@@ -3,10 +3,6 @@ package net.dries007.caffeineaddon.proxy;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-
-import net.dries007.tfc.objects.te.TEDryingMat;
-import net.dries007.caffeineaddon.client.TESRDryingMat;
 
 import static su.terrafirmagreg.api.data.Reference.MODID_CAFFEINEADDON;
 
@@ -37,8 +33,6 @@ public class ClientProxy extends CommonProxy {
 
   @Override
   public void init() {
-    super.init();
-    ClientRegistry.bindTileEntitySpecialRenderer(TEDryingMat.class, new TESRDryingMat());
   }
 
 }

@@ -93,10 +93,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
   }
 
   @Override
-  public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos,
-                                    AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-                                    @Nullable Entity entityIn,
-                                    boolean isActualState) {
+  public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
     addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LEGS);
     addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
     addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_NORTH);
@@ -130,8 +127,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
-                             ITooltipFlag flagIn) {
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     NBTTagCompound nbt = stack.getTagCompound();
     if (nbt != null) {
       Alloy alloy = new Alloy(ConfigDevice.BLOCK.CRUCIBLE.tank);
@@ -144,14 +140,12 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
   }
 
   @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-                       IBlockState state, int fortune) {
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     //breakBlock already handle this
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-                                          EnumFacing face) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
     if (face == EnumFacing.UP) {
       return BlockFaceShape.BOWL;
     }
@@ -159,15 +153,13 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
   }
 
   @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-                                                         IBlockAccess worldIn, BlockPos pos) {
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return CRUCIBLE_AABB;
   }
 
   @Override
   public Size getSize(ItemStack stack) {
-    return stack.getTagCompound() == null ? Size.LARGE :
-           Size.HUGE; // Can only store in chests if not full, overburden if full and more than one is carried
+    return stack.getTagCompound() == null ? Size.LARGE : Size.HUGE; // Can only store in chests if not full, overburden if full and more than one is carried
   }
 
   @Override

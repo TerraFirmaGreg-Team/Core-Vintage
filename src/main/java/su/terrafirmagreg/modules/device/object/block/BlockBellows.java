@@ -1,8 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.api.base.block.BaseBlock;
+import su.terrafirmagreg.api.base.block.BaseBlockContainer;
 import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.api.registry.provider.IProviderTile;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.client.render.TESRBellows;
 import su.terrafirmagreg.modules.device.object.tile.TileBellows;
@@ -28,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
-public class BlockBellows extends BaseBlock implements IProviderTile {
+public class BlockBellows extends BaseBlockContainer {
 
   public BlockBellows() {
     super(Settings.of(Material.CIRCUITS, MapColor.GRAY));
@@ -76,8 +75,7 @@ public class BlockBellows extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-                                          EnumFacing face) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
     return face == state.getValue(HORIZONTAL) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 

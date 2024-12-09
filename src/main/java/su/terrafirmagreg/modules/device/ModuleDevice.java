@@ -73,7 +73,6 @@ public final class ModuleDevice extends ModuleBase {
 
   @Override
   public void onRecipesRegister() {
-
     RecipesDevice.onRegister();
   }
 

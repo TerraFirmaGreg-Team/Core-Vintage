@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import net.dries007.caffeineaddon.init.RegistryHandler;
 import net.dries007.caffeineaddon.proxy.CommonProxy;
 
 import static su.terrafirmagreg.api.data.Reference.MODID_CAFFEINEADDON;
@@ -30,13 +29,11 @@ public class CaffeineAddon {
   @EventHandler
   public static void Init(FMLInitializationEvent event) {
     proxy.init();
-    RegistryHandler.initRegistries();
   }
 
   @EventHandler
   public static void PostInit(FMLPostInitializationEvent event) {
     proxy.postinit();
-    RegistryHandler.postInitRegistries();
   }
 
 }

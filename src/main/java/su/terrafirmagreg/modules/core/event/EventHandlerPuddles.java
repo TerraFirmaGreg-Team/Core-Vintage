@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -95,11 +96,12 @@ public class EventHandlerPuddles {
 
   @SubscribeEvent
   public static void puddleInteract(PlayerInteractEvent.RightClickBlock event) {
-    ItemStack stack = event.getItemStack();
-    World world = event.getWorld();
-    BlockPos pos = event.getPos().up();
-    EntityPlayer player = event.getEntityPlayer();
-    if (world.getBlockState(pos).getBlock() == BlocksCore.PUDDLE) {
+    final ItemStack stack = event.getItemStack();
+    final World world = event.getWorld();
+    final BlockPos pos = event.getPos().up();
+    final EntityPlayer player = event.getEntityPlayer();
+    final IBlockState state = world.getBlockState(pos);
+    if (state.getBlock() == BlocksCore.PUDDLE) {
       if (stack.getItem() == Items.GLASS_BOTTLE && ConfigCore.BLOCK.PUDDLE.canUseGlassBottle) {
         if (event.getFace() == EnumFacing.UP) {
           if (!world.isRemote) {
@@ -127,12 +129,13 @@ public class EventHandlerPuddles {
 
   @SubscribeEvent
   public static void makeBigSplash(LivingFallEvent event) {
-    EntityLivingBase entity = event.getEntityLiving();
-    BlockPos pos = entity.getPosition();
-    World world = entity.getEntityWorld();
+    final EntityLivingBase entity = event.getEntityLiving();
+    final BlockPos pos = entity.getPosition();
+    final World world = entity.getEntityWorld();
+    final IBlockState state = world.getBlockState(pos);
 
     if (!world.isRemote) {
-      if (world.getBlockState(pos).getBlock() == BlocksCore.PUDDLE) {
+      if (state.getBlock() == BlocksCore.PUDDLE) {
         float distance = event.getDistance();
         if (distance < 3.0F) {
           ((WorldServer) world).spawnParticle(

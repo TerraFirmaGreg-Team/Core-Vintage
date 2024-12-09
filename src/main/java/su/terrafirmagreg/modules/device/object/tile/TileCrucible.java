@@ -375,14 +375,12 @@ public class TileCrucible extends BaseTileTickableInventory
   }
 
   @Override
-  public ContainerCrucible getContainer(InventoryPlayer inventoryPlayer, World world,
-                                        IBlockState state, BlockPos pos) {
+  public ContainerCrucible getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
     return new ContainerCrucible(inventoryPlayer, this);
   }
 
   @Override
-  public GuiCrucible getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-                                     IBlockState state, BlockPos pos) {
+  public GuiCrucible getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
     return new GuiCrucible(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
   }
 }

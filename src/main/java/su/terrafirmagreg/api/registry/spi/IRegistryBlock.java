@@ -12,12 +12,14 @@ import java.util.Collection;
 import java.util.Map;
 
 public interface IRegistryBlock
-  extends IRegistryBase {
+  extends IRegistryBase, IRegistryData {
 
   default <T extends Block, A> Map<A, T> blocks(Map<A, T> map) {
     for (var block : map.values()) {
       if (block instanceof IBlockSettings provider) {
         this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
+
+
       }
     }
     return map;

@@ -44,6 +44,12 @@ public final class ConfigBlock {
   @Config.Comment("Oven")
   public final Oven OVEN = new Oven();
 
+  @Config.Comment("Freeze Dryer")
+  public final FreezeDryer FREEZE_DRYER = new FreezeDryer();
+
+  @Config.Comment("Ice Bunker")
+  public final IceBunker ICE_BUNKER = new IceBunker();
+
   public static final class Bellows {
 
     @Config.Comment(
@@ -184,5 +190,18 @@ public final class ConfigBlock {
 
     @Config.Comment({"Time tooltip info mode."})
     public TimeTooltipMode timeTooltipMode = TimeTooltipMode.MINECRAFT_HOURS;
+  }
+
+  public static final class FreezeDryer {
+
+    @Config.Comment({"The multiplier 100 is 1.0, 123 is 1.23\t:\tIs used to effect the coolant consumption rate of the cellars"})
+    public double coolantConsumptionMultiplier = 1.0;
+  }
+
+  public static final class IceBunker {
+
+    @Config.Comment("Debug.")
+    public boolean debug = false;
+
   }
 }

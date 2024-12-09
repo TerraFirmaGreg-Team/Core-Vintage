@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.init;
 
 import su.terrafirmagreg.api.data.enums.EnumGradeOre;
+import su.terrafirmagreg.modules.device.object.recipe.dryingmat.IDryingMatRecipeManager;
 import su.terrafirmagreg.modules.device.object.recipe.quern.IQuernRecipeManager;
 import su.terrafirmagreg.modules.flora.init.BlocksFlora;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypes;
@@ -207,26 +208,25 @@ public final class RecipesDevice {
   public static void onRegister() {
 
     //quernRecipes(RegistriesDevice.QUERN);
+    dryingMatRecipe(RegistriesDevice.DRYING_MAT);
+
+  }
+
+  private static void dryingMatRecipe(IDryingMatRecipeManager manager) {
+    manager.addRecipe(IIngredient.of(new ItemStack(ItemFoodTFC.get(Food.COFFEE_CHERRIES))), new ItemStack(ItemsFL.getDriedFruit(Fruit.COFFEE_CHERRIES)), 72000);
 
   }
 
   private static void quernRecipes(IQuernRecipeManager manager) {
     //Grain
-    manager.addRecipe(IIngredient.of("grainBarley"),
-                      new ItemStack(ItemFoodTFC.get(Food.BARLEY_FLOUR), 1));
-    manager.addRecipe(IIngredient.of("grainOat"),
-                      new ItemStack(ItemFoodTFC.get(Food.OAT_FLOUR), 1));
-    manager.addRecipe(IIngredient.of("grainRice"),
-                      new ItemStack(ItemFoodTFC.get(Food.RICE_FLOUR), 1));
-    manager.addRecipe(IIngredient.of("grainRye"),
-                      new ItemStack(ItemFoodTFC.get(Food.RYE_FLOUR), 1));
-    manager.addRecipe(IIngredient.of("grainWheat"),
-                      new ItemStack(ItemFoodTFC.get(Food.WHEAT_FLOUR), 1));
-    manager.addRecipe(IIngredient.of("grainMaize"),
-                      new ItemStack(ItemFoodTFC.get(Food.CORNMEAL_FLOUR), 1));
+    manager.addRecipe(IIngredient.of("grainBarley"), new ItemStack(ItemFoodTFC.get(Food.BARLEY_FLOUR), 1));
+    manager.addRecipe(IIngredient.of("grainOat"), new ItemStack(ItemFoodTFC.get(Food.OAT_FLOUR), 1));
+    manager.addRecipe(IIngredient.of("grainRice"), new ItemStack(ItemFoodTFC.get(Food.RICE_FLOUR), 1));
+    manager.addRecipe(IIngredient.of("grainRye"), new ItemStack(ItemFoodTFC.get(Food.RYE_FLOUR), 1));
+    manager.addRecipe(IIngredient.of("grainWheat"), new ItemStack(ItemFoodTFC.get(Food.WHEAT_FLOUR), 1));
+    manager.addRecipe(IIngredient.of("grainMaize"), new ItemStack(ItemFoodTFC.get(Food.CORNMEAL_FLOUR), 1));
 
-    manager.addRecipe(IIngredient.of(IIngredient.of(ItemFoodTFC.get(Food.OLIVE))),
-                      new ItemStack(ItemsTFC.OLIVE_PASTE, 1));
+    manager.addRecipe(IIngredient.of(IIngredient.of(ItemFoodTFC.get(Food.OLIVE))), new ItemStack(ItemsTFC.OLIVE_PASTE, 1));
 
     //Flux
     manager.addRecipe(IIngredient.of("gemBorax"), new ItemStack(ItemPowder.get(Powder.FLUX), 6));
@@ -775,5 +775,6 @@ public final class RecipesDevice {
                       new ItemStack(ItemsFL.getFood(FoodFL.TOMATO_SAUCE)));
 
   }
+
 
 }

@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class BlockIceBunker extends BaseBlockContainer {
 
   public BlockIceBunker() {

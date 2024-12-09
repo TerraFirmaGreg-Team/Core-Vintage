@@ -32,6 +32,7 @@ import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PotionsCore;
+import su.terrafirmagreg.modules.device.object.block.BlockDryingMat;
 import su.terrafirmagreg.modules.device.object.block.BlockQuernManual;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
@@ -321,7 +322,8 @@ public final class CommonEventHandler {
     final EntityPlayer player = event.getEntityPlayer();
 
     // Fire onBlockActivated for in world crafting devices
-    if (block instanceof BlockMetalAnvil || block instanceof BlockRockAnvil || block instanceof BlockQuernManual || block instanceof BlockWoodSupport) {
+    if (block instanceof BlockMetalAnvil || block instanceof BlockRockAnvil || block instanceof BlockQuernManual || block instanceof BlockWoodSupport
+        || block instanceof BlockDryingMat) {
       event.setUseBlock(Event.Result.ALLOW);
     }
 

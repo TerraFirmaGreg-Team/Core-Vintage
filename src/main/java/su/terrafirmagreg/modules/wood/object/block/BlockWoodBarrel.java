@@ -68,23 +68,6 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
                               .withProperty(SEALED, false));
   }
 
-  /**
-   * Used to toggle the barrel seal state and update the tile entity, in the correct order
-   */
-  public static void toggleBarrelSeal(World world, BlockPos pos) {
-    TileUtils.getTile(world, pos, TileWoodBarrel.class).ifPresent(tile -> {
-      IBlockState state = world.getBlockState(pos);
-      boolean previousSealed = state.getValue(SEALED);
-      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
-      if (previousSealed) {
-        tile.onUnseal();
-      } else {
-        tile.onSealed();
-      }
-    });
-
-  }
-
   @Override
   public Size getSize(ItemStack stack) {
     return stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE;
@@ -125,10 +108,26 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
     }
   }
 
+  /**
+   * Used to toggle the barrel seal state and update the tile entity, in the correct order
+   */
+  public static void toggleBarrelSeal(World world, BlockPos pos) {
+    TileUtils.getTile(world, pos, TileWoodBarrel.class).ifPresent(tile -> {
+      IBlockState state = world.getBlockState(pos);
+      boolean previousSealed = state.getValue(SEALED);
+      world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
+      if (previousSealed) {
+        tile.onUnseal();
+      } else {
+        tile.onSealed();
+      }
+    });
+
+  }
+
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileWoodBarrel.class);
-    tile.ifPresent(tileWoodBarrel -> tileWoodBarrel.onBreakBlock(worldIn, pos, state));
+    TileUtils.getTile(worldIn, pos, TileWoodBarrel.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     worldIn.updateComparatorOutputLevel(pos, this);
     super.breakBlock(worldIn, pos, state);
   }

@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.core.client;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.registry.provider.IProviderContainer;
-import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -26,13 +25,11 @@ public class GuiHandler implements IGuiHandler {
 
     var entity = world.getEntityByID(x);
     var item = player.getHeldItemMainhand().getItem();
+    var tile = world.getTileEntity(blockPos);
 
-    TileUtils.getTile(world, blockPos)
-             .filter(tile -> tile instanceof IProviderContainer<?, ?>)
-             .map(tile -> {
-               IProviderContainer<?, ?> containerProvider = (IProviderContainer<?, ?>) tile;
-               return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
-             });
+    if (tile instanceof IProviderContainer<?, ?> containerProvider) {
+      return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
+    }
 
     if (entity instanceof IProviderContainer<?, ?> containerProvider) {
       return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
@@ -53,13 +50,11 @@ public class GuiHandler implements IGuiHandler {
 
     var entity = world.getEntityByID(x);
     var item = player.getHeldItemMainhand().getItem();
+    var tile = world.getTileEntity(blockPos);
 
-    TileUtils.getTile(world, blockPos)
-             .filter(tile -> tile instanceof IProviderContainer<?, ?>)
-             .map(tile -> {
-               IProviderContainer<?, ?> containerProvider = (IProviderContainer<?, ?>) tile;
-               return containerProvider.getContainer(player.inventory, world, blockState, blockPos);
-             });
+    if (tile instanceof IProviderContainer<?, ?> containerProvider) {
+      return containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);
+    }
 
     if (entity instanceof IProviderContainer<?, ?> containerProvider) {
       return containerProvider.getGuiContainer(player.inventory, world, blockState, blockPos);

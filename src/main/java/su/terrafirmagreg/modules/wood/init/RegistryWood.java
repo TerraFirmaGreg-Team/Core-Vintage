@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.init;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe;
-import su.terrafirmagreg.modules.wood.api.recipes.NutRecipe;
+import su.terrafirmagreg.modules.wood.object.recipe.loom.LoomRecipe;
+import su.terrafirmagreg.modules.wood.object.recipe.nut.NutRecipe;
 
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;

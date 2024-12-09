@@ -1,28 +1,30 @@
 package su.terrafirmagreg.modules.animal.init;
 
-import su.terrafirmagreg.api.base.item.spi.IItemSettings.Settings;
 import su.terrafirmagreg.api.registry.RegistryManager;
-import su.terrafirmagreg.modules.animal.object.item.ItemAnimalMisc;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.animal.object.item.ItemAnimalBladder;
+import su.terrafirmagreg.modules.animal.object.item.ItemAnimalHalter;
+import su.terrafirmagreg.modules.animal.object.item.ItemAnimalSilkCloth;
+import su.terrafirmagreg.modules.animal.object.item.ItemAnimalWool;
+import su.terrafirmagreg.modules.animal.object.item.ItemAnimalWoolCloth;
+import su.terrafirmagreg.modules.animal.object.item.ItemAnimalWoolYarn;
 
 public final class ItemsAnimal {
 
-  public static ItemAnimalMisc BLADDER;
-  public static ItemAnimalMisc WOOL;
-  public static ItemAnimalMisc WOOL_YARN;
-  public static ItemAnimalMisc WOOL_CLOTH;
-  public static ItemAnimalMisc SILK_CLOTH;
+  public static ItemAnimalBladder BLADDER;
+  public static ItemAnimalWool WOOL;
+  public static ItemAnimalWoolYarn WOOL_YARN;
+  public static ItemAnimalWoolCloth WOOL_CLOTH;
+  public static ItemAnimalSilkCloth SILK_CLOTH;
+  public static ItemAnimalHalter HALTER;
 
   public static void onRegister(RegistryManager registryManager) {
 
-    BLADDER = registryManager.item(new ItemAnimalMisc("product/bladder", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)));
-    WOOL = registryManager.item(new ItemAnimalMisc("product/wool", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)));
-    WOOL_YARN = registryManager.item(new ItemAnimalMisc("product/wool_yarn", Settings.of().size(Size.VERY_SMALL).weight(Weight.VERY_LIGHT).oreDict("string")));
-    WOOL_CLOTH = registryManager.item(new ItemAnimalMisc("product/wool_cloth", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)
-                                                                                       .oreDict("cloth_high_quality")));
-    SILK_CLOTH = registryManager.item(new ItemAnimalMisc("product/silk_cloth", Settings.of().size(Size.SMALL).weight(Weight.LIGHT)
-                                                                                       .oreDict("cloth_high_quality")));
+    BLADDER = registryManager.item(new ItemAnimalBladder());
+    WOOL = registryManager.item(new ItemAnimalWool());
+    WOOL_YARN = registryManager.item(new ItemAnimalWoolYarn());
+    WOOL_CLOTH = registryManager.item(new ItemAnimalWoolCloth());
+    SILK_CLOTH = registryManager.item(new ItemAnimalSilkCloth());
+    HALTER = registryManager.item(new ItemAnimalHalter());
 
   }
 }

@@ -17,8 +17,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import org.lwjgl.opengl.GL11;
 import net.dries007.caffeineaddon.ModConfig;
+import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,8 +42,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
   @Override
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     String name = I18n.format(translationKey + ".name");
-    fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6,
-                            MCColor.BLACK.getRGB());
+    fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, MCColor.BLACK.getRGB());
     this.fontRenderer.drawString(this.playerInventory.getDisplayName()
                                                      .getUnformattedText(), 8, this.ySize - 92, MCColor.BLACK.getRGB());
 
@@ -65,52 +64,15 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     if (mouseX >= guiLeft + 5 && mouseX <= guiLeft + 15 && mouseY >= guiTop + 5
         && mouseY <= guiTop + 15) {
 
-      if (ModConfig.isDebugging) {
-        infoText.add("---Debug---");
-        infoText.add(
-          "Pump Temperature: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
-        infoText.add("Internal Pressure: " + String.format("%.2f", tile.getPressure()));
-        infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature())
-                     + Unicode.CELSIUS);
-        infoText.add("External Pressure: " + String.format("%.2f", tile.getLocalPressure()));
-        infoText.add("Temperature Delta: " + String.format("%.2f",
-                                                           (tile.getTemperature() - tile.getLocalTemperature())) + Unicode.CELSIUS);
-        infoText.add("Pressure Delta: " + String.format("%.2f",
-                                                        (tile.getPressure() - tile.getLocalPressure())));
-        infoText.add("Coolant: " + String.format("%.2f", tile.getCoolant()));
-        infoText.add("Progress: " + (tile.getSealedFor() / ModConfig.sealedDuration) * 100 + "%");
-        infoText.add("Sealed: " + ((tile.getSeal()) ? "Yes" : "No"));
-        infoText.add("Pumping: " + ((tile.getPump()) ? "Yes" : "No"));
-        infoText.add("Overheating: " + ((tile.overheating) ? "Yes" : "No"));
-        infoText.add("Overheating Ticks: " + tile.overheatTick);
-        infoText.add("Power Level: " + tile.getPower());
-        infoText.add(
-          "Max Pressure: " + (ModConfig.seaLevelPressure + ModConfig.pressureChange * (256
-                                                                                       - ModConfig.seaLevel)));
-        infoText.add("------------");
-        infoText.add("-- Config --");
-        infoText.add("------------");
-        infoText.add("Sea Level: " + ModConfig.seaLevel);
-        infoText.add("Sea Pressure: " + ModConfig.seaLevelPressure);
-        infoText.add("Work Per Power: " + ModConfig.workPerPower);
-        infoText.add("Heat Per Power: " + ModConfig.heatPerPower);
-        infoText.add("Change in Pressure: " + ModConfig.pressureChange);
-        infoText.add("Dissipation: " + ModConfig.temperatureDissipation);
-        infoText.add("Temperature Max: " + ModConfig.maxTemp + Unicode.CELSIUS);
-        infoText.add("Coolant Max: " + ModConfig.coolantMax);
-        infoText.add("Initialized: " + tile.initialized);
-      } else {
-        infoText.add("---Info---");
-        infoText.add(
-          "Temperature: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
-        infoText.add("Pressure: " + String.format("%.2f", tile.getPressure()));
-        infoText.add("Coolant: " + String.format("%.2f", tile.getCoolant()));
-        infoText.add("Progress: " + (tile.getSealedFor() / ModConfig.sealedDuration) * 100 + "%");
-        infoText.add("----------");
-        infoText.add("Sealed: " + ((tile.getSeal()) ? "Yes" : "No"));
-        infoText.add("Pumping: " + ((tile.getPump()) ? "Yes" : "No"));
-        infoText.add("Power Level: " + tile.getPower());
-      }
+      infoText.add("---Info---");
+      infoText.add("Temperature: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
+      infoText.add("Pressure: " + String.format("%.2f", tile.getPressure()));
+      infoText.add("Coolant: " + String.format("%.2f", tile.getCoolant()));
+      infoText.add("Progress: " + (tile.getSealedFor() / ModConfig.sealedDuration) * 100 + "%");
+      infoText.add("----------");
+      infoText.add("Sealed: " + ((tile.getSeal()) ? "Yes" : "No"));
+      infoText.add("Pumping: " + ((tile.getPump()) ? "Yes" : "No"));
+      infoText.add("Power Level: " + tile.getPower());
 
       this.drawHoveringText(infoText, mouseX - guiLeft, mouseY - guiTop);
       return;
@@ -131,18 +93,10 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     }
 
     // Freeze Drier Snow Flake
-    if ((mouseX >= guiLeft + 73 && mouseX <= guiLeft + 103 && mouseY >= guiTop + 36
-         && mouseY <= guiTop + 50)
-        || (mouseX >= guiLeft + 80 && mouseX <= guiLeft + 96 && mouseY >= guiTop + 28
-            && mouseY <= guiTop + 58)) {
+    if ((mouseX >= guiLeft + 73 && mouseX <= guiLeft + 103 && mouseY >= guiTop + 36 && mouseY <= guiTop + 50) ||
+        (mouseX >= guiLeft + 80 && mouseX <= guiLeft + 96 && mouseY >= guiTop + 28 && mouseY <= guiTop + 58)) {
 
-      if (ModConfig.isDebugging) {
-        infoText.add("Progress: " + String.format("%d", tile.getSealedFor()) + "%");
-        infoText.add(
-          "Ticks Vacuum Sealed: " + String.format("%.2f", tile.getSealedTicks()) + " ticks");
-      } else {
-        infoText.add("Progress: " + String.format("%d", tile.getSealedFor()) + "%");
-      }
+      infoText.add("Progress: " + String.format("%d", tile.getSealedFor()) + "%");
 
       this.drawHoveringText(infoText, mouseX - guiLeft, mouseY - guiTop);
       return;
@@ -152,13 +106,8 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     if (mouseX >= guiLeft + 125 && mouseX <= guiLeft + 129 && mouseY >= guiTop + 18
         && mouseY <= guiTop + 69) {
 
-      if (ModConfig.isDebugging) {
-        infoText.add("Vacuum: " + String.format("%.5f", tile.getPressure()));
-        infoText.add("External Pressure: " + String.format("%.5f", tile.getLocalPressure()));
-      } else {
-        infoText.add("Vacuum: " + String.format("%.2f", tile.getPressure()));
-        infoText.add("External Pressure: " + String.format("%.2f", tile.getLocalPressure()));
-      }
+      infoText.add("Vacuum: " + String.format("%.2f", tile.getPressure()));
+      infoText.add("External Pressure: " + String.format("%.2f", tile.getLocalPressure()));
 
       this.drawHoveringText(infoText, mouseX - guiLeft, mouseY - guiTop);
       return;
@@ -168,15 +117,8 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     if (mouseX >= guiLeft + 133 && mouseX <= guiLeft + 137 && mouseY >= guiTop + 18
         && mouseY <= guiTop + 69) {
 
-      if (ModConfig.isDebugging) {
-        infoText.add("Heat: " + String.format("%.5f", tile.getTemperature()) + Unicode.CELSIUS);
-        infoText.add("External Temperature: " + String.format("%.5f", tile.getLocalTemperature())
-                     + Unicode.CELSIUS);
-      } else {
-        infoText.add("Heat: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
-        infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature())
-                     + Unicode.CELSIUS);
-      }
+      infoText.add("Heat: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
+      infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature()) + Unicode.CELSIUS);
 
       this.drawHoveringText(infoText, mouseX - guiLeft, mouseY - guiTop);
       return;
@@ -200,12 +142,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     if (mouseX >= guiLeft + 163 && mouseX <= guiLeft + 167 && mouseY >= guiTop + 18
         && mouseY <= guiTop + 69) {
 
-      if (ModConfig.isDebugging) {
-        infoText.add("Coolant: " + String.format("%.5f", tile.getCoolant()));
-      } else {
-        infoText.add(
-          "Coolant: " + String.format("%.1f", (tile.getCoolant() / ModConfig.coolantMax)) + "%");
-      }
+      infoText.add("Coolant: " + String.format("%.1f", (tile.getCoolant() / ModConfig.coolantMax)) + "%");
 
       this.drawHoveringText(infoText, mouseX - guiLeft, mouseY - guiTop);
     }
@@ -306,8 +243,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
   }
 
   private float getPressureLeftScaled(int pixels) {
-    return (float) tile.getPressure() * pixels / (ModConfig.seaLevelPressure
-                                                  + ModConfig.pressureChange * (256 - ModConfig.seaLevel));
+    return (float) tile.getPressure() * pixels / (ModConfig.seaLevelPressure + ModConfig.pressureChange * (256 - ModConfig.seaLevel));
   }
 
   private float getHeatLeftScaled(int pixels) {

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.object.potion;
 
-import su.terrafirmagreg.api.base.effects.BasePotion;
+import su.terrafirmagreg.api.base.potion.BasePotion;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.entity.EntityLivingBase;

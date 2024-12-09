@@ -14,9 +14,8 @@ import su.terrafirmagreg.modules.wood.init.EntitiesWood;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.init.KeybindingsWood;
 import su.terrafirmagreg.modules.wood.init.PacketWood;
+import su.terrafirmagreg.modules.wood.init.RecipesWood;
 import su.terrafirmagreg.modules.wood.init.RegistryWood;
-import su.terrafirmagreg.modules.wood.init.recipes.LoomRecipes;
-import su.terrafirmagreg.modules.wood.init.recipes.NutRecipes;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
@@ -87,8 +86,7 @@ public final class ModuleWood extends ModuleBase {
 
   @Override
   public void onRecipesRegister() {
-    LoomRecipes.onRegister();
-    NutRecipes.onRegister();
+    RecipesWood.onRegister();
 
   }
 

@@ -194,7 +194,6 @@ public class BlockIngotPile extends BaseBlock implements IProviderTile {
   @Override
   @SideOnly(Side.CLIENT)
   public IStateMapper getStateMapper() {
-    return blockIn -> ImmutableMap.of(this.getDefaultState(),
-                                      new ModelResourceLocation(ModUtils.resource("empty").toString()));
+    return blockIn -> ImmutableMap.of(this.getDefaultState(), new ModelResourceLocation(ModUtils.resource("empty").toString()));
   }
 }

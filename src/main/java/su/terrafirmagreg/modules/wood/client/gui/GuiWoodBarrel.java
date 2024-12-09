@@ -9,7 +9,6 @@ import su.terrafirmagreg.modules.wood.client.button.GuiButtonBarrelSeal;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodBarrel;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodBarrel;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -44,11 +43,10 @@ public class GuiWoodBarrel extends BaseGuiContainerTile<TileWoodBarrel> {
   public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/barrel.png");
   private final String translationKey;
 
-  public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TileWoodBarrel tile,
-                       IBlockState state) {
+  public GuiWoodBarrel(Container container, InventoryPlayer playerInv, TileWoodBarrel tile) {
     super(container, playerInv, tile, BACKGROUND);
 
-    this.translationKey = state.getBlock().getTranslationKey();
+    this.translationKey = tile.getBlockType().getTranslationKey();
   }
 
   @Override

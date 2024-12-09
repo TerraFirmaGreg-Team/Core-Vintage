@@ -19,6 +19,7 @@ import static net.dries007.tfc.types.DefaultTrees.GEN_COCOBOLO;
 import static net.dries007.tfc.types.DefaultTrees.GEN_CONIFER;
 import static net.dries007.tfc.types.DefaultTrees.GEN_CYPRESS;
 import static net.dries007.tfc.types.DefaultTrees.GEN_EBONY;
+import static net.dries007.tfc.types.DefaultTrees.GEN_EUROPEAN_OAK;
 import static net.dries007.tfc.types.DefaultTrees.GEN_FEVER;
 import static net.dries007.tfc.types.DefaultTrees.GEN_FRUITWOOD;
 import static net.dries007.tfc.types.DefaultTrees.GEN_GINKGO;
@@ -469,6 +470,23 @@ public class WoodTypeHandler {
       .density(0.5f, 2f)
       .bushes()
       .generator(GEN_ANGELIM)
+      .paramMap(0.30f, 16f, 3, 3, 0.85f)
+      .growthLogicKit("darkoak")
+      .cellKit("deciduous")
+      .build();
+
+    WoodTypes.EUROPEAN_OAK = WoodType
+      .builder("european_oak")
+      .color(rgb(196, 161, 133))
+      .burnInfo(728f, 2250)
+      .isCanMakeTannin()
+      .rainInfo(140f, 430f)
+      .tempInfo(-8f, 15f)
+      .minGrowthTime(10)
+      .bushes()
+      .generator(GEN_EUROPEAN_OAK)
+      .fruit(null, 0.33f)
+      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
       .paramMap(0.30f, 16f, 3, 3, 0.85f)
       .growthLogicKit("darkoak")
       .cellKit("deciduous")
@@ -1969,22 +1987,6 @@ public class WoodTypeHandler {
 //      .density(0.25f, 1f)
 //      .generator(GEN_TALL_TFC)
 //      .bushes()
-//      .paramMap(0.30f, 16f, 3, 3, 0.85f)
-//      .growthLogicKit("darkoak")
-//      .cellKit("deciduous")
-//      .build();
-    //    WoodTypes.EUROPEAN_OAK = WoodType
-//      .builder("european_oak")
-//      .color(rgb(196, 161, 133))
-//      .burnInfo(728f, 2250)
-//      .isCanMakeTannin()
-//      .rainInfo(140f, 430f)
-//      .tempInfo(-8f, 15f)
-//      .minGrowthTime(10)
-//      .bushes()
-//      .generator(GEN_EUROPEAN_OAK)
-//      .fruit(null, 0.33f)
-//      .stages(new int[]{0, 0, 1, 2, 2, 1, 1, 1, 4, 4, 0, 0})
 //      .paramMap(0.30f, 16f, 3, 3, 0.85f)
 //      .growthLogicKit("darkoak")
 //      .cellKit("deciduous")

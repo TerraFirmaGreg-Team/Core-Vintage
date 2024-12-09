@@ -1,7 +1,6 @@
 package net.dries007.caffeineaddon.init;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 
 import net.dries007.tfc.objects.items.ItemCoffee;
 import net.dries007.tfc.objects.items.ItemCoffeeHeatable;
@@ -14,7 +13,6 @@ import java.util.List;
 public class ModItems {
 
   public static final List<Item> ITEMS = new ArrayList<>();
-  public static final List<ItemBlock> ITEMBLOCKS = new ArrayList<>();
 
   public static final Item GreenCoffeeBeans = new ItemCoffeeHeatable("coffee_beans_green");
   public static final Item CoffeeBeans = new ItemCoffee("coffee_beans");

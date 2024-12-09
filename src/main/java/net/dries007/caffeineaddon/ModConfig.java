@@ -6,7 +6,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModConfig {
 
-  public static boolean isDebugging;
   public static float coolantConsumptionMultiplier;
   public static int iceHouseTemperature;
   public static float coolMod;
@@ -52,7 +51,6 @@ public class ModConfig {
                               +
                               "\nDisableShards: Turning this value to true will change Ice Saw drops to ice blocks instead of shards.");
 
-    isDebugging = config.get(Configuration.CATEGORY_GENERAL, "Debug", false).getBoolean(false);
     specialIceTraits = config.get(Configuration.CATEGORY_GENERAL, "SpecialIceTraits", false).getBoolean(false);
     tempMonthAvg = config.get(Configuration.CATEGORY_GENERAL, "MonthAvgTemp", false).getBoolean(false);
     iceHouseTemperature = config.get(Configuration.CATEGORY_GENERAL, "TemperatureIceHouse", 1).getInt(1);
@@ -60,8 +58,7 @@ public class ModConfig {
     firstJoinBook = config.get(Configuration.CATEGORY_GENERAL, "FirstJoinBook", true).getBoolean(false);
 
     Property coolantConsumptionMultiplierProperty = config.get(Configuration.CATEGORY_GENERAL, "CoolantConsumptionMultiplier", 100);
-    coolantConsumptionMultiplierProperty.setComment(
-      "The multiplier 100 is 1.0, 123 is 1.23\t:\tIs used to effect the coolant consumption rate of the cellars");
+    coolantConsumptionMultiplierProperty.setComment("The multiplier 100 is 1.0, 123 is 1.23\t:\tIs used to effect the coolant consumption rate of the cellars");
     coolantConsumptionMultiplier = (float) (0.01 * coolantConsumptionMultiplierProperty.getInt());
 
     Property coolModProperty = config.get(Configuration.CATEGORY_GENERAL, "coolMod", 800);

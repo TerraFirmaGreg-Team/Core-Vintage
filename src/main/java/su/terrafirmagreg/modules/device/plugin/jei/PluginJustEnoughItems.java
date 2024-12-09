@@ -1,6 +1,9 @@
 package su.terrafirmagreg.modules.device.plugin.jei;
 
+import su.terrafirmagreg.modules.device.client.gui.GuiDryingMat;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.device.plugin.jei.dryingmat.DryingMatRecipeCategory;
+import su.terrafirmagreg.modules.device.plugin.jei.dryingmat.DryingMatRecipeMaker;
 import su.terrafirmagreg.modules.device.plugin.jei.quern.QuernRecipeCategory;
 import su.terrafirmagreg.modules.device.plugin.jei.quern.QuernRecipeMaker;
 
@@ -24,6 +27,7 @@ public final class PluginJustEnoughItems implements IModPlugin {
     IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
 
     registry.addRecipeCategories(new QuernRecipeCategory(guiHelper));
+    registry.addRecipeCategories(new DryingMatRecipeCategory(guiHelper));
   }
 
   @Override
@@ -32,6 +36,11 @@ public final class PluginJustEnoughItems implements IModPlugin {
     // ==== QUERN ====
     registry.addRecipes(QuernRecipeMaker.getRecipes(), QuernRecipeCategory.UID);
     registry.addRecipeCatalyst(new ItemStack(BlocksDevice.QUERN_MANUAL), QuernRecipeCategory.UID);
+
+    // ==== DRYING_MAT ====
+    registry.addRecipes(DryingMatRecipeMaker.getRecipes(), DryingMatRecipeCategory.UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.DRYING_MAT), DryingMatRecipeCategory.UID);
+    registry.addRecipeClickArea(GuiDryingMat.class, 103, 35, 9, 14, DryingMatRecipeCategory.UID);
 
   }
 }

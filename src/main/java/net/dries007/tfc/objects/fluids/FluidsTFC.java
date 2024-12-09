@@ -22,7 +22,6 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import net.dries007.caffeineaddon.potion.PotionEffects;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
@@ -182,25 +181,25 @@ public final class FluidsTFC {
                                          FluidsCore.TEA = registerFluid(new Fluid("tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
                                            if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
                                              foodStats.addThirst(40);
-                                             player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 0));
+                                             player.addPotionEffect(new PotionEffect(PotionsCore.CAFFEINE, 14400, 0));
                                            }
                                          }),
                                          FluidsCore.SWEET_TEA = registerFluid(new Fluid("sweet_tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
                                            if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
                                              foodStats.addThirst(40);
-                                             player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 1));
+                                             player.addPotionEffect(new PotionEffect(PotionsCore.CAFFEINE, 14400, 1));
                                            }
                                          }),
                                          FluidsCore.COFFEE = registerFluid(new Fluid("coffee", STILL, FLOW, 0xFF210B00)).with(DrinkableProperty.DRINKABLE, player -> {
                                            if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
                                              foodStats.addThirst(40);
-                                             player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 2));
+                                             player.addPotionEffect(new PotionEffect(PotionsCore.CAFFEINE, 14400, 2));
                                            }
                                          }),
                                          FluidsCore.SWEET_COFFEE = registerFluid(new Fluid("sweet_coffee", STILL, FLOW, 0xFF210B00)).with(DrinkableProperty.DRINKABLE, player -> {
                                            if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
                                              foodStats.addThirst(40);
-                                             player.addPotionEffect(new PotionEffect(PotionEffects.CAFFEINE, 14400, 3));
+                                             player.addPotionEffect(new PotionEffect(PotionsCore.CAFFEINE, 14400, 3));
                                            }
                                          })
                                        )

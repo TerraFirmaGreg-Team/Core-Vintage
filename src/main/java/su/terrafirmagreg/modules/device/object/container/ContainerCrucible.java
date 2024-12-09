@@ -21,8 +21,7 @@ public class ContainerCrucible extends BaseContainerTile<TileCrucible> {
 
   @Override
   protected void addContainerSlots() {
-    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-                                                null);
+    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
     if (inventory != null) {
       for (int i = SLOT_INPUT_START; i <= SLOT_INPUT_END; i++) {
         int line = i / 3;

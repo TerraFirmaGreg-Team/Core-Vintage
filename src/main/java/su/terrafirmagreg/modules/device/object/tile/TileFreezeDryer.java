@@ -8,6 +8,7 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiFreezeDryer;
 import su.terrafirmagreg.modules.device.object.container.ContainerFreezeDryer;
@@ -30,15 +31,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 
+import net.dries007.caffeineaddon.ModConfig;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-
-import net.dries007.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -74,10 +72,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
       initialized = true;
       localTemperature = Climate.getActualTemp(this.getPos());
       temperature = localTemperature;
-      localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos()
-                                                            .getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
-      System.out.println("Local pos: " + this.getPos());
-      System.out.println("Local pressure is: " + localPressure);
+      localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos().getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
       pressure = localPressure;
       sealed = false;
       pump = false;

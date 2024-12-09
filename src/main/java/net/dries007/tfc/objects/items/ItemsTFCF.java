@@ -20,7 +20,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.objects.GemTFCF;
 import net.dries007.tfc.objects.ToolMaterials;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
@@ -1146,8 +1145,6 @@ public final class ItemsTFCF {
   private static ImmutableList<ItemBowTFCF> allItemBows;
   @Getter
   private static ImmutableList<Item> allFoodItems;
-  @Getter
-  private static ImmutableList<ItemGemTFCF> allGemTFCFItems;
   @Getter
   private static ImmutableList<Item> allCeramicMoldItems;
   @Getter

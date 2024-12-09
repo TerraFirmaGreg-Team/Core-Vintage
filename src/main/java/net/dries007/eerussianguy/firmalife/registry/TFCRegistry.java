@@ -3,6 +3,7 @@ package net.dries007.eerussianguy.firmalife.registry;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill;
+import su.terrafirmagreg.modules.core.feature.skills.SmithingSkill.Type;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
@@ -18,6 +19,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
+import net.dries007.buuz135.hotornot.object.item.HONItems;
+import net.dries007.buuz135.hotornot.object.item.ItemMetalTongsHead;
+import net.dries007.caffeineaddon.init.ModItems;
 import net.dries007.eerussianguy.firmalife.ConfigFL;
 import net.dries007.eerussianguy.firmalife.FirmaLife;
 import net.dries007.eerussianguy.firmalife.init.FoodFL;
@@ -34,6 +38,8 @@ import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Metal.ItemType;
+import net.dries007.tfc.api.types.Metal.Tier;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
@@ -56,9 +62,11 @@ import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_THIRD_LAST;
 import static su.terrafirmagreg.api.data.Reference.MODID_CELLARS;
 import static su.terrafirmagreg.api.data.Reference.MODID_FL;
+import static su.terrafirmagreg.api.data.Reference.MODID_HOTORNOT;
 import static su.terrafirmagreg.api.data.Reference.MODID_TFC;
 import static su.terrafirmagreg.modules.core.feature.skills.SmithingSkill.Type.GENERAL;
 import static su.terrafirmagreg.modules.core.feature.skills.SmithingSkill.Type.TOOLS;
+import static su.terrafirmagreg.modules.core.init.FluidsCore.FRESH_WATER;
 
 @Mod.EventBusSubscriber(modid = MODID_FL)
 public class TFCRegistry {
@@ -89,7 +97,16 @@ public class TFCRegistry {
                              "X   X", "XXXXX").setRegistryName("pumpkin_scoop"),
       new KnappingRecipeFood(KnappingTypes.PUMPKIN, true, new ItemStack(ItemsFL.getFood(FoodFL.PUMPKIN_CHUNKS), 4), "XX XX", "XX XX",
                              "     ",
-                             "XX XX", "XX XX").setRegistryName("pumpkin_chunk")
+                             "XX XX", "XX XX").setRegistryName("pumpkin_chunk"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(ModItems.MugUnfired),
+                               "     ",
+                               "XXXX ",
+                               "XXX X",
+                               "XXXX ",
+                               "XXX  ").setRegistryName("clay_mug"),
+      // TODO change the recipe to be something more interesting than a straight line
+      new KnappingRecipeSimple(KnappingTypes.CLAY, false, new ItemStack(HONItems.TONGS_JAW_UNFIRED_MOLD),
+                               "X", "X", "X", "X", "X").setRegistryName("unfired_tongs_jaw_mold")
     );
 
     event.getRegistry()
@@ -153,7 +170,11 @@ public class TFCRegistry {
                        new IngredientItemFood(IIngredient.of(ItemsFL.getFood(FoodFL.MILK_CURD), 3)), null, new ItemStack(BlocksFL.GOUDA_WHEEL),
                        hour * 16).setRegistryName("gouda_wheel"),
       new BarrelRecipe(IIngredient.of(FluidsCore.OLIVE_OIL.get(), 500), IIngredient.of("lumber"), null,
-                       new ItemStack(ItemsFL.TREATED_LUMBER), hour * 8).setRegistryName("treat_lumber")
+                       new ItemStack(ItemsFL.TREATED_LUMBER), hour * 8).setRegistryName("treat_lumber"),
+
+      //new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 500), IIngredient.of(ModItems.GroundCoffee), new FluidStack(ModFluids.COFFEE.get(), 500), ItemStack.EMPTY, 0).setRegistryName("coffee_hot"),
+      new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 500), IIngredient.of(ModItems.GroundCoffee),
+                       new FluidStack(FluidsCore.COFFEE.get(), 500), ItemStack.EMPTY, 16 * ICalendar.TICKS_IN_HOUR).setRegistryName("coffee_cold")
     );
   }
 
@@ -166,7 +187,15 @@ public class TFCRegistry {
       new HeatRecipeSimple(IIngredient.of(ItemsFL.UNFIRED_MALLET_MOLD), new ItemStack(ItemsFL.MALLET_MOLD), 1599.0F,
                            Metal.Tier.TIER_I).setRegistryName("mallet_mold"),
       new HeatRecipeSimple(IIngredient.of("slice"), new ItemStack(ItemsFL.getFood(FoodFL.TOAST)), 150, 400).setRegistryName("slice"),
-      new HeatRecipeSimple(IIngredient.of(ItemsFL.HONEYCOMB), new ItemStack(ItemsFL.BEESWAX), 150, 400).setRegistryName("honeycomb")
+      new HeatRecipeSimple(IIngredient.of(ItemsFL.HONEYCOMB), new ItemStack(ItemsFL.BEESWAX), 150, 400).setRegistryName("honeycomb"),
+      new HeatRecipeSimple(IIngredient.of(HONItems.TONGS_JAW_UNFIRED_MOLD), new ItemStack(HONItems.TONGS_JAW_FIRED_MOLD), 1599F,
+                           Tier.TIER_I).setRegistryName("fired_tongs_jaw_mold"),
+      new HeatRecipeSimple(IIngredient.of(ModItems.GreenCoffeeBeans), new ItemStack(ModItems.CoffeeBeans), 200, 480).setRegistryName(
+        "coffee_beans"),
+      HeatRecipe.destroy(IIngredient.of(ModItems.CoffeeBeans), 480).setRegistryName("burned_coffee_beans"),
+      new HeatRecipeSimple(IIngredient.of(ModItems.MugUnfired), new ItemStack(ModItems.Mug), 1599f, Metal.Tier.TIER_I).setRegistryName(
+        "unfired_mug"),
+      new HeatRecipeSimple(IIngredient.of(ModItems.Mug), new ItemStack(ModItems.Mug), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_jug")
     );
 
     //Remove recipes
@@ -215,6 +244,12 @@ public class TFCRegistry {
         r.register(new AnvilRecipe(new ResourceLocation(MODID_FL, metal + "_mallet_head"),
                                    IIngredient.of(new ItemStack(ItemMetal.get(metal, Metal.ItemType.INGOT))),
                                    new ItemStack(ItemsFL.getMetalMalletHead(metal)), metal.getTier(), TOOLS, PUNCH_LAST, PUNCH_SECOND_LAST, SHRINK_THIRD_LAST));
+
+        r.register(new AnvilRecipe(new ResourceLocation(MODID_HOTORNOT, metal + "_tongs_head"), IIngredient.of(new ItemStack(
+          ItemMetal.get(metal, ItemType.INGOT))),
+                                   new ItemStack(ItemMetalTongsHead.get(metal)),
+                                   metal.getTier(), Type.TOOLS,
+                                   ForgeRule.PUNCH_LAST, ForgeRule.DRAW_SECOND_LAST, ForgeRule.DRAW_THIRD_LAST));
       }
     }
     r.registerAll(new AnvilRecipe(new ResourceLocation(MODID_FL, "greenhouse_wall"),

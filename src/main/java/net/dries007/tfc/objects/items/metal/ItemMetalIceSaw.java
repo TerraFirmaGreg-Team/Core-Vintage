@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.caffeineaddon.ModConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -89,23 +88,11 @@ public class ItemMetalIceSaw extends ItemMetalTool {
     Block block = state.getBlock();
 
     if (block == BlocksTFC.SEA_ICE) {
-      if (ModConfig.disableShards) {
-        return Item.getItemFromBlock(block);
-      } else {
-        return ItemsCore.SEA_ICE_SHARD;
-      }
+      return ItemsCore.SEA_ICE_SHARD;
     } else if (block == Blocks.PACKED_ICE) {
-      if (ModConfig.disableShards) {
-        return Item.getItemFromBlock(block);
-      } else {
-        return ItemsCore.PACKED_ICE_SHARD;
-      }
+      return ItemsCore.PACKED_ICE_SHARD;
     } else if (block == Blocks.ICE) {
-      if (ModConfig.disableShards) {
-        return Item.getItemFromBlock(block);
-      } else {
-        return ItemsCore.ICE_SHARD;
-      }
+      return ItemsCore.ICE_SHARD;
     }
 
     return null;

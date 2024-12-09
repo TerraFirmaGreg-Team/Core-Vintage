@@ -10,8 +10,7 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
 
-public interface IAnvilRecipe
-  extends IBaseRecipe {
+public interface IAnvilRecipe extends IBaseRecipe {
 
   ForgeRule[] getRules();
 

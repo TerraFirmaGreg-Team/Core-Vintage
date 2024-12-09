@@ -28,8 +28,7 @@ public class QuernRecipeCategory extends BaseRecipeCategory<QuernRecipeWrapper> 
 
     this.arrow = helper.createDrawable(ICONS, 0, 14, 22, 16);
     IDrawableStatic arrowAnimated = helper.createDrawable(ICONS, 22, 14, 22, 16);
-    this.arrowAnimated = helper.createAnimatedDrawable(arrowAnimated, 80,
-                                                       IDrawableAnimated.StartDirection.LEFT, false);
+    this.arrowAnimated = helper.createAnimatedDrawable(arrowAnimated, 80, IDrawableAnimated.StartDirection.LEFT, false);
     this.slot = helper.getSlotDrawable();
   }
 
@@ -43,16 +42,14 @@ public class QuernRecipeCategory extends BaseRecipeCategory<QuernRecipeWrapper> 
   }
 
   @Override
-  public void setRecipe(IRecipeLayout recipeLayout, QuernRecipeWrapper recipeWrapper,
-                        IIngredients ingredients) {
+  public void setRecipe(IRecipeLayout recipeLayout, QuernRecipeWrapper recipeWrapper, IIngredients ingredients) {
     IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
     itemStackGroup.init(0, true, 0, 16);
     itemStackGroup.init(1, true, 20, 16);
     itemStackGroup.init(2, false, 84, 16);
 
     itemStackGroup.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-    itemStackGroup.set(1,
-                       new ItemStack(ItemsDevice.HANDSTONE)); // todo: use all ore dict entries with "handstone"
+    itemStackGroup.set(1, new ItemStack(ItemsDevice.HANDSTONE)); // todo: use all ore dict entries with "handstone"
     itemStackGroup.set(2, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
   }
 

@@ -7,6 +7,9 @@ import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodBarrel;
@@ -42,9 +45,6 @@ import net.dries007.tfc.api.capability.inventory.IItemHandlerSidedCallback;
 import net.dries007.tfc.api.capability.inventory.ItemHandlerSidedWrapper;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.util.FluidTransferHelper;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -466,17 +466,6 @@ public class TileWoodBarrel extends BaseTileTickableInventory
     }
   }
 
-  @Override
-  public ContainerWoodBarrel getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new ContainerWoodBarrel(inventoryPlayer, this);
-  }
-
-  @Override
-  @SideOnly(Side.CLIENT)
-  public GuiWoodBarrel getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new GuiWoodBarrel(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state);
-  }
-
   protected static class BarrelFluidTank extends FluidTankCallback {
 
     private final Set<Fluid> whitelist;
@@ -493,7 +482,18 @@ public class TileWoodBarrel extends BaseTileTickableInventory
     public boolean canFillFluidType(FluidStack fluid) {
       return fluid != null && (whitelist.contains(fluid.getFluid()) || BarrelRecipe.isBarrelFluid(fluid));
     }
+  }  @Override
+  public ContainerWoodBarrel getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new ContainerWoodBarrel(inventoryPlayer, this);
   }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public GuiWoodBarrel getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new GuiWoodBarrel(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+  }
+
+
 
 
 }

@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.wood.object.tile;
 
 import su.terrafirmagreg.api.base.tile.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe;
 import su.terrafirmagreg.modules.wood.init.RegistryWood;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodLoom;
+import su.terrafirmagreg.modules.wood.object.recipe.loom.LoomRecipe;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -98,7 +98,7 @@ public class TileWoodLoom extends BaseTileTickableInventory {
       ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
 
       if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty() &&
-          su.terrafirmagreg.modules.wood.api.recipes.LoomRecipe.get(heldItem) != null) {
+          LoomRecipe.get(heldItem) != null) {
         inventory.setStackInSlot(0, heldItem.copy());
         inventory.getStackInSlot(0).setCount(1);
         heldItem.shrink(1);

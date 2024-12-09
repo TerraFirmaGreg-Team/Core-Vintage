@@ -6,8 +6,7 @@ import net.minecraft.potion.Potion;
 public interface IRegistryPotion
   extends IRegistryBase {
 
-  default Potion potion(String name, Potion potion, IAttribute attribute, String uniqueId,
-                        double ammount, int operation) {
+  default Potion potion(String name, Potion potion, IAttribute attribute, String uniqueId, double ammount, int operation) {
 
     potion.registerPotionAttributeModifier(attribute, uniqueId, ammount, operation);
     return this.potion(name, potion);

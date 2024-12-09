@@ -14,6 +14,7 @@ import su.terrafirmagreg.modules.device.object.block.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
 import su.terrafirmagreg.modules.device.object.block.BlockCrate;
 import su.terrafirmagreg.modules.device.object.block.BlockCrucible;
+import su.terrafirmagreg.modules.device.object.block.BlockDryingMat;
 import su.terrafirmagreg.modules.device.object.block.BlockElectricForge;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.block.BlockFreezeDryer;
@@ -84,6 +85,7 @@ public final class BlocksDevice {
   public static BlockOvenWall OVEN_WALL;
   public static BlockOvenChimney OVEN_CHIMNEY;
   public static BlockLeafMat LEAF_MAT;
+  public static BlockDryingMat DRYING_MAT;
 
   public static void onRegister(RegistryManager registryManager) {
     //==== Other =================================================================================================//
@@ -128,6 +130,7 @@ public final class BlocksDevice {
     OVEN_WALL = registryManager.block(new BlockOvenWall());
     OVEN_CHIMNEY = registryManager.block(new BlockOvenChimney());
     LEAF_MAT = registryManager.block(new BlockLeafMat());
+    DRYING_MAT = registryManager.block(new BlockDryingMat());
   }
 
 }

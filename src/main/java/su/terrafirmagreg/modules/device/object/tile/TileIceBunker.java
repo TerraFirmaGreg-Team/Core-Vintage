@@ -7,6 +7,8 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierBase;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifiers.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalTileProvider;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;
@@ -45,12 +47,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-
 import net.dries007.caffeineaddon.ModConfig;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -91,7 +89,7 @@ public class TileIceBunker extends TileEntityLockableLoot
   }
 
   public void getCellarInfo(EntityPlayer player) {
-    if (ModConfig.isDebugging) {
+    if (ConfigDevice.BLOCK.ICE_BUNKER.debug) {
       player.sendMessage(new TextComponentString("Temperature: " + temperature + " Coolant: " + coolantAmount));
       player.sendMessage(new TextComponentString("Check console for more information"));
       player.sendMessage(new TextComponentString("The current error number is: " + error));
@@ -263,10 +261,6 @@ public class TileIceBunker extends TileEntityLockableLoot
       for (int distance = 1; distance < 6; distance++) {
         //max distance between an ice bunker and a wall is 3
         if (distance == 5) {
-          if (ModConfig.isDebugging) {
-            System.out.println("Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                               + " can't find a wall on " + direction + " side");
-          }
           error = 1;
           return false;
         }
@@ -350,11 +344,6 @@ public class TileIceBunker extends TileEntityLockableLoot
 
               continue;
             }
-
-            if (ModConfig.isDebugging) {
-              System.out.println("Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                                 + " has too many doors");
-            }
             error = 3;
             return false;
           }
@@ -370,10 +359,6 @@ public class TileIceBunker extends TileEntityLockableLoot
     }
 
     if (entrance[0] == 0 && entrance[1] == 0) {
-      if (ModConfig.isDebugging) {
-        System.out.println("Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                           + " has no doors");
-      }
       error = 3;
       return false;
     }
@@ -393,10 +378,6 @@ public class TileIceBunker extends TileEntityLockableLoot
               }
 
               hasAirlock = false;
-              if (ModConfig.isDebugging) {
-                System.out.println("Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                                   + " doesn't has the second door, block there is " + blockType);
-              }
             }
           }
           if (blockType == 0) {
@@ -404,17 +385,8 @@ public class TileIceBunker extends TileEntityLockableLoot
           }
 
           hasAirlock = false;
-          if (ModConfig.isDebugging) {
-            System.out.println("Door at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
-                               + " doesn't surrounded by wall, block there is " + blockType);
-          }
         }
       }
-    }
-
-    if (ModConfig.isDebugging) {
-      System.out.println(
-        "Cellar at " + pos.getX() + " " + pos.getY() + " " + pos.getZ() + " is complete");
     }
 
     return true;

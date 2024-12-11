@@ -17,7 +17,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import net.dries007.eerussianguy.firmalife.init.BushFL;
 import net.dries007.eerussianguy.firmalife.init.FruitTreeFL;
 import net.dries007.eerussianguy.firmalife.init.StemCrop;
 import net.dries007.tfc.api.types.IFruitTree;
@@ -25,7 +24,6 @@ import net.dries007.tfc.objects.blocks.BlockBeeNest;
 import net.dries007.tfc.objects.blocks.BlockBeehive;
 import net.dries007.tfc.objects.blocks.BlockBonsai;
 import net.dries007.tfc.objects.blocks.BlockBumper;
-import net.dries007.tfc.objects.blocks.BlockBushTrellis;
 import net.dries007.tfc.objects.blocks.BlockCheesewheel;
 import net.dries007.tfc.objects.blocks.BlockClimateStation;
 import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
@@ -38,9 +36,7 @@ import net.dries007.tfc.objects.blocks.BlockStemCrop;
 import net.dries007.tfc.objects.blocks.BlockStemFruit;
 import net.dries007.tfc.objects.blocks.BlockString;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
-import net.dries007.tfc.objects.blocks.BlockTrellis;
 import net.dries007.tfc.objects.blocks.BlockTurntable;
-import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
@@ -61,7 +57,6 @@ import net.dries007.tfc.objects.te.TEStemCrop;
 import net.dries007.tfc.objects.te.TEString;
 import net.dries007.tfc.objects.te.TETurntable;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.agriculture.FruitTree;
@@ -96,8 +91,6 @@ public class BlocksFL {
   public static final BlockLargePlanter LARGE_PLANTER = Helpers.getNull();
   @GameRegistry.ObjectHolder("wool_string")
   public static final BlockString WOOL_STRING = Helpers.getNull();
-  @GameRegistry.ObjectHolder("trellis")
-  public static final BlockTrellis TRELLIS = Helpers.getNull();
   @GameRegistry.ObjectHolder("honey_jar")
   public static final BlockJars HONEY_JAR = Helpers.getNull();
   @GameRegistry.ObjectHolder("gouda_wheel")
@@ -183,7 +176,6 @@ public class BlocksFL {
     normalIBs.add(register(r, "squash_hanging_planter",
                            new BlockHangingPlanter(() -> ItemFoodTFC.get(Food.SQUASH), () -> ItemSeedsTFC.get(Crop.SQUASH), 13), CT_MISC));
     register(r, "wool_string", new BlockString(() -> ItemsAnimal.WOOL_YARN));
-    normalIBs.add(register(r, "trellis", new BlockTrellis(), CT_MISC));
     normalIBs.add(register(r, "beehive", new BlockBeehive(), CT_MISC));
     register(r, "honey_jar", new BlockJars(() -> ItemsFL.HONEY_JAR), CT_FOOD);
     normalIBs.add(register(r, "bumper", new BlockBumper(), CT_MISC));
@@ -199,17 +191,6 @@ public class BlocksFL {
     normalIBs.add(register(r, "gouda_wheel", new BlockCheesewheel(() -> ItemsFL.GOUDA), CT_FOOD));
     normalIBs.add(register(r, "feta_wheel", new BlockCheesewheel(() -> ItemsFL.FETA), CT_FOOD));
     normalIBs.add(register(r, "shosha_wheel", new BlockCheesewheel(() -> ItemsFL.SHOSHA), CT_FOOD));
-
-    for (BerryBush bush : BerryBush.values()) {
-      normalIBs.add(register(r, bush.name()
-                                    .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_MISC));
-    }
-
-    for (BushFL bush : BushFL.values()) {
-      normalIBs.add(register(r, bush.name().toLowerCase() + "_bush", new BlockBerryBush(bush), CT_FLORA));
-      normalIBs.add(register(r, bush.name()
-                                    .toLowerCase() + "_trellis", new BlockBushTrellis(bush), CT_MISC));
-    }
 
     for (BlockJackOLantern.Carving carving : BlockJackOLantern.Carving.values()) {
       jackOLanterns.add(register(r, "lit_pumpkin_" + carving.getName(), new BlockJackOLantern(carving), CT_MISC));

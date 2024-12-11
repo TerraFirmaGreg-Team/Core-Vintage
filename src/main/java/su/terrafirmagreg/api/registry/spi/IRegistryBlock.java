@@ -9,20 +9,16 @@ import net.minecraft.item.Item;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
 
 public interface IRegistryBlock
   extends IRegistryBase, IRegistryData {
 
-  default <T extends Block, A> Map<A, T> blocks(Map<A, T> map) {
-    for (var block : map.values()) {
-      if (block instanceof IBlockSettings provider) {
-        this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
-
-
-      }
-    }
-    return map;
+  default <B extends Block & IBlockSettings> B block(B block) {
+    return this.block(block, block.getItemBlock(), block.getRegistryKey());
   }
 
   /**
@@ -51,19 +47,6 @@ public interface IRegistryBlock
     return block;
   }
 
-  default <T extends Block> Collection<T> blocks(Collection<T> collection) {
-    for (var block : collection) {
-      if (block instanceof IBlockSettings provider) {
-        this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
-      }
-    }
-    return collection;
-  }
-
-  default <B extends Block & IBlockSettings> B block(B block) {
-    return this.block(block, block.getItemBlock(), block.getRegistryKey());
-  }
-
   default <B extends Block> B block(B block, String name) {
 
     return this.block(block, null, name);
@@ -74,13 +57,46 @@ public interface IRegistryBlock
     this.block(block.getBlock(), block.getItemBlock(), block.getRegistryKey());
   }
 
-  default Map<Type<?>, Block> block(Map<Type<?>, Block> blockMap) {
+  default <T extends Type<T>, B extends Block> Map<T, B> block(Set<T> types, Function<T, B> blockCreator) {
+    Map<T, B> map = new HashMap<>();
+    for (var type : types) {
+      var block = blockCreator.apply(type);
+      map.put(type, block);
+    }
 
-    for (var block : blockMap.values()) {
+    return this.block(map);
+  }
+
+  default <T extends Type<T>, B extends Block> Map<T, B> block(Map<T, B> map) {
+
+    for (var block : map.values()) {
       if (block instanceof IBlockSettings provider) {
         this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
       }
     }
-    return blockMap;
+
+    return map;
   }
+
+//  default <B extends Block, T> Map<T, B> block(Map<T, B> map) {
+//    for (var block : map.values()) {
+//      if (block instanceof IBlockSettings provider) {
+//        this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
+//
+//
+//      }
+//    }
+//    return map;
+//  }
+
+  default <T extends Block> Collection<T> block(Collection<T> collection) {
+    for (var block : collection) {
+      if (block instanceof IBlockSettings provider) {
+        this.block(provider.getBlock(), provider.getItemBlock(), provider.getRegistryKey());
+      }
+    }
+    return collection;
+  }
+
+
 }

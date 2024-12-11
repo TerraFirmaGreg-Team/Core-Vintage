@@ -27,7 +27,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
@@ -52,13 +51,11 @@ import net.dries007.tfc.objects.te.TEMetalSheet;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
 
 import lombok.Getter;
 
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
@@ -117,8 +114,6 @@ public final class BlocksTFC {
   @Getter
   private static ImmutableList<BlockFruitTreeLeaves> allFruitTreeLeavesBlocks;
 
-  @Getter
-  private static ImmutableList<BlockBerryBush> allBerryBushBlocks;
 
   @SubscribeEvent
   @SuppressWarnings("ConstantConditions")
@@ -251,19 +246,9 @@ public final class BlocksTFC {
       allFruitTreeBranchBlocks = fBranches.build();
       allFruitTreeLeavesBlocks = fLeaves.build();
 
-      Builder<BlockBerryBush> fBerry = ImmutableList.builder();
-
-      for (BerryBush bush : BerryBush.values()) {
-        fBerry.add(register(r, "berry_bush/" + bush.name().toLowerCase(), new BlockBerryBush(bush),
-                            CT_FOOD));
-      }
-
-      allBerryBushBlocks = fBerry.build();
-
       //Add ItemBlocks
       allFruitTreeSaplingBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
       allFruitTreeLeavesBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
-      allBerryBushBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
     }
 
     {

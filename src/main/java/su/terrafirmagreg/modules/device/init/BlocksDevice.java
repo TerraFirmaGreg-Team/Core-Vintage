@@ -43,10 +43,12 @@ import su.terrafirmagreg.modules.device.object.block.BlockSmelteryFirebox;
 import su.terrafirmagreg.modules.device.object.block.BlockSnare;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
 
+import static su.terrafirmagreg.modules.device.ModuleDevice.REGISTRY;
+
 public final class BlocksDevice {
 
-  public static BlockAlloyCalculator ALLOY_CALCULATOR;
-  public static BlockBearTrap BEAR_TRAP;
+  public static final BlockAlloyCalculator ALLOY_CALCULATOR = REGISTRY.block(new BlockAlloyCalculator());
+  public static final BlockBearTrap BEAR_TRAP = REGISTRY.block(new BlockBearTrap());
   public static BlockSnare SNARE;
   public static BlockCrate CRATE;
   public static BlockBellows BELLOWS;
@@ -90,8 +92,8 @@ public final class BlocksDevice {
   public static void onRegister(RegistryManager registryManager) {
     //==== Other =================================================================================================//
 
-    ALLOY_CALCULATOR = registryManager.block(new BlockAlloyCalculator());
-    BEAR_TRAP = registryManager.block(new BlockBearTrap());
+//    ALLOY_CALCULATOR = registryManager.block(new BlockAlloyCalculator());
+//    BEAR_TRAP = registryManager.block(new BlockBearTrap());
     SNARE = registryManager.block(new BlockSnare());
     CRATE = registryManager.block(new BlockCrate());
     BELLOWS = registryManager.block(new BlockBellows());

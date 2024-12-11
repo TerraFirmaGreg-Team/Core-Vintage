@@ -33,6 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public final class BlocksWood {
 
 
+  //public static final Map<WoodType, BlockTest> LOGS = REGISTRY.blocks(WoodType.getTypes(), BlockWoodLog::new);
   public static WoodBlockVariant LOG;
   public static WoodBlockVariant STRIPPED_LOG;
   public static WoodBlockVariant LEAVES;

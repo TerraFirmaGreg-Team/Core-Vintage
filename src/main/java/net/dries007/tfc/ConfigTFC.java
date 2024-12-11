@@ -291,11 +291,6 @@ public final class ConfigTFC {
       @Config.LangKey("config." + MODID_TFC + ".general.food.cropRarity")
       public int cropRarity = 30;
 
-      @Config.Comment("Defines berry bush rarity to generate, in 1 / N chunks. 0 = Disable")
-      @Config.RangeInt(min = 0)
-      @Config.LangKey("config." + MODID_TFC + ".general.food.berryBushRarity")
-      public int berryBushRarity = 80;
-
       @Config.Comment("Defines fruit tree rarity to generate, in 1 / N chunks. 0 = Disable")
       @Config.RangeInt(min = 0)
       @Config.LangKey("config." + MODID_TFC + ".general.food.fruitTreeRarity")
@@ -305,11 +300,6 @@ public final class ConfigTFC {
       @Config.RangeDouble(min = 0.01, max = 100)
       @Config.LangKey("config." + MODID_TFC + ".general.food.cropGrowthTimeModifier")
       public double cropGrowthTimeModifier = 1.0;
-
-      @Config.Comment("Modifier for how long berry bushes take to grow fruits.")
-      @Config.RangeDouble(min = 0.01, max = 100)
-      @Config.LangKey("config." + MODID_TFC + ".general.food.berryBushGrowthTimeModifier")
-      public double berryBushGrowthTimeModifier = 1.0;
 
       @Config.Comment("Modifier for how long fruit trees take to grow trunks / leaves / fruits.")
       @Config.RangeDouble(min = 0.01, max = 100)
@@ -323,11 +313,6 @@ public final class ConfigTFC {
       @Config.RangeDouble(min = 0, max = 1)
       @Config.LangKey("config." + MODID_TFC + ".general.misc.plantGrowthRate")
       public double plantGrowthRate = 0.01;
-
-      @Config.Comment("Berry bush movement modifier. Lower = Slower, Higher = Faster. 1 = No slow down. (Speed * this = slow).")
-      @Config.RangeDouble(min = 0, max = 1)
-      @Config.LangKey("config." + MODID_TFC + ".general.misc.berryBushMovementModifier")
-      public double berryBushMovementModifier = 0.1;
 
       @Config.Comment("Generic snow movement modifier. Lower = Slower, Higher = Faster. 1 = No slow down. (Speed * this = slow).")
       @Config.RangeDouble(min = 0, max = 1)
@@ -510,7 +495,7 @@ public final class ConfigTFC {
       @Config.Comment("Should animal feedback output to the actionbar? (the space just above the hotbar)")
       @Config.LangKey("config." + MODID_TFC + ".client.tooltip.animalsOutputToActionBar")
       public boolean animalsOutputToActionBar = true;
-      
+
     }
 
     public static class RenderCFG {

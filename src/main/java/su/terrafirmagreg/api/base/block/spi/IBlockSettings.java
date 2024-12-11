@@ -276,7 +276,7 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
 
     boolean isAir;
 
-    Settings(Material material, MapColor color) {
+    protected Settings(Material material, MapColor color) {
 
       this.material = material;
       this.mapColor = color;
@@ -457,6 +457,11 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
       return this;
     }
 
+    public Settings randomTicks(boolean tickRandomly) {
+      this.ticksRandomly = tickRandomly;
+      return this;
+    }
+
     public Settings replaceable() {
       this.isReplaceable = true;
       return this;
@@ -520,6 +525,11 @@ public interface IBlockSettings extends IProviderAutoReg, IProviderBlockState, I
 
     public Settings isSuffocating() {
       this.isSuffocating = state -> true;
+      return this;
+    }
+
+    public Settings noSuffocating() {
+      this.isSuffocating = state -> false;
       return this;
     }
 

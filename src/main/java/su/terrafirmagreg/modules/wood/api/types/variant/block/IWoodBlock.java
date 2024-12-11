@@ -8,9 +8,7 @@ import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 
-/**
- * Интерфейс IWoodBlock представляет деревянный блок.
- */
+
 public interface IWoodBlock extends IVariantBlock<WoodBlockVariant, WoodType>, IBlockSettings, IProviderBlockColor {
 
   @Override

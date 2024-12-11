@@ -282,7 +282,7 @@ public final class BlocksRock {
     ALABASTER_SMOOTH = registryManager.block(new BlockAlabasterSmooth());
     ALABASTER_RAW = registryManager.block(new BlockAlabasterRaw());
 
-    registryManager.blocks(ALABASTER_COLOR_BLOCKS.values());
+    registryManager.block(ALABASTER_COLOR_BLOCKS.values());
   }
 
 }

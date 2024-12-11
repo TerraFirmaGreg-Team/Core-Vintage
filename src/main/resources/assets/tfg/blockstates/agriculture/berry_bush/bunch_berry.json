@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:agriculture/berry_bush/small",
+    "textures": {
+      "texture": "tfg:blocks/agriculture/berry_bush/bush/bunch_berry"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "fruiting": {
+      "true": {
+        "textures": {
+          "texture": "tfg:blocks/agriculture/berry_bush/berry/bunch_berry"
+        }
+      },
+      "false": {}
+    }
+  }
+}

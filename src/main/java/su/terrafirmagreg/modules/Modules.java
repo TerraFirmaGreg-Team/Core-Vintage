@@ -20,6 +20,7 @@ public enum Modules implements IStringSerializable, IModuleContainer {
   ANIMAL(true),
   PLANT(true),
   DEVICE(true),
+  AGRICULTURE(true),
   FOOD(true),
   WORLD(true);
 

@@ -1,56 +1,37 @@
 package su.terrafirmagreg.modules.agriculture;
 
+import su.terrafirmagreg.modules.agriculture.config.ConfigBlock;
+import su.terrafirmagreg.modules.agriculture.config.ConfigEntity;
+import su.terrafirmagreg.modules.agriculture.config.ConfigItem;
+import su.terrafirmagreg.modules.agriculture.config.ConfigMisc;
+
 import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.Tags.MOD_NAME;
 
-@Config(modid = MOD_ID, name = MOD_NAME + "/" + "agriculture")
+@Config(modid = MOD_ID, name = MOD_NAME + "/module/Agriculture")
 public class ConfigAgriculture {
 
-  @Config.Name("Blocks")
-  @Config.Comment("Block settings")
-  public static final BlocksCategory BLOCKS = new BlocksCategory();
+  @Config.Name("Block")
+  @Config.Comment("Block setting")
+  public static final ConfigBlock BLOCKS = new ConfigBlock();
 
-  @Config.Name("Items")
-  @Config.Comment("Items settings")
-  public static final ItemsCategory ITEMS = new ItemsCategory();
+  @Config.Name("Item")
+  @Config.Comment("Item setting")
+  public static final ConfigItem ITEMS = new ConfigItem();
+
+  @Config.Name("Entity")
+  @Config.Comment("Entity setting")
+  public static final ConfigEntity ENTITY = new ConfigEntity();
 
   @Config.Name("Misc")
-  @Config.Comment("Miscellaneous")
-  public static final MiscCategory MISC = new MiscCategory();
+  @Config.Comment("Misc setting")
+  public static final ConfigMisc MISC = new ConfigMisc();
 
   static {
     ConfigAnytime.register(ConfigAgriculture.class);
-  }
-
-  public static final class BlocksCategory {
-
-  }
-
-  public static final class ItemsCategory {
-
-  }
-
-  public static class MiscCategory {
-
-  }
-
-  @Mod.EventBusSubscriber(modid = MOD_ID)
-  public static class EventHandler {
-
-    @SubscribeEvent
-    public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
-      if (event.getModID().equals(MOD_ID)) {
-        ModuleAgriculture.LOGGER.warn("Config changed");
-        ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
-      }
-    }
   }
 }

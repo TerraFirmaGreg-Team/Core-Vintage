@@ -153,8 +153,7 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
           entityLiving.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, debuffDuration));
           entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, debuffDuration));
           if (ConfigDevice.BLOCK.BEAR_TRAP.fixedDamage > 0) {
-            entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP,
-                                          (float) ConfigDevice.BLOCK.BEAR_TRAP.fixedDamage);
+            entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP, (float) ConfigDevice.BLOCK.BEAR_TRAP.fixedDamage);
           } else if (healthCut > 0) {
             entityLiving.attackEntityFrom(DamageSources.BEAR_TRAP,
                                           entityLiving.getHealth() / (float) healthCut);

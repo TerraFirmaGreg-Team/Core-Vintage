@@ -105,7 +105,7 @@ public class WoodType extends Type<WoodType> {
     this.thick = builder.thick;
 
     if (!types.add(this)) {
-      throw new RuntimeException(String.format("WoodType: [%s] already exists!", this.name));
+      throw new RuntimeException(String.format("Type: [%s] already exists!", this.name));
     }
   }
 

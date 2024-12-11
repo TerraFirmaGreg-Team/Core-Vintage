@@ -155,9 +155,9 @@ dependencies {
     }
   }
 
-  compileOnlyApi 'org.jetbrains:annotations:24.1.0'
-  annotationProcessor 'org.jetbrains:annotations:24.1.0'
-  patchedMinecraft('net.minecraft:launchwrapper:1.17.2') {
+  compileOnlyApi 'org.jetbrains:annotations:26.0.1'
+  annotationProcessor 'org.jetbrains:annotations:26.0.1'
+  patchedMinecraft('net.minecraft:launchwrapper:1.17.4') {
     transitive = false
   }
 

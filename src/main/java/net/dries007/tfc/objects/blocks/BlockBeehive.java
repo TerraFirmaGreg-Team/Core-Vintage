@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.agriculture.object.block.BlockBushTrellis;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -63,45 +64,6 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     setResistance(2.0f);
     setTickRandomly(true);
     setDefaultState(blockState.getBaseState().withProperty(STAGE_3, 0));
-  }
-
-  private static boolean isNotCalm(World world, BlockPos pos, IBlockState state) {
-    if (state.getValue(STAGE_3) == 0 || !world.isDaytime()) {
-      return false;
-    }
-    for (Vec3i v : VECTORS) {
-      BlockPos searchPos = pos.add(v);
-      IBlockState searchState = world.getBlockState(searchPos);
-      if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(LIT)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  private static int countFlowers(World world, BlockPos pos) {
-    int flowers = 0;
-    BlockPos searchPos;
-    for (int x = -4; x <= 4; x++) {
-      for (int y = -1; y <= 1; y++) {
-        for (int z = -4; z <= 4; z++) {
-          if (flowers == 10) {
-            return flowers;
-          }
-          searchPos = pos.add(x, y, z);
-          Block block = world.getBlockState(searchPos).getBlock();
-          if (block instanceof BlockPlant blockPlant) {
-            if (blockPlant.getType().getCategory() == FloraCategories.STANDARD) {
-              flowers++;
-            }
-          } else if (block instanceof BlockPlantFlowerPot || block instanceof BlockBushTrellis || block instanceof BlockLargePlanter ||
-                     block instanceof BlockHangingPlanter) {
-            flowers++;
-          }
-        }
-      }
-    }
-    return flowers;
   }
 
   @Override
@@ -184,6 +146,20 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     return false;
   }
 
+  private static boolean isNotCalm(World world, BlockPos pos, IBlockState state) {
+    if (state.getValue(STAGE_3) == 0 || !world.isDaytime()) {
+      return false;
+    }
+    for (Vec3i v : VECTORS) {
+      BlockPos searchPos = pos.add(v);
+      IBlockState searchState = world.getBlockState(searchPos);
+      if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(LIT)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   @Override
   protected BlockStateContainer createBlockState() {
     return new BlockStateContainer(this, STAGE_3);
@@ -210,6 +186,31 @@ public class BlockBeehive extends Block implements ICapabilitySize {
 
   private boolean isValid(World world, BlockPos pos, TEHangingPlanter tile) {
     return tile.isClimateValid() || Climate.getDailyTemp(world, pos) > 10;
+  }
+
+  private static int countFlowers(World world, BlockPos pos) {
+    int flowers = 0;
+    BlockPos searchPos;
+    for (int x = -4; x <= 4; x++) {
+      for (int y = -1; y <= 1; y++) {
+        for (int z = -4; z <= 4; z++) {
+          if (flowers == 10) {
+            return flowers;
+          }
+          searchPos = pos.add(x, y, z);
+          Block block = world.getBlockState(searchPos).getBlock();
+          if (block instanceof BlockPlant blockPlant) {
+            if (blockPlant.getType().getCategory() == FloraCategories.STANDARD) {
+              flowers++;
+            }
+          } else if (block instanceof BlockPlantFlowerPot || block instanceof BlockBushTrellis || block instanceof BlockLargePlanter
+                     || block instanceof BlockHangingPlanter) {
+            flowers++;
+          }
+        }
+      }
+    }
+    return flowers;
   }
 
   @Override

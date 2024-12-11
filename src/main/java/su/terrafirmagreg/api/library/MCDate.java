@@ -137,8 +137,7 @@ public class MCDate {
 
     private static final Week[] VALUES = values();
 
-    Week() {
-    }
+    Week() {}
 
     @NotNull
     public static Week valueOf(int id) {

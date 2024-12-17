@@ -29,11 +29,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
+import static gregtech.api.unification.ore.OrePrefix.block;
 import static gregtech.api.unification.ore.OrePrefix.bolt;
+import static gregtech.api.unification.ore.OrePrefix.crushed;
+import static gregtech.api.unification.ore.OrePrefix.crushedCentrifuged;
+import static gregtech.api.unification.ore.OrePrefix.crushedPurified;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.dustImpure;
+import static gregtech.api.unification.ore.OrePrefix.dustPure;
 import static gregtech.api.unification.ore.OrePrefix.dustSmall;
 import static gregtech.api.unification.ore.OrePrefix.dustTiny;
+import static gregtech.api.unification.ore.OrePrefix.gear;
 import static gregtech.api.unification.ore.OrePrefix.ingot;
 import static gregtech.api.unification.ore.OrePrefix.nugget;
 import static gregtech.api.unification.ore.OrePrefix.plate;
@@ -84,12 +90,18 @@ public final class CapabilityMetalItem {
     ORE_DICT_METAL_ITEMS.put(plateDouble, 288);
     ORE_DICT_METAL_ITEMS.put(dustTiny, 16); //7
     ORE_DICT_METAL_ITEMS.put(dustSmall, 36); //17
-    ORE_DICT_METAL_ITEMS.put(dustImpure, 120); //17
+    ORE_DICT_METAL_ITEMS.put(dustImpure, 120);
+    ORE_DICT_METAL_ITEMS.put(crushed, 120);
+    ORE_DICT_METAL_ITEMS.put(crushedPurified, 124);
+    ORE_DICT_METAL_ITEMS.put(crushedCentrifuged, 134);
+    ORE_DICT_METAL_ITEMS.put(dustPure, 134);
     ORE_DICT_METAL_ITEMS.put(dust, 144);
     ORE_DICT_METAL_ITEMS.put(stick, 72);
     ORE_DICT_METAL_ITEMS.put(stickLong, 144);
     ORE_DICT_METAL_ITEMS.put(bolt, 36);
     ORE_DICT_METAL_ITEMS.put(screw, 36);
+    ORE_DICT_METAL_ITEMS.put(gear, 576);
+    ORE_DICT_METAL_ITEMS.put(block, 1296);
 
 //    ORE_DICT_METAL_ITEMS.put(TFGOrePrefix.ingotTriple, 432);
 //    ORE_DICT_METAL_ITEMS.put(TFGOrePrefix.ingotHex, 864);

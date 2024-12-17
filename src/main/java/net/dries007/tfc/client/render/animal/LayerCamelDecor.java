@@ -17,14 +17,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.stream.IntStream;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class LayerCamelDecor implements LayerRenderer<EntityCamelTFC> {
 
-  private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16).mapToObj(i -> new ResourceLocation(MODID_TFC,
+  private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16).mapToObj(i -> new ResourceLocation(TFC,
                                                                                                                            "textures/entity/animal/livestock/decor/"
                                                                                                                            + EnumDyeColor.byMetadata(i)
                                                                                                                                          .getName() + ".png"))

@@ -1,9 +1,9 @@
 package su.terrafirmagreg.core.modules.gregtech.recipes;
 
+import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
+
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.loaders.recipe.handlers.OreRecipeHandler;
-
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
 
 public class TFGOreRecipeHandler {
 

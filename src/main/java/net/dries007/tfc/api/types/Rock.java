@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 
 public class Rock extends IForgeRegistryEntry.Impl<Rock> {
@@ -39,6 +39,10 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
   public static final Rock RHYOLITE = Helpers.getNull();
   @GameRegistry.ObjectHolder("tfc:limestone")
   public static final Rock LIMESTONE = Helpers.getNull();
+  @GameRegistry.ObjectHolder("tfc:diorite")
+  public static final Rock DIORITE = Helpers.getNull();
+  @GameRegistry.ObjectHolder("tfc:andesite")
+  public static final Rock ANDESITE = Helpers.getNull();
 
   private final RockCategory rockCategory;
   private final ResourceLocation textureLocation;
@@ -51,7 +55,7 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
 
     setRegistryName(name);
     this.rockCategory = rockCategory;
-    this.textureLocation = new ResourceLocation(MODID_TFC, "textures/blocks/stonetypes/raw/" + name.getPath() + ".png");
+    this.textureLocation = new ResourceLocation(TFC, "textures/blocks/stonetypes/raw/" + name.getPath() + ".png");
     this.isFluxStone = isFluxStone;
     this.isNaturallyGenerating = isNaturallyGenerating;
   }

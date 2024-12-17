@@ -16,13 +16,13 @@ import org.apache.logging.log4j.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @ParametersAreNonnullByDefault
 public class CalendarWorldData extends WorldSavedData {
 
-  private static final String NAME = MODID_TFC + "_calendar";
-  private static final String NAME_PRE_V1_5_0_X = MODID_TFC + ":calendar";
+  private static final String NAME = TFC + "_calendar";
+  private static final String NAME_PRE_V1_5_0_X = TFC + ":calendar";
 
   private static final Logger LOGGER = LogManager.getLogger();
   private final CalendarTFC calendar;

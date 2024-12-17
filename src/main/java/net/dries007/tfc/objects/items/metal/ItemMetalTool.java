@@ -52,7 +52,9 @@ public class ItemMetalTool extends ItemMetal {
 
   public ItemMetalTool(Metal metal, Metal.ItemType type) {
     super(metal, type);
-    if (metal.getToolMetal() == null) {throw new IllegalArgumentException("You can't make tools out of non tool metals.");}
+    if (metal.getToolMetal() == null) {
+      throw new IllegalArgumentException("You can't make tools out of non tool metals. " + metal + " / " + type);
+    }
     material = metal.getToolMetal();
     int harvestLevel = material.getHarvestLevel();
 
@@ -196,6 +198,19 @@ public class ItemMetalTool extends ItemMetal {
         attackSpeed = -3;
         canDisableShield = false;
         break;
+      case ICE_SAW:
+        typeDamage = 0.5f;
+        attackSpeed = -2.8F;
+        areaOfEffect = 1;
+        OreDictionaryHelper.registerDamageType(this, DamageType.SLASHING);
+        break;
+      case MALLET:
+        typeDamage = 0.5f;
+        attackSpeed = -3.0F;
+        areaOfEffect = 1;
+        setMaxDamage((int) ((double) material.getMaxUses() / 4));
+        OreDictionaryHelper.registerDamageType(this, DamageType.SLASHING);
+        break;
       default:
         throw new IllegalArgumentException("Tool from non tool type.");
     }
@@ -212,10 +227,9 @@ public class ItemMetalTool extends ItemMetal {
     } else if (type == Metal.ItemType.SHOVEL) {
       IBlockState iblockstate = worldIn.getBlockState(pos);
       Block block = iblockstate.getBlock();
-      if (!(block instanceof BlockRockVariant)) {
+      if (!(block instanceof BlockRockVariant rockVariant)) {
         return EnumActionResult.PASS;
       }
-      BlockRockVariant rockVariant = (BlockRockVariant) block;
       if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR
           && rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS || rockVariant.getType() == Rock.Type.DIRT) {
         IBlockState iblockstate1 = BlockRockVariant.get(rockVariant.getRock(), Rock.Type.PATH).getDefaultState();
@@ -278,8 +292,7 @@ public class ItemMetalTool extends ItemMetal {
         stack.damageItem(1, entityLiving);
       }
     }
-    if (areaOfEffect > 1 && entityLiving instanceof EntityPlayer && !worldIn.isRemote) {
-      EntityPlayer player = (EntityPlayer) entityLiving;
+    if (areaOfEffect > 1 && entityLiving instanceof EntityPlayer player && !worldIn.isRemote) {
       int areaPlus = areaOfEffect - 1; //First block already added
       for (BlockPos.MutableBlockPos extraPos : BlockPos.getAllInBoxMutable(pos.add(-areaPlus, -areaPlus, -areaPlus), pos.add(areaPlus, areaPlus, areaPlus))) {
         IBlockState st = worldIn.getBlockState(extraPos);

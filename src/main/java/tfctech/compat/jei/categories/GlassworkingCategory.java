@@ -12,13 +12,14 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
-import tfctech.TFCTech;
+import su.terrafirmagreg.api.data.Reference;
+
 import tfctech.compat.jei.wrappers.GlassworkingRecipeWrapper;
 
 @ParametersAreNonnullByDefault
 public class GlassworkingCategory extends BaseRecipeCategory<GlassworkingRecipeWrapper>
 {
-    private static final ResourceLocation ICONS = new ResourceLocation(TFCTech.MODID, "textures/gui/elements.png");
+    private static final ResourceLocation ICONS = new ResourceLocation(Reference.TFCTECH, "textures/gui/elements.png");
 
     private final IDrawableStatic arrow, outputSlot;
 

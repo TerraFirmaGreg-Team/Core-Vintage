@@ -9,7 +9,6 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.ToolProperty;
-import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.ToolItems;
 import gregtech.loaders.recipe.handlers.ToolRecipeHandler;
@@ -30,7 +29,7 @@ public class ToolRecipeHandlerMixin {
   private static void onRegisterFlintToolRecipes(CallbackInfo ci) {
     Material material = Materials.Flint;
 
-    UnificationEntry stick = new UnificationEntry(OrePrefix.stick, Materials.Wood);
+    UnificationEntry stick = new UnificationEntry(gregtech.api.unification.ore.OrePrefix.stick, Materials.Wood);
     UnificationEntry toolHeadShovel = new UnificationEntry(TFGOrePrefix.toolHeadShovel, material);
     UnificationEntry toolHeadAxe = new UnificationEntry(TFGOrePrefix.toolHeadAxe, material);
     UnificationEntry toolHeadHoe = new UnificationEntry(TFGOrePrefix.toolHeadHoe, material);
@@ -48,11 +47,11 @@ public class ToolRecipeHandlerMixin {
    * Fix tool recipes for TFG modpack
    */
   @Inject(method = "processTool", at = @At(value = "HEAD"), remap = false, cancellable = true)
-  private static void onProcessTool(OrePrefix prefix, Material material, ToolProperty property, CallbackInfo ci) {
-    UnificationEntry stick = new UnificationEntry(OrePrefix.stick, Materials.Wood);
-    UnificationEntry plate = new UnificationEntry(OrePrefix.plate, material);
-    UnificationEntry screw = new UnificationEntry(OrePrefix.screw, material);
-    UnificationEntry metalStick = new UnificationEntry(OrePrefix.stick, material);
+  private static void onProcessTool(gregtech.api.unification.ore.OrePrefix prefix, Material material, ToolProperty property, CallbackInfo ci) {
+    UnificationEntry stick = new UnificationEntry(gregtech.api.unification.ore.OrePrefix.stick, Materials.Wood);
+    UnificationEntry plate = new UnificationEntry(gregtech.api.unification.ore.OrePrefix.plate, material);
+    UnificationEntry screw = new UnificationEntry(gregtech.api.unification.ore.OrePrefix.screw, material);
+    UnificationEntry metalStick = new UnificationEntry(gregtech.api.unification.ore.OrePrefix.stick, material);
 
     UnificationEntry toolHeadSword = new UnificationEntry(TFGOrePrefix.toolHeadSword, material);
     UnificationEntry toolHeadPickaxe = new UnificationEntry(TFGOrePrefix.toolHeadPickaxe, material);
@@ -89,16 +88,16 @@ public class ToolRecipeHandlerMixin {
     }
 
     if (material.hasFlag(MaterialFlags.GENERATE_ROD) && material != Materials.Stone) {
-      UnificationEntry rod = new UnificationEntry(OrePrefix.stick, material);
+      UnificationEntry rod = new UnificationEntry(gregtech.api.unification.ore.OrePrefix.stick, material);
       if (material.hasFlag(MaterialFlags.GENERATE_PLATE)) {
         addToolRecipe(material, ToolItems.BUTCHERY_KNIFE, false, "PPf", "PP ", "Sh ", 'P', plate, 'S', rod);
         if (material.hasFlag(MaterialFlags.GENERATE_BOLT_SCREW)) {
-          addToolRecipe(material, ToolItems.WIRE_CUTTER, false, "PfP", "hPd", "STS", 'P', plate, 'T', new UnificationEntry(OrePrefix.screw, material), 'S', rod);
+          addToolRecipe(material, ToolItems.WIRE_CUTTER, false, "PfP", "hPd", "STS", 'P', plate, 'T', new UnificationEntry(gregtech.api.unification.ore.OrePrefix.screw, material), 'S', rod);
         }
       }
 
       addToolRecipe(material, ToolItems.SCREWDRIVER, true, " fS", " Sh", "W  ", 'S', rod, 'W', stick);
-      addToolRecipe(material, ToolItems.CROWBAR, true, "hDS", "DSD", "SDf", 'S', rod, 'D', new UnificationEntry(OrePrefix.dye, MarkerMaterials.Color.Blue));
+      addToolRecipe(material, ToolItems.CROWBAR, true, "hDS", "DSD", "SDf", 'S', rod, 'D', new UnificationEntry(gregtech.api.unification.ore.OrePrefix.dye, MarkerMaterials.Color.Blue));
     }
 
     ci.cancel();
@@ -115,7 +114,7 @@ public class ToolRecipeHandlerMixin {
   private static void registerStoneToolRecipes() {
     Material material = Materials.Stone;
 
-    UnificationEntry stick = new UnificationEntry(OrePrefix.stick, Materials.Wood);
+    UnificationEntry stick = new UnificationEntry(gregtech.api.unification.ore.OrePrefix.stick, Materials.Wood);
     UnificationEntry toolHeadHammer = new UnificationEntry(TFGOrePrefix.toolHeadHammer, material);
     UnificationEntry toolHeadShovel = new UnificationEntry(TFGOrePrefix.toolHeadShovel, material);
     UnificationEntry toolHeadAxe = new UnificationEntry(TFGOrePrefix.toolHeadAxe, material);

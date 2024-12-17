@@ -27,12 +27,12 @@ import net.dries007.tfc.util.skills.SkillType;
 
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkills extends GuiContainerTFC {
 
-  private static final ResourceLocation BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/player_skills.png");
+  private static final ResourceLocation BACKGROUND = new ResourceLocation(TFC, "textures/gui/player_skills.png");
 
   private final String[] skillTooltips;
   private final int[] skillBarWidths;

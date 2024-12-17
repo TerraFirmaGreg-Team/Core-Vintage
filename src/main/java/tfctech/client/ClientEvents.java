@@ -17,10 +17,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import tfctech.objects.blocks.devices.BlockFridge;
 
-import static tfctech.TFCTech.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFCTECH)
 public final class ClientEvents
 {
     @SubscribeEvent

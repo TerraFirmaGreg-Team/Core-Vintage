@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderPolarBearTFC extends RenderLiving<EntityPolarBearTFC> {
 
-  private static final ResourceLocation POLARBEAR_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/polarbear.png");
+  private static final ResourceLocation POLARBEAR_TEXTURE = new ResourceLocation(TFC, "textures/entity/animal/predators/polarbear.png");
 
   public RenderPolarBearTFC(RenderManager renderManager) {super(renderManager, new ModelPolarBearTFC(), 0.7F);}
 

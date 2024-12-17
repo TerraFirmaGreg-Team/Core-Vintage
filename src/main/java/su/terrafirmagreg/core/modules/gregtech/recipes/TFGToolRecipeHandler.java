@@ -10,7 +10,6 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
-import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
 
 import static gregtech.api.unification.material.properties.PropertyKey.GEM;
@@ -32,12 +31,12 @@ public class TFGToolRecipeHandler {
     TFGOrePrefix.toolHeadChisel.addProcessingHandler(PropertyKey.TOOL, TFGToolRecipeHandler::processHeadChisel);
   }
 
-  private static void processHeadSword(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadSword(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 2)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 2)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_SWORD)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -45,7 +44,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 2)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 2)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Orange))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -54,12 +53,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadPickaxe(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadPickaxe(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 3)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 3)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_PICKAXE)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -67,7 +66,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 3)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 3)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Magenta))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -76,12 +75,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadShovel(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadShovel(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 1)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 1)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_SHOVEL)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -89,7 +88,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 1)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 1)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.LightBlue))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -98,12 +97,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadAxe(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadAxe(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 3)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 3)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_AXE)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -111,7 +110,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 3)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 3)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Yellow))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -120,12 +119,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadHoe(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadHoe(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 2)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 2)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_HOE)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -133,7 +132,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 2)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 2)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Lime))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -142,12 +141,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadSense(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadSense(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 3)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 3)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_SENSE)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -155,7 +154,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 3)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 3)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Pink))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -164,12 +163,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadFile(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadFile(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 2)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 2)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_FILE)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -177,7 +176,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 2)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 2)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Gray))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -186,12 +185,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadHammer(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadHammer(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 6)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 6)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_HAMMER)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -199,7 +198,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 6)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 6)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.LightGray))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -208,12 +207,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadSaw(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadSaw(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 2)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 2)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_SAW)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -221,7 +220,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 2)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 2)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Cyan))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -230,12 +229,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadKnife(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadKnife(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder()
-                                      .input(OrePrefix.ingot, material, 1)
+                                      .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 1)
                                       .notConsumable(TFGMetaItems.SHAPE_MOLD_KNIFE)
                                       .outputs(OreDictUnifier.get(toolPrefix, material))
                                       .duration((int) material.getMass() * 2)
@@ -243,7 +242,7 @@ public class TFGToolRecipeHandler {
                                       .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 1)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 1)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Cyan))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -252,12 +251,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadPropick(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadPropick(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder()
-                                      .input(OrePrefix.ingot, material, 3)
+                                      .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 3)
                                       .notConsumable(TFGMetaItems.SHAPE_MOLD_PROPICK)
                                       .outputs(OreDictUnifier.get(toolPrefix, material))
                                       .duration((int) material.getMass() * 2)
@@ -265,7 +264,7 @@ public class TFGToolRecipeHandler {
                                       .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 3)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 3)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Blue))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)
@@ -274,12 +273,12 @@ public class TFGToolRecipeHandler {
     }
   }
 
-  private static void processHeadChisel(OrePrefix toolPrefix, Material material, ToolProperty property) {
+  private static void processHeadChisel(gregtech.api.unification.ore.OrePrefix toolPrefix, Material material, ToolProperty property) {
     int voltageMultiplier = IMaterialRecipeHandlerInvoker.invokeGetVoltageMultiplier(material);
 
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
-                                 .input(OrePrefix.ingot, material, 2)
+                                 .input(gregtech.api.unification.ore.OrePrefix.ingot, material, 2)
                                  .notConsumable(TFGMetaItems.SHAPE_EXTRUDER_CHISEL)
                                  .outputs(OreDictUnifier.get(toolPrefix, material))
                                  .duration((int) material.getMass() * 2)
@@ -287,7 +286,7 @@ public class TFGToolRecipeHandler {
                                  .buildAndRegister();
     } else {
       RecipeMaps.LASER_ENGRAVER_RECIPES.recipeBuilder()
-                                       .input(OrePrefix.gem, material, 2)
+                                       .input(gregtech.api.unification.ore.OrePrefix.gem, material, 2)
                                        .notConsumable(MetaItems.GLASS_LENSES.get(MarkerMaterials.Color.Brown))
                                        .outputs(OreDictUnifier.get(toolPrefix, material))
                                        .duration((int) material.getMass() * 2)

@@ -16,16 +16,17 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.AlloyRecipeWrapper;
+
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class AlloyCategory extends BaseRecipeCategory<AlloyRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Reference.TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic fire;

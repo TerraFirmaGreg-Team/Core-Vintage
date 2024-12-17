@@ -14,9 +14,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.objects.blocks.BlockPowderKeg;
+
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -46,10 +47,10 @@ public class ItemBlockPowderKeg extends ItemBlockTFC implements IItemSize {
       }
 
       if (count == 0) {
-        tooltip.add(I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.powderkeg_empty"));
+        tooltip.add(I18n.format(Reference.TFC + ".tooltip.powderkeg_empty"));
       } else {
         ItemStack itemStack = stackHandler.getStackInSlot(firstSlot);
-        tooltip.add(I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.powderkeg_amount", count, itemStack.getItem().getItemStackDisplayName(itemStack)));
+        tooltip.add(I18n.format(Reference.TFC + ".tooltip.powderkeg_amount", count, itemStack.getItem().getItemStackDisplayName(itemStack)));
       }
     }
   }

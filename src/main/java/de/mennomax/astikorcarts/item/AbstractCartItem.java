@@ -13,9 +13,9 @@ import net.minecraft.world.World;
 
 import de.mennomax.astikorcarts.AstikorCarts;
 import de.mennomax.astikorcarts.entity.AbstractDrawn;
-import de.mennomax.astikorcarts.init.ModCreativeTabs;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 
 import javax.annotation.Nonnull;
@@ -25,7 +25,7 @@ public abstract class AbstractCartItem extends ItemTFC {
   public AbstractCartItem(String name) {
     this.setRegistryName(AstikorCarts.MODID, name);
     this.setTranslationKey(this.getRegistryName().toString());
-    this.setCreativeTab(ModCreativeTabs.astikor);
+    this.setCreativeTab(CreativeTabsTFC.CT_WOOD);
     this.setMaxStackSize(1);
   }
 

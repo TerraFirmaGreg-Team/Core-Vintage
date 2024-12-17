@@ -7,7 +7,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.eerussianguy.firmalife.util.HelpersFL;
-import net.dries007.tfc.TerraFirmaCraft;
+
+import su.terrafirmagreg.api.data.Reference;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 
@@ -18,9 +19,9 @@ public class ConfigFL {
   public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
     if (event.getModID().equals(MOD_ID)) {
       if (ConfigFL.General.COMPAT.logging) {FirmaLife.logger.warn("Config changed.");}
-      ConfigManager.sync(TerraFirmaCraft.MODID_TFC, Config.Type.INSTANCE);
+      ConfigManager.sync(Reference.TFC, Config.Type.INSTANCE);
     }
-    if (event.getModID().equals(TerraFirmaCraft.MODID_TFC)) {
+    if (event.getModID().equals(Reference.TFC)) {
       HelpersFL.insertWhitelist();
     }
   }

@@ -1,0 +1,9 @@
+{
+  "type": "tfc:metal/mallet_head/unmold_recipe",
+  "ingredients": [
+    {
+      "item": "tfc:metal/mallet_head/mallet_mold"
+    }
+  ],
+  "result": "mallet_head"
+}

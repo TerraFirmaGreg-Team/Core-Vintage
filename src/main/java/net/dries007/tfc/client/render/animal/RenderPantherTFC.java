@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderPantherTFC extends RenderLiving<EntityPantherTFC> {
 
-  private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/panther.png");
+  private static final ResourceLocation TEXTURE = new ResourceLocation(TFC, "textures/entity/animal/predators/panther.png");
 
   public RenderPantherTFC(RenderManager renderManager) {
     super(renderManager, new ModelPantherTFC(), 0.7F);

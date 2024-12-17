@@ -1,5 +1,7 @@
 package tfcflorae.compat.jei.wrappers;
 
+import su.terrafirmagreg.api.data.Reference;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -11,72 +13,51 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 import net.dries007.tfc.util.Helpers;
-import tfcflorae.TFCFlorae;
-import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.objects.items.rock.ItemMud;
 
 import javax.annotation.Nullable;
 
 public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 
-  private static final ResourceLocation PINEAPPLE_LEATHER_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/pineapple_leather_button.png");
-  private static final ResourceLocation BURLAP_CLOTH_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/blocks/devices/loom/product/burlap.png");
-  private static final ResourceLocation WOOL_CLOTH_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/blocks/devices/loom/product/wool.png");
-  private static final ResourceLocation SILK_CLOTH_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/blocks/devices/loom/product/silk.png");
-  private static final ResourceLocation SISAL_CLOTH_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/blocks/devices/loom/product/sisal.png");
-  private static final ResourceLocation COTTON_CLOTH_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/blocks/devices/loom/product/cotton.png");
-  private static final ResourceLocation LINEN_CLOTH_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/blocks/devices/loom/product/linen.png");
-  private static final ResourceLocation HEMP_CLOTH_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/blocks/devices/loom/product/hemp.png");
-  private static final ResourceLocation YUCCA_CANVAS_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/blocks/devices/loom/product/yucca.png");
-  private static final ResourceLocation MUD_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/mud_button.png");
-  private static final ResourceLocation MUD_DISABLED_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/mud_button_disabled.png");
-  private static final ResourceLocation EARTHENWARE_CLAY_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/earthenware_clay_button.png");
-  private static final ResourceLocation EARTHENWARE_CLAY_DISABLED_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/earthenware_clay_button_disabled.png");
-  private static final ResourceLocation KAOLINITE_CLAY_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/kaolinite_clay_button.png");
-  private static final ResourceLocation KAOLINITE_CLAY_DISABLED_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/kaolinite_clay_button_disabled.png");
-  private static final ResourceLocation STONEWARE_CLAY_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/stoneware_clay_button.png");
-  private static final ResourceLocation STONEWARE_CLAY_DISABLED_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/stoneware_clay_button_disabled.png");
-  private static final ResourceLocation FLINT_TEXTURE = new ResourceLocation(TFCFlorae.MODID, "textures/gui/knapping/flint_button.png");
+  private static final ResourceLocation PINEAPPLE_LEATHER_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/gui/knapping/pineapple_leather_button.png");
+  private static final ResourceLocation BURLAP_CLOTH_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/blocks/devices/loom/product/burlap.png");
+  private static final ResourceLocation WOOL_CLOTH_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/blocks/devices/loom/product/wool.png");
+  private static final ResourceLocation SILK_CLOTH_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/blocks/devices/loom/product/silk.png");
+  private static final ResourceLocation SISAL_CLOTH_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/blocks/devices/loom/product/sisal.png");
+  private static final ResourceLocation COTTON_CLOTH_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/blocks/devices/loom/product/cotton.png");
+  private static final ResourceLocation LINEN_CLOTH_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/blocks/devices/loom/product/linen.png");
+  private static final ResourceLocation HEMP_CLOTH_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/blocks/devices/loom/product/hemp.png");
+  private static final ResourceLocation YUCCA_CANVAS_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/blocks/devices/loom/product/yucca.png");
+  private static final ResourceLocation MUD_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/gui/knapping/mud_button.png");
+  private static final ResourceLocation MUD_DISABLED_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/gui/knapping/mud_button_disabled.png");
+  private static final ResourceLocation FLINT_TEXTURE = new ResourceLocation(Reference.TFCF, "textures/gui/knapping/flint_button.png");
 
   private static ResourceLocation getHighTexture(KnappingType type) {
-    if (type == KnappingTypes.PINEAPPLE_LEATHER) {
+    if (type == KnappingType.PINEAPPLE_LEATHER) {
       return PINEAPPLE_LEATHER_TEXTURE;
-    } else if (type == KnappingTypes.BURLAP_CLOTH) {
+    } else if (type == KnappingType.BURLAP_CLOTH) {
       return BURLAP_CLOTH_TEXTURE;
-    } else if (type == KnappingTypes.WOOL_CLOTH) {
+    } else if (type == KnappingType.WOOL_CLOTH) {
       return WOOL_CLOTH_TEXTURE;
-    } else if (type == KnappingTypes.SILK_CLOTH) {
+    } else if (type == KnappingType.SILK_CLOTH) {
       return SILK_CLOTH_TEXTURE;
-    } else if (type == KnappingTypes.SISAL_CLOTH) {
+    } else if (type == KnappingType.SISAL_CLOTH) {
       return SISAL_CLOTH_TEXTURE;
-    } else if (type == KnappingTypes.COTTON_CLOTH) {
+    } else if (type == KnappingType.COTTON_CLOTH) {
       return COTTON_CLOTH_TEXTURE;
-    } else if (type == KnappingTypes.LINEN_CLOTH) {
+    } else if (type == KnappingType.LINEN_CLOTH) {
       return LINEN_CLOTH_TEXTURE;
-    } else if (type == KnappingTypes.HEMP_CLOTH) {
+    } else if (type == KnappingType.HEMP_CLOTH) {
       return HEMP_CLOTH_TEXTURE;
-    } else if (type == KnappingTypes.YUCCA_CANVAS) {
+    } else if (type == KnappingType.YUCCA_CANVAS) {
       return YUCCA_CANVAS_TEXTURE;
-    } else if (type == KnappingTypes.EARTHENWARE_CLAY) {
-      return EARTHENWARE_CLAY_TEXTURE;
-    } else if (type == KnappingTypes.KAOLINITE_CLAY) {
-      return KAOLINITE_CLAY_TEXTURE;
-    } else if (type == KnappingTypes.STONEWARE_CLAY) {
-      return STONEWARE_CLAY_TEXTURE;
-    } else if (type == KnappingTypes.FLINT) {
+    } else if (type == KnappingType.FLINT) {
       return FLINT_TEXTURE;
     }
     return null;
   }
 
   private static ResourceLocation getLowTexture(KnappingType type) {
-    if (type == KnappingTypes.EARTHENWARE_CLAY) {
-      return EARTHENWARE_CLAY_DISABLED_TEXTURE;
-    } else if (type == KnappingTypes.KAOLINITE_CLAY) {
-      return KAOLINITE_CLAY_DISABLED_TEXTURE;
-    } else if (type == KnappingTypes.STONEWARE_CLAY) {
-      return STONEWARE_CLAY_DISABLED_TEXTURE;
-    }
     return null;
   }
 

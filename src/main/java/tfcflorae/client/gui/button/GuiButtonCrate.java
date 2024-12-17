@@ -10,7 +10,7 @@ import tfcflorae.objects.te.TECrate;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 public class GuiButtonCrate extends GuiButtonTFC implements IButtonTooltip {
 
@@ -23,7 +23,7 @@ public class GuiButtonCrate extends GuiButtonTFC implements IButtonTooltip {
 
   @Override
   public String getTooltip() {
-    return MODID + ".tooltip." + (tile.isSealed() ? "crate_unseal" : "crate_seal");
+    return TFCF + ".tooltip." + (tile.isSealed() ? "crate_unseal" : "crate_seal");
   }
 
   @Override

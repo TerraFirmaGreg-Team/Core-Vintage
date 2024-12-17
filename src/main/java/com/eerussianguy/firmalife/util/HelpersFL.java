@@ -5,7 +5,6 @@ import com.eerussianguy.firmalife.FirmaLife;
 import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
 import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -17,6 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+
+import su.terrafirmagreg.api.data.Reference;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -35,7 +36,7 @@ public class HelpersFL {
   }
 
   public static void insertWhitelist() {
-    ConfigManager.sync(TerraFirmaCraft.MODID_TFC, Config.Type.INSTANCE);
+    ConfigManager.sync(Reference.TFC, Config.Type.INSTANCE);
     String[] additions = {"yeast_starter", "coconut_milk", "yak_milk", "zebu_milk", "goat_milk", "curdled_goat_milk", "curdled_yak_milk", "pina_colada"};
     if (ConfigFL.General.COMPAT.addToWoodenBucket) {
       Set<String> woodenBucketSet = new HashSet<>(Arrays.asList(ConfigTFC.General.MISC.woodenBucketWhitelist));

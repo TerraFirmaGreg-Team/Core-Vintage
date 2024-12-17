@@ -24,13 +24,13 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.objects.te.TEPitKiln;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln> {
 
-  private static final ResourceLocation THATCH = new ResourceLocation(MODID_TFC, "textures/blocks/thatch.png");
-  private static final ResourceLocation BARK = new ResourceLocation(MODID_TFC, "textures/blocks/wood/log/oak.png");
+  private static final ResourceLocation THATCH = new ResourceLocation(TFC, "textures/blocks/thatch.png");
+  private static final ResourceLocation BARK = new ResourceLocation(TFC, "textures/blocks/wood/log/oak.png");
   private static final ModelStraw[] STRAW = new ModelStraw[TEPitKiln.STRAW_NEEDED];
   private static final int LOG_ROWS = 2;
   private static final int LOGS_PER_ROW = TEPitKiln.WOOD_NEEDED / LOG_ROWS;

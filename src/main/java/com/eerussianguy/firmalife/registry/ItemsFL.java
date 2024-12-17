@@ -23,9 +23,6 @@ import com.eerussianguy.firmalife.items.ItemFruitDoor;
 import com.eerussianguy.firmalife.items.ItemFruitPole;
 import com.eerussianguy.firmalife.items.ItemGreenhouseDoor;
 import com.eerussianguy.firmalife.items.ItemHeatableFoodFL;
-import com.eerussianguy.firmalife.items.ItemMetalMallet;
-import com.eerussianguy.firmalife.items.ItemMetalMalletHead;
-import com.eerussianguy.firmalife.items.ItemMetalMalletMold;
 import com.eerussianguy.firmalife.items.ItemPizza;
 import com.eerussianguy.firmalife.items.ItemRoastedCocoaBeans;
 import com.eerussianguy.firmalife.items.ItemSandwichFL;
@@ -36,34 +33,27 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemMisc;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.objects.items.wood.ItemWoodenBucket;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.FruitTree;
+
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_DECORATIONS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 @GameRegistry.ObjectHolder(MOD_ID)
 public class ItemsFL {
 
-  @GameRegistry.ObjectHolder("unfired_mallet_mold")
-  public static final ItemPottery UNFIRED_MALLET_MOLD = Helpers.getNull();
-  @GameRegistry.ObjectHolder("mallet_mold")
-  public static final ItemMetalMalletMold MALLET_MOLD = Helpers.getNull();
   @GameRegistry.ObjectHolder("chestnut_slice")
   public static final ItemHeatableFoodFL CHESTNUT_SLICE = Helpers.getNull();
   @GameRegistry.ObjectHolder("roasted_cocoa_beans")
@@ -153,21 +143,13 @@ public class ItemsFL {
   @GameRegistry.ObjectHolder("beeswax")
   public static final ItemMisc BEESWAX = Helpers.getNull();
 
-  private static final Map<Metal, ItemMetalMalletHead> malletHeads = new HashMap<>();
   private static final Map<Fruit, Item> driedFruits = new HashMap<>();
   private static final Map<FoodFL, ItemFoodFL> foods = new HashMap<>();
-  public static ItemMetalMalletMold malletMold;
+  @Getter
   private static ImmutableList<Item> allEasyItems;
+  @Getter
   private static ImmutableList<ItemFruitDoor> allFruitDoors;
   private static ImmutableList<Item> unused;
-
-  public static ImmutableList<Item> getAllEasyItems() {
-    return allEasyItems;
-  }
-
-  public static ImmutableList<ItemFruitDoor> getAllFruitDoors() {return allFruitDoors;}
-
-  public static ItemMetalMalletHead getMetalMalletHead(Metal metal) {return malletHeads.get(metal);}
 
   public static Item getDriedFruit(Fruit fruit) {
     return driedFruits.get(fruit);
@@ -203,9 +185,6 @@ public class ItemsFL {
       }
       foods.put(food, foodItem);
     }
-
-    easyItems.add(register(r, "unfired_mallet_mold", new ItemPottery(), CT_POTTERY));
-    malletMold = register(r, "mallet_mold", new ItemMetalMalletMold("mallet"), CT_POTTERY);
 
     ItemDriedPineapple dryPineapple = new ItemDriedPineapple();
     easyItems.add(register(r, "dried_pineapple", dryPineapple, CT_FOOD));
@@ -274,10 +253,10 @@ public class ItemsFL {
     easyItems.add(register(r, "cinnamon_bark", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
     easyItems.add(register(r, "cinnamon", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
     easyItems.add(register(r, "ground_cinnamon", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
-    easyItems.add(register(r, "greenhouse_door", new ItemGreenhouseDoor(BlocksFL.GREENHOUSE_DOOR), CT_DECORATIONS));
-    easyItems.add(register(r, "quad_planter", new ItemBlock(BlocksFL.QUAD_PLANTER), CT_DECORATIONS));
-    easyItems.add(register(r, "large_planter", new ItemBlock(BlocksFL.LARGE_PLANTER), CT_DECORATIONS));
-    easyItems.add(register(r, "cinnamon_sapling", new ItemBlock(BlocksFL.CINNAMON_SAPLING), CT_DECORATIONS));
+    easyItems.add(register(r, "greenhouse_door", new ItemGreenhouseDoor(BlocksFL.GREENHOUSE_DOOR), CT_WOOD));
+    easyItems.add(register(r, "quad_planter", new ItemBlock(BlocksFL.QUAD_PLANTER), CT_MISC));
+    easyItems.add(register(r, "large_planter", new ItemBlock(BlocksFL.LARGE_PLANTER), CT_MISC));
+    easyItems.add(register(r, "cinnamon_sapling", new ItemBlock(BlocksFL.CINNAMON_SAPLING), CT_MISC));
 
     easyItems.add(register(r, "pineapple_leather", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
     easyItems.add(register(r, "pineapple_fiber", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
@@ -301,19 +280,7 @@ public class ItemsFL {
     for (FruitTreeFL fruitTree : FruitTreeFL.values()) {easyItems.add(registerPole(r, fruitTree));}
     for (IFruitTree fruitTree : FruitTree.values()) {easyItems.add(registerPole(r, fruitTree));}
     for (BlockFruitDoor door : BlocksFL.getAllFruitDoors()) {
-      fruitDoors.add(register(r, door.getRegistryName().getPath(), new ItemFruitDoor(door), CT_DECORATIONS));
-    }
-
-    for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
-      if (metal.isToolMetal()) {
-        ItemMetalMallet mallet = register(r, metal.toString() + "_mallet", new ItemMetalMallet(metal), CT_METAL);
-        OreDictionary.registerOre("tool", mallet);
-        easyItems.add(mallet);
-        ItemMetalMalletHead head = new ItemMetalMalletHead(metal);
-        easyItems.add(register(r, metal.toString() + "_mallet_head", head, CT_METAL));
-        OreDictionary.registerOre("tool", head);
-        malletHeads.put(metal, head);
-      }
+      fruitDoors.add(register(r, door.getRegistryName().getPath(), new ItemFruitDoor(door), CT_WOOD));
     }
 
     //uses a separate model loader

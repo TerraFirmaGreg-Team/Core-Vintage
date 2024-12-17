@@ -15,15 +15,16 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.Helpers;
 
+import su.terrafirmagreg.api.data.Reference;
+
 @SideOnly(Side.CLIENT)
 public class GuiLiquidTransfer extends GuiContainerTFC {
 
-  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/single_inventory.png");
+  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Reference.TFC, "textures/gui/single_inventory.png");
   private final int slotIdx;
 
   public GuiLiquidTransfer(Container container, EntityPlayer player, boolean mainhand) {

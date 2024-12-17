@@ -1,5 +1,7 @@
 package tfcflorae.types;
 
+import su.terrafirmagreg.api.data.Reference;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -21,7 +23,6 @@ import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.recipe.NutRecipe;
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import com.eerussianguy.firmalife.recipe.PlanterRecipe;
-import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
@@ -29,7 +30,6 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeTemperature;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
-import net.dries007.tfc.api.recipes.heat.HeatRecipeVessel;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
@@ -57,28 +57,20 @@ import net.dries007.tfc.util.agriculture.FruitTree;
 import net.dries007.tfc.util.calendar.ICalendar;
 import tfcflorae.ConfigTFCF;
 import tfcflorae.TFCFlorae;
-import tfcflorae.api.knapping.KnappingTypes;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
 import tfcflorae.objects.blocks.wood.BlockLeavesTFCF;
 import tfcflorae.objects.fluids.FluidsTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.objects.items.ceramics.ItemEarthenwareMold;
-import tfcflorae.objects.items.ceramics.ItemKaoliniteMold;
-import tfcflorae.objects.items.ceramics.ItemStonewareMold;
-import tfcflorae.objects.items.ceramics.ItemUnfiredEarthenwareMold;
-import tfcflorae.objects.items.ceramics.ItemUnfiredKaoliniteMold;
-import tfcflorae.objects.items.ceramics.ItemUnfiredStonewareMold;
 import tfcflorae.objects.items.rock.ItemFiredMudBrick;
 import tfcflorae.objects.items.rock.ItemUnfiredMudBrick;
 import tfcflorae.util.agriculture.CropTFCF;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
-import static net.dries007.tfc.api.types.Metal.ItemType.INGOT;
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MODID)
+@Mod.EventBusSubscriber(modid = TFCF)
 public final class RecipesTFCF {
 
   @SuppressWarnings("rawtypes")
@@ -248,207 +240,6 @@ public final class RecipesTFCF {
         }
       }
     }
-    if (!ConfigTFCF.General.WORLD.enableAllEarthenwareClay) {
-      for (Metal.ItemType type : Metal.ItemType.values()) {
-        if (type.hasMold(null)) {
-          IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-          String[] regNames = {
-            "metal/unmold/earthenware/" + type,
-            "ceramics/unfired_clay_recycle_earthenware/" + type
-          };
-          for (String name : regNames) {
-            IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-            if (recipe != null) {
-              registry.remove(recipe.getRegistryName());
-              TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-            }
-          }
-        }
-      }
-      for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-        IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-        String[] regNames = {
-          "ceramics/glazed_vessel_earthenware/" + dyeColor,
-          "ceramics/unfired_clay_recycle_earthenware/vessel_glazed/" + dyeColor
-        };
-        for (String name : regNames) {
-          IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-          if (recipe != null) {
-            registry.remove(recipe.getRegistryName());
-            TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-          }
-        }
-      }
-      IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-      String[] regNames = {
-        "ceramics/unfired_clay_recycle_earthenware/bowl",
-        "ceramics/unfired_clay_recycle_earthenware/flowerpot",
-        "ceramics/unfired_clay_recycle_earthenware/jug",
-        "ceramics/unfired_clay_recycle_earthenware/large_vessel",
-        "ceramics/unfired_clay_recycle_earthenware/pot",
-        "ceramics/unfired_clay_recycle_earthenware/spindle",
-        "ceramics/unfired_clay_recycle_earthenware/vessel",
-        "earthenware_block",
-        "earthenware_bricks",
-        "earthenware_clay",
-        "unfired_spindle_head_earthenware"
-      };
-      for (String name : regNames) {
-        IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-        if (recipe != null) {
-          registry.remove(recipe.getRegistryName());
-          TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-        }
-      }
-    }
-    if (!ConfigTFCF.General.WORLD.enableAllEarthenwareClay || !TFCFlorae.FirmaLifeAdded) {
-      IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-      String[] regNames = {
-        "metal/unmold/earthenware/mallet_head",
-        "ceramics/unfired_clay_recycle_earthenware/mallet",
-        };
-      for (String name : regNames) {
-        IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-        if (recipe != null) {
-          registry.remove(recipe.getRegistryName());
-          TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-        }
-      }
-    }
-    if (!ConfigTFCF.General.WORLD.enableAllKaoliniteClay) {
-      for (Metal.ItemType type : Metal.ItemType.values()) {
-        if (type.hasMold(null)) {
-          IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-          String[] regNames = {
-            "metal/unmold/kaolinite/" + type,
-            "ceramics/unfired_clay_recycle_kaolinite/" + type
-          };
-          for (String name : regNames) {
-            IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-            if (recipe != null) {
-              registry.remove(recipe.getRegistryName());
-              TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-            }
-          }
-        }
-      }
-      for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-        IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-        String[] regNames = {
-          "ceramics/glazed_vessel_kaolinite/" + dyeColor,
-          "ceramics/unfired_clay_recycle_kaolinite/vessel_glazed/" + dyeColor
-        };
-        for (String name : regNames) {
-          IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-          if (recipe != null) {
-            registry.remove(recipe.getRegistryName());
-            TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-          }
-        }
-      }
-      IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-      String[] regNames = {
-        "ceramics/unfired_clay_recycle_kaolinite/bowl",
-        "ceramics/unfired_clay_recycle_kaolinite/flowerpot",
-        "ceramics/unfired_clay_recycle_kaolinite/jug",
-        "ceramics/unfired_clay_recycle_kaolinite/large_vessel",
-        "ceramics/unfired_clay_recycle_kaolinite/pot",
-        "ceramics/unfired_clay_recycle_kaolinite/spindle",
-        "ceramics/unfired_clay_recycle_kaolinite/vessel",
-        "kaolinite_block",
-        "kaolinite_bricks",
-        "kaolinite_clay",
-        "unfired_spindle_head_kaolinite"
-      };
-      for (String name : regNames) {
-        IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-        if (recipe != null) {
-          registry.remove(recipe.getRegistryName());
-          TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-        }
-      }
-    }
-    if (!ConfigTFCF.General.WORLD.enableAllKaoliniteClay || !TFCFlorae.FirmaLifeAdded) {
-      IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-      String[] regNames = {
-        "metal/unmold/kaolinite/mallet_head",
-        "ceramics/unfired_clay_recycle_kaolinite/mallet",
-        };
-      for (String name : regNames) {
-        IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-        if (recipe != null) {
-          registry.remove(recipe.getRegistryName());
-          TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-        }
-      }
-    }
-    if (!ConfigTFCF.General.WORLD.enableAllStonewareClay) {
-      for (Metal.ItemType type : Metal.ItemType.values()) {
-        if (type.hasMold(null)) {
-          IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-          String[] regNames = {
-            "metal/unmold/stoneware/" + type,
-            "ceramics/unfired_clay_recycle_stoneware/" + type
-          };
-          for (String name : regNames) {
-            IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-            if (recipe != null) {
-              registry.remove(recipe.getRegistryName());
-              TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-            }
-          }
-        }
-      }
-      for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-        IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-        String[] regNames = {
-          "ceramics/glazed_vessel_stoneware/" + dyeColor,
-          "ceramics/unfired_clay_recycle_stoneware/vessel_glazed/" + dyeColor
-        };
-        for (String name : regNames) {
-          IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-          if (recipe != null) {
-            registry.remove(recipe.getRegistryName());
-            TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-          }
-        }
-      }
-      IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-      String[] regNames = {
-        "ceramics/unfired_clay_recycle_stoneware/bowl",
-        "ceramics/unfired_clay_recycle_stoneware/flowerpot",
-        "ceramics/unfired_clay_recycle_stoneware/jug",
-        "ceramics/unfired_clay_recycle_stoneware/large_vessel",
-        "ceramics/unfired_clay_recycle_stoneware/pot",
-        "ceramics/unfired_clay_recycle_stoneware/spindle",
-        "ceramics/unfired_clay_recycle_stoneware/vessel",
-        "stoneware_block",
-        "stoneware_bricks",
-        "stoneware_clay",
-        "unfired_spindle_head_stoneware"
-      };
-      for (String name : regNames) {
-        IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-        if (recipe != null) {
-          registry.remove(recipe.getRegistryName());
-          TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-        }
-      }
-    }
-    if (!ConfigTFCF.General.WORLD.enableAllStonewareClay || !TFCFlorae.FirmaLifeAdded) {
-      IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-      String[] regNames = {
-        "metal/unmold/stoneware/mallet_head",
-        "ceramics/unfired_clay_recycle_stoneware/mallet",
-        };
-      for (String name : regNames) {
-        IRecipe recipe = registry.getValue(new ResourceLocation("tfcflorae", name));
-        if (recipe != null) {
-          registry.remove(recipe.getRegistryName());
-          TFCFlorae.logger.info("Removed crafting recipe tfcflorae:{}", name);
-        }
-      }
-    }
   }
 
   @SuppressWarnings("rawtypes")
@@ -470,7 +261,7 @@ public final class RecipesTFCF {
     for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
       event.getRegistry().registerAll(
         new BarrelRecipe(IIngredient.of(FluidsTFC.HOT_WATER.get(), 200), IIngredient.of(BlockRockVariant.get(rock, Rock.Type.RAW)), new FluidStack(FluidsTFC.FRESH_WATER.get(), 50), new ItemStack(BlockRockVariantTFCF.get(rock, BlockTypesTFCF.RockTFCF.MOSSY_RAW), 1),
-                         8 * ICalendar.TICKS_IN_HOUR).setRegistryName(TFCFlorae.MODID, "mossy_raw_" + rock.getRegistryName().getPath())
+                         8 * ICalendar.TICKS_IN_HOUR).setRegistryName(Reference.TFCF, "mossy_raw_" + rock.getRegistryName().getPath())
       );
     }
 
@@ -799,9 +590,6 @@ public final class RecipesTFCF {
                        2 * ICalendar.TICKS_IN_HOUR).setRegistryName("rice_water"),
       //new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 500), IIngredient.of("wildRice"), new FluidStack(FluidsTFCF.RICE_WATER.get(), 500), ItemStack.EMPTY, 2 * ICalendar.TICKS_IN_HOUR).setRegistryName("wild_rice_water"),
 
-      // Kaolinite Clay
-      new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("dustKaolinite"), null, new ItemStack(ItemsTFCF.KAOLINITE_CLAY), 0).setRegistryName("kaolinite_clay"),
-
       //Special Clay Washing
       new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("clayEarthenware"), null, new ItemStack(Items.CLAY_BALL), 0).setRegistryName("earthenware_clay_wash"),
       new BarrelRecipe(IIngredient.of(FluidsTFC.FRESH_WATER.get(), 100), IIngredient.of("clayKaolinite"), null, new ItemStack(Items.CLAY_BALL), 0).setRegistryName("kaolinite_clay_wash"),
@@ -814,112 +602,51 @@ public final class RecipesTFCF {
 
   @SubscribeEvent
   public static void onRegisterKnappingRecipeEvent(RegistryEvent.Register<KnappingRecipe> event) {
-    KnappingRecipe r = new KnappingRecipeStone(KnappingTypes.MUD, rockIn -> new ItemStack(ItemUnfiredMudBrick.get(rockIn), 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX");
-    event.getRegistry().register(r.setRegistryName(TFCFlorae.MODID, "knapping_mud_brick"));
-
-    // Clay Items
-    for (Metal.ItemType type : Metal.ItemType.values()) {
-      if (type.hasMold(null)) {
-        int amount = type == INGOT ? 2 : 1;
-        event.getRegistry()
-             .register(new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemUnfiredEarthenwareMold.get(type), amount), type.getPattern()).setRegistryName(TFCFlorae.MODID,
-                                                                                                                                                                                      "earthenware_"
-                                                                                                                                                                                      + type.name()
-                                                                                                                                                                                            .toLowerCase()
-                                                                                                                                                                                      + "_mold"));
-        event.getRegistry()
-             .register(new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemUnfiredKaoliniteMold.get(type), amount), type.getPattern()).setRegistryName(TFCFlorae.MODID,
-                                                                                                                                                                                  "kaolinite_"
-                                                                                                                                                                                  + type.name()
-                                                                                                                                                                                        .toLowerCase()
-                                                                                                                                                                                  + "_mold"));
-        event.getRegistry()
-             .register(new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemUnfiredStonewareMold.get(type), amount), type.getPattern()).setRegistryName(TFCFlorae.MODID,
-                                                                                                                                                                                  "stoneware_"
-                                                                                                                                                                                  + type.name()
-                                                                                                                                                                                        .toLowerCase()
-                                                                                                                                                                                  + "_mold"));
-      }
-    }
+    KnappingRecipe r = new KnappingRecipeStone(KnappingType.MUD, rockIn -> new ItemStack(ItemUnfiredMudBrick.get(rockIn), 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX");
+    event.getRegistry().register(r.setRegistryName(Reference.TFCF, "knapping_mud_brick"));
 
     event.getRegistry().registerAll(
 
-      // Earthenware
-      new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName(TFCFlorae.MODID, "earthenware_clay_brick"),
-      new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName(TFCFlorae.MODID, "earthenware_clay_small_vessel"),
-      new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName(TFCFlorae.MODID, "earthenware_clay_jug"),
-      new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName(TFCFlorae.MODID, "earthenware_clay_pot"),
-      new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, false, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_BOWL, 2), "X   X", " XXX ").setRegistryName(TFCFlorae.MODID, "earthenware_clay_bowl"),
-      new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName(TFCFlorae.MODID, "earthenware_clay_bowl_2"),
-      new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "earthenware_clay_large_vessel"),
-
-      // Kaolinite Clay
-      new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_brick"),
-      new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_small_vessel"),
-      new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_jug"),
-      new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_pot"),
-      new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, false, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_BOWL, 2), "X   X", " XXX ").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_bowl"),
-      new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_bowl_2"),
-      new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_large_vessel"),
-
-      // Stoneware
-      new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName(TFCFlorae.MODID, "stoneware_clay_brick"),
-      new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName(TFCFlorae.MODID, "stoneware_clay_small_vessel"),
-      new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName(TFCFlorae.MODID, "stoneware_clay_jug"),
-      new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName(TFCFlorae.MODID, "stoneware_clay_pot"),
-      new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, false, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_BOWL, 2), "X   X", " XXX ").setRegistryName(TFCFlorae.MODID, "stoneware_clay_bowl"),
-      new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName(TFCFlorae.MODID, "stoneware_clay_bowl_2"),
-      new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "stoneware_clay_large_vessel"),
-
       // Flint Tool Heads
-      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_AXE_HEAD, 1), " X   ", "XXXX ", "XXXXX", "XXXX ", " X   ").setRegistryName(TFCFlorae.MODID, "flint_axe_head"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_AXE_HEAD, 1), " X   ", "XXXX ", "XXXXX", "XXXX ", " X   ").setRegistryName(Reference.TFCF, "flint_axe_head"),
 
-      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HAMMER_HEAD, 1), "     ", "XXXXX", "XXXXX", "  X  ", "     ").setRegistryName(TFCFlorae.MODID, "flint_hammer_head"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HAMMER_HEAD, 1), "     ", "XXXXX", "XXXXX", "  X  ", "     ").setRegistryName(Reference.TFCF, "flint_hammer_head"),
 
       //new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 1), "XXXXX", "   XX").setRegistryName(TFCFlorae.MODID, "flint_hoe_head_1"),
-      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(TFCFlorae.MODID, "flint_hoe_head_2"),
-      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(TFCFlorae.MODID, "flint_hoe_head_3"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(Reference.TFCF, "flint_hoe_head_2"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(Reference.TFCF, "flint_hoe_head_3"),
 
-      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_JAVELIN_HEAD, 1), "XXX  ", "XXXX ", "XXXXX", " XXX ", "  X  ").setRegistryName(TFCFlorae.MODID, "flint_javelin_head"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_JAVELIN_HEAD, 1), "XXX  ", "XXXX ", "XXXXX", " XXX ", "  X  ").setRegistryName(Reference.TFCF, "flint_javelin_head"),
 
-            /*new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_KNIFE_HEAD, 1), "X ", "XX", "XX", "XX", "XX").setRegistryName(TFCFlorae.MODID, "flint_knife_head_1"),
-            new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_KNIFE_HEAD, 1), " X", "XX", "XX", "XX", "XX").setRegistryName(TFCFlorae.MODID, "flint_knife_head_2"),*/
-      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_KNIFE_HEAD, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(TFCFlorae.MODID, "flint_knife_head_3"),
-      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_KNIFE_HEAD, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(TFCFlorae.MODID, "flint_knife_head_4"),
-      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_KNIFE_HEAD, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(TFCFlorae.MODID, "flint_knife_head_5"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_SHOVEL_HEAD, 1), " XXX ", " XXX ", " XXX ", " XXX ", "  X  ").setRegistryName(Reference.TFCF, "flint_shovel_head"),
 
-      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_SHOVEL_HEAD, 1), " XXX ", " XXX ", " XXX ", " XXX ", "  X  ").setRegistryName(TFCFlorae.MODID, "flint_shovel_head"),
-
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "clay_urn"),
-      new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "earthenware_urn"),
-      new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "kaolinite_urn"),
-      new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "stoneware_urn"),
+      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(Reference.TFCF, "clay_urn"),
 
       // Containers
       new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsTFCF.LEATHER_BAG_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("leather_bag_pieces_horizontal"),
       new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsTFCF.LEATHER_BAG_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("leather_bag_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingTypes.BURLAP_CLOTH, true, new ItemStack(ItemsTFCF.BURLAP_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("burlap_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingTypes.BURLAP_CLOTH, true, new ItemStack(ItemsTFCF.BURLAP_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("burlap_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingTypes.WOOL_CLOTH, true, new ItemStack(ItemsTFCF.WOOL_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("wool_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingTypes.WOOL_CLOTH, true, new ItemStack(ItemsTFCF.WOOL_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("wool_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingTypes.SILK_CLOTH, true, new ItemStack(ItemsTFCF.SILK_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("silk_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingTypes.SILK_CLOTH, true, new ItemStack(ItemsTFCF.SILK_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("silk_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingTypes.SISAL_CLOTH, true, new ItemStack(ItemsTFCF.SISAL_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("sisal_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingTypes.SISAL_CLOTH, true, new ItemStack(ItemsTFCF.SISAL_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("sisal_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingTypes.COTTON_CLOTH, true, new ItemStack(ItemsTFCF.COTTON_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("cotton_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingTypes.COTTON_CLOTH, true, new ItemStack(ItemsTFCF.COTTON_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("cotton_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingTypes.LINEN_CLOTH, true, new ItemStack(ItemsTFCF.LINEN_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("linen_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingTypes.LINEN_CLOTH, true, new ItemStack(ItemsTFCF.LINEN_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("linen_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingTypes.HEMP_CLOTH, true, new ItemStack(ItemsTFCF.HEMP_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("hemp_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingTypes.HEMP_CLOTH, true, new ItemStack(ItemsTFCF.HEMP_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("hemp_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingTypes.YUCCA_CANVAS, true, new ItemStack(ItemsTFCF.YUCCA_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("yucca_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingTypes.YUCCA_CANVAS, true, new ItemStack(ItemsTFCF.YUCCA_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("yucca_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_BAG_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("pineapple_leather_bag_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_BAG_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("pineapple_leather_bag_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingType.BURLAP_CLOTH, true, new ItemStack(ItemsTFCF.BURLAP_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("burlap_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingType.BURLAP_CLOTH, true, new ItemStack(ItemsTFCF.BURLAP_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("burlap_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingType.WOOL_CLOTH, true, new ItemStack(ItemsTFCF.WOOL_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("wool_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingType.WOOL_CLOTH, true, new ItemStack(ItemsTFCF.WOOL_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("wool_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingType.SILK_CLOTH, true, new ItemStack(ItemsTFCF.SILK_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("silk_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingType.SILK_CLOTH, true, new ItemStack(ItemsTFCF.SILK_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("silk_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingType.SISAL_CLOTH, true, new ItemStack(ItemsTFCF.SISAL_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("sisal_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingType.SISAL_CLOTH, true, new ItemStack(ItemsTFCF.SISAL_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("sisal_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingType.COTTON_CLOTH, true, new ItemStack(ItemsTFCF.COTTON_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("cotton_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingType.COTTON_CLOTH, true, new ItemStack(ItemsTFCF.COTTON_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("cotton_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingType.LINEN_CLOTH, true, new ItemStack(ItemsTFCF.LINEN_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("linen_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingType.LINEN_CLOTH, true, new ItemStack(ItemsTFCF.LINEN_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("linen_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingType.HEMP_CLOTH, true, new ItemStack(ItemsTFCF.HEMP_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("hemp_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingType.HEMP_CLOTH, true, new ItemStack(ItemsTFCF.HEMP_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("hemp_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingType.YUCCA_CANVAS, true, new ItemStack(ItemsTFCF.YUCCA_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("yucca_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingType.YUCCA_CANVAS, true, new ItemStack(ItemsTFCF.YUCCA_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("yucca_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingType.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_BAG_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("pineapple_leather_bag_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingType.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_BAG_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("pineapple_leather_bag_pieces_vertical"),
 
       // Pineapple Leather
-      new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(Items.SADDLE), "  X  ", "XXXXX", "XXXXX", "XXXXX", "  X  ").setRegistryName("pineapple_leather_saddle"),
-      new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFC.QUIVER), " XXXX", "X XXX", "X XXX", "X XXX", " XXXX").setRegistryName("pineapple_leather_quiver")
+      new KnappingRecipeSimple(KnappingType.PINEAPPLE_LEATHER, true, new ItemStack(Items.SADDLE), "  X  ", "XXXXX", "XXXXX", "XXXXX", "  X  ").setRegistryName("pineapple_leather_saddle"),
+      new KnappingRecipeSimple(KnappingType.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFC.QUIVER), " XXXX", "X XXX", "X XXX", "X XXX", " XXXX").setRegistryName("pineapple_leather_quiver")
 
       // Armor Knapping
             /*new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_HELMET), "XXXXX", "X   X", "X   X", "     ", "     ").setRegistryName("pineapple_leather_helmet"),
@@ -997,40 +724,6 @@ public final class RecipesTFCF {
       event.getRegistry().register(recipe.setRegistryName(rock.getRegistryName().getPath().toLowerCase() + "_fired_mud_brick"));
     }
 
-    // Clay Pottery Items with metadata
-    for (EnumDyeColor dye : EnumDyeColor.values()) {
-      r.register(new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL_GLAZED, 1, dye.getMetadata())), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_VESSEL_GLAZED, 1, dye.getMetadata()), 1599f, Metal.Tier.TIER_I).setRegistryName(
-        "unfired_earthenware_vessel_glazed_" + dye.getName()));
-      r.register(new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL_GLAZED, 1, dye.getMetadata())), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_VESSEL_GLAZED, 1, dye.getMetadata()), 1599f, Metal.Tier.TIER_I).setRegistryName(
-        "unfired_kaolinite_vessel_glazed_" + dye.getName()));
-      r.register(new HeatRecipeSimple(IIngredient.of(new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_VESSEL_GLAZED, 1, dye.getMetadata())), new ItemStack(ItemsTFCF.FIRED_STONEWARE_VESSEL_GLAZED, 1, dye.getMetadata()), 1599f, Metal.Tier.TIER_I).setRegistryName(
-        "unfired_stoneware_vessel_glazed_" + dye.getName()));
-    }
-
-    // Clay Molds
-    for (Metal.ItemType type : Metal.ItemType.values()) {
-      ItemUnfiredEarthenwareMold unfiredMoldEarthenware = ItemUnfiredEarthenwareMold.get(type);
-      ItemEarthenwareMold firedMoldEarthenware = ItemEarthenwareMold.get(type);
-      if (unfiredMoldEarthenware != null && firedMoldEarthenware != null) {
-        r.register(new HeatRecipeSimple(IIngredient.of(unfiredMoldEarthenware), new ItemStack(firedMoldEarthenware), 1599f, Metal.Tier.TIER_I).setRegistryName(
-          "fired_earthenware_mold_" + type.name().toLowerCase()));
-      }
-
-      ItemUnfiredKaoliniteMold unfiredMoldKaolinite = ItemUnfiredKaoliniteMold.get(type);
-      ItemKaoliniteMold firedMoldKaolinite = ItemKaoliniteMold.get(type);
-      if (unfiredMoldKaolinite != null && firedMoldKaolinite != null) {
-        r.register(new HeatRecipeSimple(IIngredient.of(unfiredMoldKaolinite), new ItemStack(firedMoldKaolinite), 1599f, Metal.Tier.TIER_I).setRegistryName(
-          "fired_kaolinite_mold_" + type.name().toLowerCase()));
-      }
-
-      ItemUnfiredStonewareMold unfiredMoldStoneware = ItemUnfiredStonewareMold.get(type);
-      ItemStonewareMold firedMoldStoneware = ItemStonewareMold.get(type);
-      if (unfiredMoldStoneware != null && firedMoldStoneware != null) {
-        r.register(new HeatRecipeSimple(IIngredient.of(unfiredMoldStoneware), new ItemStack(firedMoldStoneware), 1599f, Metal.Tier.TIER_I).setRegistryName(
-          "fired_stoneware_mold_" + type.name().toLowerCase()));
-      }
-    }
-
     // Bread
     if (!ConfigFL.General.COMPAT.removeTFC) {
       r.registerAll(
@@ -1046,57 +739,6 @@ public final class RecipesTFCF {
 
     // Standard / Simple recipes
     r.registerAll(
-
-      // Earthenware Pottery
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_BRICK), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_BRICK), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_brick"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_VESSEL), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_vessel"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_JUG), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_JUG), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_jug"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_POT), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_POT), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_pot"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_BOWL), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_bowl"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_EARTHENWARE_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_earthenware_large_vessel"),
-
-      // Fired Earthenware Pottery - doesn't burn up
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_BRICK), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_BRICK), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_earthenware_brick"),
-      new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_earthenware_vessel"),
-      new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_VESSEL_GLAZED), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_earthenware_vessel_glazed_all"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_JUG), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_JUG), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_earthenware_jug"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_POT), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_POT), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_earthenware_pot"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_EARTHENWARE_BOWL), new ItemStack(ItemsTFCF.FIRED_EARTHENWARE_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_earthenware_bowl"),
-      new HeatRecipeSimple(IIngredient.of(BlocksTFCF.FIRED_EARTHENWARE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_EARTHENWARE_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_earthenware_large_vessel"),
-
-      // Kaolinite Pottery
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_BRICK), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_BRICK), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_brick"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_VESSEL), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_vessel"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_JUG), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_JUG), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_jug"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_POT), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_POT), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_pot"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_BOWL), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_bowl"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_KAOLINITE_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_kaolinite_large_vessel"),
-
-      // Fired Kaolinite Pottery - doesn't burn up
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_BRICK), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_BRICK), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_brick"),
-      new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_vessel"),
-      new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_VESSEL_GLAZED), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_vessel_glazed_all"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_JUG), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_JUG), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_jug"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_POT), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_POT), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_pot"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_KAOLINITE_BOWL), new ItemStack(ItemsTFCF.FIRED_KAOLINITE_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_bowl"),
-      new HeatRecipeSimple(IIngredient.of(BlocksTFCF.FIRED_KAOLINITE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_KAOLINITE_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_kaolinite_large_vessel"),
-
-      // Stoneware Pottery
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_BRICK), new ItemStack(ItemsTFCF.FIRED_STONEWARE_BRICK), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_brick"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_VESSEL), new ItemStack(ItemsTFCF.FIRED_STONEWARE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_vessel"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_JUG), new ItemStack(ItemsTFCF.FIRED_STONEWARE_JUG), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_jug"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_POT), new ItemStack(ItemsTFCF.FIRED_STONEWARE_POT), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_pot"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_BOWL), new ItemStack(ItemsTFCF.FIRED_STONEWARE_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_bowl"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_STONEWARE_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_stoneware_large_vessel"),
-
-      // Fired Stoneware Pottery - doesn't burn up
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_BRICK), new ItemStack(ItemsTFCF.FIRED_STONEWARE_BRICK), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_stoneware_brick"),
-      new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_stoneware_vessel"),
-      new HeatRecipeVessel(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_VESSEL_GLAZED), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_stoneware_vessel_glazed_all"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_JUG), new ItemStack(ItemsTFCF.FIRED_STONEWARE_JUG), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_stoneware_jug"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_POT), new ItemStack(ItemsTFCF.FIRED_STONEWARE_POT), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_stoneware_pot"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFCF.FIRED_STONEWARE_BOWL), new ItemStack(ItemsTFCF.FIRED_STONEWARE_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_stoneware_bowl"),
-      new HeatRecipeSimple(IIngredient.of(BlocksTFCF.FIRED_STONEWARE_LARGE_VESSEL), new ItemStack(BlocksTFCF.FIRED_STONEWARE_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_stoneware_large_vessel"),
 
       new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_URN), new ItemStack(BlocksTFCF.FIRED_URN), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_urn"),
       new HeatRecipeSimple(IIngredient.of(BlocksTFCF.FIRED_URN), new ItemStack(BlocksTFCF.FIRED_URN), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_urn"),
@@ -1252,14 +894,14 @@ public final class RecipesTFCF {
 
     r.registerAll(
 
-      new LoomRecipe(new ResourceLocation(MODID, "yucca_canvas"), IIngredient.of(ItemsTFCF.YUCCA_STRING, 12), new ItemStack(ItemsTFCF.YUCCA_CANVAS), 12, new ResourceLocation(MODID, "textures/blocks/devices/loom/product/yucca.png")),
-      new LoomRecipe(new ResourceLocation(MODID, "cotton_cloth"), IIngredient.of(ItemsTFCF.COTTON_YARN, 12), new ItemStack(ItemsTFCF.COTTON_CLOTH), 12, new ResourceLocation(MODID, "textures/blocks/devices/loom/product/cotton.png")),
-      new LoomRecipe(new ResourceLocation(MODID, "hemp_cloth"), IIngredient.of(ItemsTFCF.HEMP_STRING, 12), new ItemStack(ItemsTFCF.HEMP_CLOTH), 12, new ResourceLocation(MODID, "textures/blocks/devices/loom/product/hemp.png")),
-      new LoomRecipe(new ResourceLocation(MODID, "linen_cloth"), IIngredient.of(ItemsTFCF.LINEN_STRING, 12), new ItemStack(ItemsTFCF.LINEN_CLOTH), 12, new ResourceLocation(MODID, "textures/blocks/devices/loom/product/linen.png")),
-      new LoomRecipe(new ResourceLocation(MODID, "sisal_cloth"), IIngredient.of(ItemsTFCF.SISAL_STRING, 12), new ItemStack(ItemsTFCF.SISAL_CLOTH), 12, new ResourceLocation(MODID, "textures/blocks/devices/loom/product/sisal.png")),
-      new LoomRecipe(new ResourceLocation(MODID, "wool_block_cotton"), IIngredient.of(ItemsTFCF.COTTON_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(MODID, "wool_block_linen"), IIngredient.of(ItemsTFCF.LINEN_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(MODID, "wool_block_silk"), IIngredient.of(ItemsTFC.SILK_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+      new LoomRecipe(new ResourceLocation(TFCF, "yucca_canvas"), IIngredient.of(ItemsTFCF.YUCCA_STRING, 12), new ItemStack(ItemsTFCF.YUCCA_CANVAS), 12, new ResourceLocation(TFCF, "textures/blocks/devices/loom/product/yucca.png")),
+      new LoomRecipe(new ResourceLocation(TFCF, "cotton_cloth"), IIngredient.of(ItemsTFCF.COTTON_YARN, 12), new ItemStack(ItemsTFCF.COTTON_CLOTH), 12, new ResourceLocation(TFCF, "textures/blocks/devices/loom/product/cotton.png")),
+      new LoomRecipe(new ResourceLocation(TFCF, "hemp_cloth"), IIngredient.of(ItemsTFCF.HEMP_STRING, 12), new ItemStack(ItemsTFCF.HEMP_CLOTH), 12, new ResourceLocation(TFCF, "textures/blocks/devices/loom/product/hemp.png")),
+      new LoomRecipe(new ResourceLocation(TFCF, "linen_cloth"), IIngredient.of(ItemsTFCF.LINEN_STRING, 12), new ItemStack(ItemsTFCF.LINEN_CLOTH), 12, new ResourceLocation(TFCF, "textures/blocks/devices/loom/product/linen.png")),
+      new LoomRecipe(new ResourceLocation(TFCF, "sisal_cloth"), IIngredient.of(ItemsTFCF.SISAL_STRING, 12), new ItemStack(ItemsTFCF.SISAL_CLOTH), 12, new ResourceLocation(TFCF, "textures/blocks/devices/loom/product/sisal.png")),
+      new LoomRecipe(new ResourceLocation(TFCF, "wool_block_cotton"), IIngredient.of(ItemsTFCF.COTTON_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFCF, "wool_block_linen"), IIngredient.of(ItemsTFCF.LINEN_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFCF, "wool_block_silk"), IIngredient.of(ItemsTFC.SILK_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
     );
   }
 
@@ -1435,48 +1077,11 @@ public final class RecipesTFCF {
     );
   }
 
-  @SubscribeEvent
-  public static void onRegisterKnappingRecipeEventFL(RegistryEvent.Register<KnappingRecipe> event) {
-    if (TFCFlorae.FirmaLifeAdded) {
-      event.getRegistry().registerAll(
-        // Earthenware Clay
-        new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "earthenware_clay_oven"),
-        new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X", "X   X").setRegistryName(TFCFlorae.MODID, "earthenware_clay_oven_chimney"),
-        new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX", "  XXX", "  XXX").setRegistryName(TFCFlorae.MODID, "earthenware_clay_oven_wall"),
-
-        // Earthenware Mallet Mold
-        new KnappingRecipeSimple(KnappingTypes.EARTHENWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_EARTHENWARE_MALLET_MOLD, 1), "XXXXX", "     ", "   X ", "XXXXX", "XXXXX").setRegistryName(TFCFlorae.MODID, "unfired_earthenware_clay_mallet_mold"),
-
-        // Kaolinite Clay
-        new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_oven"),
-        new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X", "X   X").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_oven_chimney"),
-        new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX", "  XXX", "  XXX").setRegistryName(TFCFlorae.MODID, "kaolinite_clay_oven_wall"),
-
-        // Kaolinite Mallet Mold
-        new KnappingRecipeSimple(KnappingTypes.KAOLINITE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_KAOLINITE_MALLET_MOLD, 1), "XXXXX", "     ", "   X ", "XXXXX", "XXXXX").setRegistryName(TFCFlorae.MODID, "unfired_kaolinite_clay_mallet_mold"),
-
-        // Stoneware Clay
-        new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X", "XXXXX").setRegistryName(TFCFlorae.MODID, "stoneware_clay_oven"),
-        new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X", "X   X").setRegistryName(TFCFlorae.MODID, "stoneware_clay_oven_chimney"),
-        new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX", "  XXX", "  XXX").setRegistryName(TFCFlorae.MODID, "stoneware_clay_oven_wall"),
-
-        // Stoneware Mallet Mold
-        new KnappingRecipeSimple(KnappingTypes.STONEWARE_CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_STONEWARE_MALLET_MOLD, 1), "XXXXX", "     ", "   X ", "XXXXX", "XXXXX").setRegistryName(TFCFlorae.MODID, "unfired_stoneware_clay_mallet_mold")
-      );
-    }
-  }
-
   @SuppressWarnings("rawtypes")
   @SubscribeEvent
   public static void onRegisterHeatRecipeEventFL(RegistryEvent.Register<HeatRecipe> event) {
     if (TFCFlorae.FirmaLifeAdded) {
       IForgeRegistry<HeatRecipe> r = event.getRegistry();
-      event.getRegistry().registerAll(
-
-        new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_EARTHENWARE_MALLET_MOLD), new ItemStack(ItemsTFCF.EARTHENWARE_MALLET_MOLD), 1599.0F, Metal.Tier.TIER_I).setRegistryName(TFCFlorae.MODID, "earthenware_clay_mallet_mold"),
-        new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_KAOLINITE_MALLET_MOLD), new ItemStack(ItemsTFCF.KAOLINITE_MALLET_MOLD), 1599.0F, Metal.Tier.TIER_I).setRegistryName(TFCFlorae.MODID, "kaolinite_clay_mallet_mold"),
-        new HeatRecipeSimple(IIngredient.of(ItemsTFCF.UNFIRED_STONEWARE_MALLET_MOLD), new ItemStack(ItemsTFCF.STONEWARE_MALLET_MOLD), 1599.0F, Metal.Tier.TIER_I).setRegistryName(TFCFlorae.MODID, "stoneware_clay_mallet_mold")
-      );
 
       //Remove recipes
       if (ConfigFL.General.COMPAT.removeTFC) {
@@ -1623,32 +1228,32 @@ public final class RecipesTFCF {
 
       r.registerAll(
         new OvenRecipe(IIngredient.of(ItemsTFCF.HASH_MUFFIN_DOUGH), new ItemStack(ItemsTFCF.HASH_MUFFIN),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "hash_muffin_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "hash_muffin_dough_oven"),
         new OvenRecipe(IIngredient.of(ItemsTFCF.AMARANTH_DOUGH), new ItemStack(ItemsTFCF.AMARANTH_BREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "amaranth_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "amaranth_dough_oven"),
         new OvenRecipe(IIngredient.of(ItemsTFCF.BUCKWHEAT_DOUGH), new ItemStack(ItemsTFCF.BUCKWHEAT_BREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "buckwheat_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "buckwheat_dough_oven"),
         new OvenRecipe(IIngredient.of(ItemsTFCF.FONIO_DOUGH), new ItemStack(ItemsTFCF.FONIO_BREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "fonio_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "fonio_dough_oven"),
         new OvenRecipe(IIngredient.of(ItemsTFCF.MILLET_DOUGH), new ItemStack(ItemsTFCF.MILLET_BREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "millet_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "millet_dough_oven"),
         new OvenRecipe(IIngredient.of(ItemsTFCF.QUINOA_DOUGH), new ItemStack(ItemsTFCF.QUINOA_BREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "quinoa_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "quinoa_dough_oven"),
         new OvenRecipe(IIngredient.of(ItemsTFCF.SPELT_DOUGH), new ItemStack(ItemsTFCF.SPELT_BREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "spelt_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "spelt_dough_oven"),
 
         new OvenRecipe(IIngredient.of("amaranthFlatbreadDough"), new ItemStack(ItemsTFCF.AMARANTH_FLATBREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "amaranth_flatbread_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "amaranth_flatbread_dough_oven"),
         new OvenRecipe(IIngredient.of("buckwheatFlatbreadDough"), new ItemStack(ItemsTFCF.BUCKWHEAT_FLATBREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "buckwheat_flatbread_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "buckwheat_flatbread_dough_oven"),
         new OvenRecipe(IIngredient.of("fonioFlatbreadDough"), new ItemStack(ItemsTFCF.FONIO_FLATBREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "fonio_flatbread_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "fonio_flatbread_dough_oven"),
         new OvenRecipe(IIngredient.of("milletFlatbreadDough"), new ItemStack(ItemsTFCF.MILLET_FLATBREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "millet_flatbread_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "millet_flatbread_dough_oven"),
         new OvenRecipe(IIngredient.of("quinoaFlatbreadDough"), new ItemStack(ItemsTFCF.QUINOA_FLATBREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "quinoa_flatbread_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "quinoa_flatbread_dough_oven"),
         new OvenRecipe(IIngredient.of("speltFlatbreadDough"), new ItemStack(ItemsTFCF.SPELT_FLATBREAD),
-                       4 * hour).setRegistryName(TFCFlorae.MODID, "spelt_flatbread_dough_oven"),
+                       4 * hour).setRegistryName(Reference.TFCF, "spelt_flatbread_dough_oven"),
 
         //new OvenRecipe(IIngredient.of(new ItemStack(ItemsTFCF.ACORN_NUT)), new ItemStack(ItemsTFCF.ROASTED_ACORN_NUT), 2 * hour).setRegistryName("acorn_roasted_oven"),
         new OvenRecipe(IIngredient.of(new ItemStack(ItemsTFCF.BEECHNUT_NUT)), new ItemStack(ItemsTFCF.ROASTED_BEECHNUT_NUT),
@@ -1724,21 +1329,21 @@ public final class RecipesTFCF {
     if (TFCFlorae.FirmaLifeAdded) {
       IForgeRegistry<DryingRecipe> r = event.getRegistry();
       r.registerAll(
-        new DryingRecipe(IIngredient.of(ItemsTFCF.CELLULOSE_FIBERS), new ItemStack(Items.PAPER), 24000).setRegistryName(TFCFlorae.MODID, "paper_from_cellulose_fibers"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.BLACK_TEA), new ItemStack(ItemsTFCF.DRIED_BLACK_TEA), 24000).setRegistryName(TFCFlorae.MODID, "dried_black_tea"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.GREEN_TEA), new ItemStack(ItemsTFCF.DRIED_GREEN_TEA), 24000).setRegistryName(TFCFlorae.MODID, "dried_green_tea"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.WHITE_TEA), new ItemStack(ItemsTFCF.DRIED_WHITE_TEA), 24000).setRegistryName(TFCFlorae.MODID, "dried_white_tea"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.CANNABIS_BUD), new ItemStack(ItemsTFCF.DRIED_CANNABIS_BUD), 24000).setRegistryName(TFCFlorae.MODID, "dried_cannabis_bud"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.CANNABIS_LEAF), new ItemStack(ItemsTFCF.DRIED_CANNABIS_LEAF), 24000).setRegistryName(TFCFlorae.MODID, "dried_cannabis_leaf"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.COCA_LEAF), new ItemStack(ItemsTFCF.DRIED_COCA_LEAF), 24000).setRegistryName(TFCFlorae.MODID, "dried_coca_leaf"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.OPIUM_POPPY_BULB), new ItemStack(ItemsTFCF.DRIED_OPIUM_POPPY_BULB), 24000).setRegistryName(TFCFlorae.MODID, "dried_opium_poppy_bulb"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.PEYOTE), new ItemStack(ItemsTFCF.DRIED_PEYOTE), 24000).setRegistryName(TFCFlorae.MODID, "dried_peyote"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.TOBACCO_LEAF), new ItemStack(ItemsTFCF.DRIED_TOBACCO_LEAF), 24000).setRegistryName(TFCFlorae.MODID, "dried_tobacco_leaf"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.COFFEA_CHERRIES), new ItemStack(ItemsTFCF.DRIED_COFFEA_CHERRIES), 24000).setRegistryName(TFCFlorae.MODID, "dried_coffea_cherries"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.CHAMOMILE_HEAD), new ItemStack(ItemsTFCF.DRIED_CHAMOMILE_HEAD), 24000).setRegistryName(TFCFlorae.MODID, "dried_chamomile_head"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.DANDELION_HEAD), new ItemStack(ItemsTFCF.DRIED_DANDELION_HEAD), 24000).setRegistryName(TFCFlorae.MODID, "dried_dandelion_head"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.CELLULOSE_FIBERS), new ItemStack(Items.PAPER), 24000).setRegistryName(Reference.TFCF, "paper_from_cellulose_fibers"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.BLACK_TEA), new ItemStack(ItemsTFCF.DRIED_BLACK_TEA), 24000).setRegistryName(Reference.TFCF, "dried_black_tea"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.GREEN_TEA), new ItemStack(ItemsTFCF.DRIED_GREEN_TEA), 24000).setRegistryName(Reference.TFCF, "dried_green_tea"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.WHITE_TEA), new ItemStack(ItemsTFCF.DRIED_WHITE_TEA), 24000).setRegistryName(Reference.TFCF, "dried_white_tea"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.CANNABIS_BUD), new ItemStack(ItemsTFCF.DRIED_CANNABIS_BUD), 24000).setRegistryName(Reference.TFCF, "dried_cannabis_bud"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.CANNABIS_LEAF), new ItemStack(ItemsTFCF.DRIED_CANNABIS_LEAF), 24000).setRegistryName(Reference.TFCF, "dried_cannabis_leaf"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.COCA_LEAF), new ItemStack(ItemsTFCF.DRIED_COCA_LEAF), 24000).setRegistryName(Reference.TFCF, "dried_coca_leaf"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.OPIUM_POPPY_BULB), new ItemStack(ItemsTFCF.DRIED_OPIUM_POPPY_BULB), 24000).setRegistryName(Reference.TFCF, "dried_opium_poppy_bulb"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.PEYOTE), new ItemStack(ItemsTFCF.DRIED_PEYOTE), 24000).setRegistryName(Reference.TFCF, "dried_peyote"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.TOBACCO_LEAF), new ItemStack(ItemsTFCF.DRIED_TOBACCO_LEAF), 24000).setRegistryName(Reference.TFCF, "dried_tobacco_leaf"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.COFFEA_CHERRIES), new ItemStack(ItemsTFCF.DRIED_COFFEA_CHERRIES), 24000).setRegistryName(Reference.TFCF, "dried_coffea_cherries"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.CHAMOMILE_HEAD), new ItemStack(ItemsTFCF.DRIED_CHAMOMILE_HEAD), 24000).setRegistryName(Reference.TFCF, "dried_chamomile_head"),
+        new DryingRecipe(IIngredient.of(ItemsTFCF.DANDELION_HEAD), new ItemStack(ItemsTFCF.DRIED_DANDELION_HEAD), 24000).setRegistryName(Reference.TFCF, "dried_dandelion_head"),
         new DryingRecipe(IIngredient.of(ItemsTFCF.LABRADOR_TEA_HEAD), new ItemStack(ItemsTFCF.DRIED_LABRADOR_TEA_HEAD), 24000).setRegistryName("dried_labrador_tea_head"),
-        new DryingRecipe(IIngredient.of(ItemsTFCF.SUNFLOWER_HEAD), new ItemStack(ItemsTFCF.DRIED_SUNFLOWER_HEAD), 24000).setRegistryName(TFCFlorae.MODID, "dried_sunflower_head")
+        new DryingRecipe(IIngredient.of(ItemsTFCF.SUNFLOWER_HEAD), new ItemStack(ItemsTFCF.DRIED_SUNFLOWER_HEAD), 24000).setRegistryName(Reference.TFCF, "dried_sunflower_head")
       );
 
       // Mud Pottery

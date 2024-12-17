@@ -17,13 +17,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderGazelleTFC extends RenderLiving<EntityGazelleTFC> {
 
-  private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/gazelle.png");
+  private static final ResourceLocation TEXTURE = new ResourceLocation(TFC, "textures/entity/animal/huntable/gazelle.png");
 
   public RenderGazelleTFC(RenderManager manager) {
     super(manager, new ModelGazelleTFC(), 0.7F);

@@ -55,7 +55,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @ParametersAreNonnullByDefault
 // Changes in config allow placing this animal in livestock and still respawn
@@ -168,7 +168,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimalTFC, ILivest
   @Override
   public TextComponentTranslation getAnimalName() {
     String entityString = isTamed() ? "cattfc" : EntityList.getEntityString(this);
-    return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
+    return new TextComponentTranslation(TFC + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
   }
 
   @Override
@@ -387,7 +387,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimalTFC, ILivest
           if (!this.world.isRemote) {
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-              TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, MODID_TFC
+              TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, TFC
                                                                                                                + ".tooltip.animal.mating.pregnant", getAnimalName()), (EntityPlayerMP) player);
             }
           }

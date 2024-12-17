@@ -21,7 +21,9 @@ import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
 import net.dries007.tfc.objects.items.metal.ItemMetalBucket;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
+import net.dries007.tfc.objects.items.metal.ItemMetalIceSaw;
 import net.dries007.tfc.objects.items.metal.ItemMetalJavelin;
+import net.dries007.tfc.objects.items.metal.ItemMetalMallet;
 import net.dries007.tfc.objects.items.metal.ItemMetalShears;
 import net.dries007.tfc.objects.items.metal.ItemMetalSheet;
 import net.dries007.tfc.objects.items.metal.ItemMetalShield;
@@ -34,11 +36,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.BiFunction;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 
-  @GameRegistry.ObjectHolder(MODID_TFC + ":unknown")
+  @GameRegistry.ObjectHolder("tfc:unknown")
   public static final Metal UNKNOWN = Helpers.getNull();
   @GameRegistry.ObjectHolder("tfc:wrought_iron")
   public static final Metal WROUGHT_IRON = Helpers.getNull();
@@ -58,6 +60,8 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
   public static final Metal BLUE_STEEL = Helpers.getNull();
   @GameRegistry.ObjectHolder("tfc:red_steel")
   public static final Metal RED_STEEL = Helpers.getNull();
+  @GameRegistry.ObjectHolder("tfc:black_steel")
+  public static final Metal BLACK_STEEL = Helpers.getNull();
 
   private final Tier tier;
   private final float specificHeat;
@@ -127,7 +131,7 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
 
   public String getTranslationKey() {
     //noinspection ConstantConditions
-    return MODID_TFC + ".types.metal." + getRegistryName().getPath();
+    return TFC + ".types.metal." + getRegistryName().getPath();
   }
 
   @SuppressWarnings("ConstantConditions")
@@ -171,60 +175,84 @@ public class Metal extends IForgeRegistryEntry.Impl<Metal> {
     }
   }
 
-  public enum ItemType {
-    INGOT(false, -1, 100, ItemIngot::new, true, "XXXX", "X  X", "X  X", "X  X", "XXXX"),
-    DOUBLE_INGOT(false, 200),
-    SCRAP(false, 100),
-    DUST(false, 100),
-    NUGGET(false, 10),
-    SHEET(false, 200, ItemMetalSheet::new),
-    DOUBLE_SHEET(false, 400),
-    ROD(false, 50),
+  public enum ItemType implements IMetalItemType {
+    INGOT(false, -1, 144, ItemIngot::new, true, "XXXX", "X  X", "X  X", "X  X", "XXXX"),
+    DOUBLE_INGOT(false, 288),
+    SCRAP(false, 144),
+    DUST(false, 144),
+    NUGGET(false, 16),
+    SHEET(false, 288, ItemMetalSheet::new),
+    DOUBLE_SHEET(false, 576),
+    ROD(false, 72),
 
-    ANVIL(true, 1400, ItemAnvil::new),
-    TUYERE(true, 400),
-    LAMP(false, 100, (metal, itemType) -> new ItemBlockMetalLamp(metal)),
-    TRAPDOOR(false, 200, (metal, itemType) -> new ItemBlock(BlockTrapDoorMetalTFC.get(metal))),
+    // TFCTech
+//    BOWL_MOUNT(false, 144),
+//    DRAW_PLATE(false, 144),
+//    GROOVE(false, 72, ItemGroove::new),
+//    INDUCTOR(false, 288),
+//    TONGS(false, 144),
+//    STRIP(false, 72),
+//    LONG_ROD(false, 144),
+//    BOLT(false, 25),
+//    SCREW(false, 25),
+//    SLEEVE(false, 144, true, "XXXXX", "XX XX", "X X X", "XX XX", "XXXXX"),
+//    RACKWHEEL_PIECE(false, 144, true, "XXXXX", "X XXX", "X  XX", "XX  X", "XXXXX"),
+//    RACKWHEEL(false, 576),
+//    GEAR(false, 576, ItemGear::new),
+//    WIRE(false, 72, ItemWire::new),
+    //BLOWPIPE(true, 288, ItemBlowpipe::new),
 
-    PICK(true, 100, ItemMetalTool::new),
-    PICK_HEAD(true, 100, true, "XXXXX", "X   X", " XXX ", "XXXXX"),
-    SHOVEL(true, 100, ItemMetalTool::new),
-    SHOVEL_HEAD(true, 100, true, "X   X", "X   X", "X   X", "X   X", "XX XX"),
-    AXE(true, 100, ItemMetalTool::new),
-    AXE_HEAD(true, 100, true, "X XXX", "    X", "     ", "    X", "X XXX"),
-    HOE(true, 100, ItemMetalHoe::new),
-    HOE_HEAD(true, 100, true, "XXXXX", "     ", "  XXX", "XXXXX"),
-    CHISEL(true, 100, ItemMetalChisel::new),
-    CHISEL_HEAD(true, 100, true, "X X", "X X", "X X", "X X", "X X"),
-    SWORD(true, 100, (metal, itemType) -> new ItemMetalSword(metal)),
-    SWORD_BLADE(true, 100, true, "XXX  ", "XX   ", "X   X", "X  XX", " XXXX"),
-    MACE(true, 100, ItemMetalTool::new),
-    MACE_HEAD(true, 100, true, "XX XX", "X   X", "X   X", "X   X", "XX XX"),
-    SAW(true, 100, ItemMetalTool::new),
-    SAW_BLADE(true, 100, true, "XXX  ", "XX   ", "X   X", "    X", "  XXX"),
-    JAVELIN(true, 100, ItemMetalJavelin::new),
-    JAVELIN_HEAD(true, 100, true, "XX   ", "X    ", "     ", "X   X", "XX XX"),
-    HAMMER(true, 100, ItemMetalTool::new),
-    HAMMER_HEAD(true, 100, true, "XXXXX", "     ", "     ", "XX XX", "XXXXX"),
-    PROPICK(true, 100, ItemProspectorPick::new),
-    PROPICK_HEAD(true, 100, true, "XXXXX", "    X", " XXX ", " XXXX", "XXXXX"),
-    KNIFE(true, 100, ItemMetalTool::new),
-    KNIFE_BLADE(true, 100, true, "XX X", "X  X", "X  X", "X  X", "X  X"),
-    SCYTHE(true, 100, ItemMetalTool::new),
-    SCYTHE_BLADE(true, 100, true, "XXXXX", "X    ", "    X", "  XXX", "XXXXX"),
-    SHEARS(true, 200, ItemMetalShears::new),
+    ANVIL(true, 2016, ItemAnvil::new),
+    TUYERE(true, 576),
+    LAMP(false, 144, (metal, itemType) -> new ItemBlockMetalLamp(metal)),
+    TRAPDOOR(false, 288, (metal, itemType) -> new ItemBlock(BlockTrapDoorMetalTFC.get(metal))),
 
-    UNFINISHED_HELMET(true, 400),
-    HELMET(true, 0, 600, ItemMetalArmor::new),
-    UNFINISHED_CHESTPLATE(true, 400),
-    CHESTPLATE(true, 1, 800, ItemMetalArmor::new),
-    UNFINISHED_GREAVES(true, 400),
-    GREAVES(true, 2, 600, ItemMetalArmor::new),
-    UNFINISHED_BOOTS(true, 200),
-    BOOTS(true, 3, 400, ItemMetalArmor::new),
+    PICK(true, 432, ItemMetalTool::new),
+    PICK_HEAD(true, 432, true, "XXXXX", "X   X", " XXX ", "XXXXX"),
+    SHOVEL(true, 144, ItemMetalTool::new),
+    SHOVEL_HEAD(true, 144, true, "X   X", "X   X", "X   X", "X   X", "XX XX"),
+    AXE(true, 432, ItemMetalTool::new),
+    AXE_HEAD(true, 432, true, "X XXX", "    X", "     ", "    X", "X XXX"),
+    HOE(true, 288, ItemMetalHoe::new),
+    HOE_HEAD(true, 288, true, "XXXXX", "     ", "  XXX", "XXXXX"),
+    CHISEL(true, 288, ItemMetalChisel::new),
+    CHISEL_HEAD(true, 288, true, "X X", "X X", "X X", "X X", "X X"),
+    SWORD(true, 288, (metal, itemType) -> new ItemMetalSword(metal)),
+    SWORD_BLADE(true, 288, true, "XXX  ", "XX   ", "X   X", "X  XX", " XXXX"),
+    MACE(true, 144, ItemMetalTool::new),
+    MACE_HEAD(true, 144, true, "XX XX", "X   X", "X   X", "X   X", "XX XX"),
+    SAW(true, 288, ItemMetalTool::new),
+    SAW_BLADE(true, 288, true, "XXX  ", "XX   ", "X   X", "    X", "  XXX"),
+    JAVELIN(true, 144, ItemMetalJavelin::new),
+    JAVELIN_HEAD(true, 144, true, "XX   ", "X    ", "     ", "X   X", "XX XX"),
+    HAMMER(true, 864, ItemMetalTool::new),
+    HAMMER_HEAD(true, 864, true, "XXXXX", "     ", "     ", "XX XX", "XXXXX"),
+    PROPICK(true, 432, ItemProspectorPick::new),
+    PROPICK_HEAD(true, 432, true, "XXXXX", "    X", " XXX ", " XXXX", "XXXXX"),
+    KNIFE(true, 144, ItemMetalTool::new),
+    KNIFE_BLADE(true, 144, true, "XX X", "X  X", "X  X", "X  X", "X  X"),
+    SCYTHE(true, 432, ItemMetalTool::new),
+    SCYTHE_BLADE(true, 432, true, "XXXXX", "X    ", "    X", "  XXX", "XXXXX"),
+    SHEARS(true, 288, ItemMetalShears::new),
+    // Cellars
+    ICE_SAW(true, 288, ItemMetalIceSaw::new),
+    ICE_SAW_HEAD(true, 288, false),
+    //Firmalife
+    MALLET(true, 144, ItemMetalMallet::new),
+    MALLET_HEAD(true, 144, true, "XXXXX", "     ", "   X ", "XXXXX", "XXXXX"),
 
-    SHIELD(true, 400, ItemMetalShield::new),
-    BUCKET(false, 200, ItemMetalBucket::new);
+
+    UNFINISHED_HELMET(true, 576),
+    HELMET(true, 0, 864, ItemMetalArmor::new),
+    UNFINISHED_CHESTPLATE(true, 576),
+    CHESTPLATE(true, 1, 1152, ItemMetalArmor::new),
+    UNFINISHED_GREAVES(true, 576),
+    GREAVES(true, 2, 864, ItemMetalArmor::new),
+    UNFINISHED_BOOTS(true, 288),
+    BOOTS(true, 3, 576, ItemMetalArmor::new),
+
+    SHIELD(true, 576, ItemMetalShield::new),
+    BUCKET(false, 288, ItemMetalBucket::new);
 
     private final boolean toolItem;
     private final int armorSlot; //Which armor slot this armor should go, from 0 = Helmet to 4 = Boots

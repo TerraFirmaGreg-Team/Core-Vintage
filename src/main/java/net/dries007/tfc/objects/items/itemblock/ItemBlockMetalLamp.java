@@ -130,7 +130,7 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements IMetalItem {
    */
   @Override
   public int getSmeltAmount(ItemStack stack) {
-    return 100;
+    return 144;
   }
 
   @SideOnly(Side.CLIENT)

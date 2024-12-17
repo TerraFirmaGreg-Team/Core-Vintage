@@ -8,9 +8,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import tfcflorae.client.render.RenderBoatTFCF;
 import tfcflorae.objects.blocks.entity.EntityBoatTFCF;
 
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFCF)
 public class ClientEvents {
 
   public static void preInit() {

@@ -22,11 +22,11 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
 
-  public static final ResourceLocation LARGE_VESSEL_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/large_vessel.png");
+  public static final ResourceLocation LARGE_VESSEL_BACKGROUND = new ResourceLocation(TFC, "textures/gui/large_vessel.png");
   private final String translationKey;
 
   public GuiLargeVessel(Container container, InventoryPlayer playerInv, TELargeVessel tile, String translationKey) {

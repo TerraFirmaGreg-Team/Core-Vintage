@@ -6,8 +6,24 @@
 package net.dries007.tfc;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCarrot;
+import net.minecraft.block.BlockChest;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockGravel;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockNewLog;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPackedIce;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockPotato;
+import net.minecraft.block.BlockSand;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.BlockSnow;
+import net.minecraft.block.BlockStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -88,6 +104,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import com.eerussianguy.firmalife.init.FoodFL;
+import com.eerussianguy.firmalife.items.ItemFruitPole;
+import com.eerussianguy.firmalife.registry.BlocksFL;
+import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.ConfigTFC.Devices;
 import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.damage.DamageType;
@@ -114,11 +134,15 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.ICreatureTFC;
+import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.Rock.Type;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.compat.patchouli.TFCPatchouliPlugin;
@@ -128,12 +152,19 @@ import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
+import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.blocks.devices.BlockQuern;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
+import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockFenceGateTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockFenceTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.entity.ai.EBEntityAI;
@@ -142,6 +173,8 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
+import net.dries007.tfc.types.DefaultPlants;
+import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
@@ -149,18 +182,26 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.CalendarWorldData;
 import net.dries007.tfc.util.calendar.ICalendar;
+import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.sharkbark.cellars.init.ModItems;
+import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
+import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLeaves;
+import tfcflorae.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
+import tfcflorae.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
+import tfcflorae.objects.items.ItemsTFCF;
+import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import java.util.Iterator;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MODID_TFC)
+@Mod.EventBusSubscriber(modid = TFC)
 public final class CommonEventHandler {
 
   private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
@@ -262,6 +303,7 @@ public final class CommonEventHandler {
     final ItemStack heldItem = player == null ? ItemStack.EMPTY : player.getHeldItemMainhand();
     final IBlockState state = event.getState();
     final Block block = state.getBlock();
+    final Month month = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
 
     // Make leaves drop sticks
     if (!event.isSilkTouching() && block instanceof BlockLeaves) {
@@ -297,7 +339,127 @@ public final class CommonEventHandler {
         }
       }
     }
+
+    if (block instanceof BlockFruitTreeLeaves) {
+      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + Constants.RNG.nextInt(4)));
+    } else if (block instanceof BlockFruitTreeTrunk blockFruitTreeTrunk) {
+      if (event.isCanceled()) {event.setCanceled(false);}
+      IFruitTree tree = blockFruitTreeTrunk.getTree();
+      ItemFruitPole pole = ItemFruitPole.get(tree);
+      if (pole != null) {event.getDrops().add(new ItemStack(pole));}
+    }
+
+    if (block instanceof BlockCassiaCinnamonLeaves || block instanceof BlockCeylonCinnamonLeaves || block instanceof BlockBambooLeaves) {
+      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + Constants.RNG.nextInt(4)));
+    }
+    if (block == BlocksFL.MELON_FRUIT && (heldItem.getItem().getHarvestLevel(heldItem, "knife", player, state) != -1)) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + Constants.RNG.nextInt(4)));
+    }
+
+    for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
+      if (plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS) &&
+          (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
+        int chance = Constants.RNG.nextInt(2);
+        if (chance == 0) {
+          event.getDrops().clear();
+          event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + Constants.RNG.nextInt(3)));
+        }
+      }
+    }
+
+    if (block instanceof BlockPackedIce) {
+      if (OreDictionaryHelper.doesStackMatchOre(heldItem, "iceSaw")) {
+        event.getDrops().clear();
+        event.getDrops().add(new ItemStack(ModItems.PACKED_ICE_SHARD, 2 + Constants.RNG.nextInt(4)));
+      }
+    }
+
+    if (block instanceof BlockStone blockStone) {
+      event.getDrops().clear();
+      switch (blockStone.getDefaultState().getValue(BlockStone.VARIANT)) {
+        case STONE:
+          event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.GRANITE, Rock.Type.RAW)));
+          break;
+        case GRANITE:
+          event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.GRANITE, Rock.Type.RAW)));
+          break;
+        case DIORITE:
+          event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.DIORITE, Rock.Type.RAW)));
+          break;
+        case ANDESITE:
+          event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.ANDESITE, Rock.Type.RAW)));
+      }
+    }
+    if (OreDictionaryHelper.doesStackMatchOre(stackAt, "cobblestone")) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.ANDESITE, Type.COBBLE)));
+    }
+    if (block instanceof BlockGrass) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.BASALT, Type.GRASS)));
+    }
+    if (block instanceof BlockGravel) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.BASALT, Type.GRAVEL)));
+    }
+    if (block instanceof BlockDirt blockDirt) {
+      event.getDrops().clear();
+      switch (blockDirt.getDefaultState().getValue(BlockDirt.VARIANT)) {
+        case DIRT:
+          event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.BASALT, Type.DIRT)));
+          break;
+        case COARSE_DIRT:
+          event.getDrops().add(new ItemStack(BlockRockVariantTFCF.get(Rock.BASALT, RockTFCF.COARSE_DIRT)));
+          break;
+        case PODZOL:
+          event.getDrops().add(new ItemStack(BlockRockVariantTFCF.get(Rock.BASALT, RockTFCF.PODZOL)));
+          break;
+      }
+    }
+    if (block instanceof BlockFarmland) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.BASALT, Type.FARMLAND)));
+    }
+
+    if (block instanceof BlockSand) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.BASALT, Type.SAND)));
+    }
+    if (block instanceof BlockChest blockChest) {
+      event.getDrops().clear();
+      if (blockChest.chestType == BlockChest.Type.BASIC) {
+        event.getDrops().add(new ItemStack(BlockChestTFC.getBasic(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+      } else if (blockChest.chestType == BlockChest.Type.TRAP) {
+        event.getDrops().add(new ItemStack(BlockChestTFC.getTrap(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+      }
+    }
+    if (block instanceof BlockPlanks) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockPlanksTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+    }
+    if (block instanceof BlockOldLog || block instanceof BlockNewLog) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockLogTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+    }
+    if (block instanceof BlockSapling) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockSaplingTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+    }
+    if (block instanceof BlockFenceGate) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockFenceGateTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+    }
+    if (block instanceof BlockFence) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(BlockFenceTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+    }
+    if (block instanceof BlockPotato || block instanceof BlockCarrot || OreDictionaryHelper.doesStackMatchOre(stackAt, "cropWheat")) {
+      event.getDrops().clear();
+      event.getDrops().add(new ItemStack(Items.STICK));
+    }
   }
+
 
   @SubscribeEvent
   public static void onBreakProgressEvent(BreakSpeed event) {

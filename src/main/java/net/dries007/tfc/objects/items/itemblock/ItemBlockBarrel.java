@@ -39,7 +39,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
@@ -47,6 +46,8 @@ import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
+
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -122,17 +123,17 @@ public class ItemBlockBarrel extends ItemBlockTFC {
 
       if (fluidStack == null || fluidStack.amount == 0) {
         if (inventory.isEmpty()) {
-          tooltip.add(TextFormatting.BLUE + I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.barrel_empty"));
+          tooltip.add(TextFormatting.BLUE + I18n.format(Reference.TFC + ".tooltip.barrel_empty"));
         } else {
           tooltip.add(TextFormatting.BLUE + I18n.format(
-            TerraFirmaCraft.MODID_TFC + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+            Reference.TFC + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
         }
       } else {
-        tooltip.add(TextFormatting.BLUE + I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
+        tooltip.add(TextFormatting.BLUE + I18n.format(Reference.TFC + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
 
         if (!inventory.isEmpty()) {
           tooltip.add(TextFormatting.BLUE + I18n.format(
-            TerraFirmaCraft.MODID_TFC + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+            Reference.TFC + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
         }
       }
 

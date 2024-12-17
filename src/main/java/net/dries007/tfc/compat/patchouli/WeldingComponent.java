@@ -21,7 +21,7 @@ import vazkii.patchouli.api.VariableHolder;
 import javax.annotation.Nullable;
 import java.util.Collections;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SuppressWarnings("unused")
 public class WeldingComponent extends CustomComponent {
@@ -65,7 +65,7 @@ public class WeldingComponent extends CustomComponent {
       if (context.isAreaHovered(mouseX, mouseY, 11, 2, 22, 22)
           || context.isAreaHovered(mouseX, mouseY, 39, 2, 22, 22)
           || context.isAreaHovered(mouseX, mouseY, 83, 2, 22, 22)) {
-        context.setHoverTooltip(Collections.singletonList(I18n.format(MODID_TFC + ".patchouli.recipe_removed")));
+        context.setHoverTooltip(Collections.singletonList(I18n.format(TFC + ".patchouli.recipe_removed")));
       }
     }
     GlStateManager.popMatrix();

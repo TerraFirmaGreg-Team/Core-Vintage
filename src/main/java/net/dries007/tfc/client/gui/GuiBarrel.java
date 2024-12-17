@@ -40,11 +40,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 
-  public static final ResourceLocation BARREL_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/barrel.png");
+  public static final ResourceLocation BARREL_BACKGROUND = new ResourceLocation(TFC, "textures/gui/barrel.png");
   private final String translationKey;
 
   public GuiBarrel(Container container, InventoryPlayer playerInv, TEBarrel tile, String translationKey) {
@@ -74,10 +74,10 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
         List<String> tooltip = new ArrayList<>();
 
         if (fluid == null || fluid.amount == 0) {
-          tooltip.add(I18n.format(MODID_TFC + ".tooltip.barrel_empty"));
+          tooltip.add(I18n.format(TFC + ".tooltip.barrel_empty"));
         } else {
           tooltip.add(fluid.getLocalizedName());
-          tooltip.add(TextFormatting.GRAY.toString() + I18n.format(MODID_TFC + ".tooltip.barrel_fluid_amount", fluid.amount));
+          tooltip.add(TextFormatting.GRAY.toString() + I18n.format(TFC + ".tooltip.barrel_fluid_amount", fluid.amount));
         }
 
         this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);

@@ -64,19 +64,19 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_DECORATIONS;
+import lombok.Getter;
+
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_GEMS;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK_ITEMS;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static net.dries007.tfc.util.Helpers.getNull;
 
-@Mod.EventBusSubscriber(modid = MODID_TFC)
-@GameRegistry.ObjectHolder(MODID_TFC)
+@Mod.EventBusSubscriber(modid = TFC)
+@GameRegistry.ObjectHolder(TFC)
 public final class ItemsTFC {
 
   public static final ItemGoldPan GOLDPAN = getNull();
@@ -191,21 +191,12 @@ public final class ItemsTFC {
   @GameRegistry.ObjectHolder("wood_ash")
   public static final Item WOOD_ASH = getNull();
 
+  @Getter
   private static ImmutableList<Item> allSimpleItems;
+  @Getter
   private static ImmutableList<ItemOreTFC> allOreItems;
+  @Getter
   private static ImmutableList<ItemGem> allGemItems;
-
-  public static ImmutableList<Item> getAllSimpleItems() {
-    return allSimpleItems;
-  }
-
-  public static ImmutableList<ItemOreTFC> getAllOreItems() {
-    return allOreItems;
-  }
-
-  public static ImmutableList<ItemGem> getAllGemItems() {
-    return allGemItems;
-  }
 
   @SuppressWarnings("ConstantConditions")
   @SubscribeEvent
@@ -219,22 +210,23 @@ public final class ItemsTFC {
     register(r, "wooden_bucket", new ItemWoodenBucket(), CT_WOOD); //not a simple item, use a custom model
     register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET), CT_METAL); //not a simple item, use a custom model
     register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), CT_METAL); //not a simple item, use a custom model
-
+//    register(r, "metal/iron_groove", new ItemGroove(Metal.WROUGHT_IRON, Metal.ItemType.GROOVE), CT_METAL);
+//    register(r, "metal/iron_bowl_mount", new ItemMetal(Metal.WROUGHT_IRON, Metal.ItemType.BOWL_MOUNT), CT_METAL);
     {
       for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-        simpleItems.add(register(r, "rock/" + rock.getRegistryName().getPath().toLowerCase(), new ItemRock(rock), CT_ROCK_ITEMS));
+        simpleItems.add(register(r, "rock/" + rock.getRegistryName().getPath().toLowerCase(), new ItemRock(rock), CT_ROCK));
       }
       for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-        simpleItems.add(register(r, "brick/" + rock.getRegistryName().getPath().toLowerCase(), new ItemBrickTFC(rock), CT_ROCK_ITEMS));
+        simpleItems.add(register(r, "brick/" + rock.getRegistryName().getPath().toLowerCase(), new ItemBrickTFC(rock), CT_ROCK));
       }
     }
 
     {
       Builder<ItemOreTFC> b = new Builder<>();
       for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
-        b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK_ITEMS));
+        b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK));
         if (ore.isGraded()) {
-          simpleItems.add(register(r, "ore/small/" + ore.getRegistryName().getPath(), new ItemSmallOre(ore), CT_ROCK_ITEMS));
+          simpleItems.add(register(r, "ore/small/" + ore.getRegistryName().getPath(), new ItemSmallOre(ore), CT_ROCK));
         }
       }
       allOreItems = b.build();
@@ -243,7 +235,7 @@ public final class ItemsTFC {
 
     {
       Builder<ItemGem> b = new Builder<>();
-      for (Gem gem : Gem.values()) {b.add(register(r, "gem/" + gem.name().toLowerCase(), new ItemGem(gem), CT_GEMS));}
+      for (Gem gem : Gem.values()) {b.add(register(r, "gem/" + gem.name().toLowerCase(), new ItemGem(gem), CT_MISC));}
       allGemItems = b.build();
     }
 
@@ -264,11 +256,11 @@ public final class ItemsTFC {
     for (BlockLogTFC log : BlocksTFC.getAllLogBlocks()) {simpleItems.add(register(r, log.getRegistryName().getPath(), new ItemBlockTFC(log), CT_WOOD));}
 
     for (BlockDoorTFC door : BlocksTFC.getAllDoorBlocks()) {
-      simpleItems.add(register(r, door.getRegistryName().getPath(), new ItemDoorTFC(door), CT_DECORATIONS));
+      simpleItems.add(register(r, door.getRegistryName().getPath(), new ItemDoorTFC(door), CT_WOOD));
     }
 
     for (BlockSlabTFC.Half slab : BlocksTFC.getAllSlabBlocks()) {
-      simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_DECORATIONS));
+      simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_WOOD));
     }
 
     for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
@@ -282,9 +274,9 @@ public final class ItemsTFC {
 
     for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
       for (Rock.ToolType type : Rock.ToolType.values()) {
-        simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName().getPath(), type.create(cat), CT_ROCK_ITEMS));
+        simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName().getPath(), type.create(cat), CT_ROCK));
         simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName()
-                                                                                         .getPath(), new ItemRockToolHead(cat, type), CT_ROCK_ITEMS));
+                                                                                         .getPath(), new ItemRockToolHead(cat, type), CT_ROCK));
       }
     }
 
@@ -441,8 +433,8 @@ public final class ItemsTFC {
   }
 
   private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
-    item.setRegistryName(MODID_TFC, name);
-    item.setTranslationKey(MODID_TFC + "." + name.replace('/', '.'));
+    item.setRegistryName(TFC, name);
+    item.setTranslationKey(TFC + "." + name.replace('/', '.'));
     item.setCreativeTab(ct);
     r.register(item);
     return item;

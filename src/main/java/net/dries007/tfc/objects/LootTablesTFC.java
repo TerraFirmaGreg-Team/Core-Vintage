@@ -16,9 +16,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.loot.ApplySimpleSkill;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
-@Mod.EventBusSubscriber(modid = MODID_TFC)
+@Mod.EventBusSubscriber(modid = TFC)
 public class LootTablesTFC {
 
   public static ResourceLocation ANIMALS_BLACK_BEAR;
@@ -107,7 +107,7 @@ public class LootTablesTFC {
     ANIMALS_ZEBU = register("animals/zebu");
 
     // Loot function for skill drop multiplier
-    LootFunctionManager.registerFunction(new ApplySimpleSkill.Serializer(new ResourceLocation(MODID_TFC, "apply_skill")));
+    LootFunctionManager.registerFunction(new ApplySimpleSkill.Serializer(new ResourceLocation(TFC, "apply_skill")));
   }
 
   @SubscribeEvent
@@ -126,7 +126,7 @@ public class LootTablesTFC {
   }
 
   private static ResourceLocation register(String id) {
-    return LootTableList.register(new ResourceLocation(MODID_TFC, id));
+    return LootTableList.register(new ResourceLocation(TFC, id));
   }
 
   private static void remove(LootTableLoadEvent event, String tableName, String pool) {

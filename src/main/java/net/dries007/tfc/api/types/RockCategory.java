@@ -12,7 +12,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 
 public class RockCategory extends IForgeRegistryEntry.Impl<RockCategory> {
@@ -79,7 +79,7 @@ public class RockCategory extends IForgeRegistryEntry.Impl<RockCategory> {
 
   public String getTranslationKey() {
     //noinspection ConstantConditions
-    return MODID_TFC + ".types.rock_category." + getRegistryName().getPath();
+    return TFC + ".types.rock_category." + getRegistryName().getPath();
   }
 
   @Override

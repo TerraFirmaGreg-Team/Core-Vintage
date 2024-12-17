@@ -7,11 +7,11 @@ import net.minecraft.util.ResourceLocation;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import tfctech.objects.tileentities.TESmelteryFirebox;
 
-import static tfctech.TFCTech.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public class GuiSmelteryFirebox extends GuiContainerTE<TESmelteryFirebox>
 {
-    private static final ResourceLocation FIREBOX_BACKGROUND = new ResourceLocation(MODID, "textures/gui/smeltery_firebox.png");
+    private static final ResourceLocation FIREBOX_BACKGROUND = new ResourceLocation(TFCTECH, "textures/gui/smeltery_firebox.png");
 
     public GuiSmelteryFirebox(Container container, InventoryPlayer playerInv, TESmelteryFirebox tile)
     {

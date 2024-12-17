@@ -75,28 +75,28 @@ import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber
-@Mod(modid = MODID_TFC, version = "2.0.0", name = TerraFirmaCraft.MOD_NAME, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
+@Mod(modid = TFC, version = "2.0.0", name = TerraFirmaCraft.MOD_NAME, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
 public final class TerraFirmaCraft {
 
-  public static final String MODID_TFC = "tfc";
   public static final String MOD_NAME = "TerraFirmaCraft";
 
   @Mod.Instance
-  private static TerraFirmaCraft INSTANCE = null;
+  private static TerraFirmaCraft INSTANCE;
 
-  @SidedProxy(modId = MODID_TFC, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
+  @SidedProxy(modId = TFC, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
   private static IProxy PROXY = null;
 
-  static {
+  public TerraFirmaCraft() {
+    INSTANCE = this;
+
     FluidRegistry.enableUniversalBucket();
   }
 
-  private final Logger log = LogManager.getLogger(MODID_TFC);
-  private final boolean isSignedBuild = true;
+  private final Logger log = LogManager.getLogger(TFC);
   private WorldTypeTFC worldTypeTFC;
   private SimpleNetworkWrapper network;
 
@@ -127,7 +127,7 @@ public final class TerraFirmaCraft {
     // No need to sync config here, forge magic
 
     NetworkRegistry.INSTANCE.registerGuiHandler(this, new TFCGuiHandler());
-    network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_TFC);
+    network = NetworkRegistry.INSTANCE.newSimpleChannel(TFC);
     int id = 0;
     // Received on server
     network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, ++id, Side.SERVER);

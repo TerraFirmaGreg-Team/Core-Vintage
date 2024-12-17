@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
-@Mod.EventBusSubscriber(modid = MODID)
+@Mod.EventBusSubscriber(modid = TFCF)
 public final class InteractionManagerTFCF {
 
   private static final Map<Predicate<ItemStack>, IRightClickBlockAction> USE_ACTIONS = new HashMap<>();

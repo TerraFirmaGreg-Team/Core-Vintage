@@ -16,14 +16,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderZebuTFC extends RenderAnimalTFC<EntityZebuTFC> {
 
-  private static final ResourceLocation ZEBU_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/zebu_young.png");
-  private static final ResourceLocation ZEBU_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/zebu_old.png");
+  private static final ResourceLocation ZEBU_YOUNG = new ResourceLocation(TFC, "textures/entity/animal/livestock/zebu_young.png");
+  private static final ResourceLocation ZEBU_OLD = new ResourceLocation(TFC, "textures/entity/animal/livestock/zebu_old.png");
 
   public RenderZebuTFC(RenderManager renderManager) {
     super(renderManager, new ModelZebuTFC(), 0.7F, ZEBU_YOUNG, ZEBU_OLD);

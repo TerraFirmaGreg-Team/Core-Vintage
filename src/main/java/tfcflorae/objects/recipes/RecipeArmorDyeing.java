@@ -32,8 +32,7 @@ public class RecipeArmorDyeing extends IForgeRegistryEntry.Impl<IRecipe> impleme
       ItemStack itemStack1 = inv.getStackInSlot(i);
 
       if (!itemStack1.isEmpty()) {
-        if (itemStack1.getItem() instanceof ItemArmorTFCF) {
-          ItemArmorTFCF itemArmor = (ItemArmorTFCF) itemStack1.getItem();
+        if (itemStack1.getItem() instanceof ItemArmorTFCF itemArmor) {
           itemStack = itemStack1;
         } else {
           if (!DyeUtils.isDye(itemStack1)) {

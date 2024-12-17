@@ -23,16 +23,16 @@ import net.dries007.tfc.util.Helpers;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @ParametersAreNonnullByDefault
 public class KnappingRecipeWrapper implements IRecipeWrapper {
 
-  private static final ResourceLocation CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_disabled.png");
-  private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_fire_disabled.png");
-  private static final ResourceLocation CLAY_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button.png");
-  private static final ResourceLocation FIRE_CLAY_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/clay_button_fire.png");
-  private static final ResourceLocation LEATHER_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping/leather_button.png");
+  private static final ResourceLocation CLAY_DISABLED_TEXTURE = new ResourceLocation(TFC, "textures/gui/knapping/clay_button_disabled.png");
+  private static final ResourceLocation FIRE_CLAY_DISABLED_TEXTURE = new ResourceLocation(TFC, "textures/gui/knapping/clay_button_fire_disabled.png");
+  private static final ResourceLocation CLAY_TEXTURE = new ResourceLocation(TFC, "textures/gui/knapping/clay_button.png");
+  private static final ResourceLocation FIRE_CLAY_TEXTURE = new ResourceLocation(TFC, "textures/gui/knapping/clay_button_fire.png");
+  private static final ResourceLocation LEATHER_TEXTURE = new ResourceLocation(TFC, "textures/gui/knapping/leather_button.png");
   protected final KnappingRecipe recipe;
   private final IDrawable squareHigh, squareLow;
 

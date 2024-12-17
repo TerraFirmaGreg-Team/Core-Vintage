@@ -18,11 +18,11 @@ import tfcflorae.objects.te.TECrate;
 
 import java.io.IOException;
 
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 public class GuiCrate extends GuiContainerTE<TECrate> {
 
-  public static final ResourceLocation CRATE_BACKGROUND = new ResourceLocation(MODID, "textures/gui/crate.png");
+  public static final ResourceLocation CRATE_BACKGROUND = new ResourceLocation(TFCF, "textures/gui/crate.png");
   private final String translationKey;
 
   public GuiCrate(Container container, InventoryPlayer playerInv, TECrate tile, String translationKey) {

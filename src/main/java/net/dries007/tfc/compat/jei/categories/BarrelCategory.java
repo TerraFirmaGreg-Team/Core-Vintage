@@ -17,9 +17,10 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.BarrelRecipeWrapper;
+
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -27,8 +28,8 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class BarrelCategory extends BaseRecipeCategory<BarrelRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/icons/jei.png");
-  private static final ResourceLocation BARREL_TEXTURES = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "textures/gui/barrel.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Reference.TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation BARREL_TEXTURES = new ResourceLocation(Reference.TFC, "textures/gui/barrel.png");
 
   private final IDrawableStatic fluidSlotBackgroound, fluidSlot;
   private final IDrawableStatic slot;

@@ -12,11 +12,11 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 import net.dries007.tfc.api.capability.DumbStorage;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class CapabilityEgg {
 
-  public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "egg");
+  public static final ResourceLocation KEY = new ResourceLocation(TFC, "egg");
   @CapabilityInject(IEgg.class)
   public static Capability<IEgg> CAPABILITY;
 

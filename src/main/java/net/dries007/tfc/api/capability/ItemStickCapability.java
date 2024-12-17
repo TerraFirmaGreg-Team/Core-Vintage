@@ -24,14 +24,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 /**
  * Custom heat + size capability for stick items.
  */
 public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
 
-  public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "stick");
+  public static final ResourceLocation KEY = new ResourceLocation(TFC, "stick");
   private static final float MELTING_POINT = 40f;
   private static final float HEAT_CAPACITY = 1f;
 

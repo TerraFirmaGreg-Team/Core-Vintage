@@ -143,12 +143,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.minecraft.util.text.TextFormatting.AQUA;
 import static net.minecraft.util.text.TextFormatting.GRAY;
 import static net.minecraft.util.text.TextFormatting.WHITE;
 
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFC)
 public class ClientEvents {
 
   public static void preInit() {

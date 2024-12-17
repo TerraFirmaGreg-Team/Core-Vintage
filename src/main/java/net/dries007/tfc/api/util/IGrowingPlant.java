@@ -9,7 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import su.terrafirmagreg.api.data.Reference;
 
 public interface IGrowingPlant {
 
@@ -39,7 +39,7 @@ public interface IGrowingPlant {
 
     @Override
     public String toString() {
-      return TerraFirmaCraft.MODID_TFC + ".enum.growstatus." + name().toLowerCase();
+      return Reference.TFC + ".enum.growstatus." + name().toLowerCase();
     }
   }
 

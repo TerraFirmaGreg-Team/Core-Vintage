@@ -1,15 +1,19 @@
 package se.gory_moon.horsepower;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import se.gory_moon.horsepower.blocks.ModBlocks;
 import se.gory_moon.horsepower.items.ModItems;
 import se.gory_moon.horsepower.lib.Reference;
@@ -23,54 +27,48 @@ import se.gory_moon.horsepower.util.Utils;
 
 @Mod(modid = Reference.MODID, version = Reference.VERSION, name = Reference.NAME, acceptedMinecraftVersions = "[1.12]", dependencies = "required-after:tfc;after:crafttweaker;after:jei;after:waila;after:theoneprobe;")
 @EventBusSubscriber
-public class HorsePowerMod
-{
-    @Instance(Reference.MODID)
-    public static HorsePowerMod instance;
+public class HorsePowerMod {
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.COMMON_PROXY)
-    public static CommonProxy proxy;
+  @Instance(Reference.MODID)
+  public static HorsePowerMod instance;
 
-    public static HorsePowerCreativeTab creativeTab = new HorsePowerCreativeTab();
-    public static ITweakerPlugin tweakerPlugin = new DummyTweakPluginImpl();
-    public static Logger logger = LogManager.getLogger("HorsePower");
+  @SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.COMMON_PROXY)
+  public static CommonProxy proxy;
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        proxy.preInit();
-        PacketHandler.init();
+  public static ITweakerPlugin tweakerPlugin = new DummyTweakPluginImpl();
+  public static Logger logger = LogManager.getLogger("HorsePower");
 
-        FMLInterModComms.sendMessage("waila", "register", Reference.WAILA_PROVIDER);
+  @EventHandler
+  public void preInit(FMLPreInitializationEvent event) {
+    proxy.preInit();
+    PacketHandler.init();
 
-        ModBlocks.registerTileEntities();
+    FMLInterModComms.sendMessage("waila", "register", Reference.WAILA_PROVIDER);
 
-        if (Loader.isModLoaded("crafttweaker"))
-            tweakerPlugin = new TweakerPluginImpl();
+    ModBlocks.registerTileEntities();
 
-        tweakerPlugin.register();
-    }
+    if (Loader.isModLoaded("crafttweaker")) {tweakerPlugin = new TweakerPluginImpl();}
 
-    @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-        proxy.init();
-        ModItems.registerRecipes();
-    }
+    tweakerPlugin.register();
+  }
 
-    @EventHandler
-    public void loadComplete(FMLPostInitializationEvent event)
-    {
-        tweakerPlugin.run();
+  @EventHandler
+  public void init(FMLInitializationEvent event) {
+    proxy.init();
+    ModItems.registerRecipes();
+  }
 
-        HPEventHandler.reloadConfig();
-        proxy.loadComplete();
-    }
+  @EventHandler
+  public void loadComplete(FMLPostInitializationEvent event) {
+    tweakerPlugin.run();
 
-    @EventHandler
-    public void serverLoad(FMLServerAboutToStartEvent event)
-    {
-        HPRecipes.instance().reloadRecipes();
-        Utils.sendSavedErrors();
-    }
+    HPEventHandler.reloadConfig();
+    proxy.loadComplete();
+  }
+
+  @EventHandler
+  public void serverLoad(FMLServerAboutToStartEvent event) {
+    HPRecipes.instance().reloadRecipes();
+    Utils.sendSavedErrors();
+  }
 }

@@ -10,7 +10,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
@@ -18,12 +17,14 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
+import su.terrafirmagreg.api.data.Reference;
+
 import javax.annotation.Nonnull;
 
 public final class FluidsTFCF {
 
-  private static final ResourceLocation STILL = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "blocks/fluid_still");
-  private static final ResourceLocation FLOW = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "blocks/fluid_flow");
+  private static final ResourceLocation STILL = new ResourceLocation(Reference.TFC, "blocks/fluid_still");
+  private static final ResourceLocation FLOW = new ResourceLocation(Reference.TFC, "blocks/fluid_flow");
 
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
 

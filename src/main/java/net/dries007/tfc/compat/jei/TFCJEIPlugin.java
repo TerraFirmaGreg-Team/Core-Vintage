@@ -23,7 +23,6 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
@@ -90,6 +89,8 @@ import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 
+import su.terrafirmagreg.api.data.Reference;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -99,25 +100,25 @@ import java.util.stream.Collectors;
 @JEIPlugin
 public final class TFCJEIPlugin implements IModPlugin {
 
-  public static final String ALLOY_UID = TerraFirmaCraft.MODID_TFC + ".alloy";
-  public static final String ANVIL_UID = TerraFirmaCraft.MODID_TFC + ".anvil";
-  public static final String BARREL_UID = TerraFirmaCraft.MODID_TFC + ".barrel";
-  public static final String BLAST_FURNACE_UID = TerraFirmaCraft.MODID_TFC + ".blast_furnace";
-  public static final String BLOOMERY_UID = TerraFirmaCraft.MODID_TFC + ".bloomery";
-  public static final String CASTING_UID = TerraFirmaCraft.MODID_TFC + ".casting";
-  public static final String CHISEL_UID = TerraFirmaCraft.MODID_TFC + ".chisel";
-  public static final String HEAT_UID = TerraFirmaCraft.MODID_TFC + ".heat";
-  public static final String KNAP_CLAY_UID = TerraFirmaCraft.MODID_TFC + ".knap.clay";
-  public static final String KNAP_FIRECLAY_UID = TerraFirmaCraft.MODID_TFC + ".knap.fireclay";
-  public static final String KNAP_LEATHER_UID = TerraFirmaCraft.MODID_TFC + ".knap.leather";
-  public static final String KNAP_STONE_UID = TerraFirmaCraft.MODID_TFC + ".knap.stone";
-  public static final String METAL_HEAT_UID = TerraFirmaCraft.MODID_TFC + ".metal_heat";
-  public static final String LOOM_UID = TerraFirmaCraft.MODID_TFC + ".loom";
-  public static final String QUERN_UID = TerraFirmaCraft.MODID_TFC + ".quern";
-  public static final String ROCK_LAYER_UID = TerraFirmaCraft.MODID_TFC + ".rock_layer";
-  public static final String VEIN_UID = TerraFirmaCraft.MODID_TFC + ".vein";
-  public static final String WELDING_UID = TerraFirmaCraft.MODID_TFC + ".welding";
-  public static final String SCRAPING_UID = TerraFirmaCraft.MODID_TFC + ".scraping";
+  public static final String ALLOY_UID = Reference.TFC + ".alloy";
+  public static final String ANVIL_UID = Reference.TFC + ".anvil";
+  public static final String BARREL_UID = Reference.TFC + ".barrel";
+  public static final String BLAST_FURNACE_UID = Reference.TFC + ".blast_furnace";
+  public static final String BLOOMERY_UID = Reference.TFC + ".bloomery";
+  public static final String CASTING_UID = Reference.TFC + ".casting";
+  public static final String CHISEL_UID = Reference.TFC + ".chisel";
+  public static final String HEAT_UID = Reference.TFC + ".heat";
+  public static final String KNAP_CLAY_UID = Reference.TFC + ".knap.clay";
+  public static final String KNAP_FIRECLAY_UID = Reference.TFC + ".knap.fireclay";
+  public static final String KNAP_LEATHER_UID = Reference.TFC + ".knap.leather";
+  public static final String KNAP_STONE_UID = Reference.TFC + ".knap.stone";
+  public static final String METAL_HEAT_UID = Reference.TFC + ".metal_heat";
+  public static final String LOOM_UID = Reference.TFC + ".loom";
+  public static final String QUERN_UID = Reference.TFC + ".quern";
+  public static final String ROCK_LAYER_UID = Reference.TFC + ".rock_layer";
+  public static final String VEIN_UID = Reference.TFC + ".vein";
+  public static final String WELDING_UID = Reference.TFC + ".welding";
+  public static final String SCRAPING_UID = Reference.TFC + ".scraping";
 
   private static IModRegistry REGISTRY;
 

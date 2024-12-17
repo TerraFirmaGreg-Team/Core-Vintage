@@ -12,25 +12,25 @@ import static net.dries007.tfc.types.DefaultRocks.IGNEOUS_EXTRUSIVE;
 import static net.dries007.tfc.types.DefaultRocks.IGNEOUS_INTRUSIVE;
 import static net.dries007.tfc.types.DefaultRocks.METAMORPHIC;
 import static net.dries007.tfc.types.DefaultRocks.SEDIMENTARY;
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
-@Mod.EventBusSubscriber(modid = MODID)
+@Mod.EventBusSubscriber(modid = TFCF)
 public final class RockTypesTFCF {
 
-  public static final ResourceLocation BRECCIA = new ResourceLocation(MODID, "breccia");
+  public static final ResourceLocation BRECCIA = new ResourceLocation(TFCF, "breccia");
   //public static final ResourceLocation FOIDOLITE = new ResourceLocation(MODID, "foidolite");
-  public static final ResourceLocation PORPHYRY = new ResourceLocation(MODID, "porphyry");
-  public static final ResourceLocation PERIDOTITE = new ResourceLocation(MODID, "peridotite");
-  public static final ResourceLocation MUDSTONE = new ResourceLocation(MODID, "mudstone");
-  public static final ResourceLocation SANDSTONE = new ResourceLocation(MODID, "sandstone");
-  public static final ResourceLocation SILTSTONE = new ResourceLocation(MODID, "siltstone");
+  public static final ResourceLocation PORPHYRY = new ResourceLocation(TFCF, "porphyry");
+  public static final ResourceLocation PERIDOTITE = new ResourceLocation(TFCF, "peridotite");
+  public static final ResourceLocation MUDSTONE = new ResourceLocation(TFCF, "mudstone");
+  public static final ResourceLocation SANDSTONE = new ResourceLocation(TFCF, "sandstone");
+  public static final ResourceLocation SILTSTONE = new ResourceLocation(TFCF, "siltstone");
   //public static final ResourceLocation BLUESCHIST = new ResourceLocation(MODID, "blueschist");
-  public static final ResourceLocation CATLINITE = new ResourceLocation(MODID, "catlinite");
+  public static final ResourceLocation CATLINITE = new ResourceLocation(TFCF, "catlinite");
   //public static final ResourceLocation GREENSCHIST = new ResourceLocation(MODID, "greenschist");
-  public static final ResourceLocation NOVACULITE = new ResourceLocation(MODID, "novaculite");
-  public static final ResourceLocation SOAPSTONE = new ResourceLocation(MODID, "soapstone");
-  public static final ResourceLocation KOMATIITE = new ResourceLocation(MODID, "komatiite");
+  public static final ResourceLocation NOVACULITE = new ResourceLocation(TFCF, "novaculite");
+  public static final ResourceLocation SOAPSTONE = new ResourceLocation(TFCF, "soapstone");
+  public static final ResourceLocation KOMATIITE = new ResourceLocation(TFCF, "komatiite");
 
   @SubscribeEvent
   public static void onPreRegisterRock(TFCRegistryEvent.RegisterPreBlock<Rock> event) {

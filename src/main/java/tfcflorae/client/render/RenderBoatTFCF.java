@@ -18,7 +18,7 @@ import tfcflorae.objects.blocks.entity.EntityBoatTFCF;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
@@ -62,17 +62,17 @@ public class RenderBoatTFCF extends Render<EntityBoatTFCF> {
     final IFruitTree wood = entity.getWood();
     if (wood != null) {
       //noinspection ConstantConditions
-      return new ResourceLocation(MODID, "textures/entity/boat/" + wood.getName().toLowerCase() + ".png");
+      return new ResourceLocation(TFCF, "textures/entity/boat/" + wood.getName().toLowerCase() + ".png");
     }
 
     final Tree tree = entity.getTree();
     if (tree != null) {
       //noinspection ConstantConditions
-      return new ResourceLocation(MODID, "textures/entity/boat/" + tree.getRegistryName().getPath().toLowerCase() + ".png");
+      return new ResourceLocation(TFCF, "textures/entity/boat/" + tree.getRegistryName().getPath().toLowerCase() + ".png");
     }
 
     // Fallback
-    return new ResourceLocation(MODID, "textures/entity/boat/oak.png");
+    return new ResourceLocation(TFCF, "textures/entity/boat/oak.png");
   }
 
   @Override

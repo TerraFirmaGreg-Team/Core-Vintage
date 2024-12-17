@@ -18,12 +18,12 @@ import net.dries007.tfc.util.skills.SkillType;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @ParametersAreNonnullByDefault
 public final class CapabilityPlayerData {
 
-  public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "player_skills");
+  public static final ResourceLocation KEY = new ResourceLocation(TFC, "player_skills");
   @CapabilityInject(IPlayerData.class)
   public static Capability<IPlayerData> CAPABILITY;
 

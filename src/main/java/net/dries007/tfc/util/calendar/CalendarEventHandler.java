@@ -25,11 +25,11 @@ import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import java.util.List;
 import java.util.Objects;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 
-@Mod.EventBusSubscriber(modid = MODID_TFC)
+@Mod.EventBusSubscriber(modid = TFC)
 public class CalendarEventHandler {
 
   /**
@@ -60,7 +60,7 @@ public class CalendarEventHandler {
   public static void onCommandFire(CommandEvent event) {
     if ("time".equals(event.getCommand().getName())) {
       event.setCanceled(true);
-      event.getSender().sendMessage(new TextComponentTranslation(MODID_TFC + ".command.time.disabled"));
+      event.getSender().sendMessage(new TextComponentTranslation(TFC + ".command.time.disabled"));
     }
   }
 

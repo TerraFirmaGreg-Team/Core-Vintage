@@ -17,13 +17,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderMongooseTFC extends RenderLiving<EntityMongooseTFC> {
 
-  private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/huntable/mongoose.png");
+  private static final ResourceLocation TEXTURE = new ResourceLocation(TFC, "textures/entity/animal/huntable/mongoose.png");
 
   public RenderMongooseTFC(RenderManager renderManager) {super(renderManager, new ModelMongooseTFC(), 0.7F);}
 

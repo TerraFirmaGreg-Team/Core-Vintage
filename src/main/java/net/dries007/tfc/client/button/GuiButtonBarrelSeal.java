@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.dries007.tfc.client.gui.GuiBarrel.BARREL_BACKGROUND;
 
 
@@ -27,7 +27,7 @@ public class GuiButtonBarrelSeal extends GuiButtonTFC implements IButtonTooltip 
 
   @Override
   public String getTooltip() {
-    return MODID_TFC + ".tooltip." + (tile.isSealed() ? "barrel_unseal" : "barrel_seal");
+    return TFC + ".tooltip." + (tile.isSealed() ? "barrel_unseal" : "barrel_seal");
   }
 
   @Override

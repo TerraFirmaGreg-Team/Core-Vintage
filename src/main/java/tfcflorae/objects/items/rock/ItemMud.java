@@ -24,7 +24,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -50,8 +50,8 @@ public class ItemMud extends ItemTFCF implements IRockObject {
 
   public ItemMud(Rock rock) {
     this.rock = rock;
-    this.textureForegroundLocation = new ResourceLocation(MODID, "textures/gui/knapping/mud_button/" + rock + ".png");
-    this.textureBackgroundLocation = new ResourceLocation(MODID, "textures/gui/knapping/mud_button_disabled/" + rock + ".png");
+    this.textureForegroundLocation = new ResourceLocation(TFCF, "textures/gui/knapping/mud_button/" + rock + ".png");
+    this.textureBackgroundLocation = new ResourceLocation(TFCF, "textures/gui/knapping/mud_button_disabled/" + rock + ".png");
     if (MAP.put(rock, this) != null) {throw new IllegalStateException("There can only be one.");}
     setMaxDamage(0);
     OreDictionaryHelper.register(this, "mud");

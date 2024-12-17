@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.dries007.tfc.client.gui.GuiPowderkeg.POWDERKEG_BACKGROUND;
 
 
@@ -27,7 +27,7 @@ public class GuiButtonPowderkegSeal extends GuiButtonTFC implements IButtonToolt
 
   @Override
   public String getTooltip() {
-    return MODID_TFC + ".tooltip." + (tile.isSealed() ? "powderkeg_unseal" : "powderkeg_seal");
+    return TFC + ".tooltip." + (tile.isSealed() ? "powderkeg_unseal" : "powderkeg_seal");
   }
 
   @Override

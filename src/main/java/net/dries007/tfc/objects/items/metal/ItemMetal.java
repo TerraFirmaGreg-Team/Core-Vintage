@@ -130,6 +130,16 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
       case NUGGET:
       case DUST:
       case SCRAP:
+//      case DRAW_PLATE:
+//      case INDUCTOR:
+//      case GROOVE:
+//      case TONGS:
+//      case STRIP:
+//      case LONG_ROD:
+//      case BOLT:
+//      case SCREW:
+//      case SLEEVE:
+//      case RACKWHEEL_PIECE:
         return Size.SMALL; // Fits in Small Vessels
       case PICK_HEAD:
       case HAMMER_HEAD:
@@ -144,6 +154,8 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
       case SAW_BLADE:
       case SCYTHE_BLADE:
       case SWORD_BLADE:
+//      case GEAR:
+//      case RACKWHEEL:
         return Size.NORMAL; // Tool heads fits in large vessels
       case ANVIL:
         return Size.HUGE; // Overburdens
@@ -164,7 +176,14 @@ public class ItemMetal extends ItemTFC implements IMetalItem {
       case DOUBLE_INGOT:
       case SHEET:
       case DOUBLE_SHEET:
+//      case GROOVE:
+//      case WIRE:
+//      case SLEEVE:
+//      case STRIP:
         return Weight.LIGHT; // Stacksize = 32
+//      case RACKWHEEL:
+//      case GEAR:
+//        return Weight.HEAVY;
       case ANVIL:
       case HELMET:
       case GREAVES:

@@ -43,7 +43,7 @@ public class BlockJackOLantern extends BlockHorizontal implements IItemSize, ILi
     super(Material.GOURD);
     setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(LIT, false));
     setTickRandomly(true);
-    setCreativeTab(CreativeTabsTFC.CT_DECORATIONS);
+    setCreativeTab(CreativeTabsTFC.CT_MISC);
     setHardness(1f);
     setLightLevel(0.75f);
     setTickRandomly(true);

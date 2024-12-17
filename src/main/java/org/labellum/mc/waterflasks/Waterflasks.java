@@ -38,13 +38,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
-import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.util.Helpers;
 import org.labellum.mc.waterflasks.item.ModItems;
 import org.labellum.mc.waterflasks.proxy.CommonProxy;
-import org.labellum.mc.waterflasks.recipe.ModRecipes;
+
+import su.terrafirmagreg.api.data.Reference;
 
 @Mod(
   modid = Waterflasks.MOD_ID,
@@ -57,7 +55,7 @@ public class Waterflasks {
   public static final String MOD_ID = "waterflasks";
   public static final String MOD_NAME = "WaterFlasks";
   public static final String VERSION = "1.9";
-  public static final String DEPENDENCIES = "required-after:" + TerraFirmaCraft.MODID_TFC +
+  public static final String DEPENDENCIES = "required-after:" + Reference.TFC +
                                             "@[" + "1.0.0.127" + ",)";
 
   /**
@@ -108,21 +106,6 @@ public class Waterflasks {
       ModItems.registerModels();
     }
 
-    /**
-     * Register Knapping Recipe
-     */
-    @SubscribeEvent
-    public static void onRegisterKnappingRecipeEvent(RegistryEvent.Register<KnappingRecipe> event) {
-      ModRecipes.registerKnapping(event);
-    }
-
-    /**
-     * Register Anvil Recipe
-     */
-    @SubscribeEvent
-    public static void onRegisterAnvilRecipeEvent(RegistryEvent.Register<AnvilRecipe> event) {
-      ModRecipes.registerAnvil(event);
-    }
 
     @SubscribeEvent
     public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {

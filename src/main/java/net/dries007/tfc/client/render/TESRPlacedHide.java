@@ -17,13 +17,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import org.lwjgl.opengl.GL11;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRPlacedHide extends TileEntitySpecialRenderer<TEPlacedHide> {
 
-  private static final ResourceLocation BASE_TEXTURE = new ResourceLocation(MODID_TFC, "textures/items/hide/large/soaked.png");
-  private static final ResourceLocation SCRAPED_TEXTURE = new ResourceLocation(MODID_TFC, "textures/items/hide/large/scraped.png");
+  private static final ResourceLocation BASE_TEXTURE = new ResourceLocation(TFC, "textures/items/hide/large/soaked.png");
+  private static final ResourceLocation SCRAPED_TEXTURE = new ResourceLocation(TFC, "textures/items/hide/large/scraped.png");
 
   private static final double[][] VERTICES = new double[][]{
     // x, z, u, v

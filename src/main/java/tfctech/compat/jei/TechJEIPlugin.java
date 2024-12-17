@@ -36,14 +36,14 @@ import tfctech.objects.items.glassworking.ItemBlowpipe;
 import tfctech.objects.items.metal.ItemTechMetal;
 import tfctech.registry.TechRegistries;
 
-import static tfctech.TFCTech.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 @JEIPlugin
 public class TechJEIPlugin implements IModPlugin
 {
-    private static final String WIRE_DRAWING_UID = MODID + ".wire_drawing";
-    private static final String SMELTERY_UID = MODID + ".smeltery";
-    private static final String GLASSWORKING_UID = MODID + ".glassworking";
+    private static final String WIRE_DRAWING_UID = TFCTECH + ".wire_drawing";
+    private static final String SMELTERY_UID = TFCTECH + ".smeltery";
+    private static final String GLASSWORKING_UID = TFCTECH + ".glassworking";
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registry)

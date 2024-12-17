@@ -5,18 +5,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static su.terrafirmagreg.Tags.MOD_ID;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class EntityRemapping {
+public class EntityRemapping extends AbstractRemapping {
 
-  private static final Map<String, EntityEntry> mappings = new HashMap<>() {{
-
-  }};
 
   @SubscribeEvent
   public static void onRemappingEntity(final RegistryEvent.MissingMappings<EntityEntry> event) {
@@ -25,8 +19,12 @@ public class EntityRemapping {
       String mappingNamespace = mapping.key.getNamespace();
       String mappingPath = mapping.key.getPath();
 
-      if (mappings.containsKey(mappingPath)) {
-        mapping.remap(mappings.get(mappingPath));
+      if (ENTITY_ENTRY_MAP.containsKey(mappingPath)) {
+        mapping.remap(ENTITY_ENTRY_MAP.get(mappingPath));
+      }
+
+      if (MOD_ID_SET.contains(mappingNamespace)) {
+        mapping.ignore();
       }
     });
   }

@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 /**
  * Advancement criterion trigger for when a device is lit
@@ -35,7 +35,7 @@ import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 @MethodsReturnNonnullByDefault
 public class LitTrigger implements ICriterionTrigger<LitTrigger.Instance> {
 
-  private static final ResourceLocation ID = new ResourceLocation(MODID_TFC, "lit_device");
+  private static final ResourceLocation ID = new ResourceLocation(TFC, "lit_device");
   private final Map<PlayerAdvancements, LitTrigger.Listeners> listeners = new HashMap<>();
 
   @Override

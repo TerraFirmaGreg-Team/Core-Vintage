@@ -14,12 +14,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.objects.te.TECharcoalForge;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiCharcoalForge extends GuiContainerTE<TECharcoalForge> {
 
-  private static final ResourceLocation CHARCOAL_FORGE_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/charcoal_forge.png");
+  private static final ResourceLocation CHARCOAL_FORGE_BACKGROUND = new ResourceLocation(TFC, "textures/gui/charcoal_forge.png");
 
   public GuiCharcoalForge(Container container, InventoryPlayer playerInv, TECharcoalForge tile) {
     super(container, playerInv, tile, CHARCOAL_FORGE_BACKGROUND);

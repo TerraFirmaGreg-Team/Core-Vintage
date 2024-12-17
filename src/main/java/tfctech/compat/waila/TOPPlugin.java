@@ -17,18 +17,17 @@ import mcjty.theoneprobe.api.*;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.Helpers;
-import tfctech.TFCTech;
 import tfctech.objects.blocks.devices.*;
 import tfctech.objects.tileentities.*;
 
-import static tfctech.TFCTech.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvider
 {
     @Override
     public String getID()
     {
-        return MODID + ":top_provider";
+        return TFCTECH + ":top_provider";
     }
 
     @Override

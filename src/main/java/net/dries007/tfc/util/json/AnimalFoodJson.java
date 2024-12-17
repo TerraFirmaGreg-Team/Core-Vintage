@@ -19,7 +19,7 @@ import net.dries007.tfc.objects.entity.animal.AnimalFood;
 
 import java.lang.reflect.Type;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class AnimalFoodJson implements JsonDeserializer<AnimalFood> {
 
@@ -30,7 +30,7 @@ public class AnimalFoodJson implements JsonDeserializer<AnimalFood> {
     JsonObject food = JsonUtils.getJsonObject(jsonObject, "foods");
     food.entrySet().forEach(entry ->
                             {
-                              Ingredient ingredient = CraftingHelper.getIngredient(entry.getValue(), new JsonContext(MODID_TFC));
+                              Ingredient ingredient = CraftingHelper.getIngredient(entry.getValue(), new JsonContext(TFC));
                               animalFood.addFood(ingredient);
                             });
     return animalFood;

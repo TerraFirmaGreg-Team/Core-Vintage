@@ -15,26 +15,19 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.TemplateManager;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.types.DefaultTrees;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
-
 public class Tree extends IForgeRegistryEntry.Impl<Tree> {
-
-  @GameRegistry.ObjectHolder(MODID_TFC + ":sequoia")
-  public static final Tree SEQUOIA = Helpers.getNull();
 
   private final int maxGrowthRadius;
   private final float dominance;
@@ -57,9 +50,8 @@ public class Tree extends IForgeRegistryEntry.Impl<Tree> {
   private ITreeGenerator generator;
 
   /**
-   * This is a registry object that will create a number of things:
-   * 1. Wood logs, planks, and leaf blocks, and all the respective variants
-   * 2. A Tree object to be used in TFC world gen
+   * This is a registry object that will create a number of things: 1. Wood logs, planks, and leaf blocks, and all the respective variants 2. A Tree object to
+   * be used in TFC world gen
    * <p>
    * Addon mods that want to add trees should subscribe to the registry event for this class They also must put (in their mod) the required resources in
    * /assets/tfc/...

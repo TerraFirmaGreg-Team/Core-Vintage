@@ -20,19 +20,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderGrouseTFC extends RenderLiving<EntityGrouseTFC> {
 
-  private static final ResourceLocation FEMALE_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/grousef_young.png");
-  private static final ResourceLocation FEMALE_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/grousef_old.png");
+  private static final ResourceLocation FEMALE_YOUNG = new ResourceLocation(TFC, "textures/entity/animal/livestock/grousef_young.png");
+  private static final ResourceLocation FEMALE_OLD = new ResourceLocation(TFC, "textures/entity/animal/livestock/grousef_old.png");
 
-  private static final ResourceLocation MALE_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/grousem_young.png");
-  private static final ResourceLocation MALE_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/grousem_old.png");
+  private static final ResourceLocation MALE_YOUNG = new ResourceLocation(TFC, "textures/entity/animal/livestock/grousem_young.png");
+  private static final ResourceLocation MALE_OLD = new ResourceLocation(TFC, "textures/entity/animal/livestock/grousem_old.png");
 
-  private static final ResourceLocation CHICK_TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/grouse_chick.png");
+  private static final ResourceLocation CHICK_TEXTURE = new ResourceLocation(TFC, "textures/entity/animal/livestock/grouse_chick.png");
 
   public RenderGrouseTFC(RenderManager manager) {
     super(manager, new ModelGrouseTFC(), 0.3F);

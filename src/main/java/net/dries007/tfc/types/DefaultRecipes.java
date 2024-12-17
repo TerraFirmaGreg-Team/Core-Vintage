@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.types;
 
+import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -19,6 +21,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import com.eerussianguy.firmalife.FirmaLife;
+import com.eerussianguy.firmalife.registry.BlocksFL;
+import com.eerussianguy.firmalife.registry.ItemsFL;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Materials;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
@@ -77,20 +84,22 @@ import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.skills.SmithingSkill;
+import org.labellum.mc.waterflasks.item.ModItems;
 
 import javax.annotation.Nullable;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
 import static net.dries007.tfc.api.types.Metal.ItemType.BOOTS;
 import static net.dries007.tfc.api.types.Metal.ItemType.CHESTPLATE;
 import static net.dries007.tfc.api.types.Metal.ItemType.DOUBLE_INGOT;
 import static net.dries007.tfc.api.types.Metal.ItemType.DOUBLE_SHEET;
 import static net.dries007.tfc.api.types.Metal.ItemType.GREAVES;
 import static net.dries007.tfc.api.types.Metal.ItemType.HELMET;
+import static net.dries007.tfc.api.types.Metal.ItemType.ICE_SAW_HEAD;
 import static net.dries007.tfc.api.types.Metal.ItemType.INGOT;
 import static net.dries007.tfc.api.types.Metal.ItemType.JAVELIN_HEAD;
 import static net.dries007.tfc.api.types.Metal.ItemType.LAMP;
 import static net.dries007.tfc.api.types.Metal.ItemType.MACE_HEAD;
+import static net.dries007.tfc.api.types.Metal.ItemType.MALLET_HEAD;
 import static net.dries007.tfc.api.types.Metal.ItemType.SHEET;
 import static net.dries007.tfc.api.types.Metal.ItemType.SHIELD;
 import static net.dries007.tfc.api.types.Metal.ItemType.TRAPDOOR;
@@ -131,26 +140,37 @@ import static net.dries007.tfc.util.forge.ForgeRule.BEND_NOT_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.BEND_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.BEND_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.DRAW_ANY;
+import static net.dries007.tfc.util.forge.ForgeRule.DRAW_NOT_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.DRAW_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.DRAW_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.HIT_ANY;
 import static net.dries007.tfc.util.forge.ForgeRule.HIT_LAST;
+import static net.dries007.tfc.util.forge.ForgeRule.HIT_NOT_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.HIT_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.HIT_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_LAST;
+import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_NOT_LAST;
+import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_SECOND_LAST;
+import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_THIRD_LAST;
+import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_NOT_LAST;
+import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_LAST;
+import static net.dries007.tfc.util.forge.ForgeRule.UPSET_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_THIRD_LAST;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.ARMOR;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
+import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
+import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 /**
  * In 1.14+, every line in here needs to be a json file. Yay, but also ugh.
  */
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = MODID_TFC)
+@Mod.EventBusSubscriber(modid = TFC)
 public final class DefaultRecipes {
 
   @SubscribeEvent
@@ -492,11 +512,26 @@ public final class DefaultRecipes {
     // these recipes cover all cases where multiple stone items can be made
     // recipes are already mirror checked
     event.getRegistry().registerAll(
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.KNIFE), 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("knife_head_1"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.KNIFE), 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("knife_head_2"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.KNIFE), 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName("knife_head_3"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.HOE), 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName("hoe_head_1"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> new ItemStack(ItemRockToolHead.get(rockIn.getRockCategory(), Rock.ToolType.HOE), 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName("hoe_head_2")
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_1"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_2"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_3"),
+
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "stone_hoe_head_1"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_2"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_3"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "stone_hoe_head_4"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_5"),
+
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Flint, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_1"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Flint, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_2"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Flint, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_3"),
+
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "flint_hoe_head_1"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_2"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_3"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "flint_hoe_head_4"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_5")
+
     );
 
     /* CLAY ITEMS */
@@ -514,7 +549,7 @@ public final class DefaultRecipes {
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_VESSEL), " XXX ", "XXXXX", "XXXXX", "XXXXX", " XXX ").setRegistryName("clay_small_vessel"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_JUG), " X   ", "XXXX ", "XXX X", "XXXX ", "XXX  ").setRegistryName("clay_jug"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_POT), "X   X", "X   X", "X   X", "XXXXX", " XXX ").setRegistryName("clay_pot"),
-      new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsTFC.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(MODID_TFC, "clay_bowl"),
+      new KnappingRecipeSimple(KnappingType.CLAY, false, new ItemStack(ItemsTFC.UNFIRED_BOWL, 2), "X   X", " XXX ").setRegistryName(TFC, "clay_bowl"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_BOWL, 4), "X   X", " XXX ", "     ", "X   X", " XXX ").setRegistryName("clay_bowl_2"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_LARGE_VESSEL), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("clay_large_vessel"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFC.UNFIRED_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("clay_brick"),
@@ -537,6 +572,12 @@ public final class DefaultRecipes {
     event.getRegistry().registerAll(
       new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsTFC.UNFIRED_CRUCIBLE), "X   X", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("fire_clay_crucible"),
       new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, new ItemStack(ItemsTFC.UNFIRED_FIRE_BRICK, 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX").setRegistryName("fire_clay_brick")
+    );
+
+    // WaterFlask
+    event.getRegistry().registerAll(
+      new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ModItems.leatherSide),
+                               "  XX ", " XXX ", "XXXXX", " XXX ", "  X  ").setRegistryName("leather_side")
     );
 
   }
@@ -722,17 +763,17 @@ public final class DefaultRecipes {
     addAnvil(r, SHEET, UNFINISHED_BOOTS, true, ARMOR, BEND_LAST, BEND_SECOND_LAST, SHRINK_THIRD_LAST);
 
     // Blooms
-    r.register(new AnvilRecipeMeasurable(new ResourceLocation(MODID_TFC, "refining_bloom"), IIngredient.of(ItemsTFC.UNREFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), Metal.Tier.TIER_II, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
-    r.register(new AnvilRecipeSplitting(new ResourceLocation(MODID_TFC, "splitting_bloom"), IIngredient.of(ItemsTFC.REFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), 100, Metal.Tier.TIER_II, PUNCH_LAST));
-    r.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, "iron_bloom"), x -> {
+    r.register(new AnvilRecipeMeasurable(new ResourceLocation(TFC, "refining_bloom"), IIngredient.of(ItemsTFC.UNREFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), Metal.Tier.TIER_II, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+    r.register(new AnvilRecipeSplitting(new ResourceLocation(TFC, "splitting_bloom"), IIngredient.of(ItemsTFC.REFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), 144, Metal.Tier.TIER_II, PUNCH_LAST));
+    r.register(new AnvilRecipe(new ResourceLocation(TFC, "iron_bloom"), x -> {
       if (x.getItem() == ItemsTFC.REFINED_BLOOM) {
         IForgeable cap = x.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
         if (cap instanceof IForgeableMeasurableMetal) {
-          return ((IForgeableMeasurableMetal) cap).getMetal() == Metal.WROUGHT_IRON && ((IForgeableMeasurableMetal) cap).getMetalAmount() == 100;
+          return ((IForgeableMeasurableMetal) cap).getMetal() == Metal.WROUGHT_IRON && ((IForgeableMeasurableMetal) cap).getMetalAmount() == 144;
         }
       }
       return false;
-    }, new ItemStack(ItemMetal.get(Metal.WROUGHT_IRON, INGOT)), Metal.Tier.TIER_II, null, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+    }, OreDictUnifier.get(gregtech.api.unification.ore.OrePrefix.ingot, Materials.WroughtIron), Metal.Tier.TIER_II, null, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
 
     // Shields
     addAnvil(r, DOUBLE_SHEET, SHIELD, true, ARMOR, UPSET_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
@@ -760,6 +801,26 @@ public final class DefaultRecipes {
 //      addAnvil(r, metal.getPath() + "_rod", INGOT, metal, new ItemStack(ItemMetal.get(metalObj, ROD), 2), metalObj.getTier()
 //                                                                                                                  .previous(), GENERAL, DRAW_LAST, DRAW_NOT_LAST, PUNCH_NOT_LAST);
 //    });
+
+    // Cellars
+    addAnvil(r, DOUBLE_INGOT, ICE_SAW_HEAD, true, TOOLS, HIT_LAST, UPSET_SECOND_LAST, DRAW_NOT_LAST);
+
+    // waterflasks
+    r.register(new AnvilRecipe(new ResourceLocation(TFC, "unfinished_iron_flask"),
+                               IIngredient.of("plateWroughtIron"),
+                               new ItemStack(ModItems.unfinishedFlask), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST
+    ));
+
+    // FirmaLife
+    addAnvil(r, INGOT, MALLET_HEAD, true, TOOLS, PUNCH_LAST, PUNCH_SECOND_LAST, SHRINK_THIRD_LAST);
+    r.registerAll(new AnvilRecipe(new ResourceLocation(FirmaLife.MOD_ID, "greenhouse_wall"), IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
+                                  new ItemStack(BlocksFL.GREENHOUSE_WALL, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, PUNCH_NOT_LAST, SHRINK_LAST));
+    r.registerAll(new AnvilRecipe(new ResourceLocation(FirmaLife.MOD_ID, "greenhouse_roof"), IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
+                                  new ItemStack(BlocksFL.GREENHOUSE_ROOF, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_THIRD_LAST, PUNCH_SECOND_LAST, PUNCH_LAST));
+    r.registerAll(new AnvilRecipe(new ResourceLocation(FirmaLife.MOD_ID, "greenhouse_door"), IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
+                                  new ItemStack(ItemsFL.ITEM_GREENHOUSE_DOOR), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, HIT_NOT_LAST, PUNCH_LAST));
+    r.registerAll(new AnvilRecipe(new ResourceLocation(FirmaLife.MOD_ID, "spout"), IIngredient.of("ingotBlackSteel"),
+                                  new ItemStack(BlocksFL.SPOUT), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_THIRD_LAST, SHRINK_SECOND_LAST, HIT_LAST));
   }
 
   @SubscribeEvent
@@ -791,11 +852,11 @@ public final class DefaultRecipes {
     IForgeRegistry<LoomRecipe> r = event.getRegistry();
 
     r.registerAll(
-      new LoomRecipe(new ResourceLocation(MODID_TFC, "burlap_cloth"), IIngredient.of(ItemsTFC.JUTE_FIBER, 12), new ItemStack(ItemsTFC.BURLAP_CLOTH), 12, new ResourceLocation(MODID_TFC, "textures/blocks/devices/loom/product/burlap.png")),
-      new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_cloth"), IIngredient.of(ItemsTFC.WOOL_YARN, 16), new ItemStack(ItemsTFC.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(MODID_TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsTFC.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFC, "burlap_cloth"), IIngredient.of(ItemsTFC.JUTE_FIBER, 12), new ItemStack(ItemsTFC.BURLAP_CLOTH), 12, new ResourceLocation(TFC, "textures/blocks/devices/loom/product/burlap.png")),
+      new LoomRecipe(new ResourceLocation(TFC, "wool_cloth"), IIngredient.of(ItemsTFC.WOOL_YARN, 16), new ItemStack(ItemsTFC.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsTFC.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
 
-      new LoomRecipe(new ResourceLocation(MODID_TFC, "wool_block"), IIngredient.of(ItemsTFC.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+      new LoomRecipe(new ResourceLocation(TFC, "wool_block"), IIngredient.of(ItemsTFC.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
     );
   }
 
@@ -973,8 +1034,8 @@ public final class DefaultRecipes {
       ItemStack output = new ItemStack(ItemMetal.get(metal, outputType));
       if (!output.isEmpty()) {
         //noinspection ConstantConditions
-        registry.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, (outputType.name() + "_" + metal.getRegistryName()
-                                                                                                       .getPath()).toLowerCase()), ingredient, output, metal.getTier(), skillType, rules));
+        registry.register(new AnvilRecipe(new ResourceLocation(TFC, (outputType.name() + "_" + metal.getRegistryName()
+                                                                                                    .getPath()).toLowerCase()), ingredient, output, metal.getTier(), skillType, rules));
       }
     }
   }
@@ -989,8 +1050,8 @@ public final class DefaultRecipes {
       ItemStack output = new ItemStack(ItemMetal.get(outputMetal, INGOT));
       if (!input.isEmpty() && !output.isEmpty()) {
         //noinspection ConstantConditions
-        registry.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, ("ingot_" + outputMetal.getRegistryName()
-                                                                                              .getPath()).toLowerCase()), IIngredient.of(input), output, inputMetal.getTier(), skillType, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+        registry.register(new AnvilRecipe(new ResourceLocation(TFC, ("ingot_" + outputMetal.getRegistryName()
+                                                                                           .getPath()).toLowerCase()), IIngredient.of(input), output, inputMetal.getTier(), skillType, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
       }
     }
   }
@@ -1002,7 +1063,7 @@ public final class DefaultRecipes {
     if (inputMetal != null && !output.isEmpty()) {
       ItemStack input = new ItemStack(ItemMetal.get(inputMetal, inputType));
       if (!input.isEmpty() && !output.isEmpty()) {
-        registry.register(new AnvilRecipe(new ResourceLocation(MODID_TFC, recipeName), IIngredient.of(input), output, tier, skillType, rules));
+        registry.register(new AnvilRecipe(new ResourceLocation(TFC, recipeName), IIngredient.of(input), output, tier, skillType, rules));
       }
     }
   }
@@ -1051,9 +1112,9 @@ public final class DefaultRecipes {
       ItemStack output = new ItemStack(outputType.isArmor() ? ItemMetalArmor.get(metal, outputType) : ItemMetal.get(metal, outputType));
       if (!output.isEmpty()) {
         // Note: Welding recipes require one less than the tier of the metal
-        registry.register(new WeldingRecipe(new ResourceLocation(MODID_TFC, (outputType.name() + "_" + metal.getRegistryName()
-                                                                                                         .getPath()).toLowerCase()), ingredient1, ingredient2, output, metal.getTier()
-                                                                                                                                                                            .previous(), skillType));
+        registry.register(new WeldingRecipe(new ResourceLocation(TFC, (outputType.name() + "_" + metal.getRegistryName()
+                                                                                                      .getPath()).toLowerCase()), ingredient1, ingredient2, output, metal.getTier()
+                                                                                                                                                                         .previous(), skillType));
       }
     }
   }
@@ -1070,9 +1131,9 @@ public final class DefaultRecipes {
       if (!input1.isEmpty() && !input2.isEmpty() && !output.isEmpty()) {
         // Note: Welding recipes require one less than the tier of the metal
         //noinspection ConstantConditions
-        registry.register(new WeldingRecipe(new ResourceLocation(MODID_TFC, ("ingot_" + outputMetal.getRegistryName()
-                                                                                                .getPath()).toLowerCase()), IIngredient.of(input1), IIngredient.of(input2), output, outputMetal.getTier()
-                                                                                                                                                                                               .previous(), null));
+        registry.register(new WeldingRecipe(new ResourceLocation(TFC, ("ingot_" + outputMetal.getRegistryName()
+                                                                                             .getPath()).toLowerCase()), IIngredient.of(input1), IIngredient.of(input2), output, outputMetal.getTier()
+                                                                                                                                                                                            .previous(), null));
       }
     }
   }

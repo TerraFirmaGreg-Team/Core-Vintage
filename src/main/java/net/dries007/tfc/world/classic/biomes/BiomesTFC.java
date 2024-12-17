@@ -20,11 +20,11 @@ import net.dries007.tfc.util.Helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
 
-@Mod.EventBusSubscriber(modid = MODID_TFC)
-@GameRegistry.ObjectHolder(MODID_TFC)
+@Mod.EventBusSubscriber(modid = TFC)
+@GameRegistry.ObjectHolder(TFC)
 public final class BiomesTFC {
 
   public static final BiomeTFC OCEAN = Helpers.getNull();
@@ -148,7 +148,7 @@ public final class BiomesTFC {
   }
 
   private static void register(IForgeRegistry<Biome> r, Biome biome, boolean isSpawn, boolean isWorldGen, BiomeDictionary.Type... types) {
-    r.register(biome.setRegistryName(MODID_TFC, biome.biomeName.replace(MOD_NAME + " ", "").replace(' ', '_').toLowerCase()));
+    r.register(biome.setRegistryName(TFC, biome.biomeName.replace(MOD_NAME + " ", "").replace(' ', '_').toLowerCase()));
 
     // Other biome registration stuff
     BiomeDictionary.addTypes(biome, types);

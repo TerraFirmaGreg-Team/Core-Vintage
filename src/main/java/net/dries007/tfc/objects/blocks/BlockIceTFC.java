@@ -15,13 +15,17 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
 
+import net.dries007.tfc.api.types.Metal.ItemType;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.climate.ITemperatureBlock;
 import net.dries007.tfc.util.climate.IceMeltHandler;
@@ -29,6 +33,8 @@ import net.dries007.tfc.util.climate.IceMeltHandler;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
+
+import static net.sharkbark.cellars.init.ModItems.SEA_ICE_SHARD;
 
 @ParametersAreNonnullByDefault
 public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
@@ -79,6 +85,23 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
         worldIn.setBlockState(pos, waterFluid.getBlock().getDefaultState());
       }
     }
+  }
+
+  @Override
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    if (waterFluid == FluidsTFC.SALT_WATER.get()) {
+      return;
+    }
+    EntityPlayer player = harvesters.get();
+    if (player != null) {
+      var tool = player.getHeldItemMainhand().getItem();
+      if (tool instanceof ItemMetalTool itemMetalTool && itemMetalTool.getType().equals(ItemType.ICE_SAW)) {
+        drops.add(new ItemStack(SEA_ICE_SHARD));
+      } else {
+        super.getDrops(drops, world, pos, state, fortune);
+      }
+    }
+
   }
 
   @Override

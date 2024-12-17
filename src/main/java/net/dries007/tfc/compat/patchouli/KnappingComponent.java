@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Objects;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SuppressWarnings("unused")
 public abstract class KnappingComponent extends CustomComponent {
@@ -74,7 +74,7 @@ public abstract class KnappingComponent extends CustomComponent {
     } else {
       Gui.drawModalRectWithCustomSizedTexture(92, 34, 2, 144, 22, 22, 256, 256);
       if (context.isAreaHovered(mouseX, mouseY, 92, 34, 22, 22)) {
-        context.setHoverTooltip(Collections.singletonList(I18n.format(MODID_TFC + ".patchouli.recipe_removed")));
+        context.setHoverTooltip(Collections.singletonList(I18n.format(TFC + ".patchouli.recipe_removed")));
       }
       for (int y = 0; y < 5; y++) {
         for (int x = 0; x < 5; x++) {

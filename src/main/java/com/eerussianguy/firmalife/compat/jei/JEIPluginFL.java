@@ -4,14 +4,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 
-import com.eerussianguy.firmalife.compat.jei.category.CastingCategoryFL;
 import com.eerussianguy.firmalife.compat.jei.category.DryingRecipeCategory;
 import com.eerussianguy.firmalife.compat.jei.category.OvenRecipeCategory;
-import com.eerussianguy.firmalife.compat.jei.wrapper.CastingRecipeWrapperFL;
 import com.eerussianguy.firmalife.compat.jei.wrapper.DryingRecipeWrapper;
 import com.eerussianguy.firmalife.compat.jei.wrapper.KnappingRecipeWrapperFL;
 import com.eerussianguy.firmalife.compat.jei.wrapper.OvenRecipeWrapper;
-import com.eerussianguy.firmalife.compat.jei.wrapper.UnmoldRecipeWrapperFL;
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.init.KnappingFL;
 import com.eerussianguy.firmalife.init.RegistriesFL;
@@ -23,7 +20,6 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.categories.KnappingCategory;
 import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
@@ -51,7 +47,6 @@ public class JEIPluginFL implements IModPlugin {
     registry.addRecipeCategories(new OvenRecipeCategory(registry.getJeiHelpers().getGuiHelper(), OVEN_ID));
     registry.addRecipeCategories(new DryingRecipeCategory(registry.getJeiHelpers().getGuiHelper(), DRY_ID));
     registry.addRecipeCategories(new KnappingCategory(registry.getJeiHelpers().getGuiHelper(), KNAP_PUMPKIN_UID));
-    registry.addRecipeCategories(new CastingCategoryFL(registry.getJeiHelpers().getGuiHelper(), CASTING_UID));
   }
 
   @Override
@@ -77,20 +72,6 @@ public class JEIPluginFL implements IModPlugin {
                                                                                                                                       .getGuiHelper()))
                                                                            .collect(Collectors.toList());
 
-    // Molds
-    List<UnmoldRecipeWrapperFL> moldRecipes = TFCRegistries.METALS.getValuesCollection().stream()
-                                                                  .filter(metal -> metal.isToolMetal() && metal.getTier().isAtMost(Metal.Tier.TIER_II))
-                                                                  .map(metal -> new UnmoldRecipeWrapperFL(metal, "mallet"))
-                                                                  .collect(Collectors.toList());
-
-    // Casts
-    List<CastingRecipeWrapperFL> castRecipes = TFCRegistries.METALS.getValuesCollection().stream()
-                                                                   .filter(metal -> metal.isToolMetal() && metal.getTier().isAtMost(Metal.Tier.TIER_II))
-                                                                   .map(metal -> new CastingRecipeWrapperFL(metal, "mallet"))
-                                                                   .collect(Collectors.toList());
-
-    registry.addRecipes(moldRecipes, "minecraft.crafting");
-    registry.addRecipes(castRecipes, CASTING_UID);
     registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), CASTING_UID);
     registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
     registry.addRecipes(pumpkinknapRecipes, KNAP_PUMPKIN_UID);

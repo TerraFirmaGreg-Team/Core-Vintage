@@ -15,14 +15,14 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 /**
  * Saves animal respawning data to world save
  */
 public class AnimalRespawnWorldData extends WorldSavedData {
 
-  private static final String NAME = MODID_TFC + "_respawn";
+  private static final String NAME = TFC + "_respawn";
   private static final int REGION_SIZE = 16; // Number of chunks (sqr) per grid, ie: 16x16
   private final Map<ResourceLocation, Map<ChunkPos, Long>> respawnMap;
 

@@ -12,25 +12,23 @@ import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.api.recipes.SmelteryRecipe;
 import tfctech.api.recipes.WireDrawingRecipe;
 
-import static tfctech.TFCTech.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
-@Mod.EventBusSubscriber(modid = MODID)
-public final class TechRegistries
-{
-    public static IForgeRegistry<WireDrawingRecipe> WIRE_DRAWING;
-    public static IForgeRegistry<SmelteryRecipe> SMELTERY;
-    public static IForgeRegistry<GlassworkingRecipe> GLASSWORKING;
+@Mod.EventBusSubscriber(modid = TFCTECH)
+public final class TechRegistries {
 
-    @SubscribeEvent
-    public static void onNewRegistryEvent(RegistryEvent.NewRegistry event)
-    {
-        WIRE_DRAWING = createRegistry(new ResourceLocation(MODID, "wire_drawing_recipe"), WireDrawingRecipe.class);
-        SMELTERY = createRegistry(new ResourceLocation(MODID, "smeltery_recipe"), SmelteryRecipe.class);
-        GLASSWORKING = createRegistry(new ResourceLocation(MODID, "glassworking_recipe"), GlassworkingRecipe.class);
-    }
+  public static IForgeRegistry<WireDrawingRecipe> WIRE_DRAWING;
+  public static IForgeRegistry<SmelteryRecipe> SMELTERY;
+  public static IForgeRegistry<GlassworkingRecipe> GLASSWORKING;
 
-    private static <T extends IForgeRegistryEntry<T>> IForgeRegistry<T> createRegistry(ResourceLocation name, Class<T> tClass)
-    {
-        return new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
-    }
+  @SubscribeEvent
+  public static void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
+    WIRE_DRAWING = createRegistry(new ResourceLocation(TFCTECH, "wire_drawing_recipe"), WireDrawingRecipe.class);
+    SMELTERY = createRegistry(new ResourceLocation(TFCTECH, "smeltery_recipe"), SmelteryRecipe.class);
+    GLASSWORKING = createRegistry(new ResourceLocation(TFCTECH, "glassworking_recipe"), GlassworkingRecipe.class);
+  }
+
+  private static <T extends IForgeRegistryEntry<T>> IForgeRegistry<T> createRegistry(ResourceLocation name, Class<T> tClass) {
+    return new RegistryBuilder<T>().setName(name).allowModification().setType(tClass).create();
+  }
 }

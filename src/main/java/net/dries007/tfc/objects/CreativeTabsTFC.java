@@ -18,16 +18,13 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public final class CreativeTabsTFC {
 
-  public static final CreativeTabs CT_ROCK_BLOCKS = new TFCCreativeTab("rock.blocks", "tfc:smooth/granite");
-  public static final CreativeTabs CT_ROCK_ITEMS = new TFCCreativeTab("rock.items", "tfc:ore/tetrahedrite");
+  public static final CreativeTabs CT_ROCK = new TFCCreativeTab("rock.blocks", "tfc:smooth/granite");
   public static final CreativeTabs CT_WOOD = new TFCCreativeTab("wood", "tfc:wood/log/pine");
-  public static final CreativeTabs CT_DECORATIONS = new TFCCreativeTab("decorations", "tfc:wall/cobble/granite");
   public static final CreativeTabs CT_METAL = new TFCCreativeTab("metal", "tfc:metal/ingot/bronze");
-  public static final CreativeTabs CT_GEMS = new TFCCreativeTab("gems", "tfc:gem/diamond");
   public static final CreativeTabs CT_POTTERY = new TFCCreativeTab("pottery", "tfc:ceramics/fired/mold/ingot");
   public static final CreativeTabs CT_FOOD = new TFCCreativeTab("food", "tfc:food/green_apple");
   public static final CreativeTabs CT_MISC = new TFCCreativeTab("misc", "tfc:wand");
@@ -38,7 +35,7 @@ public final class CreativeTabsTFC {
     private final ResourceLocation iconResourceLocation;
 
     private TFCCreativeTab(String label, String icon) {
-      super(MODID_TFC + "." + label);
+      super(TFC + "." + label);
       iconResourceLocation = new ResourceLocation(icon);
     }
 

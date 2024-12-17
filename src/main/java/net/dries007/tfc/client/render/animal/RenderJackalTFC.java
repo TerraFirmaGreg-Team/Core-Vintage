@@ -18,13 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderJackalTFC extends RenderLiving<EntityJackalTFC> {
 
-  private static final ResourceLocation TEXTURE = new ResourceLocation(MODID_TFC, "textures/entity/animal/predators/jackal.png");
+  private static final ResourceLocation TEXTURE = new ResourceLocation(TFC, "textures/entity/animal/predators/jackal.png");
 
   public RenderJackalTFC(RenderManager renderManager) {
     super(renderManager, new ModelJackalTFC(), 0.7F);

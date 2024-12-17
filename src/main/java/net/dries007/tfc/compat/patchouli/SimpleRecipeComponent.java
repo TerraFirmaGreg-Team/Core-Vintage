@@ -17,7 +17,7 @@ import vazkii.patchouli.api.IComponentRenderContext;
 import javax.annotation.Nullable;
 import java.util.Collections;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public abstract class SimpleRecipeComponent<T extends IJEISimpleRecipe> extends CustomComponent {
 
@@ -46,7 +46,7 @@ public abstract class SimpleRecipeComponent<T extends IJEISimpleRecipe> extends 
       Gui.drawModalRectWithCustomSizedTexture(11, 2, 2, 144, 22, 22, 256, 256);
       Gui.drawModalRectWithCustomSizedTexture(83, 2, 2, 144, 22, 22, 256, 256);
       if (context.isAreaHovered(mouseX, mouseY, 11, 2, 22, 22) || context.isAreaHovered(mouseX, mouseY, 83, 2, 22, 22)) {
-        context.setHoverTooltip(Collections.singletonList(I18n.format(MODID_TFC + ".patchouli.recipe_removed")));
+        context.setHoverTooltip(Collections.singletonList(I18n.format(TFC + ".patchouli.recipe_removed")));
       }
     }
 

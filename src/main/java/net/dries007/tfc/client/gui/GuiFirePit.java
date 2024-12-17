@@ -16,13 +16,13 @@ import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.objects.te.TEFirePit;
 import org.lwjgl.opengl.GL11;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class GuiFirePit extends GuiContainerTE<TEFirePit> {
 
-  private static final ResourceLocation FIRE_PIT_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/fire_pit.png");
-  private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/fire_pit_cooking_pot.png");
-  private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/fire_pit_grill.png");
+  private static final ResourceLocation FIRE_PIT_BACKGROUND = new ResourceLocation(TFC, "textures/gui/fire_pit.png");
+  private static final ResourceLocation FIRE_PIT_COOKING_POT_BACKGROUND = new ResourceLocation(TFC, "textures/gui/fire_pit_cooking_pot.png");
+  private static final ResourceLocation FIRE_PIT_GRILL_BACKGROUND = new ResourceLocation(TFC, "textures/gui/fire_pit_grill.png");
 
   private final BlockFirePit.FirePitAttachment attachment;
 

@@ -19,10 +19,8 @@ import com.eerussianguy.firmalife.init.KnappingFL;
 import com.eerussianguy.firmalife.init.PlantsFL;
 import com.eerussianguy.firmalife.init.StemCrop;
 import com.eerussianguy.firmalife.recipe.KnappingRecipeFood;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.recipes.LoomRecipe;
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
@@ -33,7 +31,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.Powder;
@@ -43,28 +40,17 @@ import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.ICalendar;
 
+import su.terrafirmagreg.api.data.Reference;
+
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
-import static net.dries007.tfc.util.forge.ForgeRule.HIT_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.HIT_NOT_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.HIT_THIRD_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_NOT_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_SECOND_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.PUNCH_THIRD_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_SECOND_LAST;
-import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_THIRD_LAST;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class TFCRegistry {
 
-  public static final ResourceLocation HALITE = new ResourceLocation(TerraFirmaCraft.MODID_TFC, "halite");
+  public static final ResourceLocation HALITE = new ResourceLocation(Reference.TFC, "halite");
 
   @SubscribeEvent
   public static void onPreRegisterOre(TFCRegistryEvent.RegisterPreBlock<Ore> event) {
@@ -103,7 +89,6 @@ public class TFCRegistry {
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X", "XXXXX").setRegistryName("clay_oven"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X", "X   X").setRegistryName("clay_oven_chimney"),
       new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX", "  XXX", "  XXX").setRegistryName("clay_oven_wall"),
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsFL.UNFIRED_MALLET_MOLD), "XXXXX", "     ", "   X ", "XXXXX", "XXXXX").setRegistryName("unfired_mallet_mold"),
 
       new KnappingRecipeFood(KnappingFL.PUMPKIN, true, new ItemStack(ItemSeedsTFC.get(StemCrop.PUMPKIN)), "XXXXX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("pumpkin_scoop"),
       new KnappingRecipeFood(KnappingFL.PUMPKIN, true, new ItemStack(ItemsFL.getFood(FoodFL.PUMPKIN_CHUNKS), 4), "XX XX", "XX XX", "     ", "XX XX", "XX XX").setRegistryName("pumpkin_chunk")
@@ -168,7 +153,6 @@ public class TFCRegistry {
     IForgeRegistry<HeatRecipe> r = event.getRegistry();
 
     r.registerAll(
-      new HeatRecipeSimple(IIngredient.of(ItemsFL.UNFIRED_MALLET_MOLD), new ItemStack(ItemsFL.MALLET_MOLD), 1599.0F, Metal.Tier.TIER_I).setRegistryName("mallet_mold"),
       new HeatRecipeSimple(IIngredient.of("slice"), new ItemStack(ItemsFL.getFood(FoodFL.TOAST)), 150, 400).setRegistryName("slice"),
       new HeatRecipeSimple(IIngredient.of(ItemsFL.HONEYCOMB), new ItemStack(ItemsFL.BEESWAX), 150, 400).setRegistryName("honeycomb")
     );
@@ -205,25 +189,5 @@ public class TFCRegistry {
 
       }
     }
-  }
-
-  @SubscribeEvent
-  public static void onRegisterAnvilRecipes(RegistryEvent.Register<AnvilRecipe> event) {
-    IForgeRegistry<AnvilRecipe> r = event.getRegistry();
-    for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
-      if (metal.isToolMetal()) {
-        r.register(new AnvilRecipe(new ResourceLocation(MOD_ID, metal.toString()
-                                                                + "_mallet_head"), IIngredient.of(new ItemStack(ItemMetal.get(metal, Metal.ItemType.INGOT))),
-                                   new ItemStack(ItemsFL.getMetalMalletHead(metal)), metal.getTier(), TOOLS, PUNCH_LAST, PUNCH_SECOND_LAST, SHRINK_THIRD_LAST));
-      }
-    }
-    r.registerAll(new AnvilRecipe(new ResourceLocation(MOD_ID, "greenhouse_wall"), IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-                                  new ItemStack(BlocksFL.GREENHOUSE_WALL, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, PUNCH_NOT_LAST, SHRINK_LAST));
-    r.registerAll(new AnvilRecipe(new ResourceLocation(MOD_ID, "greenhouse_roof"), IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-                                  new ItemStack(BlocksFL.GREENHOUSE_ROOF, 2), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_THIRD_LAST, PUNCH_SECOND_LAST, PUNCH_LAST));
-    r.registerAll(new AnvilRecipe(new ResourceLocation(MOD_ID, "greenhouse_door"), IIngredient.of(ItemMetal.get(Metal.WROUGHT_IRON, Metal.ItemType.SHEET)),
-                                  new ItemStack(ItemsFL.ITEM_GREENHOUSE_DOOR), Metal.WROUGHT_IRON.getTier(), GENERAL, HIT_NOT_LAST, HIT_NOT_LAST, PUNCH_LAST));
-    r.registerAll(new AnvilRecipe(new ResourceLocation(MOD_ID, "spout"), IIngredient.of("ingotBlackSteel"),
-                                  new ItemStack(BlocksFL.SPOUT), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_THIRD_LAST, SHRINK_SECOND_LAST, HIT_LAST));
   }
 }

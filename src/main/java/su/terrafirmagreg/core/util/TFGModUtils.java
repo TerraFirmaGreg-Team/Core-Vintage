@@ -11,30 +11,14 @@ import java.util.List;
 
 public class TFGModUtils {
 
-  public static final List<TFGOrePrefixExtended> TFG_OREPREFIX_REGISTRY = Arrays.asList
-                                                                                  (
-                                                                                    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadAxe, new String[]{" X   ",
-                                                                                                                                                    "XXXX ",
-                                                                                                                                                    "XXXXX",
-                                                                                                                                                    "XXXX ",
-                                                                                                                                                    " X   "}),
-                                                                                    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadShovel, new String[]{"XXX",
-                                                                                                                                                       "XXX",
-                                                                                                                                                       "XXX",
-                                                                                                                                                       "XXX",
-                                                                                                                                                       " X "}),
-                                                                                    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadHoe, new String[]{"XXXXX",
-                                                                                                                                                    "   XX"}),
-                                                                                    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadHammer, new String[]{"XXXXX",
-                                                                                                                                                       "XXXXX",
-                                                                                                                                                       "  X  "}),
-                                                                                    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadKnife, new String[]{"X ",
-                                                                                                                                                      "XX",
-                                                                                                                                                      "XX",
-                                                                                                                                                      "XX",
-                                                                                                                                                      "XX"})
-                                                                                  );
-  public static HashMap<String, String> TYPE_TO_OREPREFIX = new HashMap<String, String>() {{
+  public static final List<TFGOrePrefixExtended> TFG_OREPREFIX_REGISTRY = Arrays.asList(
+    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadAxe, new String[]{" X   ", "XXXX ", "XXXXX", "XXXX ", " X   "}),
+    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadShovel, new String[]{"XXX", "XXX", "XXX", "XXX", " X "}),
+    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadHoe, new String[]{"XXXXX", "   XX"}),
+    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadHammer, new String[]{"XXXXX", "XXXXX", "  X  "}),
+    new TFGOrePrefixExtended(TFGOrePrefix.toolHeadKnife, new String[]{"X ", "XX", "XX", "XX", "XX"})
+  );
+  public static HashMap<String, String> TYPE_TO_OREPREFIX = new HashMap<>() {{
     // TFC - GT
     // Здесь находятся только те идентификаторы, которые невозможно обычным путем конвертировать в GT варианты
     put("PICK_HEAD", "toolHeadPickaxe");

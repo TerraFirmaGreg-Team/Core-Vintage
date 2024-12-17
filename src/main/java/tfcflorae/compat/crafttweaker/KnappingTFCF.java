@@ -1,5 +1,7 @@
 package tfcflorae.compat.crafttweaker;
 
+import su.terrafirmagreg.api.data.Reference;
+
 import net.minecraft.util.ResourceLocation;
 
 import crafttweaker.CraftTweakerAPI;
@@ -8,7 +10,6 @@ import crafttweaker.api.item.IItemStack;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-import tfcflorae.TFCFlorae;
 
 @ZenRegister
 @ZenClass("mods.tfcflorae.knapping")
@@ -18,7 +19,7 @@ public class KnappingTFCF {
   public static void add(String type, String name, IItemStack output, String... pattern) {
     KnappingType knappingType = KnappingHelperTFCF.getType(type);
     if (knappingType != null) {
-      KnappingHelperTFCF.addRecipe(new ResourceLocation(TFCFlorae.MODID, name), knappingType, output, pattern);
+      KnappingHelperTFCF.addRecipe(new ResourceLocation(Reference.TFCF, name), knappingType, output, pattern);
     } else {CraftTweakerAPI.logError("Error Wrong Type name entered!");}
   }
 

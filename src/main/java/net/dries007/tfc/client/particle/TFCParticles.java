@@ -24,22 +24,22 @@ import net.dries007.tfc.network.PacketSpawnTFCParticle;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 /**
  * TFC Particles, wrapped up in a nice enum
  */
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MODID_TFC)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFC)
 public enum TFCParticles {
-  STEAM(new ResourceLocation(MODID_TFC, "particle/steam"), () -> ParticleSteam::new),
-  FIRE_PIT_SMOKE1(new ResourceLocation(MODID_TFC, "particle/fire_pit_smoke1"), () -> ParticleFirePitSmoke::new),
-  FIRE_PIT_SMOKE2(new ResourceLocation(MODID_TFC, "particle/fire_pit_smoke2"), () -> ParticleFirePitSmoke::new),
-  FIRE_PIT_SMOKE3(new ResourceLocation(MODID_TFC, "particle/fire_pit_smoke3"), () -> ParticleFirePitSmoke::new),
-  LEAF1(new ResourceLocation(MODID_TFC, "particle/leaf1"), () -> ParticleLeaf::new),
-  LEAF2(new ResourceLocation(MODID_TFC, "particle/leaf2"), () -> ParticleLeaf::new),
-  LEAF3(new ResourceLocation(MODID_TFC, "particle/leaf3"), () -> ParticleLeaf::new),
-  SPARK(new ResourceLocation(MODID_TFC, "particle/spark"), () -> ParticleSpark::new),
-  BUBBLE(new ResourceLocation(MODID_TFC, "particle/bubble"), () -> ParticleBubbleTFC::new);
+  STEAM(new ResourceLocation(TFC, "particle/steam"), () -> ParticleSteam::new),
+  FIRE_PIT_SMOKE1(new ResourceLocation(TFC, "particle/fire_pit_smoke1"), () -> ParticleFirePitSmoke::new),
+  FIRE_PIT_SMOKE2(new ResourceLocation(TFC, "particle/fire_pit_smoke2"), () -> ParticleFirePitSmoke::new),
+  FIRE_PIT_SMOKE3(new ResourceLocation(TFC, "particle/fire_pit_smoke3"), () -> ParticleFirePitSmoke::new),
+  LEAF1(new ResourceLocation(TFC, "particle/leaf1"), () -> ParticleLeaf::new),
+  LEAF2(new ResourceLocation(TFC, "particle/leaf2"), () -> ParticleLeaf::new),
+  LEAF3(new ResourceLocation(TFC, "particle/leaf3"), () -> ParticleLeaf::new),
+  SPARK(new ResourceLocation(TFC, "particle/spark"), () -> ParticleSpark::new),
+  BUBBLE(new ResourceLocation(TFC, "particle/bubble"), () -> ParticleBubbleTFC::new);
 
   private final ResourceLocation location;
   private final Supplier<IParticleFactoryTFC> factorySupplier;

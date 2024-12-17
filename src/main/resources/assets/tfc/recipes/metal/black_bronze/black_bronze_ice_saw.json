@@ -1,0 +1,16 @@
+{
+  "type": "tfc:shaped_skill",
+  "pattern": ["H", "S"],
+  "key": {
+    "H": {
+      "item": "tfc:metal/ice_saw_head/black_bronze"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
+  },
+  "result": {
+    "item": "tfc:metal/ice_saw/black_bronze"
+  }
+}

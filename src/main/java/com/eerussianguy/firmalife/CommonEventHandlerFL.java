@@ -1,7 +1,6 @@
 package com.eerussianguy.firmalife;
 
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityZombie;
@@ -15,7 +14,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidTank;
@@ -29,16 +27,10 @@ import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 
 import com.eerussianguy.firmalife.entity.CombatGreenhouseTask;
 import com.eerussianguy.firmalife.gui.FLGuiHandler;
-import com.eerussianguy.firmalife.items.ItemFruitPole;
 import com.eerussianguy.firmalife.player.CapPlayerDataFL;
 import com.eerussianguy.firmalife.player.PlayerDataFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.FluidsFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
 import net.dries007.tfc.objects.entity.animal.EntityGoatTFC;
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
@@ -49,21 +41,6 @@ import net.dries007.tfc.util.Helpers;
 
 @Mod.EventBusSubscriber(modid = FirmaLife.MOD_ID)
 public class CommonEventHandlerFL {
-
-  @SubscribeEvent
-  public static void onBlockHarvestDrops(BlockEvent.HarvestDropsEvent event) {
-    final IBlockState state = event.getState();
-    final Block block = state.getBlock();
-
-    if (block instanceof BlockFruitTreeLeaves) {
-      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + Constants.RNG.nextInt(4)));
-    } else if (block instanceof BlockFruitTreeTrunk) {
-      if (event.isCanceled()) {event.setCanceled(false);}
-      IFruitTree tree = ((BlockFruitTreeTrunk) block).getTree();
-      ItemFruitPole pole = ItemFruitPole.get(tree);
-      if (pole != null) {event.getDrops().add(new ItemStack(pole));}
-    }
-  }
 
   @SubscribeEvent(priority = EventPriority.LOWEST)
   public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {

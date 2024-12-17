@@ -23,7 +23,7 @@ import net.dries007.tfc.objects.te.TEChestTFC;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
@@ -36,10 +36,10 @@ public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {
   static {
     for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
       //noinspection ConstantConditions
-      SINGLE_TEXTURES.put(wood, new ResourceLocation(MODID_TFC, "textures/entity/chests/chest/" + wood.getRegistryName().getPath() + ".png"));
-      DOUBLE_TEXTURES.put(wood, new ResourceLocation(MODID_TFC, "textures/entity/chests/chest_double/" + wood.getRegistryName().getPath() + ".png"));
-      TRAP_SINGLE_TEXTURES.put(wood, new ResourceLocation(MODID_TFC, "textures/entity/chests/chest_trap/" + wood.getRegistryName().getPath() + ".png"));
-      TRAP_DOUBLE_TEXTURES.put(wood, new ResourceLocation(MODID_TFC, "textures/entity/chests/chest_trap_double/" + wood.getRegistryName().getPath() + ".png"));
+      SINGLE_TEXTURES.put(wood, new ResourceLocation(TFC, "textures/entity/chests/chest/" + wood.getRegistryName().getPath() + ".png"));
+      DOUBLE_TEXTURES.put(wood, new ResourceLocation(TFC, "textures/entity/chests/chest_double/" + wood.getRegistryName().getPath() + ".png"));
+      TRAP_SINGLE_TEXTURES.put(wood, new ResourceLocation(TFC, "textures/entity/chests/chest_trap/" + wood.getRegistryName().getPath() + ".png"));
+      TRAP_DOUBLE_TEXTURES.put(wood, new ResourceLocation(TFC, "textures/entity/chests/chest_trap_double/" + wood.getRegistryName().getPath() + ".png"));
     }
   }
 

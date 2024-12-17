@@ -23,11 +23,11 @@ import org.lwjgl.opengl.GL11;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class GuiPowderkeg extends GuiContainerTE<TEPowderKeg> {
 
-  public static final ResourceLocation POWDERKEG_BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/powderkeg.png");
+  public static final ResourceLocation POWDERKEG_BACKGROUND = new ResourceLocation(TFC, "textures/gui/powderkeg.png");
   private final String translationKey;
 
   public GuiPowderkeg(Container container, InventoryPlayer playerInv, TEPowderKeg tile, String translationKey) {

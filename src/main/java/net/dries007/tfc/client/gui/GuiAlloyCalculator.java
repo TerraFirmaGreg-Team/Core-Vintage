@@ -14,12 +14,12 @@ import net.dries007.tfc.util.Alloy;
 
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiAlloyCalculator extends GuiContainerTE<TEAlloyCalculator> {
 
-  public static final ResourceLocation BG_TEX = new ResourceLocation(MODID_TFC, "textures/gui/alloy_calc_gui.png");
+  public static final ResourceLocation BG_TEX = new ResourceLocation(TFC, "textures/gui/alloy_calc_gui.png");
 
 
   public GuiAlloyCalculator(Container container, InventoryPlayer playerInv, TEAlloyCalculator tile) {

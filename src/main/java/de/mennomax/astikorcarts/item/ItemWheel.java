@@ -3,9 +3,9 @@ package de.mennomax.astikorcarts.item;
 import net.minecraft.item.ItemStack;
 
 import de.mennomax.astikorcarts.AstikorCarts;
-import de.mennomax.astikorcarts.init.ModCreativeTabs;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
 
 import javax.annotation.Nonnull;
@@ -15,7 +15,7 @@ public class ItemWheel extends ItemTFC {
   public ItemWheel() {
     this.setRegistryName(AstikorCarts.MODID, "wheel");
     this.setTranslationKey(this.getRegistryName().toString());
-    this.setCreativeTab(ModCreativeTabs.astikor);
+    this.setCreativeTab(CreativeTabsTFC.CT_WOOD);
   }
 
   @Nonnull

@@ -17,7 +17,7 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 /**
  * This is an advanced IForgeable capability that also needs heat If you implement this capability, you MUST implement
@@ -71,15 +71,15 @@ public interface IForgeableHeatable extends IForgeable, IItemHeat {
     if (tooltip != null) {
       tooltip += TextFormatting.WHITE;
       if (temperature > getMeltTemp()) {
-        tooltip += " - " + I18n.format(MODID_TFC + ".tooltip.liquid");
+        tooltip += " - " + I18n.format(TFC + ".tooltip.liquid");
       } else if (temperature > getWeldTemp()) {
-        tooltip += " - " + I18n.format(MODID_TFC + ".tooltip.weldable");
+        tooltip += " - " + I18n.format(TFC + ".tooltip.weldable");
       } else if (temperature > getWorkTemp()) {
-        tooltip += " - " + I18n.format(MODID_TFC + ".tooltip.workable");
+        tooltip += " - " + I18n.format(TFC + ".tooltip.workable");
       }
 
       if (temperature > 0.9 * getMeltTemp()) {
-        tooltip += " (" + I18n.format(MODID_TFC + ".tooltip.danger") + ")";
+        tooltip += " (" + I18n.format(TFC + ".tooltip.danger") + ")";
       }
       text.add(tooltip);
     }

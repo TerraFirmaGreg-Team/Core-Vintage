@@ -5,7 +5,8 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
+
+import su.terrafirmagreg.api.data.Reference;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -21,7 +22,7 @@ public class HelpersTFCF {
   }
 
   public static void insertWhitelistFluids() {
-    ConfigManager.sync(TerraFirmaCraft.MODID_TFC, Config.Type.INSTANCE);
+    ConfigManager.sync(Reference.TFC, Config.Type.INSTANCE);
 
     // Fluids
     String[] fluidAdditions = {

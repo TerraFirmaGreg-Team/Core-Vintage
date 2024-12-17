@@ -11,12 +11,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SuppressWarnings("WeakerAccess")
 public abstract class PotionTFC extends Potion {
 
-  private static final ResourceLocation POTION_ICONS = new ResourceLocation(MODID_TFC, "textures/gui/icons/potion.png");
+  private static final ResourceLocation POTION_ICONS = new ResourceLocation(TFC, "textures/gui/icons/potion.png");
 
   protected PotionTFC(boolean isBadEffectIn, int liquidColorIn) {
     super(isBadEffectIn, liquidColorIn);

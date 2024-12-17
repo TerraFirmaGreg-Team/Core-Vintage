@@ -17,13 +17,13 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.Iterator;
 import java.util.Random;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 /**
  * Vanilla ice melting is hardcoded to the world. However, we can replicate most of the behavior by watching world ticks, and performing the same simple logic
  * checks
  */
-@Mod.EventBusSubscriber(modid = MODID_TFC)
+@Mod.EventBusSubscriber(modid = TFC)
 public class IceMeltHandler {
 
   public static final float ICE_MELT_THRESHOLD = 0f;

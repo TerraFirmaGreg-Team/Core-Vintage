@@ -29,7 +29,7 @@ import net.dries007.tfc.util.forge.ForgeStep;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_PLAN;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_STEP_MAX;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_STEP_MIN;
@@ -102,12 +102,12 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
     }
     if (!tile.getTier().isAtLeast(recipe.getTier())) {
       TerraFirmaCraft.getLog().info("Anvil Tier: {} + Recipe Tier: {}", tile.getTier(), recipe.getTier());
-      player.sendMessage(new TextComponentTranslation(MODID_TFC + ".tooltip.anvil_tier_too_low"));
+      player.sendMessage(new TextComponentTranslation(TFC + ".tooltip.anvil_tier_too_low"));
       return false;
     }
 
     if (!cap.isWorkable()) {
-      player.sendMessage(new TextComponentTranslation(MODID_TFC + ".tooltip.anvil_too_cold"));
+      player.sendMessage(new TextComponentTranslation(TFC + ".tooltip.anvil_too_cold"));
       return false;
     }
 
@@ -130,7 +130,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
         stack.damageItem(1, player);
         return true;
       } else {
-        player.sendMessage(new TextComponentString("" + TextFormatting.RED).appendSibling(new TextComponentTranslation(MODID_TFC + ".tooltip.anvil_no_hammer")));
+        player.sendMessage(new TextComponentString("" + TextFormatting.RED).appendSibling(new TextComponentTranslation(TFC + ".tooltip.anvil_no_hammer")));
         return false;
       }
     }

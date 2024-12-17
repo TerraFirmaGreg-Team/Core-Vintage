@@ -23,8 +23,8 @@ public class KnappingRecipeStone extends KnappingRecipe {
 
   @Override
   public ItemStack getOutput(ItemStack input) {
-    if (input.getItem() instanceof IRockObject) {
-      return supplier.apply(((IRockObject) input.getItem()).getRock(input));
+    if (input.getItem() instanceof IRockObject rockObject) {
+      return supplier.apply(rockObject.getRock(input));
     }
     return ItemStack.EMPTY;
   }

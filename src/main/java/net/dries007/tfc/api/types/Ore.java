@@ -17,10 +17,10 @@ import net.dries007.tfc.util.Helpers;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 
-@GameRegistry.ObjectHolder(MODID_TFC)
+@GameRegistry.ObjectHolder(TFC)
 public class Ore extends IForgeRegistryEntry.Impl<Ore> {
 
   public static final Ore LIMONITE = Helpers.getNull();

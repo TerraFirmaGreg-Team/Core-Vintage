@@ -13,11 +13,11 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class GuiButtonPlayerInventoryTab extends GuiButtonTFC {
 
-  private static final ResourceLocation BACKGROUND = new ResourceLocation(MODID_TFC, "textures/gui/icons.png");
+  private static final ResourceLocation BACKGROUND = new ResourceLocation(TFC, "textures/gui/icons.png");
 
   private final TFCGuiHandler.Type guiType;
   private final boolean isActive;

@@ -52,7 +52,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import com.google.common.base.Joiner;
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.entity.EntitySeatOn;
 import net.dries007.tfc.objects.entity.animal.EntityChickenTFC;
 import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
@@ -67,6 +66,8 @@ import net.dries007.tfc.objects.entity.animal.EntityPolarBearTFC;
 import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
 import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
+
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -231,12 +232,12 @@ public final class Helpers {
   }
 
   public static String getEnumName(Enum<?> anEnum) {
-    return JOINER_DOT.join(TerraFirmaCraft.MODID_TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
+    return JOINER_DOT.join(Reference.TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
   }
 
   public static String getTypeName(IForgeRegistryEntry<?> type) {
     //noinspection ConstantConditions
-    return JOINER_DOT.join(TerraFirmaCraft.MODID_TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
+    return JOINER_DOT.join(Reference.TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
   }
 
   public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {

@@ -21,6 +21,8 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.world.classic.StructureHelper;
 
+import su.terrafirmagreg.api.data.Reference;
+
 import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
@@ -40,8 +42,8 @@ public class TreeGenWillow implements ITreeGenerator {
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
     //noinspection ConstantConditions
-    ResourceLocation base = new ResourceLocation(TerraFirmaCraft.MODID_TFC, tree.getRegistryName().getPath() + "/base");
-    ResourceLocation overlay = new ResourceLocation(TerraFirmaCraft.MODID_TFC, tree.getRegistryName().getPath() + "/overlay");
+    ResourceLocation base = new ResourceLocation(Reference.TFC, tree.getRegistryName().getPath() + "/base");
+    ResourceLocation overlay = new ResourceLocation(Reference.TFC, tree.getRegistryName().getPath() + "/overlay");
 
     structureBase = manager.get(world.getMinecraftServer(), base);
     structureOverlay = manager.get(world.getMinecraftServer(), overlay);

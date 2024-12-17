@@ -14,12 +14,12 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
-import tfctech.TFCTech;
+import su.terrafirmagreg.api.data.Reference;
 
 @ParametersAreNonnullByDefault
 public class WireDrawingCategory extends BaseRecipeCategory<SimpleRecipeWrapper>
 {
-    private static final ResourceLocation ICONS = new ResourceLocation(TFCTech.MODID, "textures/gui/elements.png");
+    private static final ResourceLocation ICONS = new ResourceLocation(Reference.TFCTECH, "textures/gui/elements.png");
 
     private final IDrawableStatic slot;
     private final IDrawableStatic arrow;

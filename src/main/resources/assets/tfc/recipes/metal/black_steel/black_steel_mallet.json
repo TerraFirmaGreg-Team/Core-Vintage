@@ -1,0 +1,16 @@
+{
+  "type": "tfc:shaped_skill",
+  "pattern": ["H", "S"],
+  "key": {
+    "H": {
+      "item": "tfc:metal/mallet_head/black_steel"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
+  },
+  "result": {
+    "item": "tfc:metal/mallet/black_steel"
+  }
+}

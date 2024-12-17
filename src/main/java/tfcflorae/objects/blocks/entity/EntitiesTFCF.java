@@ -1,7 +1,5 @@
 package tfcflorae.objects.blocks.entity;
 
-import net.dries007.tfc.util.Helpers;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -14,13 +12,14 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DataSerializerEntry;
 
+import net.dries007.tfc.util.Helpers;
 import tfcflorae.TFCFlorae;
 
 import javax.annotation.Nonnull;
 
-import static tfcflorae.TFCFlorae.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
-@Mod.EventBusSubscriber(modid = MODID)
+@Mod.EventBusSubscriber(modid = TFCF)
 public class EntitiesTFCF {
 
   @GameRegistry.ObjectHolder("tfcf:long")
@@ -62,6 +61,6 @@ public class EntitiesTFCF {
   }
 
   private static void register(String name, Class<? extends Entity> cls) {
-    EntityRegistry.registerModEntity(new ResourceLocation(MODID, name), cls, name, id++, TFCFlorae.getInstance(), 160, 20, true);
+    EntityRegistry.registerModEntity(new ResourceLocation(TFCF, name), cls, name, id++, TFCFlorae.getInstance(), 160, 20, true);
   }
 }

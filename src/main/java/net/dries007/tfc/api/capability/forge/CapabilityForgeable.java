@@ -21,11 +21,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public final class CapabilityForgeable {
 
-  public static final ResourceLocation KEY = new ResourceLocation(MODID_TFC, "item_forge");
+  public static final ResourceLocation KEY = new ResourceLocation(TFC, "item_forge");
   public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>(); //Used inside CT, set custom IForgeable for items outside TFC
   @CapabilityInject(IForgeable.class)
   public static Capability<IForgeable> FORGEABLE_CAPABILITY;

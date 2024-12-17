@@ -21,11 +21,11 @@ import net.dries007.tfc.objects.container.ContainerKnapping;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class GuiKnapping extends GuiContainerTFC {
 
-  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(MODID_TFC, "textures/gui/knapping.png");
+  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(TFC, "textures/gui/knapping.png");
 
   private final ResourceLocation buttonTexture;
   private final KnappingType type;

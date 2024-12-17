@@ -15,14 +15,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault
 public class RenderSheepTFC extends RenderAnimalTFC<EntitySheepTFC> {
 
-  private static final ResourceLocation SHEEP_YOUNG = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/sheep_young.png");
-  private static final ResourceLocation SHEEP_OLD = new ResourceLocation(MODID_TFC, "textures/entity/animal/livestock/sheep_old.png");
+  private static final ResourceLocation SHEEP_YOUNG = new ResourceLocation(TFC, "textures/entity/animal/livestock/sheep_young.png");
+  private static final ResourceLocation SHEEP_OLD = new ResourceLocation(TFC, "textures/entity/animal/livestock/sheep_old.png");
 
   public RenderSheepTFC(RenderManager renderManager) {
     super(renderManager, new ModelSheepBodyTFC(), 0.7F, SHEEP_YOUNG, SHEEP_OLD);

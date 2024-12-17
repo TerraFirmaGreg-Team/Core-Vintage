@@ -16,8 +16,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.util.Alloy;
+
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -38,7 +39,7 @@ public class ItemBlockCrucible extends ItemBlockTFC {
       Alloy alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
       alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
       String metalName = (new TextComponentTranslation(alloy.getResult().getTranslationKey())).getFormattedText();
-      tooltip.add(I18n.format(TerraFirmaCraft.MODID_TFC + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));
+      tooltip.add(I18n.format(Reference.TFC + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));
     }
   }
 }

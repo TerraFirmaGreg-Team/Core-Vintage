@@ -62,7 +62,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -199,7 +199,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
   @Override
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
-    return new TextComponentTranslation(MODID_TFC + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
+    return new TextComponentTranslation(TFC + ".animal." + entityString + "." + this.getGender().name().toLowerCase());
   }
 
   public boolean isHalter() {
@@ -382,7 +382,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
           if (!this.world.isRemote) {
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-              player.sendMessage(new TextComponentTranslation(MODID_TFC + ".tooltip.animal.mating.pregnant", getName()));
+              player.sendMessage(new TextComponentTranslation(TFC + ".tooltip.animal.mating.pregnant", getName()));
             }
           }
         }

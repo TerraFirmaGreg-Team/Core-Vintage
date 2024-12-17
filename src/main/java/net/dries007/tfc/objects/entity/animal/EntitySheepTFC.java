@@ -56,7 +56,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @ParametersAreNonnullByDefault
 public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, ILivestock {
@@ -228,11 +228,11 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
   @Override
   public TextComponentTranslation getTooltip() {
     if (getAge() == Age.CHILD) {
-      return new TextComponentTranslation(MODID_TFC + ".tooltip.animal.product.young", getAnimalName());
+      return new TextComponentTranslation(TFC + ".tooltip.animal.product.young", getAnimalName());
     } else if (getFamiliarity() <= 0.15f) {
-      return new TextComponentTranslation(MODID_TFC + ".tooltip.animal.product.low_familiarity", getAnimalName());
+      return new TextComponentTranslation(TFC + ".tooltip.animal.product.low_familiarity", getAnimalName());
     } else if (!hasWool()) {
-      return new TextComponentTranslation(MODID_TFC + ".tooltip.animal.product.no_wool", getAnimalName());
+      return new TextComponentTranslation(TFC + ".tooltip.animal.product.no_wool", getAnimalName());
     }
     return null;
   }

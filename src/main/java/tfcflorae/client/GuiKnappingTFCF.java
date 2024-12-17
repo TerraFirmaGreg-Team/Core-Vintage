@@ -9,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.gui.GuiKnapping;
-import tfcflorae.api.knapping.KnappingTypes;
 
 public class GuiKnappingTFCF extends GuiKnapping {
 
@@ -30,16 +29,10 @@ public class GuiKnappingTFCF extends GuiKnapping {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-    if (type == KnappingTypes.MUD || type == KnappingTypes.EARTHENWARE_CLAY || type == KnappingTypes.KAOLINITE_CLAY || type == KnappingTypes.STONEWARE_CLAY) {
+    if (type == KnappingType.MUD) {
       GlStateManager.color(1, 1, 1, 1);
-      if (type == KnappingTypes.MUD) {mc.getTextureManager().bindTexture(backgroundTexture);} else if (type == KnappingTypes.EARTHENWARE_CLAY) {
-        mc.getTextureManager().bindTexture(GuiHandler.EARTHENWARE_CLAY_DISABLED_TEXTURE);
-      } else if (type
-                 == KnappingTypes.KAOLINITE_CLAY) {
-        mc.getTextureManager().bindTexture(GuiHandler.KAOLINITE_CLAY_DISABLED_TEXTURE);
-      } else if (type
-                 == KnappingTypes.STONEWARE_CLAY) {
-        mc.getTextureManager().bindTexture(GuiHandler.STONEWARE_CLAY_DISABLED_TEXTURE);
+      if (type == KnappingType.MUD) {
+        mc.getTextureManager().bindTexture(backgroundTexture);
       }
       for (GuiButton button : buttonList) {
         if (!button.visible) {

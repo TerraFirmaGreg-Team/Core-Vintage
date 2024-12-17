@@ -33,11 +33,11 @@ import vazkii.patchouli.api.PatchouliAPI;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class TFCPatchouliPlugin {
 
-  public static final ResourceLocation BOOK_UTIL_TEXTURES = new ResourceLocation(MODID_TFC, "textures/gui/book.png");
+  public static final ResourceLocation BOOK_UTIL_TEXTURES = new ResourceLocation(TFC, "textures/gui/book.png");
 
   private static PatchouliAPI.IPatchouliAPI API = null;
 
@@ -62,79 +62,79 @@ public class TFCPatchouliPlugin {
   public static void init() {
     // Register multiblocks
     // '0' is the center, aka where the block would be placed
-    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "forge"), getAPI().makeMultiblock(new String[][]{
+    getAPI().registerMultiblock(new ResourceLocation(TFC, "forge"), getAPI().makeMultiblock(new String[][]{
+                                                                                              {"   ", " 0 ", "   "},
+                                                                                              {" S ", "SFS", " S "},
+                                                                                              {"   ", " S ", "   "}
+                                                                                            },
+                                                                                            'S', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.RAW), BlockCharcoalForge::isValidSide),
+                                                                                            'F', getAPI().looseBlockMatcher(BlocksTFC.CHARCOAL_FORGE),
+                                                                                            ' ', getAPI().anyMatcher(),
+                                                                                            '0', getAPI().airMatcher()
+    ).setSymmetrical(true));
+
+    getAPI().registerMultiblock(new ResourceLocation(TFC, "charcoal_pit_3x3"), getAPI().makeMultiblock(new String[][]{
+                                                                                                         {"     ", " DDD ", " DDD ", " DDD ", "     "},
+                                                                                                         {" DDD ", "DLLLD", "DL0LD", "DLLLD", " DDD "},
+                                                                                                         {"SSSSS", "SDDDS", "SDDDS", "SDDDS", "SSSSS"}
+                                                                                                       },
+                                                                                                       'D', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT), BlockLogPile::isValidCoverBlock),
+                                                                                                       'S', getAPI().displayOnlyMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT)), // Since these technically don't have to be here, they're just for display
+                                                                                                       'L', getAPI().looseBlockMatcher(BlocksTFC.LOG_PILE),
+                                                                                                       '0', getAPI().looseBlockMatcher(BlocksTFC.LOG_PILE),
+                                                                                                       ' ', getAPI().anyMatcher()
+    ).setSymmetrical(true));
+
+    getAPI().registerMultiblock(new ResourceLocation(TFC, "charcoal_pit_1x1"), getAPI().makeMultiblock(new String[][]{
+                                                                                                         {"   ", " D ", "   "},
+                                                                                                         {" D ", "D0D", " D "},
+                                                                                                         {"SSS", "SDS", "SSS"}
+                                                                                                       },
+                                                                                                       'D', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT), BlockLogPile::isValidCoverBlock),
+                                                                                                       'S', getAPI().displayOnlyMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT)), // Since these technically don't have to be here, they're just for display
+                                                                                                       '0', getAPI().looseBlockMatcher(BlocksTFC.LOG_PILE),
+                                                                                                       ' ', getAPI().anyMatcher()
+    ).setSymmetrical(true));
+
+    getAPI().registerMultiblock(new ResourceLocation(TFC, "pit_kiln"), getAPI().makeMultiblock(new String[][]{
                                                                                                  {"   ", " 0 ", "   "},
-                                                                                                 {" S ", "SFS", " S "},
+                                                                                                 {" S ", "SPS", " S "},
                                                                                                  {"   ", " S ", "   "}
                                                                                                },
-                                                                                               'S', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.RAW), BlockCharcoalForge::isValidSide),
-                                                                                               'F', getAPI().looseBlockMatcher(BlocksTFC.CHARCOAL_FORGE),
-                                                                                               ' ', getAPI().anyMatcher(),
-                                                                                               '0', getAPI().airMatcher()
+                                                                                               '0', getAPI().displayOnlyMatcher(Blocks.FIRE),
+                                                                                               'S', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT), IBlockProperties::isNormalCube),
+                                                                                               'P', getAPI().stateMatcher(BlocksTFC.PIT_KILN.getDefaultState()
+                                                                                                                                            .withProperty(BlockPitKiln.FULL, true)),
+                                                                                               ' ', getAPI().anyMatcher()
     ).setSymmetrical(true));
 
-    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "charcoal_pit_3x3"), getAPI().makeMultiblock(new String[][]{
-                                                                                                            {"     ", " DDD ", " DDD ", " DDD ", "     "},
-                                                                                                            {" DDD ", "DLLLD", "DL0LD", "DLLLD", " DDD "},
-                                                                                                            {"SSSSS", "SDDDS", "SDDDS", "SDDDS", "SSSSS"}
-                                                                                                          },
-                                                                                                          'D', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT), BlockLogPile::isValidCoverBlock),
-                                                                                                          'S', getAPI().displayOnlyMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT)), // Since these technically don't have to be here, they're just for display
-                                                                                                          'L', getAPI().looseBlockMatcher(BlocksTFC.LOG_PILE),
-                                                                                                          '0', getAPI().looseBlockMatcher(BlocksTFC.LOG_PILE),
-                                                                                                          ' ', getAPI().anyMatcher()
-    ).setSymmetrical(true));
-
-    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "charcoal_pit_1x1"), getAPI().makeMultiblock(new String[][]{
-                                                                                                            {"   ", " D ", "   "},
-                                                                                                            {" D ", "D0D", " D "},
-                                                                                                            {"SSS", "SDS", "SSS"}
-                                                                                                          },
-                                                                                                          'D', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT), BlockLogPile::isValidCoverBlock),
-                                                                                                          'S', getAPI().displayOnlyMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT)), // Since these technically don't have to be here, they're just for display
-                                                                                                          '0', getAPI().looseBlockMatcher(BlocksTFC.LOG_PILE),
-                                                                                                          ' ', getAPI().anyMatcher()
-    ).setSymmetrical(true));
-
-    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "pit_kiln"), getAPI().makeMultiblock(new String[][]{
-                                                                                                    {"   ", " 0 ", "   "},
-                                                                                                    {" S ", "SPS", " S "},
-                                                                                                    {"   ", " S ", "   "}
-                                                                                                  },
-                                                                                                  '0', getAPI().displayOnlyMatcher(Blocks.FIRE),
-                                                                                                  'S', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.DIRT), IBlockProperties::isNormalCube),
-                                                                                                  'P', getAPI().stateMatcher(BlocksTFC.PIT_KILN.getDefaultState()
-                                                                                                                                               .withProperty(BlockPitKiln.FULL, true)),
-                                                                                                  ' ', getAPI().anyMatcher()
-    ).setSymmetrical(true));
-
-    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "bloomery"), getAPI().makeMultiblock(new String[][]{
-                                                                                                    {" S ", "S S", " S "},
-                                                                                                    {"SS ", "BCS", "SS "},
-                                                                                                    {"   ", "S0 ", "   "}
-                                                                                                  },
-                                                                                                  'S', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.SMOOTH), BlockBloomery::isValidSideBlock),
-                                                                                                  '0', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.SMOOTH), BlockBloomery::isValidSideBlock),
-                                                                                                  'B', getAPI().looseBlockMatcher(BlocksTFC.BLOOMERY),
-                                                                                                  'C', getAPI().stateMatcher(BlocksTFC.CHARCOAL_PILE.getDefaultState()
-                                                                                                                                                    .withProperty(BlockCharcoalPile.LAYERS, 8)),
-                                                                                                  ' ', getAPI().anyMatcher()
+    getAPI().registerMultiblock(new ResourceLocation(TFC, "bloomery"), getAPI().makeMultiblock(new String[][]{
+                                                                                                 {" S ", "S S", " S "},
+                                                                                                 {"SS ", "BCS", "SS "},
+                                                                                                 {"   ", "S0 ", "   "}
+                                                                                               },
+                                                                                               'S', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.SMOOTH), BlockBloomery::isValidSideBlock),
+                                                                                               '0', getAPI().predicateMatcher(BlockRockVariant.get(Rock.GRANITE, Rock.Type.SMOOTH), BlockBloomery::isValidSideBlock),
+                                                                                               'B', getAPI().looseBlockMatcher(BlocksTFC.BLOOMERY),
+                                                                                               'C', getAPI().stateMatcher(BlocksTFC.CHARCOAL_PILE.getDefaultState()
+                                                                                                                                                 .withProperty(BlockCharcoalPile.LAYERS, 8)),
+                                                                                               ' ', getAPI().anyMatcher()
     ));
 
-    getAPI().registerMultiblock(new ResourceLocation(MODID_TFC, "blast_furnace"), getAPI().makeMultiblock(new String[][]{
-                                                                                                         {"  S  ", " SFS ", "SF FS", " SFS ", "  S  "},
-                                                                                                         {"     ", "     ", "  B  ", "     ", "     "},
-                                                                                                         {"     ", "     ", "  0  ", "     ", "     "}
-                                                                                                       },
-                                                                                                       'S', getAPI().predicateMatcher(BlockMetalSheet.get(Metal.WROUGHT_IRON), state -> state.getBlock() instanceof BlockMetalSheet),
-                                                                                                       'F', getAPI().looseBlockMatcher(BlocksTFC.FIRE_BRICKS),
-                                                                                                       'B', getAPI().looseBlockMatcher(BlocksTFC.BLAST_FURNACE),
-                                                                                                       '0', getAPI().looseBlockMatcher(BlocksTFC.CRUCIBLE)
+    getAPI().registerMultiblock(new ResourceLocation(TFC, "blast_furnace"), getAPI().makeMultiblock(new String[][]{
+                                                                                                      {"  S  ", " SFS ", "SF FS", " SFS ", "  S  "},
+                                                                                                      {"     ", "     ", "  B  ", "     ", "     "},
+                                                                                                      {"     ", "     ", "  0  ", "     ", "     "}
+                                                                                                    },
+                                                                                                    'S', getAPI().predicateMatcher(BlockMetalSheet.get(Metal.WROUGHT_IRON), state -> state.getBlock() instanceof BlockMetalSheet),
+                                                                                                    'F', getAPI().looseBlockMatcher(BlocksTFC.FIRE_BRICKS),
+                                                                                                    'B', getAPI().looseBlockMatcher(BlocksTFC.BLAST_FURNACE),
+                                                                                                    '0', getAPI().looseBlockMatcher(BlocksTFC.CRUCIBLE)
     ).setSymmetrical(true));
   }
 
   public static void giveBookToPlayer(EntityPlayer player) {
-    ItemStack bookStack = getAPI().getBookStack(new ResourceLocation(MODID_TFC, "book").toString());
+    ItemStack bookStack = getAPI().getBookStack(new ResourceLocation(TFC, "book").toString());
     ItemHandlerHelper.giveItemToPlayer(player, bookStack);
   }
 

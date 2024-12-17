@@ -8,11 +8,11 @@ import net.minecraft.util.ResourceLocation;
 import tfctech.client.render.models.ModelWireDrawBench;
 import tfctech.objects.tileentities.TEWireDrawBench;
 
-import static tfctech.TFCTech.MODID;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public class TESRWireDrawBench extends TileEntitySpecialRenderer<TEWireDrawBench>
 {
-    private static final ResourceLocation BENCH_TEXTURES = new ResourceLocation(MODID, "textures/models/wiredraw_bench.png");
+    private static final ResourceLocation BENCH_TEXTURES = new ResourceLocation(TFCTECH, "textures/models/wiredraw_bench.png");
     private final ModelWireDrawBench model = new ModelWireDrawBench();
 
 

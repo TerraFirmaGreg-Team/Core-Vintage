@@ -38,7 +38,7 @@ import net.dries007.tfc.api.types.Tree;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static net.dries007.tfc.TerraFirmaCraft.MODID_TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.ALLOY_RECIPE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.ANVIL_RECIPE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.BARREL_RECIPE;
@@ -57,7 +57,7 @@ import static net.dries007.tfc.api.registries.TFCRegistryNames.ROCK_TYPE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.TREE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.WELDING_RECIPE;
 
-@Mod.EventBusSubscriber(modid = MODID_TFC)
+@Mod.EventBusSubscriber(modid = TFC)
 public final class Registries {
 
   private static final Map<ResourceLocation, IForgeRegistry<?>> preBlockRegistries = new LinkedHashMap<>(); // Needs to respect insertion order

@@ -20,7 +20,7 @@ import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 import net.dries007.tfc.objects.items.ItemsTFC;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

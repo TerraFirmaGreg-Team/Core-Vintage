@@ -17,7 +17,7 @@ import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.objects.ArmorMaterialTFC;
 import net.dries007.tfc.objects.ToolMaterialsTFC;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_I;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_II;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_III;

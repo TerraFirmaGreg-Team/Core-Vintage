@@ -1,5 +1,5 @@
 {
-  "package": "su.terrafirmagreg.mixin",
+  "package": "su.terrafirmagreg.old.mixin",
   "required": true,
   "refmap": "mixins.tfg.refmap.json",
   "target": "@env(DEFAULT)",

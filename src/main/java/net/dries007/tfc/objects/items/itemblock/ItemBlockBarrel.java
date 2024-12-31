@@ -47,7 +47,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

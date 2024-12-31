@@ -14,7 +14,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 @ParametersAreNonnullByDefault
 public class WireDrawingCategory extends BaseRecipeCategory<SimpleRecipeWrapper>

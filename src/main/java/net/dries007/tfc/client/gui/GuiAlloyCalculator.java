@@ -14,7 +14,7 @@ import net.dries007.tfc.util.Alloy;
 
 import java.util.Map;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiAlloyCalculator extends GuiContainerTE<TEAlloyCalculator> {

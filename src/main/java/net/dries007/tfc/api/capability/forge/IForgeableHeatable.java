@@ -17,7 +17,7 @@ import net.dries007.tfc.api.capability.heat.IItemHeat;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 /**
  * This is an advanced IForgeable capability that also needs heat If you implement this capability, you MUST implement

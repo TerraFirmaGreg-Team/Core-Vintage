@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
-import su.terrafirmagreg.core.util.TFGModUtils;
+import su.terrafirmagreg.old.core.util.TFGModUtils;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

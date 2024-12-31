@@ -20,7 +20,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.BarrelRecipeWrapper;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;

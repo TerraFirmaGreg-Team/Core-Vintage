@@ -1,6 +1,6 @@
 package tfcflorae.types;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
@@ -10,7 +10,7 @@ import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Plant;
 import tfcflorae.ConfigTFCF;
 
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.old.api.data.Reference.TFCF;
 
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = Reference.TFCF)

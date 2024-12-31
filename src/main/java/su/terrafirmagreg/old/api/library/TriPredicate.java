@@ -1,0 +1,24 @@
+package su.terrafirmagreg.old.api.library;
+
+import java.util.Objects;
+
+@SuppressWarnings("unused")
+@FunctionalInterface
+public interface TriPredicate<X, Y, Z> {
+
+  default TriPredicate<X, Y, Z> and(TriPredicate<? super X, ? super Y, ? super Z> other) {
+    Objects.requireNonNull(other);
+    return (x, y, z) -> this.test(x, y, z) && other.test(x, y, z);
+  }
+
+  boolean test(X x, Y y, Z z);
+
+  default TriPredicate<X, Y, Z> negate() {
+    return (x, y, z) -> !this.test(x, y, z);
+  }
+
+  default TriPredicate<X, Y, Z> or(TriPredicate<? super X, ? super Y, ? super Z> other) {
+    Objects.requireNonNull(other);
+    return (x, y, z) -> this.test(x, y, z) || other.test(x, y, z);
+  }
+}

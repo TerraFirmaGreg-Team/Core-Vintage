@@ -37,7 +37,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.Color;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 public final class PlayerDataOverlay {

@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.old.api.data.Reference.TFCF;
 
 @Mod.EventBusSubscriber(modid = TFCF)
 public final class InteractionManagerTFCF {

@@ -50,7 +50,7 @@ import java.util.Map;
 
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY;
-import static su.terrafirmagreg.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
 
 @SuppressWarnings("unused")
 @SideOnly(Side.CLIENT)

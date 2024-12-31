@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.objects.te.TECharcoalForge;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiCharcoalForge extends GuiContainerTE<TECharcoalForge> {

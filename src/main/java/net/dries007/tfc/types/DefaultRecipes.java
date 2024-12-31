@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
+import su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -164,7 +164,7 @@ import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
 import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 /**
  * In 1.14+, every line in here needs to be a json file. Yay, but also ugh.

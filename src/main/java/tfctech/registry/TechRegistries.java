@@ -12,7 +12,7 @@ import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.api.recipes.SmelteryRecipe;
 import tfctech.api.recipes.WireDrawingRecipe;
 
-import static su.terrafirmagreg.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
 
 @Mod.EventBusSubscriber(modid = TFCTECH)
 public final class TechRegistries {

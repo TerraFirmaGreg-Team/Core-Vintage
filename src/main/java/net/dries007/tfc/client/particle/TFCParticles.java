@@ -24,7 +24,7 @@ import net.dries007.tfc.network.PacketSpawnTFCParticle;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 /**
  * TFC Particles, wrapped up in a nice enum

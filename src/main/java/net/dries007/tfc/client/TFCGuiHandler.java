@@ -79,7 +79,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 public class TFCGuiHandler implements IGuiHandler {
 

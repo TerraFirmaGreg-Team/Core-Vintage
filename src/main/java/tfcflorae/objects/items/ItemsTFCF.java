@@ -70,7 +70,7 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.old.api.data.Reference.TFCF;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFCF)

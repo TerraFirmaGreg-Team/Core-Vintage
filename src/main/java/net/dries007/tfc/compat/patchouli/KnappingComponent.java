@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Objects;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 @SuppressWarnings("unused")
 public abstract class KnappingComponent extends CustomComponent {

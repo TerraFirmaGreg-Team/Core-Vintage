@@ -1,6 +1,6 @@
 package tfcflorae.compat.jei.wrappers;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

@@ -18,7 +18,7 @@ import net.dries007.tfc.util.skills.SkillType;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 @ParametersAreNonnullByDefault
 public final class CapabilityPlayerData {

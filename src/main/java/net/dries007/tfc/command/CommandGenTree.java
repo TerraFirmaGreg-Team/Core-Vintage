@@ -24,7 +24,7 @@ import net.dries007.tfc.api.types.Tree;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

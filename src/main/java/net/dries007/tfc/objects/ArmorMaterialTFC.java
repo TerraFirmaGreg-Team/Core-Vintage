@@ -13,8 +13,8 @@ import net.dries007.tfc.api.types.IArmorMaterialTFC;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFCF;
 
 /**
  * This is an extension enum for the vanilla's ArmorMaterials. We register a new material in vanilla and bind crushing, slashing and piercing resistances.

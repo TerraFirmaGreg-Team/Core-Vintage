@@ -19,7 +19,7 @@ import net.dries007.tfc.objects.entity.animal.AnimalFood;
 
 import java.lang.reflect.Type;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 public class AnimalFoodJson implements JsonDeserializer<AnimalFood> {
 

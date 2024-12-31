@@ -22,7 +22,7 @@ import net.dries007.tfc.util.config.QuiverSearch;
 import net.dries007.tfc.util.config.TemperatureMode;
 import net.dries007.tfc.util.config.TimeTooltipMode;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.old.api.data.Reference.TFC;
 
 /**
  * Top level items must be static, the subclasses' fields must not be static.

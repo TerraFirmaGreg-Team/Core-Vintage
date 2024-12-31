@@ -1,6 +1,6 @@
 package tfcflorae.types;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -67,7 +67,7 @@ import tfcflorae.objects.items.rock.ItemUnfiredMudBrick;
 import tfcflorae.util.agriculture.CropTFCF;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.old.api.data.Reference.TFCF;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFCF)

@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import tfctech.client.render.models.ModelWireDrawBench;
 import tfctech.objects.tileentities.TEWireDrawBench;
 
-import static su.terrafirmagreg.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
 
 public class TESRWireDrawBench extends TileEntitySpecialRenderer<TEWireDrawBench>
 {

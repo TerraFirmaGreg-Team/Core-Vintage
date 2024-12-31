@@ -14,7 +14,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import net.dries007.tfc.objects.items.ItemsTFC;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 import tfctech.client.TechGuiHandler;
 import tfctech.network.PacketFridgeUpdate;

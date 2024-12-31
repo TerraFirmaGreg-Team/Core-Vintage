@@ -6,7 +6,7 @@ import net.minecraftforge.common.config.ConfigManager;
 
 import net.dries007.tfc.ConfigTFC;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 import java.util.Arrays;
 import java.util.HashSet;

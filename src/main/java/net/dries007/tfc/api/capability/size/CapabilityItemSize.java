@@ -24,7 +24,7 @@ import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.api.capability.ItemStickCapability;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

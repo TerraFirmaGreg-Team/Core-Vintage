@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.old.api.data.Reference;
 
 public final class TechFluids {
 

@@ -11,7 +11,7 @@ import net.minecraft.util.math.Vec3d;
 import tfctech.client.render.models.ModelFridge;
 import tfctech.objects.tileentities.TEFridge;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public class TESRFridge extends TileEntitySpecialRenderer<TEFridge> {
 

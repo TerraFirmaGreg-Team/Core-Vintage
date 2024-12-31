@@ -14,11 +14,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.dries007.tfc.client.button.GuiButtonKnapping;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import tfctech.objects.container.ContainerGlassworking;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public class GuiGlassworking extends GuiContainerTFC {
 

@@ -198,7 +198,7 @@ import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import java.util.Iterator;
 import java.util.Random;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)

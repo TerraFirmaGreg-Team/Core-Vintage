@@ -43,7 +43,7 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.ICalendar;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 

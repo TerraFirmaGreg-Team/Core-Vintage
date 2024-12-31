@@ -45,7 +45,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public class TechGuiHandler implements IGuiHandler {
 

@@ -21,7 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public enum JsonConfigRegistry {
   INSTANCE;

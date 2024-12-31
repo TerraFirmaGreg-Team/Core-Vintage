@@ -13,7 +13,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.objects.fluids.TechFluids;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public class GlassworkingRecipeWrapper implements IRecipeWrapper {
 

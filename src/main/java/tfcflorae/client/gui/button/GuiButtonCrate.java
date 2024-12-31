@@ -10,7 +10,7 @@ import tfcflorae.objects.te.TECrate;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
-import static su.terrafirmagreg.old.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 public class GuiButtonCrate extends GuiButtonTFC implements IButtonTooltip {
 

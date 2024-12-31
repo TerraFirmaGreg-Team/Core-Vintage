@@ -1,6 +1,6 @@
 package tfcflorae.compat.crafttweaker;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.util.ResourceLocation;
 

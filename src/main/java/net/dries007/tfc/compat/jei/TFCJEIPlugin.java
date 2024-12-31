@@ -89,7 +89,7 @@ import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import java.util.ArrayList;
 import java.util.Collection;

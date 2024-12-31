@@ -1,6 +1,6 @@
 package tfcflorae.objects.blocks.blocktype;
 
-import su.terrafirmagreg.old.core.util.GemsFromRawRocks;
+import su.terrafirmagreg.core.util.GemsFromRawRocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;

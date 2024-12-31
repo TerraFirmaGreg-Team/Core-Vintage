@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 /**
  * Custom heat + size capability for stick items.

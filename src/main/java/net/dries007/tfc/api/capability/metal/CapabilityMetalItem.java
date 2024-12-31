@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.api.capability.metal;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -52,19 +52,19 @@ import static gregtech.api.unification.ore.OrePrefix.toolHeadChainsaw;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadDrill;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadScrewdriver;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadWrench;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.ingotDouble;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadAxe;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadChisel;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadFile;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadHammer;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadHoe;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadKnife;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadPickaxe;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadPropick;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadSaw;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadSense;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadShovel;
-import static su.terrafirmagreg.old.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadSword;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.ingotDouble;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadAxe;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadChisel;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadFile;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadHammer;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadHoe;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadKnife;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadPickaxe;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadPropick;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadSaw;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadSense;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadShovel;
+import static su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix.toolHeadSword;
 
 public final class CapabilityMetalItem {
 

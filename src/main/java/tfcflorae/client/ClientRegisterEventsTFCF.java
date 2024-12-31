@@ -1,6 +1,6 @@
 package tfcflorae.client;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -70,7 +70,7 @@ import tfcflorae.objects.te.TEFruitLoom;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static su.terrafirmagreg.old.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = Reference.TFCF)

@@ -36,7 +36,7 @@ import tfctech.objects.items.glassworking.ItemBlowpipe;
 import tfctech.objects.items.metal.ItemTechMetal;
 import tfctech.registry.TechRegistries;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 @JEIPlugin
 public class TechJEIPlugin implements IModPlugin

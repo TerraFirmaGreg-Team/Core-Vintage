@@ -16,7 +16,7 @@ import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.objects.te.TEFirePit;
 import org.lwjgl.opengl.GL11;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 public class GuiFirePit extends GuiContainerTE<TEFirePit> {
 

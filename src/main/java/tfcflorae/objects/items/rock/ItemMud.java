@@ -24,7 +24,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

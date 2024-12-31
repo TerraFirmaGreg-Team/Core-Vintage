@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 @SuppressWarnings("WeakerAccess")
 public class ItemGear extends ItemTechMetal {

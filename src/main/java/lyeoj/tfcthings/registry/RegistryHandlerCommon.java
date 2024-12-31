@@ -1,6 +1,6 @@
 package lyeoj.tfcthings.registry;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

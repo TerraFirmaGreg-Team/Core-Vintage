@@ -18,7 +18,7 @@ import tfcflorae.objects.te.TECrate;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 public class GuiCrate extends GuiContainerTE<TECrate> {
 

@@ -20,8 +20,8 @@ import tfcflorae.types.TreesTFCF;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFC;
-import static su.terrafirmagreg.old.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 @SideOnly(Side.CLIENT)
 public class TESRFruitLoomTFCF extends TESRBase<TEFruitLoom> {

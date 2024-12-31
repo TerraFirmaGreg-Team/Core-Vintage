@@ -16,7 +16,7 @@ import tfctech.objects.tileentities.TEElectricForge;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public class GuiElectricForge extends GuiContainerTE<TEElectricForge> {
 

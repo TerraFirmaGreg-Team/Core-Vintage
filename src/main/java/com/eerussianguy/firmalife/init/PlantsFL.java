@@ -6,7 +6,7 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenSequoia;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

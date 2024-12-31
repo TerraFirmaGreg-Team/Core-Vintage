@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.Alloy;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;

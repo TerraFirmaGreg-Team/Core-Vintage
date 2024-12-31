@@ -1,6 +1,6 @@
 package tfctech.client.gui;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,7 +15,7 @@ import tfctech.objects.tileentities.TESmelteryCauldron;
 
 import java.util.List;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public class GuiSmelteryCauldron extends GuiContainerTE<TESmelteryCauldron> {
 

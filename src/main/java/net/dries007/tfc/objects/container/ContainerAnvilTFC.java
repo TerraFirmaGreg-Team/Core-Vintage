@@ -29,7 +29,7 @@ import net.dries007.tfc.util.forge.ForgeStep;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_PLAN;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_STEP_MAX;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_STEP_MIN;

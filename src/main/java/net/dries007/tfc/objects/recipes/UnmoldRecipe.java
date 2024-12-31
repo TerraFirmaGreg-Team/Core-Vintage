@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.recipes;
 
-import su.terrafirmagreg.old.core.util.TFGModUtils;
+import su.terrafirmagreg.core.util.TFGModUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

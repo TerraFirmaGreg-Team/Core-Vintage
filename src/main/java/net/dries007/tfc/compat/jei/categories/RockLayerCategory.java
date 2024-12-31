@@ -17,7 +17,7 @@ import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.util.BackgroundDrawable;
 import net.dries007.tfc.compat.jei.wrappers.RockLayerWrapper;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;

@@ -19,7 +19,7 @@ import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.AlloyRecipeWrapper;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

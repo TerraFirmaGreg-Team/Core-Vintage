@@ -39,7 +39,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.forge.ForgeRule;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import tfctech.TechConfig;
 import tfctech.api.recipes.GlassworkingRecipe;
@@ -50,7 +50,7 @@ import tfctech.objects.items.TechItems;
 import tfctech.objects.items.glassworking.ItemBlowpipe;
 import tfctech.objects.items.metal.ItemTechMetal;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 @SuppressWarnings({"ConstantConditions", "unused"})
 @Mod.EventBusSubscriber(modid = TFCTECH)

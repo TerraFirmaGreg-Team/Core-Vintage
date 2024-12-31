@@ -67,7 +67,7 @@ import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
 import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.eerussianguy.firmalife.util.HelpersFL;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 

@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import tfcflorae.client.render.RenderBoatTFCF;
 import tfcflorae.objects.blocks.entity.EntityBoatTFCF;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.Reference.TFCF;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFCF)
 public class ClientEvents {

@@ -1,6 +1,6 @@
 package lyeoj.tfcthings.event;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;

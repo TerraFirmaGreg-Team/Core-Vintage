@@ -20,7 +20,7 @@ import net.dries007.tfc.util.Helpers;
 import tfctech.objects.blocks.devices.*;
 import tfctech.objects.tileentities.*;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvider
 {

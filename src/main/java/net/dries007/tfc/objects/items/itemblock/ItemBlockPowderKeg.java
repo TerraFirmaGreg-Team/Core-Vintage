@@ -17,7 +17,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.objects.blocks.BlockPowderKeg;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;

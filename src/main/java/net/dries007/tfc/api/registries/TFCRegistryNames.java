@@ -7,7 +7,7 @@ package net.dries007.tfc.api.registries;
 
 import net.minecraft.util.ResourceLocation;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 
 /**
  * The names are separate from the instances TFCRegistries so they can be used without loading the class prematurely.

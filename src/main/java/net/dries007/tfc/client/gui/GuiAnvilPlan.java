@@ -29,7 +29,7 @@ import net.dries007.tfc.util.NBTBuilder;
 import java.io.IOException;
 import java.util.List;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_1;
 
 @SideOnly(Side.CLIENT)

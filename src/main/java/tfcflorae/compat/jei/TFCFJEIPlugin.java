@@ -1,6 +1,6 @@
 package tfcflorae.compat.jei;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

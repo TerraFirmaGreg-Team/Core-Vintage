@@ -42,7 +42,7 @@ import net.dries007.tfc.util.Helpers;
 import org.labellum.mc.waterflasks.item.ModItems;
 import org.labellum.mc.waterflasks.proxy.CommonProxy;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 @Mod(
   modid = Waterflasks.MOD_ID,

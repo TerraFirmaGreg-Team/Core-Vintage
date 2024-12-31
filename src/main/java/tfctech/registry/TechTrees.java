@@ -8,11 +8,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Tree;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 import static net.dries007.tfc.types.DefaultTrees.GEN_TALL;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.old.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.Reference.TFCTECH;
 
 @Mod.EventBusSubscriber(modid = TFCTECH)
 public final class TechTrees {

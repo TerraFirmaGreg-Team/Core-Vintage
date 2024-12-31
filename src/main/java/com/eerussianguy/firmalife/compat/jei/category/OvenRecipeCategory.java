@@ -13,7 +13,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 
-import su.terrafirmagreg.old.api.data.Reference;
+import su.terrafirmagreg.api.data.Reference;
 
 //this is just TFC's HeatCategory, copied over in case i need to change it
 public class OvenRecipeCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {

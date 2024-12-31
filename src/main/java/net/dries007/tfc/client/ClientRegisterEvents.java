@@ -101,7 +101,7 @@ import net.dries007.tfc.objects.te.TEToolRack;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-import static su.terrafirmagreg.old.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.Reference.TFC;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 

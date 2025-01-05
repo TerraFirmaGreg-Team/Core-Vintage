@@ -7,7 +7,6 @@ package net.dries007.tfc.objects.blocks.wood;
 
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -65,18 +64,6 @@ public class BlockLogPile extends Block implements ILightableBlock {
     this.setDefaultState(this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(LIT, false));
   }
 
-  // A simplified check for display (Patchouli) purposes
-  public static boolean isValidCoverBlock(IBlockState state) {
-    if (state.getBlock() == BlocksTFC.LOG_PILE || state.getBlock() == BlocksTFC.CHARCOAL_PILE) {
-      return true;
-    } else if (ConfigTFC.Devices.CHARCOAL_PIT.canAcceptGlass) {
-      return state.getMaterial() == Material.GLASS
-             && !(state.getBlock() instanceof BlockPane); // Not enough context to query IBlockProperties#isSideSolid, IBlockProperties#getBlockFaceShape
-    }
-    return !state.getMaterial().getCanBurn()
-           && state.isNormalCube(); // Not enough context to query IBlockProperties#isSideSolid, IBlockProperties#getBlockFaceShape
-  }
-
   private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos, EnumFacing side) {
     if (offsetState.getBlock() instanceof BlockLogPile || offsetState.getBlock() == BlocksTFC.CHARCOAL_PILE) {
       return true;
@@ -120,7 +107,7 @@ public class BlockLogPile extends Block implements ILightableBlock {
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.getValue(LIT)) {
       worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + rand.nextFloat(), pos.getY() + 1, pos.getZ() + rand.nextFloat(),
-                            0f, 0.1f + 0.1f * rand.nextFloat(), 0f);
+        0f, 0.1f + 0.1f * rand.nextFloat(), 0f);
       if (worldIn.getTotalWorldTime() % 80 == 0) {
         worldIn.playSound(
           (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 0.6F, false);

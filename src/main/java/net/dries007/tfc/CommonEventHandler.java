@@ -98,7 +98,6 @@ import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -147,7 +146,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Rock.Type;
 import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.compat.patchouli.TFCPatchouliPlugin;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.network.PacketSimpleMessage;
@@ -229,13 +227,6 @@ public final class CommonEventHandler {
     }
   }
 
-  @SubscribeEvent
-  public void addAI(LivingEvent.LivingUpdateEvent event) {
-    if (event.getEntityLiving() instanceof EntityAnimalTFC animal && event.getEntityLiving().ticksExisted < 5 && !event.getEntityLiving().isChild()) {
-      animal.tasks.addTask(2, new EBEntityAI(animal));
-    }
-  }
-
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
     if (event.getWorld().isRemote) {
@@ -268,8 +259,7 @@ public final class CommonEventHandler {
   public static void onEntityUseItem(LivingEntityUseItemEvent.Finish event) {
     ItemStack usedItem = event.getItem();
     if (usedItem.getItem() == Items.MILK_BUCKET || PotionUtils.getPotionFromItem(usedItem) == PotionTypes.WATER) {
-      if (event.getEntityLiving() instanceof EntityPlayerMP) {
-        EntityPlayerMP player = (EntityPlayerMP) event.getEntityLiving();
+      if (event.getEntityLiving() instanceof EntityPlayerMP player) {
         if (player.getFoodStats() instanceof FoodStatsTFC) {
           ((FoodStatsTFC) player.getFoodStats()).addThirst(40); //Same as jug
         }
@@ -311,7 +301,7 @@ public final class CommonEventHandler {
       // Done via event so it applies to all leaves.
       double chance = ConfigTFC.General.TREE.leafStickDropChance;
       if (!heldItem.isEmpty() && Helpers.containsAnyOfCaseInsensitive(heldItem.getItem()
-                                                                              .getToolClasses(heldItem), ConfigTFC.General.TREE.leafStickDropChanceBonusClasses)) {
+        .getToolClasses(heldItem), ConfigTFC.General.TREE.leafStickDropChanceBonusClasses)) {
         chance = ConfigTFC.General.TREE.leafStickDropChanceBonus;
       }
       if (Constants.RNG.nextFloat() < chance) {
@@ -461,7 +451,6 @@ public final class CommonEventHandler {
     }
   }
 
-
   @SubscribeEvent
   public static void onBreakProgressEvent(BreakSpeed event) {
     EntityPlayer player = event.getEntityPlayer();
@@ -582,7 +571,7 @@ public final class CommonEventHandler {
       Entity entity = event.getEntity();
       if (entity instanceof EntityPlayerMP && entity.isSneaking()) {
         TerraFirmaCraft.getNetwork().sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANIMAL, plant.getGrowingStatus(state, world, pos)
-                                                                                                              .toString()), (EntityPlayerMP) entity);
+          .toString()), (EntityPlayerMP) entity);
       }
 
     }
@@ -737,11 +726,6 @@ public final class CommonEventHandler {
       // layer Data
       IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (playerData != null) {
-        // Give book if possible
-        if (Loader.isModLoaded("patchouli") && !playerData.hasBook() && ConfigTFC.General.MISC.giveBook) {
-          TFCPatchouliPlugin.giveBookToPlayer(player);
-          playerData.setHasBook(true);
-        }
 
         // Sync
         TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(playerData.serializeNBT()), player);
@@ -783,12 +767,6 @@ public final class CommonEventHandler {
       // Skills / Player data
       IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (cap != null) {
-        // Give book if possible
-        if (Loader.isModLoaded("patchouli") && !(event.isEndConquered() || player.world.getGameRules().getBoolean("keepInventory"))
-            && ConfigTFC.General.MISC.giveBook) {
-          TFCPatchouliPlugin.giveBookToPlayer(player);
-          cap.setHasBook(true);
-        }
 
         TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
       }
@@ -1053,7 +1031,7 @@ public final class CommonEventHandler {
           ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ, 42, 0.0D, 0.15D, 0.0D, 0.08D);
           if (rand <= 0.005F) {
             entityItem.world.setBlockState(pos, FluidsTFC.FRESH_WATER.get().getBlock()
-                                                                     .getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
+              .getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
           }
         }
         event.setExtraLife(itemTemp == 0 ? lifespan : ConfigTFC.Devices.TEMPERATURE.ticksBeforeAttemptToCool); // Set lifespan accordingly
@@ -1304,6 +1282,13 @@ public final class CommonEventHandler {
   }
 
   @SubscribeEvent
+  public void addAI(LivingEvent.LivingUpdateEvent event) {
+    if (event.getEntityLiving() instanceof EntityAnimalTFC animal && event.getEntityLiving().ticksExisted < 5 && !event.getEntityLiving().isChild()) {
+      animal.tasks.addTask(2, new EBEntityAI(animal));
+    }
+  }
+
+  @SubscribeEvent
   public void makeBigSplash(LivingFallEvent event) {
     EntityLivingBase entity = event.getEntityLiving();
     BlockPos pos = entity.getPosition();
@@ -1318,7 +1303,7 @@ public final class CommonEventHandler {
         } else {
           float f = (float) MathHelper.ceil(distance - 3.0F);
 
-          double d0 = Math.min((double) (0.2F + f / 15.0F), 2.5D);
+          double d0 = Math.min(0.2F + f / 15.0F, 2.5D);
           int i = (int) (200.0D * d0);
 
           for (int a = 0; a < 20; a++) {

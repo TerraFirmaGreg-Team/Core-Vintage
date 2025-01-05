@@ -10,7 +10,6 @@ import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.dedicated.PropertyManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -46,7 +45,6 @@ import net.dries007.tfc.command.CommandPlayerTFC;
 import net.dries007.tfc.command.CommandStripWorld;
 import net.dries007.tfc.command.CommandTimeTFC;
 import net.dries007.tfc.command.CommandWorkChunk;
-import net.dries007.tfc.compat.patchouli.TFCPatchouliPlugin;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketCapabilityContainerUpdate;
 import net.dries007.tfc.network.PacketChunkData;
@@ -92,6 +90,7 @@ public final class TerraFirmaCraft {
   private final Logger log = LogManager.getLogger(TFC);
   private WorldTypeTFC worldTypeTFC;
   private SimpleNetworkWrapper network;
+
   public TerraFirmaCraft() {
     INSTANCE = this;
 
@@ -198,9 +197,6 @@ public final class TerraFirmaCraft {
     CapabilityMetalItem.init();
 
     FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
-    if (Loader.isModLoaded("patchouli")) {
-      TFCPatchouliPlugin.init();
-    }
   }
 
   @Mod.EventHandler

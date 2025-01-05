@@ -52,7 +52,6 @@ dependencies {
   compileOnly("curse.maven:crafttweaker-239197:5013567")
   compileOnly("curse.maven:mtlib-253211:3308160")
   compileOnly("curse.maven:tfc-pams-harvestcraft-compatibility-mod-452032:3257786")
-  compileOnly("curse.maven:patchouli-306770:3162874")
   compileOnly("curse.maven:hwyla-253449:2568751")
   compileOnly("curse.maven:dynamictreestfc-362368:4259841")
   compileOnly("maven.modrinth:dtree:0.13.2")

@@ -62,6 +62,14 @@ public final class ModUtils {
     return String.format("%s:%s", MOD_ID, name);
   }
 
+  public static String id(String key, String name) {
+    return String.format("%s:%s", key, name);
+  }
+
+  public static String id(String key, String name, String subname) {
+    return String.format("%s:%s.%s", key, name, subname);
+  }
+
   public static String name(String name) {
     return String.format("%s [ %s ]", MOD_NAME, name);
   }
@@ -84,14 +92,6 @@ public final class ModUtils {
 
   public static String localize(String key, String name, String subname) {
     return String.format("%s.%s.%s", key, name, subname).toLowerCase().replace("/", ".");
-  }
-
-  public static String identifier(String name) {
-    return String.format("%s.%s", MOD_ID, name);
-  }
-
-  public static String identifier(String key, String name) {
-    return String.format("%s.%s", key, name);
   }
 
   public static String regKey(String key, String name) {

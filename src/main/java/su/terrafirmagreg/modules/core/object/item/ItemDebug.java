@@ -4,13 +4,16 @@ package su.terrafirmagreg.modules.core.object.item;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.ModuleCore;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -18,8 +21,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import com.google.common.collect.ImmutableList;
 
@@ -81,6 +88,10 @@ public class ItemDebug extends BaseItem {
 //        player.sendStatusMessage(new TextComponentString(RED + Mode.TEMPERATURE_CAPABILITY.getText()), true);
 //        break;
 //      }
+      case BLOCK: {
+        player.sendStatusMessage(new TextComponentString(RED + Mode.BLOCK.getText()), true);
+        break;
+      }
     }
   }
 
@@ -133,6 +144,37 @@ public class ItemDebug extends BaseItem {
 //          Mode.TEMPERATURE_CAPABILITY.getText() + "\n" + CapabilityTemperature.get(player).toString()));
 //        break;
 //      }
+      case BLOCK: {
+        try {
+          Block block = world.getBlockState(pos).getBlock();
+          try {
+            block.getClass().getMethod("debug").invoke(block);
+          } catch (Exception t) { /* Nothing Burger */ }
+
+          // Tile Entity
+          TileEntity tile = world.getTileEntity(pos);
+          if (tile != null) {
+            try {
+              tile.getClass().getMethod("debug").invoke(tile);
+            } catch (Exception t) {
+              ModuleCore.LOGGER.info("No debug method found to invoke on {}", tile);
+            }
+
+            ModuleCore.LOGGER.info("Tile Data: {}", tile.serializeNBT());
+
+            IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (inventory != null) {
+              ModuleCore.LOGGER.info("Found item handler: {}", inventory);
+            }
+
+            IFluidHandler fluids = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+            if (fluids != null) {
+              ModuleCore.LOGGER.info("Found fluid handler: {}", fluids);
+            }
+          }
+        } catch (Exception t) { /* Nothing Burger */ }
+        return EnumActionResult.SUCCESS;
+      }
     }
     return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
   }
@@ -186,6 +228,10 @@ public class ItemDebug extends BaseItem {
 //        tooltip.add(Mode.TEMPERATURE_CAPABILITY.getText());
 //        break;
 //      }
+      case BLOCK: {
+        tooltip.add(Mode.BLOCK.getText());
+        break;
+      }
     }
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
@@ -200,13 +246,19 @@ public class ItemDebug extends BaseItem {
     return 60;
   }
 
+  @Override
+  public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
+    return false;
+  }
+
   @Getter
   enum Mode {
     BLOCKSTATE("Blockstate "),
     NBT("NBT"),
     BLOCKSTATE_LIST("Blockstate List "),
     TRANSFORM("Transform "),
-    TEMPERATURE_CAPABILITY("Temperature Capability ");
+    TEMPERATURE_CAPABILITY("Temperature Capability "),
+    BLOCK("Block ");
 
     private final String text;
 

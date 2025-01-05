@@ -1,8 +1,8 @@
 package su.terrafirmagreg.framework.network.spi;
 
-import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.framework.network.NetworkManager;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -58,7 +58,7 @@ public class NetworkThreadedWrapper {
     try {
       return handler.getDeclaredConstructor().newInstance();
     } catch (Throwable e) {
-      TerraFirmaGreg.LOGGER.error("Failed to instanciate " + handler);
+      NetworkManager.LOGGER.error("Failed to instanciate " + handler);
       throw new RuntimeException(e);
     }
   }

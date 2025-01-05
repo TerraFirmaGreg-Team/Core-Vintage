@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.base.object.group.spi;
 
-import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.IModule;
+import su.terrafirmagreg.framework.registry.RegistryManager;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -89,24 +89,24 @@ public class BaseItemGroup extends CreativeTabs {
 
   @Override
   public String getTranslationKey() {
-    return ModUtils.identifier("item_group", this.getTabLabel());
+    return ModUtils.localize("item_group", this.getTabLabel(), "name");
   }
 
   @Override
   public ItemStack createIcon() {
     if (this.icon == null) {
-      TerraFirmaGreg.LOGGER.error("Icon supplier was null for CreativeTab {}", getTabLabel());
+      RegistryManager.LOGGER.error("Icon supplier was null for CreativeTab {}", getTabLabel());
       return new ItemStack(Items.STICK);
     }
 
     ItemStack stack = this.icon.get();
     if (stack == null) {
-      TerraFirmaGreg.LOGGER.error("Icon supplier return null for CreativeTab {}", getTabLabel());
+      RegistryManager.LOGGER.error("Icon supplier return null for CreativeTab {}", getTabLabel());
       return new ItemStack(Items.STICK);
     }
 
     if (stack.isEmpty()) {
-      TerraFirmaGreg.LOGGER.error("Icon built from iconSupplied is EMPTY for CreativeTab {}", getTabLabel());
+      RegistryManager.LOGGER.error("Icon built from iconSupplied is EMPTY for CreativeTab {}", getTabLabel());
       return new ItemStack(Items.STICK);
     }
     return stack;

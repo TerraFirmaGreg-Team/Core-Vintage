@@ -129,7 +129,6 @@ import net.dries007.tfc.util.agriculture.FruitTree;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.api.types.Rock.Type.ANVIL;
 import static net.dries007.tfc.api.types.Rock.Type.BRICKS;
 import static net.dries007.tfc.api.types.Rock.Type.CLAY;
@@ -152,6 +151,7 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static net.dries007.tfc.util.Helpers.getNull;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)
@@ -167,8 +167,7 @@ public final class BlocksTFC {
   public static final BlockDecorativeStone ALABASTER_POLISHED_PLAIN = getNull();
   @GameRegistry.ObjectHolder("alabaster/raw/plain")
   public static final BlockDecorativeStone ALABASTER_RAW_PLAIN = getNull();
-
-  public static final BlockDebug DEBUG = getNull();
+  
   public static final BlockPeat PEAT = getNull();
   public static final BlockPeat PEAT_GRASS = getNull();
   public static final BlockFirePit FIREPIT = getNull();
@@ -279,8 +278,6 @@ public final class BlocksTFC {
     Builder<ItemBlock> normalItemBlocks = ImmutableList.builder();
     Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
 
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "debug", new BlockDebug(), CT_MISC)));
-
     normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), CT_ROCK)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), CT_ROCK)));
 
@@ -362,13 +359,13 @@ public final class BlocksTFC {
       }
       allBlockRockVariants = b.build();
       allBlockRockVariants.forEach(x ->
-                                   {
-                                     if (x.getType() == SAND) {
-                                       normalItemBlocks.add(new ItemBlockHeat(x, 1, 600));
-                                     } else if (x.getType() != SPIKE && x.getType() != ANVIL) {
-                                       normalItemBlocks.add(new ItemBlockTFC(x));
-                                     }
-                                   });
+      {
+        if (x.getType() == SAND) {
+          normalItemBlocks.add(new ItemBlockHeat(x, 1, 600));
+        } else if (x.getType() != SPIKE && x.getType() != ANVIL) {
+          normalItemBlocks.add(new ItemBlockTFC(x));
+        }
+      });
     }
 
     {
@@ -408,7 +405,7 @@ public final class BlocksTFC {
       for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           b.add(register(r, ("ore/" + ore.getRegistryName().getPath() + "/" + rock.getRegistryName()
-                                                                                  .getPath()).toLowerCase(), new BlockOreTFC(ore, rock), CT_ROCK));
+            .getPath()).toLowerCase(), new BlockOreTFC(ore, rock), CT_ROCK));
         }
       }
       allOreBlocks = b.build();
@@ -450,7 +447,7 @@ public final class BlocksTFC {
       // All pressure plates + item blocks
       for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
         inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/pressure_plate/" + wood.getRegistryName().getPath()
-                                                                                          .toLowerCase(), new BlockWoodPressurePlateTFC(wood), CT_WOOD)));
+          .toLowerCase(), new BlockWoodPressurePlateTFC(wood), CT_WOOD)));
       }
 
       // Other blocks that don't have specific order requirements
@@ -510,14 +507,14 @@ public final class BlocksTFC {
       for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS}) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           b.add(register(r, ("wall/" + type.name() + "/" + rock.getRegistryName()
-                                                               .getPath()).toLowerCase(), new BlockWallTFC(BlockRockVariant.get(rock, type)), CT_ROCK));
+            .getPath()).toLowerCase(), new BlockWallTFC(BlockRockVariant.get(rock, type)), CT_ROCK));
         }
       }
       // Stairs
       for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS}) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           stairs.add(register(r, "stairs/" + (type.name() + "/" + rock.getRegistryName()
-                                                                      .getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_ROCK));
+            .getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_ROCK));
         }
       }
       for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
@@ -538,7 +535,7 @@ public final class BlocksTFC {
       for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS}) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           slab.add(register(r,
-                            "slab/" + (type.name() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_ROCK));
+            "slab/" + (type.name() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_ROCK));
         }
       }
       for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
@@ -548,9 +545,9 @@ public final class BlocksTFC {
       for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
         // Redstone things
         inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/button/" + rock.getRegistryName().getPath()
-                                                                                   .toLowerCase(), new BlockButtonStoneTFC(rock), CT_ROCK)));
+          .toLowerCase(), new BlockButtonStoneTFC(rock), CT_ROCK)));
         inventoryItemBlocks.add(new ItemBlockTFC(register(r, "stone/pressure_plate/" + rock.getRegistryName().getPath()
-                                                                                           .toLowerCase(), new BlockPressurePlateTFC(rock), CT_ROCK)));
+          .toLowerCase(), new BlockPressurePlateTFC(rock), CT_ROCK)));
       }
 
       allWallBlocks = b.build();

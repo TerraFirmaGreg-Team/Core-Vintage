@@ -1,6 +1,8 @@
 package su.terrafirmagreg.datafix.mapping;
 
 import su.terrafirmagreg.api.data.enums.Mods.Names;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -23,11 +25,16 @@ import java.util.Set;
 public abstract class AbstractRemapping {
 
   protected static final Map<String, Block> BLOCK_MAP = new Object2ObjectOpenHashMap<>() {{
+    put("debug", BlocksCore.DEBUG.get());
+
     put("alloy_calculator", BlocksTFC.ALLOY_CALCULATOR);
     put("puddle", BlocksTFC.PUDDLE);
+
   }};
 
   protected static final Map<String, Item> ITEM_MAP = new Object2ObjectOpenHashMap<>() {{
+    put("wand", ItemsCore.WAND.get());
+
     put("gem/amber", ItemGem.get(Gem.AMBER));
     put("powder/pearl", ItemPowder.get(Powder.PEARL));
     put("powder/black_pearl", ItemPowder.get(Powder.BLACK_PEARL));

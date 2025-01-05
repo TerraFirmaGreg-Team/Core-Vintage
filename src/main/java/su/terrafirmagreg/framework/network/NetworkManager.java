@@ -27,7 +27,7 @@ import java.util.Map;
 @Getter
 public class NetworkManager implements INetworkManager {
 
-  private static final LoggingHelper LOGGER = LoggingHelper.of(NetworkManager.class.getName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(NetworkManager.class.getName());
 
   private static final Map<String, NetworkThreadedWrapper> NETWORK_WRAPPER_MAP = new Object2ObjectOpenHashMap<>();
 

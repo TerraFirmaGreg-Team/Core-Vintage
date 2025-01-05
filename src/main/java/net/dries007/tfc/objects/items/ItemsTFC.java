@@ -66,7 +66,6 @@ import net.dries007.tfc.util.agriculture.Food;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
@@ -74,6 +73,7 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static net.dries007.tfc.util.Helpers.getNull;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
 @GameRegistry.ObjectHolder(TFC)
@@ -204,7 +204,6 @@ public final class ItemsTFC {
     IForgeRegistry<Item> r = event.getRegistry();
     Builder<Item> simpleItems = ImmutableList.builder();
 
-    simpleItems.add(register(r, "wand", new ItemDebug(), CT_MISC));
     simpleItems.add(register(r, "mortar", new ItemMisc(Size.TINY, Weight.VERY_LIGHT, "mortar"), CT_MISC));
     simpleItems.add(register(r, "halter", new ItemMisc(Size.SMALL, Weight.LIGHT, "halter"), CT_MISC));
     register(r, "wooden_bucket", new ItemWoodenBucket(), CT_WOOD); //not a simple item, use a custom model
@@ -244,7 +243,7 @@ public final class ItemsTFC {
         if (type != Metal.ItemType.BUCKET && type.hasType(metal)) // buckets registered separately
         {
           simpleItems.add(register(r, "metal/" + type.name().toLowerCase() + "/" + metal.getRegistryName()
-                                                                                        .getPath(), Metal.ItemType.create(metal, type), CT_METAL));
+            .getPath(), Metal.ItemType.create(metal, type), CT_METAL));
         }
       }
     }
@@ -276,7 +275,7 @@ public final class ItemsTFC {
       for (Rock.ToolType type : Rock.ToolType.values()) {
         simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "/" + cat.getRegistryName().getPath(), type.create(cat), CT_ROCK));
         simpleItems.add(register(r, "stone/" + type.name().toLowerCase() + "_head/" + cat.getRegistryName()
-                                                                                         .getPath(), new ItemRockToolHead(cat, type), CT_ROCK));
+          .getPath(), new ItemRockToolHead(cat, type), CT_ROCK));
       }
     }
 

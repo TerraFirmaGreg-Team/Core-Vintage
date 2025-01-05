@@ -79,3 +79,14 @@ tfg.machine.greenhouse.tooltip.3=This is weather-resistant!
 
 tfg.machine.greenhouse.name=Greenhouse
 recipemap.greenhouse.name=Greenhouse
+
+
+## Item Group
+item_group.tfg.core.name=Core (TFG)
+
+## Block
+block.tfg.core.debug.name=Debug Block
+
+
+## Item
+item.tfg.core.wand.name=Debug Wand

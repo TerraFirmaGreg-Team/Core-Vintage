@@ -3,7 +3,6 @@ package su.terrafirmagreg.framework.registry.api;
 import su.terrafirmagreg.api.base.object.biome.api.IBiomeSettings;
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.base.object.enchantment.api.IEnchantmentSettings;
-import su.terrafirmagreg.api.base.object.entity.api.IEntitySettings;
 import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 import su.terrafirmagreg.api.base.object.potion.api.IPotionSettings;
@@ -12,13 +11,13 @@ import su.terrafirmagreg.api.base.object.sound.api.ISoundSettings;
 import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.api.library.collection.RegistrySupplierMap;
 import su.terrafirmagreg.api.library.types.type.Type;
-import su.terrafirmagreg.api.library.types.variant.Variant;
-import su.terrafirmagreg.api.library.types.variant.block.VariantBlock;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.registry.spi.RegistryWrapper;
+import su.terrafirmagreg.framework.registry.spi.builder.LootBuilder;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -27,10 +26,20 @@ import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.RandomValueRange;
+import net.minecraft.world.storage.loot.conditions.LootCondition;
+import net.minecraft.world.storage.loot.functions.LootFunction;
+import net.minecraft.world.storage.loot.functions.LootFunctionManager;
+import net.minecraft.world.storage.loot.functions.SetCount;
+import net.minecraft.world.storage.loot.functions.SetMetadata;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -65,7 +74,7 @@ public interface IRegistryManager extends IRegistryEventHandler {
 
   // region Block
 
-  default <T extends Block & IBlockSettings> Supplier<Block> block(T block) {
+  default <B extends Block & IBlockSettings> Supplier<B> block(B block) {
     var settings = block.getSettings();
 
     if (settings.getItemBlock() != null) {
@@ -77,42 +86,94 @@ public interface IRegistryManager extends IRegistryEventHandler {
     return this.block(settings.getRegistryKey(), block);
   }
 
-  default <T extends Type<T>, B extends Block & IBlockSettings> Map<T, Supplier<Block>> block(Set<T> types, Function<T, B> factory) {
+  default <T extends Type<T>, B extends Block> Map<T, B> block(Map<T, B> map) {
+    this.block(map.values());
+
+    return map;
+  }
+
+  default <T extends Block> Collection<T> block(Collection<T> collection) {
+    collection.forEach(block -> {
+      if (block instanceof IBlockSettings provider) {
+        var settings = provider.getSettings();
+        if (settings.getItemBlock() != null) {
+          settings.getGroups().add(getGroup());
+          settings.getGroups().forEach(block::setCreativeTab);
+          this.item(settings.getRegistryKey(), settings.getItemBlock().apply(block));
+        }
+        this.block(settings.getRegistryKey(), block);
+      }
+    });
+    return collection;
+  }
+
+  default <T extends Type<T>, B extends Block & IBlockSettings> Map<T, Supplier<B>> block(Set<T> types, Function<T, B> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.block(factory.apply(type))));
   }
 
-  default <T extends Type<T>, V extends Variant<V, T>, B extends Block & IBlockSettings> Map<T, Supplier<Block>> block(Set<T> types, VariantBlock<V, T> variant, Function<T, B> factory) {
-
-//    return variant.getMap().putAll(types.stream().collect(Collectors.toMap(Function.identity(), type -> this.block(factory.apply(type)))));
-    return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.block(factory.apply(type))));
+  default <B extends Block> Supplier<B> block(String identifier, B block) {
+    return this.block(identifier, (Supplier<B>) () -> block);
   }
 
-  default Supplier<Block> block(String identifier, Block block) {
-    return this.block(identifier, () -> block);
+  default <B extends Block> Supplier<B> block(String identifier, Item itemBlock, B block) {
+    return this.block(identifier, () -> itemBlock, () -> block);
   }
 
-  default Supplier<Block> block(String identifier, Supplier<Block> block) {
-    return this.addEntry(getWrapper().getBlocks(), identifier, block);
+  default <B extends Block> Supplier<B> block(String identifier, Supplier<Item> itemBlock, Supplier<B> block) {
+    if (itemBlock != null) {
+      this.item(identifier, itemBlock);
+    }
+    return this.block(identifier, block);
+  }
+
+  @SuppressWarnings("unchecked")
+  default <B extends Block> Supplier<B> block(String identifier, Supplier<B> block) {
+    this.addEntry(getWrapper().getBlocks(), identifier, (Supplier<Block>) block);
+    return block;
   }
 
   // endregion
 
   // region Item
 
-  default <T extends Item & IItemSettings> Supplier<Item> item(T item) {
+  default <T extends Item & IItemSettings> Supplier<T> item(T item) {
     var settings = item.getSettings();
     settings.getGroups().add(getGroup());
     settings.getGroups().forEach(item::setCreativeTab);
     return this.item(settings.getRegistryKey(), item);
   }
 
-  default Supplier<Item> item(String identifier, Item item) {
-    return this.item(identifier, () -> item);
+  default <T extends Type<T>, I extends Item> Map<T, I> item(Map<T, I> map) {
+    this.item(map.values());
+
+    return map;
   }
 
-  default Supplier<Item> item(String identifier, Supplier<Item> item) {
-    return this.addEntry(getWrapper().getItems(), identifier, item);
+  default <T extends Item> void item(Collection<T> collection) {
+    collection.forEach(item -> {
+      if (item instanceof IItemSettings provider) {
+        var settings = provider.getSettings();
+        settings.getGroups().add(getGroup());
+        settings.getGroups().forEach(item::setCreativeTab);
+        this.item(settings.getRegistryKey(), item);
+      }
+    });
+  }
+
+  default <T extends Type<T>, I extends Item & IItemSettings> Map<T, Supplier<I>> item(Set<T> types, Function<T, I> factory) {
+
+    return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.item(factory.apply(type))));
+  }
+
+  default <T extends Item> Supplier<T> item(String identifier, T item) {
+    return this.item(identifier, (Supplier<T>) () -> item);
+  }
+
+  @SuppressWarnings("unchecked")
+  default <T extends Item> Supplier<T> item(String identifier, Supplier<T> item) {
+    this.addEntry(getWrapper().getItems(), identifier, (Supplier<Item>) item);
+    return item;
   }
 
   // endregion
@@ -153,12 +214,22 @@ public interface IRegistryManager extends IRegistryEventHandler {
 
   // region EntityEntry
 
-  default <T extends Entity & IEntitySettings> Supplier<EntityEntry> entity(String identifier, EntityEntryBuilder<T> builder) {
+  default <T extends Entity> Supplier<EntityEntry> entity(String identifier, EntityEntryBuilder<T> builder) {
 
     builder.id(getIdentifier(identifier), this.getIdSupplier().getAndIncrement());
     builder.name(ModUtils.localize(getIdentifier(identifier)));
 
     return this.entity(identifier, builder.build());
+  }
+
+  default <T extends Entity> Supplier<EntityEntry> entity(String identifier, Class<T> entClass, int primary, int seconday) {
+
+    final EntityEntryBuilder<T> builder = EntityEntryBuilder.create();
+    builder.entity(entClass);
+    builder.tracker(64, 1, true);
+    builder.egg(primary, seconday);
+
+    return this.entity(identifier, builder);
   }
 
   default Supplier<EntityEntry> entity(String identifier, EntityEntry entity) {
@@ -219,6 +290,66 @@ public interface IRegistryManager extends IRegistryEventHandler {
 
   default Supplier<SoundEvent> sound(String identifier, Supplier<SoundEvent> sound) {
     return this.addEntry(getWrapper().getSounds(), identifier, sound);
+  }
+
+  // endregion
+
+  // region Loot Table
+
+  default ResourceLocation loot(String name) {
+
+    return LootTableList.register(getIdentifier(name));
+  }
+
+  default <T extends LootFunction> void loot(LootFunction.Serializer<? extends T> serializer) {
+
+    LootFunctionManager.registerFunction(serializer);
+  }
+
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int amount) {
+
+    return this.loot(location, name, pool, weight, item, meta, amount, amount);
+  }
+
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int min, int max) {
+
+    final LootBuilder loot = this.loot(location, name, pool, weight, item, meta);
+    loot.addFunction(new SetCount(new LootCondition[0], new RandomValueRange(min, max)));
+    return loot;
+  }
+
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta) {
+
+    final LootBuilder loot = this.loot(location, name, pool, weight, item);
+    loot.addFunction(new SetMetadata(new LootCondition[0], new RandomValueRange(meta, meta)));
+    return loot;
+  }
+
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item) {
+
+    return this.loot(location, new LootBuilder(getIdentifier(name).toString(), pool, weight, item));
+  }
+
+  default LootBuilder loot(ResourceLocation location, LootBuilder builder) {
+
+//    this.getRegistry().getLootTable().put(location, builder);
+    return builder;
+  }
+
+  default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, int quality, Item item, List<LootCondition> conditions, List<LootFunction> functions) {
+
+    return this.loot(location, new LootBuilder(getIdentifier(name).toString(), pool, weight, quality, item, conditions, functions));
+  }
+
+  // endregion
+
+  // region Key Binding
+
+  default KeyBinding keyBinding(String description, int keyCode) {
+
+    final KeyBinding key = new KeyBinding(ModUtils.localize("key", description), keyCode, ModUtils.localize(description, "categories"));
+    ClientRegistry.registerKeyBinding(key);
+    return key;
   }
 
   // endregion

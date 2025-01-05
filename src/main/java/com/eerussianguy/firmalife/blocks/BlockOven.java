@@ -9,7 +9,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -36,7 +35,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.util.Helpers;
@@ -164,7 +162,6 @@ public class BlockOven extends Block implements ILightableBlock, IItemSize {
         TEOven te = Helpers.getTE(world, pos, TEOven.class);
         if (te == null) {return false;}
         if (isValidHorizontal(world, pos, false) && hasChimney(world, pos, false) && ItemFireStarter.onIgnition(held)) {
-          TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
           world.setBlockState(pos, state.withProperty(LIT, true));
           te.light();
           return true;
@@ -260,13 +257,13 @@ public class BlockOven extends Block implements ILightableBlock, IItemSize {
             particle = TFCParticles.FIRE_PIT_SMOKE3;
         }
         particle.spawn(worldIn, pos.getX() + (rand.nextFloat() / 2) + 0.25, pos.getY() + 3, pos.getZ() + (rand.nextFloat() / 2) + 0.25,
-                       0f, 0.2F + rand.nextFloat() / 2, 0f, 110);
+          0f, 0.2F + rand.nextFloat() / 2, 0f, 110);
       }
       // inside the oven
       worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + rand.nextFloat(), pos.getY() + 0.11, pos.getZ() + rand.nextFloat() / 2,
-                            0.02f, 0.05f * rand.nextFloat(), 0.02f);
+        0.02f, 0.05f * rand.nextFloat(), 0.02f);
       worldIn.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + rand.nextFloat(), pos.getY() + 0.11, pos.getZ() + rand.nextFloat() / 2,
-                            0.02f, 0.05f * rand.nextFloat(), 0.02f);
+        0.02f, 0.05f * rand.nextFloat(), 0.02f);
       if (worldIn.getTotalWorldTime() % 80 == 0) {
         worldIn.playSound(
           (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 0.6F, false);

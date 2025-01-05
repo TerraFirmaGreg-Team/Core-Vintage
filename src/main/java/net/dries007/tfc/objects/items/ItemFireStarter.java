@@ -10,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -28,7 +27,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.objects.te.TELogPile;
@@ -154,7 +152,6 @@ public class ItemFireStarter extends ItemTFC {
           TELogPile te = Helpers.getTE(world, pos.down(), TELogPile.class);
           if (te != null) {
             te.light();
-            TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
           }
           if (Blocks.FIRE.canPlaceBlockAt(world, pos)) {
             world.setBlockState(pos, Blocks.FIRE.getDefaultState());
@@ -166,7 +163,6 @@ public class ItemFireStarter extends ItemTFC {
           TEPitKiln te = Helpers.getTE(world, pos.down(), TEPitKiln.class);
           if (te != null) {
             te.tryLight();
-            TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
           }
         }
       } else {
@@ -205,7 +201,6 @@ public class ItemFireStarter extends ItemTFC {
             if (log.getItem().getCount() == 0) {
               log.setDead();
             }
-            TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, world.getBlockState(pos).getBlock()); // Trigger lit block
           }
         } else {
           // Can't make fire pit, so start a fire

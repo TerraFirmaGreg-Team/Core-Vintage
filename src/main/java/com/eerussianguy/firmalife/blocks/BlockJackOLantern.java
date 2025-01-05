@@ -6,7 +6,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -24,7 +23,6 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -97,7 +95,7 @@ public class BlockJackOLantern extends BlockHorizontal implements IItemSize, ILi
     TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
     if (te != null) {
       //last twice as long as a torch. balance this by being less bright
-      if (!worldIn.isRemote && te.getTicksSinceUpdate() > (2 * ConfigTFC.General.OVERRIDES.torchTime) && ConfigTFC.General.OVERRIDES.torchTime > 0) {
+      if (!worldIn.isRemote && te.getTicksSinceUpdate() > (2L * ConfigTFC.General.OVERRIDES.torchTime) && ConfigTFC.General.OVERRIDES.torchTime > 0) {
         worldIn.setBlockState(pos, state.withProperty(LIT, false));
         te.resetCounter();
       }
@@ -110,7 +108,6 @@ public class BlockJackOLantern extends BlockHorizontal implements IItemSize, ILi
       ItemStack stack = playerIn.getHeldItem(hand);
       TETickCounter tile = Helpers.getTE(worldIn, pos, TETickCounter.class);
       if (BlockTorchTFC.canLight(stack)) {
-        TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) playerIn, state.getBlock()); // Trigger lit block
         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LIT, true));
         if (tile != null) {tile.resetCounter();}
       } else {

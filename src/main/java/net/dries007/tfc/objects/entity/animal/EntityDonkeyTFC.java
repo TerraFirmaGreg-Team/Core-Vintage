@@ -17,7 +17,6 @@ import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityDonkey;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBlock;
@@ -47,7 +46,6 @@ import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.ILivestock;
 import net.dries007.tfc.api.util.IRidable;
 import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
@@ -164,7 +162,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
        + this.getModifiedMaxHealth()) / 3.0D);
     this.geneSpeed = (float) (
       (father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                                                                                              .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+        .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
     this.geneJump = (float) (
       (father.getEntityAttribute(JUMP_STRENGTH).getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH).getBaseValue() + this.getModifiedJumpStrength())
       / 3.0D);
@@ -338,8 +336,7 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
 
     if (!stack.isEmpty()) {
       boolean holdingChest = false;
-      if (stack.getItem() instanceof ItemBlock) {
-        ItemBlock itemBlock = (ItemBlock) stack.getItem();
+      if (stack.getItem() instanceof ItemBlock itemBlock) {
         holdingChest = itemBlock.getBlock() instanceof BlockChest;
       }
       if (stack.getItem() == Items.SPAWN_EGG) {
@@ -375,7 +372,6 @@ public class EntityDonkeyTFC extends EntityDonkey implements IAnimalTFC, ILivest
               this.setFamiliarity(familiarity);
             }
             world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
-            TFCTriggers.FAMILIARIZATION_TRIGGER.trigger((EntityPlayerMP) player, this); // Trigger familiarization change
           }
           return true;
         } else {

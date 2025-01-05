@@ -5,13 +5,11 @@
 
 package net.dries007.tfc.objects.items;
 
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -73,12 +71,9 @@ public class ItemSeedsTFC extends Item implements IPlantable {
     ItemStack itemstack = player.getHeldItem(hand);
     IBlockState state = worldIn.getBlockState(pos);
     if (this.crop != Crop.RICE && facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock()
-                                                                                                                                 .canSustainPlant(state, worldIn, pos, EnumFacing.UP, this)
+      .canSustainPlant(state, worldIn, pos, EnumFacing.UP, this)
         && worldIn.isAirBlock(pos.up()) && state.getBlock() instanceof BlockFarmlandTFC) {
       worldIn.setBlockState(pos.up(), BlockCropTFC.get(this.crop).getDefaultState());
-      if (player instanceof EntityPlayerMP) {
-        CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos.up(), itemstack);
-      }
 
       itemstack.shrink(1);
       return EnumActionResult.SUCCESS;
@@ -103,9 +98,6 @@ public class ItemSeedsTFC extends Item implements IPlantable {
           }
 
           worldIn.setBlockState(blockpos1, BlockCropTFC.get(this.crop).getDefaultState(), 11);
-          if (player instanceof EntityPlayerMP) {
-            CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, blockpos1, itemstack);
-          }
 
           if (!player.capabilities.isCreativeMode) {
             itemstack.shrink(1);
@@ -148,9 +140,6 @@ public class ItemSeedsTFC extends Item implements IPlantable {
           }
 
           worldIn.setBlockState(blockpos1, BlockCropTFC.get(crop).getDefaultState(), 11);
-          if (playerIn instanceof EntityPlayerMP) {
-            CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) playerIn, blockpos1, itemstack);
-          }
 
           if (!playerIn.capabilities.isCreativeMode) {
             itemstack.shrink(1);

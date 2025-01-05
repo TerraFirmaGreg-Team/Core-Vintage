@@ -13,7 +13,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -32,7 +31,6 @@ import net.minecraft.world.World;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
@@ -83,7 +81,7 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
     Predicate<IBlockState> stoneMatcher = BlockBloomery::isValidSideBlock;
     Predicate<IBlockState> insideChimney = state -> state.getBlock() == BlocksTFC.MOLTEN || state.getMaterial().isReplaceable();
     Predicate<IBlockState> center = state -> state.getBlock() == BlocksTFC.CHARCOAL_PILE || state.getBlock() == BlocksTFC.BLOOM || state.getMaterial()
-                                                                                                                                        .isReplaceable();
+      .isReplaceable();
 
     // Bloomery center is the charcoal pile pos
     BLOOMERY_BASE = new Multiblock[4];
@@ -176,9 +174,9 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
     setHarvestLevel("pickaxe", 0);
     setHardness(20.0F);
     setDefaultState(this.blockState.getBaseState()
-                                   .withProperty(FACING, EnumFacing.NORTH)
-                                   .withProperty(LIT, false)
-                                   .withProperty(OPEN, false));
+      .withProperty(FACING, EnumFacing.NORTH)
+      .withProperty(LIT, false)
+      .withProperty(OPEN, false));
   }
 
   public static boolean isValidSideBlock(IBlockState state) {
@@ -225,9 +223,9 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
   @Nonnull
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-               .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-               .withProperty(LIT, meta / 4 % 2 != 0)
-               .withProperty(OPEN, meta / 8 != 0);
+      .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+      .withProperty(LIT, meta / 4 % 2 != 0)
+      .withProperty(OPEN, meta / 8 != 0);
   }
 
   @Override
@@ -321,7 +319,6 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
         if (!state.getValue(LIT) && te.canIgnite()) {
           ItemStack held = player.getHeldItem(hand);
           if (ItemFireStarter.onIgnition(held)) {
-            TFCTriggers.LIT_TRIGGER.trigger((EntityPlayerMP) player, state.getBlock()); // Trigger lit block
             worldIn.setBlockState(pos, state.withProperty(LIT, true).withProperty(OPEN, false));
             te.onIgnite();
             return true;

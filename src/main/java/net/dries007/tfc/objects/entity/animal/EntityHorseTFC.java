@@ -43,7 +43,6 @@ import net.dries007.tfc.api.util.IRidable;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.util.calendar.CalendarTFC;
@@ -169,7 +168,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimalTFC, ILivestoc
        + this.getModifiedMaxHealth()) / 3.0D);
     this.geneSpeed = (float) (
       (father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                                                                                              .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+        .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
     this.geneJump = (float) (
       (father.getEntityAttribute(JUMP_STRENGTH).getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH).getBaseValue() + this.getModifiedJumpStrength())
       / 3.0D);
@@ -363,7 +362,6 @@ public class EntityHorseTFC extends EntityHorse implements IAnimalTFC, ILivestoc
               this.setFamiliarity(familiarity);
             }
             world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
-            TFCTriggers.FAMILIARIZATION_TRIGGER.trigger((EntityPlayerMP) player, this); // Trigger familiarization change
           }
           return true;
         } else {

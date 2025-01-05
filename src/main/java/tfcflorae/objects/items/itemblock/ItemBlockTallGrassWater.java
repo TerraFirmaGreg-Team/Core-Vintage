@@ -1,11 +1,9 @@
 package tfcflorae.objects.items.itemblock;
 
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -65,10 +63,6 @@ public class ItemBlockTallGrassWater extends ItemBlockTFC {
           }
 
           worldIn.setBlockState(blockpos1, block.getDefaultState(), 11);
-
-          if (playerIn instanceof EntityPlayerMP) {
-            CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) playerIn, blockpos1, itemstack);
-          }
 
           if (!playerIn.capabilities.isCreativeMode) {
             itemstack.shrink(1);

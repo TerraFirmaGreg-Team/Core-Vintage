@@ -1,0 +1,14 @@
+{
+  "package": "su.terrafirmagreg.mixin.extraplanets",
+  "required": true,
+  "refmap": "mixins.tfg.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8.5",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "recipes.ExtraPlanetsRecipesMixin"
+  ],
+  "server": [ ],
+  "client": [ ]
+}
+

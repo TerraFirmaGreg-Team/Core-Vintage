@@ -22,7 +22,7 @@ import net.dries007.tfc.objects.te.TEBlastFurnace;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiBlastFurnace extends GuiContainerTE<TEBlastFurnace> {

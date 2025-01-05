@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects;
 
-import net.dries007.tfc.util.collections.WeightedCollection;
+import su.terrafirmagreg.api.library.collection.WeightedCollection;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

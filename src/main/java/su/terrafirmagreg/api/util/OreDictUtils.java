@@ -1,6 +1,8 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
+import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,24 +12,37 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import org.jetbrains.annotations.NotNull;
 
 import lombok.experimental.UtilityClass;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @UtilityClass
 @SuppressWarnings("unused")
 public final class OreDictUtils {
 
-  public static void register(Item item, Object... parts) {
-    register(item, OreDictionary.WILDCARD_VALUE, parts);
+  public static void register(Block block) {
+    if (block instanceof IBlockSettings provider) {
+      provider.getSettings().getOreDict().forEach(s -> OreDictUtils.register(block, s));
+
+    }
   }
 
-  public static void register(Item item, int meta, Object... parts) {
-    register(new ItemStack(item, 1, meta), toString(parts));
+  public static void register(Item item) {
+    if (item instanceof IItemSettings provider) {
+      provider.getSettings().getOreDict().forEach(s -> OreDictUtils.register(item, s));
+    }
+  }
+
+  public static void register(Block block, Object... parts) {
+    register(new ItemStack(block), toString(parts));
+  }
+
+  public static void register(Item item, Object... parts) {
+    register(new ItemStack(item), toString(parts));
   }
 
   public static void register(ItemStack itemStack, String oreName) {
@@ -56,10 +71,6 @@ public final class OreDictUtils {
       .convert(Joiner.on('_').skipNulls().join(parts));
   }
 
-  public static void register(Block block, Object... parts) {
-    register(new ItemStack(block), toString(parts));
-  }
-
   /**
    * Gets all of the ore dictionary names for an ItemStack.
    *
@@ -67,7 +78,7 @@ public final class OreDictUtils {
    * @return A set of the ore names.
    */
   public static Set<String> getOreNames(ItemStack stack) {
-    final Set<String> names = new HashSet<>();
+    final Set<String> names = new ObjectOpenHashSet<>();
 
     for (final int id : OreDictionary.getOreIDs(stack)) {
       names.add(OreDictionary.getOreName(id));
@@ -108,14 +119,7 @@ public final class OreDictUtils {
     int needle = OreDictionary.getOreID(oreDict);
     int[] oreIDs = OreDictionary.getOreIDs(itemStack);
 
-    //noinspection ForLoopReplaceableByForEach
-    for (int i = 0; i < oreIDs.length; i++) {
-      if (oreIDs[i] == needle) {
-        return true;
-      }
-    }
-
-    return false;
+    return CollectionUtils.containsInt(oreIDs, needle);
   }
 
 }

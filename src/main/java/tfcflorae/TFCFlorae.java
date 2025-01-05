@@ -1,7 +1,5 @@
 package tfcflorae;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -15,6 +13,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import org.apache.logging.log4j.Logger;
+
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import tfcflorae.client.ClientEvents;
 import tfcflorae.client.GuiHandler;
 import tfcflorae.objects.blocks.entity.EntitiesTFCF;
@@ -24,7 +25,7 @@ import tfcflorae.util.HelpersTFCF;
 import tfcflorae.util.fuel.FuelsTFCF;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-@Mod(modid = Reference.TFCF, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
+@Mod(modid = Mods.Names.TFCF, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
 public class TFCFlorae {
 
   public static final String NAME = "TFC Florae";

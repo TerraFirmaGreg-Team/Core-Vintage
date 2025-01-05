@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault

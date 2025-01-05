@@ -14,15 +14,15 @@ import net.minecraftforge.common.MinecraftForge;
 import net.dries007.tfc.client.button.GuiButtonKnapping;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import tfctech.objects.container.ContainerGlassworking;
 
-import static su.terrafirmagreg.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
 
 public class GuiGlassworking extends GuiContainerTFC {
 
-  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Reference.TFC, "textures/gui/knapping.png");
+  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Mods.Names.TFC, "textures/gui/knapping.png");
   private static final ResourceLocation GLASS_TEXTURE = new ResourceLocation(TFCTECH, "textures/gui/glassworking/button.png");
   private static final ResourceLocation GLASS_DISABLED_TEXTURE = new ResourceLocation(TFCTECH, "textures/gui/glassworking/disabled.png");
 

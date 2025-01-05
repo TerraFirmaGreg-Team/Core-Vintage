@@ -37,10 +37,4 @@ public interface IProxy {
   @Nonnull
   String getDate(int hour, int minute, String monthName, int day, long years);
 
-  class WrongSideException extends RuntimeException {
-
-    WrongSideException(String message) {
-      super(message);
-    }
-  }
 }

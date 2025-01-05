@@ -1,5 +1,37 @@
 package su.terrafirmagreg.api.data;
 
-public class ToolClasses extends gregtech.api.items.toolitem.ToolClasses {
+import com.google.common.collect.ImmutableSet;
+
+import java.util.Set;
+
+public class ToolClasses {
+
+  public static final String SWORD = "sword";
+  public static final String PICKAXE = "pickaxe";
+  public static final String SHOVEL = "shovel";
+  public static final String AXE = "axe";
+  public static final String HOE = "hoe";
+  public static final String SAW = "saw";
+  public static final String HARD_HAMMER = "hammer";
+  public static final String SOFT_MALLET = "mallet";
+  public static final String WRENCH = "wrench";
+  public static final String FILE = "file";
+  public static final String CROWBAR = "crowbar";
+  public static final String SCREWDRIVER = "screwdriver";
+  public static final String MORTAR = "mortar";
+  public static final String WIRE_CUTTER = "wirecutter";
+  public static final String SCYTHE = "scythe";
+  public static final String SHEARS = "shears";
+  public static final String KNIFE = "knife";
+  public static final String BUTCHERY_KNIFE = "butchery_knife";
+  public static final String GRAFTER = "grafter";
+  public static final String PLUNGER = "plunger";
+  public static final String TONGS = "tongs";
+  public static final String TUYERE = "tuyere";
+  public static final String CHISEL = "chisel";
+  public static final String PROPICK = "propick";
+
+
+  public static final Set<String> DRILL = ImmutableSet.of(PICKAXE, SHOVEL);
 
 }

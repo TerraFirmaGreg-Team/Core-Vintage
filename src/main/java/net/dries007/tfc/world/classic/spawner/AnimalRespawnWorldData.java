@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 /**
  * Saves animal respawning data to world save

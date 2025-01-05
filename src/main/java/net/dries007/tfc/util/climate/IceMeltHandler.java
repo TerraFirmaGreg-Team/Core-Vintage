@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.Iterator;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 /**
  * Vanilla ice melting is hardcoded to the world. However, we can replicate most of the behavior by watching world ticks, and performing the same simple logic

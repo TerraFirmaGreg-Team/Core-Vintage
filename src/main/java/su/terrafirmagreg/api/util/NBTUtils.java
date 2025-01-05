@@ -186,9 +186,10 @@ public final class NBTUtils {
     return deepTag;
   }
 
-  public static void resetNBT(ItemStack stack) {
+  public static NBTTagCompound resetNBT(ItemStack stack) {
     NBTTagCompound nbt = new NBTTagCompound();
     stack.setTagCompound(nbt);
+    return nbt;
   }
 
   /**

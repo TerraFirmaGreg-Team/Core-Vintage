@@ -16,21 +16,22 @@ import BananaFructa.tfcfarming.util.ItemWithSubType;
 import java.util.Arrays;
 import java.util.HashMap;
 
-@Mod.EventBusSubscriber
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCFARMING;
+
+@Mod.EventBusSubscriber(modid = TFCFARMING)
 public class TFCFarmingContent {
 
   public static HashMap<ItemWithSubType, NutrientClass> fertilizerClass = new HashMap<>();
   public static HashMap<ItemWithSubType, Integer> fertilizerValues = new HashMap<>();
   public static BasicItem fertilizerP = new BasicItem("fertilizer_p");
+  static Item cachedItem = null;
+  static int cachedType = 0;
+  static boolean cachedResponse;
 
   public static void registerFertilizer(Item item, int type, NutrientClass n, int value) {
     fertilizerClass.put(new ItemWithSubType(item, type), n);
     fertilizerValues.put(new ItemWithSubType(item, type), value);
   }
-
-  static Item cachedItem = null;
-  static int cachedType = 0;
-  static boolean cachedResponse;
 
   public static boolean isFertilizer(ItemStack is) {
     Item i = is.getItem();

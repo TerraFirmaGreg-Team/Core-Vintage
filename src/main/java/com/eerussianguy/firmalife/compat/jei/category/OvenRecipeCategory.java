@@ -13,12 +13,12 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 //this is just TFC's HeatCategory, copied over in case i need to change it
 public class OvenRecipeCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Reference.TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic fire;

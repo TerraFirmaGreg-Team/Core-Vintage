@@ -32,7 +32,9 @@ import tfcflorae.world.worldgen.soil.WorldGenSoilTypes;
 import tfcflorae.world.worldgen.structures.WorldGenStructures;
 import tfcflorae.world.worldgen.structures.WorldGenStructuresCorals;
 
-@Mod.EventBusSubscriber
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+
+@Mod.EventBusSubscriber(modid = TFC)
 public class CommonProxy {
 
   @SubscribeEvent

@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.api.library.collection.WeightedCollection;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.init.Items;
@@ -17,7 +19,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.items.metal.ItemMetalArmor;
 import net.dries007.tfc.objects.items.metal.ItemMetalSword;
-import net.dries007.tfc.util.collections.WeightedCollection;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

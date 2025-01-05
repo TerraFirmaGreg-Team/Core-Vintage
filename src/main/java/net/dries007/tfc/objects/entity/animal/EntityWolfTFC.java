@@ -58,7 +58,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @ParametersAreNonnullByDefault
 // Changes in config allow placing this animal in livestock and still respawn

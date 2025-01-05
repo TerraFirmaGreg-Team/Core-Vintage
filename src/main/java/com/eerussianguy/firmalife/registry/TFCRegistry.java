@@ -43,14 +43,14 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.calendar.ICalendar;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class TFCRegistry {
 
-  public static final ResourceLocation HALITE = new ResourceLocation(Reference.TFC, "halite");
+  public static final ResourceLocation HALITE = new ResourceLocation(Mods.Names.TFC, "halite");
 
   @SubscribeEvent
   public static void onPreRegisterOre(TFCRegistryEvent.RegisterPreBlock<Ore> event) {

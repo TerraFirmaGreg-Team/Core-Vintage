@@ -12,7 +12,6 @@ import java.util.Objects;
  * @param <M> тип среднего элемента
  * @param <R> тип правого элемента
  */
-@SuppressWarnings("unused")
 @Data(staticConstructor = "of")
 public final class Triple<L, M, R> implements Serializable {
 

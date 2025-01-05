@@ -24,7 +24,7 @@ import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.api.capability.ItemStickCapability;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,7 +34,7 @@ import java.util.function.Supplier;
 
 public final class CapabilityItemSize {
 
-  public static final ResourceLocation KEY = new ResourceLocation(Reference.TFC, "item_size");
+  public static final ResourceLocation KEY = new ResourceLocation(Mods.Names.TFC, "item_size");
   public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new LinkedHashMap<>(); //Used inside CT, set custom IItemSize for items outside TFC
   @CapabilityInject(IItemSize.class)
   public static Capability<IItemSize> ITEM_SIZE_CAPABILITY;

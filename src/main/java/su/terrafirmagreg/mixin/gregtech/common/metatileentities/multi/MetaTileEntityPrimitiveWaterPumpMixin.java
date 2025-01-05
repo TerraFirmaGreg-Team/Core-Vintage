@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.gregtech.common.metatileentities.multi;
 
-import su.terrafirmagreg.core.config.TFGConfig;
+import su.terrafirmagreg.temp.config.TFGConfig;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;

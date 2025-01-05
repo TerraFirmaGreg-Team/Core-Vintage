@@ -1,5 +1,8 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,9 +55,15 @@ public final class TileUtils {
            && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
   }
 
+  public static void registerTileEntity(Block block) {
+    if (block instanceof IProviderTile provider) {
+      TileUtils.registerTileEntity(provider.getTileClass(), block.getRegistryName().getNamespace(), provider.getTileClass().getSimpleName());
+    }
+  }
 
-  public static void registerTileEntity(Class<? extends TileEntity> tileClass, String name) {
-    GameRegistry.registerTileEntity(tileClass, ModUtils.resource("tile." + name));
+
+  public static void registerTileEntity(Class<? extends TileEntity> tileClass, String namespace, String name) {
+    GameRegistry.registerTileEntity(tileClass, ModUtils.resource(namespace, "tile", name));
   }
 
 }

@@ -1,11 +1,13 @@
 package su.terrafirmagreg.datafix.mapping;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods.Names;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Metal.ItemType;
 import net.dries007.tfc.objects.Gem;
@@ -15,19 +17,17 @@ import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public abstract class AbstractRemapping {
 
-  protected static final Map<String, Block> BLOCK_MAP = new HashMap<>() {{
+  protected static final Map<String, Block> BLOCK_MAP = new Object2ObjectOpenHashMap<>() {{
     put("alloy_calculator", BlocksTFC.ALLOY_CALCULATOR);
     put("puddle", BlocksTFC.PUDDLE);
   }};
 
-  protected static final Map<String, Item> ITEM_MAP = new HashMap<>() {{
+  protected static final Map<String, Item> ITEM_MAP = new Object2ObjectOpenHashMap<>() {{
     put("gem/amber", ItemGem.get(Gem.AMBER));
     put("powder/pearl", ItemPowder.get(Powder.PEARL));
     put("powder/black_pearl", ItemPowder.get(Powder.BLACK_PEARL));
@@ -69,12 +69,12 @@ public abstract class AbstractRemapping {
     put("bronze_mallet", ItemMetal.get(Metal.BRONZE, ItemType.MALLET));
   }};
 
-  protected static final Map<String, EntityEntry> ENTITY_ENTRY_MAP = new HashMap<>() {{
+  protected static final Map<String, EntityEntry> ENTITY_ENTRY_MAP = new Object2ObjectOpenHashMap<>() {{
 
   }};
 
-  protected static final Set<String> MOD_ID_SET = new HashSet<>() {{
-    add(Reference.TFCF);
+  protected static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{
+    add(Names.TFCF);
   }};
 
 }

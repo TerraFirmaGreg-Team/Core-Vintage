@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.data;
 
 
+import su.terrafirmagreg.api.data.enums.EnumDefault;
 import su.terrafirmagreg.api.library.property.PropertyUnlistedDirection;
 import su.terrafirmagreg.api.library.property.PropertyUnlistedObject;
 
@@ -48,14 +49,14 @@ public final class Properties {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
     public static final PropertyEnum<EnumFacing.Axis> XZ = PropertyEnum.create("axis", EnumFacing.Axis.class, EnumFacing.Axis.X, EnumFacing.Axis.Z);
 
-//    public static final PropertyEnum<EnumAging> AGING = PropertyEnum.create("age", EnumAging.class);
+    //    public static final PropertyEnum<EnumAging> AGING = PropertyEnum.create("age", EnumAging.class);
 //    public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
 //    public static final PropertyEnum<EnumFruitLeafState> FRUIT_LEAF_STATE = PropertyEnum.create("state", EnumFruitLeafState.class);
 //    public static final PropertyEnum<EnumPlantPart> PLANT_PART = PropertyEnum.create("part", EnumPlantPart.class);
 //    public static final PropertyEnum<EnumFirePitAttachment> FIRE_PIT_ATTACHMENT = PropertyEnum.create("attachment", EnumFirePitAttachment.class);
 //    public static final PropertyEnum<EnumSpeleothemSize> SPELEOTHEM_SIZE = PropertyEnum.create("size", EnumSpeleothemSize.class);
 //    public static final PropertyEnum<EnumHideSize> HIDE_SIZE = PropertyEnum.create("size", EnumHideSize.class);
-//    public static final PropertyEnum<EnumDefault> DEFAULT = PropertyEnum.create("variant", EnumDefault.class);
+    public static final PropertyEnum<EnumDefault> DEFAULT = PropertyEnum.create("variant", EnumDefault.class);
 //    public static final PropertyEnum<EnumPressPart> PRESS_PART = PropertyEnum.create("part", EnumPressPart.class);
 //    public static final PropertyEnum<EnumChopperPart> CHOPPER_PART = PropertyEnum.create("part", EnumChopperPart.class);
 //    public static final PropertyEnum<EnumGradeOre> GRADE_ORE = PropertyEnum.create("grade", EnumGradeOre.class);

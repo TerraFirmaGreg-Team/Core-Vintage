@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Rotation;
@@ -12,8 +13,6 @@ import net.minecraft.world.gen.structure.template.BlockRotationProcessor;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
-
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 
 import lombok.experimental.UtilityClass;
 
@@ -47,13 +46,13 @@ public final class StructureUtils {
         if ((!placementIn.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (structureboundingbox == null || structureboundingbox.isVecInside(
           blockpos))) {
           IBlockState stateToPlace = template$blockinfo1.blockState.withMirror(
-                                                          placementIn.getMirror())
-                                                                   .withRotation(placementIn.getRotation());
+              placementIn.getMirror())
+            .withRotation(placementIn.getRotation());
           IBlockState stateToReplace = worldIn.getBlockState(blockpos);
 
           if (stateToReplace.getMaterial().isReplaceable()
               || stateToReplace.getBlock() instanceof BlockLeaves
-              || stateToReplace.getBlock() instanceof BlockSaplingTFC) {
+              || stateToReplace.getBlock() instanceof BlockSapling) {
             worldIn.setBlockState(blockpos, stateToPlace, 2);
           }
         }
@@ -65,7 +64,7 @@ public final class StructureUtils {
 
       if (structureboundingbox == null || structureboundingbox.isVecInside(blockpos1)) {
         worldIn.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(),
-                                            false);
+          false);
       }
 
     }

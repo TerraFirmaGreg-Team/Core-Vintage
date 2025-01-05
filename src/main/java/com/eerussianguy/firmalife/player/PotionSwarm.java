@@ -1,19 +1,18 @@
 package com.eerussianguy.firmalife.player;
 
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.api.data.DamageSources;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import net.dries007.tfc.Constants;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class PotionSwarm extends PotionFL {
-
-  public static final DamageSource SWARM = new DamageSource("swarm").setDifficultyScaled();
 
   public PotionSwarm() {
     super(true, 0xffff1a);
@@ -37,7 +36,7 @@ public class PotionSwarm extends PotionFL {
                             0.5 * (rand.nextFloat() - rand.nextFloat()), 0.5 * (rand.nextFloat() - rand.nextFloat()));
       }
     } else {
-      if (!entity.isWet()) {entity.attackEntityFrom(SWARM, 1.0f + amplifier);}
+      if (!entity.isWet()) {entity.attackEntityFrom(DamageSources.SWARM, 1.0f + amplifier);}
     }
 
   }

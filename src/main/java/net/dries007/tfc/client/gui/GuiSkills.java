@@ -27,7 +27,7 @@ import net.dries007.tfc.util.skills.SkillType;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkills extends GuiContainerTFC {

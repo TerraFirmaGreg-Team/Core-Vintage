@@ -19,12 +19,12 @@ import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.Helpers;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 @SideOnly(Side.CLIENT)
 public class GuiLiquidTransfer extends GuiContainerTFC {
 
-  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Reference.TFC, "textures/gui/single_inventory.png");
+  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Mods.Names.TFC, "textures/gui/single_inventory.png");
   private final int slotIdx;
 
   public GuiLiquidTransfer(Container container, EntityPlayer player, boolean mainhand) {

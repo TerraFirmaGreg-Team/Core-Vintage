@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.data.DamageSources;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -34,7 +36,6 @@ import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendar;
@@ -214,7 +215,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
       }
       entityIn.motionZ *= ConfigTFC.General.MISC.berryBushMovementModifier;
       if (bush.isSpiky() && entityIn instanceof EntityLivingBase) {
-        entityIn.attackEntityFrom(DamageSourcesTFC.BERRYBUSH, 1.0F);
+        entityIn.attackEntityFrom(DamageSources.BERRYBUSH, 1.0F);
       }
     }
   }

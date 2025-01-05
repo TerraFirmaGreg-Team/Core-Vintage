@@ -25,11 +25,13 @@ import se.gory_moon.horsepower.tweaker.ITweakerPlugin;
 import se.gory_moon.horsepower.tweaker.TweakerPluginImpl;
 import se.gory_moon.horsepower.util.Utils;
 
-@Mod(modid = Reference.MODID, version = Reference.VERSION, name = Reference.NAME, acceptedMinecraftVersions = "[1.12]", dependencies = "required-after:tfc;after:crafttweaker;after:jei;after:waila;after:theoneprobe;")
-@EventBusSubscriber
+import static se.gory_moon.horsepower.lib.Reference.MODID;
+
+@Mod(modid = MODID, version = Reference.VERSION, name = Reference.NAME, acceptedMinecraftVersions = "[1.12]", dependencies = "required-after:tfc;after:crafttweaker;after:jei;after:waila;after:theoneprobe;")
+@EventBusSubscriber(modid = MODID)
 public class HorsePowerMod {
 
-  @Instance(Reference.MODID)
+  @Instance(MODID)
   public static HorsePowerMod instance;
 
   @SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.COMMON_PROXY)

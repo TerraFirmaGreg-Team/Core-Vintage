@@ -8,6 +8,7 @@ import org.jetbrains.gradle.ext.Gradle
 plugins {
   id 'java'
   id 'java-library'
+  id 'idea'
   id 'org.jetbrains.gradle.plugin.idea-ext' version '1.1.+'
   id 'com.gtnewhorizons.retrofuturagradle' version '1.4.+'
 }
@@ -19,9 +20,6 @@ assertProperty 'mod_version'
 assertProperty 'mod_package'
 assertProperty 'mod_id'
 assertProperty 'mod_name'
-assertProperty 'mod_dependencies'
-assertProperty 'mod_server_proxy'
-assertProperty 'mod_client_proxy'
 
 assertSubProperties 'use_tags', 'tag_class_name'
 assertSubProperties 'use_access_transformer', 'access_transformer_locations'
@@ -38,11 +36,11 @@ setDefaultProperty 'extra_jvm_args', false, ''
 setDefaultProperty 'extra_tweak_classes', false, ''
 setDefaultProperty 'change_minecraft_sources', false, false
 
-version = propertyString('mod_version')
-group = propertyString('mod_package')
 
 base {
-  archivesName.set(propertyString('mod_name'))
+  version = propertyString('mod_version')
+  group = propertyString('mod_package')
+  archivesName.set(propertyString('mod_name') + '-' + propertyString('mod_suffix'))
 }
 
 tasks.decompressDecompiledSources.enabled !propertyBool('change_minecraft_sources')
@@ -53,6 +51,31 @@ java {
     // Azul covers the most platforms for Java 8 toolchains, crucially including MacOS arm64
     vendor.set(JvmVendorSpec.AZUL)
   }
+
+  if (propertyBool('generate_sources_jar')) {
+    withSourcesJar()
+  }
+  if (propertyBool('generate_javadocs_jar')) {
+    withJavadocJar()
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.encoding = 'UTF-8'
+  if (propertyBool('use_modern_java_syntax')) {
+    if (it.name in ['compileMcLauncherJava', 'compilePatchedMcJava']) {
+      return
+    }
+    sourceCompatibility = 17
+    options.release.set(8)
+
+    javaCompiler.set(javaToolchains.compilerFor {
+      languageVersion.set(JavaLanguageVersion.of(17))
+      if (propertyBool('use_azul_jmv')) {
+        vendor.set(JvmVendorSpec.AZUL)
+      }
+    })
+  }
 }
 
 configurations {
@@ -61,7 +84,7 @@ configurations {
 }
 
 minecraft {
-  mcVersion.set('1.12.2')
+  mcVersion.set(propertyString('minecraft_version'))
 
   mcpMappingChannel.set(propertyString('mapping_channel'))
   mcpMappingVersion.set(propertyString('mapping_version'))
@@ -73,27 +96,22 @@ minecraft {
   // Add any additional tweaker classes here
   extraTweakClasses.addAll(propertyStringList('extra_tweak_classes'))
 
-  // Automatic token injection with RetroFuturaGradle
-  if (propertyBool('use_tags')) {
-    injectedTags.put('MOD_ID', mod_id)
-    injectedTags.put('MOD_NAME', mod_name)
-    injectedTags.put('MOD_VERSION', mod_version)
-    injectedTags.put('DEPENDENCIES', mod_dependencies)
-    injectedTags.put('SERVER_PROXY', propertyString('mod_server_proxy'))
-    injectedTags.put('CLIENT_PROXY', propertyString('mod_client_proxy'))
-  }
-
-  if (propertyBool('use_modern_java_syntax')) {
-    lwjgl3Version = "3.3.2"
-  }
-
   // Add various JVM arguments here for runtime
   def args = ['-ea:' + group]
+  if (propertyBool('use_mixins')) {
+    args << '-Dmixin.hotSwap=true'
+    args << '-Dmixin.checks.interfaces=true'
+    args << '-Dmixin.debug.export=true'
+  }
+
   if (propertyBool('is_coremod')) {
-    args << '-Dfml.coreMods.load=' + coremod_plugin_class_name
-    args << '-Dlegacy.debugClassLoading=true'
-    args << '-Dlegacy.debugClassLoadingFiner=true'
-    args << '-Dlegacy.debugClassLoadingSave=true'
+    for (runTask in ['runClient', 'runServer']) {
+      tasks.named(runTask).configure {
+        args << '-Dfml.coreMods.load=' + coremod_plugin_class_name
+      }
+    }
+
+
     if (propertyBool('coremod_debug')) {
       args << '-Dlegacy.debugClassLoading=true'
       args << '-Dlegacy.debugClassLoadingFiner=true'
@@ -101,13 +119,18 @@ minecraft {
     }
   }
 
-  if (propertyBool('use_mixins')) {
-    args << '-Dmixin.hotSwap=true'
-    args << '-Dmixin.checks.interfaces=true'
-    args << '-Dmixin.debug.export=true'
-  }
+
   extraRunJvmArguments.addAll(args)
   extraRunJvmArguments.addAll(propertyStringList('extra_jvm_args'))
+  // Automatic token injection with RetroFuturaGradle
+  if (propertyBool('use_tags')) {
+    if (file('tags.properties').exists()) {
+      Properties props = new Properties().tap { it.load(file('tags.properties').newInputStream()); it }
+      if (!props.isEmpty()) {
+        injectedTags.set(props.collectEntries { k, v -> [(k): interpolate(v)] })
+      }
+    }
+  }
 }
 
 repositories {
@@ -149,16 +172,16 @@ dependencies {
       transitive = false
     }
     annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
-    annotationProcessor 'com.google.guava:guava:33.1.0-jre'
-    annotationProcessor 'com.google.code.gson:gson:2.10.1'
+    annotationProcessor 'com.google.guava:guava:32.1.2-jre'
+    annotationProcessor 'com.google.code.gson:gson:2.8.9'
     annotationProcessor(mixin) {
       transitive = false
     }
   }
 
-  compileOnlyApi 'org.jetbrains:annotations:24.1.0'
-  annotationProcessor 'org.jetbrains:annotations:24.1.0'
-  patchedMinecraft('net.minecraft:launchwrapper:1.17.2') {
+  compileOnlyApi 'org.jetbrains:annotations:26.0.1'
+  annotationProcessor 'org.jetbrains:annotations:26.0.1'
+  patchedMinecraft('net.minecraft:launchwrapper:1.17.4') {
     transitive = false
   }
 
@@ -187,38 +210,48 @@ if (propertyBool('use_access_transformer')) {
   }
 }
 
+
 processResources {
 
-  def filterList = ['mcmod.info', 'pack.mcmeta']
-  filterList.addAll(propertyStringList('mixin_configs').collect(config -> "mixins.${config}.json" as String))
+  inputs.property 'mod_id', propertyString('mod_id')
+  inputs.property 'mod_name', propertyString('mod_name')
+  inputs.property 'mod_version', propertyString('mod_version')
+  inputs.property 'mod_description', propertyString('mod_description')
+  inputs.property 'mod_authors', "${propertyStringList('mod_authors', ',').join(', ')}"
+  inputs.property 'mod_credits', propertyString('mod_credits')
+  inputs.property 'mod_url', propertyString('mod_url')
+  inputs.property 'mod_update_json', propertyString('mod_update_json')
+  inputs.property 'mod_logo_path', propertyString('mod_logo_path')
+  inputs.property 'mixin_refmap', propertyString('mixin_refmap')
+  inputs.property 'mixin_package', propertyString('mixin_package')
+  inputs.property 'mixin_configs', propertyStringList('mixin_configs').join(' ')
 
-  def authors = propertyString('mod_authors').split(',').collect { """\"${it.trim()}\"""" }.join(', ')
+  def filterList = ['mcmod.info', 'pack.mcmeta']
+
   filesMatching(filterList) { fcd ->
     fcd.expand(
       'mod_id': propertyString('mod_id'),
       'mod_name': propertyString('mod_name'),
       'mod_version': propertyString('mod_version'),
       'mod_description': propertyString('mod_description'),
-      'mod_authors': "[${authors}]",
+      'mod_authors': "${propertyStringList('mod_authors', ',').join(', ')}",
       'mod_credits': propertyString('mod_credits'),
       'mod_url': propertyString('mod_url'),
       'mod_update_json': propertyString('mod_update_json'),
       'mod_logo_path': propertyString('mod_logo_path'),
-
 
       'mixin_refmap': propertyString('mixin_refmap'),
       'mixin_package': propertyString('mixin_package')
     )
   }
 
+
   if (propertyBool('use_access_transformer')) {
     rename '(.+_at.cfg)', 'META-INF/$1'
   }
-
 }
 
 jar {
-  zip64 = true
   manifest {
     def attribute_map = [:]
     if (propertyBool('is_coremod')) {
@@ -237,7 +270,11 @@ jar {
     attributes(attribute_map)
   }
   // Add all embedded dependencies into the jar
-  from(provider { configurations.embed.collect { it.isDirectory() ? it : zipTree(it) } })
+  from provider {
+    configurations.embed.collect {
+      it.isDirectory() ? it : zipTree(it)
+    }
+  }
 }
 
 runClient {
@@ -248,15 +285,17 @@ runServer {
 }
 
 wrapper {
-  gradleVersion = '8.10.2'
+  gradleVersion = gradle_version
   distributionUrl = distributionUrl.replace("bin", "all")
 }
 
 idea {
   module {
-    inheritOutputDirs = true
+    inheritOutputDirs true
+    downloadJavadoc true
+    downloadSources true
 
-    excludeDirs = [file(".github"), file(".idea"), file("build"), file("gradle/wrapper"), file("run"), file("resources_templates")]
+    excludeDirs = [file(".github"), file(".idea"), file("build"),  file("run"), file("resources_templates")]
 
 
   }
@@ -288,24 +327,6 @@ idea {
   }
 }
 
-compileTestJava {
-  sourceCompatibility = targetCompatibility = 8
-}
-
-tasks.withType(JavaCompile).configureEach {
-  options.encoding = 'UTF-8'
-  if (propertyBool('use_modern_java_syntax')) {
-    if (it.name in ['compileMcLauncherJava', 'compilePatchedMcJava']) {
-      return
-    }
-    sourceCompatibility = 17
-    options.release.set(8)
-    javaCompiler.set(javaToolchains.compilerFor {
-      languageVersion.set(JavaLanguageVersion.of(17))
-      vendor.set(JvmVendorSpec.AZUL)
-    })
-  }
-}
 
 tasks.register('cleanroomAfterSync') {
   group 'cleanroom helpers'
@@ -317,6 +338,7 @@ if (propertyBool('use_modern_java_syntax')) {
     sourceCompatibility = 17
   }
 }
+
 
 tasks.named('injectTags', InjectTagsTask).configure {
   onlyIf {
@@ -345,3 +367,12 @@ idea.project.settings {
     afterSync 'cleanroomAfterSync'
   }
 }
+
+
+// Include resources generated by data generators.
+sourceSets.main {
+  resources.srcDir "src/generated/resources"
+  // Make sure resources are available for 1.12
+  output.setResourcesDir output.classesDirs.asPath
+}
+

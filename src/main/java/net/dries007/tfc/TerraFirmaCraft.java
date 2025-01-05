@@ -75,10 +75,10 @@ import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SuppressWarnings("FieldMayBeFinal")
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = TFC)
 @Mod(modid = TFC, version = "2.0.0", name = TerraFirmaCraft.MOD_NAME, useMetadata = true, guiFactory = Constants.GUI_FACTORY, dependencies = "required:forge@[14.23.5.2816,);after:jei@[4.14.2,);after:crafttweaker@[4.1.11,);after:waila@(1.8.25,)")
 public final class TerraFirmaCraft {
 
@@ -89,16 +89,14 @@ public final class TerraFirmaCraft {
 
   @SidedProxy(modId = TFC, clientSide = "net.dries007.tfc.proxy.ClientProxy", serverSide = "net.dries007.tfc.proxy.ServerProxy")
   private static IProxy PROXY = null;
-
+  private final Logger log = LogManager.getLogger(TFC);
+  private WorldTypeTFC worldTypeTFC;
+  private SimpleNetworkWrapper network;
   public TerraFirmaCraft() {
     INSTANCE = this;
 
     FluidRegistry.enableUniversalBucket();
   }
-
-  private final Logger log = LogManager.getLogger(TFC);
-  private WorldTypeTFC worldTypeTFC;
-  private SimpleNetworkWrapper network;
 
   public static Logger getLog() {
     return INSTANCE.log;

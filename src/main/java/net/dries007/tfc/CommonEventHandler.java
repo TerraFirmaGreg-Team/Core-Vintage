@@ -5,6 +5,8 @@
 
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.data.DamageSources;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCarrot;
 import net.minecraft.block.BlockChest;
@@ -175,7 +177,6 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.types.DefaultTrees;
-import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -198,7 +199,7 @@ import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 import java.util.Iterator;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)
@@ -1201,7 +1202,7 @@ public final class CommonEventHandler {
       for (String pluckable : ConfigTFC.General.MISC.pluckableEntities) {
         if (pluckable.equals(entityTypeName)) {
           target.dropItem(Items.FEATHER, 1);
-          target.attackEntityFrom(DamageSourcesTFC.PLUCKING, (float) ConfigTFC.General.MISC.damagePerFeather);
+          target.attackEntityFrom(DamageSources.PLUCKING, (float) ConfigTFC.General.MISC.damagePerFeather);
           if (target instanceof IAnimalTFC animalTarget) {
             animalTarget.setFamiliarity(animalTarget.getFamiliarity() - 0.04f);
           }

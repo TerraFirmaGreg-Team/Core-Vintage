@@ -1,15 +1,28 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
+import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
+import su.terrafirmagreg.api.library.model.CustomStateMap;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderBlockColor;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderBlockState;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderItemColor;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderItemMesh;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -21,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.experimental.UtilityClass;
 
+@SideOnly(Side.CLIENT)
 @UtilityClass
 @SuppressWarnings("unused")
 public final class ModelUtils {
@@ -38,8 +52,21 @@ public final class ModelUtils {
     }
   };
 
-  @SideOnly(Side.CLIENT)
-  public static void registerStateMapper(Block block, IStateMapper stateMap) {
+  public static void stateMapper(Block block) {
+    if (block instanceof IProviderBlockState provider) {
+      ModelUtils.stateMapper(block, provider.getStateMapper());
+      return;
+    }
+    if (block instanceof IBlockSettings provider) {
+      final var settings = provider.getSettings();
+      final var ignored = settings.getIgnoredProperties();
+      final var resource = settings.getResource();
+
+      ModelUtils.stateMapper(block, CustomStateMap.builder().ignore(ignored).customResource(resource).build());
+    }
+  }
+
+  public static void stateMapper(Block block, IStateMapper stateMap) {
     if (stateMap != null) {
       ModelLoader.setCustomStateMapper(block, stateMap);
     }
@@ -49,116 +76,126 @@ public final class ModelUtils {
 
   //region ===== ItemBlock
 
-  public static void registerBlockInventoryModes(String subfolder, Block... blocks) {
-    for (Block block : blocks) {
-      ResourceLocation registryName = block.getRegistryName();
-      Preconditions.checkNotNull(registryName, "Item %s has null registry name", block);
-      String modelLocation = registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
 
-      ModelUtils.registerBlockInventoryModel(block, modelLocation);
+  public static void model(Block block) {
+    if (block instanceof IBlockSettings provider) {
+      if (provider.getSettings().getResource() != null) {
+        ModelUtils.model(block, provider.getSettings().getResource());
+        return;
+      }
     }
-  }
 
-  public static void registerBlockInventoryModel(Block block, String modelLocation) {
-
-    ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
-  }
-
-  public static void registerBlockInventoryModes(Block... blocks) {
-    for (Block block : blocks) {
-      ModelUtils.registerBlockInventoryModel(block);
-    }
-  }
-
-  public static void registerBlockInventoryModel(Block block, ResourceLocation modelLocation) {
-
-    ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), modelLocation);
-  }
-
-  public static void registerCustomMeshDefinition(Block block, ItemMeshDefinition meshDefinition) {
-
-    ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), meshDefinition);
-  }
-
-  public static void registerBlockInventoryModel(Block block) {
     ResourceLocation registryName = block.getRegistryName();
     Preconditions.checkNotNull(registryName, "block %s has null registry name", block);
 
-    ModelUtils.registerInventoryModel(Item.getItemFromBlock(block), registryName);
+    ModelUtils.model(Item.getItemFromBlock(block), registryName);
+
   }
 
-  public static void registerBlockItemModel(IBlockState blockState) {
+  public static void model(IBlockState blockState) {
 
     Block block = blockState.getBlock();
     Item item = Item.getItemFromBlock(block);
 
-    ModelUtils.registerInventoryModel(item, new ModelResourceLocation(
-                                        Preconditions.checkNotNull(block.getRegistryName(), "Block %s has null registry name", block),
-                                        PROPERTY_STRING_MAPPER.getPropertyString(blockState.getProperties())
-                                      )
+    ModelUtils.model(item, new ModelResourceLocation(
+        Preconditions.checkNotNull(block.getRegistryName(), "Block %s has null registry name", block),
+        PROPERTY_STRING_MAPPER.getPropertyString(blockState.getProperties())
+      )
     );
+  }
+
+  public static void model(Block block, String modelLocation) {
+
+    ModelUtils.model(Item.getItemFromBlock(block), modelLocation);
+  }
+
+  public static void model(Block block, ResourceLocation modelLocation) {
+
+    ModelUtils.model(Item.getItemFromBlock(block), modelLocation);
+  }
+
+  public static void model(String subfolder, Block block) {
+    ResourceLocation registryName = block.getRegistryName();
+    Preconditions.checkNotNull(registryName, "Item %s has null registry name", block);
+    String modelLocation = registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
+
+    ModelUtils.model(block, modelLocation);
   }
 
   //endregion
 
   //region ===== Item
 
-  public static void registerInventoryModel(Item item, String modelLocation) {
+  public static void model(Item item) {
+    if (item instanceof IItemSettings provider) {
+      if (provider.getSettings().getResource() != null) {
+        ModelUtils.model(item, provider.getSettings().getResource());
+        return;
+      }
 
-    ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
+    }
+    if (item instanceof ItemBlock itemBlock) {
+      var block = itemBlock.getBlock();
+      if (block instanceof IBlockSettings provider) {
+        if (provider.getSettings().getResource() != null) {
+          ModelUtils.model(itemBlock, provider.getSettings().getResource());
+          return;
+        }
+      }
+      ModelUtils.model(itemBlock, block.getRegistryName());
+      return;
+    }
+
+    ResourceLocation registryName = item.getRegistryName();
+    Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
+
+    ModelUtils.model(item, registryName);
   }
 
-  public static void registerInventoryModel(Item item, ModelResourceLocation resourceLocation) {
+  public static void model(Item item, String modelLocation) {
 
-    ModelUtils.registerInventoryModel(item, 0, resourceLocation);
+    ModelUtils.model(item, new ModelResourceLocation(modelLocation, "inventory"));
   }
 
-  public static void registerInventoryModel(Item item, int metadata, ModelResourceLocation resourceLocation) {
+  public static void model(Item item, ModelResourceLocation resourceLocation) {
+
+    ModelUtils.model(item, 0, resourceLocation);
+  }
+
+  public static void model(Item item, int metadata, ModelResourceLocation resourceLocation) {
 
     ModelLoader.setCustomModelResourceLocation(item, metadata, resourceLocation);
   }
 
-  public static void registerInventoryModel(Item item, ResourceLocation modelLocation) {
+  public static void model(Item item, ResourceLocation modelLocation) {
 
-    ModelUtils.registerInventoryModel(item, new ModelResourceLocation(modelLocation, "inventory"));
+    ModelUtils.model(item, new ModelResourceLocation(modelLocation, "inventory"));
   }
 
-  public static void registerInventoryModel(String subfolder, Item... items) {
-    for (Item item : items) {
-      ModelUtils.registerInventoryModel(subfolder, item);
-    }
+
+  public static void model(@NotNull Item item, int metadata, @NotNull String variant) {
+    ResourceLocation registryName = item.getRegistryName();
+    Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
+
+    ModelUtils.model(item, metadata, new ModelResourceLocation(registryName, variant));
   }
 
-  public static void registerInventoryModel(String subfolder, Item item) {
+  public static void model(String subfolder, Item item) {
     ResourceLocation registryName = item.getRegistryName();
     Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
     String modelLocation = registryName.getNamespace() + ":" + subfolder + "/" + registryName.getPath();
 
-    ModelUtils.registerInventoryModel(item, modelLocation);
+    ModelUtils.model(item, modelLocation);
   }
 
-  public static void registerInventoryModel(Item... items) {
+  public static void customMeshDefinition(Item item) {
 
-    for (Item item : items) {
-      ModelUtils.registerInventoryModel(item);
+    if (item instanceof IProviderItemMesh provider) {
+      ModelUtils.customMeshDefinition(item, provider.getItemMesh());
     }
   }
 
-  public static void registerInventoryModel(Item item) {
-    ResourceLocation registryName = item.getRegistryName();
-    Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
-
-    ModelUtils.registerInventoryModel(item, registryName);
-  }
-
-  public static void registerInventoryModel(@NotNull Item item, int metadata, @NotNull String variant) {
-    ResourceLocation registryName = item.getRegistryName();
-    Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
-
-    ModelUtils.registerInventoryModel(item, metadata, new ModelResourceLocation(registryName, variant));
-  }
-
-  public static void registerCustomMeshDefinition(Item item, ItemMeshDefinition meshDefinition) {
+  public static void customMeshDefinition(Item item, ItemMeshDefinition meshDefinition) {
 
     ModelLoader.setCustomMeshDefinition(item, meshDefinition);
   }
@@ -167,10 +204,50 @@ public final class ModelUtils {
 
   //region ===== TileEntitySpecialRenderer
 
-  public static <T extends TileEntity> void registerTileEntitySpecialRenderer(Class<T> tileEntityClass, TileEntitySpecialRenderer<? super T> specialRenderer) {
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public static <T extends TileEntity> void tesr(Block block) {
+    if (block instanceof IProviderTile provider) {
+      final TileEntitySpecialRenderer tesr = provider.getTileRenderer();
 
+      ModelUtils.tesr(provider.getTileClass(), tesr);
+    }
+  }
+
+  public static <T extends TileEntity> void tesr(Class<T> tileEntityClass, TileEntitySpecialRenderer<? super T> specialRenderer) {
     if (specialRenderer != null) {
       ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, specialRenderer);
+    }
+  }
+
+  //endregion
+
+  //region ===== Color
+
+  public void colorHandler(final BlockColors blockColors, Block block) {
+    if (block instanceof IProviderBlockColor provider) {
+      if (provider.getBlockColor() != null) {
+        blockColors.registerBlockColorHandler(provider.getBlockColor(), block);
+      }
+    }
+  }
+
+  public void colorHandler(ColorHandlerEvent.Item itemColors, Block block) {
+
+  }
+
+  public void colorHandler(final ItemColors itemColors, Block block) {
+    if (block instanceof IProviderItemColor provider) {
+      if (provider.getItemColor() != null) {
+        itemColors.registerItemColorHandler(provider.getItemColor(), block);
+      }
+    }
+  }
+
+  public void colorHandler(final ItemColors itemColors, Item item) {
+    if (item instanceof IProviderItemColor provider) {
+      if (provider.getItemColor() != null) {
+        itemColors.registerItemColorHandler(provider.getItemColor(), item);
+      }
     }
   }
 

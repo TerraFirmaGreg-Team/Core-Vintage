@@ -21,7 +21,7 @@ import net.dries007.tfc.objects.container.ContainerKnapping;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 public class GuiKnapping extends GuiContainerTFC {
 

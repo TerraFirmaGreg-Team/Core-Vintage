@@ -8,26 +8,25 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.collect.Lists;
-import se.gory_moon.horsepower.Configs;
-
 import org.jetbrains.annotations.Nullable;
 
 import lombok.experimental.UtilityClass;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -50,31 +49,10 @@ public final class EntityUtils {
 
   private static final Map<String, UUID> USERNAME = CollectionUtils.invertMap(UsernameCache.getMap());
 
-
-  public static ArrayList<Class<? extends EntityCreature>> getCreatureClasses() {
-    ArrayList<Class<? extends EntityCreature>> clazzes = Lists.newArrayList();
-    if (Configs.general.useHorseInterface) {
-      clazzes.add(AbstractHorse.class);
-    }
-
-    for (String string : Configs.general.grindstoneMobList) {
-      Class clazz = EntityUtils.getEntityClass(string);
-
-      if (clazz == null) {
-        continue;
-      }
-
-      if (EntityCreature.class.isAssignableFrom(clazz)) {
-        clazzes.add(clazz);
-      } else {
-        TerraFirmaGreg.LOGGER.error("Error in config, the mob ( {} ) can't be leashed", string);
-      }
-    }
-    return clazzes;
-  }
-
+  @SuppressWarnings("unchecked")
   public static @Nullable Class<? extends Entity> getEntityClass(String mobName) {
     return ENTITY_CLASSES_CACHE.computeIfAbsent(mobName, k -> {
+
       Class clazz = ClassUtils.getClassFromString(mobName);
       if (Entity.class.isAssignableFrom(clazz)) {
         return clazz;
@@ -87,7 +65,7 @@ public final class EntityUtils {
 
   @SideOnly(Side.CLIENT)
   public static UUID getClientPlayerUUID() {
-    Minecraft minecraft = Minecraft.getMinecraft();
+    Minecraft minecraft = GameUtils.getMinecraft();
 
     return minecraft.getSession().getProfile().getId();
   }
@@ -108,6 +86,134 @@ public final class EntityUtils {
     }
 
     return EnumHand.MAIN_HAND;
+  }
+
+  /**
+   * Calculates the distance between an entity and a BlockPos.
+   *
+   * @param entity The Entity to use for the first position.
+   * @param pos    The BlockPos to use for the second position.
+   * @return double The distance between the Entity and the BlockPos.
+   */
+  public static double getDistaceFromPos(Entity entity, BlockPos pos) {
+
+    return MathUtils.getDistanceBetweenPoints(entity.getPositionVector(), new Vec3d(pos));
+  }
+
+  /**
+   * Pushes an entity towards a specific direction.
+   *
+   * @param entityToMove The entity that you want to push.
+   * @param direction    The direction to push the entity.
+   * @param force        The amount of force to push the entity with.
+   */
+  public static void pushTowards(Entity entityToMove, EnumFacing direction, double force) {
+
+    pushTowards(entityToMove, entityToMove.getPosition().offset(direction.getOpposite(), 1), force);
+  }
+
+  /**
+   * Pushes an Entity towards a BlockPos.
+   *
+   * @param entityToMove The entity that you want to push.
+   * @param pos          The BlockPos to push the entity towards.
+   * @param force        The amount of force to push the entity with.
+   */
+  public static void pushTowards(Entity entityToMove, BlockPos pos, double force) {
+
+    final BlockPos entityPos = entityToMove.getPosition();
+    final double distanceX = (double) pos.getX() - entityPos.getX();
+    final double distanceY = (double) pos.getY() - entityPos.getY();
+    final double distanceZ = (double) pos.getZ() - entityPos.getZ();
+    applyMotion(entityToMove, force, distanceX, distanceY, distanceZ);
+  }
+
+  private static void applyMotion(Entity entityToMove, double force, double distanceX, double distanceY, double distanceZ) {
+    final double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY + distanceZ * distanceZ);
+
+    if (distance > 0) {
+
+      entityToMove.motionX = distanceX / distance * force;
+      entityToMove.motionY = distanceY / distance * force;
+      entityToMove.motionZ = distanceZ / distance * force;
+    }
+  }
+
+  /**
+   * Pushes an entity towards another one.
+   *
+   * @param entityToMove The entity that should be pushed towards the other entity.
+   * @param destination  The destination entity, that the entity to move should be pushed towards.
+   * @param force        The amount of force to push the entityToMove with.
+   */
+  public static void pushTowards(Entity entityToMove, Entity destination, double force) {
+
+    final double distanceX = destination.posX - entityToMove.posX;
+    final double distanceY = destination.posY - entityToMove.posY;
+    final double distanceZ = destination.posZ - entityToMove.posZ;
+    applyMotion(entityToMove, force, distanceX, distanceY, distanceZ);
+  }
+
+  /**
+   * Creates a Vec3d that represents the additional motion that would be needed to push an entity towards a destination.
+   *
+   * @param entityToMove The entity to push.
+   * @param direction    The direction to push the entity.
+   * @param force        The amount of force to use.
+   * @return A Vec3d object that represents the motion of pushing the entity towards the destination.
+   */
+  public static Vec3d pushTowardsDirection(Entity entityToMove, EnumFacing direction, double force) {
+
+    final BlockPos entityPos = entityToMove.getPosition();
+    final BlockPos destination = entityToMove.getPosition().offset(direction.getOpposite(), 1);
+
+    final double distanceX = (double) destination.getX() - entityPos.getX();
+    final double distanceY = (double) destination.getY() - entityPos.getY();
+    final double distanceZ = (double) destination.getZ() - entityPos.getZ();
+    final double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY + distanceZ * distanceZ);
+
+    return distance > 0 ? new Vec3d(entityToMove.motionX = distanceX / distance * force, entityToMove.motionY =
+      distanceY / distance * force, entityToMove.motionZ = distanceZ / distance * force) : new Vec3d(0d, 0d, 0d);
+  }
+
+  /**
+   * Checks if two entities are close enough together.
+   *
+   * @param firstEntity  The first entity to check.
+   * @param secondEntity The second entity to check.
+   * @param maxDistance  The maximum distance that the entities can be apart.
+   * @return boolean True if the distance between the entities are within range of the maxDistance.
+   */
+  public static boolean areEntitiesCloseEnough(Entity firstEntity, Entity secondEntity, double maxDistance) {
+
+    return getDistanceFromEntity(firstEntity, secondEntity) < maxDistance * maxDistance;
+  }
+
+  /**
+   * Calculates the distance between two entities.
+   *
+   * @param firstEntity  The first entity to use.
+   * @param secondEntity The second entity to use.
+   * @return double The distance between the two entities passed.
+   */
+  public static double getDistanceFromEntity(Entity firstEntity, Entity secondEntity) {
+
+    return MathUtils.getDistanceBetweenPoints(firstEntity.getPositionVector(), secondEntity.getPositionVector());
+  }
+
+  /**
+   * Gets a List of entities that are within the provided area.
+   *
+   * @param entityClass The type of entity you are looking for.
+   * @param world       The world to search in.
+   * @param pos         The position to start the search around.
+   * @param range       The range of the search.
+   * @return List<Entity> A List containing all entities of the specified type that are within the range.
+   */
+  @SuppressWarnings("unchecked")
+  public static <T> List<T> getEntitiesInArea(Class<? extends Entity> entityClass, World world, BlockPos pos, int range) {
+
+    return (List<T>) world.getEntitiesWithinAABB(entityClass, new AxisAlignedBB(pos.add(-range, -range, -range), pos.add(range + 1, range + 1, range + 1)));
   }
 
   /**
@@ -174,7 +280,7 @@ public final class EntityUtils {
   public static double getKnockbackResistance(EntityLivingBase entity) {
 
     return entity.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE)
-                 .getAttributeValue();
+      .getAttributeValue();
   }
 
   /**
@@ -254,4 +360,6 @@ public final class EntityUtils {
 
     return entity.getEntityAttribute(attribute).getAttributeValue();
   }
+
+
 }

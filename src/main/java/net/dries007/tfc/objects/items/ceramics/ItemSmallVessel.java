@@ -64,7 +64,7 @@ import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 
@@ -74,7 +74,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Map.Entry;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 
 @ParametersAreNonnullByDefault
@@ -272,7 +272,7 @@ public class ItemSmallVessel extends ItemPottery {
             } else {
               onlySmeltables = false;
             }
-            text.add(1, I18n.format(Reference.TFC + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
+            text.add(1, I18n.format(Mods.Names.TFC + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
             hasContent = true;
           }
         }
@@ -286,14 +286,14 @@ public class ItemSmallVessel extends ItemPottery {
               if (key != null) {
                 int metalAmount = entry.getValue();
                 text.add(textPosition, I18n.format(
-                  Reference.TFC + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()), metalAmount,
+                  Mods.Names.TFC + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()), metalAmount,
                   Math.round((float) metalAmount / totalAmount * 1000) / 10f));
               }
             }
             text.add(textPosition, ""); // Separator between the contents of the vessel and the above units text, not needed but I feel that it helps visually
           }
         } else {
-          text.add(1, I18n.format(Reference.TFC + ".tooltip.small_vessel_empty"));
+          text.add(1, I18n.format(Mods.Names.TFC + ".tooltip.small_vessel_empty"));
         }
       }
       ISmallVesselHandler.super.addHeatInfo(stack, text);

@@ -25,7 +25,7 @@ import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import java.util.List;
 import java.util.Objects;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 

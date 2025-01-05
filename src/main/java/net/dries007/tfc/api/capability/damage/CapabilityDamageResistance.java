@@ -30,7 +30,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import static net.dries007.tfc.Constants.GSON;
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 public final class CapabilityDamageResistance {
 

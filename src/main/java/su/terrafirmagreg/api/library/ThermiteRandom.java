@@ -24,7 +24,6 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * XSTR - Xorshift ThermiteRandom 03.06.2016 version 0.0.4
  */
-@SuppressWarnings("unused")
 public class ThermiteRandom extends Random {
 
   private static final long serialVersionUID = 6208727693524452904L;

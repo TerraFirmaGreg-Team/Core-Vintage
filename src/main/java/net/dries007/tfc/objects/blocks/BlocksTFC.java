@@ -129,7 +129,7 @@ import net.dries007.tfc.util.agriculture.FruitTree;
 
 import lombok.Getter;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.api.types.Rock.Type.ANVIL;
 import static net.dries007.tfc.api.types.Rock.Type.BRICKS;
 import static net.dries007.tfc.api.types.Rock.Type.CLAY;

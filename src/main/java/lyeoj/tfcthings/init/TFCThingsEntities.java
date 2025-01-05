@@ -1,7 +1,5 @@
 package lyeoj.tfcthings.init;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -21,6 +19,8 @@ import lyeoj.tfcthings.renderer.RenderSlingStoneMetal;
 import lyeoj.tfcthings.renderer.RenderThrownRopeBridge;
 import lyeoj.tfcthings.renderer.RenderThrownRopeJavelin;
 import lyeoj.tfcthings.renderer.RenderUnknownProjectile;
+
+import su.terrafirmagreg.api.data.enums.Mods;
 
 public class TFCThingsEntities {
 
@@ -84,12 +84,12 @@ public class TFCThingsEntities {
 
   public static void registerEntities() {
     for (MobInfo info : MOB_ENTITY_INFOS) {
-      EntityRegistry.registerModEntity(new ResourceLocation(Reference.TFCTHINGS, info.name),
+      EntityRegistry.registerModEntity(new ResourceLocation(Mods.Names.TFCTHINGS, info.name),
                                        info.entityClass, info.name, info.id, TFCThings.instance, info.trackingRange,
                                        info.updateFrequency, info.sendsVelocityUpdates, info.eggP, info.eggS);
     }
     for (NonMobEntityInfo info : NON_MOB_ENTITY_INFOS) {
-      EntityRegistry.registerModEntity(new ResourceLocation(Reference.TFCTHINGS, info.name),
+      EntityRegistry.registerModEntity(new ResourceLocation(Mods.Names.TFCTHINGS, info.name),
                                        info.entityClass, info.name, info.id, TFCThings.instance, info.trackingRange,
                                        info.updateFrequency, info.sendsVelocityUpdates);
     }

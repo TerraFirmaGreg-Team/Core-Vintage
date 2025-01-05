@@ -14,7 +14,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  *
  * @author diesieben07
  */
-@SuppressWarnings("unused")
 @SideOnly(Side.CLIENT)
 public interface MeshDefinitionFix extends ItemMeshDefinition {
 

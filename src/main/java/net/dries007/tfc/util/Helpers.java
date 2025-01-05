@@ -67,7 +67,7 @@ import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
 import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -232,12 +232,12 @@ public final class Helpers {
   }
 
   public static String getEnumName(Enum<?> anEnum) {
-    return JOINER_DOT.join(Reference.TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
+    return JOINER_DOT.join(Mods.Names.TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
   }
 
   public static String getTypeName(IForgeRegistryEntry<?> type) {
     //noinspection ConstantConditions
-    return JOINER_DOT.join(Reference.TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
+    return JOINER_DOT.join(Mods.Names.TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
   }
 
   public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {

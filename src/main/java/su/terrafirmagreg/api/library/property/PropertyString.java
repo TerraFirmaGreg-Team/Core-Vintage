@@ -3,18 +3,18 @@ package su.terrafirmagreg.api.library.property;
 import net.minecraft.block.properties.PropertyHelper;
 
 import com.google.common.base.Optional;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 public class PropertyString extends PropertyHelper<String> {
 
   private final Collection<String> possibleValues;
 
-  private final Map<String, Integer> valueMap = new HashMap<>();
+  private final Map<String, Integer> valueMap = new Object2ObjectOpenHashMap<>();
 
   private PropertyString(String name, String... values) {
 

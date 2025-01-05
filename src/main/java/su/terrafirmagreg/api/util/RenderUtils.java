@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -40,11 +39,10 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @UtilityClass
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "deprecation"})
 public final class RenderUtils {
 
-  public static void putVertex(UnpackedBakedQuad.Builder builder, VertexFormat format, Optional<TRSRTransformation> transform, EnumFacing side, float x, float y,
-                               float z, float u, float v, float r, float g, float b, float a) {
+  public static void putVertex(UnpackedBakedQuad.Builder builder, VertexFormat format, Optional<TRSRTransformation> transform, EnumFacing side, float x, float y, float z, float u, float v, float r, float g, float b, float a) {
     Vector4f vec = new Vector4f();
     for (int e = 0; e < format.getElementCount(); e++) {
       switch (format.getElement(e).getUsage()) {
@@ -72,7 +70,7 @@ public final class RenderUtils {
           }
         case NORMAL:
           builder.put(e, (float) side.getXOffset(), (float) side.getYOffset(),
-                      (float) side.getZOffset(), 0f);
+            (float) side.getZOffset(), 0f);
           break;
         default:
           builder.put(e);
@@ -148,7 +146,7 @@ public final class RenderUtils {
   }
 
   public static IBakedModel getBakedModel(IBlockState blockState) {
-    return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(blockState);
+    return GameUtils.getBlockRenderer().getBlockModelShapes().getModelForState(blockState);
   }
 
   public static IBakedModel getBakedModel(ItemStack stack) {
@@ -161,7 +159,7 @@ public final class RenderUtils {
       return getBakedModel(blockState);
 
     } else {
-      return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
+      return GameUtils.getRenderItem().getItemModelMesher().getItemModel(stack);
     }
   }
 
@@ -171,7 +169,7 @@ public final class RenderUtils {
   }
 
   public static TextureAtlasSprite getTopTextureFromBlockstate(IBlockState state) {
-    final var modelShapes = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes();
+    final var modelShapes = GameUtils.getBlockRenderer().getBlockModelShapes();
     final IBakedModel model = modelShapes.getModelForState(state);
 
     if (model != modelShapes.getModelManager().getMissingModel()) {
@@ -183,11 +181,11 @@ public final class RenderUtils {
 
   public static TextureAtlasSprite getTextureFromBlock(Block block, int meta) {
     IBlockState state = block.getStateFromMeta(meta);
-    return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(state);
+    return GameUtils.getBlockRenderer().getBlockModelShapes().getTexture(state);
   }
 
   public static TextureAtlasSprite getTextureFromBlockstate(IBlockState state) {
-    return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(state);
+    return GameUtils.getBlockRenderer().getBlockModelShapes().getTexture(state);
   }
 
   public static ImmutableMap<TransformType, TRSRTransformation> getTransforms(IBakedModel model) {
@@ -203,8 +201,8 @@ public final class RenderUtils {
 
   // Code based on code from The Betweenlands
   public static void renderInvalidArea(World world, BlockPos blockPos, int yOffset) {
-    if (StreamSupport.stream(Minecraft.getMinecraft().player.getHeldEquipment().spliterator(), false)
-                     .anyMatch(stack -> !stack.isEmpty() && stack.getItem() == Items.LEAD)) {
+    if (StreamSupport.stream(GameUtils.getMinecraft().player.getHeldEquipment().spliterator(), false)
+      .anyMatch(stack -> !stack.isEmpty() && stack.getItem() == Items.LEAD)) {
 
       renderUsedArea(world, blockPos, yOffset, 0.55F, 0.15F);
     }
@@ -243,7 +241,7 @@ public final class RenderUtils {
 
   private static void renderBoxes(World world, BlockPos blockPos, int yOffset, float invalidAplha, float validAplha) {
     final int BOX_SIZE = 3;
-    final var renderManager = Minecraft.getMinecraft().getRenderManager();
+    final var renderManager = GameUtils.getMinecraft().getRenderManager();
 
     for (int x = -BOX_SIZE; x <= BOX_SIZE; x++) {
       for (int y = yOffset; y <= 1 + yOffset; y++) {
@@ -259,7 +257,7 @@ public final class RenderUtils {
               GlStateManager.color(1, 0, 0, invalidAplha);
               drawBoundingBoxOutline(new AxisAlignedBB(pos).offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ));
               drawBoundingBox(state.getBoundingBox(world, pos).offset(pos)
-                                   .offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ));
+                .offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ));
             } else {
               GlStateManager.color(0, 1, 0, validAplha);
               drawBoundingBoxOutline(new AxisAlignedBB(pos).offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ));

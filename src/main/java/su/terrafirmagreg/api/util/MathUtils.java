@@ -142,7 +142,7 @@ public final class MathUtils {
   public static double round(double value, int places) {
 
     return value >= 0 && places > 0 ? BigDecimal.valueOf(value)
-                                                .setScale(places, RoundingMode.HALF_UP).doubleValue() : value;
+      .setScale(places, RoundingMode.HALF_UP).doubleValue() : value;
   }
 
   /**
@@ -181,13 +181,13 @@ public final class MathUtils {
   @Nullable
   public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
     Vec3d playerVec = new Vec3d(playerIn.posX, playerIn.posY + playerIn.getEyeHeight(),
-                                playerIn.posZ);
+      playerIn.posZ);
     float cosYaw = MathHelper.cos(-playerIn.rotationYaw * 0.017453292F - PI);
     float sinYaw = MathHelper.sin(-playerIn.rotationYaw * 0.017453292F - PI);
     float cosPitch = -MathHelper.cos(-playerIn.rotationPitch * 0.017453292F);
     float sinPitch = MathHelper.sin(-playerIn.rotationPitch * 0.017453292F);
     double reachDistance = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE)
-                                   .getAttributeValue();
+      .getAttributeValue();
     Vec3d targetVec = playerVec.add(
       (sinYaw * cosPitch) * reachDistance,
       sinPitch * reachDistance,

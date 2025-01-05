@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.library;
 
 import java.util.Objects;
 
-@SuppressWarnings("unused")
 @FunctionalInterface
 public interface TriPredicate<X, Y, Z> {
 

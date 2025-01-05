@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.gregtech.common.blocks;
 
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
+import su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -26,15 +26,20 @@ public class BlockOreMixin {
   @Final
   public Material field_149764_J;
 
-  @Inject(method = "func_180660_a", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  private Material getMaterial() {
+    return field_149764_J;
+  }
+
+
+  @Inject(method = "getItemDropped", at = @At(value = "HEAD"), cancellable = true)
   private void getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune, CallbackInfoReturnable<Item> cir) {
-    var itemStack = OreDictUnifier.get(TFGOrePrefix.oreChunk, field_149764_J);
+    var itemStack = OreDictUnifier.get(OrePrefixCoreHandler.oreChunk, getMaterial());
     cir.setReturnValue(itemStack.getItem());
   }
 
-  @Inject(method = "func_180651_a", at = @At(value = "HEAD"), remap = false, cancellable = true)
+  @Inject(method = "damageDropped", at = @At(value = "HEAD"), cancellable = true)
   private void damageDropped(IBlockState state, CallbackInfoReturnable<Integer> cir) {
-    var itemStack = OreDictUnifier.get(TFGOrePrefix.oreChunk, field_149764_J);
+    var itemStack = OreDictUnifier.get(OrePrefixCoreHandler.oreChunk, getMaterial());
     cir.setReturnValue(itemStack.getItemDamage());
   }
 }

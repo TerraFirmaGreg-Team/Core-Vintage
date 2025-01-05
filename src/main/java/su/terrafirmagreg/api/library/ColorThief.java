@@ -18,6 +18,8 @@ package su.terrafirmagreg.api.library;
  * available at http://lokeshdhakar.com/projects/color-thief/
  */
 
+import mezz.jei.color.MMCQ;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.image.BufferedImage;

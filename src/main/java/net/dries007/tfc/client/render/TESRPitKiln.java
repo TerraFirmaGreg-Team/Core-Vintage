@@ -24,7 +24,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.objects.te.TEPitKiln;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRPitKiln extends TileEntitySpecialRenderer<TEPitKiln> {

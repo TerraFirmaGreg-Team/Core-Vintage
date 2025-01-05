@@ -33,7 +33,7 @@ import vazkii.patchouli.api.PatchouliAPI;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 public class TFCPatchouliPlugin {
 

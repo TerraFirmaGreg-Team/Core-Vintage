@@ -52,7 +52,7 @@ import tfcflorae.util.RegenWildCropsTFCF;
 
 import java.util.*;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 
 /**

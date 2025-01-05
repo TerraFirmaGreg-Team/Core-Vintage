@@ -1,7 +1,5 @@
 package tfcflorae.client;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDoor;
@@ -31,6 +29,9 @@ import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import tfcflorae.ConfigTFCF;
 import tfcflorae.api.stateproperty.StatePropertiesTFCF;
 import tfcflorae.client.render.TESRFruitChestTFCF;
@@ -70,10 +71,10 @@ import tfcflorae.objects.te.TEFruitLoom;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = Reference.TFCF)
+@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = Mods.Names.TFCF)
 public class ClientRegisterEventsTFCF {
 
   private final java.util.Map<net.minecraftforge.registries.IRegistryDelegate<Item>, IItemColor> itemColorMap = com.google.common.collect.Maps.newHashMap();

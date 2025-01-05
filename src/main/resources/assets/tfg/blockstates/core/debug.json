@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:core/debug",
+    "textures": {
+      "all": "tfg:blocks/core/debug"
+    }
+  },
+  "variants": {
+    "normal": [ {} ],
+    "inventory": [ {} ]
+  }
+}

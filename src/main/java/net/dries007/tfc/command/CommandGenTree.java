@@ -24,7 +24,7 @@ import net.dries007.tfc.api.types.Tree;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

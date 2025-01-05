@@ -17,7 +17,7 @@ import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.util.BackgroundDrawable;
 import net.dries007.tfc.compat.jei.wrappers.RockLayerWrapper;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class RockLayerCategory extends BaseRecipeCategory<RockLayerWrapper> {
 
-  private static final ResourceLocation BACKGROUND = new ResourceLocation(Reference.TFC, "textures/gui/jei_rocklayer.png");
+  private static final ResourceLocation BACKGROUND = new ResourceLocation(Mods.Names.TFC, "textures/gui/jei_rocklayer.png");
 
   public RockLayerCategory(IGuiHelper helper, String Uid) {
     super(new BackgroundDrawable(BACKGROUND, 164, 110), Uid);

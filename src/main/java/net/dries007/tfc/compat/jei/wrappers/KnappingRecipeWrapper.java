@@ -23,7 +23,7 @@ import net.dries007.tfc.util.Helpers;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @ParametersAreNonnullByDefault
 public class KnappingRecipeWrapper implements IRecipeWrapper {

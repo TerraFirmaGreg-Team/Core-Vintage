@@ -1,7 +1,5 @@
 package lyeoj.tfcthings.registry;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -23,9 +21,11 @@ import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import javax.annotation.Nonnull;
 
-@Mod.EventBusSubscriber(modid = Reference.TFCTHINGS, value = Side.CLIENT)
+@Mod.EventBusSubscriber(modid = Mods.Names.TFCTHINGS, value = Side.CLIENT)
 public class RegistryHandlerClient {
 
   @SubscribeEvent

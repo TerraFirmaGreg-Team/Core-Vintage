@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.library;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-@SuppressWarnings("unused")
 public class NBTBuilder {
 
   private final NBTTagCompound nbt;

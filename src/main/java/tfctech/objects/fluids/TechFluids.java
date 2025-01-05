@@ -10,12 +10,12 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 public final class TechFluids {
 
-  private static final ResourceLocation LAVA_STILL = new ResourceLocation(Reference.TFC, "blocks/lava_still");
-  private static final ResourceLocation LAVA_FLOW = new ResourceLocation(Reference.TFC, "blocks/lava_flow");
+  private static final ResourceLocation LAVA_STILL = new ResourceLocation(Mods.Names.TFC, "blocks/lava_still");
+  private static final ResourceLocation LAVA_FLOW = new ResourceLocation(Mods.Names.TFC, "blocks/lava_flow");
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
 
   public static FluidWrapper LATEX;

@@ -1,19 +1,20 @@
 package tfcflorae.types;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Plant;
+
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import tfcflorae.ConfigTFCF;
 
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
 
 @SuppressWarnings("WeakerAccess")
-@Mod.EventBusSubscriber(modid = Reference.TFCF)
+@Mod.EventBusSubscriber(modid = Mods.Names.TFCF)
 public final class PlantsTFCF {
 
   public static final ResourceLocation CATTAIL = new ResourceLocation(TFCF, "cattail");

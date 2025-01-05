@@ -5,6 +5,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
 import com.google.common.collect.Lists;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,8 +14,6 @@ import org.jetbrains.annotations.Nullable;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,7 +26,7 @@ public final class BiomeUtils {
    * A cache of type names to their value. This is implemented to make type lookup much faster as forge does not offer this for some reason. This is populated
    * by the first call to {@link #getType(String)}
    */
-  private static final Map<String, BiomeDictionary.Type> typeMap = new HashMap<>();
+  private static final Map<String, BiomeDictionary.Type> typeMap = new Object2ObjectOpenHashMap<>();
 
   /**
    * Gets a list of biomes for a type string.
@@ -65,7 +65,7 @@ public final class BiomeUtils {
    */
   public static Set<Biome> getBiomesForTypes(BiomeDictionary.Type... types) {
 
-    final Set<Biome> biomes = new HashSet<>();
+    final Set<Biome> biomes = new ObjectOpenHashSet<>();
 
     for (final BiomeDictionary.Type type : types) {
 
@@ -76,6 +76,13 @@ public final class BiomeUtils {
     }
 
     return biomes;
+  }
+
+  public static boolean isBiomeDesired(Biome biome, Biome... biomes) {
+    for (Biome b : biomes) {
+      return b == biome;
+    }
+    return false;
   }
 
   public static Biome getBiomeForLoc(ResourceLocation location) {

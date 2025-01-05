@@ -8,8 +8,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * This class allows for snapshots of the game's performance to be created.
  */
-@SuppressWarnings("unused")
 @SideOnly(Side.CLIENT)
+@SuppressWarnings("unused")
 public class PerformanceInfo {
 
   /**
@@ -136,8 +136,8 @@ public class PerformanceInfo {
   public String getMemoryString() {
 
     return String.format("Mem:% 2d%% %03d/%03dMB",
-                         this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb(),
-                         this.getMaxMemoryMb());
+      this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb(),
+      this.getMaxMemoryMb());
   }
 
   /**
@@ -188,6 +188,6 @@ public class PerformanceInfo {
   public String getAllocatedString() {
 
     return String.format("Allocated:% 2d%% %03dMB",
-                         this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb());
+      this.getUsedMemory() * 100L / this.getMaxMemory(), this.getUsedMemoryMb());
   }
 }

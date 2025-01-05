@@ -25,7 +25,7 @@ import net.dries007.tfc.util.skills.SmithingSkill;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFCF)

@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.core.modules.gregtech.oreprefix.TFGOrePrefix;
+import su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -164,7 +164,7 @@ import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
 import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
 import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 /**
  * In 1.14+, every line in here needs to be a json file. Yay, but also ugh.
@@ -512,25 +512,25 @@ public final class DefaultRecipes {
     // these recipes cover all cases where multiple stone items can be made
     // recipes are already mirror checked
     event.getRegistry().registerAll(
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_1"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_2"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Stone, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_3"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCoreHandler.toolHeadKnife, Materials.Stone, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_1"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCoreHandler.toolHeadKnife, Materials.Stone, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_2"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCoreHandler.toolHeadKnife, Materials.Stone, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_3"),
 
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "stone_hoe_head_1"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_2"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_3"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "stone_hoe_head_4"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Stone, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_5"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "stone_hoe_head_1"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_2"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_3"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "stone_hoe_head_4"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Stone, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_5"),
 
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Flint, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_1"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Flint, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_2"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadKnife, Materials.Flint, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_3"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCoreHandler.toolHeadKnife, Materials.Flint, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_1"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCoreHandler.toolHeadKnife, Materials.Flint, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_2"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCoreHandler.toolHeadKnife, Materials.Flint, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_3"),
 
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "flint_hoe_head_1"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_2"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_3"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "flint_hoe_head_4"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(TFGOrePrefix.toolHeadHoe, Materials.Flint, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_5")
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "flint_hoe_head_1"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_2"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_3"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "flint_hoe_head_4"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCoreHandler.toolHeadHoe, Materials.Flint, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_5")
 
     );
 

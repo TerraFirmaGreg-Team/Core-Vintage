@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.data.DamageSources;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -37,7 +39,6 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.advancements.TFCTriggers;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
-import net.dries007.tfc.util.DamageSourcesTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -189,7 +190,7 @@ public class BlockOven extends Block implements ILightableBlock, IItemSize {
               ItemHandlerHelper.giveItemToPlayer(player, takeStack);
               te.markForSync();
               if (ConfigFL.General.BALANCE.peelNeeded && te.willDamage() && !OreDictionaryHelper.doesStackMatchOre(held, "peel") && state.getValue(CURED)) {
-                player.attackEntityFrom(DamageSourcesTFC.GRILL, 2.0F); // damage player if they don't use peel
+                player.attackEntityFrom(DamageSources.GRILL, 2.0F); // damage player if they don't use peel
               }
               return true;
             }

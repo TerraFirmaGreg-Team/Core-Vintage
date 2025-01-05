@@ -47,7 +47,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.ICalendarFormatted;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -123,17 +123,17 @@ public class ItemBlockBarrel extends ItemBlockTFC {
 
       if (fluidStack == null || fluidStack.amount == 0) {
         if (inventory.isEmpty()) {
-          tooltip.add(TextFormatting.BLUE + I18n.format(Reference.TFC + ".tooltip.barrel_empty"));
+          tooltip.add(TextFormatting.BLUE + I18n.format(Mods.Names.TFC + ".tooltip.barrel_empty"));
         } else {
           tooltip.add(TextFormatting.BLUE + I18n.format(
-            Reference.TFC + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+            Mods.Names.TFC + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
         }
       } else {
-        tooltip.add(TextFormatting.BLUE + I18n.format(Reference.TFC + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
+        tooltip.add(TextFormatting.BLUE + I18n.format(Mods.Names.TFC + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
 
         if (!inventory.isEmpty()) {
           tooltip.add(TextFormatting.BLUE + I18n.format(
-            Reference.TFC + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+            Mods.Names.TFC + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
         }
       }
 

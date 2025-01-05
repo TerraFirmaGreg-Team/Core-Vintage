@@ -16,7 +16,6 @@ import java.util.List;
 
 import static su.terrafirmagreg.Tags.MOD_NAME;
 
-
 /**
  * A wrapper to the Log4J wrapper, which adds some extra utility, such as the stack trace being added to warning messages.
  */

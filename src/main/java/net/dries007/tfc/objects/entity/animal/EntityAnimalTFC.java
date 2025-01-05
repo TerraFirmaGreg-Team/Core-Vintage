@@ -53,7 +53,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 public abstract class EntityAnimalTFC extends EntityAnimal implements IAnimalTFC {
 

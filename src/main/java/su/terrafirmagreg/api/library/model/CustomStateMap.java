@@ -36,6 +36,10 @@ public class CustomStateMap extends StateMapperBase {
     this.path = builder.path;
   }
 
+  public static Builder builder() {
+    return new Builder();
+  }
+
   @Override
   protected @NotNull ModelResourceLocation getModelResourceLocation(IBlockState state) {
     Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
@@ -96,7 +100,9 @@ public class CustomStateMap extends StateMapperBase {
     }
 
     public Builder ignore(IProperty<?>... ignores) {
-      Collections.addAll(this.ignored, ignores);
+      if (ignores != null && ignores.length > 0) {
+        Collections.addAll(this.ignored, ignores);
+      }
       return this;
     }
 
@@ -111,7 +117,10 @@ public class CustomStateMap extends StateMapperBase {
     }
 
     public Builder customResource(ResourceLocation resourceLocation) {
-      this.resourceLocation = resourceLocation;
+      if (resourceLocation != null) {
+        this.resourceLocation = resourceLocation;
+      }
+
       return this;
     }
 

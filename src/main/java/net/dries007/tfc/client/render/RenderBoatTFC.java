@@ -22,7 +22,7 @@ import net.dries007.tfc.objects.entity.EntityBoatTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault

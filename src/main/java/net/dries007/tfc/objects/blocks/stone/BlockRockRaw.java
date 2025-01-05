@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
-import su.terrafirmagreg.core.util.GemsFromRawRocks;
+import su.terrafirmagreg.temp.util.GemsFromRawRocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;

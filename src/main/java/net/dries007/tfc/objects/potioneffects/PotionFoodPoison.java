@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.objects.potioneffects;
 
-import net.dries007.tfc.util.DamageSourcesTFC;
+import su.terrafirmagreg.api.data.DamageSources;
 
 import net.minecraft.entity.EntityLivingBase;
 
@@ -21,7 +21,7 @@ public class PotionFoodPoison extends PotionTFC {
 
   @Override
   public void performEffect(@Nonnull EntityLivingBase entity, int amplifier) {
-    entity.attackEntityFrom(DamageSourcesTFC.FOOD_POISON, 1.0F * (amplifier + 1));
+    entity.attackEntityFrom(DamageSources.FOOD_POISON, 1.0F * (amplifier + 1));
   }
 
   @Override

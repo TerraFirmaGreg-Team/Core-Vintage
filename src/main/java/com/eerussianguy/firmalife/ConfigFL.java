@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.eerussianguy.firmalife.util.HelpersFL;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 
@@ -19,9 +19,9 @@ public class ConfigFL {
   public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
     if (event.getModID().equals(MOD_ID)) {
       if (ConfigFL.General.COMPAT.logging) {FirmaLife.logger.warn("Config changed.");}
-      ConfigManager.sync(Reference.TFC, Config.Type.INSTANCE);
+      ConfigManager.sync(Mods.Names.TFC, Config.Type.INSTANCE);
     }
-    if (event.getModID().equals(Reference.TFC)) {
+    if (event.getModID().equals(Mods.Names.TFC)) {
       HelpersFL.insertWhitelist();
     }
   }

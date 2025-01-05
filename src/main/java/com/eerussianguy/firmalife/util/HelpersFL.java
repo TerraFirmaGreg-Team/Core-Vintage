@@ -17,7 +17,7 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -36,7 +36,7 @@ public class HelpersFL {
   }
 
   public static void insertWhitelist() {
-    ConfigManager.sync(Reference.TFC, Config.Type.INSTANCE);
+    ConfigManager.sync(Mods.Names.TFC, Config.Type.INSTANCE);
     String[] additions = {"yeast_starter", "coconut_milk", "yak_milk", "zebu_milk", "goat_milk", "curdled_goat_milk", "curdled_yak_milk", "pina_colada"};
     if (ConfigFL.General.COMPAT.addToWoodenBucket) {
       Set<String> woodenBucketSet = new HashSet<>(Arrays.asList(ConfigTFC.General.MISC.woodenBucketWhitelist));

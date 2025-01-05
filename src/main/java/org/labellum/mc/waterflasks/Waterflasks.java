@@ -19,6 +19,8 @@ package org.labellum.mc.waterflasks;
     along with WaterFlasks.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -42,8 +44,6 @@ import net.dries007.tfc.util.Helpers;
 import org.labellum.mc.waterflasks.item.ModItems;
 import org.labellum.mc.waterflasks.proxy.CommonProxy;
 
-import su.terrafirmagreg.api.data.Reference;
-
 @Mod(
   modid = Waterflasks.MOD_ID,
   name = Waterflasks.MOD_NAME,
@@ -55,20 +55,16 @@ public class Waterflasks {
   public static final String MOD_ID = "waterflasks";
   public static final String MOD_NAME = "WaterFlasks";
   public static final String VERSION = "1.9";
-  public static final String DEPENDENCIES = "required-after:" + Reference.TFC +
+  public static final String DEPENDENCIES = "required-after:" + Mods.Names.TFC +
                                             "@[" + "1.0.0.127" + ",)";
-
+  @GameRegistry.ObjectHolder("waterflasks:item.flaskbreak")
+  public static final SoundEvent FLASK_BREAK = Helpers.getNull();
   /**
    * Many thanks to Shadowfacts' 1.12.2 modding tutorial. Fingerprints from it remain...
    */
 
   @Mod.Instance(MOD_ID)
   public static Waterflasks INSTANCE;
-
-  @GameRegistry.ObjectHolder("waterflasks:item.flaskbreak")
-  public static final SoundEvent FLASK_BREAK = (SoundEvent) Helpers.getNull();
-
-
   @SidedProxy(serverSide = "org.labellum.mc.waterflasks.proxy.CommonProxy",
               clientSide = "org.labellum.mc.waterflasks.proxy.ClientProxy")
   public static CommonProxy proxy;
@@ -87,7 +83,7 @@ public class Waterflasks {
     LootFunctionManager.registerFunction(new ApplyRequiredSkill.Serializer(new ResourceLocation(MOD_ID, "apply_req_skill")));
   }
 
-  @Mod.EventBusSubscriber
+  @Mod.EventBusSubscriber(modid = MOD_ID)
   public static class ObjectRegistryHandler {
 
     /**
@@ -153,10 +149,10 @@ public class Waterflasks {
 
     private static void addPool(LootTableLoadEvent event, String tableName) {
       LootEntry entry = new LootEntryTable(new ResourceLocation("waterflasks:" + tableName),
-                                           1, 0, new LootCondition[0], "waterflasks_bladder_entry");
+        1, 0, new LootCondition[0], "waterflasks_bladder_entry");
 
       LootPool newPool = new LootPool(new LootEntry[]{entry}, new LootCondition[0],
-                                      new RandomValueRange(1), new RandomValueRange(0), "waterflasks_bladder_pool");
+        new RandomValueRange(1), new RandomValueRange(0), "waterflasks_bladder_pool");
       //weights here seemed screwy. Implemented own skill function, applied in json data
       event.getTable().addPool(newPool);
     }

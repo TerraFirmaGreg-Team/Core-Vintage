@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.Alloy;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -39,7 +39,7 @@ public class ItemBlockCrucible extends ItemBlockTFC {
       Alloy alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
       alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
       String metalName = (new TextComponentTranslation(alloy.getResult().getTranslationKey())).getFormattedText();
-      tooltip.add(I18n.format(Reference.TFC + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));
+      tooltip.add(I18n.format(Mods.Names.TFC + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));
     }
   }
 }

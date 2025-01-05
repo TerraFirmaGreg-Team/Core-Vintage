@@ -5,7 +5,7 @@
 
 package net.dries007.tfc.compat.jei.wrappers;
 
-import su.terrafirmagreg.core.util.TFGModUtils;
+import su.terrafirmagreg.temp.util.TFGModUtils;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -40,7 +40,7 @@ public class UnmoldRecipeWrapper implements IRecipeWrapper {
     ItemStack outputTest = OreDictUnifier.get(oreDict);
 
     if (!outputTest.getItem().equals(Items.AIR)) {
-      this.output = OreDictUnifier.get(oreDict);
+      this.output = outputTest;
     } else {
       this.output = new ItemStack(ItemMetal.get(metal, type));
     }

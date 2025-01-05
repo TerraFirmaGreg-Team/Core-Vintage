@@ -1,7 +1,5 @@
 package lyeoj.tfcthings.renderer;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -11,15 +9,17 @@ import lyeoj.tfcthings.entity.living.EntityPigvil;
 import lyeoj.tfcthings.init.TFCThingsBlocks;
 import lyeoj.tfcthings.model.ModelPigvil;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import javax.annotation.Nullable;
 
 public class RenderPigvil extends RenderLiving<EntityPigvil> {
 
-  private static final ResourceLocation PIGVIL = new ResourceLocation(Reference.TFCTHINGS, "textures/entity/pigvil.png");
-  private static final ResourceLocation PIGVIL_BLACK = new ResourceLocation(Reference.TFCTHINGS, "textures/entity/pigvil_black.png");
-  private static final ResourceLocation PIGVIL_RED = new ResourceLocation(Reference.TFCTHINGS, "textures/entity/pigvil_red.png");
-  private static final ResourceLocation PIGVIL_BLUE = new ResourceLocation(Reference.TFCTHINGS, "textures/entity/pigvil_blue.png");
-  private static final ResourceLocation PIGVIL_PURPLE = new ResourceLocation(Reference.TFCTHINGS, "textures/entity/pigvil_purple.png");
+  private static final ResourceLocation PIGVIL = new ResourceLocation(Mods.Names.TFCTHINGS, "textures/entity/pigvil.png");
+  private static final ResourceLocation PIGVIL_BLACK = new ResourceLocation(Mods.Names.TFCTHINGS, "textures/entity/pigvil_black.png");
+  private static final ResourceLocation PIGVIL_RED = new ResourceLocation(Mods.Names.TFCTHINGS, "textures/entity/pigvil_red.png");
+  private static final ResourceLocation PIGVIL_BLUE = new ResourceLocation(Mods.Names.TFCTHINGS, "textures/entity/pigvil_blue.png");
+  private static final ResourceLocation PIGVIL_PURPLE = new ResourceLocation(Mods.Names.TFCTHINGS, "textures/entity/pigvil_purple.png");
 
   public RenderPigvil(RenderManager rendermanagerIn) {
     super(rendermanagerIn, new ModelPigvil(), 0.7F);

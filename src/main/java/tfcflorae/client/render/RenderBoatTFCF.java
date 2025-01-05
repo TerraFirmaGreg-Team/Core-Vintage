@@ -18,7 +18,7 @@ import tfcflorae.objects.blocks.entity.EntityBoatTFCF;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault

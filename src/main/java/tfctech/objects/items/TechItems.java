@@ -1,7 +1,5 @@
 package tfctech.objects.items;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -33,6 +31,9 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.util.OreDictionaryHelper;
+
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import tfctech.objects.blocks.TechBlocks;
 import tfctech.objects.items.ceramics.ItemFluidBowl;
 import tfctech.objects.items.ceramics.ItemTechMold;
@@ -49,7 +50,7 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.data.Reference.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFCTECH)
@@ -220,20 +221,20 @@ public final class TechItems {
     metalItems.add(register(r, "metal/iron_draw_plate", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.DRAW_PLATE)
                                                                               .setMaxDamage(ToolMaterialsTFC.WROUGHT_IRON.getMaxUses())
                                                                               .setMaxStackSize(1), CT_METAL));
-    metalItems.add(register(r, "metal/steel_draw_plate", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.TFC, "steel")), ItemTechMetal.ItemType.DRAW_PLATE)
+    metalItems.add(register(r, "metal/steel_draw_plate", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "steel")), ItemTechMetal.ItemType.DRAW_PLATE)
                                                                                .setMaxDamage(ToolMaterialsTFC.STEEL.getMaxUses())
                                                                                .setMaxStackSize(1), CT_METAL));
-    metalItems.add(register(r, "metal/black_steel_draw_plate", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.TFC, "black_steel")), ItemTechMetal.ItemType.DRAW_PLATE)
+    metalItems.add(register(r, "metal/black_steel_draw_plate", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "black_steel")), ItemTechMetal.ItemType.DRAW_PLATE)
                                                                                      .setMaxDamage(ToolMaterialsTFC.BLACK_STEEL.getMaxUses())
                                                                                      .setMaxStackSize(1), CT_METAL));
     metalItems.add(register(r, "metal/iron_tongs", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.TONGS)
                                                                          .setMaxStackSize(1), CT_MISC));
 
-    metalItems.add(register(r, "metal/copper_inductor", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.TFC, "copper")), ItemTechMetal.ItemType.INDUCTOR), CT_METAL));
+    metalItems.add(register(r, "metal/copper_inductor", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "copper")), ItemTechMetal.ItemType.INDUCTOR), CT_METAL));
 
-    metalItems.add(register(r, "metal/tin_sleeve", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.TFC, "tin")), ItemTechMetal.ItemType.SLEEVE), CT_METAL));
-    metalItems.add(register(r, "metal/brass_sleeve", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.TFC, "brass")), ItemTechMetal.ItemType.SLEEVE), CT_METAL));
-    metalItems.add(register(r, "metal/steel_sleeve", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Reference.TFC, "steel")), ItemTechMetal.ItemType.SLEEVE), CT_METAL));
+    metalItems.add(register(r, "metal/tin_sleeve", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "tin")), ItemTechMetal.ItemType.SLEEVE), CT_METAL));
+    metalItems.add(register(r, "metal/brass_sleeve", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "brass")), ItemTechMetal.ItemType.SLEEVE), CT_METAL));
+    metalItems.add(register(r, "metal/steel_sleeve", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "steel")), ItemTechMetal.ItemType.SLEEVE), CT_METAL));
 
     for (Metal metal : TFCRegistries.METALS.getValuesCollection()) {
       if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(false)) {continue;}

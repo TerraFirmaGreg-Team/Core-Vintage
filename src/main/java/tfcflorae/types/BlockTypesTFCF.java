@@ -14,7 +14,7 @@ import net.dries007.tfc.util.Helpers;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.data.Reference.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
 
 public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
 

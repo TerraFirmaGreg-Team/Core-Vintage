@@ -30,7 +30,7 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.ItemMiscTech;
@@ -122,9 +122,9 @@ public class ItemGlassMolder extends ItemMiscTech {
       if (fluid != null) {
         String fluidDesc = TextFormatting.DARK_GREEN + fluid.getLocalizedName() + TextFormatting.WHITE;
         if (isSolidified()) {
-          fluidDesc += I18n.format(Reference.TFC + ".tooltip.solid");
+          fluidDesc += I18n.format(Mods.Names.TFC + ".tooltip.solid");
         } else if (canWork()) {
-          fluidDesc += I18n.format(Reference.TFC + ".tooltip.liquid");
+          fluidDesc += I18n.format(Mods.Names.TFC + ".tooltip.liquid");
         }
         tooltip.add(fluidDesc);
       }

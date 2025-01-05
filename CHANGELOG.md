@@ -1,8 +1,14 @@
 # Changelog
 
-## [1.0] - 2023-09-16
+## [1.0.0] - 0000-00-00
 
-### Added
+### Сделано
 
-- This is a default template changelog that follows
-  the [KeepAChangelog Convention](https://keepachangelog.com/en/1.1.0/)
+- Фрамейворк TerraFirmaGreg создан
+  - NetworkManager
+  - RegistryManager
+  - ModuleManager
+  - ? ConfigManager
+  - ? GeneratorManager
+
+

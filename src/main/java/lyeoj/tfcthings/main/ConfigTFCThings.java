@@ -1,7 +1,5 @@
 package lyeoj.tfcthings.main;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -10,8 +8,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.util.calendar.CalendarTFC;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+
 @Mod.EventBusSubscriber(
-  modid = Reference.TFCTHINGS
+  modid = Mods.Names.TFCTHINGS
 )
 public class ConfigTFCThings {
 
@@ -19,14 +19,14 @@ public class ConfigTFCThings {
 
   @SubscribeEvent
   public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
-    if (event.getModID().equals(Reference.TFCTHINGS)) {
+    if (event.getModID().equals(Mods.Names.TFCTHINGS)) {
       TFCThings.LOGGER.warn("Config changed");
-      ConfigManager.sync(Reference.TFCTHINGS, Config.Type.INSTANCE);
+      ConfigManager.sync(Mods.Names.TFCTHINGS, Config.Type.INSTANCE);
     }
   }
 
   @Config(
-    modid = Reference.TFCTHINGS,
+    modid = Mods.Names.TFCTHINGS,
     category = "items",
     name = "TerraFirmaThings - Items"
   )
@@ -279,7 +279,7 @@ public class ConfigTFCThings {
   }
 
   @Config(
-    modid = Reference.TFCTHINGS,
+    modid = Mods.Names.TFCTHINGS,
     category = "misc",
     name = "TerraFirmaThings - Misc"
   )

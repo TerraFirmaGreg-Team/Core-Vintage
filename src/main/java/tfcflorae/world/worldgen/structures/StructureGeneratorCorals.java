@@ -3,8 +3,6 @@
 
 package tfcflorae.world.worldgen.structures;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -29,6 +27,9 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -49,7 +50,7 @@ public class StructureGeneratorCorals extends WorldGenerator {
     WorldServer worldServer = (WorldServer) world;
     MinecraftServer minecraftServer = world.getMinecraftServer();
     TemplateManager templateManager = worldServer.getStructureTemplateManager();
-    Template template = templateManager.get(minecraftServer, new ResourceLocation(Reference.TFCF, structureName));
+    Template template = templateManager.get(minecraftServer, new ResourceLocation(Mods.Names.TFCF, structureName));
     final Biome b = world.getBiome(position);
     int variation = 3;
 

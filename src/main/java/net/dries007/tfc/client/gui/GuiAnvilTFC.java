@@ -26,7 +26,7 @@ import net.dries007.tfc.util.forge.ForgeSteps;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.api.data.Reference.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 public class GuiAnvilTFC extends GuiContainerTE<TEAnvilTFC> {
 

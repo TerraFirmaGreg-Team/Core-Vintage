@@ -1,0 +1,25 @@
+{
+  "package": "su.terrafirmagreg.mixin.gregtech",
+  "required": true,
+  "refmap": "mixins.tfg.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8.5",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "api.capability.impl.miner.MinerLogicMixin",
+    "api.items.armor.ArmorUtilsMixin",
+    "api.items.materialitem.MetaPrefixItemMixin",
+    "api.recipes.ingredients.GTRecipeItemInputMixin",
+    "common.blocks.BlockOreMixin",
+    "common.metatileentities.multi.IMetaTileEntityPrimitiveWaterPumpInvoker",
+    "common.metatileentities.multi.MetaTileEntityPrimitiveWaterPumpMixin",
+    "integration.jei.JustEnoughItemsModuleMixin",
+    "loaders.recipe.handlers.IMaterialRecipeHandlerInvoker",
+    "loaders.recipe.handlers.MaterialRecipeHandlerMixin",
+    "loaders.recipe.handlers.PartsRecipeHandlerMixin",
+    "loaders.recipe.handlers.ToolRecipeHandlerMixin"
+  ],
+  "server": [ ],
+  "client": [ ]
+}
+

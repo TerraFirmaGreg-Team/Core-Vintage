@@ -1,7 +1,5 @@
 package tfcflorae.compat.jei;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
@@ -19,6 +17,9 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.compat.jei.categories.CastingCategory;
 import net.dries007.tfc.compat.jei.categories.KnappingCategory;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
+
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import tfcflorae.client.GuiKnappingTFCF;
 import tfcflorae.compat.jei.wrappers.KnappingRecipeWrapperTFCF;
 import tfcflorae.objects.items.rock.ItemMud;
@@ -31,18 +32,18 @@ import java.util.stream.Collectors;
 public class TFCFJEIPlugin implements IModPlugin {
 
   private static IModRegistry REGISTRY;
-  public static final String KNAP_PINEAPPLE_LEATHER_UID = Reference.TFCF + ".knap.pineapple_leather";
-  public static final String KNAP_BURLAP_CLOTH_UID = Reference.TFCF + ".knap.burlap_cloth";
-  public static final String KNAP_WOOL_CLOTH_UID = Reference.TFCF + ".knap.wool_cloth";
-  public static final String KNAP_SILK_CLOTH_UID = Reference.TFCF + ".knap.silk_cloth";
-  public static final String KNAP_SISAL_CLOTH_UID = Reference.TFCF + ".knap.sisal_cloth";
-  public static final String KNAP_COTTON_CLOTH_UID = Reference.TFCF + ".knap.cotton_cloth";
-  public static final String KNAP_LINEN_CLOTH_UID = Reference.TFCF + ".knap.linen_cloth";
-  public static final String KNAP_HEMP_CLOTH_UID = Reference.TFCF + ".knap.hemp_cloth";
-  public static final String KNAP_YUCCA_CANVAS_UID = Reference.TFCF + ".knap.yucca_canvas";
-  public static final String KNAP_MUD_UID = Reference.TFCF + ".knap.mud";
-  public static final String KNAP_FLINT_UID = Reference.TFCF + ".knap.flint";
-  public static final String CASTING_UID = Reference.TFCF + ".casting";
+  public static final String KNAP_PINEAPPLE_LEATHER_UID = Mods.Names.TFCF + ".knap.pineapple_leather";
+  public static final String KNAP_BURLAP_CLOTH_UID = Mods.Names.TFCF + ".knap.burlap_cloth";
+  public static final String KNAP_WOOL_CLOTH_UID = Mods.Names.TFCF + ".knap.wool_cloth";
+  public static final String KNAP_SILK_CLOTH_UID = Mods.Names.TFCF + ".knap.silk_cloth";
+  public static final String KNAP_SISAL_CLOTH_UID = Mods.Names.TFCF + ".knap.sisal_cloth";
+  public static final String KNAP_COTTON_CLOTH_UID = Mods.Names.TFCF + ".knap.cotton_cloth";
+  public static final String KNAP_LINEN_CLOTH_UID = Mods.Names.TFCF + ".knap.linen_cloth";
+  public static final String KNAP_HEMP_CLOTH_UID = Mods.Names.TFCF + ".knap.hemp_cloth";
+  public static final String KNAP_YUCCA_CANVAS_UID = Mods.Names.TFCF + ".knap.yucca_canvas";
+  public static final String KNAP_MUD_UID = Mods.Names.TFCF + ".knap.mud";
+  public static final String KNAP_FLINT_UID = Mods.Names.TFCF + ".knap.flint";
+  public static final String CASTING_UID = Mods.Names.TFCF + ".casting";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {

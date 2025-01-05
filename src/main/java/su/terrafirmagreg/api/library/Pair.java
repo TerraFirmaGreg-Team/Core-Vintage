@@ -14,7 +14,6 @@ import java.util.function.Function;
  * @param <X> тип левого элемента
  * @param <Y> тип правого элемента
  */
-@SuppressWarnings("unused")
 @Data(staticConstructor = "of")
 public class Pair<X, Y> {
 

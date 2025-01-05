@@ -19,7 +19,9 @@ import net.sharkbark.cellars.init.ModItems;
 
 import javax.annotation.Nullable;
 
-@Mod.EventBusSubscriber()
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+
+@Mod.EventBusSubscriber(modid = TFC)
 public class ItemMetalIceSaw extends ItemMetalTool implements IMetalItem {
 
 

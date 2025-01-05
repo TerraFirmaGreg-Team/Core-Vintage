@@ -14,15 +14,15 @@ import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nonnull;
 
 //duplicating the fluid registration logic from TFC as not to create conflicts
 public final class FluidsFL {
 
-  private static final ResourceLocation STILL = new ResourceLocation(Reference.TFC, "blocks/fluid_still");
-  private static final ResourceLocation FLOW = new ResourceLocation(Reference.TFC, "blocks/fluid_flow");
+  private static final ResourceLocation STILL = new ResourceLocation(Mods.Names.TFC, "blocks/fluid_still");
+  private static final ResourceLocation FLOW = new ResourceLocation(Mods.Names.TFC, "blocks/fluid_flow");
 
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
 

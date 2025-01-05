@@ -5,27 +5,26 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Адаптация {@link NonNullList}
  */
-public class RegistryList<E extends IForgeRegistryEntry<E>> extends LinkedList<E> {
+public class RegistryList<E extends IForgeRegistryEntry<E>> extends ObjectArrayList<E> {
 
   private final List<E> delegate;
   private final E defaultElement;
 
 
   protected RegistryList() {
-    this(new ArrayList<>(), null);
+    this(new ObjectArrayList<>(), null);
   }
 
   protected RegistryList(List<E> delegateIn, @Nullable E listType) {
@@ -56,8 +55,23 @@ public class RegistryList<E extends IForgeRegistryEntry<E>> extends LinkedList<E
     this.forEach(registry.getRegistry()::register);
   }
 
-  public int size() {
-    return this.delegate.size();
+  public void add(final int index, final E element) {
+    Validate.notNull(element);
+    this.delegate.add(index, element);
+  }
+
+  @Nonnull
+  public E get(int index) {
+    return this.delegate.get(index);
+  }
+
+  public E remove(int index) {
+    return this.delegate.remove(index);
+  }
+
+  public E set(int index, E element) {
+    Validate.notNull(element);
+    return this.delegate.set(index, element);
   }
 
   public void clear() {
@@ -68,22 +82,8 @@ public class RegistryList<E extends IForgeRegistryEntry<E>> extends LinkedList<E
     }
   }
 
-  @Nonnull
-  public E get(int index) {
-    return this.delegate.get(index);
+  public int size() {
+    return this.delegate.size();
   }
 
-  public E set(int index, E element) {
-    Validate.notNull(element);
-    return this.delegate.set(index, element);
-  }
-
-  public void add(int index, E element) {
-    Validate.notNull(element);
-    this.delegate.add(index, element);
-  }
-
-  public E remove(int index) {
-    return this.delegate.remove(index);
-  }
 }

@@ -6,7 +6,7 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenSequoia;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 public class PlantsFL {
 
   public static final List<Plant> WRAPPERS = new ArrayList<>(8);
-  public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(Reference.TFC, "cinnamon"), new TreeGenSequoia(), 28, 35, 280, 400, 0f, 1f, 0, 4, 15, 4, false, null, false, 15, 0, 0);
+  public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(Mods.Names.TFC, "cinnamon"), new TreeGenSequoia(), 28, 35, 280, 400, 0f, 1f, 0, 4, 15, 4, false, null, false, 15, 0, 0);
   private static final int[] MAY = new int[]{0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0};
   private static final int[] JUNE = new int[]{0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0};
   private static final int[] JULY = new int[]{0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0};
@@ -38,7 +38,7 @@ public class PlantsFL {
   private static class PlantWrapper extends Plant {
 
     public PlantWrapper(@Nonnull String name, int[] stages, float minTemp, float maxTemp, float minRain, float maxRain) {
-      super(new ResourceLocation(Reference.TFC, name), PlantType.STANDARD, stages, false, false, minTemp, maxTemp, minTemp, maxTemp, minRain, maxRain, 9, 15, 1, 0, 0, 0.8F, null);
+      super(new ResourceLocation(Mods.Names.TFC, name), PlantType.STANDARD, stages, false, false, minTemp, maxTemp, minTemp, maxTemp, minRain, maxRain, 9, 15, 1, 0, 0, 0.8F, null);
     }
   }
 }

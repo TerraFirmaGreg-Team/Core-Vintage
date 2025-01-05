@@ -19,7 +19,6 @@ import static su.terrafirmagreg.api.util.MathUtils.RNG;
 /**
  * This class is an extension of the AWT Color class. It adds several things which make working with color in the MC environment less of a hassle.
  */
-@SuppressWarnings("unused")
 public class MCColor extends Color {
 
   /**

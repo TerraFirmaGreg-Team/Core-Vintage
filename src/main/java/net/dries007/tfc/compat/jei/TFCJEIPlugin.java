@@ -89,7 +89,7 @@ import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -100,25 +100,25 @@ import java.util.stream.Collectors;
 @JEIPlugin
 public final class TFCJEIPlugin implements IModPlugin {
 
-  public static final String ALLOY_UID = Reference.TFC + ".alloy";
-  public static final String ANVIL_UID = Reference.TFC + ".anvil";
-  public static final String BARREL_UID = Reference.TFC + ".barrel";
-  public static final String BLAST_FURNACE_UID = Reference.TFC + ".blast_furnace";
-  public static final String BLOOMERY_UID = Reference.TFC + ".bloomery";
-  public static final String CASTING_UID = Reference.TFC + ".casting";
-  public static final String CHISEL_UID = Reference.TFC + ".chisel";
-  public static final String HEAT_UID = Reference.TFC + ".heat";
-  public static final String KNAP_CLAY_UID = Reference.TFC + ".knap.clay";
-  public static final String KNAP_FIRECLAY_UID = Reference.TFC + ".knap.fireclay";
-  public static final String KNAP_LEATHER_UID = Reference.TFC + ".knap.leather";
-  public static final String KNAP_STONE_UID = Reference.TFC + ".knap.stone";
-  public static final String METAL_HEAT_UID = Reference.TFC + ".metal_heat";
-  public static final String LOOM_UID = Reference.TFC + ".loom";
-  public static final String QUERN_UID = Reference.TFC + ".quern";
-  public static final String ROCK_LAYER_UID = Reference.TFC + ".rock_layer";
-  public static final String VEIN_UID = Reference.TFC + ".vein";
-  public static final String WELDING_UID = Reference.TFC + ".welding";
-  public static final String SCRAPING_UID = Reference.TFC + ".scraping";
+  public static final String ALLOY_UID = Mods.Names.TFC + ".alloy";
+  public static final String ANVIL_UID = Mods.Names.TFC + ".anvil";
+  public static final String BARREL_UID = Mods.Names.TFC + ".barrel";
+  public static final String BLAST_FURNACE_UID = Mods.Names.TFC + ".blast_furnace";
+  public static final String BLOOMERY_UID = Mods.Names.TFC + ".bloomery";
+  public static final String CASTING_UID = Mods.Names.TFC + ".casting";
+  public static final String CHISEL_UID = Mods.Names.TFC + ".chisel";
+  public static final String HEAT_UID = Mods.Names.TFC + ".heat";
+  public static final String KNAP_CLAY_UID = Mods.Names.TFC + ".knap.clay";
+  public static final String KNAP_FIRECLAY_UID = Mods.Names.TFC + ".knap.fireclay";
+  public static final String KNAP_LEATHER_UID = Mods.Names.TFC + ".knap.leather";
+  public static final String KNAP_STONE_UID = Mods.Names.TFC + ".knap.stone";
+  public static final String METAL_HEAT_UID = Mods.Names.TFC + ".metal_heat";
+  public static final String LOOM_UID = Mods.Names.TFC + ".loom";
+  public static final String QUERN_UID = Mods.Names.TFC + ".quern";
+  public static final String ROCK_LAYER_UID = Mods.Names.TFC + ".rock_layer";
+  public static final String VEIN_UID = Mods.Names.TFC + ".vein";
+  public static final String WELDING_UID = Mods.Names.TFC + ".welding";
+  public static final String SCRAPING_UID = Mods.Names.TFC + ".scraping";
 
   private static IModRegistry REGISTRY;
 

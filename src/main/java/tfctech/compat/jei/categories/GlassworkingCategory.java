@@ -12,36 +12,34 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
-import su.terrafirmagreg.api.data.Reference;
+
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import tfctech.compat.jei.wrappers.GlassworkingRecipeWrapper;
 
 @ParametersAreNonnullByDefault
-public class GlassworkingCategory extends BaseRecipeCategory<GlassworkingRecipeWrapper>
-{
-    private static final ResourceLocation ICONS = new ResourceLocation(Reference.TFCTECH, "textures/gui/elements.png");
+public class GlassworkingCategory extends BaseRecipeCategory<GlassworkingRecipeWrapper> {
 
-    private final IDrawableStatic arrow, outputSlot;
+  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFCTECH, "textures/gui/elements.png");
 
-    public GlassworkingCategory(IGuiHelper helper, String Uid)
-    {
-        super(helper.createBlankDrawable(135, 82), Uid);
-        arrow = helper.createDrawable(ICONS, 0, 165, 22, 15);
-        outputSlot = helper.getSlotDrawable();
-    }
+  private final IDrawableStatic arrow, outputSlot;
 
-    @Override
-    public void drawExtras(Minecraft minecraft)
-    {
-        outputSlot.draw(minecraft, 116, 32);
-        arrow.draw(minecraft, 86, 33);
-    }
+  public GlassworkingCategory(IGuiHelper helper, String Uid) {
+    super(helper.createBlankDrawable(135, 82), Uid);
+    arrow = helper.createDrawable(ICONS, 0, 165, 22, 15);
+    outputSlot = helper.getSlotDrawable();
+  }
 
-    @Override
-    public void setRecipe(IRecipeLayout recipeLayout, GlassworkingRecipeWrapper recipeWrapper, IIngredients ingredients)
-    {
-        IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
-        itemStackGroup.init(0, true, 116, 32);
-        itemStackGroup.set(0, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
-    }
+  @Override
+  public void drawExtras(Minecraft minecraft) {
+    outputSlot.draw(minecraft, 116, 32);
+    arrow.draw(minecraft, 86, 33);
+  }
+
+  @Override
+  public void setRecipe(IRecipeLayout recipeLayout, GlassworkingRecipeWrapper recipeWrapper, IIngredients ingredients) {
+    IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
+    itemStackGroup.init(0, true, 116, 32);
+    itemStackGroup.set(0, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
+  }
 }

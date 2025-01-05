@@ -1,7 +1,5 @@
 package lyeoj.tfcthings.capability;
 
-import su.terrafirmagreg.api.data.Reference;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -12,11 +10,13 @@ import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.objects.items.metal.ItemMetalSword;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import java.util.Arrays;
 
 public class TFCThingsCapabilityHandler {
 
-  public static final ResourceLocation SHARPNESS_CAPABILITY = new ResourceLocation(Reference.TFCTHINGS, "sharpness");
+  public static final ResourceLocation SHARPNESS_CAPABILITY = new ResourceLocation(Mods.Names.TFCTHINGS, "sharpness");
 
   @SubscribeEvent
   public void attachCapability(AttachCapabilitiesEvent<ItemStack> event) {

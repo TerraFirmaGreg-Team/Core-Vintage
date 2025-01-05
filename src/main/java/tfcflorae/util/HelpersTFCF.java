@@ -6,7 +6,7 @@ import net.minecraftforge.common.config.ConfigManager;
 
 import net.dries007.tfc.ConfigTFC;
 
-import su.terrafirmagreg.api.data.Reference;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -22,7 +22,7 @@ public class HelpersTFCF {
   }
 
   public static void insertWhitelistFluids() {
-    ConfigManager.sync(Reference.TFC, Config.Type.INSTANCE);
+    ConfigManager.sync(Mods.Names.TFC, Config.Type.INSTANCE);
 
     // Fluids
     String[] fluidAdditions = {

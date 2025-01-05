@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 
 import java.util.Set;
 
-public class ToolClasses {
+public final class ToolClasses {
 
   public static final String SWORD = "sword";
   public static final String PICKAXE = "pickaxe";

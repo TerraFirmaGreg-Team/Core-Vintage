@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.data;
 
 import net.minecraft.util.DamageSource;
 
-public class DamageSources {
+public final class DamageSources {
 
   public static final DamageSource BERRYBUSH = new DamageSource("berrybush");
   public static final DamageSource PLUCKING = new DamageSource("plucking").setDamageBypassesArmor();

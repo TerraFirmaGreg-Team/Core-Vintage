@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("unused")
-public class ColorHandlers {
+public final class ColorHandlers {
 
   /**
    * A reusable color handler which uses the hash of {@link ItemStack#getDisplayName()}.

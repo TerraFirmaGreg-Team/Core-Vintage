@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.types;
 
+import su.terrafirmagreg.api.data.ToolMaterials;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -12,7 +14,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
-import net.dries007.tfc.objects.ToolMaterialsTFC;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
@@ -51,10 +52,10 @@ public final class DefaultRocks {
   @SuppressWarnings("ConstantConditions")
   public static void onPreRegisterRockCategory(TFCRegistryEvent.RegisterPreBlock<RockCategory> event) {
     event.getRegistry().registerAll(
-      new RockCategory(IGNEOUS_INTRUSIVE, ToolMaterialsTFC.IGNEOUS_INTRUSIVE, true, true, true, -0.4f, 0f, 1.6F, 10F, true),
-      new RockCategory(IGNEOUS_EXTRUSIVE, ToolMaterialsTFC.IGNEOUS_EXTRUSIVE, true, true, true, -0.5f, 0f, 1.6F, 10F, true),
-      new RockCategory(SEDIMENTARY, ToolMaterialsTFC.SEDIMENTARY, true, false, false, 0.3f, 5f, 1.4F, 10F, false),
-      new RockCategory(METAMORPHIC, ToolMaterialsTFC.METAMORPHIC, true, true, false, 0.2f, 0f, 1.5F, 10F, false)
+      new RockCategory(IGNEOUS_INTRUSIVE, ToolMaterials.IGNEOUS_INTRUSIVE, true, true, true, -0.4f, 0f, 1.6F, 10F, true),
+      new RockCategory(IGNEOUS_EXTRUSIVE, ToolMaterials.IGNEOUS_EXTRUSIVE, true, true, true, -0.5f, 0f, 1.6F, 10F, true),
+      new RockCategory(SEDIMENTARY, ToolMaterials.SEDIMENTARY, true, false, false, 0.3f, 5f, 1.4F, 10F, false),
+      new RockCategory(METAMORPHIC, ToolMaterials.METAMORPHIC, true, true, false, 0.2f, 0f, 1.5F, 10F, false)
     );
   }
 

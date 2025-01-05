@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.types;
 
+import su.terrafirmagreg.api.data.ArmorMaterials;
+import su.terrafirmagreg.api.data.ToolMaterials;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,16 +17,14 @@ import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.objects.ArmorMaterialTFC;
-import net.dries007.tfc.objects.ToolMaterialsTFC;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_I;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_II;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_III;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_IV;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_V;
 import static net.dries007.tfc.api.types.Metal.Tier.TIER_VI;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = TFC)
@@ -146,11 +147,11 @@ public final class DefaultMetals {
   public static void onPreRegisterMetal(TFCRegistryEvent.RegisterPreBlock<Metal> event) {
     event.getRegistry().registerAll(
       new Metal(BISMUTH, TIER_I, true, 0.14f, 270, 0xFF486B72, null, null),
-      new Metal(BISMUTH_BRONZE, TIER_II, true, 0.35f, 985, 0xFF418E4F, ToolMaterialsTFC.BISMUTH_BRONZE, ArmorMaterialTFC.BISMUTH_BRONZE),
-      new Metal(BLACK_BRONZE, TIER_II, true, 0.35f, 1070, 0xFF3B2636, ToolMaterialsTFC.BLACK_BRONZE, ArmorMaterialTFC.BLACK_BRONZE),
+      new Metal(BISMUTH_BRONZE, TIER_II, true, 0.35f, 985, 0xFF418E4F, ToolMaterials.BISMUTH_BRONZE, ArmorMaterials.BISMUTH_BRONZE),
+      new Metal(BLACK_BRONZE, TIER_II, true, 0.35f, 1070, 0xFF3B2636, ToolMaterials.BLACK_BRONZE, ArmorMaterials.BLACK_BRONZE),
       new Metal(BRASS, TIER_I, true, 0.35f, 930, 0xFF96892E, null, null),
-      new Metal(BRONZE, TIER_II, true, 0.35f, 950, 0xFF7C5E33, ToolMaterialsTFC.BRONZE, ArmorMaterialTFC.BRONZE),
-      new Metal(COPPER, TIER_I, true, 0.35f, 1080, 0xFFB64027, ToolMaterialsTFC.COPPER, ArmorMaterialTFC.COPPER),
+      new Metal(BRONZE, TIER_II, true, 0.35f, 950, 0xFF7C5E33, ToolMaterials.BRONZE, ArmorMaterials.BRONZE),
+      new Metal(COPPER, TIER_I, true, 0.35f, 1080, 0xFFB64027, ToolMaterials.COPPER, ArmorMaterials.COPPER),
       new Metal(GOLD, TIER_I, true, 0.6f, 1060, 0xFFDCBF1B, null, null),
       new Metal(LEAD, TIER_I, true, 0.22f, 328, 0xFF40494D, null, null),
       new Metal(NICKEL, TIER_I, true, 0.48f, 1453, 0xFF4E4E3C, null, null),
@@ -159,13 +160,13 @@ public final class DefaultMetals {
       new Metal(TIN, TIER_I, true, 0.14f, 230, 0xFF90A4BB, null, null),
       new Metal(ZINC, TIER_I, true, 0.21f, 420, 0xFFBBB9C4, null, null),
       new Metal(STERLING_SILVER, TIER_I, true, 0.35f, 900, 0xFFAC927B, null, null),
-      new Metal(WROUGHT_IRON, TIER_III, true, 0.35f, 1535, 0xFF989897, ToolMaterialsTFC.WROUGHT_IRON, ArmorMaterialTFC.WROUGHT_IRON),
+      new Metal(WROUGHT_IRON, TIER_III, true, 0.35f, 1535, 0xFF989897, ToolMaterials.WROUGHT_IRON, ArmorMaterials.WROUGHT_IRON),
       new Metal(PIG_IRON, TIER_III, true, 0.35f, 1535, 0xFF6A595C, null, null),
-      new Metal(STEEL, TIER_IV, true, 0.35f, 1540, 0xFF5F5F5F, ToolMaterialsTFC.STEEL, ArmorMaterialTFC.STEEL),
+      new Metal(STEEL, TIER_IV, true, 0.35f, 1540, 0xFF5F5F5F, ToolMaterials.STEEL, ArmorMaterials.STEEL),
       new Metal(PLATINUM, TIER_V, true, 0.35f, 1730, 0xFF9DADC0, null, null),
-      new Metal(BLACK_STEEL, TIER_V, true, 0.35f, 1485, 0xFF111111, ToolMaterialsTFC.BLACK_STEEL, ArmorMaterialTFC.BLACK_STEEL),
-      new Metal(BLUE_STEEL, TIER_VI, true, 0.35f, 1540, 0xFF2D5596, ToolMaterialsTFC.BLUE_STEEL, ArmorMaterialTFC.BLUE_STEEL),
-      new Metal(RED_STEEL, TIER_VI, true, 0.35f, 1540, 0xFF700503, ToolMaterialsTFC.RED_STEEL, ArmorMaterialTFC.RED_STEEL),
+      new Metal(BLACK_STEEL, TIER_V, true, 0.35f, 1485, 0xFF111111, ToolMaterials.BLACK_STEEL, ArmorMaterials.BLACK_STEEL),
+      new Metal(BLUE_STEEL, TIER_VI, true, 0.35f, 1540, 0xFF2D5596, ToolMaterials.BLUE_STEEL, ArmorMaterials.BLUE_STEEL),
+      new Metal(RED_STEEL, TIER_VI, true, 0.35f, 1540, 0xFF700503, ToolMaterials.RED_STEEL, ArmorMaterials.RED_STEEL),
       new Metal(WEAK_STEEL, TIER_IV, false, 0.35f, 1540, 0xFF111111, null, null),
       new Metal(WEAK_BLUE_STEEL, TIER_V, false, 0.35f, 1540, 0xFF2D5596, null, null),
       new Metal(WEAK_RED_STEEL, TIER_V, false, 0.35f, 1540, 0xFF700503, null, null),
@@ -188,7 +189,7 @@ public final class DefaultMetals {
       new AlloyRecipe.Builder(STERLING_SILVER).add(COPPER, 0.2, 0.4).add(SILVER, 0.6, 0.8).build(),
       new AlloyRecipe.Builder(WEAK_STEEL).add(STEEL, 0.5, 0.7).add(NICKEL, 0.15, 0.25).add(BLACK_BRONZE, 0.15, 0.25).build(),
       new AlloyRecipe.Builder(WEAK_BLUE_STEEL).add(BLACK_STEEL, 0.5, 0.55).add(STEEL, 0.2, 0.25).add(BISMUTH_BRONZE, 0.1, 0.15).add(STERLING_SILVER, 0.1, 0.15)
-                                              .build(),
+        .build(),
       new AlloyRecipe.Builder(WEAK_RED_STEEL).add(BLACK_STEEL, 0.5, 0.55).add(STEEL, 0.2, 0.25).add(BRASS, 0.1, 0.15).add(ROSE_GOLD, 0.1, 0.15).build()
     );
   }

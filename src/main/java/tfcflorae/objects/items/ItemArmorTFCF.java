@@ -1,5 +1,7 @@
 package tfcflorae.objects.items;
 
+import su.terrafirmagreg.api.data.ArmorMaterials;
+
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -9,8 +11,6 @@ import net.dries007.tfc.api.capability.damage.IDamageResistance;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.IArmorMaterialTFC;
-import net.dries007.tfc.objects.ArmorMaterialTFC;
 
 import javax.annotation.Nonnull;
 
@@ -27,27 +27,27 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
   public static final int WOOL_COLOR = 14079702;
   public static final int YUCCA_COLOR = 10585698;
 
-  public final IArmorMaterialTFC materialTFC;
+  public final ArmorMaterials armorMaterial;
 
-  public ItemArmorTFCF(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
-    super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
-    this.materialTFC = materialTFC;
+  public ItemArmorTFCF(ArmorMaterials armorMaterial, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+    super(armorMaterial.getArmorMaterial(), renderIndexIn, equipmentSlotIn);
+    this.armorMaterial = armorMaterial;
     setNoRepair();
   }
 
   @Override
   public float getCrushingModifier() {
-    return materialTFC.getCrushingModifier();
+    return armorMaterial.getCrushingModifier();
   }
 
   @Override
   public float getPiercingModifier() {
-    return materialTFC.getPiercingModifier();
+    return armorMaterial.getPiercingModifier();
   }
 
   @Override
   public float getSlashingModifier() {
-    return materialTFC.getSlashingModifier();
+    return armorMaterial.getSlashingModifier();
   }
 
   @Nonnull
@@ -84,19 +84,19 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
    */
   @Override
   public boolean hasColor(ItemStack stack) {
-    if (this.materialTFC != ArmorMaterialTFC.PINEAPPLE_LEATHER ||
-        this.materialTFC != ArmorMaterialTFC.BURLAP_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.WOOL_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.SILK_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.SISAL_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.COTTON_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.LINEN_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.HEMP_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.YUCCA_CANVAS) {
+    if (this.armorMaterial != ArmorMaterials.PINEAPPLE_LEATHER ||
+        this.armorMaterial != ArmorMaterials.BURLAP_CLOTH ||
+        this.armorMaterial != ArmorMaterials.WOOL_CLOTH ||
+        this.armorMaterial != ArmorMaterials.SILK_CLOTH ||
+        this.armorMaterial != ArmorMaterials.SISAL_CLOTH ||
+        this.armorMaterial != ArmorMaterials.COTTON_CLOTH ||
+        this.armorMaterial != ArmorMaterials.LINEN_CLOTH ||
+        this.armorMaterial != ArmorMaterials.HEMP_CLOTH ||
+        this.armorMaterial != ArmorMaterials.YUCCA_CANVAS) {
       return false;
     } else {
       NBTTagCompound nbttagcompound = stack.getTagCompound();
-      return nbttagcompound != null && nbttagcompound.hasKey("display", 10) ? nbttagcompound.getCompoundTag("display").hasKey("color", 3) : false;
+      return nbttagcompound != null && nbttagcompound.hasKey("display", 10) && nbttagcompound.getCompoundTag("display").hasKey("color", 3);
     }
     	/*return !stack.hasTagCompound() ? 
             false : (!stack.getTagCompound().hasKey("display", 10) ? 
@@ -108,15 +108,15 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
    */
   @Override
   public int getColor(ItemStack stack) {
-    if (this.materialTFC != ArmorMaterialTFC.PINEAPPLE_LEATHER ||
-        this.materialTFC != ArmorMaterialTFC.BURLAP_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.WOOL_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.SILK_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.SISAL_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.COTTON_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.LINEN_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.HEMP_CLOTH ||
-        this.materialTFC != ArmorMaterialTFC.YUCCA_CANVAS) {
+    if (this.armorMaterial != ArmorMaterials.PINEAPPLE_LEATHER ||
+        this.armorMaterial != ArmorMaterials.BURLAP_CLOTH ||
+        this.armorMaterial != ArmorMaterials.WOOL_CLOTH ||
+        this.armorMaterial != ArmorMaterials.SILK_CLOTH ||
+        this.armorMaterial != ArmorMaterials.SISAL_CLOTH ||
+        this.armorMaterial != ArmorMaterials.COTTON_CLOTH ||
+        this.armorMaterial != ArmorMaterials.LINEN_CLOTH ||
+        this.armorMaterial != ArmorMaterials.HEMP_CLOTH ||
+        this.armorMaterial != ArmorMaterials.YUCCA_CANVAS) {
       return DEFAULT_COLOR;
     } else {
       NBTTagCompound nbttagcompound = stack.getTagCompound();
@@ -126,31 +126,31 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
           return nbttagcompound1.getInteger("color");
         }
       }
-      if (this.materialTFC == ArmorMaterialTFC.BURLAP_CLOTH) {
+      if (this.armorMaterial == ArmorMaterials.BURLAP_CLOTH) {
         return BURLAP_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialTFC.COTTON_CLOTH) {
+      if (this.armorMaterial == ArmorMaterials.COTTON_CLOTH) {
         return COTTON_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialTFC.HEMP_CLOTH) {
+      if (this.armorMaterial == ArmorMaterials.HEMP_CLOTH) {
         return HEMP_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialTFC.LINEN_CLOTH) {
+      if (this.armorMaterial == ArmorMaterials.LINEN_CLOTH) {
         return LINEN_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialTFC.PINEAPPLE_LEATHER) {
+      if (this.armorMaterial == ArmorMaterials.PINEAPPLE_LEATHER) {
         return PINEAPPLE_LEATHER_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialTFC.SILK_CLOTH) {
+      if (this.armorMaterial == ArmorMaterials.SILK_CLOTH) {
         return SILK_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialTFC.SISAL_CLOTH) {
+      if (this.armorMaterial == ArmorMaterials.SISAL_CLOTH) {
         return SISAL_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialTFC.WOOL_CLOTH) {
+      if (this.armorMaterial == ArmorMaterials.WOOL_CLOTH) {
         return WOOL_COLOR;
       }
-      if (this.materialTFC == ArmorMaterialTFC.YUCCA_CANVAS) {
+      if (this.armorMaterial == ArmorMaterials.YUCCA_CANVAS) {
         return YUCCA_COLOR;
       }
     }
@@ -162,15 +162,15 @@ public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResist
    */
   @Override
   public void removeColor(ItemStack stack) {
-    if (this.materialTFC == ArmorMaterialTFC.PINEAPPLE_LEATHER ||
-        this.materialTFC == ArmorMaterialTFC.BURLAP_CLOTH ||
-        this.materialTFC == ArmorMaterialTFC.WOOL_CLOTH ||
-        this.materialTFC == ArmorMaterialTFC.SILK_CLOTH ||
-        this.materialTFC == ArmorMaterialTFC.SISAL_CLOTH ||
-        this.materialTFC == ArmorMaterialTFC.COTTON_CLOTH ||
-        this.materialTFC == ArmorMaterialTFC.LINEN_CLOTH ||
-        this.materialTFC == ArmorMaterialTFC.HEMP_CLOTH ||
-        this.materialTFC == ArmorMaterialTFC.YUCCA_CANVAS) {
+    if (this.armorMaterial == ArmorMaterials.PINEAPPLE_LEATHER ||
+        this.armorMaterial == ArmorMaterials.BURLAP_CLOTH ||
+        this.armorMaterial == ArmorMaterials.WOOL_CLOTH ||
+        this.armorMaterial == ArmorMaterials.SILK_CLOTH ||
+        this.armorMaterial == ArmorMaterials.SISAL_CLOTH ||
+        this.armorMaterial == ArmorMaterials.COTTON_CLOTH ||
+        this.armorMaterial == ArmorMaterials.LINEN_CLOTH ||
+        this.armorMaterial == ArmorMaterials.HEMP_CLOTH ||
+        this.armorMaterial == ArmorMaterials.YUCCA_CANVAS) {
       NBTTagCompound nbttagcompound = stack.getTagCompound();
       if (nbttagcompound != null) {
         NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");

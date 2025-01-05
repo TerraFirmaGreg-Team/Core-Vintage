@@ -1,5 +1,7 @@
 package tfcflorae.objects.items;
 
+import su.terrafirmagreg.api.data.ToolMaterials;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -23,7 +25,6 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.ToolMaterialsTFC;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.items.ItemMisc;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
@@ -1165,7 +1166,7 @@ public final class ItemsTFCF {
   private static ImmutableList<Item> allCeramicMoldItems;
   @Getter
   private static ImmutableList<ItemArmorTFCF> allArmorItems;
-  private static Map<FruitsTFCF, Item> driedFruits = new HashMap<>();
+  private static final Map<FruitsTFCF, Item> driedFruits = new HashMap<>();
 
 
   public static Item getDriedFruit(FruitsTFCF fruit) {
@@ -1608,19 +1609,19 @@ public final class ItemsTFCF {
         simpleItems.add(register(r, "mud/mud_ball/" + rock.getRegistryName().getPath().toLowerCase(), mud, CT_ROCK));
         simpleItems.add(register(r, "mud/unfired/mud_brick/" + rock.getRegistryName().getPath().toLowerCase(), unfiredMudBrick, CT_ROCK));
         simpleItems.add(register(r, "mud/fired/mud_brick/" + rock.getRegistryName().getPath()
-                                                                 .toLowerCase(), new ItemFiredMudBrick(unfiredMudBrick), CT_ROCK));
+          .toLowerCase(), new ItemFiredMudBrick(unfiredMudBrick), CT_ROCK));
       }
     }
 
     // Tools
     simpleItems.add(register(r, "tools/walking_stick", new ItemWalkingStick(ToolMaterial.WOOD, 1f, 1.5f, 0.02f, 96, "stick_wood", "walking_stick"), CT_MISC));
 
-    simpleItems.add(register(r, "tools/flint/axe/flint", new ItemAxeTFCF(ToolMaterialsTFC.FLINT, 2.5f, -3f, 50, "axe", "axe_flint", "axe_stone", "axe_stone_sedimentary"), CT_ROCK));
-    simpleItems.add(register(r, "tools/flint/hammer/flint", new ItemHammerTFCF(ToolMaterialsTFC.FLINT, 2.5f, -3f, 50, "hammer", "hammer_flint", "hammer_stone", "hammer_stone_sedimentary"), CT_ROCK));
-    simpleItems.add(register(r, "tools/flint/hoe/flint", new ItemHoeTFCF(ToolMaterialsTFC.FLINT, 2.25f, -2f, 50, "hoe", "hoe_flint", "hoe_stone", "hoe_stone_sedimentary"), CT_ROCK));
-    simpleItems.add(register(r, "tools/flint/javelin/flint", new ItemJavelinTFCF(ToolMaterialsTFC.FLINT, 1.95f, -1.8f, 50, "javelin", "javelin_flint", "javelin_stone", "javelin_stone_sedimentary"), CT_ROCK));
-    simpleItems.add(register(r, "tools/flint/knife/flint", new ItemKnifeTFCF(ToolMaterialsTFC.FLINT, 1.5f, -1.5f, 50, "knife", "knife_flint", "knife_stone", "knife_stone_sedimentary"), CT_ROCK));
-    simpleItems.add(register(r, "tools/flint/shovel/flint", new ItemShovelTFCF(ToolMaterialsTFC.FLINT, 1.25f, -3f, 50, "shovel", "shovel_flint", "shovel_stone", "shovel_stone_sedimentary"), CT_ROCK));
+    simpleItems.add(register(r, "tools/flint/axe/flint", new ItemAxeTFCF(ToolMaterials.FLINT, 2.5f, -3f, 50, "axe", "axe_flint", "axe_stone", "axe_stone_sedimentary"), CT_ROCK));
+    simpleItems.add(register(r, "tools/flint/hammer/flint", new ItemHammerTFCF(ToolMaterials.FLINT, 2.5f, -3f, 50, "hammer", "hammer_flint", "hammer_stone", "hammer_stone_sedimentary"), CT_ROCK));
+    simpleItems.add(register(r, "tools/flint/hoe/flint", new ItemHoeTFCF(ToolMaterials.FLINT, 2.25f, -2f, 50, "hoe", "hoe_flint", "hoe_stone", "hoe_stone_sedimentary"), CT_ROCK));
+    simpleItems.add(register(r, "tools/flint/javelin/flint", new ItemJavelinTFCF(ToolMaterials.FLINT, 1.95f, -1.8f, 50, "javelin", "javelin_flint", "javelin_stone", "javelin_stone_sedimentary"), CT_ROCK));
+    simpleItems.add(register(r, "tools/flint/knife/flint", new ItemKnifeTFCF(ToolMaterials.FLINT, 1.5f, -1.5f, 50, "knife", "knife_flint", "knife_stone", "knife_stone_sedimentary"), CT_ROCK));
+    simpleItems.add(register(r, "tools/flint/shovel/flint", new ItemShovelTFCF(ToolMaterials.FLINT, 1.25f, -3f, 50, "shovel", "shovel_flint", "shovel_stone", "shovel_stone_sedimentary"), CT_ROCK));
 
     // Toolheads
     simpleItems.add(register(r, "tools/flint/axe_head/flint", new ItemMiscTFCF(Size.SMALL, Weight.LIGHT, "flint_head", "flint_head_axe"), CT_ROCK));

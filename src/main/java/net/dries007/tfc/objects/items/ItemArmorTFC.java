@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.data.ArmorMaterials;
+
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -13,33 +15,32 @@ import net.dries007.tfc.api.capability.damage.IDamageResistance;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.types.IArmorMaterialTFC;
 
 import javax.annotation.Nonnull;
 
 public class ItemArmorTFC extends ItemArmor implements IItemSize, IDamageResistance {
 
-  private final IArmorMaterialTFC materialTFC;
+  private final ArmorMaterials armorMaterial;
 
-  public ItemArmorTFC(IArmorMaterialTFC materialTFC, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
-    super(materialTFC.getMaterial(), renderIndexIn, equipmentSlotIn);
-    this.materialTFC = materialTFC;
+  public ItemArmorTFC(ArmorMaterials armorMaterial, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
+    super(armorMaterial.getArmorMaterial(), renderIndexIn, equipmentSlotIn);
+    this.armorMaterial = armorMaterial;
     setNoRepair();
   }
 
   @Override
   public float getCrushingModifier() {
-    return materialTFC.getCrushingModifier();
+    return armorMaterial.getCrushingModifier();
   }
 
   @Override
   public float getPiercingModifier() {
-    return materialTFC.getPiercingModifier();
+    return armorMaterial.getPiercingModifier();
   }
 
   @Override
   public float getSlashingModifier() {
-    return materialTFC.getSlashingModifier();
+    return armorMaterial.getSlashingModifier();
   }
 
   @Nonnull

@@ -1,5 +1,8 @@
 package tfctech.objects.items;
 
+import su.terrafirmagreg.api.data.ToolMaterials;
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -24,16 +27,12 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.ToolMaterialsTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.api.data.enums.Mods;
-
 import tfctech.objects.blocks.TechBlocks;
 import tfctech.objects.items.ceramics.ItemFluidBowl;
 import tfctech.objects.items.ceramics.ItemTechMold;
@@ -219,16 +218,16 @@ public final class TechItems {
     metalItems.add(register(r, "metal/iron_bowl_mount", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.BOWL_MOUNT), CT_METAL));
 
     metalItems.add(register(r, "metal/iron_draw_plate", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.DRAW_PLATE)
-                                                                              .setMaxDamage(ToolMaterialsTFC.WROUGHT_IRON.getMaxUses())
-                                                                              .setMaxStackSize(1), CT_METAL));
+      .setMaxDamage(ToolMaterials.WROUGHT_IRON.getMaxUses())
+      .setMaxStackSize(1), CT_METAL));
     metalItems.add(register(r, "metal/steel_draw_plate", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "steel")), ItemTechMetal.ItemType.DRAW_PLATE)
-                                                                               .setMaxDamage(ToolMaterialsTFC.STEEL.getMaxUses())
-                                                                               .setMaxStackSize(1), CT_METAL));
+      .setMaxDamage(ToolMaterials.STEEL.getMaxUses())
+      .setMaxStackSize(1), CT_METAL));
     metalItems.add(register(r, "metal/black_steel_draw_plate", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "black_steel")), ItemTechMetal.ItemType.DRAW_PLATE)
-                                                                                     .setMaxDamage(ToolMaterialsTFC.BLACK_STEEL.getMaxUses())
-                                                                                     .setMaxStackSize(1), CT_METAL));
+      .setMaxDamage(ToolMaterials.BLACK_STEEL.getMaxUses())
+      .setMaxStackSize(1), CT_METAL));
     metalItems.add(register(r, "metal/iron_tongs", ItemTechMetal.ItemType.create(Metal.WROUGHT_IRON, ItemTechMetal.ItemType.TONGS)
-                                                                         .setMaxStackSize(1), CT_MISC));
+      .setMaxStackSize(1), CT_MISC));
 
     metalItems.add(register(r, "metal/copper_inductor", ItemTechMetal.ItemType.create(TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "copper")), ItemTechMetal.ItemType.INDUCTOR), CT_METAL));
 
@@ -271,8 +270,7 @@ public final class TechItems {
 
     //Register oredict for metal item components
     for (Item metalItem : allMetalItems) {
-      if (metalItem instanceof ItemTechMetal) {
-        ItemTechMetal techMetal = (ItemTechMetal) metalItem;
+      if (metalItem instanceof ItemTechMetal techMetal) {
         if (techMetal.getType() == ItemTechMetal.ItemType.ROD) {
           OreDictionary.registerOre(OreDictionaryHelper.toString("stick", techMetal.getMetal(ItemStack.EMPTY)), new ItemStack(metalItem, 1, 0));
         } else if (techMetal.getType() == ItemTechMetal.ItemType.LONG_ROD) {

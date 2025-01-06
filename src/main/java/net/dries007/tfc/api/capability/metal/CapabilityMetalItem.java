@@ -52,19 +52,19 @@ import static gregtech.api.unification.ore.OrePrefix.toolHeadChainsaw;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadDrill;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadScrewdriver;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadWrench;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.ingotDouble;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadAxe;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadChisel;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadFile;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadHammer;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadHoe;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadKnife;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadPickaxe;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadPropick;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadSaw;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadSense;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadShovel;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler.toolHeadSword;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.ingotDouble;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadAxe;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadChisel;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadFile;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadHammer;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadHoe;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadKnife;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadPickaxe;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadPropick;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadSaw;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadSense;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadShovel;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadSword;
 
 public final class CapabilityMetalItem {
 
@@ -168,17 +168,17 @@ public final class CapabilityMetalItem {
         var materialName = OreDictUnifier.getMaterial(stack).material.toString(); //костыль
         //noinspection ConstantConditions
         return TFCRegistries.METALS.getValuesCollection()
-                                   .stream()
-                                   .filter(metal -> {
-                                     var metalName = metal.getRegistryName().getPath();
-                                     return materialName.equals(metalName);
-                                   })
-                                   .findFirst()
-                                   .map(metal -> {
-                                     int smeltAmount = ORE_DICT_METAL_ITEMS.get(orePrefix);
-                                     return new MetalItemHandler(metal, smeltAmount, true);
+          .stream()
+          .filter(metal -> {
+            var metalName = metal.getRegistryName().getPath();
+            return materialName.equals(metalName);
+          })
+          .findFirst()
+          .map(metal -> {
+            int smeltAmount = ORE_DICT_METAL_ITEMS.get(orePrefix);
+            return new MetalItemHandler(metal, smeltAmount, true);
 
-                                   }).orElse(null);
+          }).orElse(null);
       }
     }
     return null;

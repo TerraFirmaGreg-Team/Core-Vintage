@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix;
+package su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix;
 
 import su.terrafirmagreg.api.base.plugin.gregtech.BaseOrePrefix;
 

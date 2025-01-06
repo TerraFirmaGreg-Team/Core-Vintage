@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.device.object.item.tools.behaviors;
+package su.terrafirmagreg.modules.integration.gregtech.object.item.tools.behaviors;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

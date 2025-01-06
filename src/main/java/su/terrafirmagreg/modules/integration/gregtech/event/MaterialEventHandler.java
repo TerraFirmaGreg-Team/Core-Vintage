@@ -1,7 +1,7 @@
-package su.terrafirmagreg.modules.core.event;
+package su.terrafirmagreg.modules.integration.gregtech.event;
 
-import su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialCoreHandler;
-import su.terrafirmagreg.modules.core.plugin.gregtech.stonetype.StoneTypeHandler;
+import su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialCoreHandler;
+import su.terrafirmagreg.modules.integration.gregtech.unification.ore.stonetype.StoneTypeHandler;
 
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

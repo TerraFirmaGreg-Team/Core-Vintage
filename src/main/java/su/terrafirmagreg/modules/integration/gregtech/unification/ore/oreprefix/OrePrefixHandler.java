@@ -1,6 +1,6 @@
-package su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix;
+package su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix;
 
-import su.terrafirmagreg.modules.core.plugin.gregtech.material.info.MaterialIconTypeCore;
+import su.terrafirmagreg.modules.integration.gregtech.unification.material.info.MaterialIconTypeCore;
 
 import gregtech.api.GTValues;
 import gregtech.api.unification.material.Materials;
@@ -18,45 +18,45 @@ import static gregtech.api.unification.ore.OrePrefix.Conditions.hasIngotProperty
 import static gregtech.api.unification.ore.OrePrefix.Conditions.hasNoCraftingToolProperty;
 import static gregtech.api.unification.ore.OrePrefix.Conditions.hasToolProperty;
 import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Arkose;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.BlackbandIronstone;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Blaimorite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Blueschist;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Boninite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Breccia;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Carbonatite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Cataclasite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Catlinite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Chalk;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Chert;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Claystone;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Conglomerate;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Dacite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Dolomite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Foidolite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Gabbro;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Gneiss;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Greenschist;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Jaspillite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Komatiite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Laterite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Limestone;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Mudstone;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Mylonite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Novaculite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Peridotite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Phyllite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Porphyry;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Rhyolite;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Sandstone;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Schist;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Shale;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Siltstone;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Slate;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Travertine;
-import static su.terrafirmagreg.modules.core.plugin.gregtech.material.MaterialsCore.Wackestone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Arkose;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.BlackbandIronstone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Blaimorite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Blueschist;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Boninite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Breccia;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Carbonatite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Cataclasite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Catlinite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Chalk;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Chert;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Claystone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Conglomerate;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Dacite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Dolomite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Foidolite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Gabbro;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Gneiss;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Greenschist;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Jaspillite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Komatiite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Laterite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Limestone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Mudstone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Mylonite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Novaculite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Peridotite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Phyllite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Porphyry;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Rhyolite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Sandstone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Schist;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Shale;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Siltstone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Slate;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Travertine;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Wackestone;
 
-public final class OrePrefixCoreHandler {
+public final class OrePrefixHandler {
 
 
   public static final OrePrefix ingotDouble;

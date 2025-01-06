@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.plugin.gregtech.material;
+package su.terrafirmagreg.modules.integration.gregtech.unification.material;
 
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.store.FluidStorageKeys;

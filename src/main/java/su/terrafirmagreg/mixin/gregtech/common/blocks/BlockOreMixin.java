@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.gregtech.common.blocks;
 
-import su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler;
+import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -33,13 +33,13 @@ public class BlockOreMixin {
 
   @Inject(method = "getItemDropped", at = @At(value = "HEAD"), cancellable = true)
   private void getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune, CallbackInfoReturnable<Item> cir) {
-    var itemStack = OreDictUnifier.get(OrePrefixCoreHandler.oreChunk, getMaterial());
+    var itemStack = OreDictUnifier.get(OrePrefixHandler.oreChunk, getMaterial());
     cir.setReturnValue(itemStack.getItem());
   }
 
   @Inject(method = "damageDropped", at = @At(value = "HEAD"), cancellable = true)
   private void damageDropped(IBlockState state, CallbackInfoReturnable<Integer> cir) {
-    var itemStack = OreDictUnifier.get(OrePrefixCoreHandler.oreChunk, getMaterial());
+    var itemStack = OreDictUnifier.get(OrePrefixHandler.oreChunk, getMaterial());
     cir.setReturnValue(itemStack.getItemDamage());
   }
 }

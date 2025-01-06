@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.device.object.tile.multi;
+package su.terrafirmagreg.modules.integration.gregtech.object.metatileentity.multi;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;

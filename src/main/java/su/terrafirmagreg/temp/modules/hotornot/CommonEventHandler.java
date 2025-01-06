@@ -1,6 +1,6 @@
 package su.terrafirmagreg.temp.modules.hotornot;
 
-import su.terrafirmagreg.modules.device.init.ItemsDevice;
+import su.terrafirmagreg.modules.integration.gregtech.init.ItemsGregTech;
 import su.terrafirmagreg.temp.config.HotLists;
 import su.terrafirmagreg.temp.config.TFGConfig;
 import su.terrafirmagreg.temp.modules.ambiental.TFCAmbientalGuiRenderer;
@@ -65,7 +65,7 @@ public class CommonEventHandler {
               for (FluidEffect effect : FluidEffect.values()) {
                 if (effect.isValid.test(fluidStack)) {
                   ItemStack offHand = entityPlayer.getHeldItemOffhand();
-                  if (offHand.getItem().equals(ItemsDevice.TONGS.get())) {
+                  if (offHand.getItem().equals(ItemsGregTech.TONGS.get())) {
                     if ((world.getTotalWorldTime() % TFGConfig.General.DURABILITY_DECREASING == 0)) {
                       ToolHelper.damageItem(offHand, entityPlayer);
                       return;
@@ -91,7 +91,7 @@ public class CommonEventHandler {
               IItemHeat heatHandlerItem = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
               if (heatHandlerItem != null && heatHandlerItem.getTemperature() >= TFGConfig.General.HOT_ITEM) {
                 ItemStack offHand = entityPlayer.getHeldItemOffhand();
-                if (offHand.getItem().equals(ItemsDevice.TONGS.get())) {
+                if (offHand.getItem().equals(ItemsGregTech.TONGS.get())) {
                   if ((world.getTotalWorldTime() % TFGConfig.General.DURABILITY_DECREASING == 0)) {
                     ToolHelper.damageItem(offHand, entityPlayer);
                     return;
@@ -114,7 +114,7 @@ public class CommonEventHandler {
             // Hot
             else if (HotLists.isHot(stack)) {
               ItemStack offHand = entityPlayer.getHeldItemOffhand();
-              if (offHand.getItem().equals(ItemsDevice.TONGS.get())) {
+              if (offHand.getItem().equals(ItemsGregTech.TONGS.get())) {
                 if ((world.getTotalWorldTime() % TFGConfig.General.DURABILITY_DECREASING == 0)) {
                   ToolHelper.damageItem(offHand, entityPlayer);
                   return;
@@ -131,7 +131,7 @@ public class CommonEventHandler {
             // Cold
             else if (HotLists.isCold(stack)) {
               ItemStack offHand = entityPlayer.getHeldItemOffhand();
-              if (offHand.getItem().equals(ItemsDevice.TONGS.get())) {
+              if (offHand.getItem().equals(ItemsGregTech.TONGS.get())) {
                 if ((world.getTotalWorldTime() % TFGConfig.General.DURABILITY_DECREASING == 0)) {
                   ToolHelper.damageItem(offHand, entityPlayer);
                   return;

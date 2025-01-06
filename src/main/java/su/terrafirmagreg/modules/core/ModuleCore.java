@@ -6,10 +6,8 @@ import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
 import su.terrafirmagreg.framework.network.api.INetworkManager;
 import su.terrafirmagreg.framework.registry.api.IRegistryManager;
-import su.terrafirmagreg.modules.core.event.MaterialEventHandler;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
-import su.terrafirmagreg.temp.Recipes;
 import su.terrafirmagreg.temp.modules.ambiental.TFCAmbientalEventHandler;
 import su.terrafirmagreg.temp.modules.ambiental.TFCAmbientalGuiRenderer;
 import su.terrafirmagreg.temp.modules.ambiental.capability.TemperatureCapability;
@@ -17,7 +15,6 @@ import su.terrafirmagreg.temp.modules.ambiental.capability.TemperaturePacket;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -85,17 +82,10 @@ public final class ModuleCore extends ModuleBase {
     MinecraftForge.EVENT_BUS.register(new TFCAmbientalGuiRenderer());
   }
 
-  @Override
-  public void onPostInit(FMLPostInitializationEvent event) {
-    Recipes.register();
-  }
-
 
   @Override
   public @NotNull List<Class<?>> getEventBusSubscribers() {
     ObjectList<Class<?>> list = new ObjectArrayList<>();
-
-    list.add(MaterialEventHandler.class);
 
     return list;
   }

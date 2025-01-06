@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.plugin.gregtech.material.info;
+package su.terrafirmagreg.modules.integration.gregtech.unification.material.info;
 
 import gregtech.api.unification.material.info.MaterialIconType;
 

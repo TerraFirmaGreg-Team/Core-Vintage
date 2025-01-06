@@ -16,7 +16,6 @@ import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import tfcflorae.TFCFlorae;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -66,10 +65,11 @@ public class WorldGenWildCropsTFCF implements IWorldGenerator {
                 double yearProgress = CalendarTFC.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
                 int maxStage = crop.getMaxStage();
                 int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
-                if (growth > maxStage) {growth = maxStage;}
-                TFCFlorae.getLog().warn(crop + " tried to generate at X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ() + " is " + b);
+                if (growth > maxStage) {
+                  growth = maxStage;
+                }
                 world.setBlockState(pos, cropBlock.getDefaultState().withProperty(cropBlock.getStageProperty(), growth)
-                                                  .withProperty(BlockCropTFC.WILD, true), 2);
+                  .withProperty(BlockCropTFC.WILD, true), 2);
               }
             }
           }
@@ -93,7 +93,6 @@ public class WorldGenWildCropsTFCF implements IWorldGenerator {
                             int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
                             if (growth > maxStage)
                                 growth = maxStage;
-                            TFCFlorae.getLog().warn(crop + " tried to generate at X: " + pos.getX() + " Y: " + pos.getY() + " Z: " + pos.getZ() + " is " + b);
                             world.setBlockState(pos, cropBlock.getDefaultState().withProperty(cropBlock.getStageProperty(), growth).withProperty(BlockCropTFC.WILD, true), 2);
                         }
                     }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.gregtech.integration.jei;
 
-import su.terrafirmagreg.modules.device.init.ItemsDevice;
+import su.terrafirmagreg.modules.integration.gregtech.init.ItemsGregTech;
 
 import net.minecraft.item.ItemStack;
 
@@ -24,7 +24,7 @@ public class JustEnoughItemsModuleMixin extends IntegrationSubmodule implements 
   @Inject(method = "register", at = @At(value = "TAIL"), remap = false)
   private void onRegister(IModRegistry registry, CallbackInfo ci) {
 
-    registry.addRecipeCatalyst(new ItemStack(ItemsDevice.PROPICK.get()), GT_ORE_SPAWN_UID);
+    registry.addRecipeCatalyst(new ItemStack(ItemsGregTech.PROPICK.get()), GT_ORE_SPAWN_UID);
 
 //    // Add TFC Propicks to HEI GT ore spawn Tab
 //    List<Metal> tierOrdered = TFCRegistries.METALS.getValuesCollection()

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.temp;
 
 import su.terrafirmagreg.Tags;
-import su.terrafirmagreg.modules.core.plugin.gregtech.recipes.RecipeCoreHandlerList;
-import su.terrafirmagreg.modules.device.object.tile.multi.MetaTileEntityGreenhouse;
+import su.terrafirmagreg.modules.integration.gregtech.object.metatileentity.multi.MetaTileEntityGreenhouse;
+import su.terrafirmagreg.modules.integration.gregtech.recipes.RecipeHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.crafting.IRecipe;
@@ -17,7 +17,7 @@ public final class CommonEventHandler {
 
   @SubscribeEvent
   public static void onRegisterRecipes(RegistryEvent.Register<IRecipe> event) {
-    RecipeCoreHandlerList.register();
+    RecipeHandler.register();
   }
 
   @SubscribeEvent

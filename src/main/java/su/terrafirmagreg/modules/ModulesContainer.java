@@ -13,9 +13,10 @@ public class ModulesContainer implements IModuleContainer {
   public static final String ROCK = "rock";
   public static final String SOIL = "soil";
   public static final String DEVICE = "device";
-
   public static final String INTEGRATION = "integration";
 
+  // Integration modules
+  public static final String GREGTECH = "gregtech";
 
   @Override
   public String getID() {

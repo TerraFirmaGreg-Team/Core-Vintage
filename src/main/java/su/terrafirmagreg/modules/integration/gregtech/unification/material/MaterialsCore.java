@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.plugin.gregtech.material;
+package su.terrafirmagreg.modules.integration.gregtech.unification.material;
 
 import gregtech.api.unification.material.Material;
 

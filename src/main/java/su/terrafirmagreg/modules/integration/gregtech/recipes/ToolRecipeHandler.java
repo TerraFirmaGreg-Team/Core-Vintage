@@ -1,8 +1,8 @@
-package su.terrafirmagreg.modules.core.plugin.gregtech.recipes;
+package su.terrafirmagreg.modules.integration.gregtech.recipes;
 
 import su.terrafirmagreg.mixin.gregtech.loaders.recipe.handlers.IMaterialRecipeHandlerInvoker;
-import su.terrafirmagreg.modules.core.plugin.gregtech.oreprefix.OrePrefixCoreHandler;
-import su.terrafirmagreg.modules.device.init.ItemsDevice;
+import su.terrafirmagreg.modules.integration.gregtech.object.item.MetaItemGregTech;
+import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler;
 
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -17,21 +17,21 @@ import static gregtech.api.unification.material.properties.PropertyKey.GEM;
 import static gregtech.api.unification.ore.OrePrefix.gem;
 import static gregtech.api.unification.ore.OrePrefix.ingot;
 
-public class ToolRecipeCoreHandler {
+public class ToolRecipeHandler {
 
   public static void register() {
-    OrePrefixCoreHandler.toolHeadSword.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadSword);
-    OrePrefixCoreHandler.toolHeadPickaxe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadPickaxe);
-    OrePrefixCoreHandler.toolHeadShovel.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadShovel);
-    OrePrefixCoreHandler.toolHeadAxe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadAxe);
-    OrePrefixCoreHandler.toolHeadHoe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadHoe);
-    OrePrefixCoreHandler.toolHeadSense.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadSense);
-    OrePrefixCoreHandler.toolHeadFile.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadFile);
-    OrePrefixCoreHandler.toolHeadHammer.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadHammer);
-    OrePrefixCoreHandler.toolHeadSaw.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadSaw);
-    OrePrefixCoreHandler.toolHeadKnife.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadKnife);
-    OrePrefixCoreHandler.toolHeadPropick.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadPropick);
-    OrePrefixCoreHandler.toolHeadChisel.addProcessingHandler(PropertyKey.TOOL, ToolRecipeCoreHandler::processHeadChisel);
+    OrePrefixHandler.toolHeadSword.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadSword);
+    OrePrefixHandler.toolHeadPickaxe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadPickaxe);
+    OrePrefixHandler.toolHeadShovel.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadShovel);
+    OrePrefixHandler.toolHeadAxe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadAxe);
+    OrePrefixHandler.toolHeadHoe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadHoe);
+    OrePrefixHandler.toolHeadSense.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadSense);
+    OrePrefixHandler.toolHeadFile.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadFile);
+    OrePrefixHandler.toolHeadHammer.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadHammer);
+    OrePrefixHandler.toolHeadSaw.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadSaw);
+    OrePrefixHandler.toolHeadKnife.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadKnife);
+    OrePrefixHandler.toolHeadPropick.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadPropick);
+    OrePrefixHandler.toolHeadChisel.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadChisel);
   }
 
   private static void processHeadSword(OrePrefix toolPrefix, Material material, ToolProperty property) {
@@ -40,7 +40,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 2)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_SWORD)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_SWORD)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -62,7 +62,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 3)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_PICKAXE)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_PICKAXE)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -84,7 +84,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 1)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_SHOVEL)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_SHOVEL)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -106,7 +106,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 3)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_AXE)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_AXE)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -128,7 +128,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 2)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_HOE)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_HOE)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -150,7 +150,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 3)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_SENSE)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_SENSE)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -172,7 +172,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 2)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_FILE)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_FILE)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -194,7 +194,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 6)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_HAMMER)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_HAMMER)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -216,7 +216,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 2)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_SAW)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_SAW)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -238,7 +238,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder()
         .input(ingot, material, 1)
-        .notConsumable(ItemsDevice.SHAPE_MOLD_KNIFE)
+        .notConsumable(MetaItemGregTech.SHAPE_MOLD_KNIFE)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -260,7 +260,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder()
         .input(ingot, material, 3)
-        .notConsumable(ItemsDevice.SHAPE_MOLD_PROPICK)
+        .notConsumable(MetaItemGregTech.SHAPE_MOLD_PROPICK)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)
@@ -282,7 +282,7 @@ public class ToolRecipeCoreHandler {
     if (!material.hasProperty(GEM)) {
       RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
         .input(ingot, material, 2)
-        .notConsumable(ItemsDevice.SHAPE_EXTRUDER_CHISEL)
+        .notConsumable(MetaItemGregTech.SHAPE_EXTRUDER_CHISEL)
         .outputs(OreDictUnifier.get(toolPrefix, material))
         .duration((int) material.getMass() * 2)
         .EUt(2 * voltageMultiplier)

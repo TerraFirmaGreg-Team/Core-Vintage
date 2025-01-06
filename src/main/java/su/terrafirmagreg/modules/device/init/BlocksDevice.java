@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.init;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.registry.api.IRegistryManager;
-import su.terrafirmagreg.modules.device.object.tile.multi.MetaTileEntityGreenhouse;
+import su.terrafirmagreg.modules.integration.gregtech.object.metatileentity.multi.MetaTileEntityGreenhouse;
 
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 

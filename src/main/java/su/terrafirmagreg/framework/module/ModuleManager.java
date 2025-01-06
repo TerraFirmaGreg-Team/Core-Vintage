@@ -47,9 +47,9 @@ public class ModuleManager implements IModuleManager {
 
   private static IModule getCoreModule(List<IModule> modules) {
     return modules.stream()
-                  .filter(module -> module.getClass().getAnnotation(ModuleInfo.class).coreModule())
-                  .findFirst()
-                  .orElse(null);
+      .filter(module -> module.getClass().getAnnotation(ModuleInfo.class).coreModule())
+      .findFirst()
+      .orElse(null);
   }
 
   public static IModuleManager of() {
@@ -60,31 +60,30 @@ public class ModuleManager implements IModuleManager {
     LOGGER.info("Configuring containers...");
 
     AnnotationUtils.getAnnotations(ModuleContainer.class, IModuleContainer.class).entrySet().stream()
-                   .filter(entry -> entry.getValue().enabled())
-                   .map(Map.Entry::getKey)
-                   .forEach(container -> CONTAINER_MAP.put(container.getID(), container));
+      .filter(entry -> entry.getValue().enabled())
+      .map(Map.Entry::getKey)
+      .forEach(container -> CONTAINER_MAP.put(container.getID(), container));
   }
 
   private void configureModules() {
     LOGGER.info("Configuring modules...");
 
     AnnotationUtils.getAnnotations(ModuleInfo.class, IModule.class).keySet().stream().filter(module -> {
-                     if (!CONTAINER_MAP.containsKey(getContainerID(module))) {
-                       return false;
-                     }
-                     return isModuleEnabled(module);
-                   })
-                   .collect(Collectors.groupingBy(module -> module.getIdentifier().getNamespace(), LinkedHashMap::new, Collectors.toList()))
-                   .forEach((container, containerModules) -> {
-                     var coreModule = getCoreModule(containerModules);
-                     Preconditions.checkNotNull(coreModule, "Could not find core module for module container " + container);
+        if (!CONTAINER_MAP.containsKey(getContainerID(module))) {
+          return false;
+        }
+        return isModuleEnabled(module);
+      })
+      .collect(Collectors.groupingBy(module -> module.getIdentifier().getNamespace(), LinkedHashMap::new, Collectors.toList()))
+      .forEach((container, containerModules) -> {
+        var coreModule = getCoreModule(containerModules);
+        Preconditions.checkNotNull(coreModule, "Could not find core module for module container " + container);
 
-                     containerModules.remove(coreModule);
-                     containerModules.add(0, coreModule);
+        containerModules.remove(coreModule);
+        containerModules.add(0, coreModule);
 
-                     MODULE_MAP.putAll(containerModules.stream().collect(Collectors.toMap(IModule::getIdentifier, module -> module)));
-
-                   });
+        MODULE_MAP.putAll(containerModules.stream().collect(Collectors.toMap(IModule::getIdentifier, module -> module)));
+      });
 
   }
 

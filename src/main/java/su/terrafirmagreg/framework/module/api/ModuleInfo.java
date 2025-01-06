@@ -19,10 +19,27 @@ public @interface ModuleInfo {
    */
   String containerID();
 
+
   /**
    * A human-readable name for this module.
    */
   String name();
+
+  String author() default "";
+
+  String version() default "";
+
+  /**
+   * A list of mod IDs that this module depends on. If any mods specified are not present, the module will not load.
+   */
+  String[] modDependencies() default {};
+
+
+  /**
+   * A description of this module in the module configuration file.
+   */
+  String[] description() default "";
+
 
   boolean enabled() default true;
 
@@ -33,13 +50,4 @@ public @interface ModuleInfo {
    * Core modules should not have mod dependencies.
    */
   boolean coreModule() default false;
-
-  String author() default "";
-
-  String version() default "";
-
-  /**
-   * A description of this module in the module configuration file.
-   */
-  String[] description() default "";
 }

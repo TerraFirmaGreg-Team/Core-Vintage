@@ -14,6 +14,8 @@ public class ModulesContainer implements IModuleContainer {
   public static final String SOIL = "soil";
   public static final String DEVICE = "device";
 
+  public static final String INTEGRATION = "integration";
+
 
   @Override
   public String getID() {

@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.world.classic.biomes;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -16,7 +18,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenSandTFC;
@@ -141,7 +142,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator {
     ChunkDataTFC data = ChunkDataTFC.get(world, chunkPos);
     if (!data.isInitialized()) {return;}
 
-    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
+    final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
     final float rainfall = ChunkDataTFC.getRainfall(world, chunkPos);
     final float floraDensity = data.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
     final float floraDiversity = data.getFloraDiversity();

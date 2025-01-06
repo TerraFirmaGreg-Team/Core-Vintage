@@ -21,7 +21,7 @@ import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.items.food.ItemSandwich;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class SandwichRecipe extends ShapedDamageRecipe {
       }
 
       sandwich.initCreationFoods(breads.get(0), breads.get(1), ingredients);
-      sandwich.setCreationDate(CalendarTFC.PLAYER_TIME.getTicks()); // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
+      sandwich.setCreationDate(Calendar.PLAYER_TIME.getTicks()); // Meals get decay reset as they have on average, high decay modifiers. Also it's too much of a pain to re-calculate a remaining decay fraction average
     }
     return output;
   }

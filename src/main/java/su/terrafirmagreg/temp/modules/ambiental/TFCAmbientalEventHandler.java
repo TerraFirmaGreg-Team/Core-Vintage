@@ -2,16 +2,13 @@ package su.terrafirmagreg.temp.modules.ambiental;
 
 import su.terrafirmagreg.temp.config.TFGConfig;
 import su.terrafirmagreg.temp.modules.ambiental.capability.TemperatureCapability;
-import su.terrafirmagreg.temp.modules.ambiental.effects.TempEffect;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -89,9 +86,4 @@ public class TFCAmbientalEventHandler {
     temp.update();
   }
 
-  @SubscribeEvent
-  public void registerPotions(RegistryEvent.Register<Potion> event) {
-    event.getRegistry().register(TempEffect.WARM);
-    event.getRegistry().register(TempEffect.COOL);
-  }
 }

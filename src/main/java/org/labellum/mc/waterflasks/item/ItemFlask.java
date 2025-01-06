@@ -1,5 +1,7 @@
 package org.labellum.mc.waterflasks.item;
 
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
+
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -33,7 +35,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -49,16 +50,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Collectors;
 
-import static net.dries007.tfc.api.capability.food.IFoodStatsTFC.MAX_PLAYER_THIRST;
 import static org.labellum.mc.waterflasks.Waterflasks.FLASK_BREAK;
 import static org.labellum.mc.waterflasks.Waterflasks.MOD_ID;
+import static su.terrafirmagreg.modules.food.api.IFoodStatsTFC.MAX_PLAYER_THIRST;
 
 public abstract class ItemFlask extends ItemFluidContainer implements IItemSize {
 
-  private int CAPACITY;
-  private int DRINK;
-
   protected String name;
+  private final int CAPACITY;
+  private final int DRINK;
 
   public ItemFlask(String name, int CAPACITY, int DRINK) {
 
@@ -102,7 +102,7 @@ public abstract class ItemFlask extends ItemFluidContainer implements IItemSize 
   @Override
   public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
     return new FlaskFluidHandler(stack, CAPACITY, FluidsTFC.getAllWrappers().stream().filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
-                                                           .map(FluidWrapper::get).collect(Collectors.toSet()));
+      .map(FluidWrapper::get).collect(Collectors.toSet()));
   }
 
   public void registerItemModel() {

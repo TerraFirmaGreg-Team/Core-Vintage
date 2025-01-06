@@ -1,0 +1,15 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/bromelia_laciniosa/0",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

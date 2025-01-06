@@ -13,7 +13,7 @@ public class ItemRemapping extends AbstractRemapping {
 
 
   @SubscribeEvent
-  public static void onRemappingItem(final RegistryEvent.MissingMappings<Item> event) {
+  public static void onRemapping(final RegistryEvent.MissingMappings<Item> event) {
 
     event.getAllMappings().forEach(mapping -> {
       String mappingKey = mapping.key.toString();

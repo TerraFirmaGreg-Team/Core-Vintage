@@ -1,5 +1,7 @@
 package tfctech.client;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -19,7 +21,6 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.objects.container.ContainerCrucible;
 import net.dries007.tfc.util.Helpers;

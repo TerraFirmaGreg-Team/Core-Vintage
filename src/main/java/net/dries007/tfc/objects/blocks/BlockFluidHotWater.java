@@ -5,10 +5,8 @@
 
 package net.dries007.tfc.objects.blocks;
 
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
-import net.dries007.tfc.client.particle.TFCParticles;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -21,6 +19,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.client.particle.TFCParticles;
+
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
@@ -28,7 +29,7 @@ import java.util.Random;
 public class BlockFluidHotWater extends BlockFluidTFC {
 
   public BlockFluidHotWater() {
-    super(FluidsTFC.HOT_WATER.get(), Material.WATER, false);
+    super(FluidsCore.HOT_WATER.get(), Material.WATER, false);
 
     setLightOpacity(3);
     disableStats();
@@ -39,7 +40,7 @@ public class BlockFluidHotWater extends BlockFluidTFC {
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (rand.nextInt(4) == 0) {
       worldIn.spawnParticle(EnumParticleTypes.WATER_BUBBLE,
-                            pos.getX() + rand.nextFloat(), pos.getY() + 0.50D, pos.getZ() + rand.nextFloat(), 0.0D, 0.0D, 0.0D, Block.getStateId(stateIn));
+        pos.getX() + rand.nextFloat(), pos.getY() + 0.50D, pos.getZ() + rand.nextFloat(), 0.0D, 0.0D, 0.0D, Block.getStateId(stateIn));
     }
     if (worldIn.isAirBlock(pos.up())) {
       // Classic made 4 particles spawn at a time
@@ -54,8 +55,7 @@ public class BlockFluidHotWater extends BlockFluidTFC {
   @Override
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     super.onEntityCollision(worldIn, pos, state, entityIn);
-    if (entityIn instanceof EntityLivingBase) {
-      EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
+    if (entityIn instanceof EntityLivingBase entityLiving) {
       if (Constants.RNG.nextInt(10) == 0 && entityLiving.getHealth() < entityLiving.getMaxHealth()) {
         entityLiving.heal(FoodStatsTFC.PASSIVE_HEAL_AMOUNT * 7f);
       }

@@ -1,0 +1,69 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0",
+        "stage": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/wild_wheat/shortest"
+      }
+    }, {
+      "when": {
+        "age": "1",
+        "stage": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/wild_wheat/shorter"
+      }
+    }, {
+      "when": {
+        "age": "2",
+        "stage": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/wild_wheat/short"
+      }
+    }, {
+      "when": {
+        "age": "3",
+        "stage": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/wild_wheat/base"
+      }
+    }, {
+      "when": {
+        "age": "0",
+        "stage": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/wild_wheat/shortest"
+      }
+    }, {
+      "when": {
+        "age": "1",
+        "stage": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/wild_wheat/shorter"
+      }
+    }, {
+      "when": {
+        "age": "2",
+        "stage": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/wild_wheat/short"
+      }
+    }, {
+      "when": {
+        "age": "3",
+        "stage": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/wild_wheat/tuft"
+      }
+    }
+  ]
+}

@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
@@ -19,8 +22,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.climate.ITemperatureBlock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -37,7 +38,7 @@ public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     super.randomTick(worldIn, pos, state, random);
-    if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - getLightOpacity(state, worldIn, pos) || ClimateTFC.getActualTemp(worldIn, pos) > 4f) {
+    if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - getLightOpacity(state, worldIn, pos) || Climate.getActualTemp(worldIn, pos) > 4f) {
       if (state.getValue(LAYERS) > 1) {
         worldIn.setBlockState(pos, state.withProperty(LAYERS, state.getValue(LAYERS) - 1));
       } else {
@@ -69,7 +70,7 @@ public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
 
     if (block != Blocks.ICE && block != Blocks.PACKED_ICE && block != Blocks.BARRIER && block != BlocksTFC.SEA_ICE) {
       return stateDown.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID || stateDown.getBlock()
-                                                                                                                 .isLeaves(stateDown, worldIn, pos.down())
+        .isLeaves(stateDown, worldIn, pos.down())
              || block == this && stateDown.getValue(LAYERS) == 8;
     } else {
       return false;
@@ -79,7 +80,7 @@ public class BlockSnowTFC extends BlockSnow implements ITemperatureBlock {
   @Override
   public void onTemperatureUpdateTick(World world, BlockPos pos, IBlockState state) {
     if (world.isRaining() && world.getLightFor(EnumSkyBlock.BLOCK, pos.up()) < 11 - getLightOpacity(state, world, pos)) {
-      int expectedLayers = -2 - (int) (ClimateTFC.getActualTemp(world, pos) * 0.5f);
+      int expectedLayers = -2 - (int) (Climate.getActualTemp(world, pos) * 0.5f);
       if (expectedLayers > state.getValue(LAYERS)
           && state.getValue(LAYERS) < 7) // If we prevent this from getting to a full block, it won't infinitely accumulate
       {

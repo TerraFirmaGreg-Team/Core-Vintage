@@ -1,0 +1,107 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/ocotillo/single/0"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "single",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/ocotillo/single/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/ocotillo/single/1",
+          "weight": 5
+        }
+      ]
+    }, {
+      "when": {
+        "part": "single",
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/ocotillo/single/1"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/ocotillo/lower/0"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/ocotillo/lower/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/ocotillo/lower/1",
+          "weight": 5
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/ocotillo/lower/1"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/ocotillo/upper/0"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/ocotillo/upper/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/ocotillo/upper/1",
+          "weight": 5
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/ocotillo/upper/1"
+        }
+      ]
+    }
+  ]
+}

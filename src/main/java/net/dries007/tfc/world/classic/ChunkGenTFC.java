@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.world.classic;
 
+import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.state.IBlockState;
@@ -34,9 +37,7 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -78,9 +79,9 @@ public class ChunkGenTFC implements IChunkGenerator {
 
   public static final IBlockState STONE = Blocks.STONE.getDefaultState();
   public static final IBlockState AIR = Blocks.AIR.getDefaultState();
-  public static final IBlockState SALT_WATER = FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
-  public static final IBlockState FRESH_WATER = FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
-  public static final IBlockState HOT_WATER = FluidsTFC.HOT_WATER.get().getBlock().getDefaultState();
+  public static final IBlockState SALT_WATER = FluidsCore.SALT_WATER.get().getBlock().getDefaultState();
+  public static final IBlockState FRESH_WATER = FluidsCore.FRESH_WATER.get().getBlock().getDefaultState();
+  public static final IBlockState HOT_WATER = FluidsCore.HOT_WATER.get().getBlock().getDefaultState();
   public static final IBlockState LAVA = Blocks.LAVA.getDefaultState(); // todo: replace
   public static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
   /* Layers must be one here - otherwise snow becomes non-replaceable and wrecks the rest of world gen */
@@ -513,7 +514,7 @@ public class ChunkGenTFC implements IChunkGenerator {
         int smooth = -1;
 
         IBlockState surfaceBlock = BlockRockVariant.get(rock1, rainfall + 1.3 * rand.nextGaussian() >= 150f ? Rock.Type.GRASS : Rock.Type.DRY_GRASS)
-                                                   .getDefaultState();
+          .getDefaultState();
         IBlockState subSurfaceBlock = BlockRockVariant.get(rock1, Rock.Type.DIRT).getDefaultState();
 
         if (BiomesTFC.isBeachBiome(getBiomeOffset(x - 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x + 1, z)) || BiomesTFC.isBeachBiome(getBiomeOffset(x, z

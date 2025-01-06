@@ -1,5 +1,7 @@
 package tfcflorae.world.worldgen;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -8,7 +10,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -35,7 +36,7 @@ public class WorldGenGlowPlant implements IWorldGenerator {
     ChunkDataTFC data = ChunkDataTFC.get(world, chunkBlockPos);
 
     Biome b = world.getBiome(chunkBlockPos);
-    float avgTemperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
+    float avgTemperature = Climate.getAvgTemp(world, chunkBlockPos);
     float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
     float floraDensity = data.getFloraDensity();
     float floraDiversity = data.getFloraDiversity();

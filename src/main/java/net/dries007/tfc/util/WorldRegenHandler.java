@@ -5,24 +5,7 @@
 
 package net.dries007.tfc.util;
 
-import com.google.common.collect.Lists;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.*;
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
-import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
-import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
-import net.dries007.tfc.world.classic.worldgen.WorldGenTrees;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -48,12 +31,38 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+import com.google.common.collect.Lists;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.ICreatureTFC;
+import net.dries007.tfc.api.types.IHuntable;
+import net.dries007.tfc.api.types.IPredator;
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
+import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.objects.te.TECropBase;
+import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.types.DefaultPlants;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import net.dries007.tfc.util.calendar.Month;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
+import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
+import net.dries007.tfc.world.classic.worldgen.WorldGenTrees;
 import tfcflorae.util.RegenWildCropsTFCF;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.
@@ -77,8 +86,8 @@ public class WorldRegenHandler {
     ChunkDataTFC chunkDataTFC = ChunkDataTFC.get(event.getChunk());
     if (event.getWorld().provider.getDimension() == 0 && chunkDataTFC.isInitialized() && POSITIONS.size() < 1000) {
       //Only run this in the early months of each year
-      if (CalendarTFC.CALENDAR_TIME.getMonthOfYear().isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected()
-          && CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
+      if (Calendar.CALENDAR_TIME.getMonthOfYear().isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected()
+          && Calendar.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
         POSITIONS.add(event.getChunk().getPos());
       }
     }
@@ -97,8 +106,8 @@ public class WorldRegenHandler {
           IChunkProvider chunkProvider = event.world.getChunkProvider();
           IChunkGenerator chunkGenerator = ((ChunkProviderServer) chunkProvider).chunkGenerator;
 
-          if (CalendarTFC.CALENDAR_TIME.getMonthOfYear().isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected()
-              && CalendarTFC.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
+          if (Calendar.CALENDAR_TIME.getMonthOfYear().isWithin(Month.APRIL, Month.JULY) && !chunkDataTFC.isSpawnProtected()
+              && Calendar.CALENDAR_TIME.getTotalYears() > chunkDataTFC.getLastUpdateYear()) {
             if (ConfigTFC.General.WORLD_REGEN.sticksRocksModifier > 0) {
               //Nuke any rocks and sticks in chunk.
               removeAllPlacedItems(event.world, pos);
@@ -221,7 +230,7 @@ public class WorldRegenHandler {
 
   public static void regenPredators(World worldIn, Biome biomeIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {
     final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
-    final float temperature = ClimateTFC.getAvgTemp(worldIn, chunkBlockPos);
+    final float temperature = Climate.getAvgTemp(worldIn, chunkBlockPos);
     final float rainfall = ChunkDataTFC.getRainfall(worldIn, chunkBlockPos);
     final float floraDensity = ChunkDataTFC.getFloraDensity(worldIn, chunkBlockPos);
     final float floraDiversity = ChunkDataTFC.getFloraDiversity(worldIn, chunkBlockPos);

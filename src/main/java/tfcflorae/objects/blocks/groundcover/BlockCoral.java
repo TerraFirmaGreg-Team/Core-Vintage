@@ -1,5 +1,8 @@
 package tfcflorae.objects.blocks.groundcover;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
@@ -34,8 +37,6 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -103,12 +104,12 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
   @Nonnull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return super.getActualState(state, worldIn, pos)
-                .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
-                .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
-                .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
-                .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
-                .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
+      .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
+      .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
+      .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
+      .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
+      .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
+      .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
   }
 
   protected boolean canSustainBush(IBlockState state) {
@@ -190,13 +191,13 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
     switch (rot) {
       case CLOCKWISE_180:
         return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH))
-                    .withProperty(WEST, state.getValue(EAST));
+          .withProperty(WEST, state.getValue(EAST));
       case COUNTERCLOCKWISE_90:
         return state.withProperty(NORTH, state.getValue(EAST)).withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST))
-                    .withProperty(WEST, state.getValue(NORTH));
+          .withProperty(WEST, state.getValue(NORTH));
       case CLOCKWISE_90:
         return state.withProperty(NORTH, state.getValue(WEST)).withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST))
-                    .withProperty(WEST, state.getValue(SOUTH));
+          .withProperty(WEST, state.getValue(SOUTH));
       default:
         return state;
     }
@@ -299,7 +300,7 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID || BlocksTFC.isGround(blockState)
            || blockState.getBlock() instanceof BlockCoralBlock) && (BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up()))
                                                                     || up.getBlock() instanceof BlockCoralBlock || up.getBlock() instanceof BlockCoral)) {
-        return ClimateTFC.getAvgTemp(worldIn, pos) >= 10f && ChunkDataTFC.getRainfall(worldIn, pos) >= 100f;
+        return Climate.getAvgTemp(worldIn, pos) >= 10f && ChunkDataTFC.getRainfall(worldIn, pos) >= 100f;
       }
     }
     return false;
@@ -309,13 +310,13 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
   @Override
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
     this.onBlockHarvested(world, pos, state, player);
-    return world.setBlockState(pos, FluidsTFC.SALT_WATER.get().getBlock().getDefaultState(), world.isRemote ? 11 : 3);
+    return world.setBlockState(pos, FluidsCore.SALT_WATER.get().getBlock().getDefaultState(), world.isRemote ? 11 : 3);
   }
 
   protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
     if (!this.canBlockStay(worldIn, pos, state)) {
       this.dropBlockAsItem(worldIn, pos, state, 0);
-      worldIn.setBlockState(pos, FluidsTFC.SALT_WATER.get().getBlock().getDefaultState());
+      worldIn.setBlockState(pos, FluidsCore.SALT_WATER.get().getBlock().getDefaultState());
     }
   }
 
@@ -327,7 +328,7 @@ public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
       if ((blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID || BlocksTFC.isGround(blockState)
            || blockState.getBlock() instanceof BlockCoralBlock) && (BlocksTFC.isSaltWater(worldIn.getBlockState(pos.up()))
                                                                     || up.getBlock() instanceof BlockCoralBlock || up.getBlock() instanceof BlockCoral)) {
-        return ClimateTFC.getAvgTemp(worldIn, pos) >= 10f && ChunkDataTFC.getRainfall(worldIn, pos) >= 100f;
+        return Climate.getAvgTemp(worldIn, pos) >= 10f && ChunkDataTFC.getRainfall(worldIn, pos) >= 100f;
       }
     }
     return false;

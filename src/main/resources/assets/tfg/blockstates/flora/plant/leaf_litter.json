@@ -1,0 +1,63 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/leaf_litter/0",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/leaf_litter/1",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/leaf_litter/1",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/leaf_litter/2",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/leaf_litter/2",
+          "weight": 2
+        }, {
+          "model": "tfg:flora/plant/leaf_litter/3",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/leaf_litter/4",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/leaf_litter/5",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/leaf_litter/4",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/leaf_litter/3",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -65,7 +65,7 @@ public interface IEgg extends INBTSerializable<NBTTagCompound> {
   @SideOnly(Side.CLIENT)
   default void addEggInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
     if (isFertilized()) {
-      long remainingDays = this.getHatchDay() - CalendarTFC.PLAYER_TIME.getTotalDays();
+      long remainingDays = this.getHatchDay() - Calendar.PLAYER_TIME.getTotalDays();
       text.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.fertilized"));
       if (remainingDays > 0) {
         text.add(I18n.format("tfc.tooltip.egg_hatch", remainingDays));

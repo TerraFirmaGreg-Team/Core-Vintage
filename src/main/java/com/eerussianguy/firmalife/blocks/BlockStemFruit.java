@@ -30,7 +30,7 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 
@@ -103,7 +103,7 @@ public class BlockStemFruit extends BlockDirectional implements IItemSize {
     if (world instanceof World && !((World) world).isRemote) {
       TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
       if (te != null) {
-        long currentTime = CalendarTFC.PLAYER_TIME.getTicks();
+        long currentTime = Calendar.PLAYER_TIME.getTicks();
         long foodCreationDate = currentTime - te.getTicksSinceUpdate();
         drops.forEach(stack -> {
           FoodHandler handler = (FoodHandler) stack.getCapability(CapabilityFood.CAPABILITY, null);

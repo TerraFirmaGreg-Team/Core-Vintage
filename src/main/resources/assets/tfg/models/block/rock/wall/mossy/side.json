@@ -1,0 +1,59 @@
+{
+  "parent": "tfg:block/rock/wall/side",
+  "textures": {
+    "overlay": "#overlay"
+  },
+  "elements": [
+    {
+      "from": [ 5, 0, 0 ],
+      "to": [ 11, 14, 8 ],
+      "faces": {
+        "down": {
+          "texture": "#all",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#all"
+        },
+        "north": {
+          "texture": "#all",
+          "cullface": "north"
+        },
+        "west": {
+          "texture": "#all"
+        },
+        "east": {
+          "texture": "#all"
+        }
+      },
+      "__comment": "wall"
+    }, {
+      "from": [
+        5, 0, 0
+      ],
+      "to": [
+        11, 14, 8
+      ],
+      "faces": {
+        "down": {
+          "texture": "#overlay",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#overlay"
+        },
+        "north": {
+          "texture": "#overlay",
+          "cullface": "north"
+        },
+        "west": {
+          "texture": "#overlay"
+        },
+        "east": {
+          "texture": "#overlay"
+        }
+      },
+      "__comment": "overlay"
+    }
+  ]
+}

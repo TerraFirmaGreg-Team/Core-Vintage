@@ -5,6 +5,11 @@
 
 package net.dries007.tfc.objects.items.ceramics;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
@@ -32,10 +37,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
@@ -75,7 +76,7 @@ public class ItemMold extends ItemPottery {
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     if (!world.isRemote) {
-      IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat cap = stack.getCapability(CapabilityHeat.CAPABILITY, null);
       if (!player.isSneaking() && cap != null && cap.isMolten()) {
         TFCGuiHandler.openGui(world, player, TFCGuiHandler.Type.MOLD);
       }
@@ -146,7 +147,7 @@ public class ItemMold extends ItemPottery {
   }
 
   // Extends ItemHeatHandler for ease of use
-  private class FilledMoldCapability extends ItemHeatHandler implements ICapabilityProvider, IMoldHandler {
+  private class FilledMoldCapability extends CapabilityProviderHeat implements ICapabilityProvider, IMoldHandler {
 
     private final FluidTank tank;
     private IFluidTankProperties[] fluidTankProperties;
@@ -242,7 +243,7 @@ public class ItemMold extends ItemPottery {
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
       return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY
-             || capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
+             || capability == CapabilityHeat.CAPABILITY;
     }
 
     @Nullable

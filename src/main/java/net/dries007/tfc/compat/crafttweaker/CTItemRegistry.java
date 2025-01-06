@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.compat.crafttweaker;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
+
 import net.minecraft.item.ItemStack;
 
 import crafttweaker.CraftTweakerAPI;
@@ -19,8 +22,6 @@ import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHandler;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.MetalItemHandler;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -71,7 +72,7 @@ public class CTItemRegistry {
     if (input instanceof ILiquidStack) {throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");}
     //noinspection ConstantConditions
     Metal metal = TFCRegistries.METALS.getValuesCollection().stream()
-                                      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metalStr)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metalStr)).findFirst().orElse(null);
     if (metal == null) {throw new IllegalArgumentException("Metal specified not found!");}
     IIngredient inputIngredient = CTHelper.getInternalIngredient(input);
     if (CapabilityMetalItem.CUSTOM_METAL_ITEMS.get(inputIngredient) != null) {
@@ -101,7 +102,7 @@ public class CTItemRegistry {
     if (input instanceof ILiquidStack) {throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");}
     if (heatCapacity <= 0 || meltTemp <= 0) {throw new IllegalArgumentException("Heat capacity and melt temp must be higher than 0!");}
     IIngredient inputIngredient = CTHelper.getInternalIngredient(input);
-    if (CapabilityItemHeat.CUSTOM_ITEMS.get(inputIngredient) != null || CapabilityForgeable.CUSTOM_ITEMS.get(inputIngredient) != null) {
+    if (CapabilityHandlerHeat.CUSTOM_ITEMS.get(inputIngredient) != null || CapabilityForgeable.CUSTOM_ITEMS.get(inputIngredient) != null) {
       throw new IllegalStateException("Input already registered in forge/heat capability!");
     } else {
       CraftTweakerAPI.apply(new IAction() {
@@ -111,7 +112,7 @@ public class CTItemRegistry {
           if (forgeable) {
             CapabilityForgeable.CUSTOM_ITEMS.put(inputIngredient, () -> new ForgeableHeatableHandler(null, heatCapacity, meltTemp));
           } else {
-            CapabilityItemHeat.CUSTOM_ITEMS.put(inputIngredient, () -> new ItemHeatHandler(null, heatCapacity, meltTemp));
+            CapabilityHandlerHeat.CUSTOM_ITEMS.put(inputIngredient, () -> new CapabilityProviderHeat(null, heatCapacity, meltTemp));
           }
         }
 
@@ -132,7 +133,7 @@ public class CTItemRegistry {
     if (input == null) {throw new IllegalArgumentException("Input not allowed to be empty!");}
     if (input instanceof ILiquidStack) {throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");}
     IIngredient inputIngredient = CTHelper.getInternalIngredient(input);
-    if (CapabilityItemHeat.CUSTOM_ITEMS.get(inputIngredient) != null || CapabilityForgeable.CUSTOM_ITEMS.get(inputIngredient) != null) {
+    if (CapabilityHandlerHeat.CUSTOM_ITEMS.get(inputIngredient) != null || CapabilityForgeable.CUSTOM_ITEMS.get(inputIngredient) != null) {
       throw new IllegalStateException("Input already registered in forge/heat capability!");
     } else {
       CraftTweakerAPI.apply(new IAction() {

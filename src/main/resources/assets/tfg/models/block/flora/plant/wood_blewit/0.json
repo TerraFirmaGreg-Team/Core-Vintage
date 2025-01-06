@@ -1,0 +1,7 @@
+{
+  "parent": "tfg:block/cross",
+  "textures": {
+    "cross": "tfg:blocks/flora/plant/wood_blewit/0"
+  }
+}
+

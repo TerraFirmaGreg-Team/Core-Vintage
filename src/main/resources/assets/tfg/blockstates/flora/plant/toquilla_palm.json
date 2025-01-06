@@ -1,0 +1,23 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "lower|single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/toquilla_palm/0"
+        }, {
+          "model": "tfg:flora/plant/toquilla_palm/0",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/toquilla_palm/0",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/toquilla_palm/0",
+          "y": 270
+        }
+      ]
+    }
+  ]
+}

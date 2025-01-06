@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -33,8 +36,6 @@ import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.ILivestock;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import javax.annotation.Nonnull;
@@ -68,9 +69,9 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
     this.setBirthDay(birthDay);
     this.setFamiliarity(0);
     this.setGrowingAge(0); //We don't use this
-    this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
-    this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
-    this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+    this.matingTime = Calendar.PLAYER_TIME.getTicks();
+    this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
+    this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
     this.fertilized = false;
   }
 
@@ -90,19 +91,19 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
       // Is it time to decay familiarity?
       // If this entity was never fed(eg: new born, wild)
       // or wasn't fed yesterday(this is the starting of the second day)
-      if (this.lastFDecay > -1 && this.lastFDecay + 1 < CalendarTFC.PLAYER_TIME.getTotalDays()) {
+      if (this.lastFDecay > -1 && this.lastFDecay + 1 < Calendar.PLAYER_TIME.getTotalDays()) {
         float familiarity = getFamiliarity();
         if (familiarity < 0.3f) {
-          familiarity -= 0.02 * (CalendarTFC.PLAYER_TIME.getTotalDays() - this.lastFDecay);
-          this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+          familiarity -= 0.02 * (Calendar.PLAYER_TIME.getTotalDays() - this.lastFDecay);
+          this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
           this.setFamiliarity(familiarity);
         }
       }
       if (this.getGender() == Gender.MALE && this.isReadyToMate()) {
-        this.matingTime = CalendarTFC.PLAYER_TIME.getTicks();
+        this.matingTime = Calendar.PLAYER_TIME.getTicks();
         EntityAnimalTFC.findFemaleMate(this);
       }
-      if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
+      if (this.getAge() == Age.OLD && lastDeath < Calendar.PLAYER_TIME.getTotalDays()) {
 
                 /* todo disabled for the time being (since it is not possible to breed parrots), in 1.15 see if this animal can sit in player shoulder and do a proper mechanic here
                 this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
@@ -134,7 +135,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
             }
           }
           if (!this.world.isRemote) {
-            lastFed = CalendarTFC.PLAYER_TIME.getTotalDays();
+            lastFed = Calendar.PLAYER_TIME.getTotalDays();
             lastFDecay = lastFed; //No decay needed
             this.consumeItemFromStack(player, itemstack);
             if (this.getAge() == Age.CHILD || this.getFamiliarity() < getAdultFamiliarityCap()) {
@@ -176,7 +177,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
 
   @Override
   public EntityAgeable createChild(@Nonnull EntityAgeable ageable) {
-    return new EntityParrotTFC(this.world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
+    return new EntityParrotTFC(this.world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
   }
 
   @Override
@@ -283,7 +284,7 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
 
   @Override
   public boolean isHungry() {
-    return lastFed < CalendarTFC.PLAYER_TIME.getTotalDays();
+    return lastFed < Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
@@ -325,9 +326,9 @@ public class EntityParrotTFC extends EntityParrot implements IAnimalTFC, ILivest
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST || biomeType == BiomeHelper.BiomeType.TROPICAL_FOREST)) {
+        (biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST || biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST)) {
       return ConfigTFC.Animals.PARROT.rarity;
     }
     return 0;

@@ -5,6 +5,15 @@
 
 package net.dries007.tfc;
 
+import su.terrafirmagreg.api.data.enums.DecayTooltipMode;
+import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
+import su.terrafirmagreg.api.data.enums.HemisphereType;
+import su.terrafirmagreg.api.data.enums.InventoryCraftingMode;
+import su.terrafirmagreg.api.data.enums.OreTooltipMode;
+import su.terrafirmagreg.api.data.enums.QuiverSearch;
+import su.terrafirmagreg.api.data.enums.TemperatureMode;
+import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
+
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -13,14 +22,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.config.DecayTooltipMode;
-import net.dries007.tfc.util.config.HealthDisplayFormat;
-import net.dries007.tfc.util.config.HemisphereType;
-import net.dries007.tfc.util.config.InventoryCraftingMode;
-import net.dries007.tfc.util.config.OreTooltipMode;
-import net.dries007.tfc.util.config.QuiverSearch;
-import net.dries007.tfc.util.config.TemperatureMode;
-import net.dries007.tfc.util.config.TimeTooltipMode;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
@@ -752,7 +753,7 @@ public final class ConfigTFC {
 
     @Config.Comment("Temperature Settings")
     @Config.LangKey("config." + TFC + ".devices.temperature")
-    public static final TemperatureCFG TEMPERATURE = new TemperatureCFG();
+    public static final TemperatureCFG HEAT = new TemperatureCFG();
 
     @Config.Comment("Barrel")
     @Config.LangKey("config." + TFC + ".devices.barrel")
@@ -1186,169 +1187,129 @@ public final class ConfigTFC {
   @Config.LangKey("config." + TFC + ".animals")
   public static final class Animals {
 
-    @Config.Name("Search distance")
-    @Config.Comment("The distance for animals to search for food")
-    public static double searchDistance = 10;
-
     @Config.Comment("Alpaca")
     @Config.LangKey("config." + TFC + ".animals.alpaca")
     public static final AlpacaCFG ALPACA = new AlpacaCFG();
-
     @Config.Comment("Sheep")
     @Config.LangKey("config." + TFC + ".animals.sheep")
     public static final SheepCFG SHEEP = new SheepCFG();
-
     @Config.Comment("Cow")
     @Config.LangKey("config." + TFC + ".animals.cow")
     public static final CowCFG COW = new CowCFG();
-
     @Config.Comment("Goat")
     @Config.LangKey("config." + TFC + ".animals.goat")
     public static final GoatCFG GOAT = new GoatCFG();
-
     @Config.Comment("Chicken")
     @Config.LangKey("config." + TFC + ".animals.chicken")
     public static final ChickenCFG CHICKEN = new ChickenCFG();
-
     @Config.Comment("Duck")
     @Config.LangKey("config." + TFC + ".animals.duck")
     public static final DuckCFG DUCK = new DuckCFG();
-
     @Config.Comment("Pig")
     @Config.LangKey("config." + TFC + ".animals.pig")
     public static final PigCFG PIG = new PigCFG();
-
     @Config.Comment("Camel")
     @Config.LangKey("config." + TFC + ".animals.camel")
     public static final CamelCFG CAMEL = new CamelCFG();
-
     @Config.Comment("Llama")
     @Config.LangKey("config." + TFC + ".animals.llama")
     public static final LlamaCFG LLAMA = new LlamaCFG();
-
     @Config.Comment("Horse")
     @Config.LangKey("config." + TFC + ".animals.horse")
     public static final HorseCFG HORSE = new HorseCFG();
-
     @Config.Comment("Donkey")
     @Config.LangKey("config." + TFC + ".animals.donkey")
     public static final DonkeyCFG DONKEY = new DonkeyCFG();
-
     @Config.Comment("Mule")
     @Config.LangKey("config." + TFC + ".animals.mule")
     public static final MuleCFG MULE = new MuleCFG();
-
     @Config.Comment("Ocelot")
     @Config.LangKey("config." + TFC + ".animals.ocelot")
     public static final OcelotCFG OCELOT = new OcelotCFG();
-
     @Config.Comment("Wolf")
     @Config.LangKey("config." + TFC + ".animals.wolf")
     public static final WolfCFG WOLF = new WolfCFG();
-
     @Config.Comment("GrizzlyBear")
     @Config.LangKey("config." + TFC + ".animals.grizzly_bear")
     public static final GrizzlyBearCFG GRIZZLY_BEAR = new GrizzlyBearCFG();
-
     @Config.Comment("Polar Bear")
     @Config.LangKey("config." + TFC + ".animals.polar_bear")
     public static final PolarBearCFG POLAR_BEAR = new PolarBearCFG();
-
     @Config.Comment("Lion")
     @Config.LangKey("config." + TFC + ".animals.lion")
     public static final LionCFG LION = new LionCFG();
-
     @Config.Comment("Panther")
     @Config.LangKey("config." + TFC + ".animals.panther")
     public static final PantherCFG PANTHER = new PantherCFG();
-
     @Config.Comment("Saber Tooth")
     @Config.LangKey("config." + TFC + ".animals.saber_tooth")
     public static final SaberToothCFG SABER_TOOTH = new SaberToothCFG();
-
     @Config.Comment("Hyena")
     @Config.LangKey("config." + TFC + ".animals.hyena")
     public static final HyenaCFG HYENA = new HyenaCFG();
-
     @Config.Comment("Deer")
     @Config.LangKey("config." + TFC + ".animals.deer")
     public static final DeerCFG DEER = new DeerCFG();
-
     @Config.Comment("Parrot")
     @Config.LangKey("config." + TFC + ".animals.parrot")
     public static final ParrotCFG PARROT = new ParrotCFG();
-
     @Config.Comment("Pheasant")
     @Config.LangKey("config." + TFC + ".animals.pheasant")
     public static final PheasantCFG PHEASANT = new PheasantCFG();
-
     @Config.Comment("Rabbit")
     @Config.LangKey("config." + TFC + ".animals.rabbit")
     public static final RabbitCFG RABBIT = new RabbitCFG();
-
     @Config.Comment("DireWolf")
     @Config.LangKey("config." + TFC + ".animals.direwolf")
     public static final DireWolfCFG DIREWOLF = new DireWolfCFG();
-
     @Config.Comment("Hare")
     @Config.LangKey("config." + TFC + ".animals.hare")
     public static final HareCFG HARE = new HareCFG();
-
     @Config.Comment("Boar")
     @Config.LangKey("config." + TFC + ".animals.boar")
     public static final BoarCFG BOAR = new BoarCFG();
-
     @Config.Comment("Zebu")
     @Config.LangKey("config." + TFC + ".animals.zebu")
     public static final ZebuCFG ZEBU = new ZebuCFG();
-
     @Config.Comment("Gazelle")
     @Config.LangKey("config." + TFC + ".animals.gazelle")
     public static final GazelleCFG GAZELLE = new GazelleCFG();
-
     @Config.Comment("Wildebeest")
     @Config.LangKey("config." + TFC + ".animals.wildebeest")
     public static final WildebeestCFG WILDEBEEST = new WildebeestCFG();
-
     @Config.Comment("Quail")
     @Config.LangKey("config." + TFC + ".animals.quail")
     public static final QuailCFG QUAIL = new QuailCFG();
-
     @Config.Comment("Grouse")
     @Config.LangKey("config." + TFC + ".animals.grouse")
     public static final GrouseCFG GROUSE = new GrouseCFG();
-
     @Config.Comment("Mongoose")
     @Config.LangKey("config." + TFC + ".animals.mongoose")
     public static final MongooseCFG MONGOOSE = new MongooseCFG();
-
     @Config.Comment("Turkey")
     @Config.LangKey("config." + TFC + ".animals.turkey")
     public static final TurkeyCFG TURKEY = new TurkeyCFG();
-
     @Config.Comment("Jackal")
     @Config.LangKey("config." + TFC + ".animals.jackal")
     public static final JackalCFG JACKAL = new JackalCFG();
-
     @Config.Comment("MuskOx")
     @Config.LangKey("config." + TFC + ".animals.muskox")
     public static final MuskOxCFG MUSKOX = new MuskOxCFG();
-
     @Config.Comment("Yak")
     @Config.LangKey("config." + TFC + ".animals.yak")
     public static final YakCFG YAK = new YakCFG();
-
     @Config.Comment("Black Bear")
     @Config.LangKey("config." + TFC + ".animals.black_bear")
     public static final BlackBearCFG BLACK_BEAR = new BlackBearCFG();
-
     @Config.Comment("Cougar")
     @Config.LangKey("config." + TFC + ".animals.cougar")
     public static final CougarCFG COUGAR = new CougarCFG();
-
     @Config.Comment("Coyote")
     @Config.LangKey("config." + TFC + ".animals.coyote")
     public static final CoyoteCFG COYOTE = new CoyoteCFG();
+    @Config.Name("Search distance")
+    @Config.Comment("The distance for animals to search for food")
+    public static double searchDistance = 10;
 
     public static final class AlpacaCFG {
 

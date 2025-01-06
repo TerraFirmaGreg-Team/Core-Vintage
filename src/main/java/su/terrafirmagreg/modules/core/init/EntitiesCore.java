@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.init;
 
 import su.terrafirmagreg.framework.registry.api.IRegistryManager;
 
-public class EntitiesCore {
+public final class EntitiesCore {
 
   public static void onRegister(IRegistryManager registry) {
 

@@ -1,0 +1,54 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/rose/single"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/rose/lower/0"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/rose/lower/1"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/rose/upper/0"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/rose/upper/1"
+        }
+      ]
+    }
+  ]
+}

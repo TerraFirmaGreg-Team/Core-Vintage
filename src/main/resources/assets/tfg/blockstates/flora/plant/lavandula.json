@@ -1,0 +1,59 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/lavandula/0"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/lavandula/1"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/lavandula/2"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/lavandula/3"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "4"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/lavandula/4"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "5"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/lavandula/5"
+        }
+      ]
+    }
+  ]
+}

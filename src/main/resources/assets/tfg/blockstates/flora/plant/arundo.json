@@ -1,0 +1,45 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/arundo/0"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/arundo/plant"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "middle",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/arundo/plant"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/arundo/0"
+        }
+      ]
+    }
+  ]
+}

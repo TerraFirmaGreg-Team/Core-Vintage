@@ -1,0 +1,32 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sugar_cane/lower"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "middle"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sugar_cane/middle"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "single|upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sugar_cane/upper"
+        }
+      ]
+    }
+  ]
+}

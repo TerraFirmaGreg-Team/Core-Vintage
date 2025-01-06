@@ -5,7 +5,7 @@ import com.eerussianguy.firmalife.te.TEOven;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;

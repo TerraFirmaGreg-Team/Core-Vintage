@@ -1,5 +1,7 @@
 package tfcflorae.world.worldgen;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.BlockHardenedClay;
 import net.minecraft.block.BlockStainedHardenedClay;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +19,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import tfcflorae.ConfigTFCF;
@@ -30,6 +31,18 @@ import java.util.Random;
 public class WorldGeneratorPlants implements IWorldGenerator {
 
   private final WorldGenPlants plantGen;
+  private final float waterCountConfig = ConfigTFCF.General.WORLD.waterCount;
+  private final float waterTallCountConfig = ConfigTFCF.General.WORLD.waterTallCount;
+  private final float waterSeaCountConfig = ConfigTFCF.General.WORLD.waterSeaCount;
+  private final float waterTallSeaCountConfig = ConfigTFCF.General.WORLD.waterTallSeaCount;
+  private final float waterSeaAlgaeCountConfig = ConfigTFCF.General.WORLD.waterSeaAlgaeCount;
+  private final float hangingCountConfig = ConfigTFCF.General.WORLD.hangingCount;
+  private final float beardedMossConfig = ConfigTFCF.General.WORLD.beardedMossCount;
+  private final float grassCountConfig = ConfigTFCF.General.WORLD.grassCount;
+  private final float tallGrassCountConfig = ConfigTFCF.General.WORLD.tallGrassCount;
+  private final float tallCountConfig = ConfigTFCF.General.WORLD.tallPlantCount;
+  private final float epiphyteCountConfig = ConfigTFCF.General.WORLD.epiphyteCount;
+  private final float standardCountConfig = ConfigTFCF.General.WORLD.standardCount;
   private int waterCount = 1;
   private int waterSeaCount = 1;
   private int hangingCount = 1;
@@ -38,19 +51,6 @@ public class WorldGeneratorPlants implements IWorldGenerator {
   private int tallCount = 1;
   private int epiphyteCount = 1;
   private int standardCount = 1;
-
-  private float waterCountConfig = ConfigTFCF.General.WORLD.waterCount;
-  private float waterTallCountConfig = ConfigTFCF.General.WORLD.waterTallCount;
-  private float waterSeaCountConfig = ConfigTFCF.General.WORLD.waterSeaCount;
-  private float waterTallSeaCountConfig = ConfigTFCF.General.WORLD.waterTallSeaCount;
-  private float waterSeaAlgaeCountConfig = ConfigTFCF.General.WORLD.waterSeaAlgaeCount;
-  private float hangingCountConfig = ConfigTFCF.General.WORLD.hangingCount;
-  private float beardedMossConfig = ConfigTFCF.General.WORLD.beardedMossCount;
-  private float grassCountConfig = ConfigTFCF.General.WORLD.grassCount;
-  private float tallGrassCountConfig = ConfigTFCF.General.WORLD.tallGrassCount;
-  private float tallCountConfig = ConfigTFCF.General.WORLD.tallPlantCount;
-  private float epiphyteCountConfig = ConfigTFCF.General.WORLD.epiphyteCount;
-  private float standardCountConfig = ConfigTFCF.General.WORLD.standardCount;
 
   public WorldGeneratorPlants() {
     plantGen = new WorldGenPlants();
@@ -96,7 +96,7 @@ public class WorldGeneratorPlants implements IWorldGenerator {
     if (!data.isInitialized()) {return;}
 
     Biome b = world.getBiome(chunkPos);
-    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
+    final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
     final float rainfall = ChunkDataTFC.getRainfall(world, chunkPos);
     final float floraDensity = data.getFloraDensity(); // Use for various plant based decoration (tall grass, those vanilla jungle shrub things, etc.)
     final float floraDiversity = data.getFloraDiversity();
@@ -175,7 +175,7 @@ public class WorldGeneratorPlants implements IWorldGenerator {
             case EPIPHYTE: {
               if (plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.MONSTERA_EPIPHYTE)) {
                 for (float i = rng.nextInt(Math.round(epiphyteCount / floraDiversity)); i < (5 + floraDensity + floraDiversity) * epiphyteCountConfig; i++) {
-                  if (rainfall >= (260f + 4f * rng.nextGaussian()) && ClimateTFC.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
+                  if (rainfall >= (260f + 4f * rng.nextGaussian()) && Climate.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
                     BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
                     IBlockState blockPosState = world.getBlockState(blockPos.down());
                     if (!(blockPosState instanceof BlockHardenedClay || blockPosState instanceof BlockStainedHardenedClay)) {
@@ -193,8 +193,8 @@ public class WorldGeneratorPlants implements IWorldGenerator {
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.LIANA)) {
                 for (float i = rng.nextInt(Math.round((hangingCount + floraDensity) / floraDiversity));
                      i < (3 + floraDensity + floraDiversity) * hangingCountConfig; i++) {
-                  if (floraDensity >= 0.1f && rainfall >= (260f + 4f * rng.nextGaussian()) && ClimateTFC.getAvgTemp(world, chunkPos) >= (20f + 2f
-                                                                                                                                               * rng.nextGaussian())) {
+                  if (floraDensity >= 0.1f && rainfall >= (260f + 4f * rng.nextGaussian()) && Climate.getAvgTemp(world, chunkPos) >= (20f + 2f
+                                                                                                                                            * rng.nextGaussian())) {
                     BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
                     IBlockState blockPosState = world.getBlockState(blockPos.down());
                     if (!(blockPosState instanceof BlockHardenedClay || blockPosState instanceof BlockStainedHardenedClay)) {
@@ -217,7 +217,7 @@ public class WorldGeneratorPlants implements IWorldGenerator {
             }
             case TALL_PLANT: {
               for (float i = rng.nextInt(Math.round((tallCount + 8) / floraDiversity)); i < (1 + floraDensity) * tallCountConfig; i++) {
-                if (rainfall >= (260f + 4f * rng.nextGaussian()) && ClimateTFC.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
+                if (rainfall >= (260f + 4f * rng.nextGaussian()) && Climate.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
                   BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
                   IBlockState blockPosState = world.getBlockState(blockPos.down());
                   if (!(blockPosState instanceof BlockHardenedClay || blockPosState instanceof BlockStainedHardenedClay)) {
@@ -248,7 +248,7 @@ public class WorldGeneratorPlants implements IWorldGenerator {
             }
             case STANDARD: {
               for (float i = rng.nextInt(Math.round((standardCount + 8) / floraDiversity)); i < (1 + floraDensity) * standardCountConfig; i++) {
-                if (rainfall >= (260f + 4f * rng.nextGaussian()) && ClimateTFC.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
+                if (rainfall >= (260f + 4f * rng.nextGaussian()) && Climate.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
                   BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
                   IBlockState blockPosState = world.getBlockState(blockPos.down());
                   if (!(blockPosState instanceof BlockHardenedClay || blockPosState instanceof BlockStainedHardenedClay)) {
@@ -322,7 +322,7 @@ public class WorldGeneratorPlants implements IWorldGenerator {
                                 plant != TFCRegistries.PLANTS.getValue(PlantsTFCF.WILD_WHEAT))
                             {*/
               for (int i = rng.nextInt(Math.round(grassCount / floraDiversity)); i < (5 + floraDensity) * grassCountConfig; i++) {
-                if (rainfall >= (260f + 4f * rng.nextGaussian()) && ClimateTFC.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
+                if (rainfall >= (260f + 4f * rng.nextGaussian()) && Climate.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
                   BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
                   IBlockState blockPosState = world.getBlockState(blockPos.down());
                   if (!(blockPosState instanceof BlockHardenedClay || blockPosState instanceof BlockStainedHardenedClay)) {
@@ -380,7 +380,7 @@ public class WorldGeneratorPlants implements IWorldGenerator {
             case TALL_GRASS: {
               if (plant != TFCRegistries.PLANTS.getValue(PlantsTFCF.SAWGRASS)) {
                 for (int i = rng.nextInt(Math.round((tallGrassCount + 8) / floraDiversity)); i < (3 + floraDensity) * tallGrassCountConfig; i++) {
-                  if (rainfall >= (260f + 4f * rng.nextGaussian()) && ClimateTFC.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
+                  if (rainfall >= (260f + 4f * rng.nextGaussian()) && Climate.getAvgTemp(world, chunkPos) >= (20f + 2f * rng.nextGaussian())) {
                     BlockPos blockPos = world.getHeight(chunkPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8));
                     IBlockState blockPosState = world.getBlockState(blockPos.down());
                     if (!(blockPosState instanceof BlockHardenedClay || blockPosState instanceof BlockStainedHardenedClay)) {

@@ -14,11 +14,12 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,7 +30,7 @@ import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 /**
  * Custom heat + size capability for stick items.
  */
-public class ItemStickCapability extends ItemHeatHandler implements IItemSize {
+public class ItemStickCapability extends CapabilityProviderHeat implements IItemSize {
 
   public static final ResourceLocation KEY = new ResourceLocation(TFC, "stick");
   private static final float MELTING_POINT = 40f;

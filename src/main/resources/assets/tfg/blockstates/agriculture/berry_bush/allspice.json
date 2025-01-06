@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:agriculture/berry_bush/large",
+    "textures": {
+      "texture": "tfg:blocks/agriculture/berry_bush/bush/allspice"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "fruiting": {
+      "true": {
+        "textures": {
+          "texture": "tfg:blocks/agriculture/berry_bush/berry/allspice"
+        }
+      },
+      "false": {}
+    }
+  }
+}

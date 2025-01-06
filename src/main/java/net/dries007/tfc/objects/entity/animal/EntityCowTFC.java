@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -40,8 +43,6 @@ import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import javax.annotation.Nonnull;
@@ -71,9 +72,9 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeUtils.BiomeType.PLAINS)) {
       return ConfigTFC.Animals.COW.rarity;
     }
     return 0;
@@ -98,7 +99,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
   public void birthChildren() {
     int numberOfChildren = ConfigTFC.Animals.COW.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityCowTFC baby = new EntityCowTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+      EntityCowTFC baby = new EntityCowTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);
@@ -132,7 +133,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
   public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand) {
     ItemStack itemstack = player.getHeldItem(hand);
     FluidActionResult fillResult = FluidUtil.tryFillContainer(itemstack, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
-                                                              Fluid.BUCKET_VOLUME, player, false);
+      Fluid.BUCKET_VOLUME, player, false);
 
     // First check if it is possible to fill the player's held item with milk
     if (fillResult.isSuccess()) {
@@ -140,7 +141,7 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
         player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
         setProductsCooldown();
         player.setHeldItem(hand, FluidUtil.tryFillContainerAndStow(itemstack, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)),
-                                                                   new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player, true).getResult());
+          new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player, true).getResult());
       } else if (!world.isRemote) {
         //Return chat message indicating why this entity isn't giving milk
         TextComponentTranslation tooltip = getTooltip();
@@ -193,12 +194,12 @@ public class EntityCowTFC extends EntityAnimalMammal implements ILivestock {
 
   @Override
   public void setProductsCooldown() {
-    setMilkedTick(CalendarTFC.PLAYER_TIME.getTicks());
+    setMilkedTick(Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
   public long getProductsCooldown() {
-    return Math.max(0, ConfigTFC.Animals.COW.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+    return Math.max(0, ConfigTFC.Animals.COW.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

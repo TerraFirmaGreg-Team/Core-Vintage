@@ -5,12 +5,13 @@
 
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.devices.BlockBlastFurnace;
 import net.dries007.tfc.objects.te.TEBlastFurnace;

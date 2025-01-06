@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.registry;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -357,10 +359,10 @@ public class BlocksFL {
     register(TEClimateStation.class, "climate_station");
     register(TETurntable.class, "turntable");
     //needs fix
-    FluidsTFC.getWrapper(FluidsFL.COCONUT_MILK.get());
-    FluidsTFC.getWrapper(FluidsFL.YAK_MILK.get());
-    FluidsTFC.getWrapper(FluidsFL.GOAT_MILK.get());
-    FluidsTFC.getWrapper(FluidsFL.ZEBU_MILK.get());
+    FluidsTFC.getWrapper(FluidsCore.COCONUT_MILK.get());
+    FluidsTFC.getWrapper(FluidsCore.YAK_MILK.get());
+    FluidsTFC.getWrapper(FluidsCore.GOAT_MILK.get());
+    FluidsTFC.getWrapper(FluidsCore.ZEBU_MILK.get());
   }
 
   private static void doFruitAdditions(IForgeRegistry<Block> r, String name, Builder<BlockFruitFence> fruitFences, Builder<BlockFruitFenceGate> fruitFenceGates, Builder<BlockFruitDoor> fruitDoors, Builder<BlockFruitTrapDoor> fruitTrapdoors, Builder<BlockBonsai> bonsais, Optional<IFruitTree> optionalTree) {
@@ -369,7 +371,7 @@ public class BlocksFL {
     fruitDoors.add(register(r, name + "_door", new BlockFruitDoor(), CT_WOOD));
     fruitTrapdoors.add(register(r, name + "_trapdoor", new BlockFruitTrapDoor(), CT_WOOD));
     optionalTree.ifPresent(tree -> bonsais.add(register(r, name + "_bonsai_pot", new BlockBonsai(() -> tree.getFoodDrop()
-                                                                                                           .getItem(), () -> Item.getItemFromBlock(BlockFruitTreeSapling.get(tree)), 19, 4, Material.CLAY), CT_WOOD))
+      .getItem(), () -> Item.getItemFromBlock(BlockFruitTreeSapling.get(tree)), 19, 4, Material.CLAY), CT_WOOD))
     );
   }
 

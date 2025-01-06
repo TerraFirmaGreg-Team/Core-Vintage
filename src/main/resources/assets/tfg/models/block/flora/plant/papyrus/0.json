@@ -1,0 +1,57 @@
+{
+  "credit": "Made with Blockbench",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "tfg:blocks/flora/plant/papyrus/0",
+    "cross1": "tfg:blocks/flora/plant/papyrus/0",
+    "cross2": "tfg:blocks/flora/plant/papyrus/0"
+  },
+  "elements": [
+    {
+      "from": [ 8, -1, -4.8 ],
+      "to": [ 8, 32, 20.8 ],
+      "shade": false,
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [ 8, 8, 8 ],
+        "rescale": true
+      },
+      "faces": {
+        "east": {
+          "uv": [ 16, 0, 0, 16 ],
+          "texture": "#cross1",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [ 0, 0, 16, 16 ],
+          "texture": "#cross1",
+          "tintindex": 0
+        }
+      }
+    }, {
+      "from": [ 8, -1, -4.8 ],
+      "to": [ 8, 32, 20.8 ],
+      "shade": false,
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [ 8, 8, 8 ],
+        "rescale": true
+      },
+      "faces": {
+        "east": {
+          "uv": [ 16, 0, 0, 16 ],
+          "texture": "#cross2",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [ 0, 0, 16, 16 ],
+          "texture": "#cross2",
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}
+

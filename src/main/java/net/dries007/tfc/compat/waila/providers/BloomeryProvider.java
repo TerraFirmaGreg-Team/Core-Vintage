@@ -26,7 +26,7 @@ import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TEBloom;
 import net.dries007.tfc.objects.te.TEBloomery;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
 package su.terrafirmagreg.framework.generator.spi;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+
 import su.terrafirmagreg.api.data.enums.ResourceType;
 import su.terrafirmagreg.api.library.Pair;
 import su.terrafirmagreg.api.util.GameUtils;
@@ -35,7 +37,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -129,9 +130,9 @@ public abstract class ResourceCache {
   @SuppressWarnings("UnstableApiUsage")
   static class Impl extends ResourceCache {
 
-    private final Map<Path, HashCode> presentFiles = new HashMap<>();
-    private final Map<Path, HashCode> writtenFiles = new HashMap<>();
-    private final Map<Path, Pair<ResourceAggregator<Object, Object>, Object>> aggregatedResources = new HashMap<>();
+    private final Map<Path, HashCode> presentFiles = new Object2ObjectOpenHashMap<>();
+    private final Map<Path, HashCode> writtenFiles = new Object2ObjectOpenHashMap<>();
+    private final Map<Path, Pair<ResourceAggregator<Object, Object>, Object>> aggregatedResources = new Object2ObjectOpenHashMap<>();
     private final Set<Path> toBeGenerated = new HashSet<>();
 
     private final Path outputDirectory;

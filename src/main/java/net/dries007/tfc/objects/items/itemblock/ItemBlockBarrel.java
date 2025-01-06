@@ -44,8 +44,8 @@ import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 
@@ -138,7 +138,7 @@ public class ItemBlockBarrel extends ItemBlockTFC {
       }
 
       String formattedDate = ICalendarFormatted.getTimeAndDate(stack.getTagCompound()
-                                                                    .getLong("sealedCalendarTick"), CalendarTFC.CALENDAR_TIME.getDaysInMonth());
+                                                                    .getLong("sealedCalendarTick"), Calendar.CALENDAR_TIME.getDaysInMonth());
       tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("waila.tfc.barrel.sealed", formattedDate).getFormattedText());
     }
   }
@@ -234,8 +234,8 @@ public class ItemBlockBarrel extends ItemBlockTFC {
       }
       NBTTagCompound nbt = container.getTagCompound();
       //noinspection ConstantConditions
-      nbt.setLong("sealedTick", CalendarTFC.PLAYER_TIME.getTicks());
-      nbt.setLong("sealedCalendarTick", CalendarTFC.CALENDAR_TIME.getTicks());
+      nbt.setLong("sealedTick", Calendar.PLAYER_TIME.getTicks());
+      nbt.setLong("sealedCalendarTick", Calendar.CALENDAR_TIME.getTicks());
       container.setTagCompound(nbt);
       super.setFluid(fluid);
     }

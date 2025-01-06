@@ -1,0 +1,7 @@
+{
+  "parent": "tfg:block/tinted_cross",
+  "textures": {
+    "cross": "tfg:blocks/flora/plant/ryegrass/short/0"
+  }
+}
+

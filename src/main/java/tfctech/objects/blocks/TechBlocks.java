@@ -1,5 +1,7 @@
 package tfctech.objects.blocks;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -72,8 +74,8 @@ public final class TechBlocks {
     TechFluids.registerFluids();
 
     ImmutableList.Builder<BlockFluidBase> b = ImmutableList.builder();
-    if (TechFluids.LATEX.isDefault()) {
-      b.add(register(r, "fluid/" + TechFluids.LATEX.get().getName(), new BlockFluidTFC(TechFluids.LATEX.get(), Material.WATER)));
+    if (FluidsCore.LATEX.isDefault()) {
+      b.add(register(r, "fluid/" + FluidsCore.LATEX.get().getName(), new BlockFluidTFC(FluidsCore.LATEX.get(), Material.WATER)));
     }
     allFluidBlocks = b.build();
 

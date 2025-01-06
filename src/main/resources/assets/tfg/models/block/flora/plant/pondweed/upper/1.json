@@ -1,0 +1,7 @@
+{
+  "parent": "tfg:block/flora/plant/pondweed/base",
+  "textures": {
+    "texture": "tfg:blocks/flora/plant/pondweed/top_b"
+  }
+}
+

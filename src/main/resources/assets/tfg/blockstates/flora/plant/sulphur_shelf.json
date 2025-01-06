@@ -1,0 +1,150 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "up"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sulphur_shelf/standing/0"
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/standing/1"
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/standing/2"
+        }
+      ]
+    }, {
+      "when": {
+        "facing": "down"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sulphur_shelf/standing/0",
+          "x": 180
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/standing/1",
+          "x": 180
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/standing/2",
+          "x": 180
+        }
+      ]
+    }, {
+      "when": {
+        "facing": "east"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sulphur_shelf/0",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/1",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/2",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/3",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/4",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/5",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/6",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/7",
+          "y": 90
+        }
+      ]
+    }, {
+      "when": {
+        "facing": "south"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sulphur_shelf/0",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/1",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/2",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/3",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/4",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/5",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/6",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/7",
+          "y": 180
+        }
+      ]
+    }, {
+      "when": {
+        "facing": "west"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sulphur_shelf/0",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/1",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/2",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/3",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/4",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/5",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/6",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/7",
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "facing": "north"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sulphur_shelf/0"
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/1"
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/2"
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/3"
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/4"
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/5"
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/6"
+        }, {
+          "model": "tfg:flora/plant/sulphur_shelf/7"
+        }
+      ]
+    }
+  ]
+}

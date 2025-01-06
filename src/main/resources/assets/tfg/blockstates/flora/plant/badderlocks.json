@@ -1,0 +1,44 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/badderlocks/upper"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/badderlocks/lower"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "middle"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/badderlocks/lower"
+        }
+      ]
+    },
+    {
+      "when": {
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/badderlocks/upper"
+        }
+      ]
+    }
+  ]
+}

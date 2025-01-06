@@ -1,5 +1,7 @@
 package BananaFructa.tfcfarming.firmalife;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,15 +15,14 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 public class TEPlanterN extends TEPlanter {
 
   NutrientValues nutrientValues = new NutrientValues(0, 0, 0);
 
   public TEPlanterN() {
-    if (getTicksSinceUpdate() == CalendarTFC.PLAYER_TIME.getTicks()) {resetCounter();}
+    if (getTicksSinceUpdate() == Calendar.PLAYER_TIME.getTicks()) {resetCounter();}
   }
 
   @Override
@@ -61,7 +62,7 @@ public class TEPlanterN extends TEPlanter {
   }
 
   public boolean isBelowMaxTemp(float maxTemp) {
-    return !Config.enforceTemperature || maxTemp > ClimateTFC.getActualTemp(world, pos, 0);
+    return !Config.enforceTemperature || maxTemp > Climate.getActualTemp(world, pos, 0);
   }
 
   @Override

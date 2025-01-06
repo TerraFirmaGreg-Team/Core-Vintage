@@ -1,0 +1,23 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/pimento/0"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/pimento/1"
+        }
+      ]
+    }
+  ]
+}

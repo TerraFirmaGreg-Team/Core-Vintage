@@ -26,7 +26,7 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
 
 import java.lang.reflect.InvocationTargetException;
@@ -59,7 +59,7 @@ public class CommonProxy {
    */
 
   private final List<Tuple<BlockPos, World>> awaiting = new ArrayList<>();
-  private final long month = CalendarTFC.CALENDAR_TIME.getDaysInMonth() * 24000;
+  private final long month = Calendar.CALENDAR_TIME.getDaysInMonth() * 24000;
 
   public void init() {}
 

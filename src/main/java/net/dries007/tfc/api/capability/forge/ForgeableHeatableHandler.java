@@ -10,14 +10,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
+
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ForgeableHeatableHandler extends ItemHeatHandler implements IForgeableHeatable {
+public class ForgeableHeatableHandler extends CapabilityProviderHeat implements IForgeableHeatable {
 
   private final ForgeableHandler internalForgeCap;
 

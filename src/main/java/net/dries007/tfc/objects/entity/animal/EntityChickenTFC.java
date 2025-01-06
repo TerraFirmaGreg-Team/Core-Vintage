@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -33,8 +36,6 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIFindNest;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import javax.annotation.Nonnull;
@@ -70,9 +71,9 @@ public class EntityChickenTFC extends EntityAnimalTFC implements ILivestock {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeUtils.BiomeType.PLAINS)) {
       return ConfigTFC.Animals.CHICKEN.rarity;
     }
     return 0;
@@ -128,7 +129,7 @@ public class EntityChickenTFC extends EntityAnimalTFC implements ILivestock {
       if (cap != null) {
         EntityChickenTFC chick = new EntityChickenTFC(this.world);
         chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-        cap.setFertilized(chick, ConfigTFC.Animals.CHICKEN.hatch + CalendarTFC.PLAYER_TIME.getTotalDays());
+        cap.setFertilized(chick, ConfigTFC.Animals.CHICKEN.hatch + Calendar.PLAYER_TIME.getTotalDays());
       }
     }
     eggs.add(egg);
@@ -137,12 +138,12 @@ public class EntityChickenTFC extends EntityAnimalTFC implements ILivestock {
 
   @Override
   public void setProductsCooldown() {
-    this.setLaidTicks(CalendarTFC.PLAYER_TIME.getTicks());
+    this.setLaidTicks(Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
   public long getProductsCooldown() {
-    return Math.max(0, ConfigTFC.Animals.CHICKEN.eggTicks + getLaidTicks() - CalendarTFC.PLAYER_TIME.getTicks());
+    return Math.max(0, ConfigTFC.Animals.CHICKEN.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
@@ -223,7 +224,7 @@ public class EntityChickenTFC extends EntityAnimalTFC implements ILivestock {
   public void onLivingUpdate() {
     super.onLivingUpdate();
     if (this.getClass() == EntityChickenTFC.class && this.getGender() == Gender.MALE && !this.world.isRemote && !this.isChild()
-        && CalendarTFC.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
+        && Calendar.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
       this.world.playSound(null, this.getPosition(), TFCSounds.ANIMAL_ROOSTER_CRY, SoundCategory.AMBIENT, 0.8f, 1.0f);
     }
     this.oFlap = this.wingRotation;

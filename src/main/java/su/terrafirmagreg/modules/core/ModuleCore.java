@@ -6,22 +6,21 @@ import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
 import su.terrafirmagreg.framework.network.api.INetworkManager;
 import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.core.init.PacketsCore;
 import su.terrafirmagreg.temp.modules.ambiental.TFCAmbientalEventHandler;
 import su.terrafirmagreg.temp.modules.ambiental.TFCAmbientalGuiRenderer;
-import su.terrafirmagreg.temp.modules.ambiental.capability.TemperatureCapability;
-import su.terrafirmagreg.temp.modules.ambiental.capability.TemperaturePacket;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.DumbStorage;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -66,15 +65,19 @@ public final class ModuleCore extends ModuleBase {
   }
 
   @Override
+  public void onNetworkRegister(INetworkManager network) {
+
+    PacketsCore.onRegister(network);
+  }
+
+  @Override
   public void onPreInit(FMLPreInitializationEvent event) {
+
+    CapabilityHeat.register();
+    CapabilityAmbiental.register();
 
     // Common Events
     MinecraftForge.EVENT_BUS.register(new TFCAmbientalEventHandler());
-
-    // Capability Registry
-    CapabilityManager.INSTANCE.register(TemperatureCapability.class, new DumbStorage<>(), () -> null);
-
-    TerraFirmaCraft.getNetwork().registerMessage(new TemperaturePacket.Handler(), TemperaturePacket.class, 100, Side.CLIENT);
   }
 
   @Override
@@ -82,6 +85,10 @@ public final class ModuleCore extends ModuleBase {
     MinecraftForge.EVENT_BUS.register(new TFCAmbientalGuiRenderer());
   }
 
+  @Override
+  public void onInit(FMLInitializationEvent event) {
+    CapabilityHandlerHeat.init();
+  }
 
   @Override
   public @NotNull List<Class<?>> getEventBusSubscribers() {

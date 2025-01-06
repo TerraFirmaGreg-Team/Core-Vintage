@@ -1,0 +1,34 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/pygmy_date_palm/single"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/pygmy_date_palm/lower"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/pygmy_date_palm/upper"
+        }
+      ]
+    }
+  ]
+}

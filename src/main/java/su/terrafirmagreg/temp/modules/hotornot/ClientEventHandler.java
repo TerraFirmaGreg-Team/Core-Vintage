@@ -1,5 +1,7 @@
 package su.terrafirmagreg.temp.modules.hotornot;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.temp.config.HotLists;
 import su.terrafirmagreg.temp.config.TFGConfig;
 
@@ -13,9 +15,6 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT)
 public class ClientEventHandler {
@@ -46,8 +45,8 @@ public class ClientEventHandler {
         event.getToolTip()
           .add(FluidEffect.GAS.color + new TextComponentTranslation(FluidEffect.GAS.tooltip).getUnformattedText());
       } else if (Loader.isModLoaded("tfc")) {
-        if (stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) {
-          IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        if (stack.hasCapability(CapabilityHeat.CAPABILITY, null)) {
+          ICapabilityHeat heat = stack.getCapability(CapabilityHeat.CAPABILITY, null);
           if (heat == null) {return;}
           if (heat.getTemperature() >= TFGConfig.General.HOT_ITEM) {
             event.getToolTip()

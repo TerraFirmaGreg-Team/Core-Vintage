@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -22,7 +24,6 @@ import com.eerussianguy.firmalife.particle.ParticlesFL;
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
 import com.eerussianguy.firmalife.util.HelpersFL;
 import com.eerussianguy.firmalife.util.IWaterable;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
@@ -104,8 +105,8 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
         double speed = MathHelper.nextDouble(rand, -0.2D, 0.2D);
         for (int i = 0; i < 5; i++) {
           ParticlesFL.SPRINKLE.spawn(world,
-                                     pos.getX() + 0.5D,
-                                     pos.getY() + 0.25D, pos.getZ() + 0.5D, speed * HelpersFL.nextSign(rand), 0.0D, speed * HelpersFL.nextSign(rand), 130);
+            pos.getX() + 0.5D,
+            pos.getY() + 0.25D, pos.getZ() + 0.5D, speed * HelpersFL.nextSign(rand), 0.0D, speed * HelpersFL.nextSign(rand), 130);
         }
       } else {
         ParticlesFL.SPRINKLE.spawn(world, pos.getX() + 0.5D, pos.getY() + 0.25D, pos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D, 130);
@@ -139,7 +140,7 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreen
     if (te != null) {
       IFluidHandler cap = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.DOWN);
       if (cap != null) {
-        return cap.drain(new FluidStack(FluidsTFC.FRESH_WATER.get(), 1), true) != null;
+        return cap.drain(new FluidStack(FluidsCore.FRESH_WATER.get(), 1), true) != null;
       }
     }
     return false;

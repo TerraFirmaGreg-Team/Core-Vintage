@@ -1,8 +1,6 @@
 package tfctech.compat.jei;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -30,11 +28,14 @@ import tfctech.compat.jei.wrappers.GlassworkingRecipeWrapper;
 import tfctech.compat.jei.wrappers.SmelteryRecipeWrapper;
 import tfctech.compat.jei.wrappers.UnmoldRecipeWrapper;
 import tfctech.objects.blocks.TechBlocks;
-import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.TechItems;
 import tfctech.objects.items.glassworking.ItemBlowpipe;
 import tfctech.objects.items.metal.ItemTechMetal;
 import tfctech.registry.TechRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
 
@@ -57,20 +58,20 @@ public class TechJEIPlugin implements IModPlugin {
   public void register(IModRegistry registry) {
     // Wire drawing
     List<SimpleRecipeWrapper> wireList = TechRegistries.WIRE_DRAWING.getValuesCollection()
-                                                                    .stream()
-                                                                    .filter(x -> x.getIngredients().size()
-                                                                                 == 2) //Only shows recipes which have a wire drawing plate (so, it can be obtained)
-                                                                    .map(SimpleRecipeWrapper::new)
-                                                                    .collect(Collectors.toList());
+      .stream()
+      .filter(x -> x.getIngredients().size()
+                   == 2) //Only shows recipes which have a wire drawing plate (so, it can be obtained)
+      .map(SimpleRecipeWrapper::new)
+      .collect(Collectors.toList());
 
     registry.addRecipes(wireList, WIRE_DRAWING_UID);
     registry.addRecipeCatalyst(new ItemStack(TechBlocks.WIRE_DRAW_BENCH), WIRE_DRAWING_UID);
 
     // Glassworking (blowpipe)
     List<GlassworkingRecipeWrapper> glassList = TechRegistries.GLASSWORKING.getValuesCollection()
-                                                                           .stream()
-                                                                           .map(x -> new GlassworkingRecipeWrapper(x, registry.getJeiHelpers().getGuiHelper()))
-                                                                           .collect(Collectors.toList());
+      .stream()
+      .map(x -> new GlassworkingRecipeWrapper(x, registry.getJeiHelpers().getGuiHelper()))
+      .collect(Collectors.toList());
 
     registry.addRecipes(glassList, GLASSWORKING_UID);
     TFCRegistries.METALS.getValuesCollection().forEach(metal -> {
@@ -82,9 +83,9 @@ public class TechJEIPlugin implements IModPlugin {
 
     // Smeltery
     List<SmelteryRecipeWrapper> smelteryList = TechRegistries.SMELTERY.getValuesCollection()
-                                                                      .stream()
-                                                                      .map(SmelteryRecipeWrapper::new)
-                                                                      .collect(Collectors.toList());
+      .stream()
+      .map(SmelteryRecipeWrapper::new)
+      .collect(Collectors.toList());
 
     registry.addRecipes(smelteryList, SMELTERY_UID);
     registry.addRecipeCatalyst(new ItemStack(TechBlocks.SMELTERY_CAULDRON), SMELTERY_UID);
@@ -95,7 +96,7 @@ public class TechJEIPlugin implements IModPlugin {
 
     // Information
     registry.addIngredientInfo(new ItemStack(TechItems.IRON_GROOVE), VanillaTypes.ITEM, "jei.information.tfctech.groove");
-    registry.addIngredientInfo(new FluidStack(TechFluids.LATEX.get(), 1000), VanillaTypes.FLUID, "jei.information.tfctech.latex");
+    registry.addIngredientInfo(new FluidStack(FluidsCore.LATEX.get(), 1000), VanillaTypes.FLUID, "jei.information.tfctech.latex");
     registry.addIngredientInfo(new ItemStack(TechBlocks.FRIDGE), VanillaTypes.ITEM, "jei.information.tfctech.fridge");
     registry.addIngredientInfo(new ItemStack(TechBlocks.WIRE_DRAW_BENCH), VanillaTypes.ITEM, "jei.information.tfctech.wiredraw");
     registry.addIngredientInfo(new ItemStack(TechBlocks.INDUCTION_CRUCIBLE), VanillaTypes.ITEM, "jei.information.tfctech.crucible");
@@ -105,22 +106,22 @@ public class TechJEIPlugin implements IModPlugin {
     List<UnmoldRecipeWrapper> unmoldList = new ArrayList<>();
     List<CastingRecipeWrapper> castingList = new ArrayList<>();
     TFCRegistries.METALS.getValuesCollection()
-                        .forEach(metal -> {
-                          if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(true)) {
-                            for (ItemTechMetal.ItemType type : ItemTechMetal.ItemType.values()) {
-                              if (type.hasMold() && ItemTechMetal.get(metal, type) != null) {
-                                unmoldList.add(new UnmoldRecipeWrapper(metal, type));
-                                castingList.add(new CastingRecipeWrapper(metal, type));
-                              }
-                            }
-                          }
-                        });
+      .forEach(metal -> {
+        if (ObfuscationReflectionHelper.getPrivateValue(Metal.class, metal, "usable").equals(true)) {
+          for (ItemTechMetal.ItemType type : ItemTechMetal.ItemType.values()) {
+            if (type.hasMold() && ItemTechMetal.get(metal, type) != null) {
+              unmoldList.add(new UnmoldRecipeWrapper(metal, type));
+              castingList.add(new CastingRecipeWrapper(metal, type));
+            }
+          }
+        }
+      });
 
     // Glass unmolding
     ItemStack input = new ItemStack(TechItems.MOLD_BLOCK);
     IFluidHandlerItem cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (cap != null) {
-      cap.fill(new FluidStack(TechFluids.GLASS.get(), 1000), true);
+      cap.fill(new FluidStack(FluidsCore.GLASS.get(), 1000), true);
     }
     unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS)));
     registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");
@@ -128,7 +129,7 @@ public class TechJEIPlugin implements IModPlugin {
     input = new ItemStack(TechItems.MOLD_PANE);
     cap = input.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (cap != null) {
-      cap.fill(new FluidStack(TechFluids.GLASS.get(), 375), true);
+      cap.fill(new FluidStack(FluidsCore.GLASS.get(), 375), true);
     }
     unmoldList.add(new UnmoldRecipeWrapper(input, new ItemStack(Blocks.GLASS_PANE)));
     registry.addIngredientInfo(input, VanillaTypes.ITEM, "jei.information.tfctech.fill_mold");

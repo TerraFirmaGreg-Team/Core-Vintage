@@ -1,5 +1,8 @@
 package tfctech.objects.items.glassworking;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -8,8 +11,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import tfctech.client.TechGuiHandler;
@@ -22,12 +23,6 @@ import java.util.Map;
 public class ItemBlowpipe extends ItemGlassMolder implements IMetalItem {
 
   private static final Map<Metal, ItemBlowpipe> TABLE = new HashMap<>();
-
-  @Nullable
-  public static ItemBlowpipe get(Metal metal) {
-    return TABLE.get(metal);
-  }
-
   private final Metal metal;
 
   public ItemBlowpipe(Metal metal) {
@@ -41,12 +36,17 @@ public class ItemBlowpipe extends ItemGlassMolder implements IMetalItem {
     setMaxDamage(metal.getToolMetal().getMaxUses() / 2);
   }
 
+  @Nullable
+  public static ItemBlowpipe get(Metal metal) {
+    return TABLE.get(metal);
+  }
+
   @Override
   @Nonnull
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     if (!world.isRemote && !player.isSneaking()) {
-      IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat cap = stack.getCapability(CapabilityHeat.CAPABILITY, null);
       if (cap instanceof GlassMolderCapability && ((GlassMolderCapability) cap).canWork()) {
         TechGuiHandler.openGui(world, player.getPosition(), player, TechGuiHandler.Type.GLASSWORKING);
       }

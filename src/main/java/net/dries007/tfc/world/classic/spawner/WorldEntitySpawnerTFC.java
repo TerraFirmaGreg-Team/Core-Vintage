@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.world.classic.spawner;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -40,9 +42,8 @@ import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
 import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import java.util.ArrayList;
@@ -113,10 +114,10 @@ public final class WorldEntitySpawnerTFC {
       AnimalRespawnWorldData data = AnimalRespawnWorldData.get(worldIn);
       ChunkPos pos = new ChunkPos(new BlockPos(event.getX(), event.getY(), event.getZ()));
       long lastSpawnTick = data.getLastRespawnTick(entity, pos);
-      long deltaTicks = CalendarTFC.PLAYER_TIME.getTicks() - lastSpawnTick;
+      long deltaTicks = Calendar.PLAYER_TIME.getTicks() - lastSpawnTick;
       long cooldown = LIVESTOCK.get(entity.getClass()).get();
       if (lastSpawnTick <= 0 || cooldown <= deltaTicks) {
-        data.setLastRespawnTick(entity, pos, CalendarTFC.PLAYER_TIME.getTicks());
+        data.setLastRespawnTick(entity, pos, Calendar.PLAYER_TIME.getTicks());
         int centerX = (int) event.getX();
         int centerZ = (int) event.getZ();
         int diameterX = 16;
@@ -139,33 +140,32 @@ public final class WorldEntitySpawnerTFC {
   public static void performWorldGenSpawning(World worldIn, Biome biomeIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {
     final BlockPos chunkBlockPos = new BlockPos(centerX, 0, centerZ);
 
-    final float temperature = ClimateTFC.getAvgTemp(worldIn, chunkBlockPos);
+    final float temperature = Climate.getAvgTemp(worldIn, chunkBlockPos);
     final float rainfall = ChunkDataTFC.getRainfall(worldIn, chunkBlockPos);
     final float floraDensity = ChunkDataTFC.getFloraDensity(worldIn, chunkBlockPos);
     final float floraDiversity = ChunkDataTFC.getFloraDiversity(worldIn, chunkBlockPos);
 
     // Spawns only one group
     ForgeRegistries.ENTITIES.getValuesCollection().stream()
-                            .filter(x -> {
-                              if (ICreatureTFC.class.isAssignableFrom(x.getEntityClass())) {
-                                Entity ent = x.newInstance(worldIn);
-                                if (ent instanceof ICreatureTFC) {
-                                  int weight = ((ICreatureTFC) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
-                                  return weight > 0 && randomIn.nextInt(weight) == 0;
-                                }
-                              }
-                              return false;
-                            }).findFirst()
-                            .ifPresent(entityEntry -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
+      .filter(x -> {
+        if (ICreatureTFC.class.isAssignableFrom(x.getEntityClass())) {
+          Entity ent = x.newInstance(worldIn);
+          if (ent instanceof ICreatureTFC) {
+            int weight = ((ICreatureTFC) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
+            return weight > 0 && randomIn.nextInt(weight) == 0;
+          }
+        }
+        return false;
+      }).findFirst()
+      .ifPresent(entityEntry -> doGroupSpawning(entityEntry, worldIn, centerX, centerZ, diameterX, diameterZ, randomIn));
   }
 
   private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random randomIn) {
     List<EntityLiving> group = new ArrayList<>();
     EntityLiving creature = (EntityLiving) entityEntry.newInstance(worldIn);
-    if (!(creature instanceof ICreatureTFC)) {
+    if (!(creature instanceof ICreatureTFC creatureTFC)) {
       return; // Make sure to not crash
     }
-    ICreatureTFC creatureTFC = (ICreatureTFC) creature;
     int fallback = 5; // Fallback measure if some mod completely deny this entity spawn
     int individuals =
       Math.max(1, creatureTFC.getMinGroupSize()) + randomIn.nextInt(creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));

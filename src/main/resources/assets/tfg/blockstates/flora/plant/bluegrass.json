@@ -1,0 +1,69 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0",
+        "age": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/bluegrass/shortest"
+      }
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/bluegrass/shorter"
+      }
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "2"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/bluegrass/short"
+      }
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/bluegrass/base"
+      }
+    }, {
+      "when": {
+        "stage": "1",
+        "age": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/bluegrass/shortest_tuft"
+      }
+    }, {
+      "when": {
+        "stage": "1",
+        "age": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/bluegrass/shorter_tuft"
+      }
+    }, {
+      "when": {
+        "stage": "1",
+        "age": "2"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/bluegrass/short_tuft"
+      }
+    }, {
+      "when": {
+        "stage": "1",
+        "age": "3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/bluegrass/tuft"
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "tfg:wood/branch/white_cedar#dynamictree"
+    }
+  }
+}

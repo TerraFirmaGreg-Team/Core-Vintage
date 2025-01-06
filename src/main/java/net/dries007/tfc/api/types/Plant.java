@@ -25,7 +25,7 @@ import net.dries007.tfc.objects.blocks.plants.BlockTallGrassTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 
 import javax.annotation.Nonnull;
@@ -202,7 +202,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
   }
 
   public int getStageForMonth() {
-    return getStageForMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear());
+    return getStageForMonth(Calendar.CALENDAR_TIME.getMonthOfYear());
   }
 
   public int getNumStages() {

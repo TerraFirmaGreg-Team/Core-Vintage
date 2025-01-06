@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,7 +23,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -36,12 +37,11 @@ public class CropProvider implements IWailaBlock {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
     TECropBase te = Helpers.getTE(world, pos, TECropBase.class);
-    if (state.getBlock() instanceof BlockCropTFC && te != null) {
-      BlockCropTFC bs = (BlockCropTFC) state.getBlock();
+    if (state.getBlock() instanceof BlockCropTFC bs && te != null) {
       ICrop crop = bs.getCrop();
 
       boolean isWild = state.getValue(BlockCropTFC.WILD);
-      float temp = ClimateTFC.getActualTemp(world, pos, -te.getLastUpdateTick());
+      float temp = Climate.getActualTemp(world, pos, -te.getLastUpdateTick());
       float rainfall = ChunkDataTFC.getRainfall(world, pos);
 
       if (isWild) {
@@ -75,11 +75,9 @@ public class CropProvider implements IWailaBlock {
   @Override
   public String getTitle(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
     IBlockState state = world.getBlockState(pos);
-    if (state.getBlock() instanceof BlockCropTFC) {
-      BlockCropTFC b = (BlockCropTFC) state.getBlock();
+    if (state.getBlock() instanceof BlockCropTFC b) {
       return new TextComponentTranslation(b.getTranslationKey() + ".name").getFormattedText();
-    } else if (state.getBlock() instanceof BlockCropDead) {
-      BlockCropDead b = (BlockCropDead) state.getBlock();
+    } else if (state.getBlock() instanceof BlockCropDead b) {
       ICrop crop = b.getCrop();
       return new TextComponentTranslation("tile.tfc.crop." + crop.toString().toLowerCase() + ".name").getFormattedText();
     }
@@ -90,12 +88,10 @@ public class CropProvider implements IWailaBlock {
   @Override
   public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
     IBlockState state = world.getBlockState(pos);
-    if (state.getBlock() instanceof BlockCropTFC) {
-      BlockCropTFC b = (BlockCropTFC) state.getBlock();
+    if (state.getBlock() instanceof BlockCropTFC b) {
       ICrop crop = b.getCrop();
       return crop.getFoodDrop(state.getValue(b.getStageProperty()));
-    } else if (state.getBlock() instanceof BlockCropDead) {
-      BlockCropDead b = (BlockCropDead) state.getBlock();
+    } else if (state.getBlock() instanceof BlockCropDead b) {
       ICrop crop = b.getCrop();
       return new ItemStack(ItemSeedsTFC.get(crop));
     }

@@ -13,7 +13,7 @@ public class BlockRemapping extends AbstractRemapping {
 
 
   @SubscribeEvent
-  public static void onRemappingBlock(final RegistryEvent.MissingMappings<Block> event) {
+  public static void onRemapping(final RegistryEvent.MissingMappings<Block> event) {
 
     event.getAllMappings().forEach(mapping -> {
       String mappingKey = mapping.key.toString();

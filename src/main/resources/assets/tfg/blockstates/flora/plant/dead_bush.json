@@ -1,0 +1,19 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/dead_bush/base",
+          "weight": 2
+        }, {
+          "model": "tfg:flora/plant/dead_bush/large",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

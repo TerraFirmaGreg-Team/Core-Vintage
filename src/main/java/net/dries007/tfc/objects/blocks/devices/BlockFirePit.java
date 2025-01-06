@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.devices;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -48,7 +49,6 @@ import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.te.TEBellows;
@@ -265,7 +265,7 @@ public class BlockFirePit extends Block implements IBellowsConsumerBlock, ILight
           // Interact with the cooking pot
           if (tile.getCookingPotStage() == TEFirePit.CookingPotStage.EMPTY) {
             FluidStack fluidStack = FluidUtil.getFluidContained(held);
-            if (fluidStack != null && fluidStack.amount >= 1000 && fluidStack.getFluid() == FluidsTFC.FRESH_WATER.get()) {
+            if (fluidStack != null && fluidStack.amount >= 1000 && fluidStack.getFluid() == FluidsCore.FRESH_WATER.get()) {
               // Add water
               tile.addWaterToCookingPot();
               IFluidHandler fluidHandler = FluidUtil.getFluidHandler(held);

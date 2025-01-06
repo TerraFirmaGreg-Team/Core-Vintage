@@ -1,5 +1,7 @@
 package tfcflorae.world.worldgen;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +18,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -41,7 +42,7 @@ public class WorldGeneratorTrees implements IWorldGenerator {
     ChunkDataTFC chunkData = ChunkDataTFC.get(world, chunkPos);
     final Biome b = world.getBiome(chunkPos);
     final TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
-    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
+    final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
     final float rainfall = ChunkDataTFC.getRainfall(world, chunkPos);
     final float diversity = chunkData.getFloraDiversity();
     final float density = chunkData.getFloraDensity();
@@ -89,7 +90,7 @@ public class WorldGeneratorTrees implements IWorldGenerator {
 
     // Sparse foliage were it's otherwise just completely barren and boring...
     if (!(b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN)) {
-      genBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.2f, 260f + gauss, 500f - gauss, 0 + random.nextInt(5), trees);
+      genBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.2f, 260f + gauss, 500f - gauss, random.nextInt(5), trees);
     }
 
     {

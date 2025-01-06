@@ -1,5 +1,9 @@
 package tfctech.objects.items.ceramics;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,15 +22,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import tfctech.objects.items.metal.ItemTechMetal;
 
 import javax.annotation.Nonnull;
@@ -88,7 +89,7 @@ public class ItemTechMold extends ItemPottery {
   /**
    * Copy of {@link ItemMold} FilledMoldCapability
    */
-  public class FilledMoldCapability extends ItemHeatHandler implements ICapabilityProvider, IMoldHandler {
+  public class FilledMoldCapability extends CapabilityProviderHeat implements ICapabilityProvider, IMoldHandler {
 
     private final FluidTank tank;
     private IFluidTankProperties[] fluidTankProperties;
@@ -180,7 +181,7 @@ public class ItemTechMold extends ItemPottery {
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
       return capability == FLUID_HANDLER_CAPABILITY
-             || capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
+             || capability == CapabilityHeat.CAPABILITY;
     }
 
     @Nullable
@@ -199,7 +200,7 @@ public class ItemTechMold extends ItemPottery {
       if (temp <= 0) {
         nbt.setLong("ticks", -1);
       } else {
-        nbt.setLong("ticks", CalendarTFC.PLAYER_TIME.getTicks());
+        nbt.setLong("ticks", Calendar.PLAYER_TIME.getTicks());
       }
       return tank.writeToNBT(nbt);
     }

@@ -5,10 +5,11 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -39,9 +40,8 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.objects.items.ItemsTFCF;
@@ -72,7 +72,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
       throw new IllegalStateException("There can only be one.");
     } else {
       plant.getOreDictName().ifPresent((name) -> {
-        OreDictionaryHelper.register(this, new Object[]{name});
+        OreDictionaryHelper.register(this, name);
       });
       this.plant = plant;
       this.growthStageProperty = PropertyInteger.create("stage", 0, plant.getNumStages());
@@ -86,7 +86,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
   }
 
   public static BlockPlantTFC get(Plant plant) {
-    return (BlockPlantTFC) MAP.get(plant);
+    return MAP.get(plant);
   }
 
   @Nonnull
@@ -95,7 +95,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
   }
 
   public int getMetaFromState(IBlockState state) {
-    return (Integer) state.getValue(AGE);
+    return state.getValue(AGE);
   }
 
   @Nonnull
@@ -109,10 +109,10 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (worldIn.isAreaLoaded(pos, 1)) {
-      Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
-      int currentStage = (Integer) state.getValue(this.growthStageProperty);
+      Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+      int currentStage = state.getValue(this.growthStageProperty);
       int expectedStage = this.plant.getStageForMonth(currentMonth);
-      int currentTime = (Integer) state.getValue(DAYPERIOD);
+      int currentTime = state.getValue(DAYPERIOD);
       int expectedTime = this.getDayPeriod();
       if (currentTime != expectedTime) {
         worldIn.setBlockState(pos, state.withProperty(DAYPERIOD, expectedTime).withProperty(this.growthStageProperty, currentStage));
@@ -142,7 +142,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     if (!(entityIn instanceof EntityPlayer) || !((EntityPlayer) entityIn).isCreative()) {
-      double modifier = 0.25 * (double) (4 - (Integer) state.getValue(AGE));
+      double modifier = 0.25 * (double) (4 - state.getValue(AGE));
       modifier += (1.0 - modifier) * this.plant.getMovementMod();
       if (modifier < ConfigTFC.General.MISC.minimumPlantMovementModifier) {
         modifier = ConfigTFC.General.MISC.minimumPlantMovementModifier;
@@ -155,8 +155,8 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
   }
 
   public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-    Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
-    int currentStage = (Integer) state.getValue(this.growthStageProperty);
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+    int currentStage = state.getValue(this.growthStageProperty);
     int expectedStage = this.plant.getStageForMonth(currentMonth);
     if (!this.plant.getOreDictName().isPresent() && !worldIn.isRemote && (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1
                                                                           || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1)
@@ -187,7 +187,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     if (!this.canBlockStay(worldIn, pos, state) && placer instanceof EntityPlayer && !((EntityPlayer) placer).isCreative() && !this.plant.getOreDictName()
-                                                                                                                                         .isPresent()) {
+      .isPresent()) {
       spawnAsEntity(worldIn, pos, new ItemStack(this));
     }
 
@@ -254,9 +254,9 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (worldIn.isAreaLoaded(pos, 1)) {
       int j;
-      if (this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+      if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos))
           && this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-        j = (Integer) state.getValue(AGE);
+        j = state.getValue(AGE);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
           if (j < 3) {
             worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
@@ -264,9 +264,9 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
           ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
-      } else if (!this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+      } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos))
                  || !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-        j = (Integer) state.getValue(AGE);
+        j = state.getValue(AGE);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
           if (j > 0) {
             worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
@@ -285,7 +285,7 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
     if (state.getBlock() != this) {
       return this.canSustainBush(soil);
     } else {
-      return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) && this.plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos))
+      return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) && this.plant.isValidTemp(Climate.getActualTemp(worldIn, pos))
              && this.plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
     }
   }
@@ -324,11 +324,11 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
 
   @Nonnull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, new IProperty[]{this.growthStageProperty, DAYPERIOD, AGE});
+    return new BlockStateContainer(this, this.growthStageProperty, DAYPERIOD, AGE);
   }
 
   int getDayPeriod() {
-    return CalendarTFC.CALENDAR_TIME.getHourOfDay() / 6;
+    return Calendar.CALENDAR_TIME.getHourOfDay() / 6;
   }
 
   private boolean isValidSoil(IBlockState state) {

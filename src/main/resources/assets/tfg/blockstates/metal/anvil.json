@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:metal/anvil",
+    "textures": {
+      "all": "tfg:blocks/metal/base",
+      "particle": "tfg:blocks/metal/base"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "facing": {
+      "north": {
+        "y": 180
+      },
+      "east": {
+        "y": 270
+      },
+      "south": {},
+      "west": {
+        "y": 90
+      }
+    }
+  }
+}

@@ -1,5 +1,7 @@
 package tfcflorae.world.worldgen;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,7 +15,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -24,11 +25,10 @@ import java.util.Random;
 
 public class WorldGenMesaStrata implements IWorldGenerator {
 
-  private RockCategory category;
-
   public static final float RAINFALL_DRY_GRASS = 150;
   protected static final IBlockState HARDENED_CLAY = Blocks.HARDENED_CLAY.getDefaultState();
   protected static final IBlockState STAINED_HARDENED_CLAY = Blocks.STAINED_HARDENED_CLAY.getDefaultState();
+  private RockCategory category;
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -41,7 +41,7 @@ public class WorldGenMesaStrata implements IWorldGenerator {
         BlockPos strataLayer = chunkBlockPos.add(x, WorldTypeTFC.SEALEVEL, z);
         //TFCFlorae.getLog().warn("TFCFlorae: Current 'strataLayer' is " + "X: " + strataLayer.getX() + ", Y: " + strataLayer.getY() + ", Z: " + strataLayer.getZ());
         final Biome b = world.getBiome(strataLayer);
-        final float avgTemperature = ClimateTFC.getAvgTemp(world, strataLayer);
+        final float avgTemperature = Climate.getAvgTemp(world, strataLayer);
         final float rainfall = ChunkDataTFC.getRainfall(world, strataLayer);
 
         if (rainfall < +1.3 * random.nextGaussian() + RAINFALL_DRY_GRASS && avgTemperature >= 15f) {

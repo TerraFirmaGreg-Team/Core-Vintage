@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:rock/raw",
+    "uvlock": true,
+    "textures": {
+      "all": "tfg:blocks/rock/raw/breccia"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "mossy": {
+      "true": {
+        "overlay": "tfg:blocks/rock/overlay/mossy/raw"
+      },
+      "false": {}
+    }
+  }
+}

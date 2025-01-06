@@ -1,5 +1,7 @@
 package tfctech.objects.recipes;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -21,7 +23,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import com.google.gson.JsonObject;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
@@ -30,8 +31,8 @@ import tfctech.objects.items.metal.ItemTechMetal;
 
 import javax.annotation.Nonnull;
 
-import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
+import static su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat.CAPABILITY;
 
 /**
  * Since TFC has Metal.ItemType we can't reuse {@link net.dries007.tfc.objects.recipes.UnmoldRecipe} directly
@@ -58,12 +59,10 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
     for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
       ItemStack stack = inv.getStackInSlot(slot);
       if (!stack.isEmpty()) {
-        if (stack.getItem() instanceof ItemTechMold) {
-          ItemTechMold moldItem = ((ItemTechMold) stack.getItem());
+        if (stack.getItem() instanceof ItemTechMold moldItem) {
           IFluidHandler cap = stack.getCapability(FLUID_HANDLER_CAPABILITY, null);
 
-          if (cap instanceof IMoldHandler) {
-            IMoldHandler moldHandler = (IMoldHandler) cap;
+          if (cap instanceof IMoldHandler moldHandler) {
             if (!moldHandler.isMolten()) {
               Metal metal = moldHandler.getMetal();
               if (metal != null && moldItem.type.equals(this.type) && !foundMold) {
@@ -210,7 +209,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
             }
             default: {
               ItemStack output = new ItemStack(item);
-              IItemHeat heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
+              ICapabilityHeat heat = output.getCapability(CAPABILITY, null);
               if (heat != null) {
                 heat.setTemperature(moldHandler.getTemperature());
               }
@@ -219,7 +218,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
           }
         } else {
           ItemStack output = new ItemStack(item);
-          IItemHeat heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
+          ICapabilityHeat heat = output.getCapability(CAPABILITY, null);
           if (heat != null) {
             heat.setTemperature(moldHandler.getTemperature());
           }

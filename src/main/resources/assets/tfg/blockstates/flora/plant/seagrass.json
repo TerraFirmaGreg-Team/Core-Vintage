@@ -1,0 +1,50 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/seagrass/single"
+        }, {
+          "model": "tfg:flora/plant/seagrass/single",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/seagrass/single",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/seagrass/single",
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/seagrass/lower"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "middle"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/seagrass/lower"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/seagrass/upper"
+        }
+      ]
+    }
+  ]
+}

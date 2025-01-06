@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.world.classic.chunkdata;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.chunk.Chunk;
@@ -16,7 +18,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketChunkData;
-import net.dries007.tfc.util.climate.ClimateTFC;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
@@ -45,7 +46,7 @@ public final class CapabilityChunkData {
       ChunkDataTFC data = chunk.getCapability(ChunkDataProvider.CHUNK_DATA_CAPABILITY, null);
       if (data != null && data.isInitialized()) {
         // Update server side climate
-        ClimateTFC.update(chunk.getPos(), data.getRegionalTemp(), data.getRainfall());
+        Climate.update(chunk.getPos(), data.getRegionalTemp(), data.getRainfall());
 
         // Update client side data
         NBTTagCompound nbt = (NBTTagCompound) ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(data, null);

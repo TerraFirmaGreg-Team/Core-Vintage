@@ -1,0 +1,18 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/papyrus/0",
+          "weight": 50
+        }, {
+          "model": "tfg:flora/plant/papyrus/1",
+          "weight": 50
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -310,14 +309,14 @@ public class ModuleEventRouter {
     });
   }
 
-  @SubscribeEvent
-  protected void onRegisterLootTableLoadEvent(LootTableLoadEvent event) {
-    this.fireEvent(module -> {
-      module.getLogger().info("Register LootTableLoadEvent start");
-      module.getRegistry().onRegisterLootTableLoad(event);
-      module.getLogger().info("Register LootTableLoadEvent complete");
-    });
-  }
+//  @SubscribeEvent
+//  protected void onRegisterLootTableLoadEvent(LootTableLoadEvent event) {
+//    this.fireEvent(module -> {
+//      module.getLogger().info("Register LootTableLoadEvent start");
+//      module.getRegistry().onRegisterLootTableLoad(event);
+//      module.getLogger().info("Register LootTableLoadEvent complete");
+//    });
+//  }
 
   // --------------------------------------------------------------------------
   // - Client

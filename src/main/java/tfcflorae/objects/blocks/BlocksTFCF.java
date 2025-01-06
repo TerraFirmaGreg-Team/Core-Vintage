@@ -1,5 +1,7 @@
 package tfcflorae.objects.blocks;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -37,7 +39,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.types.DefaultPlants;
@@ -306,7 +307,8 @@ public final class BlocksTFCF {
 
   @GameRegistry.ObjectHolder("groundcover/lightstone")
   public static final BlockLightstone LIGHTSTONE = getNull();
-
+  private static final ImmutableList<BlockCaveMushroom> allMushroomPlantBlocks = Helpers.getNull();
+  private static final ImmutableList<BlockPebbleWater> allPebbleWater = Helpers.getNull();
   //MultiBlocks
     /*@GameRegistry.ObjectHolder("multiblock/campfire")
     public static final BlockCampfire Campfire = Helpers.getNull();
@@ -373,8 +375,6 @@ public final class BlocksTFCF {
   private static ImmutableList<BlockShortGrassTFCF> allShortGrassBlocks = Helpers.getNull();
   private static ImmutableList<BlockTallGrassTFCF> allTallGrassBlocks = Helpers.getNull();
   private static ImmutableList<BlockPlantDummy1> allStandardBlocks = Helpers.getNull();
-  private static ImmutableList<BlockCaveMushroom> allMushroomPlantBlocks = Helpers.getNull();
-  private static ImmutableList<BlockPebbleWater> allPebbleWater = Helpers.getNull();
   private static ImmutableList<BlockLightstone> allLightstoneBlocks = Helpers.getNull();
   private static ImmutableList<BlockJoshuaTreeFlower> allJoshuaTreeFlowerBlocks = Helpers.getNull();
   //private static ImmutableList<MultiBlockBase> allMultiBlocks = Helpers.getNull();
@@ -769,19 +769,19 @@ public final class BlocksTFCF {
         }*/
 
     // Normal Corals
-    plantCoral.add(register(r, "coral/tube/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/brain/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/bubble/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fire/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/horn/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/tube/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/brain/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/bubble/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fire/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/horn/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
 
     for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
 
-      BlockCoral brainNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral bubbleNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral fireNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral hornNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral tubeNormal = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral brainNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral bubbleNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral fireNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral hornNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral tubeNormal = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
 
       plantCoral.add(register(r, "coral/brain/" + dyeColor.getName(), brainNormal, CT_FLORA));
       plantCoral.add(register(r, "coral/bubble/" + dyeColor.getName(), bubbleNormal, CT_FLORA));
@@ -797,18 +797,18 @@ public final class BlocksTFCF {
     }
 
     // Fan Corals
-    plantCoral.add(register(r, "coral/fan/tube/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fan/brain/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fan/bubble/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fan/fire/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
-    plantCoral.add(register(r, "coral/fan/horn/dead", new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/tube/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/brain/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/bubble/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/fire/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
+    plantCoral.add(register(r, "coral/fan/horn/dead", new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.SNOW), CT_FLORA));
 
     for (EnumDyeColor dyeColor : EnumDyeColor.values()) {
-      BlockCoral brainFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral bubbleFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral fireFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral hornFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
-      BlockCoral tubeFan = new BlockCoral(FluidsTFC.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral brainFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral bubbleFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral fireFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral hornFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
+      BlockCoral tubeFan = new BlockCoral(FluidsCore.SALT_WATER.get(), MapColor.getBlockColor(dyeColor));
 
       plantCoral.add(register(r, "coral/fan/brain/" + dyeColor.getName(), brainFan, CT_FLORA));
       plantCoral.add(register(r, "coral/fan/bubble/" + dyeColor.getName(), bubbleFan, CT_FLORA));
@@ -854,7 +854,7 @@ public final class BlocksTFCF {
     }
 
     {
-      plantGlowWater.add(register(r, "plants/glowing_sea_banana", new BlockWaterGlowPlant(FluidsTFC.SALT_WATER.get()), CT_FLORA));
+      plantGlowWater.add(register(r, "plants/glowing_sea_banana", new BlockWaterGlowPlant(FluidsCore.SALT_WATER.get()), CT_FLORA));
     }
     allGlowWaterPlants = plantGlowWater.build();
     for (BlockWaterGlowPlant plantGlowWaterBlock : allGlowWaterPlants) {
@@ -880,15 +880,16 @@ public final class BlocksTFCF {
       for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
         if (plant.getPlantType() == Plant.PlantType.WATER) {
           plantWaterBlock.add(register(r,
-                                       "plants/" + plant.getRegistryName().getPath(), new BlockWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
+            "plants/" + plant.getRegistryName().getPath(), new BlockWaterPlantTFCF(FluidsCore.FRESH_WATER.get(), plant), CT_FLORA));
         } else if (plant.getPlantType() == Plant.PlantType.WATER_SEA) {
-          plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName().getPath(), new BlockWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
+          plantWaterBlock.add(register(r,
+            "plants/" + plant.getRegistryName().getPath(), new BlockWaterPlantTFCF(FluidsCore.SALT_WATER.get(), plant), CT_FLORA));
         } else if (plant.getPlantType() == Plant.PlantType.TALL_WATER) {
           plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-                                                           .getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.FRESH_WATER.get(), plant), CT_FLORA));
+            .getPath(), new BlockTallWaterPlantTFCF(FluidsCore.FRESH_WATER.get(), plant), CT_FLORA));
         } else if (plant.getPlantType() == Plant.PlantType.TALL_WATER_SEA) {
           plantWaterBlock.add(register(r, "plants/" + plant.getRegistryName()
-                                                           .getPath(), new BlockTallWaterPlantTFCF(FluidsTFC.SALT_WATER.get(), plant), CT_FLORA));
+            .getPath(), new BlockTallWaterPlantTFCF(FluidsCore.SALT_WATER.get(), plant), CT_FLORA));
         } else if (plant.getPlantType() == Plant.PlantType.HANGING && (
           plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
           plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
@@ -947,7 +948,7 @@ public final class BlocksTFCF {
       }
       allTallGrassWaterBlocks = plantTallGrassWaterBlock.build();
       for (BlockTallGrassWater blockTallGrassWaterPlant : allTallGrassWaterBlocks) {
-        normalItemBlocks.add(new ItemBlockTallGrassWater((BlockTallGrassWater) blockTallGrassWaterPlant));
+        normalItemBlocks.add(new ItemBlockTallGrassWater(blockTallGrassWaterPlant));
       }
       allShortGrassBlocks = plantShortGrassBlock.build();
       for (BlockShortGrassTFCF blockShortGrassPlant : allShortGrassBlocks) {
@@ -1012,11 +1013,11 @@ public final class BlocksTFCF {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
             blockRockVariantsTFCF.add(register(r, rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-                                                                                            .getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK));
+              .getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK));
           } else {
             if (rockTFCF == RockTFCF.MOSSY_RAW || rockTFCF == RockTFCF.MUD_BRICKS || rockTFCF == RockTFCF.MUD) {
               blockRockVariantsTFCF.add(register(r, rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-                                                                                              .getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK));
+                .getPath(), BlockRockVariantTFCF.create(rock, rockTFCF), CT_ROCK));
             }
           }
         }
@@ -1072,7 +1073,7 @@ public final class BlocksTFCF {
       for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS}) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           blockWallTFCF.add(register(r, "wall/" + rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName().getPath()
-                                                                                            .toLowerCase(), new BlockWallTFCF(BlockRockVariantTFCF.get(rock, rockTFCF)), CT_ROCK));
+            .toLowerCase(), new BlockWallTFCF(BlockRockVariantTFCF.get(rock, rockTFCF)), CT_ROCK));
         }
       }
 
@@ -1080,7 +1081,7 @@ public final class BlocksTFCF {
       for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS}) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           blockStairsTFC.add(register(r, "stairs/" + (rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-                                                                                                .getPath()).toLowerCase(), new BlockStairsTFCF(rock, rockTFCF), CT_ROCK));
+            .getPath()).toLowerCase(), new BlockStairsTFCF(rock, rockTFCF), CT_ROCK));
         }
       }
 
@@ -1088,7 +1089,7 @@ public final class BlocksTFCF {
       for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS}) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           register(r, "double_slab/" + (rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-                                                                                  .getPath()).toLowerCase(), new BlockSlabTFCF.Double(rock, rockTFCF));
+            .getPath()).toLowerCase(), new BlockSlabTFCF.Double(rock, rockTFCF));
         }
       }
 
@@ -1096,7 +1097,7 @@ public final class BlocksTFCF {
       for (RockTFCF rockTFCF : new RockTFCF[]{RockTFCF.MUD_BRICKS}) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           blockSlabTFCF.add(register(r, "slab/" + (rockTFCF.name().toLowerCase() + "/" + rock.getRegistryName()
-                                                                                             .getPath()).toLowerCase(), new BlockSlabTFCF.Half(rock, rockTFCF), CT_ROCK));
+            .getPath()).toLowerCase(), new BlockSlabTFCF.Half(rock, rockTFCF), CT_ROCK));
         }
       }
 
@@ -1111,7 +1112,7 @@ public final class BlocksTFCF {
     for (Rock.Type type : new Rock.Type[]{Rock.Type.RAW}) {
       for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
         blockStairTFC.add(register(r, "stairs/" + (type.name() + "/" + rock.getRegistryName()
-                                                                           .getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_ROCK));
+          .getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_ROCK));
       }
     }
 
@@ -1127,7 +1128,7 @@ public final class BlocksTFCF {
     for (Rock.Type type : new Rock.Type[]{Rock.Type.RAW}) {
       for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
         blockSlabTFC.add(register(r, "slab/" + (type.name() + "/" + rock.getRegistryName()
-                                                                        .getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_ROCK));
+          .getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_ROCK));
       }
     }
 
@@ -1368,9 +1369,9 @@ public final class BlocksTFCF {
 
     {
       fluids.add(
-        register(r, "fluid/distilled_water", new BlockFluidTFC(FluidsTFCF.DISTILLED_WATER.get(), Material.WATER, false)),
-        register(r, "fluid/waste", new BlockFluidTFC(FluidsTFCF.WASTE.get(), Material.WATER, false)),
-        register(r, "fluid/base_potash_liquor", new BlockFluidTFC(FluidsTFCF.BASE_POTASH_LIQUOR.get(), Material.WATER, false))
+        register(r, "fluid/distilled_water", new BlockFluidTFC(FluidsCore.DISTILLED_WATER.get(), Material.WATER, false)),
+        register(r, "fluid/waste", new BlockFluidTFC(FluidsCore.WASTE.get(), Material.WATER, false)),
+        register(r, "fluid/base_potash_liquor", new BlockFluidTFC(FluidsCore.BASE_POTASH_LIQUOR.get(), Material.WATER, false))
       );
       for (FluidWrapper wrapper : FluidsTFCF.getAllFermentedAlcoholsFluids()) {
         fluids.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER, false)));

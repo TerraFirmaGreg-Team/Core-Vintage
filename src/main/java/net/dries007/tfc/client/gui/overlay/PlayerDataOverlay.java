@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.client.gui.overlay;
 
+import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -27,12 +30,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
-import net.dries007.tfc.util.config.HealthDisplayFormat;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.Color;
@@ -84,8 +85,7 @@ public final class PlayerDataOverlay {
     }
     float baseMaxHealth = 20 * displayModifier;
     float currentThirst = 100;
-    if (foodStats instanceof IFoodStatsTFC) {
-      IFoodStatsTFC foodStatsTFC = (IFoodStatsTFC) foodStats;
+    if (foodStats instanceof IFoodStatsTFC foodStatsTFC) {
       baseMaxHealth = 20 * foodStatsTFC.getHealthModifier() * displayModifier;
       currentThirst = foodStatsTFC.getThirst();
     }
@@ -184,10 +184,9 @@ public final class PlayerDataOverlay {
       }
 
       // Draw mount's health bar
-      if (player.getRidingEntity() instanceof EntityLivingBase && !ConfigTFC.Client.DISPLAY.useVanillaHealth) {
+      if (player.getRidingEntity() instanceof EntityLivingBase mount && !ConfigTFC.Client.DISPLAY.useVanillaHealth) {
         GuiIngameForge.renderHealthMount = false;
         mc.renderEngine.bindTexture(ICONS);
-        EntityLivingBase mount = ((EntityLivingBase) player.getRidingEntity());
         drawTexturedModalRect(mid + 1, armorRowHeight, 90, 0, 90, 10);
         double mountMaxHealth = mount.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue();
         double mountCurrentHealth = mount.getHealth();

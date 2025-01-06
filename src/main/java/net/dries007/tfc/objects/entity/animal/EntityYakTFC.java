@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.SoundEvents;
@@ -20,8 +23,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.ILivestock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import javax.annotation.Nullable;
@@ -42,9 +43,9 @@ public class EntityYakTFC extends EntityCowTFC implements ILivestock {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA)) {
+        (biomeType == BiomeUtils.BiomeType.TAIGA)) {
       return ConfigTFC.Animals.YAK.rarity;
     }
     return 0;
@@ -54,7 +55,7 @@ public class EntityYakTFC extends EntityCowTFC implements ILivestock {
   public void birthChildren() {
     int numberOfChildren = ConfigTFC.Animals.YAK.babies;
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityYakTFC baby = new EntityYakTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+      EntityYakTFC baby = new EntityYakTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
       this.world.spawnEntity(baby);
@@ -88,7 +89,7 @@ public class EntityYakTFC extends EntityCowTFC implements ILivestock {
 
   @Override
   public long getProductsCooldown() {
-    return Math.max(0, ConfigTFC.Animals.YAK.milkTicks + getMilkedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+    return Math.max(0, ConfigTFC.Animals.YAK.milkTicks + getMilkedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

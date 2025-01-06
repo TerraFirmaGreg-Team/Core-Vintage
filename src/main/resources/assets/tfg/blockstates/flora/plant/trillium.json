@@ -1,0 +1,50 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/trillium/0"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/trillium/1"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/trillium/2"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/trillium/3"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "4"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/trillium/4"
+        }
+      ]
+    }
+  ]
+}

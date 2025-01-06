@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.te.TENestBox;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import java.util.HashMap;
 import java.util.List;

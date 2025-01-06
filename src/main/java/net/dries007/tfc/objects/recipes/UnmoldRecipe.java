@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.temp.util.TFGModUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +30,6 @@ import com.google.gson.JsonObject;
 import gregtech.api.unification.OreDictUnifier;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
@@ -39,8 +39,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
+import static su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat.CAPABILITY;
 
 @SuppressWarnings("unused")
 @ParametersAreNonnullByDefault
@@ -202,7 +202,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 
       if (!outputTest.getItem().equals(Items.AIR)) {
 
-        IItemHeat heat = outputTest.getCapability(ITEM_HEAT_CAPABILITY, null);
+        ICapabilityHeat heat = outputTest.getCapability(CAPABILITY, null);
         if (heat != null) {
           heat.setTemperature(moldHandler.getTemperature());
         }
@@ -210,7 +210,7 @@ public class UnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
       } else {
         ItemStack output = new ItemStack(ItemMetal.get(m, type));
 
-        IItemHeat heat = output.getCapability(ITEM_HEAT_CAPABILITY, null);
+        ICapabilityHeat heat = output.getCapability(CAPABILITY, null);
         if (heat != null) {
           heat.setTemperature(moldHandler.getTemperature());
         }

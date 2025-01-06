@@ -1,0 +1,41 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blood_lily/0"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blood_lily/1"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blood_lily/2"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/blood_lily/3"
+        }
+      ]
+    }
+  ]
+}

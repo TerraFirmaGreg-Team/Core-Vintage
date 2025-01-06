@@ -1,0 +1,37 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single",
+        "age": "0|1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/tall_fescue_grass/shortest"
+      }
+    }, {
+      "when": {
+        "part": "single",
+        "age": "2|3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/tall_fescue_grass/shorter"
+      }
+    }, {
+      "when": {
+        "part": "upper",
+        "age": "0|1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/tall_fescue_grass/short"
+      }
+    }, {
+      "when": {
+        "part": "upper",
+        "age": "2|3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/tall_fescue_grass/base"
+      }
+    }
+  ]
+}

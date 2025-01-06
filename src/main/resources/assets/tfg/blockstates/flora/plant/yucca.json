@@ -1,0 +1,41 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/yucca/0"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/yucca/1"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/yucca/2"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/yucca/3"
+        }
+      ]
+    }
+  ]
+}

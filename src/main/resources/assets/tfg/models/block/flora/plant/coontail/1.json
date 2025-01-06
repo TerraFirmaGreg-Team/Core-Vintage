@@ -1,0 +1,7 @@
+{
+  "parent": "tfg:block/flora/plant/coontail/base",
+  "textures": {
+    "texture": "tfg:blocks/flora/plant/coontail/1"
+  }
+}
+

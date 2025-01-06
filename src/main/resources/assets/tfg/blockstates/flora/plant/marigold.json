@@ -1,0 +1,101 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single",
+        "stage": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/single/0"
+      }
+    }, {
+      "when": {
+        "part": "single",
+        "stage": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/single/1"
+      }
+    }, {
+      "when": {
+        "part": "single",
+        "stage": "2"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/single/2"
+      }
+    }, {
+      "when": {
+        "part": "single",
+        "stage": "3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/single/3"
+      }
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/lower/0"
+      }
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/upper/0"
+      }
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/lower/1"
+      }
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/upper/1"
+      }
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "2"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/lower/2"
+      }
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "2"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/upper/2"
+      }
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/lower/3"
+      }
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marigold/upper/3"
+      }
+    }
+  ]
+}

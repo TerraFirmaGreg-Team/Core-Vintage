@@ -1,16 +1,16 @@
 package tfctech.objects.fluids;
 
-import javax.annotation.Nonnull;
-
-import com.google.common.collect.HashBiMap;
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import com.google.common.collect.HashBiMap;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
-import su.terrafirmagreg.api.data.enums.Mods;
+import javax.annotation.Nonnull;
 
 public final class TechFluids {
 
@@ -18,18 +18,15 @@ public final class TechFluids {
   private static final ResourceLocation LAVA_FLOW = new ResourceLocation(Mods.Names.TFC, "blocks/lava_flow");
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
 
-  public static FluidWrapper LATEX;
-  public static FluidWrapper GLASS;
-
   public static void registerFluids() {
-    LATEX = registerFluid(new Fluid("latex", LAVA_STILL, LAVA_FLOW, 0xFFF8F8F8));
-    GLASS = registerFluid(new Fluid("glass", LAVA_STILL, LAVA_FLOW, 0xFFED97B5));
+    FluidsCore.LATEX = registerFluid(new Fluid("latex", LAVA_STILL, LAVA_FLOW, 0xFFF8F8F8));
+    FluidsCore.GLASS = registerFluid(new Fluid("glass", LAVA_STILL, LAVA_FLOW, 0xFFED97B5));
 
     setFluidTemperatures();
   }
 
   private static void setFluidTemperatures() {
-    GLASS.get().setTemperature(1073); // Kelvin
+    FluidsCore.GLASS.get().setTemperature(1073); // Kelvin
   }
 
   private static FluidWrapper registerFluid(@Nonnull Fluid newFluid) {

@@ -13,7 +13,7 @@ public class EntityRemapping extends AbstractRemapping {
 
 
   @SubscribeEvent
-  public static void onRemappingEntity(final RegistryEvent.MissingMappings<EntityEntry> event) {
+  public static void onRemapping(final RegistryEvent.MissingMappings<EntityEntry> event) {
     event.getAllMappings().forEach(mapping -> {
       String mappingKey = mapping.key.toString();
       String mappingNamespace = mapping.key.getNamespace();

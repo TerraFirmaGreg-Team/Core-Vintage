@@ -1,0 +1,33 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "lower|middle"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/tree_fern/lower"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper|single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/tree_fern/upper"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper|single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/tree_fern/upper",
+          "y": 180
+        }
+      ]
+    }
+  ]
+}

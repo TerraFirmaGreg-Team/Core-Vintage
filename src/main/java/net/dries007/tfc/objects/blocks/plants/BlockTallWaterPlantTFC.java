@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.PropertyEnum;
@@ -21,7 +23,6 @@ import net.minecraft.world.World;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -68,7 +69,7 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.up(), this.getDefaultState());
     IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(growthStageProperty, plant.getStageForMonth())
-                                   .withProperty(PART, getPlantPart(worldIn, pos));
+      .withProperty(PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
   }
@@ -109,7 +110,7 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (!worldIn.isAreaLoaded(pos, 1)) {return;}
 
-    if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+    if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos))
         && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE);
 
@@ -121,7 +122,7 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+    } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -144,7 +145,7 @@ public class BlockTallWaterPlantTFC extends BlockWaterPlantTFC implements IGrowa
     if (worldIn.getBlockState(pos.down(plant.getMaxHeight())).getBlock() == this) {return false;}
     if (state.getBlock() == this) {
       return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this)
-             && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+             && plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }

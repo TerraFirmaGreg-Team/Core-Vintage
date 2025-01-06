@@ -1,5 +1,7 @@
 package su.terrafirmagreg.temp.modules.hotornot;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.integration.gregtech.init.ItemsGregTech;
 import su.terrafirmagreg.temp.config.HotLists;
 import su.terrafirmagreg.temp.config.TFGConfig;
@@ -24,8 +26,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import gregtech.api.items.toolitem.ToolHelper;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
 
@@ -87,8 +87,8 @@ public class CommonEventHandler {
           // Items
           else if (TFGConfig.General.HOT_ITEMS && !stack.isEmpty() && !HotLists.isRemoved(stack)) {
             // TFC Heat Capability
-            if (stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) {
-              IItemHeat heatHandlerItem = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+            if (stack.hasCapability(CapabilityHeat.CAPABILITY, null)) {
+              ICapabilityHeat heatHandlerItem = stack.getCapability(CapabilityHeat.CAPABILITY, null);
               if (heatHandlerItem != null && heatHandlerItem.getTemperature() >= TFGConfig.General.HOT_ITEM) {
                 ItemStack offHand = entityPlayer.getHeldItemOffhand();
                 if (offHand.getItem().equals(ItemsGregTech.TONGS.get())) {

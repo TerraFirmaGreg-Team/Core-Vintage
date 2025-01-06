@@ -4,16 +4,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
+
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 
 import javax.annotation.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class ItemMiscHeatableTFCF extends ItemMiscTFCF {
 
-  private float heatCapacity, meltTemp;
+  private final float heatCapacity;
+  private final float meltTemp;
 
   public ItemMiscHeatableTFCF(Size size, Weight weight, float heatCapacity, float meltTemp) {
     super(size, weight);
@@ -30,6 +32,6 @@ public class ItemMiscHeatableTFCF extends ItemMiscTFCF {
   @Nullable
   @Override
   public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new ItemHeatHandler(nbt, heatCapacity, meltTemp);
+    return new CapabilityProviderHeat(nbt, heatCapacity, meltTemp);
   }
 }

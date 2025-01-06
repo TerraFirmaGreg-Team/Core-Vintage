@@ -1,6 +1,8 @@
 package com.eerussianguy.firmalife;
 
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityZombie;
@@ -30,12 +32,10 @@ import com.eerussianguy.firmalife.gui.FLGuiHandler;
 import com.eerussianguy.firmalife.player.CapPlayerDataFL;
 import com.eerussianguy.firmalife.player.PlayerDataFL;
 import com.eerussianguy.firmalife.registry.BlocksFL;
-import com.eerussianguy.firmalife.registry.FluidsFL;
 import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
 import net.dries007.tfc.objects.entity.animal.EntityGoatTFC;
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 
@@ -54,26 +54,26 @@ public class CommonEventHandlerFL {
       if (bucket != null) //checking if it can be filled
       {
         FluidActionResult fillResult = FluidUtil.tryFillContainer(item, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)), Fluid.BUCKET_VOLUME, player, false);
-        if (fillResult.isSuccess() && entity instanceof EntityCowTFC) {
-          EntityCowTFC cow = (EntityCowTFC) entity;//we can just cast the entity to a cow to test familiarity etc
-          Fluid fluid = FluidsTFC.MILK.get();
+        if (fillResult.isSuccess() && entity instanceof EntityCowTFC cow) {
+          //we can just cast the entity to a cow to test familiarity etc
+          Fluid fluid = FluidsCore.MILK.get();
           boolean foundMilkable = false;
           if (entity instanceof EntityYakTFC)//have to check the original entity to get the proper instanceof however
           {
             foundMilkable = true;
-            fluid = FluidsFL.YAK_MILK.get();
+            fluid = FluidsCore.YAK_MILK.get();
           } else if (entity instanceof EntityGoatTFC) {
             foundMilkable = true;
-            fluid = FluidsFL.GOAT_MILK.get();
+            fluid = FluidsCore.GOAT_MILK.get();
           } else if (entity instanceof EntityZebuTFC) {
             foundMilkable = true;
-            fluid = FluidsFL.ZEBU_MILK.get();
+            fluid = FluidsCore.ZEBU_MILK.get();
           }
           if (foundMilkable) {
             if (cow.getFamiliarity() > 0.15f && cow.isReadyForAnimalProduct()) {
               FluidTank fluidHandler = new FluidTank(fluid, 1000, 1000);
               player.setHeldItem(player.getActiveHand(), FluidUtil.tryFillContainerAndStow(item, fluidHandler, new PlayerInvWrapper(player.inventory), Fluid.BUCKET_VOLUME, player, true)
-                                                                  .getResult());
+                .getResult());
               cow.setProductsCooldown();
               event.setCanceled(true);
             }
@@ -86,8 +86,7 @@ public class CommonEventHandlerFL {
 
   @SubscribeEvent
   public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-    if (event.getObject() instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) event.getObject();
+    if (event.getObject() instanceof EntityPlayer player) {
       if (!player.hasCapability(CapPlayerDataFL.CAPABILITY, null)) {
         event.addCapability(CapPlayerDataFL.NAMESPACE, new PlayerDataFL());
       }
@@ -131,8 +130,7 @@ public class CommonEventHandlerFL {
   @SubscribeEvent(priority = EventPriority.HIGH)
   public static void onEntitySpawn(EntityJoinWorldEvent event) {
     Entity entity = event.getEntity();
-    if (entity instanceof EntityZombie) {
-      EntityZombie zombie = (EntityZombie) entity;
+    if (entity instanceof EntityZombie zombie) {
       zombie.tasks.addTask(4, new CombatGreenhouseTask(zombie));
     }
   }

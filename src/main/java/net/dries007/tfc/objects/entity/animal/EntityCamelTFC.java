@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.entity.Entity;
@@ -39,8 +42,6 @@ import net.dries007.tfc.api.types.ILivestock;
 import net.dries007.tfc.api.util.IRidable;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import javax.annotation.Nonnull;
@@ -155,7 +156,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILives
 
   @Override
   public void onFertilized(@Nonnull IAnimalTFC male) {
-    this.setPregnantTime(CalendarTFC.PLAYER_TIME.getTotalDays());
+    this.setPregnantTime(Calendar.PLAYER_TIME.getTotalDays());
     int selection = this.rand.nextInt(9);
     int i;
     if (selection < 4) {
@@ -173,7 +174,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILives
        + this.getModifiedMaxHealth()) / 3.0D);
     this.geneSpeed = (float) (
       (father.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue() + this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                                                                                              .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
+        .getBaseValue() + this.getModifiedMovementSpeed()) / 3.0D);
     this.geneJump = (float) (
       (father.getEntityAttribute(JUMP_STRENGTH).getBaseValue() + this.getEntityAttribute(JUMP_STRENGTH).getBaseValue() + this.getModifiedJumpStrength())
       / 3.0D);
@@ -196,9 +197,9 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILives
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.DESERT || biomeType == BiomeHelper.BiomeType.SAVANNA)) {
+        (biomeType == BiomeUtils.BiomeType.DESERT || biomeType == BiomeUtils.BiomeType.SAVANNA)) {
       return ConfigTFC.Animals.CAMEL.rarity;
     }
     return 0;
@@ -282,7 +283,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILives
     } else if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
-      return new EntityCamelTFC(this.world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+      return new EntityCamelTFC(this.world, IAnimalTFC.Gender.valueOf(Constants.RNG.nextBoolean()), (int) Calendar.PLAYER_TIME.getTotalDays());
     }
     return null;
   }
@@ -291,7 +292,7 @@ public class EntityCamelTFC extends EntityLlamaTFC implements IAnimalTFC, ILives
   public void birthChildren() {
     int numberOfChildren = ConfigTFC.Animals.CAMEL.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityCamelTFC baby = new EntityCamelTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+      EntityCamelTFC baby = new EntityCamelTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       if (this.geneHealth > 0) {
         baby.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.geneHealth);

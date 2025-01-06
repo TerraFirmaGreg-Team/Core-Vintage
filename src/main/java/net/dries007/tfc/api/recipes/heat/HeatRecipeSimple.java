@@ -5,12 +5,13 @@
 
 package net.dries007.tfc.api.recipes.heat;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
@@ -45,10 +46,10 @@ public class HeatRecipeSimple extends HeatRecipe {
   @Nonnull
   public ItemStack getOutputStack(ItemStack input) {
     // No need to check min temp, as it would of already been matched in HeatRecipe
-    IItemHeat heat = input.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+    ICapabilityHeat heat = input.getCapability(CapabilityHeat.CAPABILITY, null);
     if (heat != null && heat.getTemperature() <= maxTemp) {
       ItemStack outputStack = output.copy();
-      IItemHeat outputHeat = outputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat outputHeat = outputStack.getCapability(CapabilityHeat.CAPABILITY, null);
       if (outputHeat != null) {
         // Copy heat if possible
         outputHeat.setTemperature(heat.getTemperature());

@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.types.TreesTFCF;
@@ -190,7 +190,7 @@ public enum SeasonalTrees {
         this.autumnMonths = autumnMonths;
         this.winterMonthStart = winterMonthStart;
         this.winterMonths = winterMonths;*/
-    this.growthTime = growthTime * CalendarTFC.CALENDAR_TIME.getDaysInMonth() * ICalendar.HOURS_IN_DAY;
+    this.growthTime = growthTime * Calendar.CALENDAR_TIME.getDaysInMonth() * ICalendar.HOURS_IN_DAY;
 
     this.minTemp = minTemp;
     this.maxTemp = maxTemp;
@@ -223,7 +223,7 @@ public enum SeasonalTrees {
         this.autumnMonths = autumnMonths;
         this.winterMonthStart = winterMonthStart;
         this.winterMonths = winterMonths;*/
-    this.growthTime = growthTime * CalendarTFC.CALENDAR_TIME.getDaysInMonth() * ICalendar.HOURS_IN_DAY;
+    this.growthTime = growthTime * Calendar.CALENDAR_TIME.getDaysInMonth() * ICalendar.HOURS_IN_DAY;
 
     this.minTemp = minTemp;
     this.maxTemp = maxTemp;
@@ -249,7 +249,7 @@ public enum SeasonalTrees {
   }
 
   public int getStageForMonth() {
-    return getStageForMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear());
+    return getStageForMonth(Calendar.CALENDAR_TIME.getMonthOfYear());
   }
 
   public int getNumStages() {

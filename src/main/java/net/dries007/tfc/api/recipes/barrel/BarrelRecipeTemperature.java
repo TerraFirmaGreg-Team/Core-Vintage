@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -16,8 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.Helpers;
 
@@ -36,7 +37,7 @@ public class BarrelRecipeTemperature extends BarrelRecipe {
 
   @Override
   public boolean isValidInput(FluidStack inputFluid, ItemStack inputStack) {
-    IItemHeat cap = inputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+    ICapabilityHeat cap = inputStack.getCapability(CapabilityHeat.CAPABILITY, null);
     if (cap != null) {
       return cap.getTemperature() > 0 && this.inputFluid.testIgnoreCount(inputFluid);
     }
@@ -62,7 +63,7 @@ public class BarrelRecipeTemperature extends BarrelRecipe {
   @Override
   @Nonnull
   public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
-    IItemHeat heat = inputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+    ICapabilityHeat heat = inputStack.getCapability(CapabilityHeat.CAPABILITY, null);
     if (heat != null) {
       heat.setTemperature(heat.getTemperature() - coolAmount);
     }

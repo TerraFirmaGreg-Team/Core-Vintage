@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
+
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
@@ -48,8 +51,6 @@ import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -83,8 +84,8 @@ public class EntityMuleTFC extends EntityMule implements IAnimalTFC, ILivestock,
     this.setBirthDay(birthDay);
     this.setFamiliarity(0);
     this.setGrowingAge(0); //We don't use this
-    this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
-    this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+    this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
+    this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
@@ -148,7 +149,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimalTFC, ILivestock,
 
   @Override
   public boolean isHungry() {
-    return lastFed < CalendarTFC.PLAYER_TIME.getTotalDays();
+    return lastFed < Calendar.PLAYER_TIME.getTotalDays();
   }
 
   @Override
@@ -265,24 +266,24 @@ public class EntityMuleTFC extends EntityMule implements IAnimalTFC, ILivestock,
         }
         if (hugeHeavyCount >= 2) {
           // Does not work when ridden, mojang bug: https://bugs.mojang.com/browse/MC-121788
-          this.addPotionEffect(new PotionEffect(PotionEffectsTFC.OVERBURDENED, 25, 125, false, false));
+          this.addPotionEffect(new PotionEffect(EffectsCore.OVERBURDENED.get(), 25, 125, false, false));
         }
       }
       // Is it time to decay familiarity?
       // If this entity was never fed(eg: new born, wild)
       // or wasn't fed yesterday(this is the starting of the second day)
-      if (this.lastFDecay > -1 && this.lastFDecay + 1 < CalendarTFC.PLAYER_TIME.getTotalDays()) {
+      if (this.lastFDecay > -1 && this.lastFDecay + 1 < Calendar.PLAYER_TIME.getTotalDays()) {
         float familiarity = getFamiliarity();
         if (familiarity < 0.3f) {
-          familiarity -= 0.02 * (CalendarTFC.PLAYER_TIME.getTotalDays() - this.lastFDecay);
-          this.lastFDecay = CalendarTFC.PLAYER_TIME.getTotalDays();
+          familiarity -= 0.02 * (Calendar.PLAYER_TIME.getTotalDays() - this.lastFDecay);
+          this.lastFDecay = Calendar.PLAYER_TIME.getTotalDays();
           this.setFamiliarity(familiarity);
         }
       }
-      if (this.getAge() == Age.OLD && lastDeath < CalendarTFC.PLAYER_TIME.getTotalDays()) {
-        this.lastDeath = CalendarTFC.PLAYER_TIME.getTotalDays();
+      if (this.getAge() == Age.OLD && lastDeath < Calendar.PLAYER_TIME.getTotalDays()) {
+        this.lastDeath = Calendar.PLAYER_TIME.getTotalDays();
         // Randomly die of old age, tied to entity UUID and calendar time
-        final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * CalendarTFC.PLAYER_TIME.getTotalDays());
+        final Random random = new Random(this.entityUniqueID.getMostSignificantBits() * Calendar.PLAYER_TIME.getTotalDays());
         if (random.nextDouble() < ConfigTFC.Animals.MULE.oldDeathChance) {
           this.setDead();
         }
@@ -300,7 +301,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimalTFC, ILivestock,
   public EntityAgeable createChild(@Nonnull EntityAgeable other) {
     if (other == this) {
       // Only called if this animal is interacted with a spawn egg
-      EntityMuleTFC baby = new EntityMuleTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays());
+      EntityMuleTFC baby = new EntityMuleTFC(this.world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       return baby;
     }
@@ -384,7 +385,7 @@ public class EntityMuleTFC extends EntityMule implements IAnimalTFC, ILivestock,
             }
           }
           if (!this.world.isRemote) {
-            lastFed = CalendarTFC.PLAYER_TIME.getTotalDays();
+            lastFed = Calendar.PLAYER_TIME.getTotalDays();
             lastFDecay = lastFed; //No decay needed
             this.consumeItemFromStack(player, stack);
             if (this.getAge() == Age.CHILD || this.getFamiliarity() < getAdultFamiliarityCap()) {

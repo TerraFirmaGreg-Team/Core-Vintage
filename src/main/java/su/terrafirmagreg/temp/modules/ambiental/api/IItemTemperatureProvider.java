@@ -1,13 +1,12 @@
 package su.terrafirmagreg.temp.modules.ambiental.api;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.temp.modules.ambiental.modifier.TempModifier;
 import su.terrafirmagreg.temp.modules.ambiental.modifier.TempModifierStorage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 import java.util.Optional;
 
@@ -23,8 +22,8 @@ public interface IItemTemperatureProvider {
   }
 
   static Optional<TempModifier> handleTemperatureCapability(EntityPlayer player, ItemStack stack) {
-    if (stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) {
-      IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+    if (stack.hasCapability(CapabilityHeat.CAPABILITY, null)) {
+      ICapabilityHeat heat = stack.getCapability(CapabilityHeat.CAPABILITY, null);
       float temp = heat.getTemperature() / 800;
       float change = temp;
       float potency = 0f;

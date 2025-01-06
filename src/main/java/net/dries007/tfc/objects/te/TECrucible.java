@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,8 +29,6 @@ import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -98,21 +99,21 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
   public void update() {
     super.update();
     if (!world.isRemote) {
-      temperature = CapabilityItemHeat.adjustTempTowards(temperature, targetTemperature, (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier);
+      temperature = CapabilityHeat.adjustTempTowards(temperature, targetTemperature, (float) ConfigTFC.Devices.HEAT.heatingModifier);
       if (targetTemperature > 0) {
         // Crucible target temperature decays constantly, since it is set by outside providers
-        targetTemperature -= (float) ConfigTFC.Devices.TEMPERATURE.heatingModifier;
+        targetTemperature -= (float) ConfigTFC.Devices.HEAT.heatingModifier;
       }
 
       // Input draining
       boolean canFill = lastFillTimer <= 0;
       for (int i = SLOT_INPUT_START; i <= SLOT_INPUT_END; i++) {
         ItemStack inputStack = inventory.getStackInSlot(i);
-        IItemHeat cap = inputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        ICapabilityHeat cap = inputStack.getCapability(CapabilityHeat.CAPABILITY, null);
         if (cap != null) {
           // Always heat up the item regardless if it is melting or not
           if (cap.getTemperature() < temperature) {
-            CapabilityItemHeat.addTemp(cap, temperature / 400 + 2);
+            CapabilityHeat.addTemp(cap, temperature / 400 + 2);
           }
           if (cachedRecipes[i] != null) {
             if (cachedRecipes[i].isValidTemperature(cap.getTemperature())) {
@@ -123,7 +124,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
               inventory.setStackInSlot(i, outputStack);
               // Update reference since it may have changed from recipe output
               inputStack = inventory.getStackInSlot(i);
-              cap = inputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+              cap = inputStack.getCapability(CapabilityHeat.CAPABILITY, null);
               markForSync();
             }
           }
@@ -153,7 +154,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
 
       // Output filling
       ItemStack outputStack = inventory.getStackInSlot(SLOT_OUTPUT);
-      IItemHeat capOut = outputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat capOut = outputStack.getCapability(CapabilityHeat.CAPABILITY, null);
       if (capOut instanceof IMoldHandler mold) {
 
         // Check that the crucible metal is molten
@@ -192,7 +193,7 @@ public class TECrucible extends TETickableInventory implements ITickable, ITileF
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    if (!stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) {
+    if (!stack.hasCapability(CapabilityHeat.CAPABILITY, null)) {
       return false;
     }
     if (slot != SLOT_OUTPUT) {

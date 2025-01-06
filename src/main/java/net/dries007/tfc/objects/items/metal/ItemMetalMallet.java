@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,10 +35,8 @@ import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.Month;
 
 import javax.annotation.Nonnull;
@@ -118,7 +119,7 @@ public class ItemMetalMallet extends ItemMetalTool {
         }
       }
       if (leafCount > 0) {
-        Month month = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+        Month month = Calendar.CALENDAR_TIME.getMonthOfYear();
         if (!(month == Month.OCTOBER || month == Month.NOVEMBER)) {
           player.sendStatusMessage(new TextComponentTranslation("tooltip.firmalife.not_fall"), true);
           return EnumActionResult.PASS;
@@ -126,7 +127,7 @@ public class ItemMetalMallet extends ItemMetalTool {
 
         IPlayerDataFL playerData = player.getCapability(CapPlayerDataFL.CAPABILITY, null);
         if (playerData != null) {
-          boolean timePassed = (int) CalendarTFC.CALENDAR_TIME.getTicks() - playerData.getNuttedTime() > ConfigFL.General.BALANCE.nutTime;
+          boolean timePassed = (int) Calendar.CALENDAR_TIME.getTicks() - playerData.getNuttedTime() > ConfigFL.General.BALANCE.nutTime;
           boolean distanced = playerData.getNutDistance(pos) > ConfigFL.General.BALANCE.nutDistance;
           if (distanced && timePassed) {
             playerData.setNuttedTime();
@@ -138,10 +139,10 @@ public class ItemMetalMallet extends ItemMetalTool {
               BlockPos dropPos = logPos.offset(EnumFacing.random(Constants.RNG), Constants.RNG.nextInt(3) + 1);
               Helpers.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut().getItem(), Constants.RNG.nextInt(dropCount)));//should be querying nut
               TFCParticles.LEAF1.sendToAllNear(worldIn,
-                                               dropPos.getX() + RNG.nextFloat() / 10,
-                                               dropPos.getY() - RNG.nextFloat() / 10,
-                                               dropPos.getZ() + RNG.nextFloat() / 10,
-                                               (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, 90);
+                dropPos.getX() + RNG.nextFloat() / 10,
+                dropPos.getY() - RNG.nextFloat() / 10,
+                dropPos.getZ() + RNG.nextFloat() / 10,
+                (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, 90);
               leafCount -= dropCount;
             }
             worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 3.0F, 1.0F);
@@ -154,7 +155,7 @@ public class ItemMetalMallet extends ItemMetalTool {
               player.sendStatusMessage(new TextComponentTranslation("tooltip.firmalife.distance"), true);
             }
             player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1));
-            player.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 200, 0));
+            player.addPotionEffect(new PotionEffect(EffectsCore.THIRST.get(), 200, 0));
           }
           return EnumActionResult.SUCCESS;
         }

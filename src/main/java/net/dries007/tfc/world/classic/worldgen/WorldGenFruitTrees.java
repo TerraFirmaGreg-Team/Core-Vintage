@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.world.classic.worldgen;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -15,7 +17,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
@@ -38,7 +39,7 @@ public class WorldGenFruitTrees implements IWorldGenerator {
       if (random.nextInt(ConfigTFC.General.FOOD.fruitTreeRarity) == 0) {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-        float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
+        float temperature = Climate.getAvgTemp(world, chunkBlockPos);
         float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
         List<IFruitTree> trees = TREES.stream().filter(x -> x.isValidConditions(temperature, rainfall)).collect(Collectors.toList());
         if (!trees.isEmpty()) {

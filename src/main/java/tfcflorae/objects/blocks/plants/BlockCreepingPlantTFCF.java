@@ -5,6 +5,8 @@
 
 package tfcflorae.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.properties.PropertyBool;
@@ -23,7 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantDummy2;
 import tfcflorae.util.OreDictionaryHelper;
@@ -69,12 +70,12 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
   @Nonnull
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return super.getActualState(state, worldIn, pos)
-                .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
-                .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
-                .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
-                .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
-                .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
+      .withProperty(DOWN, canPlantConnectTo(worldIn, pos, EnumFacing.DOWN))
+      .withProperty(UP, canPlantConnectTo(worldIn, pos, EnumFacing.UP))
+      .withProperty(NORTH, canPlantConnectTo(worldIn, pos, EnumFacing.NORTH))
+      .withProperty(EAST, canPlantConnectTo(worldIn, pos, EnumFacing.EAST))
+      .withProperty(SOUTH, canPlantConnectTo(worldIn, pos, EnumFacing.SOUTH))
+      .withProperty(WEST, canPlantConnectTo(worldIn, pos, EnumFacing.WEST));
   }
 
   @Override
@@ -90,7 +91,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
 
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+    return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
   }
 
   @Override
@@ -99,7 +100,7 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if (!(blockState.getBlock() instanceof BlockLeavesTFC) && (
         blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite()) == BlockFaceShape.SOLID || blockState.getBlock() instanceof BlockFence)) {
-        return plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+        return plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
       }
     }
     return false;
@@ -168,13 +169,13 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
     switch (rot) {
       case CLOCKWISE_180:
         return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(SOUTH))
-                    .withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST));
+          .withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST));
       case COUNTERCLOCKWISE_90:
         return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(EAST))
-                    .withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST)).withProperty(WEST, state.getValue(NORTH));
+          .withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST)).withProperty(WEST, state.getValue(NORTH));
       case CLOCKWISE_90:
         return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(WEST))
-                    .withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST)).withProperty(WEST, state.getValue(SOUTH));
+          .withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST)).withProperty(WEST, state.getValue(SOUTH));
       default:
         return state.withProperty(growthStageProperty, plant.getStageForMonth());
     }
@@ -187,10 +188,10 @@ public class BlockCreepingPlantTFCF extends BlockPlantDummy2 {
     switch (mirrorIn) {
       case LEFT_RIGHT:
         return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(NORTH, state.getValue(SOUTH))
-                    .withProperty(SOUTH, state.getValue(NORTH));
+          .withProperty(SOUTH, state.getValue(NORTH));
       case FRONT_BACK:
         return state.withProperty(growthStageProperty, plant.getStageForMonth()).withProperty(EAST, state.getValue(WEST))
-                    .withProperty(WEST, state.getValue(EAST));
+          .withProperty(WEST, state.getValue(EAST));
       default:
         return super.withMirror(state, mirrorIn);
     }

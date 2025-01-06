@@ -1,9 +1,6 @@
 package com.eerussianguy.firmalife.blocks;
 
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.registry.EffectsFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
-import net.dries007.tfc.Constants;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,6 +16,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.eerussianguy.firmalife.init.FoodFL;
+import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.tfc.Constants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -68,9 +69,9 @@ public class BlockBeeNest extends BlockNonCube {
       double z = pos.getZ() + 0.5;
       for (int i = 0; i < 3 + rand.nextInt(4); i++) {
         world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                            x + rand.nextFloat() - rand.nextFloat(), y + rand.nextFloat(), z + rand.nextFloat() - rand.nextFloat(),
-                            0.5 * (rand.nextFloat() - rand.nextFloat()),
-                            0.5 * (rand.nextFloat() - rand.nextFloat()), 0.5 * (rand.nextFloat() - rand.nextFloat()));
+          x + rand.nextFloat() - rand.nextFloat(), y + rand.nextFloat(), z + rand.nextFloat() - rand.nextFloat(),
+          0.5 * (rand.nextFloat() - rand.nextFloat()),
+          0.5 * (rand.nextFloat() - rand.nextFloat()), 0.5 * (rand.nextFloat() - rand.nextFloat()));
       }
     }
   }
@@ -80,7 +81,7 @@ public class BlockBeeNest extends BlockNonCube {
     if (world.isDaytime()) {
       EntityPlayer player = world.getNearestAttackablePlayer(pos, 10, 10);
       if (player != null) {
-        player.addPotionEffect(new PotionEffect(EffectsFL.SWARM, 30 * 20));
+        player.addPotionEffect(new PotionEffect(EffectsCore.SWARM.get(), 30 * 20));
       }
     }
     super.breakBlock(world, pos, state);

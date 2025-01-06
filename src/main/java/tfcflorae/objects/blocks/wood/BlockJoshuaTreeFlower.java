@@ -1,5 +1,7 @@
 package tfcflorae.objects.blocks.wood;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -36,10 +38,9 @@ import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import tfcflorae.objects.blocks.BlocksTFCF;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
@@ -70,7 +71,7 @@ public class BlockJoshuaTreeFlower extends Block {
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
 
     this.setDefaultState(this.blockState.getBaseState().withProperty(LEAF_STATE, EnumLeafState.NORMAL).withProperty(HARVESTABLE, true)
-                                        .withProperty(AGE, Integer.valueOf(0)));
+      .withProperty(AGE, Integer.valueOf(0)));
     this.setHardness(0.2F);
     this.setLightOpacity(1);
     this.setSoundType(SoundType.PLANT);
@@ -107,7 +108,7 @@ public class BlockJoshuaTreeFlower extends Block {
       BlockPos blockpos = pos.up();
 
       if (worldIn.isAirBlock(blockpos) && blockpos.getY() < 256) {
-        int i = ((Integer) state.getValue(AGE)).intValue();
+        int i = state.getValue(AGE).intValue();
 
         if (i < 5 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, blockpos, state, rand.nextInt(1) == 0)) {
           boolean flag = false;
@@ -153,7 +154,7 @@ public class BlockJoshuaTreeFlower extends Block {
             flag = true;
           }
 
-          if (flag && areAllNeighborsEmpty(worldIn, blockpos, (EnumFacing) null) && worldIn.isAirBlock(pos.up(2))) {
+          if (flag && areAllNeighborsEmpty(worldIn, blockpos, null) && worldIn.isAirBlock(pos.up(2))) {
             worldIn.setBlockState(pos, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
             this.placeGrownFlower(worldIn, blockpos, i);
           } else if (i < 4) {
@@ -399,7 +400,7 @@ public class BlockJoshuaTreeFlower extends Block {
           flag = true;
         }
 
-        if (flag && areAllNeighborsEmpty(worldIn, blockpos, (EnumFacing) null) && worldIn.isAirBlock(currentBlock.up(2))) {
+        if (flag && areAllNeighborsEmpty(worldIn, blockpos, null) && worldIn.isAirBlock(currentBlock.up(2))) {
           worldIn.setBlockState(currentBlock, BlockJoshuaTreeLog.get(wood).getDefaultState(), 2);
           worldIn.setBlockState(blockpos, BlockJoshuaTreeFlower.get(wood).getDefaultState().withProperty(AGE, Integer.valueOf(5)), 2);
           return 0;
@@ -649,9 +650,9 @@ public class BlockJoshuaTreeFlower extends Block {
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     if (!world.isAreaLoaded(pos, 1)) {return;}
 
-    Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int expectedStage = fruitTree.getStageForMonth(currentMonth);
-    float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
+    float avgTemperature = Climate.getAvgTemp(world, pos);
 
     switch (expectedStage) {
       case 1:

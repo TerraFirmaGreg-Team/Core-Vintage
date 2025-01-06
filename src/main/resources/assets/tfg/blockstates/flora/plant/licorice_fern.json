@@ -1,0 +1,88 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/licorice_fern/0",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/1",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/2",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/3",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/4",
+          "y": 90
+        }
+      ]
+    }, {
+      "when": {
+        "facing": "south"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/licorice_fern/0",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/1",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/2",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/3",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/4",
+          "y": 180
+        }
+      ]
+    }, {
+      "when": {
+        "facing": "west"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/licorice_fern/0",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/1",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/2",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/3",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/4",
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "facing": "north"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/licorice_fern/0"
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/1"
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/2"
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/3"
+        }, {
+          "model": "tfg:flora/plant/licorice_fern/4"
+        }
+      ]
+    }
+  ]
+}

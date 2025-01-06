@@ -1,0 +1,33 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/turtle_grass/0"
+      }
+    }, {
+      "when": {
+        "age": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/turtle_grass/1"
+      }
+    }, {
+      "when": {
+        "age": "2"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/turtle_grass/2"
+      }
+    }, {
+      "when": {
+        "age": "3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/turtle_grass/3"
+      }
+    }
+  ]
+}

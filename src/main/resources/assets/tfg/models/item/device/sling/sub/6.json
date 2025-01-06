@@ -1,0 +1,52 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "tfg:items/device/sling/stone"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        0, 135, 0
+      ],
+      "translation": [
+        -3, 4, -3
+      ],
+      "scale": [
+        0.8, 0.8, 0.8
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0, -45, 0
+      ],
+      "translation": [
+        -3, 4, -3
+      ],
+      "scale": [
+        0.8, 0.8, 0.8
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0, 315, 0
+      ],
+      "translation": [
+        12, 4, -1
+      ],
+      "scale": [
+        0.8, 0.8, 0.8
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0, -225, 0
+      ],
+      "translation": [
+        12, 4, -1
+      ],
+      "scale": [
+        0.8, 0.8, 0.8
+      ]
+    }
+  }
+}

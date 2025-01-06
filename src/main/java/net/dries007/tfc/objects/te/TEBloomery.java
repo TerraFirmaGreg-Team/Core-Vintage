@@ -28,7 +28,7 @@ import net.dries007.tfc.objects.blocks.BlockMolten;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -195,7 +195,7 @@ public class TEBloomery extends TETickableInventory implements ITickable {
   }
 
   public long getRemainingTicks() {
-    return ConfigTFC.Devices.BLOOMERY.ticks - (CalendarTFC.PLAYER_TIME.getTicks() - litTick);
+    return ConfigTFC.Devices.BLOOMERY.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
   }
 
   public boolean canIgnite() {
@@ -207,7 +207,7 @@ public class TEBloomery extends TETickableInventory implements ITickable {
   }
 
   public void onIgnite() {
-    this.litTick = CalendarTFC.PLAYER_TIME.getTicks();
+    this.litTick = Calendar.PLAYER_TIME.getTicks();
   }
 
   /**

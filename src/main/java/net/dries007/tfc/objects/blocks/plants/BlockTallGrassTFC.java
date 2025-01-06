@@ -5,9 +5,10 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -29,9 +30,8 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -54,7 +54,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
   }
 
   public static BlockTallGrassTFC get(Plant plant) {
-    return (BlockTallGrassTFC) MAP.get(plant);
+    return MAP.get(plant);
   }
 
   @Nonnull
@@ -73,7 +73,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
     } else if (state.getBlock() != this) {
       return this.canSustainBush(soil);
     } else {
-      return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) && this.plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos))
+      return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this) && this.plant.isValidTemp(Climate.getActualTemp(worldIn, pos))
              && this.plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
     }
   }
@@ -115,7 +115,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.up(), this.getDefaultState());
     IBlockState iblockstate = state.withProperty(AGE, 0).withProperty(this.growthStageProperty, this.plant.getStageForMonth())
-                                   .withProperty(PART, this.getPlantPart(worldIn, pos));
+      .withProperty(PART, this.getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);
   }
@@ -126,10 +126,10 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
   }
 
   public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-    Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
-    int currentStage = (Integer) state.getValue(this.growthStageProperty);
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+    int currentStage = state.getValue(this.growthStageProperty);
     this.plant.getStageForMonth(currentMonth);
-    int age = (Integer) state.getValue(AGE);
+    int age = state.getValue(AGE);
     if (!worldIn.isRemote) {
       ItemStack stack = player.getHeldItemMainhand();
       int i;
@@ -157,7 +157,7 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
   public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
     IBlockState plant = plantable.getPlant(world, pos.offset(direction));
-    return plant.getBlock() == this ? true : super.canSustainPlant(state, world, pos, direction, plantable);
+    return plant.getBlock() == this || super.canSustainPlant(state, world, pos, direction, plantable);
   }
 
   @Nonnull
@@ -168,9 +168,9 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (worldIn.isAreaLoaded(pos, 1)) {
       int j;
-      if (this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+      if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos))
           && this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-        j = (Integer) state.getValue(AGE);
+        j = state.getValue(AGE);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
           if (j == 3 && this.canGrow(worldIn, pos, state, worldIn.isRemote)) {
             this.grow(worldIn, rand, pos, state);
@@ -180,9 +180,9 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
           ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
-      } else if (!this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+      } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos))
                  || !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-        j = (Integer) state.getValue(AGE);
+        j = state.getValue(AGE);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
           if (j == 0 && this.canShrink(worldIn, pos)) {
             this.shrink(worldIn, pos);
@@ -200,12 +200,12 @@ public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, 
 
   @Nonnull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return this.getTallBoundingBax((Integer) state.getValue(AGE), state, source, pos);
+    return this.getTallBoundingBax(state.getValue(AGE), state, source, pos);
   }
 
   @Nonnull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, new IProperty[]{AGE, this.growthStageProperty, DAYPERIOD, PART});
+    return new BlockStateContainer(this, AGE, this.growthStageProperty, DAYPERIOD, PART);
   }
 
   public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {

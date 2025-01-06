@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.FoodStats;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -13,7 +15,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 
 public class PacketFoodStatsUpdate implements IMessage {

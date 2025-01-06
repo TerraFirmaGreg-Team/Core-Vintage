@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.stone;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -22,7 +24,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlockPeat;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -51,8 +52,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
       usBlock = us.getBlock();
       if (usBlock instanceof BlockPeat) {
         world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState());
-      } else if (usBlock instanceof BlockRockVariant) {
-        BlockRockVariant rock = ((BlockRockVariant) usBlock);
+      } else if (usBlock instanceof BlockRockVariant rock) {
         world.setBlockState(pos, rock.getVariant(rock.getType().getNonGrassVersion()).getDefaultState());
       }
     } else if (neighborLight >= 9) {
@@ -86,7 +86,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
       }
       for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
         if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
-          float temp = ClimateTFC.getActualTemp(world, upPos);
+          float temp = Climate.getActualTemp(world, upPos);
           BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
 
           if (world.isAirBlock(upPos) &&
@@ -111,9 +111,9 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
   public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
     pos = pos.add(0, -1, 0);
     return state.withProperty(NORTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
-                .withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
-                .withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
-                .withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+      .withProperty(EAST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+      .withProperty(SOUTH, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+      .withProperty(WEST, BlocksTFC.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
   }
 
   @Override

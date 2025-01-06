@@ -1,0 +1,45 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/woolly_bush/shortest"
+      }
+    }, {
+      "when": {
+        "age": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/woolly_bush/shorter"
+      }
+    }, {
+      "when": {
+        "age": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/woolly_bush/short",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/woolly_bush/big_short",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/woolly_bush/base",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/woolly_bush/big",
+          "weight": 3
+        }
+      ]
+    }
+  ]
+}

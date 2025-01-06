@@ -5,13 +5,14 @@
 
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-import net.dries007.tfc.api.capability.heat.Heat;
 import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.objects.te.TEFirePit;
 import org.lwjgl.opengl.GL11;

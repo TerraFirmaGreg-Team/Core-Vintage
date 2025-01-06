@@ -19,8 +19,8 @@ import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -63,7 +63,7 @@ public class TEUrn extends TEInventory implements IItemHandlerSidedCallback {
 
   @Nonnull
   public String getSealedDate() {
-    return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
+    return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, Calendar.CALENDAR_TIME.getDaysInMonth());
   }
 
   @Override
@@ -82,8 +82,8 @@ public class TEUrn extends TEInventory implements IItemHandlerSidedCallback {
     }
 
     // Update sealed tick info and sync to client
-    sealedTick = CalendarTFC.PLAYER_TIME.getTicks();
-    sealedCalendarTick = CalendarTFC.CALENDAR_TIME.getTicks();
+    sealedTick = Calendar.PLAYER_TIME.getTicks();
+    sealedCalendarTick = Calendar.CALENDAR_TIME.getTicks();
     sealed = true;
     markForSync();
   }

@@ -1,0 +1,48 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marram_grass/shortest"
+      }
+    }, {
+      "when": {
+        "age": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/marram_grass/shorter"
+      }
+    }, {
+      "when": {
+        "age": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/marram_grass/short/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/marram_grass/short/2",
+          "weight": 3
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/marram_grass/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/marram_grass/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/marram_grass/2",
+          "weight": 3
+        }
+      ]
+    }
+  ]
+}

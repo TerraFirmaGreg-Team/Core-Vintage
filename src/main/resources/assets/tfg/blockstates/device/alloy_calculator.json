@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:device/alloy_calculator",
+    "textures": {
+      "all": "tfg:blocks/device/alloy_calculator"
+    }
+  },
+  "variants": {
+    "normal": [ {} ],
+    "inventory": [ {} ],
+    "facing": {
+      "east": {
+        "y": 90
+      },
+      "west": {
+        "y": 270
+      },
+      "south": {
+        "y": 180
+      },
+      "north": {}
+    }
+  }
+}

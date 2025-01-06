@@ -1,0 +1,11 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "tfg:flora/plant/weeping_milk_cap/0"
+        }
+      ]
+    }
+  ]
+}

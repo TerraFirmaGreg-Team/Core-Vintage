@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntitySheep;
@@ -22,8 +25,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.ILivestock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import javax.annotation.Nullable;
@@ -50,9 +51,9 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TAIGA)) {
+        (biomeType == BiomeUtils.BiomeType.TAIGA)) {
       return ConfigTFC.Animals.ALPACA.rarity;
     }
     return 0;
@@ -77,7 +78,7 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
   public void birthChildren() {
     int numberOfChildren = ConfigTFC.Animals.ALPACA.babies;
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityAlpacaTFC baby = new EntityAlpacaTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
+      EntityAlpacaTFC baby = new EntityAlpacaTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);
@@ -111,7 +112,7 @@ public class EntityAlpacaTFC extends EntitySheepTFC implements ILivestock {
 
   @Override
   public long getProductsCooldown() {
-    return Math.max(0, ConfigTFC.Animals.ALPACA.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+    return Math.max(0, ConfigTFC.Animals.ALPACA.woolTicks + getShearedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "tfg:wood/branch/sequoia#dynamicthick"
+    }
+  }
+}

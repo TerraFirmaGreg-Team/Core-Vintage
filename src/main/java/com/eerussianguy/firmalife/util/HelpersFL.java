@@ -7,7 +7,7 @@ import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;

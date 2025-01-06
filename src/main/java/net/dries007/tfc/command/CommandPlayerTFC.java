@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.command;
 
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -17,8 +20,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.api.capability.food.NutritionStats;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
@@ -50,8 +51,7 @@ public class CommandPlayerTFC extends CommandBase {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-    if (sender.getCommandSenderEntity() instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
+    if (sender.getCommandSenderEntity() instanceof EntityPlayer player) {
       if (args.length < 1) {
         throw new WrongUsageException("tfc.command.playertfc.usage_expected_first_argument");
       }
@@ -112,26 +112,26 @@ public class CommandPlayerTFC extends CommandBase {
       sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.reset_nutrients"));
     } else {
       sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_nutrients",
-                                                      String.format("%.2f", nutritionStats.getAverageNutrition())
+        String.format("%.2f", nutritionStats.getAverageNutrition())
       ));
       for (Nutrient nutrient : Nutrient.values()) {
         sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_nutrients_nutrient",
-                                                        new TextComponentTranslation(Helpers.getEnumName(nutrient)),
-                                                        String.format("%.2f", nutritionStats.getNutrient(nutrient))
+          new TextComponentTranslation(Helpers.getEnumName(nutrient)),
+          String.format("%.2f", nutritionStats.getNutrient(nutrient))
         ));
       }
       FoodData lastRecord = nutritionStats.getMostRecentRecord();
       if (lastRecord != null) {
         float[] nutrients = lastRecord.getNutrients();
         sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_nutrients_last_eaten",
-                                                        lastRecord.getHunger(),
-                                                        String.format("%.2f", lastRecord.getSaturation()),
-                                                        String.format("%.2f", lastRecord.getDecayModifier())
+          lastRecord.getHunger(),
+          String.format("%.2f", lastRecord.getSaturation()),
+          String.format("%.2f", lastRecord.getDecayModifier())
         ));
         for (Nutrient nutrient : Nutrient.values()) {
           sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_nutrients_last_eaten_nutrient",
-                                                          new TextComponentTranslation(Helpers.getEnumName(nutrient)),
-                                                          String.format("%.2f", nutrients[nutrient.ordinal()])
+            new TextComponentTranslation(Helpers.getEnumName(nutrient)),
+            String.format("%.2f", nutrients[nutrient.ordinal()])
           ));
         }
       }

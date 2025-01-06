@@ -1,5 +1,7 @@
 package tfcflorae.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFence;
@@ -36,9 +38,8 @@ import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 import tfcflorae.objects.items.food.PotionEffectToHave;
@@ -95,8 +96,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
     this.data = data;
 
     for (Object obj : oreNameParts) {
-      if (obj instanceof PotionEffectToHave) {
-        PotionEffectToHave Effect = (PotionEffectToHave) obj;
+      if (obj instanceof PotionEffectToHave Effect) {
         PotionEffects.add(Effect);
       } else if (obj instanceof Object[]) {OreDictionaryHelper.register(this, (Object[]) obj);} else {OreDictionaryHelper.register(this, obj);}
     }
@@ -163,7 +163,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
   }
 
   int getDayPeriod() {
-    return CalendarTFC.CALENDAR_TIME.getHourOfDay() / (ICalendar.HOURS_IN_DAY / 4);
+    return Calendar.CALENDAR_TIME.getHourOfDay() / (ICalendar.HOURS_IN_DAY / 4);
   }
 
   @Override
@@ -192,7 +192,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
 
   @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    return ClimateTFC.getAvgTemp(worldIn, pos) >= -13f && ClimateTFC.getAvgTemp(worldIn, pos) <= 50f && ChunkDataTFC.getRainfall(worldIn, pos) >= 250f
+    return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f && ChunkDataTFC.getRainfall(worldIn, pos) >= 250f
            && ChunkDataTFC.getRainfall(worldIn, pos) <= 500;
   }
 
@@ -202,7 +202,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
       IBlockState blockState = worldIn.getBlockState(pos.offset(face));
       if (!(blockState.getBlock() instanceof BlockLeavesTFC) && (blockState.getBlockFaceShape(worldIn, pos.offset(face), face.getOpposite())
                                                                  == BlockFaceShape.SOLID)) {
-        return ClimateTFC.getAvgTemp(worldIn, pos) >= -13f && ClimateTFC.getAvgTemp(worldIn, pos) <= 50f && ChunkDataTFC.getRainfall(worldIn, pos) >= 250f
+        return Climate.getAvgTemp(worldIn, pos) >= -13f && Climate.getAvgTemp(worldIn, pos) <= 50f && ChunkDataTFC.getRainfall(worldIn, pos) >= 250f
                && ChunkDataTFC.getRainfall(worldIn, pos) <= 500;
       }
     }
@@ -271,13 +271,13 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
     switch (rot) {
       case CLOCKWISE_180:
         return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH))
-                    .withProperty(WEST, state.getValue(EAST));
+          .withProperty(WEST, state.getValue(EAST));
       case COUNTERCLOCKWISE_90:
         return state.withProperty(NORTH, state.getValue(EAST)).withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST))
-                    .withProperty(WEST, state.getValue(NORTH));
+          .withProperty(WEST, state.getValue(NORTH));
       case CLOCKWISE_90:
         return state.withProperty(NORTH, state.getValue(WEST)).withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST))
-                    .withProperty(WEST, state.getValue(SOUTH));
+          .withProperty(WEST, state.getValue(SOUTH));
       default:
         return state;
     }
@@ -359,7 +359,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (!worldIn.isAreaLoaded(pos, 1)) {return;}
 
-    if (ClimateTFC.getActualTemp(worldIn, pos) >= -11f && ClimateTFC.getActualTemp(worldIn, pos) <= 48f
+    if (Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f
         && Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) <= 5f) {
       int j = state.getValue(AGE);
 
@@ -371,7 +371,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize
         }
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!(ClimateTFC.getActualTemp(worldIn, pos) >= -11f && ClimateTFC.getActualTemp(worldIn, pos) <= 48f) || (
+    } else if (!(Climate.getActualTemp(worldIn, pos) >= -11f && Climate.getActualTemp(worldIn, pos) <= 48f) || (
       Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()) > 5f)) {
       int j = state.getValue(AGE);
 

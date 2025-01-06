@@ -1,0 +1,41 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/winged_kelp/upper"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/winged_kelp/lower"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "middle"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/winged_kelp/lower"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/winged_kelp/upper"
+        }
+      ]
+    }
+  ]
+}

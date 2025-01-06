@@ -1,5 +1,7 @@
 package BananaFructa.tfcfarming.firmalife;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import BananaFructa.tfcfarming.Config;
@@ -12,7 +14,6 @@ import com.google.gson.Gson;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class TEStemCropN extends TEStemCrop {
   public void reduceCounter(long amount) {
     super.reduceCounter((long) (amount / factor));
 
-    float temp = ClimateTFC.getActualTemp(getWorld(), pos, -getTicksSinceUpdate());
+    float temp = Climate.getActualTemp(getWorld(), pos, -getTicksSinceUpdate());
     float rainfall = ChunkDataTFC.getRainfall(getWorld(), pos);
     if (this.crop.isValidForGrowth(temp, rainfall)) {
       NutrientValues nutrientValues = TFCFarming.INSTANCE.worldStorage.getNutrientValues(pos.getX(), pos.getZ());

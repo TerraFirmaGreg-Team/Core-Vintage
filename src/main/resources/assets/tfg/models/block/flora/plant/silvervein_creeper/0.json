@@ -1,0 +1,25 @@
+{
+  "credit": "Made with Blockbench",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "tfg:blocks/flora/plant/silvervein_creeper/0b",
+    "overlay": "tfg:blocks/flora/plant/silvervein_creeper/0b"
+  },
+  "elements": [
+    {
+      "from": [ -0.05, 0.05, -0.05 ],
+      "to": [ 16.05, 0.05, 16.05 ],
+      "faces": {
+        "up": {
+          "uv": [ 0, 0, 16, 16 ],
+          "texture": "#overlay"
+        },
+        "down": {
+          "uv": [ 0, 16, 16, 0 ],
+          "texture": "#overlay"
+        }
+      }
+    }
+  ]
+}
+

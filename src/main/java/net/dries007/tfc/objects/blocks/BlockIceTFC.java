@@ -5,6 +5,11 @@
 
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
+import su.terrafirmagreg.modules.core.feature.climate.IceMeltHandler;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,11 +29,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
 
 import net.dries007.tfc.api.types.Metal.ItemType;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
-import net.dries007.tfc.util.climate.ClimateTFC;
-import net.dries007.tfc.util.climate.ITemperatureBlock;
-import net.dries007.tfc.util.climate.IceMeltHandler;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -44,7 +45,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
 
   public BlockIceTFC(Fluid waterFluid) {
     this.waterFluid = waterFluid;
-    this.meltThreshold = waterFluid == FluidsTFC.SALT_WATER.get() ? IceMeltHandler.SALT_WATER_MELT_THRESHOLD : IceMeltHandler.ICE_MELT_THRESHOLD;
+    this.meltThreshold = waterFluid == FluidsCore.SALT_WATER.get() ? IceMeltHandler.SALT_WATER_MELT_THRESHOLD : IceMeltHandler.ICE_MELT_THRESHOLD;
 
     setHardness(0.5F);
     setLightOpacity(3);
@@ -89,7 +90,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
 
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    if (waterFluid == FluidsTFC.SALT_WATER.get()) {
+    if (waterFluid == FluidsCore.SALT_WATER.get()) {
       return;
     }
     EntityPlayer player = harvesters.get();
@@ -118,7 +119,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
   @Override
   public void onTemperatureUpdateTick(World world, BlockPos pos, IBlockState state) {
     // Either block light (i.e. from torches) or high enough temperature
-    if (world.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - getLightOpacity(state, world, pos) || ClimateTFC.getActualTemp(world, pos) > meltThreshold) {
+    if (world.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - getLightOpacity(state, world, pos) || Climate.getActualTemp(world, pos) > meltThreshold) {
       turnIntoWater(world, pos);
     }
   }

@@ -2,10 +2,13 @@ package su.terrafirmagreg.datafix.mapping;
 
 import su.terrafirmagreg.api.data.enums.Mods.Names;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionType;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -77,6 +80,20 @@ public abstract class AbstractRemapping {
   }};
 
   protected static final Map<String, EntityEntry> ENTITY_ENTRY_MAP = new Object2ObjectOpenHashMap<>() {{
+
+  }};
+
+  protected static final Map<String, Potion> EFFECT_MAP = new Object2ObjectOpenHashMap<>() {{
+    put("cool", EffectsCore.HYPOTHERMIA.get());
+    put("warm", EffectsCore.HYPERTHERMIA.get());
+    put("overburdened", EffectsCore.OVERBURDENED.get());
+    put("thirst", EffectsCore.THIRST.get());
+    put("parasites", EffectsCore.PARASITES.get());
+    put("swarm", EffectsCore.SWARM.get());
+
+  }};
+
+  protected static final Map<String, PotionType> POTION_MAP = new Object2ObjectOpenHashMap<>() {{
 
   }};
 

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.temp.modules.ambiental;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.temp.config.TFGConfig;
 import su.terrafirmagreg.temp.modules.ambiental.capability.TemperatureCapability;
 
@@ -21,7 +22,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -94,9 +94,9 @@ public class TFCAmbientalGuiRenderer {
     }
     IBlockState state = player.world.getBlockState(pos2);
     Block block = state.getBlock();
-    if (block == FluidsTFC.HOT_WATER.get().getBlock() ||
-        block == FluidsTFC.SALT_WATER.get().getBlock() ||
-        block == FluidsTFC.FRESH_WATER.get().getBlock()) {
+    if (block == FluidsCore.HOT_WATER.get().getBlock() ||
+        block == FluidsCore.SALT_WATER.get().getBlock() ||
+        block == FluidsCore.FRESH_WATER.get().getBlock()) {
       offsetY = -10f;
       offsetX = 0;
     }

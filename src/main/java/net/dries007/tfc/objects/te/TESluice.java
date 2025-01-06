@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
@@ -31,7 +33,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.devices.BlockSluice;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.util.Helpers;
@@ -53,7 +54,7 @@ public class TESluice extends TEBase implements ITickable {
   private int ticksRemaining, delayTimer;
 
   public static boolean isValidFluid(Fluid fluid) {
-    return fluid == FluidsTFC.FRESH_WATER.get() || fluid == FluidsTFC.SALT_WATER.get();
+    return fluid == FluidsCore.FRESH_WATER.get() || fluid == FluidsCore.SALT_WATER.get();
   }
 
   @Override
@@ -66,8 +67,8 @@ public class TESluice extends TEBase implements ITickable {
             if (chunkData != null) {
               // Only check for not null veins
               List<Vein> veinList = chunkData.getGeneratedVeins()
-                                             .stream().filter(vein -> vein.getType() != null && vein.getType().getOre() != null)
-                                             .collect(Collectors.toList());
+                .stream().filter(vein -> vein.getType() != null && vein.getType().getOre() != null)
+                .collect(Collectors.toList());
 
               //noinspection ConstantConditions
               Ore ore = veinList.get(Constants.RNG.nextInt(veinList.size())).getType().getOre();
@@ -106,8 +107,7 @@ public class TESluice extends TEBase implements ITickable {
         if (soil < MAX_SOIL) {
           for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos).grow(1), EntitySelectors.IS_ALIVE)) {
             ItemStack stack = entityItem.getItem();
-            if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof BlockRockVariant) {
-              BlockRockVariant rockBlock = (BlockRockVariant) ((ItemBlock) stack.getItem()).getBlock();
+            if (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof BlockRockVariant rockBlock) {
               if (rockBlock.getType() == Rock.Type.SAND || rockBlock.getType() == Rock.Type.GRAVEL) {
                 soil += 20; // Overflows to not consume an stack until a full soil worth is consumed
                 stack.shrink(1);

@@ -5,6 +5,8 @@
 
 package net.dries007.tfc;
 
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.dedicated.PropertyManager;
@@ -28,7 +30,6 @@ import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -64,7 +65,6 @@ import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.proxy.IProxy;
-import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.fuel.FuelManager;
 import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
@@ -149,7 +149,6 @@ public final class TerraFirmaCraft {
 
     CapabilityChunkData.preInit();
     CapabilityItemSize.preInit();
-    CapabilityItemHeat.preInit();
     CapabilityForgeable.preInit();
     CapabilityFood.preInit();
     CapabilityEgg.preInit();
@@ -191,7 +190,6 @@ public final class TerraFirmaCraft {
     worldTypeTFC = new WorldTypeTFC();
 
     CapabilityItemSize.init();
-    CapabilityItemHeat.init();
     CapabilityMetalItem.init();
 
     FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "net.dries007.tfc.compat.waila.TOPPlugin");
@@ -223,6 +221,6 @@ public final class TerraFirmaCraft {
     event.registerServerCommand(new CommandGenTree());
 
     // Initialize calendar for the current server
-    CalendarTFC.INSTANCE.init(event.getServer());
+    Calendar.INSTANCE.init(event.getServer());
   }
 }

@@ -1,0 +1,41 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/liana/cross/1"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/liana/cross/0"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "middle"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/liana/cross/0"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/liana/cross/1"
+        }
+      ]
+    }
+  ]
+}

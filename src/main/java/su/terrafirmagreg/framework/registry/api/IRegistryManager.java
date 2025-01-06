@@ -2,11 +2,11 @@ package su.terrafirmagreg.framework.registry.api;
 
 import su.terrafirmagreg.api.base.object.biome.api.IBiomeSettings;
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
+import su.terrafirmagreg.api.base.object.effect.api.IEffectSettings;
 import su.terrafirmagreg.api.base.object.enchantment.api.IEnchantmentSettings;
 import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 import su.terrafirmagreg.api.base.object.potion.api.IPotionSettings;
-import su.terrafirmagreg.api.base.object.potiontype.api.IPotionTypeSettings;
 import su.terrafirmagreg.api.base.object.sound.api.ISoundSettings;
 import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.api.library.collection.RegistrySupplierMap;
@@ -46,6 +46,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unchecked")
 public interface IRegistryManager extends IRegistryEventHandler {
 
   IModule getModule();
@@ -65,9 +66,7 @@ public interface IRegistryManager extends IRegistryEventHandler {
 
 
   default <T extends IForgeRegistryEntry<T>> Supplier<T> addEntry(RegistrySupplierMap<T> registry, String identifier, Supplier<T> entry) {
-
     ModUtils.isValidPath(identifier);
-
     registry.put(getIdentifier(identifier), entry);
     return entry;
   }
@@ -127,7 +126,7 @@ public interface IRegistryManager extends IRegistryEventHandler {
     return this.block(identifier, block);
   }
 
-  @SuppressWarnings("unchecked")
+
   default <B extends Block> Supplier<B> block(String identifier, Supplier<B> block) {
     this.addEntry(getWrapper().getBlocks(), identifier, (Supplier<Block>) block);
     return block;
@@ -170,7 +169,6 @@ public interface IRegistryManager extends IRegistryEventHandler {
     return this.item(identifier, (Supplier<T>) () -> item);
   }
 
-  @SuppressWarnings("unchecked")
   default <T extends Item> Supplier<T> item(String identifier, Supplier<T> item) {
     this.addEntry(getWrapper().getItems(), identifier, (Supplier<Item>) item);
     return item;
@@ -180,17 +178,18 @@ public interface IRegistryManager extends IRegistryEventHandler {
 
   // region Biome
 
-  default <T extends Biome & IBiomeSettings> Supplier<Biome> biome(T biome) {
+  default <T extends Biome & IBiomeSettings> Supplier<T> biome(T biome) {
 
     return this.biome(biome.getSettings().getRegistryKey(), biome);
   }
 
-  default Supplier<Biome> biome(String identifier, Biome biome) {
-    return this.biome(identifier, () -> biome);
+  default <T extends Biome> Supplier<T> biome(String identifier, T biome) {
+    return this.biome(identifier, (Supplier<T>) () -> biome);
   }
 
-  default Supplier<Biome> biome(String identifier, Supplier<Biome> biome) {
-    return this.addEntry(getWrapper().getBiomes(), identifier, biome);
+  default <T extends Biome> Supplier<T> biome(String identifier, Supplier<T> biome) {
+    this.addEntry(getWrapper().getBiomes(), identifier, (Supplier<Biome>) biome);
+    return biome;
   }
 
   // endregion
@@ -242,34 +241,38 @@ public interface IRegistryManager extends IRegistryEventHandler {
 
   // endregion
 
-  // region Potion
+  // region Effect
 
-  default <T extends Potion & IPotionSettings> Supplier<Potion> potion(T potion) {
-    return this.potion(potion.getSettings().getRegistryKey(), potion);
+  default <T extends Potion & IEffectSettings> Supplier<T> effect(T effect) {
+    return this.effect(effect.getSettings().getRegistryKey(), effect);
   }
 
-  default Supplier<Potion> potion(String identifier, Potion potion) {
-    return this.potion(identifier, () -> potion);
+  default <T extends Potion> Supplier<T> effect(String identifier, T effect) {
+    return this.effect(identifier, (Supplier<T>) () -> effect);
   }
 
-  default Supplier<Potion> potion(String identifier, Supplier<Potion> potion) {
-    return this.addEntry(getWrapper().getPotions(), identifier, potion);
+
+  default <T extends Potion> Supplier<T> effect(String identifier, Supplier<T> effect) {
+    this.addEntry(getWrapper().getPotions(), identifier, (Supplier<Potion>) effect);
+    return effect;
   }
 
   // endregion
 
-  // region PotionType
+  // region Potion
 
-  default <T extends PotionType & IPotionTypeSettings> Supplier<PotionType> potionType(T potionType) {
-    return this.potionType(potionType.getSettings().getRegistryKey(), potionType);
+  default <T extends PotionType & IPotionSettings> Supplier<T> potion(T potion) {
+    return this.potion(potion.getSettings().getRegistryKey(), potion);
   }
 
-  default Supplier<PotionType> potionType(String identifier, PotionType potionType) {
-    return this.potionType(identifier, () -> potionType);
+  default <T extends PotionType> Supplier<T> potion(String identifier, T potion) {
+    return this.potion(identifier, (Supplier<T>) () -> potion);
   }
 
-  default Supplier<PotionType> potionType(String identifier, Supplier<PotionType> potionType) {
-    return this.addEntry(getWrapper().getPotionTypes(), identifier, potionType);
+
+  default <T extends PotionType> Supplier<T> potion(String identifier, Supplier<T> potion) {
+    this.addEntry(getWrapper().getPotionTypes(), identifier, (Supplier<PotionType>) potion);
+    return potion;
   }
 
   // endregion

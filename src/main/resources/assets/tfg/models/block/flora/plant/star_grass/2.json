@@ -1,0 +1,7 @@
+{
+  "parent": "tfg:block/flora/plant/star_grass/base",
+  "textures": {
+    "texture": "tfg:blocks/flora/plant/star_grass/2"
+  }
+}
+

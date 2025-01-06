@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGravel;
 import net.minecraft.block.material.MapColor;
@@ -167,7 +169,7 @@ public final class BlocksTFC {
   public static final BlockDecorativeStone ALABASTER_POLISHED_PLAIN = getNull();
   @GameRegistry.ObjectHolder("alabaster/raw/plain")
   public static final BlockDecorativeStone ALABASTER_RAW_PLAIN = getNull();
-  
+
   public static final BlockPeat PEAT = getNull();
   public static final BlockPeat PEAT_GRASS = getNull();
   public static final BlockFirePit FIREPIT = getNull();
@@ -326,8 +328,8 @@ public final class BlocksTFC {
       Builder<BlockFluidBase> b = ImmutableList.builder();
       b.add(
         register(r, "fluid/hot_water", new BlockFluidHotWater()),
-        register(r, "fluid/fresh_water", new BlockFluidWater(FluidsTFC.FRESH_WATER.get(), Material.WATER, false)),
-        register(r, "fluid/salt_water", new BlockFluidWater(FluidsTFC.SALT_WATER.get(), Material.WATER, true))
+        register(r, "fluid/fresh_water", new BlockFluidWater(FluidsCore.FRESH_WATER.get(), Material.WATER, false)),
+        register(r, "fluid/salt_water", new BlockFluidWater(FluidsCore.SALT_WATER.get(), Material.WATER, true))
       );
       for (FluidWrapper wrapper : FluidsTFC.getAllAlcoholsFluids()) {
         b.add(register(r, "fluid/" + wrapper.get().getName(), new BlockFluidTFC(wrapper.get(), Material.WATER)));
@@ -731,7 +733,7 @@ public final class BlocksTFC {
     if (ConfigTFC.General.OVERRIDES.enableFrozenOverrides) {
       TerraFirmaCraft.getLog().info("The below warnings about unintended overrides are normal. The override is intended. ;)");
       event.getRegistry().registerAll(
-        new BlockIceTFC(FluidsTFC.FRESH_WATER.get()).setRegistryName("minecraft", "ice").setTranslationKey("ice"),
+        new BlockIceTFC(FluidsCore.FRESH_WATER.get()).setRegistryName("minecraft", "ice").setTranslationKey("ice"),
         new BlockSnowTFC().setRegistryName("minecraft", "snow_layer").setTranslationKey("snow")
       );
     }
@@ -746,11 +748,11 @@ public final class BlocksTFC {
   }
 
   public static boolean isFreshWater(IBlockState current) {
-    return current == FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState();
+    return current == FluidsCore.FRESH_WATER.get().getBlock().getDefaultState();
   }
 
   public static boolean isSaltWater(IBlockState current) {
-    return current == FluidsTFC.SALT_WATER.get().getBlock().getDefaultState();
+    return current == FluidsCore.SALT_WATER.get().getBlock().getDefaultState();
   }
 
   public static boolean isFreshWaterOrIce(IBlockState current) {

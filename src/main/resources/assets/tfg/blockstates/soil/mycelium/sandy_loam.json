@@ -1,0 +1,67 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:soil/grass",
+    "textures": {
+      "up": "tfg:blocks/soil/overlay/mycelium/top",
+      "north": "tfg:blocks/soil/overlay/mycelium/side",
+      "south": "tfg:blocks/soil/overlay/mycelium/side",
+      "east": "tfg:blocks/soil/overlay/mycelium/side",
+      "west": "tfg:blocks/soil/overlay/mycelium/side",
+      "all": "tfg:blocks/soil/dirt/sandy_loam"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "clay": {
+      "true": {
+        "model": "tfg:soil/clay_grass",
+        "textures": {
+          "clay": "tfg:blocks/soil/overlay/clay"
+        }
+      },
+      "false": {}
+    },
+    "east": {
+      "true": {
+        "textures": {
+          "east": "tfg:blocks/soil/overlay/mycelium/top"
+        }
+      },
+      "false": {}
+    },
+    "north": {
+      "true": {
+        "textures": {
+          "north": "tfg:blocks/soil/overlay/mycelium/top"
+        }
+      },
+      "false": {}
+    },
+    "snowy": {
+      "true": {},
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "textures": {
+          "south": "tfg:blocks/soil/overlay/mycelium/top"
+        }
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "textures": {
+          "west": "tfg:blocks/soil/overlay/mycelium/top"
+        }
+      },
+      "false": {}
+    }
+  }
+}

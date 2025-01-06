@@ -1,0 +1,9 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfg:block/cross",
+  "textures": {
+    "cross": "tfg:blocks/flora/plant/oregano/regular",
+    "particle": "tfg:blocks/flora/plant/oregano/regular"
+  }
+}
+

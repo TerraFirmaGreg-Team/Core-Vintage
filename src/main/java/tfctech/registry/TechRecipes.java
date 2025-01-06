@@ -1,7 +1,7 @@
 package tfctech.registry;
 
-import java.util.ArrayList;
-import java.util.List;
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -36,19 +36,18 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.recipes.ShapelessDamageRecipe;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.util.forge.ForgeRule;
-
-import su.terrafirmagreg.api.data.enums.Mods;
-
 import tfctech.TechConfig;
 import tfctech.api.recipes.GlassworkingRecipe;
 import tfctech.api.recipes.SmelteryRecipe;
 import tfctech.api.recipes.WireDrawingRecipe;
-import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.TechItems;
 import tfctech.objects.items.glassworking.ItemBlowpipe;
 import tfctech.objects.items.metal.ItemTechMetal;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
 
@@ -76,8 +75,8 @@ public final class TechRecipes {
   @SubscribeEvent
   public static void onRegisterBarrelRecipeEvent(RegistryEvent.Register<BarrelRecipe> event) {
     event.getRegistry().registerAll(
-      new BarrelRecipe(IIngredient.of(TechFluids.LATEX.get(), 100), IIngredient.of(new ItemStack(TechItems.VULCANIZING_AGENTS)), null, new ItemStack(TechItems.RUBBER_MIX, 6),
-                       8 * ICalendar.TICKS_IN_HOUR).setRegistryName("rubber_mix")
+      new BarrelRecipe(IIngredient.of(FluidsCore.LATEX.get(), 100), IIngredient.of(new ItemStack(TechItems.VULCANIZING_AGENTS)), null, new ItemStack(TechItems.RUBBER_MIX, 6),
+        8 * ICalendar.TICKS_IN_HOUR).setRegistryName("rubber_mix")
     );
   }
 
@@ -174,7 +173,7 @@ public final class TechRecipes {
 
     r.registerAll(
       new GlassworkingRecipe(new ItemStack(Items.GLASS_BOTTLE),
-                             " X X ", " X X ", "X   X", "X   X", " XXX ").setRegistryName(TFCTECH, "glass_bottle")
+        " X X ", " X X ", "X   X", "X   X", " XXX ").setRegistryName(TFCTECH, "glass_bottle")
     );
   }
 
@@ -184,23 +183,23 @@ public final class TechRecipes {
     r.registerAll(
       new SmelteryRecipe.Builder()
         .addInput(IIngredient.of("dustPotash")).addInput(IIngredient.of("sandSilica")).addInput(IIngredient.of("dustLime"))
-        .setOutput(new FluidStack(TechFluids.GLASS.get(), 1000), 800).build()
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 1000), 800).build()
         .setRegistryName(new ResourceLocation(TFCTECH, "glass")),
       new SmelteryRecipe.Builder()
         .addInput(IIngredient.of("blockGlass"))
-        .setOutput(new FluidStack(TechFluids.GLASS.get(), 1000), 800).build()
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 1000), 800).build()
         .setRegistryName(new ResourceLocation(TFCTECH, "glass_block")),
       new SmelteryRecipe.Builder()
         .addInput(IIngredient.of("paneGlass"))
-        .setOutput(new FluidStack(TechFluids.GLASS.get(), 375), 800).build()
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 375), 800).build()
         .setRegistryName(new ResourceLocation(TFCTECH, "glass_pane")),
       new SmelteryRecipe.Builder()
         .addInput(IIngredient.of(ItemsTFC.GLASS_SHARD))
-        .setOutput(new FluidStack(TechFluids.GLASS.get(), 500), 800).build()
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 500), 800).build()
         .setRegistryName(new ResourceLocation(TFCTECH, "glass_shard")),
       new SmelteryRecipe.Builder()
         .addInput(IIngredient.of(Items.GLASS_BOTTLE))
-        .setOutput(new FluidStack(TechFluids.GLASS.get(), 250), 800).build()
+        .setOutput(new FluidStack(FluidsCore.GLASS.get(), 250), 800).build()
         .setRegistryName(new ResourceLocation(TFCTECH, "glass_bottle"))
     );
   }

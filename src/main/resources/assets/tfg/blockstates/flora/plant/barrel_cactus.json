@@ -1,0 +1,116 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0",
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/small"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/lower"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "middle"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/middle"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1|2|3",
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/single"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/upper"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/flower/0"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1",
+        "part": "single",
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/flower/1"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "0|1",
+        "part": "upper",
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/flower/1"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2|3",
+        "part": "single|upper",
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/flower/2"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1|2|3",
+        "part": "single",
+        "stage": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/flower/3"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/barrel_cactus/flower/3"
+        }
+      ]
+    }
+  ]
+}

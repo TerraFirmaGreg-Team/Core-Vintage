@@ -1,5 +1,7 @@
 package tfcflorae.objects.blocks.wood;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -36,10 +38,9 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import tfcflorae.util.OreDictionaryHelper;
 import tfcflorae.util.agriculture.SeasonalTrees;
 
@@ -62,11 +63,6 @@ public class BlockLeavesTFCF extends BlockLeaves {
   public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockLeavesTFCF.EnumLeafState.class);
   public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
   private static final Map<SeasonalTrees, BlockLeavesTFCF> MAP = new HashMap<>();
-
-  public static BlockLeavesTFCF get(SeasonalTrees wood) {
-    return MAP.get(wood);
-  }
-
   public final Tree wood;
   public final SeasonalTrees fruitTree;
 
@@ -76,7 +72,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
     this.setTickRandomly(true);
     if (MAP.put(tree, this) != null) {throw new IllegalStateException("There can only be one.");}
     setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(LEAF_STATE, EnumLeafState.NORMAL)
-                              .withProperty(HARVESTABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
+      .withProperty(HARVESTABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
     leavesFancy = true; // Fast / Fancy graphics works correctly
     OreDictionaryHelper.register(this, "tree", "leaves");
     OreDictionaryHelper.register(this, "tree", "leaves", wood.getRegistryName().getPath());
@@ -84,12 +80,16 @@ public class BlockLeavesTFCF extends BlockLeaves {
     this.setTickRandomly(true);
   }
 
+  public static BlockLeavesTFCF get(SeasonalTrees wood) {
+    return MAP.get(wood);
+  }
+
   @SuppressWarnings("deprecation")
   @Override
   @Nonnull
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState().withProperty(HARVESTABLE, meta > 3).withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11))
-               .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
+      .withProperty(DECAYABLE, (meta & 0b01) == 0b01);
   }
 
   @Override
@@ -111,9 +111,9 @@ public class BlockLeavesTFCF extends BlockLeaves {
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     if (!world.isAreaLoaded(pos, 1)) {return;}
 
-    Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int expectedStage = fruitTree.getStageForMonth(currentMonth);
-    float avgTemperature = ClimateTFC.getAvgTemp(world, pos);
+    float avgTemperature = Climate.getAvgTemp(world, pos);
     float tempGauss = (int) (12f + (random.nextGaussian() / 4));
 
     switch (expectedStage) {
@@ -232,7 +232,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    if (state.getValue(LEAF_STATE) != EnumLeafState.WINTER && fruitTree.hasDeadLeaves == false) {
+    if (state.getValue(LEAF_STATE) != EnumLeafState.WINTER && !fruitTree.hasDeadLeaves) {
       return ConfigTFC.General.TREE.enableSaplings ? Item.getItemFromBlock(BlockSaplingTFC.get(wood)) : Items.AIR;
     }
     return null;
@@ -277,7 +277,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
 
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    if (state.getValue(LEAF_STATE) != EnumLeafState.WINTER && fruitTree.hasDeadLeaves == false) {
+    if (state.getValue(LEAF_STATE) != EnumLeafState.WINTER && !fruitTree.hasDeadLeaves) {
       int chance = this.getSaplingDropChance(state);
       if (chance > 0) {
         if (fortune > 0) {
@@ -353,27 +353,27 @@ public class BlockLeavesTFCF extends BlockLeaves {
       switch (RNG.nextInt(4)) {
         case 1:
           TFCParticles.LEAF1.sendToAllNear(world,
-                                           x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 90);
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 90);
           break;
         case 2:
           TFCParticles.LEAF2.sendToAllNear(world,
-                                           x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 70);
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 70);
           break;
         case 3:
           TFCParticles.LEAF3.sendToAllNear(world,
-                                           x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 80);
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 80);
           break;
       }
     }

@@ -6,6 +6,16 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCarrot;
@@ -117,13 +127,9 @@ import net.dries007.tfc.api.capability.egg.EggHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
@@ -169,20 +175,15 @@ import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.entity.ai.EBEntityAI;
 import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.objects.potioneffects.PotionEffectsTFC;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
 import net.dries007.tfc.util.calendar.CalendarWorldData;
-import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -294,7 +295,7 @@ public final class CommonEventHandler {
     final ItemStack heldItem = player == null ? ItemStack.EMPTY : player.getHeldItemMainhand();
     final IBlockState state = event.getState();
     final Block block = state.getBlock();
-    final Month month = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+    final Month month = Calendar.CALENDAR_TIME.getMonthOfYear();
 
     // Make leaves drop sticks
     if (!event.isSilkTouching() && block instanceof BlockLeaves) {
@@ -648,7 +649,7 @@ public final class CommonEventHandler {
       if (forgeHandler != null) {
         isForgeable = true;
         event.addCapability(CapabilityForgeable.KEY, forgeHandler);
-        isHeatable = forgeHandler instanceof IItemHeat;
+        isHeatable = forgeHandler instanceof ICapabilityHeat;
       }
       // Metal
       ICapabilityProvider metalCapability = CapabilityMetalItem.getCustomMetalItem(stack);
@@ -666,9 +667,9 @@ public final class CommonEventHandler {
       }
       // If one of the above is also heatable, skip this
       if (!isHeatable) {
-        ICapabilityProvider heatHandler = CapabilityItemHeat.getCustomHeat(stack);
+        ICapabilityProvider heatHandler = CapabilityHandlerHeat.getCustom(stack);
         if (heatHandler != null) {
-          event.addCapability(CapabilityItemHeat.KEY, heatHandler);
+          event.addCapability(CapabilityHeat.KEY, heatHandler);
         }
       }
 
@@ -851,7 +852,7 @@ public final class CommonEventHandler {
       if (event.getEntity() instanceof EntitySquid && world.getBlockState(pos).getBlock() instanceof BlockFluidTFC) {
         // Prevents squids spawning outside of salt water (eg: oceans)
         Fluid fluid = ((BlockFluidTFC) world.getBlockState(pos).getBlock()).getFluid();
-        if (FluidsTFC.SALT_WATER.get() != fluid) {
+        if (FluidsCore.SALT_WATER.get() != fluid) {
           event.setResult(Event.Result.DENY);
         }
       }
@@ -859,7 +860,7 @@ public final class CommonEventHandler {
       // Check creature spawning - Prevents vanilla's respawning mechanic to spawn creatures outside their allowed conditions
       if (event.getEntity() instanceof ICreatureTFC creature) {
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
-        float temperature = ClimateTFC.getAvgTemp(world, pos);
+        float temperature = Climate.getAvgTemp(world, pos);
         float floraDensity = ChunkDataTFC.getFloraDensity(world, pos);
         float floraDiversity = ChunkDataTFC.getFloraDiversity(world, pos);
         Biome biome = world.getBiome(pos);
@@ -942,13 +943,13 @@ public final class CommonEventHandler {
         }
       }
     }
-    if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entity instanceof EntityItem entityItem) {
+    if (ConfigTFC.Devices.HEAT.coolHeatablesInWorld && entity instanceof EntityItem entityItem) {
       ItemStack stack = entityItem.getItem();
-      IItemHeat heatCap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat heatCap = stack.getCapability(CapabilityHeat.CAPABILITY, null);
       if (heatCap != null) {
         // Add a NBT tag here to make sure our ItemExpireEvent listener picks this entity up as valid (and as an extra check)
         entityItem.addTag("TFCHeatableItem");
-        entityItem.lifespan = ConfigTFC.Devices.TEMPERATURE.ticksBeforeAttemptToCool;
+        entityItem.lifespan = ConfigTFC.Devices.HEAT.ticksBeforeAttemptToCool;
       }
     }
   }
@@ -972,9 +973,9 @@ public final class CommonEventHandler {
   public static void onItemEntityExpire(ItemExpireEvent event) {
     EntityItem entityItem = event.getEntityItem();
     ItemStack stack = entityItem.getItem();
-    IItemHeat heatCap;
-    if (ConfigTFC.Devices.TEMPERATURE.coolHeatablesInWorld && entityItem.getTags().contains("TFCHeatableItem")
-        && (heatCap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) != null) {
+    ICapabilityHeat heatCap;
+    if (ConfigTFC.Devices.HEAT.coolHeatablesInWorld && entityItem.getTags().contains("TFCHeatableItem")
+        && (heatCap = stack.getCapability(CapabilityHeat.CAPABILITY, null)) != null) {
       int lifespan = stack.getItem().getEntityLifespan(stack, entityItem.world);
       if (entityItem.lifespan >= lifespan) {
         return; // If the ItemEntity has been there for as long or if not longer than the original unmodified lifespan, we return and setDead
@@ -994,7 +995,7 @@ public final class CommonEventHandler {
               entityItem.world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2); // 1/1000 chance of the fluid being used up. Attempts to match the barrel recipe as it takes 1mb of water per operation.
             }
           }
-          event.setExtraLife(ConfigTFC.Devices.TEMPERATURE.ticksBeforeAttemptToCool); // Set half a second onto the lifespan
+          event.setExtraLife(ConfigTFC.Devices.HEAT.ticksBeforeAttemptToCool); // Set half a second onto the lifespan
           event.setCanceled(true);
           entityItem.setNoPickupDelay(); // For some reason when lifespan is added, pickup delay is reset, we disable this to make the experience seamless
           return;
@@ -1023,18 +1024,18 @@ public final class CommonEventHandler {
           entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + rand * 0.4f);
           ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ, 42, 0.0D, 0.15D, 0.0D, 0.08D);
           if (rand <= 0.01F) {
-            entityItem.world.setBlockState(pos, FluidsTFC.FRESH_WATER.get().getBlock().getDefaultState(), 2); // 1/100 chance of the ice turning into water.
+            entityItem.world.setBlockState(pos, FluidsCore.FRESH_WATER.get().getBlock().getDefaultState(), 2); // 1/100 chance of the ice turning into water.
           }
         } else if (state.getMaterial() == Material.PACKED_ICE) {
           heatCap.setTemperature(Math.max(0, itemTemp - 125));
           entityItem.world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 1f, 0.8f + rand * 0.4f);
           ((WorldServer) entityItem.world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entityItem.posX, entityItem.posY, entityItem.posZ, 42, 0.0D, 0.15D, 0.0D, 0.08D);
           if (rand <= 0.005F) {
-            entityItem.world.setBlockState(pos, FluidsTFC.FRESH_WATER.get().getBlock()
+            entityItem.world.setBlockState(pos, FluidsCore.FRESH_WATER.get().getBlock()
               .getDefaultState(), 2); // 1/200 chance of the packed ice turning into water.
           }
         }
-        event.setExtraLife(itemTemp == 0 ? lifespan : ConfigTFC.Devices.TEMPERATURE.ticksBeforeAttemptToCool); // Set lifespan accordingly
+        event.setExtraLife(itemTemp == 0 ? lifespan : ConfigTFC.Devices.HEAT.ticksBeforeAttemptToCool); // Set lifespan accordingly
         entityItem.setNoPickupDelay(); // For some reason when lifespan is added, pickup delay is reset, we disable this to make the experience seamless
       } else {
         event.setExtraLife(lifespan); // Sets the original lifespan, next time it expires it will be setDead
@@ -1069,8 +1070,8 @@ public final class CommonEventHandler {
     if (world.provider.getDimension() == 0 && !world.isRemote) {
       // Calendar Sync / Initialization
       CalendarWorldData data = CalendarWorldData.get(world);
-      CalendarTFC.INSTANCE.resetTo(data.getCalendar());
-      TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(CalendarTFC.INSTANCE));
+      Calendar.INSTANCE.resetTo(data.getCalendar());
+      TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(Calendar.INSTANCE));
     }
 
     if (ConfigTFC.General.OVERRIDES.forceNoVanillaNaturalRegeneration) {
@@ -1131,7 +1132,7 @@ public final class CommonEventHandler {
       }
       if (hugeHeavyCount >= 2) {
         // Player is barely able to move
-        event.player.addPotionEffect(new PotionEffect(PotionEffectsTFC.OVERBURDENED, 25, 125, false, false));
+        event.player.addPotionEffect(new PotionEffect(EffectsCore.OVERBURDENED.get(), 25, 125, false, false));
       }
     }
 
@@ -1356,7 +1357,7 @@ public final class CommonEventHandler {
     if (!world.isRaining()) {return false;}
 
     Biome biome = world.getBiomeForCoordsBody(pos);
-    if (biome.canRain() && !biome.getEnableSnow() && (ClimateTFC.getActualTemp(pos) > 0)) {
+    if (biome.canRain() && !biome.getEnableSnow() && (Climate.getActualTemp(pos) > 0)) {
       for (int y = pos.getY() + 1; y < world.getHeight(); y++) {
         BlockPos up = new BlockPos(pos.getX(), y, pos.getZ());
         if (!world.isAirBlock(up)) {return false;}

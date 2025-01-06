@@ -1,0 +1,75 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/crowngrass/shortest/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/shortest/3",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/shortest/4",
+          "weight": 3
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/crowngrass/shorter/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/shorter/3",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/shorter/4",
+          "weight": 4
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/crowngrass/short/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/short/3",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/short/4",
+          "weight": 4
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/crowngrass/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/3",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/crowngrass/4",
+          "weight": 5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/single"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "0",
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/upper/0"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1",
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/upper/1"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "2",
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/upper/2"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "3",
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/upper/3"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "4",
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/upper/4"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "0",
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/lower/0"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1",
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/lower/1"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "2",
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/lower/2"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "3",
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/lower/3"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "4",
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/foxglove/lower/4"
+        }
+      ]
+    }
+  ]
+}

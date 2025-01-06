@@ -1,5 +1,7 @@
 package tfcflorae.world.worldgen.cave;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -11,7 +13,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
@@ -29,10 +30,10 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
   private final WorldGenCaveCreepingVines undergroundCreepingVines;
   //private final WorldGenUnderground undergroundPlant = new WorldGenUnderground();
 
-  private float fungiUndergroundCount = ConfigTFCF.General.WORLD.fungiUndergroundCount;
-  private float hangingVinesUndergroundCount = ConfigTFCF.General.WORLD.hangingVinesUndergroundCount;
-  private float creepingVinesUndergroundCount = ConfigTFCF.General.WORLD.creepingVinesUndergroundCount;
-  private float creepingUndergroundCount = ConfigTFCF.General.WORLD.creepingUndergroundCount;
+  private final float fungiUndergroundCount = ConfigTFCF.General.WORLD.fungiUndergroundCount;
+  private final float hangingVinesUndergroundCount = ConfigTFCF.General.WORLD.hangingVinesUndergroundCount;
+  private final float creepingVinesUndergroundCount = ConfigTFCF.General.WORLD.creepingVinesUndergroundCount;
+  private final float creepingUndergroundCount = ConfigTFCF.General.WORLD.creepingUndergroundCount;
 
   public WorldGeneratorUnderground() {
     undergroundMushrooms = new WorldGenCaveMushrooms();
@@ -51,7 +52,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
 
     ChunkDataTFC data = ChunkDataTFC.get(world, chunkPos);
     Biome b = world.getBiome(chunkPos);
-    final float avgTemperature = ClimateTFC.getAvgTemp(world, chunkPos);
+    final float avgTemperature = Climate.getAvgTemp(world, chunkPos);
     final float rainfall = ChunkDataTFC.getRainfall(world, chunkPos);
     final float floraDensity = data.getFloraDensity();
     final float floraDiversity = data.getFloraDiversity();

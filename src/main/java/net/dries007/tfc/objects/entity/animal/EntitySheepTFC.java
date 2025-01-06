@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -43,8 +46,6 @@ import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import javax.annotation.Nonnull;
@@ -78,9 +79,9 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.PLAINS)) {
+        (biomeType == BiomeUtils.BiomeType.PLAINS)) {
       return ConfigTFC.Animals.SHEEP.rarity;
     }
     return 0;
@@ -105,7 +106,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
   public void birthChildren() {
     int numberOfChildren = ConfigTFC.Animals.SHEEP.babies;
     for (int i = 0; i < numberOfChildren; i++) {
-      EntitySheepTFC baby = new EntitySheepTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) CalendarTFC.PLAYER_TIME.getTotalDays(), getDyeColor());
+      EntitySheepTFC baby = new EntitySheepTFC(world, Gender.valueOf(Constants.RNG.nextBoolean()), (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(getFamiliarity() < 0.9F ? getFamiliarity() / 2.0F : getFamiliarity() * 0.9F);
       world.spawnEntity(baby);
@@ -217,12 +218,12 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
 
   @Override
   public void setProductsCooldown() {
-    setShearedTick(CalendarTFC.PLAYER_TIME.getTicks());
+    setShearedTick(Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override
   public long getProductsCooldown() {
-    return Math.max(0, ConfigTFC.Animals.SHEEP.woolTicks + getShearedTick() - CalendarTFC.PLAYER_TIME.getTicks());
+    return Math.max(0, ConfigTFC.Animals.SHEEP.woolTicks + getShearedTick() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

@@ -15,7 +15,7 @@ import lyeoj.tfcthings.capability.CapabilitySharpness;
 import lyeoj.tfcthings.capability.TFCThingsCapabilityHandler;
 import lyeoj.tfcthings.init.TFCThingsEntities;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 public class CommonProxy {
 
@@ -23,7 +23,7 @@ public class CommonProxy {
     MinecraftForge.EVENT_BUS.register(new TFCThingsCapabilityHandler());
     CapabilitySharpness.setup();
     TFCThingsEntities.registerEntities();
-    CalendarTFC.BIRTHDAYS.put("OCTOBER4", "Lyeoj's Birthday");
+    Calendar.BIRTHDAYS.put("OCTOBER4", "Lyeoj's Birthday");
     for (int i = 0; i < ConfigTFCThings.Misc.BIRTHDAYS.dayList.length; i++) {
       ConfigTFCThings.addBirthday(ConfigTFCThings.Misc.BIRTHDAYS.dayList[i]);
     }

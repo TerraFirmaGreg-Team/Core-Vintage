@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:rock/slab/half",
+    "textures": {
+      "all": "tfg:blocks/rock/bricks/laterite"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "half": {
+      "bottom": {
+        "model": "tfg:rock/slab/half"
+      },
+      "top": {
+        "model": "tfg:rock/slab/upper"
+      }
+    }
+  }
+}

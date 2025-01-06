@@ -21,7 +21,7 @@ import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -44,11 +44,11 @@ public class TENestBox extends TEInventory implements ITickable, IItemHandlerSid
         ItemStack stack = inventory.getStackInSlot(i);
         if (!stack.isEmpty()) {
           IEgg cap = stack.getCapability(CapabilityEgg.CAPABILITY, null);
-          if (cap != null && cap.getHatchDay() > 0 && cap.getHatchDay() <= CalendarTFC.PLAYER_TIME.getTotalDays()) {
+          if (cap != null && cap.getHatchDay() > 0 && cap.getHatchDay() <= Calendar.PLAYER_TIME.getTotalDays()) {
             Entity baby = cap.getEntity(this.world);
             if (baby != null) {
               if (baby instanceof IAnimalTFC) {
-                ((IAnimalTFC) baby).setBirthDay((int) CalendarTFC.PLAYER_TIME.getTotalDays());
+                ((IAnimalTFC) baby).setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
               }
               baby.setLocationAndAngles(this.pos.getX(), this.pos.getY() + 0.5D, this.pos.getZ(), 0.0F, 0.0F);
               world.spawnEntity(baby);

@@ -6,6 +6,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -37,9 +38,8 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -143,11 +143,11 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     if (!world.isRemote) {
       TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
       if (te != null) {
-        float temp = ClimateTFC.getActualTemp(world, pos);
+        float temp = Climate.getActualTemp(world, pos);
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
         long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
         if (hours > (bush.getGrowthTime() * ConfigTFC.General.FOOD.berryBushGrowthTimeModifier) && bush.isValidForGrowth(temp, rainfall)) {
-          if (bush.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+          if (bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
             //Fruiting
             world.setBlockState(pos, world.getBlockState(pos).withProperty(FRUITING, true));
           }
@@ -252,12 +252,12 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    float temp = ClimateTFC.getActualTemp(world, pos);
+    float temp = Climate.getActualTemp(world, pos);
     float rainfall = ChunkDataTFC.getRainfall(world, pos);
     boolean canGrow = bush.isValidForGrowth(temp, rainfall);
     if (state.getValue(FRUITING)) {
       return GrowthStatus.FULLY_GROWN;
-    } else if (canGrow && bush.isHarvestMonth(CalendarTFC.CALENDAR_TIME.getMonthOfYear())) {
+    } else if (canGrow && bush.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
       return GrowthStatus.GROWING;
     }
     return canGrow ? GrowthStatus.CAN_GROW : GrowthStatus.NOT_GROWING;

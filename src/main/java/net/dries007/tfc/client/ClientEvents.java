@@ -5,6 +5,11 @@
 
 package net.dries007.tfc.client;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -38,8 +43,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -131,10 +134,8 @@ import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateHelper;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -143,10 +144,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.minecraft.util.text.TextFormatting.AQUA;
 import static net.minecraft.util.text.TextFormatting.GRAY;
 import static net.minecraft.util.text.TextFormatting.WHITE;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFC)
 public class ClientEvents {
@@ -200,8 +201,7 @@ public class ClientEvents {
   @SideOnly(Side.CLIENT)
   @SubscribeEvent(priority = EventPriority.HIGH)
   public static void onInitGuiPre(GuiScreenEvent.InitGuiEvent.Pre event) {
-    if (ConfigTFC.General.OVERRIDES.forceTFCWorldType && event.getGui() instanceof GuiCreateWorld) {
-      GuiCreateWorld gui = ((GuiCreateWorld) event.getGui());
+    if (ConfigTFC.General.OVERRIDES.forceTFCWorldType && event.getGui() instanceof GuiCreateWorld gui) {
       // Only change if default is selected, because coming back from customisation, this will be set already.
       if (gui.selectedIndex == WorldType.DEFAULT.getId()) {
         gui.selectedIndex = TerraFirmaCraft.getWorldType().getId();
@@ -228,8 +228,7 @@ public class ClientEvents {
   @SubscribeEvent
   public static void onGuiButtonPressPre(GuiScreenEvent.ActionPerformedEvent.Pre event) {
     if (event.getGui() instanceof GuiInventory) {
-      if (event.getButton() instanceof GuiButtonPlayerInventoryTab) {
-        GuiButtonPlayerInventoryTab button = (GuiButtonPlayerInventoryTab) event.getButton();
+      if (event.getButton() instanceof GuiButtonPlayerInventoryTab button) {
         // This is to prevent the button from immediately firing after moving (enabled is set to false then)
         if (button.isActive() && button.enabled) {
           TerraFirmaCraft.getNetwork().sendToServer(new PacketSwitchPlayerInventoryTab(button.getGuiType()));
@@ -270,13 +269,13 @@ public class ClientEvents {
 
         if (chunkDataValid) {
           list.add(String.format("%sRegion: %s%.1f\u00b0C%s Avg: %s%.1f\u00b0C%s Min: %s%.1f\u00b0C%s Max: %s%.1f\u00b0C",
-                                 GRAY, WHITE, data.getRegionalTemp(), GRAY,
-                                 WHITE, data.getAverageTemp(), GRAY,
-                                 WHITE, ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JANUARY.getTemperatureModifier(), blockpos.getZ()), GRAY,
-                                 WHITE, ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(), blockpos.getZ())));
+            GRAY, WHITE, data.getRegionalTemp(), GRAY,
+            WHITE, data.getAverageTemp(), GRAY,
+            WHITE, ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JANUARY.getTemperatureModifier(), blockpos.getZ()), GRAY,
+            WHITE, ClimateHelper.monthFactor(data.getRegionalTemp(), Month.JULY.getTemperatureModifier(), blockpos.getZ())));
           list.add(String.format("%sTemperature: %s%.1f\u00b0C Daily: %s%.1f\u00b0C",
-                                 GRAY, WHITE, ClimateTFC.getMonthlyTemp(blockpos),
-                                 WHITE, ClimateTFC.getActualTemp(blockpos)));
+            GRAY, WHITE, Climate.getMonthlyTemp(blockpos),
+            WHITE, Climate.getActualTemp(blockpos)));
           list.add(GRAY + "Rainfall: " + WHITE + data.getRainfall());
           list.add(GRAY + "Spawn Protection = " + WHITE + data.isSpawnProtected());
         } else if (mc.world.provider.getDimension() == 0) {
@@ -284,10 +283,10 @@ public class ClientEvents {
         }
 
         // Always add calendar info
-        list.add(I18n.format("tfc.tooltip.date", CalendarTFC.CALENDAR_TIME.getTimeAndDate()));
+        list.add(I18n.format("tfc.tooltip.date", Calendar.CALENDAR_TIME.getTimeAndDate()));
 
         if (ConfigTFC.General.DEBUG.enable) {
-          list.add(I18n.format("tfc.tooltip.debug_times", CalendarTFC.PLAYER_TIME.getTicks(), CalendarTFC.CALENDAR_TIME.getTicks()));
+          list.add(I18n.format("tfc.tooltip.debug_times", Calendar.PLAYER_TIME.getTicks(), Calendar.CALENDAR_TIME.getTicks()));
 
           if (chunkDataValid) {
             list.add(GRAY + "Flora Density: " + WHITE + data.getFloraDensity());
@@ -316,7 +315,7 @@ public class ClientEvents {
       if (size != null) {
         size.addSizeInfo(stack, tt);
       }
-      IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat heat = stack.getCapability(CapabilityHeat.CAPABILITY, null);
       if (heat != null) {
         heat.addHeatInfo(stack, tt);
       }

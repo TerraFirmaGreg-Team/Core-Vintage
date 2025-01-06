@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.world.classic.worldgen;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -16,8 +18,7 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
@@ -44,7 +45,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
         BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
         Collections.shuffle(CROPS);
-        float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
+        float temperature = Climate.getAvgTemp(world, chunkBlockPos);
         float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
 
         ICrop crop = CROPS.stream().filter(x -> x.isValidConditions(temperature, rainfall)).findFirst().orElse(null);
@@ -56,7 +57,7 @@ public class WorldGenWildCrops implements IWorldGenerator {
             final int z = (chunkZ << 4) + random.nextInt(16) + 8;
             final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
             if (isValidPosition(world, pos)) {
-              double yearProgress = CalendarTFC.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
+              double yearProgress = Calendar.CALENDAR_TIME.getMonthOfYear().ordinal() / 11.0;
               int maxStage = crop.getMaxStage();
               int growth = (int) (yearProgress * maxStage) + 3 - random.nextInt(2);
               if (growth > maxStage) {growth = maxStage;}

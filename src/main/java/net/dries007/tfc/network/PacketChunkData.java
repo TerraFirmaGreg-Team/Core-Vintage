@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -16,7 +18,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
@@ -71,7 +72,7 @@ public class PacketChunkData implements IMessage {
           }
 
           // Update climate cache
-          ClimateTFC.update(chunk.getPos(), message.regionalTemp, message.rainfall);
+          Climate.update(chunk.getPos(), message.regionalTemp, message.rainfall);
         });
       }
       return null;

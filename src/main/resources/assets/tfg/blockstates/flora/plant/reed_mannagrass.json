@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/reed_mannagrass/0"
+        }
+      ]
+    }
+  ]
+}

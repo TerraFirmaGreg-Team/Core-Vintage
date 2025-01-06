@@ -1,0 +1,70 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/calendula/0"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/calendula/1"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/calendula/2"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/calendula/3"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "4"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/calendula/2"
+        }, {
+          "model": "tfg:flora/plant/calendula/3"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "5"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/calendula/4"
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "6"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/calendula/5"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0",
+        "age": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/prairie_junegrass/shortest/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/shortest/2",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/prairie_junegrass/shorter/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/shorter/2",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/prairie_junegrass/short/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/short/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/short/2",
+          "weight": 2
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/big/short",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/prairie_junegrass/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/big/base",
+          "weight": 5
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/prairie_junegrass/flowering/shortest"
+      }
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/prairie_junegrass/flowering/shorter"
+      }
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/prairie_junegrass/flowering/short",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/big/flowering_short",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/prairie_junegrass/flowering/base",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/prairie_junegrass/big/flowering",
+          "weight": 5
+        }
+      ]
+    }
+  ]
+}

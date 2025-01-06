@@ -1,0 +1,50 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/japanese_pieris/single/0",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/japanese_pieris/0",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/japanese_pieris/single/0",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/japanese_pieris/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/japanese_pieris/single/1",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/japanese_pieris/1",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/japanese_pieris/single/1",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/japanese_pieris/1",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

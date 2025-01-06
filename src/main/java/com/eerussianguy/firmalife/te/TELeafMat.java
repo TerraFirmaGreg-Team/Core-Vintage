@@ -11,7 +11,7 @@ import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.util.HelpersFL;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -36,7 +36,7 @@ public class TELeafMat extends TEInventory implements ITickable {
   @Override
   public void update() {
     if (!world.isRemote) {
-      if ((int) (CalendarTFC.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
+      if ((int) (Calendar.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
         if (recipeExists()) {
           dry();
         }
@@ -75,7 +75,7 @@ public class TELeafMat extends TEInventory implements ITickable {
 
   public void start() {
     if (recipeExists()) {
-      startTick = CalendarTFC.PLAYER_TIME.getTicks();
+      startTick = Calendar.PLAYER_TIME.getTicks();
       setDuration();
     } else {
       Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
@@ -123,6 +123,6 @@ public class TELeafMat extends TEInventory implements ITickable {
   }
 
   public long getTicksRemaining() {
-    return tickGoal - (CalendarTFC.PLAYER_TIME.getTicks() - startTick);
+    return tickGoal - (Calendar.PLAYER_TIME.getTicks() - startTick);
   }
 }

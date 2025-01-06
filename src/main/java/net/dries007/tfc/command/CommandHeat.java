@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.command;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -13,9 +16,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -41,10 +41,9 @@ public class CommandHeat extends CommandBase {
     double heat = parseDouble(args[0], 0);
 
     Entity entity = sender.getCommandSenderEntity();
-    if (entity instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) entity;
+    if (entity instanceof EntityPlayer player) {
       ItemStack stack = player.getHeldItemMainhand();
-      IItemHeat cap = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat cap = stack.getCapability(CapabilityHeat.CAPABILITY, null);
       if (cap == null) {throw new WrongUsageException("tfc.command.heat.failed.missingcap");}
       cap.setTemperature((float) heat);
     } else {

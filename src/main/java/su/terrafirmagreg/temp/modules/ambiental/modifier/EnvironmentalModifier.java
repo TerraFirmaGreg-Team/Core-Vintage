@@ -1,9 +1,12 @@
 package su.terrafirmagreg.temp.modules.ambiental.modifier;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 import su.terrafirmagreg.temp.config.TFGConfig;
 import su.terrafirmagreg.temp.modules.ambiental.api.AmbientalRegistry;
 import su.terrafirmagreg.temp.modules.ambiental.api.IEnvironmentalTemperatureProvider;
-import su.terrafirmagreg.temp.modules.ambiental.effects.TempEffect;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,10 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.biome.Biome;
 
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
 
 import java.util.Optional;
 
@@ -28,8 +28,8 @@ public class EnvironmentalModifier {
   }
 
   public static float getEnvironmentTemperature(EntityPlayer player) {
-    float avg = ClimateTFC.getAvgTemp(player.world, player.getPosition());
-    float actual = ClimateTFC.getActualTemp(player.world, player.getPosition());
+    float avg = Climate.getAvgTemp(player.world, player.getPosition());
+    float actual = Climate.getActualTemp(player.world, player.getPosition());
     if (TFGConfig.GENERAL.harsherTemperateAreas) {
       float diff = actual - AVERAGE;
       float sign = Math.signum(diff);
@@ -42,7 +42,7 @@ public class EnvironmentalModifier {
   }
 
   public static float getEnvironmentHumidity(EntityPlayer player) {
-    return ClimateTFC.getRainfall(player.world, player.getPosition()) / 3000;
+    return Climate.getRainfall(player.world, player.getPosition()) / 3000;
   }
 
   public static Optional<TempModifier> handleFire(EntityPlayer player) {
@@ -59,19 +59,20 @@ public class EnvironmentalModifier {
       return TempModifier.defined("afternoon", 4f, 0);
     } else if (dayTicks < 18000) {
       return TempModifier.defined("evening", 1f, 0);
-    } else {return TempModifier.defined("night", 1f, 0);}
+    } else {
+      return TempModifier.defined("night", 1f, 0);
+    }
   }
 
   public static Optional<TempModifier> handleWater(EntityPlayer player) {
     if (player.isInWater()) {
       BlockPos pos = player.getPosition();
       IBlockState state = player.world.getBlockState(pos);
-      if (state.getBlock() == FluidsTFC.HOT_WATER.get().getBlock()) {
+      if (state.getBlock() == FluidsCore.HOT_WATER.get().getBlock()) {
         return TempModifier.defined("in_hot_water", 5f, 6f);
       } else if (state.getBlock() == Blocks.LAVA) {
         return TempModifier.defined("in_lava", 10f, 5f);
-      } else if (state.getBlock() == FluidsTFC.SALT_WATER.get().getBlock() && player.world.getBiome(pos)
-                                                                                .getTempCategory() == Biome.TempCategory.OCEAN) {
+      } else if (state.getBlock() == FluidsCore.SALT_WATER.get().getBlock() && player.world.getBiome(pos).getTempCategory() == Biome.TempCategory.OCEAN) {
         return TempModifier.defined("in_ocean_water", -8f, 6f);
       } else {
         return TempModifier.defined("in_water", -5f, 6f);
@@ -169,10 +170,10 @@ public class EnvironmentalModifier {
   }
 
   public static Optional<TempModifier> handlePotionEffects(EntityPlayer player) {
-    if (player.isPotionActive(TempEffect.COOL)) {
+    if (player.isPotionActive(EffectsCore.HYPOTHERMIA.get())) {
       return TempModifier.defined("cooling_effect", -10F, 0);
     }
-    if (player.isPotionActive(TempEffect.WARM)) {
+    if (player.isPotionActive(EffectsCore.HYPERTHERMIA.get())) {
       return TempModifier.defined("heating_effect", 10F, 0);
     }
     return TempModifier.none();

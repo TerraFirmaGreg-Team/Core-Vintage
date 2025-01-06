@@ -1,0 +1,67 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sea_oats/single/0"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "single",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sea_oats/single/1"
+        }
+      ]
+    }, {
+      "when": {
+        "part": "single",
+        "stage": "2|3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sea_oats/single/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/sea_oats/single/2",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower",
+        "stage": "2|3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sea_oats/lower/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/sea_oats/lower/3",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper",
+        "stage": "2|3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sea_oats/upper/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/sea_oats/upper/3",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

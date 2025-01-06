@@ -1,0 +1,63 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/bunch_grass_floating/0",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/bunch_grass_floating/1",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/bunch_grass_floating/1",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/bunch_grass_floating/0",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/bunch_grass_floating/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/bunch_grass_floating/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/bunch_grass_floating/tall/0",
+          "weight": 2
+        }, {
+          "model": "tfg:flora/plant/bunch_grass_floating/tall/1",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/bunch_grass_floating/tall/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/bunch_grass_floating/tall/1",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

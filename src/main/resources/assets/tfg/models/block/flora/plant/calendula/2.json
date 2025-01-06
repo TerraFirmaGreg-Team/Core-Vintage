@@ -1,0 +1,8 @@
+{
+  "parent": "tfg:block/cross",
+  "textures": {
+    "cross": "tfg:blocks/flora/plant/calendula/2",
+    "particle": "tfg:blocks/flora/plant/calendula/2"
+  }
+}
+

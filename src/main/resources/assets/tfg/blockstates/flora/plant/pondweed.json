@@ -1,0 +1,57 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "single"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/pondweed/upper/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/pondweed/upper/1",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "part": "lower"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/pondweed/lower/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/pondweed/lower/1",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "part": "middle"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/pondweed/lower/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/pondweed/lower/1",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "part": "upper"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/pondweed/upper/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/pondweed/upper/1",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

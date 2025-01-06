@@ -1,0 +1,26 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:rock/bricks",
+    "uvlock": true,
+    "textures": {
+      "all": "tfg:blocks/rock/bricks/quartzite"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "mossy": {
+      "true": {
+        "textures": {
+          "overlay": "tfg:blocks/rock/overlay/mossy/bricks"
+        }
+      },
+      "false": {}
+    }
+  }
+}

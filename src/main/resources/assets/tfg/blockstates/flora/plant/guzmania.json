@@ -1,0 +1,277 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0",
+        "facing": "up"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/standing/0"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1",
+        "facing": "up"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/standing/1"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2",
+        "facing": "up"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/standing/1"
+        }, {
+          "model": "tfg:flora/plant/guzmania/standing/2"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3",
+        "facing": "up"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/standing/2"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "0",
+        "facing": "down"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/standing/0",
+          "x": 180
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1",
+        "facing": "down"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/standing/1",
+          "x": 180
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2",
+        "facing": "down"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/standing/1",
+          "x": 180
+        }, {
+          "model": "tfg:flora/plant/guzmania/standing/2",
+          "x": 180
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3",
+        "facing": "down"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/standing/2",
+          "x": 180
+        }
+      ]
+    }, {
+      "when": {
+        "age": "0",
+        "facing": "east"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/0"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1",
+        "facing": "east"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/1"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2",
+        "facing": "east"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/1"
+        }, {
+          "model": "tfg:flora/plant/guzmania/2"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3",
+        "facing": "east"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/2"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "0",
+        "facing": "south"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/0",
+          "y": 90
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1",
+        "facing": "south"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/1",
+          "y": 90
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2",
+        "facing": "south"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/1",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/guzmania/2",
+          "y": 90
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3",
+        "facing": "south"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/2",
+          "y": 90
+        }
+      ]
+    }, {
+      "when": {
+        "age": "0",
+        "facing": "west"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/0",
+          "y": 180
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1",
+        "facing": "west"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/1",
+          "y": 180
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2",
+        "facing": "west"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/1",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/guzmania/2",
+          "y": 180
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3",
+        "facing": "west"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/2",
+          "y": 180
+        }
+      ]
+    }, {
+      "when": {
+        "age": "0",
+        "facing": "north"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/0",
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1",
+        "facing": "north"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/1",
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2",
+        "facing": "north"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/1",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/guzmania/2",
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3",
+        "facing": "north"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/guzmania/2",
+          "y": 270
+        }
+      ]
+    }
+  ]
+}

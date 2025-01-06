@@ -1,0 +1,46 @@
+{
+  "parent": "block/wall_post",
+  "textures": {
+    "particle": "#all",
+    "wall": "#all"
+  },
+  "elements": [
+    {
+      "from": [
+        4, 0, 4
+      ],
+      "to": [
+        12, 16, 12
+      ],
+      "faces": {
+        "down": {
+          "texture": "#wall",
+          "cullface": "down",
+          "tintindex": 1
+        },
+        "up": {
+          "texture": "#wall",
+          "cullface": "up",
+          "tintindex": 1
+        },
+        "north": {
+          "texture": "#wall",
+          "tintindex": 1
+        },
+        "south": {
+          "texture": "#wall",
+          "tintindex": 1
+        },
+        "west": {
+          "texture": "#wall",
+          "tintindex": 1
+        },
+        "east": {
+          "texture": "#wall",
+          "tintindex": 1
+        }
+      },
+      "__comment": "Center post"
+    }
+  ]
+}

@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,7 +34,6 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
-import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import javax.annotation.Nullable;
@@ -46,7 +47,7 @@ public class EntityJackalTFC extends EntityCoyoteTFC implements IPredator {
   @SuppressWarnings("unused")
   public EntityJackalTFC(World worldIn) {
     this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
-         getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+      getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityJackalTFC(World worldIn, Gender gender, int birthDay) {
@@ -56,9 +57,9 @@ public class EntityJackalTFC extends EntityCoyoteTFC implements IPredator {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.DESERT)) {
+        (biomeType == BiomeUtils.BiomeType.DESERT)) {
       return ConfigTFC.Animals.JACKAL.rarity;
     }
     return 0;

@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,8 +32,7 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -152,7 +153,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     super.updateTick(worldIn, pos, state, random);
     if (!worldIn.isRemote) {
       // Attempt to grow
-      float temp = ClimateTFC.getActualTemp(worldIn, pos);
+      float temp = Climate.getActualTemp(worldIn, pos);
       float rainfall = ChunkDataTFC.getRainfall(worldIn, pos);
       TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
       if (te != null) {
@@ -319,9 +320,9 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
     //The rest is shuffled
     List<BlockPos> positions = Arrays.asList(branchPos.offset(branchFacing.rotateY()),
-                                             branchPos.offset(branchFacing.rotateY().getOpposite()),
-                                             branchPos.offset(branchFacing).offset(branchFacing.rotateY()),
-                                             branchPos.offset(branchFacing).offset(branchFacing.rotateY().getOpposite())
+      branchPos.offset(branchFacing.rotateY().getOpposite()),
+      branchPos.offset(branchFacing).offset(branchFacing.rotateY()),
+      branchPos.offset(branchFacing).offset(branchFacing.rotateY().getOpposite())
     );
     Collections.shuffle(positions);
     for (BlockPos pos : positions) {
@@ -380,7 +381,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    float temp = ClimateTFC.getActualTemp(world, pos);
+    float temp = Climate.getActualTemp(world, pos);
     float rainfall = ChunkDataTFC.getRainfall(world, pos);
     boolean canGrow = tree.isValidForGrowth(temp, rainfall);
     if (canGrow) {

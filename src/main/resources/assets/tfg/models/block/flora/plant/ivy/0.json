@@ -1,0 +1,26 @@
+{
+  "credit": "Made with Blockbench",
+  "textures": {
+    "0": "tfg:blocks/flora/plant/ivy/ivy",
+    "particle": "tfg:blocks/flora/plant/ivy/ivy"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0.5, 0 ],
+      "to": [ 16, 0.5, 16 ],
+      "faces": {
+        "up": {
+          "uv": [ 0, 0, 16, 16 ],
+          "texture": "#0",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [ 0, 0, 16, 16 ],
+          "texture": "#0",
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}
+

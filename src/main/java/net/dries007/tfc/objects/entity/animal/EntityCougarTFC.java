@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.util.BiomeUtils;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -29,7 +31,6 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIAttackMeleeTFC;
 import net.dries007.tfc.objects.entity.ai.EntityAIWanderHuntArea;
-import net.dries007.tfc.util.climate.BiomeHelper;
 import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import javax.annotation.Nullable;
@@ -43,7 +44,7 @@ public class EntityCougarTFC extends EntityPantherTFC implements IPredator {
   @SuppressWarnings("unused")
   public EntityCougarTFC(World worldIn) {
     this(worldIn, Gender.valueOf(Constants.RNG.nextBoolean()),
-         getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+      getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityCougarTFC(World worldIn, Gender gender, int birthDay) {
@@ -53,9 +54,9 @@ public class EntityCougarTFC extends EntityPantherTFC implements IPredator {
 
   @Override
   public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
-    BiomeHelper.BiomeType biomeType = BiomeHelper.getBiomeType(temperature, rainfall, floraDensity);
+    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomesTFC.isOceanicBiome(biome) && !BiomesTFC.isBeachBiome(biome) &&
-        (biomeType == BiomeHelper.BiomeType.TEMPERATE_FOREST)) {
+        (biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST)) {
       return ConfigTFC.Animals.COUGAR.rarity;
     }
     return 0;

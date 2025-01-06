@@ -1,0 +1,33 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/orchard_grass/shortest"
+      }
+    }, {
+      "when": {
+        "age": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/orchard_grass/shorter"
+      }
+    }, {
+      "when": {
+        "age": "2"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/orchard_grass/short"
+      }
+    }, {
+      "when": {
+        "age": "3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/orchard_grass/base"
+      }
+    }
+  ]
+}

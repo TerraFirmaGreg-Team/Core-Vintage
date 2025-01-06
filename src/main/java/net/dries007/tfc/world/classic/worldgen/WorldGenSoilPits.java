@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.world.classic.worldgen;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -20,7 +22,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -78,10 +79,10 @@ public class WorldGenSoilPits implements IWorldGenerator {
             if (plant.getIsClayMarking()) {
               BlockPlantTFC plantBlock = BlockPlantTFC.get(plant);
               IBlockState state = plantBlock.getDefaultState();
-              int plantAge = plant.getAgeForWorldgen(rng, ClimateTFC.getActualTemp(world, pos));
+              int plantAge = plant.getAgeForWorldgen(rng, Climate.getActualTemp(world, pos));
 
               if (!world.provider.isNether() && !world.isOutsideBuildHeight(pos) &&
-                  plant.isValidLocation(ClimateTFC.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), world.getLightFor(EnumSkyBlock.SKY, pos)) &&
+                  plant.isValidLocation(Climate.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), world.getLightFor(EnumSkyBlock.SKY, pos)) &&
                   world.isAirBlock(pos) &&
                   plantBlock.canBlockStay(world, pos, state)) {
                 world.setBlockState(pos, state.withProperty(BlockPlantTFC.AGE, plantAge), 2);

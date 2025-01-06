@@ -12,7 +12,7 @@ import com.eerussianguy.firmalife.recipe.DryingRecipe;
 import com.eerussianguy.firmalife.te.TELeafMat;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

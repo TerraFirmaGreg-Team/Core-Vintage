@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,8 +24,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
@@ -230,9 +231,9 @@ public class TEAnvilTFC extends TEInventory {
           //Produce output
           for (ItemStack output : completedRecipe.getOutput(input)) {
             if (!output.isEmpty()) {
-              IItemHeat outputCap = output.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
-              if (outputCap != null && cap instanceof IItemHeat) {
-                outputCap.setTemperature(((IItemHeat) cap).getTemperature());
+              ICapabilityHeat outputCap = output.getCapability(CapabilityHeat.CAPABILITY, null);
+              if (outputCap != null && cap instanceof ICapabilityHeat) {
+                outputCap.setTemperature(((ICapabilityHeat) cap).getTemperature());
               }
               if (skill != null && completedRecipe.getSkillBonusType() != null) {
                 SmithingSkill.applySkillBonus(skill, output, completedRecipe.getSkillBonusType());
@@ -291,7 +292,7 @@ public class TEAnvilTFC extends TEInventory {
       if (fluxStack.isEmpty()) {
         // No flux
         TerraFirmaCraft.getNetwork()
-                       .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, TFC + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
+          .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, TFC + ".tooltip.anvil_no_flux"), (EntityPlayerMP) player);
         return false;
       }
 
@@ -299,23 +300,23 @@ public class TEAnvilTFC extends TEInventory {
       IForgeable cap1 = input1.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
       IForgeable cap2 = input2.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
       if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
-        if (cap1 instanceof IItemHeat && cap2 instanceof IItemHeat) {
+        if (cap1 instanceof ICapabilityHeat && cap2 instanceof ICapabilityHeat) {
           TerraFirmaCraft.getNetwork()
-                         .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, TFC + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
+            .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, TFC + ".tooltip.anvil_too_cold"), (EntityPlayerMP) player);
         } else {
           TerraFirmaCraft.getNetwork()
-                         .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+            .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
         }
         return false;
       }
       ItemStack result = recipe.getOutput(player);
-      IItemHeat heatResult = result.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat heatResult = result.getCapability(CapabilityHeat.CAPABILITY, null);
       float resultTemperature = 0;
-      if (cap1 instanceof IItemHeat) {
-        resultTemperature = ((IItemHeat) cap1).getTemperature();
+      if (cap1 instanceof ICapabilityHeat) {
+        resultTemperature = ((ICapabilityHeat) cap1).getTemperature();
       }
-      if (cap2 instanceof IItemHeat) {
-        resultTemperature = Math.min(resultTemperature, ((IItemHeat) cap2).getTemperature());
+      if (cap2 instanceof ICapabilityHeat) {
+        resultTemperature = Math.min(resultTemperature, ((ICapabilityHeat) cap2).getTemperature());
       }
       if (heatResult != null) {
         // Every welding result should have this capability, but don't fail if it doesn't
@@ -333,7 +334,7 @@ public class TEAnvilTFC extends TEInventory {
 
     // For when there is both inputs but no recipe that matches
     TerraFirmaCraft.getNetwork()
-                   .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
+      .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.ANVIL, TFC + ".tooltip.anvil_not_weldable"), (EntityPlayerMP) player);
     return false;
   }
 

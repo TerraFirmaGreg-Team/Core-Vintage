@@ -5,6 +5,10 @@
 
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,9 +32,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -38,7 +39,7 @@ import net.dries007.tfc.objects.blocks.devices.BlockPitKiln;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -122,14 +123,14 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
       }
 
       // Check if complete
-      long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (CalendarTFC.PLAYER_TIME.getTicks() - litTick);
+      long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
       if (remainingTicks <= 0) {
         // Empty ingredients
         emptyFuelContents();
 
         // If we missed the point where remainingTicks == 0, then we need to transaction wrap this
         if (remainingTicks < 0) {
-          CalendarTFC.runTransaction(remainingTicks, 0, this::cookContents);
+          Calendar.runTransaction(remainingTicks, 0, this::cookContents);
         } else {
           cookContents();
         }
@@ -174,7 +175,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
     if (player.isSneaking()) {
       // This will search through the logItems, then the strawItems
       ItemStack dropStack = logItems.stream().filter(i -> !i.isEmpty()).findFirst()
-                                    .orElseGet(() -> strawItems.stream().filter(i -> !i.isEmpty()).findFirst().orElse(ItemStack.EMPTY));
+        .orElseGet(() -> strawItems.stream().filter(i -> !i.isEmpty()).findFirst().orElse(ItemStack.EMPTY));
       if (!dropStack.isEmpty()) {
         ItemHandlerHelper.giveItemToPlayer(player, dropStack.splitStack(1));
         updateBlock();
@@ -267,7 +268,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
           }
         }
         isLit = true;
-        litTick = CalendarTFC.PLAYER_TIME.getTicks();
+        litTick = Calendar.PLAYER_TIME.getTicks();
         updateBlock();
         world.setBlockState(pos, world.getBlockState(pos).withProperty(BlockPitKiln.LIT, true));
         world.setBlockState(above, Blocks.FIRE.getDefaultState());
@@ -295,7 +296,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
       ItemStack stack = inventory.getStackInSlot(i);
       ItemStack outputStack = ItemStack.EMPTY;
       // First, heat up the item to max temperature, so the recipe can properly check the temperature of the item
-      IItemHeat heat = stack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat heat = stack.getCapability(CapabilityHeat.CAPABILITY, null);
       if (heat != null) {
         heat.setTemperature(Heat.maxVisibleTemperature());
 
@@ -306,7 +307,7 @@ public class TEPitKiln extends TEPlacedItem implements ITickable {
         }
 
         // Heat up the output as well
-        IItemHeat outputHeat = outputStack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+        ICapabilityHeat outputHeat = outputStack.getCapability(CapabilityHeat.CAPABILITY, null);
         if (outputHeat != null) {
           outputHeat.setTemperature(Heat.maxVisibleTemperature());
         }

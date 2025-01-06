@@ -1,0 +1,27 @@
+{
+  "credit": "Made with Blockbench",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "tfg:blocks/flora/plant/jungle_vine/body",
+    "overlay": "tfg:blocks/flora/plant/jungle_vine/body"
+  },
+  "elements": [
+    {
+      "from": [ -0.05, 0.05, -0.05 ],
+      "to": [ 16.05, 0.05, 16.05 ],
+      "faces": {
+        "up": {
+          "uv": [ 0, 0, 16, 16 ],
+          "texture": "#overlay",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [ 0, 16, 16, 0 ],
+          "texture": "#overlay",
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}
+

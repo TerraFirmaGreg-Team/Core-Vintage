@@ -1,0 +1,85 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wild_barley/0"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wild_barley/1"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wild_barley/2"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3",
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wild_barley/3"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "0",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wild_barley/0_tuft"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wild_barley/1_tuft"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wild_barley/2_tuft"
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3",
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wild_barley/3_tuft"
+        }
+      ]
+    }
+  ]
+}

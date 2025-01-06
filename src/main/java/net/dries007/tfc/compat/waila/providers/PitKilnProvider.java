@@ -14,8 +14,8 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.te.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class PitKilnProvider implements IWailaBlock {
       boolean isLit = te.isLit();
 
       if (isLit) {
-        long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (CalendarTFC.PLAYER_TIME.getTicks() - te.getLitTick());
+        long remainingTicks = ConfigTFC.Devices.PIT_KILN.ticks - (Calendar.PLAYER_TIME.getTicks() - te.getLitTick());
         switch (ConfigTFC.Client.TOOLTIP.timeTooltipMode) {
           case NONE:
             break;

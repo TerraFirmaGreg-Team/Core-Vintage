@@ -15,8 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -45,7 +45,7 @@ public class CommandTimeTFC extends CommandBase {
           throw new WrongUsageException("tfc.command.timetfc.usage_expected_second_argument_set");
         } else if ("monthlength".equals(args[1])) {
           int newMonthLength = parseInt(args[2], 1);
-          CalendarTFC.INSTANCE.setMonthLength(newMonthLength);
+          Calendar.INSTANCE.setMonthLength(newMonthLength);
           notifyCommandListener(sender, this, "tfc.command.timetfc.set_month_length", newMonthLength);
         } else {
           int resultWorldTime;
@@ -60,7 +60,7 @@ public class CommandTimeTFC extends CommandBase {
             notifyCommandListener(sender, this, "tfc.command.timetfc.set_ticks", resultWorldTime);
           }
           setAllWorldTimes(server, resultWorldTime);
-          CalendarTFC.INSTANCE.setTimeFromWorldTime(resultWorldTime);
+          Calendar.INSTANCE.setTimeFromWorldTime(resultWorldTime);
         }
       } else if ("add".equals(args[0])) {
         if (args.length < 2) {
@@ -70,12 +70,12 @@ public class CommandTimeTFC extends CommandBase {
         switch (args[1]) {
           case "months":
             int months = parseInt(args[2], 0);
-            timeToAdd = ICalendar.TICKS_IN_DAY * CalendarTFC.CALENDAR_TIME.getDaysInMonth() * months;
+            timeToAdd = ICalendar.TICKS_IN_DAY * Calendar.CALENDAR_TIME.getDaysInMonth() * months;
             notifyCommandListener(sender, this, "tfc.command.timetfc.add_months", months, timeToAdd);
             break;
           case "years":
             int years = parseInt(args[2], 0);
-            timeToAdd = ICalendar.TICKS_IN_DAY * CalendarTFC.CALENDAR_TIME.getDaysInMonth() * 12 * years;
+            timeToAdd = ICalendar.TICKS_IN_DAY * Calendar.CALENDAR_TIME.getDaysInMonth() * 12 * years;
             notifyCommandListener(sender, this, "tfc.command.timetfc.add_years", years, timeToAdd);
             break;
           case "days":
@@ -87,8 +87,8 @@ public class CommandTimeTFC extends CommandBase {
             timeToAdd = parseInt(args[1], 0);
             notifyCommandListener(sender, this, "tfc.command.timetfc.add_ticks", timeToAdd);
         }
-        long newCalendarTime = CalendarTFC.CALENDAR_TIME.getTicks() + timeToAdd;
-        CalendarTFC.INSTANCE.setTimeFromCalendarTime(newCalendarTime);
+        long newCalendarTime = Calendar.CALENDAR_TIME.getTicks() + timeToAdd;
+        Calendar.INSTANCE.setTimeFromCalendarTime(newCalendarTime);
       } else if ("query".equals(args[0])) {
         if (args.length < 2) {
           throw new WrongUsageException("tfc.command.timetfc.usage_expected_second_argument_query");
@@ -97,7 +97,7 @@ public class CommandTimeTFC extends CommandBase {
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, daytime);
           notifyCommandListener(sender, this, "tfc.command.timetfc.query_daytime", daytime);
         } else if ("day".equals(args[1])) {
-          int day = (int) (CalendarTFC.CALENDAR_TIME.getTotalDays() % Integer.MAX_VALUE);
+          int day = (int) (Calendar.CALENDAR_TIME.getTotalDays() % Integer.MAX_VALUE);
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, day);
           notifyCommandListener(sender, this, "tfc.command.timetfc.query_day", day);
         } else if ("gametime".equals(args[1])) {
@@ -105,11 +105,11 @@ public class CommandTimeTFC extends CommandBase {
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, gameTime);
           notifyCommandListener(sender, this, "tfc.command.timetfc.query_gametime", gameTime);
         } else if ("playerticks".equals(args[1])) {
-          int gameTime = (int) (CalendarTFC.PLAYER_TIME.getTicks() % Integer.MAX_VALUE);
+          int gameTime = (int) (Calendar.PLAYER_TIME.getTicks() % Integer.MAX_VALUE);
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, gameTime);
           notifyCommandListener(sender, this, "tfc.command.timetfc.query_playerticks", gameTime);
         } else if ("calendarticks".equals(args[1])) {
-          int gameTime = (int) (CalendarTFC.CALENDAR_TIME.getTicks() % Integer.MAX_VALUE);
+          int gameTime = (int) (Calendar.CALENDAR_TIME.getTicks() % Integer.MAX_VALUE);
           sender.setCommandStat(CommandResultStats.Type.QUERY_RESULT, gameTime);
           notifyCommandListener(sender, this, "tfc.command.timetfc.query_calendarticks", gameTime);
         } else {

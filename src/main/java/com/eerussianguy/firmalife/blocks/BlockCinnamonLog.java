@@ -22,7 +22,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 
 import javax.annotation.Nonnull;
@@ -77,7 +77,7 @@ public class BlockCinnamonLog extends Block {
     super.updateTick(worldIn, pos, state, random);
     if (!worldIn.isRemote) {
       if (!state.getValue(GROWN)) {
-        Month month = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+        Month month = Calendar.CALENDAR_TIME.getMonthOfYear();
         if ((month == Month.APRIL || month == Month.MAY) && state.getValue(CAN_GROW) && hasGoodConditions(worldIn, pos, state)) {
           worldIn.setBlockState(pos, state.withProperty(GROWN, true).withProperty(CAN_GROW, false));
         } else if (!state.getValue(CAN_GROW) && hasGoodConditions(worldIn, pos, state) && !(month == Month.APRIL || month == Month.MAY)) {

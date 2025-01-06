@@ -5,6 +5,8 @@
 
 package tfcflorae.objects.blocks.plants.BlockPlant;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -35,10 +37,9 @@ import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.BlocksTFCF;
 
@@ -115,7 +116,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (!worldIn.isAreaLoaded(pos, 1)) {return;}
-    Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int currentStage = state.getValue(growthStageProperty);
     int expectedStage = plant.getStageForMonth(currentMonth);
     int currentTime = state.getValue(DAYPERIOD);
@@ -249,7 +250,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (!worldIn.isAreaLoaded(pos, 1)) {return;}
 
-    if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+    if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos))
         && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE);
 
@@ -259,7 +260,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
         }
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+    } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -278,7 +279,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
     IBlockState soil = worldIn.getBlockState(pos.down());
     if (state.getBlock() == this) {
       return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this)
-             && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+             && plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }
@@ -330,7 +331,7 @@ public class BlockPlantTFCF extends BlockBush implements IItemSize {
   }
 
   int getDayPeriod() {
-    return CalendarTFC.CALENDAR_TIME.getHourOfDay() / (ICalendar.HOURS_IN_DAY / 4);
+    return Calendar.CALENDAR_TIME.getHourOfDay() / (ICalendar.HOURS_IN_DAY / 4);
   }
 
   private boolean isValidSoil(IBlockState state) {

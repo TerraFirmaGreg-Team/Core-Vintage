@@ -1,0 +1,67 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sagebrush/0",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/1",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/2",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/3",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/4",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/5",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/sagebrush/6",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/sagebrush/7",
+          "weight": 1
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/sagebrush/0b",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/1b",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/2b",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/3b",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/4b",
+          "weight": 5
+        }, {
+          "model": "tfg:flora/plant/sagebrush/5b",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/sagebrush/6b",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/sagebrush/7b",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

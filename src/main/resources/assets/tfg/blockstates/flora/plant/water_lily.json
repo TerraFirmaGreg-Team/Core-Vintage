@@ -1,0 +1,312 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/water_lily/0",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "weight": 3,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "weight": 3,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "weight": 3,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 1,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 1,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 1,
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 3,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 3,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 3,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/water_lily/1",
+          "weight": 1,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/1",
+          "weight": 1,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/1",
+          "weight": 1,
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 9
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 9,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 9,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 9,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_purple",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_purple",
+          "weight": 1,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_purple",
+          "weight": 1,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_purple",
+          "weight": 1,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "white": 1
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "white": 1,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "white": 1,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "white": 1,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "yellow": 1
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "yellow": 1,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "yellow": 1,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "yellow": 1,
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 12
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 12,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 12,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 12,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/2",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/water_lily/2",
+          "weight": 3,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/2",
+          "weight": 3,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/2",
+          "weight": 3,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_purple",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_purple",
+          "weight": 1,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_purple",
+          "weight": 1,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_purple",
+          "weight": 1,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "white": 1
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "white": 1,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "white": 1,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "white": 1,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "yellow": 1
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "yellow": 1,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "yellow": 1,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/2_white",
+          "yellow": 1,
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "4"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/water_lily/base"
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/0"
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "5"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/water_lily/0"
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "y": 270
+        }
+      ]
+    }, {
+      "when": {
+        "stage": "6"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 3
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 3,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 3,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/base",
+          "weight": 3,
+          "y": 270
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "weight": 1,
+          "y": 90
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "weight": 1,
+          "y": 180
+        }, {
+          "model": "tfg:flora/plant/water_lily/0",
+          "weight": 1,
+          "y": 270
+        }
+      ]
+    }
+  ]
+}

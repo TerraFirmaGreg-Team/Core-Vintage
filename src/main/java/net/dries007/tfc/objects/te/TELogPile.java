@@ -23,7 +23,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogPile;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -91,14 +91,14 @@ public class TELogPile extends TEInventory implements ITickable {
   public void update() {
     if (!world.isRemote) {
       if (burning) {
-        if ((int) (CalendarTFC.PLAYER_TIME.getTicks() - startBurningTick) > ConfigTFC.Devices.CHARCOAL_PIT.ticks) {
+        if ((int) (Calendar.PLAYER_TIME.getTicks() - startBurningTick) > ConfigTFC.Devices.CHARCOAL_PIT.ticks) {
           // Attempt to turn this log pile into charcoal
           createCharcoal();
         }
       } else {
         if (world.getBlockState(pos.up()).getBlock() == Blocks.FIRE) {
           burning = true;
-          startBurningTick = CalendarTFC.PLAYER_TIME.getTicks();
+          startBurningTick = Calendar.PLAYER_TIME.getTicks();
         }
       }
     }
@@ -159,7 +159,7 @@ public class TELogPile extends TEInventory implements ITickable {
 
   public void light() {
     burning = true;
-    startBurningTick = CalendarTFC.PLAYER_TIME.getTicks();
+    startBurningTick = Calendar.PLAYER_TIME.getTicks();
     tryLightNearby();
     markDirty();
   }

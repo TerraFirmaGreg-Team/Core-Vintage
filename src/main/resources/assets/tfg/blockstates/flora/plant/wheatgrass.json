@@ -1,0 +1,81 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wheatgrass/shortest/3",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/shortest/4",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wheatgrass/shorter/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/shorter/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/shorter/3",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/shorter/4",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wheatgrass/short/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/short/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/short/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/short/3",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/short/4",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/wheatgrass/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/3",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/wheatgrass/4",
+          "weight": 2
+        }
+      ]
+    }
+  ]
+}

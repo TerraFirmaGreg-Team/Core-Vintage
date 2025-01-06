@@ -2,12 +2,13 @@ package su.terrafirmagreg.temp.util;
 
 import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.types.Metal;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TFGModUtils {
 
@@ -18,7 +19,7 @@ public class TFGModUtils {
     new TFGOrePrefixExtended(OrePrefixHandler.toolHeadHammer, new String[]{"XXXXX", "XXXXX", "  X  "}),
     new TFGOrePrefixExtended(OrePrefixHandler.toolHeadKnife, new String[]{"X ", "XX", "XX", "XX", "XX"})
   );
-  public static HashMap<String, String> TYPE_TO_OREPREFIX = new HashMap<>() {{
+  public static Map<String, String> TYPE_TO_OREPREFIX = new Object2ObjectOpenHashMap<>() {{
     // TFC - GT
     // Здесь находятся только те идентификаторы, которые невозможно обычным путем конвертировать в GT варианты
     put("PICK_HEAD", "toolHeadPickaxe");

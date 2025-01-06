@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 
@@ -52,7 +52,7 @@ public enum BerryBush implements IBerryBush {
     this.fruit = fruit;
     this.harvestMonthStart = harvestMonthStart;
     this.harvestingMonths = harvestingMonths;
-    this.growthTime = growthTime * CalendarTFC.CALENDAR_TIME.getDaysInMonth() * ICalendar.HOURS_IN_DAY;
+    this.growthTime = growthTime * Calendar.CALENDAR_TIME.getDaysInMonth() * ICalendar.HOURS_IN_DAY;
 
     this.minTemp = minTemp;
     this.maxTemp = maxTemp;

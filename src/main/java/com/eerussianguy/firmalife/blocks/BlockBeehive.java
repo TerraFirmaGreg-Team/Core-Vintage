@@ -1,5 +1,9 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -23,7 +27,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import com.eerussianguy.firmalife.init.FoodFL;
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
-import com.eerussianguy.firmalife.registry.EffectsFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import com.eerussianguy.firmalife.te.TEHangingPlanter;
 import mcp.MethodsReturnNonnullByDefault;
@@ -36,8 +39,6 @@ import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.climate.ClimateTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -107,9 +108,9 @@ public class BlockBeehive extends Block implements IItemSize {
       double z = pos.getZ() + 0.5;
       for (int i = 0; i < 3 + rand.nextInt(4); i++) {
         world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                            x + rand.nextFloat() - rand.nextFloat(), y + rand.nextFloat(), z + rand.nextFloat() - rand.nextFloat(),
-                            0.5 * (rand.nextFloat() - rand.nextFloat()),
-                            0.5 * (rand.nextFloat() - rand.nextFloat()), 0.5 * (rand.nextFloat() - rand.nextFloat()));
+          x + rand.nextFloat() - rand.nextFloat(), y + rand.nextFloat(), z + rand.nextFloat() - rand.nextFloat(),
+          0.5 * (rand.nextFloat() - rand.nextFloat()),
+          0.5 * (rand.nextFloat() - rand.nextFloat()), 0.5 * (rand.nextFloat() - rand.nextFloat()));
       }
     }
   }
@@ -137,7 +138,7 @@ public class BlockBeehive extends Block implements IItemSize {
   }
 
   private boolean isValid(World world, BlockPos pos, TEHangingPlanter te) {
-    return te.isClimateValid() || ClimateTFC.getDailyTemp(world, pos) > 10;
+    return te.isClimateValid() || Climate.getDailyTemp(world, pos) > 10;
   }
 
   @Override
@@ -148,7 +149,7 @@ public class BlockBeehive extends Block implements IItemSize {
       Item giveItem = !OreDictionaryHelper.doesStackMatchOre(player.getHeldItem(hand), "knife") ? ItemsFL.getFood(FoodFL.RAW_HONEY) : ItemsFL.HONEYCOMB;
       ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(giveItem));
       if (isNotCalm(world, pos, state)) {
-        player.addPotionEffect(new PotionEffect(EffectsFL.SWARM, 30 * 20));
+        player.addPotionEffect(new PotionEffect(EffectsCore.SWARM.get(), 30 * 20));
       }
       TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
       if (te != null) {te.resetCounter();}
@@ -160,7 +161,7 @@ public class BlockBeehive extends Block implements IItemSize {
   @Override
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
     if (isNotCalm(world, pos, state)) {
-      player.addPotionEffect(new PotionEffect(EffectsFL.SWARM, 30 * 20));
+      player.addPotionEffect(new PotionEffect(EffectsCore.SWARM.get(), 30 * 20));
     }
     return super.removedByPlayer(state, world, pos, player, willHarvest);
   }

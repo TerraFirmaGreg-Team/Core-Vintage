@@ -17,7 +17,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -26,6 +25,8 @@ import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
+
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -119,7 +120,7 @@ public class ItemOreTFC extends ItemTFC implements IMetalItem {
         case TOTAL_ONLY:
           // not like Classic, "Metal: xx total units" Adds the whole stacks worth up.
           String stackTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units.total",
-                                                                                                           smeltAmount * stack.getCount()));
+            smeltAmount * stack.getCount()));
           tooltip.add(stackTotal);
           break;
         case ALL_INFO:
@@ -127,7 +128,7 @@ public class ItemOreTFC extends ItemTFC implements IMetalItem {
           String infoTotal;
           if (stack.getCount() > 1) {
             infoTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units.info_total", smeltAmount,
-                                                                                                     smeltAmount * stack.getCount()));
+              smeltAmount * stack.getCount()));
           } else {
             infoTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units", smeltAmount), I18n.format("tfc.tooltip.melttemp", meltTemp));
           }
@@ -138,8 +139,8 @@ public class ItemOreTFC extends ItemTFC implements IMetalItem {
           String advancedTotal;
           if (stack.getCount() > 1) {
             advancedTotal = String.format("%s: %s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units.info_total", smeltAmount,
-                                                                                                             smeltAmount
-                                                                                                             * stack.getCount()), I18n.format("tfc.tooltip.melttemp", meltTemp));
+              smeltAmount
+              * stack.getCount()), I18n.format("tfc.tooltip.melttemp", meltTemp));
           } else {
             advancedTotal = String.format("%s: %s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units", smeltAmount), I18n.format("tfc.tooltip.melttemp", meltTemp));
           }
@@ -165,7 +166,7 @@ public class ItemOreTFC extends ItemTFC implements IMetalItem {
   @Nullable
   @Override
   public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return ore.getMetal() != null ? new ItemHeatHandler(nbt, ore.getMetal().getSpecificHeat(), ore.getMetal().getMeltTemp()) : null;
+    return ore.getMetal() != null ? new CapabilityProviderHeat(nbt, ore.getMetal().getSpecificHeat(), ore.getMetal().getMeltTemp()) : null;
   }
 
   @Override

@@ -1,5 +1,7 @@
 package tfcflorae.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -38,10 +40,9 @@ import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import tfcflorae.util.OreDictionaryHelper;
 
@@ -180,7 +181,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements IItemSize, IPl
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (!worldIn.isAreaLoaded(pos, 1)) {return;}
-    Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
     int currentStage = state.getValue(growthStageProperty);
     int expectedStage = plant.getStageForMonth(currentMonth);
     int currentTime = state.getValue(DAYPERIOD);
@@ -264,7 +265,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements IItemSize, IPl
     if (up.getBlock() instanceof BlockTallGrassWater) {return false;}
     if (state.getBlock() == this) {
       return (soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || BlocksTFC.isGround(soil))
-             && plant.isValidTemp(ClimateTFC.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
+             && plant.isValidTemp(Climate.getActualTemp(worldIn, pos)) && plant.isValidRain(ChunkDataTFC.getRainfall(worldIn, pos));
     }
     return this.canSustainBush(soil);
   }
@@ -327,7 +328,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements IItemSize, IPl
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (!worldIn.isAreaLoaded(pos, 1)) {return;}
 
-    if (plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+    if (plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos))
         && plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
       int j = state.getValue(AGE);
 
@@ -337,7 +338,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements IItemSize, IPl
         }
         ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
       }
-    } else if (!plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
+    } else if (!plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos)) || !plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
       int j = state.getValue(AGE);
 
       if (rand.nextDouble() < getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
@@ -394,7 +395,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements IItemSize, IPl
   }
 
   int getDayPeriod() {
-    return CalendarTFC.CALENDAR_TIME.getHourOfDay() / (ICalendar.HOURS_IN_DAY / 4);
+    return Calendar.CALENDAR_TIME.getHourOfDay() / (ICalendar.HOURS_IN_DAY / 4);
   }
 
   @Nonnull

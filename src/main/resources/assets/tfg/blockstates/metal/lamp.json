@@ -1,0 +1,33 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:lamp/up",
+    "textures": {
+      "sheet": "tfg:blocks/metal/metal",
+      "particle": "tfg:blocks/metal/metal",
+      "lamp": "tfg:blocks/lamp_unlit"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "lit": {
+      "true": {
+        "textures": {
+          "lamp": "tfg:blocks/lamp_lit"
+        }
+      },
+      "false": {}
+    },
+    "facing": {
+      "up": {},
+      "down": {
+        "model": "tfg:lamp/down"
+      }
+    }
+  }
+}

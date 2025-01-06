@@ -4,9 +4,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
+
 import tfcflorae.objects.blocks.BlockUrnLoot;
 
 import javax.annotation.Nullable;
@@ -23,6 +25,6 @@ public class ItemBlockUrnLoot extends ItemBlockTFC implements IItemSize {
   @Override
   public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
     // Since this is technically still a pottery item, despite being a block
-    return new ItemHeatHandler(nbt, 1.0f, 1599f);
+    return new CapabilityProviderHeat(nbt, 1.0f, 1599f);
   }
 }

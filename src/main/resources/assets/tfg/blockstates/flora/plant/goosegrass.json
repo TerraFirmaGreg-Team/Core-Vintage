@@ -1,0 +1,81 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "age": "0"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/goosegrass/shortest/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/shortest/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/shortest/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/shortest/3",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "age": "1"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/goosegrass/shorter/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/shorter/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/shorter/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/shorter/3",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "age": "2"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/goosegrass/short/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/short/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/short/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/short/3",
+          "weight": 2
+        }
+      ]
+    }, {
+      "when": {
+        "age": "3"
+      },
+      "apply": [
+        {
+          "model": "tfg:flora/plant/goosegrass/0",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/1",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/2",
+          "weight": 1
+        }, {
+          "model": "tfg:flora/plant/goosegrass/3",
+          "weight": 2
+        }
+      ]
+    }
+  ]
+}

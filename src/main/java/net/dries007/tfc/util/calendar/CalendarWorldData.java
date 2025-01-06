@@ -12,6 +12,7 @@ import net.minecraft.world.storage.WorldSavedData;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,12 +26,12 @@ public class CalendarWorldData extends WorldSavedData {
   private static final String NAME_PRE_V1_5_0_X = TFC + ":calendar";
 
   private static final Logger LOGGER = LogManager.getLogger();
-  private final CalendarTFC calendar;
+  private final Calendar calendar;
 
   @SuppressWarnings("unused")
   public CalendarWorldData(String name) {
     super(name);
-    this.calendar = new CalendarTFC();
+    this.calendar = new Calendar();
   }
 
   @Nonnull
@@ -67,7 +68,7 @@ public class CalendarWorldData extends WorldSavedData {
   @Override
   @Nonnull
   public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-    nbt.setTag("calendar", CalendarTFC.INSTANCE.serializeNBT());
+    nbt.setTag("calendar", Calendar.INSTANCE.serializeNBT());
     return nbt;
   }
 
@@ -80,7 +81,7 @@ public class CalendarWorldData extends WorldSavedData {
   }
 
   @Nonnull
-  public CalendarTFC getCalendar() {
+  public Calendar getCalendar() {
     return calendar;
   }
 }

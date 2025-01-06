@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.compat.crafttweaker;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
@@ -13,8 +16,6 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -35,7 +36,7 @@ public class CTHeating {
     if (input == null || output == null) {throw new IllegalArgumentException("Input and output are not allowed to be empty!");}
     ItemStack istack = ((ItemStack) input.getInternal());
     ItemStack ostack = ((ItemStack) output.getInternal());
-    IItemHeat icap = istack.getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+    ICapabilityHeat icap = istack.getCapability(CapabilityHeat.CAPABILITY, null);
     if (icap == null) {throw new IllegalStateException("Input must have heating capabilities!");}
     HeatRecipe recipe = new HeatRecipeSimple(IIngredient.of(istack), ostack, transformTemp, maxTemp, Metal.Tier.TIER_I).setRegistryName(registryName);
     CraftTweakerAPI.apply(new IAction() {
@@ -58,10 +59,10 @@ public class CTHeating {
     ItemStack item = (ItemStack) output.getInternal();
     List<HeatRecipe> removeList = new ArrayList<>();
     TFCRegistries.HEAT.getValuesCollection()
-                      .stream()
-                      .filter(x -> x instanceof HeatRecipeSimple)
-                      .filter(x -> x.getOutputs().get(0).isItemEqual(item))
-                      .forEach(removeList::add);
+      .stream()
+      .filter(x -> x instanceof HeatRecipeSimple)
+      .filter(x -> x.getOutputs().get(0).isItemEqual(item))
+      .forEach(removeList::add);
     for (HeatRecipe rem : removeList) {
       CraftTweakerAPI.apply(new IAction() {
         @Override

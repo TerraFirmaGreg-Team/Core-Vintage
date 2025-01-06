@@ -5,6 +5,10 @@
 
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
@@ -14,9 +18,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.IItemHeat;
 import net.dries007.tfc.objects.te.TEBlastFurnace;
 
 import java.util.ArrayList;
@@ -83,16 +84,16 @@ public class GuiBlastFurnace extends GuiContainerTE<TEBlastFurnace> {
 
     // Отображение текста с количеством руды, топлива и сплава
     fontRenderer.drawString(I18n.format(TFC + ".tooltip.blast_furnace_ore_amount"),
-                            guiLeft + 40, guiTop + 17, 0x000000);
+      guiLeft + 40, guiTop + 17, 0x000000);
     fontRenderer.drawString(I18n.format(TFC + ".tooltip.blast_furnace_fuel_amount"),
-                            guiLeft + 40, guiTop + 35, 0x000000);
+      guiLeft + 40, guiTop + 35, 0x000000);
     fontRenderer.drawString(I18n.format(TFC + ".tooltip.blast_furnace_melt_amount"),
-                            guiLeft + 40, guiTop + 53, 0x000000);
+      guiLeft + 40, guiTop + 53, 0x000000);
 
     // Отображение предупреждения, если нет дымохода
     if (tile.getField(TEBlastFurnace.CHIMNEY_LEVELS) < 1) {
       fontRenderer.drawString(I18n.format(TFC + ".tooltip.blast_furnace_invalid_structure"),
-                              guiLeft + 40, guiTop + 71, 0xDC2400);
+        guiLeft + 40, guiTop + 71, 0xDC2400);
     }
 
     if (!tempList.isEmpty()) {
@@ -161,7 +162,7 @@ public class GuiBlastFurnace extends GuiContainerTE<TEBlastFurnace> {
 
     tempList.clear();
     for (int i = 0; i < tile.getOreStacks().size(); i++) {
-      IItemHeat cap = tile.getOreStacks().get(i).getCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null);
+      ICapabilityHeat cap = tile.getOreStacks().get(i).getCapability(CapabilityHeat.CAPABILITY, null);
       if (cap != null) {
         tempList.add(cap.getTemperature());
       }

@@ -1,0 +1,69 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "stage": "0",
+        "age": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/ryegrass/shortest/0"
+      }
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/ryegrass/shorter/0"
+      }
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "2"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/ryegrass/short/0"
+      }
+    }, {
+      "when": {
+        "stage": "0",
+        "age": "3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/ryegrass/0"
+      }
+    }, {
+      "when": {
+        "stage": "1",
+        "age": "0"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/ryegrass/shortest/0b"
+      }
+    }, {
+      "when": {
+        "stage": "1",
+        "age": "1"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/ryegrass/shorter/0b"
+      }
+    }, {
+      "when": {
+        "stage": "1",
+        "age": "2"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/ryegrass/short/0b"
+      }
+    }, {
+      "when": {
+        "stage": "1",
+        "age": "3"
+      },
+      "apply": {
+        "model": "tfg:flora/plant/ryegrass/0b"
+      }
+    }
+  ]
+}

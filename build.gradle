@@ -252,6 +252,7 @@ processResources {
 }
 
 jar {
+  zip64 = true
   manifest {
     def attribute_map = [:]
     if (propertyBool('is_coremod')) {
@@ -295,7 +296,7 @@ idea {
     downloadJavadoc true
     downloadSources true
 
-    excludeDirs = [file(".github"), file(".idea"), file("build"),  file("run"), file("resources_templates")]
+    excludeDirs = [file(".github"), file(".idea"), file("build"), file("run"), file("resources_templates")]
 
 
   }

@@ -7,7 +7,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -24,7 +24,7 @@ public class PlayerDataFL implements ICapabilitySerializable<NBTTagCompound>, IP
 
   @Override
   public void setNuttedTime() {
-    nutted = CalendarTFC.CALENDAR_TIME.getTicks();
+    nutted = Calendar.CALENDAR_TIME.getTicks();
   }
 
   @Override

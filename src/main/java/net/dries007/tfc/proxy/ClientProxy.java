@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 
 import javax.annotation.Nonnull;
@@ -64,12 +64,12 @@ public class ClientProxy implements IProxy {
   @Nonnull
   @Override
   public String getDayName(int dayOfMonth, long totalDays) {
-    String date = CalendarTFC.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
-    String birthday = CalendarTFC.BIRTHDAYS.get(date);
+    String date = Calendar.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
+    String birthday = Calendar.BIRTHDAYS.get(date);
     if (birthday != null) {
       return birthday;
     }
-    return I18n.format("tfc.enum.day." + CalendarTFC.DAY_NAMES[(int) (totalDays % 7)]);
+    return I18n.format("tfc.enum.day." + Calendar.DAY_NAMES[(int) (totalDays % 7)]);
   }
 
   @Nonnull

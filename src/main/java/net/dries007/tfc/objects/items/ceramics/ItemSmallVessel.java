@@ -5,6 +5,9 @@
 
 package net.dries007.tfc.objects.items.ceramics;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +47,6 @@ import net.dries007.tfc.api.capability.ISmallVesselHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.size.CapabilityItemSize;
@@ -62,10 +64,7 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-
-import su.terrafirmagreg.api.data.enums.Mods;
-
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 
 import javax.annotation.Nonnull;
@@ -75,7 +74,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
-import static net.dries007.tfc.api.capability.heat.CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
+import static su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat.CAPABILITY;
 
 @ParametersAreNonnullByDefault
 public class ItemSmallVessel extends ItemPottery {
@@ -104,7 +103,7 @@ public class ItemSmallVessel extends ItemPottery {
             break;
           case LIQUID_SOLID:
             TerraFirmaCraft.getNetwork()
-                           .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, TFC + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
+              .sendTo(PacketSimpleMessage.translateMessage(MessageCategory.VESSEL, TFC + ".vessel.liquid_solid"), (EntityPlayerMP) playerIn);
             break;
         }
       }
@@ -159,8 +158,7 @@ public class ItemSmallVessel extends ItemPottery {
   @Nonnull
   public ItemStack getFiringResult(ItemStack input) {
     IItemHandler capItemHandler = input.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-    if (capItemHandler instanceof ISmallVesselHandler) {
-      ISmallVesselHandler cap = (ISmallVesselHandler) capItemHandler;
+    if (capItemHandler instanceof ISmallVesselHandler cap) {
       Alloy alloy = new Alloy();
 
       for (int i = 0; i < cap.getSlots(); i++) {
@@ -229,13 +227,13 @@ public class ItemSmallVessel extends ItemPottery {
 
     @Override
     public float getTemperature() {
-      return CapabilityItemHeat.adjustTemp(temperature, heatCapacity, CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick);
+      return CapabilityHeat.adjustTemp(temperature, heatCapacity, Calendar.PLAYER_TIME.getTicks() - lastUpdateTick);
     }
 
     @Override
     public void setTemperature(float temperature) {
       this.temperature = temperature;
-      this.lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
+      this.lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
     }
 
     @Override
@@ -313,7 +311,7 @@ public class ItemSmallVessel extends ItemPottery {
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
       return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY
-             || capability == ITEM_HEAT_CAPABILITY;
+             || capability == CAPABILITY;
     }
 
     @Nullable
@@ -396,7 +394,7 @@ public class ItemSmallVessel extends ItemPottery {
       IItemSize size = CapabilityItemSize.getIItemSize(stack);
       if (size != null) {
         if (size.getSize(stack).isSmallerThan(Size.NORMAL)) {
-          if (stack.hasCapability(ITEM_HEAT_CAPABILITY, null) && !(stack.getItem() instanceof ItemPottery)) {
+          if (stack.hasCapability(CAPABILITY, null) && !(stack.getItem() instanceof ItemPottery)) {
             return true;
           } else if (stack.getItem() instanceof ItemFoodTFC) {
             return true;

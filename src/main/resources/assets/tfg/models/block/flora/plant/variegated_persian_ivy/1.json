@@ -1,0 +1,9 @@
+{
+  "parent": "tfg:block/flora/plant/variegated_persian_ivy/0",
+  "textures": {
+    "particle": "tfg:blocks/flora/plant/variegated_persian_ivy/1",
+    "layer0": "tfg:blocks/flora/plant/variegated_persian_ivy/1",
+    "overlay": "tfg:blocks/flora/plant/variegated_persian_ivy/1b"
+  }
+}
+

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.temp.modules.ambiental.capability;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.temp.config.TFGConfig;
 import su.terrafirmagreg.temp.modules.ambiental.api.IBlockTemperatureProvider;
 import su.terrafirmagreg.temp.modules.ambiental.api.IEquipmentTemperatureProvider;
@@ -11,7 +12,6 @@ import su.terrafirmagreg.temp.modules.ambiental.modifier.TempModifier;
 import su.terrafirmagreg.temp.modules.ambiental.modifier.TempModifierStorage;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,8 +20,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import gregtech.common.items.MetaItems;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.FoodStatsTFC;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -72,11 +70,8 @@ public class TemperatureCapability implements ICapabilitySerializable<NBTTagComp
     Item quantumBoots = MetaItems.QUANTUM_BOOTS.getStackForm().getItem();
 
     // Nano Armor
-    if (head.equals(nanoHelmet) &&
-        (chest.equals(nanoChestplate) || chest.equals(nanoAdvancedChestplate)) &&
-        legs.equals(nanoLeggings) &&
-        feet.equals(nanoBoots)
-    ) {
+    if (head.equals(nanoHelmet) && (chest.equals(nanoChestplate) || chest.equals(nanoAdvancedChestplate)) && legs.equals(nanoLeggings)
+        && feet.equals(nanoBoots)) {
       return true;
     }
 
@@ -251,16 +246,9 @@ public class TemperatureCapability implements ICapabilitySerializable<NBTTagComp
       }
 
       this.evaluateModifiers();
-      sync();
+
     }
 
   }
 
-  public void sync() {
-    EntityPlayer player = getPlayer();
-    if (player instanceof EntityPlayerMP) {
-      TemperaturePacket packet = new TemperaturePacket(serializeNBT());
-      TerraFirmaCraft.getNetwork().sendTo(packet, (EntityPlayerMP) player);
-    }
-  }
 }

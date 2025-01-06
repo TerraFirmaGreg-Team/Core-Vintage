@@ -39,9 +39,9 @@ import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
 import net.dries007.tfc.util.FluidTransferHelper;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendarFormatted;
-import net.dries007.tfc.util.calendar.ICalendarTickable;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -155,7 +155,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
 
   @Nonnull
   public String getSealedDate() {
-    return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, CalendarTFC.CALENDAR_TIME.getDaysInMonth());
+    return ICalendarFormatted.getTimeAndDate(sealedCalendarTick, Calendar.CALENDAR_TIME.getDaysInMonth());
   }
 
   @Override
@@ -191,8 +191,8 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
       }
     }
 
-    sealedTick = CalendarTFC.PLAYER_TIME.getTicks();
-    sealedCalendarTick = CalendarTFC.CALENDAR_TIME.getTicks();
+    sealedTick = Calendar.PLAYER_TIME.getTicks();
+    sealedCalendarTick = Calendar.CALENDAR_TIME.getTicks();
     recipe = BarrelRecipe.get(inventory.getStackInSlot(SLOT_ITEM), tank.getFluid());
     if (recipe != null) {
       recipe.onBarrelSealed(tank.getFluid(), inventory.getStackInSlot(SLOT_ITEM));
@@ -253,7 +253,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
 
       // Check if recipe is complete (sealed recipes only)
       if (recipe != null && sealed) {
-        int durationSealed = (int) (CalendarTFC.PLAYER_TIME.getTicks() - sealedTick);
+        int durationSealed = (int) (Calendar.PLAYER_TIME.getTicks() - sealedTick);
         if (recipe.getDuration() > 0 && durationSealed > recipe.getDuration()) {
           ItemStack inputStack = inventory.getStackInSlot(SLOT_ITEM);
           FluidStack inputFluid = tank.getFluid();
@@ -414,12 +414,12 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
       deltaPlayerTicks = 0;
       if (recipe != null && sealed && recipe.getDuration() > 0) {
         long tickFinish = sealedTick + recipe.getDuration();
-        if (tickFinish <= CalendarTFC.PLAYER_TIME.getTicks()) {
+        if (tickFinish <= Calendar.PLAYER_TIME.getTicks()) {
           // Mark to run this transaction again in case this recipe produces valid output for another which could potentially finish in this time period.
           deltaPlayerTicks = 1;
-          long offset = tickFinish - CalendarTFC.PLAYER_TIME.getTicks();
+          long offset = tickFinish - Calendar.PLAYER_TIME.getTicks();
 
-          CalendarTFC.runTransaction(offset, offset, () -> {
+          Calendar.runTransaction(offset, offset, () -> {
             ItemStack inputStack = inventory.getStackInSlot(SLOT_ITEM);
             FluidStack inputFluid = tank.getFluid();
             if (recipe.isValidInput(inputFluid, inputStack)) {

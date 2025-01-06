@@ -1,5 +1,7 @@
 package tfcflorae.world.worldgen;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -10,7 +12,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import tfcflorae.TFCFlorae;
@@ -37,7 +38,7 @@ public class WorldGenGourds implements IWorldGenerator {
     // Guarantees crop generation if possible (easier to balance by config file while also making it random)
     BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-    float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
+    float temperature = Climate.getAvgTemp(world, chunkBlockPos);
     float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
     float floraDensity = ChunkDataTFC.getFloraDensity(world, chunkBlockPos);
 
@@ -70,7 +71,7 @@ public class WorldGenGourds implements IWorldGenerator {
     // Guarantees crop generation if possible (easier to balance by config file while also making it random)
     BlockPos chunkBlockPos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-    float temperature = ClimateTFC.getAvgTemp(world, chunkBlockPos);
+    float temperature = Climate.getAvgTemp(world, chunkBlockPos);
     float rainfall = ChunkDataTFC.getRainfall(world, chunkBlockPos);
     float floraDensity = ChunkDataTFC.getFloraDensity(world, chunkBlockPos);
 

@@ -17,8 +17,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -128,7 +128,7 @@ public class CapabilityFood {
   public static ItemStack updateFoodDecayOnCreate(ItemStack stack) {
     IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
     if (cap != null) {
-      cap.setCreationDate(CalendarTFC.PLAYER_TIME.getTicks());
+      cap.setCreationDate(Calendar.PLAYER_TIME.getTicks());
     }
     return stack;
   }
@@ -206,7 +206,7 @@ public class CapabilityFood {
    * @return Gets the creation date to set a piece of food to, in order to stack items created nearby in time
    */
   public static long getRoundedCreationDate() {
-    return (CalendarTFC.PLAYER_TIME.getTotalHours() / ConfigTFC.General.FOOD.decayStackTime) * ICalendar.TICKS_IN_HOUR * ConfigTFC.General.FOOD.decayStackTime;
+    return (Calendar.PLAYER_TIME.getTotalHours() / ConfigTFC.General.FOOD.decayStackTime) * ICalendar.TICKS_IN_HOUR * ConfigTFC.General.FOOD.decayStackTime;
   }
 
   /**
@@ -224,6 +224,6 @@ public class CapabilityFood {
    */
   private static long calculateNewCreationDate(long ci, float p) {
     // Cf = (1 - p) * T + p * Ci
-    return (long) ((1 - p) * CalendarTFC.PLAYER_TIME.getTicks() + p * ci);
+    return (long) ((1 - p) * Calendar.PLAYER_TIME.getTicks() + p * ci);
   }
 }

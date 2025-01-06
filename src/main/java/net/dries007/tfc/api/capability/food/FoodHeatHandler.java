@@ -5,13 +5,14 @@
 
 package net.dries007.tfc.api.capability.food;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.util.agriculture.Food;
 
 import javax.annotation.Nonnull;
@@ -19,11 +20,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * This is a combined capability class that delegates to two implementations:
- * - super = ItemHeatHandler
- * - internalFoodCap = FoodHandler
+ * This is a combined capability class that delegates to two implementations: - super = ItemHeatHandler - internalFoodCap = FoodHandler
  */
-public class FoodHeatHandler extends ItemHeatHandler implements IFood, ICapabilitySerializable<NBTTagCompound> {
+public class FoodHeatHandler extends CapabilityProviderHeat implements IFood, ICapabilitySerializable<NBTTagCompound> {
 
   private final FoodHandler internalFoodCap;
 
@@ -83,7 +82,7 @@ public class FoodHeatHandler extends ItemHeatHandler implements IFood, ICapabili
 
   @Override
   public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-    return capability == CapabilityFood.CAPABILITY || capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
+    return capability == CapabilityFood.CAPABILITY || capability == CapabilityHeat.CAPABILITY;
   }
 
   @Nullable

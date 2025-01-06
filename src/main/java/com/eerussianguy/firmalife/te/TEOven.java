@@ -21,8 +21,8 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.util.fuel.FuelManager;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -57,7 +57,7 @@ public class TEOven extends TEInventory implements ITickable {
   public void update() {
     if (!world.isRemote) {
       if (isBurning) {
-        if ((int) (CalendarTFC.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
+        if ((int) (Calendar.PLAYER_TIME.getTicks() - startTick) > tickGoal) {
           if (isCuringRecipe()) {
             cureSelfWallsAndChimney();
             cook();
@@ -122,7 +122,7 @@ public class TEOven extends TEInventory implements ITickable {
     }
     if (recipeExists() && hasFuel()) {
       isBurning = true;
-      startTick = CalendarTFC.PLAYER_TIME.getTicks();
+      startTick = Calendar.PLAYER_TIME.getTicks();
       setDuration();
     } else {
       turnOff();
@@ -190,13 +190,13 @@ public class TEOven extends TEInventory implements ITickable {
     isBurning = false;
     startTick = 0;
     tickGoal = 0;
-    offTick = CalendarTFC.PLAYER_TIME.getTicks();
+    offTick = Calendar.PLAYER_TIME.getTicks();
     isWarmed = false;
     markDirty();
   }
 
   public boolean willDamage() {
-    return (CalendarTFC.PLAYER_TIME.getTicks() - offTick) > (2 * ICalendar.TICKS_IN_HOUR);
+    return (Calendar.PLAYER_TIME.getTicks() - offTick) > (2 * ICalendar.TICKS_IN_HOUR);
   }
 
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
@@ -238,6 +238,6 @@ public class TEOven extends TEInventory implements ITickable {
   }
 
   public long getTicksRemaining() {
-    return tickGoal - (CalendarTFC.PLAYER_TIME.getTicks() - startTick);
+    return tickGoal - (Calendar.PLAYER_TIME.getTicks() - startTick);
   }
 }

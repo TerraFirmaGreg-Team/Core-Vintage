@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
@@ -37,7 +39,6 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
@@ -226,7 +227,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
           te.reduceCounter(growthTicks);
 
           // find stats for the time in which the crop would have grown
-          float temp = ClimateTFC.getActualTemp(worldIn, pos, -te.getTicksSinceUpdate());
+          float temp = Climate.getActualTemp(worldIn, pos, -te.getTicksSinceUpdate());
           float rainfall = ChunkDataTFC.getRainfall(worldIn, pos);
 
           // check if the crop could grow, if so, grow
@@ -254,7 +255,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
   public void die(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (ConfigTFC.General.FOOD.enableCropDeath) {
       worldIn.setBlockState(pos, BlockCropDead.get(crop).getDefaultState()
-                                              .withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == crop.getMaxStage()));
+        .withProperty(BlockCropDead.MATURE, state.getValue(getStageProperty()) == crop.getMaxStage()));
     }
   }
 
@@ -300,7 +301,7 @@ public abstract class BlockCropTFC extends BlockBush { //implements IGrowingPlan
           IBlockState stateDown = worldIn.getBlockState(pos.down());
           Material material = stateDown.getMaterial();
           return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this)
-                 || material == Material.WATER && (Integer) stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == ChunkGenTFC.FRESH_WATER
+                 || material == Material.WATER && stateDown.getValue(BlockLiquid.LEVEL) == 0 && stateDown == ChunkGenTFC.FRESH_WATER
                  || material == Material.ICE || material == Material.CORAL && !(state.getBlock() instanceof BlockEmergentTallWaterPlantTFC);
         }
       } else {

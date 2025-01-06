@@ -1,12 +1,13 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.util.Alloy;
 
@@ -51,7 +52,7 @@ public class TEAlloyCalculator extends TEInventory {
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    if (!stack.hasCapability(CapabilityItemHeat.ITEM_HEAT_CAPABILITY, null)) {
+    if (!stack.hasCapability(CapabilityHeat.CAPABILITY, null)) {
       return false;
     }
     return CapabilityMetalItem.getMetalItem(stack) != null;

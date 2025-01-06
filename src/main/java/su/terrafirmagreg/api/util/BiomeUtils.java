@@ -145,9 +145,12 @@ public final class BiomeUtils {
     TUNDRA(-100, 0, 0, 500, 0, 1), // Cold deserts
     DESERT(0, 100, 0, 60, 0, 1); // No trees and mild-high temperature
 
-    private final float temperatureMin, temperatureMax;
-    private final float rainfallMin, rainfallMax;
-    private final float densityMin, densityMax;
+    private final float temperatureMin;
+    private final float temperatureMax;
+    private final float rainfallMin;
+    private final float rainfallMax;
+    private final float densityMin;
+    private final float densityMax;
 
     BiomeType(float temperatureMin, float temperatureMax, float rainfallMin, float rainfallMax, float densityMin, float densityMax) {
       this.temperatureMin = temperatureMin;

@@ -1,11 +1,10 @@
 package tfctech.objects.items.glassworking;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import com.google.common.collect.Sets;
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -22,18 +21,17 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.heat.CapabilityItemHeat;
-import net.dries007.tfc.api.capability.heat.Heat;
-import net.dries007.tfc.api.capability.heat.ItemHeatHandler;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
-
-import su.terrafirmagreg.api.data.enums.Mods;
-
-import tfctech.objects.fluids.TechFluids;
 import tfctech.objects.items.ItemMiscTech;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
@@ -58,7 +56,7 @@ public class ItemGlassMolder extends ItemMiscTech {
     return new GlassMolderCapability(stack, capacity, nbt);
   }
 
-  public static class GlassMolderCapability extends ItemHeatHandler implements ICapabilityProvider, IFluidHandlerItem {
+  public static class GlassMolderCapability extends CapabilityProviderHeat implements ICapabilityProvider, IFluidHandlerItem {
 
     private final FluidWhitelistHandler tank;
     private final int capacity;
@@ -67,7 +65,7 @@ public class ItemGlassMolder extends ItemMiscTech {
       this.capacity = capacity;
       this.heatCapacity = 1;
       this.meltTemp = Heat.maxVisibleTemperature();
-      this.tank = new FluidWhitelistHandler(stack, capacity, Sets.newHashSet(TechFluids.GLASS.get()));
+      this.tank = new FluidWhitelistHandler(stack, capacity, Sets.newHashSet(FluidsCore.GLASS.get()));
       deserializeNBT(nbt);
     }
 
@@ -86,7 +84,7 @@ public class ItemGlassMolder extends ItemMiscTech {
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
       return capability == CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY
-             || capability == CapabilityItemHeat.ITEM_HEAT_CAPABILITY;
+             || capability == CapabilityHeat.CAPABILITY;
     }
 
     @Nullable

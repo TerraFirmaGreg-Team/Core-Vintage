@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.integration.gregtech.object.item.tools.behaviors;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -34,7 +36,6 @@ import net.dries007.tfc.util.skills.SkillType;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -129,7 +130,7 @@ public class PropickBehavior implements IToolBehavior {
    */
   @Nonnull
   private Collection<ProspectResult> scanSurroundingBlocks(World world, BlockPos center) {
-    Map<String, ProspectResult> results = new HashMap<>();
+    Map<String, ProspectResult> results = new Object2ObjectOpenHashMap<>();
     for (BlockPos.MutableBlockPos pos : BlockPos.MutableBlockPos.getAllInBoxMutable(center.add(-PROSPECT_RADIUS, -PROSPECT_RADIUS, -PROSPECT_RADIUS), center.add(PROSPECT_RADIUS, PROSPECT_RADIUS, PROSPECT_RADIUS))) {
       ItemStack stack = getOreStack(world, pos, world.getBlockState(pos), true);
       if (!stack.isEmpty()) {

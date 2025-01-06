@@ -15,9 +15,9 @@ import com.eerussianguy.firmalife.util.IWaterable;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.calendar.CalendarTFC;
-import net.dries007.tfc.util.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.ICalendarTickable;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import javax.annotation.Nonnull;
 
@@ -37,7 +37,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
     super(4);
     stages = new int[]{0, 0, 0, 0};
     lastUpdateTick = 0;
-    lastTickCalChecked = CalendarTFC.PLAYER_TIME.getTicks();
+    lastTickCalChecked = Calendar.PLAYER_TIME.getTicks();
     waterUses = 0;
     tier = 0;
     isClimateValid = false;
@@ -96,11 +96,11 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
   }
 
   public long getTicksSinceUpdate() {
-    return CalendarTFC.PLAYER_TIME.getTicks() - lastUpdateTick;
+    return Calendar.PLAYER_TIME.getTicks() - lastUpdateTick;
   }
 
   public void resetCounter() {
-    lastUpdateTick = CalendarTFC.PLAYER_TIME.getTicks();
+    lastUpdateTick = Calendar.PLAYER_TIME.getTicks();
     markForSync();
   }
 

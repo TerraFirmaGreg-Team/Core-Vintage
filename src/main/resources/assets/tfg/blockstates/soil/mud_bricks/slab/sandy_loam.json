@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tfg:soil/slab/half",
+    "textures": {
+      "all": "tfg:blocks/soil/mud_bricks/sandy_loam"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "half": {
+      "bottom": {
+        "model": "tfg:soil/slab/half"
+      },
+      "top": {
+        "model": "tfg:soil/slab/upper"
+      }
+    }
+  }
+}

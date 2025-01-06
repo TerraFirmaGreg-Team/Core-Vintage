@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -28,7 +30,6 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IGrowingPlant;
-import net.dries007.tfc.util.climate.ClimateTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -79,7 +80,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     this.tree = tree;
     Blocks.FIRE.setFireInfo(this, 5, 20);
     setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(NORTH, 0).withProperty(EAST, 0).withProperty(SOUTH, 0)
-                              .withProperty(WEST, 0).withProperty(UP, 0));
+      .withProperty(WEST, 0).withProperty(UP, 0));
   }
 
   public static BlockFruitTreeBranch get(IFruitTree tree) {
@@ -270,7 +271,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    float temp = ClimateTFC.getActualTemp(world, pos);
+    float temp = Climate.getActualTemp(world, pos);
     float rainfall = ChunkDataTFC.getRainfall(world, pos);
     boolean canGrow = tree.isValidForGrowth(temp, rainfall);
     if (canGrow) {

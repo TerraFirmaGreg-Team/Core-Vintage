@@ -5,8 +5,9 @@
 
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.feature.climate.Climate;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,9 +27,8 @@ import net.minecraftforge.common.IShearable;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.util.calendar.CalendarTFC;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.climate.ClimateTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -54,14 +54,14 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
   }
 
   public static BlockShortGrassTFC get(Plant plant) {
-    return (BlockShortGrassTFC) MAP.get(plant);
+    return MAP.get(plant);
   }
 
   public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-    Month currentMonth = CalendarTFC.CALENDAR_TIME.getMonthOfYear();
-    int currentStage = (Integer) state.getValue(this.growthStageProperty);
+    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
+    int currentStage = state.getValue(this.growthStageProperty);
     this.plant.getStageForMonth(currentMonth);
-    int age = (Integer) state.getValue(AGE);
+    int age = state.getValue(AGE);
     if (!worldIn.isRemote) {
       if (stack.getItem().getHarvestLevel(stack, "knife", player, state) == -1 && stack.getItem().getHarvestLevel(stack, "scythe", player, state) == -1) {
         if (stack.getItem() == Items.SHEARS) {
@@ -82,9 +82,9 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (worldIn.isAreaLoaded(pos, 1)) {
       int j;
-      if (this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+      if (this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos))
           && this.plant.isValidSunlight(Math.subtractExact(worldIn.getLightFor(EnumSkyBlock.SKY, pos), worldIn.getSkylightSubtracted()))) {
-        j = (Integer) state.getValue(AGE);
+        j = state.getValue(AGE);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos.up(), state, true)) {
           if (j < 3) {
             worldIn.setBlockState(pos, state.withProperty(AGE, j + 1));
@@ -92,9 +92,9 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 
           ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
-      } else if (!this.plant.isValidGrowthTemp(ClimateTFC.getActualTemp(worldIn, pos))
+      } else if (!this.plant.isValidGrowthTemp(Climate.getActualTemp(worldIn, pos))
                  || !this.plant.isValidSunlight(worldIn.getLightFor(EnumSkyBlock.SKY, pos))) {
-        j = (Integer) state.getValue(AGE);
+        j = state.getValue(AGE);
         if (rand.nextDouble() < this.getGrowthRate(worldIn, pos) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
           if (j > 0) {
             worldIn.setBlockState(pos, state.withProperty(AGE, j - 1));
@@ -112,7 +112,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 
   @Nonnull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    switch ((Integer) state.getValue(AGE)) {
+    switch (state.getValue(AGE)) {
       case 0:
         return SHORTEST_GRASS_AABB.offset(state.getOffset(source, pos));
       case 1:
@@ -126,7 +126,7 @@ public class BlockShortGrassTFC extends BlockPlantTFC implements IShearable {
 
   @Nonnull
   protected BlockStateContainer createPlantBlockState() {
-    return new BlockStateContainer(this, new IProperty[]{AGE, this.growthStageProperty, DAYPERIOD});
+    return new BlockStateContainer(this, AGE, this.growthStageProperty, DAYPERIOD);
   }
 
   public int quantityDroppedWithBonus(int fortune, Random random) {

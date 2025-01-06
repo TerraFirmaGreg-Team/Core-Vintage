@@ -1,0 +1,7 @@
+{
+  "parent": "tfg:block/cross",
+  "textures": {
+    "cross": "tfg:blocks/flora/plant/tulip_orange/0"
+  }
+}
+

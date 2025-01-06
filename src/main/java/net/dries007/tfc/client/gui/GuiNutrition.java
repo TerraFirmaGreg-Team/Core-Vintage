@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -16,7 +18,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.IFoodStatsTFC;
 import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
@@ -76,8 +77,7 @@ public class GuiNutrition extends GuiContainerTFC {
 
   @Override
   protected void actionPerformed(GuiButton button) {
-    if (button instanceof GuiButtonPlayerInventoryTab && ((GuiButtonPlayerInventoryTab) button).isActive()) {
-      GuiButtonPlayerInventoryTab tabButton = (GuiButtonPlayerInventoryTab) button;
+    if (button instanceof GuiButtonPlayerInventoryTab tabButton && ((GuiButtonPlayerInventoryTab) button).isActive()) {
       if (tabButton.isActive()) {
         if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
           this.mc.displayGuiScreen(new GuiInventory(playerInv.player));

@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -58,7 +60,7 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
     super(CHARCOAL_MATERIAL);
 
     setSoundType(TFCSounds.CHARCOAL_PILE);
-    setHarvestLevel("shovel", 0);
+    setHarvestLevel(ToolClasses.SHOVEL, 0);
     setHardness(1.0F);
     this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
   }

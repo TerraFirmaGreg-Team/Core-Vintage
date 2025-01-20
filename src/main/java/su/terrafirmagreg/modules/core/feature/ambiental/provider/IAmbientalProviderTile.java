@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.feature.ambiental.provider;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -11,6 +11,6 @@ import java.util.Optional;
 @FunctionalInterface
 public interface IAmbientalProviderTile extends IAmbientalProviderBase {
 
-  Optional<ModifierBase> getModifier(EntityPlayer player, TileEntity tile);
+  Optional<ModifierTile> getModifier(EntityPlayer player, TileEntity tile);
 
 }

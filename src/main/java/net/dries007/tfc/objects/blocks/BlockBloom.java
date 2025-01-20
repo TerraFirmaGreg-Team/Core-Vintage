@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -33,7 +35,7 @@ public class BlockBloom extends Block {
   public BlockBloom() {
     super(Material.IRON);
     setHardness(3.0f);
-    setHarvestLevel("pickaxe", 0);
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
     setSoundType(SoundType.STONE);
   }
 

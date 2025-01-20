@@ -10,16 +10,14 @@ import org.jetbrains.annotations.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Optional;
-
 public class ModifierBase implements Comparable<ModifierBase> {
 
   @Getter
   private final String name;
   @Setter
-  private float change = 0f;
+  private float change;
   @Setter
-  private float potency = 0f;
+  private float potency;
   @Getter
   private int count = 1;
   @Setter
@@ -29,6 +27,8 @@ public class ModifierBase implements Comparable<ModifierBase> {
   public ModifierBase(String name) {
 
     this.name = name;
+    this.change = 0f;
+    this.potency = 0f;
   }
 
   public ModifierBase(String name, float change, float potency) {
@@ -37,24 +37,12 @@ public class ModifierBase implements Comparable<ModifierBase> {
     this.potency = potency;
   }
 
-  public static Optional<ModifierBase> defined(String name, float change, float potency) {
-    return Optional.of(new ModifierBase(name, change, potency));
-  }
-
-  public static Optional<ModifierBase> none() {
-    return Optional.empty();
-  }
-
   public float getChange() {
-    return change * multiplier * (count == 1
-                                  ? 1f
-                                  : ConfigCore.MISC.AMBIENTAL.diminishedModifierMultiplier);
+    return change * multiplier * (count == 1 ? 1f : ConfigCore.MISC.AMBIENTAL.diminishedModifierMultiplier);
   }
 
   public float getPotency() {
-    return potency * multiplier * (count == 1
-                                   ? 1f
-                                   : ConfigCore.MISC.AMBIENTAL.diminishedModifierMultiplier);
+    return potency * multiplier * (count == 1 ? 1f : ConfigCore.MISC.AMBIENTAL.diminishedModifierMultiplier);
   }
 
   public void addCount() {
@@ -76,7 +64,7 @@ public class ModifierBase implements Comparable<ModifierBase> {
   }
 
   public String getDisplayName() {
-    return TranslatorUtil.translate(ModUtils.localize("ambient.modifier." + this.name));
+    return TranslatorUtil.translate(ModUtils.localize("ambient.modifier", this.name));
   }
 
   public void apply(CapabilityProviderAmbiental temp) {

@@ -6,6 +6,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -58,7 +60,7 @@ public class BlockLogPile extends Block implements ILightableBlock {
     setHardness(2.0F);
     setSoundType(SoundType.WOOD);
     setTickRandomly(true);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     this.setDefaultState(this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(LIT, false));
   }
 

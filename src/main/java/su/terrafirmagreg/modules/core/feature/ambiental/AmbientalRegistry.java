@@ -27,6 +27,7 @@ public class AmbientalRegistry<Type extends IAmbientalProviderBase> implements I
     return map.containsValue(type) || list.contains(type);
   }
 
+
   @Override
   public @NotNull Iterator<Type> iterator() {
     return new Iterator<>() {

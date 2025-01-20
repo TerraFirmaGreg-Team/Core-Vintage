@@ -1,5 +1,7 @@
 package tfcflorae.objects.items.tools;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
@@ -26,7 +28,7 @@ public class ItemHammerTFCF extends ItemTool implements IItemSize {
     this.attackDamage = (AttackDamage);
     this.attackSpeed = (AttackSpeed);
     this.setMaxDamage(Durability);
-    this.setHarvestLevel("hammer", material.getHarvestLevel());
+    this.setHarvestLevel(ToolClasses.HARD_HAMMER, material.getHarvestLevel());
 
     for (Object obj : oreNameParts) {
       if (obj instanceof Object[]) {OreDictionaryHelper.register(this, (Object[]) obj);} else {OreDictionaryHelper.register(this, obj);}

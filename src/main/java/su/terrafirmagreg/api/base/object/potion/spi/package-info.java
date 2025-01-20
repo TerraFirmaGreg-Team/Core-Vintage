@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package su.terrafirmagreg.modules.core.object.potion;
+package su.terrafirmagreg.api.base.object.potion.spi;
 
 import mcp.MethodsReturnNonnullByDefault;
 

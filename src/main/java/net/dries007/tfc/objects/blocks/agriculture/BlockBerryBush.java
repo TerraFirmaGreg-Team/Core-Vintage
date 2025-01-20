@@ -6,6 +6,8 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
@@ -38,8 +40,6 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -215,7 +215,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
       }
       entityIn.motionZ *= ConfigTFC.General.MISC.berryBushMovementModifier;
       if (bush.isSpiky() && entityIn instanceof EntityLivingBase) {
-        entityIn.attackEntityFrom(DamageSources.BERRYBUSH, 1.0F);
+        entityIn.attackEntityFrom(DamageSources.BERRY_BUSH, 1.0F);
       }
     }
   }

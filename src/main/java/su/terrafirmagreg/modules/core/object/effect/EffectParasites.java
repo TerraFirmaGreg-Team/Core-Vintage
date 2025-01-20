@@ -19,7 +19,7 @@ public class EffectParasites extends BaseEffect {
   @Override
   public void performEffect(EntityLivingBase entity, int amplifier) {
 
-    entity.attackEntityFrom(DamageSources.FOOD_POISON, 1.0F * (amplifier + 1));
+    entity.attackEntityFrom(DamageSources.PARASITES, 1.0F * (amplifier + 1));
   }
 
   @Override

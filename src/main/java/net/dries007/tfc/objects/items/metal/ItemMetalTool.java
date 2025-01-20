@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -66,7 +68,7 @@ public class ItemMetalTool extends ItemMetal {
     switch (type) {
       case PICK:
         // Non-Weapon (50% efficient for damaging, tweaks in attack speed / damage)
-        setHarvestLevel("pickaxe", harvestLevel);
+        setHarvestLevel(ToolClasses.PICKAXE, harvestLevel);
         typeDamage = 0.75f;
         areaOfEffect = 1;
         attackSpeed = -2.8f;
@@ -75,7 +77,7 @@ public class ItemMetalTool extends ItemMetal {
         break;
       case SHOVEL:
         // Non-Weapon
-        setHarvestLevel("shovel", harvestLevel);
+        setHarvestLevel(ToolClasses.SHOVEL, harvestLevel);
         typeDamage = 0.875f;
         areaOfEffect = 1;
         attackSpeed = -3f;
@@ -84,7 +86,7 @@ public class ItemMetalTool extends ItemMetal {
         break;
       case AXE:
         // Weapon
-        setHarvestLevel("axe", harvestLevel);
+        setHarvestLevel(ToolClasses.AXE, harvestLevel);
         typeDamage = 1.5f;
         areaOfEffect = 1;
         attackSpeed = -3f;
@@ -93,7 +95,7 @@ public class ItemMetalTool extends ItemMetal {
         break;
       case HOE:
         // Non-Weapon
-        setHarvestLevel("hoe", harvestLevel);
+        setHarvestLevel(ToolClasses.HOE, harvestLevel);
         typeDamage = 0.875f;
         areaOfEffect = 1;
         attackSpeed = -3;
@@ -102,7 +104,7 @@ public class ItemMetalTool extends ItemMetal {
         break;
       case CHISEL:
         // Non-Weapon
-        setHarvestLevel("chisel", harvestLevel);
+        setHarvestLevel(ToolClasses.CHISEL, harvestLevel);
         typeDamage = 0.27f;
         areaOfEffect = 1;
         attackSpeed = -1.5f;
@@ -111,8 +113,8 @@ public class ItemMetalTool extends ItemMetal {
         break;
       case SAW:
         // Non-Weapon (should be even worse than non-weapons)
-        setHarvestLevel("axe", harvestLevel);
-        setHarvestLevel("saw", harvestLevel);
+        setHarvestLevel(ToolClasses.AXE, harvestLevel);
+        setHarvestLevel(ToolClasses.SAW, harvestLevel);
         typeDamage = 0.5f;
         areaOfEffect = 1;
         attackSpeed = -3;
@@ -131,7 +133,7 @@ public class ItemMetalTool extends ItemMetal {
         break;
       case SCYTHE:
         // Weapon
-        setHarvestLevel("scythe", harvestLevel);
+        setHarvestLevel(ToolClasses.SCYTHE, harvestLevel);
         setMaxDamage((int) (material.getMaxUses() * 1.5));
         typeDamage = 2f;
         areaOfEffect = 2;
@@ -141,7 +143,7 @@ public class ItemMetalTool extends ItemMetal {
         break;
       case SHEARS:
         // Worst Non-Weapon, ever!
-        setHarvestLevel("shears", harvestLevel);
+        setHarvestLevel(ToolClasses.SHEARS, harvestLevel);
         setMaxDamage((int) (material.getMaxUses() * 0.3));
         typeDamage = 0.2f;
         areaOfEffect = 1;
@@ -151,7 +153,7 @@ public class ItemMetalTool extends ItemMetal {
         break;
       case KNIFE:
         // Weapon
-        setHarvestLevel("knife", harvestLevel);
+        setHarvestLevel(ToolClasses.KNIFE, harvestLevel);
         typeDamage = 0.54f;
         areaOfEffect = 1;
         attackSpeed = -1.5f;
@@ -160,7 +162,7 @@ public class ItemMetalTool extends ItemMetal {
         break;
       case HAMMER:
         // Non-Weapon
-        setHarvestLevel("hammer", harvestLevel);
+        setHarvestLevel(ToolClasses.HARD_HAMMER, harvestLevel);
         typeDamage = 1f;
         areaOfEffect = 1;
         attackSpeed = -3f;

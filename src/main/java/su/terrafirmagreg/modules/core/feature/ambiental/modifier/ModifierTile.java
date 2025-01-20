@@ -14,21 +14,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ModifierTile extends ModifierBlock {
+import java.util.Optional;
 
-  public ModifierTile(String name) {
-    super(name);
+public class ModifierTile extends ModifierBase {
 
-  }
+  public boolean affectedByDistance = false;
 
-  public ModifierTile(String name, float change, float potency) {
+  protected ModifierTile(String name, float change, float potency) {
     super(name, change, potency);
 
   }
 
-  public ModifierTile(String name, float change, float potency, boolean affectedByDistance) {
-    super(name, change, potency, affectedByDistance);
+  protected ModifierTile(String name, float change, float potency, boolean affectedByDistance) {
+    super(name, change, potency);
+    this.affectedByDistance = affectedByDistance;
+  }
 
+  public static Optional<ModifierTile> defined(String name, float change, float potency) {
+    return Optional.of(new ModifierTile(name, change, potency));
+  }
+
+  public static Optional<ModifierTile> none() {
+    return Optional.empty();
   }
 
   public static boolean hasProtection(EntityPlayer player) {

@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -48,7 +50,7 @@ public class BlockWorkbenchTFC extends BlockWorkbench {
 
     setSoundType(SoundType.WOOD);
     setHardness(2.0F).setResistance(5.0F);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     OreDictionaryHelper.register(this, "workbench");
     OreDictionaryHelper.register(this, "crafting", "table", "wood");
     Blocks.FIRE.setFireInfo(this, 5, 20);

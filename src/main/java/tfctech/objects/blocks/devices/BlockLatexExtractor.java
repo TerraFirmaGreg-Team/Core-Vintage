@@ -1,5 +1,7 @@
 package tfctech.objects.blocks.devices;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -50,10 +52,10 @@ public class BlockLatexExtractor extends Block {
   public BlockLatexExtractor() {
     super(Material.IRON);
     setDefaultState(blockState.getBaseState()
-                              .withProperty(FACING, NORTH)
-                              .withProperty(BASE, false)
-                              .withProperty(POT, false)
-                              .withProperty(CUT, 0));
+      .withProperty(FACING, NORTH)
+      .withProperty(BASE, false)
+      .withProperty(POT, false)
+      .withProperty(CUT, 0));
     setHardness(2.0F);
     setHarvestLevel("pickaxe", 0);
   }
@@ -81,8 +83,8 @@ public class BlockLatexExtractor extends Block {
     TELatexExtractor te = Helpers.getTE(worldIn, pos, TELatexExtractor.class);
     if (te != null) {
       return state.withProperty(BASE, te.hasBase())
-                  .withProperty(POT, te.hasPot())
-                  .withProperty(CUT, te.cutState());
+        .withProperty(POT, te.hasPot())
+        .withProperty(CUT, te.cutState());
     }
     return super.getActualState(state, worldIn, pos);
   }
@@ -158,7 +160,7 @@ public class BlockLatexExtractor extends Block {
     TELatexExtractor te = Helpers.getTE(world, pos, TELatexExtractor.class);
     if (te != null && hand == EnumHand.MAIN_HAND) {
       ItemStack stack = player.getHeldItem(hand);
-      if (stack.getItem().getHarvestLevel(stack, "toolKnife", player, state) != -1) {
+      if (stack.getItem().getHarvestLevel(stack, ToolClasses.KNIFE, player, state) != -1) {
         if (te.makeCut()) {
           world.playSound(null, pos, TechSounds.RUBBER_TRUNK_SCRATH, SoundCategory.BLOCKS, 1.0F, 1.0F);
           return true;

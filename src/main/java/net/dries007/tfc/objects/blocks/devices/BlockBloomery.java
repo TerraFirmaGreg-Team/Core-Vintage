@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -171,7 +173,7 @@ public class BlockBloomery extends BlockHorizontal implements IItemSize, ILighta
   public BlockBloomery() {
     super(Material.IRON);
     setSoundType(SoundType.METAL);
-    setHarvestLevel("pickaxe", 0);
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
     setHardness(20.0F);
     setDefaultState(this.blockState.getBaseState()
       .withProperty(FACING, EnumFacing.NORTH)

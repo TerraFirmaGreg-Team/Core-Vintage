@@ -112,7 +112,7 @@ public abstract class BaseEffect extends Potion implements IEffectSettings {
 
   @Override
   public String getName() {
-    return ModUtils.localize("potion", this.getRegistryName());
+    return ModUtils.localize("effect", this.getRegistryName());
   }
 
 }

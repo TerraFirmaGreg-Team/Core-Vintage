@@ -1,5 +1,8 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -22,7 +25,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import net.dries007.tfc.util.calendar.Month;
 
 import javax.annotation.Nonnull;
@@ -39,7 +41,7 @@ public class BlockCinnamonLog extends Block {
 
   public BlockCinnamonLog() {
     super(Material.WOOD, MapColor.ORANGE_STAINED_HARDENED_CLAY);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     setHardness(2.0F);
     setResistance(5.0F);
     Blocks.FIRE.setFireInfo(this, 5, 5);
@@ -113,8 +115,7 @@ public class BlockCinnamonLog extends Block {
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     IBlockState downState = worldIn.getBlockState(pos.down());
-    boolean shouldDestroy = true;
-    if (downState.getBlock() instanceof BlockCinnamonLog || BlocksTFC.isGrowableSoil(downState)) {shouldDestroy = false;}
+    boolean shouldDestroy = !(downState.getBlock() instanceof BlockCinnamonLog) && !BlocksTFC.isGrowableSoil(downState);
     if (shouldDestroy) {
       worldIn.destroyBlock(pos, true);
       return;

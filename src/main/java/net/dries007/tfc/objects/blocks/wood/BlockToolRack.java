@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -53,7 +55,7 @@ public class BlockToolRack extends Block implements IItemSize {
     super(WOOD, MapColor.AIR);
     this.wood = wood;
     setSoundType(SoundType.WOOD);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     setHardness(0.5f);
     setResistance(3f);
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));

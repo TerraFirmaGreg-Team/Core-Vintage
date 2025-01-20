@@ -1,5 +1,7 @@
 package tfcflorae.objects.items.tools;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -40,7 +42,7 @@ public class ItemJavelinTFCF extends ItemTool implements IItemSize {
     this.material = material;
     this.attackDamage = AttackDamage;
     this.attackSpeed = AttackSpeed;
-    this.setHarvestLevel("hammer", material.getHarvestLevel());
+    this.setHarvestLevel(ToolClasses.HARD_HAMMER, material.getHarvestLevel());
     this.setMaxDamage((int) (material.getMaxUses() * 0.1));
 
     for (Object obj : oreNameParts) {
@@ -86,8 +88,7 @@ public class ItemJavelinTFCF extends ItemTool implements IItemSize {
   @SuppressWarnings("ConstantConditions")
   @Override
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-    if (entityLiving instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) entityLiving;
+    if (entityLiving instanceof EntityPlayer player) {
       int charge = this.getMaxItemUseDuration(stack) - timeLeft;
       if (charge > 5) {
         float f = ItemBow.getArrowVelocity(charge); //Same charge time as bow
@@ -100,7 +101,7 @@ public class ItemJavelinTFCF extends ItemTool implements IItemSize {
           javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
           worldIn.spawnEntity(javelin);
           worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                            1.0F / (Constants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+            1.0F / (Constants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
         player.inventory.deleteStack(stack);
         player.addStat(StatList.getObjectUseStats(this));

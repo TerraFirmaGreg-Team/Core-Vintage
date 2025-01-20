@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.items.rock;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
@@ -40,7 +42,7 @@ public class ItemRockAxe extends ItemAxe implements IItemSize, IRockObject {
     super(category.getToolMaterial(), category.getToolMaterial().getAttackDamage(), -3);
     this.category = category;
     if (MAP.put(category, this) != null) {throw new IllegalStateException("There can only be one.");}
-    setHarvestLevel("axe", category.getToolMaterial().getHarvestLevel());
+    setHarvestLevel(ToolClasses.AXE, category.getToolMaterial().getHarvestLevel());
     OreDictionaryHelper.register(this, "axe");
     OreDictionaryHelper.register(this, "axe", "stone");
     OreDictionaryHelper.register(this, "axe", "stone", category);

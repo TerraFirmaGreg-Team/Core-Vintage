@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -84,10 +85,10 @@ public class ItemDebug extends BaseItem {
         player.sendStatusMessage(new TextComponentString(RED + Mode.TRANSFORM.getText()), true);
         break;
       }
-//      case TEMPERATURE_CAPABILITY: {
-//        player.sendStatusMessage(new TextComponentString(RED + Mode.TEMPERATURE_CAPABILITY.getText()), true);
-//        break;
-//      }
+      case TEMPERATURE_CAPABILITY: {
+        player.sendStatusMessage(new TextComponentString(RED + Mode.TEMPERATURE_CAPABILITY.getText()), true);
+        break;
+      }
       case BLOCK: {
         player.sendStatusMessage(new TextComponentString(RED + Mode.BLOCK.getText()), true);
         break;
@@ -139,11 +140,11 @@ public class ItemDebug extends BaseItem {
           new TextComponentString(Mode.TRANSFORM.getText(list.get(newState).toString())));
         break;
       }
-//      case TEMPERATURE_CAPABILITY: {
-//        player.sendMessage(new TextComponentString(
-//          Mode.TEMPERATURE_CAPABILITY.getText() + "\n" + CapabilityTemperature.get(player).toString()));
-//        break;
-//      }
+      case TEMPERATURE_CAPABILITY: {
+        player.sendMessage(new TextComponentString(
+          Mode.TEMPERATURE_CAPABILITY.getText() + "\n" + CapabilityAmbiental.get(player).toString()));
+        break;
+      }
       case BLOCK: {
         try {
           Block block = world.getBlockState(pos).getBlock();
@@ -224,10 +225,10 @@ public class ItemDebug extends BaseItem {
         tooltip.add(Mode.TRANSFORM.getText());
         break;
       }
-//      case TEMPERATURE_CAPABILITY: {
-//        tooltip.add(Mode.TEMPERATURE_CAPABILITY.getText());
-//        break;
-//      }
+      case TEMPERATURE_CAPABILITY: {
+        tooltip.add(Mode.TEMPERATURE_CAPABILITY.getText());
+        break;
+      }
       case BLOCK: {
         tooltip.add(Mode.BLOCK.getText());
         break;

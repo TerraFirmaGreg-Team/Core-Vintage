@@ -5,8 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.util.OreDictionaryHelper;
+import su.terrafirmagreg.api.data.ToolClasses;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -17,6 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -33,7 +35,7 @@ public class BlockBookshelfTFC extends Block {
     this.wood = wood;
     setSoundType(SoundType.WOOD);
     setHardness(2.0F).setResistance(5.0F);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     OreDictionaryHelper.register(this, "bookshelf");
     //noinspection ConstantConditions
     OreDictionaryHelper.register(this, "bookshelf", wood.getRegistryName().getPath());

@@ -241,7 +241,7 @@ public final class EntityUtils {
    * @param index The index of the slot.
    * @return EntityEquipmentSlot The slot for the index.
    */
-  public static EntityEquipmentSlot getEquipmentSlot(int index) {
+  public static @Nullable EntityEquipmentSlot getEquipmentSlot(int index) {
     if (index >= 0 && index < EQUIPMENT_SLOTS.length) {
       return EQUIPMENT_SLOTS[index];
     }
@@ -279,8 +279,7 @@ public final class EntityUtils {
    */
   public static double getKnockbackResistance(EntityLivingBase entity) {
 
-    return entity.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE)
-      .getAttributeValue();
+    return entity.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).getAttributeValue();
   }
 
   /**

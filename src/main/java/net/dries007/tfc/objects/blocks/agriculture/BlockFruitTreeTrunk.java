@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
@@ -32,7 +34,6 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -66,7 +67,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     if (MAP.put(tree, this) != null) {throw new IllegalStateException("There can only be one.");}
     setHardness(2.0F);
     setTickRandomly(true);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     setSoundType(SoundType.WOOD);
     Blocks.FIRE.setFireInfo(this, 5, 20);
     this.tree = tree;

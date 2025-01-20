@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -53,7 +55,7 @@ public class BlockCrucible extends Block implements IHeatConsumerBlock, IItemSiz
     super(Material.IRON);
 
     setHardness(3.0f);
-    setHarvestLevel("pickaxe", 0);
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
     setSoundType(SoundType.METAL);
   }
 

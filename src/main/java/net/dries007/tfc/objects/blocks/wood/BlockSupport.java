@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -64,13 +66,13 @@ public class BlockSupport extends Block {
     super(Material.WOOD, Material.WOOD.getMaterialMapColor());
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
     setHardness(2.0F);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     setSoundType(SoundType.WOOD);
     this.wood = wood;
     OreDictionaryHelper.register(this, "support");
     Blocks.FIRE.setFireInfo(this, 5, 20);
     setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.Y).withProperty(NORTH, false).withProperty(SOUTH, false)
-                              .withProperty(EAST, false).withProperty(WEST, false));
+      .withProperty(EAST, false).withProperty(WEST, false));
   }
 
   public static BlockSupport get(Tree wood) {
@@ -128,7 +130,7 @@ public class BlockSupport extends Block {
     BlockPos minPoint = new BlockPos(minX, minY, minZ);
     BlockPos maxPoint = new BlockPos(maxX, maxY, maxZ);
     for (BlockPos.MutableBlockPos searchingPoint : BlockPos.getAllInBoxMutable(minPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
-                                                                               maxPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
+      maxPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
       if (!listSupported.contains(searchingPoint)) {
         listUnsupported.add(searchingPoint.toImmutable()); //Adding blocks that wasn't found supported
       }
@@ -170,7 +172,7 @@ public class BlockSupport extends Block {
   @Nonnull
   public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     return state.withProperty(NORTH, isConnectable(worldIn, pos, EnumFacing.NORTH)).withProperty(SOUTH, isConnectable(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(EAST, isConnectable(worldIn, pos, EnumFacing.EAST)).withProperty(WEST, isConnectable(worldIn, pos, EnumFacing.WEST));
+      .withProperty(EAST, isConnectable(worldIn, pos, EnumFacing.EAST)).withProperty(WEST, isConnectable(worldIn, pos, EnumFacing.WEST));
   }
 
   @Override

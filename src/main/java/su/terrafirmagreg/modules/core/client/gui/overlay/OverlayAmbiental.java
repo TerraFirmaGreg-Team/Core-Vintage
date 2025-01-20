@@ -1,8 +1,11 @@
-package su.terrafirmagreg.temp.modules.ambiental;
+package su.terrafirmagreg.modules.core.client.gui.overlay;
 
+import su.terrafirmagreg.api.data.Unicode;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
+import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.temp.config.TFGConfig;
-import su.terrafirmagreg.temp.modules.ambiental.capability.TemperatureCapability;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -22,22 +25,17 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-
 @SideOnly(Side.CLIENT)
-public class TFCAmbientalGuiRenderer {
+public class OverlayAmbiental {
 
-  public static final ResourceLocation COLD_VIGNETTE = new ResourceLocation(MOD_ID, "textures/gui/cold_vignette.png");
-  public static final ResourceLocation HOT_VIGNETTE = new ResourceLocation(MOD_ID, "textures/gui/hot_vignette.png");
-  public static final ResourceLocation MINUS = new ResourceLocation(MOD_ID, "textures/gui/lower.png");
-  public static final ResourceLocation PLUS = new ResourceLocation(MOD_ID, "textures/gui/higher.png");
-  public static final ResourceLocation MINUSER = new ResourceLocation(MOD_ID, "textures/gui/lowerer.png");
-  public static final ResourceLocation PLUSER = new ResourceLocation(MOD_ID, "textures/gui/higherer.png");
-
-  public static boolean enableOverlay = TFGConfig.CLIENT.ENABLE_OVERLAY;
+  public static final ResourceLocation COLD_VIGNETTE = ModUtils.resource("textures/gui/cold_vignette.png");
+  public static final ResourceLocation HOT_VIGNETTE = ModUtils.resource("textures/gui/hot_vignette.png");
+  public static final ResourceLocation MINUS = ModUtils.resource("textures/gui/icons/lower.png");
+  public static final ResourceLocation PLUS = ModUtils.resource("textures/gui/icons/higher.png");
+  public static final ResourceLocation MINUSER = ModUtils.resource("textures/gui/icons/lowerer.png");
+  public static final ResourceLocation PLUSER = ModUtils.resource("textures/gui/icons/higherer.png");
 
   private static void drawTexturedModalRect(float x, float y, float width, float height, ResourceLocation loc) {
     Minecraft minecraft = Minecraft.getMinecraft();
@@ -63,18 +61,17 @@ public class TFCAmbientalGuiRenderer {
   }
 
   @SubscribeEvent
-  public void render(RenderGameOverlayEvent.Pre event) {
-    EntityPlayer player = Minecraft.getMinecraft().player;
+  public void onPostRenderOverlay(RenderGameOverlayEvent.Post event) {
+  }
 
+  @SubscribeEvent
+  public void render(RenderGameOverlayEvent.Pre event) {
+
+    EntityPlayer player = Minecraft.getMinecraft().player;
     if (player.isCreative() || player.isDead || player.isSpectator()) {
       return;
     }
-
-    if (!ArrayUtils.contains(TFGConfig.GENERAL.allowedDims, player.dimension)) {
-      return;
-    }
-
-    TemperatureCapability tempSystem = player.getCapability(TemperatureCapability.CAPABILITY, null);
+    var tempSystem = CapabilityAmbiental.get(player);
     ScaledResolution resolution = event.getResolution();
     int width = resolution.getScaledWidth();
     int height = resolution.getScaledHeight();
@@ -112,15 +109,16 @@ public class TFCAmbientalGuiRenderer {
     int mid = sr.getScaledWidth() / 2;
     temperature = tempSystem.getTemperature();
     GL11.glEnable(GL11.GL_BLEND);
-    if (temperature > TemperatureCapability.AVERAGE) {
-      float hotRange = TemperatureCapability.HOT_THRESHOLD - TemperatureCapability.AVERAGE + 2;
-      float red = Math.max(0, Math.min(1, (temperature - TemperatureCapability.AVERAGE) / hotRange));
+    if (temperature > CapabilityProviderAmbiental.AVERAGE) {
+      float hotRange = CapabilityProviderAmbiental.HOT_THRESHOLD - CapabilityProviderAmbiental.AVERAGE + 2;
+      float red = Math.max(0, Math.min(1, (temperature - CapabilityProviderAmbiental.AVERAGE) / hotRange));
       redCol = 1F;
       greenCol = 1.0F - red / 2.4F;
       blueCol = 1.0F - red / 1.6F;
     } else {
-      float coolRange = TemperatureCapability.AVERAGE - TemperatureCapability.COOL_THRESHOLD - 2;
-      float blue = Math.max(0, Math.min(1, (TemperatureCapability.AVERAGE - temperature) / coolRange));
+      float coolRange = CapabilityProviderAmbiental.AVERAGE - CapabilityProviderAmbiental.COOL_THRESHOLD - 2;
+      float blue = Math.max(0,
+        Math.min(1, (CapabilityProviderAmbiental.AVERAGE - temperature) / coolRange));
       redCol = 1.0F - blue / 1.6F;
       greenCol = 1.0F - blue / 2.4F;
       blueCol = 1.0F;
@@ -132,27 +130,35 @@ public class TFCAmbientalGuiRenderer {
     float speed = tempSystem.getChangeSpeed();
     float change = tempSystem.getChange();
     if (change > 0) {
-      if (change > TemperatureCapability.HIGH_CHANGE) {
+      if (change > CapabilityProviderAmbiental.HIGH_CHANGE) {
         drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, PLUSER);
       } else {
         drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, PLUS);
       }
     } else {
-      if (change < -TemperatureCapability.HIGH_CHANGE) {
+      if (change < -CapabilityProviderAmbiental.HIGH_CHANGE) {
         drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, MINUSER);
       } else {
         drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, MINUS);
       }
     }
-    if ((player.isSneaking() || !TFGConfig.CLIENT.SNEAKY_DETAILS) && tempSystem instanceof TemperatureCapability) {
+    if (player.isSneaking() || !ConfigCore.MISC.AMBIENTAL.sneakyDetails) {
       float targetFormatted = tempSystem.getTarget();
       float tempFormatted = tempSystem.getTemperature();
       float changeFormatted = tempSystem.getChange();
+      if (!ConfigCore.MISC.AMBIENTAL.celsius) {
+        targetFormatted = targetFormatted * ((float) 9 / 5) + 32;
+        tempFormatted = tempFormatted * ((float) 9 / 5) + 32;
+        changeFormatted = changeFormatted * ((float) 9 / 5);
+      }
       FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
-      String tempStr = String.format("%.1f\u00BA -> %.1f\u00BA", temperature, targetFormatted);
-      String changeStr = String.format("%.3f\u00BA/s", change);
-      fr.drawStringWithShadow(tempStr, mid + 50 - (float) fr.getStringWidth(tempStr) / 2 + offsetX, armorRowHeight + 1 + offsetY, c.getRGB());
-      fr.drawStringWithShadow(changeStr, mid - 50 - (float) fr.getStringWidth(changeStr) / 2, armorRowHeight + 1, c.getRGB());
+      String tempStr = String.format("%.1f" + Unicode.DEGREE + " -> %.1f" + Unicode.DEGREE,
+        temperature, targetFormatted);
+      String changeStr = String.format("%.3f" + Unicode.DEGREE + "/s", change);
+      fr.drawStringWithShadow(tempStr, mid + 50 - (float) fr.getStringWidth(tempStr) / 2 + offsetX,
+        armorRowHeight + 1 + offsetY, c.getRGB());
+      fr.drawStringWithShadow(changeStr, mid - 50 - (float) fr.getStringWidth(changeStr) / 2,
+        armorRowHeight + 1, c.getRGB());
 
     }
     GL11.glColor4f(1f, 1f, 1f, 0.9F);
@@ -160,45 +166,45 @@ public class TFCAmbientalGuiRenderer {
   }
 
   private void drawTemperatureVignettes(int width, int height, EntityPlayer player, RenderGameOverlayEvent.Pre event) {
-    if (enableOverlay) {
-      ResourceLocation vignetteLocation = null;
-      float temperature = 1f;
-      TemperatureCapability tempSystem = player.getCapability(TemperatureCapability.CAPABILITY, null);
+    ResourceLocation vignetteLocation = null;
+    float temperature = 1f;
+    var tempSystem = CapabilityAmbiental.get(player);
+    if (tempSystem != null) {
       temperature = tempSystem.getTemperature();
+    }
 
-      float opacity = 1f;
-      if (temperature > TemperatureCapability.HOT_THRESHOLD) {
-        vignetteLocation = HOT_VIGNETTE;
-        opacity = Math.min(0.95f, (temperature - TemperatureCapability.HOT_THRESHOLD) / 14);
-      } else if (temperature < TemperatureCapability.COOL_THRESHOLD) {
-        vignetteLocation = COLD_VIGNETTE;
-        opacity = Math.min(0.95f, (TemperatureCapability.COOL_THRESHOLD - temperature) / 14);
-      }
+    float opacity = 1f;
+    if (temperature > CapabilityProviderAmbiental.HOT_THRESHOLD) {
+      vignetteLocation = HOT_VIGNETTE;
+      opacity = Math.min(0.95f, (temperature - CapabilityProviderAmbiental.HOT_THRESHOLD) / 14);
+    } else if (temperature < CapabilityProviderAmbiental.COOL_THRESHOLD) {
+      vignetteLocation = COLD_VIGNETTE;
+      opacity = Math.min(0.95f, (CapabilityProviderAmbiental.COOL_THRESHOLD - temperature) / 14);
+    }
 
-      if (event.getType() == ElementType.PORTAL) {
+    if (event.getType() == ElementType.PORTAL) {
 
-        if (vignetteLocation != null) {
-          Minecraft minecraft = Minecraft.getMinecraft();
-          minecraft.getTextureManager().bindTexture(vignetteLocation);
+      if (vignetteLocation != null) {
+        Minecraft minecraft = Minecraft.getMinecraft();
+        minecraft.getTextureManager().bindTexture(vignetteLocation);
 
-          GlStateManager.disableDepth();
-          GlStateManager.depthMask(false);
-          GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
-          GlStateManager.color(1.0F, 1.0F, 1.0F, opacity);
-          GlStateManager.disableAlpha();
-          Tessellator tessellator = Tessellator.getInstance();
-          BufferBuilder buffer = tessellator.getBuffer();
-          buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-          buffer.pos(0.0D, height, -90.0D).tex(0.0D, 1.0D).endVertex();
-          buffer.pos(width, height, -90.0D).tex(1.0D, 1.0D).endVertex();
-          buffer.pos(width, 0.0D, -90.0D).tex(1.0D, 0.0D).endVertex();
-          buffer.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D).endVertex();
-          tessellator.draw();
-          GlStateManager.depthMask(true);
-          GlStateManager.enableDepth();
-          GlStateManager.enableAlpha();
-          GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        }
+        GlStateManager.disableDepth();
+        GlStateManager.depthMask(false);
+        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, opacity);
+        GlStateManager.disableAlpha();
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder buffer = tessellator.getBuffer();
+        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+        buffer.pos(0.0D, height, -90.0D).tex(0.0D, 1.0D).endVertex();
+        buffer.pos(width, height, -90.0D).tex(1.0D, 1.0D).endVertex();
+        buffer.pos(width, 0.0D, -90.0D).tex(1.0D, 0.0D).endVertex();
+        buffer.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D).endVertex();
+        tessellator.draw();
+        GlStateManager.depthMask(true);
+        GlStateManager.enableDepth();
+        GlStateManager.enableAlpha();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
       }
     }
   }

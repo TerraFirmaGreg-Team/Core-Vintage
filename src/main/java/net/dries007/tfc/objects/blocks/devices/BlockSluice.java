@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -66,7 +68,7 @@ public class BlockSluice extends BlockHorizontal implements IItemSize {
     super(Material.WOOD);
     setDefaultState(blockState.getBaseState().withProperty(UPPER, false));
     setHardness(8.0f);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
   }
 
   @Nonnull

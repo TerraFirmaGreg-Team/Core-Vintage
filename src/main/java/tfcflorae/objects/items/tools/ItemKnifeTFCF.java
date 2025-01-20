@@ -1,11 +1,6 @@
 package tfcflorae.objects.items.tools;
 
-import com.google.common.collect.ImmutableSet;
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.api.data.ToolClasses;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,6 +11,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.google.common.collect.ImmutableSet;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.api.capability.damage.DamageType;
+import net.dries007.tfc.api.capability.size.IItemSize;
+import net.dries007.tfc.api.capability.size.Size;
+import net.dries007.tfc.api.capability.size.Weight;
 import tfcflorae.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
@@ -33,7 +34,7 @@ public class ItemKnifeTFCF extends ItemTool implements IItemSize {
     this.attackDamage = AttackDamage;
     this.attackSpeed = AttackSpeed;
     this.setMaxDamage(Durability);
-    this.setHarvestLevel("knife", material.getHarvestLevel());
+    this.setHarvestLevel(ToolClasses.KNIFE, material.getHarvestLevel());
 
     for (Object obj : oreNameParts) {
       if (obj instanceof Object[]) {OreDictionaryHelper.register(this, (Object[]) obj);} else {OreDictionaryHelper.register(this, obj);}

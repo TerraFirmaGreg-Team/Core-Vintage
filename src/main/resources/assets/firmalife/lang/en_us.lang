@@ -344,9 +344,6 @@ jei.tooltip.firmalife.cocoa_powder=You can get cocoa powder by crafting cocoa bu
 jei.tooltip.firmalife.pineapple_chunks=You can get pineapple chunks by crafting pineapple fiber.
 vein.halite.name=Halite
 
-death.attack.swarm=%1$s died due to a swarm of bees
-effectFL.swarm=Swarm
-
 config.firmalife.general=General Settings
 config.firmalife.general.tooltip=General configuration for Firmalife
 

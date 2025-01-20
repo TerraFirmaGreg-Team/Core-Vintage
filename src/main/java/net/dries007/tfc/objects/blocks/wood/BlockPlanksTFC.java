@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,7 +29,7 @@ public class BlockPlanksTFC extends Block {
     this.wood = wood;
     setSoundType(SoundType.WOOD);
     setHardness(2.0F).setResistance(5.0F);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     OreDictionaryHelper.register(this, "plank", "wood");
     //noinspection ConstantConditions
     OreDictionaryHelper.register(this, "plank", "wood", wood.getRegistryName().getPath());

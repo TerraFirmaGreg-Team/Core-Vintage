@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -78,7 +80,7 @@ public class BlockBlastFurnace extends Block implements IBellowsConsumerBlock, I
     super(Material.IRON);
     setHardness(2.0F);
     setResistance(2.0F);
-    setHarvestLevel("pickaxe", 0);
+    setHarvestLevel(ToolClasses.PICKAXE, 0);
   }
 
   /**

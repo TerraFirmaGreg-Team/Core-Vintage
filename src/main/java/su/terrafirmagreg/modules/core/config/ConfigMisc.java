@@ -117,6 +117,7 @@ public final class ConfigMisc {
       "It's advisable to not change this by a lot since the entire ecosystem revolves around this. ",
       "Default = 15"
     })
+    @Config.RangeDouble(min = 0F, max = 30F)
     public float averageTemperature = 15f;
 
     @Config.Comment({
@@ -146,6 +147,12 @@ public final class ConfigMisc {
       "Default = 5"
     })
     public float freezingTemperature = 5f;
+
+    @Config.Comment({
+      "The temperature that nano or quantum armor will do when you are in a full set.",
+      "Default = 20"
+    })
+    public int nanoOrQuarkTemp = 20;
 
   }
 }

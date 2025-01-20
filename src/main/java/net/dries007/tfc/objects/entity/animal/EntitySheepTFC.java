@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
@@ -142,7 +143,7 @@ public class EntitySheepTFC extends EntityAnimalMammal implements IShearable, IL
   @Override
   public boolean processInteract(EntityPlayer player, EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
-    if (OreDictionaryHelper.doesStackMatchOre(stack, "toolKnife")) {
+    if (OreDictionaryHelper.doesStackMatchOre(stack, ToolClasses.KNIFE)) {
       if (!world.isRemote) {
         if (isReadyForAnimalProduct()) {
           stack.damageItem(1, player);

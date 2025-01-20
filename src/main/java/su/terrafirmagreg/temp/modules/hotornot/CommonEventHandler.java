@@ -5,8 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.integration.gregtech.init.ItemsGregTech;
 import su.terrafirmagreg.temp.config.HotLists;
 import su.terrafirmagreg.temp.config.TFGConfig;
-import su.terrafirmagreg.temp.modules.ambiental.TFCAmbientalGuiRenderer;
-import su.terrafirmagreg.temp.modules.ambiental.capability.TemperatureCapability;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -36,13 +34,6 @@ public class CommonEventHandler {
   public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
     if (event.getModID().equals(MOD_ID)) {
       ConfigManager.sync(MOD_ID, Config.Type.INSTANCE);
-      TemperatureCapability.AVERAGE = TFGConfig.GENERAL.averageTemperature;
-      TemperatureCapability.HOT_THRESHOLD = TFGConfig.GENERAL.hotThreshold;
-      TemperatureCapability.COOL_THRESHOLD = TFGConfig.GENERAL.coolThreshold;
-      TemperatureCapability.BURN_THRESHOLD = TFGConfig.GENERAL.burnThreshold;
-      TemperatureCapability.FREEZE_THRESHOLD = TFGConfig.GENERAL.freezeThreshold;
-      TemperatureCapability.NANO_QUARK_ARMOR_TEMP = TFGConfig.GENERAL.nanoOrQuarkTemp;
-      TFCAmbientalGuiRenderer.enableOverlay = TFGConfig.CLIENT.ENABLE_OVERLAY;
     }
   }
 

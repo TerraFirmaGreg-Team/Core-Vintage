@@ -6,6 +6,8 @@
 package net.dries007.tfc.objects.blocks.wood;
 
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -57,7 +59,7 @@ public class BlockLoom extends BlockContainer implements IItemSize {
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
     this.wood = wood;
     setSoundType(SoundType.WOOD);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     setHardness(0.5f);
     setResistance(3f);
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));

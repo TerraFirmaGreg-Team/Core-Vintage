@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -143,7 +145,7 @@ public class BlockPlacedHide extends Block {
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = playerIn.getHeldItem(hand);
-    if (OreDictionaryHelper.doesStackMatchOre(stack, "toolKnife")) {
+    if (OreDictionaryHelper.doesStackMatchOre(stack, ToolClasses.KNIFE)) {
       if (!worldIn.isRemote) {
         // Account for the distance between the hitbox and where the hide is rendered
         Vec3d point = calculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));

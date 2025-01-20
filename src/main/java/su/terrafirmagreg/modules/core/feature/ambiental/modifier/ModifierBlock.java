@@ -10,6 +10,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+
 import java.util.Optional;
 
 import static su.terrafirmagreg.modules.core.feature.ambiental.handler.ModifierHandlerBlock.BLOCK;
@@ -19,24 +21,23 @@ public class ModifierBlock extends ModifierBase {
 
   public boolean affectedByDistance = false;
 
-  public ModifierBlock(String name) {
-    super(name);
-
-  }
-
-  public ModifierBlock(String name, float change, float potency) {
+  protected ModifierBlock(String name, float change, float potency) {
     super(name, change, potency);
 
   }
 
-  public ModifierBlock(String name, float change, float potency, boolean affectedByDistance) {
+  protected ModifierBlock(String name, float change, float potency, boolean affectedByDistance) {
     super(name, change, potency);
     this.affectedByDistance = affectedByDistance;
 
   }
 
-  public static Optional<ModifierBase> defined(String name, float change, float potency) {
+  public static Optional<ModifierBlock> defined(String name, float change, float potency) {
     return Optional.of(new ModifierBlock(name, change, potency));
+  }
+
+  public static Optional<ModifierTile> none() {
+    return Optional.empty();
   }
 
   public static void computeModifiers(EntityPlayer player, AmbientalModifierStorage storage) {
@@ -52,6 +53,9 @@ public class ModifierBlock extends ModifierBase {
       Block block = state.getBlock();
 
       if (state == skipState) {
+        continue;
+      }
+      if (state.getBlock() instanceof BlockRockVariant) {
         continue;
       }
 //            if (block instanceof BlockRock || block instanceof BlockSoil) {

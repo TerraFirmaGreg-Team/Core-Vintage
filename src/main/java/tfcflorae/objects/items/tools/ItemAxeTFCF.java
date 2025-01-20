@@ -1,5 +1,7 @@
 package tfcflorae.objects.items.tools;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemAxe;
@@ -27,7 +29,7 @@ public class ItemAxeTFCF extends ItemAxe implements IItemSize {
     this.attackDamage = (AttackDamage);
     this.attackSpeed = (AttackSpeed);
     this.setMaxDamage(Durability);
-    this.setHarvestLevel("axe", material.getHarvestLevel());
+    this.setHarvestLevel(ToolClasses.AXE, material.getHarvestLevel());
 
     for (Object obj : oreNameParts) {
       if (obj instanceof Object[]) {OreDictionaryHelper.register(this, (Object[]) obj);} else {OreDictionaryHelper.register(this, obj);}

@@ -8,8 +8,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-import javax.annotation.Nullable;
-
 public final class CapabilityAmbiental {
 
   public static final ResourceLocation KEY = ModUtils.resource("ambiental_capability");
@@ -21,7 +19,6 @@ public final class CapabilityAmbiental {
     CapabilityManager.INSTANCE.register(ICapabilityAmbiental.class, new CapabilityStorageAmbiental(), CapabilityProviderAmbiental::new);
   }
 
-  @Nullable
   public static ICapabilityAmbiental get(Entity entity) {
     return entity.getCapability(CAPABILITY, null);
   }

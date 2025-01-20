@@ -7,19 +7,30 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AmbientalModifierStorage implements Iterable<ModifierBase> {
 
-  private final Map<String, ModifierBase> map = new Object2ObjectOpenHashMap<>();
+  private Map<String, ModifierBase> map = new Object2ObjectOpenHashMap<>();
 
-  public ModifierBase add(ModifierBase value) {
-    if (value == null) {
-      return null;
-    }
-    return this.put(value.getName(), value);
+  public void keepOnlyNEach(int n) {
+
+    Map<String, List<ModifierBase>> grouped = map.values().stream()
+      .collect(Collectors.groupingBy(ModifierBase::getName));
+    this.map = grouped
+      .entrySet()
+      .stream()
+      .flatMap(entry ->
+        entry.getValue()
+          .stream()
+          .sorted(Comparator.reverseOrder())
+          .limit(n)
+      ).collect(Collectors.toMap(ModifierBase::getName, v -> v));
   }
 
   private ModifierBase put(String key, ModifierBase value) {
@@ -35,8 +46,15 @@ public class AmbientalModifierStorage implements Iterable<ModifierBase> {
     }
   }
 
-  public <T extends ModifierBase> void add(Optional<T> tempModifier) {
-    tempModifier.ifPresent(this::add);
+  public ModifierBase add(ModifierBase value) {
+    if (value == null) {
+      return null;
+    }
+    return this.put(value.getName(), value);
+  }
+
+  public <T extends ModifierBase> void add(Optional<T> modifier) {
+    modifier.ifPresent(this::add);
   }
 
   public boolean contains(String key) {
@@ -53,16 +71,16 @@ public class AmbientalModifierStorage implements Iterable<ModifierBase> {
 
   public float getTotalPotency() {
     float potency = 1f;
-    for (Map.Entry<String, ModifierBase> entry : map.entrySet()) {
-      potency += entry.getValue().getPotency();
+    for (var entry : map.values()) {
+      potency += entry.getPotency();
     }
     return potency;
   }
 
   public float getTargetTemperature() {
     float change = 0f;
-    for (Map.Entry<String, ModifierBase> entry : map.entrySet()) {
-      change += entry.getValue().getChange();
+    for (var entry : map.values()) {
+      change += entry.getChange();
     }
     return change;
   }
@@ -78,8 +96,7 @@ public class AmbientalModifierStorage implements Iterable<ModifierBase> {
     Map<String, ModifierBase> map1 = map;
     return new Iterator<>() {
 
-      private final Iterator<Map.Entry<String, ModifierBase>> mapIterator = map1.entrySet()
-        .iterator();
+      private final Iterator<Map.Entry<String, ModifierBase>> mapIterator = map1.entrySet().iterator();
 
       @Override
       public boolean hasNext() {

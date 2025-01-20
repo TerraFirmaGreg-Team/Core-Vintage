@@ -59,12 +59,7 @@ metaitem.mars.rover.computer.name=Mars Rover Computer Controller
 metaitem.venus.rover.computer.name=Venus Rover Computer Controller
 metaitem.cargo.rocket.computer.name=Cargo Rocket Computer Controller
 
-# TFC death messages
-death.attack.hypothermia=%1$s froze to death.
-death.attack.hyperthermia=%1$s died of heatstroke.
 
-effect.tfg.cool.name=Cooling Down
-effect.tfg.warm.name=Warming Up
 
 # Tooltips
 tooltip.tfg.toohot=Too hot to handle! Wear protection.
@@ -80,6 +75,7 @@ tfg.machine.greenhouse.tooltip.3=This is weather-resistant!
 tfg.machine.greenhouse.name=Greenhouse
 recipemap.greenhouse.name=Greenhouse
 
+##############################################################
 
 ## Item Group
 item_group.tfg.core.name=Core (TFG)
@@ -90,3 +86,27 @@ block.tfg.core.debug.name=Debug Block
 
 ## Item
 item.tfg.core.wand.name=Debug Wand
+
+## Effect
+effect.tfg.core.overburdened=Overburdened
+effect.tfg.core.thirst=Thirst
+effect.tfg.core.parasites=Parasites
+effect.tfg.core.swarm=Swarm
+effect.tfg.core.hyperthermia=Hyperthermia
+effect.tfg.core.hypothermia=Hypothermia
+effect.tfg.core.resist_cold=Resist Cold
+effect.tfg.core.resist_heat=Resist Heat
+effect.tfg.core.caffeine=Caffeine
+
+# Damage Sources
+death.attack.dehydration=%1$s died of dehydration.
+death.attack.parasites=%1$s died of parasites.
+death.attack.plucking=%1$s died by having it's feathers plucked.
+death.attack.grill=%1$s grilled themselves well-done.
+death.attack.soup=%1$s made their hand into stew.
+death.attack.berry_bush=%1$s was pricked to death.
+death.attack.hypothermia=%1$s froze to death.
+death.attack.hyperthermia=%1$s died of heatstroke.
+death.attack.swarm=%1$s died due to a swarm of bees.
+death.attack.bear_trap=%1$s didn't watch their step
+death.attack.pigvil=%1$s was squashed by a falling...Pigvil?

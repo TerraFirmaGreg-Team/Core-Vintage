@@ -5,6 +5,7 @@
 
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
@@ -75,7 +76,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     super(Material.WOOD, Material.WOOD.getMaterialMapColor());
     if (MAP.put(tree, this) != null) {throw new IllegalStateException("There can only be one.");}
     setHardness(2.0F);
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     setSoundType(SoundType.WOOD);
     this.tree = tree;
     Blocks.FIRE.setFireInfo(this, 5, 20);

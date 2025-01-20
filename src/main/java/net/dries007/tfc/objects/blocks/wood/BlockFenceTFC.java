@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -24,7 +26,7 @@ public class BlockFenceTFC extends BlockFence {
     super(Material.WOOD, Material.WOOD.getMaterialMapColor());
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
     this.wood = wood;
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     setHardness(2.0F); // match vanilla
     setResistance(15.0F);
     OreDictionaryHelper.register(this, "fence", "wood");

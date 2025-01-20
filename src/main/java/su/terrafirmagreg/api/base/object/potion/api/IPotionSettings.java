@@ -14,11 +14,12 @@ public interface IPotionSettings extends IBaseSettings<Settings> {
   @Getter
   class Settings extends BaseSettings<Settings> {
 
-    PotionEffect[] effect = new PotionEffect[]{};
+    PotionEffect[] effect;
     Potion potion;
     int duration;
 
     protected Settings() {
+      this.effect = new PotionEffect[]{};
     }
 
     public static Settings of() {

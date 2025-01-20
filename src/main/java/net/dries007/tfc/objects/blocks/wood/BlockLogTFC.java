@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -61,7 +63,7 @@ public class BlockLogTFC extends BlockLog implements IItemSize {
     this.wood = wood;
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
     setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y).withProperty(PLACED, true).withProperty(SMALL, false));
-    setHarvestLevel("axe", 0);
+    setHarvestLevel(ToolClasses.AXE, 0);
     setHardness(2.0F);
     setResistance(5.0F);
     OreDictionaryHelper.register(this, "log", "wood");
@@ -211,7 +213,7 @@ public class BlockLogTFC extends BlockLog implements IItemSize {
   @Override
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(LOG_AXIS, EnumAxis.values()[meta & 0b11]).withProperty(PLACED, (meta & 0b100) == 0b100)
-                            .withProperty(SMALL, (meta & 0b1000) == 0b1000);
+      .withProperty(SMALL, (meta & 0b1000) == 0b1000);
   }
 
   @Override

@@ -5,6 +5,8 @@
 
 package net.dries007.tfc.objects.blocks.devices;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -87,7 +89,7 @@ public class BlockCharcoalForge extends Block implements IBellowsConsumerBlock, 
     super(BlockCharcoalPile.CHARCOAL_MATERIAL);
 
     setSoundType(SoundType.GROUND);
-    setHarvestLevel("shovel", 0);
+    setHarvestLevel(ToolClasses.SHOVEL, 0);
     setHardness(1.0F);
     setTickRandomly(true); // Used for chimney checks -> extinguish
     this.setDefaultState(this.blockState.getBaseState().withProperty(LIT, false));

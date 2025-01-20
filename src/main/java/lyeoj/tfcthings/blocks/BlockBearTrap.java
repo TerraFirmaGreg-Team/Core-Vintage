@@ -1,6 +1,7 @@
 package lyeoj.tfcthings.blocks;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.data.ToolClasses;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -45,10 +46,10 @@ import javax.annotation.Nullable;
 
 public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigurableItem {
 
-  protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
   public static final PropertyBool CLOSED = PropertyBool.create("closed");
   public static final PropertyBool BURIED = PropertyBool.create("buried");
   public static final PropertyDirection FACING = BlockHorizontal.FACING;
+  protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
   public BlockBearTrap() {
     super(Material.IRON);
@@ -57,9 +58,9 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
     this.setCreativeTab(CreativeTabsTFC.CT_METAL);
     this.setHardness(10.0F);
     this.setResistance(10.0F);
-    this.setHarvestLevel("pickaxe", 0);
+    this.setHarvestLevel(ToolClasses.PICKAXE, 0);
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURIED, Boolean.valueOf(false))
-                                        .withProperty(CLOSED, Boolean.valueOf(false)));
+      .withProperty(CLOSED, Boolean.valueOf(false)));
   }
 
   @Override
@@ -86,7 +87,7 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, new IProperty[]{FACING, BURIED, CLOSED});
+    return new BlockStateContainer(this, FACING, BURIED, CLOSED);
   }
 
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
@@ -96,11 +97,11 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
   @Nonnull
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4)).withProperty(BURIED, meta / 4 % 2 != 0)
-               .withProperty(CLOSED, meta / 8 != 0);
+      .withProperty(CLOSED, meta / 8 != 0);
   }
 
   public int getMetaFromState(IBlockState state) {
-    return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex() + ((Boolean) state.getValue(BURIED) ? 4 : 0) + ((Boolean) state.getValue(CLOSED) ? 8 : 0);
+    return state.getValue(FACING).getHorizontalIndex() + (state.getValue(BURIED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
   }
 
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
@@ -110,7 +111,7 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
   @Nullable
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
-    return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (double) ((float) 0 * 0.125F), axisalignedbb.maxZ);
+    return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F, axisalignedbb.maxZ);
   }
 
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
@@ -159,9 +160,8 @@ public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigur
 
   @Override
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-    if (entityIn instanceof EntityLivingBase) {
+    if (entityIn instanceof EntityLivingBase entityLiving) {
       TileEntityBearTrap trap = getTileEntity(worldIn, pos);
-      EntityLivingBase entityLiving = (EntityLivingBase) entityIn;
       if (trap.isOpen()) {
         int debuffDuration = ConfigTFCThings.Items.BEAR_TRAP.debuffDuration;
         double healthCut = ConfigTFCThings.Items.BEAR_TRAP.healthCut;

@@ -9,11 +9,14 @@ import su.terrafirmagreg.framework.registry.api.IRegistryManager;
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
+import su.terrafirmagreg.modules.core.event.EventHandlerAmbiental;
+import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesEntity;
+import su.terrafirmagreg.modules.core.event.EventHandlerConfigChanged;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.PacketsCore;
-import su.terrafirmagreg.temp.modules.ambiental.TFCAmbientalEventHandler;
-import su.terrafirmagreg.temp.modules.ambiental.TFCAmbientalGuiRenderer;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -62,6 +65,7 @@ public final class ModuleCore extends ModuleBase {
   public void onRegister(IRegistryManager registry) {
     BlocksCore.onRegister(registry);
     ItemsCore.onRegister(registry);
+    EffectsCore.onRegister(registry);
   }
 
   @Override
@@ -76,13 +80,11 @@ public final class ModuleCore extends ModuleBase {
     CapabilityHeat.register();
     CapabilityAmbiental.register();
 
-    // Common Events
-    MinecraftForge.EVENT_BUS.register(new TFCAmbientalEventHandler());
   }
 
   @Override
   public void onClientPreInit(FMLPreInitializationEvent event) {
-    MinecraftForge.EVENT_BUS.register(new TFCAmbientalGuiRenderer());
+    MinecraftForge.EVENT_BUS.register(new OverlayAmbiental());
   }
 
   @Override
@@ -93,6 +95,10 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public @NotNull List<Class<?>> getEventBusSubscribers() {
     ObjectList<Class<?>> list = new ObjectArrayList<>();
+
+    list.add(EventHandlerAmbiental.class);
+    list.add(EventHandlerCapabilitiesEntity.class);
+    list.add(EventHandlerConfigChanged.class);
 
     return list;
   }

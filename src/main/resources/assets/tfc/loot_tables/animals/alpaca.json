@@ -10,7 +10,7 @@
           "name": "tfc:food/camelidae",
           "functions": [
             {
-              "function": "tfc:apply_skill",
+              "function": "tfg:apply_skill",
               "skill": "butchering",
               "add": 0.06,
               "count": {

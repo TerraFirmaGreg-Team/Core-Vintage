@@ -8,13 +8,11 @@ package net.dries007.tfc.objects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.loot.ApplySimpleSkill;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
@@ -105,9 +103,6 @@ public class LootTablesTFC {
     ANIMALS_WILDEBEEST = register("animals/wildebeest");
     ANIMALS_YAK = register("animals/yak");
     ANIMALS_ZEBU = register("animals/zebu");
-
-    // Loot function for skill drop multiplier
-    LootFunctionManager.registerFunction(new ApplySimpleSkill.Serializer(new ResourceLocation(TFC, "apply_skill")));
   }
 
   @SubscribeEvent

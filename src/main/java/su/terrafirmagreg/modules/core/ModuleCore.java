@@ -16,6 +16,7 @@ import su.terrafirmagreg.modules.core.event.EventHandlerConfigChanged;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.core.init.LootTablesCore;
 import su.terrafirmagreg.modules.core.init.PacketsCore;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -66,6 +67,7 @@ public final class ModuleCore extends ModuleBase {
     BlocksCore.onRegister(registry);
     ItemsCore.onRegister(registry);
     EffectsCore.onRegister(registry);
+    LootTablesCore.onRegister(registry);
   }
 
   @Override

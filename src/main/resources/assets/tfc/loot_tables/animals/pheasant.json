@@ -10,7 +10,7 @@
           "name": "tfc:food/pheasant",
           "functions": [
             {
-              "function": "tfc:apply_skill",
+              "function": "tfg:apply_skill",
               "skill": "butchering",
               "add": 0.03,
               "count": {

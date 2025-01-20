@@ -1,14 +1,11 @@
-package org.labellum.mc.waterflasks;
+package su.terrafirmagreg.modules.core.object.loot;
 
-/**
- * Much thanks to TFC for making this possible. This code mostly borrowed from net.dries007.tfc.util.loot.ApplySimpleSkill
- */
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
@@ -23,15 +20,12 @@ import net.dries007.tfc.util.skills.SimpleSkill;
 import net.dries007.tfc.util.skills.SkillTier;
 import net.dries007.tfc.util.skills.SkillType;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 /**
  * Skill and random affect chance of any drop at all. Can require a minimum Skill Tier
  */
 
-@ParametersAreNonnullByDefault
 public class ApplyRequiredSkill extends LootFunction {
 
   private final SkillType<? extends SimpleSkill> skillType;
@@ -46,7 +40,6 @@ public class ApplyRequiredSkill extends LootFunction {
   }
 
   @Override
-  @Nonnull
   public ItemStack apply(ItemStack stack, Random rand, LootContext context) {
     Entity entity = context.getKillerPlayer();
     if (entity instanceof EntityPlayer) {
@@ -68,8 +61,8 @@ public class ApplyRequiredSkill extends LootFunction {
 
   public static class Serializer extends LootFunction.Serializer<ApplyRequiredSkill> {
 
-    public Serializer(ResourceLocation location) {
-      super(location, ApplyRequiredSkill.class);
+    public Serializer() {
+      super(ModUtils.resource("apply_req_skill"), ApplyRequiredSkill.class);
     }
 
     @Override
@@ -80,7 +73,6 @@ public class ApplyRequiredSkill extends LootFunction {
     }
 
     @Override
-    @Nonnull
     public ApplyRequiredSkill deserialize(JsonObject object, JsonDeserializationContext deserializationContext, LootCondition[] conditionsIn) {
       String skillName = JsonUtils.getString(object, "skill");
       SkillType<? extends SimpleSkill> skillType = SkillType.get(skillName, SimpleSkill.class);

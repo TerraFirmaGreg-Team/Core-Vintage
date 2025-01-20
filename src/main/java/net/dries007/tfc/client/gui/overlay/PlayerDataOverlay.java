@@ -36,18 +36,24 @@ import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import org.lwjgl.opengl.GL11;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.awt.Color;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SideOnly(Side.CLIENT)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class PlayerDataOverlay {
 
   private static final ResourceLocation ICONS = new ResourceLocation(TFC, "textures/gui/icons/overlay.png");
   private static final ResourceLocation MC_ICONS = new ResourceLocation("minecraft:textures/gui/icons.png");
-  private static final PlayerDataOverlay INSTANCE = new PlayerDataOverlay();
 
-  public static PlayerDataOverlay getInstance() {return INSTANCE;}
+  @Getter(lazy = true)
+  private static final PlayerDataOverlay instance = new PlayerDataOverlay();
+
 
   private static void drawTexturedModalRect(float xCoord, float yCoord, int minU, int minV, int maxU, int maxV) {
     float textureScaleU = 0.00390625F;

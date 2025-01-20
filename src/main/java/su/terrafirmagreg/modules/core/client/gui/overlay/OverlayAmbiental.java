@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.client.gui.overlay;
 
 import su.terrafirmagreg.api.data.Unicode;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
@@ -9,7 +10,6 @@ import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -27,19 +27,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-@SideOnly(Side.CLIENT)
-public class OverlayAmbiental {
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-  public static final ResourceLocation COLD_VIGNETTE = ModUtils.resource("textures/gui/cold_vignette.png");
-  public static final ResourceLocation HOT_VIGNETTE = ModUtils.resource("textures/gui/hot_vignette.png");
-  public static final ResourceLocation MINUS = ModUtils.resource("textures/gui/icons/lower.png");
-  public static final ResourceLocation PLUS = ModUtils.resource("textures/gui/icons/higher.png");
-  public static final ResourceLocation MINUSER = ModUtils.resource("textures/gui/icons/lowerer.png");
-  public static final ResourceLocation PLUSER = ModUtils.resource("textures/gui/icons/higherer.png");
+@SideOnly(Side.CLIENT)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class OverlayAmbiental {
+
+  private static final ResourceLocation COLD_VIGNETTE = ModUtils.resource("textures/gui/cold_vignette.png");
+  private static final ResourceLocation HOT_VIGNETTE = ModUtils.resource("textures/gui/hot_vignette.png");
+  private static final ResourceLocation MINUS = ModUtils.resource("textures/gui/icons/lower.png");
+  private static final ResourceLocation PLUS = ModUtils.resource("textures/gui/icons/higher.png");
+  private static final ResourceLocation MINUSER = ModUtils.resource("textures/gui/icons/lowerer.png");
+  private static final ResourceLocation PLUSER = ModUtils.resource("textures/gui/icons/higherer.png");
+
+  @Getter(lazy = true)
+  private static final OverlayAmbiental instance = new OverlayAmbiental();
+
 
   private static void drawTexturedModalRect(float x, float y, float width, float height, ResourceLocation loc) {
-    Minecraft minecraft = Minecraft.getMinecraft();
-    minecraft.getTextureManager().bindTexture(loc);
+    GameUtils.getTextureManager().bindTexture(loc);
 
     GlStateManager.disableDepth();
     GlStateManager.depthMask(false);
@@ -67,7 +75,7 @@ public class OverlayAmbiental {
   @SubscribeEvent
   public void render(RenderGameOverlayEvent.Pre event) {
 
-    EntityPlayer player = Minecraft.getMinecraft().player;
+    EntityPlayer player = GameUtils.getPlayer();
     if (player.isCreative() || player.isDead || player.isSpectator()) {
       return;
     }
@@ -151,13 +159,13 @@ public class OverlayAmbiental {
         tempFormatted = tempFormatted * ((float) 9 / 5) + 32;
         changeFormatted = changeFormatted * ((float) 9 / 5);
       }
-      FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
+      FontRenderer fontRenderer = GameUtils.getFontRenderer();
       String tempStr = String.format("%.1f" + Unicode.DEGREE + " -> %.1f" + Unicode.DEGREE,
         temperature, targetFormatted);
       String changeStr = String.format("%.3f" + Unicode.DEGREE + "/s", change);
-      fr.drawStringWithShadow(tempStr, mid + 50 - (float) fr.getStringWidth(tempStr) / 2 + offsetX,
+      fontRenderer.drawStringWithShadow(tempStr, mid + 50 - (float) fontRenderer.getStringWidth(tempStr) / 2 + offsetX,
         armorRowHeight + 1 + offsetY, c.getRGB());
-      fr.drawStringWithShadow(changeStr, mid - 50 - (float) fr.getStringWidth(changeStr) / 2,
+      fontRenderer.drawStringWithShadow(changeStr, mid - 50 - (float) fontRenderer.getStringWidth(changeStr) / 2,
         armorRowHeight + 1, c.getRGB());
 
     }
@@ -185,8 +193,7 @@ public class OverlayAmbiental {
     if (event.getType() == ElementType.PORTAL) {
 
       if (vignetteLocation != null) {
-        Minecraft minecraft = Minecraft.getMinecraft();
-        minecraft.getTextureManager().bindTexture(vignetteLocation);
+        GameUtils.getTextureManager().bindTexture(vignetteLocation);
 
         GlStateManager.disableDepth();
         GlStateManager.depthMask(false);

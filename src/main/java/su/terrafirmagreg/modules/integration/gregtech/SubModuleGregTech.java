@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.integration.gregtech;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.modules.integration.ModuleIntegration;
 import su.terrafirmagreg.modules.integration.gregtech.event.MaterialEventHandler;
+import su.terrafirmagreg.modules.integration.gregtech.init.BlocksGregTech;
 import su.terrafirmagreg.modules.integration.gregtech.init.ItemsGregTech;
 import su.terrafirmagreg.temp.Recipes;
 
@@ -26,11 +27,13 @@ import static su.terrafirmagreg.modules.ModulesContainer.GREGTECH;
   author = "Xikaro",
   version = "1.0.0"
 )
+@SuppressWarnings("unused")
 public class SubModuleGregTech extends ModuleIntegration.SubModule {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
     ItemsGregTech.init();
+    BlocksGregTech.init();
   }
 
   @Override

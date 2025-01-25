@@ -147,7 +147,6 @@ import net.dries007.tfc.api.types.ICreatureTFC;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Rock.Type;
 import net.dries007.tfc.api.util.FallingBlockManager;
@@ -162,6 +161,7 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.blocks.devices.BlockQuern;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockCactusTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
@@ -349,9 +349,9 @@ public final class CommonEventHandler {
       event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + Constants.RNG.nextInt(4)));
     }
 
-    for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
-      if (plant == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS) &&
-          (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
+    if (block instanceof BlockCactusTFC blockCactusTFC) {
+      if (blockCactusTFC.getPlant() == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS)
+          && (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
         int chance = Constants.RNG.nextInt(2);
         if (chance == 0) {
           event.getDrops().clear();

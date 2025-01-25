@@ -57,9 +57,9 @@ dependencies {
   compileOnly("maven.modrinth:dtree:0.13.2")
   // Утилиты
   if (use_util.toBoolean()) {
-    implementation rfg.deobf("curse.maven:had-enough-items-557549:5471944")
-    implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:5485686")
-    implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5252395-dev-5252397")
+    implementation rfg.deobf("curse.maven:had-enough-items-557549:5906628")
+    implementation rfg.deobf("curse.maven:theonesmeagle-977883:6033917")
+    implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5844968")
     implementation rfg.deobf("curse.maven:aainfo-573154:3627065")
     implementation rfg.deobf("curse.maven:reid-629017:5502915")
     implementation rfg.deobf("curse.maven:configanytime-870276:5212709")

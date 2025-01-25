@@ -21,7 +21,7 @@ public final class TranslatorUtil {
   private static final Joiner JOINER_DOT = Joiner.on('.');
 
   public static String translate(String key) {
-    if (GameUtils.isClient()) {
+    if (ModUtils.isClient()) {
       return I18n.format(key);
     } else {
       return key;
@@ -29,7 +29,7 @@ public final class TranslatorUtil {
   }
 
   public static String translate(String key, Object... args) {
-    if (GameUtils.isClient()) {
+    if (ModUtils.isClient()) {
       return I18n.format(key, args);
     } else {
       return key;

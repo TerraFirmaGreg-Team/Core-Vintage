@@ -370,4 +370,25 @@ public final class ModUtils {
     }
     return isValid;
   }
+
+  /**
+   * Checks if the game is running on the client or not.
+   *
+   * @return Whether or not the current thread is client sided.
+   */
+  public static boolean isClient() {
+    return FMLCommonHandler.instance().getSide().isClient();
+  }
+
+  public static boolean isClient(Side side) {
+    return Side.CLIENT == side;
+  }
+
+  public static boolean isServer() {
+    return FMLCommonHandler.instance().getSide().isServer();
+  }
+
+  public static boolean isServer(Side side) {
+    return Side.SERVER == side;
+  }
 }

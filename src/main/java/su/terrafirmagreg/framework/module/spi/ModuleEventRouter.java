@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.module.spi;
 
-import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleEventRoute;
 
@@ -83,8 +83,7 @@ public class ModuleEventRouter {
           module.onPreInit(event);
           module.getLogger().info("Pre-Init complete");
 
-          if (GameUtils.isClient()) {
-
+          if (ModUtils.isClient()) {
             if (module.getRegistry() != null) {
               module.getLogger().info("Client Registering");
               module.onClientRegister(module.getRegistry());
@@ -103,7 +102,7 @@ public class ModuleEventRouter {
           module.onInit(event);
           module.getLogger().info("Init complete");
 
-          if (GameUtils.isClient()) {
+          if (ModUtils.isClient()) {
             module.getLogger().info("Client Init start");
             module.onClientInit(event);
             module.getLogger().info("Client Init complete");
@@ -117,7 +116,7 @@ public class ModuleEventRouter {
           module.onPostInit(event);
           module.getLogger().info("Post-Init complete");
 
-          if (GameUtils.isClient()) {
+          if (ModUtils.isClient()) {
             module.getLogger().info("Client Post-Init start");
             module.onClientPostInit(event);
             module.getLogger().info("Client Post-Init complete");

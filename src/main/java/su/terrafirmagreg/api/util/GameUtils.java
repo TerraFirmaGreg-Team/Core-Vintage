@@ -10,7 +10,6 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -19,19 +18,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 @SuppressWarnings("unused")
 public final class GameUtils {
-
-  /**
-   * Checks if the game is running on the client or not.
-   *
-   * @return Whether or not the current thread is client sided.
-   */
-  public static boolean isClient() {
-    return FMLCommonHandler.instance().getSide().isClient();
-  }
-
-  public static boolean isServer() {
-    return FMLCommonHandler.instance().getSide().isServer();
-  }
 
   /**
    * Gets the current client difficulty.

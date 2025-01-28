@@ -59,7 +59,7 @@ public interface IModule {
 
   default ResourceLocation getIdentifier() {
     ModuleInfo moduleInfo = this.getClass().getAnnotation(ModuleInfo.class);
-    Preconditions.checkNotNull(moduleInfo, "ModuleInfo annotation missing from module class " + this.getClass().getName());
+    Preconditions.checkNotNull(moduleInfo, "ModuleInfo annotation missing from module class " + this.getClass().getSimpleName());
     return ModUtils.resource(moduleInfo.containerID(), moduleInfo.moduleID());
   }
 

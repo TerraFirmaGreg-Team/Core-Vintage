@@ -20,4 +20,6 @@ public interface IModuleManager {
   }
 
   void routeEvent(FMLStateEvent event);
+
+  void registerContainer(IModuleContainer container);
 }

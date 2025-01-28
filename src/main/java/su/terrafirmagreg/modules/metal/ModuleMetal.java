@@ -23,7 +23,7 @@ import static su.terrafirmagreg.modules.ModulesContainer.METAL;
 )
 public class ModuleMetal extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(METAL);
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleMetal.class.getSimpleName());
 
 
   public static Supplier<BaseItemGroup> GROUP;

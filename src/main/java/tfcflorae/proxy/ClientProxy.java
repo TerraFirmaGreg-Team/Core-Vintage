@@ -1,5 +1,7 @@
 package tfcflorae.proxy;
 
+import su.terrafirmagreg.api.data.enums.Mods.Names;
+
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -8,8 +10,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(modid = Names.TFCF, value = Side.CLIENT)
 public class ClientProxy extends CommonProxy {
+
+  @SubscribeEvent
+  public static void registerModels(ModelRegistryEvent event) {
+  }
 
   @Override
   public void preInit(FMLPreInitializationEvent event) {
@@ -19,9 +25,5 @@ public class ClientProxy extends CommonProxy {
   @SideOnly(Side.CLIENT)
   @Override
   public void postInit(FMLPostInitializationEvent event) {
-  }
-
-  @SubscribeEvent
-  public static void registerModels(ModelRegistryEvent event) {
   }
 }

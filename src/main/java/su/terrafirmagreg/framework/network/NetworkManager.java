@@ -27,10 +27,9 @@ import java.util.Map;
 @Getter
 public class NetworkManager implements INetworkManager {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(NetworkManager.class.getName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(NetworkManager.class.getSimpleName());
 
   private static final Map<String, NetworkThreadedWrapper> NETWORK_WRAPPER_MAP = new Object2ObjectOpenHashMap<>();
-
   private static final Map<String, IGuiHandler> GUI_HANDLER_MAP = new Object2ObjectOpenHashMap<>();
 
 
@@ -43,9 +42,9 @@ public class NetworkManager implements INetworkManager {
 
   private NetworkManager(IModule module) {
 
-    this.module = module;
-
     var moduleIdentifier = module.getIdentifier();
+
+    this.module = module;
     this.wrapper = NETWORK_WRAPPER_MAP.computeIfAbsent(moduleIdentifier.getNamespace(), NetworkThreadedWrapper::new);
     this.guiHandler = GUI_HANDLER_MAP.computeIfAbsent(moduleIdentifier.getNamespace(), GuiHandler::new);
 

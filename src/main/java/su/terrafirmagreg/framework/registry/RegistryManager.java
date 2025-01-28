@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -28,7 +29,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.DataSerializerEntry;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import lombok.Getter;
@@ -39,10 +39,10 @@ import java.util.function.Supplier;
 @Getter
 public class RegistryManager implements IRegistryManager {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(RegistryManager.class.getName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(RegistryManager.class.getSimpleName());
 
-  private static final Map<String, RegistryWrapper> REGISTRY_WRAPPER_MAP = new Object2ObjectLinkedOpenHashMap<>();
-  private static final Map<String, IdSupplier> NETWORK_ENTITY_ID_SUPPLIER_MAP = new Object2ObjectOpenHashMap<>();
+  private static final Map<ResourceLocation, RegistryWrapper> REGISTRY_WRAPPER_MAP = new Object2ObjectOpenHashMap<>();
+  private static final Map<String, IdSupplier> ENTITY_ID_SUPPLIER_MAP = new Object2ObjectOpenHashMap<>();
 
 
   private final IModule module;
@@ -53,12 +53,11 @@ public class RegistryManager implements IRegistryManager {
 
   private RegistryManager(IModule module) {
 
-    this.module = module;
-
     var moduleIdentifier = module.getIdentifier();
 
-    this.idSupplier = NETWORK_ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(moduleIdentifier.getNamespace(), s -> new IdSupplier());
-    this.wrapper = REGISTRY_WRAPPER_MAP.computeIfAbsent(moduleIdentifier.getNamespace(), s -> new RegistryWrapper());
+    this.module = module;
+    this.idSupplier = ENTITY_ID_SUPPLIER_MAP.computeIfAbsent(moduleIdentifier.getNamespace(), s -> new IdSupplier());
+    this.wrapper = REGISTRY_WRAPPER_MAP.computeIfAbsent(moduleIdentifier, s -> new RegistryWrapper());
 
   }
 
@@ -78,7 +77,7 @@ public class RegistryManager implements IRegistryManager {
   public void onRegisterBlock(RegistryEvent.Register<Block> event) {
 
     this.getWrapper().getBlocks().register(event);
-    this.getWrapper().getBlocks().forEachValues(TileUtils::registerTileEntity);
+    this.getWrapper().getBlocks().register(TileUtils::registerTileEntity);
 
   }
 
@@ -86,8 +85,8 @@ public class RegistryManager implements IRegistryManager {
   public void onRegisterItem(RegistryEvent.Register<Item> event) {
 
     this.getWrapper().getItems().register(event);
-    this.getWrapper().getBlocks().forEachValues(OreDictUtils::register);
-    this.getWrapper().getItems().forEachValues(OreDictUtils::register);
+    this.getWrapper().getBlocks().register(OreDictUtils::register);
+    this.getWrapper().getItems().register(OreDictUtils::register);
   }
 
   @Override
@@ -171,13 +170,13 @@ public class RegistryManager implements IRegistryManager {
   @SideOnly(Side.CLIENT)
   public void onRegisterModels(ModelRegistryEvent event) {
 
-    this.getWrapper().getBlocks().forEachValues(block -> {
+    this.getWrapper().getBlocks().register(block -> {
       ModelUtils.stateMapper(block);
       ModelUtils.model(block);
       ModelUtils.tesr(block);
 
     });
-    this.getWrapper().getItems().forEachValues(item -> {
+    this.getWrapper().getItems().register(item -> {
       ModelUtils.model(item);
       ModelUtils.customMeshDefinition(item);
     });
@@ -187,7 +186,7 @@ public class RegistryManager implements IRegistryManager {
   @SideOnly(Side.CLIENT)
   public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
 
-    this.getWrapper().getBlocks().forEachValues(block -> {
+    this.getWrapper().getBlocks().register(block -> {
       ModelUtils.colorHandler(event.getBlockColors(), block);
     });
   }
@@ -196,11 +195,11 @@ public class RegistryManager implements IRegistryManager {
   @SideOnly(Side.CLIENT)
   public void onRegisterItemColor(ColorHandlerEvent.Item event) {
 
-    this.getWrapper().getBlocks().forEachValues(block -> {
+    this.getWrapper().getBlocks().register(block -> {
       ModelUtils.colorHandler(event.getItemColors(), block);
     });
 
-    this.getWrapper().getItems().forEachValues(item -> {
+    this.getWrapper().getItems().register(item -> {
       ModelUtils.colorHandler(event.getItemColors(), item);
     });
   }

@@ -28,7 +28,8 @@ public enum Mods {
   FF(Names.FF),
   TFCFARMING(Names.TFCFARMING),
   TFCPASSINGDAYS(Names.TFCPASSINGDAYS),
-  FLUIDLOGGED(Names.FLUIDLOGGED);
+  FLUIDLOGGED(Names.FLUIDLOGGED),
+  GREGTECH(Names.GREGTECH);
 
 
   private final String modid;
@@ -89,6 +90,7 @@ public enum Mods {
     public static final String TFCFARMING = "tfcfarming";
     public static final String TFCPASSINGDAYS = "tfcpassingdays";
     public static final String FLUIDLOGGED = "fluidlogged_api";
+    public static final String GREGTECH = "gregtech";
   }
 
 }

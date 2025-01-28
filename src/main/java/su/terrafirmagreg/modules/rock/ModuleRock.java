@@ -27,7 +27,7 @@ import static su.terrafirmagreg.modules.ModulesContainer.ROCK;
 )
 public final class ModuleRock extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ROCK);
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleRock.class.getSimpleName());
 
   public static Supplier<BaseItemGroup> GROUP;
   public static IRegistryManager REGISTRY;

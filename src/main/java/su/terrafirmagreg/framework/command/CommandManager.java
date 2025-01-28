@@ -17,7 +17,7 @@ import java.util.Map;
 @Getter
 public class CommandManager implements ICommandManager {
 
-  private static final LoggingHelper LOGGER = LoggingHelper.of(CommandManager.class.getName());
+  private static final LoggingHelper LOGGER = LoggingHelper.of(CommandManager.class.getSimpleName());
 
   private static final Map<String, CommandWhapper> COMMAND_WRAPPER_MAP = new Object2ObjectOpenHashMap<>();
 

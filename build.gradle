@@ -107,7 +107,7 @@ minecraft {
   if (propertyBool('is_coremod')) {
     for (runTask in ['runClient', 'runServer']) {
       tasks.named(runTask).configure {
-        args << '-Dfml.coreMods.load=' + coremod_plugin_class_name
+        args << '-Dfml.coreMods.load=' + propertyString('coremod_plugin_class_name')
       }
     }
 

@@ -19,7 +19,7 @@ public class ItemsGregTech {
   public static IGTTool PROPICK;
   public static MetaItemGregTech META_ITEM;
 
-  public static void init() {
+  public static void preInit() {
     META_ITEM = new MetaItemGregTech();
 
     TONGS = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "tongs")

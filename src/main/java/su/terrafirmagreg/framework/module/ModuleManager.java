@@ -12,26 +12,36 @@ import su.terrafirmagreg.framework.module.spi.ModuleEventRouter;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLStateEvent;
 
 import com.google.common.base.Preconditions;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
+import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
+
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+@Getter
 public class ModuleManager implements IModuleManager {
 
-  private static final LoggingHelper LOGGER = LoggingHelper.of(ModuleManager.class.getName());
-
-  private static final Map<ResourceLocation, IModule> MODULE_MAP = new Object2ObjectLinkedOpenHashMap<>();
+  public static final Map<ResourceLocation, IModule> MODULE_MAP = new Object2ObjectLinkedOpenHashMap<>();
+  private static final LoggingHelper LOGGER = LoggingHelper.of(ModuleManager.class.getSimpleName());
   private static final Map<String, IModuleContainer> CONTAINER_MAP = new Object2ObjectLinkedOpenHashMap<>();
 
   private final ModuleEventRouter moduleEventRouter;
 
   private ModuleManager() {
+
     configureContainers();
     configureModules();
 
@@ -45,7 +55,7 @@ public class ModuleManager implements IModuleManager {
     return annotation.containerID();
   }
 
-  private static IModule getCoreModule(List<IModule> modules) {
+  private static @Nullable IModule getCoreModule(List<IModule> modules) {
     return modules.stream()
       .filter(module -> module.getClass().getAnnotation(ModuleInfo.class).coreModule())
       .findFirst()
@@ -56,33 +66,83 @@ public class ModuleManager implements IModuleManager {
     return new ModuleManager();
   }
 
+  public void registerContainer(IModuleContainer container) {
+    Preconditions.checkNotNull(container);
+    CONTAINER_MAP.put(container.getID(), container);
+  }
+
   private void configureContainers() {
-    LOGGER.info("Configuring containers...");
+    LOGGER.debug("Configuring containers...");
 
     AnnotationUtils.getAnnotations(ModuleContainer.class, IModuleContainer.class).entrySet().stream()
       .filter(entry -> entry.getValue().enabled())
       .map(Map.Entry::getKey)
-      .forEach(container -> CONTAINER_MAP.put(container.getID(), container));
+      .forEach(this::registerContainer);
   }
 
   private void configureModules() {
-    LOGGER.info("Configuring modules...");
+    LOGGER.debug("Configuring modules...");
 
-    AnnotationUtils.getAnnotations(ModuleInfo.class, IModule.class).keySet().stream().filter(module -> {
+    Set<ResourceLocation> toLoad = new LinkedHashSet<>();
+    Set<IModule> modulesToLoad = new LinkedHashSet<>();
+
+    AnnotationUtils.getAnnotations(ModuleInfo.class, IModule.class).keySet().stream()
+      .filter(module -> {
         if (!CONTAINER_MAP.containsKey(getContainerID(module))) {
+          LOGGER.debug("Module disabled: {}", module);
           return false;
         }
-        return isModuleEnabled(module);
+        if (!isModuleEnabled(module)) {
+          LOGGER.debug("Module disabled: {}", module.getIdentifier());
+          return false;
+        }
+        toLoad.add(module.getIdentifier());
+        modulesToLoad.add(module);
+        return true;
       })
       .collect(Collectors.groupingBy(module -> module.getIdentifier().getNamespace(), LinkedHashMap::new, Collectors.toList()))
-      .forEach((container, containerModules) -> {
-        var coreModule = getCoreModule(containerModules);
-        Preconditions.checkNotNull(coreModule, "Could not find core module for module container " + container);
+      .forEach((containerID, modules) -> {
+        IModule coreModule = getCoreModule(modules);
+        Preconditions.checkNotNull(coreModule, "Could not find core module for module container " + containerID);
 
-        containerModules.remove(coreModule);
-        containerModules.add(0, coreModule);
+        modules.remove(coreModule);
+        modules.add(0, coreModule);
 
-        MODULE_MAP.putAll(containerModules.stream().collect(Collectors.toMap(IModule::getIdentifier, module -> module)));
+        // Check any module dependencies
+        Iterator<IModule> iterator;
+        boolean changed;
+        do {
+          changed = false;
+          iterator = modulesToLoad.iterator();
+          while (iterator.hasNext()) {
+            IModule module = iterator.next();
+
+            // Check module dependencies
+            Set<ResourceLocation> dependencies = module.getDependencyUids();
+            if (!toLoad.containsAll(dependencies)) {
+              iterator.remove();
+              changed = true;
+              String moduleID = module.getIdentifier().getPath();
+              toLoad.remove(new ResourceLocation(module.getIdentifier().getPath()));
+              LOGGER.info("Module {} is missing at least one of module dependencies: {}, skipping loading...", moduleID, dependencies);
+            }
+          }
+        } while (changed);
+
+        // Sort modules by their module dependencies
+        do {
+          changed = false;
+          iterator = modulesToLoad.iterator();
+          while (iterator.hasNext()) {
+            IModule module = iterator.next();
+            if (MODULE_MAP.keySet().containsAll(module.getDependencyUids())) {
+              iterator.remove();
+              MODULE_MAP.put(module.getIdentifier(), module);
+              changed = true;
+              break;
+            }
+          }
+        } while (changed);
       });
 
   }
@@ -96,7 +156,8 @@ public class ModuleManager implements IModuleManager {
   @Override
   public boolean isModuleEnabled(IModule module) {
     var annotation = module.getClass().getAnnotation(ModuleInfo.class);
-    return annotation.enabled();
+    var modDependencies = Arrays.asList(annotation.modDependencies());
+    return annotation.enabled() && modDependencies.stream().allMatch(Loader::isModLoaded);
   }
 
   @Override

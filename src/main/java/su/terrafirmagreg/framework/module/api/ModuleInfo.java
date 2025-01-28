@@ -25,9 +25,9 @@ public @interface ModuleInfo {
    */
   String name();
 
-  String author() default "";
-
   String version() default "";
+
+  String[] author() default "";
 
   /**
    * A list of mod IDs that this module depends on. If any mods specified are not present, the module will not load.

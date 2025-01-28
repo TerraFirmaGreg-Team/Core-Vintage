@@ -57,17 +57,17 @@ public class ModuleEventRouter {
     this.routes.put(FMLConstructionEvent.class,
       (IModuleEventRoute.State<FMLConstructionEvent>) (event) ->
         this.fireEvent(module -> {
-          module.getLogger().info("Registering event handlers");
+          module.getLogger().debug("Registering event handlers");
           module.getEventBusSubscribers().forEach(MinecraftForge.EVENT_BUS::register);
 
           if (module.getNetwork() != null) {
-            module.getLogger().info("Registering packets");
+            module.getLogger().debug("Registering packets");
             module.onNetworkRegister(module.getNetwork());
           }
 
-          module.getLogger().info("Construction start");
+          module.getLogger().debug("Construction start");
           module.onConstruction(event);
-          module.getLogger().info("Construction complete");
+          module.getLogger().debug("Construction complete");
         })
     );
     this.routes.put(FMLPreInitializationEvent.class,
@@ -75,68 +75,68 @@ public class ModuleEventRouter {
         this.fireEvent(module -> {
 
           if (module.getRegistry() != null) {
-            module.getLogger().info("Registering");
+            module.getLogger().debug("Registering");
             module.onRegister(module.getRegistry());
           }
 
-          module.getLogger().info("Pre-Init start");
+          module.getLogger().debug("Pre-Init start");
           module.onPreInit(event);
-          module.getLogger().info("Pre-Init complete");
+          module.getLogger().debug("Pre-Init complete");
 
           if (ModUtils.isClient()) {
             if (module.getRegistry() != null) {
-              module.getLogger().info("Client Registering");
+              module.getLogger().debug("Client Registering");
               module.onClientRegister(module.getRegistry());
             }
 
-            module.getLogger().info("Client Pre-Init start");
+            module.getLogger().debug("Client Pre-Init start");
             module.onClientPreInit(event);
-            module.getLogger().info("Client Pre-Init complete");
+            module.getLogger().debug("Client Pre-Init complete");
           }
         })
     );
     this.routes.put(FMLInitializationEvent.class,
       (IModuleEventRoute.State<FMLInitializationEvent>) (event) ->
         this.fireEvent(module -> {
-          module.getLogger().info("Init start");
+          module.getLogger().debug("Init start");
           module.onInit(event);
-          module.getLogger().info("Init complete");
+          module.getLogger().debug("Init complete");
 
           if (ModUtils.isClient()) {
-            module.getLogger().info("Client Init start");
+            module.getLogger().debug("Client Init start");
             module.onClientInit(event);
-            module.getLogger().info("Client Init complete");
+            module.getLogger().debug("Client Init complete");
           }
         })
     );
     this.routes.put(FMLPostInitializationEvent.class,
       (IModuleEventRoute.State<FMLPostInitializationEvent>) (event) ->
         this.fireEvent(module -> {
-          module.getLogger().info("Post-Init start");
+          module.getLogger().debug("Post-Init start");
           module.onPostInit(event);
-          module.getLogger().info("Post-Init complete");
+          module.getLogger().debug("Post-Init complete");
 
           if (ModUtils.isClient()) {
-            module.getLogger().info("Client Post-Init start");
+            module.getLogger().debug("Client Post-Init start");
             module.onClientPostInit(event);
-            module.getLogger().info("Client Post-Init complete");
+            module.getLogger().debug("Client Post-Init complete");
           }
         })
     );
     this.routes.put(FMLLoadCompleteEvent.class,
       (IModuleEventRoute.State<FMLLoadCompleteEvent>) (event) ->
         this.fireEvent(module -> {
-          module.getLogger().info("Load-complete start");
+          module.getLogger().debug("Load-complete start");
           module.onLoadComplete(event);
-          module.getLogger().info("Load-complete complete");
+          module.getLogger().debug("Load-complete complete");
         })
     );
     this.routes.put(FMLServerAboutToStartEvent.class,
       (IModuleEventRoute.State<FMLServerAboutToStartEvent>) (event) ->
         this.fireEvent(module -> {
-          module.getLogger().info("Server-about-to-start start");
+          module.getLogger().debug("Server-about-to-start start");
           module.onServerAboutToStart(event);
-          module.getLogger().info("Server-about-to-start complete");
+          module.getLogger().debug("Server-about-to-start complete");
         })
     );
     this.routes.put(FMLServerStartingEvent.class,
@@ -144,38 +144,38 @@ public class ModuleEventRouter {
         this.fireEvent(module -> {
 
           if (module.getCommand() != null) {
-            module.getLogger().info("Command Registering");
+            module.getLogger().debug("Command Registering");
             module.getCommand().registerServerCommand(event);
             module.onCommandRegister(module.getCommand());
           }
 
-          module.getLogger().info("Server-starting start");
+          module.getLogger().debug("Server-starting start");
           module.onServerStarting(event);
-          module.getLogger().info("Server-starting complete");
+          module.getLogger().debug("Server-starting complete");
         })
     );
     this.routes.put(FMLServerStartedEvent.class,
       (IModuleEventRoute.State<FMLServerStartedEvent>) (event) ->
         this.fireEvent(module -> {
-          module.getLogger().info("Server-started start");
+          module.getLogger().debug("Server-started start");
           module.onServerStarted(event);
-          module.getLogger().info("Server-started complete");
+          module.getLogger().debug("Server-started complete");
         })
     );
     this.routes.put(FMLServerStoppingEvent.class,
       (IModuleEventRoute.State<FMLServerStoppingEvent>) (event) ->
         this.fireEvent(module -> {
-          module.getLogger().info("Server-stopping start");
+          module.getLogger().debug("Server-stopping start");
           module.onServerStopping(event);
-          module.getLogger().info("Server-stopping complete");
+          module.getLogger().debug("Server-stopping complete");
         })
     );
     this.routes.put(FMLServerStoppedEvent.class,
       (IModuleEventRoute.State<FMLServerStoppedEvent>) (event) ->
         this.fireEvent(module -> {
-          module.getLogger().info("Server-stopped start");
+          module.getLogger().debug("Server-stopped start");
           module.onServerStopped(event);
-          module.getLogger().info("Server-stopped complete");
+          module.getLogger().debug("Server-stopped complete");
         })
     );
   }
@@ -185,7 +185,9 @@ public class ModuleEventRouter {
   // --------------------------------------------------------------------------
 
   protected void fireEvent(Consumer<IModule> moduleConsumer) {
-    loadedModules.forEach(moduleConsumer);
+    for (var module : this.loadedModules) {
+      moduleConsumer.accept(module);
+    }
   }
 
   public <E extends FMLStateEvent> void routeEvent(E event) {
@@ -203,117 +205,117 @@ public class ModuleEventRouter {
   @SubscribeEvent
   protected void onNewRegistryEvent(RegistryEvent.NewRegistry event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register NewRegistryEvent start");
+      module.getLogger().debug("Register NewRegistryEvent start");
       module.onNewRegister();
-      module.getLogger().info("Register NewRegistryEvent complete");
+      module.getLogger().debug("Register NewRegistryEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterBlockEvent(RegistryEvent.Register<Block> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register BlockEvent start");
+      module.getLogger().debug("Register BlockEvent start");
       module.getRegistry().onRegisterBlock(event);
-      module.getLogger().info("Register BlockEvent complete");
+      module.getLogger().debug("Register BlockEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterItemEvent(RegistryEvent.Register<Item> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register ItemEvent start");
+      module.getLogger().debug("Register ItemEvent start");
       module.getRegistry().onRegisterItem(event);
-      module.getLogger().info("Register ItemEvent complete");
+      module.getLogger().debug("Register ItemEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterPotionEvent(RegistryEvent.Register<Potion> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register PotionEvent start");
+      module.getLogger().debug("Register PotionEvent start");
       module.getRegistry().onRegisterPotion(event);
-      module.getLogger().info("Register PotionEvent complete");
+      module.getLogger().debug("Register PotionEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterPotionTypeEvent(RegistryEvent.Register<PotionType> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register PotionTypeEvent start");
+      module.getLogger().debug("Register PotionTypeEvent start");
       module.getRegistry().onRegisterPotionType(event);
-      module.getLogger().info("Register PotionTypeEvent complete");
+      module.getLogger().debug("Register PotionTypeEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterBiomeEvent(RegistryEvent.Register<Biome> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register BiomeEvent start");
+      module.getLogger().debug("Register BiomeEvent start");
       module.getRegistry().onRegisterBiome(event);
-      module.getLogger().info("Register BiomeEvent complete");
+      module.getLogger().debug("Register BiomeEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register SoundEvent start");
+      module.getLogger().debug("Register SoundEvent start");
       module.getRegistry().onRegisterSound(event);
-      module.getLogger().info("Register SoundEvent complete");
+      module.getLogger().debug("Register SoundEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterEntityEvent(RegistryEvent.Register<EntityEntry> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register EntityEvent start");
+      module.getLogger().debug("Register EntityEvent start");
       module.getRegistry().onRegisterEntity(event);
-      module.getLogger().info("Register EntityEvent complete");
+      module.getLogger().debug("Register EntityEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterEnchantmentEvent(RegistryEvent.Register<Enchantment> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register EnchantmentEvent start");
+      module.getLogger().debug("Register EnchantmentEvent start");
       module.getRegistry().onRegisterEnchantment(event);
-      module.getLogger().info("Register EnchantmentEvent complete");
+      module.getLogger().debug("Register EnchantmentEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterVillagerProfessionEvent(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register VillagerProfessionEvent start");
+      module.getLogger().debug("Register VillagerProfessionEvent start");
       module.getRegistry().onRegisterVillagerProfession(event);
-      module.getLogger().info("Register VillagerProfessionEvent complete");
+      module.getLogger().debug("Register VillagerProfessionEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterRecipeEvent(RegistryEvent.Register<IRecipe> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register RecipeEvent start");
+      module.getLogger().debug("Register RecipeEvent start");
       module.getRegistry().onRegisterRecipe(event);
-      module.getLogger().info("Register RecipeEvent complete");
+      module.getLogger().debug("Register RecipeEvent complete");
     });
   }
 
   @SubscribeEvent
   protected void onRegisterDataSerializerEntryEvent(RegistryEvent.Register<DataSerializerEntry> event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register RecipeEvent start");
+      module.getLogger().debug("Register RecipeEvent start");
       module.getRegistry().onRegisterDataSerializerEntry(event);
-      module.getLogger().info("Register RecipeEvent complete");
+      module.getLogger().debug("Register RecipeEvent complete");
     });
   }
 
 //  @SubscribeEvent
 //  protected void onRegisterLootTableLoadEvent(LootTableLoadEvent event) {
 //    this.fireEvent(module -> {
-//      module.getLogger().info("Register LootTableLoadEvent start");
+//      module.getLogger().debug("Register LootTableLoadEvent start");
 //      module.getRegistry().onRegisterLootTableLoad(event);
-//      module.getLogger().info("Register LootTableLoadEvent complete");
+//      module.getLogger().debug("Register LootTableLoadEvent complete");
 //    });
 //  }
 
@@ -325,9 +327,9 @@ public class ModuleEventRouter {
   @SideOnly(Side.CLIENT)
   protected void onClientRegisterModelsEvent(ModelRegistryEvent event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register ModelsEvent start");
+      module.getLogger().debug("Register ModelsEvent start");
       module.getRegistry().onRegisterModels(event);
-      module.getLogger().info("Register ModelsEvent complete");
+      module.getLogger().debug("Register ModelsEvent complete");
     });
   }
 
@@ -335,9 +337,9 @@ public class ModuleEventRouter {
   @SideOnly(Side.CLIENT)
   protected void onClientRegisterBlockColor(ColorHandlerEvent.Block event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register ColorHandlerEvent Block start");
+      module.getLogger().debug("Register ColorHandlerEvent Block start");
       module.getRegistry().onRegisterBlockColor(event);
-      module.getLogger().info("Register ColorHandlerEvent Block complete");
+      module.getLogger().debug("Register ColorHandlerEvent Block complete");
     });
   }
 
@@ -345,9 +347,9 @@ public class ModuleEventRouter {
   @SideOnly(Side.CLIENT)
   protected void onClientRegisterItemColor(ColorHandlerEvent.Item event) {
     this.fireEvent(module -> {
-      module.getLogger().info("Register ColorHandlerEvent Item start");
+      module.getLogger().debug("Register ColorHandlerEvent Item start");
       module.getRegistry().onRegisterItemColor(event);
-      module.getLogger().info("Register ColorHandlerEvent Item complete");
+      module.getLogger().debug("Register ColorHandlerEvent Item complete");
     });
   }
 }

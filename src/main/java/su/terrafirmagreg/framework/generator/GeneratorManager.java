@@ -5,6 +5,6 @@ import su.terrafirmagreg.framework.generator.api.IGeneratorManager;
 
 public class GeneratorManager implements IGeneratorManager {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(GeneratorManager.class.getName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(GeneratorManager.class.getSimpleName());
 
 }

@@ -13,6 +13,7 @@ import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
 import su.terrafirmagreg.modules.core.event.EventHandlerAmbiental;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesEntity;
 import su.terrafirmagreg.modules.core.event.EventHandlerConfigChanged;
+import su.terrafirmagreg.modules.core.event.EventHandlerPortalSpawn;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -47,7 +48,7 @@ import static su.terrafirmagreg.modules.ModulesContainer.CORE;
   })
 public final class ModuleCore extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(CORE);
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class.getSimpleName());
 
   public static IRegistryManager REGISTRY;
   public static INetworkManager NETWORK;
@@ -101,6 +102,7 @@ public final class ModuleCore extends ModuleBase {
     list.add(EventHandlerAmbiental.class);
     list.add(EventHandlerCapabilitiesEntity.class);
     list.add(EventHandlerConfigChanged.class);
+    list.add(EventHandlerPortalSpawn.class);
 
     return list;
   }

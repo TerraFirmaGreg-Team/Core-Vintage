@@ -24,7 +24,7 @@ import static su.terrafirmagreg.modules.ModulesContainer.INTEGRATION;
 )
 public class ModuleIntegration extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(INTEGRATION);
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleIntegration.class.getSimpleName());
 
   public ModuleIntegration() {}
 

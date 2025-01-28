@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.integration.ModuleIntegration;
 import su.terrafirmagreg.modules.integration.gregtech.event.MaterialEventHandler;
 import su.terrafirmagreg.modules.integration.gregtech.init.BlocksGregTech;
 import su.terrafirmagreg.modules.integration.gregtech.init.ItemsGregTech;
-import su.terrafirmagreg.temp.Recipes;
+import su.terrafirmagreg.modules.integration.gregtech.init.RecipesGregTech;
 
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -18,11 +18,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.modules.ModulesContainer.GREGTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.GREGTECH;
+import static su.terrafirmagreg.modules.ModulesContainer.INTEGRATION;
 
 @ModuleInfo(
-  moduleID = GREGTECH,
+  moduleID = INTEGRATION,
   containerID = MOD_ID,
+  modDependencies = {GREGTECH},
   name = "GregTech Integration",
   author = "Xikaro",
   version = "1.0.0"
@@ -32,14 +34,15 @@ public class SubModuleGregTech extends ModuleIntegration.SubModule {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
-    ItemsGregTech.init();
-    BlocksGregTech.init();
+    ItemsGregTech.preInit();
+    BlocksGregTech.preInit();
   }
 
   @Override
   public void onPostInit(FMLPostInitializationEvent event) {
-    Recipes.register();
+    RecipesGregTech.postInit();
   }
+
 
   @Override
   public @NotNull List<Class<?>> getEventBusSubscribers() {

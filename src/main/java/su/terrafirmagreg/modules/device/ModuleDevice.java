@@ -24,7 +24,7 @@ import static su.terrafirmagreg.modules.ModulesContainer.DEVICE;
 )
 public final class ModuleDevice extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(DEVICE);
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleDevice.class.getSimpleName());
 
   public static Supplier<BaseItemGroup> GROUP;
   public static IRegistryManager REGISTRY;

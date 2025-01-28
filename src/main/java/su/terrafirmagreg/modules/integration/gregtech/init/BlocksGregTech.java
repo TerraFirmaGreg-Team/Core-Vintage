@@ -9,9 +9,10 @@ public final class BlocksGregTech {
 
   public static MetaTileEntityGreenhouse GREENHOUSE;
 
-  public static void init() {
+  public static void preInit() {
 
     GREENHOUSE = registerMetaTileEntity(32000, new MetaTileEntityGreenhouse(ModUtils.resource("greenhouse")));
+    MetaTileEntityGreenhouse.addGrasses();
 
   }
 }

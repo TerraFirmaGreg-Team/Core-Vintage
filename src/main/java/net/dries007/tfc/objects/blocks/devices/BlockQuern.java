@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.devices;
 
 import net.minecraft.block.Block;
@@ -78,7 +73,7 @@ public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
         return SelectionPlace.HANDLE;
       } else if (!teQuern.isGrinding() && teQuern.hasHandstone() && (!player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() || (inventory != null
                                                                                                                            && !inventory.getStackInSlot(TEQuern.SLOT_INPUT)
-                                                                                                                                        .isEmpty()))
+        .isEmpty()))
                  && INPUT_SLOT_AABB.offset(pos).calculateIntercept(eyePos, lookingPos) != null) {
         return SelectionPlace.INPUT_SLOT;
       } else if ((teQuern.hasHandstone() || teQuern.isItemValid(TEQuern.SLOT_HANDSTONE, player.getHeldItem(EnumHand.MAIN_HAND)))
@@ -202,7 +197,7 @@ public class BlockQuern extends Block implements IItemSize, IHighlightHandler {
             return true;
           } else if (selection == SelectionPlace.BASE && !inventory.getStackInSlot(TEQuern.SLOT_OUTPUT).isEmpty()) {
             ItemHandlerHelper.giveItemToPlayer(playerIn, inventory.extractItem(TEQuern.SLOT_OUTPUT, inventory.getStackInSlot(TEQuern.SLOT_OUTPUT)
-                                                                                                             .getCount(), false));
+              .getCount(), false));
             teQuern.setAndUpdateSlots(TEQuern.SLOT_OUTPUT);
             return true;
           }

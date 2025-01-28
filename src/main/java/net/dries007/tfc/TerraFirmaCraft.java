@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc;
 
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
@@ -25,7 +20,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
-import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
@@ -153,7 +147,6 @@ public final class TerraFirmaCraft {
     CapabilityFood.preInit();
     CapabilityEgg.preInit();
     CapabilityPlayerData.preInit();
-    CapabilityDamageResistance.preInit();
     CapabilityMetalItem.preInit();
     CapabilityWorldTracker.preInit();
 

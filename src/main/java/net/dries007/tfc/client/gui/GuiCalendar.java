@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui;
 
 import net.minecraft.client.gui.GuiButton;
@@ -19,6 +14,7 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;

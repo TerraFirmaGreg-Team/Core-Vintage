@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -137,13 +132,13 @@ public class TFCGuiHandler implements IGuiHandler {
         return new ContainerKnapping(KnappingType.STONE, player.inventory, stack.getItem() instanceof ItemRock ? stack : player.getHeldItemOffhand());
       case KNAPPING_CLAY:
         return new ContainerKnapping(KnappingType.CLAY, player.inventory,
-                                     OreDictionaryHelper.doesStackMatchOre(stack, "clay") ? stack : player.getHeldItemOffhand());
+          OreDictionaryHelper.doesStackMatchOre(stack, "clay") ? stack : player.getHeldItemOffhand());
       case KNAPPING_LEATHER:
         return new ContainerKnapping(KnappingType.LEATHER, player.inventory,
-                                     OreDictionaryHelper.doesStackMatchOre(stack, "leather") ? stack : player.getHeldItemOffhand());
+          OreDictionaryHelper.doesStackMatchOre(stack, "leather") ? stack : player.getHeldItemOffhand());
       case KNAPPING_FIRE_CLAY:
         return new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory,
-                                     OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
+          OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
       case CRUCIBLE:
         return new ContainerCrucible(player.inventory, Helpers.getTE(world, pos, TECrucible.class));
       case LARGE_VESSEL:
@@ -198,7 +193,7 @@ public class TFCGuiHandler implements IGuiHandler {
         return new GuiFirePit(container, player.inventory, Helpers.getTE(world, pos, TEFirePit.class));
       case BARREL:
         return new GuiBarrel(container, player.inventory, Helpers.getTE(world, pos, TEBarrel.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
-                                                                                                          .getTranslationKey());
+          .getTranslationKey());
       case CHARCOAL_FORGE:
         return new GuiCharcoalForge(container, player.inventory, Helpers.getTE(world, pos, TECharcoalForge.class));
       case ANVIL:
@@ -221,10 +216,10 @@ public class TFCGuiHandler implements IGuiHandler {
         return new GuiCrucible(container, player.inventory, Helpers.getTE(world, pos, TECrucible.class));
       case LARGE_VESSEL:
         return new GuiLargeVessel(container, player.inventory, Helpers.getTE(world, pos, TELargeVessel.class), world.getBlockState(new BlockPos(x, y, z))
-                                                                                                                    .getBlock().getTranslationKey());
+          .getBlock().getTranslationKey());
       case POWDERKEG:
         return new GuiPowderkeg(container, player.inventory, Helpers.getTE(world, pos, TEPowderKeg.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
-                                                                                                                .getTranslationKey());
+          .getTranslationKey());
       case CALENDAR:
         return new GuiCalendar(container, player.inventory);
       case NUTRITION:

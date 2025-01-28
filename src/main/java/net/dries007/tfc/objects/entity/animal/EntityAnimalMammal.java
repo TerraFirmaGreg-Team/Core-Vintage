@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +7,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;

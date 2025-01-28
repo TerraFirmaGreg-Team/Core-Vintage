@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render.animal;
 
 import net.dries007.tfc.client.model.animal.ModelCamelTFC;
@@ -25,10 +20,10 @@ import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 public class LayerCamelDecor implements LayerRenderer<EntityCamelTFC> {
 
   private static final ResourceLocation[] CAMEL_DECOR_TEXTURES = IntStream.range(0, 16).mapToObj(i -> new ResourceLocation(TFC,
-                                                                                                                           "textures/entity/animal/livestock/decor/"
-                                                                                                                           + EnumDyeColor.byMetadata(i)
-                                                                                                                                         .getName() + ".png"))
-                                                                          .toArray(ResourceLocation[]::new);
+      "textures/entity/animal/livestock/decor/"
+      + EnumDyeColor.byMetadata(i)
+        .getName() + ".png"))
+    .toArray(ResourceLocation[]::new);
   private final RenderCamelTFC renderer;
   private final ModelCamelTFC model = new ModelCamelTFC(0.51F);
 

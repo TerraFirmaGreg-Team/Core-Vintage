@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
 
 import net.minecraftforge.registries.IForgeRegistryModifiable;
@@ -24,7 +19,7 @@ public class CTAlloy {
   public static CTAlloyRecipeBuilder addAlloy(String metal) {
     //noinspection ConstantConditions
     Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                                       .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
     if (result == null) {
       throw new IllegalArgumentException("Metal specified not found!");
     }
@@ -40,7 +35,7 @@ public class CTAlloy {
   {
     //noinspection ConstantConditions
     Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                                       .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
     if (result == null) {
       throw new IllegalArgumentException("Metal specified not found!");
     }
@@ -75,7 +70,7 @@ public class CTAlloy {
     public CTAlloyRecipeBuilder addMetal(String metal, double min, double max) {
       //noinspection ConstantConditions
       Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                                         .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
+        .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
       if (result == null) {
         throw new IllegalArgumentException("Metal specified not found!");
       }

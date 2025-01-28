@@ -1,11 +1,7 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
@@ -57,7 +53,6 @@ import net.minecraft.init.PotionTypes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSpade;
@@ -120,8 +115,6 @@ import com.eerussianguy.firmalife.items.ItemFruitPole;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.ConfigTFC.Devices;
-import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
-import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.egg.CapabilityEgg;
 import net.dries007.tfc.api.capability.egg.EggHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
@@ -670,14 +663,6 @@ public final class CommonEventHandler {
         ICapabilityProvider heatHandler = CapabilityHandlerHeat.getCustom(stack);
         if (heatHandler != null) {
           event.addCapability(CapabilityHeat.KEY, heatHandler);
-        }
-      }
-
-      // Armor
-      if (item instanceof ItemArmor) {
-        ICapabilityProvider damageResistance = CapabilityDamageResistance.getCustomDamageResistance(stack);
-        if (damageResistance != null) {
-          event.addCapability(CapabilityDamageResistance.KEY, damageResistance);
         }
       }
 

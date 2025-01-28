@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import net.minecraft.block.material.Material;
@@ -58,7 +53,7 @@ public class RockLayerWrapper implements IRecipeWrapper {
     for (Ore ore : ores) {
       // Add every permutation of BlockOreTFC for better readability (this means that it's gonna work for any ore block clicked for recipes)
       List<ItemStack> oreItems = TFCRegistries.ROCKS.getValuesCollection().stream()
-                                                    .map(r -> new ItemStack(BlockOreTFC.get(ore, r))).collect(Collectors.toList());
+        .map(r -> new ItemStack(BlockOreTFC.get(ore, r))).collect(Collectors.toList());
       // Add ore drops
       if (ore.isGraded()) {
         for (Ore.Grade grade : Ore.Grade.values()) {
@@ -73,9 +68,9 @@ public class RockLayerWrapper implements IRecipeWrapper {
     if (customOres.size() > 0) {
       // Add custom ores
       oreList.addAll(customOres.stream().filter(state -> state.getMaterial() != Material.AIR)
-                               .map(state -> new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)))
-                               .map(Collections::singletonList)
-                               .collect(Collectors.toList()));
+        .map(state -> new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)))
+        .map(Collections::singletonList)
+        .collect(Collectors.toList()));
 
     }
 

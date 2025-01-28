@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.wood;
 
 import net.minecraft.block.Block;
@@ -100,7 +95,7 @@ public class ItemBoatTFC extends ItemTFC {
       Vec3d vec3d2 = playerIn.getLook(1.0F);
       boolean flag = false;
       List<Entity> list = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, playerIn.getEntityBoundingBox()
-                                                                                         .expand(vec3d2.x * 5.0D, vec3d2.y * 5.0D, vec3d2.z * 5.0D).grow(1.0D));
+        .expand(vec3d2.x * 5.0D, vec3d2.y * 5.0D, vec3d2.z * 5.0D).grow(1.0D));
 
       for (Entity entity : list) {
         if (entity.canBeCollidedWith()) {
@@ -120,7 +115,7 @@ public class ItemBoatTFC extends ItemTFC {
         Block block = worldIn.getBlockState(raytraceresult.getBlockPos()).getBlock();
         boolean flag1 = block == Blocks.WATER || block == Blocks.FLOWING_WATER;
         EntityBoatTFC entityboat = new EntityBoatTFC(worldIn, raytraceresult.hitVec.x,
-                                                     flag1 ? raytraceresult.hitVec.y - 0.12D : raytraceresult.hitVec.y, raytraceresult.hitVec.z);
+          flag1 ? raytraceresult.hitVec.y - 0.12D : raytraceresult.hitVec.y, raytraceresult.hitVec.z);
         entityboat.setBoatType(EntityBoat.Type.OAK); // not sure if required
         entityboat.setWood(wood);
         entityboat.rotationYaw = playerIn.rotationYaw;

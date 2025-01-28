@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
 
 import net.minecraftforge.registries.IForgeRegistryModifiable;
@@ -27,7 +22,7 @@ public class CTBloomery {
   public static void addRecipe(String metal, crafttweaker.api.item.IIngredient additive) {
     //noinspection ConstantConditions
     Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                                       .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
     if (result == null) {
       throw new IllegalArgumentException("Metal specified not found!");
     }
@@ -57,7 +52,7 @@ public class CTBloomery {
   public static void removeRecipe(String metal) {
     //noinspection ConstantConditions
     Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                                       .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
     if (result == null) {
       throw new IllegalArgumentException("Metal specified not found!");
     }

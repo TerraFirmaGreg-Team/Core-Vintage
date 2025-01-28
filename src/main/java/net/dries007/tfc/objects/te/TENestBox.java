@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.minecraft.entity.Entity;
@@ -21,6 +16,7 @@ import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.util.Helpers;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nullable;

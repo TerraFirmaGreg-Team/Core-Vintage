@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.minecraft.block.Block;
@@ -107,7 +102,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
       }
 
       world.playSound(null, centerX,
-                      pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+        pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
     }
 
     if (numPlayersUsing == 0 && lidAngle > 0.0F || numPlayersUsing > 0 && lidAngle < 1.0F) {
@@ -135,7 +130,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
         }
 
         world.playSound(null, centerX,
-                        pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+          pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
       }
 
       if (lidAngle < 0.0F) {

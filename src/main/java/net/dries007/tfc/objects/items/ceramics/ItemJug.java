@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -70,8 +65,8 @@ public class ItemJug extends ItemPottery {
             world.playSound(null, player.posX, player.posY + 0.5, player.posZ, TFCSounds.JUG_FILL, SoundCategory.BLOCKS, 1.0F, 0.5F);
             Vec3d look = player.getLookVec();
             ((WorldServer) world).spawnParticle(EnumParticleTypes.WATER_DROP,
-                                                player.posX + look.x,
-                                                player.posY + 0.3 + world.rand.nextDouble(), player.posZ + look.z, 42, 0.1D, 0.4D, 0.2D, 0.0D);
+              player.posX + look.x,
+              player.posY + 0.3 + world.rand.nextDouble(), player.posZ + look.z, 42, 0.1D, 0.4D, 0.2D, 0.0D);
           } else {
             player.setActiveHand(hand);
           }
@@ -170,6 +165,6 @@ public class ItemJug extends ItemPottery {
   @Override
   public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
     return new FluidWhitelistHandler(stack, CAPACITY, FluidsTFC.getAllWrappers().stream().filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
-                                                               .map(FluidWrapper::get).collect(Collectors.toSet()));
+      .map(FluidWrapper::get).collect(Collectors.toSet()));
   }
 }

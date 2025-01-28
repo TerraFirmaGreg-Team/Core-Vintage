@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
 import net.minecraft.block.Block;
@@ -290,7 +285,7 @@ public class BlockPowderKeg extends Block implements IItemSize, ILightableBlock 
 
       if (entityarrow.isBurning()) {
         trigger(worldIn, pos, worldIn.getBlockState(pos).withProperty(LIT, true),
-                entityarrow.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase) entityarrow.shootingEntity : null);
+          entityarrow.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase) entityarrow.shootingEntity : null);
       }
     }
   }

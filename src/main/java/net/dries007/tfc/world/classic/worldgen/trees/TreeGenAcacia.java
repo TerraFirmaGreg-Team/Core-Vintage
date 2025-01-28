@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.minecraft.block.BlockLog;
@@ -92,7 +87,7 @@ public class TreeGenAcacia implements ITreeGenerator {
 
   private void placeLog(World world, BlockPos pos, boolean useBark) {
     if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
-                                                                                                                                         .getBlock() instanceof BlockLeavesTFC) {
+      .getBlock() instanceof BlockLeavesTFC) {
       world.setBlockState(pos, useBark ? bark : trunk);
     }
   }

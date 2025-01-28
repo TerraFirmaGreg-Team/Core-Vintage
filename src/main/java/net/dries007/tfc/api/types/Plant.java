@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.minecraft.block.material.Material;
@@ -25,7 +20,9 @@ import net.dries007.tfc.objects.blocks.plants.BlockTallGrassTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.dries007.tfc.util.calendar.Month;
 
 import javax.annotation.Nonnull;

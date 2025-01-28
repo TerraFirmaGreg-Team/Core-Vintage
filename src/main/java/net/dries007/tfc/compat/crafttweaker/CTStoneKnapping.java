@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
 
 import net.minecraft.item.ItemStack;
@@ -87,21 +82,21 @@ public class CTStoneKnapping {
     }
     ItemStack item = (ItemStack) output.getInternal();
     List<KnappingRecipe> removeList = TFCRegistries.KNAPPING.getValuesCollection()
-                                                            .stream()
-                                                            .filter(x -> {
-                                                              if (x.getType() != KnappingType.STONE) {
-                                                                return false;
-                                                              } else {
-                                                                for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-                                                                  ItemStack outputStack = x.getOutput(new ItemStack(ItemRock.get(rock)));
-                                                                  if (outputStack != ItemStack.EMPTY && outputStack.isItemEqual(item)) {
-                                                                    return true;
-                                                                  }
-                                                                }
-                                                                return false;
-                                                              }
-                                                            })
-                                                            .collect(Collectors.toList());
+      .stream()
+      .filter(x -> {
+        if (x.getType() != KnappingType.STONE) {
+          return false;
+        } else {
+          for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
+            ItemStack outputStack = x.getOutput(new ItemStack(ItemRock.get(rock)));
+            if (outputStack != ItemStack.EMPTY && outputStack.isItemEqual(item)) {
+              return true;
+            }
+          }
+          return false;
+        }
+      })
+      .collect(Collectors.toList());
     for (KnappingRecipe rem : removeList) {
       CraftTweakerAPI.apply(new IAction() {
         @Override

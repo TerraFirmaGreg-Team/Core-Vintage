@@ -3,6 +3,7 @@ package su.terrafirmagreg.framework.module;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.util.AnnotationUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleContainer;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
@@ -123,7 +124,7 @@ public class ModuleManager implements IModuleManager {
               iterator.remove();
               changed = true;
               String moduleID = module.getIdentifier().getPath();
-              toLoad.remove(new ResourceLocation(module.getIdentifier().getPath()));
+              toLoad.remove(ModUtils.resource(module.getIdentifier().getPath()));
               LOGGER.info("Module {} is missing at least one of module dependencies: {}, skipping loading...", moduleID, dependencies);
             }
           }

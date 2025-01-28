@@ -1,24 +1,19 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.data.ArmorMaterials;
+import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.api.capability.damage.IDamageResistance;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
 import javax.annotation.Nonnull;
 
-public class ItemArmorTFC extends ItemArmor implements IItemSize, IDamageResistance {
+public class ItemArmorTFC extends ItemArmor implements IItemSize, ICapabilityDamageResistance {
 
   private final ArmorMaterials armorMaterial;
 

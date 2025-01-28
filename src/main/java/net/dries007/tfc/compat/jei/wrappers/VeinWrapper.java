@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import net.minecraft.block.state.IBlockState;
@@ -36,13 +31,13 @@ public class VeinWrapper implements IRecipeWrapper {
   public VeinWrapper(VeinType vein) {
     this.veinType = vein;
     rockBlocks = TFCRegistries.ROCKS.getValuesCollection().stream()
-                                    .filter(vein::canSpawnIn).map(rock -> new ItemStack(BlockRockVariant.get(rock, Rock.Type.RAW)))
-                                    .collect(Collectors.toList());
+      .filter(vein::canSpawnIn).map(rock -> new ItemStack(BlockRockVariant.get(rock, Rock.Type.RAW)))
+      .collect(Collectors.toList());
     if (veinType.getOre() != null) {
       Ore ore = veinType.getOre();
       // Add every permutation of BlockOreTFC for better readability (this means that it's gonna work for any ore block clicked for recipes)
       oreItems = TFCRegistries.ROCKS.getValuesCollection().stream()
-                                    .map(r -> new ItemStack(BlockOreTFC.get(ore, r))).collect(Collectors.toList());
+        .map(r -> new ItemStack(BlockOreTFC.get(ore, r))).collect(Collectors.toList());
       // Add ore drops
       if (ore.isGraded()) {
         for (Ore.Grade grade : Ore.Grade.values()) {

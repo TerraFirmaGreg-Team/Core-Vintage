@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.library.model;
 
+import su.terrafirmagreg.api.util.ModUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -67,7 +69,7 @@ public class CustomStateMap extends StateMapperBase {
       if (this.suffix != null) {
         path = path + this.suffix;
       }
-      resourceLocation = new ResourceLocation(registryName.getNamespace(), path);
+      resourceLocation = ModUtils.resource(registryName.getNamespace(), path);
     }
 
     return new ModelResourceLocation(resourceLocation, this.getPropertyString(map));

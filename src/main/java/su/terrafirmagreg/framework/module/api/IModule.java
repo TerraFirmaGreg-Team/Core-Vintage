@@ -44,7 +44,7 @@ public interface IModule {
   /**
    * What other modules this module depends on.
    * <p>
-   * for example <code>new ResourceLocation("tfg", "soil")</code> represents a dependency on the module "soil" in the container "tfg"
+   * for example <code>ModUtils.resource("tfg", "soil")</code> represents a dependency on the module "soil" in the container "tfg"
    */
   default @NotNull Set<ResourceLocation> getDependencyUids() {
     return Collections.emptySet();

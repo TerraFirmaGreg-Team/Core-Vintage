@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import net.minecraft.block.material.Material;
@@ -146,14 +141,14 @@ public class ItemGoldPan extends ItemTFC {
               if (damage == 1 || damage == 2) {
                 Random rand = new Random(world.getSeed() + chunk.getPos().x * 241179128412L + chunk.getPos().z * 327910215471L);
                 TFCRegistries.ORES.getValuesCollection()
-                                  .stream()
-                                  .filter(Ore::canPan)
-                                  .filter(x -> rand.nextDouble() < x.getChunkChance())
-                                  .forEach(x -> {
-                                    if (Constants.RNG.nextDouble() < x.getPanChance()) {
-                                      Helpers.spawnItemStack(world, position, new ItemStack(ItemSmallOre.get(x)));
-                                    }
-                                  });
+                  .stream()
+                  .filter(Ore::canPan)
+                  .filter(x -> rand.nextDouble() < x.getChunkChance())
+                  .forEach(x -> {
+                    if (Constants.RNG.nextDouble() < x.getPanChance()) {
+                      Helpers.spawnItemStack(world, position, new ItemStack(ItemSmallOre.get(x)));
+                    }
+                  });
                 // player.inventory.setInventorySlotContents(player.inventory.currentItem, stack); //only way to get it to refresh! <- do we really *need* this?
               } else if (damage == 3 || damage == 4) {
                 Rock rock = chunkDataTFC.getRockHeight(position);

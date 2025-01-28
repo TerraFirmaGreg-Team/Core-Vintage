@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util;
 
 import net.minecraft.block.Block;
@@ -356,14 +351,14 @@ public final class Helpers {
 
     boolean bypass =
       event.getEntityPlayer().getHeldItemMainhand().doesSneakBypassUse(event.getWorld(), event.getPos(), event.getEntityPlayer()) && event.getEntityPlayer()
-                                                                                                                                          .getHeldItemOffhand()
-                                                                                                                                          .doesSneakBypassUse(event.getWorld(), event.getPos(), event.getEntityPlayer());
+        .getHeldItemOffhand()
+        .doesSneakBypassUse(event.getWorld(), event.getPos(), event.getEntityPlayer());
 
     if (!event.getEntityPlayer().isSneaking() || bypass || event.getUseBlock() == Event.Result.ALLOW) {
       IBlockState iblockstate = event.getWorld().getBlockState(event.getPos());
       if (event.getUseBlock() != Event.Result.DENY) {
         if (iblockstate.getBlock()
-                       .onBlockActivated(event.getWorld(), event.getPos(), iblockstate, event.getEntityPlayer(), event.getHand(), face, hitX, hitY, hitZ)) {
+          .onBlockActivated(event.getWorld(), event.getPos(), iblockstate, event.getEntityPlayer(), event.getHand(), face, hitX, hitY, hitZ)) {
           result = EnumActionResult.SUCCESS;
         }
       }

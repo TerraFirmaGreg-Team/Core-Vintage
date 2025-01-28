@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
@@ -27,7 +22,9 @@ import net.minecraftforge.common.IShearable;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.items.ItemsTFC;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.dries007.tfc.util.calendar.Month;
 
 import javax.annotation.Nonnull;

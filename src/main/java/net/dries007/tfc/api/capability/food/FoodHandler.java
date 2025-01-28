@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.food;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,6 +9,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.agriculture.Food;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;

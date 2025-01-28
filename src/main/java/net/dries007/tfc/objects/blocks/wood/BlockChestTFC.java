@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.minecraft.block.Block;
@@ -160,8 +155,8 @@ public class BlockChestTFC extends BlockChest implements IItemSize {
 
   private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {
     for (Entity entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(),
-                                                                                             pos.getY() + 1, pos.getZ(),
-                                                                                             pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
+      pos.getY() + 1, pos.getZ(),
+      pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
       EntityOcelot entityocelot = (EntityOcelot) entity;
 
       if (entityocelot.isSitting()) {

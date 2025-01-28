@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.rock;
+
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,7 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.damage.DamageType;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -120,8 +116,7 @@ public class ItemRockJavelin extends ItemTool implements IItemSize, IRockObject 
   @SuppressWarnings("ConstantConditions")
   @Override
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-    if (entityLiving instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) entityLiving;
+    if (entityLiving instanceof EntityPlayer player) {
       int charge = this.getMaxItemUseDuration(stack) - timeLeft;
       if (charge > 5) {
         float f = ItemBow.getArrowVelocity(charge); //Same charge time as bow
@@ -134,7 +129,7 @@ public class ItemRockJavelin extends ItemTool implements IItemSize, IRockObject 
           javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
           worldIn.spawnEntity(javelin);
           worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-                            1.0F / (Constants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+            1.0F / (Constants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
         player.inventory.deleteStack(stack);
         player.addStat(StatList.getObjectUseStats(this));

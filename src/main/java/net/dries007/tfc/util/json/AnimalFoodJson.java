@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.json;
 
 import net.minecraft.item.crafting.Ingredient;
@@ -29,10 +24,10 @@ public class AnimalFoodJson implements JsonDeserializer<AnimalFood> {
     AnimalFood animalFood = new AnimalFood(jsonObject.get("eat_rotten").getAsBoolean());
     JsonObject food = JsonUtils.getJsonObject(jsonObject, "foods");
     food.entrySet().forEach(entry ->
-                            {
-                              Ingredient ingredient = CraftingHelper.getIngredient(entry.getValue(), new JsonContext(TFC));
-                              animalFood.addFood(ingredient);
-                            });
+    {
+      Ingredient ingredient = CraftingHelper.getIngredient(entry.getValue(), new JsonContext(TFC));
+      animalFood.addFood(ingredient);
+    });
     return animalFood;
   }
 }

@@ -1,20 +1,20 @@
 package tfcflorae.objects.items;
 
 import su.terrafirmagreg.api.data.ArmorMaterials;
+import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import net.dries007.tfc.api.capability.damage.IDamageResistance;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
 
 import javax.annotation.Nonnull;
 
-public class ItemArmorTFCF extends ItemArmor implements IItemSize, IDamageResistance {
+public class ItemArmorTFCF extends ItemArmor implements IItemSize, ICapabilityDamageResistance {
 
   public static final int DEFAULT_COLOR = 14277081; // Light Gray
   public static final int BURLAP_COLOR = 12497798;

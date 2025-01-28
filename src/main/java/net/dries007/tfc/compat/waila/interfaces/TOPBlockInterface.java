@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.interfaces;
 
 import net.minecraft.block.Block;
@@ -81,16 +76,16 @@ public class TOPBlockInterface implements IProbeInfoProvider, IBlockDisplayOverr
     String title = internal.overrideTitle() ? internal.getTitle(world, pos, nbt) : "";
     if (title.isEmpty()) {
       info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-          .item(stack)
-          .vertical()
-          .itemLabel(stack)
-          .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+        .item(stack)
+        .vertical()
+        .itemLabel(stack)
+        .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
     } else {
       info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-          .item(stack)
-          .vertical()
-          .text(TextStyleClass.NAME + title)
-          .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+        .item(stack)
+        .vertical()
+        .text(TextStyleClass.NAME + title)
+        .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
     }
     return true;
   }

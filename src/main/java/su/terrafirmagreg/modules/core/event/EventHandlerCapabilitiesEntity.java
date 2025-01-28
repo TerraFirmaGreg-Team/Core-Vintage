@@ -2,9 +2,13 @@ package su.terrafirmagreg.modules.core.event;
 
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
+import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -24,7 +28,7 @@ public class EventHandlerCapabilitiesEntity {
 //    skill(event, entity);
     temperature(event, entity);
 //    pull(event, entity);
-    //damageResistance(event, entity);
+    damageResistance(event, entity);
   }
 
 //  public static void skill(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
@@ -63,17 +67,21 @@ public class EventHandlerCapabilitiesEntity {
 //    }
 //
 //  }
-//
-//  public static void damageResistance(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
-//
-//    // Give certain entities damage resistance
-//    if (!CapabilityDamageResistance.has(entity)) {
-//
-//      var capabilityProvider = HandlerDamageResistance.getCustom(entity);
-//      if (capabilityProvider != null) {
-//        event.addCapability(CapabilityDamageResistance.KEY, capabilityProvider);
-//      }
-//    }
-//  }
+
+  public static void damageResistance(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
+    ResourceLocation entityType = EntityList.getKey(entity);
+    if (entityType == null) {
+      return;
+    }
+
+    // Give certain entities damage resistance
+    if (!CapabilityDamageResistance.has(entity)) {
+
+      var capabilityProvider = CapabilityHandlerDamageResistance.getCustom(entityType);
+      if (capabilityProvider != null) {
+        event.addCapability(CapabilityDamageResistance.KEY, capabilityProvider);
+      }
+    }
+  }
 
 }

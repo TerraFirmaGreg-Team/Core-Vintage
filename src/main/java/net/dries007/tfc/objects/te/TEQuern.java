@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.minecraft.entity.passive.EntityCow;
@@ -129,11 +124,11 @@ public class TEQuern extends TEInventory implements ITickable {
         if (inventory.getStackInSlot(SLOT_HANDSTONE).isEmpty()) {
           for (int i = 0; i < 15; i++) {
             world.spawnParticle(EnumParticleTypes.ITEM_CRACK,
-                                pos.getX() + 0.5D,
-                                pos.getY() + 0.875D,
-                                pos.getZ() + 0.5D,
-                                (world.rand.nextDouble() - world.rand.nextDouble()) / 4,
-                                world.rand.nextDouble() / 4, (world.rand.nextDouble() - world.rand.nextDouble()) / 4, Item.getIdFromItem(ItemsTFC.HANDSTONE));
+              pos.getX() + 0.5D,
+              pos.getY() + 0.875D,
+              pos.getZ() + 0.5D,
+              (world.rand.nextDouble() - world.rand.nextDouble()) / 4,
+              world.rand.nextDouble() / 4, (world.rand.nextDouble() - world.rand.nextDouble()) / 4, Item.getIdFromItem(ItemsTFC.HANDSTONE));
           }
           world.playSound(null, pos, BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
           world.playSound(null, pos, ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0f, 0.6f);

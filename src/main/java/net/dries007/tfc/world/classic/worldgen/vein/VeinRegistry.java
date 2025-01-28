@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.worldgen.vein;
 
 import su.terrafirmagreg.api.library.collection.WeightedCollection;
@@ -54,7 +49,7 @@ public enum VeinRegistry {
     }
     WorldGenOreVeins.CHUNK_RADIUS = 1 + (maxRadius >> 4);
     TerraFirmaCraft.getLog()
-                   .info("Vein Registry Initialized, with {} veins, {} max radius, {} total weight", veinTypeRegistry.size(), maxRadius, weightedVeinTypes.getTotalWeight());
+      .info("Vein Registry Initialized, with {} veins, {} max radius, {} total weight", veinTypeRegistry.size(), maxRadius, weightedVeinTypes.getTotalWeight());
   }
 
   /**

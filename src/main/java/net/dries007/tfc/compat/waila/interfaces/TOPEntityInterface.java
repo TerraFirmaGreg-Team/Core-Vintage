@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.interfaces;
 
 import net.minecraft.entity.Entity;
@@ -70,9 +65,9 @@ public class TOPEntityInterface implements IProbeInfoEntityProvider, IEntityDisp
       return false;
     } else {
       info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-          .vertical()
-          .text(TextStyleClass.NAME + title)
-          .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
+        .vertical()
+        .text(TextStyleClass.NAME + title)
+        .text(TextStyleClass.MODNAME + TerraFirmaCraft.MOD_NAME);
       return true;
     }
   }

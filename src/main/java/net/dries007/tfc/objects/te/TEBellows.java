@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.minecraft.block.Block;
@@ -82,8 +77,8 @@ public class TEBellows extends TEBase {
     EnumFacing direction = world.getBlockState(pos).getValue(FACING); // It is a better idea to inherit the direction directly from the block.
     for (Vec3i offset : OFFSETS) {
       BlockPos posx = pos.up(offset.getY())
-                         .offset(direction, offset.getX())
-                         .offset(direction.rotateY(), offset.getZ());
+        .offset(direction, offset.getX())
+        .offset(direction.rotateY(), offset.getZ());
       Block block = world.getBlockState(posx).getBlock();
       if (block instanceof IBellowsConsumerBlock && ((IBellowsConsumerBlock) block).canIntakeFrom(offset, direction)) {
         ((IBellowsConsumerBlock) block).onAirIntake(world, posx, BELLOWS_AIR);

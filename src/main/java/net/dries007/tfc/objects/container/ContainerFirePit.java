@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -68,8 +63,8 @@ public class ContainerFirePit extends ContainerTE<TEFirePit> {
       case COOKING_POT:
       case GRILL:
         return !mergeItemStack(stack, SLOT_FUEL_INPUT, SLOT_FUEL_INPUT + 1, false) && !mergeItemStack(stack,
-                                                                                                      SLOT_FUEL_INPUT + 1, SLOT_FUEL_INPUT
-                                                                                                                           + 6, false); // this uses index of the slots sequentially, not the slot IDs themselves
+          SLOT_FUEL_INPUT + 1, SLOT_FUEL_INPUT
+                               + 6, false); // this uses index of the slots sequentially, not the slot IDs themselves
     }
     return false;
   }

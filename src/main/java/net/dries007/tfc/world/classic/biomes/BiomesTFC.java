@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.biomes;
 
 import net.minecraft.entity.EnumCreatureType;
@@ -63,56 +58,56 @@ public final class BiomesTFC {
     IForgeRegistry<Biome> r = event.getRegistry();
 
     register(r, new BiomeTFC(0x3232C8, new Biome.BiomeProperties(MOD_NAME + " Ocean").setBaseHeight(-2.6f)
-                                                                                     .setHeightVariation(-2.69999f)), false, true, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
+      .setHeightVariation(-2.69999f)), false, true, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
     register(r, new BiomeTFC(0x2B8CBA, new Biome.BiomeProperties(MOD_NAME + " River").setBaseHeight(-2.3f)
-                                                                                     .setHeightVariation(-3f)), false, false, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
+      .setHeightVariation(-3f)), false, false, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
     register(r, new BiomeTFC(0xC7A03B, new Biome.BiomeProperties(MOD_NAME + " Beach").setBaseHeight(-1.69f)
-                                                                                     .setHeightVariation(-2.68f)), false, false, BiomeDictionary.Type.BEACH);
+      .setHeightVariation(-2.68f)), false, false, BiomeDictionary.Type.BEACH);
     register(r, new BiomeTFC(0x7E7450, new Biome.BiomeProperties(MOD_NAME + " Gravel Beach").setBaseHeight(-1.69f).setHeightVariation(-2.68f)
-                                                                                            .setBaseBiome("tfc:beach")), false, false, BiomeDictionary.Type.BEACH);
+      .setBaseBiome("tfc:beach")), false, false, BiomeDictionary.Type.BEACH);
     register(r, new BiomeTFC(0x920072, new Biome.BiomeProperties(MOD_NAME + " High Hills").setBaseHeight(-0.9000001f)
-                                                                                          .setHeightVariation(-1.1f)), false, true, BiomeDictionary.Type.HILLS);
+      .setHeightVariation(-1.1f)), false, true, BiomeDictionary.Type.HILLS);
     register(r, new BiomeTFC(0x346B25, new Biome.BiomeProperties(MOD_NAME + " Plains").setBaseHeight(-1.6000001f)
-                                                                                      .setHeightVariation(-2.54f)).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS);
+      .setHeightVariation(-2.54f)).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS);
     register(r, new BiomeTFC(0x099200, new Biome.BiomeProperties(MOD_NAME + " Swampland").setBaseHeight(-1.8f)
-                                                                                         .setHeightVariation(-2.6000001f), 16, 45).setSpawnBiome(), true, true, BiomeDictionary.Type.SWAMP);
+      .setHeightVariation(-2.6000001f), 16, 45).setSpawnBiome(), true, true, BiomeDictionary.Type.SWAMP);
     register(r, new BiomeTFC(0x92567C, new Biome.BiomeProperties(MOD_NAME + " High Hills Edge").setBaseHeight(-1.5f).setHeightVariation(-2.3f)
-                                                                                               .setBaseBiome("tfc:high_hills")), false, false, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.PLAINS);
+      .setBaseBiome("tfc:high_hills")), false, false, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.PLAINS);
     register(r, new BiomeTFC(0x734B92, new Biome.BiomeProperties(MOD_NAME + " Rolling Hills").setBaseHeight(-1.6000001f)
-                                                                                             .setHeightVariation(-2.3f)).setSpawnBiome(), true, true, BiomeDictionary.Type.HILLS);
+      .setHeightVariation(-2.3f)).setSpawnBiome(), true, true, BiomeDictionary.Type.HILLS);
     register(r, new BiomeTFC(0x920000, new Biome.BiomeProperties(MOD_NAME + " Mountains").setBaseHeight(-0.9000001f)
-                                                                                         .setHeightVariation(-1.1f)).setSpawnBiome(), true, true, BiomeDictionary.Type.MOUNTAIN);
+      .setHeightVariation(-1.1f)).setSpawnBiome(), true, true, BiomeDictionary.Type.MOUNTAIN);
     register(r, new BiomeTFC(0x924A4C, new Biome.BiomeProperties(MOD_NAME + " Mountains Edge").setBaseHeight(-1.3f).setHeightVariation(-1.9000001f)
-                                                                                              .setBaseBiome("tfc:mountains")).setSpawnBiome(), true, false, BiomeDictionary.Type.MOUNTAIN);
+      .setBaseBiome("tfc:mountains")).setSpawnBiome(), true, false, BiomeDictionary.Type.MOUNTAIN);
     register(r, new BiomeTFC(0x225031, new Biome.BiomeProperties(MOD_NAME + " High Plains").setBaseHeight(-1.3f)
-                                                                                           .setHeightVariation(-2.27f)).setSpawnBiome(), true, true, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.PLAINS);
+      .setHeightVariation(-2.27f)).setSpawnBiome(), true, true, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.PLAINS);
     register(r, new BiomeTFC(0x000080, new Biome.BiomeProperties(MOD_NAME + " Deep Ocean").setBaseHeight(-3.2f).setHeightVariation(-2.49999f)
-                                                                                          .setBaseBiome("tfc:ocean")), false, false, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
+      .setBaseBiome("tfc:ocean")), false, false, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
     register(r, new BiomeTFC(0x5D8C8D, new Biome.BiomeProperties(MOD_NAME + " Lake").setBaseHeight(-2.4f).setHeightVariation(-2.5990001f)
-                                                                                    .setBaseBiome("tfc:ocean"), 4, 5), false, false, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
+      .setBaseBiome("tfc:ocean"), 4, 5), false, false, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER);
     register(r, (new BiomeTFC(6013240, (new Biome.BiomeProperties(MOD_NAME + " Flatlands")).setBaseHeight(-1.7F)
-                                                                                           .setHeightVariation(-2.88F))).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
+      .setHeightVariation(-2.88F))).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
     register(r, (new BiomeTFC(6013240, (new Biome.BiomeProperties(MOD_NAME + " Fields")).setBaseHeight(-1.7F)
-                                                                                        .setHeightVariation(-2.88F))).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
+      .setHeightVariation(-2.88F))).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
     register(r, (new BiomeTFC(6013240, (new Biome.BiomeProperties(MOD_NAME + " Meadows")).setBaseHeight(-1.7F)
-                                                                                         .setHeightVariation(-2.88F))).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
+      .setHeightVariation(-2.88F))).setSpawnBiome(), true, true, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
     register(r, (new BiomeTFC(6975545, (new Biome.BiomeProperties(MOD_NAME + " Bayou")).setBaseHeight(-2.21F).setHeightVariation(-2.75F)
-                                                                                       .setWaterColor(16767282), 16, 45)).setSpawnBiome(), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
+      .setWaterColor(16767282), 16, 45)).setSpawnBiome(), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
     register(r, new BiomeTFC(8236369, (new Biome.BiomeProperties(MOD_NAME + " Mangrove")).setBaseHeight(-2.21F).setHeightVariation(-2.75F)
-                                                                                         .setWaterColor(16767282), 16, 45), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
+      .setWaterColor(16767282), 16, 45), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
     register(r, (new BiomeTFC(6725742, (new Biome.BiomeProperties(MOD_NAME + " Marsh")).setBaseHeight(-1.9F)
-                                                                                       .setHeightVariation(-2.95F), 8, 20)).setSpawnBiome(), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
+      .setHeightVariation(-2.95F), 8, 20)).setSpawnBiome(), true, true, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.LUSH);
     register(r, (new BiomeMesaTFC(true, true, 9090697, (new Biome.BiomeProperties(MOD_NAME + " Crag")).setBaseHeight(-0.8F)
-                                                                                                      .setHeightVariation(1.0F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MOUNTAIN);
+      .setHeightVariation(1.0F))).setSpawnBiome(), true, true, BiomeDictionary.Type.MOUNTAIN);
     register(r, new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa")).setBaseHeight(-1.7F)
-                                                                                                       .setHeightVariation(-1.4F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.DRY, BiomeDictionary.Type.LUSH);
+      .setHeightVariation(-1.4F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.DRY, BiomeDictionary.Type.LUSH);
     register(r, new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa Plateau")).setBaseHeight(-0.6F)
-                                                                                                               .setHeightVariation(-2.63F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.DRY, BiomeDictionary.Type.LUSH);
+      .setHeightVariation(-2.63F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.DRY, BiomeDictionary.Type.LUSH);
     register(r, new BiomeMesaTFC(true, false, 9470285, (new Biome.BiomeProperties(MOD_NAME
                                                                                   + " Mesa Bryce")).setBaseBiome("tfc:mesa")), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.MOUNTAIN);
     register(r, new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa Plateau M")).setBaseBiome("tfc:mesa_plateau")
-                                                                                                                 .setBaseHeight(-0.1F)
-                                                                                                                 .setHeightVariation(-1.5F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.MOUNTAIN);
+      .setBaseHeight(-0.1F)
+      .setHeightVariation(-1.5F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.MOUNTAIN);
   }
 
   public static boolean isMesaBiome(Biome b) {

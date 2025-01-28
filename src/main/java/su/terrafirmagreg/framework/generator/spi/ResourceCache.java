@@ -1,16 +1,14 @@
 package su.terrafirmagreg.framework.generator.spi;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-
 import su.terrafirmagreg.api.data.enums.ResourceType;
 import su.terrafirmagreg.api.library.Pair;
 import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.generator.api.aggregator.ResourceAggregator;
 
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.SimpleResource;
-import net.minecraft.util.ResourceLocation;
 
 import com.google.common.hash.Funnels;
 import com.google.common.hash.HashCode;
@@ -20,6 +18,7 @@ import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -248,7 +247,7 @@ public abstract class ResourceCache {
 
     private boolean existsInLoadedResources(ResourceType resourceType, String namespace, String directory, String fileName, String extension) {
       IResourceManager resourceManager = GameUtils.getMinecraft().getResourceManager();
-      try (IResource resource = resourceManager.getResource(new ResourceLocation(namespace, directory + "/" + fileName + extension))) {
+      try (IResource resource = resourceManager.getResource(ModUtils.resource(namespace, directory + "/" + fileName + extension))) {
         return true;
       } catch (FileNotFoundException ignored) {
         return false;
@@ -290,7 +289,7 @@ public abstract class ResourceCache {
       // Check resource packs
       IResourceManager resourceManager = GameUtils.getMinecraft().getResourceManager();
       try {
-        IResource resource = resourceManager.getResource(new ResourceLocation(namespace, directory + "/" + fileName + extension));
+        IResource resource = resourceManager.getResource(ModUtils.resource(namespace, directory + "/" + fileName + extension));
         if (resource instanceof SimpleResource && resource.hasMetadata()) // This should cover most cases and since it's just for datagen, meh
         {((SimpleResource) resource).mcmetaInputStream.close();}
         return Optional.of(resource.getInputStream());

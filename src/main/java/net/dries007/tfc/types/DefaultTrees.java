@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.types;
 
 import net.minecraft.util.ResourceLocation;
@@ -75,17 +70,17 @@ public final class DefaultTrees {
       new Tree.Builder(BLACKWOOD, 0f, 120f, 4f, 33f, GEN_MEDIUM).setHeight(12).setGrowthTime(8).setBurnInfo(720f, 1750).build(),
       new Tree.Builder(CHESTNUT, 160f, 320f, 11f, 35f, GEN_NORMAL).setTannin().setBurnInfo(651f, 1500).build(),
       new Tree.Builder(DOUGLAS_FIR, 280f, 480f, -2f, 14f, GEN_TALL).setDominance(5.2f).setHeight(16).setBushes().setTannin().setDensity(0.25f, 2f)
-                                                                   .setBurnInfo(707f, 1500).build(),
+        .setBurnInfo(707f, 1500).build(),
       new Tree.Builder(HICKORY, 80f, 250f, 7f, 29f, GEN_TALL).setGrowthTime(10).setTannin().setBurnInfo(762f, 2000).build(),
       new Tree.Builder(KAPOK, 210f, 500f, 15f, 35f, GEN_KAPOK_COMPOSITE).setDominance(8.5f).setRadius(3).setHeight(24).setDecayDist(6).setGrowthTime(18)
-                                                                        .setBushes().setDensity(0.6f, 2f).setBurnInfo(645f, 1000).build(),
+        .setBushes().setDensity(0.6f, 2f).setBurnInfo(645f, 1000).build(),
       new Tree.Builder(MAPLE, 140f, 360f, 3f, 20f, GEN_MEDIUM).setDominance(6.3f).setRadius(1).setTannin().setBurnInfo(745f, 2000).build(),
       new Tree.Builder(OAK, 180f, 430f, -8f, 12f, GEN_TALL).setHeight(16).setGrowthTime(10).setTannin().setBurnInfo(728f, 2250).build(),
       new Tree.Builder(PALM, 280f, 500f, 16f, 35f, GEN_TROPICAL).setDecayDist(6).setBurnInfo(730f, 1250).build(),
       new Tree.Builder(PINE, 60f, 250f, -15f, 7f, GEN_CONIFER).setRadius(1).setConifer().setDensity(0.1f, 0.8f).setBurnInfo(627f, 1250).build(),
       new Tree.Builder(ROSEWOOD, 10f, 190f, 8f, 18f, GEN_MEDIUM).setHeight(12).setGrowthTime(8).setBurnInfo(640f, 1500).build(),
       new Tree.Builder(SEQUOIA, 250f, 420f, -5f, 12f, GEN_SEQUOIA).setRadius(3).setHeight(24).setDecayDist(6).setGrowthTime(18).setConifer().setBushes()
-                                                                  .setTannin().setDensity(0.4f, 0.9f).setBurnInfo(612f, 1750).build(),
+        .setTannin().setDensity(0.4f, 0.9f).setBurnInfo(612f, 1750).build(),
       new Tree.Builder(SPRUCE, 120f, 380f, -11f, 6f, GEN_CONIFER).setRadius(1).setConifer().setDensity(0.1f, 0.8f).setBurnInfo(608f, 1500).build(),
       new Tree.Builder(SYCAMORE, 120f, 290f, 17f, 33f, GEN_MEDIUM).setGrowthTime(8).setBushes().setDensity(0.25f, 2f).setBurnInfo(653f, 1750).build(),
       new Tree.Builder(WHITE_CEDAR, 10f, 240f, -8f, 17f, GEN_TALL).setHeight(16).setBurnInfo(625f, 1500).build(),

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
 
 import net.minecraftforge.registries.IForgeRegistryModifiable;
@@ -26,12 +21,12 @@ public class CTBlastFurnace {
   @ZenMethod
   public static void addRecipe(String outputMetal, String inputMetal, crafttweaker.api.item.IIngredient additive) {
     Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                                       .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(outputMetal)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(outputMetal)).findFirst().orElse(null);
     if (result == null) {
       throw new IllegalArgumentException("Output metal specified not found!");
     }
     Metal input = TFCRegistries.METALS.getValuesCollection().stream()
-                                      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(inputMetal)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(inputMetal)).findFirst().orElse(null);
     if (input == null) {
       throw new IllegalArgumentException("Input metal specified not found!");
     }
@@ -61,7 +56,7 @@ public class CTBlastFurnace {
   public static void removeRecipe(String inputMetal) {
     //noinspection ConstantConditions
     Metal input = TFCRegistries.METALS.getValuesCollection().stream()
-                                      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(inputMetal)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(inputMetal)).findFirst().orElse(null);
     if (input == null) {
       throw new IllegalArgumentException("Metal specified not found!");
     }

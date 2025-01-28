@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.util;
 
 import net.minecraft.block.Block;
@@ -336,9 +331,9 @@ public class FallingBlockManager {
   public static class Specification {
 
     public static final IFallDropsProvider DEFAULT_DROPS_PROVIDER = (world, pos, state, teData, fallTime, fallDistance) -> Collections.singletonList(new ItemStack(state.getBlock(), 1, state.getBlock()
-                                                                                                                                                                                             .damageDropped(state)));
+      .damageDropped(state)));
     public static final ICollapseChecker DEFAULT_COLLAPSE_CHECKER = (world, collapsePos) -> world.getBlockState(collapsePos.down()).getMaterial()
-                                                                                                 .isReplaceable();
+      .isReplaceable();
 
     public static final Specification VERTICAL_AND_HORIZONTAL = new Specification(true, () -> TFCSounds.DIRT_SLIDE_SHORT);
     public static final Specification VERTICAL_ONLY = new Specification(false, () -> TFCSounds.DIRT_SLIDE_SHORT);

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import net.minecraft.block.state.IBlockState;
@@ -26,6 +21,7 @@ import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TEBloom;
 import net.dries007.tfc.objects.te.TEBloomery;
+
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.Nonnull;
@@ -67,7 +63,7 @@ public class BloomeryProvider implements IWailaBlock {
           if (cap instanceof IForgeableMeasurableMetal) {
             IForgeableMeasurableMetal forgeCap = ((IForgeableMeasurableMetal) cap);
             currentTooltip.add(new TextComponentTranslation("waila.tfc.bloomery.output", forgeCap.getMetalAmount(), new TextComponentTranslation(forgeCap.getMetal()
-                                                                                                                                                         .getTranslationKey()).getFormattedText()).getFormattedText());
+              .getTranslationKey()).getFormattedText()).getFormattedText());
           }
         }
       } else {
@@ -86,7 +82,7 @@ public class BloomeryProvider implements IWailaBlock {
         if (forgeCap instanceof IForgeableMeasurableMetal) {
           IForgeableMeasurableMetal bloomCap = ((IForgeableMeasurableMetal) forgeCap);
           currentTooltip.add(new TextComponentTranslation("waila.tfc.metal.output", bloomCap.getMetalAmount(), new TextComponentTranslation(bloomCap.getMetal()
-                                                                                                                                                    .getTranslationKey()).getFormattedText()).getFormattedText());
+            .getTranslationKey()).getFormattedText()).getFormattedText());
         }
       }
     }

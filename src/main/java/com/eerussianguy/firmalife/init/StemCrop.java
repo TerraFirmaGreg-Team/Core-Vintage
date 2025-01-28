@@ -1,10 +1,5 @@
 // Code mostly copied from net.dries007.tfc.util.agriculture.Crop
 
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package com.eerussianguy.firmalife.init;
 
 import net.minecraft.block.Block;
@@ -19,8 +14,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import net.dries007.tfc.api.types.ICrop;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
 import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
 
 import javax.annotation.Nonnull;

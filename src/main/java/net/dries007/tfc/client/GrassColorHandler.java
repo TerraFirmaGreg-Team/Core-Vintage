@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client;
 
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
@@ -15,6 +10,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
 import net.dries007.tfc.ConfigTFC;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import java.awt.Color;

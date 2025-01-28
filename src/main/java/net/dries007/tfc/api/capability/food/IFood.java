@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.capability.food;
 
 import net.minecraft.client.gui.GuiScreen;
@@ -18,6 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
@@ -60,10 +56,7 @@ public interface IFood extends INBTSerializable<NBTTagCompound> {
   }
 
   /**
-   * Get a visible measure of all immutable data associated with food
-   * - Nutrition information
-   * - Hunger / Saturation
-   * - Water (Thirst)
+   * Get a visible measure of all immutable data associated with food - Nutrition information - Hunger / Saturation - Water (Thirst)
    *
    * @see FoodData
    */

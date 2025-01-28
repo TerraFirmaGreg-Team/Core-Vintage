@@ -1,13 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.animal;
 
 import net.minecraft.entity.EntityLiving;
 
 import net.dries007.tfc.api.types.IAnimalTFC;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import java.util.List;

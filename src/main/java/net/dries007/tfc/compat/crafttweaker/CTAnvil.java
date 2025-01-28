@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
 
 import net.minecraft.item.ItemStack;
@@ -69,9 +64,9 @@ public class CTAnvil {
     ItemStack item = (ItemStack) output.getInternal();
     List<AnvilRecipe> removeList = new ArrayList<>();
     TFCRegistries.ANVIL.getValuesCollection()
-                       .stream()
-                       .filter(x -> x.getOutputs().get(0).isItemEqual(item))
-                       .forEach(removeList::add);
+      .stream()
+      .filter(x -> x.getOutputs().get(0).isItemEqual(item))
+      .forEach(removeList::add);
     for (AnvilRecipe rem : removeList) {
       CraftTweakerAPI.apply(new IAction() {
         @Override

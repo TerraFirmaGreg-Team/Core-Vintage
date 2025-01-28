@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package su.terrafirmagreg.modules.core.feature.climate;
 
 import su.terrafirmagreg.api.data.enums.TemperatureMode;
@@ -10,9 +5,11 @@ import su.terrafirmagreg.api.data.enums.TemperatureMode;
 import net.minecraft.util.math.MathHelper;
 
 import net.dries007.tfc.ConfigTFC;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+
 import net.dries007.tfc.util.calendar.Month;
 
 import static net.dries007.tfc.world.classic.WorldTypeTFC.SEALEVEL;

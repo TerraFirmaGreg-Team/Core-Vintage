@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.ai;
 
 import net.minecraft.entity.EntityCreature;
@@ -13,10 +8,8 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.dries007.tfc.api.types.IAnimalTFC;
 
 /**
- * Extends vanilla AI to add a bit more in-depth to predators Additions:
- * - Day / Night hunting behaviors (Attack on one and only when provoked otherwise)
- * - Attack Reach
- * - Hunting Area via {@link EntityCreature#setHomePosAndDistance}
+ * Extends vanilla AI to add a bit more in-depth to predators Additions: - Day / Night hunting behaviors (Attack on one and only when provoked otherwise) -
+ * Attack Reach - Hunting Area via {@link EntityCreature#setHomePosAndDistance}
  */
 public class EntityAIAttackMeleeTFC<T extends EntityCreature & IAnimalTFC> extends EntityAIAttackMelee {
 

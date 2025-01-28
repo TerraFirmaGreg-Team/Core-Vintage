@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLStateEvent;
 public interface IModuleManager {
 
   default boolean isModuleEnabled(String containerID, String moduleID) {
-    return isModuleEnabled(new ResourceLocation(containerID, moduleID));
+    return isModuleEnabled(ModUtils.resource(containerID, moduleID));
   }
 
   boolean isModuleEnabled(ResourceLocation id);

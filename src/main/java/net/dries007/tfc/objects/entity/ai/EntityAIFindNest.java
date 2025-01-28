@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity.ai;
 
 import net.minecraft.entity.ai.EntityAIBase;
@@ -14,6 +9,7 @@ import net.minecraft.world.World;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.te.TENestBox;
 import net.dries007.tfc.util.Helpers;
+
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import java.util.HashMap;

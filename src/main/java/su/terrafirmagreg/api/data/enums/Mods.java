@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.data.enums;
 
+import su.terrafirmagreg.api.util.ModUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
@@ -68,7 +70,7 @@ public enum Mods {
 
   @NotNull
   public ResourceLocation getResource(@NotNull String path) {
-    return new ResourceLocation(modid, path);
+    return ModUtils.resource(modid, path);
   }
 
   public static class Names {

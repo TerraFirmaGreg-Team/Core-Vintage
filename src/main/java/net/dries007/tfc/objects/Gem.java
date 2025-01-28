@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects;
 
 import su.terrafirmagreg.api.library.collection.WeightedCollection;
@@ -57,7 +52,7 @@ public enum Gem {
 
     private static final Grade[] VALUES = values();
     private static final WeightedCollection<Grade> GRADE_ODDS = new WeightedCollection<>(Arrays.stream(VALUES)
-                                                                                               .collect(Collectors.toMap(k -> k, v -> v.dropWeight)));
+      .collect(Collectors.toMap(k -> k, v -> v.dropWeight)));
     private final double dropWeight;
 
     Grade(int dropWeight) {

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
 
 import net.minecraft.item.ItemStack;
@@ -18,7 +13,9 @@ import crafttweaker.api.liquid.ILiquidStack;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -41,7 +38,7 @@ public class CTBarrel {
     FluidStack outputFluid = fluidOutput == null ? null : (FluidStack) fluidOutput.getInternal();
     if (outputFluid != null) {registryName += "_" + outputFluid.getUnlocalizedName();}
     BarrelRecipe recipe = new BarrelRecipe(fluidIngredient, itemIngredient, outputFluid, outputStack,
-                                           hours * ICalendar.TICKS_IN_HOUR).setRegistryName(registryName);
+      hours * ICalendar.TICKS_IN_HOUR).setRegistryName(registryName);
     CraftTweakerAPI.apply(new IAction() {
       @Override
       public void apply() {
@@ -98,10 +95,10 @@ public class CTBarrel {
     if (fluid == null && item == ItemStack.EMPTY) {throw new IllegalArgumentException("At least one output must be supplied");}
     List<BarrelRecipe> removeList = new ArrayList<>();
     TFCRegistries.BARREL.getValuesCollection()
-                        .stream()
-                        .filter(x -> (x.getOutputStack() == item || x.getOutputStack().isItemEqual(item)) && ((fluid == null && x.getOutputFluid() == null) || (
-                          fluid != null && fluid.isFluidEqual(x.getOutputFluid()))))
-                        .forEach(removeList::add);
+      .stream()
+      .filter(x -> (x.getOutputStack() == item || x.getOutputStack().isItemEqual(item)) && ((fluid == null && x.getOutputFluid() == null) || (
+        fluid != null && fluid.isFluidEqual(x.getOutputFluid()))))
+      .forEach(removeList::add);
     for (BarrelRecipe rem : removeList) {
       CraftTweakerAPI.apply(new IAction() {
         @Override

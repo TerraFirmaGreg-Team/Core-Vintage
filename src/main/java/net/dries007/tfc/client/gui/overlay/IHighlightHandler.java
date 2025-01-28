@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui.overlay;
 
 import net.minecraft.block.BlockSlab;
@@ -103,9 +98,9 @@ public interface IHighlightHandler {
         if (event.getPlayer().getHeldItemMainhand().getItem() instanceof ItemMetalChisel) {
           // Get the state that the chisel would turn the block into if it clicked
           IBlockState newState = ItemMetalChisel.getChiselResultState(player, player.world, lookingAt, traceResult.sideHit,
-                                                                      (float) traceResult.hitVec.x - lookingAt.getX(),
-                                                                      (float) traceResult.hitVec.y - lookingAt.getY(),
-                                                                      (float) traceResult.hitVec.z - lookingAt.getZ());
+            (float) traceResult.hitVec.x - lookingAt.getX(),
+            (float) traceResult.hitVec.y - lookingAt.getY(),
+            (float) traceResult.hitVec.z - lookingAt.getZ());
           if (newState != null) {
             AxisAlignedBB box = IHighlightHandler.getBox(player, lookingAt, event.getPartialTicks()).grow(0.001);
             double offsetX = 0, offsetY = 0, offsetZ = 0;

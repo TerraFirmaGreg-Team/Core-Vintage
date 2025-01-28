@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui;
 
 import net.minecraft.client.Minecraft;
@@ -121,7 +116,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
         fontRenderer.drawString(resultName, xSize / 2 - (isLong ? recipeWidth / 2 - 6 : 28), isLong ? 73 : 61, 0x404040);
       }
       fontRenderer.drawString(tile.getSealedDate(),
-                              xSize / 2 - (isLong ? 28 : fontRenderer.getStringWidth(tile.getSealedDate()) / 2), isLong ? 19 : 73, 0x404040);
+        xSize / 2 - (isLong ? 28 : fontRenderer.getStringWidth(tile.getSealedDate()) / 2), isLong ? 19 : 73, 0x404040);
     }
   }
 

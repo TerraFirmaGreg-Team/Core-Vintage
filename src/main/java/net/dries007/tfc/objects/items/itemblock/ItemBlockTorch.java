@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.itemblock;
 
 import net.minecraft.block.Block;
@@ -54,7 +49,7 @@ public class ItemBlockTorch extends ItemBlockTFC {
       } else {
         if (Math.random() <= 0.1) {
           world.spawnParticle(EnumParticleTypes.LAVA, entityItem.posX, entityItem.posY, entityItem.posZ,
-                              -0.5F + Math.random(), -0.5F + Math.random(), -0.5F + Math.random());
+            -0.5F + Math.random(), -0.5F + Math.random(), -0.5F + Math.random());
         }
         entityItem.getEntityData().setInteger("torchCount", count + 1);
       }

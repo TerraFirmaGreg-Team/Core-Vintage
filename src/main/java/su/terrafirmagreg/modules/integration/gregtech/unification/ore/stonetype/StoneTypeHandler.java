@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.integration.gregtech.unification.ore.stonetype
 
 
 import su.terrafirmagreg.api.library.Triple;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.SoundType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import gregtech.api.unification.material.Material;
@@ -123,8 +123,8 @@ public class StoneTypeHandler {
     for (Triple<String, OrePrefix, Material> triple : rockTypes) {
       new StoneType(
         idCounter.getAndIncrement(), "tfc_" + triple.getLeft(), SoundType.STONE, triple.getMiddle(), triple.getRight(),
-        () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("tfc:raw/" + triple.getLeft())).getDefaultState(),
-        state -> state.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("tfc:raw/" + triple.getLeft())),
+        () -> ForgeRegistries.BLOCKS.getValue(ModUtils.resource("tfc", "raw/" + triple.getLeft())).getDefaultState(),
+        state -> state.getBlock() == ForgeRegistries.BLOCKS.getValue(ModUtils.resource("tfc", "raw/" + triple.getLeft())),
         false
       );
     }

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package su.terrafirmagreg.modules.food.api;
 
 import su.terrafirmagreg.api.data.DamageSources;

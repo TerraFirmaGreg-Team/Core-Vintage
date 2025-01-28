@@ -1,6 +1,7 @@
 package lyeoj.tfcthings.items;
 
 import su.terrafirmagreg.api.data.ArmorMaterials;
+import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +15,6 @@ import net.minecraft.world.World;
 
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.damage.IDamageResistance;
 import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.capability.size.Weight;
@@ -22,7 +22,7 @@ import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 
 import javax.annotation.Nonnull;
 
-public class ItemHikingBoots extends ItemArmor implements IItemSize, IDamageResistance, TFCThingsConfigurableItem {
+public class ItemHikingBoots extends ItemArmor implements IItemSize, ICapabilityDamageResistance, TFCThingsConfigurableItem {
 
   private static final String STEPS_NBT_KEY = "Steps";
   private final ArmorMaterials armorMaterial;

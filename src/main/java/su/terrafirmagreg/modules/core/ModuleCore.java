@@ -7,6 +7,9 @@ import su.terrafirmagreg.framework.module.spi.ModuleBase;
 import su.terrafirmagreg.framework.network.api.INetworkManager;
 import su.terrafirmagreg.framework.registry.api.IRegistryManager;
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
+import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityHandlerAmbiental;
+import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
@@ -82,6 +85,7 @@ public final class ModuleCore extends ModuleBase {
 
     CapabilityHeat.register();
     CapabilityAmbiental.register();
+    CapabilityDamageResistance.register();
 
   }
 
@@ -93,6 +97,8 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public void onInit(FMLInitializationEvent event) {
     CapabilityHandlerHeat.init();
+    CapabilityHandlerAmbiental.init();
+    CapabilityHandlerDamageResistance.init();
   }
 
   @Override

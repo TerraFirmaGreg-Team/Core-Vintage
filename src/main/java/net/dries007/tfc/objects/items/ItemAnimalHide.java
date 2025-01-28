@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import net.minecraft.block.BlockBed;
@@ -66,11 +61,11 @@ public class ItemAnimalHide extends ItemTFC {
       if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(headPos, facing, stack)) {
         if (!worldIn.isRemote) {
           IBlockState footState = BlocksTFC.THATCH_BED.getDefaultState().withProperty(BlockBed.OCCUPIED, false)
-                                                      .withProperty(BlockBed.FACING, player.getHorizontalFacing())
-                                                      .withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+            .withProperty(BlockBed.FACING, player.getHorizontalFacing())
+            .withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
           IBlockState headState = BlocksTFC.THATCH_BED.getDefaultState().withProperty(BlockBed.OCCUPIED, false)
-                                                      .withProperty(BlockBed.FACING, player.getHorizontalFacing().getOpposite())
-                                                      .withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
+            .withProperty(BlockBed.FACING, player.getHorizontalFacing().getOpposite())
+            .withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
           worldIn.setBlockState(pos, footState, 10);
           worldIn.setBlockState(headPos, headState, 10);
           SoundType soundtype = BlocksTFC.THATCH_BED.getSoundType(footState, worldIn, pos, player);

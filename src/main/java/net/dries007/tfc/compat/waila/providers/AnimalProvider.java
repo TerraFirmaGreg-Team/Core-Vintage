@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import net.minecraft.entity.Entity;
@@ -13,6 +8,7 @@ import net.minecraftforge.common.IShearable;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaEntity;
 import net.dries007.tfc.objects.entity.animal.EntityAnimalMammal;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;

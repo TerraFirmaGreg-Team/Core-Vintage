@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render;
 
 import net.minecraft.client.renderer.BufferBuilder;
@@ -92,7 +87,7 @@ public class TESRLoom extends TESRBase<TELoom> {
         double Z = tileZ * 2 / 3;
 
         drawMaterial(b, te.getMaxInputCount(), te.getCount(), te.getMaxProgress(), te.getProgress(),
-                     ("u".equals(te.getAnimElement())) ? Z : 0, ("l".equals(te.getAnimElement())) ? Z : 0);
+          ("u".equals(te.getAnimElement())) ? Z : 0, ("l".equals(te.getAnimElement())) ? Z : 0);
         drawProduct(b, te.getMaxProgress(), te.getProgress());
 
         t.draw();
@@ -109,8 +104,8 @@ public class TESRLoom extends TESRBase<TELoom> {
 
   private void drawProduct(BufferBuilder b, int maxProgress, int progress) {
     double[][] sidesZ = getPlaneVertices(0.1875, 0.9375,
-                                         0.75 - 0.001, 0.8125,
-                                         0.9375 - (0.625 / maxProgress) * progress, 0.75 - 0.001, 0, 0, 1, (double) progress / (double) 16);
+      0.75 - 0.001, 0.8125,
+      0.9375 - (0.625 / maxProgress) * progress, 0.75 - 0.001, 0, 0, 1, (double) progress / (double) 16);
 
     for (double[] v : sidesZ) {
       b.pos(v[0], v[1], v[2]).tex(v[3], v[4]).endVertex();

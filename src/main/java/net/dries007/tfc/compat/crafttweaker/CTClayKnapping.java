@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
 
 import net.minecraft.item.ItemStack;
@@ -54,9 +49,9 @@ public class CTClayKnapping {
     ItemStack item = (ItemStack) output.getInternal();
     List<KnappingRecipe> removeList = new ArrayList<>();
     TFCRegistries.KNAPPING.getValuesCollection()
-                          .stream()
-                          .filter(x -> x.getType() == KnappingType.CLAY && x.getOutput(ItemStack.EMPTY).isItemEqual(item))
-                          .forEach(removeList::add);
+      .stream()
+      .filter(x -> x.getType() == KnappingType.CLAY && x.getOutput(ItemStack.EMPTY).isItemEqual(item))
+      .forEach(removeList::add);
     for (KnappingRecipe rem : removeList) {
       CraftTweakerAPI.apply(new IAction() {
         @Override

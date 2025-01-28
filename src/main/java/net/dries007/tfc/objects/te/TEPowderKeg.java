@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.minecraft.block.state.IBlockState;
@@ -161,7 +156,7 @@ public class TEPowderKeg extends TETickableInventory implements IItemHandlerSide
       fuse = 80;
     } else {
       world.playSound(null, pos.getX(),
-                      pos.getY() + 0.5D, pos.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.6f + Constants.RNG.nextFloat() * 0.4f);
+        pos.getY() + 0.5D, pos.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.6f + Constants.RNG.nextFloat() * 0.4f);
       fuse = -1;
     }
     markForSync();

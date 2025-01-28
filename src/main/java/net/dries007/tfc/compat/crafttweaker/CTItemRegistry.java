@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
@@ -14,8 +9,6 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.liquid.ILiquidStack;
-import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
-import net.dries007.tfc.api.capability.damage.DamageResistance;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
@@ -172,29 +165,6 @@ public class CTItemRegistry {
         return "Registered food stats for " + input.toCommandString();
       }
     });
-  }
-
-  @ZenMethod
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  public static void registerArmor(crafttweaker.api.item.IIngredient input, float crushingModifier, float piercingModifier, float slashingModifier) {
-    if (input == null) {throw new IllegalArgumentException("Input not allowed to be empty!");}
-    if (input instanceof ILiquidStack) {throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");}
-    IIngredient inputIngredient = CTHelper.getInternalIngredient(input);
-    if (CapabilityDamageResistance.CUSTOM_ARMOR.get(inputIngredient) != null) {
-      throw new IllegalStateException("Armor registered more than once!");
-    } else {
-      CraftTweakerAPI.apply(new IAction() {
-        @Override
-        public void apply() {
-          CapabilityDamageResistance.CUSTOM_ARMOR.put(inputIngredient, () -> new DamageResistance(crushingModifier, piercingModifier, slashingModifier));
-        }
-
-        @Override
-        public String describe() {
-          return "Registered armor stats for " + input.toCommandString();
-        }
-      });
-    }
   }
 
   @ZenMethod

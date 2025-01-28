@@ -1,15 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.json;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
 import org.apache.commons.io.FileUtils;
@@ -46,7 +40,7 @@ public enum JsonConfigRegistry {
     try {
       if (defaultFile.createNewFile()) {
         FileUtils.copyInputStreamToFile(Objects.requireNonNull(JsonConfigRegistry.class.getClassLoader()
-                                                                                       .getResourceAsStream(DEFAULT_DAMAGE_RESISTANCE)), defaultFile);
+          .getResourceAsStream(DEFAULT_DAMAGE_RESISTANCE)), defaultFile);
       }
     } catch (IOException e) {
       throw new Error("Problem creating default entity resistance config file.", e);
@@ -55,7 +49,7 @@ public enum JsonConfigRegistry {
     try {
       if (defaultFile.createNewFile()) {
         FileUtils.copyInputStreamToFile(Objects.requireNonNull(JsonConfigRegistry.class.getClassLoader()
-                                                                                       .getResourceAsStream(DEFAULT_ANIMAL_FOOD)), defaultFile);
+          .getResourceAsStream(DEFAULT_ANIMAL_FOOD)), defaultFile);
       }
     } catch (IOException e) {
       throw new Error("Problem creating default animal food config file.", e);
@@ -77,9 +71,7 @@ public enum JsonConfigRegistry {
         String fileContents = new String(Files.readAllBytes(path), Charset.defaultCharset());
         JsonObject jsonObject = new JsonParser().parse(fileContents).getAsJsonObject();
         JsonElement loader = jsonObject.get("#loader");
-        if (loader != null && "tfc:damage_resistance".equals(loader.getAsString())) {
-          CapabilityDamageResistance.readFile(jsonObject.entrySet());
-        } else if (loader != null && "tfc:animal_food".equals(loader.getAsString())) {
+        if (loader != null && "tfc:animal_food".equals(loader.getAsString())) {
           AnimalFood.readFile(jsonObject.entrySet());
         } else {
           // Defaults to the vein loader, this will be thrown out at 1.15 anyway
@@ -94,7 +86,6 @@ public enum JsonConfigRegistry {
       }
     }
     VeinRegistry.INSTANCE.postInit();
-    CapabilityDamageResistance.postInit();
   }
 
 }

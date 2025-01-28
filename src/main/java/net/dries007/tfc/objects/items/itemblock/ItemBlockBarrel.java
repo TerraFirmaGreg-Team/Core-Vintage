@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.itemblock;
 
 import net.minecraft.block.Block;
@@ -44,6 +39,7 @@ import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
 import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.util.OreDictionaryHelper;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 
@@ -138,7 +134,7 @@ public class ItemBlockBarrel extends ItemBlockTFC {
       }
 
       String formattedDate = ICalendarFormatted.getTimeAndDate(stack.getTagCompound()
-                                                                    .getLong("sealedCalendarTick"), Calendar.CALENDAR_TIME.getDaysInMonth());
+        .getLong("sealedCalendarTick"), Calendar.CALENDAR_TIME.getDaysInMonth());
       tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("waila.tfc.barrel.sealed", formattedDate).getFormattedText());
     }
   }

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.interaction;
 
 import net.minecraft.block.state.IBlockState;
@@ -167,7 +162,7 @@ public final class InteractionManager {
           posAt = posAt.offset(direction);
         }
         if (worldIn.getBlockState(posAt.down()).isSideSolid(worldIn, posAt.down(), EnumFacing.UP) && worldIn.getBlockState(posAt).getBlock()
-                                                                                                            .isReplaceable(worldIn, pos)) {
+          .isReplaceable(worldIn, pos)) {
           IBlockState stateToPlace = BlocksTFC.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, 1);
           if (worldIn.checkNoEntityCollision(stateToPlace.getBoundingBox(worldIn, posAt).offset(posAt))) {
             // Create a new charcoal pile

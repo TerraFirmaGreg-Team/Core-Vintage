@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.minecraft.block.Block;
@@ -232,27 +227,27 @@ public class BlockLeavesTFC extends BlockLeaves {
       switch (RNG.nextInt(4)) {
         case 1:
           TFCParticles.LEAF1.sendToAllNear(world,
-                                           x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 90);
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 90);
           break;
         case 2:
           TFCParticles.LEAF2.sendToAllNear(world,
-                                           x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 70);
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 70);
           break;
         case 3:
           TFCParticles.LEAF3.sendToAllNear(world,
-                                           x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 80);
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 80);
           break;
       }
     }

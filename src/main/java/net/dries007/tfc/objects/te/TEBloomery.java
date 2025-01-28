@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.minecraft.block.state.IBlockState;
@@ -28,6 +23,7 @@ import net.dries007.tfc.objects.blocks.BlockMolten;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
 import net.dries007.tfc.util.Helpers;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
@@ -219,8 +215,8 @@ public class TEBloomery extends TETickableInventory implements ITickable {
     if (internalBlock == null) {
       EnumFacing direction = world.getBlockState(pos).getValue(FACING);
       internalBlock = pos.up(OFFSET_INTERNAL.getY())
-                         .offset(direction, OFFSET_INTERNAL.getX())
-                         .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
+        .offset(direction, OFFSET_INTERNAL.getX())
+        .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
     }
     return internalBlock;
   }
@@ -234,8 +230,8 @@ public class TEBloomery extends TETickableInventory implements ITickable {
     if (externalBlock == null) {
       EnumFacing direction = world.getBlockState(pos).getValue(FACING);
       externalBlock = pos.up(OFFSET_EXTERNAL.getY())
-                         .offset(direction, OFFSET_EXTERNAL.getX())
-                         .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
+        .offset(direction, OFFSET_EXTERNAL.getX())
+        .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
     }
     return externalBlock;
   }
@@ -307,7 +303,7 @@ public class TEBloomery extends TETickableInventory implements ITickable {
           world.setBlockState(getInternalBlock().up(i), BlocksTFC.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, 4));
         } else {
           world.setBlockState(getInternalBlock().up(i), BlocksTFC.MOLTEN.getDefaultState().withProperty(LIT, cooking)
-                                                                        .withProperty(BlockMolten.LAYERS, slagLayers));
+            .withProperty(BlockMolten.LAYERS, slagLayers));
           slagLayers = 0;
         }
       } else {

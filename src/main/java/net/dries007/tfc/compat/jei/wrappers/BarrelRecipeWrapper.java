@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import net.minecraft.client.Minecraft;
@@ -20,6 +15,7 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
+
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.ParametersAreNonnullByDefault;

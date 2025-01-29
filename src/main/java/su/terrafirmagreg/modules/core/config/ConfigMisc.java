@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.core.config;
 
+import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
 import su.terrafirmagreg.api.data.enums.OreTooltipMode;
+import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
 
 import net.minecraftforge.common.config.Config;
 
@@ -14,6 +16,24 @@ public final class ConfigMisc {
 
   @Config.Comment("Ambiental settings")
   public final Ambiental AMBIENTAL = new Ambiental();
+
+  @Config.Comment("Damage settings")
+  public final Damage DAMAGE = new Damage();
+
+  @Config.Comment("Debug settings")
+  public final Debug DEBUG = new Debug();
+
+  @Config.Comment("Calendar settings")
+  public final Calendar CALENDAR = new Calendar();
+
+  @Config.Comment("Fallable settings")
+  public final Fallable FALLABLE = new Fallable();
+
+  @Config.Comment("Display settings")
+  public final Display DISPLAY = new Display();
+
+  @Config.Comment("Tooltip settings")
+  public final Tooltip TOOLTIP = new Tooltip();
 
   public static final class Weight {
 
@@ -180,5 +200,316 @@ public final class ConfigMisc {
     })
     public int nanoOrQuarkTemp = 20;
 
+  }
+
+  public static final class Damage {
+
+    @Config.Comment("Damage Source Types that will default to Slashing damage.")
+    public String[] slashingSources = new String[]{
+
+    };
+
+    @Config.Comment("Damage Source Types that will default to Piercing damage.")
+    public String[] piercingSources = new String[]{
+      "arrow", "cactus", "thorns"
+    };
+
+    @Config.Comment("Damage Source Types that will default to Crushing damage.")
+    public String[] crushingSources = new String[]{
+      "anvil", "falling_block"
+    };
+
+    @Config.Comment("Damage Source Entities that will default to Slashing damage.")
+    public String[] slashingEntities = new String[]{
+      "minecraft:wither_skeleton", "minecraft:vex", "minecraft:vindication_illager",
+      "minecraft:zombie_pigman", "minecraft:wolf", "minecraft:polar_bear"
+    };
+
+    @Config.Comment("Damage Source Entities that will default to Piercing damage.")
+    public String[] piercingEntities = new String[]{
+      "minecraft:stray", "minecraft:skeleton"
+    };
+
+    @Config.Comment("Damage Source Entities that will default to Crushing damage.")
+    public String[] crushingEntities = new String[]{
+      "minecraft:husk", "minecraft:skeleton_horse", "minecraft:zombie_horse",
+      "minecraft:spider", "minecraft:giant",
+      "minecraft:zombie", "minecraft:slime", "minecraft:cave_spider", "minecraft:silverfish",
+      "minecraft:villager_golem", "minecraft:zombie_villager"
+    };
+  }
+
+  public static final class Debug {
+
+    @Config.Name("Debug Mode")
+    @Config.Comment("When enabled, prints debug values to console. Activates some extra wand features. Enables extra item tooltips.")
+    public boolean enable = true;
+
+    @Config.Comment("Debug pathfinding")
+    @Config.RequiresWorldRestart
+    public boolean debugCreatePath = false;
+
+    @Config.Comment({"Debug worldgen (the danger part) " +
+                     "This will glass maps at max world height to help debug world gen. " +
+                     "THIS WILL MESS UP YOUR WORLD!"})
+    @Config.RequiresWorldRestart
+    public boolean debugWorldGenDanger = false;
+
+    @Config.Comment("Debug worldgen (safe part) " +
+                    "This will output map images of world gen steps and print some debug info. " +
+                    "This is safe to use.")
+    @Config.RequiresWorldRestart
+    public boolean debugWorldGenSafe = false;
+  }
+
+  public static final class Calendar {
+
+    @Config.Comment({"Add Special Days!"})
+    public final Birthday BIRTHDAYS = new Birthday();
+    public final Month MONTH = new Month();
+
+    public static class Month {
+
+      public final January JANUARY = new January();
+
+      public final February FEBRUARY = new February();
+
+      public final March MARCH = new March();
+
+      public final April APRIL = new April();
+
+      public final May MAY = new May();
+
+      public final June JUNE = new June();
+
+      public final July JULY = new July();
+
+      public final August AUGUST = new August();
+
+      public final September SEPTEMBER = new September();
+
+      public final October OCTOBER = new October();
+
+      public final November NOVEMBER = new November();
+
+      public final December DECEMBER = new December();
+
+      @Config.Comment({
+        "The default length of a month (in days) when a new world is started. " +
+        "This can be changed in existing worlds via the /timetfc command."
+      })
+      @Config.RangeInt(min = 1, max = 31)
+      public int defaultMonthLength = 8;
+
+      @Config.Comment({"Constant duration for each Minecraft day"})
+      @Config.RangeInt(min = 1)
+      public int defaultDayDuration = 12000;
+
+      @Config.Comment({"Constant duration for each Minecraft night"})
+      @Config.RangeInt(min = 1)
+      public int defaultNightDuration = 12000;
+
+      @Config.Comment({"Whether the moon should be the one affected by staticAngle. Setting this to false will make the sun be static instead"})
+      public boolean staticMoon = false;
+
+      @Config.Comment({"Statically sets the sun/moon to a specific angle, can be used for infinite day/night. Set to -1 to disable"})
+      @Config.RangeInt(min = -1, max = 180)
+      public int staticAngle = -1;
+
+      public static class January {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 31;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 10800;
+      }
+
+      public static class February {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 28;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 12000;
+      }
+
+      public static class March {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 31;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 13200;
+      }
+
+      public static class April {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 30;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 14400;
+      }
+
+      public static class May {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 31;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 15600;
+      }
+
+      public static class June {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 30;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 16800;
+      }
+
+      public static class July {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 31;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 18000;
+      }
+
+      public static class August {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 31;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 16800;
+      }
+
+      public static class September {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 30;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 15600;
+      }
+
+      public static class October {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 31;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 14400;
+      }
+
+      public static class November {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 30;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 13200;
+      }
+
+      public static class December {
+
+        @Config.RangeInt(min = 1, max = 31)
+        public int days = 31;
+
+        @Config.RangeInt(min = 1, max = 18000)
+        @Config.Comment({"Daylight length in ticks. Cannot be greater than 18000"})
+        public int dayDuration = 12000;
+      }
+
+    }
+
+    public static class Birthday {
+
+      @Config.Comment({"Add special days to the TFC calendar!", "Format: MONTH<dayNumber> <name of your day>.",
+                       "An invalid day string won't be read by the calendar. See defaults for examples."})
+      @Config.RequiresMcRestart
+      public String[] dayList = new String[]{
+        "MARCH2 Firedale's Birthday"
+      };
+    }
+
+
+  }
+
+  public static final class Fallable {
+
+    @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never fall.")
+    public boolean enable = true;
+
+    @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never destroy ore blocks.")
+    public boolean destroyOres = true;
+
+    @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never destroy loose items.")
+    public boolean destroyItems = true;
+
+    @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never hurt entities.")
+    public boolean hurtEntities = true;
+
+    @Config.Comment("Chance that mining raw rocks triggers a collapse.")
+    @Config.RangeDouble(min = 0, max = 1)
+    public double collapseChance = 0.1;
+
+    @Config.Comment("Chance that collapsing blocks propagate the collapse. Influenced by distance from epicenter of collapse.")
+    @Config.RangeDouble(min = 0, max = 1)
+    public double propagateCollapseChance = 0.55;
+
+    @Config.Comment("Horizontal radius of the support range of support beams.")
+    @Config.RangeInt(min = 0, max = 8)
+    public int supportBeamRangeHor = 4;
+
+    @Config.Comment("Upwards support range of support beams.")
+    @Config.RangeInt(min = 0, max = 3)
+    public int supportBeamRangeUp = 1;
+
+    @Config.Comment("Downwards support range of support beams.")
+    @Config.RangeInt(min = 0, max = 3)
+    public int supportBeamRangeDown = 1;
+
+    @Config.Comment("Should chiseling raw stone blocks cause collapses?")
+    public boolean chiselCausesCollapse = true;
+
+    @Config.Comment("Should exploding raw stone blocks cause collapses?")
+    public boolean explosionCausesCollapse = true;
+  }
+
+  public static final class Display {
+
+    @Config.Comment({"If TFC health bar is enabled, this changes display health format. (Default: TFC = 1000 / 1000)."})
+    public HealthDisplayFormat healthDisplayFormat = HealthDisplayFormat.TFC;
+
+    @Config.Comment({"Disable TFC health bar and use vanilla instead?"})
+    public boolean useVanillaHealth = false;
+
+    @Config.Comment({"Disable TFC hunger bar and use vanilla instead?"})
+    public boolean useVanillaHunger = false;
+
+    @Config.Comment({"Hide the thirst bar?"})
+    public boolean hideThirstBar = false;
+  }
+
+  public static final class Tooltip {
+
+    @Config.Comment({"Time tooltip info mode."})
+    public TimeTooltipMode timeMode = TimeTooltipMode.MINECRAFT_HOURS;
   }
 }

@@ -1,4 +1,8 @@
-package net.dries007.tfc.api.util;
+package su.terrafirmagreg.modules.core.feature.falling;
+
+import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
+import su.terrafirmagreg.modules.core.capabilities.worldtracker.ICapabilityWorldTracker;
+import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -19,9 +23,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.capability.worldtracker.CollapseData;
-import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
@@ -310,9 +311,9 @@ public class FallingBlockManager {
     }
 
     if (!secondaryPositions.isEmpty()) {
-      WorldTracker tracker = world.getCapability(CapabilityWorldTracker.CAPABILITY, null);
-      if (tracker != null) {
-        tracker.addCollapseData(new CollapseData(centerPoint, secondaryPositions, radiusSquared));
+      ICapabilityWorldTracker cap = CapabilityWorldTracker.get(world);
+      if (cap != null) {
+        cap.addCollapseData(new CollapseData(centerPoint, secondaryPositions, radiusSquared));
       }
     }
   }

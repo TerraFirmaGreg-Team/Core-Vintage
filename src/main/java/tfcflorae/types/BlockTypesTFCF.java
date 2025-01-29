@@ -1,5 +1,7 @@
 package tfcflorae.types;
 
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -8,7 +10,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
-import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
@@ -199,6 +200,138 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
       this.fallingSpecification = fallingSpecification;
     }
 
+    public static RockTFCF getNonGrassVersionStatic(RockTFCF rock) {
+      if (!rock.isGrass) {return rock;}
+      switch (rock) {
+        case BOG_IRON_GRASS:
+        case DRY_BOG_IRON_GRASS:
+        case SPARSE_BOG_IRON_GRASS:
+        case BOG_IRON_PODZOL:
+          return BOG_IRON;
+        case SPARSE_LOAMY_SAND_GRASS:
+        case DRY_LOAMY_SAND_GRASS:
+        case LOAMY_SAND_GRASS:
+        case LOAMY_SAND_PODZOL:
+          return LOAMY_SAND;
+        case SPARSE_SANDY_LOAM_GRASS:
+        case DRY_SANDY_LOAM_GRASS:
+        case SANDY_LOAM_GRASS:
+        case SANDY_LOAM_PODZOL:
+          return SANDY_LOAM;
+        case SPARSE_SANDY_CLAY_LOAM_GRASS:
+        case DRY_SANDY_CLAY_LOAM_GRASS:
+        case SANDY_CLAY_LOAM_GRASS:
+        case SANDY_CLAY_LOAM_PODZOL:
+          return SANDY_CLAY_LOAM;
+        case SPARSE_SANDY_CLAY_GRASS:
+        case DRY_SANDY_CLAY_GRASS:
+        case SANDY_CLAY_GRASS:
+        case SANDY_CLAY_PODZOL:
+          return SANDY_CLAY;
+        case SPARSE_LOAM_GRASS:
+        case DRY_LOAM_GRASS:
+        case LOAM_GRASS:
+        case LOAM_PODZOL:
+          return LOAM;
+        case SPARSE_CLAY_LOAM_GRASS:
+        case DRY_CLAY_LOAM_GRASS:
+        case CLAY_LOAM_GRASS:
+        case CLAY_LOAM_PODZOL:
+          return CLAY_LOAM;
+        case SPARSE_SILTY_CLAY_GRASS:
+        case DRY_SILTY_CLAY_GRASS:
+        case SILTY_CLAY_GRASS:
+        case SILTY_CLAY_PODZOL:
+          return SILTY_CLAY;
+        case SPARSE_SILTY_CLAY_LOAM_GRASS:
+        case DRY_SILTY_CLAY_LOAM_GRASS:
+        case SILTY_CLAY_LOAM_GRASS:
+        case SILTY_CLAY_LOAM_PODZOL:
+          return SILTY_CLAY_LOAM;
+        case SPARSE_SILT_LOAM_GRASS:
+        case DRY_SILT_LOAM_GRASS:
+        case SILT_LOAM_GRASS:
+        case SILT_LOAM_PODZOL:
+          return SILT_LOAM;
+        case SPARSE_SILT_GRASS:
+        case DRY_SILT_GRASS:
+        case SILT_GRASS:
+        case SILT_PODZOL:
+          return SILT;
+        case HUMUS_GRASS:
+        case SPARSE_HUMUS_GRASS:
+        case DRY_HUMUS_GRASS:
+          return HUMUS;
+        case CLAY_HUMUS_GRASS:
+        case SPARSE_CLAY_HUMUS_GRASS:
+        case DRY_CLAY_HUMUS_GRASS:
+          return CLAY_HUMUS;
+        case SPARSE_GRASS:
+        case SPARSE_CLAY_GRASS:
+        case DRY_CLAY_GRASS:
+        case CLAY_PODZOL:
+        case PODZOL:
+          return null; //This is supposed to happen, because it is expected to run getNonGrassVersionTFC after this one
+      }
+      throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+    }
+
+    public static Rock.Type getNonGrassVersionTFCStatic(RockTFCF rock) {
+      if (!rock.isGrass) {return null;}
+      switch (rock) {
+        case SPARSE_CLAY_GRASS:
+        case DRY_CLAY_GRASS:
+        case CLAY_PODZOL:
+          return Rock.Type.CLAY;
+        case PODZOL:
+        case SPARSE_GRASS:
+          return Rock.Type.DIRT;
+      }
+      throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
+    }
+
+    public static boolean isDryGrass(RockTFCF grass) {
+      if (!grass.isGrass) {throw new IllegalArgumentException("Non-grass can't spread.");} else if
+      (
+        grass == DRY_BOG_IRON_GRASS ||
+        grass == DRY_LOAMY_SAND_GRASS ||
+        grass == DRY_SANDY_LOAM_GRASS ||
+        grass == DRY_SANDY_CLAY_LOAM_GRASS ||
+        grass == DRY_SANDY_CLAY_GRASS ||
+        grass == DRY_LOAM_GRASS ||
+        grass == DRY_CLAY_LOAM_GRASS ||
+        grass == DRY_SILTY_CLAY_GRASS ||
+        grass == DRY_SILTY_CLAY_LOAM_GRASS ||
+        grass == DRY_SILT_LOAM_GRASS ||
+        grass == DRY_SILT_GRASS ||
+        grass == DRY_HUMUS_GRASS ||
+        grass == DRY_CLAY_HUMUS_GRASS
+      ) {return true;}
+      return false;
+    }
+
+    public static boolean isSparseGrass(RockTFCF grass) {
+      if (!grass.isGrass) {throw new IllegalArgumentException("Non-grass can't spread.");} else if
+      (
+        grass == SPARSE_BOG_IRON_GRASS ||
+        grass == SPARSE_GRASS ||
+        grass == SPARSE_CLAY_GRASS ||
+        grass == SPARSE_LOAMY_SAND_GRASS ||
+        grass == SPARSE_SANDY_LOAM_GRASS ||
+        grass == SPARSE_SANDY_CLAY_LOAM_GRASS ||
+        grass == SPARSE_SANDY_CLAY_GRASS ||
+        grass == SPARSE_LOAM_GRASS ||
+        grass == SPARSE_CLAY_LOAM_GRASS ||
+        grass == SPARSE_SILTY_CLAY_GRASS ||
+        grass == SPARSE_SILTY_CLAY_LOAM_GRASS ||
+        grass == SPARSE_SILT_LOAM_GRASS ||
+        grass == SPARSE_SILT_GRASS ||
+        grass == SPARSE_HUMUS_GRASS ||
+        grass == SPARSE_CLAY_HUMUS_GRASS
+      ) {return true;}
+      return false;
+    }
+
     public boolean canFall() {
       return fallingSpecification != null;
     }
@@ -319,96 +452,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
       throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
     }
 
-    public static RockTFCF getNonGrassVersionStatic(RockTFCF rock) {
-      if (!rock.isGrass) {return rock;}
-      switch (rock) {
-        case BOG_IRON_GRASS:
-        case DRY_BOG_IRON_GRASS:
-        case SPARSE_BOG_IRON_GRASS:
-        case BOG_IRON_PODZOL:
-          return BOG_IRON;
-        case SPARSE_LOAMY_SAND_GRASS:
-        case DRY_LOAMY_SAND_GRASS:
-        case LOAMY_SAND_GRASS:
-        case LOAMY_SAND_PODZOL:
-          return LOAMY_SAND;
-        case SPARSE_SANDY_LOAM_GRASS:
-        case DRY_SANDY_LOAM_GRASS:
-        case SANDY_LOAM_GRASS:
-        case SANDY_LOAM_PODZOL:
-          return SANDY_LOAM;
-        case SPARSE_SANDY_CLAY_LOAM_GRASS:
-        case DRY_SANDY_CLAY_LOAM_GRASS:
-        case SANDY_CLAY_LOAM_GRASS:
-        case SANDY_CLAY_LOAM_PODZOL:
-          return SANDY_CLAY_LOAM;
-        case SPARSE_SANDY_CLAY_GRASS:
-        case DRY_SANDY_CLAY_GRASS:
-        case SANDY_CLAY_GRASS:
-        case SANDY_CLAY_PODZOL:
-          return SANDY_CLAY;
-        case SPARSE_LOAM_GRASS:
-        case DRY_LOAM_GRASS:
-        case LOAM_GRASS:
-        case LOAM_PODZOL:
-          return LOAM;
-        case SPARSE_CLAY_LOAM_GRASS:
-        case DRY_CLAY_LOAM_GRASS:
-        case CLAY_LOAM_GRASS:
-        case CLAY_LOAM_PODZOL:
-          return CLAY_LOAM;
-        case SPARSE_SILTY_CLAY_GRASS:
-        case DRY_SILTY_CLAY_GRASS:
-        case SILTY_CLAY_GRASS:
-        case SILTY_CLAY_PODZOL:
-          return SILTY_CLAY;
-        case SPARSE_SILTY_CLAY_LOAM_GRASS:
-        case DRY_SILTY_CLAY_LOAM_GRASS:
-        case SILTY_CLAY_LOAM_GRASS:
-        case SILTY_CLAY_LOAM_PODZOL:
-          return SILTY_CLAY_LOAM;
-        case SPARSE_SILT_LOAM_GRASS:
-        case DRY_SILT_LOAM_GRASS:
-        case SILT_LOAM_GRASS:
-        case SILT_LOAM_PODZOL:
-          return SILT_LOAM;
-        case SPARSE_SILT_GRASS:
-        case DRY_SILT_GRASS:
-        case SILT_GRASS:
-        case SILT_PODZOL:
-          return SILT;
-        case HUMUS_GRASS:
-        case SPARSE_HUMUS_GRASS:
-        case DRY_HUMUS_GRASS:
-          return HUMUS;
-        case CLAY_HUMUS_GRASS:
-        case SPARSE_CLAY_HUMUS_GRASS:
-        case DRY_CLAY_HUMUS_GRASS:
-          return CLAY_HUMUS;
-        case SPARSE_GRASS:
-        case SPARSE_CLAY_GRASS:
-        case DRY_CLAY_GRASS:
-        case CLAY_PODZOL:
-        case PODZOL:
-          return null; //This is supposed to happen, because it is expected to run getNonGrassVersionTFC after this one
-      }
-      throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
-    }
-
-    public static Rock.Type getNonGrassVersionTFCStatic(RockTFCF rock) {
-      if (!rock.isGrass) {return null;}
-      switch (rock) {
-        case SPARSE_CLAY_GRASS:
-        case DRY_CLAY_GRASS:
-        case CLAY_PODZOL:
-          return Rock.Type.CLAY;
-        case PODZOL:
-        case SPARSE_GRASS:
-          return Rock.Type.DIRT;
-      }
-      throw new IllegalStateException("Someone forgot to add enum constants to this switch case...");
-    }
-
     public RockTFCF getGrassVersion(RockTFCF spreader) {
       if (!spreader.isGrass) {throw new IllegalArgumentException("Non-grass can't spread.");}
       switch (this) {
@@ -458,48 +501,6 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
           }
       }
       throw new IllegalArgumentException("You cannot get grass from rock types.");
-    }
-
-    public static boolean isDryGrass(RockTFCF grass) {
-      if (!grass.isGrass) {throw new IllegalArgumentException("Non-grass can't spread.");} else if
-      (
-        grass == DRY_BOG_IRON_GRASS ||
-        grass == DRY_LOAMY_SAND_GRASS ||
-        grass == DRY_SANDY_LOAM_GRASS ||
-        grass == DRY_SANDY_CLAY_LOAM_GRASS ||
-        grass == DRY_SANDY_CLAY_GRASS ||
-        grass == DRY_LOAM_GRASS ||
-        grass == DRY_CLAY_LOAM_GRASS ||
-        grass == DRY_SILTY_CLAY_GRASS ||
-        grass == DRY_SILTY_CLAY_LOAM_GRASS ||
-        grass == DRY_SILT_LOAM_GRASS ||
-        grass == DRY_SILT_GRASS ||
-        grass == DRY_HUMUS_GRASS ||
-        grass == DRY_CLAY_HUMUS_GRASS
-      ) {return true;}
-      return false;
-    }
-
-    public static boolean isSparseGrass(RockTFCF grass) {
-      if (!grass.isGrass) {throw new IllegalArgumentException("Non-grass can't spread.");} else if
-      (
-        grass == SPARSE_BOG_IRON_GRASS ||
-        grass == SPARSE_GRASS ||
-        grass == SPARSE_CLAY_GRASS ||
-        grass == SPARSE_LOAMY_SAND_GRASS ||
-        grass == SPARSE_SANDY_LOAM_GRASS ||
-        grass == SPARSE_SANDY_CLAY_LOAM_GRASS ||
-        grass == SPARSE_SANDY_CLAY_GRASS ||
-        grass == SPARSE_LOAM_GRASS ||
-        grass == SPARSE_CLAY_LOAM_GRASS ||
-        grass == SPARSE_SILTY_CLAY_GRASS ||
-        grass == SPARSE_SILTY_CLAY_LOAM_GRASS ||
-        grass == SPARSE_SILT_LOAM_GRASS ||
-        grass == SPARSE_SILT_GRASS ||
-        grass == SPARSE_HUMUS_GRASS ||
-        grass == SPARSE_CLAY_HUMUS_GRASS
-      ) {return true;}
-      return false;
     }
 
         /*

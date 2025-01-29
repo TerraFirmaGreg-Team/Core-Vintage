@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.stone;
 
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -12,7 +14,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

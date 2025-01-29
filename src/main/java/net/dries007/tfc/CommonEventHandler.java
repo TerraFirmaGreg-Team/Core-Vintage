@@ -11,6 +11,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
@@ -129,8 +130,6 @@ import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.capability.player.PlayerDataHandler;
-import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.ICreatureTFC;
@@ -139,7 +138,6 @@ import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Rock.Type;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketPlayerDataUpdate;
@@ -1151,21 +1149,6 @@ public final class CommonEventHandler {
           }
           return;
         }
-      }
-    }
-  }
-
-  @SubscribeEvent
-  public static void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
-    event.addCapability(CapabilityWorldTracker.KEY, new WorldTracker());
-  }
-
-  @SubscribeEvent
-  public static void onWorldTick(TickEvent.WorldTickEvent event) {
-    if (event.phase == TickEvent.Phase.START) {
-      WorldTracker tracker = event.world.getCapability(CapabilityWorldTracker.CAPABILITY, null);
-      if (tracker != null) {
-        tracker.tick(event.world);
       }
     }
   }

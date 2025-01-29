@@ -16,11 +16,14 @@ import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
 import su.terrafirmagreg.modules.core.event.EventHandlerAmbiental;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesEntity;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesItemStack;
+import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesWorld;
 import su.terrafirmagreg.modules.core.event.EventHandlerConfigChanged;
+import su.terrafirmagreg.modules.core.event.EventHandlerFallingBlock;
 import su.terrafirmagreg.modules.core.event.EventHandlerPortalSpawn;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
@@ -88,6 +91,7 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
 
+    CapabilityWorldTracker.register();
     CapabilityEgg.register();
     CapabilityHeat.register();
     CapabilitySize.register();
@@ -115,10 +119,13 @@ public final class ModuleCore extends ModuleBase {
   public @NotNull List<Class<?>> getEventBusSubscribers() {
     ObjectList<Class<?>> list = new ObjectArrayList<>();
 
-    list.add(EventHandlerAmbiental.class);
     list.add(EventHandlerCapabilitiesItemStack.class);
     list.add(EventHandlerCapabilitiesEntity.class);
+    list.add(EventHandlerCapabilitiesWorld.class);
+
     list.add(EventHandlerConfigChanged.class);
+    list.add(EventHandlerAmbiental.class);
+    list.add(EventHandlerFallingBlock.class);
     list.add(EventHandlerPortalSpawn.class);
 
     return list;

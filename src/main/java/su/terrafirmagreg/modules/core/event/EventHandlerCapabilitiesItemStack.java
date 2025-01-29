@@ -34,7 +34,7 @@ public class EventHandlerCapabilitiesItemStack {
     damageResistance(event, stack);
   }
 
-  public static void size(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  private static void size(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
     if (CapabilitySize.getIItemSize(stack) != null) {
       return;
@@ -55,19 +55,19 @@ public class EventHandlerCapabilitiesItemStack {
 
   }
 
-  public static void food(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  private static void food(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
   }
 
-  public static void metal(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  private static void metal(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
   }
 
-  public static void heat(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  private static void heat(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
   }
 
-//  public static void sharpness(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+//  private static void sharpness(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 //
 //    ICapabilityProvider provider = HandlerSharpness.getCustom(stack);
 //    if (provider == null) {
@@ -77,7 +77,7 @@ public class EventHandlerCapabilitiesItemStack {
 //    event.addCapability(CapabilitySharpness.KEY, provider);
 //  }
 
-  public static void egg(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  private static void egg(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
     ICapabilityProvider provider = CapabilityHandlerEgg.getCustom(stack);
     if (provider == null) {
@@ -87,7 +87,7 @@ public class EventHandlerCapabilitiesItemStack {
     event.addCapability(CapabilityEgg.KEY, provider);
   }
 
-  public static void damageResistance(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+  private static void damageResistance(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
     ICapabilityProvider provider = CapabilityHandlerDamageResistance.getCustom(stack);
     if (provider == null) {

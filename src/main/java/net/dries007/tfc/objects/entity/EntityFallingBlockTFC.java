@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.entity;
 
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
 
 import javax.annotation.Nullable;

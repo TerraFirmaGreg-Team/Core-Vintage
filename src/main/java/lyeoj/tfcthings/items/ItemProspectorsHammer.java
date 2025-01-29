@@ -1,5 +1,9 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.SoundType;
@@ -30,11 +34,8 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
@@ -51,8 +52,8 @@ import java.util.List;
 
 public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
 
-  private final Metal metal;
   public final ToolMaterial material;
+  private final Metal metal;
   private final double attackDamage;
   private final float attackSpeed;
 
@@ -60,7 +61,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
     this.metal = metal;
     this.material = metal.getToolMetal();
     this.setMaxDamage((int) ((double) material.getMaxUses() / 4));
-    this.attackDamage = (double) (0.5 * this.material.getAttackDamage());
+    this.attackDamage = 0.5 * this.material.getAttackDamage();
     this.attackSpeed = -2.8F;
     this.setMaxStackSize(1);
     setRegistryName("prospectors_hammer/" + name);
@@ -87,7 +88,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
     Multimap<String, AttributeModifier> multimap = HashMultimap.create();
     if (slot == EntityEquipmentSlot.MAINHAND) {
       multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
-      multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double) this.attackSpeed, 0));
+      multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
     }
 
     return multimap;
@@ -107,15 +108,12 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
       worldIn.playSound(playerIn, blockpos, soundType.getHitSound(), SoundCategory.BLOCKS, 1.0F, soundType.getPitch());
       Block block = iblockstate.getBlock();
       if (!worldIn.isRemote) {
-        ProspectingSkill skill = (ProspectingSkill) CapabilityPlayerData.getSkill(playerIn, SkillType.PROSPECTING);
+        ProspectingSkill skill = CapabilityPlayerData.getSkill(playerIn, SkillType.PROSPECTING);
         if (playerIn.isSneaking()) {
           checkRockLayers(playerIn, worldIn, blockpos, skill);
           playerIn.getCooldownTracker().setCooldown(this, 10);
           float skillModifier = SmithingSkill.getSkillBonus(itemstack, SmithingSkill.Type.TOOLS) / 2.0F;
-          boolean flag = true;
-          if (skillModifier > 0.0F && Constants.RNG.nextFloat() < skillModifier) {
-            flag = false;
-          }
+          boolean flag = !(skillModifier > 0.0F) || !(Constants.RNG.nextFloat() < skillModifier);
           if (flag) {
             playerIn.getHeldItem(handIn).damageItem(20, playerIn);
           } else {
@@ -127,7 +125,6 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
         if (FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos)) != null
             && FallingBlockManager.getSpecification(worldIn.getBlockState(blockpos)).isCollapsable()) {
           boolean result = isThisBlockSafe(worldIn, blockpos);
-          ;
           float falsePositiveChance = 0.3F;
           if (skill != null) {
             falsePositiveChance = 0.3F - 0.1F * (float) skill.getTier().ordinal();
@@ -146,29 +143,26 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
         }
         switch (messageType) {
           case 0:
-            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_na", new Object[0]), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_na"), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 1:
-            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_safe", new Object[0]), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_safe"), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 2:
-            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_unsafe", new Object[0]), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_unsafe"), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 3:
-            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_na_fall", new Object[0]), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_na_fall"), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 4:
-            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_safe_fall", new Object[0]), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_safe_fall"), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
           case 5:
-            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_unsafe_fall", new Object[0]), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+            playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_unsafe_fall"), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
             break;
         }
         float skillModifier = SmithingSkill.getSkillBonus(itemstack, SmithingSkill.Type.TOOLS) / 2.0F;
-        boolean flag = true;
-        if (skillModifier > 0.0F && Constants.RNG.nextFloat() < skillModifier) {
-          flag = false;
-        }
+        boolean flag = !(skillModifier > 0.0F) || !(Constants.RNG.nextFloat() < skillModifier);
         if (flag) {
           playerIn.getHeldItem(handIn).damageItem(1, playerIn);
         }
@@ -187,7 +181,7 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
     while (var6.hasNext()) {
       BlockPos checking = (BlockPos) var6.next();
       if (FallingBlockManager.getSpecification(worldIn.getBlockState(checking)) != null && FallingBlockManager.getSpecification(worldIn.getBlockState(checking))
-                                                                                                              .isCollapsable()) {
+        .isCollapsable()) {
         if (FallingBlockManager.canCollapse(worldIn, checking)) {
           return false;
         }
@@ -254,18 +248,17 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
       pos3 = pos3.down(30);
     }
     if (rocks.isEmpty()) {
-      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_no_rocks", new Object[0]), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_no_rocks"), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
     } else if (rocks.size() == 1) {
-      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_1_rock_found", new Object[]{
-        rocks.get(0).toString()}), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_1_rock_found", rocks.get(0).toString()), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
 
     } else if (rocks.size() == 2) {
-      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_2_rocks_found", new Object[]{rocks.get(0).toString(),
-                                                                                                                        rocks.get(1).toString()}), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_2_rocks_found", rocks.get(0).toString(),
+        rocks.get(1).toString()), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
     } else if (rocks.size() >= 3) {
-      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_3_rocks_found", new Object[]{rocks.get(0).toString(),
-                                                                                                                        rocks.get(1).toString(),
-                                                                                                                        rocks.get(2).toString()}), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_3_rocks_found", rocks.get(0).toString(),
+        rocks.get(1).toString(),
+        rocks.get(2).toString()), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
     }
   }
 

@@ -25,10 +25,6 @@ public final class NBTUtils {
   public static final Comparator<NBTTagCompound> NBT_COMPARATOR = (firstTag, secondTag) ->
     firstTag != null ? firstTag.equals(secondTag) ? 0 : 1 : secondTag != null ? -1 : 0;
 
-  public static void setGenericNBTValue(String tagName, Object value) {
-    setGenericNBTValue(new NBTTagCompound(), tagName, value);
-  }
-
   /**
    * Sets an unknown data type to an NBTTagCompound. If the type of the data can not be identified, and exception will be thrown. Current supported data types
    * include String, Integer, Float, Boolean, Double, Long, Short, Byte, ItemStack, Entity and Position.

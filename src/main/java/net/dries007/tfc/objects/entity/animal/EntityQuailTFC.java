@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.entity.animal;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.capabilities.egg.ICapabilityEgg;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.block.Block;
@@ -16,8 +18,6 @@ import net.minecraft.world.biome.Biome;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.api.types.ILivestock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.LootTablesTFC;
@@ -66,7 +66,7 @@ public class EntityQuailTFC extends EntityChickenTFC implements ILivestock {
     List<ItemStack> eggs = new ArrayList<>();
     ItemStack egg = new ItemStack(Items.EGG);
     if (this.isFertilized()) {
-      IEgg cap = egg.getCapability(CapabilityEgg.CAPABILITY, null);
+      ICapabilityEgg cap = egg.getCapability(CapabilityEgg.CAPABILITY, null);
       if (cap != null) {
         EntityQuailTFC chick = new EntityQuailTFC(this.world);
         chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);

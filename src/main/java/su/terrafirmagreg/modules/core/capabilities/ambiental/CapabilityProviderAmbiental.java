@@ -30,14 +30,15 @@ import lombok.Getter;
 
 public class CapabilityProviderAmbiental implements ICapabilityAmbiental {
 
+  public static final String TAG_TEMPERATURE = "temperature";
+  public static final String TAG_TARGET = "target";
+  public static final String TAG_POTENCY = "potency";
+  
+
   public static final float BAD_MULTIPLIER = 0.002f;
   public static final float GOOD_MULTIPLIER = 0.002f;
   public static final float CHANGE_CAP = 7.5f;
   public static final float HIGH_CHANGE = 0.20f;
-
-  public static final String TAG_TEMPERATURE = "temperature";
-  public static final String TAG_TARGET = "target";
-  public static final String TAG_POTENCY = "potency";
 
   public static float AVERAGE = ConfigCore.MISC.AMBIENTAL.averageTemperature;
   public static float HOT_THRESHOLD = ConfigCore.MISC.AMBIENTAL.hotTemperature;

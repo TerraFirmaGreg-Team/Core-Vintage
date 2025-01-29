@@ -115,8 +115,6 @@ import com.eerussianguy.firmalife.items.ItemFruitPole;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.ConfigTFC.Devices;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.EggHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHandler;
@@ -664,11 +662,6 @@ public final class CommonEventHandler {
         if (heatHandler != null) {
           event.addCapability(CapabilityHeat.KEY, heatHandler);
         }
-      }
-
-      // Eggs
-      if (stack.getItem() == Items.EGG) {
-        event.addCapability(CapabilityEgg.KEY, new EggHandler());
       }
     }
   }

@@ -2,6 +2,8 @@ package su.terrafirmagreg.modules.core.event;
 
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityHandlerEgg;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -25,7 +27,7 @@ public class EventHandlerCapabilitiesItemStack {
     metal(event, stack);
     heat(event, stack);
 //    sharpness(event, stack);
-//    egg(event, stack);
+    egg(event, stack);
     damageResistance(event, stack);
   }
 
@@ -71,16 +73,16 @@ public class EventHandlerCapabilitiesItemStack {
 //
 //    event.addCapability(CapabilitySharpness.KEY, provider);
 //  }
-//
-//  public static void egg(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
-//
-//    ICapabilityProvider provider = HandlerEgg.getCustom(stack);
-//    if (provider == null) {
-//      return;
-//    }
-//
-//    event.addCapability(CapabilityEgg.KEY, provider);
-//  }
+
+  public static void egg(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+
+    ICapabilityProvider provider = CapabilityHandlerEgg.getCustom(stack);
+    if (provider == null) {
+      return;
+    }
+
+    event.addCapability(CapabilityEgg.KEY, provider);
+  }
 
   public static void damageResistance(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 

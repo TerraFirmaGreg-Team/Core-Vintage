@@ -10,6 +10,8 @@ import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityHandlerAmbiental;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityHandlerEgg;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
@@ -83,6 +85,7 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
 
+    CapabilityEgg.register();
     CapabilityHeat.register();
     CapabilityAmbiental.register();
     CapabilityDamageResistance.register();
@@ -96,6 +99,7 @@ public final class ModuleCore extends ModuleBase {
 
   @Override
   public void onInit(FMLInitializationEvent event) {
+    CapabilityHandlerEgg.init();
     CapabilityHandlerHeat.init();
     CapabilityHandlerAmbiental.init();
     CapabilityHandlerDamageResistance.init();

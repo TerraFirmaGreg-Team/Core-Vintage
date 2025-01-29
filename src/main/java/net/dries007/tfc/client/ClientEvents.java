@@ -1,7 +1,10 @@
 package net.dries007.tfc.client;
 
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.capabilities.egg.ICapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
 
@@ -32,8 +35,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
@@ -129,9 +130,6 @@ import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
@@ -324,7 +322,7 @@ public class ClientEvents {
       if (nutrients != null) {
         nutrients.addTooltipInfo(stack, tt, event.getEntityPlayer());
       }
-      IEgg eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
+      ICapabilityEgg eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
       if (eggInfo != null) {
         eggInfo.addEggInfo(stack, tt);
       }

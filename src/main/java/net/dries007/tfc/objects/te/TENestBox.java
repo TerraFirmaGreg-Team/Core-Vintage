@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
+import su.terrafirmagreg.modules.core.capabilities.egg.ICapabilityEgg;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Items;
@@ -10,14 +14,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.IEgg;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.util.Helpers;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -39,7 +39,7 @@ public class TENestBox extends TEInventory implements ITickable, IItemHandlerSid
       for (int i = 0; i < inventory.getSlots(); i++) {
         ItemStack stack = inventory.getStackInSlot(i);
         if (!stack.isEmpty()) {
-          IEgg cap = stack.getCapability(CapabilityEgg.CAPABILITY, null);
+          ICapabilityEgg cap = stack.getCapability(CapabilityEgg.CAPABILITY, null);
           if (cap != null && cap.getHatchDay() > 0 && cap.getHatchDay() <= Calendar.PLAYER_TIME.getTotalDays()) {
             Entity baby = cap.getEntity(this.world);
             if (baby != null) {

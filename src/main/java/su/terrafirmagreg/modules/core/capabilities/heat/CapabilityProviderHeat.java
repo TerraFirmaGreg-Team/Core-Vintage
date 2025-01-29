@@ -16,6 +16,9 @@ import org.jetbrains.annotations.Nullable;
  */
 public class CapabilityProviderHeat implements ICapabilityHeat {
 
+  public static final String TAG_LAST_UPDATE_TICK = "lastUpdateTick";
+  public static final String TAG_TEMPERATURE = "temperature";
+
   // These are "constants". Some implementations will want to change these based on other factors. (See ItemMold)
   protected float heatCapacity;
   protected float meltTemp;
@@ -56,13 +59,13 @@ public class CapabilityProviderHeat implements ICapabilityHeat {
     NBTTagCompound nbt = new NBTTagCompound();
     if (getTemperature() <= 0) {
       // Reset temperature to zero
-      NBTUtils.setGenericNBTValue(nbt, "ticks", -1);
-      NBTUtils.setGenericNBTValue(nbt, "heat", 0);
+      NBTUtils.setGenericNBTValue(nbt, TAG_LAST_UPDATE_TICK, -1);
+      NBTUtils.setGenericNBTValue(nbt, TAG_TEMPERATURE, 0);
     } else {
       // Serialize existing values - this is intentionally lazy (and not using the result of getTemperature())
       // Why? So we don't update the serialization unnecessarily. Important for not sending unnecessary client syncs.
-      NBTUtils.setGenericNBTValue(nbt, "ticks", lastUpdateTick);
-      NBTUtils.setGenericNBTValue(nbt, "heat", temperature);
+      NBTUtils.setGenericNBTValue(nbt, TAG_LAST_UPDATE_TICK, lastUpdateTick);
+      NBTUtils.setGenericNBTValue(nbt, TAG_TEMPERATURE, temperature);
     }
     return nbt;
   }
@@ -70,8 +73,8 @@ public class CapabilityProviderHeat implements ICapabilityHeat {
   @Override
   public void deserializeNBT(@Nullable NBTTagCompound nbt) {
     if (nbt != null) {
-      temperature = nbt.getFloat("heat");
-      lastUpdateTick = nbt.getLong("ticks");
+      temperature = nbt.getFloat(TAG_TEMPERATURE);
+      lastUpdateTick = nbt.getLong(TAG_LAST_UPDATE_TICK);
     }
   }
 

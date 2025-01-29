@@ -1,5 +1,9 @@
 package net.sharkbark.cellars.blocks.tileentity;
 
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemFood;
@@ -20,9 +24,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
@@ -48,7 +49,7 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
 
   @Override
   public void update() {
-    if (world.isRemote || Reference.initialized == false) {
+    if (world.isRemote || !Reference.initialized) {
       //System.out.println("I shouldn't update.");
       return;
     }
@@ -201,7 +202,7 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
 
       removeTrait(stack, nbt);
       stack.setTagCompound(null);
-      InventoryHelper.spawnItemStack(world, (double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), stack);
+      InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
     }
   }
 
@@ -231,7 +232,7 @@ public class TECellarShelf extends TEInventory implements IItemHandlerSidedCallb
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
+    ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
     if (sizeCap != null) {
       return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
     }

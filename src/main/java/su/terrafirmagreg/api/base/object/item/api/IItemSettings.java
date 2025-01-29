@@ -4,6 +4,8 @@ package su.terrafirmagreg.api.base.object.item.api;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings.Settings;
 import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
@@ -35,6 +37,8 @@ public interface IItemSettings extends IBaseSettings<Settings> {
     int maxCount = 64;
 
     IRarity rarity = EnumRarity.COMMON;
+    Size size = Size.SMALL;
+    Weight weight = Weight.LIGHT;
 
     protected Settings() {}
 
@@ -77,6 +81,16 @@ public interface IItemSettings extends IBaseSettings<Settings> {
 
     public Settings oreDict(Object... oreDict) {
       this.oreDict.add(oreDict);
+      return this;
+    }
+
+    public Settings weight(Weight weight) {
+      this.weight = weight;
+      return this;
+    }
+
+    public Settings size(Size size) {
+      this.size = size;
       return this;
     }
 

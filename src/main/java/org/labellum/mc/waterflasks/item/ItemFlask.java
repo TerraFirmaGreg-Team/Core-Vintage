@@ -35,9 +35,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
@@ -54,7 +54,7 @@ import static org.labellum.mc.waterflasks.Waterflasks.FLASK_BREAK;
 import static org.labellum.mc.waterflasks.Waterflasks.MOD_ID;
 import static su.terrafirmagreg.modules.food.api.IFoodStatsTFC.MAX_PLAYER_THIRST;
 
-public abstract class ItemFlask extends ItemFluidContainer implements IItemSize {
+public abstract class ItemFlask extends ItemFluidContainer implements ICapabilitySize {
 
   protected String name;
   private final int CAPACITY;

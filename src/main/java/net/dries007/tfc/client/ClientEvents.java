@@ -4,6 +4,8 @@ import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.egg.ICapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
@@ -41,8 +43,6 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.render.RenderBoatTFC;
@@ -306,7 +306,7 @@ public class ClientEvents {
     List<String> tt = event.getToolTip();
     if (!stack.isEmpty()) {
       // Stuff that should always be shown as part of the tooltip
-      IItemSize size = CapabilityItemSize.getIItemSize(stack);
+      ICapabilitySize size = CapabilitySize.getIItemSize(stack);
       if (size != null) {
         size.addSizeInfo(stack, tt);
       }

@@ -9,9 +9,9 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import tfcflorae.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemAxeTFCF extends ItemAxe implements IItemSize {
+public class ItemAxeTFCF extends ItemAxe implements ICapabilitySize {
 
   public final ToolMaterial material;
 

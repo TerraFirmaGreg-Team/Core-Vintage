@@ -23,9 +23,9 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.te.TESluice;
 import net.dries007.tfc.util.block.BoundingBox;
 
@@ -37,7 +37,7 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockSluice extends BlockHorizontal implements IItemSize {
+public class BlockSluice extends BlockHorizontal implements ICapabilitySize {
 
   public static final PropertyBool UPPER = PropertyBool.create("upper"); //true if this is the upper half
   // From bottom to top, 1 step (4/16 block) at a time

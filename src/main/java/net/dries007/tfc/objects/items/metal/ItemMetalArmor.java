@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.IItemSize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemArmorTFC;
 
@@ -19,7 +19,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemMetalArmor extends ItemArmorTFC implements IMetalItem, IItemSize {
+public class ItemMetalArmor extends ItemArmorTFC implements IMetalItem, ICapabilitySize {
 
   private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetalArmor>> TABLE = new HashMap<>();
   private final Metal metal;

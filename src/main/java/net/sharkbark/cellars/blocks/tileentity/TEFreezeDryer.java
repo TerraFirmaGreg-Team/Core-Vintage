@@ -1,5 +1,8 @@
 package net.sharkbark.cellars.blocks.tileentity;
 
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
@@ -27,9 +30,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
@@ -437,7 +437,7 @@ public class TEFreezeDryer extends TEInventory implements IItemHandlerSidedCallb
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
+    ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
     if (sizeCap != null) {
       return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
     }

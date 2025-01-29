@@ -20,9 +20,9 @@ import net.minecraft.world.World;
 import com.eerussianguy.firmalife.te.TEClimateStation;
 import com.eerussianguy.firmalife.util.GreenhouseHelpers;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 
 import javax.annotation.Nonnull;
@@ -35,7 +35,7 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockClimateStation extends Block implements IItemSize, IHighlightHandler {
+public class BlockClimateStation extends Block implements ICapabilitySize, IHighlightHandler {
 
   public final int tier;
 

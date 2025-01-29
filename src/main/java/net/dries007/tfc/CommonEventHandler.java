@@ -5,6 +5,9 @@ import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
@@ -126,10 +129,6 @@ import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.capability.player.PlayerDataHandler;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
 import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -604,19 +603,6 @@ public final class CommonEventHandler {
     ItemStack stack = event.getObject();
     Item item = stack.getItem();
     if (!stack.isEmpty()) {
-      // Size
-      if (CapabilityItemSize.getIItemSize(stack) == null) {
-        ICapabilityProvider sizeHandler = CapabilityItemSize.getCustomSize(stack);
-        event.addCapability(CapabilityItemSize.KEY, sizeHandler);
-        if (sizeHandler instanceof IItemSize) {
-          // Only modify the stack size if the item was stackable in the first place
-          // Note: this is called in many cases BEFORE all custom capabilities are added.
-          int prevStackSize = stack.getMaxStackSize();
-          if (prevStackSize != 1) {
-            item.setMaxStackSize(((IItemSize) sizeHandler).getStackSize(stack));
-          }
-        }
-      }
 
       // Food
       // Because our foods supply a custom capability in Item#initCapabilities, we need to avoid attaching a duplicate, otherwise it breaks food stacking recipes.
@@ -1234,7 +1220,7 @@ public final class CommonEventHandler {
     // This is just optimized (probably uselessly, but whatever) for use in onPlayerTick
     int hugeHeavyCount = 0;
     for (ItemStack stack : inventory.mainInventory) {
-      if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
         hugeHeavyCount++;
         if (hugeHeavyCount >= 2) {
           return hugeHeavyCount;
@@ -1242,7 +1228,7 @@ public final class CommonEventHandler {
       }
     }
     for (ItemStack stack : inventory.armorInventory) {
-      if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
         hugeHeavyCount++;
         if (hugeHeavyCount >= 2) {
           return hugeHeavyCount;
@@ -1250,7 +1236,7 @@ public final class CommonEventHandler {
       }
     }
     for (ItemStack stack : inventory.offHandInventory) {
-      if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
         hugeHeavyCount++;
         if (hugeHeavyCount >= 2) {
           return hugeHeavyCount;

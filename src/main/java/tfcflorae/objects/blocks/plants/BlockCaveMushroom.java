@@ -34,9 +34,9 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.capability.food.FoodHeatHandler;
 import net.dries007.tfc.api.capability.food.IItemFoodTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
@@ -54,7 +54,7 @@ import java.util.Map;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
-public class BlockCaveMushroom extends BlockBush implements IGrowable, IItemSize, IItemFoodTFC {
+public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabilitySize, IItemFoodTFC {
 
   public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
   /*

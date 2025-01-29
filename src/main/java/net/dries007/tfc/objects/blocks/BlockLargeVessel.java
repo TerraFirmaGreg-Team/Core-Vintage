@@ -26,9 +26,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.util.Helpers;
@@ -42,7 +42,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * property, and cached in the TE (for gui purposes)
  */
 @ParametersAreNonnullByDefault
-public class BlockLargeVessel extends Block implements IItemSize {
+public class BlockLargeVessel extends Block implements ICapabilitySize {
 
   public static final PropertyBool SEALED = PropertyBool.create("sealed");
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 0.625D, 0.8125D);

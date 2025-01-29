@@ -4,6 +4,8 @@ import su.terrafirmagreg.api.base.object.block.api.IBlockSettings.Settings;
 import su.terrafirmagreg.api.base.object.itemblock.spi.BaseItemBlock;
 import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -58,8 +60,11 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
     ContextFunction<Float> slipperiness = (state, world, pos) -> 0.6F;
     Predicate<IBlockState> isSuffocating = (state) -> state.getMaterial().blocksMovement() && state.isFullCube();
     IRarity rarity = EnumRarity.COMMON;
+    Size size = Size.SMALL;
+    Weight weight = Weight.LIGHT;
     BlockRenderLayer renderLayer = BlockRenderLayer.SOLID;
     Function<Block, Item> itemBlock = BaseItemBlock::new;
+
 
     String harvestTool = null;
     int harvestLevel = -1;
@@ -317,6 +322,16 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
 
     public Settings customResource(ResourceLocation resourceLocation) {
       this.resource = resourceLocation;
+      return this;
+    }
+
+    public Settings weight(Weight weight) {
+      this.weight = weight;
+      return this;
+    }
+
+    public Settings size(Size size) {
+      this.size = size;
       return this;
     }
 

@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import net.dries007.tfc.objects.blocks.BlockPowderKeg;
 
 import su.terrafirmagreg.api.data.enums.Mods;
@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class ItemBlockPowderKeg extends ItemBlockTFC implements IItemSize {
+public class ItemBlockPowderKeg extends ItemBlockTFC implements ICapabilitySize {
 
   public ItemBlockPowderKeg(BlockPowderKeg block) {
     super(block);

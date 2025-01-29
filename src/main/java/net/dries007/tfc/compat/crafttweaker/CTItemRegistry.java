@@ -1,7 +1,13 @@
 package net.dries007.tfc.compat.crafttweaker;
 
+import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityProviderDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 
@@ -17,10 +23,6 @@ import net.dries007.tfc.api.capability.forge.ForgeableHandler;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.MetalItemHandler;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.ItemSizeHandler;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -41,13 +43,13 @@ public class CTItemRegistry {
     IIngredient inputIngredient = CTHelper.getInternalIngredient(input);
     Size size = Size.valueOf(inputSize.toUpperCase());
     Weight weight = Weight.valueOf(inputWeight.toUpperCase());
-    if (CapabilityItemSize.CUSTOM_ITEMS.get(inputIngredient) != null) {
+    if (CapabilityHandlerSize.CUSTOM_ITEMS.get(inputIngredient) != null) {
       throw new IllegalStateException("Input registered more than once!");
     } else {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          CapabilityItemSize.CUSTOM_ITEMS.put(inputIngredient, () -> ItemSizeHandler.get(size, weight, true));
+          CapabilityHandlerSize.CUSTOM_ITEMS.put(inputIngredient, () -> CapabilityProviderSize.get(size, weight, true));
         }
 
         @Override
@@ -165,6 +167,29 @@ public class CTItemRegistry {
         return "Registered food stats for " + input.toCommandString();
       }
     });
+  }
+
+  @ZenMethod
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public static void registerArmor(crafttweaker.api.item.IIngredient input, float crushingModifier, float piercingModifier, float slashingModifier) {
+    if (input == null) {throw new IllegalArgumentException("Input not allowed to be empty!");}
+    if (input instanceof ILiquidStack) {throw new IllegalArgumentException("There is a fluid where it's supposed to be an item!");}
+    IIngredient inputIngredient = CTHelper.getInternalIngredient(input);
+    if (CapabilityHandlerDamageResistance.CUSTOM_ITEMS.get(inputIngredient) != null) {
+      throw new IllegalStateException("Armor registered more than once!");
+    } else {
+      CraftTweakerAPI.apply(new IAction() {
+        @Override
+        public void apply() {
+          CapabilityHandlerDamageResistance.CUSTOM_ITEMS.put(inputIngredient, () -> new CapabilityProviderDamageResistance(crushingModifier, piercingModifier, slashingModifier));
+        }
+
+        @Override
+        public String describe() {
+          return "Registered armor stats for " + input.toCommandString();
+        }
+      });
+    }
   }
 
   @ZenMethod

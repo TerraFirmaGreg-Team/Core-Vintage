@@ -32,9 +32,9 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class BlockCoral extends BlockFluidTFC implements IItemSize, IPlantable {
+public class BlockCoral extends BlockFluidTFC implements ICapabilitySize, IPlantable {
 
   public static final Map<EnumDyeColor, BlockCoral> TUBE_CORAL = new HashMap<>();
   public static final Map<EnumDyeColor, BlockCoral> BRAIN_CORAL = new HashMap<>();

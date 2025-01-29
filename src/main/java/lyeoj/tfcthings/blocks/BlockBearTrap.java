@@ -6,7 +6,6 @@ import su.terrafirmagreg.api.data.ToolClasses;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -33,9 +32,9 @@ import net.minecraft.world.World;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import lyeoj.tfcthings.tileentity.TileEntityBearTrap;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -44,7 +43,7 @@ import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockBearTrap extends Block implements IItemSize, TFCThingsConfigurableItem {
+public class BlockBearTrap extends Block implements ICapabilitySize, TFCThingsConfigurableItem {
 
   public static final PropertyBool CLOSED = PropertyBool.create("closed");
   public static final PropertyBool BURIED = PropertyBool.create("buried");

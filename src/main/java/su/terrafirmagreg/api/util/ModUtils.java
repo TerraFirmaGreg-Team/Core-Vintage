@@ -74,12 +74,16 @@ public final class ModUtils {
     return String.format("%s [ %s ]", MOD_NAME, name);
   }
 
-  public static String localize(String name) {
-    return String.format("%s.%s", MOD_ID, name).toLowerCase().replace("/", ".");
+  public static String name(String key, String name) {
+    return String.format("%s [ %s ]", key, name);
+  }
+
+  public static String localize(String key) {
+    return String.format("%s.%s", key, MOD_ID).toLowerCase().replace("/", ".");
   }
 
   public static String localize(String key, String name) {
-    return String.format("%s.%s", key, ModUtils.localize(name)).toLowerCase().replace("/", ".");
+    return String.format("%s.%s", ModUtils.localize(key), name).toLowerCase().replace("/", ".");
   }
 
   public static String localize(String key, ResourceLocation resourceLocation) {

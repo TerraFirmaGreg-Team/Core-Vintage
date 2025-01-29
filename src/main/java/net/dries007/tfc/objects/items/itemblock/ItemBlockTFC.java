@@ -4,22 +4,22 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.ItemSizeHandler;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import javax.annotation.Nonnull;
 
-public class ItemBlockTFC extends ItemBlock implements IItemSize {
+public class ItemBlockTFC extends ItemBlock implements ICapabilitySize {
 
-  private final IItemSize size;
+  private final ICapabilitySize size;
 
   public ItemBlockTFC(Block block) {
-    this(block, block instanceof IItemSize ? (IItemSize) block : ItemSizeHandler.getDefault());
+    this(block, block instanceof ICapabilitySize ? (ICapabilitySize) block : CapabilityProviderSize.getDefault());
   }
 
-  public ItemBlockTFC(Block block, IItemSize size) {
+  public ItemBlockTFC(Block block, ICapabilitySize size) {
     super(block);
 
     this.size = size;

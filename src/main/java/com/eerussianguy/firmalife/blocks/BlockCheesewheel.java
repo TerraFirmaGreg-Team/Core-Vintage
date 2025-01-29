@@ -27,9 +27,9 @@ import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -41,7 +41,7 @@ import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockCheesewheel extends BlockNonCube implements IItemSize {
+public class BlockCheesewheel extends BlockNonCube implements ICapabilitySize {
 
   public static final PropertyInteger WEDGES = StatePropertiesFL.WEDGES;
   public static final PropertyEnum<AgingFL> AGE = StatePropertiesFL.AGE;

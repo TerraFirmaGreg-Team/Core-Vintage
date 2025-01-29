@@ -1,14 +1,14 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 
 import javax.annotation.Nonnull;
 
@@ -108,7 +108,7 @@ public class ContainerChestTFC extends Container {
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-      IItemSize cap = CapabilityItemSize.getIItemSize(stack);
+      ICapabilitySize cap = CapabilitySize.getIItemSize(stack);
       if (cap != null) {
         return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
       }

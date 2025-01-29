@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Comparator;
 import java.util.function.Consumer;
@@ -18,16 +20,18 @@ import java.util.function.Supplier;
 
 public class BaseItemGroup extends CreativeTabs {
 
-
+  private final String identifier;
   private final Supplier<ItemStack> icon;
+
 
   private boolean hasSearchBar = false;
   private Consumer<Consumer<ItemStack>> filler;
   private Comparator<ItemStack> sorter;
 
-  public BaseItemGroup(String identifier, Supplier<ItemStack> icon) {
+  private BaseItemGroup(String identifier, Supplier<ItemStack> icon) {
     super(identifier);
 
+    this.identifier = identifier;
     this.icon = icon;
 
     sortAlphabetically();
@@ -88,8 +92,15 @@ public class BaseItemGroup extends CreativeTabs {
   }
 
   @Override
+  @SideOnly(Side.CLIENT)
+  public String getTabLabel() {
+    return this.identifier;
+  }
+
+
+  @Override
   public String getTranslationKey() {
-    return ModUtils.localize("item_group", this.getTabLabel(), "name");
+    return ModUtils.localize("item_group", identifier, "name");
   }
 
   @Override

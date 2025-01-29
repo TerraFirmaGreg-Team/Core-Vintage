@@ -1063,21 +1063,6 @@ tfc.enum.tier.tier_iv=Tier IV
 tfc.enum.tier.tier_v=Tier V
 tfc.enum.tier.tier_vi=Tier VI
 
-## Size
-tfc.enum.size.tiny=Tiny
-tfc.enum.size.very_small=Very Small
-tfc.enum.size.small=Small
-tfc.enum.size.normal=Normal
-tfc.enum.size.large=Large
-tfc.enum.size.very_large=Very Large
-tfc.enum.size.huge=Huge
-
-## Weight
-tfc.enum.weight.very_light=Very Light
-tfc.enum.weight.light=Light
-tfc.enum.weight.medium=Medium
-tfc.enum.weight.heavy=Heavy
-tfc.enum.weight.very_heavy=Very Heavy
 
 ## Heat
 tfc.enum.heat.warming=Warming

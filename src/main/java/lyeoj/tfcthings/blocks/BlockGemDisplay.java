@@ -7,7 +7,6 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -27,15 +26,15 @@ import net.minecraft.world.World;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import lyeoj.tfcthings.tileentity.TileEntityGemDisplay;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockGemDisplay extends Block implements IItemSize, TFCThingsConfigurableItem {
+public class BlockGemDisplay extends Block implements ICapabilitySize, TFCThingsConfigurableItem {
 
   public static final PropertyDirection FACING = BlockHorizontal.FACING;
   public static final PropertyBool TOP = PropertyBool.create("top");

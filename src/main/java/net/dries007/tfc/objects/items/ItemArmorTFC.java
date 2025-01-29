@@ -7,13 +7,13 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import javax.annotation.Nonnull;
 
-public class ItemArmorTFC extends ItemArmor implements IItemSize, ICapabilityDamageResistance {
+public class ItemArmorTFC extends ItemArmor implements ICapabilitySize, ICapabilityDamageResistance {
 
   private final ArmorMaterials armorMaterial;
 

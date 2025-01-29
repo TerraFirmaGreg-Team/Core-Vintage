@@ -5,9 +5,9 @@ import lyeoj.tfcthings.entity.projectile.EntitySlingStoneMetal;
 import lyeoj.tfcthings.entity.projectile.EntitySlingStoneMetalLight;
 import lyeoj.tfcthings.entity.projectile.EntityUnknownProjectile;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
@@ -32,7 +32,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemSling extends Item implements IItemSize, ItemOreDict, TFCThingsConfigurableItem {
+public class ItemSling extends Item implements ICapabilitySize, ItemOreDict, TFCThingsConfigurableItem {
 
     private int tier;
 

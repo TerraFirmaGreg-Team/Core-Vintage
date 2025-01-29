@@ -1,5 +1,8 @@
-package net.dries007.tfc.api.capability.size;
+package su.terrafirmagreg.modules.core.capabilities.size.spi;
 
+import lombok.Getter;
+
+@Getter
 public enum Size {
   TINY("tiny"), // Fits in anything
   VERY_SMALL("very_small"), // Fits in anything

@@ -4,6 +4,9 @@ import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResist
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityHandlerEgg;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -22,7 +25,7 @@ public class EventHandlerCapabilitiesItemStack {
       return;
     }
 
-//    size(event, stack);
+    size(event, stack);
     food(event, stack);
     metal(event, stack);
     heat(event, stack);
@@ -31,26 +34,26 @@ public class EventHandlerCapabilitiesItemStack {
     damageResistance(event, stack);
   }
 
-//  public static void size(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
-//
-//    if (CapabilitySize.getIItemSize(stack) != null) {
-//      return;
-//    }
-//
-//    ICapabilityProvider provider = HandlerSize.getCustom(stack);
-//
-//    event.addCapability(CapabilitySize.KEY, provider);
-//
-//    if (provider instanceof ICapabilitySize itemSize) {
-//      // Only modify the stack size if the item was stackable in the first place
-//      // Note: this is called in many cases BEFORE all custom capabilities are added.
-//      int prevStackSize = stack.getMaxStackSize();
-//      if (prevStackSize != 1) {
-//        stack.getItem().setMaxStackSize(itemSize.getStackSize(stack));
-//      }
-//    }
-//
-//  }
+  public static void size(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+
+    if (CapabilitySize.getIItemSize(stack) != null) {
+      return;
+    }
+
+    ICapabilityProvider provider = CapabilityHandlerSize.getCustom(stack);
+
+    event.addCapability(CapabilitySize.KEY, provider);
+
+    if (provider instanceof ICapabilitySize itemSize) {
+      // Only modify the stack size if the item was stackable in the first place
+      // Note: this is called in many cases BEFORE all custom capabilities are added.
+      int prevStackSize = stack.getMaxStackSize();
+      if (prevStackSize != 1) {
+        stack.getItem().setMaxStackSize(itemSize.getStackSize(stack));
+      }
+    }
+
+  }
 
   public static void food(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 

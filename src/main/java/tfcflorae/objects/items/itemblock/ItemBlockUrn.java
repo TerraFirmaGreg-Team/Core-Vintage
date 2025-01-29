@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class ItemBlockUrn extends ItemBlockTFC implements IItemSize {
+public class ItemBlockUrn extends ItemBlockTFC implements ICapabilitySize {
 
   public ItemBlockUrn(BlockUrn block) {
     super(block);

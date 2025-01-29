@@ -16,9 +16,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
@@ -33,7 +33,7 @@ import java.util.Map;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemRockKnife extends ItemTool implements IItemSize, IRockObject {
+public class ItemRockKnife extends ItemTool implements ICapabilitySize, IRockObject {
 
   private static final Map<RockCategory, ItemRockKnife> MAP = new HashMap<>();
   public final RockCategory category;

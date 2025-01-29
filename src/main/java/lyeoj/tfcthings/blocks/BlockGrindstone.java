@@ -27,16 +27,16 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import lyeoj.tfcthings.tileentity.TileEntityGrindstone;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockGrindstone extends Block implements IItemSize, TFCThingsConfigurableItem {
+public class BlockGrindstone extends Block implements ICapabilitySize, TFCThingsConfigurableItem {
 
   public static final PropertyDirection FACING = BlockHorizontal.FACING;
 

@@ -2,15 +2,15 @@ package tfcflorae.objects.items.tools;
 
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.items.ItemTFC;
 import tfcflorae.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 
-public class ItemToolHeadTFCF extends ItemTFC implements IItemSize {
+public class ItemToolHeadTFCF extends ItemTFC implements ICapabilitySize {
 
   private final Size size;
   private final Weight weight;

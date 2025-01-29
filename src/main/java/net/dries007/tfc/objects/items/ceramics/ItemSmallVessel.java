@@ -2,6 +2,11 @@ package net.dries007.tfc.objects.items.ceramics;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -44,10 +49,6 @@ import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.network.PacketSimpleMessage;
@@ -59,9 +60,6 @@ import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 
 import javax.annotation.Nonnull;
@@ -388,7 +386,7 @@ public class ItemSmallVessel extends ItemPottery {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-      IItemSize size = CapabilityItemSize.getIItemSize(stack);
+      ICapabilitySize size = CapabilitySize.getIItemSize(stack);
       if (size != null) {
         if (size.getSize(stack).isSmallerThan(Size.NORMAL)) {
           if (stack.hasCapability(CAPABILITY, null) && !(stack.getItem() instanceof ItemPottery)) {

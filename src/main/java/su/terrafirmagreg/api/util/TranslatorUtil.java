@@ -1,7 +1,5 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.Tags;
-
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextComponentString;
@@ -37,12 +35,12 @@ public final class TranslatorUtil {
   }
 
   public static String getEnumName(Enum<?> anEnum) {
-    return JOINER_DOT.join(Tags.MOD_ID, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
+    return ModUtils.localize(ModUtils.localize("enum"), anEnum.getDeclaringClass().getSimpleName(), anEnum.name());
   }
 
   public static String getTypeName(IForgeRegistryEntry<?> type) {
     //noinspection ConstantConditions
-    return JOINER_DOT.join(Tags.MOD_ID, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
+    return ModUtils.localize(ModUtils.localize("types"), type.getRegistryType().getSimpleName(), type.getRegistryName().getPath());
   }
 
   /**
@@ -62,8 +60,7 @@ public final class TranslatorUtil {
   /**
    * The same as autoBreak, but it also respects break character ($) for manual line breaking in addition to the automatic ones
    */
-  public static List<String> autoBreakWithParagraphs(FontRenderer fontRenderer, String text,
-                                                     int width) {
+  public static List<String> autoBreakWithParagraphs(FontRenderer fontRenderer, String text, int width) {
 
     String[] paragraphs = text.split("\\$");
     List<String> lines = new ArrayList<>();

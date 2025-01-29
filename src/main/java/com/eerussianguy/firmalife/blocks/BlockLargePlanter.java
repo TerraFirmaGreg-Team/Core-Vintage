@@ -31,9 +31,9 @@ import com.eerussianguy.firmalife.recipe.PlanterRecipe;
 import com.eerussianguy.firmalife.render.UnlistedCropProperty;
 import com.eerussianguy.firmalife.te.TEPlanter;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
@@ -44,7 +44,7 @@ import static com.eerussianguy.firmalife.init.StatePropertiesFL.WET;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockLargePlanter extends Block implements IItemSize {
+public class BlockLargePlanter extends Block implements ICapabilitySize {
 
   public static final UnlistedCropProperty CROP = new UnlistedCropProperty(1);
   public static final AxisAlignedBB HALF_BLOCK_SHAPE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);

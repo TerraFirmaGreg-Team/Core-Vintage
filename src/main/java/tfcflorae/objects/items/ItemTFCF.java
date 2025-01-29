@@ -3,12 +3,12 @@ package tfcflorae.objects.items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public abstract class ItemTFCF extends Item implements IItemSize {
+public abstract class ItemTFCF extends Item implements ICapabilitySize {
 
   @Override
   public int getItemStackLimit(ItemStack stack) {

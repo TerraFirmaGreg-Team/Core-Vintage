@@ -14,9 +14,12 @@ import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityHandlerEgg;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
 import su.terrafirmagreg.modules.core.event.EventHandlerAmbiental;
 import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesEntity;
+import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesItemStack;
 import su.terrafirmagreg.modules.core.event.EventHandlerConfigChanged;
 import su.terrafirmagreg.modules.core.event.EventHandlerPortalSpawn;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -87,6 +90,7 @@ public final class ModuleCore extends ModuleBase {
 
     CapabilityEgg.register();
     CapabilityHeat.register();
+    CapabilitySize.register();
     CapabilityAmbiental.register();
     CapabilityDamageResistance.register();
 
@@ -99,8 +103,10 @@ public final class ModuleCore extends ModuleBase {
 
   @Override
   public void onInit(FMLInitializationEvent event) {
+
     CapabilityHandlerEgg.init();
     CapabilityHandlerHeat.init();
+    CapabilityHandlerSize.init();
     CapabilityHandlerAmbiental.init();
     CapabilityHandlerDamageResistance.init();
   }
@@ -110,6 +116,7 @@ public final class ModuleCore extends ModuleBase {
     ObjectList<Class<?>> list = new ObjectArrayList<>();
 
     list.add(EventHandlerAmbiental.class);
+    list.add(EventHandlerCapabilitiesItemStack.class);
     list.add(EventHandlerCapabilitiesEntity.class);
     list.add(EventHandlerConfigChanged.class);
     list.add(EventHandlerPortalSpawn.class);

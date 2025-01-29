@@ -78,7 +78,7 @@ recipemap.greenhouse.name=Greenhouse
 ##############################################################
 
 ## Item Group
-item_group.tfg.core.name=Core (TFG)
+item_group.tfg.core.name=[ TFG ] Core
 
 ## Block
 block.tfg.core.debug.name=Debug Block
@@ -110,3 +110,21 @@ death.attack.hyperthermia=%1$s died of heatstroke.
 death.attack.swarm=%1$s died due to a swarm of bees.
 death.attack.bear_trap=%1$s didn't watch their step
 death.attack.pigvil=%1$s was squashed by a falling...Pigvil?
+
+# Tooltip
+
+## Size
+enum.tfg.size.tiny=Tiny
+enum.tfg.size.very_small=Very Small
+enum.tfg.size.small=Small
+enum.tfg.size.normal=Normal
+enum.tfg.size.large=Large
+enum.tfg.size.very_large=Very Large
+enum.tfg.size.huge=Huge
+
+## Weight
+enum.tfg.weight.very_light=Very Light
+enum.tfg.weight.light=Light
+enum.tfg.weight.medium=Medium
+enum.tfg.weight.heavy=Heavy
+enum.tfg.weight.very_heavy=Very Heavy

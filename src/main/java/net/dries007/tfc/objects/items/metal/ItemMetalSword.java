@@ -18,9 +18,9 @@ import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -37,7 +37,7 @@ import java.util.Map;
  */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize {
+public class ItemMetalSword extends ItemSword implements IMetalItem, ICapabilitySize {
 
   private static final Map<Metal, ItemMetalSword> TABLE = new HashMap<>();
   public final ToolMaterial material;

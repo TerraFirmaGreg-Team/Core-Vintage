@@ -25,9 +25,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
@@ -43,7 +43,7 @@ import java.util.function.Predicate;
 import static net.minecraft.block.BlockTrapDoor.OPEN;
 
 @ParametersAreNonnullByDefault
-public class BlockBloomery extends BlockHorizontal implements IItemSize, ILightableBlock {
+public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, ILightableBlock {
 
   //[horizontal index][basic shape / door1 / door2]
   private static final AxisAlignedBB[][] AABB =

@@ -31,9 +31,9 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.te.TEOven;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.items.ItemFireStarter;
@@ -51,7 +51,7 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockOven extends Block implements ILightableBlock, IItemSize {
+public class BlockOven extends Block implements ILightableBlock, ICapabilitySize {
 
   public BlockOven() {
     super(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY);

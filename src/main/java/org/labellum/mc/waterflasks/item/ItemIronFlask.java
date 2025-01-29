@@ -3,8 +3,8 @@ package org.labellum.mc.waterflasks.item;
 
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import org.labellum.mc.waterflasks.ConfigFlasks;
 
 import javax.annotation.Nonnull;

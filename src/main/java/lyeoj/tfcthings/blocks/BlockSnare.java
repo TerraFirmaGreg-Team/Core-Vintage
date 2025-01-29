@@ -29,9 +29,9 @@ import net.minecraft.world.World;
 import lyeoj.tfcthings.items.TFCThingsConfigurableItem;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import lyeoj.tfcthings.tileentity.TileEntityBearTrap;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.entity.animal.AnimalFood;
 import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
@@ -50,7 +50,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 
-public class BlockSnare extends Block implements IItemSize, TFCThingsConfigurableItem {
+public class BlockSnare extends Block implements ICapabilitySize, TFCThingsConfigurableItem {
 
   public static final PropertyBool CLOSED = PropertyBool.create("closed");
   public static final PropertyBool BAITED = PropertyBool.create("baited");

@@ -200,6 +200,8 @@ public class ItemDebug extends BaseItem {
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
+
     if (worldIn == null) {
       return;
     }
@@ -207,6 +209,7 @@ public class ItemDebug extends BaseItem {
     if (nbt == null) {
       return;
     }
+
     int mode = nbt.getInteger(TAG_MODE);
     switch (Mode.values()[mode]) {
       case BLOCKSTATE: {
@@ -234,7 +237,6 @@ public class ItemDebug extends BaseItem {
         break;
       }
     }
-    super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 
   @Override

@@ -15,14 +15,14 @@ import net.minecraft.world.World;
 
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.blocks.BlockSnowTFC;
 
 import javax.annotation.Nonnull;
 
-public class ItemSnowShoes extends ItemArmor implements IItemSize, ICapabilityDamageResistance, TFCThingsConfigurableItem {
+public class ItemSnowShoes extends ItemArmor implements ICapabilitySize, ICapabilityDamageResistance, TFCThingsConfigurableItem {
 
   private static final String STEPS_NBT_KEY = "Steps";
   private final ArmorMaterials armorMaterial;

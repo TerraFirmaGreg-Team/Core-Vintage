@@ -15,16 +15,16 @@ import net.minecraft.world.World;
 
 import com.eerussianguy.firmalife.blocks.BlockGreenhouseDoor;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemGreenhouseDoor extends ItemDoor implements IItemSize {
+public class ItemGreenhouseDoor extends ItemDoor implements ICapabilitySize {
 
   private final Block block; // let's just duplicate the variable instead of using an AT
 

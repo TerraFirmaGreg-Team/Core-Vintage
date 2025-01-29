@@ -1,8 +1,8 @@
 package tfcflorae.objects.items;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,7 @@ import tfcflorae.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 
-public class ItemFlint extends ItemTFCF implements IItemSize {
+public class ItemFlint extends ItemTFCF implements ICapabilitySize {
 
   private final Size size;
   private final Weight weight;

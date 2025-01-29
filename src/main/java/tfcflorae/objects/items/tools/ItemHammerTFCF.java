@@ -8,9 +8,9 @@ import net.minecraft.item.ItemTool;
 
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import tfcflorae.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
@@ -18,7 +18,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemHammerTFCF extends ItemTool implements IItemSize {
+public class ItemHammerTFCF extends ItemTool implements ICapabilitySize {
 
   public final ToolMaterial material;
 

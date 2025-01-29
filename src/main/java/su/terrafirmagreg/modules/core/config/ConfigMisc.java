@@ -6,11 +6,37 @@ import net.minecraftforge.common.config.Config;
 
 public final class ConfigMisc {
 
+  @Config.Comment("Weight settings")
+  public final Weight WEIGHT = new Weight();
+
   @Config.Comment("Heat settings")
   public final Heat HEAT = new Heat();
 
   @Config.Comment("Ambiental settings")
   public final Ambiental AMBIENTAL = new Ambiental();
+
+  public static final class Weight {
+
+    @Config.RequiresMcRestart
+    @Config.Comment("Stack size of Very Heavy items. I wouldn't change this one. Default = 1")
+    public int veryHeavy = 1;
+
+    @Config.RequiresMcRestart
+    @Config.Comment("Stack size of Heavy items. Default = 4")
+    public int heavy = 4;
+
+    @Config.RequiresMcRestart
+    @Config.Comment("Stack size of Medium items. Default = 16")
+    public int medium = 16;
+
+    @Config.RequiresMcRestart
+    @Config.Comment("Stack size of Light items. Default = 32")
+    public int light = 32;
+
+    @Config.RequiresMcRestart
+    @Config.Comment("Stack size of Very Light items. Default = 64")
+    public int veryLight = 64;
+  }
 
   public static final class Heat {
 

@@ -1,5 +1,8 @@
 package tfctech.objects.tileentities;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemFood;
@@ -25,8 +28,6 @@ import gregtech.api.capability.GregtechCapabilities;
 import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.Helpers;
 import tfctech.TFCTech;
@@ -112,7 +113,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
 
   public ItemStack extractItem(int slot) {
     ItemStack stack = inventory.extractItem(slot, 64, false);
-    IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
     if (cap != null) {
       CapabilityFood.removeTrait(cap, TechFoodTraits.FROZEN);
       CapabilityFood.removeTrait(cap, TechFoodTraits.COLD);
@@ -124,7 +125,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
   @Override
   public void setAndUpdateSlots(int slot) {
     TFCTech.getNetwork()
-           .sendToAllTracking(new PacketTileEntityUpdate(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
+      .sendToAllTracking(new PacketTileEntityUpdate(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
     super.setAndUpdateSlots(slot);
   }
 
@@ -375,7 +376,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
         applyTrait = 0;
         if (efficiency >= 80.0F) {
           for (int i = 0; i < inventory.getSlots(); i++) {
-            IFood cap = inventory.getStackInSlot(i).getCapability(CapabilityFood.CAPABILITY, null);
+            ICapabilityFood cap = inventory.getStackInSlot(i).getCapability(CapabilityFood.CAPABILITY, null);
             if (cap != null) {
               CapabilityFood.removeTrait(cap, TechFoodTraits.COLD);
               CapabilityFood.applyTrait(cap, TechFoodTraits.FROZEN);
@@ -383,7 +384,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
           }
         } else if (efficiency >= 30.0F) {
           for (int i = 0; i < inventory.getSlots(); i++) {
-            IFood cap = inventory.getStackInSlot(i).getCapability(CapabilityFood.CAPABILITY, null);
+            ICapabilityFood cap = inventory.getStackInSlot(i).getCapability(CapabilityFood.CAPABILITY, null);
             if (cap != null) {
               CapabilityFood.removeTrait(cap, TechFoodTraits.FROZEN);
               CapabilityFood.applyTrait(cap, TechFoodTraits.COLD);
@@ -391,7 +392,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
           }
         } else {
           for (int i = 0; i < inventory.getSlots(); i++) {
-            IFood cap = inventory.getStackInSlot(i).getCapability(CapabilityFood.CAPABILITY, null);
+            ICapabilityFood cap = inventory.getStackInSlot(i).getCapability(CapabilityFood.CAPABILITY, null);
             if (cap != null) {
               CapabilityFood.removeTrait(cap, TechFoodTraits.FROZEN);
               CapabilityFood.removeTrait(cap, TechFoodTraits.COLD);
@@ -402,7 +403,7 @@ public class TEFridge extends TEInventory implements ITickable, IEnergySink {
       if (++serverUpdate % 40 == 0) {
         serverUpdate = 0;
         TFCTech.getNetwork()
-               .sendToAllTracking(new PacketFridgeUpdate(pos, efficiency), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 20));
+          .sendToAllTracking(new PacketFridgeUpdate(pos, efficiency), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 20));
       }
     }
   }

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.size;
 
+import su.terrafirmagreg.framework.registry.api.provider.IProviderItemCapability;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
@@ -13,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
 
-public class CapabilityProviderSize implements ICapabilitySize, ICapabilityProvider {
+public class CapabilityProviderSize implements ICapabilitySize, ICapabilityProvider, IProviderItemCapability {
 
   private static final EnumMap<Size, EnumMap<Weight, CapabilityProviderSize[]>> CACHE = new EnumMap<>(
     Size.class);
@@ -33,11 +34,15 @@ public class CapabilityProviderSize implements ICapabilitySize, ICapabilityProvi
     this.canStack = canStack;
   }
 
-  public static CapabilityProviderSize getDefault() {
-    return get(Size.SMALL, Weight.LIGHT, true); // Default to fitting in small vessels and stacksize = 32
+  public static CapabilityProviderSize of() {
+    return of(Size.SMALL, Weight.LIGHT, true); // Default to fitting in small vessels and stacksize = 32
   }
 
-  public static CapabilityProviderSize get(Size size, Weight weight, boolean canStack) {
+  public static CapabilityProviderSize of(Size size, Weight weight) {
+    return of(size, weight, true); // Default to fitting in small vessels and stacksize = 32
+  }
+
+  public static CapabilityProviderSize of(Size size, Weight weight, boolean canStack) {
     EnumMap<Weight, CapabilityProviderSize[]> nested = CACHE.computeIfAbsent(size,
       k -> new EnumMap<>(Weight.class));
     CapabilityProviderSize[] handlers = nested.computeIfAbsent(weight, k -> new CapabilityProviderSize[2]);
@@ -82,4 +87,8 @@ public class CapabilityProviderSize implements ICapabilitySize, ICapabilityProvi
     return hasCapability(capability, facing) ? (T) this : null;
   }
 
+  @Override
+  public ICapabilityProvider createProvider(ItemStack itemStack) {
+    return this;
+  }
 }

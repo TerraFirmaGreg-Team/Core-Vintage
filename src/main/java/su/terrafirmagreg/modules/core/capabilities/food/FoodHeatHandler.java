@@ -1,5 +1,7 @@
-package net.dries007.tfc.api.capability.food;
+package su.terrafirmagreg.modules.core.capabilities.food;
 
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 
@@ -17,9 +19,9 @@ import java.util.List;
 /**
  * This is a combined capability class that delegates to two implementations: - super = ItemHeatHandler - internalFoodCap = FoodHandler
  */
-public class FoodHeatHandler extends CapabilityProviderHeat implements IFood, ICapabilitySerializable<NBTTagCompound> {
+public class FoodHeatHandler extends CapabilityProviderHeat implements ICapabilityFood, ICapabilitySerializable<NBTTagCompound> {
 
-  private final FoodHandler internalFoodCap;
+  private final CapabilityProviderFood internalFoodCap;
 
   public FoodHeatHandler() {
     this(null, new FoodData(), 1, 100);
@@ -33,7 +35,7 @@ public class FoodHeatHandler extends CapabilityProviderHeat implements IFood, IC
     this.heatCapacity = heatCapacity;
     this.meltTemp = meltTemp;
 
-    this.internalFoodCap = new FoodHandler(nbt, data);
+    this.internalFoodCap = new CapabilityProviderFood(nbt, data);
 
     deserializeNBT(nbt);
   }

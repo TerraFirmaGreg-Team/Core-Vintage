@@ -1,5 +1,8 @@
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.Slot;
@@ -11,8 +14,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -56,7 +57,7 @@ public class PacketStackFood implements IMessage {
 
           Slot targetSlot = player.openContainer.getSlot(message.slotNumber);
           ItemStack targetStack = targetSlot.getStack();
-          IFood targetCap = targetStack.getCapability(CapabilityFood.CAPABILITY, null);
+          ICapabilityFood targetCap = targetStack.getCapability(CapabilityFood.CAPABILITY, null);
 
           if (targetCap == null || targetStack.getMaxStackSize() == targetStack.getCount() || targetCap.isRotten()) {
             return;
@@ -71,7 +72,7 @@ public class PacketStackFood implements IMessage {
           while (remaining > 0 && slotIterator.hasNext()) {
             Slot slot = slotIterator.next();
             ItemStack stack = slot.getStack();
-            IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+            ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
 
             if (cap == null || cap.isRotten()) {continue;}
 

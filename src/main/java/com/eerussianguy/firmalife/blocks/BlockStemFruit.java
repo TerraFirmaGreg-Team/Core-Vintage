@@ -1,5 +1,7 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -28,8 +30,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import com.eerussianguy.firmalife.te.TEStemCrop;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
@@ -107,7 +107,7 @@ public class BlockStemFruit extends BlockDirectional implements ICapabilitySize 
         long currentTime = Calendar.PLAYER_TIME.getTicks();
         long foodCreationDate = currentTime - te.getTicksSinceUpdate();
         drops.forEach(stack -> {
-          FoodHandler handler = (FoodHandler) stack.getCapability(CapabilityFood.CAPABILITY, null);
+          CapabilityProviderFood handler = (CapabilityProviderFood) stack.getCapability(CapabilityFood.CAPABILITY, null);
           if (handler != null) {handler.setCreationDate(foodCreationDate);}
         });
       }

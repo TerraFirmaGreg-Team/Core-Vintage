@@ -1,12 +1,13 @@
 package net.sharkbark.cellars;
 
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import net.dries007.tfc.api.capability.food.FoodTrait;
 import net.sharkbark.cellars.proxy.CommonProxy;
 import net.sharkbark.cellars.util.Reference;
 import net.sharkbark.cellars.util.handlers.PacketHandler;

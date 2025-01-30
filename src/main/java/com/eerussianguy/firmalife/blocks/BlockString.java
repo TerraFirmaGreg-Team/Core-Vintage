@@ -1,5 +1,10 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -21,15 +26,11 @@ import net.minecraftforge.items.IItemHandler;
 import com.eerussianguy.firmalife.init.StatePropertiesFL;
 import com.eerussianguy.firmalife.te.TEString;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -113,7 +114,7 @@ public class BlockString extends BlockNonCube {
       if (inv == null) {return false;}
       ItemStack current = inv.getStackInSlot(0);
       if (!held.isEmpty() && current.isEmpty()) {
-        IFood cap = held.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood cap = held.getCapability(CapabilityFood.CAPABILITY, null);
         if (cap != null) {
           List<FoodTrait> traits = cap.getTraits();
           boolean isFoodValid =

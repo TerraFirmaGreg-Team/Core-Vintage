@@ -2,6 +2,9 @@ package net.dries007.tfc.compat.crafttweaker;
 
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityProviderDamageResistance;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
@@ -15,9 +18,6 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.liquid.ILiquidStack;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHandler;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
@@ -49,7 +49,7 @@ public class CTItemRegistry {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          CapabilityHandlerSize.CUSTOM_ITEMS.put(inputIngredient, () -> CapabilityProviderSize.get(size, weight, true));
+          CapabilityHandlerSize.CUSTOM_ITEMS.put(inputIngredient, () -> CapabilityProviderSize.of(size, weight, true));
         }
 
         @Override
@@ -159,7 +159,7 @@ public class CTItemRegistry {
     CraftTweakerAPI.apply(new IAction() {
       @Override
       public void apply() {
-        CapabilityFood.CUSTOM_FOODS.put(inputIngredient, () -> new FoodHandler(null, new FoodData(hunger, water, saturation, grain, fruit, veg, protein, dairy, decay)));
+        CapabilityFood.CUSTOM_FOODS.put(inputIngredient, () -> new CapabilityProviderFood(null, new FoodData(hunger, water, saturation, grain, fruit, veg, protein, dairy, decay)));
       }
 
       @Override

@@ -6,6 +6,11 @@ import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
@@ -33,4 +38,8 @@ public abstract class BaseItem extends Item implements IItemSettings {
   }
 
 
+  @Override
+  public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return definition$initCapabilities(stack, nbt);
+  }
 }

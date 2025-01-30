@@ -1,5 +1,10 @@
 package com.eerussianguy.firmalife.recipe;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -11,11 +16,7 @@ import net.minecraftforge.common.crafting.JsonContext;
 
 import com.eerussianguy.firmalife.items.ItemPizza;
 import com.google.gson.JsonObject;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.recipes.RecipeUtils;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -31,9 +32,8 @@ public class PizzaRecipe extends SandwichBasedRecipe {
   @Override
   public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
     ItemStack output = super.getCraftingResult(inv);
-    IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
-    if (food instanceof ItemPizza.PizzaHandler) {
-      ItemPizza.PizzaHandler trailMix = (ItemPizza.PizzaHandler) food;
+    ICapabilityFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
+    if (food instanceof ItemPizza.PizzaHandler trailMix) {
       List<FoodData> ingredients = new ArrayList<>();
       getIngredients(inv, ingredients);
       if (ingredients.size() < 1) {return ItemStack.EMPTY;}

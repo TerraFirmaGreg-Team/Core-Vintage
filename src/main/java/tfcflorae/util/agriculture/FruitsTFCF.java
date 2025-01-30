@@ -1,8 +1,9 @@
 package tfcflorae.util.agriculture;
 
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+
 import net.minecraft.item.Item;
 
-import net.dries007.tfc.api.capability.food.FoodData;
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.objects.items.food.ItemFoodTFCF;
 
@@ -117,10 +118,10 @@ public enum FruitsTFCF {
   GREEN_GRAPE(ItemFoodTFCF.get(ItemsTFCF.GREEN_GRAPE), true, DRIED_FRUIT_DECAY, false),
   PURPLE_GRAPE(ItemFoodTFCF.get(ItemsTFCF.PURPLE_GRAPE), true, DRIED_FRUIT_DECAY, false);
 
+  public final boolean isVanillaFood;
   private final Item fruit;
   private final boolean dry;
   private final FoodData driedData;
-  public final boolean isVanillaFood;
 
   FruitsTFCF(Item fruit, boolean dry, FoodData driedData, boolean isVanillaFood) {
     this.fruit = fruit;

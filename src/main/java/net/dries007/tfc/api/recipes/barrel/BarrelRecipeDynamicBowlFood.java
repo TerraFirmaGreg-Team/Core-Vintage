@@ -1,11 +1,12 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.food.ItemDynamicBowlFood;
 
@@ -31,7 +32,7 @@ public class BarrelRecipeDynamicBowlFood extends BarrelRecipe {
   public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
     int multiplier = getMultiplier(inputFluid, inputStack);
     List<ItemStack> outputList = new ArrayList<>();
-    IFood food = inputStack.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood food = inputStack.getCapability(CapabilityFood.CAPABILITY, null);
     ItemStack outputStack = ItemStack.EMPTY;
     if (food instanceof ItemDynamicBowlFood.DynamicFoodHandler) {
       outputStack = ((ItemDynamicBowlFood.DynamicFoodHandler) food).getBowlStack();

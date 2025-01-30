@@ -1,6 +1,6 @@
 package tfcflorae.util.agriculture;
 
-import net.dries007.tfc.api.capability.food.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 public class FoodDataTFCF {
     /*

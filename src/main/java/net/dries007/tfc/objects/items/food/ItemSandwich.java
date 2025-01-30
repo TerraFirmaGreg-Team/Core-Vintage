@@ -1,12 +1,13 @@
 package net.dries007.tfc.objects.items.food;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.util.agriculture.Food;
 
 import javax.annotation.Nonnull;
@@ -27,7 +28,7 @@ public class ItemSandwich extends ItemFoodTFC {
     return new SandwichHandler(nbt, food.getData());
   }
 
-  public static class SandwichHandler extends FoodHandler {
+  public static class SandwichHandler extends CapabilityProviderFood {
 
     private final FoodData rootData;
 

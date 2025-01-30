@@ -1,5 +1,8 @@
 package tfcflorae.objects.items;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -21,9 +24,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
@@ -125,7 +125,7 @@ public class ItemSack extends ItemTFCF {
 
     @Override
     public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-      IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
       }
@@ -136,7 +136,7 @@ public class ItemSack extends ItemTFCF {
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
       if (!simulate) {
-        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (cap != null) {
           CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
         }
@@ -148,7 +148,7 @@ public class ItemSack extends ItemTFCF {
     @Nonnull
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
       ItemStack stack = super.extractItem(slot, amount, simulate).copy();
-      IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }
@@ -183,7 +183,7 @@ public class ItemSack extends ItemTFCF {
      */
     @Override
     public void beforePutStack(SlotCallback slot, @Nonnull ItemStack stack) {
-      IFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }

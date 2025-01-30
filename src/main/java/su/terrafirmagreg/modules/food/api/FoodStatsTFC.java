@@ -1,9 +1,10 @@
 package su.terrafirmagreg.modules.food.api;
 
-import su.terrafirmagreg.api.data.DamageSources;
-import su.terrafirmagreg.modules.core.ModuleCore;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.init.EffectsCore;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.Constants;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketFoodStatsReplace;
+import net.dries007.tfc.network.PacketFoodStatsUpdate;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -17,15 +18,14 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.NutritionStats;
-import net.dries007.tfc.network.PacketFoodStatsReplace;
-import net.dries007.tfc.network.PacketFoodStatsUpdate;
+import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.NutritionStats;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -70,7 +70,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
 
   @Override
   public void addStats(ItemFood foodItem, ItemStack stack) {
-    IFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
     if (foodCap != null) {
       addStats(foodCap);
     } else {
@@ -79,7 +79,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
   }
 
   @Override
-  public void addStats(IFood foodCap) {
+  public void addStats(ICapabilityFood foodCap) {
     // Eating items has nutritional benefits
     FoodData data = foodCap.getData();
     if (!foodCap.isRotten()) {

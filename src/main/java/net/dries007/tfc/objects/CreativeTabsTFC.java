@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 
 import javax.annotation.Nonnull;
 

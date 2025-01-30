@@ -1,6 +1,9 @@
 package net.dries007.tfc.objects.items.ceramics;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -44,9 +47,6 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
@@ -354,7 +354,7 @@ public class ItemSmallVessel extends ItemPottery {
 
     @Override
     public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-      IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
       }
@@ -365,7 +365,7 @@ public class ItemSmallVessel extends ItemPottery {
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
       if (!simulate) {
-        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (cap != null) {
           CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
         }
@@ -377,7 +377,7 @@ public class ItemSmallVessel extends ItemPottery {
     @Nonnull
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
       ItemStack stack = super.extractItem(slot, amount, simulate).copy();
-      IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }
@@ -457,7 +457,7 @@ public class ItemSmallVessel extends ItemPottery {
      */
     @Override
     public void beforePutStack(SlotCallback slot, @Nonnull ItemStack stack) {
-      IFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }

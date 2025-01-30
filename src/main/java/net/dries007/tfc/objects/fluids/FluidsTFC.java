@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.fluids;
 
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
@@ -24,7 +25,6 @@ import com.google.common.collect.ImmutableSet;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.ConfigTFC.General;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;

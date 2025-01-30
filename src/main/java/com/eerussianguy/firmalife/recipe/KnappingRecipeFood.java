@@ -2,7 +2,7 @@ package com.eerussianguy.firmalife.recipe;
 
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 

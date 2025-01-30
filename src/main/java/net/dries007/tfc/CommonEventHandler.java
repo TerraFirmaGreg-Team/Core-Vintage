@@ -2,6 +2,10 @@ package net.dries007.tfc;
 
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
+import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
@@ -122,10 +126,6 @@ import com.eerussianguy.firmalife.items.ItemFruitPole;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.ConfigTFC.Devices;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.IItemFoodTFC;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
@@ -608,7 +608,7 @@ public final class CommonEventHandler {
           foodHandler = ((IItemFoodTFC) stack.getItem()).getCustomFoodHandler();
         }
         if (foodHandler == null) {
-          foodHandler = new FoodHandler(stack.getTagCompound(), new FoodData());
+          foodHandler = new CapabilityProviderFood(stack.getTagCompound(), new FoodData());
         }
         event.addCapability(CapabilityFood.KEY, foodHandler);
       }

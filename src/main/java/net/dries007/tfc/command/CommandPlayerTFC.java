@@ -1,5 +1,8 @@
 package net.dries007.tfc.command;
 
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.NutritionStats;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.skill.Skill;
 import su.terrafirmagreg.modules.core.feature.skill.SkillType;
@@ -17,9 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.api.capability.food.NutritionStats;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;

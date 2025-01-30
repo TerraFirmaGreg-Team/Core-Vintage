@@ -1,13 +1,13 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import javax.annotation.Nonnull;
 
@@ -16,7 +16,7 @@ public class ItemBlockTFC extends ItemBlock implements ICapabilitySize {
   private final ICapabilitySize size;
 
   public ItemBlockTFC(Block block) {
-    this(block, block instanceof ICapabilitySize ? (ICapabilitySize) block : CapabilityProviderSize.getDefault());
+    this(block, block instanceof ICapabilitySize ? (ICapabilitySize) block : CapabilityProviderSize.of());
   }
 
   public ItemBlockTFC(Block block, ICapabilitySize size) {

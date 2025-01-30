@@ -1,14 +1,15 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class SaltingRecipeWrapper implements IRecipeWrapper {
       for (ItemStack matchingStack : ingredient.getMatchingStacks()) {
         ItemStack stack = matchingStack.copy(); // Avoid changing recipe
         slot.add(stack);
-        IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (food != null) {
           // Clear food traits, for some reason, #getMatchingStacks grabs ingredients brined
           food.getTraits().clear();

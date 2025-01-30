@@ -1,10 +1,11 @@
 package com.eerussianguy.firmalife.init;
 
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.text.TextFormatting;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.food.FoodTrait;
 
 import static com.eerussianguy.firmalife.FirmaLife.MOD_ID;
 

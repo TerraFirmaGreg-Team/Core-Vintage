@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.inventory.ingredient;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -21,7 +21,7 @@ public class IngredientItemFood implements IIngredient<ItemStack> {
   public NonNullList<ItemStack> getValidIngredients() {
     NonNullList<ItemStack> ingredients = innerIngredient.getValidIngredients();
     for (ItemStack stack : ingredients) {
-      IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (food != null) {
         food.setNonDecaying();
       }
@@ -50,7 +50,7 @@ public class IngredientItemFood implements IIngredient<ItemStack> {
   }
 
   private boolean isRotten(ItemStack stack) {
-    IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
     return cap != null && cap.isRotten();
   }
 }

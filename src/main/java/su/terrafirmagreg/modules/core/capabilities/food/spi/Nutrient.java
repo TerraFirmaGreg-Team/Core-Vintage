@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.food;
+package su.terrafirmagreg.modules.core.capabilities.food.spi;
 
 import net.minecraft.util.text.TextFormatting;
 

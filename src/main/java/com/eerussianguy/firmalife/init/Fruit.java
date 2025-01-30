@@ -1,14 +1,15 @@
 package com.eerussianguy.firmalife.init;
 
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+
 import net.minecraft.item.Item;
 
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
 
-import static net.dries007.tfc.api.capability.food.FoodData.DRIED_FRUIT_CATEGORY;
-import static net.dries007.tfc.api.capability.food.FoodData.DRIED_FRUIT_DECAY;
-import static net.dries007.tfc.api.capability.food.FoodData.DRIED_FRUIT_SATURATION;
+import static su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData.DRIED_FRUIT_CATEGORY;
+import static su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData.DRIED_FRUIT_DECAY;
+import static su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData.DRIED_FRUIT_SATURATION;
 
 /**
  * This is an easy way to wrap all the TFC fruits with our data

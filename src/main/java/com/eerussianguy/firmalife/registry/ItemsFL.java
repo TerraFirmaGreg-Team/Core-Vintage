@@ -1,5 +1,9 @@
 package com.eerussianguy.firmalife.registry;
 
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -30,9 +34,6 @@ import com.eerussianguy.firmalife.items.ItemTrailMix;
 import com.eerussianguy.firmalife.items.ItemWateringCan;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.api.capability.food.FoodData;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.items.ItemMisc;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.base.object.itemblock.spi;
+package su.terrafirmagreg.api.base.object.item.spi;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;

@@ -1,5 +1,8 @@
 package su.terrafirmagreg.mixin.gregtech.api.items.armor;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -7,8 +10,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 
 import gregtech.api.items.armor.ArmorUtils;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,7 +24,7 @@ public class ArmorUtilsMixin {
       cir.setReturnValue(new ActionResult<>(EnumActionResult.FAIL, food));
     }
 
-    IFood cap = food.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood cap = food.getCapability(CapabilityFood.CAPABILITY, null);
     ItemFood foodItem = (ItemFood) food.getItem();
 
     if (player.getFoodStats().needFood()) {

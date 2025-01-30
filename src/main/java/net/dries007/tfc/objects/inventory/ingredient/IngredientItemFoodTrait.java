@@ -1,11 +1,11 @@
 package net.dries007.tfc.objects.inventory.ingredient;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
 
 public class IngredientItemFoodTrait implements IIngredient<ItemStack> {
 
@@ -21,7 +21,7 @@ public class IngredientItemFoodTrait implements IIngredient<ItemStack> {
   public NonNullList<ItemStack> getValidIngredients() {
     NonNullList<ItemStack> ingredients = innerIngredient.getValidIngredients();
     for (ItemStack stack : ingredients) {
-      IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (food != null) {
         CapabilityFood.applyTrait(food, trait);
       }
@@ -50,7 +50,7 @@ public class IngredientItemFoodTrait implements IIngredient<ItemStack> {
   }
 
   private boolean hasTrait(ItemStack stack) {
-    IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
     return cap != null && cap.getTraits().contains(trait);
   }
 }

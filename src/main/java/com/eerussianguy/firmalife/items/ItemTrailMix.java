@@ -1,12 +1,12 @@
 package com.eerussianguy.firmalife.items;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.Nutrient;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,7 +25,7 @@ public class ItemTrailMix extends ItemFoodFL {
     return new TrailMixHandler(nbt, data);
   }
 
-  public static class TrailMixHandler extends FoodHandler {
+  public static class TrailMixHandler extends CapabilityProviderFood {
 
     private final FoodData rootData;
 

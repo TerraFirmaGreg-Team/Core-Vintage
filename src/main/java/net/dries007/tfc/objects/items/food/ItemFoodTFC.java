@@ -1,19 +1,20 @@
 package net.dries007.tfc.objects.items.food;
 
+import su.terrafirmagreg.api.base.object.item.spi.BaseItemFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
+import su.terrafirmagreg.modules.core.capabilities.food.FoodHeatHandler;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.FoodHeatHandler;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.IItemFoodTFC;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
 
@@ -23,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class ItemFoodTFC extends ItemFood implements ICapabilitySize, IItemFoodTFC {
+public class ItemFoodTFC extends BaseItemFood implements ICapabilitySize, IItemFoodTFC {
 
   private static final Map<Food, ItemFoodTFC> MAP = new HashMap<>();
   protected final Food food;
@@ -57,7 +58,7 @@ public class ItemFoodTFC extends ItemFood implements ICapabilitySize, IItemFoodT
     if (this.isInCreativeTab(tab)) {
       // Makes creative items not decay (like JEI)
       ItemStack stack = new ItemStack(this);
-      IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         cap.setNonDecaying();
       }
@@ -84,6 +85,6 @@ public class ItemFoodTFC extends ItemFood implements ICapabilitySize, IItemFoodT
 
   @Override
   public ICapabilityProvider getCustomFoodHandler() {
-    return food.isHeatable() ? new FoodHeatHandler(null, food) : new FoodHandler(null, food);
+    return food.isHeatable() ? new FoodHeatHandler(null, food) : new CapabilityProviderFood(null, food);
   }
 }

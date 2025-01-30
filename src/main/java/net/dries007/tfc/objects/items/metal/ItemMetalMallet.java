@@ -1,7 +1,10 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 
 import net.minecraft.block.Block;
@@ -29,15 +32,11 @@ import com.eerussianguy.firmalife.registry.BlocksFL;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -79,7 +78,7 @@ public class ItemMetalMallet extends ItemMetalTool {
         List<ItemStack> drops = block.getDrops(worldIn, pos, worldIn.getBlockState(pos), 0);
         ItemStack stack = drops.get(0);
         if (stack.getItem() == Item.getItemFromBlock(block)) {
-          IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+          ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
           if (cap != null) {
             if (!cap.isRotten()) {
               for (int i = 0; i < 2 + RNG.nextInt(4); i++) {Helpers.spawnItemStack(worldIn, pos, new ItemStack(ItemsFL.getFood(FoodFL.MELON)));}

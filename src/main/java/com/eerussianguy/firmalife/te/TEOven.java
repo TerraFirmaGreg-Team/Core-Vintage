@@ -18,7 +18,7 @@ import com.eerussianguy.firmalife.blocks.BlockOvenWall;
 import com.eerussianguy.firmalife.recipe.OvenRecipe;
 import com.eerussianguy.firmalife.registry.BlocksFL;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.te.TEInventory;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;

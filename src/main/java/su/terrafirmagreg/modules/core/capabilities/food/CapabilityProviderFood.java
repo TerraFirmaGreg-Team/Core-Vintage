@@ -1,23 +1,24 @@
-package net.dries007.tfc.api.capability.food;
+package su.terrafirmagreg.modules.core.capabilities.food;
+
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.agriculture.Food;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompound> {
+public class CapabilityProviderFood implements ICapabilityFood {
 
   private static final long ROTTEN_DATE = Long.MIN_VALUE;
   private static final long NEVER_DECAY_DATE = Long.MAX_VALUE;
@@ -29,24 +30,24 @@ public class FoodHandler implements IFood, ICapabilitySerializable<NBTTagCompoun
   protected long creationDate;
   protected boolean isNonDecaying; // This is intentionally not serialized, as we don't want it to preserve over `ItemStack.copy()` operations
 
-  public FoodHandler() {
+  public CapabilityProviderFood() {
     this(null, new FoodData(4, 0, 0, 0, 0, 0, 0, 0, 1));
   }
 
-  public FoodHandler(@Nullable NBTTagCompound nbt, @Nonnull Food food) {
+  public CapabilityProviderFood(@Nullable NBTTagCompound nbt, @Nonnull Food food) {
     this(nbt, food.getData());
   }
 
-  public FoodHandler(@Nullable NBTTagCompound nbt, FoodData data) {
+  public CapabilityProviderFood(@Nullable NBTTagCompound nbt, FoodData data) {
     this.foodTraits = new ArrayList<>(2);
     this.data = data;
-    this.isNonDecaying = FoodHandler.markStacksNonDecaying;
+    this.isNonDecaying = CapabilityProviderFood.markStacksNonDecaying;
 
     deserializeNBT(nbt);
   }
 
   public static void setNonDecaying(boolean markStacksNonDecaying) {
-    FoodHandler.markStacksNonDecaying = markStacksNonDecaying;
+    CapabilityProviderFood.markStacksNonDecaying = markStacksNonDecaying;
   }
 
   @Override

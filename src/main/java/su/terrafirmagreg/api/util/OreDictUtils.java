@@ -33,7 +33,11 @@ public final class OreDictUtils {
 
   public static void register(Item item) {
     if (item instanceof IItemSettings provider) {
-      provider.getSettings().getOreDict().forEach(s -> OreDictUtils.register(item, s));
+      provider.getSettings().getOreDict().forEach(oreDict -> {
+        if (oreDict != null && oreDict.length > 0) {
+          OreDictUtils.register(item, oreDict);
+        }
+      });
     }
   }
 
@@ -53,9 +57,7 @@ public final class OreDictUtils {
     if (itemStack != null && !itemStack.isEmpty()) {
       OreDictionary.registerOre(oreName, itemStack);
     } else {
-      TerraFirmaGreg.LOGGER.error(
-        "Failed to register ore dict entry for {}. Another unknown mod is likely responsible.",
-        oreName);
+      TerraFirmaGreg.LOGGER.error("Failed to register ore dict entry for {}. Another unknown mod is likely responsible.", oreName);
     }
   }
 
@@ -66,6 +68,9 @@ public final class OreDictUtils {
    * @return Строка, представляющая объединенные элементы массива в формате lowerCamelCase.
    */
   public static String toString(@NotNull Object... parts) {
+    if (parts == null) {
+      return null;
+    }
     return CaseFormat.UPPER_UNDERSCORE
       .converterTo(CaseFormat.LOWER_CAMEL)
       .convert(Joiner.on('_').skipNulls().join(parts));

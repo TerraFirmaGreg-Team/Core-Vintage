@@ -1,5 +1,7 @@
 package net.dries007.tfc;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.server.MinecraftServer;
@@ -20,8 +22,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.client.ClientEvents;
@@ -187,7 +187,7 @@ public final class TerraFirmaCraft {
   public void onLoadComplete(FMLLoadCompleteEvent event) {
     // This is the latest point that we can possibly stop creating non-decaying stacks on both server + client
     // It should be safe to use as we're only using it internally
-    FoodHandler.setNonDecaying(false);
+    CapabilityProviderFood.setNonDecaying(false);
   }
 
   @Mod.EventHandler

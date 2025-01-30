@@ -1,5 +1,10 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -9,10 +14,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
@@ -109,7 +110,7 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
         int minIngredientCount = 64; // The minimum stack size of the ingredients
         for (int i = SLOT_INPUT_START; i <= SLOT_INPUT_END; i++) {
           ItemStack ingredient = inventory.getStackInSlot(i);
-          IFood food = ingredient.getCapability(CapabilityFood.CAPABILITY, null);
+          ICapabilityFood food = ingredient.getCapability(CapabilityFood.CAPABILITY, null);
           if (food != null) {
             if (food.isRotten()) {
               // Rotten food is not allowed
@@ -147,7 +148,7 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
 
           if (maxNutrient != null) {
             ItemStack salad = new ItemStack(getSaladItem(maxNutrient), minIngredientCount);
-            IFood saladCap = salad.getCapability(CapabilityFood.CAPABILITY, null);
+            ICapabilityFood saladCap = salad.getCapability(CapabilityFood.CAPABILITY, null);
             if (saladCap instanceof ItemDynamicBowlFood.DynamicFoodHandler) {
               saladCap.setCreationDate(CapabilityFood.getRoundedCreationDate());
               ((ItemDynamicBowlFood.DynamicFoodHandler) saladCap).initCreationDataAndBowl(bowlStack.copy()

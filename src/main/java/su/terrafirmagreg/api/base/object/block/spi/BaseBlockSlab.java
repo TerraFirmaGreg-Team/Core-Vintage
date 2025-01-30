@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.object.block.spi;
 
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
-import su.terrafirmagreg.api.base.object.itemblock.spi.BaseItemSlab;
+import su.terrafirmagreg.api.base.object.item.spi.BaseItemSlab;
 import su.terrafirmagreg.api.data.enums.EnumDefault;
 import su.terrafirmagreg.api.util.ModUtils;
 

@@ -1,13 +1,13 @@
 package com.eerussianguy.firmalife.items;
 
-import net.minecraft.item.ItemFood;
+import su.terrafirmagreg.api.base.object.item.spi.BaseItemFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
+import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.IItemFoodTFC;
-
-public class ItemFoodFL extends ItemFood implements IItemFoodTFC {
+public class ItemFoodFL extends BaseItemFood implements IItemFoodTFC {
 
   public FoodData data;
 
@@ -19,6 +19,6 @@ public class ItemFoodFL extends ItemFood implements IItemFoodTFC {
 
   @Override
   public ICapabilityProvider getCustomFoodHandler() {
-    return new FoodHandler(null, data);
+    return new CapabilityProviderFood(null, data);
   }
 }

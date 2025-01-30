@@ -1,5 +1,9 @@
 package tfcflorae.objects.container;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -7,9 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.container.ContainerItemStack;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
@@ -26,8 +27,7 @@ public class ContainerBag extends ContainerItemStack implements ISlotCallback {
   @Override
   protected void addContainerSlots() {
     IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-    if (inventory instanceof ISlotCallback) {
-      ISlotCallback callback = (ISlotCallback) inventory;
+    if (inventory instanceof ISlotCallback callback) {
       addSlotToContainer(new SlotCallback(inventory, 0, 62, 23, callback));
       addSlotToContainer(new SlotCallback(inventory, 1, 80, 23, callback));
       addSlotToContainer(new SlotCallback(inventory, 2, 98, 23, callback));
@@ -64,14 +64,14 @@ public class ContainerBag extends ContainerItemStack implements ISlotCallback {
       // returned stack from ItemSmallVessel.extractItem, so the preserved
       // trait of food items need to be updated here. Unset the preserved
       // trait of this stack
-      IFood cap = itemstack1.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = itemstack1.getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }
 
       if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true)) {
         // Set the preserved trait again; items failed to transfer
-        IFood capFail = itemstack1.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood capFail = itemstack1.getCapability(CapabilityFood.CAPABILITY, null);
         if (capFail != null) {
           CapabilityFood.applyTrait(capFail, FoodTrait.PRESERVED);
         }

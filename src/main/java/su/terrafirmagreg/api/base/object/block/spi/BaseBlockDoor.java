@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.object.block.spi;
 
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
-import su.terrafirmagreg.api.base.object.itemblock.spi.BaseItemDoor;
+import su.terrafirmagreg.api.base.object.item.spi.BaseItemDoor;
 
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.state.IBlockState;

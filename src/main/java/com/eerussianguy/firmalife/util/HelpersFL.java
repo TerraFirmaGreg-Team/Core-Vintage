@@ -1,12 +1,8 @@
 package com.eerussianguy.firmalife.util;
 
-import com.eerussianguy.firmalife.ConfigFL;
-import com.eerussianguy.firmalife.FirmaLife;
-import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
-import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import net.minecraft.item.ItemStack;
@@ -17,7 +13,11 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-import su.terrafirmagreg.api.data.enums.Mods;
+import com.eerussianguy.firmalife.ConfigFL;
+import com.eerussianguy.firmalife.FirmaLife;
+import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
+import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
+import net.dries007.tfc.ConfigTFC;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -74,7 +74,7 @@ public class HelpersFL {
 
   public static ItemStack updateFoodFuzzed(ItemStack oldStack, ItemStack newStack) {
     ItemStack output = CapabilityFood.updateFoodFromPrevious(oldStack, newStack);
-    IFood cap = output.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood cap = output.getCapability(CapabilityFood.CAPABILITY, null);
     if (cap != null && !cap.isRotten()) {
       cap.setCreationDate(cap.getCreationDate() - (cap.getCreationDate() % ICalendar.HOURS_IN_DAY));
     }

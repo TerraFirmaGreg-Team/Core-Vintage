@@ -2,6 +2,8 @@ package su.terrafirmagreg.modules.core.event.feature;
 
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
@@ -15,9 +17,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 
 import java.lang.reflect.Field;
 
@@ -44,7 +43,7 @@ public class EventHandlerAmbiental {
               ItemStack itemToBuy2 = recipe.getSecondItemToBuy().copy();
               ItemStack itemToSell = recipe.getItemToSell().copy();
               if (itemToSell.hasCapability(CapabilityFood.CAPABILITY, null)) {
-                IFood cap = itemToSell.getCapability(CapabilityFood.CAPABILITY, null);
+                ICapabilityFood cap = itemToSell.getCapability(CapabilityFood.CAPABILITY, null);
                 if (cap != null) {
                   cap.setCreationDate(time);
                 }

@@ -1,5 +1,10 @@
 package net.dries007.tfc.objects.items.food;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -8,10 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.util.agriculture.Food;
 
 import javax.annotation.Nonnull;
@@ -34,7 +35,7 @@ public class ItemDynamicBowlFood extends ItemFoodTFC {
   @Nonnull
   @Override
   public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-    IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
     if (food instanceof DynamicFoodHandler) {
       ItemStack bowlStack = ((DynamicFoodHandler) food).getBowlStack();
       if (entityLiving instanceof EntityPlayer) {
@@ -44,7 +45,7 @@ public class ItemDynamicBowlFood extends ItemFoodTFC {
     return super.onItemUseFinish(stack, worldIn, entityLiving);
   }
 
-  public static class DynamicFoodHandler extends FoodHandler {
+  public static class DynamicFoodHandler extends CapabilityProviderFood {
 
     private ItemStack bowlStack;
 

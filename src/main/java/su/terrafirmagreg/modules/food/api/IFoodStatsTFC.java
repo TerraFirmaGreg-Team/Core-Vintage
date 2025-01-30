@@ -1,13 +1,12 @@
 package su.terrafirmagreg.modules.food.api;
 
 import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.NutritionStats;
 
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.NutritionStats;
 
 import javax.annotation.Nonnull;
 
@@ -23,7 +22,7 @@ public interface IFoodStatsTFC {
    * @param stack to obtain the attached IFood capability
    */
   default void addStats(ItemStack stack) {
-    IFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
     if (foodCap != null) {
       addStats(foodCap);
     } else {
@@ -39,7 +38,7 @@ public interface IFoodStatsTFC {
    *
    * @param foodCap The food capability to add to the current state
    */
-  void addStats(IFood foodCap);
+  void addStats(ICapabilityFood foodCap);
 
   float getHealthModifier();
 

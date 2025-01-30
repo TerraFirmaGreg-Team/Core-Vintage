@@ -1,9 +1,7 @@
 package tfctech.compat.waila;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-import javax.annotation.Nullable;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -13,12 +11,24 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import mcjty.theoneprobe.api.*;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
+import mcjty.theoneprobe.api.ElementAlignment;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ITheOneProbe;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.util.Helpers;
-import tfctech.objects.blocks.devices.*;
-import tfctech.objects.tileentities.*;
+import tfctech.objects.blocks.devices.BlockFridge;
+import tfctech.objects.blocks.devices.BlockLatexExtractor;
+import tfctech.objects.blocks.devices.BlockWireDrawBench;
+import tfctech.objects.tileentities.TEFridge;
+import tfctech.objects.tileentities.TELatexExtractor;
+import tfctech.objects.tileentities.TEWireDrawBench;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
 
@@ -61,10 +71,10 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
             ItemStack stack = fridge.getSlot(slot);
             if (!stack.isEmpty()) {
               iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                        .item(stack)
-                        .vertical()
-                        .itemLabel(stack);
-              IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+                .item(stack)
+                .vertical()
+                .itemLabel(stack);
+              ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
               List<String> list = new ArrayList<>();
               if (cap != null) {
                 cap.addTooltipInfo(stack, list, entityPlayer);

@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.entity.animal;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -10,8 +13,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class AnimalFood {
     for (Ingredient acceptedFood : acceptedFoods) {
       if (acceptedFood.apply(stack)) {
         if (!eatRotten) {
-          IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+          ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
           return cap == null || !cap.isRotten();
         }
         return true;

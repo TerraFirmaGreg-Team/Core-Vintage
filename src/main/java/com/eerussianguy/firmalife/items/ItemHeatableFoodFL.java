@@ -1,13 +1,13 @@
 package com.eerussianguy.firmalife.items;
 
-import net.minecraft.item.ItemFood;
+import su.terrafirmagreg.api.base.object.item.spi.BaseItemFood;
+import su.terrafirmagreg.modules.core.capabilities.food.FoodHeatHandler;
+import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHeatHandler;
-import net.dries007.tfc.api.capability.food.IItemFoodTFC;
-
-public class ItemHeatableFoodFL extends ItemFood implements IItemFoodTFC {
+public class ItemHeatableFoodFL extends BaseItemFood implements IItemFoodTFC {
 
   public FoodData data;
 

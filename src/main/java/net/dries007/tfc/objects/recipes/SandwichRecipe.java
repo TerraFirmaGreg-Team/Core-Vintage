@@ -1,5 +1,10 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -11,13 +16,8 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.items.food.ItemSandwich;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -34,9 +34,8 @@ public class SandwichRecipe extends ShapedDamageRecipe {
   @Override
   public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
     ItemStack output = super.getCraftingResult(inv);
-    IFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
-    if (food instanceof ItemSandwich.SandwichHandler) {
-      ItemSandwich.SandwichHandler sandwich = (ItemSandwich.SandwichHandler) food;
+    ICapabilityFood food = output.getCapability(CapabilityFood.CAPABILITY, null);
+    if (food instanceof ItemSandwich.SandwichHandler sandwich) {
       List<FoodData> breads = new ArrayList<>();
       List<FoodData> ingredients = new ArrayList<>();
       getBreadsAndIngredients(inv, breads, ingredients);
@@ -66,7 +65,7 @@ public class SandwichRecipe extends ShapedDamageRecipe {
   private void getBreadsAndIngredients(InventoryCrafting inv, List<FoodData> breads, List<FoodData> ingredients) {
     for (int i = 0; i < inv.getSizeInventory(); i++) {
       ItemStack ingredientStack = inv.getStackInSlot(i);
-      IFood ingredientCap = ingredientStack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood ingredientCap = ingredientStack.getCapability(CapabilityFood.CAPABILITY, null);
       if (ingredientCap != null) {
         if (ingredientCap.isRotten()) {
           // Found a rotten ingredient, aborting

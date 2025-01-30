@@ -85,7 +85,7 @@ public class RegistryManager implements IRegistryManager {
   public void onRegisterItem(RegistryEvent.Register<Item> event) {
 
     this.getWrapper().getItems().register(event);
-    this.getWrapper().getBlocks().register(OreDictUtils::register);
+//    this.getWrapper().getBlocks().register(OreDictUtils::register);
     this.getWrapper().getItems().register(OreDictUtils::register);
   }
 

@@ -1,6 +1,7 @@
 package com.eerussianguy.firmalife.registry;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -12,7 +13,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
-import net.dries007.tfc.api.capability.food.FoodData;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;

@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.food;
+package su.terrafirmagreg.modules.core.capabilities.food;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,7 +15,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 public interface IItemFoodTFC {
 
   /**
-   * @return A capability provider which exposes an {@link IFood} capability, e.g. {@link FoodHandler}
+   * @return A capability provider which exposes an {@link ICapabilityFood} capability, e.g. {@link CapabilityProviderFood}
    */
   ICapabilityProvider getCustomFoodHandler();
 }

@@ -1,8 +1,15 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,11 +34,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
@@ -39,10 +41,6 @@ import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.items.food.ItemDynamicBowlFood;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
-
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
 
@@ -219,7 +217,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
               int ingredientCount = 0;
               for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
                 ItemStack ingredient = inventory.getStackInSlot(i);
-                IFood food = ingredient.getCapability(CapabilityFood.CAPABILITY, null);
+                ICapabilityFood food = ingredient.getCapability(CapabilityFood.CAPABILITY, null);
                 if (food != null) {
                   if (food.isRotten()) {
                     ingredientCount = 0;
@@ -562,7 +560,7 @@ public class TEFirePit extends TETickableInventory implements ICalendarTickable,
       soupServings--;
 
       ItemStack soupStack = new ItemStack(getSoupItem());
-      IFood soupFood = soupStack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood soupFood = soupStack.getCapability(CapabilityFood.CAPABILITY, null);
       if (soupFood instanceof ItemDynamicBowlFood.DynamicFoodHandler) {
         soupFood.setCreationDate(soupCreationDate);
         ((ItemDynamicBowlFood.DynamicFoodHandler) soupFood).initCreationDataAndBowl(stack.splitStack(1), soupContents);

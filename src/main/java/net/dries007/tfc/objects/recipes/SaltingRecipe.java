@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -14,9 +18,6 @@ import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -42,7 +43,7 @@ public class SaltingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements 
     for (int i = 0; i < inv.getSizeInventory(); ++i) {
       ItemStack stack = inv.getStackInSlot(i);
       if (!stack.isEmpty()) {
-        IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (food == null || (!food.isRotten() && !food.getTraits().contains(FoodTrait.SALTED))) {
           items.add(stack);
         }
@@ -58,7 +59,7 @@ public class SaltingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements 
     for (int i = 0; i < inv.getSizeInventory(); i++) {
       ItemStack stack = inv.getStackInSlot(i).copy();
       stack.setCount(1);
-      IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (food != null) {
         // Only apply salt to first food item found
         CapabilityFood.applyTrait(food, FoodTrait.SALTED);

@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.entity.animal;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.entity.Entity;
@@ -33,8 +35,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.ILivestock;
 import net.dries007.tfc.network.PacketSimpleMessage;
@@ -357,7 +357,7 @@ public class EntityOcelotTFC extends EntityOcelot implements IAnimalTFC, ILivest
       } else if (this.isFood(itemstack) && player.isSneaking() && getAdultFamiliarityCap() > 0.0F) {
         if (this.isHungry()) {
           // Refuses to eat rotten stuff
-          IFood cap = itemstack.getCapability(CapabilityFood.CAPABILITY, null);
+          ICapabilityFood cap = itemstack.getCapability(CapabilityFood.CAPABILITY, null);
           if (cap != null) {
             if (cap.isRotten()) {
               return false;

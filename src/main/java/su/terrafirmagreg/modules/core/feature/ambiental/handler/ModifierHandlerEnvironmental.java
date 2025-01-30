@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.ambiental.handler;
 
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalRegistry;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEnvironmental;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderEnvironmental;
@@ -8,8 +9,6 @@ import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.entity.player.EntityPlayer;
-
-import net.dries007.tfc.api.capability.food.Nutrient;
 
 import java.util.Optional;
 

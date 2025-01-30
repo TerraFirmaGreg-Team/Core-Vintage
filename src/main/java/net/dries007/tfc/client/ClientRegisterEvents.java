@@ -1,5 +1,8 @@
 package net.dries007.tfc.client;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDoor;
@@ -36,8 +39,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
@@ -96,9 +97,9 @@ import net.dries007.tfc.objects.te.TEToolRack;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFC)
@@ -338,7 +339,7 @@ public final class ClientRegisterEvents {
       BlocksTFC.getAllGrassBlocks().toArray(new BlockPlantTFC[0]));
 
     itemColors.registerItemColorHandler((stack, tintIndex) -> {
-      IFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (food != null) {
         return food.isRotten() ? ConfigTFC.Client.DISPLAY.rottenFoodOverlayColor : 0xFFFFFF;
       }

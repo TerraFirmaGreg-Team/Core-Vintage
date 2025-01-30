@@ -1,11 +1,10 @@
 package su.terrafirmagreg.api.base.object.block.api;
 
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings.Settings;
-import su.terrafirmagreg.api.base.object.itemblock.spi.BaseItemBlock;
+import su.terrafirmagreg.api.base.object.item.spi.BaseItemBlock;
 import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -24,28 +23,28 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IRarity;
 
 import com.google.common.collect.Lists;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-
-import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 
 @SuppressWarnings("unused")
 public interface IBlockSettings extends IBaseSettings<Settings> {
 
-
   @Getter
   @SuppressWarnings("deprecation")
   class Settings extends BaseSettings<Settings> {
 
-    final List<Object[]> oreDict = Lists.newArrayList();
-    final Set<CreativeTabs> groups = new ObjectOpenHashSet<>();
+    final ArrayList<Object[]> oreDict = Lists.newArrayList();
+    final ArrayList<IProviderItemCapability> capability = Lists.newArrayList();
+    final ArrayList<CreativeTabs> groups = Lists.newArrayList();
 
     // Block
     final Material material;
@@ -60,8 +59,6 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
     ContextFunction<Float> slipperiness = (state, world, pos) -> 0.6F;
     Predicate<IBlockState> isSuffocating = (state) -> state.getMaterial().blocksMovement() && state.isFullCube();
     IRarity rarity = EnumRarity.COMMON;
-    Size size = Size.SMALL;
-    Weight weight = Weight.LIGHT;
     BlockRenderLayer renderLayer = BlockRenderLayer.SOLID;
     Function<Block, Item> itemBlock = BaseItemBlock::new;
 
@@ -72,7 +69,6 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
     float resistance = 1.0F;
 
     boolean canFall = false;
-    boolean canStack = true;
     boolean collidable = true;
     boolean opaque = true;
     boolean fullCube = true;
@@ -163,6 +159,16 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
       return this;
     }
 
+    public Settings group(List<CreativeTabs> group) {
+      group.forEach(this::group);
+      return this;
+    }
+
+    public Settings group(CreativeTabs... group) {
+      Collections.addAll(this.groups, group);
+      return this;
+    }
+
     public Settings group(CreativeTabs group) {
       if (group != null) {
         this.groups.add(group);
@@ -170,10 +176,30 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
       return this;
     }
 
-    public Settings oreDict(@NotNull Object... oreDict) {
-      if (oreDict != null && oreDict.length > 0) {
+    public Settings oreDict(Supplier<Boolean> supplier, Object... oreDict) {
+      if (!supplier.get()) {
         this.oreDict.add(oreDict);
       }
+      return this;
+    }
+
+    public Settings oreDict(List<Object[]> oreDict) {
+      this.oreDict.addAll(oreDict);
+      return this;
+    }
+
+    public Settings oreDict(Object... oreDict) {
+      this.oreDict.add(oreDict);
+      return this;
+    }
+
+    public Settings capability(List<IProviderItemCapability> providers) {
+      providers.forEach(this::capability);
+      return this;
+    }
+
+    public Settings capability(IProviderItemCapability... providers) {
+      this.capability.addAll(Arrays.asList(providers));
       return this;
     }
 
@@ -322,21 +348,6 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
 
     public Settings customResource(ResourceLocation resourceLocation) {
       this.resource = resourceLocation;
-      return this;
-    }
-
-    public Settings weight(Weight weight) {
-      this.weight = weight;
-      return this;
-    }
-
-    public Settings size(Size size) {
-      this.size = size;
-      return this;
-    }
-
-    public Settings nonCanStack() {
-      this.canStack = false;
       return this;
     }
 

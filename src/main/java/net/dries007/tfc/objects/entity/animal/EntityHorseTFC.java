@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.entity.animal;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.entity.EntityAgeable;
@@ -33,8 +35,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.ILivestock;
 import net.dries007.tfc.api.util.IRidable;
@@ -339,7 +339,7 @@ public class EntityHorseTFC extends EntityHorse implements IAnimalTFC, ILivestoc
       } else if (this.isFood(stack) && player.isSneaking() && getAdultFamiliarityCap() > 0.0F) {
         if (this.isHungry()) {
           // Refuses to eat rotten stuff
-          IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+          ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
           if (cap != null) {
             if (cap.isRotten()) {
               return false;

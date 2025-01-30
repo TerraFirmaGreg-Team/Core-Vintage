@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -15,8 +18,6 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -41,7 +42,7 @@ public class ShapelessDamageFoodRecipe extends ShapelessDamageRecipe {
     for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
       ItemStack stack = inv.getStackInSlot(slot);
       if (!stack.isEmpty()) {
-        IFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (foodCap != null && (smallestRottenDate == -1 || smallestRottenDate > foodCap.getRottenDate())) {
           smallestRottenDate = foodCap.getRottenDate();
           foodStack = stack;

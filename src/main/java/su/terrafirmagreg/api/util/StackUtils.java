@@ -221,8 +221,7 @@ public final class StackUtils {
    */
   public static NBTTagCompound getDisplayTag(ItemStack stack) {
 
-    prepareStackTag(stack);
-    final NBTTagCompound nbt = stack.getTagCompound();
+    final NBTTagCompound nbt = prepareStackTag(stack);
 
     if (!nbt.hasKey("display", NBT.TAG_COMPOUND)) {
       NBTUtils.setGenericNBTValue(nbt, "display", new NBTTagCompound());

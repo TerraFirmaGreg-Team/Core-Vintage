@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.core.feature.calendar;
 
-import net.dries007.tfc.util.calendar.Month;
-
 import net.minecraft.world.World;
 
 import net.dries007.tfc.TerraFirmaCraft;

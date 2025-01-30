@@ -1,5 +1,7 @@
 package tfcflorae;
 
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,7 +23,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.util.skills.SmithingSkill;
 import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
 import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 

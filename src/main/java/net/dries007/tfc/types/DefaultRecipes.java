@@ -1,6 +1,7 @@
 package net.dries007.tfc.types;
 
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler;
 
@@ -80,7 +81,6 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.fuel.FuelManager;
-import net.dries007.tfc.util.skills.SmithingSkill;
 import org.labellum.mc.waterflasks.item.ModItems;
 
 import javax.annotation.Nullable;
@@ -142,12 +142,12 @@ import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_THIRD_LAST;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.ARMOR;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
 import static su.terrafirmagreg.Tags.MOD_ID;
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.ARMOR;
+import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.GENERAL;
+import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.TOOLS;
+import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.WEAPONS;
 import static su.terrafirmagreg.modules.core.init.FluidsCore.BRINE;
 import static su.terrafirmagreg.modules.core.init.FluidsCore.CURDLED_MILK;
 import static su.terrafirmagreg.modules.core.init.FluidsCore.FRESH_WATER;

@@ -9,6 +9,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -130,8 +131,9 @@ import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
 import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
 import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
-import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.skills.SmithingSkill;
+
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
+
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 

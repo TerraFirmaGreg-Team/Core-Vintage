@@ -5,7 +5,7 @@ import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

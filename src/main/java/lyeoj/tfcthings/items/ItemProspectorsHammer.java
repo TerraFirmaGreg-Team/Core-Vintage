@@ -1,8 +1,12 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.skill.ProspectingSkill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -33,16 +37,12 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.items.ItemTFC;
-import net.dries007.tfc.util.skills.ProspectingSkill;
-import net.dries007.tfc.util.skills.SkillType;
-import net.dries007.tfc.util.skills.SmithingSkill;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -250,7 +250,8 @@ public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOr
     if (rocks.isEmpty()) {
       playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_no_rocks"), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
     } else if (rocks.size() == 1) {
-      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_1_rock_found", rocks.get(0).toString()), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
+      playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_1_rock_found", rocks.get(0)
+        .toString()), ConfigTFC.Client.TOOLTIP.propickOutputToActionBar);
 
     } else if (rocks.size() == 2) {
       playerIn.sendStatusMessage(new TextComponentTranslation("tfcthings.tooltip.prohammer_2_rocks_found", rocks.get(0).toString(),

@@ -8,7 +8,8 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
+
 import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 
 import static net.dries007.tfc.api.types.IBerryBush.Size.LARGE;

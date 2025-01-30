@@ -23,7 +23,7 @@ import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
 
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;

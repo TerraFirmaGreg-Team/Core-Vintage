@@ -1,5 +1,13 @@
 package com.eerussianguy.firmalife.blocks;
 
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.skill.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
@@ -22,17 +30,10 @@ import com.eerussianguy.firmalife.te.TEStemCrop;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.Crop;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -127,8 +128,7 @@ public class BlockStemFruit extends BlockDirectional implements ICapabilitySize 
       for (EnumFacing neighbor : EnumFacing.Plane.HORIZONTAL) {
         BlockPos cropPos = pos.offset(neighbor);
         Block block = world.getBlockState(cropPos).getBlock();
-        if (block instanceof BlockStemCrop) {
-          BlockStemCrop crop = (BlockStemCrop) block;
+        if (block instanceof BlockStemCrop crop) {
           //check the crop is pointing towards us
           TEStemCrop te = Helpers.getTE(world, cropPos, TEStemCrop.class);
           if (te != null && te.getFruitDirection() == neighbor.getOpposite()) {

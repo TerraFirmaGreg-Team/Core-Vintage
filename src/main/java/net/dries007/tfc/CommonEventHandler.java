@@ -5,13 +5,19 @@ import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ProviderPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.CalendarWorldData;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
@@ -61,10 +67,8 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -111,7 +115,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import com.eerussianguy.firmalife.init.FoodFL;
@@ -127,9 +130,6 @@ import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.capability.player.PlayerDataHandler;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.api.types.ICreatureTFC;
@@ -140,7 +140,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Rock.Type;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.network.PacketCalendarUpdate;
-import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
@@ -170,9 +169,6 @@ import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarWorldData;
-import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.sharkbark.cellars.init.ModItems;
@@ -265,7 +261,7 @@ public final class CommonEventHandler {
     final ItemStack heldItem = player == null ? ItemStack.EMPTY : player.getHeldItemMainhand();
 
     if (player != null) {
-      IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (cap != null) {
         cap.setHarvestingTool(player.getHeldItemMainhand());
       }
@@ -307,7 +303,7 @@ public final class CommonEventHandler {
     // Apply durability modifier on tools
     if (player != null) {
       ItemStack tool = ItemStack.EMPTY;
-      IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (cap != null) {
         tool = cap.getHarvestingTool();
       }
@@ -650,91 +646,6 @@ public final class CommonEventHandler {
     }
   }
 
-  @SubscribeEvent
-  public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-    if (event.getObject() instanceof EntityPlayer player) {
-      // Player skills
-      if (!player.hasCapability(CapabilityPlayerData.CAPABILITY, null)) {
-        event.addCapability(CapabilityPlayerData.KEY, new PlayerDataHandler(player));
-      }
-    }
-  }
-
-  /**
-   * Fired on server only when a player logs in
-   *
-   * @param event {@link PlayerEvent.PlayerLoggedInEvent}
-   */
-  @SubscribeEvent
-  public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-    if (event.player instanceof EntityPlayerMP player) {
-      // Capability Sync Handler
-      CapabilityContainerListener.addTo(player.inventoryContainer, player);
-
-      // Food Stats
-      FoodStatsTFC.replaceFoodStats(player);
-      if (player.getFoodStats() instanceof IFoodStatsTFC) {
-        // Also need to read the food stats from nbt, as they were not present when the player was loaded
-        MinecraftServer server = player.world.getMinecraftServer();
-        if (server != null) {
-          NBTTagCompound nbt = server.getPlayerList().getPlayerNBT(player);
-          // This can be null if the server is unable to read the file
-          //noinspection ConstantConditions
-          if (nbt != null) {
-            player.foodStats.readNBT(nbt);
-          }
-        }
-      }
-
-      // layer Data
-      IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      if (playerData != null) {
-
-        // Sync
-        TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(playerData.serializeNBT()), player);
-      }
-    }
-  }
-
-  /**
-   * Fired on server only when a player logs out
-   *
-   * @param event {@link PlayerEvent.PlayerLoggedOutEvent}
-   */
-  @SubscribeEvent
-  public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-    if (event.player instanceof EntityPlayerMP) {
-      // Capability sync handler, we can remove it now
-      CapabilityContainerListener.removeFrom((EntityPlayerMP) event.player);
-    }
-  }
-
-  /**
-   * Fired on server only when a player dies and respawns, or travels through dimensions
-   *
-   * @param event {@link PlayerEvent.PlayerRespawnEvent event}
-   */
-  @SubscribeEvent
-  public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-    if (event.player instanceof EntityPlayerMP player) {
-      // Capability Sync Handler
-      CapabilityContainerListener.addTo(player.inventoryContainer, player);
-
-      // Food Stats
-      FoodStatsTFC.replaceFoodStats(player);
-      FoodStatsTFC foodStatsTFC = (FoodStatsTFC) player.getFoodStats();
-      foodStatsTFC.setFoodLevel(4);
-      foodStatsTFC.setThirst(25F);
-      player.setHealth(5);
-
-      // Skills / Player data
-      IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      if (cap != null) {
-
-        TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
-      }
-    }
-  }
 
   /**
    * Fired on server only when a player dies and respawns. Used to copy skill level before respawning since we need the original (AKA the body) player entity
@@ -746,8 +657,8 @@ public final class CommonEventHandler {
     if (event.getEntityPlayer() instanceof EntityPlayerMP player) {
 
       // Skills
-      IPlayerData newSkills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      IPlayerData originalSkills = event.getOriginal().getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData newSkills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData originalSkills = event.getOriginal().getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (newSkills != null && originalSkills != null) {
         newSkills.deserializeNBT(originalSkills.serializeNBT());
         // To properly sync, we need to use PlayerRespawnEvent
@@ -755,25 +666,6 @@ public final class CommonEventHandler {
     }
   }
 
-  /*
-   * Fired on server, sync capabilities to client whenever player changes dimension.
-   */
-  @SubscribeEvent
-  public static void onChangeDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
-    if (event.player instanceof EntityPlayerMP player) {
-      // Capability Sync Handler
-      CapabilityContainerListener.addTo(player.inventoryContainer, player);
-
-      // Food Stats
-      FoodStatsTFC.replaceFoodStats(player);
-
-      // Skills
-      IPlayerData skills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      if (skills != null) {
-        TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(skills.serializeNBT()), player);
-      }
-    }
-  }
 
   /**
    * Only fired on server
@@ -1155,11 +1047,11 @@ public final class CommonEventHandler {
 
   @SubscribeEvent
   public static void onServerChatEvent(ServerChatEvent event) {
-    IPlayerData cap = event.getPlayer().getCapability(CapabilityPlayerData.CAPABILITY, null);
+    ICapabilityPlayerData cap = event.getPlayer().getCapability(CapabilityPlayerData.CAPABILITY, null);
     if (cap != null) {
       long intoxicatedTicks = cap.getIntoxicatedTime() - 6 * ICalendar.TICKS_IN_HOUR; // Only apply intoxication after 6 hr
       if (intoxicatedTicks > 0) {
-        float drunkChance = MathHelper.clamp((float) intoxicatedTicks / PlayerDataHandler.MAX_INTOXICATED_TICKS, 0, 0.7f);
+        float drunkChance = MathHelper.clamp((float) intoxicatedTicks / ProviderPlayerData.MAX_INTOXICATED_TICKS, 0, 0.7f);
         String originalMessage = event.getMessage();
         String[] words = originalMessage.split(" ");
         for (int i = 0; i < words.length; i++) {

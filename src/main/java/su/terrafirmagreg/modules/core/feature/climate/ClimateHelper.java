@@ -10,7 +10,7 @@ import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import static net.dries007.tfc.world.classic.WorldTypeTFC.SEALEVEL;
 import static su.terrafirmagreg.api.util.MathUtils.RNG;

@@ -14,17 +14,24 @@ import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityHandlerEgg;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
-import su.terrafirmagreg.modules.core.event.EventHandlerAmbiental;
-import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesEntity;
-import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesItemStack;
-import su.terrafirmagreg.modules.core.event.EventHandlerCapabilitiesWorld;
-import su.terrafirmagreg.modules.core.event.EventHandlerConfigChanged;
-import su.terrafirmagreg.modules.core.event.EventHandlerFallingBlock;
-import su.terrafirmagreg.modules.core.event.EventHandlerPortalSpawn;
+import su.terrafirmagreg.modules.core.event.block.EventHandlerPortalSpawn;
+import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesEntity;
+import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesItemStack;
+import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesWorld;
+import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerOnConfigChanged;
+import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerPostConfigChanged;
+import su.terrafirmagreg.modules.core.event.feature.EventHandlerAmbiental;
+import su.terrafirmagreg.modules.core.event.feature.EventHandlerCalendar;
+import su.terrafirmagreg.modules.core.event.feature.EventHandlerFallingBlock;
+import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDimension;
+import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedIn;
+import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedOut;
+import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerRespawn;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -95,6 +102,7 @@ public final class ModuleCore extends ModuleBase {
     CapabilityEgg.register();
     CapabilityHeat.register();
     CapabilitySize.register();
+    CapabilityPlayerData.register();
     CapabilityAmbiental.register();
     CapabilityDamageResistance.register();
 
@@ -119,14 +127,23 @@ public final class ModuleCore extends ModuleBase {
   public @NotNull List<Class<?>> getEventBusSubscribers() {
     ObjectList<Class<?>> list = new ObjectArrayList<>();
 
+    list.add(EventHandlerPlayerChangedDimension.class);
+    list.add(EventHandlerPlayerLoggedIn.class);
+    list.add(EventHandlerPlayerLoggedOut.class);
+    list.add(EventHandlerPlayerRespawn.class);
+
     list.add(EventHandlerCapabilitiesItemStack.class);
     list.add(EventHandlerCapabilitiesEntity.class);
     list.add(EventHandlerCapabilitiesWorld.class);
 
-    list.add(EventHandlerConfigChanged.class);
+    list.add(EventHandlerPortalSpawn.class);
+
+    list.add(EventHandlerOnConfigChanged.class);
+    list.add(EventHandlerPostConfigChanged.class);
+
+    list.add(EventHandlerCalendar.class);
     list.add(EventHandlerAmbiental.class);
     list.add(EventHandlerFallingBlock.class);
-    list.add(EventHandlerPortalSpawn.class);
 
     return list;
   }

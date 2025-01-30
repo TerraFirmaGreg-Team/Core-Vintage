@@ -21,8 +21,10 @@ import net.minecraftforge.common.IShearable;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.items.ItemsTFC;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
+
 import tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantTFCF;
 
 import javax.annotation.Nonnull;

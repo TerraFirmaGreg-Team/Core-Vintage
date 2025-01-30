@@ -1,6 +1,11 @@
 package su.terrafirmagreg.modules.core.object.loot;
 
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.skill.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillTier;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,11 +19,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillTier;
-import net.dries007.tfc.util.skills.SkillType;
 
 import java.util.Random;
 
@@ -43,7 +43,7 @@ public class ApplyRequiredSkill extends LootFunction {
   public ItemStack apply(ItemStack stack, Random rand, LootContext context) {
     Entity entity = context.getKillerPlayer();
     if (entity instanceof EntityPlayer) {
-      IPlayerData skills = entity.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData skills = entity.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (skills != null) {
         stack.setCount(0);
         SimpleSkill skill = skills.getSkill(this.skillType);
@@ -61,26 +61,30 @@ public class ApplyRequiredSkill extends LootFunction {
 
   public static class Serializer extends LootFunction.Serializer<ApplyRequiredSkill> {
 
+    private static final String PROPERTY_SKILL = "skill";
+    private static final String PROPERTY_TIER = "tier";
+    private static final String PROPERTY_RARITY = "rarity";
+
     public Serializer() {
       super(ModUtils.resource("apply_req_skill"), ApplyRequiredSkill.class);
     }
 
     @Override
     public void serialize(JsonObject object, ApplyRequiredSkill functionClazz, JsonSerializationContext serializationContext) {
-      object.add("skill", serializationContext.serialize(functionClazz.skillType.getName()));
-      object.add("tier", serializationContext.serialize(functionClazz.tier));
-      object.add("rarity", serializationContext.serialize(functionClazz.rarity));
+      object.add(PROPERTY_SKILL, serializationContext.serialize(functionClazz.skillType.getName()));
+      object.add(PROPERTY_TIER, serializationContext.serialize(functionClazz.tier));
+      object.add(PROPERTY_RARITY, serializationContext.serialize(functionClazz.rarity));
     }
 
     @Override
     public ApplyRequiredSkill deserialize(JsonObject object, JsonDeserializationContext deserializationContext, LootCondition[] conditionsIn) {
-      String skillName = JsonUtils.getString(object, "skill");
+      String skillName = JsonUtils.getString(object, PROPERTY_SKILL);
       SkillType<? extends SimpleSkill> skillType = SkillType.get(skillName, SimpleSkill.class);
       if (skillType == null) {
         throw new JsonParseException("Unknown skill type: '" + skillName + "'");
       }
-      int tierIndex = JsonUtils.getInt(object, "tier");
-      float amount = JsonUtils.getFloat(object, "rarity");
+      int tierIndex = JsonUtils.getInt(object, PROPERTY_TIER);
+      float amount = JsonUtils.getFloat(object, PROPERTY_RARITY);
       return new ApplyRequiredSkill(conditionsIn, skillType, SkillTier.valueOf(tierIndex), amount);
     }
   }

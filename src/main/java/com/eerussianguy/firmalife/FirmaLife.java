@@ -13,7 +13,6 @@ import com.eerussianguy.firmalife.compat.ModuleManager;
 import com.eerussianguy.firmalife.gui.FLGuiHandler;
 import com.eerussianguy.firmalife.network.PacketDrawBoundingBox;
 import com.eerussianguy.firmalife.network.PacketSpawnVanillaParticle;
-import com.eerussianguy.firmalife.player.CapPlayerDataFL;
 import com.eerussianguy.firmalife.proxy.CommonProxy;
 import com.eerussianguy.firmalife.registry.LootTablesFL;
 import com.eerussianguy.firmalife.util.HelpersFL;
@@ -57,7 +56,6 @@ public class FirmaLife {
     network.registerMessage(new PacketSpawnVanillaParticle.Handler(), PacketSpawnVanillaParticle.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketDrawBoundingBox.Handler(), PacketDrawBoundingBox.class, ++id, Side.CLIENT);
 
-    CapPlayerDataFL.preInit();
     HelpersFL.insertWhitelist();
 
     ModuleManager.initModules();

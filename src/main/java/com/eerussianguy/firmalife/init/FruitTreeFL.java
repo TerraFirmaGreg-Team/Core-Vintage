@@ -12,9 +12,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.types.IFruitTree;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
+
 import net.dries007.tfc.world.classic.worldgen.WorldGenFruitTrees;
 
 import javax.annotation.Nullable;

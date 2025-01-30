@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.fluids;
 
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
@@ -23,8 +25,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.ConfigTFC.General;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
@@ -111,7 +111,7 @@ public final class FluidsTFC {
     });
 
     DrinkableProperty alcoholProperty = player -> {
-      IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (player.getFoodStats() instanceof FoodStatsTFC && playerData != null) {
         ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
         playerData.addIntoxicatedTime(4 * ICalendar.TICKS_IN_HOUR);

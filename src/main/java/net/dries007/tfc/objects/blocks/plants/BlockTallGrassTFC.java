@@ -28,7 +28,8 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
+
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;

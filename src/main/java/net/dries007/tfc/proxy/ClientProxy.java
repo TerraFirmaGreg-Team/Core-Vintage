@@ -13,7 +13,7 @@ import net.dries007.tfc.util.Helpers;
 
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

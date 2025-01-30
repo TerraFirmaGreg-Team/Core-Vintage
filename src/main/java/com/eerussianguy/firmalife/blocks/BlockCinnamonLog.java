@@ -25,7 +25,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import com.eerussianguy.firmalife.registry.ItemsFL;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.Month;
+
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import java.util.Random;

@@ -1,6 +1,8 @@
 package net.dries007.tfc.client.gui.overlay;
 
 import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.client.Minecraft;
@@ -25,8 +27,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import org.lwjgl.opengl.GL11;
@@ -209,7 +209,7 @@ public final class PlayerDataOverlay {
       int iconU = 0;
 
       if (ItemMetalChisel.hasHammerForChisel(player)) {
-        IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+        ICapabilityPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
         if (capability != null) {
           switch (capability.getChiselMode()) {
             case SMOOTH:

@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.skill.ProspectingSkill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -19,12 +23,9 @@ import net.minecraftforge.common.MinecraftForge;
 import gregtech.common.blocks.BlockOre;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.events.ProspectEvent;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.network.PacketProspectResult;
-import net.dries007.tfc.util.skills.ProspectingSkill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -71,7 +72,7 @@ public class ItemProspectorPick extends ItemMetalTool {
          * of pos.toLong(). Solved this by multiplying coordinates by primes and XOR's results. Verified produces
          * more "random" results.
          */
-        RANDOM.setSeed((pos.getX() * 92853) ^ (pos.getY() * 1959302) ^ (pos.getZ() * 2839402));
+        RANDOM.setSeed((pos.getX() * 92853L) ^ (pos.getY() * 1959302L) ^ (pos.getZ() * 2839402L));
         ItemStack targetStack = getOreStack(worldIn, pos, state, false);
         if (!targetStack.isEmpty()) {
           // Just clicked on an ore block

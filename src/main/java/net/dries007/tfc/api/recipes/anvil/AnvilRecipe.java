@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.recipes.anvil;
 
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +14,6 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;
-import net.dries007.tfc.util.skills.SmithingSkill;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

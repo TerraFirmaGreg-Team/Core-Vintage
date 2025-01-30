@@ -24,7 +24,6 @@ import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
@@ -46,7 +45,6 @@ import net.dries007.tfc.network.PacketFoodStatsUpdate;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.network.PacketOpenCraftingGui;
 import net.dries007.tfc.network.PacketPlaceBlockSpecial;
-import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.network.PacketProspectResult;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSpawnTFCParticle;
@@ -130,7 +128,6 @@ public final class TerraFirmaCraft {
     network.registerMessage(new PacketCalendarUpdate.Handler(), PacketCalendarUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketFoodStatsUpdate.Handler(), PacketFoodStatsUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketFoodStatsReplace.Handler(), PacketFoodStatsReplace.class, ++id, Side.CLIENT);
-    network.registerMessage(new PacketPlayerDataUpdate.Handler(), PacketPlayerDataUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketSpawnTFCParticle.Handler(), PacketSpawnTFCParticle.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketSimpleMessage.Handler(), PacketSimpleMessage.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketProspectResult.Handler(), PacketProspectResult.class, ++id, Side.CLIENT);
@@ -141,7 +138,6 @@ public final class TerraFirmaCraft {
     CapabilityChunkData.preInit();
     CapabilityForgeable.preInit();
     CapabilityFood.preInit();
-    CapabilityPlayerData.preInit();
     CapabilityMetalItem.preInit();
 
     if (event.getSide().isClient()) {

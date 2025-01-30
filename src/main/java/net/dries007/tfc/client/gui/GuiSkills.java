@@ -1,5 +1,10 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.skill.Skill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -10,15 +15,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import java.util.List;
 
@@ -88,8 +89,7 @@ public class GuiSkills extends GuiContainerTFC {
 
   @Override
   protected void actionPerformed(GuiButton button) {
-    if (button instanceof GuiButtonPlayerInventoryTab && ((GuiButtonPlayerInventoryTab) button).isActive()) {
-      GuiButtonPlayerInventoryTab tabButton = (GuiButtonPlayerInventoryTab) button;
+    if (button instanceof GuiButtonPlayerInventoryTab tabButton && tabButton.isActive()) {
       if (tabButton.isActive()) {
         if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
           this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
@@ -110,7 +110,7 @@ public class GuiSkills extends GuiContainerTFC {
     buttonLeft.enabled = currentPage >= 1;
     buttonRight.enabled = false;
 
-    IPlayerData skills = playerInv.player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+    ICapabilityPlayerData skills = playerInv.player.getCapability(CapabilityPlayerData.CAPABILITY, null);
     if (skills != null) {
       List<SkillType<? extends Skill>> skillOrder = SkillType.getSkills();
       int totalSkills = skillOrder.size();

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 
@@ -22,8 +23,6 @@ import net.minecraft.world.World;
 
 import com.eerussianguy.firmalife.ConfigFL;
 import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.player.CapPlayerDataFL;
-import com.eerussianguy.firmalife.player.IPlayerDataFL;
 import com.eerussianguy.firmalife.recipe.CrackingRecipe;
 import com.eerussianguy.firmalife.recipe.NutRecipe;
 import com.eerussianguy.firmalife.registry.BlocksFL;
@@ -37,7 +36,8 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.Month;
+
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -125,7 +125,7 @@ public class ItemMetalMallet extends ItemMetalTool {
           return EnumActionResult.PASS;
         }
 
-        IPlayerDataFL playerData = player.getCapability(CapPlayerDataFL.CAPABILITY, null);
+        var playerData = CapabilityPlayerData.get(player);
         if (playerData != null) {
           boolean timePassed = (int) Calendar.CALENDAR_TIME.getTicks() - playerData.getNuttedTime() > ConfigFL.General.BALANCE.nutTime;
           boolean distanced = playerData.getNutDistance(pos) > ConfigFL.General.BALANCE.nutDistance;

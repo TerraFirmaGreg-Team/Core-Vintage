@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.food.api;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 
@@ -73,7 +74,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     if (foodCap != null) {
       addStats(foodCap);
     } else {
-      TerraFirmaCraft.getLog().info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
+      ModuleCore.LOGGER.info("Player ate a weird food: {} / {} that was not a food capability but was an ItemFood...", foodItem, stack);
     }
   }
 

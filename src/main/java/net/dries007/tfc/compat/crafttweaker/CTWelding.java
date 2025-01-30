@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.crafttweaker;
 
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
@@ -13,7 +15,6 @@ import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.skills.SmithingSkill;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

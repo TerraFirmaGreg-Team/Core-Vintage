@@ -10,9 +10,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
+
 import tfcflorae.objects.items.ItemsTFCF;
 import tfcflorae.types.TreesTFCF;
 
@@ -155,6 +157,12 @@ public enum SeasonalTrees {
         }
     }*/
 
+  public final boolean isNormalTree;
+  public final boolean isCustomLog;
+  public final boolean hasDeadLeaves;
+  public final boolean isLogTree;
+  public final boolean isSpecialBlock;
+  public final Tree normalTree;
   private final Supplier<Item> fruit;
   private final int[] stages;
   private final int numStages;
@@ -171,12 +179,6 @@ public enum SeasonalTrees {
   private final float maxTemp;
   private final float minRain;
   private final float maxRain;
-  public final boolean isNormalTree;
-  public final boolean isCustomLog;
-  public final boolean hasDeadLeaves;
-  public final boolean isLogTree;
-  public final boolean isSpecialBlock;
-  public final Tree normalTree;
 
   //FruitTreeTFCF(Supplier<Item> fruit, int[] stages, Month flowerMonthStart, int floweringMonths, Month harvestMonthStart, int harvestingMonths, Month autumnMonthStart, int autumnMonths, Month winterMonthStart, int winterMonths, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, boolean hasDeadLeaves, boolean isLogTree, Tree normalTree)
   SeasonalTrees(Supplier<Item> fruit, int[] stages, float minTemp, float maxTemp, float minRain, float maxRain, float growthTime, boolean hasDeadLeaves, boolean isLogTree, boolean isSpecialBlock, Tree normalTree) {

@@ -1,6 +1,9 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.skill.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -24,7 +27,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
@@ -34,8 +36,6 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillType;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;

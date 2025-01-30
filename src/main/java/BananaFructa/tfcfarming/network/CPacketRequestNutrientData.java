@@ -1,5 +1,11 @@
 package BananaFructa.tfcfarming.network;
 
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.skill.Skill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillTier;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -11,12 +17,7 @@ import BananaFructa.tfcfarming.TFCFarming;
 import BananaFructa.tfcfarming.firmalife.TEHangingPlanterN;
 import BananaFructa.tfcfarming.firmalife.TEPlanterN;
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillTier;
-import net.dries007.tfc.util.skills.SkillType;
 
 public class CPacketRequestNutrientData implements IMessage {
 
@@ -60,7 +61,7 @@ public class CPacketRequestNutrientData implements IMessage {
     public IMessage onMessage(CPacketRequestNutrientData message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
       // Request protection
-      IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       Skill skill = playerData.getSkill(SkillType.AGRICULTURE);
       // TODO:                                                                                                     V config
       if (Math.abs(player.posX - message.x) <= 5 && Math.abs(player.posZ - message.z) <= 5 && (skill.getTier().isAtLeast(SkillTier.ADEPT)
@@ -75,7 +76,7 @@ public class CPacketRequestNutrientData implements IMessage {
           if (tePlanterN == null && teHangingPlanterN == null) {return new SPacketNutrientDataResponse(false, 0, 0, 0, message.x, message.y, message.z, false);}
           boolean isHanging = teHangingPlanterN != null;
           NutrientValues nutrientValues = (!isHanging ? tePlanterN.getNutrientValues() : teHangingPlanterN.getNutrientValues());
-          int NPK[] = nutrientValues.getNPKSet();
+          int[] NPK = nutrientValues.getNPKSet();
           return new SPacketNutrientDataResponse(true, NPK[0], NPK[1], NPK[2], message.x, message.y, message.z, (!isHanging ? tePlanterN.anyLowNutrients()
                                                                                                                             : teHangingPlanterN.isLow()));
         } else {

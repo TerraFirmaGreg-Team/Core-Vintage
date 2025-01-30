@@ -304,9 +304,10 @@ public interface IRegistryManager extends IRegistryEventHandler {
     return LootTableList.register(getIdentifier(name));
   }
 
-  default <T extends LootFunction> void loot(LootFunction.Serializer<? extends T> serializer) {
+  default <T extends LootFunction> Class<? extends T> loot(LootFunction.Serializer<? extends T> serializer) {
 
     LootFunctionManager.registerFunction(serializer);
+    return serializer.getFunctionClass();
   }
 
   default LootBuilder loot(ResourceLocation location, String name, String pool, int weight, Item item, int meta, int amount) {

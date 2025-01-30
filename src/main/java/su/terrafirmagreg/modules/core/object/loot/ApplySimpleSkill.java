@@ -1,6 +1,10 @@
 package su.terrafirmagreg.modules.core.object.loot;
 
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.skill.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,10 +19,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.util.skills.SimpleSkill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -41,7 +41,7 @@ public class ApplySimpleSkill extends LootFunction {
   public ItemStack apply(ItemStack stack, Random rand, LootContext context) {
     Entity entity = context.getKillerPlayer();
     if (entity instanceof EntityPlayer) {
-      IPlayerData skills = entity.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData skills = entity.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (skills != null) {
         SimpleSkill skill = skills.getSkill(this.skillType);
         if (skill != null) {
@@ -56,25 +56,28 @@ public class ApplySimpleSkill extends LootFunction {
 
   public static class Serializer extends LootFunction.Serializer<ApplySimpleSkill> {
 
+    private static final String PROPERTY_SKILL = "skill";
+    private static final String PROPERTY_ADD = "add";
+    private static final String PROPERTY_COUNT = "count";
+
     public Serializer() {
       super(ModUtils.resource("apply_skill"), ApplySimpleSkill.class);
     }
 
     @Override
     public void serialize(JsonObject object, ApplySimpleSkill functionClazz, JsonSerializationContext serializationContext) {
-      object.add("skill", serializationContext.serialize(functionClazz.skillType.getName()));
-      object.add("add", serializationContext.serialize(functionClazz.incrementAmount));
-      object.add("count", serializationContext.serialize(functionClazz.valueRange));
+      object.add(PROPERTY_SKILL, serializationContext.serialize(functionClazz.skillType.getName()));
+      object.add(PROPERTY_ADD, serializationContext.serialize(functionClazz.incrementAmount));
+      object.add(PROPERTY_COUNT, serializationContext.serialize(functionClazz.valueRange));
     }
 
     @Override
     @NotNull
     public ApplySimpleSkill deserialize(JsonObject object, JsonDeserializationContext deserializationContext, LootCondition[] conditionsIn) {
-      String skillName = JsonUtils.getString(object, "skill");
-      float amount = JsonUtils.getFloat(object, "add");
+      String skillName = JsonUtils.getString(object, PROPERTY_SKILL);
+      float amount = JsonUtils.getFloat(object, PROPERTY_ADD);
       SkillType<? extends SimpleSkill> skillType = SkillType.get(skillName, SimpleSkill.class);
-      RandomValueRange valueRange = JsonUtils.deserializeClass(object, "count",
-        deserializationContext, RandomValueRange.class);
+      RandomValueRange valueRange = JsonUtils.deserializeClass(object, PROPERTY_COUNT, deserializationContext, RandomValueRange.class);
       if (skillType == null) {
         throw new JsonParseException("Unknown skill type: '" + skillName + "'");
       }

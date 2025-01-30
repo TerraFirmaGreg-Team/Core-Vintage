@@ -1,6 +1,9 @@
 package su.terrafirmagreg.modules.integration.gregtech.object.item.tools.behaviors;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.skill.ProspectingSkill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -24,14 +27,12 @@ import net.minecraftforge.common.MinecraftForge;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import gregtech.common.blocks.BlockOre;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
 import net.dries007.tfc.api.events.ProspectEvent;
 import net.dries007.tfc.network.PacketProspectResult;
 import net.dries007.tfc.objects.items.metal.ItemProspectorPick;
-import net.dries007.tfc.util.skills.ProspectingSkill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -102,7 +103,7 @@ public class PropickBehavior implements IToolBehavior {
 
             if (ConfigTFC.General.DEBUG.enable) {
               for (ProspectResult debugResult : results) {
-                TerraFirmaCraft.getLog()
+                ModuleCore.LOGGER
                   .debug(debugResult.ore.getDisplayName() + ": " + String.format("%.02f", debugResult.score));
               }
             }

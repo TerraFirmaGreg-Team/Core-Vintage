@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.integration.gregtech.object.item.tools.behaviors;
 
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 
 import net.minecraft.block.Block;
@@ -28,8 +30,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
@@ -73,7 +73,7 @@ public class ChiselBehavior implements IToolBehavior {
     if (hasHammerForChisel(player)) {
       IBlockState state = worldIn.getBlockState(pos);
       // get the capability that tells us the current player selected mode for chiseling
-      IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (capability != null) {
         return getRecipeResult(player, worldIn, pos, facing, capability.getChiselMode(), state, hitX, hitY, hitZ);
       }
@@ -184,7 +184,7 @@ public class ChiselBehavior implements IToolBehavior {
         worldIn.setBlockState(pos, newState);
 
         // spawn a slab if necessary
-        IPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+        ICapabilityPlayerData capability = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
         if (capability != null) {
           if (capability.getChiselMode() == ChiselRecipe.Mode.SLAB) {
             InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(newState.getBlock(), 1));

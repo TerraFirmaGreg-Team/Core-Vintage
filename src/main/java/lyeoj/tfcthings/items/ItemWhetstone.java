@@ -1,5 +1,11 @@
 package lyeoj.tfcthings.items;
 
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.ICapabilitySharpness;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,16 +26,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-import lyeoj.tfcthings.capability.CapabilitySharpness;
-import lyeoj.tfcthings.capability.ISharpness;
 import lyeoj.tfcthings.event.TFCThingsEventHandler;
 import lyeoj.tfcthings.init.TFCThingsSoundEvents;
 import lyeoj.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.types.DefaultMetals;
@@ -41,7 +42,7 @@ import java.util.List;
 public class ItemWhetstone extends Item implements ICapabilitySize, IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
 
 
-  private int tier;
+  private final int tier;
 
   public ItemWhetstone(int tier, int durability) {
     setCreativeTab(CreativeTabs.MISC);
@@ -79,7 +80,7 @@ public class ItemWhetstone extends Item implements ICapabilitySize, IMetalItem, 
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
     ItemStack itemstack = playerIn.getHeldItem(handIn);
     if (handIn.equals(EnumHand.MAIN_HAND)) {
-      if (playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand().hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+      if (playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand().hasCapability(CapabilitySharpness.CAPABILITY, null)) {
         playerIn.setActiveHand(handIn);
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
       }
@@ -89,12 +90,11 @@ public class ItemWhetstone extends Item implements ICapabilitySize, IMetalItem, 
 
 
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-    if (entityLiving instanceof EntityPlayer) {
-      EntityPlayer playerIn = (EntityPlayer) entityLiving;
+    if (entityLiving instanceof EntityPlayer playerIn) {
       if (timeLeft < 985 && playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand()
-                                                                             .hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
+        .hasCapability(CapabilitySharpness.CAPABILITY, null)) {
         ItemStack item = playerIn.getHeldItemOffhand();
-        ISharpness capability = TFCThingsEventHandler.getSharpnessCapability(item);
+        ICapabilitySharpness capability = TFCThingsEventHandler.getSharpnessCapability(item);
         if (capability != null && capability.getCharges() < getMaxCharges()) {
           for (int i = 0; i < tier; i++) {
             if (capability.getCharges() >= getMaxCharges()) {break;}
@@ -107,7 +107,7 @@ public class ItemWhetstone extends Item implements ICapabilitySize, IMetalItem, 
           playerIn.playSound(TFCThingsSoundEvents.WHETSTONE_SHARPEN, 1.0f, 1.0f);
         } else {
           if (!worldIn.isRemote) {
-            playerIn.sendMessage(new TextComponentTranslation("tfcthings.tooltip.maximum_sharpness", new Object[0]));
+            playerIn.sendMessage(new TextComponentTranslation("tfcthings.tooltip.maximum_sharpness"));
           }
         }
       }
@@ -124,7 +124,7 @@ public class ItemWhetstone extends Item implements ICapabilitySize, IMetalItem, 
 
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-    tooltip.add(I18n.format("tfcthings.tooltip.whetstone", new Object[0]));
+    tooltip.add(I18n.format("tfcthings.tooltip.whetstone"));
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 
@@ -149,7 +149,7 @@ public class ItemWhetstone extends Item implements ICapabilitySize, IMetalItem, 
 
   @Override
   public boolean canMelt(ItemStack stack) {
-    return tier > 1 ? true : false;
+    return tier > 1;
   }
 
   @Nullable

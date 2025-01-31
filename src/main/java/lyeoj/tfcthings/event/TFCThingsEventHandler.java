@@ -1,26 +1,23 @@
 package lyeoj.tfcthings.event;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.ICapabilitySharpness;
+
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import lyeoj.tfcthings.capability.CapabilitySharpness;
-import lyeoj.tfcthings.capability.ISharpness;
 import lyeoj.tfcthings.entity.projectile.EntityThrownRopeJavelin;
 import lyeoj.tfcthings.items.ItemRopeJavelin;
 import lyeoj.tfcthings.main.ConfigTFCThings;
@@ -32,30 +29,16 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import su.terrafirmagreg.api.data.enums.Mods;
-
 import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber(modid = Mods.Names.TFCTHINGS)
 public class TFCThingsEventHandler {
-
-  @SubscribeEvent
-  @SideOnly(Side.CLIENT)
-  public static void applyTooltip(ItemTooltipEvent event) {
-    if (event.getItemStack().hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
-      ISharpness capability = getSharpnessCapability(event.getItemStack());
-      if (capability != null && capability.getCharges() > 0) {
-        TextFormatting color =
-          capability.getCharges() > 64 ? capability.getCharges() > 256 ? TextFormatting.DARK_PURPLE : TextFormatting.BLUE : TextFormatting.DARK_GREEN;
-        event.getToolTip().add(I18n.format("tfcthings.tooltip.sharpness", color, "" + capability.getCharges()));
-      }
-    }
-  }
+  
 
   @SubscribeEvent
   public static void onBlockBreak(BlockEvent.BreakEvent event) {
-    if (event.getPlayer().getHeldItemMainhand().hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
-      ISharpness capability = getSharpnessCapability(event.getPlayer().getHeldItemMainhand());
+    if (event.getPlayer().getHeldItemMainhand().hasCapability(CapabilitySharpness.CAPABILITY, null)) {
+      ICapabilitySharpness capability = getSharpnessCapability(event.getPlayer().getHeldItemMainhand());
       if (capability != null && capability.getCharges() > 0) {
         capability.removeCharge();
         ItemStack stack = event.getPlayer().getHeldItemMainhand();
@@ -74,10 +57,8 @@ public class TFCThingsEventHandler {
 
   @SubscribeEvent
   public static void onLivingAttack(LivingDamageEvent event) {
-    if (event.getSource() instanceof EntityDamageSource) {
-      EntityDamageSource source = (EntityDamageSource) event.getSource();
-      if (source.getTrueSource() instanceof EntityPlayer) {
-        EntityPlayer player = (EntityPlayer) source.getTrueSource();
+    if (event.getSource() instanceof EntityDamageSource source) {
+      if (source.getTrueSource() instanceof EntityPlayer player) {
         ItemStack weapon;
         if (source instanceof EntityDamageSourceIndirect && source.getImmediateSource() instanceof EntityThrownWeapon) {
           weapon = ((EntityThrownWeapon) source.getImmediateSource()).getWeapon();
@@ -86,8 +67,8 @@ public class TFCThingsEventHandler {
         } else {
           weapon = player.getHeldItemMainhand();
         }
-        if (weapon.hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
-          ISharpness capability = getSharpnessCapability(weapon);
+        if (weapon.hasCapability(CapabilitySharpness.CAPABILITY, null)) {
+          ICapabilitySharpness capability = getSharpnessCapability(weapon);
           if (capability != null && event.getAmount() > 2.0f) {
             if (capability.getCharges() > 256) {
               event.setAmount(event.getAmount() + (ConfigTFCThings.Items.WHETSTONE.damageBoost * 3));
@@ -116,8 +97,8 @@ public class TFCThingsEventHandler {
 
   @SubscribeEvent
   public static void modifyBreakSpeed(PlayerEvent.BreakSpeed event) {
-    if (event.getEntityPlayer().getHeldItemMainhand().hasCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null)) {
-      ISharpness capability = getSharpnessCapability(event.getEntityPlayer().getHeldItemMainhand());
+    if (event.getEntityPlayer().getHeldItemMainhand().hasCapability(CapabilitySharpness.CAPABILITY, null)) {
+      ICapabilitySharpness capability = getSharpnessCapability(event.getEntityPlayer().getHeldItemMainhand());
       if (capability != null) {
         if (shouldBoostSpeed(event.getEntityPlayer().getHeldItemMainhand(), event.getState())) {
           if (event.getState().getBlock() instanceof BlockLogTFC && !event.getState().getValue(BlockLogTFC.PLACED)) {
@@ -144,10 +125,9 @@ public class TFCThingsEventHandler {
   }
 
   @Nullable
-  public static ISharpness getSharpnessCapability(ItemStack itemStack) {
-    Object capability = itemStack.getCapability(CapabilitySharpness.SHARPNESS_CAPABILITY, null);
-    if (capability instanceof ISharpness) {
-      ISharpness sharpness = (ISharpness) capability;
+  public static ICapabilitySharpness getSharpnessCapability(ItemStack itemStack) {
+    Object capability = itemStack.getCapability(CapabilitySharpness.CAPABILITY, null);
+    if (capability instanceof ICapabilitySharpness sharpness) {
       return sharpness;
     }
     return null;
@@ -155,8 +135,7 @@ public class TFCThingsEventHandler {
 
   @SubscribeEvent
   public static void onItemToss(ItemTossEvent event) {
-    if (event.getEntityItem().getItem().getItem() instanceof ItemRopeJavelin) {
-      ItemRopeJavelin javelin = (ItemRopeJavelin) event.getEntityItem().getItem().getItem();
+    if (event.getEntityItem().getItem().getItem() instanceof ItemRopeJavelin javelin) {
       javelin.retractJavelin(event.getEntityItem().getItem(), event.getEntity().getEntityWorld());
     }
   }
@@ -172,8 +151,7 @@ public class TFCThingsEventHandler {
 
   @SubscribeEvent
   public static void onPlayerInteractEntity(PlayerInteractEvent.EntityInteract event) {
-    if (event.getTarget() instanceof EntitySheepTFC) {
-      EntitySheepTFC sheep = (EntitySheepTFC) event.getTarget();
+    if (event.getTarget() instanceof EntitySheepTFC sheep) {
       if ((OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "shears") || OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "knife"))
           && sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
         if (!sheep.world.isRemote) {

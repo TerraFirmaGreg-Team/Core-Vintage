@@ -12,9 +12,12 @@ import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResist
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityHandlerEgg;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
@@ -23,6 +26,7 @@ import su.terrafirmagreg.modules.core.event.block.EventHandlerPortalSpawn;
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesEntity;
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesItemStack;
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesWorld;
+import su.terrafirmagreg.modules.core.event.client.EventHandlerGuiOpen;
 import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerOnConfigChanged;
 import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerPostConfigChanged;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerAmbiental;
@@ -101,6 +105,7 @@ public final class ModuleCore extends ModuleBase {
     CapabilityWorldTracker.register();
     CapabilityEgg.register();
     CapabilityHeat.register();
+    CapabilityFood.register();
     CapabilitySize.register();
     CapabilityPlayerData.register();
     CapabilityAmbiental.register();
@@ -118,6 +123,8 @@ public final class ModuleCore extends ModuleBase {
 
     CapabilityHandlerEgg.init();
     CapabilityHandlerHeat.init();
+    CapabilityHandlerFood.init();
+    CapabilitySharpness.register();
     CapabilityHandlerSize.init();
     CapabilityHandlerAmbiental.init();
     CapabilityHandlerDamageResistance.init();
@@ -126,6 +133,8 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public @NotNull List<Class<?>> getEventBusSubscribers() {
     ObjectList<Class<?>> list = new ObjectArrayList<>();
+
+    list.add(EventHandlerGuiOpen.class);
 
     list.add(EventHandlerPlayerChangedDimension.class);
     list.add(EventHandlerPlayerLoggedIn.class);

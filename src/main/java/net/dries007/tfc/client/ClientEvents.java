@@ -1,13 +1,9 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.modules.core.capabilities.egg.ICapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
@@ -303,82 +299,76 @@ public class ClientEvents {
   public static void onItemTooltip(ItemTooltipEvent event) {
     ItemStack stack = event.getItemStack();
     Item item = stack.getItem();
-    List<String> tt = event.getToolTip();
-    if (!stack.isEmpty()) {
-      // Stuff that should always be shown as part of the tooltip
-      ICapabilitySize size = CapabilitySize.getIItemSize(stack);
-      if (size != null) {
-        size.addSizeInfo(stack, tt);
+    List<String> tooltip = event.getToolTip();
+    if (stack.isEmpty()) {return;}
+    // Stuff that should always be shown as part of the tooltip
+
+    ICapabilityHeat heat = stack.getCapability(CapabilityHeat.CAPABILITY, null);
+    if (heat != null) {
+      heat.addHeatInfo(stack, tooltip);
+    }
+    IForgeable forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    if (forging != null && forging.getWork() > 0) {
+      tooltip.add(I18n.format("tfc.tooltip.forging_in_progress"));
+    }
+    ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    if (food != null) {
+      food.addTooltipInfo(stack, tooltip, event.getEntityPlayer());
+    }
+
+    float skillMod = SmithingSkill.getSkillBonus(stack);
+    if (skillMod > 0) {
+      String skillValue = String.format("%.2f", skillMod * 100);
+      tooltip.add(I18n.format("tfc.tooltip.smithing_skill", skillValue));
+    }
+
+    if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode
+    {
+      IMetalItem metalObject = CapabilityMetalItem.getMetalItem(stack);
+      if (metalObject != null) {
+        metalObject.addMetalInfo(stack, tooltip);
       }
-      ICapabilityHeat heat = stack.getCapability(CapabilityHeat.CAPABILITY, null);
-      if (heat != null) {
-        heat.addHeatInfo(stack, tt);
-      }
-      IForgeable forging = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-      if (forging != null && forging.getWork() > 0) {
-        tt.add(I18n.format("tfc.tooltip.forging_in_progress"));
-      }
-      ICapabilityFood nutrients = stack.getCapability(CapabilityFood.CAPABILITY, null);
-      if (nutrients != null) {
-        nutrients.addTooltipInfo(stack, tt, event.getEntityPlayer());
-      }
-      ICapabilityEgg eggInfo = stack.getCapability(CapabilityEgg.CAPABILITY, null);
-      if (eggInfo != null) {
-        eggInfo.addEggInfo(stack, tt);
-      }
-      float skillMod = SmithingSkill.getSkillBonus(stack);
-      if (skillMod > 0) {
-        String skillValue = String.format("%.2f", skillMod * 100);
-        tt.add(I18n.format("tfc.tooltip.smithing_skill", skillValue));
+      if (item instanceof IRockObject) {
+        ((IRockObject) item).addRockInfo(stack, tooltip);
+      } else if (item instanceof ItemBlock) {
+        Block block = ((ItemBlock) item).getBlock();
+        if (block instanceof IRockObject) {
+          ((IRockObject) block).addRockInfo(stack, tooltip);
+        }
       }
 
-      if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode
-      {
-        IMetalItem metalObject = CapabilityMetalItem.getMetalItem(stack);
-        if (metalObject != null) {
-          metalObject.addMetalInfo(stack, tt);
-        }
-        if (item instanceof IRockObject) {
-          ((IRockObject) item).addRockInfo(stack, tt);
-        } else if (item instanceof ItemBlock) {
-          Block block = ((ItemBlock) item).getBlock();
-          if (block instanceof IRockObject) {
-            ((IRockObject) block).addRockInfo(stack, tt);
+      if (ConfigTFC.Client.TOOLTIP.showToolClassTooltip) {
+        Set<String> toolClasses = item.getToolClasses(stack);
+        if (toolClasses.size() == 1) {
+          tooltip.add(I18n.format("tfc.tooltip.toolclass", toolClasses.iterator().next()));
+        } else if (toolClasses.size() > 1) {
+          tooltip.add(I18n.format("tfc.tooltip.toolclasses"));
+          for (String toolClass : toolClasses) {
+            tooltip.add("+ " + toolClass);
           }
         }
-
-        if (ConfigTFC.Client.TOOLTIP.showToolClassTooltip) {
-          Set<String> toolClasses = item.getToolClasses(stack);
-          if (toolClasses.size() == 1) {
-            tt.add(I18n.format("tfc.tooltip.toolclass", toolClasses.iterator().next()));
-          } else if (toolClasses.size() > 1) {
-            tt.add(I18n.format("tfc.tooltip.toolclasses"));
-            for (String toolClass : toolClasses) {
-              tt.add("+ " + toolClass);
-            }
+      }
+      if (ConfigTFC.Client.TOOLTIP.showOreDictionaryTooltip) {
+        int[] ids = OreDictionary.getOreIDs(stack);
+        if (ids.length == 1) {
+          tooltip.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
+        } else if (ids.length > 1) {
+          tooltip.add(I18n.format("tfc.tooltip.oredictionaryentries"));
+          ArrayList<String> names = new ArrayList<>(ids.length);
+          for (int id : ids) {
+            names.add("+ " + OreDictionary.getOreName(id));
           }
+          names.sort(null); // Natural order (String.compare)
+          tooltip.addAll(names);
         }
-        if (ConfigTFC.Client.TOOLTIP.showOreDictionaryTooltip) {
-          int[] ids = OreDictionary.getOreIDs(stack);
-          if (ids.length == 1) {
-            tt.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
-          } else if (ids.length > 1) {
-            tt.add(I18n.format("tfc.tooltip.oredictionaryentries"));
-            ArrayList<String> names = new ArrayList<>(ids.length);
-            for (int id : ids) {
-              names.add("+ " + OreDictionary.getOreName(id));
-            }
-            names.sort(null); // Natural order (String.compare)
-            tt.addAll(names);
-          }
-        }
-        if (ConfigTFC.Client.TOOLTIP.showNBTTooltip) {
-          if (stack.hasTagCompound()) {
-            tt.add("NBT: " + stack.getTagCompound());
-          }
+      }
+      if (ConfigTFC.Client.TOOLTIP.showNBTTooltip) {
+        if (stack.hasTagCompound()) {
+          tooltip.add("NBT: " + stack.getTagCompound());
         }
       }
     }
+
   }
 
   @SubscribeEvent

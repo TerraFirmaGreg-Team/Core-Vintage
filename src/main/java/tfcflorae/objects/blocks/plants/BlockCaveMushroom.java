@@ -1,6 +1,6 @@
 package tfcflorae.objects.blocks.plants;
 
-import su.terrafirmagreg.modules.core.capabilities.food.FoodHeatHandler;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFoodHeat;
 import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -112,7 +112,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
 
   @Override
   public ICapabilityProvider getCustomFoodHandler() {
-    return new FoodHeatHandler(null, data, 1.0F, 200.0F);
+    return new CapabilityProviderFoodHeat(null, data, 1.0F, 200.0F);
   }
 
   protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {

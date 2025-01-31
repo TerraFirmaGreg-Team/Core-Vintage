@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.items.food;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
-import su.terrafirmagreg.modules.core.capabilities.food.FoodHeatHandler;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFoodHeat;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -85,6 +85,6 @@ public class ItemFoodTFC extends BaseItemFood implements ICapabilitySize, IItemF
 
   @Override
   public ICapabilityProvider getCustomFoodHandler() {
-    return food.isHeatable() ? new FoodHeatHandler(null, food) : new CapabilityProviderFood(null, food);
+    return food.isHeatable() ? new CapabilityProviderFoodHeat(null, food) : new CapabilityProviderFood(null, food);
   }
 }

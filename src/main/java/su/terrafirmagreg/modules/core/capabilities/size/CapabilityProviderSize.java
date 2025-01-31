@@ -16,8 +16,7 @@ import java.util.EnumMap;
 
 public class CapabilityProviderSize implements ICapabilitySize, ICapabilityProvider, IProviderItemCapability {
 
-  private static final EnumMap<Size, EnumMap<Weight, CapabilityProviderSize[]>> CACHE = new EnumMap<>(
-    Size.class);
+  private static final EnumMap<Size, EnumMap<Weight, CapabilityProviderSize[]>> CACHE = new EnumMap<>(Size.class);
   private final Size size;
   private final Weight weight;
   private final boolean canStack;
@@ -43,8 +42,7 @@ public class CapabilityProviderSize implements ICapabilitySize, ICapabilityProvi
   }
 
   public static CapabilityProviderSize of(Size size, Weight weight, boolean canStack) {
-    EnumMap<Weight, CapabilityProviderSize[]> nested = CACHE.computeIfAbsent(size,
-      k -> new EnumMap<>(Weight.class));
+    EnumMap<Weight, CapabilityProviderSize[]> nested = CACHE.computeIfAbsent(size, k -> new EnumMap<>(Weight.class));
     CapabilityProviderSize[] handlers = nested.computeIfAbsent(weight, k -> new CapabilityProviderSize[2]);
     if (handlers[canStack ? 1 : 0] == null) {
       handlers[canStack ? 1 : 0] = new CapabilityProviderSize(size, weight, canStack);

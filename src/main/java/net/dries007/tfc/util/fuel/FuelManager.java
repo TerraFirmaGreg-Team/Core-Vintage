@@ -42,14 +42,16 @@ public final class FuelManager {
     }
 
     // Coals
+    FUELS.add(new Fuel(IIngredient.of("gemCoke"), 3200, 1510, false, true));
     FUELS.add(new Fuel(IIngredient.of("gemCoal"), 2200, 1415f, true, false));
     FUELS.add(new Fuel(IIngredient.of("gemLignite"), 2000, 1350f, true, false));
+    FUELS.add(new Fuel(IIngredient.of("oreChunkCoal"), 1400, 1400, true, true));
 
     // Charcoal
     FUELS.add(new Fuel(IIngredient.of("charcoal"), 1800, 1350f, true, true));
 
     // Peat
-    FUELS.add(new Fuel(IIngredient.of("peat"), 2500, 680));
+    FUELS.add(new Fuel(IIngredient.of("peat"), 3200, 680, true, false));
 
     // Stick Bundle
     FUELS.add(new Fuel(IIngredient.of("stickBundle"), 600, 900));

@@ -47,7 +47,7 @@ public interface ICapabilityEgg extends ICapabilitySerializable<NBTTagCompound> 
    * @param text  the tooltip
    */
   @SideOnly(Side.CLIENT)
-  default void addEggInfo(@NotNull ItemStack stack, @NotNull List<String> text) {
+  default void addTooltipInfo(ItemStack stack, List<String> text) {
     if (isFertilized()) {
       long remainingDays = this.getHatchDay() - Calendar.PLAYER_TIME.getTotalDays();
       text.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.fertilized"));

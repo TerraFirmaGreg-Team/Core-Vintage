@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import com.google.common.collect.Lists;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +25,6 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
@@ -42,9 +41,9 @@ public interface IItemSettings extends IBaseSettings<Settings> {
   @Getter
   class Settings extends BaseSettings<Settings> {
 
-    final ArrayList<Object[]> oreDict = new ArrayList<>();
-    final ArrayList<IProviderItemCapability> capability = new ArrayList<>();
-    final Set<CreativeTabs> groups = new ObjectOpenHashSet<>();
+    final ArrayList<Object[]> oreDict = Lists.newArrayList();
+    final ArrayList<IProviderItemCapability> capability = Lists.newArrayList();
+    final ArrayList<CreativeTabs> groups = Lists.newArrayList();
 
     ResourceLocation resource;
 

@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -14,8 +17,6 @@ import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.Helpers;
 

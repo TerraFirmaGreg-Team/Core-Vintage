@@ -1,7 +1,7 @@
 package com.eerussianguy.firmalife.items;
 
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemFood;
-import su.terrafirmagreg.modules.core.capabilities.food.FoodHeatHandler;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFoodHeat;
 import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
@@ -19,6 +19,6 @@ public class ItemHeatableFoodFL extends BaseItemFood implements IItemFoodTFC {
 
   @Override
   public ICapabilityProvider getCustomFoodHandler() {
-    return new FoodHeatHandler(null, data, 1.0F, 200.0F);
+    return new CapabilityProviderFoodHeat(null, data, 1.0F, 200.0F);
   }
 }

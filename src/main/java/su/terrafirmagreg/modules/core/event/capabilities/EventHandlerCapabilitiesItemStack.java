@@ -4,6 +4,8 @@ import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResist
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityHandlerEgg;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilityHandlerSharpness;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -29,7 +31,7 @@ public class EventHandlerCapabilitiesItemStack {
     food(event, stack);
     metal(event, stack);
     heat(event, stack);
-//    sharpness(event, stack);
+    sharpness(event, stack);
     egg(event, stack);
     damageResistance(event, stack);
   }
@@ -67,15 +69,15 @@ public class EventHandlerCapabilitiesItemStack {
 
   }
 
-//  private static void sharpness(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
-//
-//    ICapabilityProvider provider = HandlerSharpness.getCustom(stack);
-//    if (provider == null) {
-//      return;
-//    }
-//
-//    event.addCapability(CapabilitySharpness.KEY, provider);
-//  }
+  private static void sharpness(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
+
+    ICapabilityProvider provider = CapabilityHandlerSharpness.getCustom(stack);
+    if (provider == null) {
+      return;
+    }
+
+    event.addCapability(CapabilitySharpness.KEY, provider);
+  }
 
   private static void egg(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 

@@ -27,7 +27,7 @@ import java.util.List;
 public interface ICapabilitySize {
 
   @SideOnly(Side.CLIENT)
-  default void addSizeInfo(ItemStack stack, List<String> text) {
+  default void addTooltipInfo(ItemStack stack, List<String> text) {
     text.add(Unicode.WEIGHT + " " + I18n.format(TranslatorUtil.getEnumName(getWeight(stack))) + " " + Unicode.SIZE + " "
              + I18n.format(TranslatorUtil.getEnumName(getSize(stack))));
   }

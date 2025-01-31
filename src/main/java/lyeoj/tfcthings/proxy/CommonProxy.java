@@ -1,9 +1,9 @@
 package lyeoj.tfcthings.proxy;
 
 import su.terrafirmagreg.api.exception.WrongSideException;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.util.IThreadListener;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -11,17 +11,13 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import lyeoj.tfcthings.capability.CapabilitySharpness;
-import lyeoj.tfcthings.capability.TFCThingsCapabilityHandler;
 import lyeoj.tfcthings.init.TFCThingsEntities;
 import lyeoj.tfcthings.main.ConfigTFCThings;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 public class CommonProxy {
 
   public void preInit(FMLPreInitializationEvent event) {
-    MinecraftForge.EVENT_BUS.register(new TFCThingsCapabilityHandler());
-    CapabilitySharpness.setup();
+
     TFCThingsEntities.registerEntities();
     Calendar.BIRTHDAYS.put("OCTOBER4", "Lyeoj's Birthday");
     for (int i = 0; i < ConfigTFCThings.Misc.BIRTHDAYS.dayList.length; i++) {

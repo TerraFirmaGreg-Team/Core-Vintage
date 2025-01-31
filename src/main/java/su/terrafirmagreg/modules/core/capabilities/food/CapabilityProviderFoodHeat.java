@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import net.dries007.tfc.util.agriculture.Food;
 
@@ -19,19 +18,19 @@ import java.util.List;
 /**
  * This is a combined capability class that delegates to two implementations: - super = ItemHeatHandler - internalFoodCap = FoodHandler
  */
-public class FoodHeatHandler extends CapabilityProviderHeat implements ICapabilityFood, ICapabilitySerializable<NBTTagCompound> {
+public class CapabilityProviderFoodHeat extends CapabilityProviderHeat implements ICapabilityFood {
 
   private final CapabilityProviderFood internalFoodCap;
 
-  public FoodHeatHandler() {
+  public CapabilityProviderFoodHeat() {
     this(null, new FoodData(), 1, 100);
   }
 
-  public FoodHeatHandler(@Nullable NBTTagCompound nbt, @Nonnull Food food) {
+  public CapabilityProviderFoodHeat(@Nullable NBTTagCompound nbt, @Nonnull Food food) {
     this(nbt, food.getData(), food.getHeatCapacity(), food.getCookingTemp());
   }
 
-  public FoodHeatHandler(@Nullable NBTTagCompound nbt, FoodData data, float heatCapacity, float meltTemp) {
+  public CapabilityProviderFoodHeat(@Nullable NBTTagCompound nbt, FoodData data, float heatCapacity, float meltTemp) {
     this.heatCapacity = heatCapacity;
     this.meltTemp = meltTemp;
 

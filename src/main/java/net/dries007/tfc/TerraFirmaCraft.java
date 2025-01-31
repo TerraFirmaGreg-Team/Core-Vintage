@@ -1,6 +1,5 @@
 package net.dries007.tfc;
 
-import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
@@ -137,7 +136,7 @@ public final class TerraFirmaCraft {
 
     CapabilityChunkData.preInit();
     CapabilityForgeable.preInit();
-    CapabilityFood.preInit();
+
     CapabilityMetalItem.preInit();
 
     if (event.getSide().isClient()) {
@@ -150,7 +149,6 @@ public final class TerraFirmaCraft {
 
     ItemsTFC.init();
     LootTablesTFC.init();
-    CapabilityFood.init();
 
     if (event.getSide().isClient()) {
       TFCKeybindings.init();

@@ -1,12 +1,10 @@
 package su.terrafirmagreg.modules.core.capabilities.food;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -16,19 +14,14 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.DumbStorage;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class CapabilityFood {
 
   public static final ResourceLocation KEY = ModUtils.resource("food_capability");
-  public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_FOODS = new HashMap<>(); //Used inside CT, set custom IFood for food items outside TFC
   /**
    * Most TFC foods have decay modifiers in the range [1, 4] (high = faster decay) That puts decay times at 25% - 100% of this value So meat / fruit will decay
    * in ~5 days, grains take ~20 days Other modifiers are applied on top of that
@@ -37,16 +30,8 @@ public class CapabilityFood {
   @CapabilityInject(ICapabilityFood.class)
   public static Capability<ICapabilityFood> CAPABILITY;
 
-  public static void preInit() {
-    CapabilityManager.INSTANCE.register(ICapabilityFood.class, new DumbStorage<>(), CapabilityProviderFood::new);
-  }
-
-  public static void init() {
-    // Add custom vanilla food instances
-    CUSTOM_FOODS.put(IIngredient.of(Items.ROTTEN_FLESH), () -> new CapabilityProviderFood(null, FoodData.ROTTEN_FLESH));
-    CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_APPLE), () -> new CapabilityProviderFood(null, FoodData.GOLDEN_APPLE));
-    CUSTOM_FOODS.put(IIngredient.of(Items.GOLDEN_CARROT), () -> new CapabilityProviderFood(null, FoodData.GOLDEN_CARROT));
-    CUSTOM_FOODS.put(IIngredient.of(Items.EGG), () -> new CapabilityProviderFood(null, FoodData.RAW_EGG));
+  public static void register() {
+    CapabilityManager.INSTANCE.register(ICapabilityFood.class, new CapabilityStorageFood(), CapabilityProviderFood::new);
   }
 
   /**
@@ -139,10 +124,10 @@ public class CapabilityFood {
 
   @Nullable
   public static ICapabilityProvider getCustomFood(ItemStack stack) {
-    Set<IIngredient<ItemStack>> itemFoodSet = CUSTOM_FOODS.keySet();
+    Set<IIngredient<ItemStack>> itemFoodSet = CapabilityHandlerFood.CUSTOM_FOODS.keySet();
     for (IIngredient<ItemStack> ingredient : itemFoodSet) {
       if (ingredient.testIgnoreCount(stack)) {
-        return CUSTOM_FOODS.get(ingredient).get();
+        return CapabilityHandlerFood.CUSTOM_FOODS.get(ingredient).get();
       }
     }
     return null;

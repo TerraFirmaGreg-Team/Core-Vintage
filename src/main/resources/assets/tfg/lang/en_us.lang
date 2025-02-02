@@ -75,30 +75,7 @@ tfg.machine.greenhouse.tooltip.3=This is weather-resistant!
 tfg.machine.greenhouse.name=Greenhouse
 recipemap.greenhouse.name=Greenhouse
 
-##############################################################
-
-## Item Group
-item_group.tfg.core.name=[ TFG ] Core
-
-## Block
-block.tfg.core.debug.name=Debug Block
-
-block.tfg.device.alloy_calculator.name=Alloy Calculator
-
-
-## Item
-item.tfg.core.wand.name=Debug Wand
-
-## Effect
-effect.tfg.core.overburdened=Overburdened
-effect.tfg.core.thirst=Thirst
-effect.tfg.core.parasites=Parasites
-effect.tfg.core.swarm=Swarm
-effect.tfg.core.hyperthermia=Hyperthermia
-effect.tfg.core.hypothermia=Hypothermia
-effect.tfg.core.resist_cold=Resist Cold
-effect.tfg.core.resist_heat=Resist Heat
-effect.tfg.core.caffeine=Caffeine
+############################################################
 
 # Damage Sources
 death.attack.dehydration=%1$s died of dehydration.
@@ -130,3 +107,37 @@ enum.tfg.weight.light=Light
 enum.tfg.weight.medium=Medium
 enum.tfg.weight.heavy=Heavy
 enum.tfg.weight.very_heavy=Very Heavy
+
+# Module Core ################################################
+
+## Item Group
+item_group.tfg.core.name=[ TFG ] Core
+
+## Block
+block.tfg.core.debug.name=Debug Block
+
+## Item
+item.tfg.core.wand.name=Debug Wand
+
+## Effect
+effect.tfg.core.overburdened=Overburdened
+effect.tfg.core.thirst=Thirst
+effect.tfg.core.parasites=Parasites
+effect.tfg.core.swarm=Swarm
+effect.tfg.core.hyperthermia=Hyperthermia
+effect.tfg.core.hypothermia=Hypothermia
+effect.tfg.core.resist_cold=Resist Cold
+effect.tfg.core.resist_heat=Resist Heat
+effect.tfg.core.caffeine=Caffeine
+
+
+
+# Module Device ##############################################
+
+## Item Group
+item_group.tfg.device.name=[ TFG ] Device
+
+## Block
+block.tfg.device.alloy_calculator.name=Alloy Calculator
+
+## Item

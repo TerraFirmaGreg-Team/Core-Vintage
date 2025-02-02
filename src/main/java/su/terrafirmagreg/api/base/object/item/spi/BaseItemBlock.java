@@ -1,7 +1,6 @@
 package su.terrafirmagreg.api.base.object.item.spi;
 
 
-import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 
 import net.minecraft.block.Block;
@@ -15,8 +14,6 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import static com.feed_the_beast.ftbquests.FTBQuests.TAB;
-
 @Getter
 public class BaseItemBlock extends ItemBlock implements IItemSettings {
 
@@ -25,15 +22,7 @@ public class BaseItemBlock extends ItemBlock implements IItemSettings {
   public BaseItemBlock(Block block) {
     super(block);
 
-    this.settings = Settings.of().group(TAB, TAB);
-
-    if (block instanceof IBlockSettings settingsBlock) {
-      getSettings()
-        .rarity(settingsBlock.getSettings().getRarity())
-        .group(settingsBlock.getSettings().getGroups())
-        .oreDict(settingsBlock.getSettings().getOreDict())
-        .capability(settingsBlock.getSettings().getCapability());
-    }
+    this.settings = Settings.of(block);
   }
 
   @Override

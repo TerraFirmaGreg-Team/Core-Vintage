@@ -2,11 +2,13 @@ package su.terrafirmagreg.api.base.object.item.api;
 
 
 import su.terrafirmagreg.api.base.capability.spi.CombinedCapabilityProvider;
+import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings.Settings;
 import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderItemCapability;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -57,6 +59,27 @@ public interface IItemSettings extends IBaseSettings<Settings> {
 
     public static Settings of() {
       return new Settings();
+    }
+
+    public static Settings of(Block block) {
+      Settings settingsItem = Settings.of();
+      if (block instanceof IBlockSettings settingsBlock) {
+        var settings = settingsBlock.getSettings();
+        settingsItem
+          .registryKey(settings.getRegistryKey())
+          .rarity(settings.getRarity())
+          .group(settings.getGroups())
+          .oreDict(settings.getOreDict())
+          .capability(settings.getCapability());
+      }
+
+      return settingsItem;
+    }
+
+    public Settings registryKey(String registryKey) {
+      super.registryKey(registryKey);
+      this.oreDict.add(new Object[]{registryKey});
+      return this;
     }
 
     public Settings maxDamage(int maxDamage) {

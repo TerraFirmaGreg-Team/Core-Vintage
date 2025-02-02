@@ -26,14 +26,22 @@ public final class OreDictUtils {
 
   public static void register(Block block) {
     if (block instanceof IBlockSettings provider) {
-      provider.getSettings().getOreDict().forEach(s -> OreDictUtils.register(block, s));
+      var settings = provider.getSettings();
+      OreDictUtils.register(block, settings.getRegistryKey());
+      settings.getOreDict().forEach(oreDict -> {
+        if (oreDict != null && oreDict.length > 0) {
+          OreDictUtils.register(block, oreDict);
+        }
+      });
 
     }
   }
 
   public static void register(Item item) {
     if (item instanceof IItemSettings provider) {
-      provider.getSettings().getOreDict().forEach(oreDict -> {
+      var settings = provider.getSettings();
+      OreDictUtils.register(item, settings.getRegistryKey());
+      settings.getOreDict().forEach(oreDict -> {
         if (oreDict != null && oreDict.length > 0) {
           OreDictUtils.register(item, oreDict);
         }

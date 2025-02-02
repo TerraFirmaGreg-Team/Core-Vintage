@@ -5,6 +5,8 @@ import su.terrafirmagreg.api.base.object.item.spi.BaseItemBlock;
 import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderItemCapability;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -21,8 +23,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IRarity;
-
-import com.google.common.collect.Lists;
 
 import lombok.Getter;
 
@@ -42,9 +42,9 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
   @SuppressWarnings("deprecation")
   class Settings extends BaseSettings<Settings> {
 
-    final ArrayList<Object[]> oreDict = Lists.newArrayList();
-    final ArrayList<IProviderItemCapability> capability = Lists.newArrayList();
-    final ArrayList<CreativeTabs> groups = Lists.newArrayList();
+    final ArrayList<Object[]> oreDict = new ArrayList<>();
+    final ArrayList<IProviderItemCapability> capability = new ArrayList<>();
+    final ArrayList<CreativeTabs> groups = new ArrayList<>();
 
     // Block
     final Material material;
@@ -348,6 +348,19 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
 
     public Settings customResource(ResourceLocation resourceLocation) {
       this.resource = resourceLocation;
+      return this;
+    }
+
+    public Settings weight(Weight weight) {
+      return this;
+    }
+
+    public Settings size(Size size) {
+      return this;
+    }
+
+
+    public Settings nonCanStack() {
       return this;
     }
 

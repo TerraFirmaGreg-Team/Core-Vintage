@@ -11,11 +11,12 @@ public interface IBaseSettings<T extends BaseSettings<T>> {
   @Getter
   abstract class BaseSettings<T> {
 
+
     protected String registryKey;
 
     /**
      * Устанавливает ключ реестра для элемента. Во время регистрации, будет подставлено имя контейнера (modId) и имя модуля
-     * <p>Формат test:module/registryKey</p>
+     * <p>Формат test:moduleName/registryKey</p>
      */
     @SuppressWarnings("unchecked")
     public T registryKey(String registryKey) {

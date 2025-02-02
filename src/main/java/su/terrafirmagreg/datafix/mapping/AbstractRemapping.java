@@ -32,7 +32,7 @@ public abstract class AbstractRemapping {
     put("puddle", BlocksCore.PUDDLE.get());
 
     put("alloy_calculator", BlocksDevice.ALLOY_CALCULATOR.get());
-
+//    put("bear_trap", BlocksDevice.BEAR_TRAP.get());
 
   }};
 

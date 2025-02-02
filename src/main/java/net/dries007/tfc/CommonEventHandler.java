@@ -114,10 +114,11 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.items.ItemFruitPole;
-import com.eerussianguy.firmalife.registry.BlocksFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.firmalife.init.FoodFL;
+import net.dries007.firmalife.items.ItemFruitPole;
+import net.dries007.firmalife.registry.BlocksFL;
+import net.dries007.firmalife.registry.ItemsFL;
+import net.dries007.sharkbark.cellars.init.ModItems;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
@@ -159,13 +160,12 @@ import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.sharkbark.cellars.init.ModItems;
-import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLeaves;
-import tfcflorae.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
-import tfcflorae.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.types.BlockTypesTFCF.RockTFCF;
+import net.dries007.tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
+import net.dries007.tfcflorae.objects.blocks.wood.bamboo.BlockBambooLeaves;
+import net.dries007.tfcflorae.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
+import net.dries007.tfcflorae.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
+import net.dries007.tfcflorae.objects.items.ItemsTFCF;
+import net.dries007.tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 

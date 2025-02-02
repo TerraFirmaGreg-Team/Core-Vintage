@@ -14,7 +14,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.sharkbark.cellars.init.ModItems.SEA_ICE_SHARD;
+import static net.dries007.sharkbark.cellars.init.ModItems.SEA_ICE_SHARD;
 
 @ParametersAreNonnullByDefault
 public class BlockSeaIce extends BlockIceTFC {

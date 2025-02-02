@@ -1,5 +1,5 @@
 {
   "recipes": {
-    "unmold_recipe": "lyeoj.tfcthings.recipes.TFCThingsUnmoldRecipe$Factory"
+    "unmold_recipe": "net.dries007.tfcthings.recipes.TFCThingsUnmoldRecipe$Factory"
   }
 }

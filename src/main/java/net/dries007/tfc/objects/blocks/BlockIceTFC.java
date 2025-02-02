@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 
-import static net.sharkbark.cellars.init.ModItems.SEA_ICE_SHARD;
+import static net.dries007.sharkbark.cellars.init.ModItems.SEA_ICE_SHARD;
 
 @ParametersAreNonnullByDefault
 public class BlockIceTFC extends BlockIce implements ITemperatureBlock {

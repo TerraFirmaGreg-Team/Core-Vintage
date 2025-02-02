@@ -33,7 +33,7 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
-import tfctech.objects.tileentities.TEInductionCrucible;
+import net.dries007.tfctech.objects.tileentities.TEInductionCrucible;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

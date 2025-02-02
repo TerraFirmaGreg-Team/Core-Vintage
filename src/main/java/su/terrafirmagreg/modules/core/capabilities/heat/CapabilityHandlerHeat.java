@@ -4,18 +4,18 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import com.eerussianguy.firmalife.registry.ItemsFL;
+import net.dries007.firmalife.registry.ItemsFL;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.types.DefaultPlants;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.blocks.wood.BlockLogTFCF;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.types.PlantsTFCF;
-import tfcflorae.types.TreesTFCF;
+import net.dries007.tfcflorae.objects.blocks.BlocksTFCF;
+import net.dries007.tfcflorae.objects.blocks.wood.BlockLogTFCF;
+import net.dries007.tfcflorae.objects.items.ItemsTFCF;
+import net.dries007.tfcflorae.types.PlantsTFCF;
+import net.dries007.tfcflorae.types.TreesTFCF;
 
 import org.jetbrains.annotations.Nullable;
 

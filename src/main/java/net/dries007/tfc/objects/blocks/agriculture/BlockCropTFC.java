@@ -38,7 +38,7 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
+import net.dries007.tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -9,19 +9,19 @@ import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProvi
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-import com.eerussianguy.firmalife.te.TEOven;
+import net.dries007.firmalife.te.TEOven;
 import net.dries007.tfc.objects.te.TEBloomery;
 import net.dries007.tfc.objects.te.TECharcoalForge;
 import net.dries007.tfc.objects.te.TECrucible;
 import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.objects.te.TELamp;
-import net.sharkbark.cellars.blocks.tileentity.TEIceBunker;
+import net.dries007.sharkbark.cellars.blocks.tileentity.TEIceBunker;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import tfctech.objects.tileentities.TEElectricForge;
-import tfctech.objects.tileentities.TEFridge;
-import tfctech.objects.tileentities.TEInductionCrucible;
-import tfctech.objects.tileentities.TESmelteryCauldron;
-import tfctech.objects.tileentities.TESmelteryFirebox;
+import net.dries007.tfctech.objects.tileentities.TEElectricForge;
+import net.dries007.tfctech.objects.tileentities.TEFridge;
+import net.dries007.tfctech.objects.tileentities.TEInductionCrucible;
+import net.dries007.tfctech.objects.tileentities.TESmelteryCauldron;
+import net.dries007.tfctech.objects.tileentities.TESmelteryFirebox;
 
 import java.util.Optional;
 

@@ -43,10 +43,10 @@ import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.types.PlantsTFCF;
-import tfcflorae.util.agriculture.CropTFCF;
+import net.dries007.tfcflorae.objects.blocks.BlocksTFCF;
+import net.dries007.tfcflorae.objects.items.ItemsTFCF;
+import net.dries007.tfcflorae.types.PlantsTFCF;
+import net.dries007.tfcflorae.util.agriculture.CropTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

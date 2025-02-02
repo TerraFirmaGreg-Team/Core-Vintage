@@ -14,8 +14,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.sharkbark.cellars.ModConfig;
-import net.sharkbark.cellars.init.ModItems;
+import net.dries007.sharkbark.cellars.ModConfig;
+import net.dries007.sharkbark.cellars.init.ModItems;
 
 import javax.annotation.Nullable;
 

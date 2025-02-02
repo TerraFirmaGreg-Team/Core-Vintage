@@ -1,6 +1,6 @@
 {
   "recipes": {
-    "trail_mix": "com.eerussianguy.firmalife.recipe.TrailMixRecipe$Factory",
-    "pizza": "com.eerussianguy.firmalife.recipe.PizzaRecipe$Factory"
+    "trail_mix": "net.dries007.firmalife.recipe.TrailMixRecipe$Factory",
+    "pizza": "net.dries007.firmalife.recipe.PizzaRecipe$Factory"
   }
 }

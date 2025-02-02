@@ -30,7 +30,7 @@ import java.util.function.BiFunction;
 @Getter
 public abstract class BaseTileInventory extends BaseTile implements ISlotCallback {
 
-  private static final String TAG_INVENTORY = "inventory";
+  protected static final String TAG_INVENTORY = "Inventory";
 
   protected final ItemStackHandler inventory;
 

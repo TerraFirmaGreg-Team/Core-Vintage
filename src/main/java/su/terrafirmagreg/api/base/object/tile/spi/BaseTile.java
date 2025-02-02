@@ -90,6 +90,10 @@ public abstract class BaseTile extends TileEntity {
     readFromNBT(nbt);
   }
 
+  public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+    
+  }
+
   @Override
   public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
     return oldState.getBlock() != newState.getBlock() && super.shouldRefresh(world, pos, oldState, newState);

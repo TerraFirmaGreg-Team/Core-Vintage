@@ -1,8 +1,9 @@
 package su.terrafirmagreg.framework.registry.api.provider;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -19,7 +20,7 @@ public interface IProviderTile
    *
    * @return The TileEntity class to register associated to this block.
    */
-  Class<? extends TileEntity> getTileClass();
+  Class<? extends BaseTile> getTileClass();
 
   /**
    * Gets the TESR for the tile entity. If null is returned nothing will be done.

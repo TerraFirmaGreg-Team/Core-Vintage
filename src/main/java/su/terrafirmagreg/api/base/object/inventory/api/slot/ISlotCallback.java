@@ -40,6 +40,8 @@ public interface ISlotCallback {
   default void setAndUpdateSlots(int slot) {
   }
 
+  default void setAndUpdateSlots() {}
+
   default void beforePutStack(SlotCallback slot, ItemStack stack) {
   }
 }

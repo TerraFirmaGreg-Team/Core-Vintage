@@ -1,9 +1,11 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
+import su.terrafirmagreg.api.library.Location;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -151,8 +153,39 @@ public final class StackUtils {
     if (stack.isEmpty()) {
       return;
     }
-    EntityItem entityitem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-    world.spawnEntity(entityitem);
+    spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+  }
+
+  public static void spawnItemStack(World world, Location location, ItemStack stack) {
+
+    spawnItemStack(world, location.x + 0.5F, location.y + 0.5F, location.z + 0.5F, stack);
+  }
+
+  public static void spawnItemStack(World world, Entity entity, ItemStack stack) {
+
+    spawnItemStack(world, (float) entity.posX, (float) entity.posY, (float) entity.posZ, stack);
+  }
+
+  private static void spawnItemStack(World world, float x, float y, float z, ItemStack stack) {
+
+    EntityItem item = new EntityItem(world, x, y, z, stack);
+    item.setNoPickupDelay();
+    item.motionX = -0.05F + RNG.nextFloat() * 0.1F;
+    item.motionY = -0.05F + RNG.nextFloat() * 0.1F;
+    item.motionZ = -0.05F + RNG.nextFloat() * 0.1F;
+    world.spawnEntity(item);
+  }
+
+  public static void spawnItemStack(World world, Location location, List<ItemStack> stacks) {
+
+    spawnItemStack(world, location.x + 0.5F, location.y + 0.5F, location.z + 0.5F, stacks);
+  }
+
+  private static void spawnItemStack(World world, float x, float y, float z, List<ItemStack> stacks) {
+
+    for (ItemStack stack : stacks) {
+      spawnItemStack(world, x, y, z, stack);
+    }
   }
 
   /**

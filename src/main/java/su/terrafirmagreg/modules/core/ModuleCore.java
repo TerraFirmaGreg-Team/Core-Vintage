@@ -32,6 +32,7 @@ import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerPostConfig
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerAmbiental;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerCalendar;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerFallingBlock;
+import su.terrafirmagreg.modules.core.event.feature.EventHandlerPuddles;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDimension;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedIn;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedOut;
@@ -153,6 +154,7 @@ public final class ModuleCore extends ModuleBase {
     list.add(EventHandlerCalendar.class);
     list.add(EventHandlerAmbiental.class);
     list.add(EventHandlerFallingBlock.class);
+    list.add(EventHandlerPuddles.class);
 
     return list;
   }

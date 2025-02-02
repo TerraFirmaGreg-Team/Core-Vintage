@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.base.object.block.spi;
 
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
 
 import net.minecraft.block.BlockContainer;
@@ -53,6 +54,12 @@ public abstract class BaseBlockContainer extends BlockContainer implements IProv
   @Override
   public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos) : NULL_AABB;
+  }
+
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    TileUtils.getTile(worldIn, pos, this.getTileClass()).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
+    super.breakBlock(worldIn, pos, state);
   }
 
 

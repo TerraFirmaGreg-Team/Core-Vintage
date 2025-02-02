@@ -6,6 +6,7 @@ import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
 import su.terrafirmagreg.framework.network.api.INetworkManager;
 import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,14 +33,15 @@ public final class ModuleDevice extends ModuleBase {
 
   public ModuleDevice() {
 
-//    GROUP = BaseItemGroup.of(this, "bellows");
-//    REGISTRY = enableRegistry().group(GROUP);
-//    NETWORK = enableNetwork();
+    GROUP = BaseItemGroup.of(this, "bellows");
+    REGISTRY = enableRegistry().group(GROUP);
+    NETWORK = enableNetwork();
 
   }
 
   @Override
   public void onRegister(IRegistryManager registry) {
+    BlocksDevice.onRegister(registry);
     ItemsDevice.onRegister(registry);
   }
 

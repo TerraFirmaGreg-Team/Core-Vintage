@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.base.client.gui.inventory.spi;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -51,10 +52,10 @@ public abstract class BaseGuiContainer extends GuiContainer {
   }
 
   protected final void drawSimpleBackground() {
-//    GlStateManager.color(1, 1, 1, 1);
-    drawDefaultBackground();
+    GlStateManager.color(1, 1, 1, 1);
+//    this.drawDefaultBackground();
     mc.getTextureManager().bindTexture(background);
-    drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+    this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
   }
 
   protected void drawSlotOverlay(Slot slot) {

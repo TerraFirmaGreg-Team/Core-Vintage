@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.data.enums.Mods.Names;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -17,7 +18,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Metal.ItemType;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
@@ -29,9 +29,10 @@ public abstract class AbstractRemapping {
 
   protected static final Map<String, Block> BLOCK_MAP = new Object2ObjectOpenHashMap<>() {{
     put("debug", BlocksCore.DEBUG.get());
+    put("puddle", BlocksCore.PUDDLE.get());
 
-    put("alloy_calculator", BlocksTFC.ALLOY_CALCULATOR);
-    put("puddle", BlocksTFC.PUDDLE);
+    put("alloy_calculator", BlocksDevice.ALLOY_CALCULATOR.get());
+
 
   }};
 

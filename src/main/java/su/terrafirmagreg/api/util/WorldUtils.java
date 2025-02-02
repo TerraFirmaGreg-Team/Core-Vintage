@@ -16,6 +16,8 @@ import static com.google.common.math.Stats.meanOf;
 @SuppressWarnings("unused")
 public final class WorldUtils {
 
+  public static final int EARTH = 0;
+
   /**
    * Gets the display name of a world.
    *

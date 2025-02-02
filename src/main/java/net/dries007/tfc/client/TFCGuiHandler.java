@@ -13,7 +13,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.IRockObject;
-import net.dries007.tfc.client.gui.GuiAlloyCalculator;
 import net.dries007.tfc.client.gui.GuiAnvilPlan;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
 import net.dries007.tfc.client.gui.GuiBarrel;
@@ -33,7 +32,6 @@ import net.dries007.tfc.client.gui.GuiPowderkeg;
 import net.dries007.tfc.client.gui.GuiSalad;
 import net.dries007.tfc.client.gui.GuiSkills;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
-import net.dries007.tfc.objects.container.ContainerAlloyCalculator;
 import net.dries007.tfc.objects.container.ContainerAnvilPlan;
 import net.dries007.tfc.objects.container.ContainerAnvilTFC;
 import net.dries007.tfc.objects.container.ContainerBarrel;
@@ -57,7 +55,6 @@ import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.objects.te.TEAlloyCalculator;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.objects.te.TEBlastFurnace;
@@ -167,8 +164,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return null;
       case SALAD:
         return new ContainerSalad(player.inventory);
-      case ALLOY_CALCULATOR:
-        return new ContainerAlloyCalculator(player.inventory, Helpers.getTE(world, pos, TEAlloyCalculator.class));
       default:
         return null;
     }
@@ -239,8 +234,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return null;
       case SALAD:
         return new GuiSalad(container, player.inventory);
-      case ALLOY_CALCULATOR:
-        return new GuiAlloyCalculator((ContainerAlloyCalculator) container, player.inventory, Helpers.getTE(world, pos, TEAlloyCalculator.class));
       default:
         return null;
     }
@@ -273,7 +266,6 @@ public class TFCGuiHandler implements IGuiHandler {
     INVENTORY, // This is special, it is used by GuiButtonPlayerInventoryTab to signal to open the vanilla inventory
     CRAFTING, // In-inventory 3x3 crafting grid
     QUIVER,
-    ALLOY_CALCULATOR,
     NULL; // This is special, it is a non-null null.
 
     private static final Type[] values = values();

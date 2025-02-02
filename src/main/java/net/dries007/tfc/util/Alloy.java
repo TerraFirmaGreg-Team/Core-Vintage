@@ -299,7 +299,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
   /**
    * Resets the alloy
    */
-  private void clear() {
+  public void clear() {
     metalMap.clear();
     totalUnits = 0;
   }

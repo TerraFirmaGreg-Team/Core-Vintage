@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.library.ThermiteRandom;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -96,12 +95,15 @@ public final class MathUtils {
    */
   public static final ThermiteRandom TRNG = new ThermiteRandom();
   public static final Random RNG = new Random();
+  public static final double SIN_90 = Math.sin(PI / 2.0);
+  public static final double COS_90 = Math.cos(PI / 2.0);
+
   // Used for fastFloor, fastRound, fastCeil
   // http://riven8192.blogspot.com/2010/02/fastmath-fast-floor.html
-  private static final int BIG_ENOUGH_INT = 16 * 1024;
-  private static final double BIG_ENOUGH_CEIL = BIG_ENOUGH_INT + 0.9999;
-  private static final double BIG_ENOUGH_ROUND = BIG_ENOUGH_INT + 0.5000;
-  private static final double BIG_ENOUGH_FLOOR = BIG_ENOUGH_INT + 0.0000;
+  public static final int BIG_ENOUGH_INT = 16 * 1024;
+  public static final double BIG_ENOUGH_CEIL = BIG_ENOUGH_INT + 0.9999;
+  public static final double BIG_ENOUGH_ROUND = BIG_ENOUGH_INT + 0.5000;
+  public static final double BIG_ENOUGH_FLOOR = BIG_ENOUGH_INT + 0.0000;
 
   /**
    * Checks if a double is within range of two other doubles.
@@ -265,29 +267,6 @@ public final class MathUtils {
   }
 
   /**
-   * Creates a bounding box using pixel size.
-   *
-   * @param minX The min X pos.
-   * @param minY The min Y pos.
-   * @param minZ The min Z pos.
-   * @param maxX The max X pos.
-   * @param maxY The max Y pos.
-   * @param maxZ The max Z pos.
-   * @return A bounding box that is made to a pixel specific size.
-   */
-  public static AxisAlignedBB getBoundsForPixels(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
-
-    return new AxisAlignedBB(
-      getPixelDistance(minX),
-      getPixelDistance(minY),
-      getPixelDistance(minZ),
-      getPixelDistance(maxX),
-      getPixelDistance(maxY),
-      getPixelDistance(maxZ)
-    );
-  }
-
-  /**
    * Gets the distance in world for an amount of pixels. A basic block is a cubic meter, and each pixel is 1/16th of a block.
    *
    * @param pixels The amount of pixels
@@ -296,6 +275,11 @@ public final class MathUtils {
   public static double getPixelDistance(int pixels) {
 
     return pixels / 16d;
+  }
+
+  public static double getPixelDistance(double pixels) {
+
+    return pixels / 16;
   }
 
   /**

@@ -83,6 +83,8 @@ item_group.tfg.core.name=[ TFG ] Core
 ## Block
 block.tfg.core.debug.name=Debug Block
 
+block.tfg.device.alloy_calculator.name=Alloy Calculator
+
 
 ## Item
 item.tfg.core.wand.name=Debug Wand

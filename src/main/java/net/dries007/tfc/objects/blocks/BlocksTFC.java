@@ -38,7 +38,6 @@ import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
-import net.dries007.tfc.objects.blocks.devices.BlockAlloyCalculator;
 import net.dries007.tfc.objects.blocks.devices.BlockBellows;
 import net.dries007.tfc.objects.blocks.devices.BlockBlastFurnace;
 import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
@@ -91,7 +90,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockPowderKeg;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockSluice;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.objects.te.TEAlloyCalculator;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.objects.te.TEBellows;
@@ -189,8 +187,6 @@ public final class BlocksTFC {
   public static final BlockPowderKeg POWDERKEG = getNull();
   public static final BlockGravel AGGREGATE = getNull();
   public static final Block FIRE_BRICKS = getNull();
-  public static final BlockAlloyCalculator ALLOY_CALCULATOR = getNull();
-  public static final BlockPuddle PUDDLE = getNull();
 
   // All these are for use in model registration. Do not use for block lookups.
   // Use the static get methods in the classes instead.
@@ -292,9 +288,6 @@ public final class BlocksTFC {
     inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bloomery", new BlockBloomery(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockTFC(register(r, "nest_box", new BlockNestBox(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockSluice(register(r, "sluice", new BlockSluice(), CT_MISC)));
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "alloy_calculator", new BlockAlloyCalculator(), CT_MISC)));
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "puddle", new BlockPuddle(), CT_MISC)));
-
     normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockSeaIce(), CT_MISC)));
 
     normalItemBlocks.add(new ItemBlockLargeVessel(register(r, "ceramics/fired/large_vessel", new BlockLargeVessel(), CT_POTTERY)));
@@ -719,7 +712,6 @@ public final class BlocksTFC {
     register(TELargeVessel.class, "large_vessel");
     register(TEPowderKeg.class, "powderkeg");
     register(TESluice.class, "sluice");
-    register(TEAlloyCalculator.class, "alloy_calculator");
   }
 
   @SubscribeEvent(priority = EventPriority.LOWEST)

@@ -13,9 +13,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/**
- * Created 6/11/2021 by SuperMartijn642
- */
 public class BlockShape {
 
   private final List<AxisAlignedBB> boxes;

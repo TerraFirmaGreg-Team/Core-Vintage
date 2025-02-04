@@ -1,10 +1,10 @@
 package net.dries007.tfcthings.event;
 
 import su.terrafirmagreg.api.data.enums.Mods;
-import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.ICapabilitySharpness;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -155,7 +155,7 @@ public class TFCThingsEventHandler {
       if ((OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "shears") || OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "knife"))
           && sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
         if (!sheep.world.isRemote) {
-          ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL.get(), 1);
+          ItemStack woolStack = new ItemStack(ItemsCore.WOOL.get(), 1);
           Helpers.spawnItemStack(sheep.world, new BlockPos(sheep.posX, sheep.posY, sheep.posZ), woolStack);
         }
       }

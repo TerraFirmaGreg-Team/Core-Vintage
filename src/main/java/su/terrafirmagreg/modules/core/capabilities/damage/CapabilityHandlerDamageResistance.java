@@ -64,7 +64,7 @@ public class CapabilityHandlerDamageResistance {
   }
 
   @Nullable
-  public static ICapabilityProvider get(ItemStack stack) {
+  public static ICapabilityProvider getCustom(ItemStack stack) {
     for (var entry : CUSTOM_ITEMS.entrySet()) {
       if (entry.getKey().testIgnoreCount(stack)) {
         return entry.getValue().get();
@@ -77,7 +77,7 @@ public class CapabilityHandlerDamageResistance {
   }
 
   @Nullable
-  public static ICapabilityProvider get(ResourceLocation entityTypeName) {
+  public static ICapabilityProvider getCustom(ResourceLocation entityTypeName) {
     if (CUSTOM_ENTITY.containsKey(entityTypeName)) {
       return CUSTOM_ENTITY.get(entityTypeName).get();
     }

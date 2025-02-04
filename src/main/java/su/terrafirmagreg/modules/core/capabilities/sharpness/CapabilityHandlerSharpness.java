@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.core.capabilities.sharpness;
 
-import net.dries007.tfcthings.items.ItemRopeJavelin;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.metal.ItemMetalSword;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.dries007.tfcthings.items.ItemRopeJavelin;
 
 import org.jetbrains.annotations.Nullable;
 

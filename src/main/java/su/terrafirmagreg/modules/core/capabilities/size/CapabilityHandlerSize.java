@@ -59,7 +59,7 @@ public class CapabilityHandlerSize {
   }
 
   @NotNull
-  public static ICapabilityProvider get(ItemStack stack) {
+  public static ICapabilityProvider getCustom(ItemStack stack) {
 
     for (var entry : CUSTOM_ITEMS.entrySet()) {
       if (entry.getKey().testIgnoreCount(stack)) {

@@ -79,7 +79,7 @@ public class EventHandlerCapabilitiesEntity {
     // Give certain entities damage resistance
     if (!CapabilityDamageResistance.has(entity)) {
 
-      var provider = CapabilityHandlerDamageResistance.get(entityType);
+      var provider = CapabilityHandlerDamageResistance.getCustom(entityType);
       if (provider != null) {
         event.addCapability(CapabilityDamageResistance.KEY, provider);
       }

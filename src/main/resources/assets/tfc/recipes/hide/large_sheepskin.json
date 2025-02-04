@@ -10,7 +10,7 @@
     }
   ],
   "result": {
-    "item": "tfg:animal/product/wool",
+    "item": "tfg:core/product/wool",
     "count": 3
   },
   "damage": 3

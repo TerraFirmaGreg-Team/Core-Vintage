@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -14,8 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.ConfigTFC;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -122,15 +123,11 @@ public class ItemAnimalHide extends ItemTFC {
   @Override
   @Nonnull
   public Weight getWeight(ItemStack stack) {
-    switch (size) {
-      case LARGE:
-        return Weight.MEDIUM; // Stacksize = 16
-      case MEDIUM:
-        return Weight.LIGHT; // Stacksize = 32
-      case SMALL:
-      default:
-        return Weight.VERY_LIGHT; // Stacksize = 64
-    }
+    return switch (size) {
+      case LARGE -> Weight.MEDIUM; // Stacksize = 16
+      case MEDIUM -> Weight.LIGHT; // Stacksize = 32
+      default -> Weight.VERY_LIGHT; // Stacksize = 64
+    };
   }
 
   public enum HideSize implements IStringSerializable {

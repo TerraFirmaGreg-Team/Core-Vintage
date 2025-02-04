@@ -20,13 +20,17 @@ public class ItemRemapping extends AbstractRemapping {
       String mappingNamespace = mapping.key.getNamespace();
       String mappingPath = mapping.key.getPath();
 
-      if (ITEM_MAP.containsKey(mappingPath)) {
-        mapping.remap(ITEM_MAP.get(mappingPath));
-      }
+      ITEM_MAP.forEach((key, value) -> {
+        if (mappingPath.endsWith(key)) {
+          mapping.remap(value);
+        }
+      });
 
-      if (BLOCK_MAP.containsKey(mappingPath)) {
-        mapping.remap(Item.getItemFromBlock(BLOCK_MAP.get(mappingPath)));
-      }
+      BLOCK_MAP.forEach((key, value) -> {
+        if (mappingPath.endsWith(key)) {
+          mapping.remap(Item.getItemFromBlock(value));
+        }
+      });
 
       if (MOD_ID_SET.contains(mappingNamespace)) {
         mapping.ignore();

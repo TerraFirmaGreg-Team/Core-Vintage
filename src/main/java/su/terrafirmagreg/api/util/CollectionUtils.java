@@ -6,8 +6,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -154,5 +158,16 @@ public final class CollectionUtils {
   public static <T> T randomElement(T[] array, Random random) {
 
     return array[random.nextInt(array.length)];
+  }
+
+  public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+    List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
+    list.sort(Comparator.comparing(Entry::getValue));
+
+    Map<K, V> result = new LinkedHashMap<>();
+    for (Map.Entry<K, V> entry : list) {
+      result.put(entry.getKey(), entry.getValue());
+    }
+    return result;
   }
 }

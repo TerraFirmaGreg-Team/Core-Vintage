@@ -4,8 +4,6 @@ import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import mcp.mobius.waila.api.WailaPlugin;
 import net.dries007.tfc.compat.waila.interfaces.HwylaBlockInterface;
-import net.dries007.tfc.compat.waila.interfaces.HwylaEntityInterface;
-import net.dries007.tfc.compat.waila.providers.AnimalProvider;
 import net.dries007.tfc.compat.waila.providers.BarrelProvider;
 import net.dries007.tfc.compat.waila.providers.BerryBushProvider;
 import net.dries007.tfc.compat.waila.providers.BlastFurnaceProvider;
@@ -30,7 +28,6 @@ import java.util.List;
 public class HwylaPluginTFC implements IWailaPlugin {
 
   public static final List<IWailaPlugin> WAILA_PLUGINS = Arrays.asList(
-    new HwylaEntityInterface(new AnimalProvider()),
     new HwylaBlockInterface(new BarrelProvider()),
     new HwylaBlockInterface(new BerryBushProvider()),
     new HwylaBlockInterface(new BlastFurnaceProvider()),

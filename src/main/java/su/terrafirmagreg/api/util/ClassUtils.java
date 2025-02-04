@@ -4,6 +4,9 @@ import su.terrafirmagreg.TerraFirmaGreg;
 
 import lombok.experimental.UtilityClass;
 
+import javax.annotation.Nullable;
+import java.lang.reflect.InvocationTargetException;
+
 @UtilityClass
 @SuppressWarnings("unused")
 public final class ClassUtils {
@@ -44,9 +47,32 @@ public final class ClassUtils {
     try {
       return Class.forName(name);
     } catch (final ClassNotFoundException e) {
-
       TerraFirmaGreg.LOGGER.warn(e, "Could not load class {} ", name);
       return null;
     }
+  }
+
+  @Nullable
+  public static <T> T createInstanceOf(Class<T> tClass, String path) {
+    Object object = createObjectInstance(path);
+    if (object != null) {
+      return tClass.cast(object);
+    }
+    return null;
+  }
+
+  @Nullable
+  public static Object createObjectInstance(String path) {
+    return createObjectInstance(getClassFromString(path));
+  }
+
+  @Nullable
+  public static <T> T createObjectInstance(Class<T> clazz) {
+    try {
+      return clazz.getDeclaredConstructor().newInstance();
+    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      TerraFirmaGreg.LOGGER.warn(e, "Could not create instance of {}", clazz);
+    }
+    return null;
   }
 }

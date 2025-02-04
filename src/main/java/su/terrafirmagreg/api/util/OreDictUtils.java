@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import lombok.experimental.UtilityClass;
 
+import java.util.Arrays;
 import java.util.Set;
 
 @UtilityClass
@@ -79,9 +80,13 @@ public final class OreDictUtils {
     if (parts == null) {
       return null;
     }
+    Object[] modifiedParts = Arrays.stream(parts)
+      .map(part -> part.toString().replace("/", "_"))
+      .toArray();
+
     return CaseFormat.UPPER_UNDERSCORE
       .converterTo(CaseFormat.LOWER_CAMEL)
-      .convert(Joiner.on('_').skipNulls().join(parts));
+      .convert(Joiner.on('_').skipNulls().join(modifiedParts));
   }
 
   /**

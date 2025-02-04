@@ -1,11 +1,6 @@
 package net.dries007.horsepower.util;
 
-import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.google.common.collect.Lists;
+import su.terrafirmagreg.api.util.EntityUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
@@ -30,6 +25,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.collect.Lists;
 import net.dries007.horsepower.Configs;
 import net.dries007.horsepower.HorsePowerMod;
 import net.dries007.horsepower.blocks.BlockHPChoppingBase;
@@ -37,23 +33,24 @@ import net.dries007.horsepower.recipes.HPRecipes;
 import net.dries007.horsepower.recipes.ShapedChoppingRecipe;
 import net.dries007.horsepower.recipes.ShapelessChoppingRecipe;
 
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Utils {
 
   public static ArrayList<Class<? extends EntityCreature>> getCreatureClasses() {
     ArrayList<Class<? extends EntityCreature>> clazzes = Lists.newArrayList();
     if (Configs.general.useHorseInterface) {clazzes.add(AbstractHorse.class);}
 
-    for (String e : Configs.general.grindstoneMobList) {
-      try {
-        Class clazz = Class.forName(e);
+    for (String entityTypeName : Configs.general.grindstoneMobList) {
+      Class clazz = EntityUtils.getEntity(entityTypeName);
 
-        if (EntityCreature.class.isAssignableFrom(clazz)) {
-          clazzes.add(clazz);
-        } else {
-          HorsePowerMod.logger.error("Error in config, the mob (" + e + ") can't be leashed");
-        }
-      } catch (ClassNotFoundException e1) {
-        HorsePowerMod.logger.error("Error in config, could not find (" + e + ") mob class, mod for entity might not be installed");
+      if (EntityCreature.class.isAssignableFrom(clazz)) {
+        clazzes.add(clazz);
+      } else {
+        HorsePowerMod.logger.error("Error in config, the mob (" + entityTypeName + ") can't be leashed");
       }
     }
     return clazzes;

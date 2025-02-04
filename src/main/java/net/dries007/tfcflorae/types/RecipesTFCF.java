@@ -1,6 +1,7 @@
 package net.dries007.tfcflorae.types;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 
@@ -17,6 +18,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
+import net.dries007.firmalife.ConfigFL;
+import net.dries007.firmalife.FirmaLife;
+import net.dries007.firmalife.init.FoodFL;
+import net.dries007.firmalife.recipe.CrackingRecipe;
+import net.dries007.firmalife.recipe.DryingRecipe;
+import net.dries007.firmalife.recipe.NutRecipe;
+import net.dries007.firmalife.recipe.OvenRecipe;
+import net.dries007.firmalife.recipe.PlanterRecipe;
+import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
@@ -47,15 +57,6 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.agriculture.FruitTree;
-import net.dries007.firmalife.ConfigFL;
-import net.dries007.firmalife.FirmaLife;
-import net.dries007.firmalife.init.FoodFL;
-import net.dries007.firmalife.recipe.CrackingRecipe;
-import net.dries007.firmalife.recipe.DryingRecipe;
-import net.dries007.firmalife.recipe.NutRecipe;
-import net.dries007.firmalife.recipe.OvenRecipe;
-import net.dries007.firmalife.recipe.PlanterRecipe;
-import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfcflorae.ConfigTFCF;
 import net.dries007.tfcflorae.TFCFlorae;
 import net.dries007.tfcflorae.objects.blocks.BlocksTFCF;
@@ -901,7 +902,7 @@ public final class RecipesTFCF {
       new LoomRecipe(new ResourceLocation(TFCF, "sisal_cloth"), IIngredient.of(ItemsTFCF.SISAL_STRING, 12), new ItemStack(ItemsTFCF.SISAL_CLOTH), 12, new ResourceLocation(TFCF, "textures/blocks/devices/loom/product/sisal.png")),
       new LoomRecipe(new ResourceLocation(TFCF, "wool_block_cotton"), IIngredient.of(ItemsTFCF.COTTON_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
       new LoomRecipe(new ResourceLocation(TFCF, "wool_block_linen"), IIngredient.of(ItemsTFCF.LINEN_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(TFCF, "wool_block_silk"), IIngredient.of(ItemsTFC.SILK_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+      new LoomRecipe(new ResourceLocation(TFCF, "wool_block_silk"), IIngredient.of(ItemsAnimal.SILK_CLOTH.get(), 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
     );
   }
 

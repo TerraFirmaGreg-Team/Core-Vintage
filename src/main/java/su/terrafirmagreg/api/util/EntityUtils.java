@@ -14,11 +14,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.UsernameCache;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -61,6 +64,15 @@ public final class EntityUtils {
         return null;
       }
     });
+  }
+
+  public static @Nullable Class<? extends Entity> getEntity(String mobName) {
+    ResourceLocation key = new ResourceLocation(mobName);
+    EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(key);
+    if (entityEntry != null) {
+      return entityEntry.getEntityClass();
+    }
+    return null;
   }
 
   @SideOnly(Side.CLIENT)

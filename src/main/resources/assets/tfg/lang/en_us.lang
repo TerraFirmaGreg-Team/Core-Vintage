@@ -115,6 +115,7 @@ item_group.tfg.core.name=[ TFG ] Core
 
 ## Block
 block.tfg.core.debug.name=Debug Block
+block.tfg.core.puddle.name=Puddle
 
 ## Item
 item.tfg.core.wand.name=Debug Wand
@@ -141,3 +142,78 @@ item_group.tfg.device.name=[ TFG ] Device
 block.tfg.device.alloy_calculator.name=Alloy Calculator
 
 ## Item
+
+# Module Animal ##############################################
+
+# TheOneProbe
+top.tfg.animal.male=Male ♂
+top.tfg.animal.female=Female ♀
+
+top.tfg.animal.has_milk=Can Milk
+top.tfg.animal.can_mate=Can Mate
+top.tfg.animal.has_eggs=Has Eggs
+top.tfg.animal.childhood_end=Becomes adult in %s
+top.tfg.animal.familiarized=Familiarized
+top.tfg.animal.not_familiarized=Not familiarized
+top.tfg.animal.old=Animal is old
+top.tfg.animal.pregnant=Pregnant
+top.tfg.animal.can_shear=Shearable
+top.tfg.animal.pregnant_end=Will give birth in %s days
+
+
+## Item Group
+item_group.tfg.animal.name=[ TFG ] Animal
+
+## Block
+block.tfg.animal.nest_box.name=Nest Box
+
+## Item
+item.tfg.animal.halter.name=Halter
+item.tfg.animal.product.bladder.name=Bladder
+item.tfg.animal.product.wool.name=Wool
+item.tfg.animal.product.wool_yarn.name=Wool Yarn
+item.tfg.animal.product.wool_cloth.name=Wool Cloth
+item.tfg.animal.product.silk_cloth.name=Silk Cloth
+
+## Entity
+entity.tfg.animal.sheep.name=Sheep
+entity.tfg.animal.cow.name=Cow
+entity.tfg.animal.grizzlybear.name=Grizzly Bear
+entity.tfg.animal.pig.name=Pig
+entity.tfg.animal.chicken.name=Chicken
+entity.tfg.animal.deer.name=Deer
+entity.tfg.animal.pheasant.name=Pheasant
+entity.tfg.animal.rabbit.name=Rabbit
+entity.tfg.animal.wolf.name=Wolf
+entity.tfg.animal.horse.name=Horse
+entity.tfg.animal.donkey.name=Donkey
+entity.tfg.animal.mule.name=Mule
+entity.tfg.animal.parrot.name=Parrot
+entity.tfg.animal.llama.name=Llama
+entity.tfg.animal.polarbear.name=Polar Bear
+entity.tfg.animal.alpaca.name=Alpaca
+entity.tfg.animal.duck.name=Duck
+entity.tfg.animal.goat.name=Goat
+entity.tfg.animal.panther.name=Black Panther
+entity.tfg.animal.ocelot.name=Ocelot
+entity.tfg.animal.sabertooth.name=Saber Tooth
+entity.tfg.animal.camel.name=Camel
+entity.tfg.animal.lion.name=Lion
+entity.tfg.animal.hyena.name=Hyena
+entity.tfg.animal.direwolf.name=Direwolf
+entity.tfg.animal.hare.name=Hare
+entity.tfg.animal.boar.name=Boar
+entity.tfg.animal.zebu.name=Zebu
+entity.tfg.animal.gazelle.name=Gazelle
+entity.tfg.animal.wildebeest.name=Wildebeest
+entity.tfg.animal.quail.name=Quail
+entity.tfg.animal.grouse.name=Grouse
+entity.tfg.animal.mongoose.name=Mongoose
+entity.tfg.animal.turkey.name=Turkey
+entity.tfg.animal.jackal.name=Jackal
+entity.tfg.animal.muskox.name=MuskOx
+entity.tfg.animal.yak.name=Yak
+entity.tfg.animal.blackbear.name=Black Bear
+entity.tfg.animal.cougar.name=Cougar
+entity.tfg.animal.coyote.name=Coyote
+

@@ -108,7 +108,6 @@ import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.objects.te.TELogPile;
 import net.dries007.tfc.objects.te.TELoom;
 import net.dries007.tfc.objects.te.TEMetalSheet;
-import net.dries007.tfc.objects.te.TENestBox;
 import net.dries007.tfc.objects.te.TEPitKiln;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.objects.te.TEPlacedItem;
@@ -173,7 +172,6 @@ public final class BlocksTFC {
   public static final BlockPlacedItem PLACED_ITEM = getNull();
   public static final BlockPlacedHide PLACED_HIDE = getNull();
   public static final BlockCharcoalPile CHARCOAL_PILE = getNull();
-  public static final BlockNestBox NEST_BOX = getNull();
   public static final BlockLogPile LOG_PILE = getNull();
   public static final BlockIngotPile INGOT_PILE = getNull();
   public static final BlockCharcoalForge CHARCOAL_FORGE = getNull();
@@ -286,7 +284,6 @@ public final class BlocksTFC {
 
     inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bellows", new BlockBellows(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bloomery", new BlockBloomery(), CT_MISC)));
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "nest_box", new BlockNestBox(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockSluice(register(r, "sluice", new BlockSluice(), CT_MISC)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockSeaIce(), CT_MISC)));
 
@@ -690,7 +687,6 @@ public final class BlocksTFC {
     register(TEPlacedHide.class, "placed_hide");
     register(TEPitKiln.class, "pit_kiln");
     register(TEChestTFC.class, "chest");
-    register(TENestBox.class, "nest_box");
     register(TELogPile.class, "log_pile");
     register(TEIngotPile.class, "ingot_pile");
     register(TEFirePit.class, "fire_pit");

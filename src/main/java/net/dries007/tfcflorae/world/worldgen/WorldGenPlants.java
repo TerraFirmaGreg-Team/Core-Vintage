@@ -11,8 +11,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockEpiphyteTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallGrassTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallPlantTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -109,7 +109,7 @@ public class WorldGenPlants extends WorldGenerator {
         break;
       }
       case SHORT_GRASS: {
-        BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
+        BlockPlantShortGrass plantBlock = BlockPlantShortGrass.get(plant);
         IBlockState state = plantBlock.getDefaultState();
 
         for (int i = 0; i < ChunkDataTFC.getRainfall(worldIn, position) / 4; ++i) {
@@ -120,7 +120,7 @@ public class WorldGenPlants extends WorldGenerator {
               worldIn.isAirBlock(blockpos) &&
               plantBlock.canBlockStay(worldIn, blockpos, state)) {
             int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
-            setBlockAndNotifyAdequately(worldIn, blockpos, state.withProperty(BlockShortGrassTFC.AGE, plantAge));
+            setBlockAndNotifyAdequately(worldIn, blockpos, state.withProperty(BlockPlantShortGrass.AGE, plantAge));
           }
         }
         break;
@@ -141,7 +141,7 @@ public class WorldGenPlants extends WorldGenerator {
                   worldIn.isAirBlock(blockpos.up(k)) &&
                   plantBlock.canBlockStay(worldIn, blockpos.up(k), state)) {
                 int plantAge = plant.getAgeForWorldgen(rand, Climate.getActualTemp(worldIn, blockpos));
-                setBlockAndNotifyAdequately(worldIn, blockpos.up(k), state.withProperty(BlockShortGrassTFC.AGE, plantAge));
+                setBlockAndNotifyAdequately(worldIn, blockpos.up(k), state.withProperty(BlockPlantShortGrass.AGE, plantAge));
               }
             }
           }

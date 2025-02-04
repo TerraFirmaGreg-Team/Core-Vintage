@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.core.capabilities.size;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemBlock;
 import su.terrafirmagreg.api.data.Unicode;
-import su.terrafirmagreg.api.util.TranslatorUtil;
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
@@ -28,8 +28,8 @@ public interface ICapabilitySize {
 
   @SideOnly(Side.CLIENT)
   default void addTooltipInfo(ItemStack stack, List<String> text) {
-    text.add(Unicode.WEIGHT + " " + I18n.format(TranslatorUtil.getEnumName(getWeight(stack))) + " " + Unicode.SIZE + " "
-             + I18n.format(TranslatorUtil.getEnumName(getSize(stack))));
+    text.add(Unicode.WEIGHT + " " + I18n.format(TranslatorUtils.getEnumName(getWeight(stack))) + " " + Unicode.SIZE + " "
+             + I18n.format(TranslatorUtils.getEnumName(getSize(stack))));
   }
 
   default Weight getWeight(ItemStack stack) {

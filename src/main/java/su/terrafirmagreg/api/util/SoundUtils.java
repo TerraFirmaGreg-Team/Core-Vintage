@@ -8,7 +8,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-public class SoundUtils {
+public final class SoundUtils {
 
   public static void playBlockPlaceSound(World world, EntityPlayer player, IBlockState state, Location location) {
 

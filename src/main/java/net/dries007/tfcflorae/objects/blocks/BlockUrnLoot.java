@@ -1,5 +1,10 @@
 package net.dries007.tfcflorae.objects.blocks;
 
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,15 +23,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.firmalife.registry.ItemsFL;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import hu.lebeg134.tfc_ph_compat.objects.items.ItemsTPC;
-
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
+import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemsTFC;
@@ -126,7 +126,7 @@ public class BlockUrnLoot extends Block implements ICapabilitySize {
       Item[] dropList = {ItemsTFCF.MADDER, ItemsTFCF.WELD, ItemsTFCF.WOAD, ItemsTFCF.INDIGO, ItemsTFCF.RAPE, ItemsTFCF.HOPS, ItemsTFCF.FLAX,
                          ItemsTFCF.LINEN_STRING, ItemsTFCF.COTTON_BOLL, ItemsTFCF.COTTON_YARN, ItemsTFCF.AGAVE, ItemsTFCF.SISAL_STRING,
                          ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsTFC.MORTAR, ItemsTFC.FIRE_CLAY, Items.CLAY_BALL,
-                         ItemsTFC.WOOL, ItemsTFC.WOOL_YARN,
+                         ItemsAnimal.WOOL.get(), ItemsAnimal.WOOL_YARN.get(),
 
                          // TODO заменить на gt
 //                           ItemPowder.get(Powder.KAOLINITE), ItemPowder.get(Powder.GRAPHITE), ItemPowder.get(Powder.FLUX),

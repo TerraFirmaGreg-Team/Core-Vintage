@@ -1,11 +1,25 @@
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDonkey;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalHorse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalLlama;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMule;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalOcelot;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalParrot;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
+import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalPolarBear;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCommandBlock;
 import net.minecraft.block.BlockStructure;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPolarBear;
@@ -31,7 +45,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -47,22 +60,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import com.google.common.base.Joiner;
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.entity.EntitySeatOn;
-import net.dries007.tfc.objects.entity.animal.EntityChickenTFC;
-import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
-import net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC;
-import net.dries007.tfc.objects.entity.animal.EntityHorseTFC;
-import net.dries007.tfc.objects.entity.animal.EntityLlamaTFC;
-import net.dries007.tfc.objects.entity.animal.EntityMuleTFC;
-import net.dries007.tfc.objects.entity.animal.EntityOcelotTFC;
-import net.dries007.tfc.objects.entity.animal.EntityParrotTFC;
-import net.dries007.tfc.objects.entity.animal.EntityPigTFC;
-import net.dries007.tfc.objects.entity.animal.EntityPolarBearTFC;
-import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
-import net.dries007.tfc.objects.entity.animal.EntitySheepTFC;
-import net.dries007.tfc.objects.entity.animal.EntityWolfTFC;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -99,19 +96,19 @@ public final class Helpers {
     PREVENT_ON_SURFACE.add(EntityZombieHorse.class);
     PREVENT_ON_SURFACE.add(EntitySkeletonHorse.class);
     VANILLA_REPLACEMENTS = new HashMap<>();
-    VANILLA_REPLACEMENTS.put(EntityCow.class, EntityCowTFC.class);
-    VANILLA_REPLACEMENTS.put(EntitySheep.class, EntitySheepTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityPig.class, EntityPigTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityMule.class, EntityMuleTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityHorse.class, EntityHorseTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityDonkey.class, EntityDonkeyTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityChicken.class, EntityChickenTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityRabbit.class, EntityRabbitTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityWolf.class, EntityWolfTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityOcelot.class, EntityOcelotTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityPolarBear.class, EntityPolarBearTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityParrot.class, EntityParrotTFC.class);
-    VANILLA_REPLACEMENTS.put(EntityLlama.class, EntityLlamaTFC.class);
+    VANILLA_REPLACEMENTS.put(EntityCow.class, EntityAnimalCow.class);
+    VANILLA_REPLACEMENTS.put(EntitySheep.class, EntityAnimalSheep.class);
+    VANILLA_REPLACEMENTS.put(EntityPig.class, EntityAnimalPig.class);
+    VANILLA_REPLACEMENTS.put(EntityMule.class, EntityAnimalMule.class);
+    VANILLA_REPLACEMENTS.put(EntityHorse.class, EntityAnimalHorse.class);
+    VANILLA_REPLACEMENTS.put(EntityDonkey.class, EntityAnimalDonkey.class);
+    VANILLA_REPLACEMENTS.put(EntityChicken.class, EntityAnimalChicken.class);
+    VANILLA_REPLACEMENTS.put(EntityRabbit.class, EntityAnimalRabbit.class);
+    VANILLA_REPLACEMENTS.put(EntityWolf.class, EntityAnimalWolf.class);
+    VANILLA_REPLACEMENTS.put(EntityOcelot.class, EntityAnimalOcelot.class);
+    VANILLA_REPLACEMENTS.put(EntityPolarBear.class, EntityAnimalPolarBear.class);
+    VANILLA_REPLACEMENTS.put(EntityParrot.class, EntityAnimalParrot.class);
+    VANILLA_REPLACEMENTS.put(EntityLlama.class, EntityAnimalLlama.class);
   }
 
   public static boolean isJEIEnabled() {
@@ -142,42 +139,6 @@ public final class Helpers {
 
   public static boolean shouldPreventOnSurface(Entity entity) {
     return PREVENT_ON_SURFACE.contains(entity.getClass()) || entity.isCreatureType(EnumCreatureType.MONSTER, false);
-  }
-
-  /**
-   * Makes an entity sit on a block
-   *
-   * @param world    the worldObj
-   * @param pos      the BlockPos of the block to sit on
-   * @param creature the entityLiving that will sit on this block
-   * @param yOffset  the y offset of the top facing
-   */
-  public static void sitOnBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityLiving creature, double yOffset) {
-    if (!world.isRemote && !world.getBlockState(pos).getMaterial().isReplaceable()) {
-      EntitySeatOn seat = new EntitySeatOn(world, pos, yOffset);
-      world.spawnEntity(seat);
-      creature.startRiding(seat);
-    }
-  }
-
-  /**
-   * Returns the entity which is sitting on this BlockPos.
-   *
-   * @param world the WorldObj
-   * @param pos   the BlockPos of this block
-   * @return the entity which is sitting on this block, or null if none
-   */
-  @Nullable
-  public static Entity getSittingEntity(@Nonnull World world, @Nonnull BlockPos pos) {
-    if (!world.isRemote) {
-      List<EntitySeatOn> seats = world.getEntitiesWithinAABB(EntitySeatOn.class, new AxisAlignedBB(pos).grow(1D));
-      for (EntitySeatOn seat : seats) {
-        if (pos.equals(seat.getPos())) {
-          return seat.getSittingEntity();
-        }
-      }
-    }
-    return null;
   }
 
   /**

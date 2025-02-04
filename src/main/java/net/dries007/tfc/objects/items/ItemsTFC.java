@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -18,8 +21,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
@@ -87,14 +88,6 @@ public final class ItemsTFC {
   public static final ItemMisc JUTE_FIBER = getNull();
   @GameRegistry.ObjectHolder("crop/product/burlap_cloth")
   public static final ItemMisc BURLAP_CLOTH = getNull();
-  @GameRegistry.ObjectHolder("animal/product/wool")
-  public static final ItemMisc WOOL = getNull();
-  @GameRegistry.ObjectHolder("animal/product/wool_yarn")
-  public static final ItemMisc WOOL_YARN = getNull();
-  @GameRegistry.ObjectHolder("animal/product/wool_cloth")
-  public static final ItemMisc WOOL_CLOTH = getNull();
-  @GameRegistry.ObjectHolder("animal/product/silk_cloth")
-  public static final ItemMisc SILK_CLOTH = getNull();
 
   @GameRegistry.ObjectHolder("ceramics/unfired/fire_brick")
   public static final ItemPottery UNFIRED_FIRE_BRICK = getNull();
@@ -138,7 +131,6 @@ public final class ItemsTFC {
 
   public static final ItemTFC MORTAR = getNull();
 
-  public static final ItemTFC HALTER = getNull();
 
   @GameRegistry.ObjectHolder("powder/salt")
   public static final ItemPowder SALT = getNull();
@@ -200,7 +192,6 @@ public final class ItemsTFC {
     Builder<Item> simpleItems = ImmutableList.builder();
 
     simpleItems.add(register(r, "mortar", new ItemMisc(Size.TINY, Weight.VERY_LIGHT, "mortar"), CT_MISC));
-    simpleItems.add(register(r, "halter", new ItemMisc(Size.SMALL, Weight.LIGHT, "halter"), CT_MISC));
     register(r, "wooden_bucket", new ItemWoodenBucket(), CT_WOOD); //not a simple item, use a custom model
     register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET), CT_METAL); //not a simple item, use a custom model
     register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), CT_METAL); //not a simple item, use a custom model
@@ -363,11 +354,6 @@ public final class ItemsTFC {
     }
 
     simpleItems.add(register(r, "quiver", new ItemQuiver(), CT_MISC));
-
-    simpleItems.add(register(r, "animal/product/wool", new ItemMisc(Size.SMALL, Weight.LIGHT), CT_MISC));
-    simpleItems.add(register(r, "animal/product/wool_yarn", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT, "string"), CT_MISC));
-    simpleItems.add(register(r, "animal/product/wool_cloth", new ItemMisc(Size.SMALL, Weight.LIGHT, "cloth_high_quality"), CT_MISC));
-    simpleItems.add(register(r, "animal/product/silk_cloth", new ItemMisc(Size.SMALL, Weight.LIGHT, "cloth_high_quality"), CT_MISC));
 
     simpleItems.add(register(r, "dye/black", new ItemMisc(Size.TINY, Weight.LIGHT, "dye_black"), CT_MISC));
     simpleItems.add(register(r, "dye/blue", new ItemMisc(Size.TINY, Weight.LIGHT, "dye_blue"), CT_MISC));

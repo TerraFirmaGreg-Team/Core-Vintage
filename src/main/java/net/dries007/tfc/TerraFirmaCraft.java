@@ -49,12 +49,10 @@ import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSpawnTFCParticle;
 import net.dries007.tfc.network.PacketStackFood;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.objects.LootTablesTFC;
 import net.dries007.tfc.objects.entity.EntitiesTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.proxy.IProxy;
 import net.dries007.tfc.util.fuel.FuelManager;
-import net.dries007.tfc.util.json.JsonConfigRegistry;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import org.apache.logging.log4j.LogManager;
@@ -132,7 +130,6 @@ public final class TerraFirmaCraft {
     network.registerMessage(new PacketProspectResult.Handler(), PacketProspectResult.class, ++id, Side.CLIENT);
 
     EntitiesTFC.preInit();
-    JsonConfigRegistry.INSTANCE.preInit(event.getModConfigurationDirectory());
 
     CapabilityChunkData.preInit();
     CapabilityForgeable.preInit();
@@ -148,7 +145,6 @@ public final class TerraFirmaCraft {
   public void init(FMLInitializationEvent event) {
 
     ItemsTFC.init();
-    LootTablesTFC.init();
 
     if (event.getSide().isClient()) {
       TFCKeybindings.init();
@@ -178,7 +174,6 @@ public final class TerraFirmaCraft {
   @Mod.EventHandler
   public void postInit(FMLPostInitializationEvent event) {
     FuelManager.postInit();
-    JsonConfigRegistry.INSTANCE.postInit();
   }
 
   @Mod.EventHandler

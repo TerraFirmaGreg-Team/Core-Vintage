@@ -21,7 +21,8 @@ import static su.terrafirmagreg.modules.ModulesContainer.DEVICE;
   containerID = MOD_ID,
   name = "Device",
   author = "Xikaro",
-  version = "1.0.0"
+  version = "1.0.0",
+  description = "Device module"
 )
 public final class ModuleDevice extends ModuleBase {
 

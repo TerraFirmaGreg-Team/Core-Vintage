@@ -10,8 +10,10 @@ public final class BlocksDevice {
 
   public static Supplier<BlockAlloyCalculator> ALLOY_CALCULATOR;
 
+
   public static void onRegister(IRegistryManager registry) {
 
     ALLOY_CALCULATOR = registry.block(new BlockAlloyCalculator());
+
   }
 }

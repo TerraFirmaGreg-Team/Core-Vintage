@@ -18,7 +18,7 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlockPeat;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -82,7 +82,7 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
       for (Plant plant : TFCRegistries.PLANTS.getValuesCollection()) {
         if (plant.getPlantType() == Plant.PlantType.SHORT_GRASS && rand.nextFloat() < 0.5f) {
           float temp = Climate.getActualTemp(world, upPos);
-          BlockShortGrassTFC plantBlock = BlockShortGrassTFC.get(plant);
+          BlockPlantShortGrass plantBlock = BlockPlantShortGrass.get(plant);
 
           if (world.isAirBlock(upPos) &&
               plant.isValidLocation(temp, ChunkDataTFC.getRainfall(world, upPos), Math.subtractExact(world.getLightFor(EnumSkyBlock.SKY, upPos), world.getSkylightSubtracted()))

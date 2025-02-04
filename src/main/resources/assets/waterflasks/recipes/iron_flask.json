@@ -25,7 +25,7 @@
       "item": "waterflasks:leather_side"
     },
     "B": {
-      "item": "waterflasks:bladder"
+      "item": "tfg:animal/product/bladder"
     }
   },
   "result": {

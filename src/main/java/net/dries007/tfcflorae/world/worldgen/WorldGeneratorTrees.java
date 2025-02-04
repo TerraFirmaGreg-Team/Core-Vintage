@@ -1,5 +1,6 @@
 package net.dries007.tfcflorae.world.worldgen;
 
+import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.state.IBlockState;
@@ -150,8 +151,8 @@ public class WorldGeneratorTrees implements IWorldGenerator {
         IBlockState down = world.getBlockState(blockPos.down());
         final Biome b1 = world.getBiome(blockPos);
 
-        if (b1 != BiomesTFC.BAYOU && b1 != BiomesTFC.MARSH && !BiomesTFC.isOceanicBiome(b1) && !BiomesTFC.isLakeBiome(b1) && !BiomesTFC.isBeachBiome(b1)
-            && !BiomesTFC.isMesaBiome(b1)) {
+        if (b1 != BiomesTFC.BAYOU && b1 != BiomesTFC.MARSH && !BiomeHelper.isOceanic(b1) && !BiomeHelper.isLake(b1) && !BiomeHelper.isBeach(b1)
+            && !BiomeHelper.isMesa(b1)) {
           if ((BlocksTFC.isSand(down) || BlocksTFC.isSoilOrGravel(down) || BlocksTFCF.isSand(down) || BlocksTFCF.isSoilOrGravel(down)) && (
             down != Blocks.HARDENED_CLAY && down != Blocks.STAINED_HARDENED_CLAY)) {
             if (15f <= avgTemperature && 40f >= avgTemperature && 65f <= rainfall && 150f >= rainfall && blockPos.getY() >= WorldTypeTFC.SEALEVEL) {

@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.util;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -394,5 +395,14 @@ public final class ModUtils {
 
   public static boolean isServer(Side side) {
     return Side.SERVER == side;
+  }
+
+  /**
+   * Is this a development environment?
+   *
+   * @return boolean showing if the game is currently in dev
+   */
+  public static boolean isDevEnv() {
+    return (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
   }
 }

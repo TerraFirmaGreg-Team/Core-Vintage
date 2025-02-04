@@ -42,7 +42,7 @@ public class EventHandlerCapabilitiesItemStack {
       return;
     }
 
-    ICapabilityProvider provider = CapabilityHandlerSize.getCustom(stack);
+    ICapabilityProvider provider = CapabilityHandlerSize.get(stack);
 
     event.addCapability(CapabilitySize.KEY, provider);
 
@@ -91,7 +91,7 @@ public class EventHandlerCapabilitiesItemStack {
 
   private static void damageResistance(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
-    ICapabilityProvider provider = CapabilityHandlerDamageResistance.getCustom(stack);
+    ICapabilityProvider provider = CapabilityHandlerDamageResistance.get(stack);
     if (provider == null) {
       return;
     }

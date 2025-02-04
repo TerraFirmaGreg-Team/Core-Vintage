@@ -1,6 +1,9 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ICreature;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
@@ -94,7 +97,6 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
@@ -124,10 +126,7 @@ import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
 import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ICreatureTFC;
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Rock.Type;
@@ -149,8 +148,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.objects.entity.ai.EBEntityAI;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.types.DefaultPlants;
@@ -620,7 +617,7 @@ public final class CommonEventHandler {
       }
 
       // Check creature spawning - Prevents vanilla's respawning mechanic to spawn creatures outside their allowed conditions
-      if (event.getEntity() instanceof ICreatureTFC creature) {
+      if (event.getEntity() instanceof ICreature creature) {
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
         float temperature = Climate.getAvgTemp(world, pos);
         float floraDensity = ChunkDataTFC.getFloraDensity(world, pos);
@@ -944,7 +941,7 @@ public final class CommonEventHandler {
         if (pluckable.equals(entityTypeName)) {
           target.dropItem(Items.FEATHER, 1);
           target.attackEntityFrom(DamageSources.PLUCKING, (float) ConfigTFC.General.MISC.damagePerFeather);
-          if (target instanceof IAnimalTFC animalTarget) {
+          if (target instanceof IAnimal animalTarget) {
             animalTarget.setFamiliarity(animalTarget.getFamiliarity() - 0.04f);
           }
           return;
@@ -1027,13 +1024,6 @@ public final class CommonEventHandler {
       }
     }
     return hugeHeavyCount;
-  }
-
-  @SubscribeEvent
-  public void addAI(LivingEvent.LivingUpdateEvent event) {
-    if (event.getEntityLiving() instanceof EntityAnimalTFC animal && event.getEntityLiving().ticksExisted < 5 && !event.getEntityLiving().isChild()) {
-      animal.tasks.addTask(2, new EBEntityAI(animal));
-    }
   }
 
 

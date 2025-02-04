@@ -1,6 +1,24 @@
 {
   "pools": [
     {
+      "name": "bladder",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "tfg:animal/product/bladder",
+          "functions": [
+            {
+              "function": "tfg:apply_req_skill",
+              "skill": "butchering",
+              "tier": 0,
+              "rarity": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "roll1",
       "rolls": 1,
       "entries": [
@@ -17,7 +35,8 @@
                 "min": 8,
                 "max": 16
               }
-            }, {
+            },
+            {
               "function": "looting_enchant",
               "count": {
                 "min": 0,
@@ -27,7 +46,8 @@
           ]
         }
       ]
-    }, {
+    },
+    {
       "name": "roll2",
       "rolls": 1,
       "entries": [
@@ -39,7 +59,8 @@
             {
               "function": "set_count",
               "count": 1
-            }, {
+            },
+            {
               "function": "looting_enchant",
               "count": {
                 "min": 0,
@@ -49,7 +70,8 @@
           ]
         }
       ]
-    }, {
+    },
+    {
       "name": "roll3",
       "rolls": 1,
       "entries": [
@@ -64,7 +86,8 @@
                 "min": 0,
                 "max": 4
               }
-            }, {
+            },
+            {
               "function": "looting_enchant",
               "count": {
                 "min": 0,
@@ -74,7 +97,8 @@
           ]
         }
       ]
-    }, {
+    },
+    {
       "name": "roll4",
       "rolls": 1,
       "entries": [

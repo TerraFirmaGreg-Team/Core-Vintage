@@ -39,6 +39,7 @@ import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedOut;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerRespawn;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
+import su.terrafirmagreg.modules.core.init.EntitiesCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.LootTablesCore;
 import su.terrafirmagreg.modules.core.init.PacketsCore;
@@ -90,6 +91,7 @@ public final class ModuleCore extends ModuleBase {
   public void onRegister(IRegistryManager registry) {
     BlocksCore.onRegister(registry);
     ItemsCore.onRegister(registry);
+    EntitiesCore.onRegister(registry);
     EffectsCore.onRegister(registry);
     LootTablesCore.onRegister(registry);
   }

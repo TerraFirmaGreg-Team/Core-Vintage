@@ -18,13 +18,15 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -221,9 +223,31 @@ public final class ModelUtils {
 
   //endregion
 
+  //region ===== TileEntitySpecialRenderer
+
+//  @SuppressWarnings({"unchecked"})
+//  public static <T extends EntityEntry> void entity(T entity) {
+//    var entityClass = entity.getEntityClass();
+//    var clazz = IProviderEntityRenderer.class.isAssignableFrom(entityClass);
+//    if (clazz) {
+//      var classSubclass = entityClass.asSubclass(IProviderEntityRenderer.class);
+//      var provider = ClassUtils.createObjectInstance(classSubclass);
+//
+//      ModelUtils.entity(entityClass, provider.getRenderFactory());
+//    }
+//  }
+
+  public static <T extends Entity> void entity(Class<T> entityClass, IRenderFactory<? super T> renderFactory) {
+    if (renderFactory != null) {
+      RenderingRegistry.registerEntityRenderingHandler(entityClass, renderFactory);
+    }
+  }
+
+  //endregion
+
   //region ===== Color
 
-  public void colorHandler(final BlockColors blockColors, Block block) {
+  public void color(final BlockColors blockColors, Block block) {
     if (block instanceof IProviderBlockColor provider) {
       if (provider.getBlockColor() != null) {
         blockColors.registerBlockColorHandler(provider.getBlockColor(), block);
@@ -231,11 +255,7 @@ public final class ModelUtils {
     }
   }
 
-  public void colorHandler(ColorHandlerEvent.Item itemColors, Block block) {
-
-  }
-
-  public void colorHandler(final ItemColors itemColors, Block block) {
+  public void color(final ItemColors itemColors, Block block) {
     if (block instanceof IProviderItemColor provider) {
       if (provider.getItemColor() != null) {
         itemColors.registerItemColorHandler(provider.getItemColor(), block);
@@ -243,7 +263,7 @@ public final class ModelUtils {
     }
   }
 
-  public void colorHandler(final ItemColors itemColors, Item item) {
+  public void color(final ItemColors itemColors, Item item) {
     if (item instanceof IProviderItemColor provider) {
       if (provider.getItemColor() != null) {
         itemColors.registerItemColorHandler(provider.getItemColor(), item);

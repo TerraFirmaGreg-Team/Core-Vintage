@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 @UtilityClass
 @SuppressWarnings("unused")
@@ -124,7 +125,12 @@ public final class AnnotationUtils {
    */
   public static <T, A extends Annotation> Map<T, A> getAnnotations(Class<A> annotation, Class<T> instance) {
 
-    return getAnnotations(asmData, annotation, instance);
+    return getAnnotations(asmData, annotation, instance, aClass -> true);
+  }
+
+  public static <T, A extends Annotation> Map<T, A> getAnnotations(Class<A> annotation, Class<T> instance, Function<Class<? extends T>, Boolean> createInstance) {
+
+    return getAnnotations(asmData, annotation, instance, createInstance);
   }
 
   /**
@@ -135,7 +141,7 @@ public final class AnnotationUtils {
    * @param instance   The class of the thing you're trying to construct. This should be a shared interface, or parent class.
    * @return A list of all classes annotated with the annotation, as instances.
    */
-  public static <T, A extends Annotation> Map<T, A> getAnnotations(ASMDataTable table, Class<A> annotation, Class<T> instance) {
+  public static <T, A extends Annotation> Map<T, A> getAnnotations(ASMDataTable table, Class<A> annotation, Class<T> instance, Function<Class<? extends T>, Boolean> createInstance) {
 
     final Map<T, A> map = new Object2ObjectOpenHashMap<>();
 
@@ -145,7 +151,10 @@ public final class AnnotationUtils {
 
         final Class<?> asmClass = Class.forName(asmData.getClassName());
         final Class<? extends T> asmInstanceClass = asmClass.asSubclass(instance);
-        map.put(asmInstanceClass.getDeclaredConstructor().newInstance(), asmInstanceClass.getAnnotation(annotation));
+        if (createInstance.apply(asmInstanceClass)) {
+          map.put(asmInstanceClass.getDeclaredConstructor().newInstance(), asmInstanceClass.getAnnotation(annotation));
+        }
+
       } catch (final ClassNotFoundException e) {
 
         // Ignore missing clases, because Forge changed this behaviour to allow these.

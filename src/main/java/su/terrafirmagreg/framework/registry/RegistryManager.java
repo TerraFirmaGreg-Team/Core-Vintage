@@ -187,7 +187,7 @@ public class RegistryManager implements IRegistryManager {
   public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
 
     this.getWrapper().getBlocks().register(block -> {
-      ModelUtils.colorHandler(event.getBlockColors(), block);
+      ModelUtils.color(event.getBlockColors(), block);
     });
   }
 
@@ -196,11 +196,11 @@ public class RegistryManager implements IRegistryManager {
   public void onRegisterItemColor(ColorHandlerEvent.Item event) {
 
     this.getWrapper().getBlocks().register(block -> {
-      ModelUtils.colorHandler(event.getItemColors(), block);
+      ModelUtils.color(event.getItemColors(), block);
     });
 
     this.getWrapper().getItems().register(item -> {
-      ModelUtils.colorHandler(event.getItemColors(), item);
+      ModelUtils.color(event.getItemColors(), item);
     });
   }
 

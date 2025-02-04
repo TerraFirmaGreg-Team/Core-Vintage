@@ -1,6 +1,19 @@
 package net.dries007.tfcthings.blocks;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.modules.animal.api.util.AnimalFood;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalHare;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalPheasant;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalTurkey;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDuck;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGrouse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalQuail;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -26,30 +39,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import net.dries007.tfc.objects.CreativeTabsTFC;
+import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfcthings.items.TFCThingsConfigurableItem;
 import net.dries007.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfcthings.tileentity.TileEntityBearTrap;
 
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.entity.animal.AnimalFood;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
-import net.dries007.tfc.objects.entity.animal.EntityChickenTFC;
-import net.dries007.tfc.objects.entity.animal.EntityDuckTFC;
-import net.dries007.tfc.objects.entity.animal.EntityGrouseTFC;
-import net.dries007.tfc.objects.entity.animal.EntityHareTFC;
-import net.dries007.tfc.objects.entity.animal.EntityPheasantTFC;
-import net.dries007.tfc.objects.entity.animal.EntityQuailTFC;
-import net.dries007.tfc.objects.entity.animal.EntityRabbitTFC;
-import net.dries007.tfc.objects.entity.animal.EntityTurkeyTFC;
-import net.dries007.tfc.objects.items.ItemSeedsTFC;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
+import java.util.function.Supplier;
 
 
 public class BlockSnare extends Block implements ICapabilitySize, TFCThingsConfigurableItem {
@@ -164,8 +163,8 @@ public class BlockSnare extends Block implements ICapabilitySize, TFCThingsConfi
   }
 
   private boolean isFood(ItemStack stack) {
-    AnimalFood food = AnimalFood.get(EntityChickenTFC.class);
-    return food != null && food.isFood(stack);
+    Supplier<AnimalFood> food = AnimalFood.get(EntityAnimalChicken.class);
+    return food != null && food.get().isFood(stack);
   }
 
   @Override
@@ -191,7 +190,7 @@ public class BlockSnare extends Block implements ICapabilitySize, TFCThingsConfi
       pos.getX() - 10.0D, pos.getY() - 5.0D, pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D, pos.getZ() + 10.0D);
     TileEntityBearTrap snare = getTileEntity(worldIn, pos);
     if (snare.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty() && !worldIn.isRemote) {
-      for (EntityAnimalTFC animal : worldIn.getEntitiesWithinAABB(EntityAnimalTFC.class, captureBox)) {
+      for (EntityAnimalBase animal : worldIn.getEntitiesWithinAABB(EntityAnimalBase.class, captureBox)) {
         if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition()).getBlock() instanceof BlockSnare)) {
           snare.setCapturedEntity(animal);
           snare.setOpen(false);
@@ -205,25 +204,25 @@ public class BlockSnare extends Block implements ICapabilitySize, TFCThingsConfi
       if (state.getValue(BAITED)) {
         if (rand.nextDouble() < ConfigTFCThings.Items.SNARE.baitCaptureChance) {
           double entitySelection = rand.nextDouble();
-          EntityAnimalTFC animal;
+          EntityAnimalBase animal;
           if (entitySelection < 0.1) {
             if (entitySelection < 0.03) {
               if (entitySelection < 0.01) {
-                animal = new EntityGrouseTFC(worldIn);
+                animal = new EntityAnimalGrouse(worldIn);
               } else {
-                animal = new EntityQuailTFC(worldIn);
+                animal = new EntityAnimalQuail(worldIn);
               }
             } else {
-              animal = new EntityDuckTFC(worldIn);
+              animal = new EntityAnimalDuck(worldIn);
             }
           } else if (entitySelection < 0.5) {
             if (entitySelection < 0.3) {
-              animal = new EntityHareTFC(worldIn);
+              animal = new EntityAnimalHare(worldIn);
             } else {
-              animal = new EntityRabbitTFC(worldIn);
+              animal = new EntityAnimalRabbit(worldIn);
             }
           } else {
-            animal = new EntityPheasantTFC(worldIn);
+            animal = new EntityAnimalPheasant(worldIn);
           }
           animal.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
           worldIn.spawnEntity(animal);
@@ -241,8 +240,10 @@ public class BlockSnare extends Block implements ICapabilitySize, TFCThingsConfi
   }
 
   private boolean isCapturable(Entity entityIn) {
-    return entityIn instanceof EntityRabbitTFC || entityIn instanceof EntityPheasantTFC || entityIn instanceof EntityDuckTFC
-           || entityIn instanceof EntityChickenTFC || entityIn instanceof EntityTurkeyTFC;
+    return entityIn instanceof EntityAnimalRabbit
+           || entityIn instanceof EntityAnimalPheasant
+           || entityIn instanceof EntityAnimalChicken
+           || entityIn instanceof EntityAnimalTurkey;
   }
 
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {

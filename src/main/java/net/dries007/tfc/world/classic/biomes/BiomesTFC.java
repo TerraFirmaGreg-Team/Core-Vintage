@@ -15,8 +15,8 @@ import net.dries007.tfc.util.Helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
 @GameRegistry.ObjectHolder(TFC)
@@ -108,30 +108,6 @@ public final class BiomesTFC {
     register(r, new BiomeMesaTFC(false, false, 9470285, (new Biome.BiomeProperties(MOD_NAME + " Mesa Plateau M")).setBaseBiome("tfc:mesa_plateau")
       .setBaseHeight(-0.1F)
       .setHeightVariation(-1.5F)), true, true, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.MOUNTAIN);
-  }
-
-  public static boolean isMesaBiome(Biome b) {
-    return MESA == b || MESA_PLATEAU == b || MESA_BRYCE == b || MESA_PLATEAU_M == b;
-  }
-
-  public static boolean isOceanicBiome(Biome b) {
-    return OCEAN == b || DEEP_OCEAN == b || MANGROVE == b;
-  }
-
-  public static boolean isRiverBiome(Biome b) {
-    return RIVER == b;
-  }
-
-  public static boolean isLakeBiome(Biome b) {
-    return LAKE == b;
-  }
-
-  public static boolean isMountainBiome(Biome b) {
-    return MOUNTAINS == b || MOUNTAINS_EDGE == b || CRAG == b;
-  }
-
-  public static boolean isBeachBiome(Biome b) {
-    return BEACH == b || GRAVEL_BEACH == b;
   }
 
   public static List<Biome> getSpawnBiomes() {

@@ -7,6 +7,8 @@ import su.terrafirmagreg.api.base.object.item.api.IItemSettings.Settings;
 import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderItemCapability;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -154,6 +156,18 @@ public interface IItemSettings extends IBaseSettings<Settings> {
 
     public Settings fireResistant() {
       this.isFireResistant = true;
+      return this;
+    }
+
+    public Settings weight(Weight weight) {
+      return this;
+    }
+
+    public Settings size(Size size) {
+      return this;
+    }
+
+    public Settings notCanStack() {
       return this;
     }
   }

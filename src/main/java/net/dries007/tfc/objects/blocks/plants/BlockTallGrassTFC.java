@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
@@ -25,11 +27,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.objects.items.ItemsTFC;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
-
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -39,7 +36,7 @@ import java.util.Map;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
-public class BlockTallGrassTFC extends BlockShortGrassTFC implements IGrowable, ITallPlant {
+public class BlockTallGrassTFC extends BlockPlantShortGrass implements IGrowable, ITallPlant {
 
   private static final PropertyEnum<ITallPlant.EnumBlockPart> PART = PropertyEnum.create("part", ITallPlant.EnumBlockPart.class);
   private static final Map<Plant, BlockTallGrassTFC> MAP = new HashMap<>();

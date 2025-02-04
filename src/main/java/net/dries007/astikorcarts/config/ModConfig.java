@@ -38,10 +38,10 @@ public class ModConfig {
       "minecraft:mule",
       "minecraft:pig",
       "minecraft:player",
-      "tfc:cameltfc",
-      "tfc:donkeytfc",
-      "tfc:horsetfc",
-      "tfc:muletfc"
+      "tfg:camel",
+      "tfg:donkey",
+      "tfg:horse",
+      "tfg:mule"
     };
   }
 
@@ -53,10 +53,10 @@ public class ModConfig {
       "minecraft:mule",
       "minecraft:pig",
       "minecraft:player",
-      "tfc:cameltfc",
-      "tfc:donkeytfc",
-      "tfc:horsetfc",
-      "tfc:muletfc"
+      "tfg:camel",
+      "tfg:donkey",
+      "tfg:horse",
+      "tfg:mule"
     };
   }
 
@@ -68,10 +68,10 @@ public class ModConfig {
       "minecraft:mule",
       "minecraft:pig",
       "minecraft:player",
-      "tfc:cameltfc",
-      "tfc:donkeytfc",
-      "tfc:horsetfc",
-      "tfc:muletfc"
+      "tfg:camel",
+      "tfg:donkey",
+      "tfg:horse",
+      "tfg:mule"
     };
   }
 

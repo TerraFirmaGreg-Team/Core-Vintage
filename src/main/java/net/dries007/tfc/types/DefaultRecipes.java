@@ -1,5 +1,6 @@
 package net.dries007.tfc.types;
 
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
@@ -22,6 +23,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.firmalife.FirmaLife;
+import net.dries007.firmalife.registry.BlocksFL;
+import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
@@ -78,9 +82,6 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.fuel.FuelManager;
-import net.dries007.firmalife.FirmaLife;
-import net.dries007.firmalife.registry.BlocksFL;
-import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.waterflasks.item.ModItems;
 
 import javax.annotation.Nullable;
@@ -850,10 +851,10 @@ public final class DefaultRecipes {
 
     r.registerAll(
       new LoomRecipe(new ResourceLocation(TFC, "burlap_cloth"), IIngredient.of(ItemsTFC.JUTE_FIBER, 12), new ItemStack(ItemsTFC.BURLAP_CLOTH), 12, new ResourceLocation(TFC, "textures/blocks/devices/loom/product/burlap.png")),
-      new LoomRecipe(new ResourceLocation(TFC, "wool_cloth"), IIngredient.of(ItemsTFC.WOOL_YARN, 16), new ItemStack(ItemsTFC.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsTFC.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFC, "wool_cloth"), IIngredient.of(ItemsAnimal.WOOL_YARN.get(), 16), new ItemStack(ItemsAnimal.WOOL_CLOTH.get()), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsAnimal.SILK_CLOTH.get()), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
 
-      new LoomRecipe(new ResourceLocation(TFC, "wool_block"), IIngredient.of(ItemsTFC.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+      new LoomRecipe(new ResourceLocation(TFC, "wool_block"), IIngredient.of(ItemsAnimal.WOOL_CLOTH.get(), 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
     );
   }
 

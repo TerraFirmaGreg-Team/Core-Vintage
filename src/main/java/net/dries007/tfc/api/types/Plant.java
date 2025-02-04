@@ -1,5 +1,8 @@
 package net.dries007.tfc.api.types;
 
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -14,16 +17,12 @@ import net.dries007.tfc.objects.blocks.plants.BlockEpiphyteTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockHangingPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockMushroomTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallGrassTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
@@ -324,7 +323,7 @@ public class Plant extends IForgeRegistryEntry.Impl<Plant> {
     DRY(BlockPlantTFC::new),
     DRY_TALL_PLANT(BlockTallPlantTFC::new),
     CACTUS(BlockCactusTFC::new),
-    SHORT_GRASS(BlockShortGrassTFC::new),
+    SHORT_GRASS(BlockPlantShortGrass::new),
     TALL_GRASS(BlockTallGrassTFC::new),
     EPIPHYTE(BlockEpiphyteTFC::new),
     REED(BlockPlantTFC::new),

@@ -44,6 +44,7 @@ public class BaseItemGroup extends CreativeTabs {
   public static Supplier<BaseItemGroup> of(String identifier, String icon) {
     return of(identifier, ModUtils.resource(icon));
   }
+  
 
   public static Supplier<BaseItemGroup> of(IModule module, String icon) {
     var identifier = module.getIdentifier();

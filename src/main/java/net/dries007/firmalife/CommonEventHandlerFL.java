@@ -1,6 +1,11 @@
 package net.dries007.firmalife;
 
 
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGoat;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.state.IBlockState;
@@ -29,11 +34,6 @@ import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 import net.dries007.firmalife.entity.CombatGreenhouseTask;
 import net.dries007.firmalife.gui.FLGuiHandler;
 import net.dries007.firmalife.registry.BlocksFL;
-import net.dries007.tfc.objects.entity.animal.EntityCowTFC;
-import net.dries007.tfc.objects.entity.animal.EntityGoatTFC;
-import net.dries007.tfc.objects.entity.animal.EntityYakTFC;
-import net.dries007.tfc.objects.entity.animal.EntityZebuTFC;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.util.Helpers;
 
 @Mod.EventBusSubscriber(modid = FirmaLife.MOD_ID)
@@ -51,18 +51,18 @@ public class CommonEventHandlerFL {
       if (bucket != null) //checking if it can be filled
       {
         FluidActionResult fillResult = FluidUtil.tryFillContainer(item, FluidUtil.getFluidHandler(new ItemStack(Items.MILK_BUCKET)), Fluid.BUCKET_VOLUME, player, false);
-        if (fillResult.isSuccess() && entity instanceof EntityCowTFC cow) {
+        if (fillResult.isSuccess() && entity instanceof EntityAnimalCow cow) {
           //we can just cast the entity to a cow to test familiarity etc
           Fluid fluid = FluidsCore.MILK.get();
           boolean foundMilkable = false;
-          if (entity instanceof EntityYakTFC)//have to check the original entity to get the proper instanceof however
+          if (entity instanceof EntityAnimalYak)//have to check the original entity to get the proper instanceof however
           {
             foundMilkable = true;
             fluid = FluidsCore.YAK_MILK.get();
-          } else if (entity instanceof EntityGoatTFC) {
+          } else if (entity instanceof EntityAnimalGoat) {
             foundMilkable = true;
             fluid = FluidsCore.GOAT_MILK.get();
-          } else if (entity instanceof EntityZebuTFC) {
+          } else if (entity instanceof EntityAnimalZebu) {
             foundMilkable = true;
             fluid = FluidsCore.ZEBU_MILK.get();
           }
@@ -105,7 +105,7 @@ public class CommonEventHandlerFL {
     EntityPlayer player = event.getEntityPlayer();
     BlockPos pos = event.getPos();
     EnumFacing facing = event.getFace();
-    if (item == ItemsTFC.WOOL_YARN && player.isSneaking() && facing != null) {
+    if (item == ItemsAnimal.WOOL_YARN.get() && player.isSneaking() && facing != null) {
       BlockPos offsetPos = pos.offset(facing);
       if (world.isAirBlock(offsetPos)) {
         IBlockState string = BlocksFL.WOOL_STRING.getStateForPlacement(world, player, facing, offsetPos);

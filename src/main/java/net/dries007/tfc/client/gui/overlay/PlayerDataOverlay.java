@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.gui.overlay;
 
 import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
@@ -27,7 +28,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.types.IAnimalTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import org.lwjgl.opengl.GL11;
 
@@ -243,7 +243,7 @@ public final class PlayerDataOverlay {
 
     if (player.isSneaking()) {
       EntityLivingBase entity = event.getEntity();
-      if (entity instanceof IAnimalTFC && ((IAnimalTFC) entity).getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity) {
+      if (entity instanceof IAnimal animal && animal.getAdultFamiliarityCap() > 0 && entity == mc.pointedEntity) {
         double x, y, z;
         x = event.getX();
         y = event.getY();
@@ -255,7 +255,6 @@ public final class PlayerDataOverlay {
         float f2 = 5.0F;
 
         if (d3 < f2) {
-          IAnimalTFC animal = (IAnimalTFC) entity;
           RenderManager rendermanager = mc.getRenderManager();
 
           GL11.glPushMatrix();
@@ -270,7 +269,7 @@ public final class PlayerDataOverlay {
           GL11.glScalef(0.33F, 0.33F, 0.33F);
 
           float familiarity = Math.max(0.0F, Math.min(1.0F, animal.getFamiliarity()));
-          if (familiarity >= animal.getAdultFamiliarityCap() && animal.getAge() != IAnimalTFC.Age.CHILD) {
+          if (familiarity >= animal.getAdultFamiliarityCap() && animal.getAge() != IAnimal.Age.CHILD) {
             // Render a red-ish outline for adults that cannot be familiarized more
             drawTexturedModalRect(-8, 0, 132, 40, 16, 16);
           } else if (familiarity >= 0.3F) {

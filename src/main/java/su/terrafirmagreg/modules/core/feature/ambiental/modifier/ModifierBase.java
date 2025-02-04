@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.ambiental.modifier;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.TranslatorUtil;
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
 
@@ -64,7 +64,7 @@ public class ModifierBase implements Comparable<ModifierBase> {
   }
 
   public String getDisplayName() {
-    return TranslatorUtil.translate(ModUtils.localize("ambient.modifier", this.name));
+    return TranslatorUtils.translate(ModUtils.localize("ambient.modifier", this.name));
   }
 
   public void apply(CapabilityProviderAmbiental temp) {

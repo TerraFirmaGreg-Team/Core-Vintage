@@ -1,5 +1,7 @@
 package net.dries007.firmalife;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -7,8 +9,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.firmalife.util.HelpersFL;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 import static net.dries007.firmalife.FirmaLife.MOD_ID;
 
@@ -93,11 +93,6 @@ public class ConfigFL {
       @Config.Comment("Ticks required between two nut hammerings")
       @Config.LangKey("config." + MOD_ID + "general.balance.nutTime")
       public int nutTime = 2000;
-
-      @Config.Comment("List of animals that drop rennet")
-      @Config.LangKey("config." + MOD_ID + "general.balance.rennetLootTable")
-      public String[] rennetLootTable = new String[]{"animals/sheep", "animals/cow", "animals/deer", "animals/goat", "animals/zebu", "animals/gazelle",
-                                                     "animals/wildebeest", "animals/muskox", "animals/yak"};
 
       @Config.Comment("Ticks required for a cheese to become aged")
       @Config.LangKey("config." + MOD_ID + "general.balance.cheeseTimeToAged")

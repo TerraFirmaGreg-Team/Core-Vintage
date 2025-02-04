@@ -1,8 +1,12 @@
 package su.terrafirmagreg.datafix.mapping;
 
 import su.terrafirmagreg.api.data.enums.Mods.Names;
+import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
+import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
+import su.terrafirmagreg.modules.core.init.EntitiesCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
@@ -34,10 +38,19 @@ public abstract class AbstractRemapping {
     put("alloy_calculator", BlocksDevice.ALLOY_CALCULATOR.get());
 //    put("bear_trap", BlocksDevice.BEAR_TRAP.get());
 
+    put("nest_box", BlocksAnimal.NEST_BOX.get());
+
   }};
 
   protected static final Map<String, Item> ITEM_MAP = new Object2ObjectOpenHashMap<>() {{
     put("wand", ItemsCore.WAND.get());
+
+    put("bladder", ItemsAnimal.BLADDER.get());
+    put("halter", ItemsAnimal.HALTER.get());
+    put("product/silk_cloth", ItemsAnimal.SILK_CLOTH.get());
+    put("product/wool_cloth", ItemsAnimal.WOOL_CLOTH.get());
+    put("product/wool_yarn", ItemsAnimal.WOOL_YARN.get());
+    put("product/wool", ItemsAnimal.WOOL.get());
 
     put("gem/amber", ItemGem.get(Gem.AMBER));
     put("powder/pearl", ItemPowder.get(Powder.PEARL));
@@ -81,6 +94,47 @@ public abstract class AbstractRemapping {
   }};
 
   protected static final Map<String, EntityEntry> ENTITY_ENTRY_MAP = new Object2ObjectOpenHashMap<>() {{
+    put("sitblock", EntitiesCore.SIT_BLOCK.get());
+    put("sheeptfc", EntitiesAnimal.SHEEP.get());
+    put("cowtfc", EntitiesAnimal.COW.get());
+    put("grizzlybeartfc", EntitiesAnimal.GRIZZLYBEAR.get());
+    put("chickentfc", EntitiesAnimal.CHICKEN.get());
+    put("pheasanttfc", EntitiesAnimal.PHEASANT.get());
+    put("deertfc", EntitiesAnimal.DEER.get());
+    put("pigtfc", EntitiesAnimal.PIG.get());
+    put("wolftfc", EntitiesAnimal.WOLF.get());
+    put("rabbittfc", EntitiesAnimal.RABBIT.get());
+    put("horsetfc", EntitiesAnimal.HORSE.get());
+    put("donkeytfc", EntitiesAnimal.DONKEY.get());
+    put("muletfc", EntitiesAnimal.MULE.get());
+    put("polarbeartfc", EntitiesAnimal.POLARBEAR.get());
+    put("parrottfc", EntitiesAnimal.PARROT.get());
+    put("llamatfc", EntitiesAnimal.LLAMA.get());
+    put("ocelottfc", EntitiesAnimal.OCELOT.get());
+    put("panthertfc", EntitiesAnimal.PANTHER.get());
+    put("ducktfc", EntitiesAnimal.DUCK.get());
+    put("alpacatfc", EntitiesAnimal.ALPACA.get());
+    put("goattfc", EntitiesAnimal.GOAT.get());
+    put("sabertoothtfc", EntitiesAnimal.SABERTOOTH.get());
+    put("cameltfc", EntitiesAnimal.CAMEL.get());
+    put("liontfc", EntitiesAnimal.LION.get());
+    put("hyenatfc", EntitiesAnimal.HYENA.get());
+    put("direwolftfc", EntitiesAnimal.DIREWOLF.get());
+    put("haretfc", EntitiesAnimal.HARE.get());
+    put("boartfc", EntitiesAnimal.BOAR.get());
+    put("zebutfc", EntitiesAnimal.ZEBU.get());
+    put("gazelletfc", EntitiesAnimal.GAZELLE.get());
+    put("wildebeesttfc", EntitiesAnimal.WILDEBEEST.get());
+    put("quailtfc", EntitiesAnimal.QUAIL.get());
+    put("grousetfc", EntitiesAnimal.GROUSE.get());
+    put("mongoosetfc", EntitiesAnimal.MONGOOSE.get());
+    put("turkeytfc", EntitiesAnimal.TURKEY.get());
+    put("jackaltfc", EntitiesAnimal.JACKAL.get());
+    put("muskoxtfc", EntitiesAnimal.MUSKOX.get());
+    put("yaktfc", EntitiesAnimal.YAK.get());
+    put("blackbeartfc", EntitiesAnimal.BLACKBEAR.get());
+    put("cougartfc", EntitiesAnimal.COUGAR.get());
+    put("coyotetfc", EntitiesAnimal.COYOTE.get());
 
   }};
 

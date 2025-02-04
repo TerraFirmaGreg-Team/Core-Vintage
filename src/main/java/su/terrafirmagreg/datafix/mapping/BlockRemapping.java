@@ -20,9 +20,11 @@ public class BlockRemapping extends AbstractRemapping {
       String mappingNamespace = mapping.key.getNamespace();
       String mappingPath = mapping.key.getPath();
 
-      if (BLOCK_MAP.containsKey(mappingPath)) {
-        mapping.remap(BLOCK_MAP.get(mappingPath));
-      }
+      BLOCK_MAP.forEach((key, value) -> {
+        if (mappingPath.endsWith(key)) {
+          mapping.remap(value);
+        }
+      });
 
       if (MOD_ID_SET.contains(mappingNamespace)) {
         mapping.ignore();

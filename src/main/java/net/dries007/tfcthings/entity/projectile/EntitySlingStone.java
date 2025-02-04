@@ -1,7 +1,6 @@
 package net.dries007.tfcthings.entity.projectile;
 
-import net.dries007.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.types.IPredator;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,6 +9,8 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 public class EntitySlingStone extends EntityThrowable {
 

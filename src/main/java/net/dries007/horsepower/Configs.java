@@ -1,9 +1,5 @@
 package net.dries007.horsepower;
 
-import java.util.function.BooleanSupplier;
-
-import com.google.gson.JsonObject;
-
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
@@ -12,7 +8,10 @@ import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.Fluid;
 
+import com.google.gson.JsonObject;
 import net.dries007.horsepower.lib.Reference;
+
+import java.util.function.BooleanSupplier;
 
 @Config(modid = Reference.MODID, category = "all")
 public class Configs {
@@ -213,9 +212,9 @@ public class Configs {
               "Must be edited with in-game editor for live changes."})
     @Name("Press Recipes")
     public String[] pressRecipes = {
-      "minecraft:string@22-tfc:animal/product/silk_cloth",
+      "minecraft:string@22-tfg:animal/product/silk_cloth",
       "ore:treeLeaves@8-fluid:fresh_water@1000",
-      "tfc:animal/product/wool_yarn@14-tfc:animal/product/wool_cloth",
+      "tfg:animal/product/wool_yarn@14-tfg:animal/product/wool_cloth",
       "tfc:crop/product/jute_fiber@10-tfc:crop/product/burlap_cloth",
       "tfc:food/olive:*-fluid:olive_oil_water@250"
     };
@@ -306,12 +305,12 @@ public class Configs {
     @Config.LangKey("config.gui.mobs")
     @Name("Mob List")
     public String[] grindstoneMobList = {
-      "net.dries007.tfc.objects.entity.animal.EntityHorseTFC",
-      "net.dries007.tfc.objects.entity.animal.EntityDonkeyTFC",
-      "net.dries007.tfc.objects.entity.animal.EntityMuleTFC",
-      "net.dries007.tfc.objects.entity.animal.EntityCamelTFC",
-      "net.dries007.tfc.objects.entity.animal.EntityLlamaTFC"
-    };
+      "tfg:horse",
+      "tfg:donkey",
+      "tfg:mule",
+      "tfg:camel",
+      "tfg:lama",
+      };
 
     @Comment("The amount of points that is needed for a full press")
     @Name("Points For Press")

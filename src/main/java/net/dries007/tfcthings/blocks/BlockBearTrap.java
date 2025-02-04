@@ -2,6 +2,7 @@ package net.dries007.tfcthings.blocks;
 
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -32,13 +33,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfcthings.items.TFCThingsConfigurableItem;
-import net.dries007.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfcthings.tileentity.TileEntityBearTrap;
-import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
+import net.dries007.tfcthings.items.TFCThingsConfigurableItem;
+import net.dries007.tfcthings.main.ConfigTFCThings;
+import net.dries007.tfcthings.tileentity.TileEntityBearTrap;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -14,7 +14,6 @@ import net.dries007.firmalife.gui.FLGuiHandler;
 import net.dries007.firmalife.network.PacketDrawBoundingBox;
 import net.dries007.firmalife.network.PacketSpawnVanillaParticle;
 import net.dries007.firmalife.proxy.CommonProxy;
-import net.dries007.firmalife.registry.LootTablesFL;
 import net.dries007.firmalife.util.HelpersFL;
 import net.dries007.firmalife.util.OreDictsFL;
 import org.apache.logging.log4j.Logger;
@@ -65,7 +64,6 @@ public class FirmaLife {
   @Mod.EventHandler
   public void init(FMLInitializationEvent event) {
     proxy.init(event);
-    LootTablesFL.init();
     ModuleManager.getModules().forEach(mod -> mod.init(event));
 
 

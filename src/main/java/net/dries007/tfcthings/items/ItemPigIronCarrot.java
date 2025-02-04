@@ -1,18 +1,9 @@
 package net.dries007.tfcthings.items;
 
-import net.dries007.tfcthings.entity.living.EntityPigvil;
-import net.dries007.tfcthings.init.TFCThingsBlocks;
-import net.dries007.tfcthings.main.ConfigTFCThings;
-
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.entity.animal.EntityPigTFC;
-import net.dries007.tfc.objects.items.ItemTFC;
-import net.dries007.tfc.types.DefaultMetals;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,6 +11,14 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.items.ItemTFC;
+import net.dries007.tfc.types.DefaultMetals;
+import net.dries007.tfcthings.entity.living.EntityPigvil;
+import net.dries007.tfcthings.init.TFCThingsBlocks;
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nonnull;
 
@@ -49,10 +48,9 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
 //            EntityAnimalTFC animal = (EntityAnimalTFC)entity;
 //            animal.setFamiliarity(animal.getFamiliarity() + 0.1f);
 //        }
-    if (metal == TFCRegistries.METALS.getValue(DefaultMetals.PIG_IRON) && entity instanceof EntityPigTFC) {
-      EntityPigTFC piggy = (EntityPigTFC) entity;
+    if (metal == TFCRegistries.METALS.getValue(DefaultMetals.PIG_IRON) && entity instanceof EntityAnimalPig piggy) {
       float requiredFamiliarity = (float) ConfigTFCThings.Misc.PIGVIL.familiarityLevel;
-      if (piggy.getGender().equals(IAnimalTFC.Gender.MALE) && piggy.getAge() == IAnimalTFC.Age.ADULT && piggy.getFamiliarity() >= requiredFamiliarity) {
+      if (piggy.getGender().equals(IAnimal.Gender.MALE) && piggy.getAge() == IAnimal.Age.ADULT && piggy.getFamiliarity() >= requiredFamiliarity) {
         player.world.playSound(player, piggy.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1.0f, 1.0f);
         if (!player.world.isRemote) {
           if (!player.isCreative()) {
@@ -67,8 +65,7 @@ public class ItemPigIronCarrot extends ItemTFC implements TFCThingsConfigurableI
           }
         }
       }
-    } else if (entity instanceof EntityPigvil) {
-      EntityPigvil pigvil = (EntityPigvil) entity;
+    } else if (entity instanceof EntityPigvil pigvil) {
       if (pigvil.getAnvil() == TFCThingsBlocks.PIGVIL_BLOCK && metal == TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL)) {
         player.world.playSound(player, pigvil.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1.0f, 1.0f);
         if (!player.world.isRemote) {

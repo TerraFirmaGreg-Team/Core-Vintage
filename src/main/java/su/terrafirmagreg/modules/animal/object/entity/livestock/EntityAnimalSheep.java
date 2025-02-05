@@ -11,12 +11,12 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.network.SCPacketSimple;
 
 import net.minecraft.block.Block;
@@ -166,7 +166,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
       if (!world.isRemote) {
         if (isReadyForAnimalProduct()) {
           stack.damageItem(1, player);
-          ItemStack woolStack = new ItemStack(ItemsCore.WOOL.get());
+          ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL.get());
           StackUtils.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
           playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
           setProductsCooldown();
@@ -232,7 +232,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   @Override
   public List<ItemStack> getProducts() {
     // Only white for now
-    return Collections.singletonList(new ItemStack(ItemsCore.WOOL.get()));
+    return Collections.singletonList(new ItemStack(ItemsAnimal.WOOL.get()));
   }
 
   @Override

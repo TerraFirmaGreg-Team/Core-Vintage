@@ -1,9 +1,9 @@
 package net.dries007.tfcflorae.types;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -902,7 +902,7 @@ public final class RecipesTFCF {
       new LoomRecipe(new ResourceLocation(TFCF, "sisal_cloth"), IIngredient.of(ItemsTFCF.SISAL_STRING, 12), new ItemStack(ItemsTFCF.SISAL_CLOTH), 12, new ResourceLocation(TFCF, "textures/blocks/devices/loom/product/sisal.png")),
       new LoomRecipe(new ResourceLocation(TFCF, "wool_block_cotton"), IIngredient.of(ItemsTFCF.COTTON_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
       new LoomRecipe(new ResourceLocation(TFCF, "wool_block_linen"), IIngredient.of(ItemsTFCF.LINEN_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(TFCF, "wool_block_silk"), IIngredient.of(ItemsCore.SILK_CLOTH.get(), 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+      new LoomRecipe(new ResourceLocation(TFCF, "wool_block_silk"), IIngredient.of(ItemsAnimal.SILK_CLOTH.get(), 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
     );
   }
 

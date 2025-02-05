@@ -212,9 +212,9 @@ public class Configs {
               "Must be edited with in-game editor for live changes."})
     @Name("Press Recipes")
     public String[] pressRecipes = {
-      "minecraft:string@22-tfg:core/product/silk_cloth",
+      "minecraft:string@22-tfg:animal/product/silk_cloth",
       "ore:treeLeaves@8-fluid:fresh_water@1000",
-      "tfg:core/product/wool_yarn@14-tfg:core/product/wool_cloth",
+      "tfg:animal/product/wool_yarn@14-tfg:animal/product/wool_cloth",
       "tfc:crop/product/jute_fiber@10-tfc:crop/product/burlap_cloth",
       "tfc:food/olive:*-fluid:olive_oil_water@250"
     };

@@ -1,7 +1,7 @@
 package net.dries007.firmalife.registry;
 
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -262,7 +262,7 @@ public class BlocksFL {
     normalIBs.add(register(r, "pumpkin_hanging_planter", new BlockHangingPlanter(() -> Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT), () -> ItemSeedsTFC.get(StemCrop.PUMPKIN), 13), CT_MISC));
     normalIBs.add(register(r, "melon_hanging_planter", new BlockHangingPlanter(() -> Item.getItemFromBlock(BlocksFL.MELON_FRUIT), () -> ItemSeedsTFC.get(StemCrop.MELON), 13), CT_MISC));
     normalIBs.add(register(r, "squash_hanging_planter", new BlockHangingPlanter(() -> ItemFoodTFC.get(Food.SQUASH), () -> ItemSeedsTFC.get(Crop.SQUASH), 13), CT_MISC));
-    register(r, "wool_string", new BlockString(() -> ItemsCore.WOOL_YARN.get()));
+    register(r, "wool_string", new BlockString(() -> ItemsAnimal.WOOL_YARN.get()));
     normalIBs.add(register(r, "trellis", new BlockTrellis(), CT_MISC));
     normalIBs.add(register(r, "beehive", new BlockBeehive(), CT_MISC));
     register(r, "honey_jar", new BlockJars(() -> ItemsFL.HONEY_JAR), CT_FOOD);

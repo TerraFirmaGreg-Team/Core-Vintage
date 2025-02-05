@@ -49,10 +49,10 @@ public abstract class AbstractRemapping {
 
     put("bladder", ItemsAnimal.BLADDER.get());
     put("halter", ItemsAnimal.HALTER.get());
-    put("product/silk_cloth", ItemsCore.SILK_CLOTH.get());
-    put("product/wool_cloth", ItemsCore.WOOL_CLOTH.get());
-    put("product/wool_yarn", ItemsCore.WOOL_YARN.get());
-    put("product/wool", ItemsCore.WOOL.get());
+    put("product/silk_cloth", ItemsAnimal.SILK_CLOTH.get());
+    put("product/wool_cloth", ItemsAnimal.WOOL_CLOTH.get());
+    put("product/wool_yarn", ItemsAnimal.WOOL_YARN.get());
+    put("product/wool", ItemsAnimal.WOOL.get());
 
     put("gem/amber", ItemGem.get(Gem.AMBER));
     put("powder/pearl", ItemPowder.get(Powder.PEARL));

@@ -1,18 +1,18 @@
-package su.terrafirmagreg.modules.core.object.item;
+package su.terrafirmagreg.modules.animal.object.item;
 
 import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
-public class ItemSilkCloth extends BaseItem {
+public class ItemAnimalWoolYarn extends BaseItem {
 
-  public ItemSilkCloth() {
+  public ItemAnimalWoolYarn() {
 
     getSettings()
-      .registryKey("product/silk_cloth")
-      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
-      .oreDict("cloth_high_quality");
+      .registryKey("product/wool_yarn")
+      .capability(CapabilityProviderSize.of(Size.VERY_SMALL, Weight.VERY_LIGHT))
+      .oreDict("string");
   }
 
 }

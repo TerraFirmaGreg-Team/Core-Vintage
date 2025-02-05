@@ -6,11 +6,11 @@
       "ore": "spindle"
     },
     {
-      "item": "tfg:core/product/wool"
+      "item": "tfg:animal/product/wool"
     }
   ],
   "result": {
-    "item": "tfg:core/product/wool_yarn",
+    "item": "tfg:animal/product/wool_yarn",
     "count": 8
   }
 }

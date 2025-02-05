@@ -53,6 +53,14 @@ public class CapabilityProviderHeat implements ICapabilityHeat {
   public CapabilityProviderHeat() {
   } // This is here so you can do a custom implementation
 
+  public static CapabilityProviderHeat of(float heatCapacity, float meltTemp) {
+    return of(null, heatCapacity, meltTemp);
+  }
+
+  public static CapabilityProviderHeat of(NBTTagCompound nbt, float heatCapacity, float meltTemp) {
+    return new CapabilityProviderHeat(nbt, heatCapacity, meltTemp);
+  }
+
   @Override
   @NotNull
   public NBTTagCompound serializeNBT() {

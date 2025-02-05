@@ -1,12 +1,12 @@
 package net.dries007.firmalife;
 
 
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGoat;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -105,7 +105,7 @@ public class CommonEventHandlerFL {
     EntityPlayer player = event.getEntityPlayer();
     BlockPos pos = event.getPos();
     EnumFacing facing = event.getFace();
-    if (item == ItemsCore.WOOL_YARN.get() && player.isSneaking() && facing != null) {
+    if (item == ItemsAnimal.WOOL_YARN.get() && player.isSneaking() && facing != null) {
       BlockPos offsetPos = pos.offset(facing);
       if (world.isAirBlock(offsetPos)) {
         IBlockState string = BlocksFL.WOOL_STRING.getStateForPlacement(world, player, facing, offsetPos);

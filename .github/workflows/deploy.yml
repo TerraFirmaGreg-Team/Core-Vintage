@@ -73,7 +73,7 @@ jobs:
         uses: actions/checkout@v4.2.2
 
       - name: SetUp JDK
-        uses: actions/setup-java@v4.6.0
+        uses: actions/setup-java@v4.7.0
         with:
           java-version: |
             8

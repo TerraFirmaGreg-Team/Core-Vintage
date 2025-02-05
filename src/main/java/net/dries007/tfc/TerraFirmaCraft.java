@@ -21,7 +21,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.client.ClientEvents;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCKeybindings;
@@ -131,7 +130,6 @@ public final class TerraFirmaCraft {
     EntitiesTFC.preInit();
 
     CapabilityChunkData.preInit();
-    CapabilityForgeable.preInit();
 
     if (event.getSide().isClient()) {
       ClientEvents.preInit();

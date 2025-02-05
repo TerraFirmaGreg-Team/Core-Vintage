@@ -68,11 +68,6 @@ public class CapabilityHandlerSize {
     }
     // Check for generic item types
     Item item = stack.getItem();
-//        if (item instanceof IItemSettings provider) {
-//            var settings = provider.getSettings();
-//            return CapabilityProviderSize.get(settings.getSize(), settings.getWeight(), settings.isCanStack());
-//
-//        }
     if (item instanceof ItemTool || item instanceof ItemSword) {
       return CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM, true); // Stored only in chests, stacksize should be limited to 1 since it is a tool
 
@@ -86,10 +81,6 @@ public class CapabilityHandlerSize {
       if (block instanceof BlockLadder) {
         return CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT, true); // Fits small vessels and stacksize = 64
       }
-//            if (block instanceof IBlockSettings provider) {
-//                var settings = provider.getSettings();
-//                return CapabilityProviderSize.get(settings.getSize(), settings.getWeight(), settings.isCanStack());
-//            }
       return CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT, true); // Fits small vessels and stacksize = 32
 
     }

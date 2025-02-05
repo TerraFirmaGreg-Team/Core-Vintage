@@ -1,5 +1,8 @@
 package net.dries007.tfc.types;
 
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
+import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
+import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
@@ -26,9 +29,6 @@ import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.firmalife.FirmaLife;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
@@ -765,7 +765,7 @@ public final class DefaultRecipes {
     r.register(new AnvilRecipeSplitting(new ResourceLocation(TFC, "splitting_bloom"), IIngredient.of(ItemsTFC.REFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), 144, Metal.Tier.TIER_II, PUNCH_LAST));
     r.register(new AnvilRecipe(new ResourceLocation(TFC, "iron_bloom"), x -> {
       if (x.getItem() == ItemsTFC.REFINED_BLOOM) {
-        IForgeable cap = x.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+        ICapabilityForge cap = x.getCapability(CapabilityForgeable.CAPABILITY, null);
         if (cap instanceof IForgeableMeasurableMetal) {
           return ((IForgeableMeasurableMetal) cap).getMetal() == Metal.WROUGHT_IRON && ((IForgeableMeasurableMetal) cap).getMetalAmount() == 144;
         }

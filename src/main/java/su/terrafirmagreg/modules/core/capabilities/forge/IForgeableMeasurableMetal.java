@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.forge;
+package su.terrafirmagreg.modules.core.capabilities.forge;
 
 import net.dries007.tfc.api.types.Metal;
 

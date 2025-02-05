@@ -28,7 +28,7 @@ public class CapabilityFood {
    */
   public static final int DEFAULT_ROT_TICKS = ICalendar.TICKS_IN_DAY * 22;
   @CapabilityInject(ICapabilityFood.class)
-  public static Capability<ICapabilityFood> CAPABILITY;
+  public static final Capability<ICapabilityFood> CAPABILITY = ModUtils.getNull();
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilityFood.class, new CapabilityStorageFood(), CapabilityProviderFood::new);

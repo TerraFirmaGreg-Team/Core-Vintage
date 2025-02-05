@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.forge;
+package su.terrafirmagreg.modules.core.capabilities.forge;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 /**
  * Capability for forgeable items (not to be confused with forgeable items that needs heat) Allows items to be forged in the anvil.
  */
-public interface IForgeable extends INBTSerializable<NBTTagCompound> {
+public interface ICapabilityForge extends INBTSerializable<NBTTagCompound> {
 
   /**
    * Gets the current amount of work on the object
@@ -60,8 +60,8 @@ public interface IForgeable extends INBTSerializable<NBTTagCompound> {
   void addStep(@Nullable ForgeStep step);
 
   /**
-   * Resets the object's {@link IForgeable} components. Used if an item falls out of an anvil without getting worked Purpose is to preserve stackability on
-   * items that haven't been worked yet.
+   * Resets the object's {@link ICapabilityForge} components. Used if an item falls out of an anvil without getting worked Purpose is to preserve stackability
+   * on items that haven't been worked yet.
    */
   void reset();
 

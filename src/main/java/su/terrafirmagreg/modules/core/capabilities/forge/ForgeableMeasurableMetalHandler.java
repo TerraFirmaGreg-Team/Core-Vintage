@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.forge;
+package su.terrafirmagreg.modules.core.capabilities.forge;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

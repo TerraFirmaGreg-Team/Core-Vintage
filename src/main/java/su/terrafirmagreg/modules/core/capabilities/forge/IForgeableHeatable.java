@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.forge;
+package su.terrafirmagreg.modules.core.capabilities.forge;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
@@ -19,7 +19,7 @@ import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
  * This is an advanced IForgeable capability that also needs heat If you implement this capability, you MUST implement {@link CapabilityHeat} as well You should
  * return the same instance from the getCapability calls
  */
-public interface IForgeableHeatable extends IForgeable, ICapabilityHeat {
+public interface IForgeableHeatable extends ICapabilityForge, ICapabilityHeat {
 
   /**
    * Gets the working temperature of the item

@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
+import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
@@ -20,8 +22,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -97,7 +97,7 @@ public class TEAnvilTFC extends TEInventory {
    */
   public boolean setRecipe(@Nullable AnvilRecipe recipe) {
     ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
     boolean recipeChanged;
 
     if (cap != null && recipe != null) {
@@ -177,7 +177,7 @@ public class TEAnvilTFC extends TEInventory {
     switch (slot) {
       case SLOT_INPUT_1:
       case SLOT_INPUT_2:
-        return stack.hasCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+        return stack.hasCapability(CapabilityForgeable.CAPABILITY, null);
       case SLOT_FLUX:
         return OreDictionaryHelper.doesStackMatchOre(stack, "dustFlux");
       case SLOT_HAMMER:
@@ -192,7 +192,7 @@ public class TEAnvilTFC extends TEInventory {
    */
   public void addStep(@Nonnull EntityPlayer player, @Nullable ForgeStep step) {
     ItemStack input = inventory.getStackInSlot(SLOT_INPUT_1);
-    IForgeable cap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    ICapabilityForge cap = input.getCapability(CapabilityForgeable.CAPABILITY, null);
     if (cap != null) {
       // Add step to stack + tile
       if (step != null) {
@@ -292,8 +292,8 @@ public class TEAnvilTFC extends TEInventory {
       }
 
       // Check if both are weldable
-      IForgeable cap1 = input1.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-      IForgeable cap2 = input2.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+      ICapabilityForge cap1 = input1.getCapability(CapabilityForgeable.CAPABILITY, null);
+      ICapabilityForge cap2 = input2.getCapability(CapabilityForgeable.CAPABILITY, null);
       if (cap1 == null || cap2 == null || !cap1.isWeldable() || !cap2.isWeldable()) {
         if (cap1 instanceof ICapabilityHeat && cap2 instanceof ICapabilityHeat) {
           TerraFirmaCraft.getNetwork()
@@ -343,7 +343,7 @@ public class TEAnvilTFC extends TEInventory {
 
   private void checkRecipeUpdate() {
     ItemStack stack = inventory.getStackInSlot(SLOT_INPUT_1);
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
     if (cap == null && recipe != null) {
       // Check for item removed / broken
       setRecipe(null);
@@ -374,7 +374,7 @@ public class TEAnvilTFC extends TEInventory {
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
       ItemStack result = super.extractItem(slot, amount, simulate);
       if (slot == SLOT_INPUT_1 || slot == SLOT_INPUT_2) {
-        IForgeable cap = result.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+        ICapabilityForge cap = result.getCapability(CapabilityForgeable.CAPABILITY, null);
         if (cap != null && cap.getRecipeName() != null && (!cap.getSteps().hasWork() || cap.getWork() == 0)) {
           cap.reset();
         }

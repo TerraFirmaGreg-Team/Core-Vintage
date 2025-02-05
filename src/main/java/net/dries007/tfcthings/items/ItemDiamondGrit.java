@@ -1,16 +1,15 @@
 package net.dries007.tfcthings.items;
 
-import net.dries007.tfc.api.capability.forge.ForgeableHandler;
-
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityProviderForge;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.items.ItemTFC;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import net.dries007.tfc.objects.CreativeTabsTFC;
+import net.dries007.tfc.objects.items.ItemTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,6 +36,6 @@ public class ItemDiamondGrit extends ItemTFC {
 
   @Nullable
   public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new ForgeableHandler(nbt);
+    return new CapabilityProviderForge(nbt);
   }
 }

@@ -9,6 +9,9 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
 import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityHandlerForge;
+import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
@@ -124,8 +127,6 @@ import net.dries007.firmalife.items.ItemFruitPole;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.sharkbark.cellars.init.ModItems;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Metal;
@@ -520,7 +521,7 @@ public final class CommonEventHandler {
       }
 
       // Forge / Metal / Heat. Try forge first, because it's more specific
-      ICapabilityProvider forgeHandler = CapabilityForgeable.getCustomForgeable(stack);
+      ICapabilityProvider forgeHandler = CapabilityHandlerForge.getCustom(stack);
       boolean isForgeable = false;
       boolean isHeatable = false;
       if (forgeHandler != null) {

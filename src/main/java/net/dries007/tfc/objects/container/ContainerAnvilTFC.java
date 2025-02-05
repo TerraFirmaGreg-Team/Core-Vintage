@@ -1,5 +1,8 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
+import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
+
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -11,8 +14,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -24,7 +25,6 @@ import net.dries007.tfc.util.forge.ForgeStep;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_PLAN;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_STEP_MAX;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_STEP_MIN;
@@ -32,6 +32,7 @@ import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_FLUX;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_1;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_2;
+import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @ParametersAreNonnullByDefault
 public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButtonHandler {
@@ -85,7 +86,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
     if (slotInput == null) {return false;}
 
     ItemStack stack = slotInput.getStack();
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
 
     // The input must have the forge item capability
     if (cap == null) {return false;}

@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.forge;
+package su.terrafirmagreg.modules.core.capabilities.forge;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -12,18 +12,18 @@ import net.dries007.tfc.util.forge.ForgeSteps;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ForgeableHandler implements ICapabilitySerializable<NBTTagCompound>, IForgeable {
+public class CapabilityProviderForge implements ICapabilitySerializable<NBTTagCompound>, ICapabilityForge {
 
   protected final ForgeSteps steps;
   protected int work;
   protected ResourceLocation recipeName;
 
-  public ForgeableHandler(@Nullable NBTTagCompound nbt) {
+  public CapabilityProviderForge(@Nullable NBTTagCompound nbt) {
     steps = new ForgeSteps();
     deserializeNBT(nbt);
   }
 
-  public ForgeableHandler() {
+  public CapabilityProviderForge() {
     // for custom implementations
     steps = new ForgeSteps();
   }
@@ -70,7 +70,7 @@ public class ForgeableHandler implements ICapabilitySerializable<NBTTagCompound>
 
   @Override
   public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-    return capability == CapabilityForgeable.FORGEABLE_CAPABILITY;
+    return capability == CapabilityForgeable.CAPABILITY;
   }
 
   @SuppressWarnings("unchecked")

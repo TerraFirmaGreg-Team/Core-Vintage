@@ -14,6 +14,7 @@ import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityHandlerEgg;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
@@ -113,6 +114,7 @@ public final class ModuleCore extends ModuleBase {
     CapabilityHeat.register();
     CapabilityFood.register();
     CapabilityMetal.register();
+    CapabilityForgeable.register();
     CapabilitySize.register();
     CapabilityPlayerData.register();
     CapabilityAmbiental.register();

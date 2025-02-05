@@ -7,8 +7,11 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class CombinedCapabilityProvider implements ICapabilityProvider {
 
   private final ICapabilityProvider[] providers;

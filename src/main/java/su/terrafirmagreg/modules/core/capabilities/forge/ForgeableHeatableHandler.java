@@ -1,4 +1,6 @@
-package net.dries007.tfc.api.capability.forge;
+package su.terrafirmagreg.modules.core.capabilities.forge;
+
+import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -8,27 +10,25 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ForgeableHeatableHandler extends CapabilityProviderHeat implements IForgeableHeatable {
 
-  private final ForgeableHandler internalForgeCap;
+  private final CapabilityProviderForge internalForgeCap;
 
   public ForgeableHeatableHandler(@Nullable NBTTagCompound nbt, float heatCapacity, float meltTemp) {
     this.heatCapacity = heatCapacity;
     this.meltTemp = meltTemp;
 
-    internalForgeCap = new ForgeableHandler(nbt);
+    internalForgeCap = new CapabilityProviderForge(nbt);
 
     deserializeNBT(nbt);
   }
 
   public ForgeableHeatableHandler() {
     // for custom implementations
-    internalForgeCap = new ForgeableHandler();
+    internalForgeCap = new CapabilityProviderForge();
   }
 
   @Override
@@ -70,7 +70,7 @@ public class ForgeableHeatableHandler extends CapabilityProviderHeat implements 
 
   @Override
   public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-    return capability == CapabilityForgeable.FORGEABLE_CAPABILITY || super.hasCapability(capability, facing);
+    return capability == CapabilityForgeable.CAPABILITY || super.hasCapability(capability, facing);
   }
 
   @SuppressWarnings("unchecked")

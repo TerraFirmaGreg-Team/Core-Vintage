@@ -1,17 +1,16 @@
 package net.dries007.tfcthings.items;
 
-import net.dries007.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-
+import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-import net.dries007.tfc.objects.CreativeTabsTFC;
-import net.dries007.tfc.objects.items.ItemTFC;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import net.dries007.tfc.objects.CreativeTabsTFC;
+import net.dries007.tfc.objects.items.ItemTFC;
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

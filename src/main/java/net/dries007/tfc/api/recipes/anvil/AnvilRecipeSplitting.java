@@ -1,12 +1,13 @@
 package net.dries007.tfc.api.recipes.anvil;
 
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
+import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
+import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.forge.ForgeRule;
@@ -34,7 +35,7 @@ public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
   public boolean matches(ItemStack input) {
     if (!super.matches(input)) {return false;}
     //Splitable if the output is at least two(don't change this or you will have duplicates)
-    IForgeable cap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    ICapabilityForge cap = input.getCapability(CapabilityForgeable.CAPABILITY, null);
     if (cap instanceof IForgeableMeasurableMetal) {return splitAmount < ((IForgeableMeasurableMetal) cap).getMetalAmount();}
     return false;
   }
@@ -44,7 +45,7 @@ public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
   @Nonnull
   public NonNullList<ItemStack> getOutput(ItemStack input) {
     if (matches(input)) {
-      IForgeable inCap = input.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+      ICapabilityForge inCap = input.getCapability(CapabilityForgeable.CAPABILITY, null);
       if (inCap instanceof IForgeableMeasurableMetal) {
         int metalAmount = ((IForgeableMeasurableMetal) inCap).getMetalAmount();
         Metal metal = ((IForgeableMeasurableMetal) inCap).getMetal();
@@ -54,7 +55,7 @@ public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
         NonNullList<ItemStack> output = NonNullList.create();
         for (int i = 0; i < outCount; i++) {
           ItemStack dump = input.copy();
-          IForgeable cap = dump.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+          ICapabilityForge cap = dump.getCapability(CapabilityForgeable.CAPABILITY, null);
           if (cap instanceof IForgeableMeasurableMetal) {
             cap.reset();
             ((IForgeableMeasurableMetal) cap).setMetalAmount(splitAmount);
@@ -64,7 +65,7 @@ public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {
         }
         if (surplus > 0) {
           ItemStack dumpSurplus = input.copy();
-          IForgeable cap = dumpSurplus.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+          ICapabilityForge cap = dumpSurplus.getCapability(CapabilityForgeable.CAPABILITY, null);
           if (cap instanceof IForgeableMeasurableMetal) {
             cap.reset();
             ((IForgeableMeasurableMetal) cap).setMetalAmount(surplus);

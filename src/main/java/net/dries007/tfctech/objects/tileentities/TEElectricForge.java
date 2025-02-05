@@ -2,6 +2,7 @@ package net.dries007.tfctech.objects.tileentities;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,6 @@ import gregtech.api.capability.GregtechCapabilities;
 import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.te.ITileFields;
 import net.dries007.tfc.objects.te.TEInventory;
@@ -106,7 +106,7 @@ public class TEElectricForge extends TEInventory implements ITickable, ITileFiel
     for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
       ItemStack stack = inventory.getStackInSlot(i);
       ICapabilityHeat cap = stack.getCapability(CapabilityHeat.CAPABILITY, null);
-      float modifier = stack.getItem() instanceof IMetalItem ? ((IMetalItem) stack.getItem()).getSmeltAmount(stack) / 100.0F : 1.0F;
+      float modifier = stack.getItem() instanceof ICapabilityMetal ? ((ICapabilityMetal) stack.getItem()).getSmeltAmount(stack) / 100.0F : 1.0F;
       if (cap != null) {
         // Update temperature of item
         float itemTemp = cap.getTemperature();

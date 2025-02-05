@@ -1,5 +1,8 @@
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -8,8 +11,6 @@ import net.minecraftforge.fluids.FluidStack;
 import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.recipes.AlloyRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -102,7 +103,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
       if (recipe != null && recipe.isValidTemperature(temperature)) {
         return add(stack, recipe);
       } else {
-        IMetalItem metalObject = CapabilityMetalItem.getMetalItem(stack);
+        ICapabilityMetal metalObject = CapabilityMetal.getMetalItem(stack);
         if (metalObject != null) {
           // Melt into unknown alloy (so items aren't simply voided and becomes something)
           add(new FluidStack(FluidsTFC.getFluidFromMetal(Metal.UNKNOWN), metalObject.getSmeltAmount(stack) * stack.getCount()));

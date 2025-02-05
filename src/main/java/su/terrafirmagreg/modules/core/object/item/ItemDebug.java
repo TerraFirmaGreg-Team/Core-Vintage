@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.object.item;
 
 
 import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
+import su.terrafirmagreg.api.util.EntityUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ModuleCore;
@@ -10,11 +11,11 @@ import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -93,6 +94,10 @@ public class ItemDebug extends BaseItem {
         player.sendStatusMessage(new TextComponentString(RED + Mode.BLOCK.getText()), true);
         break;
       }
+      case ENTITY: {
+        player.sendStatusMessage(new TextComponentString(RED + Mode.ENTITY.getText()), true);
+        break;
+      }
     }
   }
 
@@ -153,8 +158,7 @@ public class ItemDebug extends BaseItem {
           } catch (Exception t) { /* Nothing Burger */ }
 
           // Tile Entity
-          TileEntity tile = world.getTileEntity(pos);
-          if (tile != null) {
+          TileUtils.getTile(world, pos).ifPresent(tile -> {
             try {
               tile.getClass().getMethod("debug").invoke(tile);
             } catch (Exception t) {
@@ -172,9 +176,18 @@ public class ItemDebug extends BaseItem {
             if (fluids != null) {
               ModuleCore.LOGGER.info("Found fluid handler: {}", fluids);
             }
-          }
+          });
         } catch (Exception t) { /* Nothing Burger */ }
         return EnumActionResult.SUCCESS;
+      }
+      case ENTITY: {
+        Entity entity = EntityUtils.getEntity(world, pos);
+        if (entity != null) {
+          player.sendMessage(new TextComponentString(Mode.ENTITY.getText()));
+          player.sendMessage(new TextComponentString("Name: " + entity.getName()));
+          player.sendMessage(new TextComponentString("Health: " + entity.getCustomNameTag()));
+        }
+
       }
     }
     return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
@@ -236,6 +249,10 @@ public class ItemDebug extends BaseItem {
         tooltip.add(Mode.BLOCK.getText());
         break;
       }
+      case ENTITY: {
+        tooltip.add(Mode.ENTITY.getText());
+        break;
+      }
     }
   }
 
@@ -261,7 +278,8 @@ public class ItemDebug extends BaseItem {
     BLOCKSTATE_LIST("Blockstate List "),
     TRANSFORM("Transform "),
     TEMPERATURE_CAPABILITY("Temperature Capability "),
-    BLOCK("Block ");
+    BLOCK("Block "),
+    ENTITY("Entity ");
 
     private final String text;
 

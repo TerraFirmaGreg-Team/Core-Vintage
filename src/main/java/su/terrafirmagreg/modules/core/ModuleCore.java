@@ -16,6 +16,8 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
@@ -33,6 +35,7 @@ import su.terrafirmagreg.modules.core.event.feature.EventHandlerAmbiental;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerCalendar;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerFallingBlock;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerPuddles;
+import su.terrafirmagreg.modules.core.event.player.EventHandlerItemTooltip;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDimension;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedIn;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedOut;
@@ -109,6 +112,7 @@ public final class ModuleCore extends ModuleBase {
     CapabilityEgg.register();
     CapabilityHeat.register();
     CapabilityFood.register();
+    CapabilityMetal.register();
     CapabilitySize.register();
     CapabilityPlayerData.register();
     CapabilityAmbiental.register();
@@ -127,6 +131,7 @@ public final class ModuleCore extends ModuleBase {
     CapabilityHandlerEgg.init();
     CapabilityHandlerHeat.init();
     CapabilityHandlerFood.init();
+    CapabilityHandlerMetal.init();
     CapabilitySharpness.register();
     CapabilityHandlerSize.init();
     CapabilityHandlerAmbiental.init();
@@ -149,6 +154,8 @@ public final class ModuleCore extends ModuleBase {
     list.add(EventHandlerCapabilitiesWorld.class);
 
     list.add(EventHandlerPortalSpawn.class);
+
+    list.add(EventHandlerItemTooltip.class);
 
     list.add(EventHandlerOnConfigChanged.class);
     list.add(EventHandlerPostConfigChanged.class);

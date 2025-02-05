@@ -38,10 +38,10 @@ public class ModConfig {
       "minecraft:mule",
       "minecraft:pig",
       "minecraft:player",
-      "tfg:camel",
-      "tfg:donkey",
-      "tfg:horse",
-      "tfg:mule"
+      "tfg:animal/camel",
+      "tfg:animal/donkey",
+      "tfg:animal/horse",
+      "tfg:animal/mule"
     };
   }
 
@@ -53,10 +53,10 @@ public class ModConfig {
       "minecraft:mule",
       "minecraft:pig",
       "minecraft:player",
-      "tfg:camel",
-      "tfg:donkey",
-      "tfg:horse",
-      "tfg:mule"
+      "tfg:animal/camel",
+      "tfg:animal/donkey",
+      "tfg:animal/horse",
+      "tfg:animal/mule"
     };
   }
 
@@ -68,10 +68,10 @@ public class ModConfig {
       "minecraft:mule",
       "minecraft:pig",
       "minecraft:player",
-      "tfg:camel",
-      "tfg:donkey",
-      "tfg:horse",
-      "tfg:mule"
+      "tfg:animal/camel",
+      "tfg:animal/donkey",
+      "tfg:animal/horse",
+      "tfg:animal/mule"
     };
   }
 

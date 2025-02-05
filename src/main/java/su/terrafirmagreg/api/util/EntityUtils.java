@@ -247,6 +247,12 @@ public final class EntityUtils {
     return null;
   }
 
+  @Nullable
+  public static Entity getEntity(World world, BlockPos pos) {
+    return world.getEntityByID(pos.getX());
+  }
+
+
   /**
    * Gets the type of equipment for slot index.
    *

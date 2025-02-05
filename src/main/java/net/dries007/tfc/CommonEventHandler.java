@@ -12,6 +12,9 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ProviderPlayerData;
@@ -123,8 +126,6 @@ import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.sharkbark.cellars.init.ModItems;
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Metal;
@@ -528,12 +529,12 @@ public final class CommonEventHandler {
         isHeatable = forgeHandler instanceof ICapabilityHeat;
       }
       // Metal
-      ICapabilityProvider metalCapability = CapabilityMetalItem.getCustomMetalItem(stack);
+      ICapabilityProvider metalCapability = CapabilityHandlerMetal.getCustom(stack);
       if (metalCapability != null) {
-        event.addCapability(CapabilityMetalItem.KEY, metalCapability);
+        event.addCapability(CapabilityMetal.KEY, metalCapability);
         if (!isForgeable) {
           // Add a forgeable capability for this item, if none is found
-          IMetalItem cap = (IMetalItem) metalCapability;
+          ICapabilityMetal cap = (ICapabilityMetal) metalCapability;
           Metal metal = cap.getMetal(stack);
           if (metal != null) {
             event.addCapability(CapabilityForgeable.KEY, new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));

@@ -3,6 +3,8 @@ package net.dries007.tfc.compat.crafttweaker;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityProviderMetal;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -12,8 +14,6 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.liquid.ILiquidStack;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.MetalItemHandler;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -59,13 +59,13 @@ public class CTItemRegistry {
       .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metalStr)).findFirst().orElse(null);
     if (metal == null) {throw new IllegalArgumentException("Metal specified not found!");}
     IIngredient inputIngredient = CTHelper.getInternalIngredient(input);
-    if (CapabilityMetalItem.CUSTOM_METAL_ITEMS.get(inputIngredient) != null) {
+    if (CapabilityHandlerMetal.CUSTOM_ITEMS.get(inputIngredient) != null) {
       throw new IllegalStateException("Input already registered in metal item capability!");
     } else {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          CapabilityMetalItem.CUSTOM_METAL_ITEMS.put(inputIngredient, () -> new MetalItemHandler(metal, amount, canMelt));
+          CapabilityHandlerMetal.CUSTOM_ITEMS.put(inputIngredient, () -> new CapabilityProviderMetal(metal, amount, canMelt));
         }
 
         @Override

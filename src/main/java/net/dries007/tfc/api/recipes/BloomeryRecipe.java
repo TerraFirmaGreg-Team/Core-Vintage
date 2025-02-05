@@ -1,13 +1,14 @@
 package net.dries007.tfc.api.recipes;
 
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -44,7 +45,7 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
   public ItemStack getOutput(List<ItemStack> inputs) {
     int metalAmount = 0;
     for (ItemStack stack : inputs) {
-      IMetalItem metalItem = CapabilityMetalItem.getMetalItem(stack);
+      ICapabilityMetal metalItem = CapabilityMetal.getMetalItem(stack);
       if (metalItem != null) {
         metalAmount += metalItem.getSmeltAmount(stack);
       }
@@ -76,7 +77,7 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
   }
 
   public boolean isValidInput(ItemStack inputItem) {
-    IMetalItem metalItem = CapabilityMetalItem.getMetalItem(inputItem);
+    ICapabilityMetal metalItem = CapabilityMetal.getMetalItem(inputItem);
     return metalItem != null && metalItem.getMetal(inputItem) == metal;
   }
 

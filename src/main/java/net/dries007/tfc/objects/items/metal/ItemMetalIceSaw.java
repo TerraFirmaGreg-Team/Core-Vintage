@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,18 +13,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.sharkbark.cellars.ModConfig;
 import net.dries007.sharkbark.cellars.init.ModItems;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import javax.annotation.Nullable;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
-public class ItemMetalIceSaw extends ItemMetalTool implements IMetalItem {
+public class ItemMetalIceSaw extends ItemMetalTool implements ICapabilityMetal {
 
 
   public ItemMetalIceSaw(Metal metal, Metal.ItemType type) {

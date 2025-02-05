@@ -1,5 +1,7 @@
 package net.dries007.tfctech.client;
 
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -27,7 +29,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.capability.IMoldHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfctech.client.render.teisr.TEISRTechDevices;
 import net.dries007.tfctech.client.render.tesr.TESRFridge;
@@ -85,11 +86,10 @@ public final class ClientRegisterEvents {
 
     // Metals
     for (Item item : TechItems.getAllMetalItems()) {
-      if (item instanceof ItemTechMetal) {
-        ItemTechMetal metalItem = (ItemTechMetal) item;
+      if (item instanceof ItemTechMetal metalItem) {
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(TFCTECH, "metal/" + metalItem.getType().name()
           .toLowerCase()), "inventory"));
-        if (((ItemTechMetal) item).getType() == ItemTechMetal.ItemType.WIRE) {
+        if (metalItem.getType() == ItemTechMetal.ItemType.WIRE) {
           for (int i = 1; i <= 4; i++) {
             ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TFCTECH, "metal/" + metalItem.getType().name()
               .toLowerCase()), "inventory"));
@@ -187,7 +187,7 @@ public final class ClientRegisterEvents {
             return -1;
           }
           //noinspection ConstantConditions
-          return (new Color(((IMetalItem) stack.getItem()).getMetal(stack).getColor())).brighter().getRGB();
+          return (new Color(((ICapabilityMetal) stack.getItem()).getMetal(stack).getColor())).brighter().getRGB();
         },
         item);
     }

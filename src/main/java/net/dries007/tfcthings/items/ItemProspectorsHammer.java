@@ -1,5 +1,6 @@
 package net.dries007.tfcthings.items;
 
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -32,17 +33,16 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.dries007.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.items.ItemTFC;
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ItemProspectorsHammer extends ItemTFC implements IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
+public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, ItemOreDict, TFCThingsConfigurableItem {
 
   public final ToolMaterial material;
   private final Metal metal;

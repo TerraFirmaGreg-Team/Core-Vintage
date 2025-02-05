@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.capability.metal;
+package su.terrafirmagreg.modules.core.capabilities.metal;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ import java.util.List;
  * Must be on Item or Block (with ItemBlock, i.e. do not implement on blocks that have a separate item block)
  * Also, has a capability interface
  */
-public interface IMetalItem {
+public interface ICapabilityMetal {
 
   /**
    * @param stack the item stack. This can assume that it is of the right item type and do casts without checking

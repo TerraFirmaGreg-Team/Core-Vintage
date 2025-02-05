@@ -305,11 +305,11 @@ public class Configs {
     @Config.LangKey("config.gui.mobs")
     @Name("Mob List")
     public String[] grindstoneMobList = {
-      "tfg:horse",
-      "tfg:donkey",
-      "tfg:mule",
-      "tfg:camel",
-      "tfg:lama",
+      "tfg:animal/horse",
+      "tfg:animal/donkey",
+      "tfg:animal/mule",
+      "tfg:animal/camel",
+      "tfg:animal/lama",
       };
 
     @Comment("The amount of points that is needed for a full press")

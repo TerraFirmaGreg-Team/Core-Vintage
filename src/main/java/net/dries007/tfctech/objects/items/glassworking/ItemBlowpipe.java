@@ -2,6 +2,7 @@ package net.dries007.tfctech.objects.items.glassworking;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfctech.client.TechGuiHandler;
 
@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemBlowpipe extends ItemGlassMolder implements IMetalItem {
+public class ItemBlowpipe extends ItemGlassMolder implements ICapabilityMetal {
 
   private static final Map<Metal, ItemBlowpipe> TABLE = new HashMap<>();
   private final Metal metal;

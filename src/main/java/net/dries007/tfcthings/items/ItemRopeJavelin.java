@@ -1,5 +1,9 @@
 package net.dries007.tfcthings.items;
 
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -24,24 +28,19 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.dries007.tfcthings.entity.projectile.EntityThrownRopeJavelin;
-import net.dries007.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
+import net.dries007.tfcthings.entity.projectile.EntityThrownRopeJavelin;
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict, TFCThingsConfigurableItem {
+public class ItemRopeJavelin extends ItemTFC implements ICapabilityMetal, ItemOreDict, TFCThingsConfigurableItem {
 
   private static final String THROWN_NBT_KEY = "Thrown";
   private static final String JAVELIN_NBT_KEY = "JavelinID";
@@ -57,7 +56,7 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
     this.material = metal.getToolMetal();
     setCreativeTab(CreativeTabsTFC.CT_METAL);
     this.setMaxDamage((int) ((double) material.getMaxUses() * 0.1D));
-    this.attackDamage = (double) (0.7 * this.material.getAttackDamage());
+    this.attackDamage = 0.7 * this.material.getAttackDamage();
     this.attackSpeed = -1.8F;
     this.setTranslationKey(getNamePrefix() + "_" + name);
     this.setRegistryName(getNamePrefix() + "/" + name);
@@ -117,7 +116,7 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
     Multimap<String, AttributeModifier> multimap = HashMultimap.create();
     if (slot == EntityEquipmentSlot.MAINHAND && !isThrown(stack)) {
       multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, 0));
-      multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double) this.attackSpeed, 0));
+      multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", this.attackSpeed, 0));
     }
 
     return multimap;
@@ -159,8 +158,7 @@ public class ItemRopeJavelin extends ItemTFC implements IMetalItem, ItemOreDict,
   }
 
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-    if (entityLiving instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) entityLiving;
+    if (entityLiving instanceof EntityPlayer player) {
       int charge = this.getMaxItemUseDuration(stack) - timeLeft;
       if (charge > 5) {
         float f = ItemBow.getArrowVelocity(charge);

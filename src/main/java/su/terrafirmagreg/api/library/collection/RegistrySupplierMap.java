@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.library.collection;
 
+import su.terrafirmagreg.framework.registry.RegistryManager;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -21,7 +23,8 @@ public class RegistrySupplierMap<T extends IForgeRegistryEntry<T>> extends Objec
       if (!identifier.equals(object.getRegistryName())) {
         object.setRegistryName(identifier);
       }
-
+      
+      RegistryManager.LOGGER.info("Registry: " + identifier);
       event.getRegistry().register(object);
     });
   }

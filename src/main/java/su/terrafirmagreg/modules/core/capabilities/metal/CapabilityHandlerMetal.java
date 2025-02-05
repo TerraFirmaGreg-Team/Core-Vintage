@@ -1,27 +1,20 @@
-package net.dries007.tfc.api.capability.metal;
-
-import su.terrafirmagreg.api.data.enums.Mods;
+package su.terrafirmagreg.modules.core.capabilities.metal;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import gregtech.api.unification.OreDictUnifier;
-import net.dries007.tfc.api.capability.DumbStorage;
+import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Supplier;
 
 import static gregtech.api.unification.ore.OrePrefix.block;
@@ -61,21 +54,16 @@ import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.ore
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadShovel;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadSword;
 
-public final class CapabilityMetalItem {
+public class CapabilityHandlerMetal {
 
-  public static final ResourceLocation KEY = new ResourceLocation(Mods.Names.TFC, "metal_object");
-  public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_METAL_ITEMS = new HashMap<>(); //Used inside CT, set custom IMetalItem for items outside TFC
-  public static final Map<gregtech.api.unification.ore.OrePrefix, Integer> ORE_DICT_METAL_ITEMS = new LinkedHashMap<>();
-  @CapabilityInject(IMetalItem.class)
-  public static Capability<IMetalItem> METAL_OBJECT_CAPABILITY;
-
-  public static void preInit() {
-    CapabilityManager.INSTANCE.register(IMetalItem.class, new DumbStorage<>(), MetalItemHandler::new);
-
-  }
+  //Used inside CT, set custom IMetalItem for items outside TFC
+  public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>();
+  //Used inside CT, set custom IMetalItem for items outside TFC
+  public static final Map<OrePrefix, Integer> ORE_DICT_METAL_ITEMS = new LinkedHashMap<>();
 
   public static void init() {
-    CUSTOM_METAL_ITEMS.put(IIngredient.of(Blocks.IRON_BARS), () -> new MetalItemHandler(Metal.WROUGHT_IRON, 25, true));
+    CUSTOM_ITEMS.put(IIngredient.of(Blocks.IRON_BARS),
+      () -> new CapabilityProviderMetal(Metal.WROUGHT_IRON, 25, true));
 
     // Register ore dict prefix values
     ORE_DICT_METAL_ITEMS.put(nugget, 16);
@@ -119,48 +107,23 @@ public final class CapabilityMetalItem {
     ORE_DICT_METAL_ITEMS.put(toolHeadChisel, 288);
   }
 
-  /**
-   * Gets the IMetalItem instance from an itemstack, either via capability or via interface
-   *
-   * @param stack The stack
-   * @return The IMetalItem if it exists, or null if it doesn't
-   */
   @Nullable
-  public static IMetalItem getMetalItem(ItemStack stack) {
-    if (!stack.isEmpty()) {
-      IMetalItem metal = stack.getCapability(METAL_OBJECT_CAPABILITY, null);
-      if (metal != null) {
-        return metal;
-      } else if (stack.getItem() instanceof IMetalItem metalItem) {
-        return metalItem;
-      } else if (stack.getItem() instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof IMetalItem metalItem) {
-        return metalItem;
+  public static ICapabilityProvider getCustom(ItemStack stack) {
+    for (var entry : CUSTOM_ITEMS.entrySet()) {
+      if (entry.getKey().testIgnoreCount(stack)) {
+        return entry.getValue().get();
       }
     }
-    return null;
+    return getMetalItemFromOrePrefix(stack);
   }
 
-  @Nullable
-  public static ICapabilityProvider getCustomMetalItem(ItemStack stack) {
-    if (!stack.isEmpty()) {
-      Set<IIngredient<ItemStack>> itemItemSet = CUSTOM_METAL_ITEMS.keySet();
-      for (IIngredient<ItemStack> ingredient : itemItemSet) {
-        if (ingredient.testIgnoreCount(stack)) {
-          return CUSTOM_METAL_ITEMS.get(ingredient).get();
-        }
-      }
-
-      return getMetalItemFromOrePrefix(stack);
-    }
-    return null;
-  }
 
   @Nullable
   private static ICapabilityProvider getMetalItemFromOrePrefix(ItemStack stack) {
     for (var orePrefix : ORE_DICT_METAL_ITEMS.keySet()) {
       var prefix = OreDictUnifier.getPrefix(stack);
       if (orePrefix == prefix) {
-        var materialName = OreDictUnifier.getMaterial(stack).material.toString(); //костыль
+        var materialName = OreDictUnifier.getMaterial(stack).material.toString(); // TODO костыль
         //noinspection ConstantConditions
         return TFCRegistries.METALS.getValuesCollection()
           .stream()
@@ -171,7 +134,7 @@ public final class CapabilityMetalItem {
           .findFirst()
           .map(metal -> {
             int smeltAmount = ORE_DICT_METAL_ITEMS.get(orePrefix);
-            return new MetalItemHandler(metal, smeltAmount, true);
+            return new CapabilityProviderMetal(metal, smeltAmount, true);
 
           }).orElse(null);
       }

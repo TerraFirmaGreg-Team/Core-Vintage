@@ -2,6 +2,9 @@ package net.dries007.tfctech.objects.items;
 
 import su.terrafirmagreg.api.data.ToolMaterials;
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,11 +24,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
@@ -281,7 +279,7 @@ public final class TechItems {
           OreDictionary.registerOre(OreDictionaryHelper.toString(techMetal.getType(), techMetal.getMetal(ItemStack.EMPTY)), new ItemStack(metalItem, 1, 0));
         }
       } else {
-        Metal metal = ((IMetalItem) metalItem).getMetal(ItemStack.EMPTY);
+        Metal metal = ((ICapabilityMetal) metalItem).getMetal(ItemStack.EMPTY);
         OreDictionary.registerOre(OreDictionaryHelper.toString("blowpipe"), new ItemStack(metalItem, 1, 0));
       }
     }

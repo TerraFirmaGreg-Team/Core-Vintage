@@ -51,9 +51,9 @@ public class ModuleManager implements IModuleManager {
     MinecraftForge.EVENT_BUS.register(this.moduleEventRouter);
   }
 
-  private static String getContainerID(IModule module) {
-    var annotation = module.getClass().getAnnotation(ModuleInfo.class);
-    return annotation.containerID();
+
+  public static IModuleManager of() {
+    return new ModuleManager();
   }
 
   private static @Nullable IModule getCoreModule(List<IModule> modules) {
@@ -61,10 +61,6 @@ public class ModuleManager implements IModuleManager {
       .filter(module -> module.getClass().getAnnotation(ModuleInfo.class).coreModule())
       .findFirst()
       .orElse(null);
-  }
-
-  public static IModuleManager of() {
-    return new ModuleManager();
   }
 
   public void registerContainer(IModuleContainer container) {
@@ -75,9 +71,9 @@ public class ModuleManager implements IModuleManager {
   private void configureContainers() {
     LOGGER.debug("Configuring containers...");
 
-    AnnotationUtils.getAnnotations(ModuleContainer.class, IModuleContainer.class).entrySet().stream()
-      .filter(entry -> entry.getValue().enabled())
-      .map(Map.Entry::getKey)
+    AnnotationUtils.getAnnotations(ModuleContainer.class, IModuleContainer.class,
+        aClass -> aClass.getAnnotation(ModuleContainer.class).enabled())
+      .keySet()
       .forEach(this::registerContainer);
   }
 
@@ -87,16 +83,18 @@ public class ModuleManager implements IModuleManager {
     Set<ResourceLocation> toLoad = new LinkedHashSet<>();
     Set<IModule> modulesToLoad = new LinkedHashSet<>();
 
-    AnnotationUtils.getAnnotations(ModuleInfo.class, IModule.class).keySet().stream()
+    AnnotationUtils.getAnnotations(ModuleInfo.class, IModule.class, module -> {
+        var annotation = module.getAnnotation(ModuleInfo.class);
+
+        if (!CONTAINER_MAP.containsKey(annotation.containerID())) {
+          LOGGER.debug("Module disabled: {}", annotation.moduleID());
+          return false;
+        }
+
+        var modDependencies = Arrays.asList(annotation.modDependencies());
+        return annotation.enabled() && modDependencies.stream().allMatch(Loader::isModLoaded);
+      }).keySet().stream()
       .filter(module -> {
-        if (!CONTAINER_MAP.containsKey(getContainerID(module))) {
-          LOGGER.debug("Module disabled: {}", module);
-          return false;
-        }
-        if (!isModuleEnabled(module)) {
-          LOGGER.debug("Module disabled: {}", module.getIdentifier());
-          return false;
-        }
         toLoad.add(module.getIdentifier());
         modulesToLoad.add(module);
         return true;

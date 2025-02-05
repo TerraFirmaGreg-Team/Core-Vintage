@@ -10,6 +10,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SCPacketPlayerDataUpdate extends PacketBase<SCPacketPlayerDataUpdate> {
 
   private NBTTagCompound tag;

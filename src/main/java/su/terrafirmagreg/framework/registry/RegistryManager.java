@@ -178,7 +178,7 @@ public class RegistryManager implements IRegistryManager {
     });
     this.getWrapper().getItems().register(item -> {
       ModelUtils.model(item);
-      ModelUtils.customMeshDefinition(item);
+      ModelUtils.meshDefinition(item);
     });
   }
 

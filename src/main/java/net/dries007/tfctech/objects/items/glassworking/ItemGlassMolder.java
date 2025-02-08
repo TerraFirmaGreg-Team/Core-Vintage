@@ -1,9 +1,12 @@
 package net.dries007.tfctech.objects.items.glassworking;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.client.resources.I18n;
@@ -23,11 +26,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Sets;
 import mcp.MethodsReturnNonnullByDefault;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.dries007.tfctech.objects.items.ItemMiscTech;
 
 import javax.annotation.Nonnull;
@@ -60,14 +58,14 @@ public class ItemGlassMolder extends ItemMiscTech {
 
   public static class GlassMolderCapability extends CapabilityProviderHeat implements ICapabilityProvider, IFluidHandlerItem {
 
-    private final FluidWhitelistHandler tank;
+    private final CapabilityProviderFluid.Whitelist tank;
     private final int capacity;
 
     GlassMolderCapability(ItemStack stack, int capacity, @Nullable NBTTagCompound nbt) {
       this.capacity = capacity;
       this.heatCapacity = 1;
       this.meltTemp = Heat.maxVisibleTemperature();
-      this.tank = new FluidWhitelistHandler(stack, capacity, Sets.newHashSet(FluidsCore.GLASS.get()));
+      this.tank = new CapabilityProviderFluid.Whitelist(stack, capacity, Sets.newHashSet(FluidsCore.GLASS.get()));
       deserializeNBT(nbt);
     }
 

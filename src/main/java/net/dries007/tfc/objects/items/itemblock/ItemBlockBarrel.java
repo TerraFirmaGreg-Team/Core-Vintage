@@ -1,5 +1,10 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -36,14 +41,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -182,7 +181,7 @@ public class ItemBlockBarrel extends ItemBlockTFC {
   }
 
   // This is not an item handler, but still saves items from a sealed barrel
-  public static class ItemBarrelFluidHandler extends FluidWhitelistHandlerComplex {
+  public static class ItemBarrelFluidHandler extends CapabilityProviderFluid.WhitelistComplex {
 
     protected ItemBarrelFluidHandler(@Nonnull ItemStack container) {
       super(container, ConfigTFC.Devices.BARREL.tank, ConfigTFC.Devices.BARREL.fluidWhitelist);

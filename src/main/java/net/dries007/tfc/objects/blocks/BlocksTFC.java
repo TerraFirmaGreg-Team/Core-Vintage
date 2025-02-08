@@ -262,7 +262,7 @@ public final class BlocksTFC {
   @SuppressWarnings("ConstantConditions")
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
     // This is called here because it needs to wait until Metal registry has fired
-    FluidsTFC.registerFluids();
+//    FluidsTFC.registerFluids();
 
     IForgeRegistry<Block> r = event.getRegistry();
 

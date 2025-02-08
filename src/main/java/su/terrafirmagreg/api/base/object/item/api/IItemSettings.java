@@ -19,8 +19,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import com.google.common.collect.Lists;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,7 +26,9 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
@@ -45,15 +45,15 @@ public interface IItemSettings extends IBaseSettings<Settings> {
   @Getter
   class Settings extends BaseSettings<Settings> {
 
-    final ArrayList<Object[]> oreDict = Lists.newArrayList();
-    final ArrayList<IProviderItemCapability> capability = Lists.newArrayList();
-    final ArrayList<CreativeTabs> groups = Lists.newArrayList();
+    final Set<Object[]> oreDict = new HashSet<>();
+    final Set<IProviderItemCapability> capability = new HashSet<>();
+    final Set<CreativeTabs> groups = new HashSet<>();
 
     ResourceLocation resource;
 
     boolean isFireResistant;
-    int maxDamage = 0;
-    int maxCount = 64;
+    int durability;
+    int maxStackSize = 64;
 
     IRarity rarity = EnumRarity.COMMON;
 
@@ -84,23 +84,23 @@ public interface IItemSettings extends IBaseSettings<Settings> {
       return this;
     }
 
-    public Settings maxDamage(int maxDamage) {
-      if (maxDamage < 1) {throw new IllegalArgumentException("Maximum stack size must be greater than zero!");}
-      if (maxDamage > 1 && this.maxCount != 0) {throw new RuntimeException("An item cannot have durability and be stackable!");}
+    public Settings durability(int durability) {
+      if (this.maxStackSize != 64 && this.maxStackSize > 1) {throw new RuntimeException("An item cannot have durability and be stackable!");}
+      this.durability = durability;
+      this.maxStackSize = 1;
 
-      this.maxDamage = maxDamage;
       return this;
     }
 
-    public Settings maxCount(int maxCount) {
-      if (this.maxDamage != 64 && this.maxDamage > 1) {throw new RuntimeException("An item cannot have durability and be stackable!");}
+    public Settings maxStackSize(int maxStackSize) {
+      if (maxStackSize < 1) {throw new IllegalArgumentException("Maximum stack size must be greater than zero!");}
+      if (maxStackSize > 1 && this.durability != 0) {throw new RuntimeException("An item cannot have durability and be stackable!");}
 
-      this.maxCount = maxCount;
-      this.maxDamage = 1;
+      this.maxStackSize = maxStackSize;
       return this;
     }
 
-    public Settings group(List<CreativeTabs> groupList) {
+    public Settings group(Set<CreativeTabs> groupList) {
       groupList.forEach(this::group);
       return this;
     }
@@ -144,7 +144,7 @@ public interface IItemSettings extends IBaseSettings<Settings> {
       return this;
     }
 
-    public Settings capability(List<IProviderItemCapability> providers) {
+    public Settings capability(Set<IProviderItemCapability> providers) {
       providers.forEach(this::capability);
       return this;
     }

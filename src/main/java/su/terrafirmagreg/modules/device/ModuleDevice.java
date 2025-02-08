@@ -8,6 +8,7 @@ import su.terrafirmagreg.framework.network.api.INetworkManager;
 import su.terrafirmagreg.framework.registry.api.IRegistryManager;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,6 +45,7 @@ public final class ModuleDevice extends ModuleBase {
   public void onRegister(IRegistryManager registry) {
     BlocksDevice.onRegister(registry);
     ItemsDevice.onRegister(registry);
+    SoundsDevice.onRegister(registry);
   }
 
   @Override

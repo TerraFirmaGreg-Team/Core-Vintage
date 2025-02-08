@@ -1,5 +1,7 @@
 package net.dries007.tfctech.objects.tileentities;
 
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +13,6 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
 import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
@@ -137,7 +138,7 @@ public class TESmelteryCauldron extends TEInventory implements ITickable, IFluid
   public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
     if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
       //noinspection unchecked
-      return (T) new FluidHandlerSided(this, tank, facing);
+      return (T) new CapabilityProviderFluid.Sided(this, tank, facing);
     }
     return super.getCapability(capability, facing);
   }

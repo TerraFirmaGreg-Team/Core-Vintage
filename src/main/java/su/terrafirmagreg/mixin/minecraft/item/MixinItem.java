@@ -55,7 +55,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    */
   @Overwrite
   public int getMaxDamage() {
-    return getSettings().getMaxDamage();
+    return getSettings().getDurability();
   }
 
   /**
@@ -64,7 +64,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    */
   @Overwrite
   public int getItemStackLimit() {
-    return getSettings().getMaxCount();
+    return getSettings().getMaxStackSize();
   }
 
   /**
@@ -72,11 +72,11 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    * @reason Адаптация под ISettingsItem
    */
   @Overwrite
-  public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
-    if (!terraFirmaGreg$settings.getCapability().isEmpty()) {
-      return definition$initCapabilities(stack, nbt);
+  public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+    if (getSettings().getCapability().isEmpty()) {
+      return null;
     }
-    return null;
+    return definition$initCapabilities(stack, nbt);
   }
 
 

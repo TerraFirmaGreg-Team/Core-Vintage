@@ -9,5 +9,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ModuleContainer {
 
+  /**
+   * The ID of the container to associate this module with.
+   */
+  String containerID();
+
   boolean enabled() default true;
 }

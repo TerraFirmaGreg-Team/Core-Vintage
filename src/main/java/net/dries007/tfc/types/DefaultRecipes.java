@@ -7,6 +7,7 @@ import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMet
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler;
 
 import net.minecraft.block.Block;
@@ -82,7 +83,6 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.fuel.FuelManager;
-import net.dries007.waterflasks.item.ModItems;
 
 import javax.annotation.Nullable;
 
@@ -574,7 +574,7 @@ public final class DefaultRecipes {
 
     // WaterFlask
     event.getRegistry().registerAll(
-      new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ModItems.leatherSide),
+      new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsDevice.LEATHER_FLASK_UNFINISHED.get()),
         "  XX ", " XXX ", "XXXXX", " XXX ", "  X  ").setRegistryName("leather_side")
     );
 
@@ -806,7 +806,7 @@ public final class DefaultRecipes {
     // waterflasks
     r.register(new AnvilRecipe(new ResourceLocation(TFC, "unfinished_iron_flask"),
       IIngredient.of("plateWroughtIron"),
-      new ItemStack(ModItems.unfinishedFlask), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST
+      new ItemStack(ItemsDevice.METAL_FLASK_UNFINISHED.get()), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST
     ));
 
     // FirmaLife

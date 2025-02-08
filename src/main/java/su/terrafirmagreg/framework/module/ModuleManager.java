@@ -3,7 +3,6 @@ package su.terrafirmagreg.framework.module;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.util.AnnotationUtils;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleContainer;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
@@ -24,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import lombok.Getter;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -35,36 +35,39 @@ import java.util.stream.Collectors;
 @Getter
 public class ModuleManager implements IModuleManager {
 
-  public static final Map<ResourceLocation, IModule> MODULE_MAP = new Object2ObjectLinkedOpenHashMap<>();
-  private static final LoggingHelper LOGGER = LoggingHelper.of(ModuleManager.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleManager.class.getSimpleName());
+
+  private static final Map<ResourceLocation, IModule> MODULE_MAP = new Object2ObjectLinkedOpenHashMap<>();
   private static final Map<String, IModuleContainer> CONTAINER_MAP = new Object2ObjectLinkedOpenHashMap<>();
 
+  private final String modId;
   private final ModuleEventRouter moduleEventRouter;
 
-  private ModuleManager() {
+  private ModuleManager(String modId) {
 
     configureContainers();
     configureModules();
 
+    this.modId = modId;
     this.moduleEventRouter = new ModuleEventRouter(MODULE_MAP.values());
 
     MinecraftForge.EVENT_BUS.register(this.moduleEventRouter);
   }
 
 
-  public static IModuleManager of() {
-    return new ModuleManager();
+  public static IModuleManager of(String modId) {
+    return new ModuleManager(modId);
   }
 
   private static @Nullable IModule getCoreModule(List<IModule> modules) {
     return modules.stream()
-      .filter(module -> module.getClass().getAnnotation(ModuleInfo.class).coreModule())
+      .filter(module -> AnnotationUtils.getAnnotation(module, ModuleInfo.class).coreModule())
       .findFirst()
       .orElse(null);
   }
 
   public void registerContainer(IModuleContainer container) {
-    Preconditions.checkNotNull(container);
+    Preconditions.checkNotNull(container, "Module container cannot be null ");
     CONTAINER_MAP.put(container.getID(), container);
   }
 
@@ -72,9 +75,8 @@ public class ModuleManager implements IModuleManager {
     LOGGER.debug("Configuring containers...");
 
     AnnotationUtils.getAnnotations(ModuleContainer.class, IModuleContainer.class,
-        aClass -> aClass.getAnnotation(ModuleContainer.class).enabled())
-      .keySet()
-      .forEach(this::registerContainer);
+      aClass -> AnnotationUtils.getAnnotation(aClass, ModuleContainer.class).enabled()
+    ).keySet().forEach(this::registerContainer);
   }
 
   private void configureModules() {
@@ -83,8 +85,74 @@ public class ModuleManager implements IModuleManager {
     Set<ResourceLocation> toLoad = new LinkedHashSet<>();
     Set<IModule> modulesToLoad = new LinkedHashSet<>();
 
-    AnnotationUtils.getAnnotations(ModuleInfo.class, IModule.class, module -> {
-        var annotation = module.getAnnotation(ModuleInfo.class);
+    for (IModuleContainer container : CONTAINER_MAP.values()) {
+      String containerID = container.getID();
+      List<IModule> containerModules = getModules().get(containerID);
+      IModule coreModule = getCoreModule(containerModules);
+      Preconditions.checkNotNull(coreModule, "Could not find core module for module container " + containerID);
+
+      containerModules.remove(coreModule);
+      containerModules.add(0, coreModule);
+
+      // Remove disabled modules and gather potential modules to load
+      Iterator<IModule> iterator = containerModules.iterator();
+      while (iterator.hasNext()) {
+        IModule module = iterator.next();
+        if (!isModuleEnabled(module)) {
+          iterator.remove();
+          LOGGER.debug("Module disabled: {}", module);
+          continue;
+        }
+        ModuleInfo annotation = module.getClass().getAnnotation(ModuleInfo.class);
+        toLoad.add(new ResourceLocation(containerID, annotation.moduleID()));
+        modulesToLoad.add(module);
+      }
+
+    }
+
+    // Check any module dependencies
+    Iterator<IModule> iterator;
+    boolean changed;
+    do {
+      changed = false;
+      iterator = modulesToLoad.iterator();
+      while (iterator.hasNext()) {
+        IModule module = iterator.next();
+
+        // Check module dependencies
+        Set<ResourceLocation> dependencies = module.getDependencyUids();
+        if (!toLoad.containsAll(dependencies)) {
+          iterator.remove();
+          changed = true;
+          ModuleInfo annotation = module.getClass().getAnnotation(ModuleInfo.class);
+          String moduleID = annotation.moduleID();
+          toLoad.remove(new ResourceLocation(moduleID));
+          LOGGER.info("Module {} is missing at least one of module dependencies: {}, skipping loading...", moduleID, dependencies);
+        }
+      }
+    } while (changed);
+
+    // Sort modules by their module dependencies
+    do {
+      changed = false;
+      iterator = modulesToLoad.iterator();
+      while (iterator.hasNext()) {
+        IModule module = iterator.next();
+        if (MODULE_MAP.keySet().containsAll(module.getDependencyUids())) {
+          iterator.remove();
+          ModuleInfo annotation = module.getClass().getAnnotation(ModuleInfo.class);
+          MODULE_MAP.put(new ResourceLocation(annotation.containerID(), annotation.moduleID()), module);
+          changed = true;
+          break;
+        }
+      }
+    } while (changed);
+
+  }
+
+  private Map<String, List<IModule>> getModules() {
+    return AnnotationUtils.getAnnotations(ModuleInfo.class, IModule.class, module -> {
+        var annotation = AnnotationUtils.getAnnotation(module, ModuleInfo.class);
 
         if (!CONTAINER_MAP.containsKey(annotation.containerID())) {
           LOGGER.debug("Module disabled: {}", annotation.moduleID());
@@ -94,56 +162,14 @@ public class ModuleManager implements IModuleManager {
         var modDependencies = Arrays.asList(annotation.modDependencies());
         return annotation.enabled() && modDependencies.stream().allMatch(Loader::isModLoaded);
       }).keySet().stream()
-      .filter(module -> {
-        toLoad.add(module.getIdentifier());
-        modulesToLoad.add(module);
-        return true;
-      })
-      .collect(Collectors.groupingBy(module -> module.getIdentifier().getNamespace(), LinkedHashMap::new, Collectors.toList()))
-      .forEach((containerID, modules) -> {
-        IModule coreModule = getCoreModule(modules);
-        Preconditions.checkNotNull(coreModule, "Could not find core module for module container " + containerID);
-
-        modules.remove(coreModule);
-        modules.add(0, coreModule);
-
-        // Check any module dependencies
-        Iterator<IModule> iterator;
-        boolean changed;
-        do {
-          changed = false;
-          iterator = modulesToLoad.iterator();
-          while (iterator.hasNext()) {
-            IModule module = iterator.next();
-
-            // Check module dependencies
-            Set<ResourceLocation> dependencies = module.getDependencyUids();
-            if (!toLoad.containsAll(dependencies)) {
-              iterator.remove();
-              changed = true;
-              String moduleID = module.getIdentifier().getPath();
-              toLoad.remove(ModUtils.resource(module.getIdentifier().getPath()));
-              LOGGER.info("Module {} is missing at least one of module dependencies: {}, skipping loading...", moduleID, dependencies);
-            }
-          }
-        } while (changed);
-
-        // Sort modules by their module dependencies
-        do {
-          changed = false;
-          iterator = modulesToLoad.iterator();
-          while (iterator.hasNext()) {
-            IModule module = iterator.next();
-            if (MODULE_MAP.keySet().containsAll(module.getDependencyUids())) {
-              iterator.remove();
-              MODULE_MAP.put(module.getIdentifier(), module);
-              changed = true;
-              break;
-            }
-          }
-        } while (changed);
-      });
-
+      .sorted(Comparator.comparing(module -> {
+        ModuleInfo info = AnnotationUtils.getAnnotation(module, ModuleInfo.class);
+        return info.containerID() + ":" + info.moduleID();
+      }))
+      .collect(Collectors.groupingBy(module -> {
+        ModuleInfo info = AnnotationUtils.getAnnotation(module, ModuleInfo.class);
+        return info.containerID();
+      }, LinkedHashMap::new, Collectors.toList()));
   }
 
   @Override
@@ -154,7 +180,7 @@ public class ModuleManager implements IModuleManager {
 
   @Override
   public boolean isModuleEnabled(IModule module) {
-    var annotation = module.getClass().getAnnotation(ModuleInfo.class);
+    var annotation = AnnotationUtils.getAnnotation(module, ModuleInfo.class);
     var modDependencies = Arrays.asList(annotation.modDependencies());
     return annotation.enabled() && modDependencies.stream().allMatch(Loader::isModLoaded);
   }

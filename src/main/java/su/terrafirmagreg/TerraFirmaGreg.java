@@ -44,72 +44,70 @@ public class TerraFirmaGreg {
   @Mod.Instance(MOD_ID)
   private static TerraFirmaGreg instance;
 
-  private IModuleManager moduleManager;
+  private static IModuleManager moduleManager;
 
   public TerraFirmaGreg() {
-    instance = this;
     FluidRegistry.enableUniversalBucket();
   }
 
   @EventHandler
   public void onConstruction(FMLConstructionEvent event) {
     AnnotationUtils.configureAsmData(event);
-    this.moduleManager = ModuleManager.of();
-
-    this.moduleManager.routeEvent(event);
+    moduleManager = ModuleManager.of(MOD_ID);
+    moduleManager.routeEvent(event);
   }
 
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
 
-    this.moduleManager.routeEvent(event);
+    moduleManager.routeEvent(event);
   }
 
   @EventHandler
   public void init(FMLInitializationEvent event) {
 
-    this.moduleManager.routeEvent(event);
+    moduleManager.routeEvent(event);
   }
 
   @EventHandler
   public void postInit(FMLPostInitializationEvent event) {
 
-    this.moduleManager.routeEvent(event);
+    moduleManager.routeEvent(event);
   }
 
   @EventHandler
   public void loadComplete(FMLLoadCompleteEvent event) {
 
-    this.moduleManager.routeEvent(event);
+    moduleManager.routeEvent(event);
   }
 
   @EventHandler
   public void serverAboutToStart(FMLServerAboutToStartEvent event) {
 
-    this.moduleManager.routeEvent(event);
+    moduleManager.routeEvent(event);
   }
 
   @EventHandler
   public void serverStarting(FMLServerStartingEvent event) {
 
-    this.moduleManager.routeEvent(event);
+    moduleManager.routeEvent(event);
   }
 
   @EventHandler
   public void serverStarted(FMLServerStartedEvent event) {
 
-    this.moduleManager.routeEvent(event);
+    moduleManager.routeEvent(event);
   }
 
   @EventHandler
   public void serverStopping(FMLServerStoppingEvent event) {
 
-    this.moduleManager.routeEvent(event);
+    moduleManager.routeEvent(event);
   }
 
   @EventHandler
   public void serverStopped(FMLServerStoppedEvent event) {
 
-    this.moduleManager.routeEvent(event);
+    moduleManager.routeEvent(event);
   }
 }

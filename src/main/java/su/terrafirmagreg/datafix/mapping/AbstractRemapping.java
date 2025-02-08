@@ -10,6 +10,8 @@ import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.EntitiesCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -53,6 +55,13 @@ public abstract class AbstractRemapping {
     put("product/wool_cloth", ItemsAnimal.WOOL_CLOTH.get());
     put("product/wool_yarn", ItemsAnimal.WOOL_YARN.get());
     put("product/wool", ItemsAnimal.WOOL.get());
+
+    put("leather_flask", ItemsDevice.LEATHER_FLASK.get());
+    put("leather_side", ItemsDevice.LEATHER_FLASK_UNFINISHED.get());
+    put("broken_leather_flask", ItemsDevice.LEATHER_FLASK_BROKEN.get());
+    put("iron_flask", ItemsDevice.METAL_FLASK.get());
+    put("unfinished_iron_flask", ItemsDevice.METAL_FLASK_UNFINISHED.get());
+    put("broken_iron_flask", ItemsDevice.METAL_FLASK_BROKEN.get());
 
     put("gem/amber", ItemGem.get(Gem.AMBER));
     put("powder/pearl", ItemPowder.get(Powder.PEARL));
@@ -246,6 +255,8 @@ public abstract class AbstractRemapping {
     put("animal.yak.say", SoundsAnimal.ANIMAL_YAK_SAY.get());
     put("animal.yak.death", SoundsAnimal.ANIMAL_YAK_DEATH.get());
     put("animal.yak.hurt", SoundsAnimal.ANIMAL_YAK_HURT.get());
+
+    put("item.flaskbreak", SoundsDevice.FLASK_BREAK.get());
   }};
 
   protected static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{

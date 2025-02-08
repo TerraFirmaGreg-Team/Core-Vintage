@@ -23,9 +23,6 @@ public abstract class BaseItem extends Item implements IItemSettings {
     this.settings = Settings.of();
   }
 
-  public BaseItem(Settings settings) {
-    this.settings = settings;
-  }
 
   @Override
   public String getTranslationKey(ItemStack stack) {
@@ -39,7 +36,10 @@ public abstract class BaseItem extends Item implements IItemSettings {
 
 
   @Override
-  public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+  public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+    if (getSettings().getCapability().isEmpty()) {
+      return null;
+    }
     return definition$initCapabilities(stack, nbt);
   }
 }

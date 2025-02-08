@@ -142,6 +142,17 @@ item_group.tfg.device.name=[ TFG ] Device
 block.tfg.device.alloy_calculator.name=Alloy Calculator
 
 ## Item
+item.tfg.device.flask.leather.name=Empty Leather Flask
+item.tfg.device.flask.leather.filled.name=%s Leather Flask
+item.tfg.device.flask.leather.broken.name=Broken Leather Flask
+item.tfg.device.flask.leather.unfinished.name=Unfinished Leather Flask
+
+
+item.tfg.device.flask.metal.name=Empty Metal Flask
+item.tfg.device.flask.metal.filled.name=%s Metal Flask
+item.tfg.device.flask.metal.broken.name=Broken Metal Flask
+item.tfg.device.flask.metal.unfinished.name=Unfinished Metal Flask
+
 
 # Module Animal ##############################################
 

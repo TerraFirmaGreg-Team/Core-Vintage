@@ -26,10 +26,11 @@ import net.minecraftforge.common.IRarity;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -42,9 +43,9 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
   @SuppressWarnings("deprecation")
   class Settings extends BaseSettings<Settings> {
 
-    final ArrayList<Object[]> oreDict = new ArrayList<>();
-    final ArrayList<IProviderItemCapability> capability = new ArrayList<>();
-    final ArrayList<CreativeTabs> groups = new ArrayList<>();
+    final Set<Object[]> oreDict = new HashSet<>();
+    final Set<IProviderItemCapability> capability = new HashSet<>();
+    final Set<CreativeTabs> groups = new HashSet<>();
 
     // Block
     final Material material;

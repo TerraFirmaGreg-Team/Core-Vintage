@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -30,7 +31,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
 import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
@@ -359,7 +359,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
     }
 
     if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-      return (T) new FluidHandlerSided(this, tank, facing);
+      return (T) new CapabilityProviderFluid.Sided(this, tank, facing);
     }
 
     return super.getCapability(capability, facing);

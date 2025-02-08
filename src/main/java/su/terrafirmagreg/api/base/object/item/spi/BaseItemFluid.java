@@ -2,12 +2,12 @@ package su.terrafirmagreg.api.base.object.item.spi;
 
 
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
+import su.terrafirmagreg.api.util.ModUtils;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.fluids.capability.ItemFluidContainer;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,15 +15,29 @@ import org.jetbrains.annotations.Nullable;
 import lombok.Getter;
 
 @Getter
-public class BaseItemBlock extends ItemBlock implements IItemSettings {
+public abstract class BaseItemFluid extends ItemFluidContainer implements IItemSettings {
 
   protected final Settings settings;
+  protected final int capacity;
 
-  public BaseItemBlock(Block block) {
-    super(block);
+  public BaseItemFluid(int capacity) {
+    super(capacity);
 
-    this.settings = Settings.of(block);
+    this.settings = Settings.of();
+    this.capacity = capacity;
   }
+
+
+  @Override
+  public String getTranslationKey(ItemStack stack) {
+    return this.getTranslationKey();
+  }
+
+  @Override
+  public String getTranslationKey() {
+    return ModUtils.localize("item", this.getRegistryName());
+  }
+
 
   @Override
   public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
@@ -32,5 +46,4 @@ public class BaseItemBlock extends ItemBlock implements IItemSettings {
     }
     return definition$initCapabilities(stack, nbt);
   }
-
 }

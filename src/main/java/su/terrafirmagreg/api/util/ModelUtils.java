@@ -12,6 +12,7 @@ import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -190,14 +191,16 @@ public final class ModelUtils {
     ModelUtils.model(item, modelLocation);
   }
 
-  public static void customMeshDefinition(Item item) {
+  public static void meshDefinition(Item item) {
 
     if (item instanceof IProviderItemMesh provider) {
-      ModelUtils.customMeshDefinition(item, provider.getItemMesh());
+
+      ModelUtils.meshDefinition(item, provider.getItemMesh());
+      ModelBakery.registerItemVariants(item, provider.getModelLocations());
     }
   }
 
-  public static void customMeshDefinition(Item item, ItemMeshDefinition meshDefinition) {
+  public static void meshDefinition(Item item, ItemMeshDefinition meshDefinition) {
 
     ModelLoader.setCustomMeshDefinition(item, meshDefinition);
   }

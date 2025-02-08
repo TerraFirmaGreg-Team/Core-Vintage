@@ -1,5 +1,9 @@
 package net.dries007.firmalife.items;
 
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockStaticLiquid;
@@ -31,14 +35,9 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.firmalife.ConfigFL;
 import net.dries007.firmalife.recipe.StrainingRecipe;
-import mcp.MethodsReturnNonnullByDefault;
-
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.dries007.tfc.objects.items.ItemTFC;
 import net.dries007.tfc.util.Helpers;
 
@@ -175,6 +174,6 @@ public class ItemCheesecloth extends ItemTFC {
 
   @Override
   public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new FluidWhitelistHandler(stack, CAPACITY, ConfigFL.General.COMPAT.cheeseclothWhitelist);
+    return new CapabilityProviderFluid.Whitelist(stack, CAPACITY, ConfigFL.General.COMPAT.cheeseclothWhitelist);
   }
 }

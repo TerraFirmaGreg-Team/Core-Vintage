@@ -38,4 +38,5 @@ public abstract class ModuleBase implements IModule {
     this.command = CommandManager.of(this);
     return this.command;
   }
+
 }

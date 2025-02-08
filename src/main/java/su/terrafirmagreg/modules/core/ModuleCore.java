@@ -44,6 +44,7 @@ import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerRespawn;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.EntitiesCore;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.LootTablesCore;
 import su.terrafirmagreg.modules.core.init.PacketsCore;
@@ -93,6 +94,7 @@ public final class ModuleCore extends ModuleBase {
 
   @Override
   public void onRegister(IRegistryManager registry) {
+    FluidsCore.onRegister(registry);
     BlocksCore.onRegister(registry);
     ItemsCore.onRegister(registry);
     EntitiesCore.onRegister(registry);

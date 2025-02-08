@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 
+import com.google.common.base.Preconditions;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import lombok.Getter;
@@ -167,4 +168,13 @@ public final class AnnotationUtils {
     return map;
   }
 
+  public static <A extends Annotation> A getAnnotation(Class<?> clazz, Class<A> annotation) {
+    Preconditions.checkNotNull(annotation, "Annotation {} missing from class {}", annotation.getSimpleName(), clazz.getSimpleName());
+    return clazz.getAnnotation(annotation);
+  }
+
+  public static <A extends Annotation> A getAnnotation(Object object, Class<A> annotation) {
+    
+    return getAnnotation(object.getClass(), annotation);
+  }
 }

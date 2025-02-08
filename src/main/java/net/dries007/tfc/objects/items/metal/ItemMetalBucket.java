@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockStaticLiquid;
@@ -34,7 +36,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -171,6 +172,6 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
 
   @Override
   public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new FluidWhitelistHandler(stack, CAPACITY, getValidFluids());
+    return new CapabilityProviderFluid.Whitelist(stack, CAPACITY, getValidFluids());
   }
 }

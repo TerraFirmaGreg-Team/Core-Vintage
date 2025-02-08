@@ -1,6 +1,7 @@
 package su.terrafirmagreg.framework.module.api;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.api.util.AnnotationUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.command.api.ICommandManager;
 import su.terrafirmagreg.framework.network.api.INetworkManager;
@@ -20,8 +21,6 @@ import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.google.common.base.Preconditions;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -58,8 +57,7 @@ public interface IModule {
   }
 
   default ResourceLocation getIdentifier() {
-    ModuleInfo moduleInfo = this.getClass().getAnnotation(ModuleInfo.class);
-    Preconditions.checkNotNull(moduleInfo, "ModuleInfo annotation missing from module class " + this.getClass().getSimpleName());
+    var moduleInfo = AnnotationUtils.getAnnotation(this, ModuleInfo.class);
     return ModUtils.resource(moduleInfo.containerID(), moduleInfo.moduleID());
   }
 

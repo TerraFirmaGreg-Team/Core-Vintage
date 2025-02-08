@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,9 +14,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
 import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
 import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
@@ -54,7 +54,7 @@ public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidH
   @SuppressWarnings("unchecked")
   public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
     if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-      return (T) new FluidHandlerSided(this, tank, facing);
+      return (T) new CapabilityProviderFluid.Sided(this, tank, facing);
     }
     return super.getCapability(capability, facing);
   }
@@ -113,10 +113,10 @@ public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidH
    */
   public void loadFromItemStack(ItemStack stack) {
     IFluidHandler lampCap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-    if (lampCap instanceof FluidWhitelistHandlerComplex) {
+    if (lampCap instanceof CapabilityProviderFluid.WhitelistComplex whitelistComplex) {
       NBTTagCompound contents = stack.getTagCompound();
       if (contents != null) {
-        tank.fill(((FluidWhitelistHandlerComplex) lampCap).getFluid(), true);
+        tank.fill(whitelistComplex.getFluid(), true);
         markForSync();
       }
     }

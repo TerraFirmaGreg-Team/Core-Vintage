@@ -54,7 +54,7 @@ public class ItemDebug extends BaseItem {
     getSettings()
       .registryKey("wand")
       .rarity(EnumRarity.EPIC)
-      .maxCount(1);
+      .maxStackSize(1);
 
     setNoRepair();
     setFull3D();

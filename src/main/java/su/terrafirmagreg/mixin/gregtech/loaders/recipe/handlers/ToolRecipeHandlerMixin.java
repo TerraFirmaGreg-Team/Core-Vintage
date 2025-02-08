@@ -30,10 +30,10 @@ public class ToolRecipeHandlerMixin {
     Material material = Materials.Flint;
 
     UnificationEntry stick = new UnificationEntry(gregtech.api.unification.ore.OrePrefix.stick, Materials.Wood);
-    UnificationEntry toolHeadShovel = new UnificationEntry(OrePrefixHandler.toolHeadShovel, material);
-    UnificationEntry toolHeadAxe = new UnificationEntry(OrePrefixHandler.toolHeadAxe, material);
-    UnificationEntry toolHeadHoe = new UnificationEntry(OrePrefixHandler.toolHeadHoe, material);
-    UnificationEntry toolHeadKnife = new UnificationEntry(OrePrefixHandler.toolHeadKnife, material);
+    UnificationEntry toolHeadShovel = new UnificationEntry(OrePrefixHandler.toolHeadShovel, Materials.Flint);
+    UnificationEntry toolHeadAxe = new UnificationEntry(OrePrefixHandler.toolHeadAxe, Materials.Flint);
+    UnificationEntry toolHeadHoe = new UnificationEntry(OrePrefixHandler.toolHeadHoe, Materials.Flint);
+    UnificationEntry toolHeadKnife = new UnificationEntry(OrePrefixHandler.toolHeadKnife, Materials.Flint);
 
     ModHandler.addShapelessRecipe(String.format("axe_%s", material), ToolItems.AXE.get(material), toolHeadAxe, stick);
     ModHandler.addShapelessRecipe(String.format("hoe_%s", material), ToolItems.HOE.get(material), toolHeadHoe, stick);
@@ -115,11 +115,11 @@ public class ToolRecipeHandlerMixin {
     Material material = Materials.Stone;
 
     UnificationEntry stick = new UnificationEntry(gregtech.api.unification.ore.OrePrefix.stick, Materials.Wood);
-    UnificationEntry toolHeadHammer = new UnificationEntry(OrePrefixHandler.toolHeadHammer, material);
-    UnificationEntry toolHeadShovel = new UnificationEntry(OrePrefixHandler.toolHeadShovel, material);
-    UnificationEntry toolHeadAxe = new UnificationEntry(OrePrefixHandler.toolHeadAxe, material);
-    UnificationEntry toolHeadHoe = new UnificationEntry(OrePrefixHandler.toolHeadHoe, material);
-    UnificationEntry toolHeadKnife = new UnificationEntry(OrePrefixHandler.toolHeadKnife, material);
+    UnificationEntry toolHeadHammer = new UnificationEntry(OrePrefixHandler.toolHeadHammer, Materials.Stone);
+    UnificationEntry toolHeadShovel = new UnificationEntry(OrePrefixHandler.toolHeadShovel, Materials.Stone);
+    UnificationEntry toolHeadAxe = new UnificationEntry(OrePrefixHandler.toolHeadAxe, Materials.Stone);
+    UnificationEntry toolHeadHoe = new UnificationEntry(OrePrefixHandler.toolHeadHoe, Materials.Stone);
+    UnificationEntry toolHeadKnife = new UnificationEntry(OrePrefixHandler.toolHeadKnife, Materials.Stone);
 
     ModHandler.addShapelessRecipe(String.format("hammer_%s", material), ToolItems.HARD_HAMMER.get(material), toolHeadHammer, stick);
     ModHandler.addShapelessRecipe(String.format("axe_%s", material), ToolItems.AXE.get(material), toolHeadAxe, stick);

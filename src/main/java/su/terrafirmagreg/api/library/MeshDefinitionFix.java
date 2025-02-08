@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * A hackish adapter that allows lambdas to be used as {@link ItemMeshDefinition} implementations without breaking ForgeGradle's reobfuscation and causing
  * {@link AbstractMethodError}s.
@@ -22,7 +24,7 @@ public interface MeshDefinitionFix extends ItemMeshDefinition {
     return lambda;
   }
 
-  default ModelResourceLocation getModelLocation(ItemStack stack) {
+  default @NotNull ModelResourceLocation getModelLocation(ItemStack stack) {
     return getLocation(stack);
   }
 

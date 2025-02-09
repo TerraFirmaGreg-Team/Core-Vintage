@@ -1326,7 +1326,6 @@ vein.surface_tetrahedrite.name=Surface Tetrahedrite
 ### ================== BLOCKS ===========================
 
 
-tile.tfc.debug.name=TFC Debug Block
 tile.tfc.placed_item.name=Placed Items
 tile.tfc.placed_item_flat.name=Debris
 tile.tfc.pit_kiln.name=Pit Kiln
@@ -3362,7 +3361,6 @@ tile.tfc.trapdoor.red_steel.name=Red Steel Trapdoor
 
 
 
-item.tfc.wand.name=TFC Debug Wand
 item.tfc.firestarter.name=Firestarter
 item.tfc.straw.name=Straw
 item.leather.name=Leather
@@ -3376,7 +3374,6 @@ item.tfc.ceramics.fired.jug.filled=%s Jug
 item.tfc.ceramics.unfired.clay_flower_pot.name=Unfired Clay Flower Pot
 item.tfc.ceramics.unfired.crucible.name=Unfired Crucible
 item.tfc.mortar.name=Mortar
-item.tfc.halter.name=Halter
 item.tfc.wrought_iron_grill.name=Wrought Iron Grill
 item.tfc.alabaster_brick.name=Alabaster Brick
 item.tfc.metal.rod.gold.name=Gold Rod
@@ -4698,11 +4695,6 @@ item.tfc.bloom.refined.unknown.name=Refined Bloom
 item.tfc.bloom.unrefined.wrought_iron.name=Raw Iron Bloom
 item.tfc.bloom.refined.wrought_iron.name=Refined Iron Bloom
 
-item.tfc.animal.product.wool.name=Wool
-item.tfc.animal.product.wool_yarn.name=Wool Yarn
-item.tfc.animal.product.wool_cloth.name=Wool Cloth
-item.tfc.animal.product.silk_cloth.name=Silk Cloth
-
 item.tfc.quiver.name=Quiver
 
 ## Entities
@@ -4841,111 +4833,12 @@ tfc.item.firestarter=Firestarter sizzles
 tfc.item.jug.blow=The sound of music!!!
 tfc.item.jug.fill=Jug fills
 tfc.item.throw=Javelin thrown
-tfc.animal.rooster.cry=Rooster cries
 tfc.quern.stonedrag=Quern grinds
 tfc.bellows.blow.air=Bellows puff
 tfc.dirt.slide=Dirt slides
 tfc.rock.slide=Rock slides
 tfc.anvil.metalimpact=Hammer bangs on anvil
-tfc.animal.deer.say=Deer snorts
-tfc.animal.deer.cry=Deer cries
-tfc.animal.deer.hurt=Deer hurts
-tfc.animal.deer.death=Deer dies
-tfc.animal.bear.say=Bear grunts
-tfc.animal.bear.cry=Bear cries
-tfc.animal.bear.cub.cry=Baby bear cries
-tfc.animal.bear.hurt=Bear hurts
-tfc.animal.bear.death=Bear dies
-tfc.animal.pheasant.say=Pheasant clucks
-tfc.animal.pheasant.chick.say=Baby pheasant clucks
-tfc.animal.pheasant.hurt=Pheasant hurts
-tfc.animal.pheasant.death=Pheasant dies
-tfc.animal.alpaca.say=Alpaca bleats
-tfc.animal.alpaca.cry=Alpaca bleats
-tfc.animal.alpaca.hurt=Alpaca hurt
-tfc.animal.alpaca.death=Alpaca dies
-tfc.animal.alpaca.step=Footsteps
-tfc.animal.duck.say=Duck clucks
-tfc.animal.duck.cry=Duck clucks
-tfc.animal.duck.hurt=Duck hurt
-tfc.animal.duck.death=Duck dies
-tfc.animal.goat.say=Goat baahs
-tfc.animal.goat.cry=Goat baahs
-tfc.animal.goat.hurt=Goat hurt
-tfc.animal.goat.death=Goat dies
-tfc.animal.camel.say=Camel grunts
-tfc.animal.camel.cry=Camel cries
-tfc.animal.camel.hurt=Camel hurt
-tfc.animal.camel.death=Camel dies
-tfc.animal.panther.say=Panther grunts
-tfc.animal.panther.cry=Panther cries
-tfc.animal.panther.hurt=Panther hurt
-tfc.animal.panther.death=Panther dies
-tfc.animal.sabertooth.say=Saber Tooth grunts
-tfc.animal.sabertooth.cry=Saber Tooth cries
-tfc.animal.sabertooth.hurt=Saber Tooth hurt
-tfc.animal.sabertooth.death=Saber Tooth dies
-tfc.animal.lion.say=Lion grunts
-tfc.animal.lion.cry=Lion roars
-tfc.animal.lion.hurt=Lion hurt
-tfc.animal.lion.death=Lion dies
-tfc.animal.hyena.say=Hyena grunts
-tfc.animal.hyena.cry=Hyena cries
-tfc.animal.hyena.hurt=Hyena hurts
-tfc.animal.hyena.death=Hyena dies
-tfc.animal.zebu.say=Zebu grunts
-tfc.animal.zebu.cry=Zebu cries
-tfc.animal.zebu.hurt=Zebu hurts
-tfc.animal.zebu.death=Zebu dies
-tfc.animal.muskox.say=Muskox grunts
-tfc.animal.muskox.cry=Muskox cries
-tfc.animal.muskox.hurt=Muskox hurts
-tfc.animal.muskox.death=Muskox dies
-tfc.animal.turkey.say=Turkey grunts
-tfc.animal.turkey.cry=Turkey cries
-tfc.animal.turkey.hurt=Turkey hurts
-tfc.animal.turkey.death=Turkey dies
-tfc.animal.boar.say=Boar grunts
-tfc.animal.boar.cry=Boar cries
-tfc.animal.boar.hurt=Boar hurts
-tfc.animal.boar.death=Boar dies
-tfc.animal.wildebeest.say=Wildebeest grunts
-tfc.animal.wildebeest.hurt=Wildebeest hurts
-tfc.animal.wildebeest.death=Wildebeest dies
-tfc.animal.quail.say=Quail chirps
-tfc.animal.quail.hurt=Quail hurts
-tfc.animal.quail.death=Quail dies
-tfc.animal.grouse.say=Grouse chirps
-tfc.animal.grouse.hurt=Grouse hurts
-tfc.animal.grouse.death=Grouse dies
-tfc.animal.cougar.say=Cougar grunts
-tfc.animal.cougar.cry=Cougar cries
-tfc.animal.cougar.hurt=Cougar hurts
-tfc.animal.cougar.death=Cougar dies
-tfc.animal.coyote.say=Coyote grunts
-tfc.animal.coyote.cry=Coyote cries
-tfc.animal.coyote.hurt=Coyote hurts
-tfc.animal.coyote.death=Coyote dies
-tfc.animal.gazelle.say=Gazelle grunts
-tfc.animal.gazelle.hurt=Gazelle hurts
-tfc.animal.gazelle.death=Gazelle dies
-tfc.animal.direwolf.cry=Direwolf howls
-tfc.animal.direwolf.say=Direwolf barks
-tfc.animal.direwolf.hurt=Direwolf whimpers
-tfc.animal.direwolf.death=Direwolf dies
-tfc.animal.yak.say=Yak moos
-tfc.animal.yak.hurt=Yak groans
-tfc.animal.yak.death=Yak dies
-tfc.animal.jackal.say=Jackal grunts
-tfc.animal.jackal.cry=Jackal yelps
-tfc.animal.jackal.hurt=Jackal hurts
-tfc.animal.jackal.death=Jackal dies
-tfc.animal.mongoose.say=Mongoose grunts
-tfc.animal.mongoose.hurt=Mongoose hurts
-tfc.animal.mongoose.death=Mongoose dies
-tfc.animal.feline.step=Feline walks
-tfc.animal.cricket=Crickets
-tfc.animal.frog=Frogs
+
 
 # Waila
 waila.tfc.ore_drop=Contains %s
@@ -4954,10 +4847,6 @@ waila.tfc.temperature=Air Temperature: %dºC
 waila.tfc.rainfall=Rainfall: %d
 waila.tfc.metal.output=Contains %d units of %s
 waila.tfc.quern.handstone_durability=Handstone Durability: %d / %d
-
-# Patchouli
-tfc.patchouli.landing_text=A guide for TFC-TNG, a total conversion mod for 1.12.2
-tfc.patchouli.recipe_removed=Recipe Removed
 
 ## Devices
 waila.tfc.devices.minutes_remaining=%d Minutes Remaining
@@ -4984,15 +4873,3 @@ waila.tfc.crop.growth=Growth: %s
 waila.tfc.crop.growing=Growing
 waila.tfc.crop.not_growing=Not Growing
 
-
-## Animal stuff
-waila.tfc.animal.has_milk=Can Milk
-waila.tfc.animal.can_mate=Can Mate
-waila.tfc.animal.has_eggs=Has Eggs
-waila.tfc.animal.childhood_end=Becomes adult in %s
-waila.tfc.animal.familiarized=Familiarized
-waila.tfc.animal.not_familiarized=Not familiarized
-waila.tfc.animal.old=Animal is old
-waila.tfc.animal.pregnant=Pregnant
-waila.tfc.animal.can_shear=Shearable
-waila.tfc.animal.pregnant_end=Will give birth in %s days

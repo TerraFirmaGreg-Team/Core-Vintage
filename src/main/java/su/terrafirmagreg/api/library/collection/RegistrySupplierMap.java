@@ -23,8 +23,8 @@ public class RegistrySupplierMap<T extends IForgeRegistryEntry<T>> extends Objec
       if (!identifier.equals(object.getRegistryName())) {
         object.setRegistryName(identifier);
       }
-      
-      RegistryManager.LOGGER.info("Registry: " + identifier);
+
+      RegistryManager.LOGGER.info("Registry: {}  {}", object.getRegistryType(), identifier);
       event.getRegistry().register(object);
     });
   }

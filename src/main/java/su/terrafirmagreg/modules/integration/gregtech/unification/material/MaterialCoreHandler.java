@@ -658,7 +658,7 @@ public final class MaterialCoreHandler {
     BlackBronze.setProperty(PropertyKey.TOOL, new ToolProperty(2.2f, 2f, 212, 2));
     BlackSteel.setProperty(PropertyKey.TOOL, new ToolProperty(6.0f, 3f, 784, 3));
 
-    SaltWater.setMaterialRGB(0xFF1F5099);
+    SaltWater.getProperty(PropertyKey.FLUID).getQueuedBuilder(FluidStorageKeys.LIQUID).textures(true, true);
     Glowstone.setFormula("Au(Si(FeS2)5(CrAl2O3)Hg3)", true);
     RedSteel.addFlags(GENERATE_LONG_ROD, GENERATE_BOLT_SCREW, GENERATE_DOUBLE_PLATE);
     BlueSteel.addFlags(GENERATE_LONG_ROD, GENERATE_BOLT_SCREW, GENERATE_DOUBLE_PLATE);

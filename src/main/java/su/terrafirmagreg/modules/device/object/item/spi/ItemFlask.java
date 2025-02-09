@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.device.object.item;
+package su.terrafirmagreg.modules.device.object.item.spi;
 
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemFluid;
 import su.terrafirmagreg.api.library.MeshDefinitionFix;

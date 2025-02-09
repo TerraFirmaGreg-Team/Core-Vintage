@@ -67,6 +67,17 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
     return getSettings().getMaxStackSize();
   }
 
+  // Fix #12 by actually implementing the MC function that limits stack sizes
+
+  /**
+   * @author Xikaro
+   * @reason Адаптация под ISettingsItem
+   */
+  @Overwrite
+  public int getItemStackLimit(ItemStack stack) {
+    return getItemStackLimit();
+  }
+
   /**
    * @author Xikaro
    * @reason Адаптация под ISettingsItem

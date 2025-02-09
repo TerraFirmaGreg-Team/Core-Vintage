@@ -49,6 +49,11 @@ public final class FluidsTFC {
   private static final ResourceLocation STILL = new ResourceLocation(TFC, "blocks/fluid_still");
   private static final ResourceLocation FLOW = new ResourceLocation(TFC, "blocks/fluid_flow");
 
+  private static final ResourceLocation WATER_STILL = new ResourceLocation(TFC, "blocks/water_still");
+  private static final ResourceLocation WATER_FLOW = new ResourceLocation(TFC, "blocks/water_flow");
+  private static final ResourceLocation FRESH_WATER_STILL = new ResourceLocation(TFC, "blocks/fresh_water_still");
+  private static final ResourceLocation FRESH_WATER_FLOW = new ResourceLocation(TFC, "blocks/fresh_water_flow");
+
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
   private static final ResourceLocation LAVA_STILL = new ResourceLocation(TFC, "blocks/lava_still");
   private static final ResourceLocation LAVA_FLOW = new ResourceLocation(TFC, "blocks/lava_flow");
@@ -95,13 +100,13 @@ public final class FluidsTFC {
   }
 
   public static void registerFluids() {
-    FluidsCore.FRESH_WATER = registerFluid(new Fluid("fresh_water", STILL, FLOW, 0xFF296ACD)).with(DrinkableProperty.DRINKABLE, player -> {
+    FluidsCore.FRESH_WATER = registerFluid(new Fluid("fresh_water", FRESH_WATER_STILL, FRESH_WATER_FLOW, 0xFF296ACD)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC foodStatsTFC) {
         foodStatsTFC.addThirst(40);
       }
     });
-    FluidsCore.HOT_WATER = registerFluid(new Fluid("hot_water", STILL, FLOW, 0xFF345FDA).setTemperature(350));
-    FluidsCore.SALT_WATER = registerFluid(new Fluid("salt_water", STILL, FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
+    FluidsCore.HOT_WATER = registerFluid(new Fluid("hot_water", WATER_STILL, WATER_FLOW, 0xFF345FDA).setTemperature(350));
+    FluidsCore.SALT_WATER = registerFluid(new Fluid("salt_water", WATER_STILL, WATER_FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC) {
         ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
         if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {

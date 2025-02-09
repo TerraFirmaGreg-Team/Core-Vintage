@@ -4,6 +4,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.object.item.spi.ItemFlask;
 
 public class ItemFlaskLeather extends ItemFlask {
 

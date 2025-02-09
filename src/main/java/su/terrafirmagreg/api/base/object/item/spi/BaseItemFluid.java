@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import lombok.Getter;
 
 @Getter
+@SuppressWarnings("deprecation")
 public abstract class BaseItemFluid extends ItemFluidContainer implements IItemSettings {
 
   protected final Settings settings;
@@ -45,5 +46,15 @@ public abstract class BaseItemFluid extends ItemFluidContainer implements IItemS
       return null;
     }
     return definition$initCapabilities(stack, nbt);
+  }
+
+
+  @Override
+  public int getItemStackLimit() {
+    return getSettings().getMaxStackSize();
+  }
+
+  public int getItemStackLimit(ItemStack stack) {
+    return getItemStackLimit();
   }
 }

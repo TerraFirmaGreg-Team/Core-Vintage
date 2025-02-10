@@ -30,7 +30,7 @@ public final class OreDictUtils {
       var settings = provider.getSettings();
       OreDictUtils.register(block, settings.getRegistryKey());
       settings.getOreDict().forEach(oreDict -> {
-        if (oreDict != null && oreDict.length > 0) {
+        if (oreDict != null && oreDict.length != 0) {
           OreDictUtils.register(block, oreDict);
         }
       });
@@ -43,7 +43,7 @@ public final class OreDictUtils {
       var settings = provider.getSettings();
       OreDictUtils.register(item, settings.getRegistryKey());
       settings.getOreDict().forEach(oreDict -> {
-        if (oreDict != null && oreDict.length > 0) {
+        if (oreDict != null && oreDict.length != 0) {
           OreDictUtils.register(item, oreDict);
         }
       });

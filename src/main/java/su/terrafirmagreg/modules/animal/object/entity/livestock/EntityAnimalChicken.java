@@ -230,8 +230,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
     if (this.getClass() == EntityAnimalChicken.class && this.getGender() == Gender.MALE
         && !this.world.isRemote && !this.isChild() &&
         Calendar.CALENDAR_TIME.getHourOfDay() == 6 && rand.nextInt(600) == 0) {
-      this.world.playSound(null, this.getPosition(), SoundsAnimal.ANIMAL_ROOSTER_CRY.get(),
-        SoundCategory.AMBIENT, 0.8f, 1.0f);
+      this.world.playSound(null, this.getPosition(), SoundsAnimal.ANIMAL_ROOSTER_CRY.get(), SoundCategory.AMBIENT, 0.8f, 1.0f);
     }
     this.oFlap = this.wingRotation;
     this.oFlapSpeed = this.destPos;

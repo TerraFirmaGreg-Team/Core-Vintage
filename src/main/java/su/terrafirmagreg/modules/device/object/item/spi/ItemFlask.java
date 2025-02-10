@@ -58,6 +58,7 @@ public abstract class ItemFlask extends BaseItemFluid implements IProviderItemMe
 
     getSettings()
       .maxStackSize(1)
+      .oreDict("flask")
       .capability(
         CapabilityProviderFluid.of(capacity, true, getValidFluids())
       );

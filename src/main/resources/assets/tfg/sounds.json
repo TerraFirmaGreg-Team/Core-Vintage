@@ -1,14 +1,14 @@
 {
-  "item.device.flaskbreak": {
+  "device/item/flaskbreak": {
     "category": "ambient",
-    "subtitle": "tfg.item.device.flaskbreak",
+    "subtitle": "sound.tfg.device.item.flaskbreak",
     "sounds": [
       "tfg:device/flask/leather/break"
     ]
   },
-  "item.device.firestarter": {
+  "device/item/firestarter": {
     "category": "ambient",
-    "subtitle": "tfg.item.device.firestarter",
+    "subtitle": "sound.tfg.device.item.firestarter",
     "sounds": [
       "tfg:device/firestarter/1",
       "tfg:device/firestarter/2",
@@ -22,136 +22,136 @@
       "tfg:device/firestarter/10"
     ]
   },
-  "block.device.bellows.blow.air": {
+  "device/block/bellows/blow/air": {
     "category": "block",
-    "subtitle": "tfg.block.device.bellows.blow.air",
+    "subtitle": "sound.tfg.device.block.bellows.blow.air",
     "sounds": [
       "tfg:device/bellows/blow/air"
     ]
   },
-  "block.device.fridge.open": {
+  "device/block/fridge/open": {
     "category": "block",
-    "subtitle": "tfg.block.device.bellows.fridge.open",
+    "subtitle": "sound.tfg.device.block.bellows.fridge.open",
     "sounds": [
       "tfg:device/fridge/open"
     ]
   },
-  "block.device.fridge.close": {
+  "device/block/fridge/close": {
     "category": "block",
-    "subtitle": "tfg.block.device.bellows.fridge.close",
+    "subtitle": "sound.tfg.device.block.bellows.fridge.close",
     "sounds": [
       "tfg:device/fridge/close"
     ]
   },
-  "block.device.induction_smelter.work": {
+  "device/block/induction_smelter/work": {
     "category": "block",
-    "subtitle": "tfg.block.device.induction_smelter.work",
+    "subtitle": "sound.tfg.device.block.induction_smelter.work",
     "sounds": [
       "tfg:device/induction_smelter/work"
     ]
   },
-  "block.device.latex_extractor.fit.groove": {
+  "device/block/latex_extractor/fit/groove": {
     "category": "block",
-    "subtitle": "tfg.block.device.latex_extractor.fit.groove",
+    "subtitle": "sound.tfg.device.block.latex_extractor.fit.groove",
     "sounds": [
       "tfg:device/latex_extractor/fit_groove"
     ]
   },
-  "block.device.latex_extractor.fit.mount": {
+  "device/block/latex_extractor/fit/mount": {
     "category": "block",
-    "subtitle": "tfg.block.device.latex_extractor.fit.mount",
+    "subtitle": "sound.tfg.device.block.latex_extractor.fit.mount",
     "sounds": [
       "tfg:device/latex_extractor/fit_mount"
     ]
   },
-  "block.device.latex_extractor.fit.bowl": {
+  "device/block/latex_extractor/fit/bowl": {
     "category": "block",
-    "subtitle": "tfg.block.device.latex_extractor.fit.bowl",
+    "subtitle": "sound.tfg.device.block.latex_extractor.fit.bowl",
     "sounds": [
       "tfg:device/latex_extractor/fit_bowl"
     ]
   },
-  "block.device.latex_extractor.grab.bowl": {
+  "device/block/latex_extractor/grab/bowl": {
     "category": "block",
-    "subtitle": "tfg.block.device.latex_extractor.grab.bowl",
+    "subtitle": "sound.tfg.device.block.latex_extractor.grab.bowl",
     "sounds": [
       "tfg:device/latex_extractor/grab_bowl"
     ]
   },
-  "block.device.latex_extractor.trunk.scratch": {
+  "device/block/latex_extractor/trunk/scratch": {
     "category": "block",
-    "subtitle": "tfg.block.device.latex_extractor.trunk.scratch",
+    "subtitle": "sound.tfg.device.block.latex_extractor.trunk.scratch",
     "sounds": [
       "tfg:device/latex_extractor/trunk_scratch"
     ]
   },
-  "entity.animal.alpaca.say": {
+  "animal/entity/alpaca/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.alpaca.say",
+    "subtitle": "sound.tfg.animal.entity.alpaca.say",
     "sounds": [
       "tfg:animal/alpaca/say/1",
       "tfg:animal/alpaca/say/2",
       "tfg:animal/alpaca/say/3"
     ]
   },
-  "entity.animal.alpaca.cry": {
+  "animal/entity/alpaca/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.alpaca.cry",
+    "subtitle": "sound.tfg.animal.entity.alpaca.cry",
     "sounds": [
       "tfg:animal/alpaca/cry/1",
       "tfg:animal/alpaca/cry/2",
       "tfg:animal/alpaca/cry/3"
     ]
   },
-  "entity.animal.alpaca.hurt": {
+  "animal/entity/alpaca/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.alpaca.hurt",
+    "subtitle": "sound.tfg.animal.entity.alpaca.hurt",
     "sounds": [
       "tfg:animal/alpaca/hurt/1",
       "tfg:animal/alpaca/hurt/2"
     ]
   },
-  "entity.animal.alpaca.death": {
+  "animal/entity/alpaca/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.alpaca.death",
+    "subtitle": "sound.tfg.animal.entity.alpaca.death",
     "sounds": [
       "tfg:animal/alpaca/death/1"
     ]
   },
-  "entity.animal.duck.say": {
+  "animal/entity/duck/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.duck.say",
+    "subtitle": "sound.tfg.animal.entity.duck.say",
     "sounds": [
       "tfg:animal/duck/say/1",
       "tfg:animal/duck/say/2",
       "tfg:animal/duck/say/3"
     ]
   },
-  "entity.animal.duck.cry": {
+  "animal/entity/duck/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.duck.cry",
+    "subtitle": "sound.tfg.animal.entity.duck.cry",
     "sounds": [
       "tfg:animal/duck/cry/1",
       "tfg:animal/duck/cry/2"
     ]
   },
-  "entity.animal.duck.death": {
+  "animal/entity/duck/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.duck.death",
+    "subtitle": "sound.tfg.animal.entity.duck.death",
     "sounds": [
       "tfg:animal/duck/death/1"
     ]
   },
-  "entity.animal.duck.hurt": {
+  "animal/entity/duck/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.duck.hurt",
+    "subtitle": "sound.tfg.animal.entity.duck.hurt",
     "sounds": [
       "tfg:animal/duck/hurt/1"
     ]
   },
-  "entity.animal.goat.say": {
+  "animal/entity/goat/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.goat.say",
+    "subtitle": "sound.tfg.animal.entity.goat.say",
     "sounds": [
       "tfg:animal/goat/say/1",
       "tfg:animal/goat/say/2",
@@ -159,32 +159,32 @@
       "tfg:animal/goat/say/4"
     ]
   },
-  "entity.animal.goat.cry": {
+  "animal/entity/goat/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.goat.cry",
+    "subtitle": "sound.tfg.animal.entity.goat.cry",
     "sounds": [
       "tfg:animal/goat/cry/1",
       "tfg:animal/goat/cry/2",
       "tfg:animal/goat/cry/3"
     ]
   },
-  "entity.animal.goat.death": {
+  "animal/entity/goat/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.goat.death",
+    "subtitle": "sound.tfg.animal.entity.goat.death",
     "sounds": [
       "tfg:animal/goat/death/1"
     ]
   },
-  "entity.animal.goat.hurt": {
+  "animal/entity/goat/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.goat.hurt",
+    "subtitle": "sound.tfg.animal.entity.goat.hurt",
     "sounds": [
       "tfg:animal/goat/hurt/1"
     ]
   },
-  "entity.animal.deer.say": {
+  "animal/entity/deer/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.deer.say",
+    "subtitle": "sound.tfg.animal.entity.deer.say",
     "sounds": [
       "tfg:animal/deer/say/1",
       "tfg:animal/deer/say/2",
@@ -195,9 +195,9 @@
       "tfg:animal/deer/say/7"
     ]
   },
-  "entity.animal.deer.cry": {
+  "animal/entity/deer/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.deer.cry",
+    "subtitle": "sound.tfg.animal.entity.deer.cry",
     "sounds": [
       "tfg:animal/deer/cry/1",
       "tfg:animal/deer/cry/2",
@@ -205,23 +205,23 @@
       "tfg:animal/deer/cry/4"
     ]
   },
-  "entity.animal.deer.hurt": {
+  "animal/entity/deer/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.deer.hurt",
+    "subtitle": "sound.tfg.animal.entity.deer.hurt",
     "sounds": [
       "tfg:animal/deer/hurt/1"
     ]
   },
-  "entity.animal.deer.death": {
+  "animal/entity/deer/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.deer.death",
+    "subtitle": "sound.tfg.animal.entity.deer.death",
     "sounds": [
       "tfg:animal/deer/death/1"
     ]
   },
-  "entity.animal.bear.say": {
+  "animal/entity/bear/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.bear.say",
+    "subtitle": "sound.tfg.animal.entity.bear.say",
     "sounds": [
       "tfg:animal/bear/say/1",
       "tfg:animal/bear/say/2",
@@ -231,9 +231,9 @@
       "tfg:animal/bear/say/6"
     ]
   },
-  "entity.animal.bear.cry": {
+  "animal/entity/bear/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.bear.cry",
+    "subtitle": "sound.tfg.animal.entity.bear.cry",
     "sounds": [
       "tfg:animal/bear/cry/1",
       "tfg:animal/bear/cry/2",
@@ -241,211 +241,211 @@
       "tfg:animal/bear/cry/4"
     ]
   },
-  "entity.animal.bear.cub.cry": {
+  "animal/entity/bear.cub/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.bear.cub.cry",
+    "subtitle": "sound.tfg.animal.entity.bear.cub.cry",
     "sounds": [
       "tfg:animal/bear/cry/cub/1"
     ]
   },
-  "entity.animal.bear.hurt": {
+  "animal/entity/bear/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.bear.hurt",
+    "subtitle": "sound.tfg.animal.entity.bear.hurt",
     "sounds": [
       "tfg:animal/bear/hurt/1"
     ]
   },
-  "entity.animal.bear.death": {
+  "animal/entity/bear/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.bear.death",
+    "subtitle": "sound.tfg.animal.entity.bear.death",
     "sounds": [
       "tfg:animal/bear/death/1"
     ]
   },
-  "entity.animal.camel.say": {
+  "animal/entity/camel/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.camel.say",
+    "subtitle": "sound.tfg.animal.entity.camel.say",
     "sounds": [
       "tfg:animal/camel/say/1",
       "tfg:animal/camel/say/2",
       "tfg:animal/camel/say/3"
     ]
   },
-  "entity.animal.camel.cry": {
+  "animal/entity/camel/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.camel.cry",
+    "subtitle": "sound.tfg.animal.entity.camel.cry",
     "sounds": [
       "tfg:animal/camel/cry/1",
       "tfg:animal/camel/cry/2",
       "tfg:animal/camel/cry/3"
     ]
   },
-  "entity.animal.camel.hurt": {
+  "animal/entity/camel/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.camel.hurt",
+    "subtitle": "sound.tfg.animal.entity.camel.hurt",
     "sounds": [
       "tfg:animal/camel/hurt/1",
       "tfg:animal/camel/hurt/2"
     ]
   },
-  "entity.animal.camel.death": {
+  "animal/entity/camel/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.camel.death",
+    "subtitle": "sound.tfg.animal.entity.camel.death",
     "sounds": [
       "tfg:animal/camel/death/1"
     ]
   },
-  "entity.animal.panther.say": {
+  "animal/entity/panther/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.panther.say",
+    "subtitle": "sound.tfg.animal.entity.panther.say",
     "sounds": [
       "tfg:animal/panther/say/1",
       "tfg:animal/panther/say/2",
       "tfg:animal/panther/say/3"
     ]
   },
-  "entity.animal.panther.cry": {
+  "animal/entity/panther/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.panther.cry",
+    "subtitle": "sound.tfg.animal.entity.panther.cry",
     "sounds": [
       "tfg:animal/panther/cry/1"
     ]
   },
-  "entity.animal.panther.hurt": {
+  "animal/entity/panther/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.panther.hurt",
+    "subtitle": "sound.tfg.animal.entity.panther.hurt",
     "sounds": [
       "tfg:animal/panther/hurt/1",
       "tfg:animal/panther/hurt/2"
     ]
   },
-  "entity.animal.panther.death": {
+  "animal/entity/panther/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.panther.death",
+    "subtitle": "sound.tfg.animal.entity.panther.death",
     "sounds": [
       "tfg:animal/panther/death/1"
     ]
   },
-  "entity.animal.sabertooth.say": {
+  "animal/entity/sabertooth/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.sabertooth.say",
+    "subtitle": "sound.tfg.animal.entity.sabertooth.say",
     "sounds": [
       "tfg:animal/sabertooth/say/1",
       "tfg:animal/sabertooth/say/2",
       "tfg:animal/sabertooth/say/3"
     ]
   },
-  "entity.animal.sabertooth.cry": {
+  "animal/entity/sabertooth/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.sabertooth.cry",
+    "subtitle": "sound.tfg.animal.entity.sabertooth.cry",
     "sounds": [
       "tfg:animal/sabertooth/cry/1",
       "tfg:animal/sabertooth/cry/2"
     ]
   },
-  "entity.animal.sabertooth.hurt": {
+  "animal/entity/sabertooth/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.sabertooth.hurt",
+    "subtitle": "sound.tfg.animal.entity.sabertooth.hurt",
     "sounds": [
       "tfg:animal/sabertooth/hurt/1",
       "tfg:animal/sabertooth/hurt/2"
     ]
   },
-  "entity.animal.sabertooth.death": {
+  "animal/entity/sabertooth/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.sabertooth.death",
+    "subtitle": "sound.tfg.animal.entity.sabertooth.death",
     "sounds": [
       "tfg:animal/sabertooth/death/1"
     ]
   },
-  "entity.animal.pheasant.say": {
+  "animal/entity/pheasant/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.pheasant.say",
+    "subtitle": "sound.tfg.animal.entity.pheasant.say",
     "sounds": [
       "tfg:animal/pheasant/say/1",
       "tfg:animal/pheasant/say/2",
       "tfg:animal/pheasant/say/3"
     ]
   },
-  "entity.animal.pheasant.hurt": {
+  "animal/entity/pheasant/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.pheasant.hurt",
+    "subtitle": "sound.tfg.animal.entity.pheasant.hurt",
     "sounds": [
       "tfg:animal/pheasant/hurt/1"
     ]
   },
-  "entity.animal.pheasant.death": {
+  "animal/entity/pheasant/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.pheasant.death",
+    "subtitle": "sound.tfg.animal.entity.pheasant.death",
     "sounds": [
       "tfg:animal/pheasant/death/1"
     ]
   },
-  "entity.animal.lion.say": {
+  "animal/entity/lion/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.lion.say",
+    "subtitle": "sound.tfg.animal.entity.lion.say",
     "sounds": [
       "tfg:animal/lion/say/1"
     ]
   },
-  "entity.animal.lion.cry": {
+  "animal/entity/lion/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.lion.cry",
+    "subtitle": "sound.tfg.animal.entity.lion.cry",
     "sounds": [
       "tfg:animal/lion/cry/1",
       "tfg:animal/lion/cry/2"
     ]
   },
-  "entity.animal.lion.hurt": {
+  "animal/entity/lion/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.lion.hurt",
+    "subtitle": "sound.tfg.animal.entity.lion.hurt",
     "sounds": [
       "tfg:animal/lion/hurt/1",
       "tfg:animal/lion/hurt/2"
     ]
   },
-  "entity.animal.lion.death": {
+  "animal/entity/lion/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.lion.death",
+    "subtitle": "sound.tfg.animal.entity.lion.death",
     "sounds": [
       "tfg:animal/lion/death/1"
     ]
   },
-  "entity.animal.hyena.say": {
+  "animal/entity/hyena/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.hyena.say",
+    "subtitle": "sound.tfg.animal.entity.hyena.say",
     "sounds": [
       "tfg:animal/hyena/say/1",
       "tfg:animal/hyena/say/2",
       "tfg:animal/hyena/say/3"
     ]
   },
-  "entity.animal.hyena.cry": {
+  "animal/entity/hyena/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.hyena.cry",
+    "subtitle": "sound.tfg.animal.entity.hyena.cry",
     "sounds": [
       "tfg:animal/hyena/cry/1",
       "tfg:animal/hyena/cry/2",
       "tfg:animal/hyena/cry/3"
     ]
   },
-  "entity.animal.hyena.death": {
+  "animal/entity/hyena/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.hyena.death",
+    "subtitle": "sound.tfg.animal.entity.hyena.death",
     "sounds": [
       "tfg:animal/hyena/death/1"
     ]
   },
-  "entity.animal.hyena.hurt": {
+  "animal/entity/hyena/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.hyena.hurt",
+    "subtitle": "sound.tfg.animal.entity.hyena.hurt",
     "sounds": [
       "tfg:animal/hyena/hurt/1"
     ]
   },
-  "entity.animal.zebu.say": {
+  "animal/entity/zebu/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.zebu.say",
+    "subtitle": "sound.tfg.animal.entity.zebu.say",
     "sounds": [
       "tfg:animal/zebu/say/1",
       "tfg:animal/zebu/say/2",
@@ -453,96 +453,96 @@
       "tfg:animal/zebu/say/4"
     ]
   },
-  "entity.animal.zebu.hurt": {
+  "animal/entity/zebu/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.zebu.hurt",
+    "subtitle": "sound.tfg.animal.entity.zebu.hurt",
     "sounds": [
       "tfg:animal/zebu/hurt/1",
       "tfg:animal/zebu/hurt/2"
     ]
   },
-  "entity.animal.zebu.death": {
+  "animal/entity/zebu/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.zebu.death",
+    "subtitle": "sound.tfg.animal.entity.zebu.death",
     "sounds": [
       "tfg:animal/zebu/death/1"
     ]
   },
-  "entity.animal.muskox.say": {
+  "animal/entity/muskox/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.muskox.say",
+    "subtitle": "sound.tfg.animal.entity.muskox.say",
     "sounds": [
       "tfg:animal/muskox/say/1",
       "tfg:animal/muskox/say/2",
       "tfg:animal/muskox/say/3"
     ]
   },
-  "entity.animal.muskox.hurt": {
+  "animal/entity/muskox/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.muskox.hurt",
+    "subtitle": "sound.tfg.animal.entity.muskox.hurt",
     "sounds": [
       "tfg:animal/muskox/hurt/1",
       "tfg:animal/muskox/hurt/2"
     ]
   },
-  "entity.animal.muskox.death": {
+  "animal/entity/muskox/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.muskox.death",
+    "subtitle": "sound.tfg.animal.entity.muskox.death",
     "sounds": [
       "tfg:animal/muskox/death/1"
     ]
   },
-  "entity.animal.turkey.say": {
+  "animal/entity/turkey/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.turkey.say",
+    "subtitle": "sound.tfg.animal.entity.turkey.say",
     "sounds": [
       "tfg:animal/turkey/say/1",
       "tfg:animal/turkey/say/2",
       "tfg:animal/turkey/say/3"
     ]
   },
-  "entity.animal.turkey.hurt": {
+  "animal/entity/turkey/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.turkey.hurt",
+    "subtitle": "sound.tfg.animal.entity.turkey.hurt",
     "sounds": [
       "tfg:animal/turkey/hurt/1",
       "tfg:animal/turkey/hurt/2"
     ]
   },
-  "entity.animal.turkey.death": {
+  "animal/entity/turkey/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.turkey.death",
+    "subtitle": "sound.tfg.animal.entity.turkey.death",
     "sounds": [
       "tfg:animal/turkey/death/1"
     ]
   },
-  "entity.animal.boar.say": {
+  "animal/entity/boar/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.boar.say",
+    "subtitle": "sound.tfg.animal.entity.boar.say",
     "sounds": [
       "tfg:animal/boar/say/1",
       "tfg:animal/boar/say/2",
       "tfg:animal/boar/say/3"
     ]
   },
-  "entity.animal.boar.hurt": {
+  "animal/entity/boar/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.boar.hurt",
+    "subtitle": "sound.tfg.animal.entity.boar.hurt",
     "sounds": [
       "tfg:animal/boar/hurt/1",
       "tfg:animal/boar/hurt/2"
     ]
   },
-  "entity.animal.boar.death": {
+  "animal/entity/boar/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.boar.death",
+    "subtitle": "sound.tfg.animal.entity.boar.death",
     "sounds": [
       "tfg:animal/boar/death/1"
     ]
   },
-  "entity.animal.wildebeest.say": {
+  "animal/entity/wildebeest/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.wildebeest.say",
+    "subtitle": "sound.tfg.animal.entity.wildebeest.say",
     "sounds": [
       "tfg:animal/wildebeest/say/1",
       "tfg:animal/wildebeest/say/2",
@@ -550,24 +550,24 @@
       "tfg:animal/wildebeest/say/4"
     ]
   },
-  "entity.animal.wildebeest.hurt": {
+  "animal/entity/wildebeest/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.wildebeest.hurt",
+    "subtitle": "sound.tfg.animal.entity.wildebeest.hurt",
     "sounds": [
       "tfg:animal/wildebeest/hurt/1",
       "tfg:animal/wildebeest/hurt/2"
     ]
   },
-  "entity.animal.wildebeest.death": {
+  "animal/entity/wildebeest/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.wildebeest.death",
+    "subtitle": "sound.tfg.animal.entity.wildebeest.death",
     "sounds": [
       "tfg:animal/wildebeest/death/1"
     ]
   },
-  "entity.animal.grouse.say": {
+  "animal/entity/grouse/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.grouse.say",
+    "subtitle": "sound.tfg.animal.entity.grouse.say",
     "sounds": [
       "tfg:animal/grouse/say/1",
       "tfg:animal/grouse/say/2",
@@ -575,24 +575,24 @@
       "tfg:animal/grouse/say/4"
     ]
   },
-  "entity.animal.grouse.hurt": {
+  "animal/entity/grouse/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.grouse.hurt",
+    "subtitle": "sound.tfg.animal.entity.grouse.hurt",
     "sounds": [
       "tfg:animal/grouse/hurt/1",
       "tfg:animal/grouse/hurt/2"
     ]
   },
-  "entity.animal.grouse.death": {
+  "animal/entity/grouse/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.grouse.death",
+    "subtitle": "sound.tfg.animal.entity.grouse.death",
     "sounds": [
       "tfg:animal/grouse/death/1"
     ]
   },
-  "entity.animal.quail.say": {
+  "animal/entity/quail/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.quail.say",
+    "subtitle": "sound.tfg.animal.entity.quail.say",
     "sounds": [
       "tfg:animal/quail/say/1",
       "tfg:animal/quail/say/2",
@@ -601,87 +601,87 @@
       "tfg:animal/quail/say/5"
     ]
   },
-  "entity.animal.quail.hurt": {
+  "animal/entity/quail/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.quail.hurt",
+    "subtitle": "sound.tfg.animal.entity.quail.hurt",
     "sounds": [
       "tfg:animal/quail/hurt/1",
       "tfg:animal/quail/hurt/2"
     ]
   },
-  "entity.animal.quail.death": {
+  "animal/entity/quail/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.quail.death",
+    "subtitle": "sound.tfg.animal.entity.quail.death",
     "sounds": [
       "tfg:animal/quail/death/1"
     ]
   },
-  "entity.animal.coyote.say": {
+  "animal/entity/coyote/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.coyote.say",
+    "subtitle": "sound.tfg.animal.entity.coyote.say",
     "sounds": [
       "tfg:animal/coyote/say/1",
       "tfg:animal/coyote/say/2",
       "tfg:animal/coyote/say/3"
     ]
   },
-  "entity.animal.coyote.cry": {
+  "animal/entity/coyote/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.coyote.cry",
+    "subtitle": "sound.tfg.animal.entity.coyote.cry",
     "sounds": [
       "tfg:animal/coyote/cry/1",
       "tfg:animal/coyote/cry/2"
     ]
   },
-  "entity.animal.coyote.hurt": {
+  "animal/entity/coyote/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.coyote.hurt",
+    "subtitle": "sound.tfg.animal.entity.coyote.hurt",
     "sounds": [
       "tfg:animal/coyote/hurt/1",
       "tfg:animal/coyote/hurt/2"
     ]
   },
-  "entity.animal.coyote.death": {
+  "animal/entity/coyote/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.coyote.death",
+    "subtitle": "sound.tfg.animal.entity.coyote.death",
     "sounds": [
       "tfg:animal/coyote/death/1"
     ]
   },
-  "entity.animal.cougar.say": {
+  "animal/entity/cougar/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.cougar.say",
+    "subtitle": "sound.tfg.animal.entity.cougar.say",
     "sounds": [
       "tfg:animal/cougar/say/1",
       "tfg:animal/cougar/say/2",
       "tfg:animal/cougar/say/3"
     ]
   },
-  "entity.animal.cougar.cry": {
+  "animal/entity/cougar/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.cougar.cry",
+    "subtitle": "sound.tfg.animal.entity.cougar.cry",
     "sounds": [
       "tfg:animal/cougar/cry/1"
     ]
   },
-  "entity.animal.cougar.hurt": {
+  "animal/entity/cougar/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.cougar.hurt",
+    "subtitle": "sound.tfg.animal.entity.cougar.hurt",
     "sounds": [
       "tfg:animal/cougar/hurt/1",
       "tfg:animal/cougar/hurt/2"
     ]
   },
-  "entity.animal.cougar.death": {
+  "animal/entity/cougar/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.cougar.death",
+    "subtitle": "sound.tfg.animal.entity.cougar.death",
     "sounds": [
       "tfg:animal/cougar/death/1"
     ]
   },
-  "entity.animal.gazelle.say": {
+  "animal/entity/gazelle/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.gazelle.say",
+    "subtitle": "sound.tfg.animal.entity.gazelle.say",
     "sounds": [
       "tfg:animal/gazelle/say/1",
       "tfg:animal/gazelle/say/2",
@@ -689,56 +689,56 @@
       "tfg:animal/gazelle/say/4"
     ]
   },
-  "entity.animal.gazelle.hurt": {
+  "animal/entity/gazelle/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.gazelle.hurt",
+    "subtitle": "sound.tfg.animal.entity.gazelle.hurt",
     "sounds": [
       "tfg:animal/gazelle/hurt/1",
       "tfg:animal/gazelle/hurt/2"
     ]
   },
-  "entity.animal.gazelle.death": {
+  "animal/entity/gazelle/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.gazelle.death",
+    "subtitle": "sound.tfg.animal.entity.gazelle.death",
     "sounds": [
       "tfg:animal/gazelle/death/1"
     ]
   },
-  "entity.animal.direwolf.say": {
+  "animal/entity/direwolf/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.direwolf.say",
+    "subtitle": "sound.tfg.animal.entity.direwolf.say",
     "sounds": [
       "tfg:animal/direwolf/say/1",
       "tfg:animal/direwolf/say/2",
       "tfg:animal/direwolf/say/3"
     ]
   },
-  "entity.animal.direwolf.cry": {
+  "animal/entity/direwolf/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.direwolf.cry",
+    "subtitle": "sound.tfg.animal.entity.direwolf.cry",
     "sounds": [
       "tfg:animal/direwolf/cry/1",
       "tfg:animal/direwolf/cry/2"
     ]
   },
-  "entity.animal.direwolf.hurt": {
+  "animal/entity/direwolf/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.direwolf.hurt",
+    "subtitle": "sound.tfg.animal.entity.direwolf.hurt",
     "sounds": [
       "tfg:animal/direwolf/hurt/1",
       "tfg:animal/direwolf/hurt/2"
     ]
   },
-  "entity.animal.direwolf.death": {
+  "animal/entity/direwolf/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.direwolf.death",
+    "subtitle": "sound.tfg.animal.entity.direwolf.death",
     "sounds": [
       "tfg:animal/direwolf/death/1"
     ]
   },
-  "entity.animal.yak.say": {
+  "animal/entity/yak/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.yak.say",
+    "subtitle": "sound.tfg.animal.entity.yak.say",
     "sounds": [
       "tfg:animal/yak/say/1",
       "tfg:animal/yak/say/2",
@@ -746,80 +746,80 @@
       "tfg:animal/yak/say/4"
     ]
   },
-  "entity.animal.yak.hurt": {
+  "animal/entity/yak/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.yak.hurt",
+    "subtitle": "sound.tfg.animal.entity.yak.hurt",
     "sounds": [
       "tfg:animal/yak/hurt/1",
       "tfg:animal/yak/hurt/2"
     ]
   },
-  "entity.animal.yak.death": {
+  "animal/entity/yak/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.yak.death",
+    "subtitle": "sound.tfg.animal.entity.yak.death",
     "sounds": [
       "tfg:animal/yak/death/1"
     ]
   },
-  "entity.animal.jackal.say": {
+  "animal/entity/jackal/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.jackal.say",
+    "subtitle": "sound.tfg.animal.entity.jackal.say",
     "sounds": [
       "tfg:animal/jackal/say/1",
       "tfg:animal/jackal/say/2",
       "tfg:animal/jackal/say/3"
     ]
   },
-  "entity.animal.jackal.cry": {
+  "animal/entity/jackal/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.jackal.cry",
+    "subtitle": "sound.tfg.animal.entity.jackal.cry",
     "sounds": [
       "tfg:animal/jackal/cry/1",
       "tfg:animal/jackal/cry/2"
     ]
   },
-  "entity.animal.jackal.hurt": {
+  "animal/entity/jackal/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.jackal.hurt",
+    "subtitle": "sound.tfg.animal.entity.jackal.hurt",
     "sounds": [
       "tfg:animal/jackal/hurt/1",
       "tfg:animal/jackal/hurt/2"
     ]
   },
-  "entity.animal.jackal.death": {
+  "animal/entity/jackal/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.jackal.death",
+    "subtitle": "sound.tfg.animal.entity.jackal.death",
     "sounds": [
       "tfg:animal/jackal/death/1"
     ]
   },
-  "entity.animal.mongoose.say": {
+  "animal/entity/mongoose/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.mongoose.say",
+    "subtitle": "sound.tfg.animal.entity.mongoose.say",
     "sounds": [
       "tfg:animal/mongoose/say/1",
       "tfg:animal/mongoose/say/2",
       "tfg:animal/mongoose/say/3"
     ]
   },
-  "entity.animal.mongoose.hurt": {
+  "animal/entity/mongoose/hurt": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.mongoose.hurt",
+    "subtitle": "sound.tfg.animal.entity.mongoose.hurt",
     "sounds": [
       "tfg:animal/mongoose/hurt/1",
       "tfg:animal/mongoose/hurt/2"
     ]
   },
-  "entity.animal.mongoose.death": {
+  "animal/entity/mongoose/death": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.mongoose.death",
+    "subtitle": "sound.tfg.animal.entity.mongoose.death",
     "sounds": [
       "tfg:animal/mongoose/death/1"
     ]
   },
-  "entity.animal.feline.step": {
+  "animal/entity/feline.step": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.feline.step",
+    "subtitle": "sound.tfg.animal.entity.feline.step",
     "sounds": [
       "tfg:animal/feline/step/1",
       "tfg:animal/feline/step/2",
@@ -827,9 +827,9 @@
       "tfg:animal/feline/step/4"
     ]
   },
-  "entity.animal.cricket.say": {
+  "animal/entity/cricket/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.cricket.say",
+    "subtitle": "sound.tfg.animal.entity.cricket.say",
     "sounds": [
       "tfg:animal/cricket/say/1",
       "tfg:animal/cricket/say/2",
@@ -837,16 +837,16 @@
       "tfg:animal/cricket/say/4"
     ]
   },
-  "entity.animal.frog.say": {
+  "animal/entity/frog/say": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.frog.say",
+    "subtitle": "sound.tfg.animal.entity.frog.say",
     "sounds": [
       "tfg:animal/frog/say/1"
     ]
   },
-  "entity.animal.rooster.cry": {
+  "animal/entity/rooster/cry": {
     "category": "ambient",
-    "subtitle": "tfg.entity.animal.rooster.cry",
+    "subtitle": "sound.tfg.animal.entity.rooster.cry",
     "sounds": [
       "tfg:animal/rooster/cry/1"
     ]

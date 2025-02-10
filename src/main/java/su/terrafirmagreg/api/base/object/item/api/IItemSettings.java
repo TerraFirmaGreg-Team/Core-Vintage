@@ -45,19 +45,28 @@ public interface IItemSettings extends IBaseSettings<Settings> {
   @Getter
   class Settings extends BaseSettings<Settings> {
 
-    final Set<Object[]> oreDict = new HashSet<>();
-    final Set<IProviderItemCapability> capability = new HashSet<>();
-    final Set<CreativeTabs> groups = new HashSet<>();
+    final List<Object[]> oreDict;
+    final Set<IProviderItemCapability> capability;
+    final Set<CreativeTabs> groups;
 
     ResourceLocation resource;
 
     boolean isFireResistant;
     int durability;
-    int maxStackSize = 64;
+    int maxStackSize;
 
-    IRarity rarity = EnumRarity.COMMON;
+    IRarity rarity;
 
-    protected Settings() {}
+    protected Settings() {
+
+      this.groups = new HashSet<>();
+      this.capability = new HashSet<>();
+      this.oreDict = new ArrayList<>();
+
+      this.rarity = EnumRarity.COMMON;
+      this.maxStackSize = 64;
+
+    }
 
     public static Settings of() {
       return new Settings();

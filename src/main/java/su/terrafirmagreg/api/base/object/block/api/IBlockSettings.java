@@ -26,6 +26,7 @@ import net.minecraftforge.common.IRarity;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -43,9 +44,9 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
   @SuppressWarnings("deprecation")
   class Settings extends BaseSettings<Settings> {
 
-    final Set<Object[]> oreDict = new HashSet<>();
-    final Set<IProviderItemCapability> capability = new HashSet<>();
-    final Set<CreativeTabs> groups = new HashSet<>();
+    final List<Object[]> oreDict;
+    final Set<IProviderItemCapability> capability;
+    final Set<CreativeTabs> groups;
 
     // Block
     final Material material;
@@ -54,38 +55,61 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
     IProperty<?>[] ignoredProperties = null;
     ResourceLocation resource = null;
 
-    SoundType soundType = SoundType.STONE;
-    ContextFunction<Float> hardness = (state, world, pos) -> 1.0F;
-    ContextFunction<Integer> lightValue = (state, world, pos) -> 0;
-    ContextFunction<Float> slipperiness = (state, world, pos) -> 0.6F;
-    Predicate<IBlockState> isSuffocating = (state) -> state.getMaterial().blocksMovement() && state.isFullCube();
-    IRarity rarity = EnumRarity.COMMON;
-    BlockRenderLayer renderLayer = BlockRenderLayer.SOLID;
-    Function<Block, Item> itemBlock = BaseItemBlock::new;
+    SoundType soundType;
+    ContextFunction<Float> hardness;
+    ContextFunction<Integer> lightValue;
+    ContextFunction<Float> slipperiness;
+    Predicate<IBlockState> isSuffocating;
+    IRarity rarity;
+    BlockRenderLayer renderLayer;
+    Function<Block, Item> itemBlock;
 
 
-    String harvestTool = null;
-    int harvestLevel = -1;
+    String harvestTool;
+    int harvestLevel;
 
-    float resistance = 1.0F;
+    float resistance;
 
-    boolean canFall = false;
-    boolean collidable = true;
-    boolean opaque = true;
-    boolean fullCube = true;
-    boolean hasItemSubtypes = false;
-    boolean ticksRandomly = false;
-    boolean requiresCorrectTool = false;
-    boolean useNeighborBrightness = false;
+    boolean canFall;
+    boolean collidable;
+    boolean opaque;
+    boolean fullCube;
+    boolean hasItemSubtypes;
+    boolean ticksRandomly;
+    boolean requiresCorrectTool;
+    boolean useNeighborBrightness;
     boolean isReplaceable;
 
     boolean isAir;
 
     protected Settings(Material material, MapColor color) {
 
+      this.oreDict = new ArrayList<>();
+      this.capability = new HashSet<>();
+      this.groups = new HashSet<>();
+
       this.material = material;
       this.mapColor = color;
       this.isAir = material == Material.AIR;
+
+      this.soundType = SoundType.STONE;
+      this.hardness = (state, world, pos) -> 1.0F;
+      this.lightValue = (state, world, pos) -> 0;
+      this.slipperiness = (state, world, pos) -> 0.6F;
+      this.isSuffocating = (state) -> state.getMaterial().blocksMovement() && state.isFullCube();
+      this.rarity = EnumRarity.COMMON;
+      this.renderLayer = BlockRenderLayer.SOLID;
+      this.itemBlock = BaseItemBlock::new;
+      this.harvestLevel = -1;
+      this.resistance = 1.0F;
+      this.canFall = false;
+      this.collidable = true;
+      this.opaque = true;
+      this.fullCube = true;
+      this.hasItemSubtypes = false;
+      this.ticksRandomly = false;
+      this.requiresCorrectTool = false;
+      this.useNeighborBrightness = false;
     }
 
     public static Settings of(Material material, EnumDyeColor color) {

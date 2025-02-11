@@ -1,5 +1,10 @@
 package net.dries007.tfcflorae.client;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.device.client.gui.GuiCrate;
+import su.terrafirmagreg.modules.device.object.container.ContainerCrate;
+import su.terrafirmagreg.modules.device.object.tile.TileCrate;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -12,26 +17,21 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.gui.GuiChestTFC;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
+import net.dries007.tfc.client.gui.GuiKnappingTFCF;
+import net.dries007.tfc.client.gui.GuiUrn;
+import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
+import net.dries007.tfc.objects.container.ContainerBag;
 import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.container.ContainerKnapping;
+import net.dries007.tfc.objects.container.ContainerSack;
+import net.dries007.tfc.objects.container.ContainerUrn;
+import net.dries007.tfc.objects.items.ItemBag;
+import net.dries007.tfc.objects.items.ItemSack;
+import net.dries007.tfc.objects.items.rock.ItemMud;
+import net.dries007.tfc.objects.te.TEUrn;
 import net.dries007.tfc.util.Helpers;
-
-import su.terrafirmagreg.api.data.enums.Mods;
-
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfcflorae.TFCFlorae;
-import net.dries007.tfcflorae.client.gui.GuiCrate;
-import net.dries007.tfcflorae.client.gui.GuiUrn;
-import net.dries007.tfcflorae.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
-import net.dries007.tfcflorae.objects.container.ContainerBag;
-import net.dries007.tfcflorae.objects.container.ContainerCrate;
-import net.dries007.tfcflorae.objects.container.ContainerSack;
-import net.dries007.tfcflorae.objects.container.ContainerUrn;
-import net.dries007.tfcflorae.objects.items.ItemBag;
-import net.dries007.tfcflorae.objects.items.ItemSack;
-import net.dries007.tfcflorae.objects.items.rock.ItemMud;
-import net.dries007.tfcflorae.objects.te.TECrate;
-import net.dries007.tfcflorae.objects.te.TEUrn;
-import net.dries007.tfcflorae.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -81,41 +81,41 @@ public class GuiHandler implements IGuiHandler {
         return new ContainerBag(player.inventory, stack.getItem() instanceof ItemBag ? stack : player.getHeldItemOffhand());
       case PINEAPPLE_LEATHER:
         return new ContainerKnapping(KnappingType.PINEAPPLE_LEATHER, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "leatherPineapple") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "leatherPineapple") ? stack : player.getHeldItemOffhand());
       case BURLAP_CLOTH:
         return new ContainerKnapping(KnappingType.BURLAP_CLOTH, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "clothBurlap") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothBurlap") ? stack : player.getHeldItemOffhand());
       case WOOL_CLOTH:
         return new ContainerKnapping(KnappingType.WOOL_CLOTH, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "clothWool") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothWool") ? stack : player.getHeldItemOffhand());
       case SILK_CLOTH:
         return new ContainerKnapping(KnappingType.SILK_CLOTH, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "clothSilk") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothSilk") ? stack : player.getHeldItemOffhand());
       case SISAL_CLOTH:
         return new ContainerKnapping(KnappingType.SISAL_CLOTH, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "clothSisal") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothSisal") ? stack : player.getHeldItemOffhand());
       case COTTON_CLOTH:
         return new ContainerKnapping(KnappingType.COTTON_CLOTH, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "clothCotton") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothCotton") ? stack : player.getHeldItemOffhand());
       case LINEN_CLOTH:
         return new ContainerKnapping(KnappingType.LINEN_CLOTH, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "clothLinen") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothLinen") ? stack : player.getHeldItemOffhand());
       case HEMP_CLOTH:
         return new ContainerKnapping(KnappingType.HEMP_CLOTH, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "clothHemp") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothHemp") ? stack : player.getHeldItemOffhand());
       case YUCCA_CANVAS:
         return new ContainerKnapping(KnappingType.YUCCA_CANVAS, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "canvasYucca") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "canvasYucca") ? stack : player.getHeldItemOffhand());
       case MUD:
         return new ContainerKnapping(KnappingType.MUD, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "mud") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "mud") ? stack : player.getHeldItemOffhand());
       case FLINT:
         return new ContainerKnapping(KnappingType.FLINT, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "flint") ? stack : player.getHeldItemOffhand());
+          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "flint") ? stack : player.getHeldItemOffhand());
       case URN:
         return new ContainerUrn(player.inventory, Helpers.getTE(world, pos, TEUrn.class));
       case CRATE:
-        return new ContainerCrate(player.inventory, Helpers.getTE(world, pos, TECrate.class));
+        return new ContainerCrate(player.inventory, Helpers.getTE(world, pos, TileCrate.class));
       case CHEST:
         if (world.getBlockState(pos).getBlock() instanceof BlockFruitChestTFCF) {
           ILockableContainer chestContainer = ((BlockFruitChestTFCF) world.getBlockState(pos).getBlock()).getLockableContainer(world, pos);
@@ -168,7 +168,7 @@ public class GuiHandler implements IGuiHandler {
         return new GuiUrn(container, player.inventory, Helpers.getTE(world, pos, TEUrn.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
           .getTranslationKey());
       case CRATE:
-        return new GuiCrate(container, player.inventory, Helpers.getTE(world, pos, TECrate.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
+        return new GuiCrate(container, player.inventory, Helpers.getTE(world, pos, TileCrate.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
           .getTranslationKey());
       case CHEST:
         if (container instanceof ContainerChestTFC) {

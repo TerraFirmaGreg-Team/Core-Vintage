@@ -1,5 +1,6 @@
 package net.dries007.firmalife.registry;
 
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.item.ItemStack;
@@ -14,12 +15,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.dries007.firmalife.init.FoodFL;
 import net.dries007.firmalife.init.Fruit;
 import net.dries007.firmalife.init.PlantsFL;
-import net.dries007.firmalife.recipe.CrackingRecipe;
-import net.dries007.firmalife.recipe.DryingRecipe;
-import net.dries007.firmalife.recipe.NutRecipe;
-import net.dries007.firmalife.recipe.OvenRecipe;
-import net.dries007.firmalife.recipe.PlanterRecipe;
-import net.dries007.firmalife.recipe.StrainingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -29,11 +24,15 @@ import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.objects.recipes.CrackingRecipe;
+import net.dries007.tfc.objects.recipes.DryingRecipe;
+import net.dries007.tfc.objects.recipes.NutRecipe;
+import net.dries007.tfc.objects.recipes.OvenRecipe;
+import net.dries007.tfc.objects.recipes.PlanterRecipe;
+import net.dries007.tfc.objects.recipes.StrainingRecipe;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
-
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import static net.dries007.firmalife.FirmaLife.MOD_ID;
 

@@ -1,5 +1,8 @@
 package net.dries007.tfcflorae.client;
 
+import su.terrafirmagreg.api.data.Properties.BoolProp;
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDoor;
@@ -25,50 +28,46 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.base.Strings;
 import net.dries007.tfc.client.GrassColorHandler;
+import net.dries007.tfc.client.render.TESRFruitChestTFCF;
+import net.dries007.tfc.client.render.TESRFruitLoomTFCF;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
+import net.dries007.tfc.objects.blocks.blocktype.BlockRockRawTFCF;
+import net.dries007.tfc.objects.blocks.blocktype.BlockRockVariantTFCF;
+import net.dries007.tfc.objects.blocks.blocktype.BlockSlabTFCF;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockHumusFarmland;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockLoamFarmland;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockLoamySandFarmland;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockSandyLoamFarmland;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockSiltFarmland;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.BlockSiltLoamFarmland;
+import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
+import net.dries007.tfc.objects.blocks.plants.BlockCreepingPlantTFCF;
+import net.dries007.tfc.objects.blocks.plants.BlockHangingCreepingPlantTFCF;
+import net.dries007.tfc.objects.blocks.plants.BlockHangingPlantTFCF;
+import net.dries007.tfc.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
+import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFCF;
+import net.dries007.tfc.objects.blocks.plants.BlockTallGrassWater;
+import net.dries007.tfc.objects.blocks.plants.BlockWaterGlowPlant;
+import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
+import net.dries007.tfc.objects.blocks.wood.BlockFenceGateLog;
+import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeSapling;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-
-import su.terrafirmagreg.api.data.enums.Mods;
-
+import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitDoorTFCF;
+import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitFenceGate;
+import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitLogFenceGate;
+import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitSlab;
+import net.dries007.tfc.objects.items.ItemArmorTFCF;
+import net.dries007.tfc.objects.items.ItemFruitDoorTFCF;
+import net.dries007.tfc.objects.items.ItemsTFCF;
+import net.dries007.tfc.objects.te.TEFruitChest;
+import net.dries007.tfc.objects.te.TEFruitLoom;
+import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfcflorae.ConfigTFCF;
-import net.dries007.tfcflorae.api.stateproperty.StatePropertiesTFCF;
-import net.dries007.tfcflorae.client.render.TESRFruitChestTFCF;
-import net.dries007.tfcflorae.client.render.TESRFruitLoomTFCF;
-import net.dries007.tfcflorae.objects.blocks.BlocksTFCF;
-import net.dries007.tfcflorae.objects.blocks.blocktype.BlockRockRawTFCF;
-import net.dries007.tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import net.dries007.tfcflorae.objects.blocks.blocktype.BlockSlabTFCF;
-import net.dries007.tfcflorae.objects.blocks.blocktype.farmland.BlockHumusFarmland;
-import net.dries007.tfcflorae.objects.blocks.blocktype.farmland.BlockLoamFarmland;
-import net.dries007.tfcflorae.objects.blocks.blocktype.farmland.BlockLoamySandFarmland;
-import net.dries007.tfcflorae.objects.blocks.blocktype.farmland.BlockSandyLoamFarmland;
-import net.dries007.tfcflorae.objects.blocks.blocktype.farmland.BlockSiltFarmland;
-import net.dries007.tfcflorae.objects.blocks.blocktype.farmland.BlockSiltLoamFarmland;
-import net.dries007.tfcflorae.objects.blocks.groundcover.BlockCoral;
-import net.dries007.tfcflorae.objects.blocks.plants.BlockCreepingPlantTFCF;
-import net.dries007.tfcflorae.objects.blocks.plants.BlockHangingCreepingPlantTFCF;
-import net.dries007.tfcflorae.objects.blocks.plants.BlockHangingPlantTFCF;
-import net.dries007.tfcflorae.objects.blocks.plants.BlockPlant.BlockPlantDummy1;
-import net.dries007.tfcflorae.objects.blocks.plants.BlockShortGrassTFCF;
-import net.dries007.tfcflorae.objects.blocks.plants.BlockTallGrassWater;
-import net.dries007.tfcflorae.objects.blocks.plants.BlockWaterGlowPlant;
-import net.dries007.tfcflorae.objects.blocks.plants.BlockWaterPlantTFCF;
-import net.dries007.tfcflorae.objects.blocks.wood.BlockFenceGateLog;
-import net.dries007.tfcflorae.objects.blocks.wood.BlockJoshuaTreeSapling;
-import net.dries007.tfcflorae.objects.blocks.wood.BlockLeavesTFCF;
-import net.dries007.tfcflorae.objects.blocks.wood.BlockLogTFCF;
-import net.dries007.tfcflorae.objects.blocks.wood.fruitwood.BlockFruitDoor;
-import net.dries007.tfcflorae.objects.blocks.wood.fruitwood.BlockFruitFenceGate;
-import net.dries007.tfcflorae.objects.blocks.wood.fruitwood.BlockFruitLogFenceGate;
-import net.dries007.tfcflorae.objects.blocks.wood.fruitwood.BlockFruitSlab;
-import net.dries007.tfcflorae.objects.items.ItemArmorTFCF;
-import net.dries007.tfcflorae.objects.items.ItemFruitDoor;
-import net.dries007.tfcflorae.objects.items.ItemsTFCF;
-import net.dries007.tfcflorae.objects.te.TEFruitChest;
-import net.dries007.tfcflorae.objects.te.TEFruitLoom;
-import net.dries007.tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
@@ -94,7 +93,7 @@ public class ClientRegisterEventsTFCF {
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
     }
 
-    for (ItemFruitDoor item : ItemsTFCF.getAllFruitDoors()) {
+    for (ItemFruitDoorTFCF item : ItemsTFCF.getAllFruitDoors()) {
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
     }
 
@@ -156,7 +155,7 @@ public class ClientRegisterEventsTFCF {
 
     for (Block block : BlocksTFCF.getAllCropBlocks()) {ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(WILD).build());}
 
-    for (BlockFruitDoor door : BlocksTFCF.getAllFruitDoors()) {
+    for (BlockFruitDoorTFCF door : BlocksTFCF.getAllFruitDoors()) {
       ModelLoader.setCustomStateMapper(door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
     }
 
@@ -194,7 +193,7 @@ public class ClientRegisterEventsTFCF {
     for (Block block : BlocksTFCF.getAllFluidBlocks()) {ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());}
 
     for (Block block : BlocksTFCF.getAllBambooLog()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(StatePropertiesTFCF.CAN_GROW).build());
+      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BoolProp.CAN_GROW).build());
     }
 
     for (Block block : BlocksTFCF.getAllBambooLeaves()) {ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());}
@@ -203,11 +202,11 @@ public class ClientRegisterEventsTFCF {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
     }
 
-    ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesTFCF.CAN_GROW).build());
+    ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LOG, new StateMap.Builder().ignore(BoolProp.CAN_GROW).build());
     ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
     ModelLoader.setCustomStateMapper(BlocksTFCF.CASSIA_CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
 
-    ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesTFCF.CAN_GROW).build());
+    ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LOG, new StateMap.Builder().ignore(BoolProp.CAN_GROW).build());
     ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
     ModelLoader.setCustomStateMapper(BlocksTFCF.CEYLON_CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
 

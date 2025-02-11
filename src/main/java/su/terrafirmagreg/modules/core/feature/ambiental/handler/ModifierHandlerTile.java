@@ -5,23 +5,23 @@ import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalRegistry;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEnvironmental;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
+import su.terrafirmagreg.modules.device.object.tile.TileBloomery;
+import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
+import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
+import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
+import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
+import su.terrafirmagreg.modules.device.object.tile.TileFridge;
+import su.terrafirmagreg.modules.device.object.tile.TileIceBunker;
+import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
+import su.terrafirmagreg.modules.device.object.tile.TileSmelteryCauldron;
+import su.terrafirmagreg.modules.device.object.tile.TileSmelteryFirebox;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-import net.dries007.firmalife.te.TEOven;
-import net.dries007.tfc.objects.te.TEBloomery;
-import net.dries007.tfc.objects.te.TECharcoalForge;
-import net.dries007.tfc.objects.te.TECrucible;
-import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.objects.te.TELamp;
-import net.dries007.sharkbark.cellars.blocks.tileentity.TEIceBunker;
+import net.dries007.tfc.objects.te.TEOven;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import net.dries007.tfctech.objects.tileentities.TEElectricForge;
-import net.dries007.tfctech.objects.tileentities.TEFridge;
-import net.dries007.tfctech.objects.tileentities.TEInductionCrucible;
-import net.dries007.tfctech.objects.tileentities.TESmelteryCauldron;
-import net.dries007.tfctech.objects.tileentities.TESmelteryFirebox;
 
 import java.util.Optional;
 
@@ -53,7 +53,7 @@ public final class ModifierHandlerTile {
   }
 
   public static Optional<ModifierTile> handleCellar(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TEIceBunker iceBunker) {
+    if (tile instanceof TileIceBunker iceBunker) {
 
       boolean isComplete = false;
       float temperature = 0.0f;
@@ -117,9 +117,9 @@ public final class ModifierHandlerTile {
 
 
   public static Optional<ModifierTile> handleCharcoalForge(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TECharcoalForge forge) {
+    if (tile instanceof TileCharcoalForge forge) {
 
-      float temp = forge.getField(TECharcoalForge.FIELD_TEMPERATURE);
+      float temp = forge.getField(TileCharcoalForge.FIELD_TEMPERATURE);
       float change = temp / 140f;
       if (ModifierTile.hasProtection(player)) {
         change = 1.0F;
@@ -131,9 +131,9 @@ public final class ModifierHandlerTile {
   }
 
   public static Optional<ModifierTile> handleFirePit(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TEFirePit pit) {
+    if (tile instanceof TileFirePit pit) {
 
-      float temp = pit.getField(TEFirePit.FIELD_TEMPERATURE);
+      float temp = pit.getField(TileFirePit.FIELD_TEMPERATURE);
       float change = temp / 100f;
       if (ModifierTile.hasProtection(player)) {
         change = 1.0F;
@@ -145,7 +145,7 @@ public final class ModifierHandlerTile {
   }
 
   public static Optional<ModifierTile> handleBloomery(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TEBloomery bloomery) {
+    if (tile instanceof TileBloomery bloomery) {
 
       float change = bloomery.getRemainingTicks() > 0 ? 4f : 0f;
       if (ModifierTile.hasProtection(player)) {
@@ -158,9 +158,9 @@ public final class ModifierHandlerTile {
   }
 
   public static Optional<ModifierTile> handleCrucible(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TECrucible crucible) {
+    if (tile instanceof TileCrucible crucible) {
 
-      float temp = crucible.getField(TECrucible.FIELD_TEMPERATURE);
+      float temp = crucible.getField(TileCrucible.FIELD_TEMPERATURE);
       float change = temp / 100f;
       if (ModifierTile.hasProtection(player)) {
         change = 1.0F;
@@ -184,8 +184,8 @@ public final class ModifierHandlerTile {
   }
 
   public static Optional<ModifierTile> handleElectricForge(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TEElectricForge electricForge) {
-      float temp = electricForge.getField(TECrucible.FIELD_TEMPERATURE);
+    if (tile instanceof TileElectricForge electricForge) {
+      float temp = electricForge.getField(TileCrucible.FIELD_TEMPERATURE);
       float change = temp / 100f;
       float potency = temp / 350f;
       if (ModifierTile.hasProtection(player)) {
@@ -198,8 +198,8 @@ public final class ModifierHandlerTile {
   }
 
   public static Optional<ModifierTile> handleInductionCrucible(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TEInductionCrucible inductionCrucible) {
-      float temp = inductionCrucible.getField(TECrucible.FIELD_TEMPERATURE);
+    if (tile instanceof TileInductionCrucible inductionCrucible) {
+      float temp = inductionCrucible.getField(TileCrucible.FIELD_TEMPERATURE);
       float change = temp / 100f;
       float potency = temp / 350f;
       if (ModifierTile.hasProtection(player)) {
@@ -212,8 +212,8 @@ public final class ModifierHandlerTile {
   }
 
   public static Optional<ModifierTile> handleSmelteryCauldron(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TESmelteryCauldron smelteryCauldron) {
-      float temp = smelteryCauldron.getField(TECrucible.FIELD_TEMPERATURE);
+    if (tile instanceof TileSmelteryCauldron smelteryCauldron) {
+      float temp = smelteryCauldron.getField(TileCrucible.FIELD_TEMPERATURE);
       float change = temp / 120f;
       float potency = temp / 370f;
       if (ModifierTile.hasProtection(player)) {
@@ -226,8 +226,8 @@ public final class ModifierHandlerTile {
   }
 
   public static Optional<ModifierTile> handleSmelteryFirebox(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TESmelteryFirebox smelteryFirebox) {
-      float temp = smelteryFirebox.getField(TECrucible.FIELD_TEMPERATURE);
+    if (tile instanceof TileSmelteryFirebox smelteryFirebox) {
+      float temp = smelteryFirebox.getField(TileCrucible.FIELD_TEMPERATURE);
       float change = temp / 120f;
       float potency = temp / 370f;
       if (ModifierTile.hasProtection(player)) {
@@ -240,7 +240,7 @@ public final class ModifierHandlerTile {
   }
 
   public static Optional<ModifierTile> handleFridge(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TEFridge fridge) {
+    if (tile instanceof TileFridge fridge) {
 
       float change = 0f;
       float potency = 0f;

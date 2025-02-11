@@ -1,6 +1,8 @@
 package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.device.object.block.BlockBlastFurnace;
+import su.terrafirmagreg.modules.device.object.tile.TileBlastFurnace;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -8,8 +10,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.blocks.devices.BlockBlastFurnace;
-import net.dries007.tfc.objects.te.TEBlastFurnace;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
@@ -23,7 +23,7 @@ public class BlastFurnaceProvider implements IWailaBlock {
   @Override
   public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
-    TEBlastFurnace blastFurnace = Helpers.getTE(world, pos, TEBlastFurnace.class);
+    TileBlastFurnace blastFurnace = Helpers.getTE(world, pos, TileBlastFurnace.class);
     if (blastFurnace != null) {
       int chinmey = BlockBlastFurnace.getChimneyLevels(blastFurnace.getWorld(), blastFurnace.getPos());
       if (chinmey > 0) {
@@ -47,6 +47,6 @@ public class BlastFurnaceProvider implements IWailaBlock {
   @Nonnull
   @Override
   public List<Class<?>> getLookupClass() {
-    return Collections.singletonList(TEBlastFurnace.class);
+    return Collections.singletonList(TileBlastFurnace.class);
   }
 }

@@ -45,7 +45,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.dries007.firmalife.items.ItemFoodFL;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
@@ -57,10 +56,11 @@ import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.items.ItemFoodFL;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfcflorae.objects.items.food.ItemFoodTFCF;
+import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -2,7 +2,7 @@ package net.dries007.firmalife.render;
 
 import net.minecraftforge.common.property.IUnlistedProperty;
 
-import net.dries007.firmalife.recipe.PlanterRecipe;
+import net.dries007.tfc.objects.recipes.PlanterRecipe;
 
 public class UnlistedCropProperty implements IUnlistedProperty<PlanterRecipe.PlantInfo> {
 

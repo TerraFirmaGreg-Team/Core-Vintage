@@ -1,17 +1,17 @@
 package net.dries007.tfc.api.util;
 
+import su.terrafirmagreg.modules.device.object.tile.TileBellows;
+
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.te.TEBellows;
-
 import javax.annotation.Nonnull;
 
 /**
  * Blocks(not TEs) must implement this interface in order to work with bellows and must provide an offset for them to check by calling
- * {@link TEBellows#addBellowsOffset(Vec3i)}
+ * {@link TileBellows#addBellowsOffset(Vec3i)}
  */
 public interface IBellowsConsumerBlock {
 

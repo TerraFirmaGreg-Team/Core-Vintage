@@ -11,7 +11,7 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
-import net.dries007.firmalife.te.TEPlanter;
+import net.dries007.tfc.objects.te.TEPlanter;
 import net.dries007.tfcfarming.Config;
 import net.dries007.tfcfarming.CropNutrients;
 import net.dries007.tfcfarming.NutrientClass;

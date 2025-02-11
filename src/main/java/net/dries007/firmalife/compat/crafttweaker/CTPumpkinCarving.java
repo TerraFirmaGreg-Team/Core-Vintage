@@ -5,14 +5,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 import com.blamejared.mtlib.helpers.InputHelper;
-import net.dries007.firmalife.init.KnappingFL;
-import net.dries007.firmalife.recipe.KnappingRecipeFood;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
+import net.dries007.firmalife.init.KnappingFL;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.objects.recipes.KnappingRecipeFood;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

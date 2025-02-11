@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -8,11 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
-
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import net.dries007.tfc.objects.blocks.BlockPowderKeg;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;

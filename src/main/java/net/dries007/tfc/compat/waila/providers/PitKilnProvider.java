@@ -1,5 +1,9 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -7,11 +11,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.te.TEPitKiln;
 import net.dries007.tfc.util.Helpers;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class PitKilnProvider implements IWailaBlock {
   @Override
   public List<String> getTooltip(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
-    TEPitKiln te = Helpers.getTE(world, pos, TEPitKiln.class);
+    TilePitKiln te = Helpers.getTE(world, pos, TilePitKiln.class);
     if (te != null) {
       boolean isLit = te.isLit();
 
@@ -66,6 +66,6 @@ public class PitKilnProvider implements IWailaBlock {
   @Nonnull
   @Override
   public List<Class<?>> getLookupClass() {
-    return Collections.singletonList(TEPitKiln.class);
+    return Collections.singletonList(TilePitKiln.class);
   }
 }

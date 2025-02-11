@@ -14,7 +14,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.firmalife.registry.ItemsFL;
-import net.dries007.firmalife.te.TETurntable;
+import net.dries007.tfc.objects.te.TETurntable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

@@ -12,11 +12,11 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
-import net.dries007.firmalife.blocks.BlockLargePlanter;
-import net.dries007.firmalife.init.StatePropertiesFL;
-import net.dries007.firmalife.recipe.PlanterRecipe;
 import com.google.common.collect.ImmutableMap;
 import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.firmalife.init.StatePropertiesFL;
+import net.dries007.tfc.objects.blocks.BlockLargePlanter;
+import net.dries007.tfc.objects.recipes.PlanterRecipe;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

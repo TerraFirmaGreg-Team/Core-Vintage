@@ -2,6 +2,19 @@ package net.dries007.tfc.client;
 
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.device.client.render.TESRBellows;
+import su.terrafirmagreg.modules.device.client.render.TESRCrucible;
+import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
+import su.terrafirmagreg.modules.device.client.render.TESRPitKiln;
+import su.terrafirmagreg.modules.device.client.render.TESRQuern;
+import su.terrafirmagreg.modules.device.client.render.TESRSluice;
+import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
+import su.terrafirmagreg.modules.device.object.tile.TileBellows;
+import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
+import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
+import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
+import su.terrafirmagreg.modules.device.object.tile.TileQuern;
+import su.terrafirmagreg.modules.device.object.tile.TileSluice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -45,22 +58,15 @@ import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.render.TESRAnvil;
 import net.dries007.tfc.client.render.TESRBarrel;
-import net.dries007.tfc.client.render.TESRBellows;
 import net.dries007.tfc.client.render.TESRChestTFC;
-import net.dries007.tfc.client.render.TESRCrucible;
-import net.dries007.tfc.client.render.TESRFirePit;
 import net.dries007.tfc.client.render.TESRIngotPile;
 import net.dries007.tfc.client.render.TESRLoom;
-import net.dries007.tfc.client.render.TESRPitKiln;
 import net.dries007.tfc.client.render.TESRPlacedHide;
 import net.dries007.tfc.client.render.TESRPlacedItem;
 import net.dries007.tfc.client.render.TESRPlacedItemFlat;
-import net.dries007.tfc.client.render.TESRQuern;
-import net.dries007.tfc.client.render.TESRSluice;
 import net.dries007.tfc.client.render.TESRToolRack;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
-import net.dries007.tfc.objects.blocks.BlockThatchBed;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -80,18 +86,12 @@ import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.objects.te.TEBellows;
 import net.dries007.tfc.objects.te.TEChestTFC;
-import net.dries007.tfc.objects.te.TECrucible;
-import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.objects.te.TEIngotPile;
 import net.dries007.tfc.objects.te.TELoom;
-import net.dries007.tfc.objects.te.TEPitKiln;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.objects.te.TEQuern;
-import net.dries007.tfc.objects.te.TESluice;
 import net.dries007.tfc.objects.te.TEToolRack;
 
 import javax.annotation.Nonnull;
@@ -259,19 +259,19 @@ public final class ClientRegisterEvents {
 
     ClientRegistry.bindTileEntitySpecialRenderer(TEChestTFC.class, new TESRChestTFC());
     ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRToolRack());
-    ClientRegistry.bindTileEntitySpecialRenderer(TEPitKiln.class, new TESRPitKiln());
+    ClientRegistry.bindTileEntitySpecialRenderer(TilePitKiln.class, new TESRPitKiln());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());
     ClientRegistry.bindTileEntitySpecialRenderer(TEIngotPile.class, new TESRIngotPile());
-    ClientRegistry.bindTileEntitySpecialRenderer(TEQuern.class, new TESRQuern());
-    ClientRegistry.bindTileEntitySpecialRenderer(TEBellows.class, new TESRBellows());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileQuern.class, new TESRQuern());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileBellows.class, new TESRBellows());
     ClientRegistry.bindTileEntitySpecialRenderer(TEBarrel.class, new TESRBarrel());
     ClientRegistry.bindTileEntitySpecialRenderer(TEAnvilTFC.class, new TESRAnvil());
     ClientRegistry.bindTileEntitySpecialRenderer(TELoom.class, new TESRLoom());
-    ClientRegistry.bindTileEntitySpecialRenderer(TECrucible.class, new TESRCrucible());
-    ClientRegistry.bindTileEntitySpecialRenderer(TEFirePit.class, new TESRFirePit());
-    ClientRegistry.bindTileEntitySpecialRenderer(TESluice.class, new TESRSluice());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileCrucible.class, new TESRCrucible());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileFirePit.class, new TESRFirePit());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileSluice.class, new TESRSluice());
   }
 
   @SubscribeEvent

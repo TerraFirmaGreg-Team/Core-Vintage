@@ -25,8 +25,8 @@ import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfcthings.entity.projectile.EntityThrownRopeJavelin;
-import net.dries007.tfcthings.items.ItemRopeJavelin;
+import net.dries007.tfc.objects.entity.projectile.EntityThrownRopeJavelin;
+import net.dries007.tfc.objects.items.ItemRopeJavelin;
 import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nullable;

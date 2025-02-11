@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.init;
 
 import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.object.item.ItemFlaskLeather;
 import su.terrafirmagreg.modules.device.object.item.ItemFlaskLeatherBroken;
 import su.terrafirmagreg.modules.device.object.item.ItemFlaskLeatherUnfinished;
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
 
 public final class ItemsDevice {
 
-  public static Supplier<Item> FIRESTARTER;
+  public static Supplier<ItemFireStarter> FIRESTARTER;
   public static Supplier<ItemFlaskLeatherUnfinished> LEATHER_FLASK_UNFINISHED;
   public static Supplier<ItemFlaskLeather> LEATHER_FLASK;
   public static Supplier<ItemFlaskLeatherBroken> LEATHER_FLASK_BROKEN;
@@ -33,6 +34,8 @@ public final class ItemsDevice {
   public static Supplier<Item> GRINDSTONE_DIAMOND;
 
   public static void onRegister(IRegistryManager registry) {
+
+    FIRESTARTER = registry.item(new ItemFireStarter());
 
     LEATHER_FLASK_UNFINISHED = registry.item(new ItemFlaskLeatherUnfinished());
     LEATHER_FLASK = registry.item(new ItemFlaskLeather());

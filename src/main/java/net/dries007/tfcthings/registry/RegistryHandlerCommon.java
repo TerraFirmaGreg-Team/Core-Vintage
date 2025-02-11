@@ -2,6 +2,8 @@ package net.dries007.tfcthings.registry;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.modules.device.object.tile.TileBearTrap;
+import su.terrafirmagreg.modules.device.object.tile.TileGrindstone;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -14,15 +16,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import net.dries007.tfcthings.init.TFCThingsBlocks;
-import net.dries007.tfcthings.init.TFCThingsItems;
-import net.dries007.tfcthings.init.TFCThingsSoundEvents;
-import net.dries007.tfcthings.items.ItemOreDict;
-import net.dries007.tfcthings.items.TFCThingsConfigurableItem;
-import net.dries007.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfcthings.tileentity.TileEntityBearTrap;
-import net.dries007.tfcthings.tileentity.TileEntityGemDisplay;
-import net.dries007.tfcthings.tileentity.TileEntityGrindstone;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
@@ -34,12 +27,19 @@ import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.objects.items.ItemOreDict;
+import net.dries007.tfc.objects.items.TFCThingsConfigurableItem;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
+import net.dries007.tfc.objects.te.TEGemDisplay;
 import net.dries007.tfc.types.DefaultMetals;
 import net.dries007.tfc.types.DefaultRocks;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeRule;
+import net.dries007.tfcthings.init.TFCThingsBlocks;
+import net.dries007.tfcthings.init.TFCThingsItems;
+import net.dries007.tfcthings.init.TFCThingsSoundEvents;
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import static net.dries007.tfc.api.types.Metal.ItemType.DOUBLE_INGOT;
 import static net.dries007.tfc.api.types.Metal.ItemType.DOUBLE_SHEET;
@@ -100,12 +100,12 @@ public class RegistryHandlerCommon {
         event.getRegistry().register(block);
       }
     }
-    GameRegistry.registerTileEntity(TileEntityBearTrap.class, TFCThingsBlocks.BEAR_TRAP.getRegistryName());
+    GameRegistry.registerTileEntity(TileBearTrap.class, TFCThingsBlocks.BEAR_TRAP.getRegistryName());
     if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGemDisplays) {
-      GameRegistry.registerTileEntity(TileEntityGemDisplay.class, TFCThingsBlocks.GEM_DISPLAY_ANDESITE.getRegistryName());
+      GameRegistry.registerTileEntity(TEGemDisplay.class, TFCThingsBlocks.GEM_DISPLAY_ANDESITE.getRegistryName());
     }
     if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGrindstones) {
-      GameRegistry.registerTileEntity(TileEntityGrindstone.class, TFCThingsBlocks.GRINDSTONE_BLOCK.getRegistryName());
+      GameRegistry.registerTileEntity(TileGrindstone.class, TFCThingsBlocks.GRINDSTONE_BLOCK.getRegistryName());
     }
   }
 

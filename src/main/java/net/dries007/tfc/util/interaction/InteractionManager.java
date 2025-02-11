@@ -1,5 +1,7 @@
 package net.dries007.tfc.util.interaction;
 
+import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -19,7 +21,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.te.TELogPile;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -29,7 +30,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
-import static net.dries007.tfc.objects.blocks.BlockCharcoalPile.LAYERS;
+import static su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile.LAYERS;
 
 @Mod.EventBusSubscriber(modid = TFC)
 public final class InteractionManager {
@@ -86,7 +87,7 @@ public final class InteractionManager {
         if (stateAt.getBlock() == BlocksTFC.LOG_PILE) {
           // Clicked on a log pile, so try to insert into the original
           // This is called first when player is sneaking, otherwise the call chain is passed to the BlockLogPile#onBlockActivated
-          TELogPile te = Helpers.getTE(worldIn, pos, TELogPile.class);
+          TileLogPile te = Helpers.getTE(worldIn, pos, TileLogPile.class);
           if (te != null) {
             if (!player.isSneaking()) {
               if (te.insertLog(stack)) {
@@ -121,7 +122,7 @@ public final class InteractionManager {
             if (!worldIn.isRemote) {
               worldIn.setBlockState(posAt, BlocksTFC.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
 
-              TELogPile te = Helpers.getTE(worldIn, posAt, TELogPile.class);
+              TileLogPile te = Helpers.getTE(worldIn, posAt, TileLogPile.class);
               if (te != null) {
                 te.insertLog(stack.copy());
               }

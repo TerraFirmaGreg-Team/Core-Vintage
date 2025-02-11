@@ -4,11 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import net.dries007.firmalife.compat.CompatibleRecipeRegistry;
 import net.dries007.firmalife.init.FoodFL;
-import net.dries007.firmalife.recipe.NutRecipe;
 import net.dries007.firmalife.registry.ItemsFL;
-import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import net.dries007.tfc.objects.recipes.NutRecipe;
 import org.labellum.mc.dynamictreestfc.ModBlocks;
 import org.labellum.mc.dynamictreestfc.ModTrees;
 

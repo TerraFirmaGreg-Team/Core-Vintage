@@ -1,18 +1,19 @@
 package net.dries007.tfcthings.init;
 
+import su.terrafirmagreg.modules.device.object.block.BlockBearTrap;
+import su.terrafirmagreg.modules.device.object.block.BlockGrindstoneManual;
+import su.terrafirmagreg.modules.device.object.block.BlockSnare;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.types.DefaultMetals;
-import net.dries007.tfcthings.blocks.BlockBearTrap;
-import net.dries007.tfcthings.blocks.BlockGemDisplay;
-import net.dries007.tfcthings.blocks.BlockGrindstone;
-import net.dries007.tfcthings.blocks.BlockPigvil;
-import net.dries007.tfcthings.blocks.BlockRopeBridge;
-import net.dries007.tfcthings.blocks.BlockRopeLadder;
-import net.dries007.tfcthings.blocks.BlockSnare;
+import net.dries007.tfc.objects.blocks.BlockGemDisplay;
+import net.dries007.tfc.objects.blocks.BlockPigvil;
+import net.dries007.tfc.objects.blocks.BlockRopeBridge;
+import net.dries007.tfc.objects.blocks.BlockRopeLadder;
 
 public class TFCThingsBlocks {
 
@@ -34,7 +35,7 @@ public class TFCThingsBlocks {
   public static final Item ROPE_BRIDGE_ITEM = new ItemBlock(ROPE_BRIDGE_BLOCK).setRegistryName(ROPE_BRIDGE_BLOCK.getRegistryName());
   public static final Block ROPE_LADDER_BLOCK = new BlockRopeLadder();
   public static final Item ROPE_LADDER_ITEM = new ItemBlock(ROPE_LADDER_BLOCK).setRegistryName(ROPE_LADDER_BLOCK.getRegistryName());
-  public static final Block GRINDSTONE_BLOCK = new BlockGrindstone();
+  public static final Block GRINDSTONE_BLOCK = new BlockGrindstoneManual();
   public static final Item GRINDSTONE_ITEM = new ItemBlock(GRINDSTONE_BLOCK).setRegistryName(GRINDSTONE_BLOCK.getRegistryName()).setMaxStackSize(4);
 
   public static final Block GEM_DISPLAY_ANDESITE = new BlockGemDisplay("andesite");

@@ -1,7 +1,5 @@
 package net.dries007.sharkbark.cellars.util;
 
-import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-
 public class Reference {
 
   static public final String MOD_ID = "cellars";
@@ -14,12 +12,6 @@ public class Reference {
   public static final int GUI_CELLAR_SHELF = 1;
   public static final int GUI_ICE_BUNKER = 2;
   public static final int GUI_FREEZE_DRYER = 3;
-
-  public static FoodTrait COOL;
-  public static FoodTrait ICY;
-  public static FoodTrait FREEZING;
-  public static FoodTrait DRY;
-  public static FoodTrait PRESERVING;
 
   public static boolean initialized = false;
 }

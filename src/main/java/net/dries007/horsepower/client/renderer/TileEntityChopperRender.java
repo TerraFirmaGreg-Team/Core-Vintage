@@ -1,23 +1,27 @@
 package net.dries007.horsepower.client.renderer;
 
-import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 import net.dries007.horsepower.blocks.BlockChopper;
 import net.dries007.horsepower.blocks.BlockHPBase;
 import net.dries007.horsepower.client.model.modelvariants.ChopperModels;
-import net.dries007.horsepower.tileentity.TileEntityChopper;
 import net.dries007.horsepower.util.RenderUtils;
+import org.lwjgl.opengl.GL11;
 
-public class TileEntityChopperRender extends TileEntityHPBaseRenderer<TileEntityChopper> {
+public class TileEntityChopperRender extends TileEntityHPBaseRenderer<TileChopperHorse> {
 
   @Override
-  public void render(TileEntityChopper te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TileChopperHorse te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     Tessellator tessellator = Tessellator.getInstance();
     BufferBuilder buffer = tessellator.getBuffer();
     BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();

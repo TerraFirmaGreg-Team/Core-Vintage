@@ -1,26 +1,26 @@
 package net.dries007.tfcthings.init;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import net.dries007.tfcthings.entity.living.EntityPigvil;
-import net.dries007.tfcthings.entity.projectile.EntityRopeBridgeThrown;
-import net.dries007.tfcthings.entity.projectile.EntitySlingStone;
-import net.dries007.tfcthings.entity.projectile.EntitySlingStoneMetal;
-import net.dries007.tfcthings.entity.projectile.EntitySlingStoneMetalLight;
-import net.dries007.tfcthings.entity.projectile.EntityThrownHookJavelin;
-import net.dries007.tfcthings.entity.projectile.EntityThrownRopeJavelin;
-import net.dries007.tfcthings.entity.projectile.EntityUnknownProjectile;
+import net.dries007.tfc.client.render.RenderPigvil;
+import net.dries007.tfc.client.render.RenderSlingStone;
+import net.dries007.tfc.client.render.RenderSlingStoneMetal;
+import net.dries007.tfc.client.render.RenderThrownRopeBridge;
+import net.dries007.tfc.client.render.RenderThrownRopeJavelin;
+import net.dries007.tfc.client.render.RenderUnknownProjectile;
+import net.dries007.tfc.objects.entity.living.EntityPigvil;
+import net.dries007.tfc.objects.entity.projectile.EntityRopeBridgeThrown;
+import net.dries007.tfc.objects.entity.projectile.EntitySlingStone;
+import net.dries007.tfc.objects.entity.projectile.EntitySlingStoneMetal;
+import net.dries007.tfc.objects.entity.projectile.EntitySlingStoneMetalLight;
+import net.dries007.tfc.objects.entity.projectile.EntityThrownHookJavelin;
+import net.dries007.tfc.objects.entity.projectile.EntityThrownRopeJavelin;
+import net.dries007.tfc.objects.entity.projectile.EntityUnknownProjectile;
 import net.dries007.tfcthings.main.TFCThings;
-import net.dries007.tfcthings.renderer.RenderPigvil;
-import net.dries007.tfcthings.renderer.RenderSlingStone;
-import net.dries007.tfcthings.renderer.RenderSlingStoneMetal;
-import net.dries007.tfcthings.renderer.RenderThrownRopeBridge;
-import net.dries007.tfcthings.renderer.RenderThrownRopeJavelin;
-import net.dries007.tfcthings.renderer.RenderUnknownProjectile;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 public class TFCThingsEntities {
 

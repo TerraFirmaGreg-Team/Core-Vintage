@@ -1,5 +1,10 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
@@ -27,26 +32,16 @@ import net.minecraftforge.common.ForgeHooks;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
-
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.objects.items.ItemsTFCF;
+import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
-
+import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.dries007.tfcflorae.objects.blocks.BlocksTFCF;
-import net.dries007.tfcflorae.objects.items.ItemsTFCF;
-import net.dries007.tfcflorae.types.PlantsTFCF;
-import net.dries007.tfcflorae.util.agriculture.CropTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

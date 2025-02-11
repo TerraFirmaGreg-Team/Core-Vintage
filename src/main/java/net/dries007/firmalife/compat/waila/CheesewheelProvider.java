@@ -6,10 +6,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import net.dries007.firmalife.blocks.BlockCheesewheel;
 import net.dries007.firmalife.init.AgingFL;
 import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
+import net.dries007.tfc.objects.blocks.BlockCheesewheel;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

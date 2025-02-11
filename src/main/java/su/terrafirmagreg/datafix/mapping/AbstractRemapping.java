@@ -56,6 +56,7 @@ public abstract class AbstractRemapping {
     put("product/wool_yarn", ItemsAnimal.WOOL_YARN.get());
     put("product/wool", ItemsAnimal.WOOL.get());
 
+    put("firestarter", ItemsDevice.FIRESTARTER.get());
     put("leather_flask", ItemsDevice.LEATHER_FLASK.get());
     put("leather_side", ItemsDevice.LEATHER_FLASK_UNFINISHED.get());
     put("broken_leather_flask", ItemsDevice.LEATHER_FLASK_BROKEN.get());

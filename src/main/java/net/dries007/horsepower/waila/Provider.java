@@ -1,5 +1,12 @@
 package net.dries007.horsepower.waila;
 
+import su.terrafirmagreg.modules.device.object.block.BlockQuernHorse;
+import su.terrafirmagreg.modules.device.object.block.BlockQuernManual;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+import su.terrafirmagreg.modules.device.object.tile.TileQuernHorse;
+import su.terrafirmagreg.modules.device.object.tile.TileQuernManual;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,18 +27,12 @@ import net.dries007.horsepower.Configs;
 import net.dries007.horsepower.blocks.BlockChopper;
 import net.dries007.horsepower.blocks.BlockChoppingBlock;
 import net.dries007.horsepower.blocks.BlockFiller;
-import net.dries007.horsepower.blocks.BlockGrindstone;
 import net.dries007.horsepower.blocks.BlockHPChoppingBase;
-import net.dries007.horsepower.blocks.BlockHandGrindstone;
 import net.dries007.horsepower.blocks.BlockPress;
 import net.dries007.horsepower.blocks.ModBlocks;
 import net.dries007.horsepower.lib.Reference;
-import net.dries007.horsepower.tileentity.TileEntityChopper;
 import net.dries007.horsepower.tileentity.TileEntityFiller;
-import net.dries007.horsepower.tileentity.TileEntityGrindstone;
 import net.dries007.horsepower.tileentity.TileEntityHPBase;
-import net.dries007.horsepower.tileentity.TileEntityHandGrindstone;
-import net.dries007.horsepower.tileentity.TileEntityManualChopper;
 import net.dries007.horsepower.tileentity.TileEntityPress;
 import net.dries007.horsepower.util.Localization;
 
@@ -43,13 +44,13 @@ public class Provider implements IWailaDataProvider {
     Provider provider = new Provider();
 
     //registrar.registerStackProvider(provider, BlockFiller.class);
-    registrar.registerBodyProvider(provider, BlockGrindstone.class);
-    registrar.registerBodyProvider(provider, BlockHandGrindstone.class);
+    registrar.registerBodyProvider(provider, BlockQuernHorse.class);
+    registrar.registerBodyProvider(provider, BlockQuernManual.class);
     registrar.registerBodyProvider(provider, BlockHPChoppingBase.class);
     registrar.registerBodyProvider(provider, BlockPress.class);
     registrar.registerBodyProvider(provider, BlockFiller.class);
-    registrar.registerNBTProvider(provider, BlockGrindstone.class);
-    registrar.registerNBTProvider(provider, BlockHandGrindstone.class);
+    registrar.registerNBTProvider(provider, BlockQuernHorse.class);
+    registrar.registerNBTProvider(provider, BlockQuernManual.class);
     registrar.registerNBTProvider(provider, BlockChopper.class);
     registrar.registerNBTProvider(provider, BlockChoppingBlock.class);
     registrar.registerNBTProvider(provider, BlockPress.class);
@@ -91,10 +92,10 @@ public class Provider implements IWailaDataProvider {
       double progressWindup = Math.round(((windup / totalWindup) * 100D) * 100D) / 100D;
       double progressChopping = Math.round(((current / total) * 100D) * 100D) / 100D;
 
-      if (accessor.getTileEntity() instanceof TileEntityChopper || accessor.getTileEntity() instanceof TileEntityFiller) {
+      if (accessor.getTileEntity() instanceof TileChopperHorse || accessor.getTileEntity() instanceof TileEntityFiller) {
         currenttip.add(Localization.WAILA.WINDUP_PROGRESS.translate(progressWindup));
       }
-      if (total > 1 || accessor.getTileEntity() instanceof TileEntityManualChopper) {
+      if (total > 1 || accessor.getTileEntity() instanceof TileChopperManual) {
         currenttip.add(Localization.WAILA.CHOPPING_PROGRESS.translate(progressChopping));
       }
     } else if (nbt.hasKey("horsepower:press")) {
@@ -154,8 +155,8 @@ public class Provider implements IWailaDataProvider {
     NBTTagCompound tile = new NBTTagCompound();
     if (te instanceof TileEntityFiller) {te = ((TileEntityFiller) te).getFilledTileEntity();}
     if (te != null) {te.writeToNBT(tile);}
-    if (te instanceof TileEntityGrindstone || te instanceof TileEntityHandGrindstone) {tag.setTag("horsepower:grindstone", tile);} else if (
-      te instanceof TileEntityChopper || te instanceof TileEntityManualChopper) {
+    if (te instanceof TileQuernHorse || te instanceof TileQuernManual) {tag.setTag("horsepower:grindstone", tile);} else if (
+      te instanceof TileChopperHorse || te instanceof TileChopperManual) {
       tag.setTag("horsepower:chopper", tile);
     } else if (te instanceof TileEntityPress) {tag.setTag("horsepower:press", tile);}
     return tag;

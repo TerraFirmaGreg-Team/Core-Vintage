@@ -5,11 +5,11 @@ import su.terrafirmagreg.api.base.object.inventory.spi.ItemHandlerSidedWrapper;
 import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderContainer;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.client.gui.GuiNestBox;
 import su.terrafirmagreg.modules.animal.object.container.ContainerNestBox;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.object.entity.EntitySeatOn;
-import su.terrafirmagreg.modules.device.client.gui.GuiNestBox;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

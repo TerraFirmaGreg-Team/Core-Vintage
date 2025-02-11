@@ -1,12 +1,12 @@
 package net.dries007.firmalife.compat.jei.wrapper;
 
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 
-import net.dries007.firmalife.recipe.OvenRecipe;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
-
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import net.dries007.tfc.objects.recipes.OvenRecipe;
 
 public class OvenRecipeWrapper extends SimpleRecipeWrapper {
 

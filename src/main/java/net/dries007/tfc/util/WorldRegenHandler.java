@@ -48,7 +48,6 @@ import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenTrees;
-import net.dries007.tfcflorae.util.RegenWildCropsTFCF;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

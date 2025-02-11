@@ -5,7 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+import net.dries007.tfc.util.agriculture.SeasonalTrees;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -41,6 +43,16 @@ public final class FuelManager {
       FUELS.add(new Fuel(IIngredient.of(new ItemStack(log)), wood.getBurnTicks(), wood.getBurnTemp()));
     }
 
+    for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
+      BlockLogTFCF log = BlockLogTFCF.get(wood);
+      FuelManager.addFuel(new Fuel(IIngredient.of(new ItemStack(log)), wood.getBurnTicks(), wood.getBurnTemp()));
+    }
+
+    for (SeasonalTrees tree : SeasonalTrees.values()) {
+      BlockLogTFCF log = BlockLogTFCF.get(tree);
+      FuelManager.addFuel(new Fuel(IIngredient.of(new ItemStack(log)), tree.normalTree.getBurnTicks(), tree.normalTree.getBurnTemp()));
+    }
+
     // Coals
     FUELS.add(new Fuel(IIngredient.of("gemCoke"), 3200, 1510, false, true));
     FUELS.add(new Fuel(IIngredient.of("gemCoal"), 2200, 1415f, true, false));
@@ -55,6 +67,22 @@ public final class FuelManager {
 
     // Stick Bundle
     FUELS.add(new Fuel(IIngredient.of("stickBundle"), 600, 900));
+
+    // Eucalyptus
+    // FuelManager.addFuel(new Fuel(IIngredient.of(new ItemStack(BlockLogTFCF.get(TFCRegistries.TREES.getValue(TreesTFCF.EUCALYPTUS)))), 1000, 705, false, false));
+    // FuelManager.addFuel(new Fuel(IIngredient.of("logWoodEucalyptus"), 1000, 705, false, false));
+
+    // Wood
+    FuelManager.addFuel(new Fuel(IIngredient.of("poleWooden"), 900, 700));
+    FuelManager.addFuel(new Fuel(IIngredient.of("driftwood"), 750, 650));
+    FuelManager.addFuel(new Fuel(IIngredient.of("twig"), 400, 550));
+    FuelManager.addFuel(new Fuel(IIngredient.of("bamboo"), 450, 550));
+    FuelManager.addFuel(new Fuel(IIngredient.of("pinecone"), 200, 300));
+    FuelManager.addFuel(new Fuel(IIngredient.of("lumberFirewood"), 1000, 700, true, false));
+    FuelManager.addFuel(new Fuel(IIngredient.of("woodFirewood"), 1000, 700, true, false));
+    FuelManager.addFuel(new Fuel(IIngredient.of("itemFirewood"), 1000, 700, true, false));
+    FuelManager.addFuel(new Fuel(IIngredient.of("fuelFirewood"), 1000, 700, true, false));
+    FuelManager.addFuel(new Fuel(IIngredient.of("firewood"), 1000, 700, true, false));
   }
 
   /**

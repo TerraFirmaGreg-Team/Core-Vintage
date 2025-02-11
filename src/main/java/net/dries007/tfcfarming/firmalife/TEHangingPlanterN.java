@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.dries007.tfc.api.types.ICrop;
-import net.dries007.firmalife.te.TEHangingPlanter;
+import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfcfarming.Config;
 import net.dries007.tfcfarming.CropNutrients;
 import net.dries007.tfcfarming.NutrientClass;

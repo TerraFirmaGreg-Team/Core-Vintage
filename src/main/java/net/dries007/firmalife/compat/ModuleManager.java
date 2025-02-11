@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import net.dries007.firmalife.compat.dynamictrees.DTModule;
-import net.dries007.firmalife.recipe.NutRecipe;
+import net.dries007.tfc.objects.recipes.NutRecipe;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,5 @@
 package net.dries007.firmalife.render;
 
-import net.dries007.firmalife.blocks.BlockClimateStation;
-import net.dries007.firmalife.util.ClientHelpers;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -19,6 +16,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.firmalife.util.ClientHelpers;
+import net.dries007.tfc.objects.blocks.BlockClimateStation;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -53,8 +53,7 @@ public class RenderHandler {
     final Item item = stack.getItem();
     if (item instanceof ItemBlock) {
       Block block = ((ItemBlock) item).getBlock();
-      if (block instanceof BlockClimateStation) {
-        BlockClimateStation station = (BlockClimateStation) block;
+      if (block instanceof BlockClimateStation station) {
         switch (station.tier) {
           case 1:
             event.getToolTip().add("Enables enhanced flaw detection for your greenhouse.");

@@ -24,17 +24,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.firmalife.ConfigFL;
 import net.dries007.firmalife.init.FoodFL;
-import net.dries007.firmalife.recipe.CrackingRecipe;
-import net.dries007.firmalife.recipe.NutRecipe;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
+import net.dries007.tfc.objects.recipes.CrackingRecipe;
+import net.dries007.tfc.objects.recipes.NutRecipe;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
 

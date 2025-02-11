@@ -336,7 +336,6 @@ public final class ItemsTFC {
     simpleItems.add(register(r, "crop/product/jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
     simpleItems.add(register(r, "crop/product/dirty_jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 
-    simpleItems.add(register(r, "firestarter", new ItemFireStarter(), CT_MISC));
     simpleItems.add(register(r, "straw", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"), CT_MISC));
     simpleItems.add(register(r, "glass_shard", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
     simpleItems.add(register(r, "handstone", new ItemCraftingTool(250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"), CT_MISC));
@@ -367,8 +366,6 @@ public final class ItemsTFC {
     simpleItems.add(register(r, "wrought_iron_grill", new ItemMisc(Size.LARGE, Weight.HEAVY, "grill"), CT_MISC));
 
     allSimpleItems = simpleItems.build();
-
-    OreDictionaryHelper.init();
   }
 
   @SuppressWarnings("ConstantConditions")

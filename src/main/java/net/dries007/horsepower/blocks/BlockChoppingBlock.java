@@ -1,7 +1,6 @@
 package net.dries007.horsepower.blocks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
@@ -29,8 +28,10 @@ import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import net.dries007.horsepower.Configs;
 import net.dries007.horsepower.HPEventHandler;
 import net.dries007.horsepower.lib.Constants;
-import net.dries007.horsepower.tileentity.TileEntityManualChopper;
 import net.dries007.horsepower.util.Localization;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
 public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInfoAccessor {
@@ -68,7 +69,7 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
   @Override
   @Nonnull
   public Class<?> getTileClass() {
-    return TileEntityManualChopper.class;
+    return TileChopperManual.class;
   }
 
   @Override
@@ -93,7 +94,7 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
 
   @Override
   public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World world, BlockPos pos) {
-    TileEntityManualChopper te = getTileEntity(world, pos);
+    TileChopperManual te = getTileEntity(world, pos);
     if (te != null) {
       ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
       if (isValidChoppingTool(heldItem, player)) {
@@ -110,7 +111,7 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
   public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer player) {
     if (player instanceof FakePlayer || player == null) {return;}
 
-    TileEntityManualChopper te = getTileEntity(worldIn, pos);
+    TileChopperManual te = getTileEntity(worldIn, pos);
     if (te != null) {
       ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
       if (isValidChoppingTool(held, player)) {
@@ -131,7 +132,7 @@ public class BlockChoppingBlock extends BlockHPChoppingBase implements IProbeInf
   @Optional.Method(modid = "theoneprobe")
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-    TileEntityManualChopper tileEntity = getTileEntity(world, data.getPos());
+    TileChopperManual tileEntity = getTileEntity(world, data.getPos());
     if (tileEntity != null) {
       probeInfo.progress((long) ((((double) tileEntity.getField(1)) / ((double) tileEntity.getField(0))) * 100L), 100L, new ProgressStyle().prefix(
         Localization.TOP.CHOPPING_PROGRESS.translate() + " ").suffix("%"));

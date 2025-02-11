@@ -1,5 +1,9 @@
 package net.dries007.firmalife.util;
 
+import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseDoor;
+import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseRoof;
+import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -7,10 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.firmalife.blocks.BlockGreenhouseDoor;
-import net.dries007.firmalife.blocks.BlockGreenhouseRoof;
-import net.dries007.firmalife.blocks.BlockGreenhouseWall;
-import net.dries007.firmalife.te.TEClimateStation;
+import net.dries007.tfc.objects.te.TEClimateStation;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.firmalife.init.StatePropertiesFL.GLASS;

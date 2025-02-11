@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.modules.device.object.block.BlockSluice;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.blocks.devices.BlockSluice;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

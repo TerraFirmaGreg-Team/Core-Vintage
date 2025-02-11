@@ -2,6 +2,7 @@ package su.terrafirmagreg.framework.registry;
 
 import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.api.helper.OreDictHelper;
 import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -87,6 +88,7 @@ public class RegistryManager implements IRegistryManager {
     this.getWrapper().getItems().register(event);
 //    this.getWrapper().getBlocks().register(OreDictUtils::register);
     this.getWrapper().getItems().register(OreDictUtils::register);
+    OreDictHelper.init();
   }
 
   @Override

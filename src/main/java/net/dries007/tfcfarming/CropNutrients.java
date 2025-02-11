@@ -1,9 +1,9 @@
 package net.dries007.tfcfarming;
 
+import net.dries007.firmalife.init.StemCrop;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.firmalife.init.StemCrop;
-import net.dries007.tfcflorae.util.agriculture.CropTFCF;
+import net.dries007.tfc.util.agriculture.CropTFCF;
 
 import java.util.HashMap;
 

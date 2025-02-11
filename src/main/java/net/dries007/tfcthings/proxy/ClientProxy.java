@@ -1,17 +1,22 @@
 package net.dries007.tfcthings.proxy;
 
-import net.dries007.tfcthings.entity.projectile.EntityThrownHookJavelin;
-import net.dries007.tfcthings.init.TFCThingsEntities;
-import net.dries007.tfcthings.renderer.TESRGemDisplay;
-import net.dries007.tfcthings.renderer.TESRGrindstone;
-import net.dries007.tfcthings.tileentity.TileEntityGemDisplay;
-import net.dries007.tfcthings.tileentity.TileEntityGrindstone;
+import su.terrafirmagreg.modules.device.object.tile.TileGrindstone;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import net.dries007.tfc.client.render.TESRGemDisplay;
+import net.dries007.tfc.client.render.TESRGrindstone;
+import net.dries007.tfc.objects.entity.projectile.EntityThrownHookJavelin;
+import net.dries007.tfc.objects.te.TEGemDisplay;
+import net.dries007.tfcthings.init.TFCThingsEntities;
 
 public class ClientProxy extends CommonProxy {
 
@@ -26,8 +31,8 @@ public class ClientProxy extends CommonProxy {
   @Override
   public void init(FMLInitializationEvent event) {
     super.init(event);
-    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGemDisplay.class, new TESRGemDisplay());
-    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindstone.class, new TESRGrindstone());
+    ClientRegistry.bindTileEntitySpecialRenderer(TEGemDisplay.class, new TESRGemDisplay());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileGrindstone.class, new TESRGrindstone());
   }
 
   @Override

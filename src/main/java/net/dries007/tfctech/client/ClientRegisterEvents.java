@@ -1,6 +1,13 @@
 package net.dries007.tfctech.client;
 
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.device.client.render.TEISRFridge;
+import su.terrafirmagreg.modules.device.client.render.TESRFridge;
+import su.terrafirmagreg.modules.device.client.render.TESRLatexExtractor;
+import su.terrafirmagreg.modules.device.client.render.TESRWireDrawBench;
+import su.terrafirmagreg.modules.device.object.tile.TileFridge;
+import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
+import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -30,19 +37,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfctech.client.render.teisr.TEISRTechDevices;
-import net.dries007.tfctech.client.render.tesr.TESRFridge;
-import net.dries007.tfctech.client.render.tesr.TESRLatexExtractor;
-import net.dries007.tfctech.client.render.tesr.TESRWireDrawBench;
-import net.dries007.tfctech.objects.blocks.TechBlocks;
-import net.dries007.tfctech.objects.items.TechItems;
-import net.dries007.tfctech.objects.items.glassworking.ItemBlowpipe;
-import net.dries007.tfctech.objects.items.glassworking.ItemGlassMolder;
-import net.dries007.tfctech.objects.items.metal.ItemGear;
-import net.dries007.tfctech.objects.items.metal.ItemTechMetal;
-import net.dries007.tfctech.objects.tileentities.TEFridge;
-import net.dries007.tfctech.objects.tileentities.TELatexExtractor;
-import net.dries007.tfctech.objects.tileentities.TEWireDrawBench;
+import net.dries007.tfc.objects.blocks.TechBlocks;
+import net.dries007.tfc.objects.items.TechItems;
+import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
+import net.dries007.tfc.objects.items.glassworking.ItemGlassMolder;
+import net.dries007.tfc.objects.items.metal.ItemGear;
+import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 
 import javax.annotation.Nonnull;
 import java.awt.Color;
@@ -81,7 +81,7 @@ public final class ClientRegisterEvents {
     //TEISR item blocks
     for (ItemBlock item : TechBlocks.getAllTEISRBlocks()) {
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-      item.setTileEntityItemStackRenderer(new TEISRTechDevices());
+      item.setTileEntityItemStackRenderer(new TEISRFridge());
     }
 
     // Metals
@@ -162,9 +162,9 @@ public final class ClientRegisterEvents {
 
     // TESRs //
 
-    ClientRegistry.bindTileEntitySpecialRenderer(TELatexExtractor.class, new TESRLatexExtractor());
-    ClientRegistry.bindTileEntitySpecialRenderer(TEWireDrawBench.class, new TESRWireDrawBench());
-    ClientRegistry.bindTileEntitySpecialRenderer(TEFridge.class, new TESRFridge());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileLatexExtractor.class, new TESRLatexExtractor());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileWireDrawBench.class, new TESRWireDrawBench());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileFridge.class, new TESRFridge());
   }
 
   @SubscribeEvent

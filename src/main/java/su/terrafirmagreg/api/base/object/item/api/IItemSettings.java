@@ -93,7 +93,7 @@ public interface IItemSettings extends IBaseSettings<Settings> {
       return this;
     }
 
-    public Settings durability(int durability) {
+    public Settings maxDamage(int durability) {
       if (this.maxStackSize != 64 && this.maxStackSize > 1) {throw new RuntimeException("An item cannot have durability and be stackable!");}
       this.durability = durability;
       this.maxStackSize = 1;

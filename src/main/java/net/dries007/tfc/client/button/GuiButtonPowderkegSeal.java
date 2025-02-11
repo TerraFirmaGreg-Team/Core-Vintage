@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.objects.te.TEPowderKeg;
+import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,14 +8,14 @@ import net.minecraft.client.renderer.GlStateManager;
 import javax.annotation.Nonnull;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
-import static net.dries007.tfc.client.gui.GuiPowderkeg.POWDERKEG_BACKGROUND;
+import static su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg.POWDERKEG_BACKGROUND;
 
 
 public class GuiButtonPowderkegSeal extends GuiButtonTFC implements IButtonTooltip {
 
-  private final TEPowderKeg tile;
+  private final TilePowderKeg tile;
 
-  public GuiButtonPowderkegSeal(TEPowderKeg tile, int buttonId, int guiTop, int guiLeft) {
+  public GuiButtonPowderkegSeal(TilePowderKeg tile, int buttonId, int guiTop, int guiLeft) {
     super(buttonId, guiLeft + 123, guiTop + 35, 20, 20, "");
     this.tile = tile;
   }

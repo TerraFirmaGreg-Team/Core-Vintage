@@ -1,6 +1,6 @@
 package net.dries007.horsepower.jei.chopping.manual;
 
-import java.util.List;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -16,9 +16,10 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IStackHelper;
 import net.dries007.horsepower.jei.HorsePowerPlugin;
 import net.dries007.horsepower.lib.Reference;
-import net.dries007.horsepower.tileentity.TileEntityManualChopper;
 import net.dries007.horsepower.util.Localization;
 import net.dries007.horsepower.util.color.Colors;
+
+import java.util.List;
 
 public class HPManualChoppingCategory implements IRecipeCategory<ManualChoppingRecipeWrapper> {
 
@@ -61,8 +62,8 @@ public class HPManualChoppingCategory implements IRecipeCategory<ManualChoppingR
     recipeLayout.getItemStacks().addTooltipCallback((slotIndex, input, ingredient, tooltip) ->
     {
       if (slotIndex == axeSlot) {
-        int base = TileEntityManualChopper.getBaseAmount(ingredient, null);
-        int chance = TileEntityManualChopper.getChance(ingredient, null);
+        int base = TileChopperManual.getBaseAmount(ingredient, null);
+        int chance = TileChopperManual.getChance(ingredient, null);
         tooltip.add(Colors.LIGHTGRAY + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_1.translate(Colors.WHITE.toString() + base));
         tooltip.add(Colors.LIGHTGRAY + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_2.translate(Colors.WHITE.toString() + chance));
         tooltip.add(Colors.LIGHTGRAY + "\n" + Localization.GUI.JEI.MANUAL_CHOPPING_DESC_3.translate(Colors.WHITE, Colors.LIGHTGRAY));
@@ -78,8 +79,7 @@ public class HPManualChoppingCategory implements IRecipeCategory<ManualChoppingR
     List<List<ItemStack>> outputs = ingredients.getOutputs(VanillaTypes.ITEM);
 
     IStackHelper stackHelper = HorsePowerPlugin.jeiHelpers.getStackHelper();
-    if (focus != null && focus.getValue() instanceof ItemStack) {
-      ItemStack stack = (ItemStack) focus.getValue();
+    if (focus != null && focus.getValue() instanceof ItemStack stack) {
 
       if (focus.getMode() == IFocus.Mode.INPUT) {
         int index = -1;

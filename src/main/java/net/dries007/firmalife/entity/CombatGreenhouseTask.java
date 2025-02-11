@@ -1,13 +1,13 @@
 package net.dries007.firmalife.entity;
 
+import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.math.BlockPos;
-
-import net.dries007.firmalife.blocks.BlockGreenhouseWall;
 
 public class CombatGreenhouseTask extends EntityAIBreakDoor {
 

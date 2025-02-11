@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import net.dries007.tfcthings.init.TFCThingsBlocks;
 import net.dries007.tfcthings.init.TFCThingsItems;
-import net.dries007.tfcthings.items.ItemTFCThingsMold;
+import net.dries007.tfc.objects.items.ItemTFCThingsMold;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;

@@ -15,20 +15,20 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import net.dries007.tfc.api.types.ICrop;
+import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
+import net.dries007.tfc.objects.blocks.BlockLargePlanter;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
+import net.dries007.tfc.objects.te.TEHangingPlanter;
+import net.dries007.tfc.objects.te.TEPlanter;
+import net.dries007.tfc.objects.te.TEStemCrop;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.firmalife.blocks.BlockHangingPlanter;
-import net.dries007.firmalife.blocks.BlockLargePlanter;
-import net.dries007.firmalife.te.TEHangingPlanter;
-import net.dries007.firmalife.te.TEPlanter;
-import net.dries007.firmalife.te.TEStemCrop;
 import net.dries007.tfcfarming.firmalife.TEHangingPlanterN;
 import net.dries007.tfcfarming.firmalife.TEPlanterN;
 import net.dries007.tfcfarming.firmalife.TEStemCropN;
-import net.dries007.tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

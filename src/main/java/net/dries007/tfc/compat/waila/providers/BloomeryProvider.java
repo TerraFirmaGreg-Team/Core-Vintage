@@ -4,6 +4,9 @@ import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.device.object.block.BlockBloomery;
+import su.terrafirmagreg.modules.device.object.tile.TileBloom;
+import su.terrafirmagreg.modules.device.object.tile.TileBloomery;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -19,10 +22,7 @@ import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.te.TEBloom;
-import net.dries007.tfc.objects.te.TEBloomery;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class BloomeryProvider implements IWailaBlock {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
     TileEntity tileEntity = world.getTileEntity(pos);
-    if (tileEntity instanceof TEBloomery bloomery) {
+    if (tileEntity instanceof TileBloomery bloomery) {
       if (state.getValue(ILightableBlock.LIT)) {
         List<ItemStack> oreStacks = bloomery.getOreStacks();
         BloomeryRecipe recipe = oreStacks.size() > 0 ? BloomeryRecipe.get(oreStacks.get(0)) : null;
@@ -71,7 +71,7 @@ public class BloomeryProvider implements IWailaBlock {
         currentTooltip.add(new TextComponentTranslation("waila.tfc.bloomery.ores", ores, max).getFormattedText());
         currentTooltip.add(new TextComponentTranslation("waila.tfc.bloomery.fuel", fuel, max).getFormattedText());
       }
-    } else if (tileEntity instanceof TEBloom bloom) {
+    } else if (tileEntity instanceof TileBloom bloom) {
       IItemHandler cap = bloom.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       if (cap != null) {
         ItemStack bloomStack = cap.getStackInSlot(0);
@@ -88,6 +88,6 @@ public class BloomeryProvider implements IWailaBlock {
   @Nonnull
   @Override
   public List<Class<?>> getLookupClass() {
-    return ImmutableList.of(TEBloom.class, TEBloomery.class);
+    return ImmutableList.of(TileBloom.class, TileBloomery.class);
   }
 }

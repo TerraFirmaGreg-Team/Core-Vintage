@@ -18,20 +18,20 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import net.dries007.tfc.api.types.ICrop;
+import net.dries007.tfc.objects.blocks.BlockHangingPlanter;
+import net.dries007.tfc.objects.blocks.BlockLargePlanter;
+import net.dries007.tfc.objects.blocks.BlockQuadPlanter;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
 import net.dries007.tfc.objects.items.rock.ItemRockHoe;
-import net.dries007.firmalife.blocks.BlockHangingPlanter;
-import net.dries007.firmalife.blocks.BlockLargePlanter;
-import net.dries007.firmalife.blocks.BlockQuadPlanter;
 import net.dries007.tfcfarming.network.CPacketRequestNutrientData;
 import net.dries007.tfcfarming.network.PacketHandler;
 import net.dries007.tfcfarming.network.SPacketNutrientDataResponse;
-import net.dries007.tfcflorae.objects.blocks.blocktype.farmland.FarmlandTFCF;
-import net.dries007.tfcflorae.objects.items.tools.ItemHoeTFCF;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
+import net.dries007.tfc.objects.items.tools.ItemHoeTFCF;
 
 public class ClientProxy extends CommonProxy {
 

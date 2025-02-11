@@ -1,6 +1,6 @@
 package net.dries007.horsepower.client.renderer;
 
-import java.util.stream.StreamSupport;
+import su.terrafirmagreg.modules.device.object.block.BlockQuernHorse;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
@@ -13,10 +13,11 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.horsepower.Configs;
-import net.dries007.horsepower.blocks.BlockGrindstone;
 import net.dries007.horsepower.blocks.BlockHPBase;
 import net.dries007.horsepower.tileentity.TileEntityHPHorseBase;
 import net.dries007.horsepower.util.RenderUtils;
+
+import java.util.stream.StreamSupport;
 
 public class ClientHandler {
 
@@ -30,7 +31,7 @@ public class ClientHandler {
         if (mc.objectMouseOver == null || mc.objectMouseOver.typeOfHit != RayTraceResult.Type.BLOCK) {return;}
 
         int offset = 0;
-        if (!itemStack[0].isEmpty() && ((ItemBlock) itemStack[0].getItem()).getBlock() instanceof BlockGrindstone) {offset = -1;}
+        if (!itemStack[0].isEmpty() && ((ItemBlock) itemStack[0].getItem()).getBlock() instanceof BlockQuernHorse) {offset = -1;}
 
         EnumFacing enumFacing = mc.objectMouseOver.sideHit;
         BlockPos pos = mc.objectMouseOver.getBlockPos();

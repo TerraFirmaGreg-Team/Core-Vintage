@@ -21,10 +21,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.blocks.blocktype.BlockRockVariantTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import net.dries007.tfcflorae.types.BlockTypesTFCF.RockTFCF;
+import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
 
@@ -67,8 +67,7 @@ public final class CommonEventHandlerTFCF {
       IBlockState state = world.getBlockState(pos);
 
       if (ConfigTFC.General.OVERRIDES.enableHoeing) {
-        if (state.getBlock() instanceof BlockRockVariantTFCF) {
-          BlockRockVariantTFCF blockRock = (BlockRockVariantTFCF) state.getBlock();
+        if (state.getBlock() instanceof BlockRockVariantTFCF blockRock) {
           if
           (
             blockRock.getType() == RockTFCF.PODZOL ||

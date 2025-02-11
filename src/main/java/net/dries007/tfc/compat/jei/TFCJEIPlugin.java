@@ -1,5 +1,9 @@
 package net.dries007.tfc.compat.jei;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
+import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
+
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -30,8 +34,6 @@ import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
 import net.dries007.tfc.client.gui.GuiBarrel;
 import net.dries007.tfc.client.gui.GuiCalendar;
-import net.dries007.tfc.client.gui.GuiCrucible;
-import net.dries007.tfc.client.gui.GuiFirePit;
 import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.client.gui.GuiNutrition;
 import net.dries007.tfc.client.gui.GuiSkills;
@@ -83,8 +85,6 @@ import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockKnife;
 import net.dries007.tfc.objects.recipes.SaltingRecipe;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -171,7 +171,7 @@ public final class TFCJEIPlugin implements IModPlugin {
       .collect(Collectors.toList());
 
     registry.addRecipes(heatList, HEAT_UID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksTFC.FIREPIT), HEAT_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksTFC.FIRE_PIT), HEAT_UID);
     registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CHARCOAL_FORGE), HEAT_UID);
 
     //Wraps all anvil recipes

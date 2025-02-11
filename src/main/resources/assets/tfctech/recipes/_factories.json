@@ -1,6 +1,0 @@
-{
-  "recipes": {
-    "unmold_recipe": "net.dries007.tfctech.objects.recipes.UnmoldRecipe$Factory",
-    "unmoldglass_recipe": "net.dries007.tfctech.objects.recipes.UnmoldGlassRecipe$Factory"
-  }
-}

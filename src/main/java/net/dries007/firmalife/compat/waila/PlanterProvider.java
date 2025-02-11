@@ -8,11 +8,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import net.dries007.firmalife.blocks.BlockLargePlanter;
-import net.dries007.firmalife.blocks.BlockQuadPlanter;
-import net.dries007.firmalife.recipe.PlanterRecipe;
-import net.dries007.firmalife.te.TEPlanter;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
+import net.dries007.tfc.objects.blocks.BlockLargePlanter;
+import net.dries007.tfc.objects.blocks.BlockQuadPlanter;
+import net.dries007.tfc.objects.recipes.PlanterRecipe;
+import net.dries007.tfc.objects.te.TEPlanter;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

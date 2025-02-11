@@ -1,13 +1,13 @@
 package net.dries007.horsepower.client.renderer;
 
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+
 import net.minecraft.client.renderer.GlStateManager;
 
-import net.dries007.horsepower.tileentity.TileEntityManualChopper;
-
-public class TileEntityChoppingBlockRender extends TileEntityHPBaseRenderer<TileEntityManualChopper> {
+public class TileEntityChoppingBlockRender extends TileEntityHPBaseRenderer<TileChopperManual> {
 
   @Override
-  public void render(TileEntityManualChopper te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TileChopperManual te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     GlStateManager.pushMatrix();
     GlStateManager.translate(x, y, z);
     if (!te.getStackInSlot(0).isEmpty()) {renderStillItem(te, te.getStackInSlot(0), 0.5F, 0.63F, 0.5F, 2F);}

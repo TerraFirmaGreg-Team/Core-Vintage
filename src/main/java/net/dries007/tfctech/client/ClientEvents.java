@@ -1,5 +1,7 @@
 package net.dries007.tfctech.client;
 
+import su.terrafirmagreg.modules.device.object.block.BlockFridge;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
@@ -15,8 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfctech.objects.blocks.devices.BlockFridge;
-
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
 
 @SideOnly(Side.CLIENT)
@@ -31,8 +31,7 @@ public final class ClientEvents {
     EntityPlayer player = event.getPlayer();
     IBlockState state = world.getBlockState(pos);
 
-    if (state.getBlock() instanceof BlockFridge) {
-      BlockFridge fridge = (BlockFridge) state.getBlock();
+    if (state.getBlock() instanceof BlockFridge fridge) {
       if (state.getValue(BlockFridge.UPPER)) {
         pos = pos.down();
       }

@@ -1,6 +1,0 @@
-{
-  "recipes": {
-    "trail_mix": "net.dries007.firmalife.recipe.TrailMixRecipe$Factory",
-    "pizza": "net.dries007.firmalife.recipe.PizzaRecipe$Factory"
-  }
-}

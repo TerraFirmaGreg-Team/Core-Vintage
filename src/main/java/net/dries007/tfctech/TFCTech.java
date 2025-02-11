@@ -1,6 +1,6 @@
 package net.dries007.tfctech;
 
-import org.apache.logging.log4j.Logger;
+import su.terrafirmagreg.api.data.enums.Mods;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -12,15 +12,12 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
+import net.dries007.tfc.network.PacketFridgeUpdate;
+import net.dries007.tfc.network.PacketLatexUpdate;
+import net.dries007.tfc.network.PacketTileEntityUpdate;
 import net.dries007.tfc.objects.items.ItemsTFC;
-
-import su.terrafirmagreg.api.data.enums.Mods;
-
 import net.dries007.tfctech.client.TechGuiHandler;
-import net.dries007.tfctech.network.PacketFridgeUpdate;
-import net.dries007.tfctech.network.PacketLatexUpdate;
-import net.dries007.tfctech.network.PacketTileEntityUpdate;
-import net.dries007.tfctech.registry.TechFoodTraits;
+import org.apache.logging.log4j.Logger;
 
 @SuppressWarnings("WeakerAccess")
 @Mod(modid = Mods.Names.TFCTECH, name = TFCTech.NAME, version = TFCTech.VERSION, dependencies = TFCTech.DEPENDENCIES)
@@ -29,7 +26,6 @@ public class TFCTech {
   public static final String NAME = "TFCTech Unofficial";
   public static final String VERSION = "@VERSION@";
   public static final String DEPENDENCIES = "required-after:tfc@[1.0.0,);after:ic2;after:gregtech";
-  private static final boolean signedBuild = true;
   @SuppressWarnings("FieldMayBeFinal")
   @Mod.Instance
   private static TFCTech instance = null;
@@ -54,7 +50,6 @@ public class TFCTech {
     // Unfortunately, this has to be done after TFC registered it's items, which is only safe after preInit
     OreDictionary.registerOre("dustAsh", ItemsTFC.WOOD_ASH);
     FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "tfctech.compat.waila.TOPPlugin");
-    TechFoodTraits.init();
   }
 
   @EventHandler
@@ -66,8 +61,5 @@ public class TFCTech {
     network.registerMessage(new PacketLatexUpdate.Handler(), PacketLatexUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketTileEntityUpdate.Handler(), PacketTileEntityUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketFridgeUpdate.Handler(), PacketFridgeUpdate.class, ++id, Side.CLIENT);
-    if (!signedBuild) {
-      logger.error("INVALID FINGERPRINT DETECTED! This means this jar file has been compromised and are not supported.");
-    }
   }
 }

@@ -5,14 +5,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
-import net.dries007.firmalife.init.RegistriesFL;
-import net.dries007.firmalife.recipe.StrainingRecipe;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
+import net.dries007.firmalife.init.RegistriesFL;
 import net.dries007.tfc.compat.crafttweaker.CTHelper;
+import net.dries007.tfc.objects.recipes.StrainingRecipe;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

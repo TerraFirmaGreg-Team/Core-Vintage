@@ -1,6 +1,8 @@
 package net.dries007.horsepower.blocks;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -25,9 +27,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import net.dries007.horsepower.Configs;
 import net.dries007.horsepower.blocks.property.PropertyUnlistedString;
-import net.dries007.horsepower.tileentity.TileEntityChopper;
 import net.dries007.horsepower.tileentity.TileEntityHPBase;
-import net.dries007.horsepower.tileentity.TileEntityManualChopper;
 import net.dries007.horsepower.util.RenderUtils;
 import net.dries007.horsepower.util.Utils;
 
@@ -173,7 +173,7 @@ public abstract class BlockHPChoppingBase extends BlockHPBase {
   private void writeDataOntoItemstack(@Nonnull ItemStack item, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, boolean inventorySave) {
     // get block data from the block
     TileEntity te = world.getTileEntity(pos);
-    if (te != null && (te instanceof TileEntityChopper || te instanceof TileEntityManualChopper)) {
+    if (te != null && (te instanceof TileChopperHorse || te instanceof TileChopperManual)) {
       NBTTagCompound tag = item.hasTagCompound() ? item.getTagCompound() : new NBTTagCompound();
 
       // texture

@@ -1,5 +1,7 @@
 package net.dries007.horsepower.blocks;
 
+import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
+
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
@@ -29,7 +31,6 @@ import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
 import net.dries007.horsepower.Configs;
 import net.dries007.horsepower.client.model.modelvariants.ChopperModels;
 import net.dries007.horsepower.lib.Constants;
-import net.dries007.horsepower.tileentity.TileEntityChopper;
 import net.dries007.horsepower.tileentity.TileEntityHPBase;
 import net.dries007.horsepower.util.Localization;
 import net.dries007.horsepower.util.color.Colors;
@@ -139,14 +140,14 @@ public class BlockChopper extends BlockHPChoppingBase implements IProbeInfoAcces
   @Nonnull
   @Override
   public Class<?> getTileClass() {
-    return TileEntityChopper.class;
+    return TileChopperHorse.class;
   }
 
   // The One Probe Integration
   @Optional.Method(modid = "theoneprobe")
   @Override
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-    TileEntityChopper tileEntity = getTileEntity(world, data.getPos());
+    TileChopperHorse tileEntity = getTileEntity(world, data.getPos());
     if (tileEntity != null) {
       double totalWindup = Configs.general.pointsForWindup > 0 ? Configs.general.pointsForWindup : 1;
       probeInfo.progress((long) ((((double) tileEntity.getField(2)) / totalWindup) * 100L), 100L, new ProgressStyle().prefix(

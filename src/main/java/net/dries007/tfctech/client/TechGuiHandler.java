@@ -1,6 +1,18 @@
 package net.dries007.tfctech.client;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.device.client.gui.GuiElectricForge;
+import su.terrafirmagreg.modules.device.client.gui.GuiInductionCrucible;
+import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
+import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryFirebox;
+import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
+import su.terrafirmagreg.modules.device.object.container.ContainerElectricForge;
+import su.terrafirmagreg.modules.device.object.container.ContainerSmelteryCauldron;
+import su.terrafirmagreg.modules.device.object.container.ContainerSmelteryFirebox;
+import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
+import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
+import su.terrafirmagreg.modules.device.object.tile.TileSmelteryCauldron;
+import su.terrafirmagreg.modules.device.object.tile.TileSmelteryFirebox;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -22,24 +34,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.objects.container.ContainerCrucible;
+import net.dries007.tfc.client.gui.GuiGlassworking;
+import net.dries007.tfc.objects.container.ContainerGlassworking;
+import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
 import net.dries007.tfc.util.Helpers;
-import org.lwjgl.opengl.GL11;
 import net.dries007.tfctech.TFCTech;
-import net.dries007.tfctech.client.gui.GuiElectricForge;
-import net.dries007.tfctech.client.gui.GuiGlassworking;
-import net.dries007.tfctech.client.gui.GuiInductionCrucible;
-import net.dries007.tfctech.client.gui.GuiSmelteryCauldron;
-import net.dries007.tfctech.client.gui.GuiSmelteryFirebox;
-import net.dries007.tfctech.objects.container.ContainerElectricForge;
-import net.dries007.tfctech.objects.container.ContainerGlassworking;
-import net.dries007.tfctech.objects.container.ContainerSmelteryCauldron;
-import net.dries007.tfctech.objects.container.ContainerSmelteryFirebox;
-import net.dries007.tfctech.objects.items.glassworking.ItemBlowpipe;
-import net.dries007.tfctech.objects.tileentities.TEElectricForge;
-import net.dries007.tfctech.objects.tileentities.TEInductionCrucible;
-import net.dries007.tfctech.objects.tileentities.TESmelteryCauldron;
-import net.dries007.tfctech.objects.tileentities.TESmelteryFirebox;
+import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -64,16 +64,16 @@ public class TechGuiHandler implements IGuiHandler {
     Type type = Type.valueOf(ID);
     switch (type) {
       case ELECTRIC_FORGE:
-        TEElectricForge teElectricForge = Helpers.getTE(world, pos, TEElectricForge.class);
+        TileElectricForge teElectricForge = Helpers.getTE(world, pos, TileElectricForge.class);
         return teElectricForge == null ? null : new ContainerElectricForge(player.inventory, teElectricForge);
       case INDUCTION_CRUCIBLE:
-        TEInductionCrucible teInductionCrucible = Helpers.getTE(world, pos, TEInductionCrucible.class);
+        TileInductionCrucible teInductionCrucible = Helpers.getTE(world, pos, TileInductionCrucible.class);
         return teInductionCrucible == null ? null : new ContainerCrucible(player.inventory, teInductionCrucible);
       case SMELTERY_CAULDRON:
-        TESmelteryCauldron teSmelteryCauldron = Helpers.getTE(world, pos, TESmelteryCauldron.class);
+        TileSmelteryCauldron teSmelteryCauldron = Helpers.getTE(world, pos, TileSmelteryCauldron.class);
         return teSmelteryCauldron == null ? null : new ContainerSmelteryCauldron(player.inventory, teSmelteryCauldron);
       case SMELTERY_FIREBOX:
-        TESmelteryFirebox teSmelteryFirebox = Helpers.getTE(world, pos, TESmelteryFirebox.class);
+        TileSmelteryFirebox teSmelteryFirebox = Helpers.getTE(world, pos, TileSmelteryFirebox.class);
         return teSmelteryFirebox == null ? null : new ContainerSmelteryFirebox(player.inventory, teSmelteryFirebox);
       case GLASSWORKING:
         return new ContainerGlassworking(player.inventory, stack.getItem() instanceof ItemBlowpipe ? stack : player.getHeldItemOffhand());
@@ -91,13 +91,13 @@ public class TechGuiHandler implements IGuiHandler {
     BlockPos pos = new BlockPos(x, y, z);
     switch (type) {
       case ELECTRIC_FORGE:
-        return new GuiElectricForge(container, player.inventory, Helpers.getTE(world, pos, TEElectricForge.class));
+        return new GuiElectricForge(container, player.inventory, Helpers.getTE(world, pos, TileElectricForge.class));
       case INDUCTION_CRUCIBLE:
-        return new GuiInductionCrucible(container, player.inventory, Helpers.getTE(world, pos, TEInductionCrucible.class));
+        return new GuiInductionCrucible(container, player.inventory, Helpers.getTE(world, pos, TileInductionCrucible.class));
       case SMELTERY_CAULDRON:
-        return new GuiSmelteryCauldron(container, player.inventory, Helpers.getTE(world, pos, TESmelteryCauldron.class));
+        return new GuiSmelteryCauldron(container, player.inventory, Helpers.getTE(world, pos, TileSmelteryCauldron.class));
       case SMELTERY_FIREBOX:
-        return new GuiSmelteryFirebox(container, player.inventory, Helpers.getTE(world, pos, TESmelteryFirebox.class));
+        return new GuiSmelteryFirebox(container, player.inventory, Helpers.getTE(world, pos, TileSmelteryFirebox.class));
       case GLASSWORKING:
         return new GuiGlassworking(container, player);
       default:
@@ -221,7 +221,7 @@ public class TechGuiHandler implements IGuiHandler {
       if (fluid != null && mouseX >= posX && mouseX <= posX + 18 && mouseY >= posY && mouseY <= posY + 49) {
         List<String> tooltip = new ArrayList<>();
         tooltip.add(fluid.getLocalizedName());
-        tooltip.add(fluid.amount + " / " + TESmelteryCauldron.FLUID_CAPACITY);
+        tooltip.add(fluid.amount + " / " + TileSmelteryCauldron.FLUID_CAPACITY);
         return tooltip;
       }
       return null;

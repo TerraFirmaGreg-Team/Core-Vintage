@@ -1,10 +1,6 @@
 package net.dries007.horsepower.jei.chopping.manual;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.google.common.collect.Lists;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -12,6 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.collect.Lists;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -23,8 +20,11 @@ import net.dries007.horsepower.blocks.BlockChoppingBlock;
 import net.dries007.horsepower.jei.HorsePowerCategory;
 import net.dries007.horsepower.jei.HorsePowerPlugin;
 import net.dries007.horsepower.recipes.ChoppingBlockRecipe;
-import net.dries007.horsepower.tileentity.TileEntityManualChopper;
 import net.dries007.horsepower.util.Localization;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ManualChoppingRecipeWrapper implements IRecipeWrapper {
 
@@ -67,7 +67,7 @@ public class ManualChoppingRecipeWrapper implements IRecipeWrapper {
     List<ItemStack> outputs = new ArrayList<>(axes.size());
     for (ItemStack stack : axes) {
       ItemStack result = output.copy();
-      double base = TileEntityManualChopper.getBaseAmount(stack, null) / 100D;
+      double base = TileChopperManual.getBaseAmount(stack, null) / 100D;
 
       result.setCount((int) Math.ceil((double) result.getCount() * base));
       outputs.add(result);
@@ -104,9 +104,8 @@ public class ManualChoppingRecipeWrapper implements IRecipeWrapper {
   @Override
   public boolean equals(Object o) {
     if (this == o) {return true;}
-    if (!(o instanceof ManualChoppingRecipeWrapper)) {return false;}
+    if (!(o instanceof ManualChoppingRecipeWrapper that)) {return false;}
 
-    ManualChoppingRecipeWrapper that = (ManualChoppingRecipeWrapper) o;
     boolean flag = true;
     for (ItemStack stack : inputs) {
       for (ItemStack stack1 : that.inputs) {

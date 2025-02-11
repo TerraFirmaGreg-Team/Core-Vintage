@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 
-import net.dries007.firmalife.blocks.BlockStemCrop;
 import com.google.common.collect.Maps;
+import net.dries007.tfc.objects.blocks.BlockStemCrop;
 
 import java.util.Map;
 

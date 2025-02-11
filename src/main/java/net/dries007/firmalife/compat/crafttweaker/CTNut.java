@@ -7,12 +7,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 import com.blamejared.mtlib.helpers.InputHelper;
-import net.dries007.firmalife.init.RegistriesFL;
-import net.dries007.firmalife.recipe.NutRecipe;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
+import net.dries007.firmalife.init.RegistriesFL;
+import net.dries007.tfc.objects.recipes.NutRecipe;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

@@ -1,7 +1,5 @@
 package net.dries007.sharkbark.cellars;
 
-import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -32,12 +30,6 @@ public class Main {
   public void Init(FMLInitializationEvent event) {
 
     RegistryHandler.initRegistries();
-
-    Reference.COOL = new FoodTrait("sharkCool", ModConfig.coolMod);
-    Reference.ICY = new FoodTrait("sharkIcy", ModConfig.icyMod);
-    Reference.FREEZING = new FoodTrait("sharkIcle", ModConfig.icleMod);
-    Reference.DRY = new FoodTrait("sharkDry", ModConfig.dryMod);
-    Reference.PRESERVING = new FoodTrait("sharkPreserving", ModConfig.preservingMod);
 
 
   }

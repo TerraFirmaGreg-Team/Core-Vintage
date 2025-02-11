@@ -2,6 +2,12 @@ package net.dries007.tfctech.compat.waila;
 
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.device.object.block.BlockFridge;
+import su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor;
+import su.terrafirmagreg.modules.device.object.block.BlockWireDrawBench;
+import su.terrafirmagreg.modules.device.object.tile.TileFridge;
+import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
+import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -18,12 +24,6 @@ import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfctech.objects.blocks.devices.BlockFridge;
-import net.dries007.tfctech.objects.blocks.devices.BlockLatexExtractor;
-import net.dries007.tfctech.objects.blocks.devices.BlockWireDrawBench;
-import net.dries007.tfctech.objects.tileentities.TEFridge;
-import net.dries007.tfctech.objects.tileentities.TELatexExtractor;
-import net.dries007.tfctech.objects.tileentities.TEWireDrawBench;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
       if (!iBlockState.getValue(BlockWireDrawBench.UPPER)) {
         TEPos = TEPos.offset(iBlockState.getValue(BlockWireDrawBench.FACING));
       }
-      TEWireDrawBench bench = Helpers.getTE(world, TEPos, TEWireDrawBench.class);
+      TileWireDrawBench bench = Helpers.getTE(world, TEPos, TileWireDrawBench.class);
       if (bench != null) {
         if (bench.getProgress() > 0) {
           IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
@@ -61,7 +61,7 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
       if (!iBlockState.getValue(BlockWireDrawBench.UPPER)) {
         TEPos = TEPos.up();
       }
-      TEFridge fridge = Helpers.getTE(world, TEPos, TEFridge.class);
+      TileFridge fridge = Helpers.getTE(world, TEPos, TileFridge.class);
       if (fridge != null) {
         IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
         horizontalPane.text((new TextComponentTranslation("waila.tfctech.fridge.efficiency", (int) fridge.getEfficiency())).getFormattedText());
@@ -88,7 +88,7 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
       }
     }
     if (b instanceof BlockLatexExtractor) {
-      TELatexExtractor extractor = Helpers.getTE(world, pos, TELatexExtractor.class);
+      TileLatexExtractor extractor = Helpers.getTE(world, pos, TileLatexExtractor.class);
       if (extractor != null) {
         if (extractor.getFluidAmount() > 0) {
           IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));

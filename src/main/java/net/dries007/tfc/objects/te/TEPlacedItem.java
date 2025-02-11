@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.te;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -36,7 +37,7 @@ public class TEPlacedItem extends TEInventory {
   }
 
   public static void convertPitKilnToPlacedItem(World world, BlockPos pos) {
-    TEPitKiln teOld = Helpers.getTE(world, pos, TEPitKiln.class);
+    TilePitKiln teOld = Helpers.getTE(world, pos, TilePitKiln.class);
     if (teOld != null) {
       // Remove inventory items
       // This happens here to stop the block dropping its items in onBreakBlock()

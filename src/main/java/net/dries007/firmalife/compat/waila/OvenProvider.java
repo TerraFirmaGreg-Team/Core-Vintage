@@ -1,11 +1,5 @@
 package net.dries007.firmalife.compat.waila;
 
-import net.dries007.firmalife.recipe.OvenRecipe;
-import net.dries007.firmalife.te.TEOven;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import net.minecraft.block.state.IBlockState;
@@ -17,12 +11,18 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
+import net.dries007.tfc.objects.blocks.property.ILightableBlock;
+import net.dries007.tfc.objects.recipes.OvenRecipe;
+import net.dries007.tfc.objects.te.TEOven;
+
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static net.dries007.firmalife.te.TEOven.SLOT_MAIN;
+import static net.dries007.tfc.objects.te.TEOven.SLOT_MAIN;
 
 public class OvenProvider implements IWailaBlock {
 
@@ -32,8 +32,7 @@ public class OvenProvider implements IWailaBlock {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
     TileEntity te = world.getTileEntity(pos);
-    if (te instanceof TEOven) {
-      TEOven oven = (TEOven) te;
+    if (te instanceof TEOven oven) {
       ItemStack mainSlot = oven.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(SLOT_MAIN);
       OvenRecipe recipe = OvenRecipe.get(mainSlot);
       if (state.getValue(ILightableBlock.LIT) && recipe != null) {

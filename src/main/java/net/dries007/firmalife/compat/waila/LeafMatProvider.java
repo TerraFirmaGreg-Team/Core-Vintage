@@ -1,5 +1,7 @@
 package net.dries007.firmalife.compat.waila;
 
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -8,12 +10,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import net.dries007.firmalife.recipe.DryingRecipe;
-import net.dries007.firmalife.te.TELeafMat;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import net.dries007.tfc.objects.recipes.DryingRecipe;
+import net.dries007.tfc.objects.te.TELeafMat;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -27,8 +27,7 @@ public class LeafMatProvider implements IWailaBlock {
   public List<String> getTooltip(World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
     List<String> currentTooltip = new ArrayList<>();
     TileEntity te = world.getTileEntity(pos);
-    if (te instanceof TELeafMat) {
-      TELeafMat leafMat = (TELeafMat) te;
+    if (te instanceof TELeafMat leafMat) {
       ItemStack mainSlot = leafMat.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(0);
       DryingRecipe recipe = DryingRecipe.get(mainSlot);
       if (!mainSlot.isEmpty() && recipe != null) {

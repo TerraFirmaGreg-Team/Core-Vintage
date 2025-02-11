@@ -24,6 +24,13 @@ public class FoodTrait {
   public static final FoodTrait CHARCOAL_GRILLED; // Slight debuff from cooking in a charcoal forge
   public static final FoodTrait WOOD_GRILLED; // Slight bugg when cooking in a grill
   public static final FoodTrait BURNT_TO_A_CRISP; // Cooking food in something that's WAY TOO HOT too cook food in you fool!
+  public static final FoodTrait COOL;
+  public static final FoodTrait ICY;
+  public static final FoodTrait FREEZING;
+  public static final FoodTrait DRY;
+  public static final FoodTrait PRESERVING;
+  public static final FoodTrait COLD;
+  public static final FoodTrait FROZEN;
   public static final FoodTrait SMOKED;
   public static final FoodTrait FRESH; // These should eventually do something besides just modifying decay rate, for now they're here as an incomplete feature
   public static final FoodTrait AGED;
@@ -42,9 +49,15 @@ public class FoodTrait {
     CHARCOAL_GRILLED = new FoodTrait("charcoal_grilled", 1.25f);
     WOOD_GRILLED = new FoodTrait("wood_grilled", 0.8f);
     BURNT_TO_A_CRISP = new FoodTrait("burnt_to_a_crisp", 2.5f); // This one is so high as it is meant to be > the existing gain from cooking meat.
-
+    COOL = new FoodTrait("sharkCool", 0.8f);
+    ICY = new FoodTrait("sharkIcy", 0.5f);
+    FREEZING = new FoodTrait("sharkIcle", 0.25f);
+    DRY = new FoodTrait("sharkDry", 0.1f);
+    PRESERVING = new FoodTrait("sharkPreserving", 0.9f);
+    COLD = new FoodTrait("cold", 0.25f);
+    FROZEN = new FoodTrait("frozen", 0.1f);
     SMOKED = new FoodTrait("smoked", 0.25F);
-    FRESH = new FoodTrait("fresh", 1.4F); // These should eventually do something besides just modifying decay rate, for now they're here as an incomplete feature
+    FRESH = new FoodTrait("fresh", 1.4F);
     AGED = new FoodTrait("aged", 1.0F);
     VINTAGE = new FoodTrait("vintage", 0.6F);
   }

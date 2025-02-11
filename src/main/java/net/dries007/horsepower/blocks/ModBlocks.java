@@ -1,5 +1,12 @@
 package net.dries007.horsepower.blocks;
 
+import su.terrafirmagreg.modules.device.object.block.BlockQuernHorse;
+import su.terrafirmagreg.modules.device.object.block.BlockQuernManual;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+import su.terrafirmagreg.modules.device.object.tile.TileQuernHorse;
+import su.terrafirmagreg.modules.device.object.tile.TileQuernManual;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -13,11 +20,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import net.dries007.horsepower.items.ItemBlockDouble;
 import net.dries007.horsepower.lib.Reference;
-import net.dries007.horsepower.tileentity.TileEntityChopper;
 import net.dries007.horsepower.tileentity.TileEntityFiller;
-import net.dries007.horsepower.tileentity.TileEntityGrindstone;
-import net.dries007.horsepower.tileentity.TileEntityHandGrindstone;
-import net.dries007.horsepower.tileentity.TileEntityManualChopper;
 import net.dries007.horsepower.tileentity.TileEntityPress;
 
 import java.util.HashSet;
@@ -25,8 +28,8 @@ import java.util.Set;
 
 public class ModBlocks {
 
-  public static final BlockHandGrindstone BLOCK_HAND_GRINDSTONE = new BlockHandGrindstone();
-  public static final BlockGrindstone BLOCK_GRINDSTONE = new BlockGrindstone();
+  public static final BlockQuernManual BLOCK_HAND_GRINDSTONE = new BlockQuernManual();
+  public static final BlockQuernHorse BLOCK_GRINDSTONE = new BlockQuernHorse();
   public static final BlockChoppingBlock BLOCK_MANUAL_CHOPPER = new BlockChoppingBlock();
   public static final BlockChopper BLOCK_CHOPPER = new BlockChopper();
   public static final BlockFiller BLOCK_CHOPPER_FILLER = (BlockFiller) new BlockFiller(Material.WOOD, "chopper_", true).setHarvestLevel1("axe", 0)
@@ -36,10 +39,10 @@ public class ModBlocks {
     .setResistance(5F);
 
   public static void registerTileEntities() {
-    registerTileEntity(TileEntityHandGrindstone.class);
-    registerTileEntity(TileEntityGrindstone.class);
-    registerTileEntity(TileEntityManualChopper.class);
-    registerTileEntity(TileEntityChopper.class);
+    registerTileEntity(TileQuernManual.class);
+    registerTileEntity(TileQuernHorse.class);
+    registerTileEntity(TileChopperManual.class);
+    registerTileEntity(TileChopperHorse.class);
     registerTileEntity(TileEntityFiller.class);
     registerTileEntity(TileEntityPress.class);
   }

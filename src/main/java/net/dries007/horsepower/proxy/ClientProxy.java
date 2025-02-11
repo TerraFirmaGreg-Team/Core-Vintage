@@ -1,5 +1,12 @@
 package net.dries007.horsepower.proxy;
 
+import su.terrafirmagreg.modules.device.client.render.TESRQuernHorse;
+import su.terrafirmagreg.modules.device.client.render.TESRQuernManual;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+import su.terrafirmagreg.modules.device.object.tile.TileQuernHorse;
+import su.terrafirmagreg.modules.device.object.tile.TileQuernManual;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.item.ItemStack;
@@ -16,15 +23,9 @@ import net.dries007.horsepower.client.renderer.ClientHandler;
 import net.dries007.horsepower.client.renderer.TileEntityChopperRender;
 import net.dries007.horsepower.client.renderer.TileEntityChoppingBlockRender;
 import net.dries007.horsepower.client.renderer.TileEntityFillerRender;
-import net.dries007.horsepower.client.renderer.TileEntityGrindstoneRender;
 import net.dries007.horsepower.client.renderer.TileEntityHPBaseRenderer;
-import net.dries007.horsepower.client.renderer.TileEntityHandGrindstoneRender;
 import net.dries007.horsepower.client.renderer.TileEntityPressRender;
-import net.dries007.horsepower.tileentity.TileEntityChopper;
 import net.dries007.horsepower.tileentity.TileEntityFiller;
-import net.dries007.horsepower.tileentity.TileEntityGrindstone;
-import net.dries007.horsepower.tileentity.TileEntityHandGrindstone;
-import net.dries007.horsepower.tileentity.TileEntityManualChopper;
 import net.dries007.horsepower.tileentity.TileEntityPress;
 import net.dries007.horsepower.util.HorsePowerCommand;
 import net.dries007.horsepower.util.color.ColorGetter;
@@ -35,11 +36,11 @@ public class ClientProxy extends CommonProxy {
   @Override
   public void preInit() {
     super.preInit();
-    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindstone.class, new TileEntityGrindstoneRender());
-    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChopper.class, new TileEntityChopperRender());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileQuernHorse.class, new TESRQuernHorse());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileChopperHorse.class, new TileEntityChopperRender());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFiller.class, new TileEntityFillerRender());
-    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHandGrindstone.class, new TileEntityHandGrindstoneRender());
-    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManualChopper.class, new TileEntityChoppingBlockRender());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileQuernManual.class, new TESRQuernManual());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileChopperManual.class, new TileEntityChoppingBlockRender());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPress.class, new TileEntityPressRender());
   }
 
@@ -61,7 +62,7 @@ public class ClientProxy extends CommonProxy {
     {
       if (worldIn != null && pos != null) {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
-        if (tileEntity instanceof TileEntityGrindstone te) {
+        if (tileEntity instanceof TileQuernHorse te) {
           ItemStack outputStack = te.getStackInSlot(1);
           ItemStack secondaryStack = te.getStackInSlot(2);
           if (outputStack.getCount() < secondaryStack.getCount()) {outputStack = secondaryStack;}

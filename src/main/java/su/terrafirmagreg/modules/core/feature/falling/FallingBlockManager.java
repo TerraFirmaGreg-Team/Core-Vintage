@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.core.feature.falling;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.ICapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.spi.CollapseData;
+import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -25,7 +26,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.BlockCharcoalPile;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.entity.EntityFallingBlockTFC;

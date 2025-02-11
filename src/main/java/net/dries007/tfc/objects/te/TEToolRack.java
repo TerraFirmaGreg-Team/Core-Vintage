@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
@@ -17,7 +19,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import net.dries007.tfc.util.OreDictionaryHelper;
 

@@ -3,12 +3,12 @@ package net.dries007.firmalife.init;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import net.dries007.firmalife.recipe.CrackingRecipe;
-import net.dries007.firmalife.recipe.DryingRecipe;
-import net.dries007.firmalife.recipe.NutRecipe;
-import net.dries007.firmalife.recipe.OvenRecipe;
-import net.dries007.firmalife.recipe.PlanterRecipe;
-import net.dries007.firmalife.recipe.StrainingRecipe;
+import net.dries007.tfc.objects.recipes.CrackingRecipe;
+import net.dries007.tfc.objects.recipes.DryingRecipe;
+import net.dries007.tfc.objects.recipes.NutRecipe;
+import net.dries007.tfc.objects.recipes.OvenRecipe;
+import net.dries007.tfc.objects.recipes.PlanterRecipe;
+import net.dries007.tfc.objects.recipes.StrainingRecipe;
 
 /**
  * This is where we initialize our registry instances!

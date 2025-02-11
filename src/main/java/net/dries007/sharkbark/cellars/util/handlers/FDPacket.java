@@ -1,5 +1,7 @@
 package net.dries007.sharkbark.cellars.util.handlers;
 
+import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -8,7 +10,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.sharkbark.cellars.blocks.tileentity.TEFreezeDryer;
 
 public class FDPacket implements IMessage {
 
@@ -54,7 +55,7 @@ public class FDPacket implements IMessage {
 
       if (ctx.side == Side.SERVER) {
         TileEntity tile = ctx.getServerHandler().player.world.getTileEntity(new BlockPos(msg.xCoord, msg.yCoord, msg.zCoord));
-        TEFreezeDryer freezeDryer = (TEFreezeDryer) tile;
+        TileFreezeDryer freezeDryer = (TileFreezeDryer) tile;
 
         if (msg.bool == 0) {
           if (msg.mode) {

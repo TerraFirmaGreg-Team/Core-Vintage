@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import net.dries007.firmalife.recipe.NutRecipe;
+import net.dries007.tfc.objects.recipes.NutRecipe;
 
 import static net.dries007.firmalife.FirmaLife.MOD_ID;
 

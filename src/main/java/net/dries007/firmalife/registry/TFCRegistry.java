@@ -23,7 +23,6 @@ import net.dries007.firmalife.init.FoodFL;
 import net.dries007.firmalife.init.KnappingFL;
 import net.dries007.firmalife.init.PlantsFL;
 import net.dries007.firmalife.init.StemCrop;
-import net.dries007.firmalife.recipe.KnappingRecipeFood;
 import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
@@ -43,6 +42,7 @@ import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.objects.recipes.KnappingRecipeFood;
 import net.dries007.tfc.util.agriculture.Food;
 
 import static net.dries007.firmalife.FirmaLife.MOD_ID;

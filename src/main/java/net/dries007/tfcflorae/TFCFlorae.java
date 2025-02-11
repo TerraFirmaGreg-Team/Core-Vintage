@@ -14,12 +14,11 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
+import net.dries007.tfc.objects.blocks.entity.EntitiesTFCF;
+import net.dries007.tfc.util.HelpersTFCF;
 import net.dries007.tfcflorae.client.ClientEvents;
 import net.dries007.tfcflorae.client.GuiHandler;
-import net.dries007.tfcflorae.objects.blocks.entity.EntitiesTFCF;
 import net.dries007.tfcflorae.proxy.CommonProxy;
-import net.dries007.tfcflorae.util.HelpersTFCF;
-import net.dries007.tfcflorae.util.fuel.FuelsTFCF;
 import org.apache.logging.log4j.Logger;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -96,7 +95,6 @@ public class TFCFlorae {
 
   @EventHandler
   public void postInit(FMLPostInitializationEvent event) {
-    FuelsTFCF.postInit();
     proxy.postInit(event);
   }
 

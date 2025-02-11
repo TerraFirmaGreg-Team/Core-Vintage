@@ -1,5 +1,8 @@
 package net.dries007.firmalife;
 
+import su.terrafirmagreg.modules.device.client.render.TESRLeafMat;
+import su.terrafirmagreg.modules.device.client.render.TESROven;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockFenceGate;
@@ -26,33 +29,31 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.firmalife.blocks.BlockBonsai;
-import net.dries007.firmalife.blocks.BlockFruitDoor;
-import net.dries007.firmalife.blocks.BlockFruitFenceGate;
-import net.dries007.firmalife.blocks.BlockStemCrop;
 import net.dries007.firmalife.init.RegistriesFL;
 import net.dries007.firmalife.init.StatePropertiesFL;
-import net.dries007.firmalife.items.ItemFruitDoor;
-import net.dries007.firmalife.recipe.PlanterRecipe;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.firmalife.render.LargePlanterBakedModel;
 import net.dries007.firmalife.render.LargePlanterStateMapper;
 import net.dries007.firmalife.render.QuadPlanterBakedModel;
 import net.dries007.firmalife.render.QuadPlanterStateMapper;
-import net.dries007.firmalife.render.TESRLeafMat;
-import net.dries007.firmalife.render.TESROven;
 import net.dries007.firmalife.render.TESRString;
 import net.dries007.firmalife.render.TESRTurntable;
 import net.dries007.firmalife.render.VanillaStemStateMapper;
-import net.dries007.firmalife.te.TELeafMat;
-import net.dries007.firmalife.te.TEOven;
-import net.dries007.firmalife.te.TEString;
-import net.dries007.firmalife.te.TETurntable;
 import net.dries007.tfc.client.GrassColorHandler;
+import net.dries007.tfc.objects.blocks.BlockBonsai;
+import net.dries007.tfc.objects.blocks.BlockFruitDoor;
+import net.dries007.tfc.objects.blocks.BlockFruitFenceGate;
+import net.dries007.tfc.objects.blocks.BlockStemCrop;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import net.dries007.tfc.objects.items.ItemFruitDoor;
+import net.dries007.tfc.objects.recipes.PlanterRecipe;
+import net.dries007.tfc.objects.te.TELeafMat;
+import net.dries007.tfc.objects.te.TEOven;
+import net.dries007.tfc.objects.te.TEString;
+import net.dries007.tfc.objects.te.TETurntable;
 
 import static net.dries007.firmalife.FirmaLife.MOD_ID;
 

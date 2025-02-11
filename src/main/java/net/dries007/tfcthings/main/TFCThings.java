@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-import net.dries007.tfcthings.network.MessageHookJavelinUpdate;
+import net.dries007.tfc.network.MessageHookJavelinUpdate;
 import net.dries007.tfcthings.proxy.CommonProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

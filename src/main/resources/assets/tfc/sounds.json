@@ -42,13 +42,6 @@
       "tfc:stonedrag2"
     ]
   },
-  "bellows.blow.air": {
-    "category": "block",
-    "subtitle": "tfc.bellows.blow.air",
-    "sounds": [
-      "tfc:bellows1"
-    ]
-  },
   "dirt.slide.short": {
     "category": "block",
     "subtitle": "tfc.dirt.slide",

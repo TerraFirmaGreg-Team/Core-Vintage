@@ -31,14 +31,14 @@
   },
   "device/block/fridge/open": {
     "category": "block",
-    "subtitle": "sound.tfg.device.block.bellows.fridge.open",
+    "subtitle": "sound.tfg.device.block.fridge.open",
     "sounds": [
       "tfg:device/fridge/open"
     ]
   },
   "device/block/fridge/close": {
     "category": "block",
-    "subtitle": "sound.tfg.device.block.bellows.fridge.close",
+    "subtitle": "sound.tfg.device.block.fridge.close",
     "sounds": [
       "tfg:device/fridge/close"
     ]

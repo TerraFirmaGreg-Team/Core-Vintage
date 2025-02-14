@@ -94,7 +94,7 @@ public final class BlocksDevice {
     BEAR_TRAP = registry.block(new BlockBearTrap());
     SNARE = registry.block(new BlockSnare());
 //    CRATE = registry.block(new BlockCrate());
-//    BELLOWS = registry.block(new BlockBellows());
+    BELLOWS = registry.block(new BlockBellows());
 //    BLAST_FURNACE = registry.block(new BlockBlastFurnace());
 //    BLOOM = registry.block(new BlockBloom());
 //    BLOOMERY = registry.block(new BlockBloomery());

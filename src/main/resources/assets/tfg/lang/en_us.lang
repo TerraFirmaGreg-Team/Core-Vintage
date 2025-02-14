@@ -141,6 +141,7 @@ item_group.tfg.device.name=[ TFG ] Device
 block.tfg.device.alloy_calculator.name=Alloy Calculator
 block.tfg.device.bear_trap.name=Bear Trap
 block.tfg.device.snare.name=Snare
+block.tfg.device.bellows.name=Bellows
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask
@@ -155,6 +156,8 @@ item.tfg.device.firestarter.name=Firestarter
 
 ## Sound
 sound.tfg.device.item.firestarter=Firestarter sizzles
+
+sound.tfg.device.block.bellows.blow.air=Bellows puff
 
 
 # Module Animal ##############################################

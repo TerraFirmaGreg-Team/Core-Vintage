@@ -42,6 +42,7 @@ public abstract class AbstractRemapping {
     put("alloy_calculator", BlocksDevice.ALLOY_CALCULATOR.get());
     put("bear_trap", BlocksDevice.BEAR_TRAP.get());
     put("snare", BlocksDevice.SNARE.get());
+    put("bellows", BlocksDevice.BELLOWS.get());
 
     put("nest_box", BlocksAnimal.NEST_BOX.get());
 
@@ -167,8 +168,6 @@ public abstract class AbstractRemapping {
 
   protected static final Map<String, SoundEvent> SOUND_MAP = new Object2ObjectOpenHashMap<>() {{
 
-    put("animal.alpaca.cry", SoundsDevice.FIRE_STARTER.get());
-
     put("animal.alpaca.cry", SoundsAnimal.ANIMAL_ALPACA_CRY.get());
     put("animal.alpaca.death", SoundsAnimal.ANIMAL_ALPACA_DEATH.get());
     put("animal.alpaca.hurt", SoundsAnimal.ANIMAL_ALPACA_HURT.get());
@@ -262,6 +261,8 @@ public abstract class AbstractRemapping {
     put("animal.yak.hurt", SoundsAnimal.ANIMAL_YAK_HURT.get());
 
     put("item.flaskbreak", SoundsDevice.FLASK_BREAK.get());
+    put("item.firestarter", SoundsDevice.FIRE_STARTER.get());
+    put("bellows.blow.air", SoundsDevice.BELLOWS_BLOW_AIR.get());
   }};
 
   protected static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{

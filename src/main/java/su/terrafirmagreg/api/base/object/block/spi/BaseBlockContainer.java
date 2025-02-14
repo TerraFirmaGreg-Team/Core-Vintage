@@ -7,6 +7,7 @@ import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -34,6 +35,10 @@ public abstract class BaseBlockContainer extends BlockContainer implements IProv
   @Override
   protected boolean hasInvalidNeighbor(World world, BlockPos pos) {
     return Arrays.stream(EnumFacing.HORIZONTALS).anyMatch(facing -> this.isInvalidNeighbor(world, pos, facing));
+  }
+
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
   }
 
   @Override

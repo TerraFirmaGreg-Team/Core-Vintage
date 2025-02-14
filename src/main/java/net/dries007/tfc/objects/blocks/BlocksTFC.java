@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockBellows;
 import su.terrafirmagreg.modules.device.object.block.BlockBlastFurnace;
 import su.terrafirmagreg.modules.device.object.block.BlockBloom;
 import su.terrafirmagreg.modules.device.object.block.BlockBloomery;
@@ -17,7 +16,6 @@ import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
-import su.terrafirmagreg.modules.device.object.tile.TileBellows;
 import su.terrafirmagreg.modules.device.object.tile.TileBlastFurnace;
 import su.terrafirmagreg.modules.device.object.tile.TileBloom;
 import su.terrafirmagreg.modules.device.object.tile.TileBloomery;
@@ -287,7 +285,6 @@ public final class BlocksTFC {
     normalItemBlocks.add(new ItemBlockCrucible(register(r, "crucible", new BlockCrucible(), CT_MISC)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "blast_furnace", new BlockBlastFurnace(), CT_MISC)));
 
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bellows", new BlockBellows(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bloomery", new BlockBloomery(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockSluice(register(r, "sluice", new BlockSluice(), CT_MISC)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockSeaIce(), CT_MISC)));
@@ -698,7 +695,6 @@ public final class BlocksTFC {
     register(TEToolRack.class, "tool_rack");
     register(TELoom.class, "loom");
     register(TELamp.class, "lamp");
-    register(TileBellows.class, "bellows");
     register(TEBarrel.class, "barrel");
     register(TileCharcoalForge.class, "charcoal_forge");
     register(TEAnvilTFC.class, "anvil");

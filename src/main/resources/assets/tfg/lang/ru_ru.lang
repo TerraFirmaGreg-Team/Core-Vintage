@@ -67,6 +67,7 @@ item_group.tfg.device.name=[ TFG ] Device
 block.tfg.device.alloy_calculator.name=Калькулятор сплава
 block.tfg.device.bear_trap.name=Медвежий капкан
 block.tfg.device.snare.name=Ловушка
+block.tfg.device.bellows.name=Кузнечные меха
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга
@@ -81,6 +82,8 @@ item.tfg.device.firestarter.name=Поджигатель
 
 ## Sound
 sound.tfg.device.item.firestarter=Поджигатель шипит
+
+sound.tfg.device.block.bellows.blow.air=Меха пыхают
 
 
 # Module Animal ##############################################

@@ -3360,8 +3360,6 @@ tile.tfc.trapdoor.red_steel.name=Red Steel Trapdoor
 ### ======================= ITEMS ======================
 
 
-
-item.tfc.firestarter.name=Firestarter
 item.tfc.straw.name=Straw
 item.leather.name=Leather
 item.tfc.spindle.name=Spindle
@@ -4829,7 +4827,6 @@ tfc.animal.coyotetfc.female=Coyote
 
 # Sound Events
 tfc.item.ceramicbreak=Ceramic item breaks
-tfc.item.firestarter=Firestarter sizzles
 tfc.item.jug.blow=The sound of music!!!
 tfc.item.jug.fill=Jug fills
 tfc.item.throw=Javelin thrown

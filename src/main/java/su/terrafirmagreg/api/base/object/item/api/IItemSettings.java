@@ -34,7 +34,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public interface IItemSettings extends IBaseSettings<Settings> {
 
-  default ICapabilityProvider definition$initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+  default ICapabilityProvider def$initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
     ArrayList<ICapabilityProvider> providers = new ArrayList<>();
     for (IProviderItemCapability itemCapability : getSettings().getCapability()) {
       providers.add(itemCapability.createProvider(stack));

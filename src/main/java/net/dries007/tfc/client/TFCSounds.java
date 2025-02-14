@@ -34,8 +34,6 @@ public class TFCSounds {
   public static final SoundEvent JUG_BLOW = getNull();
   @GameRegistry.ObjectHolder(TFC + ":item.jug.fill")
   public static final SoundEvent JUG_FILL = getNull();
-  @GameRegistry.ObjectHolder(TFC + ":item.firestarter")
-  public static final SoundEvent FIRE_STARTER = getNull();
 
 
   // These are static initialized because we need a custom sound type which uses the sounds before initialization
@@ -66,8 +64,7 @@ public class TFCSounds {
       createSoundEvent("anvil.metalimpact"),
       createSoundEvent("item.throw"),
       createSoundEvent("item.jug.blow"),
-      createSoundEvent("item.jug.fill"),
-      createSoundEvent("item.firestarter")
+      createSoundEvent("item.jug.fill")
     );
   }
 

@@ -80,8 +80,7 @@ public class ItemFireStarter extends BaseItem {
     if (stack.isEmpty()) {
       return false;
     }
-    return OreDictUtils.contains(stack, "fireStarter") || OreDictUtils.contains(stack,
-      "infiniteFire");
+    return OreDictUtils.contains(stack, "firestarter") || OreDictUtils.contains(stack, "infiniteFire");
   }
 
   @Override

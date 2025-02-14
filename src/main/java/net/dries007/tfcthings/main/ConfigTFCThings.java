@@ -1,14 +1,13 @@
 package net.dries007.tfcthings.main;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 @Mod.EventBusSubscriber(
   modid = Mods.Names.TFCTHINGS
@@ -50,12 +49,6 @@ public class ConfigTFCThings {
     @Config.Comment({"Sling Settings"})
     @Config.LangKey("config.tfcthings.items.sling")
     public static final SlingCFG SLING = new SlingCFG();
-    @Config.Comment({"Bear Trap Settings"})
-    @Config.LangKey("config.tfcthings.items.beartrap")
-    public static final BearTrapCFG BEAR_TRAP = new BearTrapCFG();
-    @Config.Comment({"Snare Settings"})
-    @Config.LangKey("config.tfcthings.items.snare")
-    public static final SnareCFG SNARE = new SnareCFG();
     @Config.Comment({"Whetstone Settings"})
     @Config.LangKey("config.tfcthings.items.whetstone")
     public static final WhetstoneCFG WHETSTONE = new WhetstoneCFG();
@@ -97,75 +90,6 @@ public class ConfigTFCThings {
       public int chargeSpeed = 16;
     }
 
-    public static final class BearTrapCFG {
-
-      @Config.Comment("Percent chance for a bear trap to break when harvested after being activated (a predator breakout will attempt to break the trap with double this chance).")
-      @Config.RangeDouble(
-        min = 0.0D,
-        max = 1.0D
-      )
-      @Config.LangKey("config.tfcthings.items.breakChance")
-      public double breakChance = 0.1D;
-
-      @Config.Comment({"The chance a predator has to break out of a bear trap each tick.",
-                       "0 = no breakouts. If this number isn't kept very small then breakouts will happen very fast. 1 = instant breakout."})
-      @Config.RangeDouble(
-        min = 0.0D,
-        max = 1.0D
-      )
-      @Config.LangKey("config.tfcthings.items.breakoutChance")
-      public double breakoutChance = 0.001D;
-
-      @Config.Comment({"The duration of the debuffs applied by the bear trap in ticks.", "Set to 0 to disable the debuffs."})
-      @Config.RangeInt(
-        min = 0
-      )
-      @Config.LangKey("config.tfcthings.items.debuffDuration")
-      public int debuffDuration = 1000;
-
-      @Config.Comment({"The fraction of an entity's health that is dealt as damage when stepping in a trap.",
-                       "E.g. 3 = 1/3 current health dealt as damage. Less than 1 will deal more damage than current health, probably an instakill. Set to 0 to do no damage."})
-      @Config.RangeDouble(
-        min = 0.0D,
-        max = 20.0D
-      )
-      @Config.LangKey("config.tfcthings.items.healthCut")
-      public double healthCut = 3.0D;
-      @Config.LangKey("config.tfcthings.items.fixedDamage")
-      @Config.Comment({"The amount of damage points dealt by a bear trap.",
-                       "This will override the fractional health cut setting if set to a value greater than 0"})
-      @Config.RangeDouble(
-        min = 0.0D
-      )
-      public double fixedDamage = 0.0D;
-    }
-
-    public static final class SnareCFG {
-
-      @Config.Comment("Percent chance for a snare to break when harvested after being tripped.")
-      @Config.RangeDouble(
-        min = 0.0D,
-        max = 1.0D
-      )
-      @Config.LangKey("config.tfcthings.items.breakChance")
-      public double breakChance = 0.2D;
-
-      @Config.Comment({"The chance for a snare to capture a random small animal when loaded with bait. Happens on random block ticks."})
-      @Config.RangeDouble(
-        min = 0.0D,
-        max = 1.0D
-      )
-      @Config.LangKey("config.tfcthings.items.baitCaptureChance")
-      public double baitCaptureChance = 0.05D;
-
-      @Config.Comment({"The chance for a piece of bait in a snare to be consumed if the snare fails to capture a random animal."})
-      @Config.RangeDouble(
-        min = 0.0D,
-        max = 1.0D
-      )
-      @Config.LangKey("config.tfcthings.items.baitExpireChance")
-      public double baitExpireChance = 0.05D;
-    }
 
     public static final class WhetstoneCFG {
 

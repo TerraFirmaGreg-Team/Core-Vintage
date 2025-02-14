@@ -65,18 +65,22 @@ item_group.tfg.device.name=[ TFG ] Device
 
 ## Block
 block.tfg.device.alloy_calculator.name=Калькулятор сплава
+block.tfg.device.bear_trap.name=Медвежий капкан
+block.tfg.device.snare.name=Ловушка
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга
 item.tfg.device.flask.leather.filled.name=Кожаная фляга с %s
 item.tfg.device.flask.leather.broken.name=Поврежденная кожаная фляга
 item.tfg.device.flask.leather.unfinished.name=Незавершенная кожаная фляга
-
-
 item.tfg.device.flask.metal.name=Пустая металлическая фляга
 item.tfg.device.flask.metal.filled.name=Металлическая фляга с %s
 item.tfg.device.flask.metal.broken.name=Поврежденная металлическая фляга
 item.tfg.device.flask.metal.unfinished.name=Незавершенная металлическая фляга
+item.tfg.device.firestarter.name=Поджигатель
+
+## Sound
+sound.tfg.device.item.firestarter=Поджигатель шипит
 
 
 # Module Animal ##############################################

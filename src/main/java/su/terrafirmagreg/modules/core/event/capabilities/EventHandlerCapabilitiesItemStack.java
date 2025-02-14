@@ -50,6 +50,7 @@ public class EventHandlerCapabilitiesItemStack {
       // Only modify the stack size if the item was stackable in the first place
       // Note: this is called in many cases BEFORE all custom capabilities are added.
       int prevStackSize = stack.getMaxStackSize();
+      var item = stack.getItem();
       if (prevStackSize != 1) {
         stack.getItem().setMaxStackSize(itemSize.getStackSize(stack));
       }

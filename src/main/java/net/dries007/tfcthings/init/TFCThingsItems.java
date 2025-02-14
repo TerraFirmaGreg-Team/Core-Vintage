@@ -5,6 +5,9 @@ import su.terrafirmagreg.api.data.ArmorMaterials;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ItemBearTrapHalf;
 import net.dries007.tfc.objects.items.ItemCrown;
 import net.dries007.tfc.objects.items.ItemDiamondGrit;
@@ -22,12 +25,9 @@ import net.dries007.tfc.objects.items.ItemSnowShoes;
 import net.dries007.tfc.objects.items.ItemTFCThingsMold;
 import net.dries007.tfc.objects.items.ItemTFCThingsToolHead;
 import net.dries007.tfc.objects.items.ItemWhetstone;
-import net.dries007.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.types.DefaultMetals;
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -234,13 +234,11 @@ public class TFCThingsItems {
     ITEM_PLATINUM_CROWN_TOPAZ,
     ITEM_PLATINUM_CROWN_TOURMALINE,
 
-    TFCThingsBlocks.BEAR_TRAP_ITEM,
     TFCThingsBlocks.PIGVIL_ITEM,
     TFCThingsBlocks.PIGVIL_ITEM_BLACK,
     TFCThingsBlocks.PIGVIL_ITEM_BLUE,
     TFCThingsBlocks.PIGVIL_ITEM_RED,
     TFCThingsBlocks.PIGVIL_ITEM_PURPLE,
-    TFCThingsBlocks.SNARE_ITEM,
     TFCThingsBlocks.ROPE_BRIDGE_ITEM,
     TFCThingsBlocks.ROPE_LADDER_ITEM,
     TFCThingsBlocks.GRINDSTONE_ITEM,

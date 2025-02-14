@@ -4627,7 +4627,6 @@ item.tfc.quiver.name=Колчан
 
 # Sound Events
 tfc.item.ceramicbreak=Керамический предмет ломается
-tfc.item.firestarter=Поджигатель шипит
 tfc.item.jug.blow=Звуки музыки!!!
 tfc.item.jug.fill=Кувшин наполняется
 tfc.item.throw=Метание копья

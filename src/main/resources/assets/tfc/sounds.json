@@ -6,22 +6,6 @@
       "tfc:ceramicbreak1"
     ]
   },
-  "item.firestarter": {
-    "category": "ambient",
-    "subtitle": "tfc.item.firestarter",
-    "sounds": [
-      "tfc:firestarter1",
-      "tfc:firestarter2",
-      "tfc:firestarter3",
-      "tfc:firestarter4",
-      "tfc:firestarter5",
-      "tfc:firestarter6",
-      "tfc:firestarter7",
-      "tfc:firestarter8",
-      "tfc:firestarter9",
-      "tfc:firestarter10"
-    ]
-  },
   "item.jug.blow": {
     "category": "ambient",
     "subtitle": "tfc.item.jug.blow",

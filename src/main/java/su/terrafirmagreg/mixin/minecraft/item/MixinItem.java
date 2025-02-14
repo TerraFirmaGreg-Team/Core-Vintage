@@ -87,7 +87,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
     if (getSettings().getCapability().isEmpty()) {
       return null;
     }
-    return definition$initCapabilities(stack, nbt);
+    return def$initCapabilities(stack, nbt);
   }
 
 

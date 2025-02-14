@@ -1,24 +1,20 @@
 package net.dries007.tfcthings.init;
 
-import su.terrafirmagreg.modules.device.object.block.BlockBearTrap;
 import su.terrafirmagreg.modules.device.object.block.BlockGrindstoneManual;
-import su.terrafirmagreg.modules.device.object.block.BlockSnare;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.types.DefaultMetals;
 import net.dries007.tfc.objects.blocks.BlockGemDisplay;
 import net.dries007.tfc.objects.blocks.BlockPigvil;
 import net.dries007.tfc.objects.blocks.BlockRopeBridge;
 import net.dries007.tfc.objects.blocks.BlockRopeLadder;
+import net.dries007.tfc.types.DefaultMetals;
 
 public class TFCThingsBlocks {
 
-  public static final Block BEAR_TRAP = new BlockBearTrap();
-  public static final Item BEAR_TRAP_ITEM = new ItemBlock(BEAR_TRAP).setRegistryName(BEAR_TRAP.getRegistryName()).setMaxStackSize(2);
   public static final Block PIGVIL_BLOCK = new BlockPigvil(TFCRegistries.METALS.getValue(DefaultMetals.STEEL));
   public static final Item PIGVIL_ITEM = new ItemBlock(PIGVIL_BLOCK).setRegistryName(PIGVIL_BLOCK.getRegistryName());
   public static final Block PIGVIL_BLOCK_BLACK = new BlockPigvil(TFCRegistries.METALS.getValue(DefaultMetals.BLACK_STEEL));
@@ -29,8 +25,6 @@ public class TFCThingsBlocks {
   public static final Item PIGVIL_ITEM_BLUE = new ItemBlock(PIGVIL_BLOCK_BLUE).setRegistryName(PIGVIL_BLOCK_BLUE.getRegistryName());
   public static final Block PIGVIL_BLOCK_PURPLE = new BlockPigvil();
   public static final Item PIGVIL_ITEM_PURPLE = new ItemBlock(PIGVIL_BLOCK_PURPLE).setRegistryName(PIGVIL_BLOCK_PURPLE.getRegistryName());
-  public static final Block SNARE_BLOCK = new BlockSnare();
-  public static final Item SNARE_ITEM = new ItemBlock(SNARE_BLOCK).setRegistryName(SNARE_BLOCK.getRegistryName()).setMaxStackSize(4);
   public static final Block ROPE_BRIDGE_BLOCK = new BlockRopeBridge();
   public static final Item ROPE_BRIDGE_ITEM = new ItemBlock(ROPE_BRIDGE_BLOCK).setRegistryName(ROPE_BRIDGE_BLOCK.getRegistryName());
   public static final Block ROPE_LADDER_BLOCK = new BlockRopeLadder();
@@ -82,13 +76,11 @@ public class TFCThingsBlocks {
   public static final Item GEM_DISPLAY_SLATE_ITEM = new ItemBlock(GEM_DISPLAY_SLATE).setRegistryName(GEM_DISPLAY_SLATE.getRegistryName());
 
   public static final Block[] BLOCKLIST = {
-    BEAR_TRAP,
     PIGVIL_BLOCK,
     PIGVIL_BLOCK_BLACK,
     PIGVIL_BLOCK_BLUE,
     PIGVIL_BLOCK_RED,
     PIGVIL_BLOCK_PURPLE,
-    SNARE_BLOCK,
     ROPE_BRIDGE_BLOCK,
     ROPE_LADDER_BLOCK,
     GRINDSTONE_BLOCK,

@@ -2,7 +2,7 @@ package net.dries007.tfcthings.registry;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
-import su.terrafirmagreg.modules.device.object.tile.TileBearTrap;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileGrindstone;
 
 import net.minecraft.block.Block;
@@ -100,7 +100,6 @@ public class RegistryHandlerCommon {
         event.getRegistry().register(block);
       }
     }
-    GameRegistry.registerTileEntity(TileBearTrap.class, TFCThingsBlocks.BEAR_TRAP.getRegistryName());
     if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableGemDisplays) {
       GameRegistry.registerTileEntity(TEGemDisplay.class, TFCThingsBlocks.GEM_DISPLAY_ANDESITE.getRegistryName());
     }
@@ -241,7 +240,7 @@ public class RegistryHandlerCommon {
   public static void registerWeldingRecipes(RegistryEvent.Register<WeldingRecipe> event) {
     if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableBearTrap) {
       event.getRegistry()
-        .register(new WeldingRecipe(new ResourceLocation(Mods.Names.TFCTHINGS, "bear_trap"), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), new ItemStack(TFCThingsBlocks.BEAR_TRAP), Metal.STEEL.getTier()));
+        .register(new WeldingRecipe(new ResourceLocation(Mods.Names.TFCTHINGS, "bear_trap"), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), new ItemStack(BlocksDevice.BEAR_TRAP.get()), Metal.STEEL.getTier()));
     }
     if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones) {
       event.getRegistry()

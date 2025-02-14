@@ -667,11 +667,6 @@ public final class ConfigTFC {
       @Config.LangKey("config." + TFC + ".general.misc.stoneGemDropChance")
       public double stoneGemDropChance = 31.0 / 8000.0; // 0.003875
 
-      @Config.Comment("Chance for the fire starter to be successful")
-      @Config.RangeDouble(min = 0d, max = 1d)
-      @Config.LangKey("config." + TFC + ".general.misc.fireStarterChance")
-      public double fireStarterChance = 0.5;
-
       @Config.Comment("The amount of metal contained in a small ore / nugget.")
       @Config.LangKey("config." + TFC + ".general.misc.smallOreMetalAmount")
       @Config.RangeInt(min = 1, max = 10_000)

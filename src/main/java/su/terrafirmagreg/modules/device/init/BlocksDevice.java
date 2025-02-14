@@ -91,8 +91,8 @@ public final class BlocksDevice {
   public static void onRegister(IRegistryManager registry) {
 
     ALLOY_CALCULATOR = registry.block(new BlockAlloyCalculator());
-//    BEAR_TRAP = registry.block(new BlockBearTrap());
-//    SNARE = registry.block(new BlockSnare());
+    BEAR_TRAP = registry.block(new BlockBearTrap());
+    SNARE = registry.block(new BlockSnare());
 //    CRATE = registry.block(new BlockCrate());
 //    BELLOWS = registry.block(new BlockBellows());
 //    BLAST_FURNACE = registry.block(new BlockBlastFurnace());

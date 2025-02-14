@@ -1,17 +1,14 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
 import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg;
-import su.terrafirmagreg.modules.device.object.container.ContainerBlastFurnace;
 import su.terrafirmagreg.modules.device.object.container.ContainerCharcoalForge;
 import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
 import su.terrafirmagreg.modules.device.object.container.ContainerFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerLogPile;
 import su.terrafirmagreg.modules.device.object.container.ContainerPowderKeg;
-import su.terrafirmagreg.modules.device.object.tile.TileBlastFurnace;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
@@ -142,8 +139,6 @@ public class TFCGuiHandler implements IGuiHandler {
       case SKILLS:
       case NUTRITION:
         return new ContainerSimple(player.inventory);
-      case BLAST_FURNACE:
-        return new ContainerBlastFurnace(player.inventory, Helpers.getTE(world, pos, TileBlastFurnace.class));
       case CRAFTING:
         return new ContainerInventoryCrafting(player.inventory, player.world);
       case QUIVER:
@@ -217,8 +212,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return new GuiNutrition(container, player.inventory);
       case SKILLS:
         return new GuiSkills(container, player.inventory);
-      case BLAST_FURNACE:
-        return new GuiBlastFurnace(container, player.inventory, Helpers.getTE(world, pos, TileBlastFurnace.class));
       case CRAFTING:
         return new GuiInventoryCrafting(container);
       case QUIVER:
@@ -250,7 +243,6 @@ public class TFCGuiHandler implements IGuiHandler {
     ANVIL,
     ANVIL_PLAN,
     CRUCIBLE,
-    BLAST_FURNACE,
     LARGE_VESSEL,
     POWDERKEG,
     CALENDAR,

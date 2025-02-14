@@ -4,8 +4,6 @@ import mcjty.theoneprobe.api.ITheOneProbe;
 import net.dries007.tfc.compat.waila.interfaces.TOPBlockInterface;
 import net.dries007.tfc.compat.waila.providers.BarrelProvider;
 import net.dries007.tfc.compat.waila.providers.BerryBushProvider;
-import net.dries007.tfc.compat.waila.providers.BlastFurnaceProvider;
-import net.dries007.tfc.compat.waila.providers.BloomeryProvider;
 import net.dries007.tfc.compat.waila.providers.CropProvider;
 import net.dries007.tfc.compat.waila.providers.CrucibleProvider;
 import net.dries007.tfc.compat.waila.providers.FruitTreeProvider;
@@ -28,8 +26,6 @@ public class TOPPlugin implements Function<ITheOneProbe, Void> {
   public static final List<TOPBlockInterface> TOP_BLOCK_INTERFACES = Arrays.asList(
     new TOPBlockInterface(new BarrelProvider()),
     new TOPBlockInterface(new BerryBushProvider()),
-    new TOPBlockInterface(new BlastFurnaceProvider()),
-    new TOPBlockInterface(new BloomeryProvider()),
     new TOPBlockInterface(new LampProvider()),
     new TOPBlockInterface(new CropProvider()),
     new TOPBlockInterface(new CrucibleProvider()),

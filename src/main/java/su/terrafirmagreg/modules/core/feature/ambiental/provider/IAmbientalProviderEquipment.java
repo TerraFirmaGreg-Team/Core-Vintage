@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.core.feature.ambiental.provider;
 
+import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEquipment;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEquipment;
 
 import java.util.Optional;
 
 @FunctionalInterface
-public interface IAmbientalProviderEquipment extends IAmbientalProviderBase {
+public interface IAmbientalProviderEquipment extends IAmbientalProvider {
 
   Optional<ModifierEquipment> getModifier(EntityPlayer player, ItemStack stack);
 

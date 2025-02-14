@@ -95,9 +95,9 @@ public final class BlocksDevice {
     SNARE = registry.block(new BlockSnare());
 //    CRATE = registry.block(new BlockCrate());
     BELLOWS = registry.block(new BlockBellows());
-//    BLAST_FURNACE = registry.block(new BlockBlastFurnace());
+    BLAST_FURNACE = registry.block(new BlockBlastFurnace());
 //    BLOOM = registry.block(new BlockBloom());
-//    BLOOMERY = registry.block(new BlockBloomery());
+    BLOOMERY = registry.block(new BlockBloomery());
 //    CHARCOAL_FORGE = registry.block(new BlockCharcoalForge());
 //    CHARCOAL_PILE = registry.block(new BlockCharcoalPile());
 //    CRUCIBLE = registry.block(new BlockCrucible());
@@ -105,7 +105,7 @@ public final class BlocksDevice {
 //    PIT_KILN = registry.block(new BlockPitKiln());
 //    QUERN_MANUAL = registry.block(new BlockQuernManual());
 //    QUERN_HORSE = registry.block(new BlockQuernHorse());
-//    MOLTEN = registry.block(new BlockMolten());
+    MOLTEN = registry.block(new BlockMolten());
 //    LOG_PILE = registry.block(new BlockLogPile());
 //    CELLAR_SHELF = registry.block(new BlockCellarShelf());
 //    CELLAR_DOOR = registry.block(new BlockCellarDoor());

@@ -1,19 +1,26 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
+import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockBloomery;
-import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
-import su.terrafirmagreg.modules.device.object.block.BlockMolten;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
@@ -21,23 +28,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 import com.google.common.collect.ImmutableList;
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.te.TETickableInventory;
-import net.dries007.tfc.util.Helpers;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
-import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.data.Properties.IntProp.LAYERS;
+import static su.terrafirmagreg.api.data.Properties.IntProp.TYPE;
 
 @SuppressWarnings("WeakerAccess")
-@ParametersAreNonnullByDefault
-public class TileBloomery extends TETickableInventory implements ITickable {
+public class TileBloomery extends BaseTileTickableInventory implements IAmbientalProviderTile {
 
   // Gets the internal block, should be charcoal pile/bloom
   private static final Vec3i OFFSET_INTERNAL = new Vec3i(1, 0, 0);
@@ -54,6 +59,11 @@ public class TileBloomery extends TETickableInventory implements ITickable {
 
   public TileBloomery() {
     super(0);
+  }
+
+  @Override
+  public Block getBlockType() {
+    return super.getBlockType();
   }
 
   @Override
@@ -74,26 +84,68 @@ public class TileBloomery extends TETickableInventory implements ITickable {
   }
 
   @Override
-  @Nonnull
-  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+  public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
     NBTTagList ores = new NBTTagList();
     for (ItemStack stack : oreStacks) {
       ores.appendTag(stack.serializeNBT());
     }
-    tag.setTag("ores", ores);
+    NBTUtils.setGenericNBTValue(nbt, "ores", ores);
     NBTTagList fuels = new NBTTagList();
     for (ItemStack stack : fuelStacks) {
       fuels.appendTag(stack.serializeNBT());
     }
-    tag.setTag("fuels", fuels);
-    tag.setLong("litTick", litTick);
-    return super.writeToNBT(tag);
+    NBTUtils.setGenericNBTValue(nbt, "fuels", fuels);
+    NBTUtils.setGenericNBTValue(nbt, "litTick", litTick);
+    return super.writeToNBT(nbt);
   }
 
   @Override
   public void onBreakBlock(World worldIn, BlockPos pos, IBlockState state) {
     dumpItems();
     super.onBreakBlock(world, pos, state);
+  }
+
+  protected void dumpItems() {
+    //Dump everything in world
+    for (int i = 1; i < 4; i++) {
+      if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
+        world.setBlockToAir(getInternalBlock().up(i));
+      }
+    }
+    oreStacks.forEach(
+      i -> StackUtils.spawnItemStack(world, getExternalBlock(), i));
+    fuelStacks.forEach(
+      i -> StackUtils.spawnItemStack(world, getExternalBlock(), i));
+  }
+
+  /**
+   * Gets the internal (charcoal pile / bloom) position
+   *
+   * @return BlockPos of the internal block
+   */
+  public BlockPos getInternalBlock() {
+    if (internalBlock == null) {
+      EnumFacing direction = world.getBlockState(pos).getValue(HORIZONTAL);
+      internalBlock = pos.up(OFFSET_INTERNAL.getY())
+        .offset(direction, OFFSET_INTERNAL.getX())
+        .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
+    }
+    return internalBlock;
+  }
+
+  /**
+   * Gets the external (front facing) position
+   *
+   * @return BlockPos to dump items in world
+   */
+  public BlockPos getExternalBlock() {
+    if (externalBlock == null) {
+      EnumFacing direction = world.getBlockState(pos).getValue(HORIZONTAL);
+      externalBlock = pos.up(OFFSET_EXTERNAL.getY())
+        .offset(direction, OFFSET_EXTERNAL.getX())
+        .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
+    }
+    return externalBlock;
   }
 
   public ImmutableList<ItemStack> getFuelStacks() {
@@ -118,11 +170,8 @@ public class TileBloomery extends TETickableInventory implements ITickable {
             }
           }
           if (cachedRecipe != null) {
-            world.setBlockState(getInternalBlock(), BlocksTFC.BLOOM.getDefaultState());
-            TileBloom te = Helpers.getTE(world, getInternalBlock(), TileBloom.class);
-            if (te != null) {
-              te.setBloom(cachedRecipe.getOutput(oreStacks));
-            }
+            world.setBlockState(getInternalBlock(), BlocksDevice.BLOOM.get().getDefaultState());
+            TileUtils.getTile(world, getInternalBlock(), TileBloom.class).ifPresent(tile -> tile.setBloom(cachedRecipe.getOutput(oreStacks)));
           }
 
           oreStacks.clear();
@@ -138,8 +187,8 @@ public class TileBloomery extends TETickableInventory implements ITickable {
 
       // Update multiblock status
       int newMaxItems = BlockBloomery.getChimneyLevels(world, getInternalBlock()) * 8;
-      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
-      if (!BlocksTFC.BLOOMERY.isFormed(world, getInternalBlock(), direction)) {
+      EnumFacing direction = world.getBlockState(pos).getValue(HORIZONTAL);
+      if (!BlocksDevice.BLOOMERY.get().isFormed(world, getInternalBlock(), direction)) {
         newMaxItems = 0;
       }
 
@@ -149,13 +198,13 @@ public class TileBloomery extends TETickableInventory implements ITickable {
       while (maxOre < oreStacks.size()) {
         turnOff = true;
         // Structure lost one or more chimney levels
-        InventoryHelper.spawnItemStack(world, getExternalBlock().getX(), getExternalBlock().getY(), getExternalBlock().getZ(), oreStacks.get(0));
+        StackUtils.spawnItemStack(world, getExternalBlock(), oreStacks.get(0));
         oreStacks.remove(0);
         markForSync();
       }
       while (maxFuel < fuelStacks.size()) {
         turnOff = true;
-        InventoryHelper.spawnItemStack(world, getExternalBlock().getX(), getExternalBlock().getY(), getExternalBlock().getZ(), fuelStacks.get(0));
+        StackUtils.spawnItemStack(world, getExternalBlock(), fuelStacks.get(0));
         fuelStacks.remove(0);
         markForSync();
       }
@@ -164,7 +213,7 @@ public class TileBloomery extends TETickableInventory implements ITickable {
         state = state.withProperty(LIT, false);
         world.setBlockState(pos, state);
       }
-      if (!BlocksTFC.BLOOMERY.canGateStayInPlace(world, pos, direction.getAxis())) {
+      if (!BlocksDevice.BLOOMERY.get().canGateStayInPlace(world, pos, direction.getAxis())) {
         // Bloomery gate (the front facing) structure became compromised
         world.destroyBlock(pos, true);
         return;
@@ -185,72 +234,40 @@ public class TileBloomery extends TETickableInventory implements ITickable {
     }
   }
 
-  @Override
-  public void onLoad() {
-    // This caches the bloomery block as otherwise it can be null when broken
-    getExternalBlock();
-  }
-
   public long getRemainingTicks() {
-    return ConfigTFC.Devices.BLOOMERY.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
+    return ConfigDevice.BLOCK.BLOOMERY.ticks - (Calendar.PLAYER_TIME.getTicks() - litTick);
   }
 
-  public boolean canIgnite() {
-    if (world.isRemote) {return false;}
-    if (this.fuelStacks.size() < this.oreStacks.size() || this.oreStacks.isEmpty()) {
-      return false;
-    }
-    return isInternalBlockComplete();
-  }
-
-  public void onIgnite() {
-    this.litTick = Calendar.PLAYER_TIME.getTicks();
-  }
-
-  /**
-   * Gets the internal (charcoal pile / bloom) position
-   *
-   * @return BlockPos of the internal block
-   */
-  public BlockPos getInternalBlock() {
-    if (internalBlock == null) {
-      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
-      internalBlock = pos.up(OFFSET_INTERNAL.getY())
-        .offset(direction, OFFSET_INTERNAL.getX())
-        .offset(direction.rotateY(), OFFSET_INTERNAL.getZ());
-    }
-    return internalBlock;
-  }
-
-  /**
-   * Gets the external (front facing) position
-   *
-   * @return BlockPos to dump items in world
-   */
-  public BlockPos getExternalBlock() {
-    if (externalBlock == null) {
-      EnumFacing direction = world.getBlockState(pos).getValue(FACING);
-      externalBlock = pos.up(OFFSET_EXTERNAL.getY())
-        .offset(direction, OFFSET_EXTERNAL.getX())
-        .offset(direction.rotateY(), OFFSET_EXTERNAL.getZ());
-    }
-    return externalBlock;
-  }
-
-  protected void dumpItems() {
-    //Dump everything in world
+  protected void updateSlagBlock(boolean cooking) {
+    int slag = fuelStacks.size() + oreStacks.size();
+    //If there's at least one item, show one layer so player knows that it is holding stacks
+    int slagLayers = slag > 0 && slag < 4 ? 1 : slag / 4;
     for (int i = 1; i < 4; i++) {
-      if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksTFC.MOLTEN) {
-        world.setBlockToAir(getInternalBlock().up(i));
+      if (slagLayers > 0) {
+        if (slagLayers >= 4) {
+          slagLayers -= 4;
+          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.get().getDefaultState()
+            .withProperty(LIT, cooking)
+            .withProperty(LAYERS, 4));
+        } else {
+          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.get().getDefaultState()
+            .withProperty(LIT, cooking)
+            .withProperty(LAYERS, slagLayers));
+          slagLayers = 0;
+        }
+      } else {
+        //Remove any surplus slag(ie: after cooking/structure became compromised)
+        if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN.get()) {
+          world.setBlockToAir(getInternalBlock().up(i));
+        }
       }
     }
-    oreStacks.forEach(i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(), getExternalBlock().getY(), getExternalBlock().getZ(), i));
-    fuelStacks.forEach(i -> InventoryHelper.spawnItemStack(world, getExternalBlock().getX(), getExternalBlock().getY(), getExternalBlock().getZ(), i));
   }
 
   protected boolean isInternalBlockComplete() {
     IBlockState inside = world.getBlockState(getInternalBlock());
-    return inside.getBlock() == BlocksTFC.CHARCOAL_PILE && inside.getValue(BlockCharcoalPile.LAYERS) >= 8;
+    return inside.getBlock() == BlocksDevice.CHARCOAL_PILE
+           && inside.getValue(TYPE) >= 8;
   }
 
   protected void addItemsFromWorld() {
@@ -260,7 +277,9 @@ public class TileBloomery extends TETickableInventory implements ITickable {
         this.dumpItems();
       }
     }
-    for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(getInternalBlock().up(), getInternalBlock().add(1, 4, 1)), EntitySelectors.IS_ALIVE)) {
+    for (EntityItem entityItem : world.getEntitiesWithinAABB(EntityItem.class,
+      new AxisAlignedBB(getInternalBlock().up(), getInternalBlock().add(1, 4, 1)),
+      EntitySelectors.IS_ALIVE)) {
       ItemStack stack = entityItem.getItem();
       if (cachedRecipe == null) {
         cachedRecipe = BloomeryRecipe.get(stack);
@@ -293,27 +312,33 @@ public class TileBloomery extends TETickableInventory implements ITickable {
     }
   }
 
-  protected void updateSlagBlock(boolean cooking) {
-    int slag = fuelStacks.size() + oreStacks.size();
-    //If there's at least one item, show one layer so player knows that it is holding stacks
-    int slagLayers = slag > 0 && slag < 4 ? 1 : slag / 4;
-    for (int i = 1; i < 4; i++) {
-      if (slagLayers > 0) {
-        if (slagLayers >= 4) {
-          slagLayers -= 4;
-          world.setBlockState(getInternalBlock().up(i), BlocksTFC.MOLTEN.getDefaultState().withProperty(LIT, cooking).withProperty(BlockMolten.LAYERS, 4));
-        } else {
-          world.setBlockState(getInternalBlock().up(i), BlocksTFC.MOLTEN.getDefaultState().withProperty(LIT, cooking)
-            .withProperty(BlockMolten.LAYERS, slagLayers));
-          slagLayers = 0;
-        }
-      } else {
-        //Remove any surplus slag(ie: after cooking/structure became compromised)
-        if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksTFC.MOLTEN) {
-          world.setBlockToAir(getInternalBlock().up(i));
-        }
-      }
-    }
+  @Override
+  public void onLoad() {
+    // This caches the bloomery block as otherwise it can be null when broken
+    getExternalBlock();
   }
 
+  public boolean canIgnite() {
+    if (world.isRemote) {
+      return false;
+    }
+    if (this.fuelStacks.size() < this.oreStacks.size() || this.oreStacks.isEmpty()) {
+      return false;
+    }
+    return isInternalBlockComplete();
+  }
+
+  public void onIgnite() {
+    this.litTick = Calendar.PLAYER_TIME.getTicks();
+  }
+
+  @Override
+  public Optional<ModifierTile> getModifier(EntityPlayer player, TileEntity tile) {
+    float change = this.getRemainingTicks() > 0 ? 4f : 0f;
+    float potency = change;
+    if (ModifierTile.hasProtection(player)) {
+      change = 1.0F;
+    }
+    return ModifierTile.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
+  }
 }

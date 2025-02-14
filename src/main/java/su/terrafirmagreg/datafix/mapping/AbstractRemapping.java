@@ -38,11 +38,15 @@ public abstract class AbstractRemapping {
   protected static final Map<String, Block> BLOCK_MAP = new Object2ObjectOpenHashMap<>() {{
     put("debug", BlocksCore.DEBUG.get());
     put("puddle", BlocksCore.PUDDLE.get());
+    put("fire_bricks", BlocksCore.FIRE_BRICKS.get());
 
     put("alloy_calculator", BlocksDevice.ALLOY_CALCULATOR.get());
     put("bear_trap", BlocksDevice.BEAR_TRAP.get());
     put("snare", BlocksDevice.SNARE.get());
     put("bellows", BlocksDevice.BELLOWS.get());
+    put("blast_furnace", BlocksDevice.BLAST_FURNACE.get());
+    put("molten", BlocksDevice.MOLTEN.get());
+    put("bloomery", BlocksDevice.BLOOMERY.get());
 
     put("nest_box", BlocksAnimal.NEST_BOX.get());
 

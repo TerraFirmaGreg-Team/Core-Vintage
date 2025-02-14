@@ -115,6 +115,7 @@ item_group.tfg.core.name=[ TFG ] Core
 ## Block
 block.tfg.core.debug.name=Debug Block
 block.tfg.core.puddle.name=Puddle
+block.tfg.core.fire_bricks.name=Fire Bricks
 
 ## Item
 item.tfg.core.wand.name=Debug Wand
@@ -134,6 +135,21 @@ effect.tfg.core.caffeine=Caffeine
 
 # Module Device ##############################################
 
+# The One Probe
+top.tfg.device.bloomery.output=Making: %d units of %s
+top.tfg.device.bloomery.ores=Ores: %d/%d
+top.tfg.device.bloomery.fuel=Fuel: %d/%d
+top.tfg.device.blast_furnace.not_formed=Not Formed
+
+# Just Enough Items
+jei.tfg.category.blast_furnace=Blast Furnace recipes
+
+# Tooltip
+tooltip.tfg.device.blast_furnace.ore_amount=Ore
+tooltip.tfg.device.blast_furnace.fuel_amount=Fuel
+tooltip.tfg.device.blast_furnace.melt_amount=Melt
+tooltip.tfg.device.blast_furnace.invalid_structure=Invalid Structure!
+
 ## Item Group
 item_group.tfg.device.name=[ TFG ] Device
 
@@ -142,6 +158,9 @@ block.tfg.device.alloy_calculator.name=Alloy Calculator
 block.tfg.device.bear_trap.name=Bear Trap
 block.tfg.device.snare.name=Snare
 block.tfg.device.bellows.name=Bellows
+block.tfg.device.blast_furnace.name=Blast Furnace
+block.tfg.device.bloomery.name=Bloomery
+block.tfg.device.molten.name=Molten
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask
@@ -165,7 +184,6 @@ sound.tfg.device.block.bellows.blow.air=Bellows puff
 # TheOneProbe
 top.tfg.animal.male=Male ♂
 top.tfg.animal.female=Female ♀
-
 top.tfg.animal.has_milk=Can Milk
 top.tfg.animal.can_mate=Can Mate
 top.tfg.animal.has_eggs=Has Eggs

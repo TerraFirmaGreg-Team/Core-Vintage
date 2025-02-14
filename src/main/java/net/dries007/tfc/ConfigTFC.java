@@ -746,10 +746,6 @@ public final class ConfigTFC {
     @Config.LangKey("config." + TFC + ".devices.barrel")
     public static final BarrelCFG BARREL = new BarrelCFG();
 
-    @Config.Comment("Blast Furnace")
-    @Config.LangKey("config." + TFC + ".devices.blast_furnace")
-    public static final BlastFurnaceCFG BLAST_FURNACE = new BlastFurnaceCFG();
-
     @Config.Comment("Bloomery")
     @Config.LangKey("config." + TFC + ".devices.bloomery")
     public static final BloomeryCFG BLOOMERY = new BloomeryCFG();
@@ -842,15 +838,6 @@ public final class ConfigTFC {
                                                     "milk", "milk_curdled", "milk_vinegar", "white_dye", "orange_dye", "magenta_dye", "light_blue_dye",
                                                     "yellow_dye", "lime_dye", "pink_dye", "gray_dye", "light_gray_dye", "cyan_dye", "purple_dye", "blue_dye",
                                                     "brown_dye", "green_dye", "red_dye", "black_dye"};
-    }
-
-    public static final class BlastFurnaceCFG {
-
-      @Config.Comment({"How fast the blast furnace consume fuels (compared to the charcoal forge).",
-                       "Example: Charcoal (without bellows) lasts for 1800 ticks in forge while 1800 / 4 = 450 ticks in blast furnace."})
-      @Config.RangeDouble(min = 0.1D)
-      @Config.LangKey("config." + TFC + ".devices.blast_furnace.consumption")
-      public double consumption = 4;
     }
 
     public static final class BloomeryCFG {

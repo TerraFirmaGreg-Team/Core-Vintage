@@ -36,11 +36,12 @@ enum.tfg.weight.very_heavy=Очень тяжелый
 # Module Core ################################################
 
 ## Item Group
-item_group.tfg.core.name=[ TFG ] Core
+item_group.tfg.core.name=[ TFG ] Ядро
 
 ## Block
 block.tfg.core.debug.name=Отладочный блок
 block.tfg.core.puddle.name=Лужа
+block.tfg.core.fire_bricks.name=Огнеупорный кирпич
 
 ## Item
 item.tfg.core.wand.name=Отладочная палочка
@@ -60,14 +61,32 @@ effect.tfg.core.caffeine=Caffeine
 
 # Module Device ##############################################
 
+# TheOneProbe
+top.tfg.device.bloomery.output=Изготовление: %d единицы %s
+top.tfg.device.bloomery.ores=Руды: %d/%d
+top.tfg.device.bloomery.fuel=Топливо: %d/%d
+top.tfg.device.blast_furnace.not_formed=Не сформирован
+
+# Just Enough Items
+jei.tfg.category.blast_furnace=Рецепты доменной печи
+
+# Tooltip
+tooltip.tfg.device.blast_furnace.ore_amount=Руда
+tooltip.tfg.device.blast_furnace.fuel_amount=Топливо
+tooltip.tfg.device.blast_furnace.melt_amount=Расплавлено
+tooltip.tfg.device.blast_furnace.invalid_structure=Неверная структура!
+
 ## Item Group
-item_group.tfg.device.name=[ TFG ] Device
+item_group.tfg.device.name=[ TFG ] Девайсы
 
 ## Block
 block.tfg.device.alloy_calculator.name=Калькулятор сплава
 block.tfg.device.bear_trap.name=Медвежий капкан
 block.tfg.device.snare.name=Ловушка
 block.tfg.device.bellows.name=Кузнечные меха
+block.tfg.device.blast_furnace.name=Доменная печь
+block.tfg.device.bloomery.name=Кричной горн
+block.tfg.device.molten.name=Расплав
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга
@@ -105,7 +124,7 @@ top.tfg.animal.pregnant_end=Родит через %s дней
 
 
 ## Item Group
-item_group.tfg.animal.name=[ TFG ] Animal
+item_group.tfg.animal.name=[ TFG ] Животные
 
 ## Block
 block.tfg.animal.nest_box.name=Насест

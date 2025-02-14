@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalRegistry;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEnvironmental;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
-import su.terrafirmagreg.modules.device.object.tile.TileBloomery;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
@@ -47,7 +46,6 @@ public final class ModifierHandlerTile {
     // TFC
     TILE.register(ModifierHandlerTile::handleCharcoalForge); // Угольная кузня
     TILE.register(ModifierHandlerTile::handleFirePit); // Костер
-    TILE.register(ModifierHandlerTile::handleBloomery); // Доменка
     TILE.register(ModifierHandlerTile::handleLamps); // Лампа
     TILE.register(ModifierHandlerTile::handleCrucible); // Тигель
   }
@@ -139,19 +137,6 @@ public final class ModifierHandlerTile {
         change = 1.0F;
       }
       return ModifierTile.defined("fire_pit", Math.min(6f, change), 0);
-    } else {
-      return ModifierTile.none();
-    }
-  }
-
-  public static Optional<ModifierTile> handleBloomery(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TileBloomery bloomery) {
-
-      float change = bloomery.getRemainingTicks() > 0 ? 4f : 0f;
-      if (ModifierTile.hasProtection(player)) {
-        change = 1.0F;
-      }
-      return ModifierTile.defined("bloomery", change, 0);
     } else {
       return ModifierTile.none();
     }

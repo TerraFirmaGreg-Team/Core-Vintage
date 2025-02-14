@@ -3,6 +3,7 @@ package net.dries007.tfc.compat.jei;
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;
@@ -281,7 +282,7 @@ public final class TFCJEIPlugin implements IModPlugin {
       .collect(Collectors.toList());
 
     registry.addRecipes(bloomeryList, BLOOMERY_UID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksTFC.BLOOMERY), BLOOMERY_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.BLOOMERY.get()), BLOOMERY_UID);
 
     //Wraps all blast furnace recipes
     List<BlastFurnaceRecipeWrapper> blastList = TFCRegistries.BLAST_FURNACE.getValuesCollection()
@@ -290,7 +291,7 @@ public final class TFCJEIPlugin implements IModPlugin {
       .collect(Collectors.toList());
 
     registry.addRecipes(blastList, BLAST_FURNACE_UID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksTFC.BLAST_FURNACE), BLAST_FURNACE_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.BLAST_FURNACE.get()), BLAST_FURNACE_UID);
 
     //Wraps all metal melting recipes
     List<MetalHeatingRecipeWrapper> heatMetalList = new ArrayList<>();

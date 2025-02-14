@@ -57,7 +57,9 @@ public final class TileUtils {
 
   public static void registerTileEntity(Block block) {
     if (block instanceof IProviderTile provider) {
-      TileUtils.registerTileEntity(provider.getTileClass(), block.getRegistryName().getNamespace(), provider.getTileClass().getSimpleName());
+      var registryName = block.getRegistryName();
+      assert registryName != null;
+      TileUtils.registerTileEntity(provider.getTileClass(), registryName.getNamespace(), registryName.getPath());
     }
   }
 

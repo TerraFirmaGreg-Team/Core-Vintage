@@ -62,19 +62,19 @@ public class TileBellows extends BaseTile {
             lastPushed = world.getTotalWorldTime();
             markForBlockUpdate();
         }
-        EnumFacing direction = world.getBlockState(pos)
-                .getValue(HORIZONTAL); // It is a better idea to inherit the direction directly from the block.
+        EnumFacing direction = world.getBlockState(pos).getValue(HORIZONTAL); // It is a better idea to inherit the direction directly from the block.
         for (Vec3i offset : OFFSETS) {
             BlockPos posx = pos.up(offset.getY())
                     .offset(direction, offset.getX())
                     .offset(direction.rotateY(), offset.getZ());
             Block block = world.getBlockState(posx).getBlock();
-            if (block instanceof IBellowsConsumerBlock bellowsConsumerBlock
-                    && bellowsConsumerBlock.canIntakeFrom(offset, direction)) {
+            if (block instanceof IBellowsConsumerBlock bellowsConsumerBlock && bellowsConsumerBlock.canIntakeFrom(offset, direction)) {
                 bellowsConsumerBlock.onAirIntake(world, posx, BELLOWS_AIR);
                 if (world.isRemote) {
                     posx = pos.offset(direction);
-                    world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posx.getX() + .5d, posx.getY() + .5d,
+                    world.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
+                            posx.getX() + .5d,
+                            posx.getY() + .5d,
                             posx.getZ() + .5d, 0, 0, 0);
                 }
                 return true;

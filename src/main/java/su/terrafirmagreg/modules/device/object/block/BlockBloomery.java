@@ -1,16 +1,17 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.object.tile.TileBloomery;
 
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +19,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -30,20 +30,18 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.block.Multiblock;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.function.Predicate;
 
-import static net.minecraft.block.BlockTrapDoor.OPEN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.OPEN;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
-@ParametersAreNonnullByDefault
-public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, ILightableBlock {
+@SuppressWarnings("deprecation")
+public class BlockBloomery extends BaseBlock implements IProviderTile {
 
   //[horizontal index][basic shape / door1 / door2]
   private static final AxisAlignedBB[][] AABB =
@@ -76,16 +74,17 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
 
   static {
     Predicate<IBlockState> stoneMatcher = BlockBloomery::isValidSideBlock;
-    Predicate<IBlockState> insideChimney = state -> state.getBlock() == BlocksTFC.MOLTEN || state.getMaterial().isReplaceable();
-    Predicate<IBlockState> center = state -> state.getBlock() == BlocksTFC.CHARCOAL_PILE || state.getBlock() == BlocksTFC.BLOOM || state.getMaterial()
-      .isReplaceable();
+    Predicate<IBlockState> insideChimney = state ->
+      state.getBlock() == BlocksDevice.MOLTEN || state.getMaterial().isReplaceable();
+    Predicate<IBlockState> center = state ->
+      state.getBlock() == BlocksDevice.CHARCOAL_PILE || state.getBlock() == BlocksDevice.BLOOM || state.getMaterial().isReplaceable();
 
     // Bloomery center is the charcoal pile pos
     BLOOMERY_BASE = new Multiblock[4];
     BLOOMERY_BASE[EnumFacing.NORTH.getHorizontalIndex()] = new Multiblock()
       .match(new BlockPos(0, 0, 0), center)
       .match(new BlockPos(0, -1, 0), stoneMatcher)
-      .match(new BlockPos(0, 0, 1), state -> state.getBlock() == BlocksTFC.BLOOMERY)
+      .match(new BlockPos(0, 0, 1), state -> state.getBlock() == BlocksDevice.BLOOMERY)
       .match(new BlockPos(1, 0, 1), stoneMatcher)
       .match(new BlockPos(-1, 0, 1), stoneMatcher)
       .match(new BlockPos(0, 1, 1), stoneMatcher)
@@ -100,7 +99,7 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
     BLOOMERY_BASE[EnumFacing.SOUTH.getHorizontalIndex()] = new Multiblock()
       .match(new BlockPos(0, 0, 0), center)
       .match(new BlockPos(0, -1, 0), stoneMatcher)
-      .match(new BlockPos(0, 0, -1), state -> state.getBlock() == BlocksTFC.BLOOMERY)
+      .match(new BlockPos(0, 0, -1), state -> state.getBlock() == BlocksDevice.BLOOMERY)
       .match(new BlockPos(1, 0, -1), stoneMatcher)
       .match(new BlockPos(-1, 0, -1), stoneMatcher)
       .match(new BlockPos(0, 1, 1), stoneMatcher)
@@ -115,7 +114,7 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
     BLOOMERY_BASE[EnumFacing.WEST.getHorizontalIndex()] = new Multiblock()
       .match(new BlockPos(0, 0, 0), center)
       .match(new BlockPos(0, -1, 0), stoneMatcher)
-      .match(new BlockPos(1, 0, 0), state -> state.getBlock() == BlocksTFC.BLOOMERY)
+      .match(new BlockPos(1, 0, 0), state -> state.getBlock() == BlocksDevice.BLOOMERY)
       .match(new BlockPos(1, 0, -1), stoneMatcher)
       .match(new BlockPos(1, 0, 1), stoneMatcher)
       .match(new BlockPos(0, 1, 1), stoneMatcher)
@@ -130,7 +129,7 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
     BLOOMERY_BASE[EnumFacing.EAST.getHorizontalIndex()] = new Multiblock()
       .match(new BlockPos(0, 0, 0), center)
       .match(new BlockPos(0, -1, 0), stoneMatcher)
-      .match(new BlockPos(-1, 0, 0), state -> state.getBlock() == BlocksTFC.BLOOMERY)
+      .match(new BlockPos(-1, 0, 0), state -> state.getBlock() == BlocksDevice.BLOOMERY)
       .match(new BlockPos(-1, 0, -1), stoneMatcher)
       .match(new BlockPos(-1, 0, 1), stoneMatcher)
       .match(new BlockPos(0, 1, 1), stoneMatcher)
@@ -151,14 +150,16 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
 
     // Gate center is the bloomery gate block
     GATE_Z = new Multiblock()
-      .match(new BlockPos(0, 0, 0), state -> state.getBlock() == BlocksTFC.BLOOMERY || state.getBlock() == Blocks.AIR)
+      .match(new BlockPos(0, 0, 0),
+        state -> state.getBlock() == BlocksDevice.BLOOMERY || state.getBlock() == Blocks.AIR)
       .match(new BlockPos(1, 0, 0), stoneMatcher)
       .match(new BlockPos(-1, 0, 0), stoneMatcher)
       .match(new BlockPos(0, 1, 0), stoneMatcher)
       .match(new BlockPos(0, -1, 0), stoneMatcher);
 
     GATE_X = new Multiblock()
-      .match(new BlockPos(0, 0, 0), state -> state.getBlock() == BlocksTFC.BLOOMERY || state.getBlock() == Blocks.AIR)
+      .match(new BlockPos(0, 0, 0),
+        state -> state.getBlock() == BlocksDevice.BLOOMERY || state.getBlock() == Blocks.AIR)
       .match(new BlockPos(0, 0, 1), stoneMatcher)
       .match(new BlockPos(0, 0, -1), stoneMatcher)
       .match(new BlockPos(0, 1, 0), stoneMatcher)
@@ -166,12 +167,19 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
   }
 
   public BlockBloomery() {
-    super(Material.IRON);
-    setSoundType(SoundType.METAL);
+    super(Settings.of(Material.IRON));
+
+    getSettings()
+      .registryKey("bloomery")
+      .sound(SoundType.METAL)
+      .hardness(20.0F)
+      .size(Size.LARGE)
+      .weight(Weight.VERY_HEAVY)
+      .nonFullCube()
+      .nonOpaque();
     setHarvestLevel(ToolClasses.PICKAXE, 0);
-    setHardness(20.0F);
-    setDefaultState(this.blockState.getBaseState()
-      .withProperty(FACING, EnumFacing.NORTH)
+    setDefaultState(blockState.getBaseState()
+      .withProperty(HORIZONTAL, EnumFacing.NORTH)
       .withProperty(LIT, false)
       .withProperty(OPEN, false));
   }
@@ -191,100 +199,43 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
     return 3;
   }
 
-  public boolean canGateStayInPlace(World world, BlockPos pos, EnumFacing.Axis axis) {
-    if (axis == EnumFacing.Axis.X) {
-      return GATE_X.test(world, pos);
-    } else {
-      return GATE_Z.test(world, pos);
-    }
-  }
-
   public boolean isFormed(World world, BlockPos centerPos, EnumFacing facing) {
     return BLOOMERY_BASE[facing.getHorizontalIndex()].test(world, centerPos);
   }
 
   @Override
-  @Nonnull
-  public Size getSize(ItemStack stack) {
-    return Size.LARGE; // Only in chests
-  }
-
-  @Override
-  @Nonnull
-  public Weight getWeight(ItemStack stack) {
-    return Weight.VERY_HEAVY;  // stacksize = 1
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  @Nonnull
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState()
-      .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
+      .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
       .withProperty(LIT, meta / 4 % 2 != 0)
       .withProperty(OPEN, meta / 8 != 0);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex()
+    return state.getValue(HORIZONTAL).getHorizontalIndex()
            + (state.getValue(LIT) ? 4 : 0)
            + (state.getValue(OPEN) ? 8 : 0);
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public boolean isFullCube(IBlockState state) {
-    return false;
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  @Nonnull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return AABB[state.getValue(FACING).getHorizontalIndex()][0];
+    return AABB[state.getValue(HORIZONTAL).getHorizontalIndex()][0];
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  @Nonnull
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    return BlockFaceShape.UNDEFINED;
+  public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    TileUtils.getTile(world, pos, TileBloomery.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
+    super.breakBlock(world, pos, state);
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  @ParametersAreNonnullByDefault
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+  public @Nullable RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn,
+                                                    BlockPos pos, Vec3d start, Vec3d end) {
     if (blockState.getValue(OPEN)) {
-      return NULL_AABB;
-    }
-    return AABB[blockState.getValue(FACING).getHorizontalIndex()][0];
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
-  }
-
-  @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileBloomery te = Helpers.getTE(worldIn, pos, TileBloomery.class);
-    if (te != null) {
-      te.onBreakBlock(worldIn, pos, state);
-    }
-    super.breakBlock(worldIn, pos, state);
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  @Nullable
-  @ParametersAreNonnullByDefault
-  public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
-    if (blockState.getValue(OPEN)) {
-      int index = blockState.getValue(FACING).getHorizontalIndex();
-      RayTraceResult rayTraceDoor1 = rayTrace(pos, start, end, AABB[index][1]), rayTraceDoor2 = rayTrace(pos, start, end, AABB[index][2]);
+      int index = blockState.getValue(HORIZONTAL).getHorizontalIndex();
+      RayTraceResult rayTraceDoor1 = rayTrace(pos, start, end,
+        AABB[index][1]), rayTraceDoor2 = rayTrace(pos, start, end, AABB[index][2]);
 
       if (rayTraceDoor1 == null) {
         return rayTraceDoor2;
@@ -300,8 +251,18 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
   }
 
   @Override
-  public boolean canPlaceBlockAt(World worldIn, @Nonnull BlockPos pos) {
-    return super.canPlaceBlockAt(worldIn, pos) && (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.Z) || canGateStayInPlace(worldIn, pos, EnumFacing.Axis.X));
+  public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    return super.canPlaceBlockAt(worldIn, pos) &&
+           (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.Z) || canGateStayInPlace(worldIn, pos,
+             EnumFacing.Axis.X));
+  }
+
+  public boolean canGateStayInPlace(World world, BlockPos pos, EnumFacing.Axis axis) {
+    if (axis == EnumFacing.Axis.X) {
+      return GATE_X.test(world, pos);
+    } else {
+      return GATE_Z.test(world, pos);
+    }
   }
 
   @Override
@@ -311,25 +272,23 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
         worldIn.setBlockState(pos, state.cycleProperty(OPEN));
         worldIn.playSound(null, pos, SoundEvents.BLOCK_FENCE_GATE_CLOSE, SoundCategory.BLOCKS, 1.0f, 1.0f);
       }
-      TileBloomery te = Helpers.getTE(worldIn, pos, TileBloomery.class);
-      if (te != null) {
-        if (!state.getValue(LIT) && te.canIgnite()) {
+      TileUtils.getTile(worldIn, pos, TileBloomery.class).ifPresent(tile -> {
+        if (!state.getValue(LIT) && tile.canIgnite()) {
           ItemStack held = player.getHeldItem(hand);
           if (ItemFireStarter.onIgnition(held)) {
             worldIn.setBlockState(pos, state.withProperty(LIT, true).withProperty(OPEN, false));
-            te.onIgnite();
-            return true;
+            tile.onIgnite();
           }
         }
-      }
+      });
     }
     return true;
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  @Nonnull
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+                                          float hitX, float hitY, float hitZ, int meta,
+                                          EntityLivingBase placer) {
     EnumFacing placeDirection;
     float wrappedRotation = MathHelper.wrapDegrees(placer.rotationYaw);
     if (canGateStayInPlace(worldIn, pos, EnumFacing.Axis.X)) {
@@ -350,13 +309,21 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
       // Cannot place, skip
       return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
     }
-    return this.getDefaultState().withProperty(FACING, placeDirection);
+    return this.getDefaultState().withProperty(HORIZONTAL, placeDirection);
   }
 
   @Override
-  @Nonnull
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, LIT, OPEN);
+    return new BlockStateContainer(this, HORIZONTAL, LIT, OPEN);
+  }
+
+  @Override
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
+                                               BlockPos pos) {
+    if (blockState.getValue(OPEN)) {
+      return NULL_AABB;
+    }
+    return AABB[blockState.getValue(HORIZONTAL).getHorizontalIndex()][0];
   }
 
   @Override
@@ -365,12 +332,12 @@ public class BlockBloomery extends BlockHorizontal implements ICapabilitySize, I
   }
 
   @Override
-  public boolean hasTileEntity(IBlockState state) {
-    return true;
+  public TileBloomery createNewTileEntity(World worldIn, int meta) {
+    return new TileBloomery();
   }
 
   @Override
-  public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TileBloomery();
+  public Class<TileBloomery> getTileClass() {
+    return TileBloomery.class;
   }
 }

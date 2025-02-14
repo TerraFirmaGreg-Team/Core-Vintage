@@ -1,7 +1,9 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
+import su.terrafirmagreg.api.data.Unicode;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.object.tile.TileBlastFurnace;
 
@@ -14,17 +16,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.client.gui.GuiContainerTE;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 @SideOnly(Side.CLIENT)
-public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
+public class GuiBlastFurnace extends BaseGuiContainerTile<TileBlastFurnace> {
 
-  private static final ResourceLocation BLAST_FURNACE_BACKGROUND = new ResourceLocation(TFC, "textures/gui/blast_furnace.png");
+  private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/blast_furnace.png");
 
   List<Float> tempList = new ArrayList<>();
   long lastBurningTicks = 0;
@@ -32,7 +32,7 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
   int scaledHeight;
 
   public GuiBlastFurnace(Container container, InventoryPlayer playerInv, TileBlastFurnace tile) {
-    super(container, playerInv, tile, BLAST_FURNACE_BACKGROUND);
+    super(container, playerInv, tile, BACKGROUND);
 
   }
 
@@ -68,7 +68,7 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
       drawTexturedModalRect(guiLeft + 40, guiTop + 43, 176, 0, fuelCount + 1, 8);
     }
 
-    // Отображение количества сплава
+    // Отображение количества сплавленного материала
     int meltAmount = tile.getField(TileBlastFurnace.FIELD_MELT);
     if (meltAmount > 700) {
       meltAmount = 700;
@@ -78,18 +78,14 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
       drawTexturedModalRect(guiLeft + 40, guiTop + 61, 176, 0, meltAmount + 1, 8);
     }
 
-    // Отображение текста с количеством руды, топлива и сплава
-    fontRenderer.drawString(I18n.format(TFC + ".tooltip.blast_furnace_ore_amount"),
-      guiLeft + 40, guiTop + 17, 0x000000);
-    fontRenderer.drawString(I18n.format(TFC + ".tooltip.blast_furnace_fuel_amount"),
-      guiLeft + 40, guiTop + 35, 0x000000);
-    fontRenderer.drawString(I18n.format(TFC + ".tooltip.blast_furnace_melt_amount"),
-      guiLeft + 40, guiTop + 53, 0x000000);
+    // Отображение текста с количеством руды, топлива и сплавленного материала
+    fontRenderer.drawString(I18n.format(ModUtils.localize("tooltip", "device.blast_furnace.ore_amount")), guiLeft + 40, guiTop + 17, 0x000000);
+    fontRenderer.drawString(I18n.format(ModUtils.localize("tooltip", "device.blast_furnace.fuel_amount")), guiLeft + 40, guiTop + 35, 0x000000);
+    fontRenderer.drawString(I18n.format(ModUtils.localize("tooltip", "device.blast_furnace.melt_amount")), guiLeft + 40, guiTop + 53, 0x000000);
 
     // Отображение предупреждения, если нет дымохода
     if (tile.getField(TileBlastFurnace.CHIMNEY_LEVELS) < 1) {
-      fontRenderer.drawString(I18n.format(TFC + ".tooltip.blast_furnace_invalid_structure"),
-        guiLeft + 40, guiTop + 71, 0xDC2400);
+      fontRenderer.drawString(I18n.format(ModUtils.localize("tooltip", "device.blast_furnace.invalid_structure")), guiLeft + 40, guiTop + 71, 0xDC2400);
     }
 
     if (!tempList.isEmpty()) {
@@ -158,7 +154,7 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
 
     tempList.clear();
     for (int i = 0; i < tile.getOreStacks().size(); i++) {
-      ICapabilityHeat cap = tile.getOreStacks().get(i).getCapability(CapabilityHeat.CAPABILITY, null);
+      var cap = CapabilityHeat.get(tile.getOreStacks().get(i));
       if (cap != null) {
         tempList.add(cap.getTemperature());
       }
@@ -179,7 +175,7 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
     if (ttString == null) {
       return "Cold";
     } else {
-      return ttString.replaceAll("\u2605", "");
+      return ttString.replaceAll(Unicode.STAR, "");
     }
 
   }
@@ -204,4 +200,3 @@ public class GuiBlastFurnace extends GuiContainerTE<TileBlastFurnace> {
     super.renderHoveredToolTip(mouseX, mouseY);
   }
 }
-

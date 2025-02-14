@@ -147,10 +147,6 @@ tfc.tooltip.plant_rain=Кол-во осадков:
 tfc.tooltip.plant_temp=Температура:
 tfc.tooltip.plant_valid=%sПодходит%s
 tfc.tooltip.plant_wet=%sСлишком влажно%s
-tfc.tooltip.blast_furnace_ore_amount=Руда
-tfc.tooltip.blast_furnace_fuel_amount=Топливо
-tfc.tooltip.blast_furnace_melt_amount=Расплавлено
-tfc.tooltip.blast_furnace_invalid_structure=Неверная структура!
 tfc.tooltip.large_vessel_seal=Запечатать большой сосуд
 tfc.tooltip.large_vessel_unseal=Распечатать большой сосуд
 tfc.tooltip.powderkeg_seal=Запечатать Пороховая бочка
@@ -679,13 +675,6 @@ config.tfc.devices.barrel.tank.tooltip=Сколько жидкости (mB) мо
 
 config.tfc.devices.barrel.fluidWhitelist=Разрешенные жидкости
 config.tfc.devices.barrel.fluidWhitelist.tooltip=Список жидкостей, разрешенных к вливу в бочку
-
-
-### Blast Furnace
-config.tfc.devices.blast_furnace=Доменная печь
-
-config.tfc.devices.blast_furnace.consumption=Расход топлива
-config.tfc.devices.blast_furnace.consumption.tooltip=Как быстро доменная печь расходует топливо (по сравнению с угольной кузницей). Пример: древесного угля (без мехов) хватает на 1800 тиков в кузнице, а 1800 / 4 = 450 тиков в доменной печи.
 
 
 ### Bloomery
@@ -1302,9 +1291,6 @@ tile.tfc.thatch.name=Сноп соломы
 tile.tfc.firepit.name=Костер
 tile.tfc.crucible.name=Тигель
 tile.tfc.torch.name=Факел
-tile.tfc.blast_furnace.name=Доменная печь
-tile.tfc.bloomery.name=Кричной горн
-tile.tfc.fire_bricks.name=Огнеупорный кирпич
 tile.tfc.quern.name=Жёрнов
 tile.tfc.ceramics.fired.large_vessel.name=Большой сосуд
 tile.tfc.fire_clay_block.name=Огнеупорная глина
@@ -4653,10 +4639,6 @@ waila.tfc.barrel.recipe=Изготовление: %s
 waila.tfc.barrel.no_recipe=Нет рецепта
 waila.tfc.barrel.contents=Содержит: %dmB %s
 waila.tfc.barrel.sealed=Запечатанный: %s
-waila.tfc.bloomery.output=Изготовление: %d единицы %s
-waila.tfc.bloomery.ores=Руды: %d/%d
-waila.tfc.bloomery.fuel=Топливо: %d/%d
-waila.tfc.blast_furnace.not_formed=Не сформирован
 
 ## Agriculture
 waila.tfc.agriculture.harvesting_months=Сезоны сбора урожая:

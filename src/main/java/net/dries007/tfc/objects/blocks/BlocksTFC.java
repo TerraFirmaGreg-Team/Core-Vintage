@@ -2,23 +2,18 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockBlastFurnace;
 import su.terrafirmagreg.modules.device.object.block.BlockBloom;
-import su.terrafirmagreg.modules.device.object.block.BlockBloomery;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
 import su.terrafirmagreg.modules.device.object.block.BlockCrucible;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
-import su.terrafirmagreg.modules.device.object.block.BlockMolten;
 import su.terrafirmagreg.modules.device.object.block.BlockPitKiln;
 import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
-import su.terrafirmagreg.modules.device.object.tile.TileBlastFurnace;
 import su.terrafirmagreg.modules.device.object.tile.TileBloom;
-import su.terrafirmagreg.modules.device.object.tile.TileBloomery;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
@@ -179,15 +174,11 @@ public final class BlocksTFC {
   public static final BlockIngotPile INGOT_PILE = getNull();
   public static final BlockCharcoalForge CHARCOAL_FORGE = getNull();
   public static final BlockCrucible CRUCIBLE = getNull();
-  public static final BlockMolten MOLTEN = getNull();
-  public static final BlockBlastFurnace BLAST_FURNACE = getNull();
   public static final BlockBloom BLOOM = getNull();
-  public static final BlockBloomery BLOOMERY = getNull();
   public static final BlockQuern QUERN = getNull();
   public static final BlockSeaIce SEA_ICE = getNull();
   public static final BlockPowderKeg POWDERKEG = getNull();
   public static final BlockGravel AGGREGATE = getNull();
-  public static final Block FIRE_BRICKS = getNull();
 
   // All these are for use in model registration. Do not use for block lookups.
   // Use the static get methods in the classes instead.
@@ -279,13 +270,10 @@ public final class BlocksTFC {
     normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockPeatGrass(Material.GRASS), CT_ROCK)));
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), CT_MISC)));
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), CT_MISC)));
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "quern", new BlockQuern(), CT_MISC)));
     normalItemBlocks.add(new ItemBlockCrucible(register(r, "crucible", new BlockCrucible(), CT_MISC)));
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "blast_furnace", new BlockBlastFurnace(), CT_MISC)));
 
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bloomery", new BlockBloomery(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockSluice(register(r, "sluice", new BlockSluice(), CT_MISC)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockSeaIce(), CT_MISC)));
 
@@ -669,7 +657,6 @@ public final class BlocksTFC {
     register(r, "charcoal_pile", new BlockCharcoalPile());
     register(r, "ingot_pile", new BlockIngotPile());
     register(r, "log_pile", new BlockLogPile());
-    register(r, "molten", new BlockMolten());
     register(r, "bloom", new BlockBloom());
     register(r, "thatch_bed", new BlockThatchBed());
 
@@ -701,8 +688,6 @@ public final class BlocksTFC {
     register(TileCrucible.class, "crucible");
     register(TECropBase.class, "crop_base");
     register(TECropSpreading.class, "crop_spreading");
-    register(TileBlastFurnace.class, "blast_furnace");
-    register(TileBloomery.class, "bloomery");
     register(TileBloom.class, "bloom");
     register(TEMetalSheet.class, "metal_sheet");
     register(TileQuern.class, "quern");

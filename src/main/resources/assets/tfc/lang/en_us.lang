@@ -139,10 +139,6 @@ tfc.tooltip.plant_rain=Rainfall:
 tfc.tooltip.plant_temp=Temperature:
 tfc.tooltip.plant_valid=%sGood%s
 tfc.tooltip.plant_wet=%sToo wet%s
-tfc.tooltip.blast_furnace_ore_amount=Ore
-tfc.tooltip.blast_furnace_fuel_amount=Fuel
-tfc.tooltip.blast_furnace_melt_amount=Melt
-tfc.tooltip.blast_furnace_invalid_structure=Invalid Structure!
 tfc.tooltip.large_vessel_seal=Seal Large Vessel
 tfc.tooltip.large_vessel_unseal=Unseal Large Vessel
 tfc.tooltip.powderkeg_seal=Seal Powderkeg
@@ -676,13 +672,6 @@ config.tfc.devices.barrel.tank.tooltip=How much fluid (mB) can a barrel hold?
 
 config.tfc.devices.barrel.fluidWhitelist=Fluid Whitelist
 config.tfc.devices.barrel.fluidWhitelist.tooltip=List of fluids allowed to be inserted into a barrel.
-
-
-### Blast Furnace
-config.tfc.devices.blast_furnace=Blast Furnace
-
-config.tfc.devices.blast_furnace.consumption=Consumption
-config.tfc.devices.blast_furnace.consumption.tooltip=How fast the blast furnace consume fuels (compared to the charcoal forge). Example: Charcoal (without bellows) lasts for 1800 ticks in forge while 1800 / 4 = 450 ticks in blast furnace.
 
 
 ### Bloomery
@@ -1336,9 +1325,6 @@ tile.tfc.thatch.name=Thatch
 tile.tfc.firepit.name=Firepit
 tile.tfc.crucible.name=Crucible
 tile.tfc.torch.name=Torch
-tile.tfc.blast_furnace.name=Blast Furnace
-tile.tfc.bloomery.name=Bloomery
-tile.tfc.fire_bricks.name=Fire Bricks
 tile.tfc.quern.name=Quern
 tile.tfc.ceramics.fired.large_vessel.name=Large Vessel
 tile.tfc.fire_clay_block.name=Fire Clay
@@ -4854,10 +4840,6 @@ waila.tfc.barrel.recipe=Making: %s
 waila.tfc.barrel.no_recipe=No Recipe
 waila.tfc.barrel.contents=Contains %dmB of %s
 waila.tfc.barrel.sealed=Sealed: %s
-waila.tfc.bloomery.output=Making: %d units of %s
-waila.tfc.bloomery.ores=Ores: %d/%d
-waila.tfc.bloomery.fuel=Fuel: %d/%d
-waila.tfc.blast_furnace.not_formed=Not Formed
 
 ## Agriculture
 waila.tfc.agriculture.harvesting_months=Harvesting Seasons:

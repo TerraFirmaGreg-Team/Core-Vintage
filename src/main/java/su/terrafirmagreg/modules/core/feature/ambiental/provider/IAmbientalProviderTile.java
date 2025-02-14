@@ -9,7 +9,7 @@ import java.util.Optional;
 
 //Add an example of this into TemperatureRegistry for tile entities you didn't create personally
 @FunctionalInterface
-public interface IAmbientalProviderTile extends IAmbientalProviderBase {
+public interface IAmbientalProviderTile extends IAmbientalProvider {
 
   Optional<ModifierTile> getModifier(EntityPlayer player, TileEntity tile);
 

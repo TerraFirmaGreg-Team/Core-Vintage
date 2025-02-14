@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.feature.ambiental;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProvider;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-public class AmbientalRegistry<Type extends IAmbientalProviderBase> implements Iterable<Type> {
+public class AmbientalRegistry<Type extends IAmbientalProvider> implements Iterable<Type> {
 
 
   private final ArrayList<Type> list = new ArrayList<>();

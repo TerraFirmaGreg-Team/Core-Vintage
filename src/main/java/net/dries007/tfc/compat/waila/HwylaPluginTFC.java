@@ -6,8 +6,6 @@ import mcp.mobius.waila.api.WailaPlugin;
 import net.dries007.tfc.compat.waila.interfaces.HwylaBlockInterface;
 import net.dries007.tfc.compat.waila.providers.BarrelProvider;
 import net.dries007.tfc.compat.waila.providers.BerryBushProvider;
-import net.dries007.tfc.compat.waila.providers.BlastFurnaceProvider;
-import net.dries007.tfc.compat.waila.providers.BloomeryProvider;
 import net.dries007.tfc.compat.waila.providers.CropProvider;
 import net.dries007.tfc.compat.waila.providers.CrucibleProvider;
 import net.dries007.tfc.compat.waila.providers.FruitTreeProvider;
@@ -30,8 +28,6 @@ public class HwylaPluginTFC implements IWailaPlugin {
   public static final List<IWailaPlugin> WAILA_PLUGINS = Arrays.asList(
     new HwylaBlockInterface(new BarrelProvider()),
     new HwylaBlockInterface(new BerryBushProvider()),
-    new HwylaBlockInterface(new BlastFurnaceProvider()),
-    new HwylaBlockInterface(new BloomeryProvider()),
     new HwylaBlockInterface(new LampProvider()),
     new HwylaBlockInterface(new CropProvider()),
     new HwylaBlockInterface(new CrucibleProvider()),

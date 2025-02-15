@@ -676,20 +676,6 @@ config.tfc.devices.barrel.tank.tooltip=Сколько жидкости (mB) мо
 config.tfc.devices.barrel.fluidWhitelist=Разрешенные жидкости
 config.tfc.devices.barrel.fluidWhitelist.tooltip=Список жидкостей, разрешенных к вливу в бочку
 
-
-### Crucible
-config.tfc.devices.crucible=Тигель
-
-config.tfc.devices.crucible.tank=Объем тигеля
-config.tfc.devices.crucible.tank.tooltip=Сколько металла (единиц / mB) может вместить тигель?
-
-config.tfc.devices.crucible.enableAllSlots=Принять заливку из всех ячеек
-config.tfc.devices.crucible.enableAllSlots.tooltip=Позвольте тиглям принимать разливаемый металл (из малых сосудов / форм) из всех 9 входных ячеек одновременно.
-
-config.tfc.devices.crucible.pouringSpeed=Скорость заливки
-config.tfc.devices.crucible.pouringSpeed.tooltip=Как быстро тигель должен принимать жидкости из форм / малых сосудов?
-
-
 ### Charcoal Pit
 config.tfc.devices.charcoal_pit=Угольная яма
 
@@ -1274,7 +1260,6 @@ tile.tfc.peat.name=Торф
 tile.tfc.peat_grass.name=Торфяная трава
 tile.tfc.thatch.name=Сноп соломы
 tile.tfc.firepit.name=Костер
-tile.tfc.crucible.name=Тигель
 tile.tfc.torch.name=Факел
 tile.tfc.quern.name=Жёрнов
 tile.tfc.ceramics.fired.large_vessel.name=Большой сосуд

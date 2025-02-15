@@ -2,13 +2,11 @@ package net.dries007.tfc.client;
 
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
-import su.terrafirmagreg.modules.device.client.render.TESRCrucible;
 import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
 import su.terrafirmagreg.modules.device.client.render.TESRPitKiln;
 import su.terrafirmagreg.modules.device.client.render.TESRQuern;
 import su.terrafirmagreg.modules.device.client.render.TESRSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
-import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 import su.terrafirmagreg.modules.device.object.tile.TileQuern;
@@ -266,7 +264,6 @@ public final class ClientRegisterEvents {
     ClientRegistry.bindTileEntitySpecialRenderer(TEBarrel.class, new TESRBarrel());
     ClientRegistry.bindTileEntitySpecialRenderer(TEAnvilTFC.class, new TESRAnvil());
     ClientRegistry.bindTileEntitySpecialRenderer(TELoom.class, new TESRLoom());
-    ClientRegistry.bindTileEntitySpecialRenderer(TileCrucible.class, new TESRCrucible());
     ClientRegistry.bindTileEntitySpecialRenderer(TileFirePit.class, new TESRFirePit());
     ClientRegistry.bindTileEntitySpecialRenderer(TileSluice.class, new TESRSluice());
   }

@@ -89,6 +89,7 @@ block.tfg.device.bloomery.name=Кричной горн
 block.tfg.device.molten.name=Расплав
 block.tfg.device.bloom.name=Крица
 block.tfg.device.charcoal_forge.name=Угольная кузница
+block.tfg.device.crucible.name=Тигель
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

@@ -1,9 +1,16 @@
 package net.dries007.firmalife.compat.jei;
 
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.IModRegistry;
+import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.dries007.firmalife.compat.jei.category.DryingRecipeCategory;
 import net.dries007.firmalife.compat.jei.category.OvenRecipeCategory;
 import net.dries007.firmalife.compat.jei.wrapper.DryingRecipeWrapper;
@@ -14,16 +21,10 @@ import net.dries007.firmalife.init.KnappingFL;
 import net.dries007.firmalife.init.RegistriesFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
-import mezz.jei.api.IModPlugin;
-import mezz.jei.api.IModRegistry;
-import mezz.jei.api.JEIPlugin;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.jei.categories.KnappingCategory;
 import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 
 import java.util.List;
@@ -72,7 +73,7 @@ public class JEIPluginFL implements IModPlugin {
         .getGuiHelper()))
       .collect(Collectors.toList());
 
-    registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), CASTING_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE.get()), CASTING_UID);
     registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
     registry.addRecipes(pumpkinknapRecipes, KNAP_PUMPKIN_UID);
     registry.addRecipeCatalyst(new ItemStack(Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT)), KNAP_PUMPKIN_UID);

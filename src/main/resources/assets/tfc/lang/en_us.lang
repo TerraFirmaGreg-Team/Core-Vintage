@@ -674,19 +674,6 @@ config.tfc.devices.barrel.fluidWhitelist=Fluid Whitelist
 config.tfc.devices.barrel.fluidWhitelist.tooltip=List of fluids allowed to be inserted into a barrel.
 
 
-### Crucible
-config.tfc.devices.crucible=Crucible
-
-config.tfc.devices.crucible.tank=Crucible Storage
-config.tfc.devices.crucible.tank.tooltip=How much metal (units / mB) can a crucible hold?
-
-config.tfc.devices.crucible.enableAllSlots=Accept Pouring from All Slots
-config.tfc.devices.crucible.enableAllSlots.tooltip=Let crucibles accept pouring metal (from small vessels / molds) from all 9 input slots at the same time.
-
-config.tfc.devices.crucible.pouringSpeed=Pouring Speed
-config.tfc.devices.crucible.pouringSpeed.tooltip=How fast should crucibles accept fluids from molds / small vessel?
-
-
 ### Charcoal Pit
 config.tfc.devices.charcoal_pit=Charcoal Pit
 
@@ -1307,7 +1294,6 @@ tile.tfc.peat.name=Peat
 tile.tfc.peat_grass.name=Peat Grass
 tile.tfc.thatch.name=Thatch
 tile.tfc.firepit.name=Firepit
-tile.tfc.crucible.name=Crucible
 tile.tfc.torch.name=Torch
 tile.tfc.quern.name=Quern
 tile.tfc.ceramics.fired.large_vessel.name=Large Vessel

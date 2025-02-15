@@ -3,7 +3,6 @@ package net.dries007.tfc.objects.blocks;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
-import su.terrafirmagreg.modules.device.object.block.BlockCrucible;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
 import su.terrafirmagreg.modules.device.object.block.BlockPitKiln;
@@ -11,7 +10,6 @@ import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
-import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
@@ -87,7 +85,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockWorkbenchTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockCrucible;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockFloatingWaterTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockHeat;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
@@ -168,7 +165,6 @@ public final class BlocksTFC {
   public static final BlockCharcoalPile CHARCOAL_PILE = getNull();
   public static final BlockLogPile LOG_PILE = getNull();
   public static final BlockIngotPile INGOT_PILE = getNull();
-  public static final BlockCrucible CRUCIBLE = getNull();
   public static final BlockQuern QUERN = getNull();
   public static final BlockSeaIce SEA_ICE = getNull();
   public static final BlockPowderKeg POWDERKEG = getNull();
@@ -266,7 +262,6 @@ public final class BlocksTFC {
     normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), CT_MISC)));
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "quern", new BlockQuern(), CT_MISC)));
-    normalItemBlocks.add(new ItemBlockCrucible(register(r, "crucible", new BlockCrucible(), CT_MISC)));
 
     inventoryItemBlocks.add(new ItemBlockSluice(register(r, "sluice", new BlockSluice(), CT_MISC)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockSeaIce(), CT_MISC)));
@@ -676,7 +671,6 @@ public final class BlocksTFC {
     register(TELamp.class, "lamp");
     register(TEBarrel.class, "barrel");
     register(TEAnvilTFC.class, "anvil");
-    register(TileCrucible.class, "crucible");
     register(TECropBase.class, "crop_base");
     register(TECropSpreading.class, "crop_spreading");
     register(TEMetalSheet.class, "metal_sheet");

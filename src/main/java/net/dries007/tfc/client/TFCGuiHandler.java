@@ -1,13 +1,10 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg;
-import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
 import su.terrafirmagreg.modules.device.object.container.ContainerFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerLogPile;
 import su.terrafirmagreg.modules.device.object.container.ContainerPowderKeg;
-import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
@@ -123,8 +120,6 @@ public class TFCGuiHandler implements IGuiHandler {
       case KNAPPING_FIRE_CLAY:
         return new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory,
           OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
-      case CRUCIBLE:
-        return new ContainerCrucible(player.inventory, Helpers.getTE(world, pos, TileCrucible.class));
       case LARGE_VESSEL:
         return new ContainerLargeVessel(player.inventory, Helpers.getTE(world, pos, TELargeVessel.class));
       case POWDERKEG:
@@ -189,8 +184,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return new GuiKnapping(container, player, KnappingType.LEATHER, LEATHER_TEXTURE);
       case KNAPPING_FIRE_CLAY:
         return new GuiKnapping(container, player, KnappingType.FIRE_CLAY, FIRE_CLAY_TEXTURE);
-      case CRUCIBLE:
-        return new GuiCrucible(container, player.inventory, Helpers.getTE(world, pos, TileCrucible.class));
       case LARGE_VESSEL:
         return new GuiLargeVessel(container, player.inventory, Helpers.getTE(world, pos, TELargeVessel.class), world.getBlockState(new BlockPos(x, y, z))
           .getBlock().getTranslationKey());
@@ -233,7 +226,6 @@ public class TFCGuiHandler implements IGuiHandler {
     KNAPPING_LEATHER,
     ANVIL,
     ANVIL_PLAN,
-    CRUCIBLE,
     LARGE_VESSEL,
     POWDERKEG,
     CALENDAR,

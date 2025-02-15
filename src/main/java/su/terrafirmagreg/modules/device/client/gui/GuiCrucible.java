@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 
@@ -19,7 +21,6 @@ import net.minecraftforge.fluids.Fluid;
 
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.FluidSpriteCache;
-import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.util.Alloy;
 import org.lwjgl.input.Mouse;
@@ -32,15 +33,15 @@ import java.util.Map;
 
 import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
-public class GuiCrucible extends GuiContainerTE<TileCrucible> {
+public class GuiCrucible extends BaseGuiContainerTile<TileCrucible> {
 
-  private static final ResourceLocation CRUCIBLE_BACKGROUND = new ResourceLocation(TFC, "textures/gui/crucible.png");
+  private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/crucible.png");
   private static final int MAX_ELEMENTS = 3;
   private int scrollPos;
   private boolean scrollPress;
 
   public GuiCrucible(Container container, InventoryPlayer playerInv, TileCrucible tile) {
-    super(container, playerInv, tile, CRUCIBLE_BACKGROUND);
+    super(container, playerInv, tile, BACKGROUND);
 
     this.ySize = 221;
     scrollPos = 0;
@@ -54,7 +55,8 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
       int startY = 93;
       int endX = 133;
       int endY = 124;
-      if (mouseX >= guiLeft + startX && mouseX < guiLeft + endX && mouseY >= guiTop + startY && mouseY < guiTop + endY) {
+      if (mouseX >= guiLeft + startX && mouseX < guiLeft + endX && mouseY >= guiTop + startY
+          && mouseY < guiTop + endY) {
         List<String> tooltip = new ArrayList<>();
         tooltip.add(I18n.format(tile.getAlloy().getResult().getTranslationKey()));
         int amount = tile.getAlloy().getAmount();
@@ -69,13 +71,15 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
   @Override
   protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
     super.mouseClicked(mouseX, mouseY, mouseButton);
-    if (mouseX >= guiLeft + 154 && mouseX <= guiLeft + 165 && mouseY >= guiTop + 11 + scrollPos && mouseY <= guiTop + 26 + scrollPos) {
+    if (mouseX >= guiLeft + 154 && mouseX <= guiLeft + 165 && mouseY >= guiTop + 11 + scrollPos
+        && mouseY <= guiTop + 26 + scrollPos) {
       scrollPress = true;
     }
   }
 
   @Override
-  protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
+  protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton,
+                                long timeSinceLastClick) {
     super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
     if (!Mouse.isButtonDown(0)) {
       scrollPress = false;
@@ -90,7 +94,8 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
     super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
     // Draw the temperature indicator
-    int temperature = (int) (51 * tile.getField(TileCrucible.FIELD_TEMPERATURE) / Heat.maxVisibleTemperature());
+    int temperature = (int) (51 * tile.getField(TileCrucible.FIELD_TEMPERATURE)
+                             / Heat.maxVisibleTemperature());
     if (temperature > 0) {
       if (temperature > 51) {
         temperature = 51;
@@ -109,7 +114,8 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
       int endX = 133;
       int endY = 124;
 
-      int fillHeight = (int) Math.ceil((float) (endY - startY) * alloy.getAmount() / alloy.getMaxAmount());
+      int fillHeight = (int) Math.ceil(
+        (float) (endY - startY) * alloy.getAmount() / alloy.getMaxAmount());
 
       Fluid fluid = FluidsTFC.getFluidFromMetal(alloy.getResult());
       TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid);
@@ -119,7 +125,9 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
 
       GlStateManager.enableAlpha();
       GlStateManager.enableBlend();
-      GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+      GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
+        GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+        GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
       int color = fluid.getColor();
 
@@ -139,10 +147,17 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
         int xPos = endX;
         while (fillWidth > 0) {
           int xPixels = Math.min(fillWidth, 16);
-          buffer.pos(guiLeft + xPos - xPixels, guiTop + yPos - yPixels, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
-          buffer.pos(guiLeft + xPos - xPixels, guiTop + yPos, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
-          buffer.pos(guiLeft + xPos, guiTop + yPos, 0).tex(sprite.getMaxU(), sprite.getMaxV()).endVertex();
-          buffer.pos(guiLeft + xPos, guiTop + yPos - yPixels, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
+          buffer.pos(guiLeft + xPos - xPixels, guiTop + yPos - yPixels, 0)
+            .tex(sprite.getMinU(), sprite.getMinV())
+            .endVertex();
+          buffer.pos(guiLeft + xPos - xPixels, guiTop + yPos, 0)
+            .tex(sprite.getMinU(), sprite.getMaxV())
+            .endVertex();
+          buffer.pos(guiLeft + xPos, guiTop + yPos, 0).tex(sprite.getMaxU(), sprite.getMaxV())
+            .endVertex();
+          buffer.pos(guiLeft + xPos, guiTop + yPos - yPixels, 0)
+            .tex(sprite.getMaxU(), sprite.getMinV())
+            .endVertex();
           fillWidth -= 16;
           xPos -= 16;
         }
@@ -151,7 +166,7 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
       }
       Tessellator.getInstance().draw();
 
-      Minecraft.getMinecraft().renderEngine.bindTexture(CRUCIBLE_BACKGROUND);
+      Minecraft.getMinecraft().renderEngine.bindTexture(BACKGROUND);
       GlStateManager.color(1, 1, 1, 1);
 
       // Draw Title:
@@ -159,7 +174,8 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
       String resultText = TextFormatting.UNDERLINE + I18n.format(result.getTranslationKey());
       fontRenderer.drawString(resultText, guiLeft + 10, guiTop + 11, 0x000000);
 
-      int startElement = Math.max(0, (int) Math.floor(((alloy.getMetals().size() - MAX_ELEMENTS) / 49D) * (scrollPos + 1)));
+      int startElement = Math.max(0, (int) Math.floor(((alloy.getMetals()
+                                                          .size() - MAX_ELEMENTS) / 49D) * (scrollPos + 1)));
 
       // Draw Components
       yPos = guiTop + 22;
@@ -178,7 +194,8 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
         // Metal 2 name:
         //   ZZZ units(WW.W)%
 
-        String metalName = fontRenderer.trimStringToWidth(I18n.format(entry.getKey().getTranslationKey()), 141);
+        String metalName = fontRenderer.trimStringToWidth(
+          I18n.format(entry.getKey().getTranslationKey()), 141);
         metalName += ":";
         String units;
         if (entry.getValue() >= 1) {
@@ -186,7 +203,9 @@ public class GuiCrucible extends GuiContainerTE<TileCrucible> {
         } else {
           units = I18n.format(TFC + ".tooltip.crucible_less_than_one");
         }
-        String content = String.format("  %s(%s%2.1f%%%s)", units, TextFormatting.DARK_GREEN, 100 * entry.getValue() / alloy.getAmount(), TextFormatting.RESET);
+        String content = String.format("  %s(%s%2.1f%%%s)", units, TextFormatting.DARK_GREEN,
+          100 * entry.getValue() / alloy.getAmount(),
+          TextFormatting.RESET);
         fontRenderer.drawString(metalName, guiLeft + 10, yPos, 0x404040);
         fontRenderer.drawString(content, guiLeft + 10, yPos + 9, 0x404040);
         yPos += 18;

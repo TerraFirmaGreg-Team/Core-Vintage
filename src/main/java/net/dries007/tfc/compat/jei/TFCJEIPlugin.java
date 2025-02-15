@@ -208,7 +208,7 @@ public final class TFCJEIPlugin implements IModPlugin {
       .collect(Collectors.toList());
 
     registry.addRecipes(alloyRecipes, ALLOY_UID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), ALLOY_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE.get()), ALLOY_UID);
     registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), ALLOY_UID);
 
     // Clay Knapping
@@ -310,7 +310,7 @@ public final class TFCJEIPlugin implements IModPlugin {
       }
     });
     registry.addRecipes(heatMetalList, METAL_HEAT_UID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), METAL_HEAT_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE.get()), METAL_HEAT_UID);
     registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), METAL_HEAT_UID);
 
     //Wraps all chisel recipes
@@ -375,7 +375,7 @@ public final class TFCJEIPlugin implements IModPlugin {
     }
     registry.addRecipes(unmoldList, VanillaRecipeCategoryUid.CRAFTING);
     registry.addRecipes(castingList, CASTING_UID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CRUCIBLE), CASTING_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE.get()), CASTING_UID);
     registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
 
     //Click areas

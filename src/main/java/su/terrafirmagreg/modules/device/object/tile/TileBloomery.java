@@ -108,7 +108,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
   protected void dumpItems() {
     //Dump everything in world
     for (int i = 1; i < 4; i++) {
-      if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
+      if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN.get()) {
         world.setBlockToAir(getInternalBlock().up(i));
       }
     }
@@ -266,8 +266,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
 
   protected boolean isInternalBlockComplete() {
     IBlockState inside = world.getBlockState(getInternalBlock());
-    return inside.getBlock() == BlocksDevice.CHARCOAL_PILE
-           && inside.getValue(TYPE) >= 8;
+    return inside.getBlock() == BlocksDevice.CHARCOAL_PILE.get() && inside.getValue(TYPE) >= 8;
   }
 
   protected void addItemsFromWorld() {

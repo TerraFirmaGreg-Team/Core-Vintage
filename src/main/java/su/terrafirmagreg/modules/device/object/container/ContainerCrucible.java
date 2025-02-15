@@ -1,19 +1,18 @@
 package su.terrafirmagreg.modules.device.object.container;
 
+import su.terrafirmagreg.api.base.object.inventory.spi.container.BaseContainerTile;
+import su.terrafirmagreg.api.base.object.inventory.spi.slot.SlotCallback;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.container.ContainerTE;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-
 import static su.terrafirmagreg.modules.device.object.tile.TileCrucible.SLOT_INPUT_END;
 import static su.terrafirmagreg.modules.device.object.tile.TileCrucible.SLOT_INPUT_START;
 import static su.terrafirmagreg.modules.device.object.tile.TileCrucible.SLOT_OUTPUT;
 
-public class ContainerCrucible extends ContainerTE<TileCrucible> {
+public class ContainerCrucible extends BaseContainerTile<TileCrucible> {
 
   public ContainerCrucible(InventoryPlayer playerInv, TileCrucible tile) {
     super(playerInv, tile, 55);

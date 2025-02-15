@@ -49,6 +49,7 @@ public abstract class AbstractRemapping {
     put("bloomery", BlocksDevice.BLOOMERY.get());
     put("bloom", BlocksDevice.BLOOM.get());
     put("charcoal_forge", BlocksDevice.CHARCOAL_FORGE.get());
+    put("crucible", BlocksDevice.CRUCIBLE.get());
 
     put("nest_box", BlocksAnimal.NEST_BOX.get());
 

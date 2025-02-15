@@ -56,7 +56,7 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
 
   @Override
   public void readFromNBT(NBTTagCompound nbt) {
-    inventory.deserializeNBT(nbt.getCompoundTag(TAG_INVENTORY));
+    this.inventory.deserializeNBT(nbt.getCompoundTag(TAG_INVENTORY));
     super.readFromNBT(nbt);
   }
 

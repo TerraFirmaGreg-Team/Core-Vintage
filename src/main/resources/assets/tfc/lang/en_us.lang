@@ -674,13 +674,6 @@ config.tfc.devices.barrel.fluidWhitelist=Fluid Whitelist
 config.tfc.devices.barrel.fluidWhitelist.tooltip=List of fluids allowed to be inserted into a barrel.
 
 
-### Bloomery
-config.tfc.devices.bloomery=Bloomery
-
-config.tfc.devices.bloomery.ticks=Ticks
-config.tfc.devices.bloomery.ticks.tooltip=Number of ticks required for a bloomery to complete. (1000 = 1 in game hour = 50 seconds), default is 15 hours.
-
-
 ### Crucible
 config.tfc.devices.crucible=Crucible
 

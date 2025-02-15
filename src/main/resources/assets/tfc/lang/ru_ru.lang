@@ -677,13 +677,6 @@ config.tfc.devices.barrel.fluidWhitelist=Разрешенные жидкости
 config.tfc.devices.barrel.fluidWhitelist.tooltip=Список жидкостей, разрешенных к вливу в бочку
 
 
-### Bloomery
-config.tfc.devices.bloomery=Кричной горн
-
-config.tfc.devices.bloomery.ticks=Время кричного горна
-config.tfc.devices.bloomery.ticks.tooltip=Кол-во тиков необходимое для завершения работы кричного горна. (1000 тиков = 1 игровой часу = 50 секундам), по умолчанию 15 часов.
-
-
 ### Crucible
 config.tfc.devices.crucible=Тигель
 
@@ -3309,9 +3302,6 @@ tile.tfc.trapdoor.red_steel.name=Люк из красной стали
 
 ### ======================= ITEMS ======================
 
-
-
-item.tfc.firestarter.name=Поджигатель
 item.tfc.straw.name=Солома
 item.leather.name=Кожа
 item.tfc.spindle.name=Веретено

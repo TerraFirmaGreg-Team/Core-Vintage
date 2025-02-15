@@ -73,8 +73,7 @@ public class BlockMolten extends BaseBlock {
   @Override
   public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
     IBlockState state = worldIn.getBlockState(pos);
-    if (state.getValue(LIT) && !entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase
-        && state.getValue(LIT)) {
+    if (state.getValue(LIT) && !entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase && state.getValue(LIT)) {
       entityIn.attackEntityFrom(DamageSource.IN_FIRE, 4.0f);
     }
     super.onEntityWalk(worldIn, pos, entityIn);
@@ -86,21 +85,17 @@ public class BlockMolten extends BaseBlock {
   }
 
   @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos,
-                       IBlockState state, int fortune) {
-    // Drops are handled by the relevant TE (blast furnace or bloomery)
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    // Drops are handled by the relevant Tile (blast furnace or bloomery)
   }
 
   @Override
-  public @Nullable PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world,
-                                                  BlockPos pos, @Nullable EntityLiving entity) {
-    return state.getValue(LIT) && (entity == null || !entity.isImmuneToFire())
-           ? PathNodeType.DAMAGE_FIRE : null;
+  public @Nullable PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EntityLiving entity) {
+    return state.getValue(LIT) && (entity == null || !entity.isImmuneToFire()) ? PathNodeType.DAMAGE_FIRE : null;
   }
 
   @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
-                                                         IBlockAccess worldIn, BlockPos pos) {
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return MOLTEN_AABB[blockState.getValue(LAYERS) - 1];
   }
 

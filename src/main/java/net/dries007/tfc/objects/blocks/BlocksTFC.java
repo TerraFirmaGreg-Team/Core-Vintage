@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockBloom;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
 import su.terrafirmagreg.modules.device.object.block.BlockCrucible;
@@ -13,7 +12,6 @@ import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
-import su.terrafirmagreg.modules.device.object.tile.TileBloom;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
@@ -174,7 +172,6 @@ public final class BlocksTFC {
   public static final BlockIngotPile INGOT_PILE = getNull();
   public static final BlockCharcoalForge CHARCOAL_FORGE = getNull();
   public static final BlockCrucible CRUCIBLE = getNull();
-  public static final BlockBloom BLOOM = getNull();
   public static final BlockQuern QUERN = getNull();
   public static final BlockSeaIce SEA_ICE = getNull();
   public static final BlockPowderKeg POWDERKEG = getNull();
@@ -657,7 +654,6 @@ public final class BlocksTFC {
     register(r, "charcoal_pile", new BlockCharcoalPile());
     register(r, "ingot_pile", new BlockIngotPile());
     register(r, "log_pile", new BlockLogPile());
-    register(r, "bloom", new BlockBloom());
     register(r, "thatch_bed", new BlockThatchBed());
 
     // Note: if you add blocks you don't need to put them in this list of todos. Feel free to add them where they make sense :)
@@ -688,7 +684,6 @@ public final class BlocksTFC {
     register(TileCrucible.class, "crucible");
     register(TECropBase.class, "crop_base");
     register(TECropSpreading.class, "crop_spreading");
-    register(TileBloom.class, "bloom");
     register(TEMetalSheet.class, "metal_sheet");
     register(TileQuern.class, "quern");
     register(TELargeVessel.class, "large_vessel");

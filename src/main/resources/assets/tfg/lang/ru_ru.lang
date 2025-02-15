@@ -87,6 +87,7 @@ block.tfg.device.bellows.name=Кузнечные меха
 block.tfg.device.blast_furnace.name=Доменная печь
 block.tfg.device.bloomery.name=Кричной горн
 block.tfg.device.molten.name=Расплав
+block.tfg.device.bloom.name=Крица
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

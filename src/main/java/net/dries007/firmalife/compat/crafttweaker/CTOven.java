@@ -10,7 +10,7 @@ import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
-import net.dries007.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.crafttweaker.CTHelper;
 import net.dries007.tfc.objects.recipes.OvenRecipe;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -29,7 +29,7 @@ public class CTOven {
     CraftTweakerAPI.apply(new IAction() {
       @Override
       public void apply() {
-        RegistriesFL.OVEN.register(recipe);
+        TFCRegistries.OVEN.register(recipe);
       }
 
       @Override
@@ -42,13 +42,13 @@ public class CTOven {
   @ZenMethod
   public static void removeRecipe(String recipe_name) {
 
-    OvenRecipe recipe = RegistriesFL.OVEN.getValue(new ResourceLocation(recipe_name));
+    OvenRecipe recipe = TFCRegistries.OVEN.getValue(new ResourceLocation(recipe_name));
 
     if (recipe != null) {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<OvenRecipe> Oven = (IForgeRegistryModifiable<OvenRecipe>) RegistriesFL.OVEN;
+          IForgeRegistryModifiable<OvenRecipe> Oven = (IForgeRegistryModifiable<OvenRecipe>) TFCRegistries.OVEN;
           Oven.remove(recipe.getRegistryName());
         }
 
@@ -65,7 +65,7 @@ public class CTOven {
     if (output == null) {throw new IllegalArgumentException("Output not allowed to be empty");}
     ArrayList<OvenRecipe> removeList = new ArrayList<>();
 
-    RegistriesFL.OVEN.getValuesCollection()
+    TFCRegistries.OVEN.getValuesCollection()
       .stream()
       .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
       .forEach(removeList::add);
@@ -74,7 +74,7 @@ public class CTOven {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<OvenRecipe> Oven = (IForgeRegistryModifiable<OvenRecipe>) RegistriesFL.OVEN;
+          IForgeRegistryModifiable<OvenRecipe> Oven = (IForgeRegistryModifiable<OvenRecipe>) TFCRegistries.OVEN;
           Oven.remove(recipe.getRegistryName());
         }
 

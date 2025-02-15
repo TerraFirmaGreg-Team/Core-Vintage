@@ -52,16 +52,16 @@ public final class BlocksDevice {
   public static Supplier<BlockCrate> CRATE;
   public static Supplier<BlockBellows> BELLOWS;
   public static Supplier<BlockBlastFurnace> BLAST_FURNACE;
-  public static Supplier<BlockBloom> BLOOM;
+  public static Supplier<BlockBloom> BLOOM; // TODO noItems
   public static Supplier<BlockBloomery> BLOOMERY;
   public static Supplier<BlockCharcoalForge> CHARCOAL_FORGE;
-  public static Supplier<BlockCharcoalPile> CHARCOAL_PILE;
+  public static Supplier<BlockCharcoalPile> CHARCOAL_PILE; // TODO noItems
   public static Supplier<BlockCrucible> CRUCIBLE;
   public static Supplier<BlockFirePit> FIRE_PIT;
   public static Supplier<BlockPitKiln> PIT_KILN;
   public static Supplier<BlockQuernManual> QUERN_MANUAL;
   public static Supplier<BlockQuernHorse> QUERN_HORSE;
-  public static Supplier<BlockMolten> MOLTEN;
+  public static Supplier<BlockMolten> MOLTEN; // TODO noItems
   public static Supplier<BlockLogPile> LOG_PILE;
   public static Supplier<BlockCellarShelf> CELLAR_SHELF;
   public static Supplier<BlockCellarDoor> CELLAR_DOOR;
@@ -99,7 +99,7 @@ public final class BlocksDevice {
     BLOOM = registry.block(new BlockBloom());
     BLOOMERY = registry.block(new BlockBloomery());
     CHARCOAL_FORGE = registry.block(new BlockCharcoalForge());
-//    CHARCOAL_PILE = registry.block(new BlockCharcoalPile());
+    CHARCOAL_PILE = registry.block(new BlockCharcoalPile());
     CRUCIBLE = registry.block(new BlockCrucible());
 //    FIRE_PIT = registry.block(new BlockFirePit());
 //    PIT_KILN = registry.block(new BlockPitKiln());

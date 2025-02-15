@@ -10,7 +10,7 @@ import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
-import net.dries007.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.crafttweaker.CTHelper;
 import net.dries007.tfc.objects.recipes.PlanterRecipe;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -34,7 +34,7 @@ public class CTPlanter {
     CraftTweakerAPI.apply(new IAction() {
       @Override
       public void apply() {
-        RegistriesFL.PLANTER_QUAD.register(recipe);
+        TFCRegistries.PLANTER_QUAD.register(recipe);
       }
 
       @Override
@@ -47,13 +47,13 @@ public class CTPlanter {
   @ZenMethod
   public static void removeRecipe(String recipe_name) {
 
-    PlanterRecipe recipe = RegistriesFL.PLANTER_QUAD.getValue(new ResourceLocation(recipe_name));
+    PlanterRecipe recipe = TFCRegistries.PLANTER_QUAD.getValue(new ResourceLocation(recipe_name));
 
     if (recipe != null) {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable<PlanterRecipe>) RegistriesFL.PLANTER_QUAD;
+          IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable<PlanterRecipe>) TFCRegistries.PLANTER_QUAD;
           Planter.remove(recipe.getRegistryName());
         }
 
@@ -70,7 +70,7 @@ public class CTPlanter {
     if (output == null) {throw new IllegalArgumentException("Output not allowed to be empty");}
     ArrayList<PlanterRecipe> removeList = new ArrayList<>();
 
-    RegistriesFL.PLANTER_QUAD.getValuesCollection()
+    TFCRegistries.PLANTER_QUAD.getValuesCollection()
       .stream()
       .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
       .forEach(removeList::add);
@@ -79,7 +79,7 @@ public class CTPlanter {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable<PlanterRecipe>) RegistriesFL.PLANTER_QUAD;
+          IForgeRegistryModifiable<PlanterRecipe> Planter = (IForgeRegistryModifiable<PlanterRecipe>) TFCRegistries.PLANTER_QUAD;
           Planter.remove(recipe.getRegistryName());
         }
 

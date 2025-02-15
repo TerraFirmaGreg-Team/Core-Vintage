@@ -10,7 +10,7 @@ import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
-import net.dries007.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.crafttweaker.CTHelper;
 import net.dries007.tfc.objects.recipes.CrackingRecipe;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -29,7 +29,7 @@ public class CTCracking {
     CraftTweakerAPI.apply(new IAction() {
       @Override
       public void apply() {
-        RegistriesFL.CRACKING.register(recipe);
+        TFCRegistries.CRACKING.register(recipe);
       }
 
       @Override
@@ -42,13 +42,13 @@ public class CTCracking {
   @ZenMethod
   public static void removeRecipe(String recipe_name) {
 
-    CrackingRecipe recipe = RegistriesFL.CRACKING.getValue(new ResourceLocation(recipe_name));
+    CrackingRecipe recipe = TFCRegistries.CRACKING.getValue(new ResourceLocation(recipe_name));
 
     if (recipe != null) {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<CrackingRecipe> CRACKING = (IForgeRegistryModifiable<CrackingRecipe>) RegistriesFL.CRACKING;
+          IForgeRegistryModifiable<CrackingRecipe> CRACKING = (IForgeRegistryModifiable<CrackingRecipe>) TFCRegistries.CRACKING;
           CRACKING.remove(recipe.getRegistryName());
         }
 
@@ -65,7 +65,7 @@ public class CTCracking {
     if (output == null) {throw new IllegalArgumentException("Output not allowed to be empty");}
     ArrayList<CrackingRecipe> removeList = new ArrayList<>();
 
-    RegistriesFL.CRACKING.getValuesCollection()
+    TFCRegistries.CRACKING.getValuesCollection()
       .stream()
       .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
       .forEach(removeList::add);
@@ -74,7 +74,7 @@ public class CTCracking {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<CrackingRecipe> CRACKING = (IForgeRegistryModifiable<CrackingRecipe>) RegistriesFL.CRACKING;
+          IForgeRegistryModifiable<CrackingRecipe> CRACKING = (IForgeRegistryModifiable<CrackingRecipe>) TFCRegistries.CRACKING;
           CRACKING.remove(recipe.getRegistryName());
         }
 

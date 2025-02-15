@@ -1,6 +1,8 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
@@ -8,7 +10,6 @@ import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -25,20 +26,19 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.util.Helpers;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
-public class BlockCharcoalPile extends Block implements ILightableBlock {
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.IntProp.TYPE;
+
+@SuppressWarnings("deprecation")
+public class BlockCharcoalPile extends BaseBlock {
 
   public static final Material CHARCOAL_MATERIAL = new Material(MapColor.BROWN);
 
-  public static final PropertyInteger LAYERS = PropertyInteger.create("type", 1, 8);
 
   private static final AxisAlignedBB[] PILE_AABB = new AxisAlignedBB[]{
     new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D),
@@ -49,97 +49,70 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
     new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D),
     new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D),
     new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D),
-    new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
+    new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)
+  };
 
   public BlockCharcoalPile() {
-    super(CHARCOAL_MATERIAL);
+    super(Settings.of(CHARCOAL_MATERIAL));
 
-    setSoundType(TFCSounds.CHARCOAL_PILE);
-    setHarvestLevel(ToolClasses.SHOVEL, 0);
-    setHardness(1.0F);
-    this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
+    getSettings()
+      .registryKey("charcoal_pile")
+      .hardness(1.0F)
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+      .sound(TFCSounds.CHARCOAL_PILE);
+
+    setDefaultState(blockState.getBaseState()
+      .withProperty(TYPE, 1));
   }
 
   @Override
-  @SuppressWarnings("deprecation")
   public boolean isTopSolid(IBlockState state) {
-    return state.getValue(LAYERS) == 8;
+    return state.getValue(TYPE) == 8;
   }
 
   @Override
-  @Nonnull
-  @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(LAYERS, meta + 1);
+    return this.getDefaultState().withProperty(TYPE, meta + 1);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(LAYERS) - 1;
+    return state.getValue(TYPE) - 1;
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public boolean isFullCube(IBlockState state) {
-    return state.getValue(LAYERS) == 8;
-  }
-
-  @Override
-  @Nonnull
-  @SuppressWarnings("deprecation")
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return PILE_AABB[state.getValue(LAYERS)];
+    return PILE_AABB[state.getValue(TYPE)];
   }
 
   @Override
-  @Nonnull
-  @SuppressWarnings("deprecation")
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    return face == EnumFacing.DOWN || state.getValue(LAYERS) == 8 ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-  }
-
-  @Override
-  @Nullable
-  @SuppressWarnings("deprecation")
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    return PILE_AABB[state.getValue(LAYERS)];
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(IBlockState state) {
-    return state.getValue(LAYERS) == 8;
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    if (!worldIn.isRemote) {
-      // Try to drop the rock down
-      IBlockState stateUnder = worldIn.getBlockState(pos.down());
-      if (stateUnder.getBlock() instanceof BlockCharcoalPile) {
-        int layersAt = state.getValue(LAYERS);
-        int layersUnder = stateUnder.getValue(LAYERS);
-        if (layersUnder < 8) {
-          if (layersUnder + layersAt <= 8) {
-            worldIn.setBlockState(pos.down(), stateUnder.withProperty(LAYERS, layersAt + layersUnder));
-            worldIn.setBlockToAir(pos);
-          } else {
-            worldIn.setBlockState(pos.down(), stateUnder.withProperty(LAYERS, 8));
-            worldIn.setBlockState(pos, state.withProperty(LAYERS, layersAt + layersUnder - 8));
-          }
+    if (worldIn.isRemote) {return;}
+
+    // Try to drop the rock down
+    IBlockState stateUnder = worldIn.getBlockState(pos.down());
+    if (stateUnder.getBlock() instanceof BlockCharcoalPile) {
+      int layersAt = state.getValue(TYPE);
+      int layersUnder = stateUnder.getValue(TYPE);
+      if (layersUnder < 8) {
+        if (layersUnder + layersAt <= 8) {
+          worldIn.setBlockState(pos.down(),
+            stateUnder.withProperty(TYPE, layersAt + layersUnder));
+          worldIn.setBlockToAir(pos);
+        } else {
+          worldIn.setBlockState(pos.down(), stateUnder.withProperty(TYPE, 8));
+          worldIn.setBlockState(pos, state.withProperty(TYPE, layersAt + layersUnder - 8));
         }
-        return;
       }
-      if (!stateUnder.isSideSolid(worldIn, pos, EnumFacing.UP)) {
-        this.dropBlockAsItem(worldIn, pos, state, 0);
-        worldIn.setBlockToAir(pos);
-      }
+      return;
+    }
+    if (!stateUnder.isSideSolid(worldIn, pos, EnumFacing.UP)) {
+      this.dropBlockAsItem(worldIn, pos, state, 0);
+      worldIn.setBlockToAir(pos);
     }
   }
 
   @Override
-  @Nonnull
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
     return Items.COAL;
   }
@@ -152,13 +125,10 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
-    if (state.getValue(LAYERS) >= 7 && BlockCharcoalForge.isValid(world, pos) && ItemFireStarter.onIgnition(stack)) {
+    if (state.getValue(TYPE) >= 7 && BlockCharcoalForge.isValid(world, pos) && ItemFireStarter.onIgnition(stack)) {
       if (!world.isRemote) {
         world.setBlockState(pos, BlocksDevice.CHARCOAL_FORGE.get().getDefaultState().withProperty(LIT, true));
-        TileCharcoalForge te = Helpers.getTE(world, pos, TileCharcoalForge.class);
-        if (te != null) {
-          te.onCreate();
-        }
+        TileUtils.getTile(world, pos, TileCharcoalForge.class).ifPresent(TileCharcoalForge::onCreate);
       }
       return true;
     }
@@ -166,9 +136,8 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
   }
 
   @Override
-  @Nonnull
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, LAYERS);
+    return new BlockStateContainer(this, TYPE);
   }
 
   @Override
@@ -180,19 +149,39 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
     }
 
     if (!world.isRemote) {
-      int layers = state.getValue(LAYERS);
+      int layers = state.getValue(TYPE);
       if (layers == 1) {
         world.setBlockToAir(pos);
       } else {
-        world.setBlockState(pos, state.withProperty(LAYERS, layers - 1));
+        world.setBlockState(pos, state.withProperty(TYPE, layers - 1));
       }
     }
     return true;
   }
 
   @Override
-  @Nonnull
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     return new ItemStack(Items.COAL, 1, 1);
   }
+
+  @Override
+  public boolean isFullCube(IBlockState state) {
+    return state.getValue(TYPE) == 8;
+  }
+
+  @Override
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    return face == EnumFacing.DOWN || state.getValue(TYPE) == 8 ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+  }
+
+  @Override
+  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    return PILE_AABB[state.getValue(TYPE)];
+  }
+
+  @Override
+  public boolean isOpaqueCube(IBlockState state) {
+    return state.getValue(TYPE) == 8;
+  }
+
 }

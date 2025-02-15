@@ -10,7 +10,7 @@ import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
-import net.dries007.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.crafttweaker.CTHelper;
 import net.dries007.tfc.objects.recipes.DryingRecipe;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -29,7 +29,7 @@ public class CTDrying {
     CraftTweakerAPI.apply(new IAction() {
       @Override
       public void apply() {
-        RegistriesFL.DRYING.register(recipe);
+        TFCRegistries.DRYING.register(recipe);
       }
 
       @Override
@@ -42,13 +42,13 @@ public class CTDrying {
   @ZenMethod
   public static void removeRecipe(String recipe_name) {
 
-    DryingRecipe recipe = RegistriesFL.DRYING.getValue(new ResourceLocation(recipe_name));
+    DryingRecipe recipe = TFCRegistries.DRYING.getValue(new ResourceLocation(recipe_name));
 
     if (recipe != null) {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<DryingRecipe> DRYING = (IForgeRegistryModifiable<DryingRecipe>) RegistriesFL.DRYING;
+          IForgeRegistryModifiable<DryingRecipe> DRYING = (IForgeRegistryModifiable<DryingRecipe>) TFCRegistries.DRYING;
           DRYING.remove(recipe.getRegistryName());
         }
 
@@ -65,7 +65,7 @@ public class CTDrying {
     if (output == null) {throw new IllegalArgumentException("Output not allowed to be empty");}
     ArrayList<DryingRecipe> removeList = new ArrayList<>();
 
-    RegistriesFL.DRYING.getValuesCollection()
+    TFCRegistries.DRYING.getValuesCollection()
       .stream()
       .filter(x -> x.getOutputItem(ItemStack.EMPTY).isItemEqual(InputHelper.toStack(output)))
       .forEach(removeList::add);
@@ -74,7 +74,7 @@ public class CTDrying {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<DryingRecipe> DRYING = (IForgeRegistryModifiable<DryingRecipe>) RegistriesFL.DRYING;
+          IForgeRegistryModifiable<DryingRecipe> DRYING = (IForgeRegistryModifiable<DryingRecipe>) TFCRegistries.DRYING;
           DRYING.remove(recipe.getRegistryName());
         }
 

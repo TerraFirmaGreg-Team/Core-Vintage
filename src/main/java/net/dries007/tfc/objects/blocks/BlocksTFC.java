@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
 import su.terrafirmagreg.modules.device.object.block.BlockPitKiln;
@@ -162,7 +161,6 @@ public final class BlocksTFC {
   public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
   public static final BlockPlacedItem PLACED_ITEM = getNull();
   public static final BlockPlacedHide PLACED_HIDE = getNull();
-  public static final BlockCharcoalPile CHARCOAL_PILE = getNull();
   public static final BlockLogPile LOG_PILE = getNull();
   public static final BlockIngotPile INGOT_PILE = getNull();
   public static final BlockQuern QUERN = getNull();
@@ -246,7 +244,7 @@ public final class BlocksTFC {
   @SuppressWarnings("ConstantConditions")
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
     // This is called here because it needs to wait until Metal registry has fired
-//    FluidsTFC.registerFluids();
+    FluidsTFC.registerFluids();
 
     IForgeRegistry<Block> r = event.getRegistry();
 
@@ -642,7 +640,6 @@ public final class BlocksTFC {
     // These have no ItemBlock or Creative Tab
     register(r, "placed_item_flat", new BlockPlacedItemFlat());
     register(r, "placed_hide", new BlockPlacedHide());
-    register(r, "charcoal_pile", new BlockCharcoalPile());
     register(r, "ingot_pile", new BlockIngotPile());
     register(r, "log_pile", new BlockLogPile());
     register(r, "thatch_bed", new BlockThatchBed());

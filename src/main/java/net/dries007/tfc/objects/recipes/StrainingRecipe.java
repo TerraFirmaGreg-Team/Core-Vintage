@@ -4,8 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.firmalife.init.RegistriesFL;
 import net.dries007.tfc.Constants;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nonnull;
@@ -31,7 +31,7 @@ public class StrainingRecipe extends IForgeRegistryEntry.Impl<StrainingRecipe> {
 
   @Nullable
   public static StrainingRecipe get(FluidStack fluidStack) {
-    return RegistriesFL.STRAINING.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack)).findFirst().orElse(null);
+    return TFCRegistries.STRAINING.getValuesCollection().stream().filter(x -> x.isValidInput(fluidStack)).findFirst().orElse(null);
   }
 
   public int getDropAmount() {

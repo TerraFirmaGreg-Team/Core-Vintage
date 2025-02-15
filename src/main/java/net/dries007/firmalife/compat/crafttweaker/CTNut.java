@@ -11,7 +11,7 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
-import net.dries007.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.recipes.NutRecipe;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -39,7 +39,7 @@ public class CTNut {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          RegistriesFL.NUT_TREES.register(recipe);
+          TFCRegistries.NUT_TREES.register(recipe);
         }
 
         @Override
@@ -53,13 +53,13 @@ public class CTNut {
   @ZenMethod
   public static void removeRecipe(String recipe_name) {
 
-    NutRecipe recipe = RegistriesFL.NUT_TREES.getValue(new ResourceLocation(recipe_name));
+    NutRecipe recipe = TFCRegistries.NUT_TREES.getValue(new ResourceLocation(recipe_name));
 
     if (recipe != null) {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<NutRecipe> NUT = (IForgeRegistryModifiable<NutRecipe>) RegistriesFL.NUT_TREES;
+          IForgeRegistryModifiable<NutRecipe> NUT = (IForgeRegistryModifiable<NutRecipe>) TFCRegistries.NUT_TREES;
           NUT.remove(recipe.getRegistryName());
         }
 
@@ -76,7 +76,7 @@ public class CTNut {
     if (output == null) {throw new IllegalArgumentException("Output not allowed to be empty");}
     ArrayList<NutRecipe> removeList = new ArrayList<>();
 
-    RegistriesFL.NUT_TREES.getValuesCollection()
+    TFCRegistries.NUT_TREES.getValuesCollection()
       .stream()
       .filter(x -> x.getNut().isItemEqual(InputHelper.toStack(output)))
       .forEach(removeList::add);
@@ -85,7 +85,7 @@ public class CTNut {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<NutRecipe> NUT = (IForgeRegistryModifiable<NutRecipe>) RegistriesFL.NUT_TREES;
+          IForgeRegistryModifiable<NutRecipe> NUT = (IForgeRegistryModifiable<NutRecipe>) TFCRegistries.NUT_TREES;
           NUT.remove(recipe.getRegistryName());
         }
 

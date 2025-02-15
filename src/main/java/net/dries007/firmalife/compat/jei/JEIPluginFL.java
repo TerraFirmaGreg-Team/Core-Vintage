@@ -18,7 +18,6 @@ import net.dries007.firmalife.compat.jei.wrapper.KnappingRecipeWrapperFL;
 import net.dries007.firmalife.compat.jei.wrapper.OvenRecipeWrapper;
 import net.dries007.firmalife.init.FoodFL;
 import net.dries007.firmalife.init.KnappingFL;
-import net.dries007.firmalife.init.RegistriesFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
@@ -54,11 +53,11 @@ public class JEIPluginFL implements IModPlugin {
   public void register(IModRegistry registry) {
     REGISTRY = registry;
 
-    List<SimpleRecipeWrapper> ovenList = RegistriesFL.OVEN.getValuesCollection().stream().map(OvenRecipeWrapper::new).collect(Collectors.toList());
+    List<SimpleRecipeWrapper> ovenList = TFCRegistries.OVEN.getValuesCollection().stream().map(OvenRecipeWrapper::new).collect(Collectors.toList());
     registry.addRecipes(ovenList, OVEN_ID);
     registry.addRecipeCatalyst(new ItemStack(BlocksFL.OVEN), OVEN_ID);
 
-    List<SimpleRecipeWrapper> dryList = RegistriesFL.DRYING.getValuesCollection().stream().map(DryingRecipeWrapper::new).collect(Collectors.toList());
+    List<SimpleRecipeWrapper> dryList = TFCRegistries.DRYING.getValuesCollection().stream().map(DryingRecipeWrapper::new).collect(Collectors.toList());
     registry.addRecipes(dryList, DRY_ID);
     registry.addRecipeCatalyst(new ItemStack(BlocksFL.LEAF_MAT, 1), DRY_ID);
 

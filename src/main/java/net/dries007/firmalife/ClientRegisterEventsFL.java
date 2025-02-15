@@ -29,7 +29,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.firmalife.init.RegistriesFL;
 import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
@@ -40,6 +39,7 @@ import net.dries007.firmalife.render.QuadPlanterStateMapper;
 import net.dries007.firmalife.render.TESRString;
 import net.dries007.firmalife.render.TESRTurntable;
 import net.dries007.firmalife.render.VanillaStemStateMapper;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.objects.blocks.BlockBonsai;
 import net.dries007.tfc.objects.blocks.BlockFruitDoor;
@@ -176,7 +176,7 @@ public class ClientRegisterEventsFL {
 
   @SubscribeEvent
   public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
-    for (PlanterRecipe crop : RegistriesFL.PLANTER_QUAD.getValuesCollection()) {
+    for (PlanterRecipe crop : TFCRegistries.PLANTER_QUAD.getValuesCollection()) {
       if (crop.getRegistryName() != null) {
         for (int stage = 0; stage <= PlanterRecipe.getMaxStage(crop); stage++) {
           event.getMap().registerSprite(new ResourceLocation(MOD_ID, "blocks/crop/" + crop.getRegistryName().getPath() + "_" + stage));

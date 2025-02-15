@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.object.block;
 
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
@@ -33,7 +34,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.client.TFCGuiHandler;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.Helpers;
@@ -60,7 +60,7 @@ public class BlockLogPile extends Block implements ILightableBlock {
   }
 
   private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos, EnumFacing side) {
-    if (offsetState.getBlock() instanceof BlockLogPile || offsetState.getBlock() == BlocksTFC.CHARCOAL_PILE) {
+    if (offsetState.getBlock() instanceof BlockLogPile || offsetState.getBlock() == BlocksDevice.CHARCOAL_PILE.get()) {
       return true;
     } else if (offsetState.getMaterial() == Material.GLASS && ConfigTFC.Devices.CHARCOAL_PIT.canAcceptGlass) {
       return offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID || offsetState.isSideSolid(world, pos, side);

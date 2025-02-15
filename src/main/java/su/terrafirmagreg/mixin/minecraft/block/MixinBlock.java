@@ -38,7 +38,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
   protected Settings terraFirmaGreg$settings;
 
 
-  @Inject(method = "<init>(Lnet/minecraft/block/material/Material;Lnet/minecraft/block/material/MapColor;)V", at = @At(value = "CTOR_HEAD"), remap = false)
+  @Inject(method = "<init>(Lnet/minecraft/block/material/Material;Lnet/minecraft/block/material/MapColor;)V", at = @At(value = "TAIL"))
   public void onConstruct(Material blockMaterialIn, MapColor blockMapColorIn, CallbackInfo ci) {
     this.terraFirmaGreg$settings = Settings.of(blockMaterialIn, blockMapColorIn);
   }

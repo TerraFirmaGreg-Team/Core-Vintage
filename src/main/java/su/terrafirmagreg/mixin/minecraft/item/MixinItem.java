@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Mixin(value = Item.class, remap = false)
+@Mixin(value = Item.class)
 public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implements IItemSettings {
 
   @Unique
@@ -30,7 +30,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
   @Final
   protected Settings terraFirmaGreg$settings;
 
-  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
+  @Inject(method = "<init>", at = @At(value = "TAIL"))
   public void onConstruct(CallbackInfo ci) {
     this.terraFirmaGreg$settings = Settings.of();
   }
@@ -44,7 +44,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Overwrite
+  @Overwrite(remap = false)
   public IRarity getForgeRarity(ItemStack stack) {
     return getSettings().getRarity();
   }
@@ -73,7 +73,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Overwrite
+  @Overwrite(remap = false)
   public int getItemStackLimit(ItemStack stack) {
     return getItemStackLimit();
   }
@@ -82,7 +82,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Overwrite
+  @Overwrite(remap = false)
   public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
     if (getSettings().getCapability().isEmpty()) {
       return null;

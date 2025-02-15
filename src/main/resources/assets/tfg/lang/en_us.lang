@@ -164,6 +164,7 @@ block.tfg.device.molten.name=Molten
 block.tfg.device.bloom.name=Bloom
 block.tfg.device.charcoal_forge.name=Charcoal Forge
 block.tfg.device.crucible.name=Crucible
+block.tfg.device.charcoal_pile.name=Charcoal Pile
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

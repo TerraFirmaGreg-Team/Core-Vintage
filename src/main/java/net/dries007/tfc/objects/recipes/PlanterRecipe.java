@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nonnull;
@@ -40,7 +40,7 @@ public class PlanterRecipe extends IForgeRegistryEntry.Impl<PlanterRecipe> {
 
   @Nullable
   public static PlanterRecipe get(ItemStack item) {
-    return RegistriesFL.PLANTER_QUAD.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
+    return TFCRegistries.PLANTER_QUAD.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
   }
 
   public static int getMaxStage(PlanterRecipe recipe) {

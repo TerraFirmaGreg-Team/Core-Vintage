@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nonnull;
@@ -30,7 +30,7 @@ public class CrackingRecipe extends IForgeRegistryEntry.Impl<CrackingRecipe> {
 
   @Nullable
   public static CrackingRecipe get(ItemStack item) {
-    return RegistriesFL.CRACKING.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
+    return TFCRegistries.CRACKING.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);
   }
 
   @Nonnull

@@ -10,7 +10,7 @@ import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
-import net.dries007.firmalife.init.RegistriesFL;
+import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.compat.crafttweaker.CTHelper;
 import net.dries007.tfc.objects.recipes.StrainingRecipe;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -35,7 +35,7 @@ public class CTStraining {
     CraftTweakerAPI.apply(new IAction() {
       @Override
       public void apply() {
-        RegistriesFL.STRAINING.register(recipe);
+        TFCRegistries.STRAINING.register(recipe);
       }
 
       @Override
@@ -47,13 +47,13 @@ public class CTStraining {
 
   @ZenMethod
   public static void removeRecipe(String recipe_name) {
-    StrainingRecipe recipe = RegistriesFL.STRAINING.getValue(new ResourceLocation(recipe_name));
+    StrainingRecipe recipe = TFCRegistries.STRAINING.getValue(new ResourceLocation(recipe_name));
 
     if (recipe != null) {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          IForgeRegistryModifiable<StrainingRecipe> Strain = (IForgeRegistryModifiable<StrainingRecipe>) RegistriesFL.STRAINING;
+          IForgeRegistryModifiable<StrainingRecipe> Strain = (IForgeRegistryModifiable<StrainingRecipe>) TFCRegistries.STRAINING;
           Strain.remove(recipe.getRegistryName());
         }
 

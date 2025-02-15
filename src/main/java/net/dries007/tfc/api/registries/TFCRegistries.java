@@ -21,6 +21,12 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.recipes.CrackingRecipe;
+import net.dries007.tfc.objects.recipes.DryingRecipe;
+import net.dries007.tfc.objects.recipes.NutRecipe;
+import net.dries007.tfc.objects.recipes.OvenRecipe;
+import net.dries007.tfc.objects.recipes.PlanterRecipe;
+import net.dries007.tfc.objects.recipes.StrainingRecipe;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -51,8 +57,15 @@ public class TFCRegistries {
   public static final IForgeRegistry<ChiselRecipe> CHISEL = GameRegistry.findRegistry(ChiselRecipe.class);
   public static final IForgeRegistry<BloomeryRecipe> BLOOMERY = GameRegistry.findRegistry(BloomeryRecipe.class);
   public static final IForgeRegistry<BlastFurnaceRecipe> BLAST_FURNACE = GameRegistry.findRegistry(BlastFurnaceRecipe.class);
+  public static final IForgeRegistry<OvenRecipe> OVEN = GameRegistry.findRegistry(OvenRecipe.class);
+  public static final IForgeRegistry<DryingRecipe> DRYING = GameRegistry.findRegistry(DryingRecipe.class);
+  public static final IForgeRegistry<PlanterRecipe> PLANTER_QUAD = GameRegistry.findRegistry(PlanterRecipe.class);
+  public static final IForgeRegistry<NutRecipe> NUT_TREES = GameRegistry.findRegistry(NutRecipe.class);
+  public static final IForgeRegistry<CrackingRecipe> CRACKING = GameRegistry.findRegistry(CrackingRecipe.class);
+  public static final IForgeRegistry<StrainingRecipe> STRAINING = GameRegistry.findRegistry(StrainingRecipe.class);
 
   public static final IForgeRegistry<Plant> PLANTS = GameRegistry.findRegistry(Plant.class);
+
 
   static {
     // Make sure all public static final fields have values, should stop people from prematurely loading this class.

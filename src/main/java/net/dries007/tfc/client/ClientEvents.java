@@ -84,10 +84,10 @@ public class ClientEvents {
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
   public static void onInitGuiPost(GuiScreenEvent.InitGuiEvent.Post event) {
-    if (event.getGui() instanceof GuiInventory) {
+    if (event.getGui() instanceof GuiInventory guiInventory) {
       int buttonId = event.getButtonList().size();
-      int guiLeft = ((GuiInventory) event.getGui()).getGuiLeft();
-      int guiTop = ((GuiInventory) event.getGui()).getGuiTop();
+      int guiLeft = guiInventory.getGuiLeft();
+      int guiTop = guiInventory.getGuiTop();
 
       event.getButtonList().add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.INVENTORY, guiLeft, guiTop, ++buttonId, false));
       event.getButtonList().add(new GuiButtonPlayerInventoryTab(TFCGuiHandler.Type.SKILLS, guiLeft, guiTop, ++buttonId, true));

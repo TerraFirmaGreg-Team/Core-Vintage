@@ -1,40 +1,52 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.base.object.tile.api.ITileFields;
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
+import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.ModuleDevice;
+import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
+import su.terrafirmagreg.modules.device.object.container.ContainerCharcoalForge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.util.IHeatConsumerBlock;
-import net.dries007.tfc.objects.te.ITileFields;
-import net.dries007.tfc.objects.te.TETickableInventory;
 import net.dries007.tfc.util.fuel.Fuel;
 import net.dries007.tfc.util.fuel.FuelManager;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
+import java.util.Optional;
 
-import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
-@ParametersAreNonnullByDefault
-public class TileCharcoalForge extends TETickableInventory implements ICalendarTickable, ITileFields {
+public class TileCharcoalForge extends BaseTileTickableInventory
+  implements ICalendarTickable, ITileFields, IAmbientalProviderTile,
+             IProviderContainer<ContainerCharcoalForge, GuiCharcoalForge> {
 
   public static final int SLOT_FUEL_MIN = 0;
   public static final int SLOT_FUEL_MAX = 4;
@@ -45,7 +57,7 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
 
   public static final int FIELD_TEMPERATURE = 0;
 
-  private static final int MAX_AIR_TICKS = ConfigTFC.Devices.BELLOWS.maxTicks;
+  private static final int MAX_AIR_TICKS = ConfigDevice.BLOCK.BELLOWS.maxTicks;
 
   private final HeatRecipe[] cachedRecipes = new HeatRecipe[5];
   private boolean requiresSlotUpdate = false;
@@ -81,9 +93,9 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
    * Consume more fuel on rain
    */
   public void onRainDrop() {
-    burnTicks -= ConfigTFC.Devices.CHARCOAL_FORGE.rainTicks;
+    burnTicks -= ConfigDevice.BLOCK.CHARCOAL_FORGE.rainTicks;
     // Play the "tsssss" sound
-    world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + Constants.RNG.nextFloat() * 0.4f);
+    world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.8f, 0.8f + MathUtils.RNG.nextFloat() * 0.4f);
   }
 
   @Override
@@ -133,15 +145,15 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
 
         // Provide heat to blocks that are one block above
         Block blockUp = world.getBlockState(pos.up()).getBlock();
-        if (blockUp instanceof IHeatConsumerBlock) {
-          ((IHeatConsumerBlock) blockUp).acceptHeat(world, pos.up(), temperature);
+        if (blockUp instanceof IHeatConsumerBlock heatConsumerBlock) {
+          heatConsumerBlock.acceptHeat(world, pos.up(), temperature);
         }
 
         // Update items in slots
         // Loop through input + 2 output slots
         for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
           ItemStack stack = inventory.getStackInSlot(i);
-          ICapabilityHeat cap = stack.getCapability(CapabilityHeat.CAPABILITY, null);
+          var cap = CapabilityHeat.get(stack);
           if (cap != null) {
             // Update temperature of item
             float itemTemp = cap.getTemperature();
@@ -161,6 +173,86 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
       }
       markDirty();
     }
+  }
+
+  private void handleInputMelting(ItemStack stack, int startIndex) {
+    HeatRecipe recipe = cachedRecipes[startIndex - SLOT_INPUT_MIN];
+    var cap = CapabilityHeat.get(stack);
+
+    if (recipe != null && cap != null && recipe.isValidTemperature(cap.getTemperature())) {
+      // Handle possible metal output
+      FluidStack fluidStack = recipe.getOutputFluid(stack);
+      ItemStack outputStack = recipe.getOutputStack(stack);
+      float itemTemperature = cap.getTemperature();
+      if (fluidStack != null) {
+        // Loop through all input slots
+        for (int i = SLOT_EXTRA_MIN; i <= SLOT_EXTRA_MAX; i++) {
+          // While the fluid is still waiting
+          if (fluidStack.amount <= 0) {
+            break;
+          }
+          // Try an output slot
+          ItemStack output = inventory.getStackInSlot(i);
+          // Fill the fluid
+          IFluidHandler fluidHandler = output.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+          if (fluidHandler != null) {
+            int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
+            if (amountFilled > 0) {
+              fluidStack.amount -= amountFilled;
+
+              // If the fluid was filled, make sure to make it the same temperature
+              var heatHandler = CapabilityHeat.get(output);
+              if (heatHandler != null) {
+                heatHandler.setTemperature(itemTemperature);
+              }
+            }
+          }
+        }
+      }
+
+      // Charcoal grilled!
+      CapabilityFood.applyTrait(outputStack, FoodTrait.CHARCOAL_GRILLED);
+
+      // Handle possible item output
+      inventory.setStackInSlot(startIndex, outputStack);
+    }
+  }
+
+  @Override
+  public ContainerCharcoalForge getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new ContainerCharcoalForge(inventoryPlayer, this);
+  }
+
+  @Override
+  public GuiCharcoalForge getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new GuiCharcoalForge(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+  }
+
+  private void cascadeFuelSlots() {
+    // This will cascade all fuel down to the lowest available slot
+    int lowestAvailSlot = 0;
+    for (int i = 0; i <= SLOT_FUEL_MAX; i++) {
+      ItemStack stack = inventory.getStackInSlot(i);
+      if (!stack.isEmpty()) {
+        // Move to lowest avail slot
+        if (i > lowestAvailSlot) {
+          inventory.setStackInSlot(lowestAvailSlot, stack.copy());
+          inventory.setStackInSlot(i, ItemStack.EMPTY);
+        }
+        lowestAvailSlot++;
+      }
+    }
+    requiresSlotUpdate = false;
+  }
+
+  @Override
+  public long getLastUpdateTick() {
+    return lastPlayerTick;
+  }
+
+  @Override
+  public void setLastUpdateTick(long tick) {
+    this.lastPlayerTick = tick;
   }
 
   @Override
@@ -198,7 +290,7 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
       temperature = 0;
       for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
         ItemStack stack = inventory.getStackInSlot(i);
-        ICapabilityHeat cap = stack.getCapability(CapabilityHeat.CAPABILITY, null);
+        var cap = CapabilityHeat.get(stack);
         if (cap != null) {
           cap.setTemperature(0f);
         }
@@ -207,15 +299,6 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
     }
   }
 
-  @Override
-  public long getLastUpdateTick() {
-    return lastPlayerTick;
-  }
-
-  @Override
-  public void setLastUpdateTick(long tick) {
-    this.lastPlayerTick = tick;
-  }
 
   public void onCreate() {
     burnTicks = 200;
@@ -242,14 +325,25 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
   }
 
   @Override
-  @Nonnull
+  @NotNull
   public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-    nbt.setFloat("temperature", temperature);
-    nbt.setInteger("burnTicks", burnTicks);
-    nbt.setInteger("airTicks", airTicks);
-    nbt.setFloat("burnTemperature", burnTemperature);
-    nbt.setLong("lastPlayerTick", lastPlayerTick);
+    NBTUtils.setGenericNBTValue(nbt, "temperature", temperature);
+    NBTUtils.setGenericNBTValue(nbt, "burnTicks", burnTicks);
+    NBTUtils.setGenericNBTValue(nbt, "airTicks", airTicks);
+    NBTUtils.setGenericNBTValue(nbt, "burnTemperature", burnTemperature);
+    NBTUtils.setGenericNBTValue(nbt, "lastPlayerTick", lastPlayerTick);
     return super.writeToNBT(nbt);
+  }
+
+  private void updateCachedRecipes() {
+    // cache heat recipes for each input
+    for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
+      cachedRecipes[i - SLOT_INPUT_MIN] = null;
+      ItemStack inputStack = inventory.getStackInSlot(i);
+      if (!inputStack.isEmpty()) {
+        cachedRecipes[i - SLOT_INPUT_MIN] = HeatRecipe.get(inputStack);
+      }
+    }
   }
 
   @Override
@@ -259,16 +353,16 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
   }
 
   @Override
-  public boolean isItemValid(int slot, ItemStack stack) {
+  public boolean isItemValid(int slot, @NotNull ItemStack stack) {
     if (slot <= SLOT_FUEL_MAX) {
       // Fuel slots - anything that is a valid TFC fuel
       return FuelManager.isItemForgeFuel(stack);
     } else if (slot <= SLOT_INPUT_MAX) {
       // Input slots - anything that can heat up
-      return stack.hasCapability(CapabilityHeat.CAPABILITY, null);
+      return CapabilityHeat.has(stack);
     } else {
       // Extra slots - anything that can heat up and hold fluids
-      return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) && stack.hasCapability(CapabilityHeat.CAPABILITY, null);
+      return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) && CapabilityHeat.has(stack);
     }
   }
 
@@ -282,7 +376,7 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
     if (index == FIELD_TEMPERATURE) {
       this.temperature = (float) value;
     } else {
-      TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#setField", index);
+      ModuleDevice.LOGGER.warn("Invalid field ID {} in TECharcoalForge#setField", index);
     }
   }
 
@@ -291,78 +385,19 @@ public class TileCharcoalForge extends TETickableInventory implements ICalendarT
     if (index == FIELD_TEMPERATURE) {
       return (int) temperature;
     }
-    TerraFirmaCraft.getLog().warn("Invalid field ID {} in TECharcoalForge#getField", index);
+    ModuleDevice.LOGGER.warn("Invalid field ID {} in TECharcoalForge#getField", index);
     return 0;
   }
 
-  private void handleInputMelting(ItemStack stack, int startIndex) {
-    HeatRecipe recipe = cachedRecipes[startIndex - SLOT_INPUT_MIN];
-    ICapabilityHeat cap = stack.getCapability(CapabilityHeat.CAPABILITY, null);
-
-    if (recipe != null && cap != null && recipe.isValidTemperature(cap.getTemperature())) {
-      // Handle possible metal output
-      FluidStack fluidStack = recipe.getOutputFluid(stack);
-      ItemStack outputStack = recipe.getOutputStack(stack);
-      float itemTemperature = cap.getTemperature();
-      if (fluidStack != null) {
-        // Loop through all input slots
-        for (int i = SLOT_EXTRA_MIN; i <= SLOT_EXTRA_MAX; i++) {
-          // While the fluid is still waiting
-          if (fluidStack.amount <= 0) {
-            break;
-          }
-          // Try an output slot
-          ItemStack output = inventory.getStackInSlot(i);
-          // Fill the fluid
-          IFluidHandler fluidHandler = output.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-          if (fluidHandler != null) {
-            int amountFilled = fluidHandler.fill(fluidStack.copy(), true);
-            if (amountFilled > 0) {
-              fluidStack.amount -= amountFilled;
-
-              // If the fluid was filled, make sure to make it the same temperature
-              ICapabilityHeat heatHandler = output.getCapability(CapabilityHeat.CAPABILITY, null);
-              if (heatHandler != null) {
-                heatHandler.setTemperature(itemTemperature);
-              }
-            }
-          }
-        }
-      }
-
-      // Charcoal grilled!
-      CapabilityFood.applyTrait(outputStack, FoodTrait.CHARCOAL_GRILLED);
-
-      // Handle possible item output
-      inventory.setStackInSlot(startIndex, outputStack);
+  @Override
+  public Optional<ModifierTile> getModifier(EntityPlayer player, TileEntity tile) {
+    float change = temperature / 140f;
+    float potency = temperature / 350f;
+    if (ModifierTile.hasProtection(player)) {
+      change = 1.0F;
     }
+    return ModifierTile.defined(this.getBlockType().getRegistryName().getPath(), change, potency);
   }
 
-  private void cascadeFuelSlots() {
-    // This will cascade all fuel down to the lowest available slot
-    int lowestAvailSlot = 0;
-    for (int i = 0; i <= SLOT_FUEL_MAX; i++) {
-      ItemStack stack = inventory.getStackInSlot(i);
-      if (!stack.isEmpty()) {
-        // Move to lowest avail slot
-        if (i > lowestAvailSlot) {
-          inventory.setStackInSlot(lowestAvailSlot, stack.copy());
-          inventory.setStackInSlot(i, ItemStack.EMPTY);
-        }
-        lowestAvailSlot++;
-      }
-    }
-    requiresSlotUpdate = false;
-  }
 
-  private void updateCachedRecipes() {
-    // cache heat recipes for each input
-    for (int i = SLOT_INPUT_MIN; i <= SLOT_INPUT_MAX; i++) {
-      cachedRecipes[i - SLOT_INPUT_MIN] = null;
-      ItemStack inputStack = inventory.getStackInSlot(i);
-      if (!inputStack.isEmpty()) {
-        cachedRecipes[i - SLOT_INPUT_MIN] = HeatRecipe.get(inputStack);
-      }
-    }
-  }
 }

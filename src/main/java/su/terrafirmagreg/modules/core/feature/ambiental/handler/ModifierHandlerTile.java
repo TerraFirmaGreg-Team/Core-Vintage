@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalRegistry;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEnvironmental;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
-import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
@@ -44,7 +43,6 @@ public final class ModifierHandlerTile {
     TILE.register(ModifierHandlerTile::handleClayOven); // Oven
 
     // TFC
-    TILE.register(ModifierHandlerTile::handleCharcoalForge); // Угольная кузня
     TILE.register(ModifierHandlerTile::handleFirePit); // Костер
     TILE.register(ModifierHandlerTile::handleLamps); // Лампа
     TILE.register(ModifierHandlerTile::handleCrucible); // Тигель
@@ -113,20 +111,6 @@ public final class ModifierHandlerTile {
     }
   }
 
-
-  public static Optional<ModifierTile> handleCharcoalForge(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TileCharcoalForge forge) {
-
-      float temp = forge.getField(TileCharcoalForge.FIELD_TEMPERATURE);
-      float change = temp / 140f;
-      if (ModifierTile.hasProtection(player)) {
-        change = 1.0F;
-      }
-      return ModifierTile.defined("charcoal_forge", change, 0);
-    } else {
-      return ModifierTile.none();
-    }
-  }
 
   public static Optional<ModifierTile> handleFirePit(EntityPlayer player, TileEntity tile) {
     if (tile instanceof TileFirePit pit) {

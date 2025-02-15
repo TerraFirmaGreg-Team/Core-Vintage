@@ -98,7 +98,7 @@ public final class BlocksDevice {
     BLAST_FURNACE = registry.block(new BlockBlastFurnace());
     BLOOM = registry.block(new BlockBloom());
     BLOOMERY = registry.block(new BlockBloomery());
-//    CHARCOAL_FORGE = registry.block(new BlockCharcoalForge());
+    CHARCOAL_FORGE = registry.block(new BlockCharcoalForge());
 //    CHARCOAL_PILE = registry.block(new BlockCharcoalPile());
 //    CRUCIBLE = registry.block(new BlockCrucible());
 //    FIRE_PIT = registry.block(new BlockFirePit());

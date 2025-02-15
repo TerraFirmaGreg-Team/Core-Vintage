@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 
@@ -9,17 +11,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.client.gui.GuiContainerTE;
-
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
-
 @SideOnly(Side.CLIENT)
-public class GuiCharcoalForge extends GuiContainerTE<TileCharcoalForge> {
+public class GuiCharcoalForge extends BaseGuiContainerTile<TileCharcoalForge> {
 
-  private static final ResourceLocation CHARCOAL_FORGE_BACKGROUND = new ResourceLocation(TFC, "textures/gui/charcoal_forge.png");
+  private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/charcoal_forge.png");
 
   public GuiCharcoalForge(Container container, InventoryPlayer playerInv, TileCharcoalForge tile) {
-    super(container, playerInv, tile, CHARCOAL_FORGE_BACKGROUND);
+    super(container, playerInv, tile, BACKGROUND);
+
   }
 
   @Override
@@ -27,7 +26,8 @@ public class GuiCharcoalForge extends GuiContainerTE<TileCharcoalForge> {
     super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
     // Draw the temperature indicator
-    int temperature = (int) (51 * tile.getField(TileCharcoalForge.FIELD_TEMPERATURE) / Heat.maxVisibleTemperature());
+    int temperature = (int) (51 * tile.getField(TileCharcoalForge.FIELD_TEMPERATURE)
+                             / Heat.maxVisibleTemperature());
     if (temperature > 0) {
       if (temperature > 51) {
         temperature = 51;

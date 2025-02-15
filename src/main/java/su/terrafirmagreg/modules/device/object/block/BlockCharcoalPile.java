@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 
@@ -24,7 +25,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.util.Helpers;
 
@@ -154,7 +154,7 @@ public class BlockCharcoalPile extends Block implements ILightableBlock {
     ItemStack stack = player.getHeldItem(hand);
     if (state.getValue(LAYERS) >= 7 && BlockCharcoalForge.isValid(world, pos) && ItemFireStarter.onIgnition(stack)) {
       if (!world.isRemote) {
-        world.setBlockState(pos, BlocksTFC.CHARCOAL_FORGE.getDefaultState().withProperty(LIT, true));
+        world.setBlockState(pos, BlocksDevice.CHARCOAL_FORGE.get().getDefaultState().withProperty(LIT, true));
         TileCharcoalForge te = Helpers.getTE(world, pos, TileCharcoalForge.class);
         if (te != null) {
           te.onCreate();

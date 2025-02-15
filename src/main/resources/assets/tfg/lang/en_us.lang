@@ -162,6 +162,7 @@ block.tfg.device.blast_furnace.name=Blast Furnace
 block.tfg.device.bloomery.name=Bloomery
 block.tfg.device.molten.name=Molten
 block.tfg.device.bloom.name=Bloom
+block.tfg.device.charcoal_forge.name=Charcoal Forge
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

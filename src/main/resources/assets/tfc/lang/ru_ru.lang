@@ -699,13 +699,6 @@ config.tfc.devices.charcoal_pit.glass=Можно использовать сте
 config.tfc.devices.charcoal_pit.glass.tooltip=Могут ли угольные ямы использовать стекло (окрашенное стекло) в качестве действительного покрытия?
 
 
-### Charcoal Forge
-config.tfc.devices.charcoal_forge=Угольная кузница
-
-config.tfc.devices.charcoal_forge.rainTicks=Дождь сокращает время горения в тиках
-config.tfc.devices.charcoal_forge.ticks.tooltip=Кол-во  тиков горения, которые удаляются, когда угольная кузница находится под дождем (случайное количество тиков). Это эффективно заставляет угольную кузницу потреблять больше топлива, когда над ним идет дождь.
-
-
 ### Fire Pit
 config.tfc.devices.fire_pit=Костер
 
@@ -1277,7 +1270,6 @@ vein.surface_tetrahedrite.name=Поверхностный тетраэдрит
 tile.tfc.placed_item.name=Установленные предметы
 tile.tfc.placed_item_flat.name=Мусор
 tile.tfc.pit_kiln.name=Яма для обжига
-tile.tfc.charcoal_forge.name=Угольная кузница
 tile.tfc.peat.name=Торф
 tile.tfc.peat_grass.name=Торфяная трава
 tile.tfc.thatch.name=Сноп соломы

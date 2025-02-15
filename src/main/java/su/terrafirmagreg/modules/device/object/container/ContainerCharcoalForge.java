@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.object.container;
 
+import su.terrafirmagreg.api.base.object.inventory.spi.container.BaseContainerTile;
+import su.terrafirmagreg.api.base.object.inventory.spi.slot.SlotCallback;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 
 import net.minecraft.entity.player.InventoryPlayer;
@@ -7,22 +9,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.container.ContainerTE;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_EXTRA_MAX;
 import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_EXTRA_MIN;
 import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_FUEL_MIN;
 import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_INPUT_MAX;
 import static su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge.SLOT_INPUT_MIN;
 
-@ParametersAreNonnullByDefault
-public class ContainerCharcoalForge extends ContainerTE<TileCharcoalForge> {
+public class ContainerCharcoalForge extends BaseContainerTile<TileCharcoalForge> {
 
-  public ContainerCharcoalForge(InventoryPlayer playerInv, TileCharcoalForge te) {
-    super(playerInv, te);
+  public ContainerCharcoalForge(InventoryPlayer playerInv, TileCharcoalForge tile) {
+    super(playerInv, tile);
   }
 
   @Override
@@ -49,13 +45,15 @@ public class ContainerCharcoalForge extends ContainerTE<TileCharcoalForge> {
 
       // Extra slots (for ceramic molds)
       for (int i = SLOT_EXTRA_MIN; i <= SLOT_EXTRA_MAX; i++) {
-        addSlotToContainer(new SlotCallback(inventory, i, 152, 8 + 18 * (i - SLOT_EXTRA_MIN), tile));
+        addSlotToContainer(
+          new SlotCallback(inventory, i, 152, 8 + 18 * (i - SLOT_EXTRA_MIN), tile));
       }
     }
   }
 
   @Override
   protected boolean transferStackIntoContainer(ItemStack stack, int containerSlots) {
-    return !mergeItemStack(stack, SLOT_EXTRA_MIN, SLOT_EXTRA_MAX + 1, false) && !mergeItemStack(stack, SLOT_FUEL_MIN, SLOT_INPUT_MAX + 1, false);
+    return !mergeItemStack(stack, SLOT_EXTRA_MIN, SLOT_EXTRA_MAX + 1, false) && !mergeItemStack(
+      stack, SLOT_FUEL_MIN, SLOT_INPUT_MAX + 1, false);
   }
 }

@@ -173,7 +173,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
     registry.addRecipes(heatList, HEAT_UID);
     registry.addRecipeCatalyst(new ItemStack(BlocksTFC.FIRE_PIT), HEAT_UID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksTFC.CHARCOAL_FORGE), HEAT_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CHARCOAL_FORGE.get()), HEAT_UID);
 
     //Wraps all anvil recipes
     List<AnvilRecipeWrapper> anvilList = TFCRegistries.ANVIL.getValuesCollection()

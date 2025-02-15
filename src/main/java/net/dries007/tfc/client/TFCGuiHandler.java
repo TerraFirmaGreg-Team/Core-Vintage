@@ -1,15 +1,12 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg;
-import su.terrafirmagreg.modules.device.object.container.ContainerCharcoalForge;
 import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
 import su.terrafirmagreg.modules.device.object.container.ContainerFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerLogPile;
 import su.terrafirmagreg.modules.device.object.container.ContainerPowderKeg;
-import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
@@ -110,9 +107,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return new ContainerFirePit(player.inventory, Helpers.getTE(world, pos, TileFirePit.class));
       case BARREL:
         return new ContainerBarrel(player.inventory, Helpers.getTE(world, pos, TEBarrel.class));
-      case CHARCOAL_FORGE:
-        //noinspection ConstantConditions
-        return new ContainerCharcoalForge(player.inventory, Helpers.getTE(world, pos, TileCharcoalForge.class));
       case ANVIL:
         //noinspection ConstantConditions
         return new ContainerAnvilTFC(player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
@@ -179,8 +173,6 @@ public class TFCGuiHandler implements IGuiHandler {
       case BARREL:
         return new GuiBarrel(container, player.inventory, Helpers.getTE(world, pos, TEBarrel.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
           .getTranslationKey());
-      case CHARCOAL_FORGE:
-        return new GuiCharcoalForge(container, player.inventory, Helpers.getTE(world, pos, TileCharcoalForge.class));
       case ANVIL:
         return new GuiAnvilTFC(container, player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
       case ANVIL_PLAN:
@@ -239,7 +231,6 @@ public class TFCGuiHandler implements IGuiHandler {
     KNAPPING_CLAY,
     KNAPPING_FIRE_CLAY,
     KNAPPING_LEATHER,
-    CHARCOAL_FORGE,
     ANVIL,
     ANVIL_PLAN,
     CRUCIBLE,

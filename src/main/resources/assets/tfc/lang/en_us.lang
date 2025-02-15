@@ -695,14 +695,6 @@ config.tfc.devices.charcoal_pit.ticks.tooltip=Number of ticks required for charc
 config.tfc.devices.charcoal_pit.glass=Can Accept Glass
 config.tfc.devices.charcoal_pit.glass.tooltip=Can charcoal pits take glass (or stained glass) as a valid cover block?
 
-
-### Charcoal Forge
-config.tfc.devices.charcoal_forge=Charcoal Forge
-
-config.tfc.devices.charcoal_forge.rainTicks=Rain drop burning ticks removal
-config.tfc.devices.charcoal_forge.ticks.tooltip=Number of burning ticks that is removed when the charcoal forge is on rain (random ticks). This effectively makes the charcoal forge consumes more fuel when it is raining above it.
-
-
 ### Fire Pit
 config.tfc.devices.fire_pit=Fire Pit
 
@@ -1311,7 +1303,6 @@ vein.surface_tetrahedrite.name=Surface Tetrahedrite
 tile.tfc.placed_item.name=Placed Items
 tile.tfc.placed_item_flat.name=Debris
 tile.tfc.pit_kiln.name=Pit Kiln
-tile.tfc.charcoal_forge.name=Charcoal Forge
 tile.tfc.peat.name=Peat
 tile.tfc.peat_grass.name=Peat Grass
 tile.tfc.thatch.name=Thatch

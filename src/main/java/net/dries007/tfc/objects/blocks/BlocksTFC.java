@@ -2,7 +2,6 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockCharcoalForge;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
 import su.terrafirmagreg.modules.device.object.block.BlockCrucible;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
@@ -12,7 +11,6 @@ import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
-import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
@@ -170,7 +168,6 @@ public final class BlocksTFC {
   public static final BlockCharcoalPile CHARCOAL_PILE = getNull();
   public static final BlockLogPile LOG_PILE = getNull();
   public static final BlockIngotPile INGOT_PILE = getNull();
-  public static final BlockCharcoalForge CHARCOAL_FORGE = getNull();
   public static final BlockCrucible CRUCIBLE = getNull();
   public static final BlockQuern QUERN = getNull();
   public static final BlockSeaIce SEA_ICE = getNull();
@@ -644,7 +641,6 @@ public final class BlocksTFC {
 
     // Registering JEI only blocks (for info)
     inventoryItemBlocks.add(new ItemBlock(register(r, "firepit", new BlockFirePit())));
-    inventoryItemBlocks.add(new ItemBlock(register(r, "charcoal_forge", new BlockCharcoalForge())));
     inventoryItemBlocks.add(new ItemBlock(register(r, "pit_kiln", new BlockPitKiln())));
     inventoryItemBlocks.add(new ItemBlock(register(r, "placed_item", new BlockPlacedItem())));
     // technical blocks
@@ -679,7 +675,6 @@ public final class BlocksTFC {
     register(TELoom.class, "loom");
     register(TELamp.class, "lamp");
     register(TEBarrel.class, "barrel");
-    register(TileCharcoalForge.class, "charcoal_forge");
     register(TEAnvilTFC.class, "anvil");
     register(TileCrucible.class, "crucible");
     register(TECropBase.class, "crop_base");

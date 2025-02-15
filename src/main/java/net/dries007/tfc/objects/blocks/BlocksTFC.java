@@ -2,14 +2,12 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
 import su.terrafirmagreg.modules.device.object.block.BlockPitKiln;
 import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
-import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
@@ -154,7 +152,6 @@ public final class BlocksTFC {
 
   public static final BlockPeat PEAT = getNull();
   public static final BlockPeat PEAT_GRASS = getNull();
-  public static final BlockFirePit FIRE_PIT = getNull();
   public static final BlockThatch THATCH = getNull();
   public static final BlockThatchBed THATCH_BED = getNull();
   public static final BlockPitKiln PIT_KILN = getNull();
@@ -244,7 +241,8 @@ public final class BlocksTFC {
   @SuppressWarnings("ConstantConditions")
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
     // This is called here because it needs to wait until Metal registry has fired
-    FluidsTFC.registerFluids();
+
+    FluidsTFC.registerFluidsPost();
 
     IForgeRegistry<Block> r = event.getRegistry();
 
@@ -633,7 +631,6 @@ public final class BlocksTFC {
     }
 
     // Registering JEI only blocks (for info)
-    inventoryItemBlocks.add(new ItemBlock(register(r, "firepit", new BlockFirePit())));
     inventoryItemBlocks.add(new ItemBlock(register(r, "pit_kiln", new BlockPitKiln())));
     inventoryItemBlocks.add(new ItemBlock(register(r, "placed_item", new BlockPlacedItem())));
     // technical blocks
@@ -662,7 +659,6 @@ public final class BlocksTFC {
     register(TEChestTFC.class, "chest");
     register(TileLogPile.class, "log_pile");
     register(TEIngotPile.class, "ingot_pile");
-    register(TileFirePit.class, "fire_pit");
     register(TEToolRack.class, "tool_rack");
     register(TELoom.class, "loom");
     register(TELamp.class, "lamp");

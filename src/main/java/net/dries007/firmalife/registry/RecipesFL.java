@@ -2,6 +2,7 @@ package net.dries007.firmalife.registry;
 
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
@@ -45,7 +46,7 @@ public class RecipesFL {
     int hour = ICalendar.TICKS_IN_HOUR;
     r.registerAll(
       // the input being straw makes this a curing recipe
-      new OvenRecipe(IIngredient.of(new ItemStack(ItemsTFC.STRAW)), new ItemStack(ItemsTFC.WOOD_ASH), 8 * hour).setRegistryName("cure"),
+      new OvenRecipe(IIngredient.of(new ItemStack(ItemsTFC.STRAW)), new ItemStack(ItemsCore.WOOD_ASH.get()), 8 * hour).setRegistryName("cure"),
 
       new OvenRecipe(IIngredient.of(new ItemStack(ItemsFL.getFood(FoodFL.DRIED_COCOA_BEANS))), new ItemStack(ItemsFL.ROASTED_COCOA_BEANS),
         2 * hour).setRegistryName("dried_cocoa_beans"),

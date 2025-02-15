@@ -19,10 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-@Mixin(value = Item.class)
+@Mixin(value = Item.class, remap = false)
 public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implements IItemSettings {
 
   @Unique
@@ -30,7 +27,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
   @Final
   protected Settings terraFirmaGreg$settings;
 
-  @Inject(method = "<init>", at = @At(value = "TAIL"))
+  @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
   public void onConstruct(CallbackInfo ci) {
     this.terraFirmaGreg$settings = Settings.of();
   }
@@ -44,7 +41,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Overwrite(remap = false)
+  @Overwrite
   public IRarity getForgeRarity(ItemStack stack) {
     return getSettings().getRarity();
   }
@@ -55,7 +52,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    */
   @Overwrite
   public int getMaxDamage() {
-    return getSettings().getDurability();
+    return getSettings().getMaxDamage();
   }
 
   /**
@@ -73,7 +70,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Overwrite(remap = false)
+  @Overwrite
   public int getItemStackLimit(ItemStack stack) {
     return getItemStackLimit();
   }
@@ -82,8 +79,8 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
    * @author Xikaro
    * @reason Адаптация под ISettingsItem
    */
-  @Overwrite(remap = false)
-  public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+  @Overwrite
+  public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
     if (getSettings().getCapability().isEmpty()) {
       return null;
     }

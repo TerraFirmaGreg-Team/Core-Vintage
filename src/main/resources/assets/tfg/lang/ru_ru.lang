@@ -45,6 +45,7 @@ block.tfg.core.fire_bricks.name=Огнеупорный кирпич
 
 ## Item
 item.tfg.core.wand.name=Отладочная палочка
+item.tfg.core.wood_ash.name=Древесная зола
 
 ## Effect
 effect.tfg.core.overburdened=Перегружен
@@ -91,6 +92,7 @@ block.tfg.device.bloom.name=Крица
 block.tfg.device.charcoal_forge.name=Угольная кузница
 block.tfg.device.crucible.name=Тигель
 block.tfg.device.charcoal_pile.name=Угольная куча
+block.tfg.device.fire_pit.name=Костер
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

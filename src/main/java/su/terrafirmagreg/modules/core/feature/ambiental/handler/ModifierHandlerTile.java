@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
-import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileIceBunker;
 import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
@@ -43,7 +42,6 @@ public final class ModifierHandlerTile {
     TILE.register(ModifierHandlerTile::handleClayOven); // Oven
 
     // TFC
-    TILE.register(ModifierHandlerTile::handleFirePit); // Костер
     TILE.register(ModifierHandlerTile::handleLamps); // Лампа
     TILE.register(ModifierHandlerTile::handleCrucible); // Тигель
   }
@@ -106,21 +104,6 @@ public final class ModifierHandlerTile {
       }
 
       return ModifierTile.defined("firmalife_oven", change, potency);
-    } else {
-      return ModifierTile.none();
-    }
-  }
-
-
-  public static Optional<ModifierTile> handleFirePit(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TileFirePit pit) {
-
-      float temp = pit.getField(TileFirePit.FIELD_TEMPERATURE);
-      float change = temp / 100f;
-      if (ModifierTile.hasProtection(player)) {
-        change = 1.0F;
-      }
-      return ModifierTile.defined("fire_pit", Math.min(6f, change), 0);
     } else {
       return ModifierTile.none();
     }

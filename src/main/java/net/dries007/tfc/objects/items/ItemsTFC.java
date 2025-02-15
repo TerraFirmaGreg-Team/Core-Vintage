@@ -175,8 +175,6 @@ public final class ItemsTFC {
   public static final Item GLASS_SHARD = getNull();
   @GameRegistry.ObjectHolder("stick_bunch")
   public static final Item STICK_BUNCH = getNull();
-  @GameRegistry.ObjectHolder("wood_ash")
-  public static final Item WOOD_ASH = getNull();
 
   @Getter
   private static ImmutableList<Item> allSimpleItems;
@@ -255,7 +253,6 @@ public final class ItemsTFC {
 
     simpleItems.add(register(r, "stick_bunch", new ItemMisc(Size.NORMAL, Weight.LIGHT), CT_WOOD));
     simpleItems.add(register(r, "stick_bundle", new ItemMisc(Size.VERY_LARGE, Weight.MEDIUM, "log_wood", "stick_bundle"), CT_WOOD));
-    simpleItems.add(register(r, "wood_ash", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_WOOD));
 
     for (RockCategory cat : TFCRegistries.ROCK_CATEGORIES.getValuesCollection()) {
       for (Rock.ToolType type : Rock.ToolType.values()) {

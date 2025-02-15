@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -827,10 +828,10 @@ public final class RecipesTFCF {
       new HeatRecipeSimple(IIngredient.of("driftwood"), new ItemStack(Blocks.TORCH, 12), 60).setRegistryName("torch_driftwood"),
 
       // Ash
-      new HeatRecipeSimple(IIngredient.of("straw"), new ItemStack(ItemsTFC.WOOD_ASH, 1), 350, 750).setRegistryName("straw_ash"),
-      new HeatRecipeSimple(IIngredient.of("twig"), new ItemStack(ItemsTFC.WOOD_ASH, 2), 350, 750).setRegistryName("twig_ash"),
-      new HeatRecipeSimple(IIngredient.of("torch"), new ItemStack(ItemsTFC.WOOD_ASH, 2), 350, 750).setRegistryName("torch_ash_1"),
-      new HeatRecipeSimple(IIngredient.of(Blocks.TORCH), new ItemStack(ItemsTFC.WOOD_ASH, 2), 350, 750).setRegistryName("torch_ash_2"),
+      new HeatRecipeSimple(IIngredient.of("straw"), new ItemStack(ItemsCore.WOOD_ASH.get(), 1), 350, 750).setRegistryName("straw_ash"),
+      new HeatRecipeSimple(IIngredient.of("twig"), new ItemStack(ItemsCore.WOOD_ASH.get(), 2), 350, 750).setRegistryName("twig_ash"),
+      new HeatRecipeSimple(IIngredient.of("torch"), new ItemStack(ItemsCore.WOOD_ASH.get(), 2), 350, 750).setRegistryName("torch_ash_1"),
+      new HeatRecipeSimple(IIngredient.of(Blocks.TORCH), new ItemStack(ItemsCore.WOOD_ASH.get(), 2), 350, 750).setRegistryName("torch_ash_2"),
 
       // Charred Bones
       new HeatRecipeSimple(IIngredient.of("bone"), new ItemStack(ItemsTFCF.CHARRED_BONES), 425, 850).setRegistryName("charred_bones_heat"),

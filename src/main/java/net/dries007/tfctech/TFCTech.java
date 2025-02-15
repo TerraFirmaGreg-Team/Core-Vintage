@@ -1,6 +1,7 @@
 package net.dries007.tfctech;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -15,7 +16,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.dries007.tfc.network.PacketFridgeUpdate;
 import net.dries007.tfc.network.PacketLatexUpdate;
 import net.dries007.tfc.network.PacketTileEntityUpdate;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfctech.client.TechGuiHandler;
 import org.apache.logging.log4j.Logger;
 
@@ -48,7 +48,7 @@ public class TFCTech {
   public void init(FMLInitializationEvent event) {
     // Register dust ash ore dictionary
     // Unfortunately, this has to be done after TFC registered it's items, which is only safe after preInit
-    OreDictionary.registerOre("dustAsh", ItemsTFC.WOOD_ASH);
+    OreDictionary.registerOre("dustAsh", ItemsCore.WOOD_ASH.get());
     FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "tfctech.compat.waila.TOPPlugin");
   }
 

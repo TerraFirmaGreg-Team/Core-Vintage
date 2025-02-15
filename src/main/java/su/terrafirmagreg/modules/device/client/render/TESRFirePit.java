@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.client.tesr.spi.BaseTESR;
+import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
@@ -12,7 +14,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -24,24 +25,26 @@ import net.minecraftforge.items.IItemHandler;
 import net.dries007.tfc.client.FluidSpriteCache;
 import org.lwjgl.opengl.GL11;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_END;
 import static su.terrafirmagreg.modules.device.object.tile.TileFirePit.SLOT_EXTRA_INPUT_START;
 
 /**
  * Render water in the cooking pot
  */
-@ParametersAreNonnullByDefault
+
 @SideOnly(Side.CLIENT)
-public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
+public class TESRFirePit extends BaseTESR<TileFirePit> {
 
   @Override
-  public void render(TileFirePit te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-    super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+  public void render(@NotNull TileFirePit tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
     // Rendering liquid in the soup pot
-    if (te.getCookingPotStage() != TileFirePit.CookingPotStage.EMPTY) {
+    if (tile.getCookingPotStage() != TileFirePit.CookingPotStage.EMPTY) {
       Fluid water = FluidsCore.FRESH_WATER.get();
 
       GlStateManager.pushMatrix();
@@ -51,7 +54,9 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
 
       GlStateManager.enableAlpha();
       GlStateManager.enableBlend();
-      GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+      GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
+        GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+        GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
       int color = water.getColor();
 
@@ -60,7 +65,7 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
       float b = (color & 0xFF) / 255F;
       float a = ((color >> 24) & 0xFF) / 255F;
 
-      if (te.getCookingPotStage() == TileFirePit.CookingPotStage.FINISHED) {
+      if (tile.getCookingPotStage() == TileFirePit.CookingPotStage.FINISHED) {
         b = 0;
         g /= 4;
         r *= 3;
@@ -75,23 +80,38 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
 
       double height = 0.625D;
 
-      buffer.pos(0.3125D, height, 0.3125D).tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(5)).normal(0, 0, 1).endVertex();
-      buffer.pos(0.3125D, height, 0.6875D).tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(11)).normal(0, 0, 1).endVertex();
-      buffer.pos(0.6875D, height, 0.6875D).tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(11)).normal(0, 0, 1).endVertex();
-      buffer.pos(0.6875D, height, 0.3125D).tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(5)).normal(0, 0, 1).endVertex();
+      buffer.pos(0.3125D, height, 0.3125D)
+        .tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(5))
+        .normal(0, 0, 1)
+        .endVertex();
+      buffer.pos(0.3125D, height, 0.6875D)
+        .tex(sprite.getInterpolatedU(5), sprite.getInterpolatedV(11))
+        .normal(0, 0, 1)
+        .endVertex();
+      buffer.pos(0.6875D, height, 0.6875D)
+        .tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(11))
+        .normal(0, 0, 1)
+        .endVertex();
+      buffer.pos(0.6875D, height, 0.3125D)
+        .tex(sprite.getInterpolatedU(11), sprite.getInterpolatedV(5))
+        .normal(0, 0, 1)
+        .endVertex();
 
       Tessellator.getInstance().draw();
 
       GlStateManager.popMatrix();
     }
     // Render food on the grill
-    if (te.hasWorld()) {
-      IBlockState state = te.getWorld().getBlockState(te.getPos());
-      if (state.getBlock() instanceof BlockFirePit && state.getValue(BlockFirePit.ATTACHMENT) == BlockFirePit.FirePitAttachment.GRILL) {
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    if (tile.hasWorld()) {
+      IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+      if (state.getBlock() instanceof BlockFirePit
+          && state.getValue(FIRE_PIT_ATTACHMENT) == EnumFirePitAttachment.GRILL) {
+        IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
-          int rotation = te.getBlockMetadata();
-          if (state.getValue(BlockFirePit.LIT)) {rotation -= 1;}
+          int rotation = tile.getBlockMetadata();
+          if (state.getValue(LIT)) {
+            rotation -= 1;
+          }
           float yOffset = 0.625f;
 
           GlStateManager.pushMatrix();
@@ -104,11 +124,15 @@ public class TESRFirePit extends TileEntitySpecialRenderer<TileFirePit> {
           for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
             ItemStack item = cap.getStackInSlot(i);
             if (!item.isEmpty()) {
-              Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
+              Minecraft.getMinecraft()
+                .getRenderItem()
+                .renderItem(item, ItemCameraTransforms.TransformType.FIXED);
             }
 
             GlStateManager.translate(-leftTranslate, 0, 0);
-            if ((i == SLOT_EXTRA_INPUT_START + 1) || (i == SLOT_EXTRA_INPUT_START + 3)) {GlStateManager.translate(2 * leftTranslate, -0.7f, 0);}
+            if ((i == SLOT_EXTRA_INPUT_START + 1) || (i == SLOT_EXTRA_INPUT_START + 3)) {
+              GlStateManager.translate(2 * leftTranslate, -0.7f, 0);
+            }
           }
 
           GlStateManager.popMatrix();

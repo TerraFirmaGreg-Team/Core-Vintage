@@ -51,6 +51,7 @@ public abstract class AbstractRemapping {
     put("charcoal_forge", BlocksDevice.CHARCOAL_FORGE.get());
     put("crucible", BlocksDevice.CRUCIBLE.get());
     put("charcoal_pile", BlocksDevice.CHARCOAL_PILE.get());
+    put("firepit", BlocksDevice.FIRE_PIT.get());
 
     put("nest_box", BlocksAnimal.NEST_BOX.get());
 
@@ -58,6 +59,7 @@ public abstract class AbstractRemapping {
 
   protected static final Map<String, Item> ITEM_MAP = new Object2ObjectOpenHashMap<>() {{
     put("wand", ItemsCore.WAND.get());
+    put("wood_ash", ItemsCore.WOOD_ASH.get());
 
     put("bladder", ItemsAnimal.BLADDER.get());
     put("halter", ItemsAnimal.HALTER.get());

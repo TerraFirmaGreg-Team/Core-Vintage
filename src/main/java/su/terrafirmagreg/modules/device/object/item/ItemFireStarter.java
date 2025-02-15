@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
@@ -43,9 +44,9 @@ public class ItemFireStarter extends BaseItem {
     getSettings()
       .registryKey("firestarter")
       .notCanStack()
-      .maxDamage(8)
       .maxStackSize(1);
 
+    setMaxDamage(8);
   }
 
   /**
@@ -187,7 +188,7 @@ public class ItemFireStarter extends BaseItem {
         if (sticks >= 3 && log != null) {
           final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
           if (itemRand.nextFloat() < chance + kindlingModifier) {
-            world.setBlockState(pos, BlocksTFC.FIRE_PIT.getDefaultState().withProperty(LIT, true));
+            world.setBlockState(pos, BlocksDevice.FIRE_PIT.get().getDefaultState().withProperty(LIT, true));
             EntityItem finalLog = log;
             TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> tile.onCreate(finalLog.getItem()));
             stuffToUse.forEach(Entity::setDead);

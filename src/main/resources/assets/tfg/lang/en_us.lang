@@ -119,6 +119,7 @@ block.tfg.core.fire_bricks.name=Fire Bricks
 
 ## Item
 item.tfg.core.wand.name=Debug Wand
+item.tfg.core.wood_ash.name=Wood Ash
 
 ## Effect
 effect.tfg.core.overburdened=Overburdened
@@ -165,6 +166,7 @@ block.tfg.device.bloom.name=Bloom
 block.tfg.device.charcoal_forge.name=Charcoal Forge
 block.tfg.device.crucible.name=Crucible
 block.tfg.device.charcoal_pile.name=Charcoal Pile
+block.tfg.device.fire_pit.name=Firepit
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

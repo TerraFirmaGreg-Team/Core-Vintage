@@ -52,7 +52,7 @@ public interface IItemSettings extends IBaseSettings<Settings> {
     ResourceLocation resource;
 
     boolean isFireResistant;
-    int durability;
+    int maxDamage;
     int maxStackSize;
 
     IRarity rarity;
@@ -95,7 +95,7 @@ public interface IItemSettings extends IBaseSettings<Settings> {
 
     public Settings maxDamage(int durability) {
       if (this.maxStackSize != 64 && this.maxStackSize > 1) {throw new RuntimeException("An item cannot have durability and be stackable!");}
-      this.durability = durability;
+      this.maxDamage = durability;
       this.maxStackSize = 1;
 
       return this;
@@ -103,7 +103,7 @@ public interface IItemSettings extends IBaseSettings<Settings> {
 
     public Settings maxStackSize(int maxStackSize) {
       if (maxStackSize < 1) {throw new IllegalArgumentException("Maximum stack size must be greater than zero!");}
-      if (maxStackSize > 1 && this.durability != 0) {throw new RuntimeException("An item cannot have durability and be stackable!");}
+      if (maxStackSize > 1 && this.maxDamage != 0) {throw new RuntimeException("An item cannot have durability and be stackable!");}
 
       this.maxStackSize = maxStackSize;
       return this;

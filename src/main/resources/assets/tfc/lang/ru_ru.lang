@@ -1259,7 +1259,6 @@ tile.tfc.pit_kiln.name=Яма для обжига
 tile.tfc.peat.name=Торф
 tile.tfc.peat_grass.name=Торфяная трава
 tile.tfc.thatch.name=Сноп соломы
-tile.tfc.firepit.name=Костер
 tile.tfc.torch.name=Факел
 tile.tfc.quern.name=Жёрнов
 tile.tfc.ceramics.fired.large_vessel.name=Большой сосуд
@@ -3491,7 +3490,6 @@ item.tfc.brick.ranite.name=Гранитный кирпич
 
 item.tfc.stick_bunch.name=Связка из палок
 item.tfc.stick_bundle.name=Тюк палок
-item.tfc.wood_ash.name=Древесная зола
 item.tfc.wood.lumber.ash.name=Пиломатериалы из ясеня
 item.tfc.wood.lumber.aspen.name=Пиломатериалы из осины
 item.tfc.wood.lumber.birch.name=Пиломатериалы из березы

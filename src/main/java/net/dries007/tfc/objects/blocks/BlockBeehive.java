@@ -44,6 +44,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockBeehive extends Block implements ICapabilitySize {
@@ -91,7 +93,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     for (Vec3i v : VECTORS) {
       BlockPos searchPos = pos.add(v);
       IBlockState searchState = world.getBlockState(searchPos);
-      if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(BlockFirePit.LIT)) {
+      if (searchState.getBlock() instanceof BlockFirePit && searchState.getValue(LIT)) {
         return false;
       }
     }

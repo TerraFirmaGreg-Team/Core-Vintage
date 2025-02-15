@@ -99,6 +99,19 @@ public final class FluidsTFC {
     return DYE_FLUIDS.get(dyeColor);
   }
 
+  public static void registerFluidsPost() {
+//noinspection ConstantConditions
+    allMetalFluids = ImmutableMap.<Metal, FluidWrapper>builder().putAll(
+      TFCRegistries.METALS.getValuesCollection()
+        .stream()
+        .collect(Collectors.toMap(
+          metal -> metal,
+          metal -> registerFluid(new Fluid(metal.getRegistryName().getPath(), LAVA_STILL, LAVA_FLOW, metal.getColor()))
+            .with(MetalProperty.METAL, new MetalProperty(metal))
+        ))
+    ).build();
+  }
+
   public static void registerFluids() {
     FluidsCore.FRESH_WATER = registerFluid(new Fluid("fresh_water", FRESH_WATER_STILL, FRESH_WATER_FLOW, 0xFF296ACD)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC foodStatsTFC) {
@@ -180,17 +193,6 @@ public final class FluidsTFC {
           player.addPotionEffect(new PotionEffect(EffectsCore.CAFFEINE.get(), 14400, 3));
         }
       })
-    ).build();
-
-    //noinspection ConstantConditions
-    allMetalFluids = ImmutableMap.<Metal, FluidWrapper>builder().putAll(
-      TFCRegistries.METALS.getValuesCollection()
-        .stream()
-        .collect(Collectors.toMap(
-          metal -> metal,
-          metal -> registerFluid(new Fluid(metal.getRegistryName().getPath(), LAVA_STILL, LAVA_FLOW, metal.getColor()))
-            .with(MetalProperty.METAL, new MetalProperty(metal))
-        ))
     ).build();
 
     DYE_FLUIDS.putAll(Arrays.stream(EnumDyeColor.values()).collect(Collectors.toMap(

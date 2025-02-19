@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.modules.core.init.BlocksCore;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -19,7 +21,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 
 import javax.annotation.Nullable;
@@ -67,14 +68,14 @@ public class BlockThatchBed extends BlockBed {
 
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return Item.getItemFromBlock(BlocksTFC.THATCH);
+    return Item.getItemFromBlock(BlocksCore.THATCH.get());
   }
 
   @Override
   public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {
     if (state.getValue(PART) == BlockBed.EnumPartType.HEAD) {
       spawnAsEntity(worldIn, pos, new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.RAW, ItemAnimalHide.HideSize.LARGE)));
-      spawnAsEntity(worldIn, pos, new ItemStack(BlocksTFC.THATCH, 2));
+      spawnAsEntity(worldIn, pos, new ItemStack(BlocksCore.THATCH.get(), 2));
     }
   }
 
@@ -86,7 +87,7 @@ public class BlockThatchBed extends BlockBed {
 
   @Override
   public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-    return new ItemStack(BlocksTFC.THATCH);
+    return new ItemStack(BlocksCore.THATCH.get());
   }
 
   @Override

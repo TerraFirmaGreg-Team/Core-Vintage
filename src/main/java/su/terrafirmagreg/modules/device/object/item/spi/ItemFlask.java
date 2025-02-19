@@ -65,9 +65,11 @@ public abstract class ItemFlask extends BaseItemFluid implements IProviderItemMe
 
     setHasSubtypes(true);
     if (ConfigDevice.ITEM.WATER_FLASKS.damageFactor == 0) {
-      setMaxDamage(Integer.MAX_VALUE);
+      getSettings()
+        .maxDamage(Integer.MAX_VALUE);
     } else {
-      setMaxDamage(capacity / ConfigDevice.ITEM.WATER_FLASKS.damageFactor);
+      getSettings()
+        .maxDamage(capacity / ConfigDevice.ITEM.WATER_FLASKS.damageFactor);
     }
 
   }

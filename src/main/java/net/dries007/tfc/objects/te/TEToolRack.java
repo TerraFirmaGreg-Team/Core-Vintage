@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class TEToolRack extends TEBase {
+public class TEToolRack extends BaseTile {
 
   private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
 

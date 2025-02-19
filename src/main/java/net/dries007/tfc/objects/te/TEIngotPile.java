@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class TEIngotPile extends TEBase {
+public class TEIngotPile extends BaseTile {
 
   private Metal metal;
   private int count;

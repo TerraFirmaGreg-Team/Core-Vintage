@@ -292,6 +292,11 @@ public final class BlockUtils {
     return block == Blocks.LAVA || block == Blocks.WATER || block instanceof IFluidBlock;
   }
 
+  public static boolean isFluid(Block block, String fluidName) {
+
+    return block instanceof IFluidBlock fluidBlock && fluidBlock.getFluid() == FluidRegistry.getFluid(fluidName);
+  }
+
   /**
    * Проверяет, полон ли уровень жидкости.
    *

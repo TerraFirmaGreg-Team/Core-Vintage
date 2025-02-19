@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.library.collection;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+
 import su.terrafirmagreg.framework.registry.RegistryManager;
 
 import net.minecraft.util.ResourceLocation;
@@ -11,7 +13,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class RegistrySupplierMap<T extends IForgeRegistryEntry<T>> extends Object2ObjectOpenHashMap<ResourceLocation, Supplier<T>> {
+public class RegistrySupplierMap<T extends IForgeRegistryEntry<T>> extends Object2ObjectLinkedOpenHashMap<ResourceLocation, Supplier<T>> {
 
   public static <E extends IForgeRegistryEntry<E>> RegistrySupplierMap<E> create() {
     return new RegistrySupplierMap<>();

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.event.capabilities;
 
+import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
@@ -26,6 +27,7 @@ public class EventHandlerCapabilitiesItemStack {
     if (stack.isEmpty()) {
       return;
     }
+    setting(stack);
 
     size(event, stack);
     food(event, stack);
@@ -35,6 +37,16 @@ public class EventHandlerCapabilitiesItemStack {
     egg(event, stack);
     damageResistance(event, stack);
   }
+
+  private static void setting(@NotNull ItemStack stack) {
+    var item = stack.getItem();
+    if (item instanceof IItemSettings itemSettings) {
+      var settings = itemSettings.getSettings();
+      item.setMaxDamage(settings.getMaxDamage());
+      item.setMaxStackSize(settings.getMaxStackSize());
+    }
+  }
+
 
   private static void size(AttachCapabilitiesEvent<ItemStack> event, @NotNull ItemStack stack) {
 
@@ -52,7 +64,7 @@ public class EventHandlerCapabilitiesItemStack {
       int prevStackSize = stack.getMaxStackSize();
       var item = stack.getItem();
       if (prevStackSize != 1) {
-        stack.getItem().setMaxStackSize(itemSize.getStackSize(stack));
+        item.setMaxStackSize(itemSize.getStackSize(stack));
       }
     }
 

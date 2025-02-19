@@ -2,6 +2,7 @@ package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -54,8 +55,8 @@ public class ItemAnimalHide extends ItemTFC {
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     if (ConfigTFC.General.OVERRIDES.enableThatchBed && type == HideType.RAW && size == HideSize.LARGE && facing == EnumFacing.UP
-        && worldIn.getBlockState(pos).getBlock() == BlocksTFC.THATCH
-        && worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksTFC.THATCH) {
+        && worldIn.getBlockState(pos).getBlock() == BlocksCore.THATCH.get()
+        && worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksCore.THATCH.get()) {
       // Try and create a thatch bed
       BlockPos headPos = pos.offset(player.getHorizontalFacing());
       //Creating a thatch bed

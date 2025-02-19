@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 
@@ -18,7 +19,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.network.PacketLatexUpdate;
 import net.dries007.tfc.objects.items.TechItems;
-import net.dries007.tfc.objects.te.TEBase;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfctech.TFCTech;
 
@@ -30,7 +30,7 @@ import static net.minecraftforge.fluids.Fluid.BUCKET_VOLUME;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class TileLatexExtractor extends TEBase implements ITickable {
+public class TileLatexExtractor extends BaseTile implements ITickable {
 
   public static final int MAX_FLUID = BUCKET_VOLUME;
 

@@ -34,8 +34,6 @@ public class BaseItemGroup extends CreativeTabs {
     this.identifier = identifier;
     this.icon = icon;
 
-    sortAlphabetically();
-
     if (hasSearchBar) {
       setBackgroundImageName("item_search.png");
     }

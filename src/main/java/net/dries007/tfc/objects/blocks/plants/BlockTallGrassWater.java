@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -24,7 +25,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -183,7 +183,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
         for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
           if (Constants.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i)).getValue(AGE) + 1) / 4.0D) //+25% change for each age
           {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFC.STRAW, 1));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW.get()));
           }
         }
       }

@@ -156,22 +156,22 @@ public final class ConfigMisc {
       "(The less temperate an area is, the less the modifier affects it). ",
       "Default = 1.2 "
     })
-    public float harsherMultiplier = 1.20f;
+    public float harsherMultiplier = 1.2f;
 
     @Config.Comment({
       "The temperature at which you are at equilibrium. ",
       "It's advisable to not change this by a lot since the entire ecosystem revolves around this. ",
-      "Default = 15"
+      "Default = 20"
     })
     @Config.RangeDouble(min = 0F, max = 30F)
-    public float averageTemperature = 15f;
+    public float averageTemperature = 20f;
 
     @Config.Comment({
       "The temperature at which your screen starts heating. ",
       "It's advisable to not change this by a lot since the entire ecosystem revolves around this. ",
-      "Default = 20"
+      "Default = 30"
     })
-    public float hotTemperature = 20f;
+    public float hotTemperature = 30f;
 
     @Config.Comment({
       "The temperature at which your screen starts freezing. ",
@@ -183,9 +183,9 @@ public final class ConfigMisc {
     @Config.Comment({
       "The temperature at which you start burning and taking damage. ",
       "It's advisable to not change this by a lot since the entire ecosystem revolves around this. ",
-      "Default = 25"
+      "Default = 35"
     })
-    public float burningTemperature = 25f;
+    public float burningTemperature = 35f;
 
     @Config.Comment({
       "The temperature at which you start freezing and taking damage. ",

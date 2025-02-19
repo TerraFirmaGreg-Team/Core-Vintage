@@ -1292,7 +1292,6 @@ tile.tfc.placed_item_flat.name=Debris
 tile.tfc.pit_kiln.name=Pit Kiln
 tile.tfc.peat.name=Peat
 tile.tfc.peat_grass.name=Peat Grass
-tile.tfc.thatch.name=Thatch
 tile.tfc.torch.name=Torch
 tile.tfc.quern.name=Quern
 tile.tfc.ceramics.fired.large_vessel.name=Large Vessel
@@ -3313,8 +3312,6 @@ tile.tfc.trapdoor.red_steel.name=Red Steel Trapdoor
 
 ### ======================= ITEMS ======================
 
-
-item.tfc.straw.name=Straw
 item.leather.name=Leather
 item.tfc.spindle.name=Spindle
 item.tfc.glass_shard.name=Glass Shard

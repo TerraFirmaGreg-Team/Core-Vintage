@@ -57,7 +57,7 @@ dependencies {
   compileOnly("maven.modrinth:dtree:0.13.2")
   // Утилиты
   if (use_util.toBoolean()) {
-    implementation rfg.deobf("curse.maven:had-enough-items-557549:5906628")
+    implementation rfg.deobf("curse.maven:had-enough-items-557549:6187146")
 //    implementation rfg.deobf("curse.maven:theonesmeagle-977883:6033917")
     implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:6130214")
     implementation rfg.deobf("curse.maven:topalldependents-1120632:6138503")

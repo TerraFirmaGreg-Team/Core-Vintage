@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nonnull;
@@ -7,7 +9,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 
 @ParametersAreNonnullByDefault
-public class TEPlacedHide extends TEBase {
+public class TEPlacedHide extends BaseTile {
 
   private short positions; // essentially a boolean[16]
 

@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.te;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockOven;
 import su.terrafirmagreg.modules.device.object.block.BlockOvenChimney;
 import su.terrafirmagreg.modules.device.object.block.BlockOvenWall;
@@ -21,7 +22,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.firmalife.registry.BlocksFL;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.recipes.OvenRecipe;
 import net.dries007.tfc.util.fuel.FuelManager;
 
@@ -208,7 +208,7 @@ public class TEOven extends TEInventory implements ITickable {
   public boolean isCuringRecipe() {
     if (recipeExists()) {
       ItemStack input = inventory.getStackInSlot(SLOT_MAIN);
-      return input.isItemEqual(new ItemStack(ItemsTFC.STRAW));
+      return input.isItemEqual(new ItemStack(ItemsCore.STRAW.get()));
     }
     return false;
   }

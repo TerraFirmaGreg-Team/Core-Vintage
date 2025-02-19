@@ -6,9 +6,14 @@ import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalRegistry;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEnvironmental;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderEnvironmental;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
+import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 
 import java.util.Optional;
 
@@ -18,54 +23,59 @@ public final class ModifierHandlerEnvironmental {
   public static final AmbientalRegistry<IAmbientalProviderEnvironmental> ENVIRONMENT = new AmbientalRegistry<>();
 
   static {
-    ENVIRONMENT.register((player) ->
-      ModifierEnvironmental.defined("on_fire", 4f, 4f)
-        .filter(mod -> player.isBurning())
-    );
 
-    ENVIRONMENT.register((player) ->
-      ModifierEnvironmental.defined("environment",
-        ModifierEnvironmental.getEnvironmentTemperature(player),
-        ModifierEnvironmental.getEnvironmentHumidity(player))
-    );
-
-    ENVIRONMENT.register((player) ->
-      ModifierEnvironmental.defined("weather", -2f, 0.1f)
-        .filter(mod -> player.world.isRaining())
-        .filter(mod -> ModifierEnvironmental.getSkylight(player) < 15)
-    );
-
-    ENVIRONMENT.register((player) ->
-      ModifierEnvironmental.defined("weather", -4f, 0.3f)
-        .filter(mod -> player.world.isRaining())
-        .filter(mod -> ModifierEnvironmental.getSkylight(player) > 15)
-    );
-
-    ENVIRONMENT.register((player) ->
-      ModifierEnvironmental.defined("sprint", 2f, 0.3f)
-        .filter(mod -> player.isSprinting())
-    );
-
-    ENVIRONMENT.register((player) ->
-      ModifierEnvironmental.defined("underground", -6f, 0.2f)
-        .filter(mod -> ModifierEnvironmental.getSkylight(player) < 2)
-    );
-
-    ENVIRONMENT.register((player) ->
-      ModifierEnvironmental.defined("hypothermia_effect", -10F, 0)
-        .filter(mod -> player.isPotionActive(EffectsCore.HYPOTHERMIA.get()))
-    );
-
-    ENVIRONMENT.register((player) ->
-      ModifierEnvironmental.defined("hyperthermia_effect", 10F, 0)
-        .filter(mod -> player.isPotionActive(EffectsCore.HYPERTHERMIA.get()))
-    );
+    ENVIRONMENT.register(ModifierHandlerEnvironmental::handleGeneralTemperature);
     ENVIRONMENT.register(ModifierHandlerEnvironmental::handleTimeOfDay);
     ENVIRONMENT.register(ModifierHandlerEnvironmental::handleShade);
     ENVIRONMENT.register(ModifierHandlerEnvironmental::handleCozy);
     ENVIRONMENT.register(ModifierHandlerEnvironmental::handleThirst);
     ENVIRONMENT.register(ModifierHandlerEnvironmental::handleFood);
     ENVIRONMENT.register(ModifierHandlerEnvironmental::handleDiet);
+    ENVIRONMENT.register(ModifierHandlerEnvironmental::handleFire);
+    ENVIRONMENT.register(ModifierHandlerEnvironmental::handleWater);
+    ENVIRONMENT.register(ModifierHandlerEnvironmental::handleRain);
+    ENVIRONMENT.register(ModifierHandlerEnvironmental::handleSprinting);
+    ENVIRONMENT.register(ModifierHandlerEnvironmental::handleUnderground);
+    ENVIRONMENT.register(ModifierHandlerEnvironmental::handlePotionEffects);
+  }
+
+  public static Optional<ModifierEnvironmental> handleGeneralTemperature(EntityPlayer player) {
+    return ModifierEnvironmental.defined("environment",
+      ModifierEnvironmental.getEnvironmentTemperature(player),
+      ModifierEnvironmental.getEnvironmentHumidity(player));
+  }
+
+  public static Optional<ModifierEnvironmental> handleFire(EntityPlayer player) {
+    return ModifierEnvironmental.defined("on_fire", 4f, 4f)
+      .filter(mod -> player.isBurning());
+  }
+
+  public static Optional<ModifierEnvironmental> handleRain(EntityPlayer player) {
+    if (player.world.isRaining()) {
+      if (ModifierEnvironmental.getSkylight(player) < 15) {
+        return ModifierEnvironmental.defined("weather", -2f, 0.1f);
+      } else {
+        return ModifierEnvironmental.defined("weather", -4f, 0.3f);
+      }
+    } else {
+      return ModifierEnvironmental.none();
+    }
+  }
+
+  public static Optional<ModifierEnvironmental> handleUnderground(EntityPlayer player) {
+    if (ModifierEnvironmental.getSkylight(player) < 2) {
+      return ModifierEnvironmental.defined("underground", -6f, 0.2f);
+    } else {
+      return ModifierEnvironmental.none();
+    }
+  }
+
+  public static Optional<ModifierEnvironmental> handleSprinting(EntityPlayer player) {
+    if (player.isSprinting()) {
+      return ModifierEnvironmental.defined("sprint", 2f, 0.3f);
+    } else {
+      return ModifierEnvironmental.none();
+    }
   }
 
   public static Optional<ModifierEnvironmental> handleTimeOfDay(EntityPlayer player) {
@@ -78,6 +88,35 @@ public final class ModifierHandlerEnvironmental {
       return ModifierEnvironmental.defined("evening", 2f, 0);
     } else {
       return ModifierEnvironmental.defined("night", 1f, 0);
+    }
+  }
+
+  public static Optional<ModifierEnvironmental> handlePotionEffects(EntityPlayer player) {
+    if (player.isPotionActive(EffectsCore.HYPOTHERMIA.get())) {
+      return ModifierEnvironmental.defined("hypothermia_effect", -10F, 0);
+    }
+    if (player.isPotionActive(EffectsCore.HYPERTHERMIA.get())) {
+      return ModifierEnvironmental.defined("hyperthermia_effect", 10F, 0);
+    }
+    return ModifierEnvironmental.none();
+  }
+
+  public static Optional<ModifierEnvironmental> handleWater(EntityPlayer player) {
+    if (player.isInWater()) {
+      BlockPos pos = player.getPosition();
+      IBlockState state = player.world.getBlockState(pos);
+      var block = state.getBlock();
+      if (block == FluidsCore.HOT_WATER.get().getBlock()) {
+        return ModifierEnvironmental.defined("in_hot_water", 5f, 6f);
+      } else if (block == Blocks.LAVA) {
+        return ModifierEnvironmental.defined("in_lava", 10f, 5f);
+      } else if (block == FluidsCore.SALT_WATER.get().getBlock() && player.world.getBiome(pos).getTempCategory() == Biome.TempCategory.OCEAN) {
+        return ModifierEnvironmental.defined("in_ocean_water", -8f, 6f);
+      } else {
+        return ModifierEnvironmental.defined("in_water", -5f, 6f);
+      }
+    } else {
+      return ModifierEnvironmental.none();
     }
   }
 

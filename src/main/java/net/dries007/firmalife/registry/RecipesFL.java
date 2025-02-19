@@ -46,7 +46,7 @@ public class RecipesFL {
     int hour = ICalendar.TICKS_IN_HOUR;
     r.registerAll(
       // the input being straw makes this a curing recipe
-      new OvenRecipe(IIngredient.of(new ItemStack(ItemsTFC.STRAW)), new ItemStack(ItemsCore.WOOD_ASH.get()), 8 * hour).setRegistryName("cure"),
+      new OvenRecipe(IIngredient.of(new ItemStack(ItemsCore.STRAW.get())), new ItemStack(ItemsCore.WOOD_ASH.get()), 8 * hour).setRegistryName("cure"),
 
       new OvenRecipe(IIngredient.of(new ItemStack(ItemsFL.getFood(FoodFL.DRIED_COCOA_BEANS))), new ItemStack(ItemsFL.ROASTED_COCOA_BEANS),
         2 * hour).setRegistryName("dried_cocoa_beans"),

@@ -1052,7 +1052,7 @@ public final class ConfigTFC {
 
       @Config.Comment({"Show ItemStack OreDictionary matches when advanced tooltips are enabled. (F3+H)"})
       @Config.LangKey("config." + TFC + ".client.tooltip.showOreDictionaryTooltip")
-      public boolean showOreDictionaryTooltip = true;
+      public boolean showOreDictionaryTooltip = false;
 
       @Config.Comment({"Show ItemStack NBT on the tooltip when advanced tooltips are enabled. (F3+H)"})
       @Config.LangKey("config." + TFC + ".client.tooltip.showNBTTooltip")

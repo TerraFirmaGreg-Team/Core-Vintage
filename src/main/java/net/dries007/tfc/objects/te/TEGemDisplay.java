@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
@@ -18,7 +20,7 @@ import net.dries007.tfc.objects.items.ItemGem;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TEGemDisplay extends TEBase {
+public class TEGemDisplay extends BaseTile {
 
   private final NonNullList<ItemStack> items;
   private int grade;

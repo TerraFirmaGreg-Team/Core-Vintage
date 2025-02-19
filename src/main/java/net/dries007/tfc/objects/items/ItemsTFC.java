@@ -76,7 +76,6 @@ import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 public final class ItemsTFC {
 
   public static final ItemGoldPan GOLDPAN = getNull();
-  public static final ItemMisc STRAW = getNull();
   public static final Item HANDSTONE = getNull();
   public static final Item WROUGHT_IRON_GRILL = getNull();
   public static final Item GLUE = getNull();
@@ -333,7 +332,6 @@ public final class ItemsTFC {
     simpleItems.add(register(r, "crop/product/jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
     simpleItems.add(register(r, "crop/product/dirty_jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 
-    simpleItems.add(register(r, "straw", new ItemMisc(Size.SMALL, Weight.VERY_LIGHT, "kindling", "straw"), CT_MISC));
     simpleItems.add(register(r, "glass_shard", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
     simpleItems.add(register(r, "handstone", new ItemCraftingTool(250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"), CT_MISC));
 

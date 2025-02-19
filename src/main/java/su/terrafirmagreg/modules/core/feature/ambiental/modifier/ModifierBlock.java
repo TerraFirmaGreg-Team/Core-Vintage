@@ -68,8 +68,7 @@ public class ModifierBlock extends ModifierBase {
       distanceMultiplier = Math.min(1f, Math.max(0f, distanceMultiplier));
       distanceMultiplier = 1f - distanceMultiplier;
 
-      boolean isInside = ModifierEnvironmental.getSkylight(player) < 14
-                         && ModifierEnvironmental.getBlockLight(player) > 3;
+      boolean isInside = ModifierEnvironmental.getSkylight(player) < 14 && ModifierEnvironmental.getBlockLight(player) > 3;
       if (isInside) {
         distanceMultiplier *= 1.3f;
       }

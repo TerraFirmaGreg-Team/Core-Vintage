@@ -61,8 +61,7 @@ public abstract class BaseTile extends TileEntity {
    * Gets the update packet that is used to sync the TE on load
    */
   @Override
-  @Nullable
-  public SPacketUpdateTileEntity getUpdatePacket() {
+  public @Nullable SPacketUpdateTileEntity getUpdatePacket() {
     return new SPacketUpdateTileEntity(getPos(), 1, getUpdateTag());
   }
 
@@ -91,7 +90,7 @@ public abstract class BaseTile extends TileEntity {
   }
 
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-    
+
   }
 
   @Override

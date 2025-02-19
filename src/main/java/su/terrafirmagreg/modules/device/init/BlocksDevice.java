@@ -102,7 +102,7 @@ public final class BlocksDevice {
     CHARCOAL_PILE = registry.block(new BlockCharcoalPile());
     CRUCIBLE = registry.block(new BlockCrucible());
     FIRE_PIT = registry.block(new BlockFirePit());
-//    PIT_KILN = registry.block(new BlockPitKiln());
+    PIT_KILN = registry.block(new BlockPitKiln());
 //    QUERN_MANUAL = registry.block(new BlockQuernManual());
 //    QUERN_HORSE = registry.block(new BlockQuernHorse());
     MOLTEN = registry.block(new BlockMolten());

@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 
@@ -30,7 +31,6 @@ import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.metal.ItemSmallOre;
-import net.dries007.tfc.objects.te.TEBase;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.vein.Vein;
@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
-public class TileSluice extends TEBase implements ITickable {
+public class TileSluice extends BaseTile implements ITickable {
 
   public static final int MAX_SOIL = 50;
   private int soil;

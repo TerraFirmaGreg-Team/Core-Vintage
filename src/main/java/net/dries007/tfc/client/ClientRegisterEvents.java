@@ -3,12 +3,10 @@ package net.dries007.tfc.client;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
-import su.terrafirmagreg.modules.device.client.render.TESRPitKiln;
 import su.terrafirmagreg.modules.device.client.render.TESRQuern;
 import su.terrafirmagreg.modules.device.client.render.TESRSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
-import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 import su.terrafirmagreg.modules.device.object.tile.TileQuern;
 import su.terrafirmagreg.modules.device.object.tile.TileSluice;
 
@@ -242,7 +240,6 @@ public final class ClientRegisterEvents {
     // todo: switch to hide rack (involves changing mechanics, etc)
     final ModelResourceLocation hideRack = new ModelResourceLocation(TFC + ":hide_rack");
 
-    ModelLoader.setCustomStateMapper(BlocksTFC.PIT_KILN, blockIn -> ImmutableMap.of(BlocksTFC.PIT_KILN.getDefaultState(), empty));
     ModelLoader.setCustomStateMapper(BlocksTFC.PLACED_ITEM_FLAT, blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM_FLAT.getDefaultState(), empty));
     ModelLoader.setCustomStateMapper(BlocksTFC.INGOT_PILE, blockIn -> ImmutableMap.of(BlocksTFC.INGOT_PILE.getDefaultState(), empty));
     ModelLoader.setCustomStateMapper(BlocksTFC.PLACED_ITEM, blockIn -> ImmutableMap.of(BlocksTFC.PLACED_ITEM.getDefaultState(), empty));
@@ -255,7 +252,6 @@ public final class ClientRegisterEvents {
 
     ClientRegistry.bindTileEntitySpecialRenderer(TEChestTFC.class, new TESRChestTFC());
     ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRToolRack());
-    ClientRegistry.bindTileEntitySpecialRenderer(TilePitKiln.class, new TESRPitKiln());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());

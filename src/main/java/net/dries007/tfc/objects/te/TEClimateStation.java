@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import mcp.MethodsReturnNonnullByDefault;
@@ -8,7 +10,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class TEClimateStation extends TEBase {
+public class TEClimateStation extends BaseTile {
 
   public int forward;
   public int arcs;

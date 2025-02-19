@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.client.tesr.spi.BaseTESR;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
 import net.minecraft.client.Minecraft;
@@ -9,7 +11,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -19,13 +20,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
-
 @SideOnly(Side.CLIENT)
-public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
+public class TESRPitKiln extends BaseTESR<TilePitKiln> {
 
-  private static final ResourceLocation THATCH = new ResourceLocation(TFC, "textures/blocks/thatch.png");
-  private static final ResourceLocation BARK = new ResourceLocation(TFC, "textures/blocks/wood/log/oak.png");
+  private static final ResourceLocation THATCH = ModUtils.resource("textures/blocks/thatch.png");
+  private static final ResourceLocation BARK = ModUtils.resource("textures/blocks/wood/log/oak.png");
   private static final ModelStraw[] STRAW = new ModelStraw[TilePitKiln.STRAW_NEEDED];
   private static final int LOG_ROWS = 2;
   private static final int LOGS_PER_ROW = TilePitKiln.WOOD_NEEDED / LOG_ROWS;
@@ -39,11 +38,13 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
   }
 
   @Override
-  public void render(TilePitKiln te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TilePitKiln tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-    World world = te.getWorld();
+    World world = tile.getWorld();
     //noinspection ConstantConditions
-    if (world == null) {return;}
+    if (world == null) {
+      return;
+    }
 
     GlStateManager.pushMatrix();
     GlStateManager.pushAttrib();
@@ -51,14 +52,14 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
     GlStateManager.translate(x, y, z);
 
     GlStateManager.pushMatrix();
-    IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    IItemHandler cap = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
     if (cap != null) {
       float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
       GlStateManager.translate(0.25, 0.25, 0.25);
       RenderHelper.enableStandardItemLighting();
       GlStateManager.pushAttrib();
 
-      if (te.holdingLargeItem()) {
+      if (tile.holdingLargeItem()) {
         GlStateManager.scale(1.0F, 1.0F, 1.0F);
         ItemStack stack = cap.getStackInSlot(0);
         if (!stack.isEmpty()) {
@@ -72,7 +73,9 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
         GlStateManager.scale(0.5F, 0.5F, 0.5F);
         for (int i = 0; i < cap.getSlots(); i++) {
           ItemStack stack = cap.getStackInSlot(i);
-          if (stack.isEmpty()) {continue;}
+          if (stack.isEmpty()) {
+            continue;
+          }
           GlStateManager.pushMatrix();
           GlStateManager.translate((i % 2 == 0 ? 1 : 0), -0.001, (i < 2 ? 1 : 0));
           GlStateManager.rotate(timeD, 0, 1, 0);
@@ -85,7 +88,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
       GlStateManager.popAttrib();
       GlStateManager.popMatrix();
 
-      int straw = te.getStrawCount();
+      int straw = tile.getStrawCount();
       if (straw != 0) {
         GlStateManager.pushMatrix();
         GlStateManager.pushAttrib();
@@ -99,7 +102,7 @@ public class TESRPitKiln extends TileEntitySpecialRenderer<TilePitKiln> {
         GlStateManager.popMatrix();
       }
 
-      int logs = te.getLogCount();
+      int logs = tile.getLogCount();
       if (logs != 0) {
         GlStateManager.pushMatrix();
         GlStateManager.pushAttrib();

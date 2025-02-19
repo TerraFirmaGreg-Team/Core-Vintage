@@ -31,6 +31,7 @@ import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
@@ -136,7 +137,6 @@ import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
 import net.dries007.tfc.objects.blocks.blocktype.BlockRockVariantTFCF;
@@ -589,10 +589,10 @@ public final class CommonEventHandler {
   public static void onLivingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
     World world = event.getWorld();
     BlockPos pos = new BlockPos(event.getX(), event.getY(), event.getZ());
-    if (world.getWorldType() == TerraFirmaCraft.getWorldType() && event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
+    if (world.getWorldType() == TerraFirmaCraft.getWorldType() && world.provider.getDimensionType() == DimensionType.OVERWORLD) {
       if (ConfigTFC.General.SPAWN_PROTECTION.preventMobs && event.getEntity().isCreatureType(EnumCreatureType.MONSTER, false)) {
         // Prevent Mobs
-        ChunkDataTFC data = ChunkDataTFC.get(event.getWorld(), pos);
+        ChunkDataTFC data = ChunkDataTFC.get(world, pos);
         int minY = ConfigTFC.General.SPAWN_PROTECTION.minYMobs;
         int maxY = ConfigTFC.General.SPAWN_PROTECTION.maxYMobs;
         if (data.isSpawnProtected() && minY <= maxY && event.getY() >= minY && event.getY() <= maxY) {
@@ -602,7 +602,7 @@ public final class CommonEventHandler {
 
       if (ConfigTFC.General.SPAWN_PROTECTION.preventPredators && event.getEntity() instanceof IPredator) {
         // Prevent Predators
-        ChunkDataTFC data = ChunkDataTFC.get(event.getWorld(), pos);
+        ChunkDataTFC data = ChunkDataTFC.get(world, pos);
         int minY = ConfigTFC.General.SPAWN_PROTECTION.minYPredators;
         int maxY = ConfigTFC.General.SPAWN_PROTECTION.maxYPredators;
         if (data.isSpawnProtected() && minY <= maxY && event.getY() >= minY && event.getY() <= maxY) {
@@ -645,7 +645,8 @@ public final class CommonEventHandler {
 
     // Stop mob spawning in thatch - the list of non-spawnable light-blocking, non-collidable blocks is hardcoded in WorldEntitySpawner#canEntitySpawnBody
     // This is intentionally outside the previous world type check as this is a fix for the thatch block, not a generic spawning check.
-    if (event.getWorld().getBlockState(pos).getBlock() == BlocksTFC.THATCH || event.getWorld().getBlockState(pos.up()).getBlock() == BlocksTFC.THATCH) {
+    if (world.getBlockState(pos).getBlock() == BlocksCore.THATCH.get()
+        || world.getBlockState(pos.up()).getBlock() == BlocksCore.THATCH.get()) {
       event.setResult(Event.Result.DENY);
     }
   }

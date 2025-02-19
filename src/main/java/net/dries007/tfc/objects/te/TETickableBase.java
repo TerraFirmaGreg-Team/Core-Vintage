@@ -1,11 +1,13 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+
 import net.minecraft.util.ITickable;
 
 /**
  * Base class for tickable tile entities Batches sync requests into single packets per tick
  */
-public class TETickableBase extends TEBase implements ITickable {
+public class TETickableBase extends BaseTile implements ITickable {
 
   private boolean needsClientUpdate;
 

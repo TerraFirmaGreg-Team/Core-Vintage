@@ -1258,7 +1258,6 @@ tile.tfc.placed_item_flat.name=Мусор
 tile.tfc.pit_kiln.name=Яма для обжига
 tile.tfc.peat.name=Торф
 tile.tfc.peat_grass.name=Торфяная трава
-tile.tfc.thatch.name=Сноп соломы
 tile.tfc.torch.name=Факел
 tile.tfc.quern.name=Жёрнов
 tile.tfc.ceramics.fired.large_vessel.name=Большой сосуд
@@ -3278,7 +3277,6 @@ tile.tfc.trapdoor.red_steel.name=Люк из красной стали
 
 ### ======================= ITEMS ======================
 
-item.tfc.straw.name=Солома
 item.leather.name=Кожа
 item.tfc.spindle.name=Веретено
 item.tfc.glass_shard.name=Осколок стекла

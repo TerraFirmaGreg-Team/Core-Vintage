@@ -42,10 +42,12 @@ item_group.tfg.core.name=[ TFG ] Ядро
 block.tfg.core.debug.name=Отладочный блок
 block.tfg.core.puddle.name=Лужа
 block.tfg.core.fire_bricks.name=Огнеупорный кирпич
+block.tfg.core.thatch.name=Сноп соломы
 
 ## Item
 item.tfg.core.wand.name=Отладочная палочка
 item.tfg.core.wood_ash.name=Древесная зола
+item.tfg.core.straw.name=Солома
 
 ## Effect
 effect.tfg.core.overburdened=Перегружен

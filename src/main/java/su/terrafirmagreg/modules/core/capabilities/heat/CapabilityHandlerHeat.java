@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.heat;
 
+import su.terrafirmagreg.modules.core.init.ItemsCore;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,7 +14,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.types.DefaultPlants;
@@ -52,7 +53,7 @@ public class CapabilityHandlerHeat {
 
     CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL), () -> new CapabilityProviderHeat(null, 1, 1599));
     CUSTOM_ITEMS.put(IIngredient.of(BlockLogTFCF.get(TFCRegistries.TREES.getValue(TreesTFCF.EUCALYPTUS))), () -> new CapabilityProviderHeat(null, 1, 1599));
-    CUSTOM_ITEMS.put(IIngredient.of(ItemsTFC.STRAW), () -> new CapabilityProviderHeat(null, 1, 30));
+    CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.STRAW.get()), () -> new CapabilityProviderHeat(null, 1, 30));
     CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.TWIG), () -> new CapabilityProviderHeat(null, 1, 50));
     CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.DRIFTWOOD), () -> new CapabilityProviderHeat(null, 1, 60));
     CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.BONES), () -> new CapabilityProviderHeat(null, 1, 425));

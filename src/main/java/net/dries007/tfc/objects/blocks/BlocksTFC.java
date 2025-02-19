@@ -3,13 +3,11 @@ package net.dries007.tfc.objects.blocks;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
-import su.terrafirmagreg.modules.device.object.block.BlockPitKiln;
 import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
-import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 import su.terrafirmagreg.modules.device.object.tile.TileQuern;
 import su.terrafirmagreg.modules.device.object.tile.TileSluice;
@@ -152,9 +150,7 @@ public final class BlocksTFC {
 
   public static final BlockPeat PEAT = getNull();
   public static final BlockPeat PEAT_GRASS = getNull();
-  public static final BlockThatch THATCH = getNull();
   public static final BlockThatchBed THATCH_BED = getNull();
-  public static final BlockPitKiln PIT_KILN = getNull();
   public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
   public static final BlockPlacedItem PLACED_ITEM = getNull();
   public static final BlockPlacedHide PLACED_HIDE = getNull();
@@ -254,8 +250,6 @@ public final class BlocksTFC {
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockPeat(Material.GROUND), CT_ROCK)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockPeatGrass(Material.GRASS), CT_ROCK)));
-
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), CT_MISC)));
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "quern", new BlockQuern(), CT_MISC)));
 
@@ -631,7 +625,6 @@ public final class BlocksTFC {
     }
 
     // Registering JEI only blocks (for info)
-    inventoryItemBlocks.add(new ItemBlock(register(r, "pit_kiln", new BlockPitKiln())));
     inventoryItemBlocks.add(new ItemBlock(register(r, "placed_item", new BlockPlacedItem())));
     // technical blocks
     // These have no ItemBlock or Creative Tab
@@ -655,7 +648,6 @@ public final class BlocksTFC {
     register(TEPlacedItem.class, "placed_item");
     register(TEPlacedItemFlat.class, "placed_item_flat");
     register(TEPlacedHide.class, "placed_hide");
-    register(TilePitKiln.class, "pit_kiln");
     register(TEChestTFC.class, "chest");
     register(TileLogPile.class, "log_pile");
     register(TEIngotPile.class, "ingot_pile");

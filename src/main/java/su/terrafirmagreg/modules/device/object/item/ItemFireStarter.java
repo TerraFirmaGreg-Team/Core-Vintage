@@ -155,7 +155,7 @@ public class ItemFireStarter extends BaseItem {
             world.setBlockState(pos, Blocks.FIRE.getDefaultState());
           }
         }
-      } else if (state.getBlock() == BlocksTFC.PIT_KILN) {
+      } else if (state.getBlock() == BlocksDevice.PIT_KILN.get()) {
         // Pit Kiln
         if (itemRand.nextFloat() < chance) {
           TileUtils.getTile(world, pos.down(), TilePitKiln.class).ifPresent(TilePitKiln::tryLight);

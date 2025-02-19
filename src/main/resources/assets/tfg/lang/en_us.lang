@@ -116,10 +116,12 @@ item_group.tfg.core.name=[ TFG ] Core
 block.tfg.core.debug.name=Debug Block
 block.tfg.core.puddle.name=Puddle
 block.tfg.core.fire_bricks.name=Fire Bricks
+block.tfg.core.thatch.name=Thatch
 
 ## Item
 item.tfg.core.wand.name=Debug Wand
 item.tfg.core.wood_ash.name=Wood Ash
+item.tfg.core.straw.name=Straw
 
 ## Effect
 effect.tfg.core.overburdened=Overburdened

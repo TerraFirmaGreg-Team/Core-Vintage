@@ -1,16 +1,16 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
-import net.dries007.tfc.objects.te.TEBase;
-
 import javax.annotation.Nullable;
 
-public class TileInfectedAir extends TEBase implements ITickable {
+public class TileInfectedAir extends BaseTile implements ITickable {
 
   public TileInfectedAir() {
   }

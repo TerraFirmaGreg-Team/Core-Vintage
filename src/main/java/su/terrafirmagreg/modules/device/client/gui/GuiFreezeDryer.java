@@ -71,13 +71,13 @@ public class GuiFreezeDryer extends GuiContainerTE<TileFreezeDryer> {
     if (TE.getSeal()) {
       IItemHandler handler = (this.tile).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       if (handler != null) {
-        GL11.glDisable(2929);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
 
         for (int slotId = 0; slotId < handler.getSlots() - 1; ++slotId) {
           this.drawSlotOverlay(this.inventorySlots.getSlot(slotId));
         }
 
-        GL11.glEnable(2929);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
       }
     }
 

@@ -23,6 +23,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
@@ -31,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -40,6 +42,89 @@ import static su.terrafirmagreg.api.util.MathUtils.RNG;
 @UtilityClass
 @SuppressWarnings("unused")
 public final class StackUtils {
+
+
+  /**
+   * Pretty much just a check for {@link ItemStack#isEmpty()} but exists in case Mojang does some more refactoring.
+   *
+   * @param stack The stack
+   * @return If the stack is not empty.
+   */
+  public static boolean isValid(ItemStack stack) {
+    if (stack == null) {
+      TerraFirmaGreg.LOGGER.warn("Null stack: {}", stack);
+      return false;
+    }
+    return !stack.isEmpty();
+  }
+
+  /**
+   * @return The empty itemstack instance.
+   */
+  public static ItemStack getEmpty() {
+    return ItemStack.EMPTY;
+  }
+
+  /**
+   * A helper method to make NonNullLists with empty fill.
+   *
+   * @param size How big the list will be.
+   * @return A {@link NonNullList} with the same size as provided.
+   */
+  public static NonNullList<ItemStack> makeList(int size) {
+    return NonNullList.withSize(size, getEmpty());
+  }
+
+  /**
+   * Checks if a collection of stacks are empty, as {@link Collection#isEmpty()} does not care about empty stacks.
+   *
+   * @param stacks Some ItemStacks
+   * @return If all stacks in the collection return true for {@link ItemStack#isEmpty()}
+   */
+  public static boolean isEmpty(Collection<ItemStack> stacks) {
+    if (stacks.isEmpty()) {return true;}
+    for (ItemStack stack : stacks) {if (!stack.isEmpty()) {return false;}}
+    return true;
+  }
+
+  /**
+   * Util method to find the first filled item in a handler.  Searches from slot 0 to the end.
+   *
+   * @param inv The IItemHandler to search.
+   * @return The first filled slot, or -1 if all slots are empty.
+   */
+  public static int findFirstFilled(IItemHandler inv) {
+    for (int i = 0; i < inv.getSlots(); i++) {
+      if (!inv.getStackInSlot(i).isEmpty()) {return i;}
+    }
+    return -1;
+  }
+
+  /**
+   * Helper method to add stack size and return the stack.
+   */
+  public static ItemStack grow(ItemStack stack, int size) {
+    stack.grow(size);
+    return stack;
+  }
+
+  /**
+   * Helper method to remove stack size and return the stack.
+   */
+  public static ItemStack shrink(ItemStack stack, int size) {
+    stack.shrink(size);
+    return stack;
+  }
+
+  /**
+   * Helper method to remove stack size and return the stack.
+   */
+  public static ItemStack shrinkForContainer(ItemStack stack, int size) {
+    ItemStack copy = stack.copy();
+    stack.shrink(size);
+    if (stack.isEmpty()) {return copy.getItem().getContainerItem(copy);}
+    return stack;
+  }
 
   /**
    * Compare two item stacks for crafting equivalency without oreDictionary or craftingTools

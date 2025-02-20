@@ -1,24 +1,18 @@
 package net.dries007.firmalife.render;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.firmalife.util.ClientHelpers;
-import net.dries007.tfc.objects.blocks.BlockClimateStation;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -44,35 +38,6 @@ public class RenderHandler {
       runnable.run();
       buffer.setTranslation(0.0D, 0.0D, 0.0D);
       GlStateManager.enableAlpha();
-    }
-  }
-
-  @SubscribeEvent
-  public static void onItemTooltip(ItemTooltipEvent event) {
-    final ItemStack stack = event.getItemStack();
-    final Item item = stack.getItem();
-    if (item instanceof ItemBlock) {
-      Block block = ((ItemBlock) item).getBlock();
-      if (block instanceof BlockClimateStation station) {
-        switch (station.tier) {
-          case 1:
-            event.getToolTip().add("Enables enhanced flaw detection for your greenhouse.");
-            event.getToolTip().add("Right click to show either the protected region, or the incorrect block.");
-            break;
-          case 2:
-            event.getToolTip().add("Enhanced climate regulation makes planters grow 10.5% faster.");
-            break;
-          case 3:
-            event.getToolTip().add("Enables growing grains in the greenhouse.");
-            break;
-          case 4:
-            event.getToolTip().add("Enables growing fruit trees in the greenhouse.");
-            break;
-          case 5:
-            event.getToolTip().add("Distributes steam to your spouts and sprinklers, eliminating the need to feed them with barrels.");
-            break;
-        }
-      }
     }
   }
 }

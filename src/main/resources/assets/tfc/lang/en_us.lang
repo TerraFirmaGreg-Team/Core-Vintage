@@ -81,10 +81,6 @@ tfc.command.work.nonentity=Entity not found.
 
 ## Tooltips
 tfc.tooltip.food_expiry_date.days=Will decay in about %s day(s)!
-tfc.tooltip.toolclass=§fTool Class:§7 %s
-tfc.tooltip.toolclasses=§fTool Classes:
-tfc.tooltip.oredictionaryentry=§fOre Dictionary name:§7 %s
-tfc.tooltip.oredictionaryentries=§fOre Dictionary names:
 tfc.tooltip.metal=§fMetal:§7 %s
 tfc.tooltip.units=%d units
 tfc.tooltip.melttemp=%d°C

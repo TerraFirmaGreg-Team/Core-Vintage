@@ -1,12 +1,5 @@
 package net.dries007.horsepower;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -15,25 +8,24 @@ import net.minecraft.network.NetworkManager;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 
 import net.dries007.horsepower.lib.Reference;
 import net.dries007.horsepower.network.PacketHandler;
 import net.dries007.horsepower.network.messages.SyncServerRecipesMessage;
 import net.dries007.horsepower.recipes.HPRecipes;
 import net.dries007.horsepower.util.Utils;
-import net.dries007.horsepower.util.color.Colors;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class HPEventHandler {
@@ -106,43 +98,6 @@ public class HPEventHandler {
       if (manager != null && !manager.isLocalChannel() && HPRecipes.serverSyncedRecipes) {
         HPRecipes.serverSyncedRecipes = false;
         HPRecipes.instance().reloadRecipes();
-      }
-    }
-  }
-
-  @SubscribeEvent(priority = EventPriority.HIGHEST)
-  @SideOnly(Side.CLIENT)
-  public static void onToolTip(ItemTooltipEvent event) {
-    if (!event.getItemStack().isEmpty()) {
-      String part = "";
-      if (Configs.misc.showOreDictionaries) {
-        StringBuilder out = null;
-        for (int id : OreDictionary.getOreIDs(event.getItemStack())) {
-          String s = OreDictionary.getOreName(id);
-          if (out == null) {out = new StringBuilder(Colors.LIGHTGRAY + "Ores: " + Colors.ORANGE + s);} else {out.append(", ").append(s);}
-        }
-        if (out != null) {
-          event.getToolTip().add(out.toString());
-          part = "OreDict";
-        }
-      }
-
-      if (Configs.misc.showHarvestLevel) {
-        boolean added = false;
-        for (String harv : Configs.misc.harvestTypes) {
-          int harvestLevel = event.getItemStack().getItem().getHarvestLevel(event.getItemStack(), harv, null, null);
-          if (harvestLevel > -1) {
-            event.getToolTip().add(Colors.LIGHTGRAY + "HarvestLevel: " + Colors.ORANGE + StringUtils.capitalize(harv) + " (" + harvestLevel + ")");
-            if (!added) {
-              part += (!part.isEmpty() ? " and " : "") + "HarvestLevel";
-              added = true;
-            }
-          }
-        }
-      }
-
-      if (!part.isEmpty()) {
-        event.getToolTip().add(Colors.LIGHTGRAY + "The " + part + " tooltip was added by HorsePower, to disabled check the config.");
       }
     }
   }

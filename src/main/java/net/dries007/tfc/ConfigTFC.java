@@ -1046,17 +1046,6 @@ public final class ConfigTFC {
 
     public static final class TooltipCFG {
 
-      @Config.Comment({"Show ItemStack tool classes when advanced tooltips are enabled. (F3+H)"})
-      @Config.LangKey("config." + TFC + ".client.tooltip.showToolClassTooltip")
-      public boolean showToolClassTooltip = true;
-
-      @Config.Comment({"Show ItemStack OreDictionary matches when advanced tooltips are enabled. (F3+H)"})
-      @Config.LangKey("config." + TFC + ".client.tooltip.showOreDictionaryTooltip")
-      public boolean showOreDictionaryTooltip = false;
-
-      @Config.Comment({"Show ItemStack NBT on the tooltip when advanced tooltips are enabled. (F3+H)"})
-      @Config.LangKey("config." + TFC + ".client.tooltip.showNBTTooltip")
-      public boolean showNBTTooltip = false;
 
       @Config.Comment("Should the prospectors pick output to the actionbar? (the space just above the hotbar)")
       @Config.LangKey("config." + TFC + ".client.tooltip.propickOutputToActionBar")

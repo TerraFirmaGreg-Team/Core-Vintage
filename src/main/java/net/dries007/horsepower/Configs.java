@@ -28,10 +28,6 @@ public class Configs {
   @Config.LangKey("config.gui.recipes")
   public static Recipes recipes = new Recipes();
 
-  @Comment("Contains misc configs, mostly for debugging and dev")
-  @Config.LangKey("config.gui.misc")
-  public static Misc misc = new Misc();
-
   public static class Client {
 
     @Comment("If the amount text on how many items is in a stack in a grindstone should render")
@@ -339,22 +335,5 @@ public class Configs {
       String item = JsonUtils.getString(json, "enabled");
       return () -> "flour".equals(item) ? general.enableFlour : "dough".equals(item) && general.enableDough;
     }
-  }
-
-  public static class Misc {
-
-    @Comment("Will show a items all ore dictionaries in the tooltip")
-    @Name("Show Ore Dictionaries")
-    public boolean showOreDictionaries = false;
-
-    @Comment("Will show the harvest level of items in the tooltip")
-    @Name("Show Harvest Level")
-    public boolean showHarvestLevel = false;
-
-    @Comment("What harvest types to show the harvest level for")
-    @Name("Harvest Types")
-    public String[] harvestTypes = {
-      "axe"
-    };
   }
 }

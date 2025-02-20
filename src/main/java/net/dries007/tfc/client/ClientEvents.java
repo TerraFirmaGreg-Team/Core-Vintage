@@ -13,6 +13,9 @@ import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.temp.config.HotLists;
+import su.terrafirmagreg.temp.config.TFGConfig;
+import su.terrafirmagreg.temp.modules.hotornot.FluidEffect;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -25,19 +28,23 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
@@ -46,15 +53,14 @@ import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.render.RenderBoatTFC;
 import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
+import net.dries007.tfc.objects.blocks.BlockClimateStation;
 import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static net.minecraft.util.text.TextFormatting.AQUA;
 import static net.minecraft.util.text.TextFormatting.GRAY;
@@ -203,53 +209,76 @@ public class ClientEvents {
       tooltip.add(I18n.format("tfc.tooltip.smithing_skill", skillValue));
     }
 
+    if (TFGConfig.General.TOOLTIP && !stack.isEmpty() && !HotLists.isRemoved(stack)) {
+      if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+        IFluidHandlerItem fluidHandlerItem = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        if (fluidHandlerItem == null) {return;}
+        FluidStack fluidStack = fluidHandlerItem.drain(1000, false);
+        if (fluidStack != null) {
+          for (FluidEffect effect : FluidEffect.values()) {
+            if (effect.isValid.test(fluidStack)) {
+              event.getToolTip()
+                .add(effect.color + new TextComponentTranslation(effect.tooltip).getUnformattedText());
+            }
+          }
+        }
+      } else if (HotLists.isHot(stack)) {
+        event.getToolTip()
+          .add(FluidEffect.HOT.color + new TextComponentTranslation(FluidEffect.HOT.tooltip).getUnformattedText());
+      } else if (HotLists.isCold(stack)) {
+        event.getToolTip()
+          .add(FluidEffect.COLD.color + new TextComponentTranslation(FluidEffect.COLD.tooltip).getUnformattedText());
+      } else if (HotLists.isGaseous(stack)) {
+        event.getToolTip()
+          .add(FluidEffect.GAS.color + new TextComponentTranslation(FluidEffect.GAS.tooltip).getUnformattedText());
+      } else if (Loader.isModLoaded("tfc")) {
+        if (stack.hasCapability(CapabilityHeat.CAPABILITY, null)) {
+          if (heat == null) {return;}
+          if (heat.getTemperature() >= TFGConfig.General.HOT_ITEM) {
+            event.getToolTip().add(FluidEffect.HOT.color + new TextComponentTranslation(FluidEffect.HOT.tooltip).getUnformattedText());
+          }
+        }
+      }
+    }
+    if (item instanceof ItemBlock itemBlock) {
+      Block block = itemBlock.getBlock();
+      if (block instanceof BlockClimateStation station) {
+        switch (station.tier) {
+          case 1:
+            event.getToolTip().add("Enables enhanced flaw detection for your greenhouse.");
+            event.getToolTip().add("Right click to show either the protected region, or the incorrect block.");
+            break;
+          case 2:
+            event.getToolTip().add("Enhanced climate regulation makes planters grow 10.5% faster.");
+            break;
+          case 3:
+            event.getToolTip().add("Enables growing grains in the greenhouse.");
+            break;
+          case 4:
+            event.getToolTip().add("Enables growing fruit trees in the greenhouse.");
+            break;
+          case 5:
+            event.getToolTip().add("Distributes steam to your spouts and sprinklers, eliminating the need to feed them with barrels.");
+            break;
+        }
+      }
+    }
+
     if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode
     {
       ICapabilityMetal metalObject = CapabilityMetal.getMetalItem(stack);
       if (metalObject != null) {
         metalObject.addMetalInfo(stack, tooltip);
       }
-      if (item instanceof IRockObject) {
-        ((IRockObject) item).addRockInfo(stack, tooltip);
-      } else if (item instanceof ItemBlock) {
-        Block block = ((ItemBlock) item).getBlock();
-        if (block instanceof IRockObject) {
-          ((IRockObject) block).addRockInfo(stack, tooltip);
-        }
-      }
-
-      if (ConfigTFC.Client.TOOLTIP.showToolClassTooltip) {
-        Set<String> toolClasses = item.getToolClasses(stack);
-        if (toolClasses.size() == 1) {
-          tooltip.add(I18n.format("tfc.tooltip.toolclass", toolClasses.iterator().next()));
-        } else if (toolClasses.size() > 1) {
-          tooltip.add(I18n.format("tfc.tooltip.toolclasses"));
-          for (String toolClass : toolClasses) {
-            tooltip.add("+ " + toolClass);
-          }
-        }
-      }
-      if (ConfigTFC.Client.TOOLTIP.showOreDictionaryTooltip) {
-        int[] ids = OreDictionary.getOreIDs(stack);
-        if (ids.length == 1) {
-          tooltip.add(I18n.format("tfc.tooltip.oredictionaryentry", OreDictionary.getOreName(ids[0])));
-        } else if (ids.length > 1) {
-          tooltip.add(I18n.format("tfc.tooltip.oredictionaryentries"));
-          ArrayList<String> names = new ArrayList<>(ids.length);
-          for (int id : ids) {
-            names.add("+ " + OreDictionary.getOreName(id));
-          }
-          names.sort(null); // Natural order (String.compare)
-          tooltip.addAll(names);
-        }
-      }
-      if (ConfigTFC.Client.TOOLTIP.showNBTTooltip) {
-        if (stack.hasTagCompound()) {
-          tooltip.add("NBT: " + stack.getTagCompound());
+      if (item instanceof IRockObject rockObject) {
+        rockObject.addRockInfo(stack, tooltip);
+      } else if (item instanceof ItemBlock itemBlock) {
+        Block block = itemBlock.getBlock();
+        if (block instanceof IRockObject rockObject) {
+          rockObject.addRockInfo(stack, tooltip);
         }
       }
     }
-
   }
 
   @SubscribeEvent

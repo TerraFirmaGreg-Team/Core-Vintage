@@ -511,5 +511,30 @@ public final class ConfigMisc {
 
     @Config.Comment({"Time tooltip info mode."})
     public TimeTooltipMode timeMode = TimeTooltipMode.MINECRAFT_HOURS;
+
+    @Config.Comment({"Is the control key needed to show the advanced data?"})
+    public boolean requireCTRL = true;
+
+    @Config.Comment({"Show ItemStack tool classes when advanced tooltips are enabled. (F3+H)"})
+    public boolean showToolClass = true;
+
+    @Config.Comment({"Show ItemStack OreDictionary matches when advanced tooltips are enabled. (F3+H)"})
+    public boolean showOreDictionary = true;
+
+    @Config.Comment({"Show ItemStack Code Name when advanced tooltips are enabled. (F3+H)"})
+    public boolean showCodeName = true;
+
+    @Config.Comment({"Show ItemStack Metadata when advanced tooltips are enabled. (F3+H)"})
+    public boolean showMetadata = true;
+
+    @Config.Comment({"Show ItemStack Meta's Unlocalized Name when advanced tooltips are enabled. (F3+H)"})
+    public boolean showMetaUnlocalizedName = true;
+
+    @Config.Comment({"Show ItemStack NBT on the tooltip when advanced tooltips are enabled. (F3+H)"})
+    public boolean showNBT = true;
+
+    @Config.Comment({"Number of characters for NBT data"})
+    @Config.RangeInt(min = 1, max = 500)
+    public int charLimitNBT = 40;
   }
 }

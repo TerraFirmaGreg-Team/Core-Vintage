@@ -16,6 +16,10 @@ death.attack.bear_trap=%1$s didn't watch their step
 death.attack.pigvil=%1$s was squashed by a falling...Pigvil?
 
 # Tooltip
+tooltip.tfg.core.advanced_data.tool_class=§7  -Класс Инструмента:§8 %s
+tooltip.tfg.core.advanced_data.tool_classes=§7  -Классы Инструмента:§8 %s
+tooltip.tfg.core.advanced_data.ore_dict=§7  -Имя в словаре руд:§8 %s
+tooltip.tfg.core.advanced_data.ore_dicts=§7  -Имена в словаре руд:§8 %s
 
 ## Size
 enum.tfg.size.tiny=Крошечный

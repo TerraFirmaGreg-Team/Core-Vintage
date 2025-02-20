@@ -62,7 +62,6 @@ dependencies {
     implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:6130214")
     implementation rfg.deobf("curse.maven:topalldependents-1120632:6138503")
     implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5844968")
-    implementation rfg.deobf("curse.maven:aainfo-573154:3627065")
     implementation rfg.deobf("curse.maven:reid-629017:5502915")
     implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
     implementation rfg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")

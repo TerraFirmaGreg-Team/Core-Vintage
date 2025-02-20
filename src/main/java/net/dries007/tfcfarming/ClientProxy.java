@@ -23,15 +23,15 @@ import net.dries007.tfc.objects.blocks.BlockLargePlanter;
 import net.dries007.tfc.objects.blocks.BlockQuadPlanter;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
 import net.dries007.tfc.objects.items.rock.ItemRockHoe;
+import net.dries007.tfc.objects.items.tools.ItemHoeTFCF;
 import net.dries007.tfcfarming.network.CPacketRequestNutrientData;
 import net.dries007.tfcfarming.network.PacketHandler;
 import net.dries007.tfcfarming.network.SPacketNutrientDataResponse;
-import net.dries007.tfc.objects.blocks.blocktype.farmland.FarmlandTFCF;
-import net.dries007.tfc.objects.items.tools.ItemHoeTFCF;
 
 public class ClientProxy extends CommonProxy {
 
@@ -50,11 +50,6 @@ public class ClientProxy extends CommonProxy {
     GuiUtils.drawGradientRect(0, tooltipX + width + 2, tooltipY - 3 + 1, tooltipX + width + 3, tooltipY + height + 3 - 1, borderColorStart, borderColorEnd);
     GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY - 3, tooltipX + width + 3, tooltipY - 3 + 1, borderColorStart, borderColorStart);
     GuiUtils.drawGradientRect(0, tooltipX - 3, tooltipY + height + 2, tooltipX + width + 3, tooltipY + height + 3, borderColorEnd, borderColorEnd);
-  }
-
-  @Override
-  public void init() {
-
   }
 
   @SubscribeEvent

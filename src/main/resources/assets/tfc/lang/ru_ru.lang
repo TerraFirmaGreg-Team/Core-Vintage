@@ -91,10 +91,6 @@ tfc.command.work.nonentity=Объект не найден.
 
 ## Tooltips
 tfc.tooltip.food_expiry_date.days=Сгниёт примерно через %s дня(дней)!
-tfc.tooltip.toolclass=§fКласс предмета:§7 %s
-tfc.tooltip.toolclasses=§fКлассы предметов:
-tfc.tooltip.oredictionaryentry=§fИмя в словаре руд:§7 %s
-tfc.tooltip.oredictionaryentries=§fИмена в словаре руд:
 tfc.tooltip.metal=§fМеталл:§7 %s
 tfc.tooltip.units=%d единиц
 tfc.tooltip.crucible_units=%d / %d единиц

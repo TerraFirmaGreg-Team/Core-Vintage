@@ -511,8 +511,8 @@ public final class CommonEventHandler {
       // We allow custom defined capabilities to attach to non-food items, that should have rot (such as eggs).
       ICapabilityProvider foodHandler = CapabilityFood.getCustomFood(stack);
       if (foodHandler != null || stack.getItem() instanceof ItemFood) {
-        if (stack.getItem() instanceof IItemFoodTFC) {
-          foodHandler = ((IItemFoodTFC) stack.getItem()).getCustomFoodHandler();
+        if (stack.getItem() instanceof IItemFoodTFC iItemFoodTFC) {
+          foodHandler = iItemFoodTFC.getCustomFoodHandler();
         }
         if (foodHandler == null) {
           foodHandler = new CapabilityProviderFood(stack.getTagCompound(), new FoodData());
@@ -534,6 +534,7 @@ public final class CommonEventHandler {
       if (metalCapability != null) {
         event.addCapability(CapabilityMetal.KEY, metalCapability);
         if (!isForgeable) {
+
           // Add a forgeable capability for this item, if none is found
           ICapabilityMetal cap = (ICapabilityMetal) metalCapability;
           Metal metal = cap.getMetal(stack);

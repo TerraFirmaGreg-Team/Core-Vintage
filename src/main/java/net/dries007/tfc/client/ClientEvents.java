@@ -1,13 +1,6 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
-import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
-import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
-import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
@@ -53,7 +46,6 @@ import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.client.render.RenderBoatTFC;
 import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.objects.blocks.BlockClimateStation;
 import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
@@ -190,19 +182,6 @@ public class ClientEvents {
     if (stack.isEmpty()) {return;}
     // Stuff that should always be shown as part of the tooltip
 
-    ICapabilityHeat heat = stack.getCapability(CapabilityHeat.CAPABILITY, null);
-    if (heat != null) {
-      heat.addHeatInfo(stack, tooltip);
-    }
-    ICapabilityForge forging = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
-    if (forging != null && forging.getWork() > 0) {
-      tooltip.add(I18n.format("tfc.tooltip.forging_in_progress"));
-    }
-    ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
-    if (food != null) {
-      food.addTooltipInfo(stack, tooltip, event.getEntityPlayer());
-    }
-
     float skillMod = SmithingSkill.getSkillBonus(stack);
     if (skillMod > 0) {
       String skillValue = String.format("%.2f", skillMod * 100);
@@ -217,59 +196,29 @@ public class ClientEvents {
         if (fluidStack != null) {
           for (FluidEffect effect : FluidEffect.values()) {
             if (effect.isValid.test(fluidStack)) {
-              event.getToolTip()
-                .add(effect.color + new TextComponentTranslation(effect.tooltip).getUnformattedText());
+              tooltip.add(effect.color + new TextComponentTranslation(effect.tooltip).getUnformattedText());
             }
           }
         }
       } else if (HotLists.isHot(stack)) {
-        event.getToolTip()
-          .add(FluidEffect.HOT.color + new TextComponentTranslation(FluidEffect.HOT.tooltip).getUnformattedText());
+        tooltip.add(FluidEffect.HOT.color + new TextComponentTranslation(FluidEffect.HOT.tooltip).getUnformattedText());
       } else if (HotLists.isCold(stack)) {
-        event.getToolTip()
-          .add(FluidEffect.COLD.color + new TextComponentTranslation(FluidEffect.COLD.tooltip).getUnformattedText());
+        tooltip.add(FluidEffect.COLD.color + new TextComponentTranslation(FluidEffect.COLD.tooltip).getUnformattedText());
       } else if (HotLists.isGaseous(stack)) {
-        event.getToolTip()
-          .add(FluidEffect.GAS.color + new TextComponentTranslation(FluidEffect.GAS.tooltip).getUnformattedText());
+        tooltip.add(FluidEffect.GAS.color + new TextComponentTranslation(FluidEffect.GAS.tooltip).getUnformattedText());
       } else if (Loader.isModLoaded("tfc")) {
-        if (stack.hasCapability(CapabilityHeat.CAPABILITY, null)) {
+        if (CapabilityHeat.has(stack)) {
+          var heat = CapabilityHeat.get(stack);
           if (heat == null) {return;}
           if (heat.getTemperature() >= TFGConfig.General.HOT_ITEM) {
-            event.getToolTip().add(FluidEffect.HOT.color + new TextComponentTranslation(FluidEffect.HOT.tooltip).getUnformattedText());
+            tooltip.add(FluidEffect.HOT.color + new TextComponentTranslation(FluidEffect.HOT.tooltip).getUnformattedText());
           }
-        }
-      }
-    }
-    if (item instanceof ItemBlock itemBlock) {
-      Block block = itemBlock.getBlock();
-      if (block instanceof BlockClimateStation station) {
-        switch (station.tier) {
-          case 1:
-            event.getToolTip().add("Enables enhanced flaw detection for your greenhouse.");
-            event.getToolTip().add("Right click to show either the protected region, or the incorrect block.");
-            break;
-          case 2:
-            event.getToolTip().add("Enhanced climate regulation makes planters grow 10.5% faster.");
-            break;
-          case 3:
-            event.getToolTip().add("Enables growing grains in the greenhouse.");
-            break;
-          case 4:
-            event.getToolTip().add("Enables growing fruit trees in the greenhouse.");
-            break;
-          case 5:
-            event.getToolTip().add("Distributes steam to your spouts and sprinklers, eliminating the need to feed them with barrels.");
-            break;
         }
       }
     }
 
     if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode
     {
-      ICapabilityMetal metalObject = CapabilityMetal.getMetalItem(stack);
-      if (metalObject != null) {
-        metalObject.addMetalInfo(stack, tooltip);
-      }
       if (item instanceof IRockObject rockObject) {
         rockObject.addRockInfo(stack, tooltip);
       } else if (item instanceof ItemBlock itemBlock) {

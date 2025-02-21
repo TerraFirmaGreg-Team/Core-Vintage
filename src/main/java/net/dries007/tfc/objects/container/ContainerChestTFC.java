@@ -108,7 +108,7 @@ public class ContainerChestTFC extends Container {
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-      ICapabilitySize cap = CapabilitySize.getIItemSize(stack);
+      ICapabilitySize cap = CapabilitySize.get(stack);
       if (cap != null) {
         return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
       }

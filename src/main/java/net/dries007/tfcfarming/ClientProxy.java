@@ -56,7 +56,7 @@ public class ClientProxy extends CommonProxy {
   public void onToolTip(ItemTooltipEvent event) {
 
     if (TFCFarmingContent.isFertilizer(event.getItemStack())) {
-      Item i = event.getItemStack().getItem();
+      Item item = event.getItemStack().getItem();
       int prc = 0;
       int val = TFCFarmingContent.getFertilizerValue(event.getItemStack());
       prc = ((int) (val / 255.0f * 100));

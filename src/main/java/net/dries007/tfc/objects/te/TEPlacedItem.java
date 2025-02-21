@@ -119,7 +119,7 @@ public class TEPlacedItem extends TEInventory {
   public boolean insertItem(EntityPlayer player, ItemStack stack, int slot) {
     // Try and insert an item
     // Check the size of item to determine if insertion is possible, or if it requires the large slot
-    ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
+    ICapabilitySize sizeCap = CapabilitySize.get(stack);
     Size size = Size.NORMAL;
     if (sizeCap != null) {
       size = sizeCap.getSize(stack);

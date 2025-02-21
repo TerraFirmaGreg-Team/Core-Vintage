@@ -65,7 +65,7 @@ public class CTItemRegistry {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          CapabilityHandlerMetal.CUSTOM_ITEMS.put(inputIngredient, () -> new CapabilityProviderMetal(metal, amount, canMelt));
+          CapabilityHandlerMetal.CUSTOM_ITEMS.put(inputIngredient, () -> CapabilityProviderMetal.of(metal, amount, canMelt));
         }
 
         @Override

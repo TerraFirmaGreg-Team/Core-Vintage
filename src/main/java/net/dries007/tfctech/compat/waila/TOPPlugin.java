@@ -77,7 +77,7 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
               ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
               List<String> list = new ArrayList<>();
               if (cap != null) {
-                cap.addTooltipInfo(stack, list, entityPlayer);
+                cap.addTooltipInfo(stack, list);
               }
               for (String text : list) {
                 iProbeInfo.text(text);

@@ -45,7 +45,7 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
   public ItemStack getOutput(List<ItemStack> inputs) {
     int metalAmount = 0;
     for (ItemStack stack : inputs) {
-      ICapabilityMetal metalItem = CapabilityMetal.getMetalItem(stack);
+      ICapabilityMetal metalItem = CapabilityMetal.get(stack);
       if (metalItem != null) {
         metalAmount += metalItem.getSmeltAmount(stack);
       }
@@ -77,7 +77,7 @@ public class BloomeryRecipe extends IForgeRegistryEntry.Impl<BloomeryRecipe> {
   }
 
   public boolean isValidInput(ItemStack inputItem) {
-    ICapabilityMetal metalItem = CapabilityMetal.getMetalItem(inputItem);
+    ICapabilityMetal metalItem = CapabilityMetal.get(inputItem);
     return metalItem != null && metalItem.getMetal(inputItem) == metal;
   }
 

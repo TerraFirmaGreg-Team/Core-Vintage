@@ -78,11 +78,11 @@ public class ItemBloom extends ItemTFC implements ICapabilityMetal {
   @Override
   public void addMetalInfo(ItemStack stack, List<String> text) {
     ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
-    if (cap instanceof IForgeableMeasurableMetal) {
+    if (cap instanceof IForgeableMeasurableMetal forgeableMeasurableMetal) {
       text.add("");
-      text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(((IForgeableMeasurableMetal) cap).getMetal()))));
-      text.add(I18n.format("tfc.tooltip.units", ((IForgeableMeasurableMetal) cap).getMetalAmount()));
-      text.add(I18n.format(Helpers.getEnumName(((IForgeableMeasurableMetal) cap).getMetal().getTier())));
+      text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(forgeableMeasurableMetal.getMetal()))));
+      text.add(I18n.format("tfc.tooltip.units", forgeableMeasurableMetal.getMetalAmount()));
+      text.add(I18n.format(Helpers.getEnumName(forgeableMeasurableMetal.getMetal().getTier())));
     }
   }
 

@@ -81,7 +81,13 @@ public final class OreDictUtils {
       return null;
     }
     Object[] modifiedParts = Arrays.stream(parts)
-      .map(part -> part.toString().replace("/", "_"))
+      .map(part -> {
+        String partString = part.toString();
+        if (partString.matches("^[a-z]+[A-Z][a-z]+$")) {
+          partString = partString.replaceAll("(?<=[a-z])(?=[A-Z])", "_");
+        }
+        return partString.replace("/", "_");
+      })
       .toArray();
 
     return CaseFormat.UPPER_UNDERSCORE
@@ -92,13 +98,16 @@ public final class OreDictUtils {
   /**
    * Gets all of the ore dictionary names for an ItemStack.
    *
-   * @param stack The ItemStack to look at.
+   * @param itemStack The ItemStack to look at.
    * @return A set of the ore names.
    */
-  public static Set<String> getOreNames(ItemStack stack) {
+  public static Set<String> getOreNames(ItemStack itemStack) {
     final Set<String> names = new ObjectOpenHashSet<>();
+    if (itemStack.isEmpty()) {
+      return names;
+    }
 
-    for (final int id : OreDictionary.getOreIDs(stack)) {
+    for (final int id : OreDictionary.getOreIDs(itemStack)) {
       names.add(OreDictionary.getOreName(id));
     }
 
@@ -124,13 +133,22 @@ public final class OreDictUtils {
     return false;
   }
 
+  public static boolean startsWith(ItemStack itemStack, String oreDict) {
+    if (itemStack.isEmpty()) {
+      return false;
+    }
+    return OreDictUtils.getOreNames(itemStack)
+      .stream()
+      .anyMatch(name -> name.startsWith(oreDict));
+  }
+
   public static boolean contains(ItemStack itemStack, String oreDict) {
-    if (!OreDictionary.doesOreNameExist(oreDict)) {
-      TerraFirmaGreg.LOGGER.warn("Method called with non-existing name. stack: {} name: {}", itemStack, oreDict);
+    if (itemStack.isEmpty()) {
       return false;
     }
 
-    if (itemStack.isEmpty()) {
+    if (!OreDictionary.doesOreNameExist(oreDict)) {
+      TerraFirmaGreg.LOGGER.warn("Method called with non-existing name. stack: {} name: {}", itemStack, oreDict);
       return false;
     }
 

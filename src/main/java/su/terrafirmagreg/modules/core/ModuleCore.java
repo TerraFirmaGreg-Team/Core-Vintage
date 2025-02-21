@@ -30,6 +30,7 @@ import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitie
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesItemStack;
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesWorld;
 import su.terrafirmagreg.modules.core.event.client.EventHandlerGuiOpen;
+import su.terrafirmagreg.modules.core.event.client.EventHandlerGuiScreen;
 import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerOnConfigChanged;
 import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerPostConfigChanged;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerAmbiental;
@@ -147,6 +148,7 @@ public final class ModuleCore extends ModuleBase {
     ObjectList<Class<?>> list = new ObjectArrayList<>();
 
     list.add(EventHandlerGuiOpen.class);
+    list.add(EventHandlerGuiScreen.class);
 
     list.add(EventHandlerPlayerChangedDimension.class);
     list.add(EventHandlerPlayerLoggedIn.class);

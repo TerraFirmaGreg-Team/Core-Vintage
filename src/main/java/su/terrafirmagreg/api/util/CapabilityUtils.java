@@ -4,23 +4,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
+import lombok.experimental.UtilityClass;
+
 import java.util.Optional;
 
+@UtilityClass
+@SuppressWarnings("unused")
 public final class CapabilityUtils {
-
-  public static <T> Optional<T> getCapability(@Nonnull ICapabilityProvider provider, @Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-    T instance = null;
-    if (provider.hasCapability(capability, facing)) {
-      instance = provider.getCapability(capability, facing);
-    }
-    return Optional.ofNullable(instance);
-  }
-
-  public static <T> Optional<T> getCapability(@Nonnull ICapabilityProvider provider, @Nonnull Capability<T> capability) {
-    return getCapability(provider, capability, null);
-  }
 
   @Nullable
   public static <T> T get(ICapabilityProvider provider, Capability<T> capability) {

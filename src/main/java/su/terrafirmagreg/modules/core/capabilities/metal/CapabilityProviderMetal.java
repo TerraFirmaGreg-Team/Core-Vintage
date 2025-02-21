@@ -26,6 +26,22 @@ public class CapabilityProviderMetal implements ICapabilityMetal, ICapabilityPro
     this.canMelt = canMelt;
   }
 
+  public static CapabilityProviderMetal of(Metal metal, int amount, boolean canMelt) {
+    return new CapabilityProviderMetal(metal, amount, canMelt);
+  }
+
+  public static CapabilityProviderMetal of(Metal metal, int amount) {
+    return new CapabilityProviderMetal(metal, amount, true);
+  }
+
+  public static CapabilityProviderMetal of(Metal metal) {
+    return new CapabilityProviderMetal(metal, 0, true);
+  }
+
+  public static CapabilityProviderMetal of() {
+    return new CapabilityProviderMetal();
+  }
+
   @Override
   public boolean canMelt(ItemStack stack) {
     return canMelt;

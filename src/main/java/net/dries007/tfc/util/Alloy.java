@@ -103,7 +103,7 @@ public class Alloy implements INBTSerializable<NBTTagCompound> {
       if (recipe != null && recipe.isValidTemperature(temperature)) {
         return add(stack, recipe);
       } else {
-        ICapabilityMetal metalObject = CapabilityMetal.getMetalItem(stack);
+        ICapabilityMetal metalObject = CapabilityMetal.get(stack);
         if (metalObject != null) {
           // Melt into unknown alloy (so items aren't simply voided and becomes something)
           add(new FluidStack(FluidsTFC.getFluidFromMetal(Metal.UNKNOWN), metalObject.getSmeltAmount(stack) * stack.getCount()));

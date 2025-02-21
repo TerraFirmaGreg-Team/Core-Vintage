@@ -25,11 +25,13 @@ public interface ICapabilityMetal {
   @Nullable
   Metal getMetal(ItemStack stack);
 
+
   /**
    * @param stack The item stack
    * @return the amount of liquid metal that this item will create (in TFC units or mB: 1 unit = 1 mB)
    */
   int getSmeltAmount(ItemStack stack);
+
 
   /**
    * Can the metal melt directly from the stack into a fluid? This is used by {@link HeatRecipeMetalMelting} to determine if metal melting is possible

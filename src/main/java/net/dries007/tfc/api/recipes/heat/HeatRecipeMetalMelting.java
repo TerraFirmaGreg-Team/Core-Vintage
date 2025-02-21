@@ -19,7 +19,7 @@ public class HeatRecipeMetalMelting extends HeatRecipe {
 
   public HeatRecipeMetalMelting(Metal metal) {
     super(input -> {
-      ICapabilityMetal metalObject = CapabilityMetal.getMetalItem(input);
+      ICapabilityMetal metalObject = CapabilityMetal.get(input);
       if (metalObject != null) {
         return metalObject.getMetal(input) == metal;
       }
@@ -31,7 +31,7 @@ public class HeatRecipeMetalMelting extends HeatRecipe {
   @Nullable
   @Override
   public FluidStack getOutputFluid(ItemStack input) {
-    ICapabilityMetal metalObject = CapabilityMetal.getMetalItem(input);
+    ICapabilityMetal metalObject = CapabilityMetal.get(input);
     if (metalObject != null) {
       Metal metal = metalObject.getMetal(input);
       if (metal != null) {

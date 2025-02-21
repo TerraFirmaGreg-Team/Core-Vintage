@@ -51,13 +51,13 @@ public class BlastFurnaceRecipe extends IForgeRegistryEntry.Impl<BlastFurnaceRec
 
   @Nullable
   public FluidStack getOutput(ItemStack stack) {
-    ICapabilityMetal metal = CapabilityMetal.getMetalItem(stack);
+    ICapabilityMetal metal = CapabilityMetal.get(stack);
     int value = metal != null && metal.getMetal(stack) == input ? metal.getSmeltAmount(stack) : 0;
     return value > 0 ? new FluidStack(FluidsTFC.getFluidFromMetal(output), value) : null;
   }
 
   public boolean isValidInput(ItemStack stack) {
-    ICapabilityMetal metal = CapabilityMetal.getMetalItem(stack);
+    ICapabilityMetal metal = CapabilityMetal.get(stack);
     return metal != null && metal.getMetal(stack) == input;
   }
 

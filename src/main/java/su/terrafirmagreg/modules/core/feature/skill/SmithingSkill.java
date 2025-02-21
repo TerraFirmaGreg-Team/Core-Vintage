@@ -5,6 +5,8 @@ import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerD
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import lombok.Getter;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -123,6 +125,7 @@ public class SmithingSkill extends Skill {
     return sum;
   }
 
+  @Getter
   public enum Type {
     GENERAL(80),
     TOOLS(40),
@@ -135,8 +138,5 @@ public class SmithingSkill extends Skill {
       this.max = max;
     }
 
-    public int getMax() {
-      return max;
-    }
   }
 }

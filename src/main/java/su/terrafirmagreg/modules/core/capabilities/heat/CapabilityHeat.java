@@ -79,8 +79,7 @@ public final class CapabilityHeat {
     float targetTemperature = burnTemp + (hasAir ? MathHelper.clamp(burnTemp, 0, maxTempBonus) : 0);
     if (temp != targetTemperature) {
       float delta = (float) ConfigCore.MISC.HEAT.heatingModifier;
-      return adjustTempTowards(temp, targetTemperature, delta * (hasAir ? 2 : 1),
-        delta * (hasAir ? 0.5f : 1));
+      return adjustTempTowards(temp, targetTemperature, delta * (hasAir ? 2 : 1), delta * (hasAir ? 0.5f : 1));
     }
     return temp;
   }

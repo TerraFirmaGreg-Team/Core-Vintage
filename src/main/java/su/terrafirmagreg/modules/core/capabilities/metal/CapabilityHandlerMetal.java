@@ -1,11 +1,14 @@
 package su.terrafirmagreg.modules.core.capabilities.metal;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
+
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.ore.OrePrefix;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
@@ -15,8 +18,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 
+import static gregtech.api.items.toolitem.ToolOreDict.toolAxe;
 import static gregtech.api.unification.ore.OrePrefix.block;
 import static gregtech.api.unification.ore.OrePrefix.bolt;
 import static gregtech.api.unification.ore.OrePrefix.crushed;
@@ -59,52 +64,54 @@ public class CapabilityHandlerMetal {
   //Used inside CT, set custom IMetalItem for items outside TFC
   public static final Map<IIngredient<ItemStack>, Supplier<ICapabilityProvider>> CUSTOM_ITEMS = new HashMap<>();
   //Used inside CT, set custom IMetalItem for items outside TFC
-  public static final Map<OrePrefix, Integer> ORE_DICT_METAL_ITEMS = new LinkedHashMap<>();
+  public static final Map<String, Integer> ORE_DICT_METAL_ITEMS = new LinkedHashMap<>();
 
   public static void init() {
     CUSTOM_ITEMS.put(IIngredient.of(Blocks.IRON_BARS),
-      () -> new CapabilityProviderMetal(Metal.WROUGHT_IRON, 25, true));
+      () -> CapabilityProviderMetal.of(Metal.WROUGHT_IRON, 25, true));
 
     // Register ore dict prefix values
-    ORE_DICT_METAL_ITEMS.put(nugget, 16);
-    ORE_DICT_METAL_ITEMS.put(ingot, 144);
-    ORE_DICT_METAL_ITEMS.put(ingotDouble, 288);
-    ORE_DICT_METAL_ITEMS.put(plate, 144);
-    ORE_DICT_METAL_ITEMS.put(plateDouble, 288);
-    ORE_DICT_METAL_ITEMS.put(dustTiny, 16); //7
-    ORE_DICT_METAL_ITEMS.put(dustSmall, 36); //17
-    ORE_DICT_METAL_ITEMS.put(dustImpure, 120);
-    ORE_DICT_METAL_ITEMS.put(crushed, 120);
-    ORE_DICT_METAL_ITEMS.put(crushedPurified, 124);
-    ORE_DICT_METAL_ITEMS.put(crushedCentrifuged, 134);
-    ORE_DICT_METAL_ITEMS.put(dustPure, 134);
-    ORE_DICT_METAL_ITEMS.put(dust, 144);
-    ORE_DICT_METAL_ITEMS.put(stick, 72);
-    ORE_DICT_METAL_ITEMS.put(stickLong, 144);
-    ORE_DICT_METAL_ITEMS.put(bolt, 36);
-    ORE_DICT_METAL_ITEMS.put(screw, 36);
-    ORE_DICT_METAL_ITEMS.put(gear, 576);
-    ORE_DICT_METAL_ITEMS.put(block, 1296);
+    ORE_DICT_METAL_ITEMS.put(nugget.name(), 16);
+    ORE_DICT_METAL_ITEMS.put(ingot.name(), 144);
+    ORE_DICT_METAL_ITEMS.put(ingotDouble.name(), 288);
+    ORE_DICT_METAL_ITEMS.put(plate.name(), 144);
+    ORE_DICT_METAL_ITEMS.put(plateDouble.name(), 288);
+    ORE_DICT_METAL_ITEMS.put(dustTiny.name(), 16); //7
+    ORE_DICT_METAL_ITEMS.put(dustSmall.name(), 36); //17
+    ORE_DICT_METAL_ITEMS.put(dustImpure.name(), 120);
+    ORE_DICT_METAL_ITEMS.put(crushed.name(), 120);
+    ORE_DICT_METAL_ITEMS.put(crushedPurified.name(), 124);
+    ORE_DICT_METAL_ITEMS.put(crushedCentrifuged.name(), 134);
+    ORE_DICT_METAL_ITEMS.put(dustPure.name(), 134);
+    ORE_DICT_METAL_ITEMS.put(dust.name(), 144);
+    ORE_DICT_METAL_ITEMS.put(stick.name(), 72);
+    ORE_DICT_METAL_ITEMS.put(stickLong.name(), 144);
+    ORE_DICT_METAL_ITEMS.put(bolt.name(), 36);
+    ORE_DICT_METAL_ITEMS.put(screw.name(), 36);
+    ORE_DICT_METAL_ITEMS.put(gear.name(), 576);
+    ORE_DICT_METAL_ITEMS.put(block.name(), 1296);
 
 //    ORE_DICT_METAL_ITEMS.put(TFGOrePrefix.ingotTriple, 432);
 //    ORE_DICT_METAL_ITEMS.put(TFGOrePrefix.ingotHex, 864);
-    ORE_DICT_METAL_ITEMS.put(toolHeadDrill, 576);
-    ORE_DICT_METAL_ITEMS.put(toolHeadChainsaw, 288);
-    ORE_DICT_METAL_ITEMS.put(toolHeadWrench, 576);
-    ORE_DICT_METAL_ITEMS.put(toolHeadBuzzSaw, 576);
-    ORE_DICT_METAL_ITEMS.put(toolHeadScrewdriver, 144);
-    ORE_DICT_METAL_ITEMS.put(toolHeadSword, 288);
-    ORE_DICT_METAL_ITEMS.put(toolHeadPickaxe, 432);
-    ORE_DICT_METAL_ITEMS.put(toolHeadShovel, 144);
-    ORE_DICT_METAL_ITEMS.put(toolHeadAxe, 432);
-    ORE_DICT_METAL_ITEMS.put(toolHeadHoe, 288);
-    ORE_DICT_METAL_ITEMS.put(toolHeadSense, 432);
-    ORE_DICT_METAL_ITEMS.put(toolHeadFile, 288);
-    ORE_DICT_METAL_ITEMS.put(toolHeadHammer, 864);
-    ORE_DICT_METAL_ITEMS.put(toolHeadSaw, 288);
-    ORE_DICT_METAL_ITEMS.put(toolHeadKnife, 144);
-    ORE_DICT_METAL_ITEMS.put(toolHeadPropick, 432);
-    ORE_DICT_METAL_ITEMS.put(toolHeadChisel, 288);
+    ORE_DICT_METAL_ITEMS.put(toolHeadDrill.name(), 576);
+    ORE_DICT_METAL_ITEMS.put(toolHeadChainsaw.name(), 288);
+    ORE_DICT_METAL_ITEMS.put(toolHeadWrench.name(), 576);
+    ORE_DICT_METAL_ITEMS.put(toolHeadBuzzSaw.name(), 576);
+    ORE_DICT_METAL_ITEMS.put(toolHeadScrewdriver.name(), 144);
+    ORE_DICT_METAL_ITEMS.put(toolHeadSword.name(), 288);
+    ORE_DICT_METAL_ITEMS.put(toolHeadPickaxe.name(), 432);
+    ORE_DICT_METAL_ITEMS.put(toolHeadShovel.name(), 144);
+    ORE_DICT_METAL_ITEMS.put(toolHeadAxe.name(), 432);
+    ORE_DICT_METAL_ITEMS.put(toolHeadHoe.name(), 288);
+    ORE_DICT_METAL_ITEMS.put(toolHeadSense.name(), 432);
+    ORE_DICT_METAL_ITEMS.put(toolHeadFile.name(), 288);
+    ORE_DICT_METAL_ITEMS.put(toolHeadHammer.name(), 864);
+    ORE_DICT_METAL_ITEMS.put(toolHeadSaw.name(), 288);
+    ORE_DICT_METAL_ITEMS.put(toolHeadKnife.name(), 144);
+    ORE_DICT_METAL_ITEMS.put(toolHeadPropick.name(), 432);
+    ORE_DICT_METAL_ITEMS.put(toolHeadChisel.name(), 288);
+
+    ORE_DICT_METAL_ITEMS.put(toolAxe.name(), 432);
   }
 
   @Nullable
@@ -114,31 +121,53 @@ public class CapabilityHandlerMetal {
         return entry.getValue().get();
       }
     }
-    return getMetalItemFromOrePrefix(stack);
+    Item item = stack.getItem();
+
+    if (item instanceof ICapabilityMetal capability) {
+      return CapabilityProviderMetal.of(capability.getMetal(stack), capability.getSmeltAmount(stack), capability.canMelt(stack));
+    }
+
+    if (item instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof ICapabilityMetal capability) {
+      return CapabilityProviderMetal.of(capability.getMetal(stack), capability.getSmeltAmount(stack), capability.canMelt(stack));
+    }
+    return getMetalItemFromOre(stack);
+
+  }
+
+  @Nullable
+  private static ICapabilityProvider getMetalItemFromOre(ItemStack stack) {
+    var unificationEntry = OreDictUnifier.getUnificationEntry(stack);
+    if (unificationEntry != null) {
+      return ORE_DICT_METAL_ITEMS.entrySet().stream()
+        .filter(entry -> unificationEntry.orePrefix.name().startsWith(entry.getKey()))
+        .flatMap(entry -> {
+          var material = unificationEntry.material;
+          if (material != null) {
+            return TFCRegistries.METALS.getValuesCollection().stream()
+              .filter(m -> material.getName().equals(m.getRegistryName().getPath()))
+              .map(m -> CapabilityProviderMetal.of(m, entry.getValue(), true));
+          }
+          return null;
+        })
+        .findFirst()
+        .orElse(null);
+    }
+    return OreDictUtils.getOreNames(stack).stream()
+      .map(CapabilityHandlerMetal::getMetalItemFromOreDict)
+      .filter(Objects::nonNull)
+      .findFirst()
+      .orElse(null);
   }
 
 
   @Nullable
-  private static ICapabilityProvider getMetalItemFromOrePrefix(ItemStack stack) {
-    for (var orePrefix : ORE_DICT_METAL_ITEMS.keySet()) {
-      var prefix = OreDictUnifier.getPrefix(stack);
-      if (orePrefix == prefix) {
-        var materialName = OreDictUnifier.getMaterial(stack).material.toString(); // TODO костыль
-        //noinspection ConstantConditions
-        return TFCRegistries.METALS.getValuesCollection()
-          .stream()
-          .filter(metal -> {
-            var metalName = metal.getRegistryName().getPath();
-            return materialName.equals(metalName);
-          })
-          .findFirst()
-          .map(metal -> {
-            int smeltAmount = ORE_DICT_METAL_ITEMS.get(orePrefix);
-            return new CapabilityProviderMetal(metal, smeltAmount, true);
-
-          }).orElse(null);
-      }
-    }
-    return null;
+  private static ICapabilityProvider getMetalItemFromOreDict(String oreDict) {
+    return ORE_DICT_METAL_ITEMS.entrySet().stream()
+      .filter(entry -> oreDict.startsWith(entry.getKey()))
+      .flatMap(entry -> TFCRegistries.METALS.getValuesCollection().stream()
+        .filter(m -> oreDict.equals(OreDictUtils.toString(entry.getKey(), m.getRegistryName().getPath())))
+        .map(m -> CapabilityProviderMetal.of(m, entry.getValue(), true)))
+      .findFirst()
+      .orElse(null);
   }
 }

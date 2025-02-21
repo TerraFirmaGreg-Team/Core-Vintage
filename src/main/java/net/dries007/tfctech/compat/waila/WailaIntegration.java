@@ -68,7 +68,7 @@ public final class WailaIntegration implements IWailaDataProvider, IWailaPlugin 
               currenttip.add(TextFormatting.WHITE + stack.getDisplayName());
               ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
               if (cap != null) {
-                cap.addTooltipInfo(stack, currenttip, accessor.getPlayer());
+                cap.addTooltipInfo(stack, currenttip);
               }
             }
           }

@@ -154,7 +154,7 @@ public class TileCrate extends TEInventory implements IItemHandlerSidedCallback 
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
+    ICapabilitySize sizeCap = CapabilitySize.get(stack);
     if (sizeCap != null) {
       return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
     }

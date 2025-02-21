@@ -1,8 +1,12 @@
 package su.terrafirmagreg.modules.core.capabilities.forge;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.util.forge.ForgeStep;
@@ -10,6 +14,7 @@ import net.dries007.tfc.util.forge.ForgeSteps;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Capability for forgeable items (not to be confused with forgeable items that needs heat) Allows items to be forged in the anvil.
@@ -77,5 +82,12 @@ public interface ICapabilityForge extends INBTSerializable<NBTTagCompound> {
    */
   default boolean isWeldable() {
     return true;
+  }
+
+  @SideOnly(Side.CLIENT)
+  default void addTooltipInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
+    if (getWork() > 0) {
+      text.add(I18n.format("tfc.tooltip.forging_in_progress"));
+    }
   }
 }

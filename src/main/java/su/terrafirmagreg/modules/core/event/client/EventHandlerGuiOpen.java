@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EventHandlerGuiOpen {
 
   @SubscribeEvent
-  public static void onGuiOpen(GuiOpenEvent event) {
+  public static void on(GuiOpenEvent event) {
     var gui = event.getGui();
     if (gui instanceof GuiScreenAdvancements) {
       event.setCanceled(true);

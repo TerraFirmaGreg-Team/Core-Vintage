@@ -25,10 +25,10 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
 import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.capability.TFCDoubleChestItemHandler;
-import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -185,7 +185,7 @@ public class TEFruitChest extends TileEntityChest implements ISlotCallback {
   @Override
   public boolean isItemValidForSlot(int index, ItemStack stack) {
     // Blocks input from hopper
-    ICapabilitySize cap = CapabilitySize.getIItemSize(stack);
+    ICapabilitySize cap = CapabilitySize.get(stack);
     if (cap != null) {
       return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
     }

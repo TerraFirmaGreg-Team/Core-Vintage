@@ -394,7 +394,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
       case SLOT_FLUID_CONTAINER_IN:
         return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
       case SLOT_ITEM:
-        ICapabilitySize size = CapabilitySize.getIItemSize(stack);
+        ICapabilitySize size = CapabilitySize.get(stack);
         if (size != null) {
           return size.getSize(stack).isSmallerThan(Size.HUGE);
         }

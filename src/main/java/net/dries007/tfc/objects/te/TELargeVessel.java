@@ -153,7 +153,7 @@ public class TELargeVessel extends TEInventory implements IItemHandlerSidedCallb
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
+    ICapabilitySize sizeCap = CapabilitySize.get(stack);
     if (sizeCap != null) {
       return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
     }

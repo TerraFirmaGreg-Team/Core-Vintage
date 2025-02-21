@@ -9,7 +9,6 @@ import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
@@ -22,7 +21,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -96,7 +94,7 @@ public interface ICapabilityFood extends ICapabilitySerializable<NBTTagCompound>
    * @param text  the tooltip
    */
   @SideOnly(Side.CLIENT)
-  default void addTooltipInfo(@Nonnull ItemStack stack, @Nonnull List<String> text, @Nullable EntityPlayer player) {
+  default void addTooltipInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
     // Expiration dates
     if (isRotten()) {
       text.add(TextFormatting.RED + I18n.format("tfc.tooltip.food_rotten"));

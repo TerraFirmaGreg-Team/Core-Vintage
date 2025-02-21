@@ -170,7 +170,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
   @Override
   public boolean isItemValidForSlot(int index, ItemStack stack) {
     // Blocks input from hopper
-    ICapabilitySize cap = CapabilitySize.getIItemSize(stack);
+    ICapabilitySize cap = CapabilitySize.get(stack);
     if (cap != null) {
       return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
     }

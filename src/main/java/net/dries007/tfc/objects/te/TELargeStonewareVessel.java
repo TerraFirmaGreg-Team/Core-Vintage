@@ -22,7 +22,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.dries007.tfc.objects.blocks.BlockLargeVessel;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.objects.te.TEInventory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -154,7 +153,7 @@ public class TELargeStonewareVessel extends TEInventory implements IItemHandlerS
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    ICapabilitySize sizeCap = CapabilitySize.getIItemSize(stack);
+    ICapabilitySize sizeCap = CapabilitySize.get(stack);
     if (sizeCap != null) {
       return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
     }

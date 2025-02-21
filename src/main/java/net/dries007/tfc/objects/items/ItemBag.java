@@ -1,7 +1,5 @@
 package net.dries007.tfc.objects.items;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
-
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
@@ -29,6 +27,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfcflorae.client.GuiHandler;
 
 import javax.annotation.Nonnull;
@@ -162,7 +161,7 @@ public class ItemBag extends ItemTFCF {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-      ICapabilitySize size = CapabilitySize.getIItemSize(stack);
+      ICapabilitySize size = CapabilitySize.get(stack);
       if (size != null) {
         return size.getSize(stack).isSmallerThan(Size.NORMAL);
       }

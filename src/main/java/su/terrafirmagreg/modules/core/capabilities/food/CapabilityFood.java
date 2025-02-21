@@ -27,11 +27,20 @@ public class CapabilityFood {
    * in ~5 days, grains take ~20 days Other modifiers are applied on top of that
    */
   public static final int DEFAULT_ROT_TICKS = ICalendar.TICKS_IN_DAY * 22;
+
   @CapabilityInject(ICapabilityFood.class)
   public static final Capability<ICapabilityFood> CAPABILITY = ModUtils.getNull();
 
   public static void register() {
     CapabilityManager.INSTANCE.register(ICapabilityFood.class, new CapabilityStorageFood(), CapabilityProviderFood::new);
+  }
+
+  public static ICapabilityFood get(ItemStack itemStack) {
+    return itemStack.getCapability(CAPABILITY, null);
+  }
+
+  public static boolean has(ItemStack itemStack) {
+    return itemStack.hasCapability(CAPABILITY, null);
   }
 
   /**

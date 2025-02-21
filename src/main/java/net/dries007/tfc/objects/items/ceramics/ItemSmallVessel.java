@@ -58,9 +58,9 @@ import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.items.ItemFoodFL;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
 import net.dries007.tfc.util.Alloy;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -259,7 +259,7 @@ public class ItemSmallVessel extends ItemPottery {
         boolean onlySmeltables = true;
         for (ItemStack slot : super.stacks) {
           if (!slot.isEmpty()) {
-            ICapabilityMetal itemMetal = CapabilityMetal.getMetalItem(slot);
+            ICapabilityMetal itemMetal = CapabilityMetal.get(slot);
             if (itemMetal != null) {
               materials.merge(itemMetal.getMetal(slot), itemMetal.getSmeltAmount(slot) * slot.getCount(), Integer::sum);
             } else {
@@ -386,7 +386,7 @@ public class ItemSmallVessel extends ItemPottery {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-      ICapabilitySize size = CapabilitySize.getIItemSize(stack);
+      ICapabilitySize size = CapabilitySize.get(stack);
       if (size != null) {
         if (size.getSize(stack).isSmallerThan(Size.NORMAL)) {
           if (stack.hasCapability(CAPABILITY, null) && !(stack.getItem() instanceof ItemPottery)) {

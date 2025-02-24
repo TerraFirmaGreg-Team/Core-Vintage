@@ -102,6 +102,8 @@ block.tfg.device.fire_pit.name=Костер
 block.tfg.device.cellar.door.name=Дверь подвала
 block.tfg.device.cellar.shelf.name=Полка подвала
 block.tfg.device.cellar.wall.name=Стена подвала
+block.tfg.device.smeltery.cauldron.name=Плавильный котёл
+block.tfg.device.smeltery.firebox.name=Плавильная печь
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

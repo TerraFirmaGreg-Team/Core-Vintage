@@ -11,6 +11,7 @@ import gregtech.common.blocks.BlockOre;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -19,13 +20,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-@Mixin(value = BlockOre.class, remap = false)
-public class BlockOreMixin {
+@Mixin(value = BlockOre.class)
+public abstract class BlockOreMixin {
 
-  @Shadow
   @Final
+  @Shadow
   public Material field_149764_J;
 
+  @Unique
   private Material getMaterial() {
     return field_149764_J;
   }

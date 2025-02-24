@@ -1,6 +1,9 @@
 package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid.Callback;
+import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidHandlerSidedCallback;
+import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidTankCallback;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -14,9 +17,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockMetalLamp;
 
 import javax.annotation.Nonnull;
@@ -27,7 +27,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class TELamp extends TETickCounter implements IFluidTankCallback, IFluidHandlerSidedCallback {
 
   public static int CAPACITY;
-  private final FluidTank tank = new FluidTankCallback(this, 0, CAPACITY);
+  private final FluidTank tank = new Callback(this, 0, CAPACITY);
   private boolean powered = false;
 
   public TELamp() {

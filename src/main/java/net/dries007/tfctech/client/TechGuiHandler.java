@@ -1,50 +1,28 @@
 package net.dries007.tfctech.client;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.client.gui.GuiElectricForge;
 import su.terrafirmagreg.modules.device.client.gui.GuiInductionCrucible;
-import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
-import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryFirebox;
 import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
 import su.terrafirmagreg.modules.device.object.container.ContainerElectricForge;
-import su.terrafirmagreg.modules.device.object.container.ContainerSmelteryCauldron;
-import su.terrafirmagreg.modules.device.object.container.ContainerSmelteryFirebox;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
-import su.terrafirmagreg.modules.device.object.tile.TileSmelteryCauldron;
-import su.terrafirmagreg.modules.device.object.tile.TileSmelteryFirebox;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.client.gui.GuiGlassworking;
 import net.dries007.tfc.objects.container.ContainerGlassworking;
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfctech.TFCTech;
-import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
@@ -69,12 +47,6 @@ public class TechGuiHandler implements IGuiHandler {
       case INDUCTION_CRUCIBLE:
         TileInductionCrucible teInductionCrucible = Helpers.getTE(world, pos, TileInductionCrucible.class);
         return teInductionCrucible == null ? null : new ContainerCrucible(player.inventory, teInductionCrucible);
-      case SMELTERY_CAULDRON:
-        TileSmelteryCauldron teSmelteryCauldron = Helpers.getTE(world, pos, TileSmelteryCauldron.class);
-        return teSmelteryCauldron == null ? null : new ContainerSmelteryCauldron(player.inventory, teSmelteryCauldron);
-      case SMELTERY_FIREBOX:
-        TileSmelteryFirebox teSmelteryFirebox = Helpers.getTE(world, pos, TileSmelteryFirebox.class);
-        return teSmelteryFirebox == null ? null : new ContainerSmelteryFirebox(player.inventory, teSmelteryFirebox);
       case GLASSWORKING:
         return new ContainerGlassworking(player.inventory, stack.getItem() instanceof ItemBlowpipe ? stack : player.getHeldItemOffhand());
       default:
@@ -94,10 +66,6 @@ public class TechGuiHandler implements IGuiHandler {
         return new GuiElectricForge(container, player.inventory, Helpers.getTE(world, pos, TileElectricForge.class));
       case INDUCTION_CRUCIBLE:
         return new GuiInductionCrucible(container, player.inventory, Helpers.getTE(world, pos, TileInductionCrucible.class));
-      case SMELTERY_CAULDRON:
-        return new GuiSmelteryCauldron(container, player.inventory, Helpers.getTE(world, pos, TileSmelteryCauldron.class));
-      case SMELTERY_FIREBOX:
-        return new GuiSmelteryFirebox(container, player.inventory, Helpers.getTE(world, pos, TileSmelteryFirebox.class));
       case GLASSWORKING:
         return new GuiGlassworking(container, player);
       default:
@@ -108,8 +76,6 @@ public class TechGuiHandler implements IGuiHandler {
   public enum Type {
     ELECTRIC_FORGE,
     INDUCTION_CRUCIBLE,
-    SMELTERY_CAULDRON,
-    SMELTERY_FIREBOX,
     GLASSWORKING;
 
     private static final Type[] values = values();
@@ -122,109 +88,4 @@ public class TechGuiHandler implements IGuiHandler {
     }
   }
 
-  /*
-   * Some helper functions to alleviate the design of new GUIs
-   */
-  @SideOnly(Side.CLIENT)
-  public static abstract class Drawing {
-
-    /**
-     * Draw the temperature bar onscreen
-     *
-     * @param minecraft   the minecraft obj
-     * @param guiElement  the gui obj
-     * @param posX        the x coords to draw (don't forget guiLeft!)
-     * @param posY        the y coords to draw (don't forget guiTop!)
-     * @param temperature the temperature to draw the indicator
-     */
-    public static void drawTemperatureBar(Minecraft minecraft, Gui guiElement, int posX, int posY, float temperature) {
-      // The bar
-      minecraft.getTextureManager().bindTexture(TechGuiHandler.GUI_ELEMENTS);
-      guiElement.drawTexturedModalRect(posX, posY, 39, 1, 9, 52);
-
-      // the temperature indicator <->
-      int temperaturePixels = (int) (51 * Math.min(Heat.maxVisibleTemperature(), temperature)
-                                     / Heat.maxVisibleTemperature()); //Max temperature is brilliant white in tfc
-      guiElement.drawTexturedModalRect(posX - 3, posY + 49 - temperaturePixels, 36, 54, 15, 5);
-    }
-
-    /**
-     * Draw a tank with contents onscreen
-     *
-     * @param minecraft  the minecraft obj
-     * @param guiElement the gui obj
-     * @param posX       the x coords to draw (don't forget guiLeft!)
-     * @param posY       the y coords to draw (don't forget guiTop!)
-     * @param capacity   the capacity of this tank
-     * @param fluid      the fluid if you want to draw it, null otherwise
-     */
-    public static void drawTank(Minecraft minecraft, Gui guiElement, int posX, int posY, int capacity, @Nullable FluidStack fluid) {
-      minecraft.getTextureManager().bindTexture(TechGuiHandler.GUI_ELEMENTS);
-
-      // Draw the background
-      guiElement.drawTexturedModalRect(posX, posY, 0, 102, 18, 49);
-
-      // Draw fluid
-      if (fluid != null) {
-        // Fluid
-        int fillPixels = (int) Math.min(Math.ceil((fluid.amount / (float) capacity) * 47), 47);
-        TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid.getFluid());
-        minecraft.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        BufferBuilder buffer = Tessellator.getInstance().getBuffer();
-
-        GlStateManager.enableAlpha();
-        GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-
-        int color = fluid.getFluid().getColor();
-
-        float r = ((color >> 16) & 0xFF) / 255f;
-        float g = ((color >> 8) & 0xFF) / 255f;
-        float b = (color & 0xFF) / 255f;
-        float a = ((color >> 24) & 0xFF) / 255f;
-
-        GlStateManager.color(r, g, b, a);
-
-        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-
-        int startX = posX + 1;
-        int startY = posY + 48 - fillPixels;
-        int endX = posX + 17;
-        int endY = posY + 48;
-
-        buffer.pos(startX, startY, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
-        buffer.pos(startX, endY, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
-        buffer.pos(endX, endY, 0).tex(sprite.getMaxU(), sprite.getMaxV()).endVertex();
-        buffer.pos(endX, startY, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
-
-        Tessellator.getInstance().draw();
-
-        minecraft.renderEngine.bindTexture(GUI_ELEMENTS);
-        GlStateManager.color(1, 1, 1, 1);
-
-        // Overlay
-        guiElement.drawTexturedModalRect(posX, posY, 18, 102, 18, 49);
-      }
-    }
-
-    /**
-     * Draws tooltip if not null
-     *
-     * @param fluid  the fluid
-     * @param mouseX the mouseX relation to GUI (mouseX - guiLeft)
-     * @param mouseY the mouseY relation to GUI (mouseY - guiTop)
-     * @param posX   the tank's x coords (without guiLeft!)
-     * @param posY   the tank's y coords (without guiTop!)
-     */
-    @Nullable
-    public static List<String> getFluidTooltip(@Nullable FluidStack fluid, int mouseX, int mouseY, int posX, int posY) {
-      if (fluid != null && mouseX >= posX && mouseX <= posX + 18 && mouseY >= posY && mouseY <= posY + 49) {
-        List<String> tooltip = new ArrayList<>();
-        tooltip.add(fluid.getLocalizedName());
-        tooltip.add(fluid.amount + " / " + TileSmelteryCauldron.FLUID_CAPACITY);
-        return tooltip;
-      }
-      return null;
-    }
-  }
 }

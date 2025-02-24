@@ -8,12 +8,11 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStackSimple;
-
-import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -151,5 +150,23 @@ public class CapabilityProviderFluid implements IProviderItemCapability {
       return null;
     }
 
+  }
+
+
+  public static class Callback extends FluidTank {
+
+    private final int ID;
+    private final IFluidTankCallback callback;
+
+    public Callback(IFluidTankCallback callback, int fluidTankID, int capacity) {
+      super(capacity);
+      this.callback = callback;
+      this.ID = fluidTankID;
+    }
+
+    @Override
+    protected void onContentsChanged() {
+      callback.setAndUpdateFluidTank(ID);
+    }
   }
 }

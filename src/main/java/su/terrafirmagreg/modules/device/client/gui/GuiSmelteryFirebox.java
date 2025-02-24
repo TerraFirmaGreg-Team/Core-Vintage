@@ -1,21 +1,19 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.object.tile.TileSmelteryFirebox;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-import net.dries007.tfc.client.gui.GuiContainerTE;
+public class GuiSmelteryFirebox extends BaseGuiContainerTile<TileSmelteryFirebox> {
 
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
-
-public class GuiSmelteryFirebox extends GuiContainerTE<TileSmelteryFirebox> {
-
-  private static final ResourceLocation FIREBOX_BACKGROUND = new ResourceLocation(TFCTECH, "textures/gui/smeltery_firebox.png");
+  private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/smeltery_firebox.png");
 
   public GuiSmelteryFirebox(Container container, InventoryPlayer playerInv, TileSmelteryFirebox tile) {
-    super(container, playerInv, tile, FIREBOX_BACKGROUND);
+    super(container, playerInv, tile, BACKGROUND);
   }
 
   @Override
@@ -24,7 +22,7 @@ public class GuiSmelteryFirebox extends GuiContainerTE<TileSmelteryFirebox> {
     // Draw elements
     // if on fire
     if (tile.getField(1) > 0) {
-      mc.getTextureManager().bindTexture(FIREBOX_BACKGROUND);
+      mc.getTextureManager().bindTexture(BACKGROUND);
       for (int i = 0; i < 4; i++) {
         this.drawTexturedModalRect(guiLeft + 54 + (i * 18), guiTop + 12, 0, 166, 14, 14);
       }

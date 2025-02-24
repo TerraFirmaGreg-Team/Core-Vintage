@@ -120,8 +120,8 @@ public final class BlocksDevice {
 //    INDUCTION_CRUCIBLE = registry.block(new BlockInductionCrucible());
 //    FRIDGE = registry.block(new BlockFridge());
 //    LATEX_EXTRACTOR = registry.block(new BlockLatexExtractor());
-//    SMELTERY_CAULDRON = registry.block(new BlockSmelteryCauldron());
-//    SMELTERY_FIREBOX = registry.block(new BlockSmelteryFirebox());
+    SMELTERY_CAULDRON = registry.block(new BlockSmelteryCauldron());
+    SMELTERY_FIREBOX = registry.block(new BlockSmelteryFirebox());
 //    GREENHOUSE_DOOR = registry.block(new BlockGreenhouseDoor());
 //    GREENHOUSE_ROOF = registry.block(new BlockGreenhouseRoof());
 //    GREENHOUSE_WALL = registry.block(new BlockGreenhouseWall());

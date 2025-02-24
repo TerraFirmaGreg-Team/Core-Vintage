@@ -1,6 +1,9 @@
 package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid.Callback;
+import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidHandlerSidedCallback;
+import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidTankCallback;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -31,9 +34,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
@@ -446,7 +446,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
     this.lastPlayerTick = tick;
   }
 
-  protected static class BarrelFluidTank extends FluidTankCallback {
+  protected static class BarrelFluidTank extends Callback {
 
     private final Set<Fluid> whitelist;
 

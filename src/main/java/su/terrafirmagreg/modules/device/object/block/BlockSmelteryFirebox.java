@@ -1,24 +1,15 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
-import su.terrafirmagreg.modules.device.object.tile.TileBellows;
-import su.terrafirmagreg.modules.device.object.tile.TileSmelteryFirebox;
-
-import net.minecraft.block.BlockHorizontal;
+import net.dries007.tfc.api.util.IBellowsConsumerBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -31,192 +22,175 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlockHorizontal;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.network.spi.GuiHandler;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.object.tile.TileBellows;
+import su.terrafirmagreg.modules.device.object.tile.TileSmelteryFirebox;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.util.IBellowsConsumerBlock;
-import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfctech.client.TechGuiHandler;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class BlockSmelteryFirebox extends BlockHorizontal implements IBellowsConsumerBlock, ILightableBlock, ICapabilitySize {
+import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
-  public BlockSmelteryFirebox() {
-    super(Material.IRON);
-    setHardness(3.0F);
-    setSoundType(SoundType.STONE);
-    setHarvestLevel("pickaxe", 0);
-    setDefaultState(getBlockState().getBaseState().withProperty(LIT, false).withProperty(FACING, EnumFacing.NORTH));
-    setTickRandomly(true);
-    setLightLevel(1f);
-  }
+@SuppressWarnings("deprecation")
+public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellowsConsumerBlock, IProviderTile {
 
-  @Nonnull
-  @Override
-  public Size getSize(@Nonnull ItemStack itemStack) {
-    return Size.LARGE;
-  }
+    public BlockSmelteryFirebox() {
+        super(Settings.of(Material.IRON));
 
-  @Nonnull
-  @Override
-  public Weight getWeight(@Nonnull ItemStack itemStack) {
-    return Weight.MEDIUM;
-  }
+        getSettings()
+                .registryKey("smeltery/firebox")
+                .sound(SoundType.STONE)
+                .hardness(3.0F)
+                .lightValue(1)
+                .nonFullCube()
+                .nonOpaque()
+                .randomTicks()
+                .harvestLevel(ToolClasses.PICKAXE, 0)
+                .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM));
 
-  @Override
-  @SuppressWarnings("deprecation")
-  @Nonnull
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState()
-      .withProperty(FACING, EnumFacing.byHorizontalIndex(meta % 4))
-      .withProperty(LIT, meta / 4 % 2 != 0);
-  }
+        setDefaultState(getBlockState().getBaseState()
+                .withProperty(LIT, false)
+                .withProperty(HORIZONTAL, EnumFacing.NORTH));
 
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex()
-           + (state.getValue(LIT) ? 4 : 0);
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public boolean isFullCube(IBlockState state) {
-    return false;
-  }
-
-  @SuppressWarnings("deprecation")
-  @Nonnull
-  @Override
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    return FULL_BLOCK_AABB;
-  }
-
-  @Override
-  @Nonnull
-  @SuppressWarnings("deprecation")
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rng) {
-    if (!state.getValue(LIT)) {return;}
-
-    if (rng.nextInt(24) == 0) {
-      world.playSound(
-        (float) pos.getX() + 0.5F,
-        (float) pos.getY() + 0.5F,
-        (float) pos.getZ() + 0.5F, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0F + rng.nextFloat(), rng.nextFloat() * 0.7F + 0.3F, false);
     }
-    if (rng.nextFloat() < 0.4f) {
-      double x = pos.getX() + 0.5;
-      double y = pos.getY() + 0.35;
-      double z = pos.getZ() + 0.5;
-      switch (state.getValue(FACING)) {
-        case NORTH:
-          z -= 0.6f;
-          break;
-        case SOUTH:
-          z += 0.6f;
-          break;
-        case WEST:
-          x += 0.6f;
-          break;
-        case EAST:
-          x += 0.6f;
-          break;
-      }
 
-      world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y, z, 0.0D, 0.2D, 0.0D);
-      if (rng.nextFloat() > 0.75) {world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, x, y, z, 0.0D, 0.1D, 0.0D);}
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState()
+                .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta % 4))
+                .withProperty(LIT, meta / 4 % 2 != 0);
     }
-  }
 
-  @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileSmelteryFirebox te = Helpers.getTE(worldIn, pos, TileSmelteryFirebox.class);
-    if (te != null) {
-      te.onBreakBlock(worldIn, pos, state);
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(LIT) ? 4 : 0);
     }
-    super.breakBlock(worldIn, pos, state);
-  }
 
-  @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-    if (!player.isSneaking()) {
-      if (!world.isRemote) {
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, LIT, HORIZONTAL);
+    }
+
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+    }
+
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return state.getValue(LIT) ? 15 : 0;
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return FULL_BLOCK_AABB;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rng) {
+        if (!state.getValue(LIT)) {
+            return;
+        }
+
+        if (rng.nextInt(24) == 0) {
+            world.playSound((float) pos.getX() + 0.5F, (float) pos.getY() + 0.5F,
+                    (float) pos.getZ() + 0.5F, SoundEvents.BLOCK_FIRE_AMBIENT,
+                    SoundCategory.BLOCKS, 1.0F + rng.nextFloat(), rng.nextFloat() * 0.7F + 0.3F, false);
+        }
+        if (rng.nextFloat() < 0.4f) {
+            double x = pos.getX() + 0.5;
+            double y = pos.getY() + 0.35;
+            double z = pos.getZ() + 0.5;
+            switch (state.getValue(HORIZONTAL)) {
+                case NORTH:
+                    z -= 0.6f;
+                    break;
+                case SOUTH:
+                    z += 0.6f;
+                    break;
+                case WEST:
+                    x += 0.6f;
+                    break;
+                case EAST:
+                    x += 0.6f;
+                    break;
+            }
+
+            world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y, z, 0.0D, 0.2D, 0.0D);
+            if (rng.nextFloat() > 0.75) {
+                world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, x, y, z, 0.0D, 0.1D, 0.0D);
+            }
+        }
+    }
+
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        TileUtils.getTile(worldIn, pos, TileSmelteryFirebox.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
+        super.breakBlock(worldIn, pos, state);
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (player.isSneaking()) {
+            return false;
+        }
+        if (world.isRemote) {
+            return true;
+        }
+
         ItemStack held = player.getHeldItem(hand);
         if (world.getBlockState(pos.up()).getBlock() instanceof BlockSmelteryCauldron) {
-          TileSmelteryFirebox firebox = Helpers.getTE(world, pos, TileSmelteryFirebox.class);
-          if (ItemFireStarter.canIgnite(held) && firebox.onIgnite()) {
-            ItemFireStarter.onIgnition(held);
-          } else {
-            TechGuiHandler.openGui(world, pos, player, TechGuiHandler.Type.SMELTERY_FIREBOX);
-          }
+            TileUtils.getTile(world, pos, TileSmelteryFirebox.class).ifPresent(tile -> {
+                if (ItemFireStarter.canIgnite(held) && tile.onIgnite()) {
+                    ItemFireStarter.onIgnition(held);
+                } else {
+                    GuiHandler.openGui(world, pos, player);
+                }
+            });
+
         } else {
-          if (held.getItem() instanceof ItemBlock && ((ItemBlock) held.getItem()).getBlock() instanceof BlockSmelteryCauldron && world.getBlockState(pos.up())
-            .getMaterial().isReplaceable()) {
-            held.getItem().onItemUse(player, world, pos.up(), hand, side, hitX, hitY, hitZ);
-          } else {
-            player.sendStatusMessage(new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
-          }
+            if (held.getItem() instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof BlockSmelteryCauldron &&
+                    world.getBlockState(pos.up())
+                            .getMaterial()
+                            .isReplaceable()) {
+                held.getItem().onItemUse(player, world, pos.up(), hand, side, hitX, hitY, hitZ);
+            } else {
+                player.sendStatusMessage(
+                        new TextComponentTranslation("tooltip.tfctech.smeltery.invalid"), true);
+            }
         }
-      }
-      return true;
+        return true;
     }
-    return false;
-  }
 
-  @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, LIT, FACING);
-  }
-
-  @Override
-  public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return state.getValue(LIT) ? 15 : 0;
-  }
-
-  @Override
-  public boolean hasTileEntity(IBlockState state) {
-    return true;
-  }
-
-  @Nullable
-  @Override
-  public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TileSmelteryFirebox();
-  }
-
-  @Override
-  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-  }
-
-  @Override
-  public boolean canIntakeFrom(@Nonnull Vec3i offset, @Nonnull EnumFacing direction) {
-    return offset.equals(TileBellows.OFFSET_LEVEL);
-  }
-
-  @Override
-  public void onAirIntake(@Nonnull World world, @Nonnull BlockPos pos, int airAmount) {
-    TileSmelteryFirebox firebox = Helpers.getTE(world, pos, TileSmelteryFirebox.class);
-    if (firebox != null) {
-      firebox.onAirIntake(airAmount);
+    @Override
+    public boolean canIntakeFrom(@NotNull Vec3i offset, @NotNull EnumFacing direction) {
+        return offset.equals(TileBellows.OFFSET_LEVEL);
     }
-  }
 
+    @Override
+    public void onAirIntake(@NotNull World world, @NotNull BlockPos pos, int airAmount) {
+        TileUtils.getTile(world, pos, TileSmelteryFirebox.class).ifPresent(tile -> tile.onAirIntake(airAmount));
+    }
+
+    @Nullable
+    @Override
+    public TileSmelteryFirebox createNewTileEntity(World worldIn, int meta) {
+        return new TileSmelteryFirebox();
+    }
+
+    @Override
+    public Class<TileSmelteryFirebox> getTileClass() {
+        return TileSmelteryFirebox.class;
+    }
 }

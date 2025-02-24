@@ -176,6 +176,8 @@ block.tfg.device.fire_pit.name=Firepit
 block.tfg.device.cellar.door.name=Cellar Door
 block.tfg.device.cellar.shelf.name=Cellar Shelf
 block.tfg.device.cellar.wall.name=Cellar Wall
+block.tfg.device.smeltery.cauldron.name=Smeltery Cauldron
+block.tfg.device.smeltery.firebox.name=Smeltery Firebox
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

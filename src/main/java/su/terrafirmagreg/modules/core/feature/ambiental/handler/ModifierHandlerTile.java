@@ -10,8 +10,6 @@ import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileIceBunker;
 import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
-import su.terrafirmagreg.modules.device.object.tile.TileSmelteryCauldron;
-import su.terrafirmagreg.modules.device.object.tile.TileSmelteryFirebox;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -29,8 +27,6 @@ public final class ModifierHandlerTile {
 
   static {
     // TFC-Tech
-    TILE.register(ModifierHandlerTile::handleSmelteryFirebox); // Топило для печи для стекла
-    TILE.register(ModifierHandlerTile::handleSmelteryCauldron); // Печь для стекла
     TILE.register(ModifierHandlerTile::handleElectricForge); // Тигель
     TILE.register(ModifierHandlerTile::handleInductionCrucible); // Кузня
     TILE.register(ModifierHandlerTile::handleFridge); // Холодос
@@ -158,34 +154,6 @@ public final class ModifierHandlerTile {
         change = 1.0F;
       }
       return ModifierTile.defined("induction_crucible", change, potency);
-    } else {
-      return ModifierTile.none();
-    }
-  }
-
-  public static Optional<ModifierTile> handleSmelteryCauldron(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TileSmelteryCauldron smelteryCauldron) {
-      float temp = smelteryCauldron.getField(TileCrucible.FIELD_TEMPERATURE);
-      float change = temp / 120f;
-      float potency = temp / 370f;
-      if (ModifierTile.hasProtection(player)) {
-        change = 1.0F;
-      }
-      return ModifierTile.defined("smeltery_cauldron", change, potency);
-    } else {
-      return ModifierTile.none();
-    }
-  }
-
-  public static Optional<ModifierTile> handleSmelteryFirebox(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TileSmelteryFirebox smelteryFirebox) {
-      float temp = smelteryFirebox.getField(TileCrucible.FIELD_TEMPERATURE);
-      float change = temp / 120f;
-      float potency = temp / 370f;
-      if (ModifierTile.hasProtection(player)) {
-        change = 1.0F;
-      }
-      return ModifierTile.defined("smeltery_firebox", change, potency);
     } else {
       return ModifierTile.none();
     }

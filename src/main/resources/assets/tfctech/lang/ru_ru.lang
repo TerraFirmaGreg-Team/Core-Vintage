@@ -27,8 +27,6 @@ tile.tfctech.induction_crucible.name=Индукционный тигель
 tile.tfctech.wire_draw_bench.name=Станок для волочения проволоки
 tile.tfctech.fridge.name=Холодильник
 tile.tfctech.latex_extractor.name=Латексный экстрактор
-tile.tfctech.smeltery_cauldron.name=Плавильный котёл
-tile.tfctech.smeltery_firebox.name=Плавильная печь
 
 # Items
 ## Ceramics

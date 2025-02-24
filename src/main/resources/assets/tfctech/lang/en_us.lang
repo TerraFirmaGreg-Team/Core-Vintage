@@ -32,8 +32,6 @@ tile.tfctech.induction_crucible.name=Induction Crucible
 tile.tfctech.wire_draw_bench.name=Wire Drawing Bench
 tile.tfctech.fridge.name=Fridge
 tile.tfctech.latex_extractor.name=Latex Extractor
-tile.tfctech.smeltery_cauldron.name=Smeltery Cauldron
-tile.tfctech.smeltery_firebox.name=Smeltery Firebox
 
 # Items
 ## Ceramics

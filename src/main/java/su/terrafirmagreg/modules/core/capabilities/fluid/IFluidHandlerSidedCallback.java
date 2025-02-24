@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.fluids.capability;
+package su.terrafirmagreg.modules.core.capabilities.fluid;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;

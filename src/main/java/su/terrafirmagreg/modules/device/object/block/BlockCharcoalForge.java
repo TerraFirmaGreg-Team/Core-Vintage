@@ -61,16 +61,17 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
       // Top block
       .match(new BlockPos(0, 1, 0), state -> state.getBlock() == BlocksDevice.CRUCIBLE.get() || state.getBlock() == Blocks.AIR)
       // Chimney
-      .matchOneOf(new BlockPos(0, 1, 0), new Multiblock()
-        .match(new BlockPos(0, 0, 0), skyMatcher)
-        .match(new BlockPos(0, 0, 1), skyMatcher)
-        .match(new BlockPos(0, 0, 2), skyMatcher)
-        .match(new BlockPos(0, 0, -1), skyMatcher)
-        .match(new BlockPos(0, 0, -2), skyMatcher)
-        .match(new BlockPos(1, 0, 0), skyMatcher)
-        .match(new BlockPos(2, 0, 0), skyMatcher)
-        .match(new BlockPos(-1, 0, 0), skyMatcher)
-        .match(new BlockPos(-2, 0, 0), skyMatcher)
+      .matchOneOf(new BlockPos(0, 1, 0),
+        new Multiblock()
+          .match(new BlockPos(0, 0, 0), skyMatcher)
+          .match(new BlockPos(0, 0, 1), skyMatcher)
+          .match(new BlockPos(0, 0, 2), skyMatcher)
+          .match(new BlockPos(0, 0, -1), skyMatcher)
+          .match(new BlockPos(0, 0, -2), skyMatcher)
+          .match(new BlockPos(1, 0, 0), skyMatcher)
+          .match(new BlockPos(2, 0, 0), skyMatcher)
+          .match(new BlockPos(-1, 0, 0), skyMatcher)
+          .match(new BlockPos(-2, 0, 0), skyMatcher)
       )
       // Underneath
       .match(new BlockPos(1, 0, 0), isValidSide)

@@ -2,6 +2,7 @@ package net.dries007.tfc.compat.jei;
 
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -88,7 +89,7 @@ public class TechJEIPlugin implements IModPlugin {
       .collect(Collectors.toList());
 
     registry.addRecipes(smelteryList, SMELTERY_UID);
-    registry.addRecipeCatalyst(new ItemStack(TechBlocks.SMELTERY_CAULDRON), SMELTERY_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.SMELTERY_CAULDRON.get()), SMELTERY_UID);
 
     // Click areas
     registry.addRecipeClickArea(GuiSmelteryCauldron.class, 52, 58, 72, 15, SMELTERY_UID);

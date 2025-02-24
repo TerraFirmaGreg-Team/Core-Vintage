@@ -57,6 +57,8 @@ public abstract class AbstractRemapping {
     put("cellar_wall", BlocksDevice.CELLAR_WALL.get());
     put("cellar_door", BlocksDevice.CELLAR_DOOR.get());
     put("cellar_shelf", BlocksDevice.CELLAR_SHELF.get());
+    put("smeltery_firebox", BlocksDevice.SMELTERY_FIREBOX.get());
+    put("smeltery_cauldron", BlocksDevice.SMELTERY_CAULDRON.get());
 
     put("nest_box", BlocksAnimal.NEST_BOX.get());
 

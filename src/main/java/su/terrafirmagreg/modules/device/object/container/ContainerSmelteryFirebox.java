@@ -1,18 +1,17 @@
 package su.terrafirmagreg.modules.device.object.container;
 
+import su.terrafirmagreg.api.base.object.inventory.spi.container.BaseContainerTile;
+import su.terrafirmagreg.api.base.object.inventory.spi.slot.SlotCallback;
 import su.terrafirmagreg.modules.device.object.tile.TileSmelteryFirebox;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.container.ContainerTE;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+public class ContainerSmelteryFirebox extends BaseContainerTile<TileSmelteryFirebox> {
 
-public class ContainerSmelteryFirebox extends ContainerTE<TileSmelteryFirebox> {
-
-  public ContainerSmelteryFirebox(InventoryPlayer playerInv, TileSmelteryFirebox te) {
-    super(playerInv, te);
+  public ContainerSmelteryFirebox(InventoryPlayer playerInv, TileSmelteryFirebox tile) {
+    super(playerInv, tile);
   }
 
   @Override

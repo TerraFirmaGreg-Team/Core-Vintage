@@ -11,6 +11,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -19,6 +20,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
 
@@ -52,6 +55,12 @@ public abstract class BaseBlock extends Block implements IBlockSettings, IFluidl
 
   public static VoxelShape createShape(double x1, double y1, double z1, double x2, double y2, double z2) {
     return new VoxelShape(x1, y1, z1, x2, y2, z2);
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public BlockRenderLayer getRenderLayer() {
+    return this.settings.getRenderLayer();
   }
 
   @Override

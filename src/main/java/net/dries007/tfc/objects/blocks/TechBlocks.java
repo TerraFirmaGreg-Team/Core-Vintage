@@ -4,12 +4,10 @@ import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockElectricForge;
 import su.terrafirmagreg.modules.device.object.block.BlockFridge;
 import su.terrafirmagreg.modules.device.object.block.BlockInductionCrucible;
-import su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor;
 import su.terrafirmagreg.modules.device.object.block.BlockWireDrawBench;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
-import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
 
 import net.minecraft.block.Block;
@@ -41,7 +39,6 @@ public final class TechBlocks {
 
   public static final BlockElectricForge ELECTRIC_FORGE = getNull();
   public static final BlockInductionCrucible INDUCTION_CRUCIBLE = getNull();
-  public static final BlockLatexExtractor LATEX_EXTRACTOR = getNull();
   public static final BlockWireDrawBench WIRE_DRAW_BENCH = getNull();
   public static final BlockFridge FRIDGE = getNull();
 
@@ -88,13 +85,9 @@ public final class TechBlocks {
 
     allTEISRBlocks = teisrItemBlocks.build();
 
-    //No itemblocks
-    register(r, "latex_extractor", new BlockLatexExtractor());
-
     //Register TEs
     register(TileElectricForge.class, "electric_forge");
     register(TileInductionCrucible.class, "induction_crucible");
-    register(TileLatexExtractor.class, "latex_extractor");
     register(TileWireDrawBench.class, "wire_draw_bench");
     register(TileFridge.class, "fridge");
   }

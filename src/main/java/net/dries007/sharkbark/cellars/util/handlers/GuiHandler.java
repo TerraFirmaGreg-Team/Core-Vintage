@@ -1,10 +1,7 @@
 package net.dries007.sharkbark.cellars.util.handlers;
 
-import su.terrafirmagreg.modules.device.client.gui.GuiFreezeDryer;
 import su.terrafirmagreg.modules.device.client.gui.GuiIceBunker;
-import su.terrafirmagreg.modules.device.object.container.ContainerFreezeDryer;
 import su.terrafirmagreg.modules.device.object.container.ContainerIceBunker;
-import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 import su.terrafirmagreg.modules.device.object.tile.TileIceBunker;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,9 +26,6 @@ public class GuiHandler implements IGuiHandler {
     if (ID == Reference.GUI_ICE_BUNKER) {
       return new ContainerIceBunker(entityPlayer.inventory, (TileIceBunker) world.getTileEntity(new BlockPos(x, y, z)), entityPlayer);
     }
-    if (ID == Reference.GUI_FREEZE_DRYER) {
-      return new ContainerFreezeDryer(entityPlayer.inventory, (TileFreezeDryer) world.getTileEntity(new BlockPos(x, y, z)), entityPlayer);
-    }
     return null;
   }
 
@@ -43,11 +37,6 @@ public class GuiHandler implements IGuiHandler {
     if (ID == Reference.GUI_ICE_BUNKER) {
       TileIceBunker te = (TileIceBunker) world.getTileEntity(new BlockPos(x, y, z));
       return new GuiIceBunker(container, entityPlayer.inventory, te, world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
-    }
-
-    if (ID == Reference.GUI_FREEZE_DRYER) {
-      TileFreezeDryer te = (TileFreezeDryer) world.getTileEntity(new BlockPos(x, y, z));
-      return new GuiFreezeDryer(container, entityPlayer.inventory, te, world.getBlockState(new BlockPos(x, y, z)).getBlock().getTranslationKey());
     }
     return null;
   }

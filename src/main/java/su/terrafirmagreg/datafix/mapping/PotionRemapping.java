@@ -20,9 +20,11 @@ public class PotionRemapping extends AbstractRemapping {
       String mappingNamespace = mapping.key.getNamespace();
       String mappingPath = mapping.key.getPath();
 
-      if (POTION_MAP.containsKey(mappingPath)) {
-        mapping.remap(POTION_MAP.get(mappingPath));
-      }
+      POTION_MAP.forEach((key, value) -> {
+        if (mappingPath.endsWith(key)) {
+          mapping.remap(value.get());
+        }
+      });
 
       if (MOD_ID_SET.contains(mappingNamespace)) {
         mapping.ignore();

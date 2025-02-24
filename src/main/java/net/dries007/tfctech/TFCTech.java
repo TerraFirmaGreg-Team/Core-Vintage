@@ -14,7 +14,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
 import net.dries007.tfc.network.PacketFridgeUpdate;
-import net.dries007.tfc.network.PacketLatexUpdate;
 import net.dries007.tfc.network.PacketTileEntityUpdate;
 import net.dries007.tfctech.client.TechGuiHandler;
 import org.apache.logging.log4j.Logger;
@@ -58,7 +57,6 @@ public class TFCTech {
     NetworkRegistry.INSTANCE.registerGuiHandler(this, new TechGuiHandler());
     network = NetworkRegistry.INSTANCE.newSimpleChannel(Mods.ModIDs.TFCTECH);
     int id = 0;
-    network.registerMessage(new PacketLatexUpdate.Handler(), PacketLatexUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketTileEntityUpdate.Handler(), PacketTileEntityUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketFridgeUpdate.Handler(), PacketFridgeUpdate.class, ++id, Side.CLIENT);
   }

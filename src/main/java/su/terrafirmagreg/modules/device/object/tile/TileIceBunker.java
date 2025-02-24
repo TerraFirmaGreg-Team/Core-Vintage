@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockCellarDoor;
 import su.terrafirmagreg.modules.device.object.block.BlockCellarShelf;
@@ -36,7 +37,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 
 import net.dries007.sharkbark.cellars.ModConfig;
-import net.dries007.sharkbark.cellars.init.ModItems;
 import net.dries007.sharkbark.cellars.util.Reference;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
@@ -139,15 +139,15 @@ public class TileIceBunker extends TileEntityLockableLoot implements IInventory,
         for (int slot = 3; slot >= 0; slot--) {
           if (!chestContents.get(slot).isEmpty()) {
             Item item = chestContents.get(slot).getItem();
-            if (item == ModItems.PACKED_ICE_SHARD || Block.getBlockFromItem(item) == Blocks.PACKED_ICE) {
+            if (Block.getBlockFromItem(item) == Blocks.PACKED_ICE) {
               coolantAmount = coolantAmount + ModConfig.packedIceCoolant;
               seaIce = false;
               dryIce = true;
-            } else if (item == ModItems.SEA_ICE_SHARD || Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) {
+            } else if (Block.getBlockFromItem(item) == BlocksTFC.SEA_ICE) {
               coolantAmount = coolantAmount + ModConfig.seaIceCoolant;
               seaIce = true;
               dryIce = false;
-            } else if (item == ModItems.ICE_SHARD || Block.getBlockFromItem(item) == Blocks.ICE) {
+            } else if (item == ItemsCore.ICE_SHARD.get() || Block.getBlockFromItem(item) == Blocks.ICE) {
               coolantAmount = coolantAmount + ModConfig.iceCoolant;
               seaIce = false;
               dryIce = false;

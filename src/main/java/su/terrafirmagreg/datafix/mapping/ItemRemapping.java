@@ -22,13 +22,13 @@ public class ItemRemapping extends AbstractRemapping {
 
       ITEM_MAP.forEach((key, value) -> {
         if (mappingPath.endsWith(key)) {
-          mapping.remap(value);
+          mapping.remap(value.get());
         }
       });
 
       BLOCK_MAP.forEach((key, value) -> {
         if (mappingPath.endsWith(key)) {
-          mapping.remap(Item.getItemFromBlock(value));
+          mapping.remap(Item.getItemFromBlock(value.get()));
         }
       });
 

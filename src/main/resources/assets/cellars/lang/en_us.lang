@@ -1,19 +1,7 @@
-item.cellar_door.name=Cellar Door
-item.infected_air.name=Cellar Air
-item.ice_shard.name=Ice Shard
-item.packed_ice_shard.name=Packed Ice Shard
-item.sea_ice_shard.name=Sea Ice Shard
-tile.freeze_dryer.name=Freeze Dryer
+
 tile.ice_bunker.name=Ice Bunker
-tile.infected_air.name=Cellar Air
 
 container.ice_bunker=Ice Bunker
-container.cellar_shelf=Cellar Shelf
-container.cellar_shelf=Freeze Dryer
-
-block.cellar_door.name=Cellar Door
-block.cellar_wall.name=Cellar Wall
-block.infected_air.name=Cellar Air
 
 itemGroup.cellars=TFC Cellars
 

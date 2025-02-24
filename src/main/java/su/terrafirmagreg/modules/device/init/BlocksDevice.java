@@ -75,7 +75,7 @@ public final class BlocksDevice {
   public static Supplier<BlockElectricForge> ELECTRIC_FORGE;
   public static Supplier<BlockInductionCrucible> INDUCTION_CRUCIBLE;
   public static Supplier<BlockFridge> FRIDGE;
-  public static Supplier<BlockLatexExtractor> LATEX_EXTRACTOR;
+  public static Supplier<BlockLatexExtractor> LATEX_EXTRACTOR; // TODO noItems
   public static Supplier<BlockSmelteryCauldron> SMELTERY_CAULDRON;
   public static Supplier<BlockSmelteryFirebox> SMELTERY_FIREBOX;
   public static Supplier<BlockGreenhouseDoor> GREENHOUSE_DOOR;
@@ -111,15 +111,15 @@ public final class BlocksDevice {
     CELLAR_DOOR = registry.block(new BlockCellarDoor());
     CELLAR_WALL = registry.block(new BlockCellarWall());
 //    ICE_BUNKER = registry.block(new BlockIceBunker());
-//    INFECTED_AIR = registry.block(new BlockInfectedAir());
-//    FREEZE_DRYER = registry.block(new BlockFreezeDryer());
+    INFECTED_AIR = registry.block(new BlockInfectedAir());
+    FREEZE_DRYER = registry.block(new BlockFreezeDryer());
 //    POWDERKEG = registry.block(new BlockPowderKeg());
 //    THATCH_BED = registry.block(new BlockThatchBed());
 //    GRINDSTONE_MANUAL = registry.block(new BlockGrindstoneManual());
 //    ELECTRIC_FORGE = registry.block(new BlockElectricForge());
 //    INDUCTION_CRUCIBLE = registry.block(new BlockInductionCrucible());
 //    FRIDGE = registry.block(new BlockFridge());
-//    LATEX_EXTRACTOR = registry.block(new BlockLatexExtractor());
+    LATEX_EXTRACTOR = registry.block(new BlockLatexExtractor());
     SMELTERY_CAULDRON = registry.block(new BlockSmelteryCauldron());
     SMELTERY_FIREBOX = registry.block(new BlockSmelteryFirebox());
 //    GREENHOUSE_DOOR = registry.block(new BlockGreenhouseDoor());

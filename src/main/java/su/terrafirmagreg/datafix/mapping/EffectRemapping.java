@@ -20,9 +20,11 @@ public class EffectRemapping extends AbstractRemapping {
       String mappingNamespace = mapping.key.getNamespace();
       String mappingPath = mapping.key.getPath();
 
-      if (EFFECT_MAP.containsKey(mappingPath)) {
-        mapping.remap(EFFECT_MAP.get(mappingPath));
-      }
+      EFFECT_MAP.forEach((key, value) -> {
+        if (mappingPath.endsWith(key)) {
+          mapping.remap(value.get());
+        }
+      });
 
       if (MOD_ID_SET.contains(mappingNamespace)) {
         mapping.ignore();

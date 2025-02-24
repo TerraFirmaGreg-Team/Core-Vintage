@@ -4,6 +4,7 @@ import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
 import su.terrafirmagreg.modules.core.feature.climate.IceMeltHandler;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.SoundType;
@@ -29,8 +30,6 @@ import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
-
-import static net.dries007.sharkbark.cellars.init.ModItems.SEA_ICE_SHARD;
 
 @ParametersAreNonnullByDefault
 public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
@@ -92,7 +91,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
     if (player != null) {
       var tool = player.getHeldItemMainhand().getItem();
       if (tool instanceof ItemMetalTool itemMetalTool && itemMetalTool.getType().equals(ItemType.ICE_SAW)) {
-        drops.add(new ItemStack(SEA_ICE_SHARD));
+        drops.add(new ItemStack(ItemsCore.ICE_SHARD.get()));
       } else {
         super.getDrops(drops, world, pos, state, fortune);
       }

@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -13,8 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 
-import net.dries007.sharkbark.cellars.ModConfig;
-import net.dries007.sharkbark.cellars.init.ModItems;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 
@@ -64,24 +63,8 @@ public class ItemMetalIceSaw extends ItemMetalTool implements ICapabilityMetal {
   private Item getDroppedItem(IBlockState state) {
     Block block = state.getBlock();
 
-    if (block == BlocksTFC.SEA_ICE) {
-      if (ModConfig.disableShards) {
-        return Item.getItemFromBlock(block);
-      } else {
-        return ModItems.SEA_ICE_SHARD;
-      }
-    } else if (block == Blocks.PACKED_ICE) {
-      if (ModConfig.disableShards) {
-        return Item.getItemFromBlock(block);
-      } else {
-        return ModItems.PACKED_ICE_SHARD;
-      }
-    } else if (block == Blocks.ICE) {
-      if (ModConfig.disableShards) {
-        return Item.getItemFromBlock(block);
-      } else {
-        return ModItems.ICE_SHARD;
-      }
+    if (block == BlocksTFC.SEA_ICE || block == Blocks.PACKED_ICE || block == Blocks.ICE) {
+      return ItemsCore.ICE_SHARD.get();
     }
 
     return null;

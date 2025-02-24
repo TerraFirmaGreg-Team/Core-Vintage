@@ -3,10 +3,8 @@ package net.dries007.tfctech.client;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.device.client.render.TEISRFridge;
 import su.terrafirmagreg.modules.device.client.render.TESRFridge;
-import su.terrafirmagreg.modules.device.client.render.TESRLatexExtractor;
 import su.terrafirmagreg.modules.device.client.render.TESRWireDrawBench;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
-import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
 
 import net.minecraft.block.Block;
@@ -161,8 +159,6 @@ public final class ClientRegisterEvents {
     });
 
     // TESRs //
-
-    ClientRegistry.bindTileEntitySpecialRenderer(TileLatexExtractor.class, new TESRLatexExtractor());
     ClientRegistry.bindTileEntitySpecialRenderer(TileWireDrawBench.class, new TESRWireDrawBench());
     ClientRegistry.bindTileEntitySpecialRenderer(TileFridge.class, new TESRFridge());
   }

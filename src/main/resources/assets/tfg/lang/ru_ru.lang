@@ -52,6 +52,8 @@ block.tfg.core.thatch.name=Сноп соломы
 item.tfg.core.wand.name=Отладочная палочка
 item.tfg.core.wood_ash.name=Древесная зола
 item.tfg.core.straw.name=Солома
+item.tfg.core.shard.glass.name=Осколок стекла
+item.tfg.core.shard.ice.name=Осколок льда
 
 ## Effect
 effect.tfg.core.overburdened=Перегружен
@@ -102,8 +104,11 @@ block.tfg.device.fire_pit.name=Костер
 block.tfg.device.cellar.door.name=Дверь подвала
 block.tfg.device.cellar.shelf.name=Полка подвала
 block.tfg.device.cellar.wall.name=Стена подвала
+block.tfg.device.infected_air.name=Зараженный воздух
 block.tfg.device.smeltery.cauldron.name=Плавильный котёл
 block.tfg.device.smeltery.firebox.name=Плавильная печь
+block.tfg.device.latex_extractor.name=Латексный экстрактор
+block.tfg.device.freeze_dryer.name=Сублимационная камера
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

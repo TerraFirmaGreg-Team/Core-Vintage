@@ -34,6 +34,7 @@ import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -126,7 +127,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.dries007.firmalife.init.FoodFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
-import net.dries007.sharkbark.cellars.init.ModItems;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Metal;
@@ -155,7 +155,6 @@ import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.items.ItemFruitPole;
 import net.dries007.tfc.objects.items.ItemQuiver;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfc.types.DefaultPlants;
@@ -281,7 +280,7 @@ public final class CommonEventHandler {
     // Drop shards from glass
     ItemStack stackAt = new ItemStack(Item.getItemFromBlock(state.getBlock()), 1, state.getBlock().damageDropped(state));
     if (!event.isSilkTouching() && OreDictionaryHelper.doesStackMatchOre(stackAt, "blockGlass")) {
-      event.getDrops().add(new ItemStack(ItemsTFC.GLASS_SHARD));
+      event.getDrops().add(new ItemStack(ItemsCore.GLASS_SHARD.get()));
     }
 
     // Apply durability modifier on tools
@@ -331,7 +330,7 @@ public final class CommonEventHandler {
     if (block instanceof BlockPackedIce) {
       if (OreDictionaryHelper.doesStackMatchOre(heldItem, "iceSaw")) {
         event.getDrops().clear();
-        event.getDrops().add(new ItemStack(ModItems.PACKED_ICE_SHARD, 2 + Constants.RNG.nextInt(4)));
+        event.getDrops().add(new ItemStack(ItemsCore.ICE_SHARD.get(), 3 + Constants.RNG.nextInt(4)));
       }
     }
 

@@ -170,8 +170,6 @@ public final class ItemsTFC {
   public static final Item DIRTY_JUTE_NET = getNull();
   @GameRegistry.ObjectHolder("food/olive_paste")
   public static final Item OLIVE_PASTE = getNull();
-  @GameRegistry.ObjectHolder("glass_shard")
-  public static final Item GLASS_SHARD = getNull();
   @GameRegistry.ObjectHolder("stick_bunch")
   public static final Item STICK_BUNCH = getNull();
 
@@ -332,7 +330,6 @@ public final class ItemsTFC {
     simpleItems.add(register(r, "crop/product/jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
     simpleItems.add(register(r, "crop/product/dirty_jute_net", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
 
-    simpleItems.add(register(r, "glass_shard", new ItemMisc(Size.VERY_SMALL, Weight.VERY_LIGHT), CT_MISC));
     simpleItems.add(register(r, "handstone", new ItemCraftingTool(250, Size.NORMAL, Weight.VERY_HEAVY, "handstone"), CT_MISC));
 
     simpleItems.add(register(r, "spindle", new ItemCraftingTool(40, Size.NORMAL, Weight.MEDIUM, "spindle"), CT_MISC));

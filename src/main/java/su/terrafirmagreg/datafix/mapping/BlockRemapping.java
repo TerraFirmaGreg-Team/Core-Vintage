@@ -22,7 +22,7 @@ public class BlockRemapping extends AbstractRemapping {
 
       BLOCK_MAP.forEach((key, value) -> {
         if (mappingPath.endsWith(key)) {
-          mapping.remap(value);
+          mapping.remap(value.get());
         }
       });
 

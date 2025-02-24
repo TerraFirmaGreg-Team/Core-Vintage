@@ -19,9 +19,11 @@ public class EntityRemapping extends AbstractRemapping {
       String mappingNamespace = mapping.key.getNamespace();
       String mappingPath = mapping.key.getPath();
 
-      if (ENTITY_ENTRY_MAP.containsKey(mappingPath)) {
-        mapping.remap(ENTITY_ENTRY_MAP.get(mappingPath));
-      }
+      ENTITY_MAP.forEach((key, value) -> {
+        if (mappingPath.endsWith(key)) {
+          mapping.remap(value.get());
+        }
+      });
 
       if (MOD_ID_SET.contains(mappingNamespace)) {
         mapping.ignore();

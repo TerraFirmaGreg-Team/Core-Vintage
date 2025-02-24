@@ -16,7 +16,6 @@ public class ModConfig {
   public static float preservingMod;
   public static boolean specialIceTraits;
   public static boolean tempMonthAvg;
-  public static boolean disableShards;
   public static int packedIceCoolant;
   public static int seaIceCoolant;
   public static int iceCoolant;
@@ -56,7 +55,6 @@ public class ModConfig {
     specialIceTraits = config.get(Configuration.CATEGORY_GENERAL, "SpecialIceTraits", false).getBoolean(false);
     tempMonthAvg = config.get(Configuration.CATEGORY_GENERAL, "MonthAvgTemp", false).getBoolean(false);
     iceHouseTemperature = config.get(Configuration.CATEGORY_GENERAL, "TemperatureIceHouse", 1).getInt(1);
-    disableShards = config.get(Configuration.CATEGORY_GENERAL, "DisableShards", false).getBoolean(false);
     firstJoinBook = config.get(Configuration.CATEGORY_GENERAL, "FirstJoinBook", true).getBoolean(false);
 
     Property coolantConsumptionMultiplierProperty = config.get(Configuration.CATEGORY_GENERAL, "CoolantConsumptionMultiplier", 100);

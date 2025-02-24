@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import net.dries007.sharkbark.cellars.proxy.CommonProxy;
 import net.dries007.sharkbark.cellars.util.Reference;
-import net.dries007.sharkbark.cellars.util.handlers.PacketHandler;
 import net.dries007.sharkbark.cellars.util.handlers.RegistryHandler;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, dependencies = "required-after:tfc")
@@ -37,7 +36,6 @@ public class Main {
   @Mod.EventHandler
   public void PostInit(FMLPostInitializationEvent event) {
     Reference.initialized = true;
-    PacketHandler.init();
   }
 
 }

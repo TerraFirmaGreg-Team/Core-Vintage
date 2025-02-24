@@ -42,14 +42,14 @@ import java.util.Objects;
 import static su.terrafirmagreg.api.data.enums.Colors.RED;
 
 
-public class ItemDebug extends BaseItem {
+public class ItemDebugWand extends BaseItem {
 
   private static final String TAG_MODE = "Mode";
   private static final String TAG_BLOCKSTATE = "Blockstate";
   private static final String TAG_NBT = "NBT";
   private static final String TAG_BLOCKSTATE_LIST = "BlockstateList";
 
-  public ItemDebug() {
+  public ItemDebugWand() {
 
     getSettings()
       .registryKey("wand")

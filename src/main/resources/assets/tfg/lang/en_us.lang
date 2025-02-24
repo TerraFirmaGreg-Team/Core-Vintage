@@ -126,6 +126,8 @@ block.tfg.core.thatch.name=Thatch
 item.tfg.core.wand.name=Debug Wand
 item.tfg.core.wood_ash.name=Wood Ash
 item.tfg.core.straw.name=Straw
+item.tfg.core.shard.glass.name=Glass Shard
+item.tfg.core.shard.ice.name=Ice Shard
 
 ## Effect
 effect.tfg.core.overburdened=Overburdened
@@ -176,8 +178,11 @@ block.tfg.device.fire_pit.name=Firepit
 block.tfg.device.cellar.door.name=Cellar Door
 block.tfg.device.cellar.shelf.name=Cellar Shelf
 block.tfg.device.cellar.wall.name=Cellar Wall
+block.tfg.device.infected_air.name=Infected Air
 block.tfg.device.smeltery.cauldron.name=Smeltery Cauldron
 block.tfg.device.smeltery.firebox.name=Smeltery Firebox
+block.tfg.device.latex_extractor.name=Latex Extractor
+block.tfg.device.freeze_dryer.name=Freeze Dryer
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

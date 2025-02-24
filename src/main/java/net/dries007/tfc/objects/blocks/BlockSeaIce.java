@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,8 +14,6 @@ import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import static net.dries007.sharkbark.cellars.init.ModItems.SEA_ICE_SHARD;
 
 @ParametersAreNonnullByDefault
 public class BlockSeaIce extends BlockIceTFC {
@@ -32,7 +31,7 @@ public class BlockSeaIce extends BlockIceTFC {
       var tool = player.getHeldItemMainhand();
       if (OreDictionaryHelper.doesStackMatchOre(tool, "iceSaw")) {
         drops.clear();
-        drops.add(new ItemStack(SEA_ICE_SHARD, 2 + Constants.RNG.nextInt(4)));
+        drops.add(new ItemStack(ItemsCore.ICE_SHARD.get(), 2 + Constants.RNG.nextInt(4)));
       } else {
         super.getDrops(drops, world, pos, state, fortune);
       }

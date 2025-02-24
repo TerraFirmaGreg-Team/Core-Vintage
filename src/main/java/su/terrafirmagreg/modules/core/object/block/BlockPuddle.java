@@ -35,8 +35,7 @@ public class BlockPuddle extends BaseBlock {
       .noCollision()
       .nonFullCube()
       .randomTicks()
-      .replaceable()
-      .noCollision();
+      .replaceable();
   }
 
   @Override

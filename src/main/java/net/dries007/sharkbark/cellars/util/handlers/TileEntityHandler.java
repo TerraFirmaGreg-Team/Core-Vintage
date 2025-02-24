@@ -1,8 +1,6 @@
 package net.dries007.sharkbark.cellars.util.handlers;
 
-import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 import su.terrafirmagreg.modules.device.object.tile.TileIceBunker;
-import su.terrafirmagreg.modules.device.object.tile.TileInfectedAir;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -13,7 +11,5 @@ public class TileEntityHandler {
 
   public static void registerTileEntities() {
     GameRegistry.registerTileEntity(TileIceBunker.class, new ResourceLocation(Reference.MOD_ID + ":ice_shelf"));
-    GameRegistry.registerTileEntity(TileFreezeDryer.class, new ResourceLocation(Reference.MOD_ID + ":freeze_dryer"));
-    GameRegistry.registerTileEntity(TileInfectedAir.class, new ResourceLocation(Reference.MOD_ID + ":infected_air"));
   }
 }

@@ -3310,7 +3310,6 @@ tile.tfc.trapdoor.red_steel.name=Red Steel Trapdoor
 
 item.leather.name=Leather
 item.tfc.spindle.name=Spindle
-item.tfc.glass_shard.name=Glass Shard
 item.tfc.handstone.name=Quern Handstone
 item.tfc.wooden_bucket.name=Wooden Bucket
 item.tfc.wooden_bucket.filled.name=%s Wooden Bucket

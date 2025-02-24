@@ -3275,7 +3275,6 @@ tile.tfc.trapdoor.red_steel.name=Люк из красной стали
 
 item.leather.name=Кожа
 item.tfc.spindle.name=Веретено
-item.tfc.glass_shard.name=Осколок стекла
 item.tfc.handstone.name=Верхная часть жёрнова
 item.tfc.wooden_bucket.name=Деревянное ведро
 item.tfc.wooden_bucket.filled.name=Деревянное ведро с %s

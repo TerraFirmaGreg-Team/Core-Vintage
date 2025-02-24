@@ -3,6 +3,7 @@ package net.dries007.tfc.types;
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -36,7 +37,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.TechItems;
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
@@ -194,7 +194,7 @@ public final class TechRecipes {
         .setOutput(new FluidStack(FluidsCore.GLASS.get(), 375), 800).build()
         .setRegistryName(new ResourceLocation(TFCTECH, "glass_pane")),
       new SmelteryRecipe.Builder()
-        .addInput(IIngredient.of(ItemsTFC.GLASS_SHARD))
+        .addInput(IIngredient.of(ItemsCore.GLASS_SHARD.get()))
         .setOutput(new FluidStack(FluidsCore.GLASS.get(), 500), 800).build()
         .setRegistryName(new ResourceLocation(TFCTECH, "glass_shard")),
       new SmelteryRecipe.Builder()

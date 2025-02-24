@@ -1,44 +1,30 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickable;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
-public class TileInfectedAir extends BaseTile implements ITickable {
+public class TileInfectedAir extends BaseTileTickable {
 
   public TileInfectedAir() {
   }
 
   @Override
   public void update() {
-
-  }
-
-  private void writeSyncData(NBTTagCompound tagCompound) {
-  }
-
-  private void readSyncData(NBTTagCompound tagCompound) {
   }
 
   @Nullable
   @Override
   public SPacketUpdateTileEntity getUpdatePacket() {
-    NBTTagCompound tagCompound = new NBTTagCompound();
-    writeToNBT(tagCompound);
-    writeSyncData(tagCompound);
-    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, tagCompound);
+    NBTTagCompound nbt = new NBTTagCompound();
+    writeToNBT(nbt);
+    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
   }
 
-  @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-    readFromNBT(packet.getNbtCompound());
-    readSyncData(packet.getNbtCompound());
-  }
+
 }
 

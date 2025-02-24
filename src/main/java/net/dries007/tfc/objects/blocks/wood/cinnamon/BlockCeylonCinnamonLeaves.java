@@ -27,7 +27,7 @@ public class BlockCeylonCinnamonLeaves extends BlockLeavesTFC {
   public BlockCeylonCinnamonLeaves() {
     super(TreesTFCF.CEYLON_CINNAMON_TREE);
     setSoundType(SoundType.PLANT);
-    setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, true));
+    setDefaultState(getBlockState().getBaseState().withProperty(DECAYABLE, true));
     net.dries007.tfc.util.OreDictionaryHelper.register(this, "tree", "leaves");
     OreDictionaryHelper.register(this, "tree", "leaves", wood.getRegistryName().getPath());
   }

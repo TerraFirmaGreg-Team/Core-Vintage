@@ -23,6 +23,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -41,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SuppressWarnings("deprecation")
 public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBlock {
@@ -68,19 +69,18 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
 
   }
 
+  @Override
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
+  }
+
   public Size getSizeOf(ItemStack stack) {
     return stack.getTagCompound() == null ? Size.LARGE : Size.HUGE; // Can only store in chests if not full, overburden if full and more than one is carried
   }
 
   @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(world, pos, TileCrucible.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
-    super.breakBlock(world, pos, state);
-  }
-
-  @Override
   public void acceptHeat(World world, BlockPos pos, float temperature) {
-    TileUtils.getTile(world, pos, TileCrucible.class).ifPresent(tile -> tile.acceptHeat(temperature));
+    TileUtils.getTile(world, pos, getTileClass()).ifPresent(tile -> tile.acceptHeat(temperature));
   }
 
   @Override

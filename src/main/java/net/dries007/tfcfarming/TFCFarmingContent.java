@@ -16,7 +16,7 @@ import net.dries007.tfcfarming.util.ItemWithSubType;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCFARMING;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCFARMING;
 
 @Mod.EventBusSubscriber(modid = TFCFARMING)
 public class TFCFarmingContent {

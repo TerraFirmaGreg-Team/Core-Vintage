@@ -118,17 +118,17 @@ public class ItemBlockBarrel extends ItemBlockTFC {
 
       if (fluidStack == null || fluidStack.amount == 0) {
         if (inventory.isEmpty()) {
-          tooltip.add(TextFormatting.BLUE + I18n.format(Mods.Names.TFC + ".tooltip.barrel_empty"));
+          tooltip.add(TextFormatting.BLUE + I18n.format(Mods.ModIDs.TFC + ".tooltip.barrel_empty"));
         } else {
           tooltip.add(TextFormatting.BLUE + I18n.format(
-            Mods.Names.TFC + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+            Mods.ModIDs.TFC + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
         }
       } else {
-        tooltip.add(TextFormatting.BLUE + I18n.format(Mods.Names.TFC + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
+        tooltip.add(TextFormatting.BLUE + I18n.format(Mods.ModIDs.TFC + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
 
         if (!inventory.isEmpty()) {
           tooltip.add(TextFormatting.BLUE + I18n.format(
-            Mods.Names.TFC + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+            Mods.ModIDs.TFC + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
         }
       }
 

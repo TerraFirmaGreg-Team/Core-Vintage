@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.network.PacketChunkData;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
 public final class CapabilityChunkData {

@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 public class TESRWireDrawBench extends TileEntitySpecialRenderer<TileWireDrawBench> {
 

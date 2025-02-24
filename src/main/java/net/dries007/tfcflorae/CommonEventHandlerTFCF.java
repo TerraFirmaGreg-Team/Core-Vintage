@@ -26,7 +26,7 @@ import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFCF)

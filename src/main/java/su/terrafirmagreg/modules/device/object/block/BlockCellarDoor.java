@@ -1,12 +1,21 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlockDoor;
+import su.terrafirmagreg.api.util.BlockUtils;
+
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-import net.dries007.sharkbark.cellars.blocks.DoorBase;
+public class BlockCellarDoor extends BaseBlockDoor {
 
-public class BlockCellarDoor extends DoorBase {
+  public BlockCellarDoor() {
+    super(Settings.of(Material.WOOD));
 
-  public BlockCellarDoor(String name, Material material) {
-    super(name, material);
+    getSettings()
+      .registryKey("cellar/door")
+      .sound(SoundType.WOOD)
+      .hardness(2F);
+
+    BlockUtils.setFireInfo(this, 5, 20);
   }
 }

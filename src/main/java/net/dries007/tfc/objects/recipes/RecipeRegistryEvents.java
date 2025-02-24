@@ -8,7 +8,7 @@ import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 import net.dries007.tfc.ConfigTFC;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
 public class RecipeRegistryEvents {

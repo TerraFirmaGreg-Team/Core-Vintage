@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockCellarDoor;
 import su.terrafirmagreg.modules.device.object.block.BlockCellarShelf;
 import su.terrafirmagreg.modules.device.object.block.BlockCellarWall;
@@ -35,7 +36,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 
 import net.dries007.sharkbark.cellars.ModConfig;
-import net.dries007.sharkbark.cellars.init.ModBlocks;
 import net.dries007.sharkbark.cellars.init.ModItems;
 import net.dries007.sharkbark.cellars.util.Reference;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -221,7 +221,7 @@ public class TileIceBunker extends TileEntityLockableLoot implements IInventory,
 
     //1st door
     Block door = world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock();
-    if (door == ModBlocks.CELLAR_DOOR && BlockDoor.isOpen(world, new BlockPos(posX, posY, posZ))) {
+    if (door == BlocksDevice.CELLAR_DOOR.get() && BlockDoor.isOpen(world, new BlockPos(posX, posY, posZ))) {
 
       loss = 0.05f;
     }
@@ -233,7 +233,7 @@ public class TileIceBunker extends TileEntityLockableLoot implements IInventory,
     }
 
     door = world.getBlockState(new BlockPos(posX + entrance[2], posY, posZ + entrance[3])).getBlock();
-    if (door == ModBlocks.CELLAR_DOOR && BlockDoor.isOpen(world, new BlockPos(posX + entrance[2], posY, posZ + entrance[3]))) {
+    if (door == BlocksDevice.CELLAR_DOOR.get() && BlockDoor.isOpen(world, new BlockPos(posX + entrance[2], posY, posZ + entrance[3]))) {
 
       return loss * 13 + 0.05f;
     }

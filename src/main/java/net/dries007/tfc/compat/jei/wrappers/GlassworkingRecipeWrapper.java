@@ -14,7 +14,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.GlassworkingRecipe;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 public class GlassworkingRecipeWrapper implements IRecipeWrapper {
 

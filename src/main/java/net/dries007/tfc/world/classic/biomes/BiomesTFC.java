@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
 @GameRegistry.ObjectHolder(TFC)

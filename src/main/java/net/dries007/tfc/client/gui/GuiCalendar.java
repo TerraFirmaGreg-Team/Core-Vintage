@@ -17,7 +17,7 @@ import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
 
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiCalendar extends GuiContainerTFC {

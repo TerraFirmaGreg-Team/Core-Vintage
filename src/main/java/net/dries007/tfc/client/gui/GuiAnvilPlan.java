@@ -24,7 +24,7 @@ import net.dries007.tfc.util.NBTBuilder;
 import java.io.IOException;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_1;
 
 @SideOnly(Side.CLIENT)

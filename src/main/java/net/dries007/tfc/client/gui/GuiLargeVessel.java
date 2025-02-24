@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
 

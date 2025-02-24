@@ -18,18 +18,18 @@ import javax.annotation.Nullable;
 
 public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 
-  private static final ResourceLocation PINEAPPLE_LEATHER_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/gui/knapping/pineapple_leather_button.png");
-  private static final ResourceLocation BURLAP_CLOTH_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/blocks/devices/loom/product/burlap.png");
-  private static final ResourceLocation WOOL_CLOTH_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/blocks/devices/loom/product/wool.png");
-  private static final ResourceLocation SILK_CLOTH_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/blocks/devices/loom/product/silk.png");
-  private static final ResourceLocation SISAL_CLOTH_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/blocks/devices/loom/product/sisal.png");
-  private static final ResourceLocation COTTON_CLOTH_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/blocks/devices/loom/product/cotton.png");
-  private static final ResourceLocation LINEN_CLOTH_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/blocks/devices/loom/product/linen.png");
-  private static final ResourceLocation HEMP_CLOTH_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/blocks/devices/loom/product/hemp.png");
-  private static final ResourceLocation YUCCA_CANVAS_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/blocks/devices/loom/product/yucca.png");
-  private static final ResourceLocation MUD_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/gui/knapping/mud_button.png");
-  private static final ResourceLocation MUD_DISABLED_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/gui/knapping/mud_button_disabled.png");
-  private static final ResourceLocation FLINT_TEXTURE = new ResourceLocation(Mods.Names.TFCF, "textures/gui/knapping/flint_button.png");
+  private static final ResourceLocation PINEAPPLE_LEATHER_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/gui/knapping/pineapple_leather_button.png");
+  private static final ResourceLocation BURLAP_CLOTH_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/blocks/devices/loom/product/burlap.png");
+  private static final ResourceLocation WOOL_CLOTH_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/blocks/devices/loom/product/wool.png");
+  private static final ResourceLocation SILK_CLOTH_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/blocks/devices/loom/product/silk.png");
+  private static final ResourceLocation SISAL_CLOTH_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/blocks/devices/loom/product/sisal.png");
+  private static final ResourceLocation COTTON_CLOTH_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/blocks/devices/loom/product/cotton.png");
+  private static final ResourceLocation LINEN_CLOTH_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/blocks/devices/loom/product/linen.png");
+  private static final ResourceLocation HEMP_CLOTH_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/blocks/devices/loom/product/hemp.png");
+  private static final ResourceLocation YUCCA_CANVAS_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/blocks/devices/loom/product/yucca.png");
+  private static final ResourceLocation MUD_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/gui/knapping/mud_button.png");
+  private static final ResourceLocation MUD_DISABLED_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/gui/knapping/mud_button_disabled.png");
+  private static final ResourceLocation FLINT_TEXTURE = new ResourceLocation(Mods.ModIDs.TFCF, "textures/gui/knapping/flint_button.png");
 
   public KnappingRecipeWrapperTFCF(KnappingRecipe recipe, IGuiHelper helper) {
     super(recipe, helper, getHighTexture(recipe.getType()), getLowTexture(recipe.getType()));

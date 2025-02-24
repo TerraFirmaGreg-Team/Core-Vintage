@@ -23,7 +23,7 @@ import net.dries007.tfc.util.Helpers;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkills extends GuiContainerTFC {

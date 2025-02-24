@@ -61,7 +61,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public class TFCGuiHandler implements IGuiHandler {
 

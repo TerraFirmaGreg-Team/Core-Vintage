@@ -56,7 +56,7 @@ public class BlockFarmlandTFC extends BlockRockVariantFallable {
 
   public BlockFarmlandTFC(Rock.Type type, Rock rock) {
     super(type, rock);
-    setDefaultState(blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
+    setDefaultState(getBlockState().getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
     setTickRandomly(true);
     setLightOpacity(255);
     useNeighborBrightness = true;

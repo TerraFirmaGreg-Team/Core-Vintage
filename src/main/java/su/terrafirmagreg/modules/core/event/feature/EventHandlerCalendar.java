@@ -23,7 +23,7 @@ import java.util.Objects;
 
 import static net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import static net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public class EventHandlerCalendar {
 

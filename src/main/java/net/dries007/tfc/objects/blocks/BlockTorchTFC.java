@@ -40,7 +40,7 @@ import java.util.Random;
 public class BlockTorchTFC extends BlockTorch implements ICapabilitySize, ILightableBlock {
 
   public BlockTorchTFC() {
-    setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));
+    setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));
     setHardness(0f);
     setLightLevel(0.9375F);
     setTickRandomly(true);

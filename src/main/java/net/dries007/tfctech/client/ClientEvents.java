@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFCTECH)

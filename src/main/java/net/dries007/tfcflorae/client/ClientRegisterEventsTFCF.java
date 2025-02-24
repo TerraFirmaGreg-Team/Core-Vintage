@@ -70,10 +70,10 @@ import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfcflorae.ConfigTFCF;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = Mods.Names.TFCF)
+@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = Mods.ModIDs.TFCF)
 public class ClientRegisterEventsTFCF {
 
   private final java.util.Map<net.minecraftforge.registries.IRegistryDelegate<Item>, IItemColor> itemColorMap = com.google.common.collect.Maps.newHashMap();

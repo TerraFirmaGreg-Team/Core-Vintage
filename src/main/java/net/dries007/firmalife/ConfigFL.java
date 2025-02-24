@@ -19,9 +19,9 @@ public class ConfigFL {
   public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
     if (event.getModID().equals(MOD_ID)) {
       if (ConfigFL.General.COMPAT.logging) {FirmaLife.logger.warn("Config changed.");}
-      ConfigManager.sync(Mods.Names.TFC, Config.Type.INSTANCE);
+      ConfigManager.sync(Mods.ModIDs.TFC, Config.Type.INSTANCE);
     }
-    if (event.getModID().equals(Mods.Names.TFC)) {
+    if (event.getModID().equals(Mods.ModIDs.TFC)) {
       HelpersFL.insertWhitelist();
     }
   }

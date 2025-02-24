@@ -44,7 +44,7 @@ public class BlockMolten extends BaseBlock {
       .nonOpaque()
       .hardness(-1);
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false)
       .withProperty(LAYERS, 1));
   }

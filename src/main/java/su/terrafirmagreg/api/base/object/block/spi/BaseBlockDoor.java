@@ -2,6 +2,10 @@ package su.terrafirmagreg.api.base.object.block.spi;
 
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemDoor;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.state.IBlockState;
@@ -30,8 +34,7 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings 
     getSettings()
       .ignoresProperties(BlockDoor.POWERED)
       .itemBlock(BaseItemDoor::new)
-//      .weight(Weight.HEAVY)
-//      .size(Size.VERY_LARGE)
+      .capability(CapabilityProviderSize.of(Size.VERY_LARGE, Weight.HEAVY))
       .hardness(3.0F);
   }
 
@@ -43,6 +46,21 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings 
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     return new ItemStack(Item.getItemFromBlock(this));
+  }
+
+  @Override
+  public String getTranslationKey() {
+    return ModUtils.localize("block", this.getRegistryName());
+  }
+
+  @Override
+  public String getHarvestTool(IBlockState state) {
+    return this.settings.getHarvestTool();
+  }
+
+  @Override
+  public int getHarvestLevel(IBlockState state) {
+    return this.settings.getHarvestLevel();
   }
 
 }

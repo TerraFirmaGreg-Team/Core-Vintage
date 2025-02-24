@@ -11,7 +11,7 @@ import net.dries007.tfc.client.button.IButtonTooltip;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 public class GuiButtonCrate extends GuiButtonTFC implements IButtonTooltip {
 

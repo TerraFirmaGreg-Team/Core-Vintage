@@ -14,24 +14,24 @@ import lombok.Getter;
 
 @Getter
 public enum Mods {
-  TFC(Names.TFC),
-  TFCF(Names.TFCF),
-  TFCTECH(Names.TFCTECH),
-  TFCTHINGS(Names.TFCTHINGS),
-  HORSEPOWER(Names.HORSEPOWER),
-  CA(Names.CAFFEINEADDON),
-  TIME4TFC(Names.TIME4TFC),
-  OSA(Names.OSA),
-  CELLARS(Names.CELLARS),
-  HOTORNOT(Names.HOTORNOT),
-  FL(Names.FL),
-  AGEDDRINKS(Names.AGEDDRINKS),
-  DDD(Names.DDD),
-  FF(Names.FF),
-  TFCFARMING(Names.TFCFARMING),
-  TFCPASSINGDAYS(Names.TFCPASSINGDAYS),
-  FLUIDLOGGED(Names.FLUIDLOGGED),
-  GREGTECH(Names.GREGTECH);
+  TFC(ModIDs.TFC),
+  TFCF(ModIDs.TFCF),
+  TFCTECH(ModIDs.TFCTECH),
+  TFCTHINGS(ModIDs.TFCTHINGS),
+  HORSEPOWER(ModIDs.HORSEPOWER),
+  CA(ModIDs.CAFFEINEADDON),
+  TIME4TFC(ModIDs.TIME4TFC),
+  OSA(ModIDs.OSA),
+  CELLARS(ModIDs.CELLARS),
+  HOTORNOT(ModIDs.HOTORNOT),
+  FL(ModIDs.FL),
+  AGEDDRINKS(ModIDs.AGEDDRINKS),
+  DDD(ModIDs.DDD),
+  FF(ModIDs.FF),
+  TFCFARMING(ModIDs.TFCFARMING),
+  TFCPASSINGDAYS(ModIDs.TFCPASSINGDAYS),
+  FLUIDLOGGED(ModIDs.FLUIDLOGGED),
+  GREGTECH(ModIDs.GREGTECH);
 
 
   private final String modid;
@@ -73,7 +73,7 @@ public enum Mods {
     return ModUtils.resource(modid, path);
   }
 
-  public static class Names {
+  public static class ModIDs {
 
     public static final String TFC = "tfc";
     public static final String TFCF = "tfcflorae";

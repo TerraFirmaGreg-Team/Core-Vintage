@@ -56,7 +56,7 @@ import net.dries007.tfc.world.classic.chunkdata.CapabilityChunkData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SuppressWarnings("FieldMayBeFinal")
 @Mod.EventBusSubscriber(modid = TFC)

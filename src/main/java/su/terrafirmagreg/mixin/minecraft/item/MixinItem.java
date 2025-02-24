@@ -6,7 +6,6 @@ import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -37,14 +36,14 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
     return terraFirmaGreg$settings;
   }
 
-  /**
-   * @author Xikaro
-   * @reason Адаптация под ISettingsItem
-   */
-  @Overwrite
-  public IRarity getForgeRarity(ItemStack stack) {
-    return getSettings().getRarity();
-  }
+//  /**
+//   * @author Xikaro
+//   * @reason Адаптация под ISettingsItem
+//   */
+//  @Overwrite
+//  public IRarity getForgeRarity(ItemStack stack) {
+//    return getSettings().getRarity();
+//  }
 
 //  /**
 //   * @author Xikaro
@@ -84,7 +83,7 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
     if (getSettings().getCapability().isEmpty()) {
       return null;
     }
-    return def$initCapabilities(stack, nbt);
+    return settings$initCapabilities(stack, nbt);
   }
 
 

@@ -50,7 +50,7 @@ public class BlockLeavesTFC extends BlockLeaves {
   public BlockLeavesTFC(Tree wood) {
     this.wood = wood;
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
-    setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
+    setDefaultState(getBlockState().getBaseState().withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
     leavesFancy = true; // Fast / Fancy graphics works correctly
     OreDictionaryHelper.register(this, "tree", "leaves");
     //noinspection ConstantConditions

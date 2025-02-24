@@ -21,7 +21,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class SmelteryCategory extends BaseRecipeCategory<SmelteryRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFCTECH, "textures/gui/elements.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Mods.ModIDs.TFCTECH, "textures/gui/elements.png");
 
   private final IDrawableStatic fluidSlotBackground;
   private final IDrawableStatic slot;

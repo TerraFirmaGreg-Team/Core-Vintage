@@ -19,8 +19,8 @@ import org.lwjgl.opengl.GL11;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @SideOnly(Side.CLIENT)
 public class TESRFruitLoomTFCF extends TESRBase<TEFruitLoom> {

@@ -20,13 +20,13 @@ public class ItemGear extends ItemTechMetal {
       case TIER_0:
       case TIER_I:
       case TIER_II:
-        return TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "tin"));
+        return TFCRegistries.METALS.getValue(new ResourceLocation(Mods.ModIDs.TFC, "tin"));
       case TIER_III:
       case TIER_IV:
-        return TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "brass"));
+        return TFCRegistries.METALS.getValue(new ResourceLocation(Mods.ModIDs.TFC, "brass"));
       case TIER_V:
       case TIER_VI:
-        return TFCRegistries.METALS.getValue(new ResourceLocation(Mods.Names.TFC, "steel"));
+        return TFCRegistries.METALS.getValue(new ResourceLocation(Mods.ModIDs.TFC, "steel"));
     }
   }
 }

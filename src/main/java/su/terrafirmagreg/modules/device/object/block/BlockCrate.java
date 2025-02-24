@@ -54,7 +54,7 @@ public class BlockCrate extends Block implements ICapabilitySize {
     super(Material.CIRCUITS);
     setSoundType(SoundType.WOOD);
     setHardness(2F);
-    setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(SEALED, false));
   }
 
   /**

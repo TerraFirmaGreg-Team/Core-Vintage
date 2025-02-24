@@ -16,7 +16,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import net.dries007.tfc.Constants;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 
@@ -24,8 +23,8 @@ import javax.annotation.Nonnull;
 
 public final class FluidsTFCF {
 
-  private static final ResourceLocation STILL = new ResourceLocation(Mods.Names.TFC, "blocks/fluid_still");
-  private static final ResourceLocation FLOW = new ResourceLocation(Mods.Names.TFC, "blocks/fluid_flow");
+  private static final ResourceLocation STILL = new ResourceLocation(Mods.ModIDs.TFC, "blocks/fluid_still");
+  private static final ResourceLocation FLOW = new ResourceLocation(Mods.ModIDs.TFC, "blocks/fluid_flow");
 
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
 

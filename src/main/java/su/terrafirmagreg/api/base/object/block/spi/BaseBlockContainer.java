@@ -1,17 +1,22 @@
 package su.terrafirmagreg.api.base.object.block.spi;
 
-import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IWorldNameable;
 import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
@@ -22,64 +27,66 @@ import java.util.Arrays;
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockContainer extends BlockContainer implements IProviderTile, IBlockSettings {
+public abstract class BaseBlockContainer extends BaseBlock implements IProviderTile {
 
-  protected final Settings settings;
 
   public BaseBlockContainer(Settings settings) {
-    super(settings.getMaterial(), settings.getMapColor());
+    super(settings);
 
-    this.settings = settings;
   }
 
-  @Override
+  protected boolean isInvalidNeighbor(World world, BlockPos pos, EnumFacing facing) {
+    return world.getBlockState(pos.offset(facing)).getMaterial() == Material.CACTUS;
+  }
+
   protected boolean hasInvalidNeighbor(World world, BlockPos pos) {
     return Arrays.stream(EnumFacing.HORIZONTALS).anyMatch(facing -> this.isInvalidNeighbor(world, pos, facing));
   }
 
+  @Override
   public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
-
-  @Override
-  public boolean getUseNeighborBrightness(IBlockState state) {
-    return !this.settings.isUseNeighborBrightness() || super.getUseNeighborBrightness(state);
-  }
-
-  @Override
-  public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
-  }
-
-  @Override
-  public boolean getTickRandomly() {
-    return this.settings.isTicksRandomly();
-  }
-
-  @Override
-  public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos) : NULL_AABB;
+    return EnumBlockRenderType.INVISIBLE;
   }
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
     TileUtils.getTile(worldIn, pos, this.getTileClass()).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
-  }
-
-
-  @Override
-  public String getTranslationKey() {
-    return ModUtils.localize("block", this.getRegistryName());
+    worldIn.removeTileEntity(pos);
   }
 
   @Override
-  public String getHarvestTool(IBlockState state) {
-    return this.settings.getHarvestTool();
+  public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    if (te instanceof IWorldNameable nameable && nameable.hasCustomName()) {
+      player.addStat(StatList.getBlockStats(this));
+      player.addExhaustion(0.005F);
+
+      if (world.isRemote) {
+        return;
+      }
+
+      int enchantmentLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
+      Item item = this.getItemDropped(state, world.rand, enchantmentLevel);
+
+      if (item == Items.AIR) {
+        return;
+      }
+
+      ItemStack itemstack = new ItemStack(item, this.quantityDropped(world.rand));
+      itemstack.setStackDisplayName(nameable.getName());
+      spawnAsEntity(world, pos, itemstack);
+    } else {
+      super.harvestBlock(world, player, pos, state, null, stack);
+    }
   }
 
   @Override
-  public int getHarvestLevel(IBlockState state) {
-    return this.settings.getHarvestLevel();
+  public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
+    super.eventReceived(state, world, pos, id, param);
+    return TileUtils.getTile(world, pos, getTileClass())
+      .map(tile -> tile.receiveClientEvent(id, param))
+      .orElse(false);
   }
+
+
 }

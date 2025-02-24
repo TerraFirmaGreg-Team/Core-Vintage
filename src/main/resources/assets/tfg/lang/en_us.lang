@@ -173,6 +173,9 @@ block.tfg.device.charcoal_forge.name=Charcoal Forge
 block.tfg.device.crucible.name=Crucible
 block.tfg.device.charcoal_pile.name=Charcoal Pile
 block.tfg.device.fire_pit.name=Firepit
+block.tfg.device.cellar.door.name=Cellar Door
+block.tfg.device.cellar.shelf.name=Cellar Shelf
+block.tfg.device.cellar.wall.name=Cellar Wall
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

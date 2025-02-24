@@ -34,7 +34,7 @@ public interface IGrowingPlant {
 
     @Override
     public String toString() {
-      return Mods.Names.TFC + ".enum.growstatus." + name().toLowerCase();
+      return Mods.ModIDs.TFC + ".enum.growstatus." + name().toLowerCase();
     }
   }
 

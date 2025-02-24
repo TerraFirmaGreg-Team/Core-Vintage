@@ -166,7 +166,7 @@ import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)

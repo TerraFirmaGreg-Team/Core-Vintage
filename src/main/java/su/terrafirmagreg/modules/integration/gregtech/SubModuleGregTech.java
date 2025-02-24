@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.GREGTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.GREGTECH;
 import static su.terrafirmagreg.modules.ModulesContainer.INTEGRATION;
 
 @ModuleInfo(

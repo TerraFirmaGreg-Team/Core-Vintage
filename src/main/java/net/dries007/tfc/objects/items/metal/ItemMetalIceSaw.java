@@ -20,7 +20,7 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
 public class ItemMetalIceSaw extends ItemMetalTool implements ICapabilityMetal {

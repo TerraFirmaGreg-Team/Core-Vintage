@@ -47,7 +47,7 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
   public BlockSaplingTFC(Tree wood) {
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
     this.wood = wood;
-    setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
+    setDefaultState(getBlockState().getBaseState().withProperty(STAGE, 0));
     setSoundType(SoundType.PLANT);
     setHardness(0.0F);
     OreDictionaryHelper.register(this, "tree", "sapling");

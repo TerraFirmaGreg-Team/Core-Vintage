@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(
-  modid = Mods.Names.TFCTHINGS
+  modid = Mods.ModIDs.TFCTHINGS
 )
 public class ConfigTFCThings {
 
@@ -18,9 +18,9 @@ public class ConfigTFCThings {
 
   @SubscribeEvent
   public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
-    if (event.getModID().equals(Mods.Names.TFCTHINGS)) {
+    if (event.getModID().equals(Mods.ModIDs.TFCTHINGS)) {
       TFCThings.LOGGER.warn("Config changed");
-      ConfigManager.sync(Mods.Names.TFCTHINGS, Config.Type.INSTANCE);
+      ConfigManager.sync(Mods.ModIDs.TFCTHINGS, Config.Type.INSTANCE);
     }
   }
 
@@ -39,7 +39,7 @@ public class ConfigTFCThings {
   }
 
   @Config(
-    modid = Mods.Names.TFCTHINGS,
+    modid = Mods.ModIDs.TFCTHINGS,
     category = "items",
     name = "TerraFirmaThings - Items"
   )
@@ -217,7 +217,7 @@ public class ConfigTFCThings {
   }
 
   @Config(
-    modid = Mods.Names.TFCTHINGS,
+    modid = Mods.ModIDs.TFCTHINGS,
     category = "misc",
     name = "TerraFirmaThings - Misc"
   )

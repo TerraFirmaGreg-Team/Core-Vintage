@@ -36,7 +36,7 @@ import net.dries007.tfc.objects.items.itemblocks.ItemBlockWireDrawBench;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFCTECH)

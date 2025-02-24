@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class GlassworkingCategory extends BaseRecipeCategory<GlassworkingRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFCTECH, "textures/gui/elements.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Mods.ModIDs.TFCTECH, "textures/gui/elements.png");
 
   private final IDrawableStatic arrow, outputSlot;
 

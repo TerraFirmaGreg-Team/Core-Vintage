@@ -146,7 +146,7 @@ import static net.dries007.tfc.util.forge.ForgeRule.UPSET_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_THIRD_LAST;
 import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.ARMOR;
 import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.GENERAL;
 import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.TOOLS;

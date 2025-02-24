@@ -18,7 +18,7 @@ import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
 public class EntitiesTFC {

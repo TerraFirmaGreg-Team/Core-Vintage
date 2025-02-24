@@ -66,7 +66,7 @@ public class BlockFruitTreeTrunk extends Block implements IGrowingPlant {
     setSoundType(SoundType.WOOD);
     Blocks.FIRE.setFireInfo(this, 5, 20);
     this.tree = tree;
-    setDefaultState(blockState.getBaseState().withProperty(NORTH, false).withProperty(SOUTH, false).withProperty(EAST, false).withProperty(WEST, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(NORTH, false).withProperty(SOUTH, false).withProperty(EAST, false).withProperty(WEST, false));
   }
 
   public static BlockFruitTreeTrunk get(IFruitTree tree) {

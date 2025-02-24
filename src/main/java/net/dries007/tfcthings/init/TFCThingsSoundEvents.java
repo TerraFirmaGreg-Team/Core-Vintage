@@ -7,7 +7,7 @@ import su.terrafirmagreg.api.data.enums.Mods;
 
 public class TFCThingsSoundEvents {
 
-  public static final SoundEvent WHETSTONE_SHARPEN = new SoundEvent(new ResourceLocation(Mods.Names.TFCTHINGS, "whetstone.sharpen")).setRegistryName("sharpen");
+  public static final SoundEvent WHETSTONE_SHARPEN = new SoundEvent(new ResourceLocation(Mods.ModIDs.TFCTHINGS, "whetstone.sharpen")).setRegistryName("sharpen");
 
   public static final SoundEvent[] SOUND_EVENTS = {
     WHETSTONE_SHARPEN

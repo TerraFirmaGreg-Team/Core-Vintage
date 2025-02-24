@@ -63,7 +63,7 @@ public class BlockFruitBarrel extends Block implements ICapabilitySize {
     super(Material.WOOD);
     setSoundType(SoundType.WOOD);
     setHardness(2F);
-    setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(SEALED, false));
     OreDictionaryHelper.register(this, "barrel");
     Blocks.FIRE.setFireInfo(this, 5, 20);
   }

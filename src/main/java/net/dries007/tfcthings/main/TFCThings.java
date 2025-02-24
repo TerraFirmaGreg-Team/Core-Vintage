@@ -16,15 +16,15 @@ import net.dries007.tfcthings.proxy.CommonProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Mods.Names.TFCTHINGS, name = TFCThings.NAME, version = TFCThings.VERSION, dependencies = TFCThings.DEPENDENCIES)
+@Mod(modid = Mods.ModIDs.TFCTHINGS, name = TFCThings.NAME, version = TFCThings.VERSION, dependencies = TFCThings.DEPENDENCIES)
 public class TFCThings {
 
   public static final String NAME = "TerraFirmaThings";
   public static final String VERSION = "1.3.5";
   public static final String CLIENT_PROXY = "net.dries007.tfcthings.proxy.ClientProxy";
   public static final String COMMON_PROXY = "net.dries007.tfcthings.proxy.CommonProxy";
-  public static final String DEPENDENCIES = "required-after:" + Mods.Names.TFC;
-  public static final Logger LOGGER = LogManager.getLogger(Mods.Names.TFCTHINGS);
+  public static final String DEPENDENCIES = "required-after:" + Mods.ModIDs.TFC;
+  public static final Logger LOGGER = LogManager.getLogger(Mods.ModIDs.TFCTHINGS);
   @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
   public static CommonProxy proxy;
   @Mod.Instance
@@ -34,7 +34,7 @@ public class TFCThings {
   @Mod.EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     LOGGER.info("TFC Things: Starting Pre-Init...");
-    network = NetworkRegistry.INSTANCE.newSimpleChannel(Mods.Names.TFCTHINGS);
+    network = NetworkRegistry.INSTANCE.newSimpleChannel(Mods.ModIDs.TFCTHINGS);
     network.registerMessage(MessageHookJavelinUpdate.Handler.class, MessageHookJavelinUpdate.class, 1, Side.CLIENT);
     proxy.preInit(event);
   }

@@ -10,10 +10,10 @@ import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfcflorae.ConfigTFCF;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @SuppressWarnings("WeakerAccess")
-@Mod.EventBusSubscriber(modid = Mods.Names.TFCF)
+@Mod.EventBusSubscriber(modid = Mods.ModIDs.TFCF)
 public final class PlantsTFCF {
 
   public static final ResourceLocation CATTAIL = new ResourceLocation(TFCF, "cattail");

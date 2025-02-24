@@ -51,7 +51,7 @@ public class BlockLatexExtractor extends Block {
 
   public BlockLatexExtractor() {
     super(Material.IRON);
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(FACING, NORTH)
       .withProperty(BASE, false)
       .withProperty(POT, false)

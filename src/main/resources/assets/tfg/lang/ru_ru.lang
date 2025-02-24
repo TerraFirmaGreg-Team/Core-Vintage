@@ -99,6 +99,9 @@ block.tfg.device.charcoal_forge.name=Угольная кузница
 block.tfg.device.crucible.name=Тигель
 block.tfg.device.charcoal_pile.name=Угольная куча
 block.tfg.device.fire_pit.name=Костер
+block.tfg.device.cellar.door.name=Дверь подвала
+block.tfg.device.cellar.shelf.name=Полка подвала
+block.tfg.device.cellar.wall.name=Стена подвала
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

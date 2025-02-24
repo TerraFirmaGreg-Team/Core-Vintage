@@ -1,6 +1,6 @@
 package su.terrafirmagreg.datafix.mapping;
 
-import su.terrafirmagreg.api.data.enums.Mods.Names;
+import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
@@ -54,6 +54,9 @@ public abstract class AbstractRemapping {
     put("charcoal_pile", BlocksDevice.CHARCOAL_PILE.get());
     put("firepit", BlocksDevice.FIRE_PIT.get());
     put("pit_kiln", BlocksDevice.PIT_KILN.get());
+    put("cellar_wall", BlocksDevice.CELLAR_WALL.get());
+    put("cellar_door", BlocksDevice.CELLAR_DOOR.get());
+    put("cellar_shelf", BlocksDevice.CELLAR_SHELF.get());
 
     put("nest_box", BlocksAnimal.NEST_BOX.get());
 
@@ -279,7 +282,7 @@ public abstract class AbstractRemapping {
   }};
 
   protected static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{
-    add(Names.TFCF);
+    add(ModIDs.TFCF);
   }};
 
 

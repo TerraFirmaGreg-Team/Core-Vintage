@@ -221,8 +221,9 @@ public final class ConfigMisc {
 
     @Config.Comment("Damage Source Entities that will default to Slashing damage.")
     public String[] slashingEntities = new String[]{
-      "minecraft:wither_skeleton", "minecraft:vex", "minecraft:vindication_illager",
-      "minecraft:zombie_pigman", "minecraft:wolf", "minecraft:polar_bear"
+      "minecraft:wither_skeleton", "minecraft:vex",
+      "minecraft:vindication_illager", "minecraft:zombie_pigman",
+      "minecraft:wolf", "minecraft:polar_bear"
     };
 
     @Config.Comment("Damage Source Entities that will default to Piercing damage.")
@@ -232,10 +233,12 @@ public final class ConfigMisc {
 
     @Config.Comment("Damage Source Entities that will default to Crushing damage.")
     public String[] crushingEntities = new String[]{
-      "minecraft:husk", "minecraft:skeleton_horse", "minecraft:zombie_horse",
-      "minecraft:spider", "minecraft:giant",
-      "minecraft:zombie", "minecraft:slime", "minecraft:cave_spider", "minecraft:silverfish",
-      "minecraft:villager_golem", "minecraft:zombie_villager"
+      "minecraft:husk", "minecraft:skeleton_horse",
+      "minecraft:zombie_horse", "minecraft:spider",
+      "minecraft:giant", "minecraft:zombie",
+      "minecraft:slime", "minecraft:cave_spider",
+      "minecraft:silverfish", "minecraft:villager_golem",
+      "minecraft:zombie_villager"
     };
   }
 
@@ -249,15 +252,19 @@ public final class ConfigMisc {
     @Config.RequiresWorldRestart
     public boolean debugCreatePath = false;
 
-    @Config.Comment({"Debug worldgen (the danger part) " +
-                     "This will glass maps at max world height to help debug world gen. " +
-                     "THIS WILL MESS UP YOUR WORLD!"})
+    @Config.Comment({
+      "Debug worldgen (the danger part) ",
+      "This will glass maps at max world height to help debug world gen. ",
+      "THIS WILL MESS UP YOUR WORLD!"
+    })
     @Config.RequiresWorldRestart
     public boolean debugWorldGenDanger = false;
 
-    @Config.Comment("Debug worldgen (safe part) " +
-                    "This will output map images of world gen steps and print some debug info. " +
-                    "This is safe to use.")
+    @Config.Comment({
+      "Debug worldgen (safe part) ",
+      "This will output map images of world gen steps and print some debug info. ",
+      "This is safe to use."
+    })
     @Config.RequiresWorldRestart
     public boolean debugWorldGenSafe = false;
   }

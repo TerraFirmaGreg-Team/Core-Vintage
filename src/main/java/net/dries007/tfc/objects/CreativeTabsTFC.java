@@ -13,7 +13,7 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public final class CreativeTabsTFC {
 

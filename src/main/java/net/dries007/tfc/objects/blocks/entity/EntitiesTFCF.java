@@ -17,7 +17,7 @@ import net.dries007.tfcflorae.TFCFlorae;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @Mod.EventBusSubscriber(modid = TFCF)
 public class EntitiesTFCF {

@@ -32,7 +32,7 @@ import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_FLUX;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_1;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_2;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @ParametersAreNonnullByDefault
 public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButtonHandler {

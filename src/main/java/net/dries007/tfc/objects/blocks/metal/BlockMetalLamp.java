@@ -57,7 +57,7 @@ public class BlockMetalLamp extends Block implements ILightableBlock {
     this.metal = metal;
     if (MAP.put(metal, this) != null) {throw new IllegalStateException("There can only be one.");}
 
-    setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, false));
     setHardness(1f);
     setTickRandomly(true);
     setSoundType(SoundType.METAL);

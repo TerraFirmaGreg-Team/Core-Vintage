@@ -20,7 +20,7 @@ import net.dries007.tfctech.client.TechGuiHandler;
 import org.apache.logging.log4j.Logger;
 
 @SuppressWarnings("WeakerAccess")
-@Mod(modid = Mods.Names.TFCTECH, name = TFCTech.NAME, version = TFCTech.VERSION, dependencies = TFCTech.DEPENDENCIES)
+@Mod(modid = Mods.ModIDs.TFCTECH, name = TFCTech.NAME, version = TFCTech.VERSION, dependencies = TFCTech.DEPENDENCIES)
 public class TFCTech {
 
   public static final String NAME = "TFCTech Unofficial";
@@ -56,7 +56,7 @@ public class TFCTech {
   public void preInit(FMLPreInitializationEvent event) {
     logger = event.getModLog();
     NetworkRegistry.INSTANCE.registerGuiHandler(this, new TechGuiHandler());
-    network = NetworkRegistry.INSTANCE.newSimpleChannel(Mods.Names.TFCTECH);
+    network = NetworkRegistry.INSTANCE.newSimpleChannel(Mods.ModIDs.TFCTECH);
     int id = 0;
     network.registerMessage(new PacketLatexUpdate.Handler(), PacketLatexUpdate.class, ++id, Side.CLIENT);
     network.registerMessage(new PacketTileEntityUpdate.Handler(), PacketTileEntityUpdate.class, ++id, Side.CLIENT);

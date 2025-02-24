@@ -14,7 +14,7 @@ import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @ParametersAreNonnullByDefault
 public class KnappingCategory extends BaseRecipeCategory<KnappingRecipeWrapper> {

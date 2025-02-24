@@ -28,6 +28,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -79,17 +80,16 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
       .lightValue(15);
     disableStats();
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false)
       .withProperty(FIRE_PIT_ATTACHMENT, EnumFirePitAttachment.NONE));
   }
 
-
   @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
-    super.breakBlock(world, pos, state);
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
   }
+
 
   @Override
   public IBlockState getStateFromMeta(int meta) {

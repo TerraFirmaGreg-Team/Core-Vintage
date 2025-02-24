@@ -18,7 +18,7 @@ import net.dries007.tfc.objects.te.TEChestTFC;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRChestTFC extends TileEntitySpecialRenderer<TEChestTFC> {

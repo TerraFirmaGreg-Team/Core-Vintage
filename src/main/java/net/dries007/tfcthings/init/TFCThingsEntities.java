@@ -40,12 +40,12 @@ public class TFCThingsEntities {
 
   public static void registerEntities() {
     for (MobInfo info : MOB_ENTITY_INFOS) {
-      EntityRegistry.registerModEntity(new ResourceLocation(Mods.Names.TFCTHINGS, info.name),
+      EntityRegistry.registerModEntity(new ResourceLocation(Mods.ModIDs.TFCTHINGS, info.name),
         info.entityClass, info.name, info.id, TFCThings.instance, info.trackingRange,
         info.updateFrequency, info.sendsVelocityUpdates, info.eggP, info.eggS);
     }
     for (NonMobEntityInfo info : NON_MOB_ENTITY_INFOS) {
-      EntityRegistry.registerModEntity(new ResourceLocation(Mods.Names.TFCTHINGS, info.name),
+      EntityRegistry.registerModEntity(new ResourceLocation(Mods.ModIDs.TFCTHINGS, info.name),
         info.entityClass, info.name, info.id, TFCThings.instance, info.trackingRange,
         info.updateFrequency, info.sendsVelocityUpdates);
     }

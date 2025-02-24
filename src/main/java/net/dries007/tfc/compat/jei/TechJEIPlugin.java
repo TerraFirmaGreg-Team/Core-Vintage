@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 @JEIPlugin
 public class TechJEIPlugin implements IModPlugin {

@@ -1,7 +1,5 @@
 package net.dries007.tfc.compat.jei.categories;
 
-import su.terrafirmagreg.api.data.enums.Mods;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
@@ -14,13 +12,14 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.compat.jei.BaseRecipeCategory;
 import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
+import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class WireDrawingCategory extends BaseRecipeCategory<SimpleRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFCTECH, "textures/gui/elements.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(ModIDs.TFCTECH, "textures/gui/elements.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic arrow;

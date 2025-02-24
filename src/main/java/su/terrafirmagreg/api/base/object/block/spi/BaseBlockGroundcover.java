@@ -2,6 +2,8 @@ package su.terrafirmagreg.api.base.object.block.spi;
 
 
 import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
@@ -29,10 +31,9 @@ public abstract class BaseBlockGroundcover extends BaseBlock {
     getSettings()
       .hardness(0.1F)
       .nonCube()
-      //      .size(Size.SMALL)
-//      .weight(Weight.LIGHT)
-      .replaceable()
-    ;
+      .size(Size.SMALL)
+      .weight(Weight.LIGHT)
+      .replaceable();
   }
 
   protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {

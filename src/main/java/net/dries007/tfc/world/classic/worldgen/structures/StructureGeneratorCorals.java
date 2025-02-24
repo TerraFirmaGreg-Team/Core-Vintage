@@ -128,7 +128,7 @@ public class StructureGeneratorCorals extends WorldGenerator {
     WorldServer worldServer = (WorldServer) world;
     MinecraftServer minecraftServer = world.getMinecraftServer();
     TemplateManager templateManager = worldServer.getStructureTemplateManager();
-    Template template = templateManager.get(minecraftServer, new ResourceLocation(Mods.Names.TFCF, structureName));
+    Template template = templateManager.get(minecraftServer, new ResourceLocation(Mods.ModIDs.TFCF, structureName));
     final Biome b = world.getBiome(position);
     int variation = 3;
 

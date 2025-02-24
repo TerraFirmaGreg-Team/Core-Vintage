@@ -19,7 +19,7 @@ public class KnappingTFCF {
   public static void add(String type, String name, IItemStack output, String... pattern) {
     KnappingType knappingType = KnappingHelperTFCF.getType(type);
     if (knappingType != null) {
-      KnappingHelperTFCF.addRecipe(new ResourceLocation(Mods.Names.TFCF, name), knappingType, output, pattern);
+      KnappingHelperTFCF.addRecipe(new ResourceLocation(Mods.ModIDs.TFCF, name), knappingType, output, pattern);
     } else {CraftTweakerAPI.logError("Error Wrong Type name entered!");}
   }
 

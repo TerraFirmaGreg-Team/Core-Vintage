@@ -29,7 +29,7 @@ public class BlockPigvil extends BlockAnvilTFC {
   private final Metal metal;
 
   public BlockPigvil(Metal metal) {
-    super(new Metal(new ResourceLocation(Mods.Names.TFCTHINGS + ":pigvil_" + metal), metal.getTier(), false, 10, 100, 0, null, null));
+    super(new Metal(new ResourceLocation(Mods.ModIDs.TFCTHINGS + ":pigvil_" + metal), metal.getTier(), false, 10, 100, 0, null, null));
     if (metal != TFCRegistries.METALS.getValue(DefaultMetals.STEEL)) {
       this.setTranslationKey("pigvil_" + metal);
       this.setRegistryName("pigvil_" + metal);
@@ -42,7 +42,7 @@ public class BlockPigvil extends BlockAnvilTFC {
   }
 
   public BlockPigvil() {
-    super(new Metal(new ResourceLocation(Mods.Names.TFCTHINGS + ":pigvil_purple_steel"), Metal.Tier.TIER_VI, false, 10, 100, 0, null, null));
+    super(new Metal(new ResourceLocation(Mods.ModIDs.TFCTHINGS + ":pigvil_purple_steel"), Metal.Tier.TIER_VI, false, 10, 100, 0, null, null));
     this.setTranslationKey("pigvil_purple_steel");
     this.setRegistryName("pigvil_purple_steel");
     this.metal = Metal.RED_STEEL;

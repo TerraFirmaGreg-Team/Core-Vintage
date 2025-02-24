@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @Mod.EventBusSubscriber(modid = TFCF)
 public final class InteractionManagerTFCF {

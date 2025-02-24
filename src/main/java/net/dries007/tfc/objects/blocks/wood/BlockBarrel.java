@@ -33,6 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.te.TEBarrel;
@@ -59,7 +60,7 @@ public class BlockBarrel extends Block implements ICapabilitySize {
     super(Material.WOOD);
     setSoundType(SoundType.WOOD);
     setHardness(2F);
-    setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(SEALED, false));
   }
 
   /**

@@ -22,7 +22,7 @@ import net.dries007.tfcflorae.proxy.CommonProxy;
 import org.apache.logging.log4j.Logger;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-@Mod(modid = Mods.Names.TFCF, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
+@Mod(modid = Mods.ModIDs.TFCF, name = TFCFlorae.NAME, version = TFCFlorae.VERSION, dependencies = TFCFlorae.DEPENDENCIES)
 public class TFCFlorae {
 
   public static final String NAME = "TFC Florae";

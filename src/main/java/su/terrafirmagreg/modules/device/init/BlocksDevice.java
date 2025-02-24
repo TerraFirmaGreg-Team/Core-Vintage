@@ -107,9 +107,9 @@ public final class BlocksDevice {
 //    QUERN_HORSE = registry.block(new BlockQuernHorse());
     MOLTEN = registry.block(new BlockMolten());
 //    LOG_PILE = registry.block(new BlockLogPile());
-//    CELLAR_SHELF = registry.block(new BlockCellarShelf());
-//    CELLAR_DOOR = registry.block(new BlockCellarDoor());
-//    CELLAR_WALL = registry.block(new BlockCellarWall());
+    CELLAR_SHELF = registry.block(new BlockCellarShelf());
+    CELLAR_DOOR = registry.block(new BlockCellarDoor());
+    CELLAR_WALL = registry.block(new BlockCellarWall());
 //    ICE_BUNKER = registry.block(new BlockIceBunker());
 //    INFECTED_AIR = registry.block(new BlockInfectedAir());
 //    FREEZE_DRYER = registry.block(new BlockFreezeDryer());

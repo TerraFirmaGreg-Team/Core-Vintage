@@ -42,7 +42,7 @@ public class BlockOreTFC extends Block {
 
     this.ore = ore;
     this.rock = rock;
-    setDefaultState(blockState.getBaseState().withProperty(GRADE, Ore.Grade.NORMAL));
+    setDefaultState(getBlockState().getBaseState().withProperty(GRADE, Ore.Grade.NORMAL));
     setSoundType(SoundType.STONE);
     setHardness(10.0F).setResistance(10.0F);
     setHarvestLevel("pickaxe", 0);

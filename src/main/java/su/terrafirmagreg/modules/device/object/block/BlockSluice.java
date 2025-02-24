@@ -61,7 +61,7 @@ public class BlockSluice extends BlockHorizontal implements ICapabilitySize {
 
   public BlockSluice() {
     super(Material.WOOD);
-    setDefaultState(blockState.getBaseState().withProperty(UPPER, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(UPPER, false));
     setHardness(8.0f);
     setHarvestLevel(ToolClasses.AXE, 0);
   }

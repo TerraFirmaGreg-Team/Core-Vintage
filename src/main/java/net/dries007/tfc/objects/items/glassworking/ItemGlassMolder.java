@@ -120,9 +120,9 @@ public class ItemGlassMolder extends ItemMiscTech {
       if (fluid != null) {
         String fluidDesc = TextFormatting.DARK_GREEN + fluid.getLocalizedName() + TextFormatting.WHITE;
         if (isSolidified()) {
-          fluidDesc += I18n.format(Mods.Names.TFC + ".tooltip.solid");
+          fluidDesc += I18n.format(Mods.ModIDs.TFC + ".tooltip.solid");
         } else if (canWork()) {
-          fluidDesc += I18n.format(Mods.Names.TFC + ".tooltip.liquid");
+          fluidDesc += I18n.format(Mods.ModIDs.TFC + ".tooltip.liquid");
         }
         tooltip.add(fluidDesc);
       }

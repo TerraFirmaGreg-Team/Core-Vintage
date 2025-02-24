@@ -68,7 +68,7 @@ public class BlockFridge extends BlockHorizontal {
     super(Material.IRON);
     setHardness(3.0F);
     setHarvestLevel("pickaxe", 0);
-    setDefaultState(blockState.getBaseState().withProperty(FACING, NORTH).withProperty(UPPER, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(FACING, NORTH).withProperty(UPPER, false));
   }
 
   public static Vec3d[] getItems(EnumFacing facing) {

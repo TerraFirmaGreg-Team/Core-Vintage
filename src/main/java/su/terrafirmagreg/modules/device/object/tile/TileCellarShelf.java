@@ -1,40 +1,43 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.base.object.inventory.api.IItemHandlerSidedCallback;
+import su.terrafirmagreg.api.base.object.inventory.spi.ItemHandlerSidedWrapper;
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.device.client.gui.GuiCellarShelf;
+import su.terrafirmagreg.modules.device.object.container.ContainerCellarShelf;
+import su.terrafirmagreg.modules.device.object.inventory.InventoryCellarShelf;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemFood;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
 
 import net.dries007.sharkbark.cellars.ModConfig;
-import net.dries007.sharkbark.cellars.util.Reference;
-import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
-import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
-import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
-import net.dries007.tfc.objects.te.TEInventory;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
-public class TileCellarShelf extends TEInventory implements IItemHandlerSidedCallback, ITickable {
+import lombok.Getter;
 
+public class TileCellarShelf extends BaseTileTickableInventory
+  implements IItemHandlerSidedCallback, IProviderContainer<ContainerCellarShelf, GuiCellarShelf> {
+
+  @Getter
   public float temperature = -1;
   //private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(14, ItemStack.EMPTY);
   private int cellarTick = -240;    //Because a bunker may be not in the same chunk
@@ -42,15 +45,14 @@ public class TileCellarShelf extends TEInventory implements IItemHandlerSidedCal
   private int updateTickCounter = 120;
   private int lastUpdate = -1;
 
-
   public TileCellarShelf() {
-    super(new CellarShelfItemStackHandler(14));
+    super(new InventoryCellarShelf(14));
+
   }
 
   @Override
   public void update() {
-    if (world.isRemote || !Reference.initialized) {
-      //System.out.println("I shouldn't update.");
+    if (world.isRemote) {
       return;
     }
 
@@ -74,7 +76,7 @@ public class TileCellarShelf extends TEInventory implements IItemHandlerSidedCal
 
         //Syncing
         if (cellarTick == 0) {
-          world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
+          BlockUtils.notifyBlockUpdate(world, pos, 2);
         }
       }
       //Updates shelf contents.
@@ -84,7 +86,39 @@ public class TileCellarShelf extends TEInventory implements IItemHandlerSidedCal
 
       //Syncing syncing
       if (cellarTick == 0) {
-        world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
+        BlockUtils.notifyBlockUpdate(world, pos, 2);
+      }
+    }
+  }
+
+  private void updateTraits() {
+    for (int x = 0; x < inventory.getSlots(); x++) {
+      ItemStack stack = inventory.getStackInSlot(x);
+      NBTTagCompound nbt;
+      if (stack.hasTagCompound()) {
+        nbt = stack.getTagCompound();
+      } else {
+        nbt = new NBTTagCompound();
+      }
+
+      String string = getTrait(stack, nbt);
+
+      if (temperature > ModConfig.coolMaxThreshold || temperature <= -1000) {
+        removeTrait(stack, nbt);
+      } else if ((temperature <= ModConfig.frozenMaxThreshold && temperature > -1000)
+                 && string.compareTo("freezing") != 0) {
+        removeTrait(stack, nbt);
+        applyTrait(stack, nbt, "freezing", FoodTrait.FREEZING);
+      } else if (
+        (temperature <= ModConfig.icyMaxThreshold && temperature > ModConfig.frozenMaxThreshold)
+        && string.compareTo("icy") != 0) {
+        removeTrait(stack, nbt);
+        applyTrait(stack, nbt, "icy", FoodTrait.ICY);
+      } else if (
+        (temperature <= ModConfig.coolMaxThreshold && temperature > ModConfig.icyMaxThreshold)
+        && string.compareTo("cool") != 0) {
+        removeTrait(stack, nbt);
+        applyTrait(stack, nbt, "cool", FoodTrait.COOL);
       }
     }
   }
@@ -124,63 +158,27 @@ public class TileCellarShelf extends TEInventory implements IItemHandlerSidedCal
     stack.setTagCompound(nbt);
   }
 
-  private void updateTraits() {
-    for (int x = 0; x < inventory.getSlots(); x++) {
-      ItemStack stack = inventory.getStackInSlot(x);
-      NBTTagCompound nbt;
-      if (stack.hasTagCompound()) {
-        nbt = stack.getTagCompound();
-      } else {
-        nbt = new NBTTagCompound();
-      }
-
-      String string = getTrait(stack, nbt);
-
-      if (temperature > ModConfig.coolMaxThreshold || temperature <= -1000) {
-        removeTrait(stack, nbt);
-      } else if ((temperature <= ModConfig.frozenMaxThreshold && temperature > -1000) && string.compareTo("freezing") != 0) {
-        removeTrait(stack, nbt);
-        applyTrait(stack, nbt, "freezing", FoodTrait.FREEZING);
-      } else if ((temperature <= ModConfig.icyMaxThreshold && temperature > ModConfig.frozenMaxThreshold) && string.compareTo("icy") != 0) {
-        removeTrait(stack, nbt);
-        applyTrait(stack, nbt, "icy", FoodTrait.ICY);
-      } else if ((temperature <= ModConfig.coolMaxThreshold && temperature > ModConfig.icyMaxThreshold) && string.compareTo("cool") != 0) {
-        removeTrait(stack, nbt);
-        applyTrait(stack, nbt, "cool", FoodTrait.COOL);
-      }
-    }
-  }
-
   public void updateShelf(float temp) {
     cellarTick = 100;
     temperature = temp;
     lastUpdate = 240;
     //Syncing syncing diving diving
-    world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
-  }
-
-  public float getTemperature() {
-    return temperature;
-  }
-
-  private void writeSyncData(NBTTagCompound tagCompound) {
-    float temp = (lastUpdate < 0) ? -1000 : temperature;
-    tagCompound.setFloat("Temperature", temp);
-    tagCompound.setTag("Items", super.serializeNBT());
-  }
-
-  private void readSyncData(NBTTagCompound tagCompound) {
-    temperature = tagCompound.getFloat("Temperature");
-    super.deserializeNBT(tagCompound.getCompoundTag("Items"));
+    BlockUtils.notifyBlockUpdate(world, pos, 2);
   }
 
   @Nullable
   @Override
   public SPacketUpdateTileEntity getUpdatePacket() {
-    NBTTagCompound tagCompound = new NBTTagCompound();
-    writeToNBT(tagCompound);
-    writeSyncData(tagCompound);
-    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, tagCompound);
+    NBTTagCompound nbt = new NBTTagCompound();
+    writeToNBT(nbt);
+    writeSyncData(nbt);
+    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
+  }
+
+  private void writeSyncData(NBTTagCompound nbt) {
+    float temp = (lastUpdate < 0) ? -1000 : temperature;
+    NBTUtils.setGenericNBTValue(nbt, "Temperature", temp);
+    NBTUtils.setGenericNBTValue(nbt, "Items", super.serializeNBT());
   }
 
   @Override
@@ -189,21 +187,9 @@ public class TileCellarShelf extends TEInventory implements IItemHandlerSidedCal
     readSyncData(packet.getNbtCompound());
   }
 
-  @Override
-  public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-    for (int i = 0; i < 14; ++i) {
-      ItemStack stack = inventory.getStackInSlot(i);
-      NBTTagCompound nbt;
-      if (stack.hasTagCompound()) {
-        nbt = stack.getTagCompound();
-      } else {
-        nbt = new NBTTagCompound();
-      }
-
-      removeTrait(stack, nbt);
-      stack.setTagCompound(null);
-      InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-    }
+  private void readSyncData(NBTTagCompound tagCompound) {
+    temperature = tagCompound.getFloat("Temperature");
+    super.deserializeNBT(tagCompound.getCompoundTag("Items"));
   }
 
   @Override
@@ -221,8 +207,25 @@ public class TileCellarShelf extends TEInventory implements IItemHandlerSidedCal
   }
 
   @Override
+  public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
+    for (int i = 0; i < 14; ++i) {
+      ItemStack stack = inventory.getStackInSlot(i);
+      NBTTagCompound nbt;
+      if (stack.hasTagCompound()) {
+        nbt = stack.getTagCompound();
+      } else {
+        nbt = new NBTTagCompound();
+      }
+
+      removeTrait(stack, nbt);
+      stack.setTagCompound(null);
+      StackUtils.spawnItemStack(world, pos, stack);
+    }
+  }
+
+  @Override
   public boolean canInsert(int i, ItemStack itemStack, EnumFacing enumFacing) {
-    return (itemStack.getItem() instanceof ItemFood) || (itemStack.getItem() instanceof ItemSmallVessel);
+    return true;
   }
 
   @Override
@@ -232,46 +235,23 @@ public class TileCellarShelf extends TEInventory implements IItemHandlerSidedCal
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    ICapabilitySize sizeCap = CapabilitySize.get(stack);
-    if (sizeCap != null) {
-      return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
+    ICapabilitySize cap = CapabilitySize.get(stack);
+    if (cap != null) {
+      return cap.getSize(stack).isSmallerThan(Size.LARGE);
     }
     return true;
   }
 
-
-  private static class CellarShelfItemStackHandler extends ItemStackHandler implements IItemHandlerModifiable, IItemHandler, INBTSerializable<NBTTagCompound> {
-
-    public CellarShelfItemStackHandler(int size) {
-      super(size);
-      this.deserializeNBT(new NBTTagCompound());
-    }
-
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-      ItemStack stack = super.extractItem(slot, amount, simulate);
-
-      NBTTagCompound nbt;
-      if (stack.hasTagCompound()) {
-        nbt = stack.getTagCompound();
-      } else {
-        nbt = new NBTTagCompound();
-      }
-
-      String string = nbt.getString("CellarAddonTemperature");
-      if (string.compareTo("cool") == 0) {
-        CapabilityFood.removeTrait(stack, FoodTrait.COOL);
-      }
-      if (string.compareTo("icy") == 0) {
-        CapabilityFood.removeTrait(stack, FoodTrait.ICY);
-      }
-      if (string.compareTo("freezing") == 0) {
-        CapabilityFood.removeTrait(stack, FoodTrait.FREEZING);
-      }
-      nbt.removeTag("CellarAddonTemperature");
-      stack.setTagCompound(null);
-      return stack;
-    }
-
+  @Override
+  public ContainerCellarShelf getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new ContainerCellarShelf(inventoryPlayer, this);
   }
+
+  @Override
+  public GuiCellarShelf getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new GuiCellarShelf(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state);
+  }
+
+
 }
 

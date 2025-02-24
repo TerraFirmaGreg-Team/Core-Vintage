@@ -53,7 +53,7 @@ public class BlockJoshuaTreeSapling extends BlockBush implements IGrowable {
   public BlockJoshuaTreeSapling(Tree wood) {
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
     this.wood = wood;
-    setDefaultState(blockState.getBaseState().withProperty(STAGE, 0));
+    setDefaultState(getBlockState().getBaseState().withProperty(STAGE, 0));
     setSoundType(SoundType.PLANT);
     setHardness(0.0F);
     net.dries007.tfc.util.OreDictionaryHelper.register(this, "tree", "sapling");

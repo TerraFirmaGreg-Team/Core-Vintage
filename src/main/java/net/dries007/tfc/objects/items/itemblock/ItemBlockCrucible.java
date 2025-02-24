@@ -34,7 +34,7 @@ public class ItemBlockCrucible extends ItemBlockTFC {
       Alloy alloy = new Alloy(ConfigTFC.Devices.CRUCIBLE.tank);
       alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
       String metalName = (new TextComponentTranslation(alloy.getResult().getTranslationKey())).getFormattedText();
-      tooltip.add(I18n.format(Mods.Names.TFC + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));
+      tooltip.add(I18n.format(Mods.ModIDs.TFC + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));
     }
   }
 }

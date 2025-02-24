@@ -24,7 +24,7 @@ public class HelpersTFCF {
   }
 
   public static void insertWhitelistFluids() {
-    ConfigManager.sync(Mods.Names.TFC, Config.Type.INSTANCE);
+    ConfigManager.sync(Mods.ModIDs.TFC, Config.Type.INSTANCE);
 
     // Fluids
     String[] fluidAdditions = {

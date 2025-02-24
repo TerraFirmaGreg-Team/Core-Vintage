@@ -50,7 +50,7 @@ import static net.dries007.firmalife.FirmaLife.MOD_ID;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class TFCRegistry {
 
-  public static final ResourceLocation HALITE = new ResourceLocation(Mods.Names.TFC, "halite");
+  public static final ResourceLocation HALITE = new ResourceLocation(Mods.ModIDs.TFC, "halite");
 
   @SubscribeEvent
   public static void onPreRegisterOre(TFCRegistryEvent.RegisterPreBlock<Ore> event) {

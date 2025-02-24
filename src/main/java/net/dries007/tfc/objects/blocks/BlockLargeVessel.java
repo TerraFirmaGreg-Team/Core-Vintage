@@ -29,6 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.util.Helpers;
@@ -53,7 +54,7 @@ public class BlockLargeVessel extends Block implements ICapabilitySize {
     super(Material.CIRCUITS);
     setSoundType(SoundType.STONE);
     setHardness(2F);
-    setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(SEALED, false));
   }
 
   /**

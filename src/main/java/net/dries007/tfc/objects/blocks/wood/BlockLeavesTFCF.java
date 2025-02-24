@@ -69,7 +69,7 @@ public class BlockLeavesTFCF extends BlockLeaves {
     this.fruitTree = tree;
     this.setTickRandomly(true);
     if (MAP.put(tree, this) != null) {throw new IllegalStateException("There can only be one.");}
-    setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(LEAF_STATE, EnumLeafState.NORMAL)
+    setDefaultState(getBlockState().getBaseState().withProperty(DECAYABLE, false).withProperty(LEAF_STATE, EnumLeafState.NORMAL)
       .withProperty(HARVESTABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
     leavesFancy = true; // Fast / Fancy graphics works correctly
     net.dries007.tfc.util.OreDictionaryHelper.register(this, "tree", "leaves");

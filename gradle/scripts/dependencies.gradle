@@ -69,7 +69,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:groovyscript-687577:5789690-sources-5789692")
 
 
-//    implementation rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
+    compileOnly rfg.deobf("maven.modrinth:fluidlogged-api:2.2.7")
 //    implementation rfg.deobf("curse.maven:itemzoom-261725:2643616")
 //    implementation rfg.deobf("curse.maven:realistic-terrain-generation-unofficial-648514:4696300")
 //    implementation rfg.deobf("curse.maven:streams-229769:3109315")

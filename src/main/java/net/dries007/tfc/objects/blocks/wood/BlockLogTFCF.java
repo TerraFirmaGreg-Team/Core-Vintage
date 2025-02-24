@@ -60,7 +60,7 @@ public class BlockLogTFCF extends BlockLog implements ICapabilitySize {
     this.wood = wood;
     this.fruitTree = tree;
     if (MAP.put(tree, this) != null) {throw new IllegalStateException("There can only be one.");}
-    setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y).withProperty(PLACED, true).withProperty(SMALL, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y).withProperty(PLACED, true).withProperty(SMALL, false));
     setHarvestLevel("axe", 0);
     setHardness(20.0F);
     setResistance(5.0F);

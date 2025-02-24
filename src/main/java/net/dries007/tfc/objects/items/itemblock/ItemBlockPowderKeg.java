@@ -41,10 +41,10 @@ public class ItemBlockPowderKeg extends ItemBlockTFC implements ICapabilitySize 
       }
 
       if (count == 0) {
-        tooltip.add(I18n.format(Mods.Names.TFC + ".tooltip.powderkeg_empty"));
+        tooltip.add(I18n.format(Mods.ModIDs.TFC + ".tooltip.powderkeg_empty"));
       } else {
         ItemStack itemStack = stackHandler.getStackInSlot(firstSlot);
-        tooltip.add(I18n.format(Mods.Names.TFC + ".tooltip.powderkeg_amount", count, itemStack.getItem().getItemStackDisplayName(itemStack)));
+        tooltip.add(I18n.format(Mods.ModIDs.TFC + ".tooltip.powderkeg_amount", count, itemStack.getItem().getItemStackDisplayName(itemStack)));
       }
     }
   }

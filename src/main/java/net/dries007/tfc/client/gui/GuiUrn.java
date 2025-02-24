@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 public class GuiUrn extends GuiContainerTE<TEUrn> {
 

@@ -131,7 +131,7 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)

@@ -67,7 +67,7 @@ public class BlockNestBox extends BaseBlockContainer {
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
-      TileUtils.getTile(world, pos, TileNestBox.class).ifPresent(tile -> GuiHandler.openGui(world, pos, player));
+      TileUtils.getTile(world, pos, getTileClass()).ifPresent(tile -> GuiHandler.openGui(world, pos, player));
     }
     return true;
   }
@@ -79,12 +79,6 @@ public class BlockNestBox extends BaseBlockContainer {
   @Override
   public EnumBlockRenderType getRenderType(IBlockState state) {
     return EnumBlockRenderType.MODEL;
-  }
-
-  @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, TileNestBox.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
-    super.breakBlock(worldIn, pos, state);
   }
 
   @Override

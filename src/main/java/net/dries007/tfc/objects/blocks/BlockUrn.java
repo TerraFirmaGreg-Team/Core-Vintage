@@ -54,7 +54,7 @@ public class BlockUrn extends Block implements ICapabilitySize {
     super(Material.CIRCUITS);
     setSoundType(SoundType.GLASS);
     setHardness(2F);
-    setDefaultState(blockState.getBaseState().withProperty(SEALED, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(SEALED, false));
   }
 
   /**

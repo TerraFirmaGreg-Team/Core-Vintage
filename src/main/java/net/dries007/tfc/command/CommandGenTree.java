@@ -19,7 +19,7 @@ import net.dries007.tfc.api.types.Tree;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

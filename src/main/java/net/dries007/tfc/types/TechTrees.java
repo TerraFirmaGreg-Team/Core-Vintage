@@ -12,18 +12,18 @@ import net.dries007.tfc.api.types.Tree;
 
 import static net.dries007.tfc.types.DefaultTrees.GEN_TALL;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 @Mod.EventBusSubscriber(modid = TFCTECH)
 public final class TechTrees {
 
-  @GameRegistry.ObjectHolder(Mods.Names.TFC + ":hevea")
+  @GameRegistry.ObjectHolder(Mods.ModIDs.TFC + ":hevea")
   public static final Tree HEVEA = getNull();
 
   @SubscribeEvent
   public static void onPreRegisterTrees(TFCRegistryEvent.RegisterPreBlock<Tree> event) {
     event.getRegistry().registerAll(
-      new Tree.Builder(new ResourceLocation(Mods.Names.TFC, "hevea"), 140f, 350f, 7f, 27f, GEN_TALL)
+      new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "hevea"), 140f, 350f, 7f, 27f, GEN_TALL)
         .setDensity(0.1f, 0.6f).setRadius(2).setGrowthTime(10).setBurnInfo(762f, 2000).build()
     );
   }

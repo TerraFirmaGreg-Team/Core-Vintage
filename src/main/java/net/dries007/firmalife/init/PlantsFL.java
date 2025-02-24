@@ -16,7 +16,7 @@ import java.util.List;
 public class PlantsFL {
 
   public static final List<Plant> WRAPPERS = new ArrayList<>(8);
-  public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(Mods.Names.TFC, "cinnamon"), new TreeGenSequoia(), 28, 35, 280, 400, 0f, 1f, 0, 4, 15, 4, false, null, false, 15, 0, 0);
+  public static final Tree CINNAMON_TREE = new Tree(new ResourceLocation(Mods.ModIDs.TFC, "cinnamon"), new TreeGenSequoia(), 28, 35, 280, 400, 0f, 1f, 0, 4, 15, 4, false, null, false, 15, 0, 0);
   private static final int[] MAY = new int[]{0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0};
   private static final int[] JUNE = new int[]{0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0};
   private static final int[] JULY = new int[]{0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0};
@@ -38,7 +38,7 @@ public class PlantsFL {
   private static class PlantWrapper extends Plant {
 
     public PlantWrapper(@Nonnull String name, int[] stages, float minTemp, float maxTemp, float minRain, float maxRain) {
-      super(new ResourceLocation(Mods.Names.TFC, name), PlantType.STANDARD, stages, false, false, minTemp, maxTemp, minTemp, maxTemp, minRain, maxRain, 9, 15, 1, 0, 0, 0.8F, null);
+      super(new ResourceLocation(Mods.ModIDs.TFC, name), PlantType.STANDARD, stages, false, false, minTemp, maxTemp, minTemp, maxTemp, minRain, maxRain, 9, 15, 1, 0, 0, 0.8F, null);
     }
   }
 }

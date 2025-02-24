@@ -12,7 +12,7 @@ import static net.dries007.tfc.types.DefaultRocks.IGNEOUS_EXTRUSIVE;
 import static net.dries007.tfc.types.DefaultRocks.IGNEOUS_INTRUSIVE;
 import static net.dries007.tfc.types.DefaultRocks.METAMORPHIC;
 import static net.dries007.tfc.types.DefaultRocks.SEDIMENTARY;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Mod.EventBusSubscriber(modid = TFCF)

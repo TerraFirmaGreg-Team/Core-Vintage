@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 /**
  * This is an advanced IForgeable capability that also needs heat If you implement this capability, you MUST implement {@link CapabilityHeat} as well You should

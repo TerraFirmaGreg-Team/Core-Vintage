@@ -37,7 +37,7 @@ import lombok.NoArgsConstructor;
 
 import java.awt.Color;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SideOnly(Side.CLIENT)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

@@ -36,7 +36,7 @@ public class HelpersFL {
   }
 
   public static void insertWhitelist() {
-    ConfigManager.sync(Mods.Names.TFC, Config.Type.INSTANCE);
+    ConfigManager.sync(Mods.ModIDs.TFC, Config.Type.INSTANCE);
     String[] additions = {"yeast_starter", "coconut_milk", "yak_milk", "zebu_milk", "goat_milk", "curdled_goat_milk", "curdled_yak_milk", "pina_colada"};
     if (ConfigFL.General.COMPAT.addToWoodenBucket) {
       Set<String> woodenBucketSet = new HashSet<>(Arrays.asList(ConfigTFC.General.MISC.woodenBucketWhitelist));

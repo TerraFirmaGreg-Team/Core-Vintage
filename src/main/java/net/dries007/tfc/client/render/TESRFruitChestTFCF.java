@@ -21,7 +21,7 @@ import net.dries007.tfc.util.agriculture.FruitTree;
 import java.util.HashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @SideOnly(Side.CLIENT)
 public class TESRFruitChestTFCF extends TileEntitySpecialRenderer<TEFruitChest> {

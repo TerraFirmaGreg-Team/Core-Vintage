@@ -61,7 +61,7 @@ public class BlockCharcoalPile extends BaseBlock {
       .harvestLevel(ToolClasses.SHOVEL, 0)
       .sound(TFCSounds.CHARCOAL_PILE);
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(TYPE, 1));
   }
 

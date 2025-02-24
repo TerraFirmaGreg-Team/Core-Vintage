@@ -64,7 +64,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     setHardness(1.0F);
     setTickRandomly(true);
     setSoundType(SoundType.PLANT);
-    setDefaultState(blockState.getBaseState().withProperty(FRUITING, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(FRUITING, false));
   }
 
   public static BlockBerryBush get(IBerryBush bush) {

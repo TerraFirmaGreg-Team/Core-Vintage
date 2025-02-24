@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvider {
 

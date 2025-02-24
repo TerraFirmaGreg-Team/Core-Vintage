@@ -188,12 +188,12 @@ public final class Helpers {
   }
 
   public static String getEnumName(Enum<?> anEnum) {
-    return JOINER_DOT.join(Mods.Names.TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
+    return JOINER_DOT.join(Mods.ModIDs.TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
   }
 
   public static String getTypeName(IForgeRegistryEntry<?> type) {
     //noinspection ConstantConditions
-    return JOINER_DOT.join(Mods.Names.TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
+    return JOINER_DOT.join(Mods.ModIDs.TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
   }
 
   public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {

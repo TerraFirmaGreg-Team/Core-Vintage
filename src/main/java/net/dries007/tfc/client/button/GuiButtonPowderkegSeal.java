@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 import static su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg.POWDERKEG_BACKGROUND;
 
 

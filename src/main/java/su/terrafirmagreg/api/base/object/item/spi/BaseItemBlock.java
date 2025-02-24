@@ -30,7 +30,7 @@ public class BaseItemBlock extends ItemBlock implements IItemSettings {
     if (getSettings().getCapability().isEmpty()) {
       return null;
     }
-    return def$initCapabilities(stack, nbt);
+    return settings$initCapabilities(stack, nbt);
   }
 
 }

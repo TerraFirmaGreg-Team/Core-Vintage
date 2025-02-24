@@ -31,7 +31,7 @@ import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nullable;
 
-@Mod.EventBusSubscriber(modid = Mods.Names.TFCTHINGS)
+@Mod.EventBusSubscriber(modid = Mods.ModIDs.TFCTHINGS)
 public class TFCThingsEventHandler {
 
 

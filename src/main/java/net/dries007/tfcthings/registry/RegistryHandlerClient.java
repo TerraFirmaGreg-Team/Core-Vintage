@@ -25,7 +25,7 @@ import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nonnull;
 
-@Mod.EventBusSubscriber(modid = Mods.Names.TFCTHINGS, value = Side.CLIENT)
+@Mod.EventBusSubscriber(modid = Mods.ModIDs.TFCTHINGS, value = Side.CLIENT)
 public class RegistryHandlerClient {
 
   @SubscribeEvent

@@ -20,7 +20,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class BloomeryCategory extends BaseRecipeCategory<BloomeryRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Mods.ModIDs.TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic fire;

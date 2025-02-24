@@ -13,6 +13,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -34,7 +35,11 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public interface IItemSettings extends IBaseSettings<Settings> {
 
-  default ICapabilityProvider def$initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+  default Item asItem() {
+    return (Item) this;
+  }
+
+  default ICapabilityProvider settings$initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
     ArrayList<ICapabilityProvider> providers = new ArrayList<>();
     for (IProviderItemCapability itemCapability : getSettings().getCapability()) {
       providers.add(itemCapability.createProvider(stack));

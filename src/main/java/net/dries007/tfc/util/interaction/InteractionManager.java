@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static su.terrafirmagreg.api.data.Properties.IntProp.TYPE;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
 public final class InteractionManager {

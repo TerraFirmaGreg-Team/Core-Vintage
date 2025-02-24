@@ -18,7 +18,7 @@ import net.dries007.tfc.objects.blocks.entity.EntityBoatTFCF;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @SideOnly(Side.CLIENT)
 @ParametersAreNonnullByDefault

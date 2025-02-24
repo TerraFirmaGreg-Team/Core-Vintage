@@ -15,7 +15,7 @@ import net.dries007.tfctech.client.TechGuiHandler;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 public class GuiSmelteryCauldron extends GuiContainerTE<TileSmelteryCauldron> {
 
@@ -55,9 +55,9 @@ public class GuiSmelteryCauldron extends GuiContainerTE<TileSmelteryCauldron> {
       String formatted = Heat.getTooltip(tile.getTemp());
       formatted += TextFormatting.WHITE;
       if (tile.isSolidified()) {
-        formatted += I18n.format(Mods.Names.TFC + ".tooltip.solid");
+        formatted += I18n.format(Mods.ModIDs.TFC + ".tooltip.solid");
       } else {
-        formatted += I18n.format(Mods.Names.TFC + ".tooltip.liquid");
+        formatted += I18n.format(Mods.ModIDs.TFC + ".tooltip.liquid");
       }
       tooltip.add(formatted);
       this.drawHoveringText(tooltip, mouseX, mouseY, fontRenderer);

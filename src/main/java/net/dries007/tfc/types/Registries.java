@@ -33,7 +33,7 @@ import net.dries007.tfc.api.types.Tree;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.ALLOY_RECIPE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.ANVIL_RECIPE;
 import static net.dries007.tfc.api.registries.TFCRegistryNames.BARREL_RECIPE;

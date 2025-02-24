@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.dries007.tfc.client.render.RenderBoatTFCF;
 import net.dries007.tfc.objects.blocks.entity.EntityBoatTFCF;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCF;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFCF)
 public class ClientEvents {

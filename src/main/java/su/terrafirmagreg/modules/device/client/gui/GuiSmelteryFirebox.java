@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import net.dries007.tfc.client.gui.GuiContainerTE;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFCTECH;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 public class GuiSmelteryFirebox extends GuiContainerTE<TileSmelteryFirebox> {
 

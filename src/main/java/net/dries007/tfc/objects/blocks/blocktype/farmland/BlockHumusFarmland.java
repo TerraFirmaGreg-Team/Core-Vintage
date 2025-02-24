@@ -60,7 +60,7 @@ public class BlockHumusFarmland extends FarmlandTFCF {
 
   public BlockHumusFarmland(RockTFCF rockTFCF, Rock rock) {
     super(rockTFCF, rock);
-    setDefaultState(blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
+    setDefaultState(getBlockState().getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
     setTickRandomly(true);
     setLightOpacity(255);
     useNeighborBrightness = true;

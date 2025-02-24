@@ -7,6 +7,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import org.jetbrains.annotations.NotNull;
@@ -15,13 +16,20 @@ import org.jetbrains.annotations.Nullable;
 import lombok.Getter;
 
 @Getter
-@SuppressWarnings("deprecation")
 public abstract class BaseItem extends Item implements IItemSettings {
 
   protected final Settings settings;
 
   public BaseItem() {
     this.settings = Settings.of();
+
+    setMaxStackSize(settings.getMaxStackSize());
+    setMaxDamage(settings.getMaxDamage());
+  }
+
+  @Override
+  public IRarity getForgeRarity(ItemStack stack) {
+    return settings.getRarity();
   }
 
 
@@ -41,15 +49,6 @@ public abstract class BaseItem extends Item implements IItemSettings {
     if (getSettings().getCapability().isEmpty()) {
       return null;
     }
-    return def$initCapabilities(stack, nbt);
-  }
-
-  @Override
-  public int getItemStackLimit() {
-    return getSettings().getMaxStackSize();
-  }
-
-  public int getItemStackLimit(ItemStack stack) {
-    return getItemStackLimit();
+    return settings$initCapabilities(stack, nbt);
   }
 }

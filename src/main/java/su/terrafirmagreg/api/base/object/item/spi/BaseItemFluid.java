@@ -45,7 +45,7 @@ public abstract class BaseItemFluid extends ItemFluidContainer implements IItemS
     if (getSettings().getCapability().isEmpty()) {
       return null;
     }
-    return def$initCapabilities(stack, nbt);
+    return settings$initCapabilities(stack, nbt);
   }
 
 

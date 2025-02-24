@@ -22,7 +22,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class ChiselCategory extends BaseRecipeCategory<ChiselRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Mods.ModIDs.TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic arrow;

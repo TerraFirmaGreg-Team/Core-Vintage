@@ -39,7 +39,7 @@ public class BlockJackOLantern extends BlockHorizontal implements ICapabilitySiz
 
   public BlockJackOLantern(Carving carving) {
     super(Material.GOURD);
-    setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(LIT, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(LIT, false));
     setTickRandomly(true);
     setCreativeTab(CreativeTabsTFC.CT_MISC);
     setHardness(1f);

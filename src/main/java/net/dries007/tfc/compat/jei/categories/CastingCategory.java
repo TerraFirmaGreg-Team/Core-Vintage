@@ -21,7 +21,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class CastingCategory extends BaseRecipeCategory<CastingRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Mods.ModIDs.TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic arrow;

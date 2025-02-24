@@ -179,7 +179,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
       .nonFullCube()
       .nonOpaque();
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH)
       .withProperty(LIT, false)
       .withProperty(OPEN, false));

@@ -19,7 +19,7 @@ import net.dries007.tfc.network.PacketSpawnTFCParticle;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 /**
  * TFC Particles, wrapped up in a nice enum

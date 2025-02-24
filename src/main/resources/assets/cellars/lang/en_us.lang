@@ -3,11 +3,8 @@ item.infected_air.name=Cellar Air
 item.ice_shard.name=Ice Shard
 item.packed_ice_shard.name=Packed Ice Shard
 item.sea_ice_shard.name=Sea Ice Shard
-tile.cellar_wall.name=Cellar Wall
-tile.cellar_shelf.name=Cellar Shelf
 tile.freeze_dryer.name=Freeze Dryer
 tile.ice_bunker.name=Ice Bunker
-tile.cellar_door.name=Cellar Door
 tile.infected_air.name=Cellar Air
 
 container.ice_bunker=Ice Bunker

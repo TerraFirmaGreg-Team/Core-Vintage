@@ -40,6 +40,15 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public interface IBlockSettings extends IBaseSettings<Settings> {
 
+
+  default Block asBlock() {
+    return (Block) this;
+  }
+
+  default Item asItem() {
+    return Item.getItemFromBlock(asBlock());
+  }
+
   @Getter
   @SuppressWarnings("deprecation")
   class Settings extends BaseSettings<Settings> {
@@ -56,7 +65,7 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
     ResourceLocation resource = null;
 
     SoundType soundType;
-    ContextFunction<Float> hardness;
+
     ContextFunction<Integer> lightValue;
     ContextFunction<Float> slipperiness;
     Predicate<IBlockState> isSuffocating;
@@ -69,6 +78,7 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
     int harvestLevel;
 
     float resistance;
+    float hardness;
 
     boolean canFall;
     boolean collidable;
@@ -93,7 +103,6 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
       this.isAir = material == Material.AIR;
 
       this.soundType = SoundType.STONE;
-      this.hardness = (state, world, pos) -> 1.0F;
       this.lightValue = (state, world, pos) -> 0;
       this.slipperiness = (state, world, pos) -> 0.6F;
       this.isSuffocating = (state) -> state.getMaterial().blocksMovement() && state.isFullCube();
@@ -107,7 +116,6 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
       this.opaque = true;
       this.fullCube = true;
       this.hasItemSubtypes = false;
-      this.ticksRandomly = false;
       this.requiresCorrectTool = false;
       this.useNeighborBrightness = false;
     }
@@ -134,7 +142,7 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
       settings.soundType = block.getSoundType();
       settings.lightValue = ($, world, pos) -> block.getLightValue(state, world, pos);
       settings.resistance = block.blockResistance;
-      settings.hardness = ($, world, pos) -> block.blockHardness;
+      settings.hardness = block.getBlockHardness(null, null, null);
       settings.requiresCorrectTool = !block.material.isToolNotRequired();
       settings.ticksRandomly = block.getTickRandomly();
       settings.slipperiness = ($, world, pos) -> block.slipperiness;
@@ -245,7 +253,7 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
 
     public Settings strength(float strength) {
       this.resistance = strength;
-      this.hardness = (state, world, pos) -> strength;
+      this.hardness = strength;
       return this;
     }
 
@@ -255,12 +263,12 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
     }
 
     public Settings hardness(float hardness) {
-      this.hardness = (state, world, pos) -> hardness;
+      this.hardness = hardness;
       return this;
     }
 
     public Settings unbreakable() {
-      this.hardness = (state, world, pos) -> -1.0F;
+      this.hardness = -1.0F;
       return this;
     }
 

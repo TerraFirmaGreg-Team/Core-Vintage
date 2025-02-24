@@ -7,7 +7,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 
 public class RockCategory extends IForgeRegistryEntry.Impl<RockCategory> {

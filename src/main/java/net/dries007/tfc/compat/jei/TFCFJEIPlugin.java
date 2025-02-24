@@ -30,18 +30,18 @@ import java.util.stream.Collectors;
 @JEIPlugin
 public class TFCFJEIPlugin implements IModPlugin {
 
-  public static final String KNAP_PINEAPPLE_LEATHER_UID = Mods.Names.TFCF + ".knap.pineapple_leather";
-  public static final String KNAP_BURLAP_CLOTH_UID = Mods.Names.TFCF + ".knap.burlap_cloth";
-  public static final String KNAP_WOOL_CLOTH_UID = Mods.Names.TFCF + ".knap.wool_cloth";
-  public static final String KNAP_SILK_CLOTH_UID = Mods.Names.TFCF + ".knap.silk_cloth";
-  public static final String KNAP_SISAL_CLOTH_UID = Mods.Names.TFCF + ".knap.sisal_cloth";
-  public static final String KNAP_COTTON_CLOTH_UID = Mods.Names.TFCF + ".knap.cotton_cloth";
-  public static final String KNAP_LINEN_CLOTH_UID = Mods.Names.TFCF + ".knap.linen_cloth";
-  public static final String KNAP_HEMP_CLOTH_UID = Mods.Names.TFCF + ".knap.hemp_cloth";
-  public static final String KNAP_YUCCA_CANVAS_UID = Mods.Names.TFCF + ".knap.yucca_canvas";
-  public static final String KNAP_MUD_UID = Mods.Names.TFCF + ".knap.mud";
-  public static final String KNAP_FLINT_UID = Mods.Names.TFCF + ".knap.flint";
-  public static final String CASTING_UID = Mods.Names.TFCF + ".casting";
+  public static final String KNAP_PINEAPPLE_LEATHER_UID = Mods.ModIDs.TFCF + ".knap.pineapple_leather";
+  public static final String KNAP_BURLAP_CLOTH_UID = Mods.ModIDs.TFCF + ".knap.burlap_cloth";
+  public static final String KNAP_WOOL_CLOTH_UID = Mods.ModIDs.TFCF + ".knap.wool_cloth";
+  public static final String KNAP_SILK_CLOTH_UID = Mods.ModIDs.TFCF + ".knap.silk_cloth";
+  public static final String KNAP_SISAL_CLOTH_UID = Mods.ModIDs.TFCF + ".knap.sisal_cloth";
+  public static final String KNAP_COTTON_CLOTH_UID = Mods.ModIDs.TFCF + ".knap.cotton_cloth";
+  public static final String KNAP_LINEN_CLOTH_UID = Mods.ModIDs.TFCF + ".knap.linen_cloth";
+  public static final String KNAP_HEMP_CLOTH_UID = Mods.ModIDs.TFCF + ".knap.hemp_cloth";
+  public static final String KNAP_YUCCA_CANVAS_UID = Mods.ModIDs.TFCF + ".knap.yucca_canvas";
+  public static final String KNAP_MUD_UID = Mods.ModIDs.TFCF + ".knap.mud";
+  public static final String KNAP_FLINT_UID = Mods.ModIDs.TFCF + ".knap.flint";
+  public static final String CASTING_UID = Mods.ModIDs.TFCF + ".casting";
   private static IModRegistry REGISTRY;
 
   /**

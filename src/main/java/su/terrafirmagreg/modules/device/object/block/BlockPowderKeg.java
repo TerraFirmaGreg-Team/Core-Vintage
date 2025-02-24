@@ -63,7 +63,7 @@ public class BlockPowderKeg extends Block implements ICapabilitySize, ILightable
     setHardness(2F);
     setTickRandomly(true);
 
-    setDefaultState(blockState.getBaseState().withProperty(LIT, false).withProperty(SEALED, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(LIT, false).withProperty(SEALED, false));
   }
 
   /**

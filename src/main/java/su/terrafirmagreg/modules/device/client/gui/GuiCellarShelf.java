@@ -5,9 +5,7 @@ import su.terrafirmagreg.api.data.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.object.tile.TileCellarShelf;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -18,20 +16,15 @@ import java.util.List;
 public class GuiCellarShelf extends BaseGuiContainerTile<TileCellarShelf> {
 
   public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/cellar_shelf.png");
-  private final String translationKey;
-  private final InventoryPlayer playerInventory;
 
-  public GuiCellarShelf(Container container, InventoryPlayer playerInv, TileCellarShelf tile, IBlockState state) {
+
+  public GuiCellarShelf(Container container, InventoryPlayer playerInv, TileCellarShelf tile) {
     super(container, playerInv, tile, BACKGROUND);
-    this.playerInventory = playerInv;
-    this.translationKey = state.getBlock().getTranslationKey();
   }
 
   @Override
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-    String name = I18n.format(translationKey + ".name");
-    this.fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0);
-    this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 92, 0);
+    super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
     if (mouseX >= guiLeft + 5 && mouseX <= guiLeft + 15 && mouseY >= guiTop + 5
         && mouseY <= guiTop + 15) {

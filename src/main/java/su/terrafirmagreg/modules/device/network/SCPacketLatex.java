@@ -24,7 +24,7 @@ public class SCPacketLatex extends PacketBase<SCPacketLatex> {
   private boolean pot = false;
   private boolean base = false;
 
-  @SuppressWarnings("unused")
+
   public SCPacketLatex() {
   }
 
@@ -59,8 +59,7 @@ public class SCPacketLatex extends PacketBase<SCPacketLatex> {
     EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(context);
     if (player != null) {
       World world = player.getEntityWorld();
-      TileUtils.getTile(world, pos, TileLatexExtractor.class)
-        .ifPresent(tile -> tile.updateClient(cutState, fluid, pot, base));
+      TileUtils.getTile(world, pos, TileLatexExtractor.class).ifPresent(tile -> tile.updateClient(cutState, fluid, pot, base));
     }
     return null;
   }

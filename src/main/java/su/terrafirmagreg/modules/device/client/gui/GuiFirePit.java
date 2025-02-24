@@ -90,8 +90,7 @@ public class GuiFirePit extends BaseGuiContainerTile<TileFirePit> {
 
     if (attachment == EnumFirePitAttachment.COOKING_POT) {
       TileFirePit.CookingPotStage stage = tile.getCookingPotStage();
-      if (stage == TileFirePit.CookingPotStage.BOILING
-          || stage == TileFirePit.CookingPotStage.FINISHED) {
+      if (stage == TileFirePit.CookingPotStage.BOILING || stage == TileFirePit.CookingPotStage.FINISHED) {
         // slots are disabled while boiling
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         for (int i = TileFirePit.SLOT_EXTRA_INPUT_START; i <= TileFirePit.SLOT_EXTRA_INPUT_END;

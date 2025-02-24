@@ -50,6 +50,9 @@ public final class ConfigBlock {
   @Config.Comment("Ice Bunker")
   public final IceBunker ICE_BUNKER = new IceBunker();
 
+  @Config.Comment("Cellar Shelf")
+  public final CellarShelf CELLAR_SHELF = new CellarShelf();
+
   public static final class Bellows {
 
     @Config.Comment(
@@ -149,7 +152,8 @@ public final class ConfigBlock {
     @Config.RangeDouble(min = 0.0D, max = 1.0D)
     public double breakoutChance = 0.001D;
 
-    @Config.Comment({"The duration of the debuffs applied by the bear trap in ticks.", "Set to 0 to disable the debuffs."})
+    @Config.Comment({"The duration of the debuffs applied by the bear trap in ticks.",
+                     "Set to 0 to disable the debuffs."})
     @Config.RangeInt(min = 0)
     public int debuffDuration = 1000;
 
@@ -170,11 +174,15 @@ public final class ConfigBlock {
     @Config.RangeDouble(min = 0.0D, max = 1.0D)
     public double breakChance = 0.2D;
 
-    @Config.Comment({"The chance for a snare to capture a random small animal when loaded with bait. Happens on random block ticks."})
+    @Config.Comment({
+      "The chance for a snare to capture a random small animal when loaded with bait. Happens on random block ticks."
+    })
     @Config.RangeDouble(min = 0.0D, max = 1.0D)
     public double baitCaptureChance = 0.05D;
 
-    @Config.Comment({"The chance for a piece of bait in a snare to be consumed if the snare fails to capture a random animal."})
+    @Config.Comment({
+      "The chance for a piece of bait in a snare to be consumed if the snare fails to capture a random animal."
+    })
     @Config.RangeDouble(min = 0.0D, max = 1.0D)
     public double baitExpireChance = 0.05D;
   }
@@ -194,14 +202,115 @@ public final class ConfigBlock {
 
   public static final class FreezeDryer {
 
-    @Config.Comment({"The multiplier 100 is 1.0, 123 is 1.23\t:\tIs used to effect the coolant consumption rate of the cellars"})
-    public double coolantConsumptionMultiplier = 1.0;
+    @Config.Comment({
+      "Maximum amount of coolant freeze dryer can store internally."
+    })
+    public float coolantMax = 6400F;
+
+    @Config.Comment({
+      "Number of seconds at target pressure to preserve."
+    })
+    public int sealedDuration = 120;
+
+    @Config.Comment({
+      "This is the sea level pressure."
+    })
+    public float seaLevelPressure = 1016F;
+
+    @Config.Comment({
+      "The multiplier 100 is 1.0, 123 is 1.23\t:\tIs used to effect the coolant consumption rate of the cellars"
+    })
+    public float coolantConsumptionMultiplier = 1.0F;
+    @Config.Comment({
+      "1000 is 10.0, 1230 is 12.3\t:\tPercentage of Temperature Delta in heat dissipated per second"
+    })
+    public float temperatureDissipation = 0.2F;
+    @Config.Comment({
+      "Work per redstone power level each second"
+    })
+    public float workPerPower = 100;
+    @Config.Comment({
+      "1000 is 1.00, 1230 is 1.23\t:\tTarget pressure to achieve to start preserving"
+    })
+    public float targetPressure = 0.6F;
+    @Config.Comment({
+      "1000 is 1.00, 1230 is 1.23\\t:\\tHeat generated per redstone power level"
+    })
+    public float heatPerPower = 0.1F;
+    @Config.Comment({
+      "1000 is 1.00, 1230 is 1.23\\t:\\tPressure change per Y level"
+    })
+    public float pressureChange = 1.980F;
+    @Config.Comment({
+      "Maximum temperature of freeze dryer vacuum pump"
+    })
+    public int maxTemp = 40;
+    @Config.Comment("This setting dictates how much coolant you get from a block of Sea Ice")
+    public int seaIceCoolant = 180;
+
+    @Config.Comment("This setting dictates how much coolant you get from a block of Ice or Ice Shards")
+    public int iceCoolant = 120;
+
+    @Config.Comment("This setting dictates how much coolant you get from a block of Snow")
+    public int snowCoolant = 60;
+
+    @Config.Comment("This setting dictates how much coolant you get from a block of Packed Ice")
+    public int packedIceCoolant = 60;
+
+    @Config.Comment("This setting dictates how much coolant you get from a block of Snowball")
+    public int snowBallCoolant = 15;
   }
 
   public static final class IceBunker {
 
-    @Config.Comment("Debug.")
+    @Config.Comment("Will enable all debug text.")
     public boolean debug = false;
+
+    @Config.Comment("This will cause the temperature calculation, for cellars, to be based on the average temperature of the month. Instead of actual current temperature")
+    public boolean tempMonthAvg = false;
+
+    @Config.Comment("Makes using sea ice and packed ice effect temperature of the cellars.")
+    public boolean specialIceTraits = false;
+
+    @Config.Comment("Is the minimum value the ice house can make it with out negative temperatures outside. Special Ice Traits do not take this into account.")
+    public int iceHouseTemperature = 1;
+
+    @Config.Comment("The multiplier 100 is 1.0, 123 is 1.23\t:\tIs used to effect the coolant consumption rate of the cellars")
+    public float coolantConsumptionMultiplier = 1.0F;
+
+    @Config.Comment("This setting dictates how much coolant you get from a block of Sea Ice")
+    public int seaIceCoolant = 180;
+
+    @Config.Comment("This setting dictates how much coolant you get from a block of Ice or Ice Shards")
+    public int iceCoolant = 120;
+
+    @Config.Comment("This setting dictates how much coolant you get from a block of Snow")
+    public int snowCoolant = 60;
+
+    @Config.Comment("This setting dictates how much coolant you get from a block of Packed Ice")
+    public int packedIceCoolant = 60;
+
+    @Config.Comment("This setting dictates how much coolant you get from a block of Snowball")
+    public int snowBallCoolant = 15;
+
+  }
+
+  public static final class CellarShelf {
+
+    @Config.Comment({
+      "This is the temperature at which foods will gain a trait."
+    })
+    public int coolMaxThreshold = 20;
+
+    @Config.Comment({
+      "This is the temperature at which foods will go from icy to frozen."
+    })
+    public int frozenMaxThreshold = 0;
+
+    @Config.Comment({
+      "This is the temperature at which foods will go from cool to icy."
+    })
+    public int icyMaxThreshold = 5;
 
   }
 }

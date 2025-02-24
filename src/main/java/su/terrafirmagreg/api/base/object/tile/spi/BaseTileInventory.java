@@ -9,6 +9,7 @@ import su.terrafirmagreg.api.util.TileUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -80,8 +81,10 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
   }
 
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-    for (int i = 0; i < inventory.getSlots(); i++) {
-      StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(i));
+    invalidate();
+    for (int slot = 0; slot < inventory.getSlots(); slot++) {
+      inventory.setStackInSlot(slot, ItemStack.EMPTY);
+      StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(slot));
     }
   }
 

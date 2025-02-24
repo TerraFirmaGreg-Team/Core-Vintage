@@ -78,8 +78,7 @@ public class GuiCrucible extends BaseGuiContainerTile<TileCrucible> {
   }
 
   @Override
-  protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton,
-                                long timeSinceLastClick) {
+  protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
     super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
     if (!Mouse.isButtonDown(0)) {
       scrollPress = false;
@@ -94,8 +93,7 @@ public class GuiCrucible extends BaseGuiContainerTile<TileCrucible> {
     super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
     // Draw the temperature indicator
-    int temperature = (int) (51 * tile.getField(TileCrucible.FIELD_TEMPERATURE)
-                             / Heat.maxVisibleTemperature());
+    int temperature = (int) (51 * tile.getField(TileCrucible.FIELD_TEMPERATURE) / Heat.maxVisibleTemperature());
     if (temperature > 0) {
       if (temperature > 51) {
         temperature = 51;

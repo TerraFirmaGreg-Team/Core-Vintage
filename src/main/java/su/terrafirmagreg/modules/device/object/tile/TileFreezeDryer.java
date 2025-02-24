@@ -14,6 +14,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiFreezeDryer;
 import su.terrafirmagreg.modules.device.object.container.ContainerFreezeDryer;
 import su.terrafirmagreg.modules.device.object.inventory.InventoryFreezeDryer;
@@ -35,8 +36,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import net.dries007.sharkbark.cellars.ModConfig;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.world.classic.WorldTypeTFC;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -49,15 +50,20 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
   public boolean overheating = false;
   public int overheatTick;
   public boolean initialized;
+  @Getter
   private float localTemperature;
   private int tick;
+  @Getter
   private float temperature;
   @Getter
   private double pressure;
   @Getter
   private double localPressure;
+  @Getter
   private float coolant;
+  @Getter
   private boolean sealed;
+  @Getter
   private boolean pump;
   private int ticksSealed;
 
@@ -72,7 +78,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
       initialized = true;
       localTemperature = Climate.getActualTemp(this.getPos());
       temperature = localTemperature;
-      localPressure = (ModConfig.seaLevelPressure + ((-(this.getPos().getY() - ModConfig.seaLevel)) * ModConfig.pressureChange));
+      localPressure = (ConfigDevice.BLOCK.FREEZE_DRYER.seaLevelPressure + ((-(this.getPos().getY() - WorldTypeTFC.SEALEVEL)) * ConfigDevice.BLOCK.FREEZE_DRYER.pressureChange));
       pressure = localPressure;
       sealed = false;
       pump = false;
@@ -94,20 +100,17 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
     handleCoolant();
 
     //Dissipate Heat
-    if (coolant > ModConfig.coolantConsumptionMultiplier * Math.abs(temperature - localTemperature)
-        && pump) {
-      temperature =
-        temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
+    if (coolant > ConfigDevice.BLOCK.FREEZE_DRYER.coolantConsumptionMultiplier * Math.abs(temperature - localTemperature) && pump) {
+      temperature = temperature + ConfigDevice.BLOCK.FREEZE_DRYER.temperatureDissipation * (localTemperature - temperature);
 
       //Only consume coolant if needed.
-      if (temperature >= ModConfig.maxTemp) {
-        coolant = coolant - ModConfig.coolantConsumptionMultiplier * Math.abs(
-          temperature - localTemperature);
-        temperature = temperature - (ModConfig.temperatureDissipation * temperature);
+      if (temperature >= ConfigDevice.BLOCK.FREEZE_DRYER.maxTemp) {
+        coolant = coolant - ConfigDevice.BLOCK.FREEZE_DRYER.coolantConsumptionMultiplier * Math.abs(temperature - localTemperature);
+        temperature = temperature - (ConfigDevice.BLOCK.FREEZE_DRYER.temperatureDissipation * temperature);
       }
     } else {
       temperature =
-        temperature + ModConfig.temperatureDissipation * (localTemperature - temperature);
+        temperature + ConfigDevice.BLOCK.FREEZE_DRYER.temperatureDissipation * (localTemperature - temperature);
     }
 
     //Disabled till it cools back down
@@ -119,27 +122,27 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
     if (world.isBlockPowered(this.getPos()) && !overheating && pump) {
 
       //Increase heat
-      temperature = temperature + (ModConfig.heatPerPower * getPowerLevel());
+      temperature = temperature + (ConfigDevice.BLOCK.FREEZE_DRYER.heatPerPower * getPowerLevel());
 
       //Decrease pressure
       if (sealed) {
-        pressure = pressure - (getPowerLevel() * ModConfig.workPerPower * pressure) / Math.pow(
+        pressure = pressure - (getPowerLevel() * ConfigDevice.BLOCK.FREEZE_DRYER.workPerPower * pressure) / Math.pow(
           localPressure, 2);
       }
 
-      if (pressure < ModConfig.targetPressure) {
-        pressure = ModConfig.targetPressure;
+      if (pressure < ConfigDevice.BLOCK.FREEZE_DRYER.targetPressure) {
+        pressure = ConfigDevice.BLOCK.FREEZE_DRYER.targetPressure;
       }
 
       spawnParticles();
     }
 
-    if (temperature >= ModConfig.maxTemp) {
+    if (temperature >= ConfigDevice.BLOCK.FREEZE_DRYER.maxTemp) {
       overheating = true;
     }
 
-    if (sealed && pressure <= ModConfig.targetPressure) {
-      if (ticksSealed < ModConfig.sealedDuration) {
+    if (sealed && pressure <= ConfigDevice.BLOCK.FREEZE_DRYER.targetPressure) {
+      if (ticksSealed < ConfigDevice.BLOCK.FREEZE_DRYER.sealedDuration) {
         ticksSealed += 1;
       }
     }
@@ -161,18 +164,18 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
     int coolantToAdd = 0;
 
     if (block == Blocks.PACKED_ICE) {
-      coolantToAdd = ModConfig.packedIceCoolant;
+      coolantToAdd = ConfigDevice.BLOCK.FREEZE_DRYER.packedIceCoolant;
     } else if (block == BlocksTFC.SEA_ICE) {
-      coolantToAdd = ModConfig.seaIceCoolant;
+      coolantToAdd = ConfigDevice.BLOCK.FREEZE_DRYER.seaIceCoolant;
     } else if (item == ItemsCore.ICE_SHARD.get() || block == Blocks.ICE) {
-      coolantToAdd = ModConfig.iceCoolant;
+      coolantToAdd = ConfigDevice.BLOCK.FREEZE_DRYER.iceCoolant;
     } else if (block == Blocks.SNOW) {
-      coolantToAdd = ModConfig.snowCoolant;
+      coolantToAdd = ConfigDevice.BLOCK.FREEZE_DRYER.snowCoolant;
     } else if (item == Items.SNOWBALL) {
-      coolantToAdd = ModConfig.snowBallCoolant;
+      coolantToAdd = ConfigDevice.BLOCK.FREEZE_DRYER.snowBallCoolant;
     }
 
-    if (coolantToAdd > 0 && coolant < ModConfig.coolantMax - coolantToAdd) {
+    if (coolantToAdd > 0 && coolant < ConfigDevice.BLOCK.FREEZE_DRYER.coolantMax - coolantToAdd) {
       coolant += coolantToAdd;
       inventory.extractItem(9, 1, false);
     }
@@ -234,7 +237,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
   }
 
   private void updateTraits() {
-    if (ticksSealed >= ModConfig.sealedDuration) {
+    if (ticksSealed >= ConfigDevice.BLOCK.FREEZE_DRYER.sealedDuration) {
       for (int x = 0; x < inventory.getSlots() - 1; x++) {
         ItemStack stack = inventory.getStackInSlot(x);
 
@@ -258,28 +261,8 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
     CapabilityFood.applyTrait(stack, trait);
   }
 
-  public double getTemperature() {
-    return temperature;
-  }
-
-  public double getCoolant() {
-    return coolant;
-  }
-
-  public double getLocalTemperature() {
-    return localTemperature;
-  }
-
-  public boolean getSeal() {
-    return sealed;
-  }
-
   public int getPower() {
     return getPowerLevel();
-  }
-
-  public Boolean getPump() {
-    return pump;
   }
 
   public void seal() {
@@ -410,12 +393,10 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
 
   @Override
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-    for (int i = 0; i < 10; ++i) {
-      ItemStack stack = inventory.getStackInSlot(i);
+    for (int slot = 0; slot < 10; ++slot) {
 
       removeTraits();
-
-      StackUtils.spawnItemStack(world, pos, stack);
+      StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(slot));
     }
   }
 

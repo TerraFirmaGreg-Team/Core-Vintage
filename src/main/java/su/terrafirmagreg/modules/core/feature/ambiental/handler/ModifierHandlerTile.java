@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProvi
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
-import su.terrafirmagreg.modules.device.object.tile.TileIceBunker;
 import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,50 +30,13 @@ public final class ModifierHandlerTile {
     TILE.register(ModifierHandlerTile::handleInductionCrucible); // Кузня
     TILE.register(ModifierHandlerTile::handleFridge); // Холодос
 
-    // Cellar
-    TILE.register(ModifierHandlerTile::handleCellar); // Подвал
-
     // Firmalife
     TILE.register(ModifierHandlerTile::handleClayOven); // Oven
 
     // TFC
     TILE.register(ModifierHandlerTile::handleLamps); // Лампа
-    TILE.register(ModifierHandlerTile::handleCrucible); // Тигель
   }
 
-  public static Optional<ModifierTile> handleCellar(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TileIceBunker iceBunker) {
-
-      boolean isComplete = false;
-      float temperature = 0.0f;
-
-      try {
-        isComplete = (boolean) FieldUtils.readField(iceBunker, "isComplete", true);
-        temperature = (float) FieldUtils.readField(iceBunker, "temperature", true);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-
-      float change = 0.0f;
-      float potency = 0.0f;
-
-      if (isComplete) {
-
-        if (temperature < 10) {
-          change = -2f * (12 - temperature);
-          potency = -0.5f;
-        }
-
-        if (ModifierTile.hasProtection(player)) {
-          change = 1.0F;
-        }
-      }
-
-      return ModifierTile.defined("cellar", change, potency);
-    } else {
-      return ModifierTile.none();
-    }
-  }
 
   public static Optional<ModifierTile> handleClayOven(EntityPlayer player, TileEntity tile) {
     if (tile instanceof TEOven oven) {
@@ -100,20 +62,6 @@ public final class ModifierHandlerTile {
       }
 
       return ModifierTile.defined("firmalife_oven", change, potency);
-    } else {
-      return ModifierTile.none();
-    }
-  }
-
-  public static Optional<ModifierTile> handleCrucible(EntityPlayer player, TileEntity tile) {
-    if (tile instanceof TileCrucible crucible) {
-
-      float temp = crucible.getField(TileCrucible.FIELD_TEMPERATURE);
-      float change = temp / 100f;
-      if (ModifierTile.hasProtection(player)) {
-        change = 1.0F;
-      }
-      return ModifierTile.defined("crucible", change, 0);
     } else {
       return ModifierTile.none();
     }

@@ -110,7 +110,7 @@ public final class BlocksDevice {
     CELLAR_SHELF = registry.block(new BlockCellarShelf());
     CELLAR_DOOR = registry.block(new BlockCellarDoor());
     CELLAR_WALL = registry.block(new BlockCellarWall());
-//    ICE_BUNKER = registry.block(new BlockIceBunker());
+    ICE_BUNKER = registry.block(new BlockIceBunker());
     INFECTED_AIR = registry.block(new BlockInfectedAir());
     FREEZE_DRYER = registry.block(new BlockFreezeDryer());
 //    POWDERKEG = registry.block(new BlockPowderKeg());

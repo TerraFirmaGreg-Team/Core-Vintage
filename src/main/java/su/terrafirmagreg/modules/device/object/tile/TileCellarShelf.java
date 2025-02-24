@@ -12,6 +12,7 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiCellarShelf;
 import su.terrafirmagreg.modules.device.object.container.ContainerCellarShelf;
 import su.terrafirmagreg.modules.device.object.inventory.InventoryCellarShelf;
@@ -27,8 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
-
-import net.dries007.sharkbark.cellars.ModConfig;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -103,19 +102,18 @@ public class TileCellarShelf extends BaseTileTickableInventory
 
       String string = getTrait(stack, nbt);
 
-      if (temperature > ModConfig.coolMaxThreshold || temperature <= -1000) {
+      if (temperature > ConfigDevice.BLOCK.CELLAR_SHELF.coolMaxThreshold || temperature <= -1000) {
         removeTrait(stack, nbt);
-      } else if ((temperature <= ModConfig.frozenMaxThreshold && temperature > -1000)
-                 && string.compareTo("freezing") != 0) {
+      } else if ((temperature <= ConfigDevice.BLOCK.CELLAR_SHELF.frozenMaxThreshold && temperature > -1000) && string.compareTo("freezing") != 0) {
         removeTrait(stack, nbt);
         applyTrait(stack, nbt, "freezing", FoodTrait.FREEZING);
       } else if (
-        (temperature <= ModConfig.icyMaxThreshold && temperature > ModConfig.frozenMaxThreshold)
+        (temperature <= ConfigDevice.BLOCK.CELLAR_SHELF.icyMaxThreshold && temperature > ConfigDevice.BLOCK.CELLAR_SHELF.frozenMaxThreshold)
         && string.compareTo("icy") != 0) {
         removeTrait(stack, nbt);
         applyTrait(stack, nbt, "icy", FoodTrait.ICY);
       } else if (
-        (temperature <= ModConfig.coolMaxThreshold && temperature > ModConfig.icyMaxThreshold)
+        (temperature <= ConfigDevice.BLOCK.CELLAR_SHELF.coolMaxThreshold && temperature > ConfigDevice.BLOCK.CELLAR_SHELF.icyMaxThreshold)
         && string.compareTo("cool") != 0) {
         removeTrait(stack, nbt);
         applyTrait(stack, nbt, "cool", FoodTrait.COOL);
@@ -249,7 +247,7 @@ public class TileCellarShelf extends BaseTileTickableInventory
 
   @Override
   public GuiCellarShelf getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new GuiCellarShelf(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state);
+    return new GuiCellarShelf(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
   }
 
 

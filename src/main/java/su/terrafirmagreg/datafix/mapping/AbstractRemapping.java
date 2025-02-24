@@ -63,6 +63,7 @@ public abstract class AbstractRemapping {
     put("latex_extractor", BlocksDevice.LATEX_EXTRACTOR);
     put("infected_air", BlocksDevice.INFECTED_AIR);
     put("freeze_dryer", BlocksDevice.FREEZE_DRYER);
+    put("ice_bunker", BlocksDevice.ICE_BUNKER);
 
     put("nest_box", BlocksAnimal.NEST_BOX);
 
@@ -290,6 +291,7 @@ public abstract class AbstractRemapping {
   protected static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{
     add(ModIDs.TFCF);
     add(ModIDs.CAFFEINEADDON);
+    add(ModIDs.CELLARS);
   }};
 
 

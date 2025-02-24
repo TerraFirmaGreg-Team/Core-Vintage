@@ -1,45 +1,38 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
+import su.terrafirmagreg.api.data.Unicode;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.object.tile.TileIceBunker;
 
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-import net.dries007.sharkbark.cellars.util.Reference;
-import net.dries007.tfc.client.gui.GuiContainerTE;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiIceBunker extends GuiContainerTE<TileIceBunker> {
+public class GuiIceBunker extends BaseGuiContainerTile<TileIceBunker> {
 
-  private static final ResourceLocation GUI_BUNKER = new ResourceLocation(Reference.MOD_ID + ":textures/gui/ice_bunker.png");
-  private final InventoryPlayer playerInventory;
-  private final TileIceBunker te;
+  private static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/ice_bunker.png");
 
-  public GuiIceBunker(Container container, InventoryPlayer playerInv, TileIceBunker tile, String translationKey) {
-    super(container, playerInv, tile, GUI_BUNKER);
-    this.playerInventory = playerInv;
-    this.te = tile;
+  public GuiIceBunker(Container container, InventoryPlayer playerInv, TileIceBunker tile) {
+    super(container, playerInv, tile, BACKGROUND);
     this.xSize = 176;
     this.ySize = 166;
   }
 
   @Override
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-    String name = I18n.format(this.playerInventory.getDisplayName().getUnformattedText());
-    fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 00000000);
-    this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 92, 00000000);
+    super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
     if (mouseX >= guiLeft + 5 && mouseX <= guiLeft + 15 && mouseY >= guiTop + 5 && mouseY <= guiTop + 15) {
       List<String> infoText = new ArrayList<String>();
-      float temperature = te.getTemperature();
-      int coolant = te.getCoolant();
+      float temperature = tile.getTemperature();
+      int coolant = tile.getCoolant();
 
-      if (temperature <= -1000) {
+      if (temperature <= -1000) { //TODO сделать перевод
         switch ((int) (temperature * 0.001f)) {
           case -1:
             infoText.add("[!] The cellar has a problem with walls or has no doors");
@@ -58,7 +51,7 @@ public class GuiIceBunker extends GuiContainerTE<TileIceBunker> {
         if (temperature < 0) {
           infoText.add("Temperature: below zero");
         } else {
-          infoText.add("Temperature: " + String.format("%.2f", temperature) + "\u2103");
+          infoText.add("Temperature: " + String.format("%.2f", temperature) + Unicode.CELSIUS);
         }
         infoText.add("Coolant: " + coolant + " units");
       }
@@ -70,7 +63,7 @@ public class GuiIceBunker extends GuiContainerTE<TileIceBunker> {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-    this.mc.getTextureManager().bindTexture(GUI_BUNKER);
+    this.mc.getTextureManager().bindTexture(BACKGROUND);
     this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
   }
 }

@@ -37,10 +37,6 @@ public class BlockFreezeDryer extends BaseBlockContainer {
       .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
-  public EnumFacing getFacing(IBlockState state) {
-    return state.getValue(HORIZONTAL);
-  }
-
   @Override
   public IBlockState getStateFromMeta(int meta) {
     EnumFacing enumfacing = EnumFacing.byHorizontalIndex(meta);
@@ -77,14 +73,11 @@ public class BlockFreezeDryer extends BaseBlockContainer {
       if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock()
           && !iblockstate1.isFullBlock()) {
         enumfacing = EnumFacing.SOUTH;
-      } else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock()
-                 && !iblockstate.isFullBlock()) {
+      } else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock()) {
         enumfacing = EnumFacing.NORTH;
-      } else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock()
-                 && !iblockstate3.isFullBlock()) {
+      } else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock()) {
         enumfacing = EnumFacing.EAST;
-      } else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock()
-                 && !iblockstate2.isFullBlock()) {
+      } else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock()) {
         enumfacing = EnumFacing.WEST;
       }
 
@@ -93,17 +86,14 @@ public class BlockFreezeDryer extends BaseBlockContainer {
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,
-                                  EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY,
-                                  float hitZ) {
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing playerFacing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       GuiHandler.openGui(worldIn, pos, player);
     }
     return true;
   }
 
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
-                                          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     return this.getDefaultState()
       .withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
   }

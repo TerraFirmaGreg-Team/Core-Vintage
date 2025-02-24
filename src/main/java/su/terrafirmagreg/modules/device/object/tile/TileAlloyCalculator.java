@@ -14,12 +14,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.util.Alloy;
 
+import org.jetbrains.annotations.Nullable;
+
 import lombok.Getter;
 
 @Getter
 public class TileAlloyCalculator extends BaseTileInventory implements IProviderContainer<ContainerAlloyCalculator, GuiAlloyCalculator> {
 
 
+  @Nullable
   private Alloy alloy;
 
   public TileAlloyCalculator() {

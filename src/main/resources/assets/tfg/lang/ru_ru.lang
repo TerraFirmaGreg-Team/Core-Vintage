@@ -109,6 +109,7 @@ block.tfg.device.smeltery.cauldron.name=Плавильный котёл
 block.tfg.device.smeltery.firebox.name=Плавильная печь
 block.tfg.device.latex_extractor.name=Латексный экстрактор
 block.tfg.device.freeze_dryer.name=Сублимационная камера
+block.tfg.device.ice_bunker.name=Морозильная камера
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

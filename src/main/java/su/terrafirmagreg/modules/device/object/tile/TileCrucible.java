@@ -11,6 +11,8 @@ import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
@@ -18,9 +20,11 @@ import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -43,10 +47,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @SuppressWarnings("WeakerAccess")
 public class TileCrucible extends BaseTileTickableInventory
-  implements ITileFields, IItemHandlerSidedCallback,
+  implements ITileFields, IItemHandlerSidedCallback, IAmbientalProviderTile,
              IProviderContainer<ContainerCrucible, GuiCrucible> {
 
   public static final int SLOT_INPUT_START = 0;
@@ -382,5 +387,14 @@ public class TileCrucible extends BaseTileTickableInventory
   @Override
   public GuiCrucible getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
     return new GuiCrucible(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
+  }
+
+  @Override
+  public Optional<ModifierTile> getModifier(EntityPlayer player, TileEntity tile) {
+    float change = temperature / 100f;
+    if (ModifierTile.hasProtection(player)) {
+      change = change * 0.3F;
+    }
+    return ModifierTile.defined("crucible", change, 0);
   }
 }

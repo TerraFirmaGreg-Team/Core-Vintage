@@ -16,16 +16,16 @@ public class ItemStackHandlerCallback extends ItemStackHandler {
 
   @Override
   public int getSlotLimit(int slot) {
-    return callback.getSlotLimit(slot);
+    return this.callback.getSlotLimit(slot);
   }
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    return callback.isItemValid(slot, stack);
+    return this.callback.isItemValid(slot, stack);
   }
 
   @Override
   protected void onContentsChanged(int slot) {
-    callback.setAndUpdateSlots(slot);
+    this.callback.setAndUpdateSlots(slot);
   }
 }

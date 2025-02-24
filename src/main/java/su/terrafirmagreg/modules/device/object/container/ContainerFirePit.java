@@ -34,8 +34,7 @@ public class ContainerFirePit extends BaseContainerTile<TileFirePit> {
     EnumFirePitAttachment attachment = tile.getWorld()
       .getBlockState(tile.getPos())
       .getValue(FIRE_PIT_ATTACHMENT);
-    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
-      null);
+    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
     if (inventory != null) {
       // fuel slots
       for (int i = 0; i < 4; i++) {

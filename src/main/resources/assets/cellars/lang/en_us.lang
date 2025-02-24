@@ -1,15 +1,8 @@
 
-tile.ice_bunker.name=Ice Bunker
-
-container.ice_bunker=Ice Bunker
 
 itemGroup.cellars=TFC Cellars
 
-tfc.food_traits.sharkCool=Cooled
-tfc.food_traits.sharkIcy=Icy
-tfc.food_traits.sharkIcle=Frozen
-tfc.food_traits.sharkPreserving=Preserving
-tfc.food_traits.sharkDry=Freeze Dryed
+
 
 cellars.main.root.title=Cellars 101
 cellars.patchouli.landing_text=A guide for TFC-TNG: Cellars Addon $(br2) $(l)$(4)******Warning****** $(br) Many TFC-TNG: Cellars values are change-able in the config.

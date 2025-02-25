@@ -73,8 +73,8 @@ public class TEGemDisplay extends BaseTile {
     return nbt;
   }
 
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-    super.onDataPacket(net, pkt);
+  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+    super.onDataPacket(net, packet);
     this.markForBlockUpdate();
   }
 

@@ -7,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;
 
+import org.jetbrains.annotations.NotNull;
+
 public class InventoryFreezeDryer extends ItemStackHandler {
 
   public InventoryFreezeDryer(int size) {
@@ -14,6 +16,12 @@ public class InventoryFreezeDryer extends ItemStackHandler {
     this.deserializeNBT(new NBTTagCompound());
   }
 
+  @Override
+  public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+    return super.insertItem(slot, stack, simulate);
+  }
+
+  @Override
   public ItemStack extractItem(int slot, int amount, boolean simulate) {
     ItemStack stack = super.extractItem(slot, amount, simulate);
     CapabilityFood.removeTrait(stack, FoodTrait.PRESERVING);

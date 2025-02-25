@@ -21,8 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class BaseTile extends TileEntity {
 
   /**
-   * Syncs the TE data to client via means of a block update Use for stuff that is updated infrequently, for data that is analogous to changing the state. DO
-   * NOT call every tick
+   * Syncs the TE data to client via means of a block update Use for stuff that is updated infrequently, for data that is analogous to changing the state. DO NOT call every tick
    */
   public void markForBlockUpdate() {
     BlockUtils.notifyBlockUpdate(world, pos);
@@ -39,8 +38,8 @@ public abstract class BaseTile extends TileEntity {
   }
 
   /**
-   * Marks a tile entity for syncing without sending a block update. Use preferentially over {@link BaseTile#markForBlockUpdate()} if there's no reason to have
-   * a block update. For container based integer synchronization, see ITileFields DO NOT call every tick
+   * Marks a tile entity for syncing without sending a block update. Use preferentially over {@link BaseTile#markForBlockUpdate()} if there's no reason to have a block update. For container based integer synchronization, see ITileFields DO
+   * NOT call every tick
    */
   public void markForSync() {
     sendVanillaUpdatePacket();
@@ -77,8 +76,8 @@ public abstract class BaseTile extends TileEntity {
    * Handles updating on client side when a block update is received
    */
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-    readFromNBT(pkt.getNbtCompound());
+  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+    readFromNBT(packet.getNbtCompound());
   }
 
   /**

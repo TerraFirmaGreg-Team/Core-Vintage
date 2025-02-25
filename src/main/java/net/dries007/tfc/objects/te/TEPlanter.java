@@ -186,8 +186,8 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-    super.onDataPacket(net, pkt);
+  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+    super.onDataPacket(net, packet);
     markForBlockUpdate();
   }
 }

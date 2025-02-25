@@ -69,8 +69,8 @@ public class TEToolRack extends BaseTile {
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-    super.onDataPacket(net, pkt);
+  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+    super.onDataPacket(net, packet);
     markForBlockUpdate();
   }
 

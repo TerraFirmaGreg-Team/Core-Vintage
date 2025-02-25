@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.CSPacketFreezeDryer;
 import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -27,7 +26,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
 
   public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/freeze_dryer.png");
 
-  public GuiFreezeDryer(Container container, InventoryPlayer playerInv, TileFreezeDryer tile, IBlockState state) {
+  public GuiFreezeDryer(Container container, InventoryPlayer playerInv, TileFreezeDryer tile) {
     super(container, playerInv, tile, BACKGROUND);
 
   }
@@ -37,20 +36,19 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
     if (tile.isSealed()) {
-      IItemHandler handler = (this.tile).getCapability(
-        CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       if (handler != null) {
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(2929);
 
         for (int slotId = 0; slotId < handler.getSlots() - 1; ++slotId) {
           this.drawSlotOverlay(this.inventorySlots.getSlot(slotId));
         }
 
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(2929);
       }
     }
 
-    List<String> infoText = new ArrayList<String>();
+    List<String> infoText = new ArrayList<>();
     if (mouseX >= guiLeft + 5 && mouseX <= guiLeft + 15 && mouseY >= guiTop + 5 && mouseY <= guiTop + 15) {
 
       infoText.add("---Info---");
@@ -68,8 +66,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     }
 
     // Freeze Drier Seal
-    if (mouseX >= guiLeft + 62 && mouseX <= guiLeft + 78 && mouseY >= guiTop + 17
-        && mouseY <= guiTop + 33) {
+    if (mouseX >= guiLeft + 62 && mouseX <= guiLeft + 78 && mouseY >= guiTop + 17 && mouseY <= guiTop + 33) {
 
       if (tile.isSealed()) {
         infoText.add("Unseal Chamber");
@@ -92,8 +89,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     }
 
     // Seal
-    if (mouseX >= guiLeft + 125 && mouseX <= guiLeft + 129 && mouseY >= guiTop + 18
-        && mouseY <= guiTop + 69) {
+    if (mouseX >= guiLeft + 125 && mouseX <= guiLeft + 129 && mouseY >= guiTop + 18 && mouseY <= guiTop + 69) {
 
       infoText.add("Vacuum: " + String.format("%.2f", tile.getPressure()));
       infoText.add("External Pressure: " + String.format("%.2f", tile.getLocalPressure()));
@@ -103,8 +99,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     }
 
     // Heat
-    if (mouseX >= guiLeft + 133 && mouseX <= guiLeft + 137 && mouseY >= guiTop + 18
-        && mouseY <= guiTop + 69) {
+    if (mouseX >= guiLeft + 133 && mouseX <= guiLeft + 137 && mouseY >= guiTop + 18 && mouseY <= guiTop + 69) {
 
       infoText.add("Heat: " + String.format("%.2f", tile.getTemperature()) + Unicode.CELSIUS);
       infoText.add("External Temperature: " + String.format("%.2f", tile.getLocalTemperature()) + Unicode.CELSIUS);
@@ -114,8 +109,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     }
 
     // Pump Power
-    if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 158 && mouseY >= guiTop + 53
-        && mouseY <= guiTop + 70) {
+    if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 158 && mouseY >= guiTop + 53 && mouseY <= guiTop + 70) {
 
       if (tile.isPump()) {
         infoText.add("Stop Pump");
@@ -128,8 +122,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
     }
 
     // Coolant
-    if (mouseX >= guiLeft + 163 && mouseX <= guiLeft + 167 && mouseY >= guiTop + 18
-        && mouseY <= guiTop + 69) {
+    if (mouseX >= guiLeft + 163 && mouseX <= guiLeft + 167 && mouseY >= guiTop + 18 && mouseY <= guiTop + 69) {
 
       infoText.add("Coolant: " + String.format("%.1f", (tile.getCoolant() / ConfigDevice.BLOCK.FREEZE_DRYER.coolantMax)) + "%");
 
@@ -142,22 +135,21 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
   protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
     super.mouseClicked(mouseX, mouseY, mouseButton);
 
-    if (mouseX >= guiLeft + 61 && mouseX <= guiLeft + 79 && mouseY >= guiTop + 16
-        && mouseY <= guiTop + 34) {
+    if (mouseX >= guiLeft + 61 && mouseX <= guiLeft + 79 && mouseY >= guiTop + 16 && mouseY <= guiTop + 34) {
       if (!tile.isSealed()) {
-        ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 0, true));
-        //tile.seal();
+        ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos(), 0, true));
+        // tile.seal();
       } else {
-        ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 0, false));
+        ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos(), 0, false));
         //tile.unseal();
       }
     } else if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 159 && mouseY >= guiTop + 52 && mouseY <= guiTop + 70) {
       if ((tile.isSealed() && tile.getPower() > 0) || tile.isPump()) {
         if (!tile.isPump()) {
-          ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 1, true));
+          ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos(), 1, true));
           //tile.startPump();
         } else {
-          ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 1, false));
+          ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos(), 1, false));
           //tile.stopPump();
         }
       }
@@ -172,38 +164,32 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
 
     {
       int k = (int) this.getPressureLeftScaled(51);
-      this.drawTexturedModalRect(this.guiLeft + 125, this.guiTop + 17 + 52 - k, 180, 52 - k - 1, 5,
-        k + 1);
+      this.drawTexturedModalRect(this.guiLeft + 125, this.guiTop + 17 + 52 - k, 180, 52 - k - 1, 5, k + 1);
     }
 
     {
       int k = (int) this.getHeatLeftScaled(51);
-      this.drawTexturedModalRect(this.guiLeft + 133, this.guiTop + 17 + 52 - k, 188, 52 - k - 1, 5,
-        k + 1);
+      this.drawTexturedModalRect(this.guiLeft + 133, this.guiTop + 17 + 52 - k, 188, 52 - k - 1, 5, k + 1);
     }
 
     {
       int k = (int) this.getCoolentLeftScaled(51);
-      this.drawTexturedModalRect(this.guiLeft + 163, this.guiTop + 17 + 52 - k, 196, 52 - k - 1, 5,
-        k + 1);
+      this.drawTexturedModalRect(this.guiLeft + 163, this.guiTop + 17 + 52 - k, 196, 52 - k - 1, 5, k + 1);
     }
 
     {
       int k = (int) this.getLocalPressureScaled(51);
-      this.drawTexturedModalRect(this.guiLeft + 126, this.guiTop + 17 + 52 - k, 204, 52 - k - 1, 3,
-        1);
+      this.drawTexturedModalRect(this.guiLeft + 126, this.guiTop + 17 + 52 - k, 204, 52 - k - 1, 3, 1);
     }
 
     {
       int k = (int) this.getLocalTempatureScaled(51);
-      this.drawTexturedModalRect(this.guiLeft + 134, this.guiTop + 17 + 52 - k, 204, 52 - k - 1, 3,
-        1);
+      this.drawTexturedModalRect(this.guiLeft + 134, this.guiTop + 17 + 52 - k, 204, 52 - k - 1, 3, 1);
     }
 
     {
       int k = (int) this.getProgressScaled(27);
-      this.drawTexturedModalRect(this.guiLeft + 74, this.guiTop + 28 + 28 - k, 180, 84 - k - 1, 28,
-        k + 1);
+      this.drawTexturedModalRect(this.guiLeft + 74, this.guiTop + 28 + 28 - k, 180, 84 - k - 1, 28, k + 1);
     }
 
     if (tile.isSealed()) {
@@ -229,7 +215,7 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
   }
 
   private float getCoolentLeftScaled(int pixels) {
-    return (float) tile.getCoolant() * pixels / ConfigDevice.BLOCK.FREEZE_DRYER.coolantMax;
+    return tile.getCoolant() * pixels / ConfigDevice.BLOCK.FREEZE_DRYER.coolantMax;
   }
 
   private float getLocalPressureScaled(int pixels) {

@@ -27,8 +27,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -45,7 +43,8 @@ import lombok.Getter;
 
 import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
-public class TileFreezeDryer extends BaseTileTickableInventory implements IItemHandlerSidedCallback, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
+public class TileFreezeDryer extends BaseTileTickableInventory
+  implements IItemHandlerSidedCallback, IProviderContainer<ContainerFreezeDryer, GuiFreezeDryer> {
 
   public boolean overheating = false;
   public int overheatTick;
@@ -109,8 +108,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
         temperature = temperature - (ConfigDevice.BLOCK.FREEZE_DRYER.temperatureDissipation * temperature);
       }
     } else {
-      temperature =
-        temperature + ConfigDevice.BLOCK.FREEZE_DRYER.temperatureDissipation * (localTemperature - temperature);
+      temperature = temperature + ConfigDevice.BLOCK.FREEZE_DRYER.temperatureDissipation * (localTemperature - temperature);
     }
 
     //Disabled till it cools back down
@@ -252,7 +250,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
   }
 
   private void applyTrait(ItemStack stack, FoodTrait trait) {
-    ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood food = CapabilityFood.get(stack);
     if (!stack.isEmpty() && food != null) {
       if (trait == FoodTrait.PRESERVING && (food.getTraits().contains(FoodTrait.DRY))) {
         return;
@@ -304,34 +302,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
     this.markForSync();
   }
 
-  @Nullable
   @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    NBTTagCompound nbt = new NBTTagCompound();
-    writeToNBT(nbt);
-    writeSyncData(nbt);
-    return new SPacketUpdateTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), 1, nbt);
-  }
-
-  private void writeSyncData(NBTTagCompound nbt) {
-    NBTUtils.setGenericNBTValue(nbt, "Temperature", temperature);
-    NBTUtils.setGenericNBTValue(nbt, "Pressure", pressure);
-    NBTUtils.setGenericNBTValue(nbt, "LocalPressure", localPressure);
-    NBTUtils.setGenericNBTValue(nbt, "Coolant", coolant);
-    NBTUtils.setGenericNBTValue(nbt, "Seal", sealed);
-    NBTUtils.setGenericNBTValue(nbt, "Pump", pump);
-    NBTUtils.setGenericNBTValue(nbt, "TicksSealed", ticksSealed);
-    NBTUtils.setGenericNBTValue(nbt, "OverheatTicks", overheatTick);
-    NBTUtils.setGenericNBTValue(nbt, "Overheating", overheating);
-    NBTUtils.setGenericNBTValue(nbt, "Initialized", initialized);
-  }
-
-  @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-    readFromNBT(packet.getNbtCompound());
-    readSyncData(packet.getNbtCompound());
-  }
-
   public void readFromNBT(NBTTagCompound nbt) {
     super.readFromNBT(nbt);
 
@@ -347,19 +318,8 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
     initialized = nbt.getBoolean("Initialized");
   }
 
-  private void readSyncData(NBTTagCompound nbt) {
-    temperature = nbt.getFloat("Temperature");
-    pressure = nbt.getDouble("Pressure");
-    localPressure = nbt.getDouble("LocalPressure");
-    coolant = nbt.getFloat("Coolant");
-    sealed = nbt.getBoolean("Seal");
-    pump = nbt.getBoolean("Pump");
-    ticksSealed = nbt.getInteger("TicksSealed");
-    overheatTick = nbt.getInteger("OverheatTicks");
-    overheating = nbt.getBoolean("Overheating");
-    initialized = nbt.getBoolean("Initialized");
-  }
 
+  @Override
   public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
     super.writeToNBT(nbt);
 
@@ -401,20 +361,20 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
   }
 
   @Override
-  public boolean canInsert(int i, ItemStack itemStack, EnumFacing enumFacing) {
+  public boolean canInsert(int slot, ItemStack itemStack, EnumFacing enumFacing) {
 
-    if (sealed && i < 9) {
+    if (sealed && slot < 9) {
       return false;
     }
     var item = itemStack.getItem();
-    return (item == ItemsCore.ICE_SHARD.get() || item == Items.SNOWBALL || item == Item.getItemFromBlock(Blocks.ICE) ||
-            item == Item.getItemFromBlock(Blocks.PACKED_ICE) || item == Item.getItemFromBlock(BlocksTFC.SEA_ICE) ||
-            item == Item.getItemFromBlock(Blocks.SNOW)) || i == 9;
+    return ((item == ItemsCore.ICE_SHARD.get() || item == Items.SNOWBALL || item == Item.getItemFromBlock(Blocks.ICE) ||
+             item == Item.getItemFromBlock(Blocks.PACKED_ICE) || item == Item.getItemFromBlock(BlocksTFC.SEA_ICE) ||
+             item == Item.getItemFromBlock(Blocks.SNOW)) || slot != 9);
   }
 
   @Override
-  public boolean canExtract(int i, EnumFacing enumFacing) {
-    return !sealed || i >= 9;
+  public boolean canExtract(int slot, EnumFacing enumFacing) {
+    return !sealed || slot >= 9;
   }
 
   @Override
@@ -441,7 +401,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory implements IItemH
 
   @Override
   public GuiFreezeDryer getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new GuiFreezeDryer(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this, state);
+    return new GuiFreezeDryer(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
   }
 
 

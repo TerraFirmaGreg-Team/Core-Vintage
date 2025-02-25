@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.network.spi.packet;
 
+import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.tileentity.TileEntity;
@@ -9,8 +10,9 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class PacketBaseTile<T extends TileEntity> extends PacketBaseBlockPos<PacketBaseTile<T>> {
+public abstract class PacketBaseTile<T extends TileEntity, P extends PacketBase<P>> extends PacketBase<P> {
 
+  public BlockPos blockPos;
   /**
    * The TileEntity.
    */
@@ -32,19 +34,29 @@ public abstract class PacketBaseTile<T extends TileEntity> extends PacketBaseBlo
    * @param blockPos The position of the tile entity.
    */
   public PacketBaseTile(BlockPos blockPos) {
-    super(blockPos);
+    this.blockPos = blockPos;
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public IMessage handleMessage(MessageContext context) {
-
     this.context = context;
-    final World world = context.getServerHandler().player.getEntityWorld();
-    TileUtils.getTile(world, blockPos, this.tile.getClass()).ifPresent(tile -> {
-      if (world.isBlockLoaded(this.blockPos)) {
-        ((WorldServer) world).addScheduledTask(this::getAction);
-      }
-    });
+
+    var player = TerraFirmaGreg.getProxy().getPlayer(context);
+    if (player == null) {
+      return null;
+    }
+
+    final World world = player.getEntityWorld();
+
+    if (world instanceof WorldServer worldServer) {
+      TileUtils.getTile(world, this.blockPos).ifPresent(tile -> {
+        this.tile = (T) tile;
+        if (world.isBlockLoaded(blockPos)) {
+          worldServer.addScheduledTask(getAction());
+        }
+      });
+    }
 
     return null;
   }

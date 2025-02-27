@@ -37,7 +37,7 @@ public final class TechConfig {
 
     @Config.Comment({"Which blocks are considered valid for rubber tapping?"})
     @Config.LangKey("config." + TFCTECH + ".tweaks.validRubberTrees")
-    public String[] rubberTrees = new String[]{"tfc:wood/log/hevea{placed=false,axis=y}", "dynamictreestfc:branch/hevea{radius=8}"};
+    public String[] rubberTrees = new String[]{"tfc:wood/log/hevea{placed=false,axis=y}", "tfc:wood/log/maclura{placed=true,axis=y}", "dynamictreestfc:branch/hevea{radius=8}"};
   }
 
   public static class Devices {

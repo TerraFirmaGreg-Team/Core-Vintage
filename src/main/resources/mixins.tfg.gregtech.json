@@ -11,7 +11,6 @@
     "api.items.materialitem.MetaPrefixItemMixin",
     "api.recipes.ingredients.GTRecipeItemInputMixin",
     "common.blocks.BlockOreMixin",
-    "common.metatileentities.multi.IMetaTileEntityPrimitiveWaterPumpInvoker",
     "common.metatileentities.multi.MetaTileEntityPrimitiveWaterPumpMixin",
     "integration.jei.JustEnoughItemsModuleMixin",
     "loaders.recipe.handlers.IMaterialRecipeHandlerInvoker",

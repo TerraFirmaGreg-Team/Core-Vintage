@@ -62,20 +62,21 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   @SuppressWarnings("unused")
   public EntityAnimalSheep(World worldIn) {
     this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+
       getRandomGrowth(ConfigAnimal.ENTITY.SHEEP.adulthood, ConfigAnimal.ENTITY.SHEEP.elder),
       EntitySheep.getRandomSheepColor(RNG));
   }
 
   public EntityAnimalSheep(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
     super(worldIn, gender, birthDay);
+
     setSize(0.9F, 1.3F);
     setDyeColor(dye);
     setShearedTick(0);
   }
 
   @Override
-  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-                            float floraDiversity) {
+  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
     BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
     if (!BiomeHelper.isOceanic(biome) && !BiomeHelper.isBeach(biome) &&
         (biomeType == BiomeUtils.BiomeType.PLAINS)) {

@@ -11,6 +11,7 @@ public class ItemWoodAsh extends BaseItem {
 
     getSettings()
       .registryKey("wood_ash")
+      .oreDict("dustAsh")
       .capability(CapabilityProviderSize.of(Size.VERY_SMALL, Weight.VERY_LIGHT));
   }
 }

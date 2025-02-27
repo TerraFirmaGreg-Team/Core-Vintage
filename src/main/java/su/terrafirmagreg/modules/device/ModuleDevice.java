@@ -10,6 +10,9 @@ import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.init.PacketsDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
+import su.terrafirmagreg.modules.device.plugin.top.TheOneProbeDevice;
+
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -53,6 +56,12 @@ public final class ModuleDevice extends ModuleBase {
     BlocksDevice.onRegister(registry);
     ItemsDevice.onRegister(registry);
     SoundsDevice.onRegister(registry);
+  }
+
+  @Override
+  public void onInit(FMLInitializationEvent event) {
+
+    TheOneProbeDevice.init();
   }
 
   @Override

@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 import su.terrafirmagreg.api.library.model.CustomStateMap;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderBlockColor;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderBlockState;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderEntityRenderer;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderItemColor;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderItemMesh;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
@@ -28,6 +29,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -228,17 +230,15 @@ public final class ModelUtils {
 
   //region ===== TileEntitySpecialRenderer
 
-//  @SuppressWarnings({"unchecked"})
-//  public static <T extends EntityEntry> void entity(T entity) {
-//    var entityClass = entity.getEntityClass();
-//    var clazz = IProviderEntityRenderer.class.isAssignableFrom(entityClass);
-//    if (clazz) {
-//      var classSubclass = entityClass.asSubclass(IProviderEntityRenderer.class);
-//      var provider = ClassUtils.createObjectInstance(classSubclass);
-//
-//      ModelUtils.entity(entityClass, provider.getRenderFactory());
-//    }
-//  }
+  @SuppressWarnings({"unchecked"})
+  public static <T extends EntityEntry> void entity(T entity) {
+    if (entity instanceof IProviderEntityRenderer provider) {
+      if (provider.renderClass() != null) {
+        ModelUtils.entity(entity.getEntityClass(), provider.getRenderFactory());
+        return;
+      }
+    }
+  }
 
   public static <T extends Entity> void entity(Class<T> entityClass, IRenderFactory<? super T> renderFactory) {
     if (renderFactory != null) {

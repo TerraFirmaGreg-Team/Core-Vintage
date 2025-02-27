@@ -10,7 +10,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-
 public class RenderAnimalSheep extends RenderAnimal<EntityAnimalSheep> {
 
   private static final ResourceLocation SHEEP_YOUNG = ModUtils.resource(

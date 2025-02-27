@@ -12,7 +12,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -92,7 +91,7 @@ public class BlockBellows extends BaseBlockContainer {
   }
 
   @Override
-  public TileEntitySpecialRenderer<?> getTileRenderer() {
+  public TESRBellows getTileRenderer() {
     return new TESRBellows();
   }
 

@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.CSPacketFreezeDryer;
 import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -158,37 +157,35 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
 
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-    this.mc.getTextureManager().bindTexture(BACKGROUND);
-    this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
     {
-      int k = (int) this.getPressureLeftScaled(51);
+      int k = (int) (tile.getPressure() * 51 / (ConfigDevice.BLOCK.FREEZE_DRYER.seaLevelPressure + ConfigDevice.BLOCK.FREEZE_DRYER.pressureChange * (256 - WorldTypeTFC.SEALEVEL)));
       this.drawTexturedModalRect(this.guiLeft + 125, this.guiTop + 17 + 52 - k, 180, 52 - k - 1, 5, k + 1);
     }
 
     {
-      int k = (int) this.getHeatLeftScaled(51);
+      int k = Math.round(tile.getTemperature()) * 51 / ConfigDevice.BLOCK.FREEZE_DRYER.maxTemp;
       this.drawTexturedModalRect(this.guiLeft + 133, this.guiTop + 17 + 52 - k, 188, 52 - k - 1, 5, k + 1);
     }
 
     {
-      int k = (int) this.getCoolentLeftScaled(51);
+      int k = (int) (tile.getCoolant() * 51 / ConfigDevice.BLOCK.FREEZE_DRYER.coolantMax);
       this.drawTexturedModalRect(this.guiLeft + 163, this.guiTop + 17 + 52 - k, 196, 52 - k - 1, 5, k + 1);
     }
 
     {
-      int k = (int) this.getLocalPressureScaled(51);
+      int k = (int) (tile.getLocalPressure() * 51 / (ConfigDevice.BLOCK.FREEZE_DRYER.seaLevelPressure + ConfigDevice.BLOCK.FREEZE_DRYER.pressureChange * (256 - WorldTypeTFC.SEALEVEL)));
       this.drawTexturedModalRect(this.guiLeft + 126, this.guiTop + 17 + 52 - k, 204, 52 - k - 1, 3, 1);
     }
 
     {
-      int k = (int) this.getLocalTempatureScaled(51);
+      int k = Math.round(tile.getLocalTemperature()) * 51 / ConfigDevice.BLOCK.FREEZE_DRYER.maxTemp;
       this.drawTexturedModalRect(this.guiLeft + 134, this.guiTop + 17 + 52 - k, 204, 52 - k - 1, 3, 1);
     }
 
     {
-      int k = (int) this.getProgressScaled(27);
+      int k = (int) (tile.getSealedTicks() * 27 / ConfigDevice.BLOCK.FREEZE_DRYER.sealedDuration);
       this.drawTexturedModalRect(this.guiLeft + 74, this.guiTop + 28 + 28 - k, 180, 84 - k - 1, 28, k + 1);
     }
 
@@ -206,28 +203,5 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
 
   }
 
-  private float getPressureLeftScaled(int pixels) {
-    return (float) tile.getPressure() * pixels / (ConfigDevice.BLOCK.FREEZE_DRYER.seaLevelPressure + ConfigDevice.BLOCK.FREEZE_DRYER.pressureChange * (256 - WorldTypeTFC.SEALEVEL));
-  }
-
-  private float getHeatLeftScaled(int pixels) {
-    return Math.round(tile.getTemperature()) * pixels / ConfigDevice.BLOCK.FREEZE_DRYER.maxTemp;
-  }
-
-  private float getCoolentLeftScaled(int pixels) {
-    return tile.getCoolant() * pixels / ConfigDevice.BLOCK.FREEZE_DRYER.coolantMax;
-  }
-
-  private float getLocalPressureScaled(int pixels) {
-    return (float) tile.getLocalPressure() * pixels / (ConfigDevice.BLOCK.FREEZE_DRYER.seaLevelPressure + ConfigDevice.BLOCK.FREEZE_DRYER.pressureChange * (256 - WorldTypeTFC.SEALEVEL));
-  }
-
-  private float getLocalTempatureScaled(int pixels) {
-    return Math.round(tile.getLocalTemperature()) * pixels / ConfigDevice.BLOCK.FREEZE_DRYER.maxTemp;
-  }
-
-  private float getProgressScaled(int pixels) {
-    return tile.getSealedTicks() * pixels / ConfigDevice.BLOCK.FREEZE_DRYER.sealedDuration;
-  }
 
 }

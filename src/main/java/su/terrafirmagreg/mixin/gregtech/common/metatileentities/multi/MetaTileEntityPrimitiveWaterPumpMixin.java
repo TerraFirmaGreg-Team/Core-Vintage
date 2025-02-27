@@ -32,12 +32,15 @@ public abstract class MetaTileEntityPrimitiveWaterPumpMixin extends MultiblockCo
   @Shadow
   public abstract int getFluidProduction();
 
+  @Shadow
+  protected abstract int getAmount();
+
   @Inject(method = "update", at = @At(value = "HEAD"), cancellable = true)
   public void onUpdate(CallbackInfo ci) {
     super.update();
     if (!getWorld().isRemote && getOffsetTimer() % 20 == 0 && isStructureFormed()) {
       if (biomeModifier == 0) {
-        biomeModifier = ((IMetaTileEntityPrimitiveWaterPumpInvoker) this).invokeGetAmount();
+        biomeModifier = getAmount();
       } else if (biomeModifier > 0) {
         FluidStack fluidStack = FluidRegistry.getFluidStack(TFGConfig.General.fluidForPrimitivePump, getFluidProduction());
         if (fluidStack != null) {

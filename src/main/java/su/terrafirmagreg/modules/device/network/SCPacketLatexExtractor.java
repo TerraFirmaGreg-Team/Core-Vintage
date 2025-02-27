@@ -1,35 +1,26 @@
 package su.terrafirmagreg.modules.device.network;
 
-import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.network.spi.packet.PacketBase;
+import su.terrafirmagreg.framework.network.spi.packet.PacketBaseTile;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Update latex status on client, for render purposes
  */
-public class SCPacketLatex extends PacketBase<SCPacketLatex> {
+public class SCPacketLatexExtractor extends PacketBaseTile<TileLatexExtractor, SCPacketLatexExtractor> {
 
-  private BlockPos pos;
   private int cutState = -1;
   private int fluid = 0;
   private boolean pot = false;
   private boolean base = false;
 
 
-  public SCPacketLatex() {
+  public SCPacketLatexExtractor() {
   }
 
-  public SCPacketLatex(@NotNull TileLatexExtractor tile) {
-    this.pos = tile.getPos();
+  public SCPacketLatexExtractor(@NotNull TileLatexExtractor tile) {
+    super(tile.getPos());
     this.cutState = tile.cutState();
     this.fluid = tile.getFluidAmount();
     this.pot = tile.hasPot();
@@ -55,12 +46,7 @@ public class SCPacketLatex extends PacketBase<SCPacketLatex> {
 //  }
 
   @Override
-  public IMessage handleMessage(MessageContext context) {
-    EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(context);
-    if (player != null) {
-      World world = player.getEntityWorld();
-      TileUtils.getTile(world, pos, TileLatexExtractor.class).ifPresent(tile -> tile.updateClient(cutState, fluid, pot, base));
-    }
-    return null;
+  public Runnable getAction() {
+    return () -> tile.updateClient(cutState, fluid, pot, base);
   }
 }

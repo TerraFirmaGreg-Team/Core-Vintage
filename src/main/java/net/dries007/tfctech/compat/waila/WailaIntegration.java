@@ -3,7 +3,6 @@ package net.dries007.tfctech.compat.waila;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.device.object.block.BlockFridge;
-import su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor;
 import su.terrafirmagreg.modules.device.object.block.BlockWireDrawBench;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
@@ -73,13 +72,6 @@ public final class WailaIntegration implements IWailaDataProvider, IWailaPlugin 
             }
           }
         }
-      }
-    }
-    if (b instanceof BlockLatexExtractor) {
-      BlockPos TEPos = accessor.getPosition();
-      TileLatexExtractor extractor = Helpers.getTE(accessor.getWorld(), TEPos, TileLatexExtractor.class);
-      if (extractor != null) {
-        currenttip.add((new TextComponentTranslation("waila.tfctech.latex.quantity", extractor.getFluidAmount())).getFormattedText());
       }
     }
     return currenttip;

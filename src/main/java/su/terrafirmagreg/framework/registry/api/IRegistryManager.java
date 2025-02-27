@@ -213,6 +213,12 @@ public interface IRegistryManager extends IRegistryEventHandler {
 
   // region EntityEntry
 
+//  default <T extends Entity & IEntitySettings> Supplier<EntityEntry> entity(T entity) {
+//    var settings = entity.getSettings();
+//    settings.entity(entity.getClass());
+//    return this.entity(settings.getRegistryKey(), settings.getBuilder());
+//  }
+
   default <T extends Entity> Supplier<EntityEntry> entity(String identifier, EntityEntryBuilder<T> builder) {
 
     builder.id(getIdentifier(identifier), this.getIdSupplier().getAndIncrement());

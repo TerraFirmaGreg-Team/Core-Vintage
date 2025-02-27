@@ -149,6 +149,13 @@ top.tfg.device.bloomery.output=Making: %d units of %s
 top.tfg.device.bloomery.ores=Ores: %d/%d
 top.tfg.device.bloomery.fuel=Fuel: %d/%d
 top.tfg.device.blast_furnace.not_formed=Not Formed
+top.tfg.device.latex_extractor.quantity=Latex: %dmB
+top.tfg.device.pit_kiln.unlit=Unlit
+top.tfg.device.pit_kiln.straw=Needs %d Straw
+top.tfg.device.pit_kiln.logs=Needs %d Logs
+top.tfg.device.pit_kiln.remaining.ticks=Remaining %d Ticks
+top.tfg.device.pit_kiln.remaining.hours=Remaining %d Hours
+top.tfg.device.pit_kiln.remaining.minutes=Remaining %d Minutes
 
 # Just Enough Items
 jei.tfg.category.blast_furnace=Blast Furnace recipes
@@ -187,11 +194,11 @@ block.tfg.device.ice_bunker.name=Ice Bunker
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask
-item.tfg.device.flask.leather.filled.name=%s Leather Flask
+item.tfg.device.flask.leather.filled.name=Leather Flask ( %s )
 item.tfg.device.flask.leather.broken.name=Broken Leather Flask
 item.tfg.device.flask.leather.unfinished.name=Unfinished Leather Flask
 item.tfg.device.flask.metal.name=Empty Metal Flask
-item.tfg.device.flask.metal.filled.name=%s Metal Flask
+item.tfg.device.flask.metal.filled.name=Metal Flask ( %s )
 item.tfg.device.flask.metal.broken.name=Broken Metal Flask
 item.tfg.device.flask.metal.unfinished.name=Unfinished Metal Flask
 item.tfg.device.firestarter.name=Firestarter

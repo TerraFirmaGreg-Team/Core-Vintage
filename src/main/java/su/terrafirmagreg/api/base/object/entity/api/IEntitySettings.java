@@ -34,7 +34,7 @@ public interface IEntitySettings extends IBaseSettings<Settings> {
       return this;
     }
 
-    public Settings entity(Class<Entity> entClass) {
+    public <E extends Entity> Settings entity(Class<E> entClass) {
       this.builder.entity(entClass);
       return this;
     }

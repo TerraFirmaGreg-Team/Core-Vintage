@@ -3,10 +3,8 @@ package net.dries007.tfctech.compat.waila;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.device.object.block.BlockFridge;
-import su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor;
 import su.terrafirmagreg.modules.device.object.block.BlockWireDrawBench;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
-import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
 
 import net.minecraft.block.Block;
@@ -84,15 +82,6 @@ public final class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfo
               }
             }
           }
-        }
-      }
-    }
-    if (b instanceof BlockLatexExtractor) {
-      TileLatexExtractor extractor = Helpers.getTE(world, pos, TileLatexExtractor.class);
-      if (extractor != null) {
-        if (extractor.getFluidAmount() > 0) {
-          IProbeInfo horizontalPane = iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
-          horizontalPane.text((new TextComponentTranslation("waila.tfctech.latex.quantity", extractor.getFluidAmount())).getFormattedText());
         }
       }
     }

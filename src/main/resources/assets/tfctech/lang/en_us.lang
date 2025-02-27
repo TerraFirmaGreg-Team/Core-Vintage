@@ -203,4 +203,3 @@ jei.information.tfctech.fill_mold=Right click an empty mold into any container h
 # Waila/Hwyla/TOP
 waila.tfctech.wiredraw.progress=Progress: %d%%
 waila.tfctech.fridge.efficiency=Efficiency: %d%%
-waila.tfctech.latex.quantity=Latex: %dmB

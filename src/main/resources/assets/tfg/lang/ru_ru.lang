@@ -75,6 +75,13 @@ top.tfg.device.bloomery.output=Изготовление: %d единицы %s
 top.tfg.device.bloomery.ores=Руды: %d/%d
 top.tfg.device.bloomery.fuel=Топливо: %d/%d
 top.tfg.device.blast_furnace.not_formed=Не сформирован
+top.tfg.device.latex_extractor.quantity=Латекс: %dmB
+top.tfg.device.pit_kiln.unlit=Не горит
+top.tfg.device.pit_kiln.straw=Нужно %d солома/ы
+top.tfg.device.pit_kiln.logs=Нужно %d бревна/ен
+top.tfg.device.pit_kiln.remaining.ticks=Осталось %d тик(ов)
+top.tfg.device.pit_kiln.remaining.hours=Осталось %d час(ов)
+top.tfg.device.pit_kiln.remaining.minutes=Осталось %d минут(ы)
 
 # Just Enough Items
 jei.tfg.category.blast_furnace=Рецепты доменной печи
@@ -113,11 +120,11 @@ block.tfg.device.ice_bunker.name=Морозильная камера
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга
-item.tfg.device.flask.leather.filled.name=Кожаная фляга с %s
+item.tfg.device.flask.leather.filled.name=Кожаная фляга ( %s )
 item.tfg.device.flask.leather.broken.name=Поврежденная кожаная фляга
 item.tfg.device.flask.leather.unfinished.name=Незавершенная кожаная фляга
 item.tfg.device.flask.metal.name=Пустая металлическая фляга
-item.tfg.device.flask.metal.filled.name=Металлическая фляга с %s
+item.tfg.device.flask.metal.filled.name=Металлическая фляга ( %s )
 item.tfg.device.flask.metal.broken.name=Поврежденная металлическая фляга
 item.tfg.device.flask.metal.unfinished.name=Незавершенная металлическая фляга
 item.tfg.device.firestarter.name=Поджигатель

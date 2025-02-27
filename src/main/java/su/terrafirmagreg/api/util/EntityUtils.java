@@ -2,7 +2,6 @@ package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.TerraFirmaGreg;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,21 +16,19 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.common.UsernameCache;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.Nullable;
 
 import lombok.experimental.UtilityClass;
 
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @UtilityClass
@@ -50,7 +47,6 @@ public final class EntityUtils {
 
   private static final ConcurrentHashMap<String, Class<? extends EntityCreature>> ENTITY_CLASSES_CACHE = new ConcurrentHashMap<>();
 
-  private static final Map<String, UUID> USERNAME = CollectionUtils.invertMap(UsernameCache.getMap());
 
   @SuppressWarnings("unchecked")
   public static @Nullable Class<? extends Entity> getEntityClass(String mobName) {
@@ -75,20 +71,6 @@ public final class EntityUtils {
     return null;
   }
 
-  @SideOnly(Side.CLIENT)
-  public static UUID getClientPlayerUUID() {
-    Minecraft minecraft = GameUtils.getMinecraft();
-
-    return minecraft.getSession().getProfile().getId();
-  }
-
-  public static UUID getUUID(String player) {
-    return USERNAME.get(player);
-  }
-
-  public static boolean hasUUID(String player) {
-    return USERNAME.containsKey(player);
-  }
 
   public static EnumHand getHandForItemAndMeta(EntityPlayer player, Item item, int meta) {
     for (EnumHand hand : EnumHand.values()) {
@@ -376,6 +358,31 @@ public final class EntityUtils {
   public static double getAttributeValue(EntityLivingBase entity, IAttribute attribute) {
 
     return entity.getEntityAttribute(attribute).getAttributeValue();
+  }
+
+  /**
+   * Changes the world that an entity is in. This allows for changing dimensions safer when working with other mods.
+   *
+   * @param entity   The entity to change the world of.
+   * @param worldOld The old entity world.
+   * @param worldNew The new entity world.
+   */
+  public static void changeWorld(Entity entity, WorldServer worldOld, WorldServer worldNew) {
+
+    final WorldProvider providerOld = worldOld.provider;
+    final WorldProvider providerNew = worldNew.provider;
+    final double moveFactor = providerOld.getMovementFactor() / providerNew.getMovementFactor();
+    final double x = MathHelper.clamp(entity.posX * moveFactor, -29999872, 29999872);
+    final double z = MathHelper.clamp(entity.posZ * moveFactor, -29999872, 29999872);
+
+    if (entity.isEntityAlive()) {
+
+      entity.setLocationAndAngles(x, entity.posY, z, entity.rotationYaw, entity.rotationPitch);
+      worldNew.spawnEntity(entity);
+      worldNew.updateEntityWithOptionalForce(entity, false);
+    }
+
+    entity.setWorld(worldNew);
   }
 
 

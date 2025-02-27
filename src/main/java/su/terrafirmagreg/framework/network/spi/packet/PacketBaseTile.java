@@ -43,21 +43,17 @@ public abstract class PacketBaseTile<T extends TileEntity, P extends PacketBase<
     this.context = context;
 
     var player = TerraFirmaGreg.getProxy().getPlayer(context);
-    if (player == null) {
-      return null;
-    }
-
-    final World world = player.getEntityWorld();
-
-    if (world instanceof WorldServer worldServer) {
+    if (player != null) {
+      final World world = player.getEntityWorld();
       TileUtils.getTile(world, this.blockPos).ifPresent(tile -> {
         this.tile = (T) tile;
         if (world.isBlockLoaded(blockPos)) {
-          worldServer.addScheduledTask(getAction());
+          if (world instanceof WorldServer worldServer) {
+            worldServer.addScheduledTask(getAction());
+          }
         }
       });
     }
-
     return null;
   }
 

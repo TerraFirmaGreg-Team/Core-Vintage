@@ -7,7 +7,7 @@
 - [TFC-TowerHeat](https://github.com/BananaFructa/TFC-TowerHeat) +
 - [TFCAlloyCalc](https://github.com/Quarris/TFCAlloyCalc) +
 - [Puddles](https://github.com/OrderedChaos-Dev/Puddles) +
-- [TFC-TNG-Cellars-Addon](https://github.com/russellShyvers/TFC-TNG-Cellars-Addon)
+- [TFC-TNG-Cellars-Addon](https://github.com/russellShyvers/TFC-TNG-Cellars-Addon) +
 - [TFC-Alcohols](https://github.com/Lumintorious/TFC-Alcohols) +
 - [TFCTech](https://github.com/TFC-Metallum/TFCTech)
 - [WaterFlasks](https://github.com/Gaelmare/WaterFlasks) +
@@ -16,3 +16,4 @@
 - [HorsePowerTFC](https://github.com/ACGaming/HorsePowerTFC)
 - [TFC-Farming](https://github.com/BananaFructa/TFC-Farming)
 - [EasyBreedingTFC](https://github.com/ACGaming/EasyBreedingTFC) +
+- [ActuallyAdvancedInfo](https://github.com/Rongmario/ActuallyAdvancedInfo) +

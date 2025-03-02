@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -21,12 +22,12 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-
 import lombok.Data;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
+
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 public class NetworkThreadedWrapper {
 
@@ -113,6 +114,10 @@ public class NetworkThreadedWrapper {
    */
   public void sendToAllTracking(IMessage message, Entity entity) {
     getParent(message, Side.CLIENT).sendToAllTracking(message, entity);
+  }
+
+  public void sendToAllTracking(IMessage message, TargetPoint point) {
+    getParent(message, Side.CLIENT).sendToAllTracking(message, point);
   }
 
   /**

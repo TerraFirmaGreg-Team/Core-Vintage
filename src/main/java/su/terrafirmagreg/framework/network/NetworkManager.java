@@ -18,11 +18,11 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-
 import lombok.Getter;
 
 import java.util.Map;
+
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 @Getter
 public class NetworkManager implements INetworkManager {
@@ -114,6 +114,17 @@ public class NetworkManager implements INetworkManager {
   @Override
   public void sendToDimension(IMessage message, int dimension) {
     this.getWrapper().sendToDimension(message, dimension);
+  }
+
+
+  @Override
+  public void sendToAllTracking(IMessage message, int dimension, double x, double y, double z, double range) {
+    this.getWrapper().sendToAllTracking(message, new TargetPoint(dimension, x, y, z, range));
+  }
+
+  @Override
+  public void sendToAllTracking(IMessage message, int dimension, BlockPos blockPos, double range) {
+    this.sendToAllTracking(message, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), range);
   }
 
   @Override

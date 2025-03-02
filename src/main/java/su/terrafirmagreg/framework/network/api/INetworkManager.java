@@ -35,6 +35,10 @@ public interface INetworkManager {
 
   void sendToDimension(IMessage message, int dimension);
 
+  void sendToAllTracking(IMessage message, int dimension, double x, double y, double z, double range);
+
+  void sendToAllTracking(IMessage message, int dimension, BlockPos blockPos, double range);
+
   void sendToAllTracking(IMessage message, Entity entity);
 
   void sendToAll(IMessage message);

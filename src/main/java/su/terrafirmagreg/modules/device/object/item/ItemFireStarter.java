@@ -4,6 +4,9 @@ import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
@@ -28,8 +31,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -37,16 +38,17 @@ import java.util.List;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+
 public class ItemFireStarter extends BaseItem {
 
   public ItemFireStarter() {
     setNoRepair();
     getSettings()
       .registryKey("firestarter")
-      .notCanStack()
-      .maxStackSize(1);
-
-    setMaxDamage(8);
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT, false))
+      .maxStackSize(1)
+      .maxDamage(8);
   }
 
   /**

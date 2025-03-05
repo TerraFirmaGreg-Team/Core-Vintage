@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
+
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -7,15 +9,15 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-import net.dries007.tfc.objects.te.TEBarrel;
-
 import javax.annotation.Nullable;
 
 import static net.dries007.tfc.objects.te.TEBarrel.SLOT_FLUID_CONTAINER_IN;
 import static net.dries007.tfc.objects.te.TEBarrel.SLOT_FLUID_CONTAINER_OUT;
 import static net.dries007.tfc.objects.te.TEBarrel.SLOT_ITEM;
+
+import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.te.TEBarrel;
 
 public class ContainerBarrel extends ContainerTE<TEBarrel> implements IButtonHandler {
 

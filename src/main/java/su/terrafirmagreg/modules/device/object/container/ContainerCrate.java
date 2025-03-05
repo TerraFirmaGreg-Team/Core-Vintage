@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.object.container;
 
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
 import su.terrafirmagreg.modules.device.object.block.BlockCrate;
 import su.terrafirmagreg.modules.device.object.tile.TileCrate;
 
@@ -8,11 +9,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.container.ContainerTE;
-import net.dries007.tfc.objects.container.IButtonHandler;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
-
 import javax.annotation.Nullable;
+
+import net.dries007.tfc.objects.container.ContainerTE;
+import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
 public class ContainerCrate extends ContainerTE<TileCrate> implements IButtonHandler {
 

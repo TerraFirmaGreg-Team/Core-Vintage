@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -7,21 +9,20 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
+import java.io.IOException;
+
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.button.GuiButtonAnvilPlan;
 import net.dries007.tfc.client.button.GuiButtonAnvilStep;
-import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
-
-import java.io.IOException;
-
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public class GuiAnvilTFC extends GuiContainerTE<TEAnvilTFC> {
 

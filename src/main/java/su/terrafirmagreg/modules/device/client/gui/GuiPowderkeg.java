@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
 import net.minecraft.client.gui.GuiButton;
@@ -10,17 +11,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
-import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.client.gui.GuiContainerTE;
-import net.dries007.tfc.network.PacketGuiButton;
-import org.lwjgl.opengl.GL11;
-
 import javax.annotation.Nonnull;
 import java.io.IOException;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
+import net.dries007.tfc.client.gui.GuiContainerTE;
+import net.dries007.tfc.network.PacketGuiButton;
+import org.lwjgl.opengl.GL11;
 
 public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
 

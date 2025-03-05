@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -8,16 +10,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.button.GuiButtonLargeVesselSeal;
-import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.network.PacketGuiButton;
-import net.dries007.tfc.objects.te.TELargeVessel;
-import org.lwjgl.opengl.GL11;
-
 import java.io.IOException;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.client.button.GuiButtonLargeVesselSeal;
+import net.dries007.tfc.network.PacketGuiButton;
+import net.dries007.tfc.objects.te.TELargeVessel;
+import org.lwjgl.opengl.GL11;
 
 public class GuiLargeVessel extends GuiContainerTE<TELargeVessel> {
 

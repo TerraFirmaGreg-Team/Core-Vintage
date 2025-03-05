@@ -23,12 +23,12 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
+
+import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
 
 @Getter
 @SuppressWarnings("deprecation")
@@ -65,7 +65,7 @@ public abstract class BaseBlock extends Block implements IBlockSettings, IFluidl
 
   @Override
   public boolean getUseNeighborBrightness(IBlockState state) {
-    return !this.settings.isUseNeighborBrightness() || super.getUseNeighborBrightness(state);
+    return this.settings.isUseNeighborBrightness();
   }
 
   @Override

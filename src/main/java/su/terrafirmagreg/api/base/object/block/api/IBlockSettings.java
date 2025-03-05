@@ -117,7 +117,6 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
       this.fullCube = true;
       this.hasItemSubtypes = false;
       this.requiresCorrectTool = false;
-      this.useNeighborBrightness = false;
     }
 
     public static Settings of(Material material, EnumDyeColor color) {

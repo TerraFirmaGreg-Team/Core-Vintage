@@ -1,5 +1,7 @@
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -7,16 +9,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.objects.container.IButtonHandler;
-
 import javax.annotation.Nullable;
 
+import io.netty.buffer.ByteBuf;
+import net.dries007.tfc.TerraFirmaCraft;
+
 /**
- * This is a generic packet that sends a button notification to the players open container, which can delegate to the tile entity if needed See
- * {@link net.dries007.tfc.client.gui.GuiAnvilTFC} for an example of its usage, and {@link net.dries007.tfc.objects.container.ContainerAnvilTFC} for an example
- * of the message handling
+ * This is a generic packet that sends a button notification to the players open container, which can delegate to the tile entity if needed See {@link net.dries007.tfc.client.gui.GuiAnvilTFC} for an example of its usage, and
+ * {@link net.dries007.tfc.objects.container.ContainerAnvilTFC} for an example of the message handling
  *
  * @author AlcatrazEscapee
  */

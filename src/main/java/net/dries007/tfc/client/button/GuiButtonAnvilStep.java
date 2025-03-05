@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.util.forge.ForgeStep;
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,6 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.ANVIL_BACKGROUND;
+
+import net.dries007.tfc.util.forge.ForgeStep;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonAnvilStep extends GuiButtonTFC implements IButtonTooltip {

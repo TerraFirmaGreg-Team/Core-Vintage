@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.button;
 
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
 import net.minecraft.client.Minecraft;

@@ -34,7 +34,7 @@ public abstract class BaseBlockBush extends BlockBush implements IBlockSettings 
 
   @Override
   public boolean getUseNeighborBrightness(IBlockState state) {
-    return !this.settings.isUseNeighborBrightness() || super.getUseNeighborBrightness(state);
+    return this.settings.isUseNeighborBrightness();
   }
 
   @Override

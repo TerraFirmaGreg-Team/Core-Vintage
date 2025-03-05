@@ -28,7 +28,7 @@ public abstract class BaseBlockFalling extends BlockFalling implements IBlockSet
 
   @Override
   public boolean getUseNeighborBrightness(IBlockState state) {
-    return !this.settings.isUseNeighborBrightness() || super.getUseNeighborBrightness(state);
+    return this.settings.isUseNeighborBrightness();
   }
 
   @Override

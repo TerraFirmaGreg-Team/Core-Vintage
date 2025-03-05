@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.button;
 
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;

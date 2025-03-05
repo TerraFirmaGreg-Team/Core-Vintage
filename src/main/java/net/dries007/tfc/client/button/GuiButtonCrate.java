@@ -1,29 +1,28 @@
-package net.dries007.tfc.client.gui.button;
+package net.dries007.tfc.client.button;
+
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
+import su.terrafirmagreg.modules.device.object.tile.TileCrate;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-
-import net.dries007.tfc.client.button.GuiButtonTFC;
-import net.dries007.tfc.client.button.IButtonTooltip;
-import net.dries007.tfc.objects.te.TEUrn;
 
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiLargeVessel.LARGE_VESSEL_BACKGROUND;
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
-public class GuiButtonUrn extends GuiButtonTFC implements IButtonTooltip {
+public class GuiButtonCrate extends GuiButtonTFC implements IButtonTooltip {
 
-  private final TEUrn tile;
+  private final TileCrate tile;
 
-  public GuiButtonUrn(TEUrn tile, int buttonId, int guiTop, int guiLeft) {
+  public GuiButtonCrate(TileCrate tile, int buttonId, int guiTop, int guiLeft) {
     super(buttonId, guiLeft + 123, guiTop + 35, 20, 20, "");
     this.tile = tile;
   }
 
   @Override
   public String getTooltip() {
-    return TFCF + ".tooltip." + (tile.isSealed() ? "urn_unseal" : "urn_seal");
+    return TFCF + ".tooltip." + (tile.isSealed() ? "crate_unseal" : "crate_seal");
   }
 
   @Override

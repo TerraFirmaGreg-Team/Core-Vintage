@@ -1,14 +1,16 @@
 package net.dries007.tfc.client.button;
 
-import net.dries007.tfc.objects.te.TEBarrel;
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 import static net.dries007.tfc.client.gui.GuiBarrel.BARREL_BACKGROUND;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+
+import net.dries007.tfc.objects.te.TEBarrel;
 
 
 public class GuiButtonBarrelSeal extends GuiButtonTFC implements IButtonTooltip {

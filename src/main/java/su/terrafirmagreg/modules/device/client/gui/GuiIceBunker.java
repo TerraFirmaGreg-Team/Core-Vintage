@@ -28,7 +28,7 @@ public class GuiIceBunker extends BaseGuiContainerTile<TileIceBunker> {
     super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
     if (mouseX >= guiLeft + 5 && mouseX <= guiLeft + 15 && mouseY >= guiTop + 5 && mouseY <= guiTop + 15) {
-      List<String> infoText = new ArrayList<String>();
+      List<String> infoText = new ArrayList<>();
       float temperature = tile.getTemperature();
       int coolant = tile.getCoolant();
 

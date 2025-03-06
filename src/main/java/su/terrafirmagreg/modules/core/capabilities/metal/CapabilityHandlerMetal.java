@@ -8,11 +8,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import gregtech.api.unification.OreDictUnifier;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -59,6 +54,11 @@ import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.ore
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadShovel;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.toolHeadSword;
 
+import gregtech.api.unification.OreDictUnifier;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
+
 public class CapabilityHandlerMetal {
 
   //Used inside CT, set custom IMetalItem for items outside TFC
@@ -91,8 +91,6 @@ public class CapabilityHandlerMetal {
     ORE_DICT_METAL_ITEMS.put(gear.name(), 576);
     ORE_DICT_METAL_ITEMS.put(block.name(), 1296);
 
-//    ORE_DICT_METAL_ITEMS.put(TFGOrePrefix.ingotTriple, 432);
-//    ORE_DICT_METAL_ITEMS.put(TFGOrePrefix.ingotHex, 864);
     ORE_DICT_METAL_ITEMS.put(toolHeadDrill.name(), 576);
     ORE_DICT_METAL_ITEMS.put(toolHeadChainsaw.name(), 288);
     ORE_DICT_METAL_ITEMS.put(toolHeadWrench.name(), 576);

@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "gregtech:items/tools/stick_reversed_javelin",
+    "layer1": "gregtech:items/tools/javelin"
+  }
+}

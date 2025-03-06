@@ -1,0 +1,8 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "gregtech:items/tools/handle_saw",
+    "layer1": "gregtech:items/tools/saw",
+    "layer2": "gregtech:items/tools/saw_overlay"
+  }
+}

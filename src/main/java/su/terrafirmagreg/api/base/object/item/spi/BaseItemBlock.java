@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.base.object.item.spi;
 
 
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
@@ -23,6 +24,11 @@ public class BaseItemBlock extends ItemBlock implements IItemSettings {
     super(block);
 
     this.settings = Settings.of(block);
+  }
+
+  @Override
+  public String getTranslationKey() {
+    return ModUtils.localize("block", block.getRegistryName());
   }
 
   @Override

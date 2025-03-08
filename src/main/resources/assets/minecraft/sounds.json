@@ -1,0 +1,143 @@
+{ 
+	"music.game": { 
+		"category": "music",
+		"sounds": [
+			{
+				"name": "music/game/m0",
+				"stream": true
+			},
+			{
+				"name": "music/game/m1",
+				"stream": true
+			},
+			{
+				"name": "music/game/m2",
+				"stream": true
+			},
+			{
+				"name": "music/game/m3",
+				"stream": true
+			},
+			{
+				"name": "music/game/m4",
+				"stream": true
+			}
+		]
+	},
+	"music.game.creative": {
+		"category": "music",
+		"replace": true,
+		"sounds": [
+			{
+				"name": "music/game/calm1",
+				"stream": true
+			},
+			{
+				"name": "music/game/calm2",
+				"stream": true
+			},
+			{
+				"name": "music/game/calm3",
+				"stream": true
+			},
+			{
+				"name": "music/game/hal1",
+				"stream": true
+			},
+			{
+				"name": "music/game/hal2",
+				"stream": true
+			},
+			{
+				"name": "music/game/hal3",
+				"stream": true
+			},
+			{
+				"name": "music/game/hal4",
+				"stream": true
+			},
+			{
+				"name": "music/game/nuance1",
+				"stream": true
+			},
+			{
+				"name": "music/game/nuance2",
+				"stream": true
+			},
+			{
+				"name": "music/game/piano1",
+				"stream": true
+			},
+			{
+				"name": "music/game/piano2",
+				"stream": true
+			},
+			{
+				"name": "music/game/piano3",
+				"stream": true
+			},
+			{
+				"name": "music/game/m0",
+				"stream": true
+			},
+			{
+				"name": "music/game/m1",
+				"stream": true
+			},
+			{
+				"name": "music/game/m2",
+				"stream": true
+			},
+			{
+				"name": "music/game/m3",
+				"stream": true
+			},
+			{
+				"name": "music/game/m4",
+				"stream": true
+			}
+		]
+	},
+	"music.menu": {
+		"category": "music",
+		"replace": true,
+		"sounds": [
+			{
+				"name": "music/menu/menu1",
+				"stream": true
+			},
+			{
+				"name": "music/menu/menu2",
+				"stream": true
+			},
+			{
+				"name": "music/menu/menu3",
+				"stream": true
+			},
+			{
+				"name": "music/menu/menu4",
+				"stream": true
+			},
+			{
+				"name": "music/game/m0",
+				"stream": true
+			},
+			{
+				"name": "music/game/m1",
+				"stream": true
+			},
+			{
+				"name": "music/game/m2",
+				"stream": true
+			},
+			{
+				"name": "music/game/m3",
+				"stream": true
+			},
+			{
+				"name": "music/game/m4",
+				"stream": true
+			}
+		]
+	}
+}

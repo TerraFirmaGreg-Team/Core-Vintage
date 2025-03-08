@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.base.object.item.spi;
 
-import lombok.Getter;
+import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -20,7 +21,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
+import lombok.Getter;
 
 @Getter
 public class BaseItemDoor extends ItemDoor implements IItemSettings {
@@ -33,6 +34,16 @@ public class BaseItemDoor extends ItemDoor implements IItemSettings {
 
     this.block = block;
     this.settings = Settings.of(block);
+  }
+
+  @Override
+  public String getTranslationKey() {
+    return ModUtils.localize("block", block.getRegistryName());
+  }
+
+  @Override
+  public String getTranslationKey(ItemStack stack) {
+    return ModUtils.localize("block", block.getRegistryName());
   }
 
   /**

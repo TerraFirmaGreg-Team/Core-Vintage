@@ -3,7 +3,9 @@
   "defaults": {
     "model": "torch_wall",
     "textures": {
-      "torch": "blocks/torch_on"
+      "torch": "blocks/torch_on",
+      "bot_torch": "blocks/torch_on",
+      "top_torch": "blocks/torch_on_bloom"
     }
   },
   "variants": {
@@ -14,7 +16,9 @@
       "true": {},
       "false": {
         "textures": {
-          "torch": "tfc:blocks/torch_off"
+          "torch": "tfc:blocks/torch_off",
+          "bot_torch": "tfc:blocks/torch_off",
+          "top_torch": "tfc:blocks/torch_off"
         }
       }
     },

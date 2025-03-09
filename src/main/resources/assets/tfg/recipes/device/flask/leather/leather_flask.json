@@ -8,7 +8,7 @@
   "key": {
     "K": {
       "type": "forge:ore_dict",
-      "ore": "knife",
+      "ore": "toolKnife",
       "data": "*"
     },
     "S": {

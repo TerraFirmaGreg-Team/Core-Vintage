@@ -271,8 +271,6 @@ public class BlockPowderKeg extends BaseBlockContainer {
         } else {
           GuiHandler.openGui(worldIn, pos, playerIn);
         }
-
-
       });
     }
     return true;

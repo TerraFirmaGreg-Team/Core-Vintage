@@ -2,20 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XXX",
-    "XZX",
+    "X X",
     "XXX"
   ],
   "key": {
     "X": {
       "type": "forge:ore_dict",
-      "ore": "sheetDoubleWroughtIron"
-    },
-    "Z": {
-      "item": "tfc:crucible"
+      "ore": "sheetDoubleAnyBronze"
     }
   },
   "result": {
-    "item": "tfc:blast_furnace",
+    "item": "tfg:device/bloomery",
     "count": 1
   }
 }

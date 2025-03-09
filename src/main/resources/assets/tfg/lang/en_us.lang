@@ -89,12 +89,6 @@ death.attack.swarm=%1$s died due to a swarm of bees.
 death.attack.bear_trap=%1$s didn't watch their step
 death.attack.pigvil=%1$s was squashed by a falling...Pigvil?
 
-# Tooltip
-tooltip.tfg.core.advanced_data.tool_class=§7  -Tool Class:§8 %s
-tooltip.tfg.core.advanced_data.tool_classes=§7  -Tool Classes:§8 %s
-tooltip.tfg.core.advanced_data.ore_dict=§7  -Ore Dictionary Name:§8 %s
-tooltip.tfg.core.advanced_data.ore_dicts=§7  -Ore Dictionary Names:§8 %s
-
 ## Size
 enum.tfg.size.tiny=Tiny
 enum.tfg.size.very_small=Very Small
@@ -112,6 +106,12 @@ enum.tfg.weight.heavy=Heavy
 enum.tfg.weight.very_heavy=Very Heavy
 
 # Module Core ################################################
+
+# Tooltip
+tooltip.tfg.core.advanced_data.tool_class=§7  -Tool Class:§8 %s
+tooltip.tfg.core.advanced_data.tool_classes=§7  -Tool Classes:§8 %s
+tooltip.tfg.core.advanced_data.ore_dict=§7  -Ore Dictionary Name:§8 %s
+tooltip.tfg.core.advanced_data.ore_dicts=§7  -Ore Dictionary Names:§8 %s
 
 ## Item Group
 item_group.tfg.core.name=[ TFG ] Core
@@ -165,6 +165,10 @@ tooltip.tfg.device.blast_furnace.ore_amount=Ore
 tooltip.tfg.device.blast_furnace.fuel_amount=Fuel
 tooltip.tfg.device.blast_furnace.melt_amount=Melt
 tooltip.tfg.device.blast_furnace.invalid_structure=Invalid Structure!
+tooltip.tfg.device.powderkeg.amount=Contains %1$dx %2$s
+tooltip.tfg.device.powderkeg.empty=Empty
+tooltip.tfg.device.powderkeg.unseal=Unseal Powderkeg
+tooltip.tfg.device.powderkeg.seal=Seal Powderkeg
 
 ## Item Group
 item_group.tfg.device.name=[ TFG ] Device
@@ -191,6 +195,7 @@ block.tfg.device.smeltery.firebox.name=Smeltery Firebox
 block.tfg.device.latex_extractor.name=Latex Extractor
 block.tfg.device.freeze_dryer.name=Freeze Dryer
 block.tfg.device.ice_bunker.name=Ice Bunker
+block.tfg.device.powderkeg.name=Powderkeg
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

@@ -74,10 +74,10 @@ public interface IRegistryManager extends IRegistryEventHandler {
   // region Block
 
   default <B extends Block & IBlockSettings> Supplier<B> block(B block) {
+    block.defaultSetter();
     var settings = block.getSettings();
-
     if (settings.getItemBlock() != null) {
-      settings.getGroups().add(getGroup());
+      settings.group(getGroup());
       settings.getGroups().forEach(block::setCreativeTab);
       this.item(settings.getRegistryKey(), settings.getItemBlock().apply(block));
     }
@@ -85,24 +85,14 @@ public interface IRegistryManager extends IRegistryEventHandler {
     return this.block(settings.getRegistryKey(), block);
   }
 
-  default <T extends Type<T>, B extends Block> Map<T, B> block(Map<T, B> map) {
+  default <T extends Type<T>, B extends Block & IBlockSettings> Map<T, B> block(Map<T, B> map) {
     this.block(map.values());
 
     return map;
   }
 
-  default <T extends Block> Collection<T> block(Collection<T> collection) {
-    collection.forEach(block -> {
-      if (block instanceof IBlockSettings provider) {
-        var settings = provider.getSettings();
-        if (settings.getItemBlock() != null) {
-          settings.getGroups().add(getGroup());
-          settings.getGroups().forEach(block::setCreativeTab);
-          this.item(settings.getRegistryKey(), settings.getItemBlock().apply(block));
-        }
-        this.block(settings.getRegistryKey(), block);
-      }
-    });
+  default <T extends Block & IBlockSettings> Collection<T> block(Collection<T> collection) {
+    collection.forEach(this::block);
     return collection;
   }
 
@@ -138,6 +128,7 @@ public interface IRegistryManager extends IRegistryEventHandler {
 
   default <T extends Item & IItemSettings> Supplier<T> item(T item) {
     var settings = item.getSettings();
+    item.defaultSetter();
     settings.getGroups().add(getGroup());
     settings.getGroups().forEach(item::setCreativeTab);
     return this.item(settings.getRegistryKey(), item);
@@ -152,6 +143,7 @@ public interface IRegistryManager extends IRegistryEventHandler {
   default <T extends Item> void item(Collection<T> collection) {
     collection.forEach(item -> {
       if (item instanceof IItemSettings provider) {
+        provider.defaultSetter();
         var settings = provider.getSettings();
         settings.getGroups().add(getGroup());
         settings.getGroups().forEach(item::setCreativeTab);

@@ -104,8 +104,6 @@ tfc.tooltip.barrel_fluid=Содержит %1$d mB %2$s
 tfc.tooltip.barrel_fluid_amount=%d mB
 tfc.tooltip.barrel_item=Содержит %1$dx %2$s
 tfc.tooltip.barrel_item_in_fluid= и %1$dx %2$s
-tfc.tooltip.powderkeg_amount=Содержит %sx из %s
-tfc.tooltip.powderkeg_empty=Пусто
 tfc.tooltip.small_vessel_empty=Пусто
 tfc.tooltip.small_vessel_item=%1$dx %2$s
 tfc.tooltip.weldable=Можно сварить
@@ -145,8 +143,6 @@ tfc.tooltip.plant_valid=%sПодходит%s
 tfc.tooltip.plant_wet=%sСлишком влажно%s
 tfc.tooltip.large_vessel_seal=Запечатать большой сосуд
 tfc.tooltip.large_vessel_unseal=Распечатать большой сосуд
-tfc.tooltip.powderkeg_seal=Запечатать Пороховая бочка
-tfc.tooltip.powderkeg_unseal=Распечатать Пороховая бочка
 tfc.tooltip.goldpan.chunkworked=Эта область выглядит переработанной. Вероятно вы не найдете здесь многого.
 tfc.tooltip.smithing_skill=Бонус опыта: %0.1f%%
 tfc.tooltip.crucible_alloy=Содержит %1$d mB %2$s
@@ -1267,7 +1263,6 @@ tile.tfc.aggregate.name=Заполнитель
 tile.tfc.sluice.name=Рудопромывочный жёлоб
 tile.tfc.ice.name=Лед
 tile.tfc.sea_ice.name=Морской лед
-tile.tfc.powderkeg.name=Пороховая бочка
 
 ## Decoration blocks
 tile.tfc.alabaster.bricks.cyan.name=Голубой алебастровый кирпич

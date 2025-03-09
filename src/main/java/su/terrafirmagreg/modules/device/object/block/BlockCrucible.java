@@ -35,14 +35,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.util.IHeatConsumerBlock;
-import net.dries007.tfc.util.Alloy;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+
+import net.dries007.tfc.api.util.IHeatConsumerBlock;
+import net.dries007.tfc.util.Alloy;
 
 @SuppressWarnings("deprecation")
 public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBlock {
@@ -64,18 +64,26 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
       .nonOpaque()
       .hardness(3.0f)
       .harvestLevel(ToolClasses.PICKAXE, 0)
-      .capability(CapabilityProviderSize.of(getSizeOf(new ItemStack(this)), Weight.VERY_HEAVY));
+      .capability(getCapabilitySize());
 
 
+  }
+
+  private CapabilityProviderSize getCapabilitySize() {
+    return new CapabilityProviderSize() {
+      public Weight getWeight(ItemStack stack) {
+        return Weight.VERY_HEAVY;
+      }
+
+      public Size getSize(ItemStack stack) {
+        return stack.getTagCompound() == null ? Size.LARGE : Size.HUGE; // Can only store in chests if not full, overburden if full and more than one is carried
+      }
+    };
   }
 
   @Override
   public EnumBlockRenderType getRenderType(IBlockState state) {
     return EnumBlockRenderType.MODEL;
-  }
-
-  public Size getSizeOf(ItemStack stack) {
-    return stack.getTagCompound() == null ? Size.LARGE : Size.HUGE; // Can only store in chests if not full, overburden if full and more than one is carried
   }
 
   @Override

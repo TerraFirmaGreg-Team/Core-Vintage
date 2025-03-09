@@ -47,6 +47,13 @@ public interface IItemSettings extends IBaseSettings<Settings> {
     return new CombinedCapabilityProvider(providers);
   }
 
+  default void defaultSetter() {
+    var settings = getSettings();
+    asItem()
+      .setMaxDamage(settings.getMaxDamage())
+      .setMaxStackSize(settings.getMaxStackSize());
+  }
+
   @Getter
   class Settings extends BaseSettings<Settings> {
 
@@ -86,6 +93,7 @@ public interface IItemSettings extends IBaseSettings<Settings> {
           .rarity(settings.getRarity())
           .group(settings.getGroups())
           .oreDict(settings.getOreDict())
+          .maxStackSize(settings.isNonCanStack() ? 1 : 64)
           .capability(settings.getCapability());
       }
 
@@ -182,6 +190,7 @@ public interface IItemSettings extends IBaseSettings<Settings> {
     }
 
     public Settings notCanStack() {
+      maxStackSize(1);
       return this;
     }
   }

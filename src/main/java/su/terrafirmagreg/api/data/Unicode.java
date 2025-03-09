@@ -18,6 +18,7 @@ public final class Unicode {
 
   public static final String SIZE = "⇲";
   public static final String WEIGHT = "⚖";
+  public static final String STACK_SIZE = "◇";
 
   public static final String HEART = "❤";
   public static final String SMILE = "☺";

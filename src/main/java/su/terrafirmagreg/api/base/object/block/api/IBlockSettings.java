@@ -49,6 +49,16 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
     return Item.getItemFromBlock(asBlock());
   }
 
+  default void defaultSetter() {
+    var settings = getSettings();
+    asBlock()
+      .setResistance(settings.getResistance())
+      .setHardness(settings.getHardness())
+      .setSoundType(settings.getSoundType())
+      .setTickRandomly(settings.isTicksRandomly())
+      .setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
+  }
+
   @Getter
   @SuppressWarnings("deprecation")
   class Settings extends BaseSettings<Settings> {
@@ -91,6 +101,7 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
     boolean isReplaceable;
 
     boolean isAir;
+    boolean nonCanStack = false;
 
     protected Settings(Material material, MapColor color) {
 
@@ -393,6 +404,7 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
 
 
     public Settings nonCanStack() {
+      this.nonCanStack = true;
       return this;
     }
 

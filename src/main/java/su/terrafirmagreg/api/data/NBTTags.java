@@ -6,8 +6,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public final class NBTTags {
 
-  public static class StringTag {
-
-    public static final String INVENTORY = "Inventory";
-  }
+  public static final String SEALED_TAG = "sealed";
+  public static final String INVENTORY_TAG = "Inventory";
+  
 }

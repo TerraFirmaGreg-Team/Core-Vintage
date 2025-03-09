@@ -1,13 +1,10 @@
 package net.dries007.tfc.client;
 
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
-import su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg;
 import su.terrafirmagreg.modules.device.object.container.ContainerFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerLogPile;
-import su.terrafirmagreg.modules.device.object.container.ContainerPowderKeg;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
-import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -17,6 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
@@ -57,11 +59,6 @@ import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public class TFCGuiHandler implements IGuiHandler {
 
@@ -122,8 +119,6 @@ public class TFCGuiHandler implements IGuiHandler {
           OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
       case LARGE_VESSEL:
         return new ContainerLargeVessel(player.inventory, Helpers.getTE(world, pos, TELargeVessel.class));
-      case POWDERKEG:
-        return new ContainerPowderKeg(player.inventory, Helpers.getTE(world, pos, TilePowderKeg.class));
       case CALENDAR:
       case SKILLS:
       case NUTRITION:
@@ -187,10 +182,6 @@ public class TFCGuiHandler implements IGuiHandler {
       case LARGE_VESSEL:
         return new GuiLargeVessel(container, player.inventory, Helpers.getTE(world, pos, TELargeVessel.class), world.getBlockState(new BlockPos(x, y, z))
           .getBlock().getTranslationKey());
-      case POWDERKEG:
-        return new GuiPowderkeg(container, player.inventory, Helpers.getTE(world, pos, TilePowderKeg.class), world.getBlockState(new BlockPos(x, y, z))
-          .getBlock()
-          .getTranslationKey());
       case CALENDAR:
         return new GuiCalendar(container, player.inventory);
       case NUTRITION:
@@ -227,7 +218,6 @@ public class TFCGuiHandler implements IGuiHandler {
     ANVIL,
     ANVIL_PLAN,
     LARGE_VESSEL,
-    POWDERKEG,
     CALENDAR,
     NUTRITION,
     SKILLS,

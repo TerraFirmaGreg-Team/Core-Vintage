@@ -15,12 +15,6 @@ death.attack.swarm=%1$s died due to a swarm of bees.
 death.attack.bear_trap=%1$s didn't watch their step
 death.attack.pigvil=%1$s was squashed by a falling...Pigvil?
 
-# Tooltip
-tooltip.tfg.core.advanced_data.tool_class=§7  -Класс Инструмента:§8 %s
-tooltip.tfg.core.advanced_data.tool_classes=§7  -Классы Инструмента:§8 %s
-tooltip.tfg.core.advanced_data.ore_dict=§7  -Имя в словаре руд:§8 %s
-tooltip.tfg.core.advanced_data.ore_dicts=§7  -Имена в словаре руд:§8 %s
-
 ## Size
 enum.tfg.size.tiny=Крошечный
 enum.tfg.size.very_small=Очень маленький
@@ -38,6 +32,12 @@ enum.tfg.weight.heavy=Тяжелый
 enum.tfg.weight.very_heavy=Очень тяжелый
 
 # Module Core ################################################
+
+# Tooltip
+tooltip.tfg.core.advanced_data.tool_class=§7  -Класс Инструмента:§8 %s
+tooltip.tfg.core.advanced_data.tool_classes=§7  -Классы Инструмента:§8 %s
+tooltip.tfg.core.advanced_data.ore_dict=§7  -Имя в словаре руд:§8 %s
+tooltip.tfg.core.advanced_data.ore_dicts=§7  -Имена в словаре руд:§8 %s
 
 ## Item Group
 item_group.tfg.core.name=[ TFG ] Ядро
@@ -91,6 +91,10 @@ tooltip.tfg.device.blast_furnace.ore_amount=Руда
 tooltip.tfg.device.blast_furnace.fuel_amount=Топливо
 tooltip.tfg.device.blast_furnace.melt_amount=Расплавлено
 tooltip.tfg.device.blast_furnace.invalid_structure=Неверная структура!
+tooltip.tfg.device.powderkeg.amount=Содержит %1$dx из %2$s
+tooltip.tfg.device.powderkeg.empty=Пусто
+tooltip.tfg.device.powderkeg.unseal=Распечатать пороховую бочку
+tooltip.tfg.device.powderkeg.seal=Запечатать пороховую бочку
 
 ## Item Group
 item_group.tfg.device.name=[ TFG ] Девайсы
@@ -117,6 +121,7 @@ block.tfg.device.smeltery.firebox.name=Плавильная печь
 block.tfg.device.latex_extractor.name=Латексный экстрактор
 block.tfg.device.freeze_dryer.name=Сублимационная камера
 block.tfg.device.ice_bunker.name=Морозильная камера
+block.tfg.device.powderkeg.name=Пороховая бочка
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

@@ -24,7 +24,7 @@ import lombok.Getter;
 
 import java.util.function.BiFunction;
 
-import static su.terrafirmagreg.api.data.NBTTags.StringTag.INVENTORY;
+import static su.terrafirmagreg.api.data.NBTTags.INVENTORY_TAG;
 
 /**
  * This is a helper class for Tile's with a simple inventory that will respect automation To provide side based automation, you must expose a IItemHandler wrapper based on the input side Without overriding the getCapability methods, this
@@ -57,13 +57,13 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
 
   @Override
   public void readFromNBT(NBTTagCompound nbt) {
-    this.inventory.deserializeNBT(nbt.getCompoundTag(INVENTORY));
+    this.inventory.deserializeNBT(nbt.getCompoundTag(INVENTORY_TAG));
     super.readFromNBT(nbt);
   }
 
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-    NBTUtils.setGenericNBTValue(nbt, INVENTORY, this.inventory.serializeNBT());
+    NBTUtils.setGenericNBTValue(nbt, INVENTORY_TAG, this.inventory.serializeNBT());
     return super.writeToNBT(nbt);
   }
 

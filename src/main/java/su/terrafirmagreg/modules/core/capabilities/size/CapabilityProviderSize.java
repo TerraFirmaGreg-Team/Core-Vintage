@@ -89,4 +89,5 @@ public class CapabilityProviderSize implements ICapabilitySize, ICapabilityProvi
   public ICapabilityProvider createProvider(ItemStack itemStack) {
     return this;
   }
+
 }

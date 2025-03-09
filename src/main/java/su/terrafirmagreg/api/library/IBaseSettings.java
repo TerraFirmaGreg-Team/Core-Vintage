@@ -8,6 +8,8 @@ public interface IBaseSettings<T extends BaseSettings<T>> {
 
   T getSettings();
 
+  default void defaultSetter() {}
+
   @Getter
   abstract class BaseSettings<T> {
 

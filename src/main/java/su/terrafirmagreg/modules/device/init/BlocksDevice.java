@@ -113,7 +113,7 @@ public final class BlocksDevice {
     ICE_BUNKER = registry.block(new BlockIceBunker());
     INFECTED_AIR = registry.block(new BlockInfectedAir());
     FREEZE_DRYER = registry.block(new BlockFreezeDryer());
-//    POWDERKEG = registry.block(new BlockPowderKeg());
+    POWDERKEG = registry.block(new BlockPowderKeg());
 //    THATCH_BED = registry.block(new BlockThatchBed());
 //    GRINDSTONE_MANUAL = registry.block(new BlockGrindstoneManual());
 //    ELECTRIC_FORGE = registry.block(new BlockElectricForge());

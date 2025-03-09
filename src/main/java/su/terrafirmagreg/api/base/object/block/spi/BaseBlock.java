@@ -42,12 +42,6 @@ public abstract class BaseBlock extends Block implements IBlockSettings, IFluidl
 
     this.settings = settings;
 
-    setResistance(settings.getResistance());
-    setHardness(settings.getHardness());
-    setSoundType(settings.getSoundType());
-    setTickRandomly(settings.isTicksRandomly());
-    setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
-
     // Fix some potential issues with these fields being set prematurely by the super ctor
     this.fullBlock = getDefaultState().isOpaqueCube();
     this.lightOpacity = this.fullBlock ? 255 : 0;

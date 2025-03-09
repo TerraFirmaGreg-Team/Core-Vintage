@@ -1,6 +1,11 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
+import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
+import su.terrafirmagreg.modules.device.ModuleDevice;
+import su.terrafirmagreg.modules.device.client.button.GuiButtonPowderkegSeal;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
 import net.minecraft.client.gui.GuiButton;
@@ -11,26 +16,19 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
-
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.client.button.GuiButtonPowderkegSeal;
-import net.dries007.tfc.client.gui.GuiContainerTE;
-import net.dries007.tfc.network.PacketGuiButton;
 import org.lwjgl.opengl.GL11;
 
-public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
+public class GuiPowderkeg extends BaseGuiContainerTile<TilePowderKeg> {
 
-  public static final ResourceLocation POWDERKEG_BACKGROUND = new ResourceLocation(TFC, "textures/gui/powderkeg.png");
-  private final String translationKey;
+  public static final ResourceLocation BACKGROUND = ModUtils.resource("textures/gui/container/powderkeg.png");
 
-  public GuiPowderkeg(Container container, InventoryPlayer playerInv, TilePowderKeg tile, String translationKey) {
-    super(container, playerInv, tile, POWDERKEG_BACKGROUND);
+  public GuiPowderkeg(Container container, InventoryPlayer playerInv, TilePowderKeg tile) {
+    super(container, playerInv, tile, BACKGROUND);
 
-    this.translationKey = translationKey;
   }
 
   @Override
@@ -55,12 +53,12 @@ public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
 
   @Override
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-    String name = I18n.format(translationKey + ".name");
-    fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
+    super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
     if (tile.isSealed()) {
       // Draw over the input items, making them look unavailable
-      IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      IItemHandler handler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
+        null);
       if (handler != null) {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         for (int slotId = 0; slotId < handler.getSlots(); slotId++) {
@@ -77,9 +75,9 @@ public class GuiPowderkeg extends GuiContainerTE<TilePowderKeg> {
   }
 
   @Override
-  protected void actionPerformed(@Nonnull GuiButton button) throws IOException {
+  protected void actionPerformed(@NotNull GuiButton button) throws IOException {
     if (button instanceof GuiButtonPowderkegSeal) {
-      TerraFirmaCraft.getNetwork().sendToServer(new PacketGuiButton(button.id));
+      ModuleDevice.NETWORK.sendToServer(new CSPacketGuiButton(button.id));
     }
     super.actionPerformed(button);
   }

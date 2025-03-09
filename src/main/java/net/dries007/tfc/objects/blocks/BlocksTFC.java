@@ -3,12 +3,10 @@ package net.dries007.tfc.objects.blocks;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
-import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
-import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 import su.terrafirmagreg.modules.device.object.tile.TileQuern;
 import su.terrafirmagreg.modules.device.object.tile.TileSluice;
 
@@ -29,6 +27,32 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import lombok.Getter;
+
+import static net.dries007.tfc.api.types.Rock.Type.ANVIL;
+import static net.dries007.tfc.api.types.Rock.Type.BRICKS;
+import static net.dries007.tfc.api.types.Rock.Type.CLAY;
+import static net.dries007.tfc.api.types.Rock.Type.CLAY_GRASS;
+import static net.dries007.tfc.api.types.Rock.Type.COBBLE;
+import static net.dries007.tfc.api.types.Rock.Type.DIRT;
+import static net.dries007.tfc.api.types.Rock.Type.DRY_GRASS;
+import static net.dries007.tfc.api.types.Rock.Type.GRASS;
+import static net.dries007.tfc.api.types.Rock.Type.GRAVEL;
+import static net.dries007.tfc.api.types.Rock.Type.RAW;
+import static net.dries007.tfc.api.types.Rock.Type.SAND;
+import static net.dries007.tfc.api.types.Rock.Type.SMOOTH;
+import static net.dries007.tfc.api.types.Rock.Type.SPIKE;
+import static net.dries007.tfc.api.types.Rock.Type.values;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FLORA;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK;
+import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
+import static net.dries007.tfc.util.Helpers.getNull;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
@@ -84,7 +108,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockFloatingWaterTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockHeat;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockPlant;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockPowderKeg;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockSluice;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
@@ -106,32 +129,6 @@ import net.dries007.tfc.objects.te.TEToolRack;
 import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
-
-import lombok.Getter;
-
-import static net.dries007.tfc.api.types.Rock.Type.ANVIL;
-import static net.dries007.tfc.api.types.Rock.Type.BRICKS;
-import static net.dries007.tfc.api.types.Rock.Type.CLAY;
-import static net.dries007.tfc.api.types.Rock.Type.CLAY_GRASS;
-import static net.dries007.tfc.api.types.Rock.Type.COBBLE;
-import static net.dries007.tfc.api.types.Rock.Type.DIRT;
-import static net.dries007.tfc.api.types.Rock.Type.DRY_GRASS;
-import static net.dries007.tfc.api.types.Rock.Type.GRASS;
-import static net.dries007.tfc.api.types.Rock.Type.GRAVEL;
-import static net.dries007.tfc.api.types.Rock.Type.RAW;
-import static net.dries007.tfc.api.types.Rock.Type.SAND;
-import static net.dries007.tfc.api.types.Rock.Type.SMOOTH;
-import static net.dries007.tfc.api.types.Rock.Type.SPIKE;
-import static net.dries007.tfc.api.types.Rock.Type.values;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FLORA;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_METAL;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK;
-import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
-import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)
@@ -158,7 +155,6 @@ public final class BlocksTFC {
   public static final BlockIngotPile INGOT_PILE = getNull();
   public static final BlockQuern QUERN = getNull();
   public static final BlockSeaIce SEA_ICE = getNull();
-  public static final BlockPowderKeg POWDERKEG = getNull();
   public static final BlockGravel AGGREGATE = getNull();
 
   // All these are for use in model registration. Do not use for block lookups.
@@ -257,7 +253,6 @@ public final class BlocksTFC {
     normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockSeaIce(), CT_MISC)));
 
     normalItemBlocks.add(new ItemBlockLargeVessel(register(r, "ceramics/fired/large_vessel", new BlockLargeVessel(), CT_POTTERY)));
-    normalItemBlocks.add(new ItemBlockPowderKeg(register(r, "powderkeg", new BlockPowderKeg(), CT_WOOD)));
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/raw/plain", new BlockDecorativeStone(MapColor.SNOW), CT_MISC)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/polished/plain", new BlockDecorativeStone(MapColor.SNOW), CT_MISC)));
@@ -661,7 +656,6 @@ public final class BlocksTFC {
     register(TEMetalSheet.class, "metal_sheet");
     register(TileQuern.class, "quern");
     register(TELargeVessel.class, "large_vessel");
-    register(TilePowderKeg.class, "powderkeg");
     register(TileSluice.class, "sluice");
   }
 

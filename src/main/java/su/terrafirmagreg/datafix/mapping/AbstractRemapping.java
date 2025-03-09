@@ -64,6 +64,7 @@ public abstract class AbstractRemapping {
     put("infected_air", BlocksDevice.INFECTED_AIR);
     put("freeze_dryer", BlocksDevice.FREEZE_DRYER);
     put("ice_bunker", BlocksDevice.ICE_BUNKER);
+    put("powderkeg", BlocksDevice.POWDERKEG);
 
     put("nest_box", BlocksAnimal.NEST_BOX);
 

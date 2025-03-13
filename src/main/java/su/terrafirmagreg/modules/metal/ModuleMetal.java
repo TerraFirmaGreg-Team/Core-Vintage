@@ -32,9 +32,9 @@ public class ModuleMetal extends ModuleBase {
 
   public ModuleMetal() {
 
-//    GROUP = BaseItemGroup.of(this, "anvil/red_steel");
-//    REGISTRY = enableRegistry().group(GROUP);
-//    NETWORK = enableNetwork();
+    GROUP = BaseItemGroup.of(this, "anvil/red_steel");
+    REGISTRY = enableRegistry().group(GROUP);
+    NETWORK = enableNetwork();
 
   }
 

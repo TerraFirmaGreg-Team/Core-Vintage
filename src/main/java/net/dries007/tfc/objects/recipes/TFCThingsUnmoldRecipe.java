@@ -21,6 +21,9 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.google.gson.JsonObject;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
@@ -28,9 +31,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.ItemTFCThingsMold;
 import net.dries007.tfcthings.init.TFCThingsItems;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
@@ -99,7 +99,7 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
     if (moldStack != null) {
       IFluidHandler moldCap = moldStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
       if (moldCap instanceof IMoldHandler moldHandler) {
-        if (!moldHandler.isMolten() && moldHandler.getAmount() == 100) {
+        if (!moldHandler.isMolten() && moldHandler.getAmount() == 144) {
           return this.getOutputItem(moldHandler);
         }
       }

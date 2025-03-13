@@ -1,23 +1,23 @@
 package su.terrafirmagreg.temp.util;
 
-import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler;
-
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.dries007.tfc.api.types.Metal;
-import org.apache.commons.lang3.StringUtils;
+import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.dries007.tfc.api.types.Metal;
+import org.apache.commons.lang3.StringUtils;
+
 public class TFGModUtils {
 
   public static final List<TFGOrePrefixExtended> TFG_OREPREFIX_REGISTRY = Arrays.asList(
-    new TFGOrePrefixExtended(OrePrefixHandler.toolHeadAxe, new String[]{" X   ", "XXXX ", "XXXXX", "XXXX ", " X   "}),
-    new TFGOrePrefixExtended(OrePrefixHandler.toolHeadShovel, new String[]{"XXX", "XXX", "XXX", "XXX", " X "}),
-    new TFGOrePrefixExtended(OrePrefixHandler.toolHeadHoe, new String[]{"XXXXX", "   XX"}),
-    new TFGOrePrefixExtended(OrePrefixHandler.toolHeadHammer, new String[]{"XXXXX", "XXXXX", "  X  "}),
-    new TFGOrePrefixExtended(OrePrefixHandler.toolHeadKnife, new String[]{"X ", "XX", "XX", "XX", "XX"})
+    new TFGOrePrefixExtended(OrePrefixCore.toolHeadAxe, new String[]{" X   ", "XXXX ", "XXXXX", "XXXX ", " X   "}),
+    new TFGOrePrefixExtended(OrePrefixCore.toolHeadShovel, new String[]{"XXX", "XXX", "XXX", "XXX", " X "}),
+    new TFGOrePrefixExtended(OrePrefixCore.toolHeadHoe, new String[]{"XXXXX", "   XX"}),
+    new TFGOrePrefixExtended(OrePrefixCore.toolHeadHammer, new String[]{"XXXXX", "XXXXX", "  X  "}),
+    new TFGOrePrefixExtended(OrePrefixCore.toolHeadKnife, new String[]{"X ", "XX", "XX", "XX", "XX"})
   );
   public static Map<String, String> TYPE_TO_OREPREFIX = new Object2ObjectOpenHashMap<>() {{
     // TFC - GT

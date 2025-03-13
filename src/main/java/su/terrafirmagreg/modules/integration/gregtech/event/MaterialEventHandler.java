@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.integration.gregtech.event;
 
-import su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialCoreHandler;
-import su.terrafirmagreg.modules.integration.gregtech.unification.ore.stonetype.StoneTypeHandler;
+import su.terrafirmagreg.modules.integration.gregtech.unification.material.materials.ElementMaterialsCore;
+import su.terrafirmagreg.modules.integration.gregtech.unification.ore.StoneTypesCore;
 
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,13 +18,13 @@ public final class MaterialEventHandler {
   @SubscribeEvent(priority = EventPriority.HIGH)
   public static void registerMaterials(MaterialEvent event) {
 
-    MaterialCoreHandler.init();
-    StoneTypeHandler.init();
+    ElementMaterialsCore.init();
+    StoneTypesCore.init();
   }
 
   @SubscribeEvent
   public static void registerMaterialsPost(PostMaterialEvent event) {
-    MaterialCoreHandler.postInit();
+    ElementMaterialsCore.postInit();
 
     GregTechAPI.materialManager.getRegisteredMaterials().forEach(material -> {
       if (material.hasProperty(PropertyKey.TOOL)) {

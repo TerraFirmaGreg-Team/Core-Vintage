@@ -1,4 +1,7 @@
-package su.terrafirmagreg.modules.integration.gregtech.unification.material;
+package su.terrafirmagreg.modules.integration.gregtech.unification.material.materials;
+
+import su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialCore;
+import su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Trinaquadalloy;
 import static gregtech.api.unification.material.Materials.Aluminium;
@@ -94,13 +97,14 @@ import static gregtech.api.unification.material.info.MaterialIconSet.DIAMOND;
 
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.store.FluidStorageKeys;
+import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.FluidProperty;
 import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 
-public final class MaterialCoreHandler {
+public final class ElementMaterialsCore {
 
   public static void init() {
     // Igneous Intrusive
@@ -341,6 +345,55 @@ public final class MaterialCoreHandler {
       .liquid(new FluidBuilder().temperature(2200))
       .color(0x40311d)
       .flags(GENERATE_PLATE, GENERATE_DENSE)
+      .build();
+
+    // Metals
+    MaterialsCore.Unknown = new MaterialCore.Builder("unknown")
+      .ingot()
+      .liquid(new FluidBuilder().temperature(1250))
+      .color(0x2F2B27).iconSet(MaterialIconSet.METALLIC)
+      .flags(MaterialFlags.NO_UNIFICATION)
+      .build();
+
+    MaterialsCore.PigIron = new MaterialCore.Builder("pig_iron")
+      .ingot()
+      .liquid(new FluidBuilder().temperature(1535))
+      .color(0x6A595C).iconSet(MaterialIconSet.METALLIC)
+      .build();
+
+    MaterialsCore.HighCarbonSteel = new MaterialCore.Builder("high_carbon_steel")
+      .ingot().liquid(new FluidBuilder().temperature(1540))
+      .color(0x5F5F5F).iconSet(MaterialIconSet.METALLIC)
+      .build();
+
+    MaterialsCore.HighCarbonBlackSteel = new MaterialCore.Builder("high_carbon_black_steel")
+      .ingot().liquid(new FluidBuilder().temperature(1540))
+      .color(0x111111).iconSet(MaterialIconSet.METALLIC)
+      .build();
+
+    MaterialsCore.HighCarbonRedSteel = new MaterialCore.Builder("high_carbon_red_steel")
+      .ingot().liquid(new FluidBuilder().temperature(1540))
+      .color(0x700503).iconSet(MaterialIconSet.METALLIC)
+      .build();
+
+    MaterialsCore.HighCarbonBlueSteel = new MaterialCore.Builder("high_carbon_blue_steel")
+      .ingot().liquid(new FluidBuilder().temperature(1540))
+      .color(0x2D5596).iconSet(MaterialIconSet.METALLIC)
+      .build();
+
+    MaterialsCore.WeakSteel = new MaterialCore.Builder("weak_steel")
+      .ingot().liquid(new FluidBuilder().temperature(1540))
+      .color(0x111111).iconSet(MaterialIconSet.METALLIC)
+      .build();
+
+    MaterialsCore.WeakBlueSteel = new MaterialCore.Builder("weak_blue_steel")
+      .ingot().liquid(new FluidBuilder().temperature(1540))
+      .color(0x2D5596).iconSet(MaterialIconSet.METALLIC)
+      .build();
+
+    MaterialsCore.WeakRedSteel = new MaterialCore.Builder("weak_red_steel")
+      .ingot().liquid(new FluidBuilder().temperature(1540))
+      .color(0x700503).iconSet(MaterialIconSet.METALLIC)
       .build();
 
     // - Породы планет

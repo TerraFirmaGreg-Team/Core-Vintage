@@ -31,6 +31,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.EnumMap;
+import java.util.List;
+
+import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
+
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -40,14 +48,6 @@ import net.dries007.tfc.objects.container.ContainerEmpty;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.recipes.UnmoldRecipe;
 import net.dries007.tfc.util.Helpers;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.EnumMap;
-import java.util.List;
-
-import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @ParametersAreNonnullByDefault
 public class ItemMold extends ItemPottery {
@@ -132,7 +132,7 @@ public class ItemMold extends ItemPottery {
   @Nullable
   @Override
   public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new FilledMoldCapability(nbt);
+    return new FilledMoldCapability(type.getSmeltAmount(), nbt);
   }
 
   @Override
@@ -147,8 +147,8 @@ public class ItemMold extends ItemPottery {
     private final FluidTank tank;
     private IFluidTankProperties[] fluidTankProperties;
 
-    FilledMoldCapability(@Nullable NBTTagCompound nbt) {
-      tank = new FluidTank(144);
+    FilledMoldCapability(int smeltAmount, @Nullable NBTTagCompound nbt) {
+      tank = new FluidTank(smeltAmount);
 
       if (nbt != null) {
         deserializeNBT(nbt);

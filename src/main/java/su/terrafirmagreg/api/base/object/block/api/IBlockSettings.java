@@ -7,6 +7,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.registry.api.provider.IProviderItemCapability;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -405,6 +407,35 @@ public interface IBlockSettings extends IBaseSettings<Settings> {
 
     public Settings nonCanStack() {
       this.nonCanStack = true;
+      return this;
+    }
+
+    public Settings fallable(Block block, Specification specification, IBlockState resultingState) {
+      var spec = new Specification(specification);
+      spec.setResultingState(resultingState);
+      return fallable(block, spec);
+    }
+
+    public Settings fallable(Block block, Specification specification) {
+      if (specification != null) {
+        FallingBlockManager.registerFallable(block, specification);
+      }
+      return this;
+    }
+
+    public Settings fallable(IBlockState state, Specification specification, IBlockState resultingState) {
+      if (specification != null) {
+        var spec = new Specification(specification);
+        spec.setResultingState(resultingState);
+        FallingBlockManager.registerFallable(state, spec);
+      }
+      return this;
+    }
+
+    public Settings fallable(IBlockState state, Specification specification) {
+      if (specification != null) {
+        FallingBlockManager.registerFallable(state, specification);
+      }
       return this;
     }
 

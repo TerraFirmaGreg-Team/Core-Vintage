@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.gregtech.api.capability.impl.miner;
 
-import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler;
+import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ public class MinerLogicMixin {
   @Inject(method = "getRegularBlockDrops", at = @At(value = "HEAD"), remap = false, cancellable = true)
   protected void onGetRegularBlockDrops(NonNullList<ItemStack> blockDrops, WorldServer world, BlockPos blockToMine, IBlockState blockState, CallbackInfo ci) {
     if (blockState.getBlock() instanceof BlockOre blockOre) {
-      blockDrops.add(OreDictUnifier.get(OrePrefixHandler.oreChunk, blockOre.material));
+      blockDrops.add(OreDictUnifier.get(OrePrefixCore.oreChunk, blockOre.material));
       ci.cancel();
     }
   }

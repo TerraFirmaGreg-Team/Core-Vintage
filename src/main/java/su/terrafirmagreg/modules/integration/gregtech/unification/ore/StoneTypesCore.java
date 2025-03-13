@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.integration.gregtech.unification.ore.stonetype;
+package su.terrafirmagreg.modules.integration.gregtech.unification.ore;
 
 
 import su.terrafirmagreg.api.library.Triple;
@@ -6,10 +6,6 @@ import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.SoundType;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
-import gregtech.api.unification.material.Material;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.ore.StoneType;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -51,34 +47,38 @@ import static su.terrafirmagreg.modules.integration.gregtech.unification.materia
 import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Shale;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Siltstone;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Slate;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreBreccia;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreCatlinite;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreChalk;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreChert;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreClaystone;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreConglomerate;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreDacite;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreDolomite;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreGabbro;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreGneiss;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreKomatiite;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreLimestone;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreMudstone;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreNovaculite;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.orePeridotite;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.orePhyllite;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.orePorphyry;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreQuartzite;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreRhyolite;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreRockSalt;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreSandstone;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreSchist;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreShale;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreSiltstone;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreSlate;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.oreSoapstone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreBreccia;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreCatlinite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreChalk;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreChert;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreClaystone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreConglomerate;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreDacite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreDolomite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreGabbro;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreGneiss;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreKomatiite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreLimestone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreMudstone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreNovaculite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.orePeridotite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.orePhyllite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.orePorphyry;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreQuartzite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreRhyolite;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreRockSalt;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreSandstone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreSchist;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreShale;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreSiltstone;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreSlate;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreSoapstone;
 
-public class StoneTypeHandler {
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.ore.StoneType;
+
+public class StoneTypesCore {
 
   @SuppressWarnings("ConstantConditions")
   public static void init() {

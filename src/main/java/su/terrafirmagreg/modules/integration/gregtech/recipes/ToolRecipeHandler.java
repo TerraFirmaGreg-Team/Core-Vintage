@@ -2,9 +2,16 @@ package su.terrafirmagreg.modules.integration.gregtech.recipes;
 
 import su.terrafirmagreg.mixin.gregtech.loaders.recipe.handlers.IMaterialRecipeHandlerInvoker;
 import su.terrafirmagreg.modules.integration.gregtech.object.item.MetaItemGregTech;
-import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler;
+import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore;
 
 import net.minecraftforge.registries.IForgeRegistry;
+
+import static gregtech.api.recipes.RecipeMaps.MACERATOR_RECIPES;
+import static gregtech.api.unification.material.properties.PropertyKey.GEM;
+import static gregtech.api.unification.ore.OrePrefix.gem;
+import static gregtech.api.unification.ore.OrePrefix.ingot;
+import static su.terrafirmagreg.Tags.MOD_ID;
+import static su.terrafirmagreg.temp.util.TFGModUtils.TFG_OREPREFIX_REGISTRY;
 
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
@@ -22,28 +29,21 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 
-import static gregtech.api.recipes.RecipeMaps.MACERATOR_RECIPES;
-import static gregtech.api.unification.material.properties.PropertyKey.GEM;
-import static gregtech.api.unification.ore.OrePrefix.gem;
-import static gregtech.api.unification.ore.OrePrefix.ingot;
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.temp.util.TFGModUtils.TFG_OREPREFIX_REGISTRY;
-
 public class ToolRecipeHandler {
 
   public static void register() {
-    OrePrefixHandler.toolHeadSword.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadSword);
-    OrePrefixHandler.toolHeadPickaxe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadPickaxe);
-    OrePrefixHandler.toolHeadShovel.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadShovel);
-    OrePrefixHandler.toolHeadAxe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadAxe);
-    OrePrefixHandler.toolHeadHoe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadHoe);
-    OrePrefixHandler.toolHeadSense.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadSense);
-    OrePrefixHandler.toolHeadFile.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadFile);
-    OrePrefixHandler.toolHeadHammer.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadHammer);
-    OrePrefixHandler.toolHeadSaw.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadSaw);
-    OrePrefixHandler.toolHeadKnife.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadKnife);
-    OrePrefixHandler.toolHeadPropick.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadPropick);
-    OrePrefixHandler.toolHeadChisel.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadChisel);
+    OrePrefixCore.toolHeadSword.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadSword);
+    OrePrefixCore.toolHeadPickaxe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadPickaxe);
+    OrePrefixCore.toolHeadShovel.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadShovel);
+    OrePrefixCore.toolHeadAxe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadAxe);
+    OrePrefixCore.toolHeadHoe.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadHoe);
+    OrePrefixCore.toolHeadSense.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadSense);
+    OrePrefixCore.toolHeadFile.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadFile);
+    OrePrefixCore.toolHeadHammer.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadHammer);
+    OrePrefixCore.toolHeadSaw.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadSaw);
+    OrePrefixCore.toolHeadKnife.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadKnife);
+    OrePrefixCore.toolHeadPropick.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadPropick);
+    OrePrefixCore.toolHeadChisel.addProcessingHandler(PropertyKey.TOOL, ToolRecipeHandler::processHeadChisel);
 
     fixStoneToolsRecipes();
     //fixFlintToolsRecipes(); // TODO
@@ -316,22 +316,22 @@ public class ToolRecipeHandler {
   }
 
   private static void fixStoneToolsRecipes() {
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadSword, Materials.Stone));
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadPickaxe, Materials.Stone));
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadSense, Materials.Stone));
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadFile, Materials.Stone));
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadPropick, Materials.Stone));
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadChisel, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadSword, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadPickaxe, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadSense, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadFile, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadPropick, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadChisel, Materials.Stone));
   }
 
   private static void fixFlintToolsRecipes() {
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadSword, Materials.Stone));
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadPickaxe, Materials.Stone));
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadSense, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadSword, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadPickaxe, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadSense, Materials.Stone));
     // GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(TFGOrePrefix.toolHeadFile, Materials.Stone));
     // GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(TFGOrePrefix.toolHeadSaw, Materials.Stone));
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadPropick, Materials.Stone));
-    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixHandler.toolHeadChisel, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadPropick, Materials.Stone));
+    GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES, OreDictUnifier.get(OrePrefixCore.toolHeadChisel, Materials.Stone));
   }
 
 
@@ -345,7 +345,7 @@ public class ToolRecipeHandler {
         .setRegistryName(MOD_ID, s.getOrePrefix().name().toLowerCase() + "_stone_head"));
 
       // This covers all flint -> single tool head recipes
-      if (s.getOrePrefix() != OrePrefixHandler.toolHeadHammer) {
+      if (s.getOrePrefix() != OrePrefixCore.toolHeadHammer) {
         r.register(new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(s.getOrePrefix(), Materials.Flint), s.getStoneKnappingRecipe())
           .setRegistryName(MOD_ID, s.getOrePrefix().name().toLowerCase() + "_flint_head"));
       }

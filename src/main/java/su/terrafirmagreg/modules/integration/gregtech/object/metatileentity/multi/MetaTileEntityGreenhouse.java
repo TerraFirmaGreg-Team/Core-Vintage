@@ -13,6 +13,15 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static gregtech.api.unification.material.Materials.Steel;
+
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -34,15 +43,6 @@ import gregtech.core.sound.GTSoundEvents;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-
-import static gregtech.api.unification.material.Materials.Steel;
 
 public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
 
@@ -67,7 +67,7 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
   }
 
   @Override
-  protected BlockPattern createStructurePattern() {
+  protected @NotNull BlockPattern createStructurePattern() {
     return FactoryBlockPattern.start()
       .aisle("CCCCCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
       .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
@@ -112,8 +112,7 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
   public boolean checkNaturalLighting() {
     if (!this.getWorld().isDaytime()) {return false;}
     for (BlockPos pos : BlockPos.getAllInBox(this.getPos().up(8).offset(this.frontFacing.rotateY(), 3),
-      this.getPos().up(8).offset(this.getFrontFacing().rotateYCCW(), 3)
-        .offset(this.getFrontFacing().getOpposite(), 6))) {
+      this.getPos().up(8).offset(this.getFrontFacing().rotateYCCW(), 3).offset(this.getFrontFacing().getOpposite(), 6))) {
       if (!this.getWorld().canSeeSky(pos.up())) {
         return false;
       }

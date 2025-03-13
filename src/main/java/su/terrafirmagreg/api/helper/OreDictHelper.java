@@ -19,7 +19,7 @@ import static gregtech.api.unification.ore.OrePrefix.ingot;
 import static gregtech.api.unification.ore.OrePrefix.nugget;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.plateDouble;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.ingotDouble;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.ingotDouble;
 
 import gregtech.api.unification.OreDictUnifier;
 import net.dries007.tfc.api.registries.TFCRegistries;

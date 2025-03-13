@@ -9,6 +9,7 @@ import su.terrafirmagreg.framework.registry.api.IRegistryManager;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.init.PacketsDevice;
+import su.terrafirmagreg.modules.device.init.RecipesDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.plugin.top.TheOneProbeDevice;
 
@@ -51,17 +52,24 @@ public final class ModuleDevice extends ModuleBase {
     PacketsDevice.onRegister(network);
   }
 
+
   @Override
   public void onRegister(IRegistryManager registry) {
     BlocksDevice.onRegister(registry);
     ItemsDevice.onRegister(registry);
     SoundsDevice.onRegister(registry);
+
   }
 
   @Override
   public void onInit(FMLInitializationEvent event) {
 
     TheOneProbeDevice.init();
+  }
+
+  @Override
+  public void onRecipeRegister() {
+    RecipesDevice.onRegister();
   }
 
   @Override

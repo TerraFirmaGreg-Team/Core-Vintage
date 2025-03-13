@@ -1,7 +1,17 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.items.metal.ItemMetalTool;
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.object.tile.TileBearTrap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,7 +24,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
@@ -27,18 +36,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
-
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
-import su.terrafirmagreg.api.data.DamageSources;
-import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
-import su.terrafirmagreg.modules.animal.api.type.IPredator;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.object.tile.TileBearTrap;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.BURIED;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CLOSED;
@@ -126,10 +123,10 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    var item = playerIn.getHeldItem(hand).getItem();
-    if (item instanceof ItemSpade || (item instanceof ItemMetalTool itemMetalTool && itemMetalTool.getType().equals(Metal.ItemType.SHOVEL))) {
+    var itemStack = playerIn.getHeldItem(hand);
+    if (StackUtils.doesStackMatchTool(itemStack, ToolClasses.SHOVEL)) {
 
-      playerIn.getHeldItem(hand).damageItem(1, playerIn);
+      itemStack.damageItem(1, playerIn);
       state = state.cycleProperty(BURIED);
       worldIn.setBlockState(pos, state, 2);
       worldIn.playSound(playerIn, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0f, 1.0f);

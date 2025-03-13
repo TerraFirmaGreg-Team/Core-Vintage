@@ -1,10 +1,27 @@
 package su.terrafirmagreg.api.helper;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Arrays;
+
+import static gregtech.api.unification.material.Materials.BismuthBronze;
+import static gregtech.api.unification.material.Materials.BlackBronze;
+import static gregtech.api.unification.material.Materials.Bronze;
+import static gregtech.api.unification.ore.OrePrefix.dust;
+import static gregtech.api.unification.ore.OrePrefix.dustSmall;
+import static gregtech.api.unification.ore.OrePrefix.dustTiny;
+import static gregtech.api.unification.ore.OrePrefix.ingot;
+import static gregtech.api.unification.ore.OrePrefix.nugget;
+import static gregtech.api.unification.ore.OrePrefix.plate;
+import static gregtech.api.unification.ore.OrePrefix.plateDouble;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler.ingotDouble;
+
+import gregtech.api.unification.OreDictUnifier;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlockDecorativeStone;
@@ -173,5 +190,15 @@ public class OreDictHelper {
 
     // Register a name without any items
     OreDictionary.getOres("infiniteFire", true);
+
+    // GregTech
+    Arrays.asList(Bronze, BlackBronze, BismuthBronze).forEach(bronze -> {
+      Arrays.asList(plate, plateDouble, ingot, ingotDouble, dust, dustTiny, dustSmall, nugget).forEach(ore -> {
+        var stack = OreDictUnifier.get(ore, bronze);
+        OreDictionary.registerOre(OreDictUtils.toString(ore.name, "Any", "Bronze"), stack);
+      });
+    });
+
+
   }
 }

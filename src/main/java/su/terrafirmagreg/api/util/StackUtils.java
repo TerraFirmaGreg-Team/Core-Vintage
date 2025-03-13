@@ -22,6 +22,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
@@ -226,6 +227,20 @@ public final class StackUtils {
     }
   }
 
+  private ItemStack damageStack(ItemStack stack) {
+    return damageStack(stack, 1);
+  }
+
+  // We need to damage the stack but damageItem will not return an item.
+  private ItemStack damageStack(ItemStack stack, int damage) {
+    ItemStack damagedStack = stack.copy();
+    EntityPlayer player = ForgeHooks.getCraftingPlayer();
+    if (player != null) {
+      damagedStack.damageItem(damage, player);
+    }
+    return damagedStack;
+  }
+
   public static boolean doesStackMatchTool(ItemStack stack, String toolClass) {
     Set<String> toolClasses = stack.getItem().getToolClasses(stack);
     return toolClasses.contains(toolClass);
@@ -404,8 +419,8 @@ public final class StackUtils {
   }
 
   /**
-   * Writes an ItemStack as a String. This method is intended for use in configuration files, and allows for a damage sensitive item to be represented as a
-   * String. The format looks like "itemid#damage". This method is not intended for actually saving an ItemStack.
+   * Writes an ItemStack as a String. This method is intended for use in configuration files, and allows for a damage sensitive item to be represented as a String. The format looks like "itemid#damage". This method is not intended for
+   * actually saving an ItemStack.
    *
    * @param stack The instance of ItemStack to write.
    * @return String A string which can be used to represent a damage sensitive item.
@@ -416,8 +431,7 @@ public final class StackUtils {
   }
 
   /**
-   * Reads an ItemStack from a string This method is intended for use in reading information from a configuration file. The correct format is "itemid#damage".
-   * This method is intended for use with writeStackToString.
+   * Reads an ItemStack from a string This method is intended for use in reading information from a configuration file. The correct format is "itemid#damage". This method is intended for use with writeStackToString.
    *
    * @param stackString The string used to construct an ItemStack.
    * @return ItemStackAn ItemStack representation of a damage sensitive item.
@@ -432,8 +446,7 @@ public final class StackUtils {
   }
 
   /**
-   * A blend between the itemRegistry.getObject and bockRegistry.getObject methods. Used for grabbing something from an ID, when you have no clue what it might
-   * be.
+   * A blend between the itemRegistry.getObject and bockRegistry.getObject methods. Used for grabbing something from an ID, when you have no clue what it might be.
    *
    * @param name The ID of the thing you're looking for. Domains are often preferred.
    * @return Hopefully the thing you're looking for.
@@ -514,8 +527,7 @@ public final class StackUtils {
   }
 
   /**
-   * Gets an NBTTagCompound from a stack without polluting the original input stack. If the stack does not have a tag, you will get a new one. This new tag will
-   * NOT be set to the stack automatically.
+   * Gets an NBTTagCompound from a stack without polluting the original input stack. If the stack does not have a tag, you will get a new one. This new tag will NOT be set to the stack automatically.
    *
    * @param stack The stack to check.
    * @return The nbt data for the stack.
@@ -643,9 +655,8 @@ public final class StackUtils {
   }
 
   /**
-   * Checks if two given ItemStack are equal. For them to be equal, both must be null, or both must have a null item, or both must share a damage value. If
-   * either stack has a wild card damage value, they will also be considered the same. If the checkNBT parameter is true, they will also need the same item
-   * nbt.
+   * Checks if two given ItemStack are equal. For them to be equal, both must be null, or both must have a null item, or both must share a damage value. If either stack has a wild card damage value, they will also be considered the same. If
+   * the checkNBT parameter is true, they will also need the same item nbt.
    *
    * @param firstStack  The first ItemStack to compare.
    * @param secondStack The second ItemStack to compare.
@@ -696,8 +707,7 @@ public final class StackUtils {
   }
 
   /**
-   * Safely gets a block instance from an ItemStack. If the ItemStack is not valid, null will be returned. Null can also be returned if the Item does not have a
-   * block form.
+   * Safely gets a block instance from an ItemStack. If the ItemStack is not valid, null will be returned. Null can also be returned if the Item does not have a block form.
    *
    * @param stack The ItemStack to get a block from.
    * @return The block version of the item contained in the ItemStack.

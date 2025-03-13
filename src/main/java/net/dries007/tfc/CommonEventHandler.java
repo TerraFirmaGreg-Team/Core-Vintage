@@ -124,6 +124,8 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+
 import net.dries007.firmalife.init.FoodFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
@@ -164,8 +166,6 @@ import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)
@@ -484,8 +484,8 @@ public final class CommonEventHandler {
     // Modifier for damage type + damage resistance
     actualDamage *= DamageType.getModifier(event.getSource(), event.getEntityLiving());
     if (event.getEntityLiving() instanceof EntityPlayer player) {
-      if (player.getFoodStats() instanceof IFoodStatsTFC) {
-        float healthModifier = ((IFoodStatsTFC) player.getFoodStats()).getHealthModifier();
+      if (player.getFoodStats() instanceof IFoodStatsTFC foodStatsTFC) {
+        float healthModifier = foodStatsTFC.getHealthModifier();
         if (healthModifier < ConfigTFC.General.PLAYER.minHealthModifier) {
           healthModifier = (float) ConfigTFC.General.PLAYER.minHealthModifier;
         }
@@ -719,9 +719,8 @@ public final class CommonEventHandler {
   /**
    * This implementation utilizes EntityJoinWorldEvent and ItemExpireEvent, they go hand-in-hand with each other.
    * <p>
-   * By manually editing the tag of the EntityItem upon spawning, we can identify what EntityItems should be subjected to the cooling process. We also apply an
-   * extremely short lifespan to mimic the speed of the barrel recipe, albeit slightly longer (half a second, but modifiable via config). Then all the checks
-   * are done in ItemExpireEvent to set a new cooler temperature depending on if the conditions are met.
+   * By manually editing the tag of the EntityItem upon spawning, we can identify what EntityItems should be subjected to the cooling process. We also apply an extremely short lifespan to mimic the speed of the barrel recipe, albeit
+   * slightly longer (half a second, but modifiable via config). Then all the checks are done in ItemExpireEvent to set a new cooler temperature depending on if the conditions are met.
    * <p>
    * First of all, if temperature is 0 or less, then nothing needs to be done and the original lifespan is restored/added on.
    * <p>

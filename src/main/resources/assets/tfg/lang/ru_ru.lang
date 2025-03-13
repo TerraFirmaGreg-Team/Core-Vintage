@@ -125,7 +125,7 @@ block.tfg.device.powderkeg.name=Пороховая бочка
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга
-item.tfg.device.flask.leather.filled.name=Кожаная фляга ( %s )
+item.tfg.device.flask.leather.filled.name=Кожаная фляга (%s)
 item.tfg.device.flask.leather.broken.name=Поврежденная кожаная фляга
 item.tfg.device.flask.leather.unfinished.name=Незавершенная кожаная фляга
 item.tfg.device.flask.metal.name=Пустая металлическая фляга

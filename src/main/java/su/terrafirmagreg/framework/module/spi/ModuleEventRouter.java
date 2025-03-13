@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.module.spi;
 
+import su.terrafirmagreg.api.helper.OreDictHelper;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleEventRoute;
@@ -34,12 +35,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.DataSerializerEntry;
 
-import com.google.common.base.Preconditions;
-import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Consumer;
+
+import com.google.common.base.Preconditions;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
 
 public class ModuleEventRouter {
@@ -112,6 +113,12 @@ public class ModuleEventRouter {
     this.routes.put(FMLPostInitializationEvent.class,
       (IModuleEventRoute.State<FMLPostInitializationEvent>) (event) ->
         this.fireEvent(module -> {
+
+          if (module.getRegistry() != null) {
+            module.getLogger().debug("Recipe Registering");
+            module.onRecipeRegister();
+          }
+
           module.getLogger().debug("Post-Init start");
           module.onPostInit(event);
           module.getLogger().debug("Post-Init complete");
@@ -296,6 +303,7 @@ public class ModuleEventRouter {
   protected void onRegisterRecipeEvent(RegistryEvent.Register<IRecipe> event) {
     this.fireEvent(module -> {
       module.getLogger().debug("Register RecipeEvent start");
+      OreDictHelper.init();
       module.getRegistry().onRegisterRecipe(event);
       module.getLogger().debug("Register RecipeEvent complete");
     });

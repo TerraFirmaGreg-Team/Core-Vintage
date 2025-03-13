@@ -2,7 +2,6 @@ package su.terrafirmagreg.framework.registry;
 
 import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
 import su.terrafirmagreg.api.helper.LoggingHelper;
-import su.terrafirmagreg.api.helper.OreDictHelper;
 import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -30,12 +29,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.DataSerializerEntry;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-
 import lombok.Getter;
 
 import java.util.Map;
 import java.util.function.Supplier;
+
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 @Getter
 public class RegistryManager implements IRegistryManager {
@@ -88,7 +87,7 @@ public class RegistryManager implements IRegistryManager {
     this.getWrapper().getItems().register(event);
 //    this.getWrapper().getBlocks().register(OreDictUtils::register);
     this.getWrapper().getItems().register(OreDictUtils::register);
-    OreDictHelper.init();
+
   }
 
   @Override

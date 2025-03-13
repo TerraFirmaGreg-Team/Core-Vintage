@@ -114,6 +114,8 @@ public interface IModule {
   @SideOnly(Side.CLIENT)
   default void onClientRegister(IRegistryManager registry) {}
 
+  default void onRecipeRegister() {}
+
   default void onCommandRegister(ICommandManager command) {}
 
 

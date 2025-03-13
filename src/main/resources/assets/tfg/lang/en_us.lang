@@ -199,7 +199,7 @@ block.tfg.device.powderkeg.name=Powderkeg
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask
-item.tfg.device.flask.leather.filled.name=Leather Flask ( %s )
+item.tfg.device.flask.leather.filled.name=Leather Flask (%s)
 item.tfg.device.flask.leather.broken.name=Broken Leather Flask
 item.tfg.device.flask.leather.unfinished.name=Unfinished Leather Flask
 item.tfg.device.flask.metal.name=Empty Metal Flask

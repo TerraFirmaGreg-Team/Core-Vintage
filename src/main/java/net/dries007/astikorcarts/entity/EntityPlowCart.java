@@ -1,5 +1,8 @@
 package net.dries007.astikorcarts.entity;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.StackUtils;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -9,8 +12,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -25,12 +26,9 @@ import net.minecraft.world.World;
 import net.dries007.astikorcarts.AstikorCarts;
 import net.dries007.astikorcarts.config.ModConfig;
 import net.dries007.astikorcarts.init.ModItems;
-import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.items.metal.ItemMetalHoe;
-import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
 public class EntityPlowCart extends AbstractDrawnInventory implements IInventoryChangedListener {
 
@@ -166,35 +164,23 @@ public class EntityPlowCart extends AbstractDrawnInventory implements IInventory
   }
 
   private void handleTool(BlockPos pos, int slot, EntityPlayer player) {
+    if (world.isRemote) {return;}
     IBlockState state = this.world.getBlockState(pos);
-    ItemStack itemstack = this.inventory.getStackInSlot(slot);
-    Item item = itemstack.getItem();
+    ItemStack itemStack = this.inventory.getStackInSlot(slot);
+    Item item = itemStack.getItem();
 
     if (state.getBlock() instanceof BlockRockVariant blockRock) {
       if (blockRock.getType() == Rock.Type.GRASS || blockRock.getType() == Rock.Type.DIRT || blockRock.getType() == Rock.Type.DRY_GRASS) {
-        if (item instanceof ItemHoe || item instanceof ItemMetalHoe) {
-          if (!world.isRemote) {
-            world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.FARMLAND).getDefaultState());
-            damageAndUpdateOnBreak(pos, slot, itemstack, player);
+        if (StackUtils.doesStackMatchTool(itemStack, ToolClasses.HOE)) {
+          world.playSound(null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+          world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.FARMLAND).getDefaultState());
+          damageAndUpdateOnBreak(pos, slot, itemStack, player);
 
-          }
-        } else if (itemstack.getItem() instanceof ItemMetalTool metaltool)  //All the metal tools
-        {
-          if (metaltool.getType() == Metal.ItemType.SHOVEL) {
-            if (!world.isRemote) {
-              world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-              this.world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.PATH).getDefaultState());
-              this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
-            }
-          }
-        } else if (itemstack.getItem() instanceof ItemSpade) //Gets the stone tools
-        {
-          if (!world.isRemote) {
-            world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            this.world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.PATH).getDefaultState());
-            this.damageAndUpdateOnBreak(pos, slot, itemstack, player);
-          }
+
+        } else if (StackUtils.doesStackMatchTool(itemStack, ToolClasses.SHOVEL)) {
+          world.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+          this.world.setBlockState(pos, BlockRockVariant.get(blockRock.getRock(), Rock.Type.PATH).getDefaultState());
+          this.damageAndUpdateOnBreak(pos, slot, itemStack, player);
         }
       }
     }

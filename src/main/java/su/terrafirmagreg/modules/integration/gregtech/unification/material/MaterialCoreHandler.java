@@ -1,13 +1,5 @@
 package su.terrafirmagreg.modules.integration.gregtech.unification.material;
 
-import gregtech.api.fluids.FluidBuilder;
-import gregtech.api.fluids.store.FluidStorageKeys;
-import gregtech.api.unification.material.info.MaterialIconSet;
-import gregtech.api.unification.material.properties.FluidProperty;
-import gregtech.api.unification.material.properties.OreProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.material.properties.ToolProperty;
-
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Trinaquadalloy;
 import static gregtech.api.unification.material.Materials.Aluminium;
 import static gregtech.api.unification.material.Materials.Americium;
@@ -99,6 +91,14 @@ import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_SPRI
 import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_SPRING_SMALL;
 import static gregtech.api.unification.material.info.MaterialFlags.NO_UNIFICATION;
 import static gregtech.api.unification.material.info.MaterialIconSet.DIAMOND;
+
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.store.FluidStorageKeys;
+import gregtech.api.unification.material.info.MaterialIconSet;
+import gregtech.api.unification.material.properties.FluidProperty;
+import gregtech.api.unification.material.properties.OreProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.properties.ToolProperty;
 
 public final class MaterialCoreHandler {
 

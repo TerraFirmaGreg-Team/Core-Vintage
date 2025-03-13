@@ -11,13 +11,13 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
 import net.dries007.tfc.objects.te.TEMetalSheet;
 import net.dries007.tfc.util.Helpers;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ItemMetalSheet extends ItemMetal {
@@ -30,7 +30,7 @@ public class ItemMetalSheet extends ItemMetal {
   @Nonnull
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
-    if (worldIn.getBlockState(pos).isNormalCube() && stack.getItem() instanceof ItemMetalSheet) {
+    if (worldIn.getBlockState(pos).isNormalCube() && stack.getItem() instanceof ItemMetalSheet sheet) {
       // Placing a sheet erases data, and since I really don't want to rewrite all of this, let's be sufficient with this for now
       // todo: decide what approach to take (likely in 1.15)
       // Option 1: make this a single block with block states (flattening actual state), per metal.
@@ -38,7 +38,6 @@ public class ItemMetalSheet extends ItemMetal {
       if (!ItemStack.areItemStacksEqual(new ItemStack(stack.getItem(), stack.getCount()), stack)) {
         return EnumActionResult.FAIL;
       }
-      ItemMetalSheet sheet = (ItemMetalSheet) stack.getItem();
       BlockPos posAt = pos.offset(facing);
       IBlockState stateAt = worldIn.getBlockState(posAt);
 

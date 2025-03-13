@@ -30,7 +30,7 @@ public interface ICapabilitySize {
     text.add(
       Unicode.WEIGHT + " " + I18n.format(TranslatorUtils.getEnumName(getWeight(stack))) + " " +
       Unicode.SIZE + " " + I18n.format(TranslatorUtils.getEnumName(getSize(stack))) + " " +
-      Unicode.STACK_SIZE + getStackSize(stack)
+      Unicode.STACK_SIZE + " " + getStackSize(stack)
     );
   }
 

@@ -98,7 +98,10 @@ public class EventHandlerAmbiental {
     if (player.isCreative()) {
       return;
     }
-    CapabilityAmbiental.get(player).update();
+    if (CapabilityAmbiental.has(player)) {
+      var cap = CapabilityAmbiental.get(player);
+      cap.update();
+    }
   }
 
 

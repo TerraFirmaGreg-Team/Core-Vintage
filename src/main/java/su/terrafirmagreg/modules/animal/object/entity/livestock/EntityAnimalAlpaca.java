@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
-import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
@@ -10,6 +9,7 @@ import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.helper.BiomeHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -30,8 +30,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 /**
- * A Sheep of the colder regions! Actually, they produce wool faster, but takes longer to reach maturity, have long gestation periods and only give birth to one
- * individual
+ * A Sheep of the colder regions! Actually, they produce wool faster, but takes longer to reach maturity, have long gestation periods and only give birth to one individual
  */
 
 public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock {

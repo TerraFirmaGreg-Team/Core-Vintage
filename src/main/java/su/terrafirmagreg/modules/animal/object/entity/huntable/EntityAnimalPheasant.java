@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.object.entity.huntable;
 
-import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
@@ -9,6 +8,7 @@ import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import su.terrafirmagreg.modules.core.helper.BiomeHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;

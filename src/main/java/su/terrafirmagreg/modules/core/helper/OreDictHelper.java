@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.helper;
+package su.terrafirmagreg.modules.core.helper;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
 
@@ -6,6 +6,19 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import gregtech.api.unification.OreDictUnifier;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.objects.Powder;
+import net.dries007.tfc.objects.blocks.BlockDecorativeStone;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
+import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
+import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.items.ItemPowder;
+import net.dries007.tfc.types.PlantsTFCF;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import java.util.Arrays;
 
@@ -20,19 +33,6 @@ import static gregtech.api.unification.ore.OrePrefix.nugget;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.plateDouble;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.ingotDouble;
-
-import gregtech.api.unification.OreDictUnifier;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.blocks.BlockDecorativeStone;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
-import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
-import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.items.ItemPowder;
-import net.dries007.tfc.types.PlantsTFCF;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 public class OreDictHelper {
 

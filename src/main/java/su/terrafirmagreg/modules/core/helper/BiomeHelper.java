@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.helper;
+package su.terrafirmagreg.modules.core.helper;
 
 import net.minecraft.world.biome.Biome;
 

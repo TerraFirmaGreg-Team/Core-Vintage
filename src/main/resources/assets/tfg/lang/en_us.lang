@@ -47,6 +47,10 @@ tooltip.tfg.core.advanced_data.tool_classes=§7  -Tool Classes:§8 %s
 tooltip.tfg.core.advanced_data.ore_dict=§7  -Ore Dictionary Name:§8 %s
 tooltip.tfg.core.advanced_data.ore_dicts=§7  -Ore Dictionary Names:§8 %s
 
+tooltip.tfg.core.hot_or_not.hot=Too hot to handle! Wear protection.
+tooltip.tfg.core.hot_or_not.cold=Too cold to handle! Wear protection.
+tooltip.tfg.core.hot_or_not.light=Too light to handle! Wear protection.
+
 ## Item Group
 item_group.tfg.core.name=[ TFG ] Core
 

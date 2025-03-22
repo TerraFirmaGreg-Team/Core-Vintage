@@ -42,6 +42,7 @@ import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDime
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedIn;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedOut;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerRespawn;
+import su.terrafirmagreg.modules.core.helper.OreDictHelper;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.EntitiesCore;
@@ -141,6 +142,11 @@ public final class ModuleCore extends ModuleBase {
     CapabilityHandlerSize.init();
     CapabilityHandlerAmbiental.init();
     CapabilityHandlerDamageResistance.init();
+  }
+
+  @Override
+  public void onRecipeRegister() {
+    OreDictHelper.init();
   }
 
   @Override

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
-import su.terrafirmagreg.api.helper.BiomeHelper;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -17,6 +16,7 @@ import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIAttackMel
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIStandAttack;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIWanderHuntArea;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.helper.BiomeHelper;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;

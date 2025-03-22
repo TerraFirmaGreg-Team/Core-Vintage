@@ -25,6 +25,10 @@ public final class CapabilityUtils {
   }
 
   public static <T> Optional<T> getOptional(ICapabilityProvider provider, Capability<T> capability) {
-    return Optional.ofNullable(get(provider, capability));
+    return getOptional(provider, capability, null);
+  }
+
+  public static <T> Optional<T> getOptional(ICapabilityProvider provider, Capability<T> capability, @Nullable EnumFacing facing) {
+    return Optional.ofNullable(get(provider, capability, facing));
   }
 }

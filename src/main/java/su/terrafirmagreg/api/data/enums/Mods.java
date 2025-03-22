@@ -12,6 +12,8 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public enum Mods {
   TFC(ModIDs.TFC),
@@ -39,6 +41,11 @@ public enum Mods {
 
   Mods(String modid) {
     this.modid = modid;
+  }
+
+  public static boolean contains(String modid) {
+    return Arrays.stream(Mods.values())
+      .anyMatch(mod -> mod.getModid().equals(modid));
   }
 
   public boolean isModLoaded() {

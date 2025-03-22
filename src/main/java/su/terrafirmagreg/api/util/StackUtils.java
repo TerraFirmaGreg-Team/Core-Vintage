@@ -35,6 +35,7 @@ import lombok.experimental.UtilityClass;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
@@ -462,6 +463,18 @@ public final class StackUtils {
     thing = Block.getBlockFromName(name);
 
     return thing;
+  }
+
+  public static boolean compareStackToList(ItemStack stack, List<?> itemName) {
+    String regName = Objects.requireNonNull(stack.getItem().getRegistryName()).toString();
+
+    return itemName.contains(regName);
+  }
+
+  public static boolean compareStackToName(ItemStack stack, String itemName) {
+    String regName = Objects.requireNonNull(stack.getItem().getRegistryName()).toString();
+
+    return itemName.equals(regName);
   }
 
   /**

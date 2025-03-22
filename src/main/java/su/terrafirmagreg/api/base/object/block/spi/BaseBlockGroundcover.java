@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.base.object.block.spi;
 
 
 import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
@@ -31,8 +32,7 @@ public abstract class BaseBlockGroundcover extends BaseBlock {
     getSettings()
       .hardness(0.1F)
       .nonCube()
-      .size(Size.SMALL)
-      .weight(Weight.LIGHT)
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
       .replaceable();
   }
 

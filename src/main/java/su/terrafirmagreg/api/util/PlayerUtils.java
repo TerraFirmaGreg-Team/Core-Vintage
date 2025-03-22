@@ -118,7 +118,7 @@ public final class PlayerUtils {
   /**
    * Attempts to get the username associated with a UUID from Mojang. If no username is detected or an exception takes place, the exception message will be returned.
    *
-   * @param id The UUID to search for.
+   * @param uuid The UUID to search for.
    * @return The name of the player associated to that uuid.
    */
   public static String getPlayerNameFromUUID(UUID uuid) {

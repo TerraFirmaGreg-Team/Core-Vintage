@@ -19,155 +19,155 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unused")
 public final class CollectionUtils {
 
-  /**
-   * Used because {@link Collections#singletonList(Object)} is immutable
-   */
-  public static <T> List<T> listOf(T element) {
-    List<T> list = new ArrayList<>(1);
-    list.add(element);
-    return list;
-  }
-
-  /**
-   * Used because {@link Arrays#asList(Object[])} is immutable
-   */
-  @SafeVarargs
-  public static <T> List<T> listOf(T... elements) {
-    List<T> list = new ArrayList<>(elements.length);
-    Collections.addAll(list, elements);
-    return list;
-  }
-
-  public static <K, V> Map<V, K> invertMap(Map<K, V> map) {
-    return map.entrySet().stream().collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
-  }
-
-  public static <E> E combine(E[] a) {
-
-    if (a.length == 0) {
-      throw new IllegalArgumentException("Zero-length array");
+    /**
+     * Used because {@link Collections#singletonList(Object)} is immutable
+     */
+    public static <T> List<T> listOf(T element) {
+        List<T> list = new ArrayList<>(1);
+        list.add(element);
+        return list;
     }
 
-    E result = a[0];
-
-    for (int i = 1; i < a.length; i++) {
-      result = CollectionUtils.combine(result, a[i]);
+    /**
+     * Used because {@link Arrays#asList(Object[])} is immutable
+     */
+    @SafeVarargs
+    public static <T> List<T> listOf(T... elements) {
+        List<T> list = new ArrayList<>(elements.length);
+        Collections.addAll(list, elements);
+        return list;
     }
 
-    return result;
-  }
-
-  /**
-   * Combines two arrays of the same or most general type and returns a new array.
-   * <p>
-   * <a href="https://stackoverflow.com/a/80503">...</a>
-   */
-  public static <E> E combine(E a, E b) {
-
-    if (!a.getClass().isArray() || !b.getClass().isArray()) {
-      throw new IllegalArgumentException();
+    public static <K, V> Map<V, K> invertMap(Map<K, V> map) {
+        return map.entrySet().stream().collect(Collectors.toMap(Entry::getValue, Entry::getKey));
     }
 
-    Class<?> resCompType;
-    Class<?> aCompType = a.getClass().getComponentType();
-    Class<?> bCompType = b.getClass().getComponentType();
+    public static <E> E combine(E[] a) {
 
-    if (aCompType.isAssignableFrom(bCompType)) {
-      resCompType = aCompType;
+        if (a.length == 0) {
+            throw new IllegalArgumentException("Zero-length array");
+        }
 
-    } else if (bCompType.isAssignableFrom(aCompType)) {
-      resCompType = bCompType;
+        E result = a[0];
 
-    } else {
-      throw new IllegalArgumentException();
+        for (int i = 1; i < a.length; i++) {
+            result = CollectionUtils.combine(result, a[i]);
+        }
+
+        return result;
     }
 
-    int aLen = Array.getLength(a);
-    int bLen = Array.getLength(b);
+    /**
+     * Combines two arrays of the same or most general type and returns a new array.
+     * <p>
+     * <a href="https://stackoverflow.com/a/80503">...</a>
+     */
+    public static <E> E combine(E a, E b) {
 
-    @SuppressWarnings("unchecked")
-    E result = (E) Array.newInstance(resCompType, aLen + bLen);
-    //noinspection SuspiciousSystemArraycopy
-    System.arraycopy(a, 0, result, 0, aLen);
-    //noinspection SuspiciousSystemArraycopy
-    System.arraycopy(b, 0, result, aLen, bLen);
+        if (!a.getClass().isArray() || !b.getClass().isArray()) {
+            throw new IllegalArgumentException();
+        }
 
-    return result;
-  }
+        Class<?> resCompType;
+        Class<?> aCompType = a.getClass().getComponentType();
+        Class<?> bCompType = b.getClass().getComponentType();
 
-  public static String[] copy(String[] toCopy) {
+        if (aCompType.isAssignableFrom(bCompType)) {
+            resCompType = aCompType;
 
-    String[] result = new String[toCopy.length];
-    System.arraycopy(toCopy, 0, result, 0, toCopy.length);
-    return result;
-  }
+        } else if (bCompType.isAssignableFrom(aCompType)) {
+            resCompType = bCompType;
 
-  public static int[] copy(int[] toCopy) {
+        } else {
+            throw new IllegalArgumentException();
+        }
 
-    int[] result = new int[toCopy.length];
-    System.arraycopy(toCopy, 0, result, 0, toCopy.length);
-    return result;
-  }
+        int aLen = Array.getLength(a);
+        int bLen = Array.getLength(b);
 
-  public static <T> boolean contains(T[] array, T element) {
+        @SuppressWarnings("unchecked")
+        E result = (E) Array.newInstance(resCompType, aLen + bLen);
+        //noinspection SuspiciousSystemArraycopy
+        System.arraycopy(a, 0, result, 0, aLen);
+        //noinspection SuspiciousSystemArraycopy
+        System.arraycopy(b, 0, result, aLen, bLen);
 
-    return Arrays.asList(array).contains(element);
-  }
-
-  public static boolean containsInt(int[] array, int element) {
-
-    for (int arrayElement : array) {
-
-      if (arrayElement == element) {
-        return true;
-      }
+        return result;
     }
-    return false;
-  }
 
-  public static int getOrLast(int[] array, int index) {
+    public static String[] copy(String[] toCopy) {
 
-    if (index >= array.length) {
-      return array[array.length - 1];
-
-    } else {
-      return array[index];
+        String[] result = new String[toCopy.length];
+        System.arraycopy(toCopy, 0, result, 0, toCopy.length);
+        return result;
     }
-  }
 
-  public static double getOrLast(double[] array, int index) {
+    public static int[] copy(int[] toCopy) {
 
-    if (index >= array.length) {
-      return array[array.length - 1];
-
-    } else {
-      return array[index];
+        int[] result = new int[toCopy.length];
+        System.arraycopy(toCopy, 0, result, 0, toCopy.length);
+        return result;
     }
-  }
 
-  public static <T> T getOrLast(T[] array, int index) {
+    public static <T> boolean contains(T[] array, T element) {
 
-    if (index >= array.length) {
-      return array[array.length - 1];
-
-    } else {
-      return array[index];
+        return Arrays.asList(array).contains(element);
     }
-  }
 
-  public static <T> T randomElement(T[] array, Random random) {
+    public static boolean containsInt(int[] array, int element) {
 
-    return array[random.nextInt(array.length)];
-  }
+        for (int arrayElement : array) {
 
-  public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
-    List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
-    list.sort(Comparator.comparing(Entry::getValue));
-
-    Map<K, V> result = new LinkedHashMap<>();
-    for (Map.Entry<K, V> entry : list) {
-      result.put(entry.getKey(), entry.getValue());
+            if (arrayElement == element) {
+                return true;
+            }
+        }
+        return false;
     }
-    return result;
-  }
+
+    public static int getOrLast(int[] array, int index) {
+
+        if (index >= array.length) {
+            return array[array.length - 1];
+
+        } else {
+            return array[index];
+        }
+    }
+
+    public static double getOrLast(double[] array, int index) {
+
+        if (index >= array.length) {
+            return array[array.length - 1];
+
+        } else {
+            return array[index];
+        }
+    }
+
+    public static <T> T getOrLast(T[] array, int index) {
+
+        if (index >= array.length) {
+            return array[array.length - 1];
+
+        } else {
+            return array[index];
+        }
+    }
+
+    public static <T> T randomElement(T[] array, Random random) {
+
+        return array[random.nextInt(array.length)];
+    }
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Entry<K, V>> list = new LinkedList<>(map.entrySet());
+        list.sort(Comparator.comparing(Entry::getValue));
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
 }

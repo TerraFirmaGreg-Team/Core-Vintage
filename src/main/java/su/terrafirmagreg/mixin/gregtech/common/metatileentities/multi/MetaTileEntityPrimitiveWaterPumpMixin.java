@@ -1,7 +1,5 @@
 package su.terrafirmagreg.mixin.gregtech.common.metatileentities.multi;
 
-import su.terrafirmagreg.temp.config.TFGConfig;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -42,7 +40,7 @@ public abstract class MetaTileEntityPrimitiveWaterPumpMixin extends MultiblockCo
       if (biomeModifier == 0) {
         biomeModifier = getAmount();
       } else if (biomeModifier > 0) {
-        FluidStack fluidStack = FluidRegistry.getFluidStack(TFGConfig.General.fluidForPrimitivePump, getFluidProduction());
+        FluidStack fluidStack = FluidRegistry.getFluidStack("fresh_water", getFluidProduction());
         if (fluidStack != null) {
           waterTank.fill(fluidStack, true);
         } else {

@@ -1,14 +1,10 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
-import su.terrafirmagreg.temp.config.HotLists;
-import su.terrafirmagreg.temp.config.TFGConfig;
-import su.terrafirmagreg.temp.modules.hotornot.FluidEffect;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -21,18 +17,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -186,35 +177,6 @@ public class ClientEvents {
     if (skillMod > 0) {
       String skillValue = String.format("%.2f", skillMod * 100);
       tooltip.add(I18n.format("tfc.tooltip.smithing_skill", skillValue));
-    }
-
-    if (TFGConfig.General.TOOLTIP && !stack.isEmpty() && !HotLists.isRemoved(stack)) {
-      if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-        IFluidHandlerItem fluidHandlerItem = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        if (fluidHandlerItem == null) {return;}
-        FluidStack fluidStack = fluidHandlerItem.drain(1000, false);
-        if (fluidStack != null) {
-          for (FluidEffect effect : FluidEffect.values()) {
-            if (effect.isValid.test(fluidStack)) {
-              tooltip.add(effect.color + new TextComponentTranslation(effect.tooltip).getUnformattedText());
-            }
-          }
-        }
-      } else if (HotLists.isHot(stack)) {
-        tooltip.add(FluidEffect.HOT.color + new TextComponentTranslation(FluidEffect.HOT.tooltip).getUnformattedText());
-      } else if (HotLists.isCold(stack)) {
-        tooltip.add(FluidEffect.COLD.color + new TextComponentTranslation(FluidEffect.COLD.tooltip).getUnformattedText());
-      } else if (HotLists.isGaseous(stack)) {
-        tooltip.add(FluidEffect.GAS.color + new TextComponentTranslation(FluidEffect.GAS.tooltip).getUnformattedText());
-      } else if (Loader.isModLoaded("tfc")) {
-        if (CapabilityHeat.has(stack)) {
-          var heat = CapabilityHeat.get(stack);
-          if (heat == null) {return;}
-          if (heat.getTemperature() >= TFGConfig.General.HOT_ITEM) {
-            tooltip.add(FluidEffect.HOT.color + new TextComponentTranslation(FluidEffect.HOT.tooltip).getUnformattedText());
-          }
-        }
-      }
     }
 
     if (event.getFlags().isAdvanced()) // Only added with advanced tooltip mode

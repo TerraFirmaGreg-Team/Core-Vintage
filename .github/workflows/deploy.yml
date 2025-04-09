@@ -105,7 +105,7 @@ jobs:
 
       - name: Upload jar
         id: upload_file
-        uses: actions/upload-artifact@v4.6.1
+        uses: actions/upload-artifact@v4.6.2
         with:
           path: build/libs/${{ needs.info.outputs.mod_full_name }}-${{ needs.info.outputs.mod_version }}.jar
 

@@ -10,6 +10,7 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalSheep;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
@@ -65,6 +66,9 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
       getRandomGrowth(ConfigAnimal.ENTITY.SHEEP.adulthood, ConfigAnimal.ENTITY.SHEEP.elder),
       EntitySheep.getRandomSheepColor(RNG));
+
+    getSettings()
+      .entity(EntityAnimalSheep.class, RenderAnimalSheep::new);
   }
 
   public EntityAnimalSheep(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {

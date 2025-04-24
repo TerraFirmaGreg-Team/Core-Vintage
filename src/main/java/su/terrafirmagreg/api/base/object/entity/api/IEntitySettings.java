@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.base.object.entity.api.IEntitySettings.Settings;
 import su.terrafirmagreg.api.library.IBaseSettings;
 
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 
 import lombok.Getter;
@@ -14,6 +15,9 @@ public interface IEntitySettings extends IBaseSettings<Settings> {
   class Settings extends BaseSettings<Settings> {
 
     final EntityEntryBuilder<Entity> builder;
+
+    Class<? extends Entity> entity;
+    IRenderFactory<? super Entity> renderFactory;
 
 
     protected Settings() {
@@ -29,9 +33,18 @@ public interface IEntitySettings extends IBaseSettings<Settings> {
       return this;
     }
 
+    public <E extends Entity> Settings render(IRenderFactory<? super Entity> renderFactory) {
+      this.renderFactory = renderFactory;
+      return this;
+    }
+
     public Settings tracker(int range, final int updateFrequency, final boolean sendVelocityUpdates) {
       this.builder.tracker(range, updateFrequency, sendVelocityUpdates);
       return this;
+    }
+
+    public <T extends Entity> Settings entity(Class<T> entityClass, IRenderFactory<? super T> renderFactory) {
+
     }
 
     public <E extends Entity> Settings entity(Class<E> entClass) {

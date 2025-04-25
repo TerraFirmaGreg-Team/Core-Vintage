@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.object.item.ItemFlaskLeather;
 import su.terrafirmagreg.modules.device.object.item.ItemFlaskLeatherBroken;
@@ -33,16 +33,16 @@ public final class ItemsDevice {
   public static Supplier<Item> GRINDSTONE_STEEL;
   public static Supplier<Item> GRINDSTONE_DIAMOND;
 
-  public static void onRegister(IRegistryManager registry) {
+  public static void onRegister(IRegistryRegistrar registrar) {
 
-    FIRESTARTER = registry.item(new ItemFireStarter());
+    FIRESTARTER = registrar.addItem(new ItemFireStarter());
 
-    LEATHER_FLASK_UNFINISHED = registry.item(new ItemFlaskLeatherUnfinished());
-    LEATHER_FLASK = registry.item(new ItemFlaskLeather());
-    LEATHER_FLASK_BROKEN = registry.item(new ItemFlaskLeatherBroken());
+    LEATHER_FLASK_UNFINISHED = registrar.addItem(new ItemFlaskLeatherUnfinished());
+    LEATHER_FLASK = registrar.addItem(new ItemFlaskLeather());
+    LEATHER_FLASK_BROKEN = registrar.addItem(new ItemFlaskLeatherBroken());
 
-    METAL_FLASK_UNFINISHED = registry.item(new ItemFlaskMetalUnfinished());
-    METAL_FLASK = registry.item(new ItemFlaskMetal());
-    METAL_FLASK_BROKEN = registry.item(new ItemFlaskMetalBroken());
+    METAL_FLASK_UNFINISHED = registrar.addItem(new ItemFlaskMetalUnfinished());
+    METAL_FLASK = registrar.addItem(new ItemFlaskMetal());
+    METAL_FLASK_BROKEN = registrar.addItem(new ItemFlaskMetalBroken());
   }
 }

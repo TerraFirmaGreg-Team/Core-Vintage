@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.core.event.player;
 
-import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.network.SCPacketPlayerDataUpdate;
@@ -38,7 +37,7 @@ public class EventHandlerPlayerRespawn {
       ICapabilityPlayerData playerData = CapabilityPlayerData.get(playerMP);
       if (playerData != null) {
 
-        ModuleCore.NETWORK.sendTo(new SCPacketPlayerDataUpdate(playerData.serializeNBT()), playerMP);
+        new SCPacketPlayerDataUpdate(playerData.serializeNBT()).sendTo(playerMP);
       }
     }
   }

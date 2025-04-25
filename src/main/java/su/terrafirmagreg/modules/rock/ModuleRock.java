@@ -15,13 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.modules.ModulesContainer.ROCK;
-
 @ModuleInfo(
-  moduleID = ROCK,
-  containerID = MOD_ID,
-  name = "Rock",
+  id = "rock",
   author = "Xikaro",
   version = "1.0.0"
 )

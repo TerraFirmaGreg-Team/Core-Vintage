@@ -1,14 +1,13 @@
 package su.terrafirmagreg.modules.core.network;
 
-import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.framework.network.spi.packet.PacketBase;
+import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
+import su.terrafirmagreg.api.base.network.packet.spi.NetworkPacketBase;
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class SCPacketAmbiental extends PacketBase<SCPacketAmbiental> {
+public class SCPacketAmbiental extends NetworkPacketBase implements INetworkPacket.Client {
 
   public NBTTagCompound tag;
 
@@ -20,18 +19,15 @@ public class SCPacketAmbiental extends PacketBase<SCPacketAmbiental> {
     this.tag = tag;
   }
 
-  @Override
-  public IMessage handleMessage(MessageContext context) {
-    TerraFirmaGreg.getProxy().getThreadListener(context).addScheduledTask(() -> {
-      var player = TerraFirmaGreg.getProxy().getPlayer(context);
-      if (player != null) {
-        var sys = CapabilityAmbiental.get(player);
-        if (sys != null) {
-          sys.deserializeNBT(tag);
-        }
-      }
-    });
-    return null;
-  }
 
+  @Override
+  public void process(Minecraft minecraft) {
+    var player = minecraft.player;
+    if (player != null) {
+      var capability = CapabilityAmbiental.get(player);
+      if (capability != null) {
+        capability.deserializeNBT(tag);
+      }
+    }
+  }
 }

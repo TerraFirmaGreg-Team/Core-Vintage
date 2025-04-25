@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.init;
 
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.core.object.item.ItemDebugWand;
 import su.terrafirmagreg.modules.core.object.item.ItemGlassShard;
 import su.terrafirmagreg.modules.core.object.item.ItemIceShard;
@@ -22,12 +22,12 @@ public final class ItemsCore {
   public static Supplier<Item> JAR;
   public static Supplier<Item> MORTAR;
 
-  public static void onRegister(IRegistryManager registry) {
+  public static void onRegister(IRegistryRegistrar registry) {
 
-    DEBUG_WAND = registry.item(new ItemDebugWand());
-    WOOD_ASH = registry.item(new ItemWoodAsh());
-    STRAW = registry.item(new ItemStraw());
-    GLASS_SHARD = registry.item(new ItemGlassShard());
-    ICE_SHARD = registry.item(new ItemIceShard());
+    DEBUG_WAND = registry.addItem(new ItemDebugWand());
+    WOOD_ASH = registry.addItem(new ItemWoodAsh());
+    STRAW = registry.addItem(new ItemStraw());
+    GLASS_SHARD = registry.addItem(new ItemGlassShard());
+    ICE_SHARD = registry.addItem(new ItemIceShard());
   }
 }

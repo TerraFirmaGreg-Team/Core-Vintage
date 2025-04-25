@@ -1,11 +1,10 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.framework.network.spi.datasync.DataSerializers;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -52,8 +51,7 @@ import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
-  private static final DataParameter<Long> MILKED = EntityDataManager.createKey(
-    EntityAnimalCow.class, DataSerializers.LONG);
+  private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityAnimalCow.class, DataSerializers.LONG);
 
   @SuppressWarnings("unused")
   public EntityAnimalCow(World worldIn) {
@@ -160,9 +158,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
       } else if (!world.isRemote) {
         //Return chat message indicating why this entity isn't giving milk
         TextComponentTranslation tooltip = getTooltip();
-        ModuleAnimal.NETWORK.sendTo(
-          new SCPacketSimple(SCPacketSimple.MessageCategory.ANIMAL, tooltip),
-          (EntityPlayerMP) player);
+        new SCPacketSimple(SCPacketSimple.MessageCategory.ANIMAL, tooltip).sendTo((EntityPlayerMP) player);
       }
       return true;
     } else {

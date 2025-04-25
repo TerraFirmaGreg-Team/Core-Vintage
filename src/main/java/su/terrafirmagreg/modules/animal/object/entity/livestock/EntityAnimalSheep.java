@@ -1,13 +1,12 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.network.spi.datasync.DataSerializers;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalSheep;
@@ -178,9 +177,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
         } else {
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
-            ModuleAnimal.NETWORK.sendTo(
-              new SCPacketSimple(SCPacketSimple.MessageCategory.ANIMAL, tooltip),
-              (EntityPlayerMP) player);
+            new SCPacketSimple(SCPacketSimple.MessageCategory.ANIMAL, tooltip).sendTo((EntityPlayerMP) player);
           }
         }
       }
@@ -190,9 +187,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
         if (!isReadyForAnimalProduct()) {
           TextComponentTranslation tooltip = getTooltip();
           if (tooltip != null) {
-            ModuleAnimal.NETWORK.sendTo(
-              new SCPacketSimple(SCPacketSimple.MessageCategory.ANIMAL, tooltip),
-              (EntityPlayerMP) player);
+            new SCPacketSimple(SCPacketSimple.MessageCategory.ANIMAL, tooltip).sendTo((EntityPlayerMP) player);
           }
         }
       }

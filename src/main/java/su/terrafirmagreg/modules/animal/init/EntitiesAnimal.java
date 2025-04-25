@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.init;
 
 import su.terrafirmagreg.api.util.ModelUtils;
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalAbstractHorse;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalAlpaca;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalBlackBear;
@@ -131,52 +131,52 @@ public final class EntitiesAnimal {
   public static Supplier<EntityEntry> COUGAR;
   public static Supplier<EntityEntry> COYOTE;
 
-  public static void onRegister(IRegistryManager registry) {
+  public static void onRegister(IRegistryRegistrar registrar) {
 
-    SHEEP = registry.entity("sheep", EntityAnimalSheep.class, 0xFFFFFF, 0xFF6347);
-    COW = registry.entity("cow", EntityAnimalCow.class, 0xA52A2A, 0xFFFFFF);
-    GRIZZLYBEAR = registry.entity("grizzlybear", EntityAnimalGrizzlyBear.class, 0xB22222, 0xDEB887);
-    CHICKEN = registry.entity("chicken", EntityAnimalChicken.class, 0x557755, 0xFFF91F);
-    PHEASANT = registry.entity("pheasant", EntityAnimalPheasant.class, 0x5577FF, 0xFFFA90);
-    DEER = registry.entity("deer", EntityAnimalDeer.class, 0x55FF55, 0x5FFAAF);
-    PIG = registry.entity("pig", EntityAnimalPig.class, 0xAA7722, 0xFFEBCD);
-    WOLF = registry.entity("wolf", EntityAnimalWolf.class, 0xB0ACAC, 0x796555);
-    RABBIT = registry.entity("rabbit", EntityAnimalRabbit.class, 0x885040, 0x462612);
-    HORSE = registry.entity("horse", EntityAnimalHorse.class, 0xA5886B, 0xABA400);
-    DONKEY = registry.entity("donkey", EntityAnimalDonkey.class, 0x493C32, 0x756659);
-    MULE = registry.entity("mule", EntityAnimalMule.class, 0x180200, 0x482D1A);
-    POLARBEAR = registry.entity("polarbear", EntityAnimalPolarBear.class, 0xF1FFF1, 0xA0A0A0);
-    PARROT = registry.entity("parrot", EntityAnimalParrot.class, 0x885040, 0xB0ACAC);
-    LLAMA = registry.entity("llama", EntityAnimalLlama.class, 0xA52A2A, 0xAA7722);
-    OCELOT = registry.entity("ocelot", EntityAnimalOcelot.class, 0x3527FA, 0x7F23A0);
-    PANTHER = registry.entity("panther", EntityAnimalPanther.class, 0x000066, 0x000000);
-    DUCK = registry.entity("duck", EntityAnimalDuck.class, 0xFFF91F, 0x462612);
-    ALPACA = registry.entity("alpaca", EntityAnimalAlpaca.class, 0x00CC66, 0x006633);
-    GOAT = registry.entity("goat", EntityAnimalGoat.class, 0xA0A0A0, 0x404040);
-    SABERTOOTH = registry.entity("sabertooth", EntityAnimalSaberTooth.class, 0xFF8000, 0xFFD700);
-    CAMEL = registry.entity("camel", EntityAnimalCamel.class, 0xA5886B, 0x006633);
-    LION = registry.entity("lion", EntityAnimalLion.class, 0xDAA520, 0xA0522D);
-    HYENA = registry.entity("hyena", EntityAnimalHyena.class, 0x666600, 0x331900);
-    DIREWOLF = registry.entity("direwolf", EntityAnimalDireWolf.class, 0x343434, 0x978f7e);
-    HARE = registry.entity("hare", EntityAnimalHare.class, 0x866724, 0xDADADA);
-    BOAR = registry.entity("boar", EntityAnimalBoar.class, 0x463c09, 0xe39ad8);
-    ZEBU = registry.entity("zebu", EntityAnimalZebu.class, 0x2c2507, 0xbcb38e);
-    GAZELLE = registry.entity("gazelle", EntityAnimalGazelle.class, 0xa9a76f, 0xc0ab55);
-    WILDEBEEST = registry.entity("wildebeest", EntityAnimalWildebeest.class, 0x696142, 0x9c8115);
-    QUAIL = registry.entity("quail", EntityAnimalQuail.class, 0x237ddc, 0xe3e36d);
-    GROUSE = registry.entity("grouse", EntityAnimalGrouse.class, 0xf7a100, 0x71ffd0);
-    MONGOOSE = registry.entity("mongoose", EntityAnimalMongoose.class, 0xf9f50f, 0x90ec7f);
-    TURKEY = registry.entity("turkey", EntityAnimalTurkey.class, 0xad1d1d, 0xeaa659);
-    JACKAL = registry.entity("jackal", EntityAnimalJackal.class, 0xb8762b, 0xffffff);
-    MUSKOX = registry.entity("muskox", EntityAnimalMuskOx.class, 0x620d55, 0xcdaf4f);
-    YAK = registry.entity("yak", EntityAnimalYak.class, 0x837669, 0x3e3d7c);
-    BLACKBEAR = registry.entity("blackbear", EntityAnimalBlackBear.class, 0x000000, 0xa18f6c);
-    COUGAR = registry.entity("cougar", EntityAnimalCougar.class, 0x817a00, 0xdcd889);
-    COYOTE = registry.entity("coyote", EntityAnimalCoyote.class, 0xb7bc88, 0xdac213);
+    SHEEP = registrar.addEntity("sheep", EntityAnimalSheep.class, 0xFFFFFF, 0xFF6347);
+    COW = registrar.addEntity("cow", EntityAnimalCow.class, 0xA52A2A, 0xFFFFFF);
+    GRIZZLYBEAR = registrar.addEntity("grizzlybear", EntityAnimalGrizzlyBear.class, 0xB22222, 0xDEB887);
+    CHICKEN = registrar.addEntity("chicken", EntityAnimalChicken.class, 0x557755, 0xFFF91F);
+    PHEASANT = registrar.addEntity("pheasant", EntityAnimalPheasant.class, 0x5577FF, 0xFFFA90);
+    DEER = registrar.addEntity("deer", EntityAnimalDeer.class, 0x55FF55, 0x5FFAAF);
+    PIG = registrar.addEntity("pig", EntityAnimalPig.class, 0xAA7722, 0xFFEBCD);
+    WOLF = registrar.addEntity("wolf", EntityAnimalWolf.class, 0xB0ACAC, 0x796555);
+    RABBIT = registrar.addEntity("rabbit", EntityAnimalRabbit.class, 0x885040, 0x462612);
+    HORSE = registrar.addEntity("horse", EntityAnimalHorse.class, 0xA5886B, 0xABA400);
+    DONKEY = registrar.addEntity("donkey", EntityAnimalDonkey.class, 0x493C32, 0x756659);
+    MULE = registrar.addEntity("mule", EntityAnimalMule.class, 0x180200, 0x482D1A);
+    POLARBEAR = registrar.addEntity("polarbear", EntityAnimalPolarBear.class, 0xF1FFF1, 0xA0A0A0);
+    PARROT = registrar.addEntity("parrot", EntityAnimalParrot.class, 0x885040, 0xB0ACAC);
+    LLAMA = registrar.addEntity("llama", EntityAnimalLlama.class, 0xA52A2A, 0xAA7722);
+    OCELOT = registrar.addEntity("ocelot", EntityAnimalOcelot.class, 0x3527FA, 0x7F23A0);
+    PANTHER = registrar.addEntity("panther", EntityAnimalPanther.class, 0x000066, 0x000000);
+    DUCK = registrar.addEntity("duck", EntityAnimalDuck.class, 0xFFF91F, 0x462612);
+    ALPACA = registrar.addEntity("alpaca", EntityAnimalAlpaca.class, 0x00CC66, 0x006633);
+    GOAT = registrar.addEntity("goat", EntityAnimalGoat.class, 0xA0A0A0, 0x404040);
+    SABERTOOTH = registrar.addEntity("sabertooth", EntityAnimalSaberTooth.class, 0xFF8000, 0xFFD700);
+    CAMEL = registrar.addEntity("camel", EntityAnimalCamel.class, 0xA5886B, 0x006633);
+    LION = registrar.addEntity("lion", EntityAnimalLion.class, 0xDAA520, 0xA0522D);
+    HYENA = registrar.addEntity("hyena", EntityAnimalHyena.class, 0x666600, 0x331900);
+    DIREWOLF = registrar.addEntity("direwolf", EntityAnimalDireWolf.class, 0x343434, 0x978f7e);
+    HARE = registrar.addEntity("hare", EntityAnimalHare.class, 0x866724, 0xDADADA);
+    BOAR = registrar.addEntity("boar", EntityAnimalBoar.class, 0x463c09, 0xe39ad8);
+    ZEBU = registrar.addEntity("zebu", EntityAnimalZebu.class, 0x2c2507, 0xbcb38e);
+    GAZELLE = registrar.addEntity("gazelle", EntityAnimalGazelle.class, 0xa9a76f, 0xc0ab55);
+    WILDEBEEST = registrar.addEntity("wildebeest", EntityAnimalWildebeest.class, 0x696142, 0x9c8115);
+    QUAIL = registrar.addEntity("quail", EntityAnimalQuail.class, 0x237ddc, 0xe3e36d);
+    GROUSE = registrar.addEntity("grouse", EntityAnimalGrouse.class, 0xf7a100, 0x71ffd0);
+    MONGOOSE = registrar.addEntity("mongoose", EntityAnimalMongoose.class, 0xf9f50f, 0x90ec7f);
+    TURKEY = registrar.addEntity("turkey", EntityAnimalTurkey.class, 0xad1d1d, 0xeaa659);
+    JACKAL = registrar.addEntity("jackal", EntityAnimalJackal.class, 0xb8762b, 0xffffff);
+    MUSKOX = registrar.addEntity("muskox", EntityAnimalMuskOx.class, 0x620d55, 0xcdaf4f);
+    YAK = registrar.addEntity("yak", EntityAnimalYak.class, 0x837669, 0x3e3d7c);
+    BLACKBEAR = registrar.addEntity("blackbear", EntityAnimalBlackBear.class, 0x000000, 0xa18f6c);
+    COUGAR = registrar.addEntity("cougar", EntityAnimalCougar.class, 0x817a00, 0xdcd889);
+    COYOTE = registrar.addEntity("coyote", EntityAnimalCoyote.class, 0xb7bc88, 0xdac213);
   }
 
   @SideOnly(Side.CLIENT)
-  public static void onClientRegister(IRegistryManager registry) {
+  public static void onClientRegister(IRegistryRegistrar registrar) {
 
     ModelUtils.entity(EntityAnimalSheep.class, RenderAnimalSheep::new);
     ModelUtils.entity(EntityAnimalCow.class, RenderAnimalCow::new);

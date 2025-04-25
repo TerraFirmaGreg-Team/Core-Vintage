@@ -1,20 +1,19 @@
 package su.terrafirmagreg.modules.core.network;
 
-import su.terrafirmagreg.TerraFirmaGreg;
-import su.terrafirmagreg.framework.network.spi.packet.PacketBase;
+import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
+import su.terrafirmagreg.api.base.network.packet.spi.NetworkPacketBase;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import net.dries007.tfc.ConfigTFC;
 
 import java.util.function.BooleanSupplier;
 
-public class SCPacketSimple extends PacketBase<SCPacketSimple> {
+public class SCPacketSimple extends NetworkPacketBase implements INetworkPacket.Client {
 
   private ITextComponent text;
   private MessageCategory category;
@@ -40,29 +39,13 @@ public class SCPacketSimple extends PacketBase<SCPacketSimple> {
     return new SCPacketSimple(category, new TextComponentString(localized));
   }
 
-//  @Override
-//  public void fromBytes(ByteBuf buf) {
-//    category = MessageCategory.values()[buf.readInt()];
-//    text = ITextComponent.Serializer.jsonToComponent(buf.readCharSequence(buf.readInt(), Charset.defaultCharset()).toString());
-//  }
-//
-//  @Override
-//  public void toBytes(ByteBuf buf) {
-//    buf.writeInt(category.ordinal());
-//    String json = ITextComponent.Serializer.componentToJson(text);
-//    buf.writeInt(json.length());
-//    buf.writeCharSequence(json, Charset.defaultCharset());
-//  }
 
   @Override
-  public IMessage handleMessage(MessageContext context) {
-    TerraFirmaGreg.getProxy().getThreadListener(context).addScheduledTask(() -> {
-      EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(context);
-      if (player != null) {
-        player.sendStatusMessage(text, category.displayToToolbar.getAsBoolean());
-      }
-    });
-    return null;
+  public void process(Minecraft minecraft) {
+    EntityPlayer player = minecraft.player;
+    if (player != null) {
+      player.sendStatusMessage(text, category.displayToToolbar.getAsBoolean());
+    }
   }
 
 

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.core.event.player;
 
-import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.network.SCPacketPlayerDataUpdate;
@@ -51,7 +50,7 @@ public class EventHandlerPlayerLoggedIn {
       if (playerData != null) {
 
         // Sync
-        ModuleCore.NETWORK.sendTo(new SCPacketPlayerDataUpdate(playerData.serializeNBT()), playerMP);
+        new SCPacketPlayerDataUpdate(playerData.serializeNBT()).sendTo(playerMP);
       }
     }
   }

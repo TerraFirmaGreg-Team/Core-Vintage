@@ -1,12 +1,13 @@
 package su.terrafirmagreg.modules.device;
 
-import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
+import su.terrafirmagreg.framework.manager.network.api.INetworkRegistrar;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
-import su.terrafirmagreg.framework.network.api.INetworkManager;
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.FeaturesDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.init.PacketsDevice;
 import su.terrafirmagreg.modules.device.init.RecipesDevice;
@@ -14,18 +15,12 @@ import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.plugin.top.TheOneProbeDevice;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Supplier;
-
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.modules.ModulesContainer.DEVICE;
-
 @ModuleInfo(
-  moduleID = DEVICE,
-  containerID = MOD_ID,
-  name = "Device",
+  id = "device",
   author = "Xikaro",
   version = "1.0.0",
   description = "Device module"
@@ -34,31 +29,36 @@ public final class ModuleDevice extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleDevice.class.getSimpleName());
 
-  public static Supplier<BaseItemGroup> GROUP;
-  public static IRegistryManager REGISTRY;
-  public static INetworkManager NETWORK;
 
   public ModuleDevice() {
 
-    GROUP = BaseItemGroup.of(this, "bellows");
-    REGISTRY = enableRegistry().group(GROUP);
-    NETWORK = enableNetwork();
+    enableRegistry();
+    enableNetwork();
+    enableCommand();
+    enableFeature();
+  }
+
+  @Override
+  public void onNetwork(INetworkRegistrar registrar) {
+
+    PacketsDevice.onRegister(registrar);
+  }
+
+
+  @Override
+  public void onRegistry(IRegistryRegistrar registrar) {
+    registrar.group("bellows");
+
+    BlocksDevice.onRegister(registrar);
+    ItemsDevice.onRegister(registrar);
+    SoundsDevice.onRegister(registrar);
 
   }
 
   @Override
-  public void onNetworkRegister(INetworkManager network) {
+  public void onFeature(IFeatureRegistrar registrar) {
 
-    PacketsDevice.onRegister(network);
-  }
-
-
-  @Override
-  public void onRegister(IRegistryManager registry) {
-    BlocksDevice.onRegister(registry);
-    ItemsDevice.onRegister(registry);
-    SoundsDevice.onRegister(registry);
-
+    FeaturesDevice.onRegister(registrar);
   }
 
   @Override
@@ -68,9 +68,11 @@ public final class ModuleDevice extends ModuleBase {
   }
 
   @Override
-  public void onRecipeRegister() {
+  public void onPostInit(FMLPostInitializationEvent event) {
+
     RecipesDevice.onRegister();
   }
+
 
   @Override
   public @NotNull LoggingHelper getLogger() {

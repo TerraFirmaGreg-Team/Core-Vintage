@@ -1,13 +1,11 @@
 package su.terrafirmagreg.modules.core.network;
 
-import su.terrafirmagreg.TerraFirmaGreg;
 import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
-import su.terrafirmagreg.framework.network.spi.packet.PacketBase;
+import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
+import su.terrafirmagreg.api.base.network.packet.spi.NetworkPacketBase;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 // *
 // * @author AlcatrazEscapee
 // */
-public class CSPacketGuiButton extends PacketBase<CSPacketGuiButton> {
+public class CSPacketGuiButton extends NetworkPacketBase implements INetworkPacket.Server {
 
   private int buttonID;
   private NBTTagCompound extraNBT;
@@ -33,17 +31,12 @@ public class CSPacketGuiButton extends PacketBase<CSPacketGuiButton> {
     this.buttonID = buttonID;
     this.extraNBT = extraNBT;
   }
+  
 
   @Override
-  public IMessage handleMessage(MessageContext context) {
-    EntityPlayer player = TerraFirmaGreg.getProxy().getPlayer(context);
-    if (player != null) {
-      TerraFirmaGreg.getProxy().getThreadListener(context).addScheduledTask(() -> {
-        if (player.openContainer instanceof IButtonHandler buttonHandler) {
-          buttonHandler.onButtonPress(buttonID, extraNBT);
-        }
-      });
+  public void process(EntityPlayerMP player) {
+    if (player.openContainer instanceof IButtonHandler buttonHandler) {
+      buttonHandler.onButtonPress(buttonID, extraNBT);
     }
-    return null;
   }
 }

@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
 import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
-import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.button.GuiButtonPowderkegSeal;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
@@ -16,11 +15,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import org.lwjgl.opengl.GL11;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-
-import org.lwjgl.opengl.GL11;
 
 public class GuiPowderkeg extends BaseGuiContainerTile<TilePowderKeg> {
 
@@ -77,7 +76,7 @@ public class GuiPowderkeg extends BaseGuiContainerTile<TilePowderKeg> {
   @Override
   protected void actionPerformed(@NotNull GuiButton button) throws IOException {
     if (button instanceof GuiButtonPowderkegSeal) {
-      ModuleDevice.NETWORK.sendToServer(new CSPacketGuiButton(button.id));
+      new CSPacketGuiButton(button.id).sendToServer();
     }
     super.actionPerformed(button);
   }

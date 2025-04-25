@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.init;
 
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.animal.object.item.ItemAnimalBladder;
 import su.terrafirmagreg.modules.animal.object.item.ItemAnimalHalter;
 import su.terrafirmagreg.modules.animal.object.item.ItemAnimalSilkCloth;
@@ -19,14 +19,14 @@ public final class ItemsAnimal {
   public static Supplier<ItemAnimalSilkCloth> SILK_CLOTH;
   public static Supplier<ItemAnimalHalter> HALTER;
 
-  public static void onRegister(IRegistryManager registry) {
+  public static void onRegister(IRegistryRegistrar registrar) {
 
-    BLADDER = registry.item(new ItemAnimalBladder());
-    WOOL = registry.item(new ItemAnimalWool());
-    WOOL_YARN = registry.item(new ItemAnimalWoolYarn());
-    WOOL_CLOTH = registry.item(new ItemAnimalWoolCloth());
-    SILK_CLOTH = registry.item(new ItemAnimalSilkCloth());
-    HALTER = registry.item(new ItemAnimalHalter());
+    BLADDER = registrar.addItem(new ItemAnimalBladder());
+    WOOL = registrar.addItem(new ItemAnimalWool());
+    WOOL_YARN = registrar.addItem(new ItemAnimalWoolYarn());
+    WOOL_CLOTH = registrar.addItem(new ItemAnimalWoolCloth());
+    SILK_CLOTH = registrar.addItem(new ItemAnimalSilkCloth());
+    HALTER = registrar.addItem(new ItemAnimalHalter());
 
   }
 }

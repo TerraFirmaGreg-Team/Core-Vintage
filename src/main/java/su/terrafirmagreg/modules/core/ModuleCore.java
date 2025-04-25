@@ -1,11 +1,12 @@
 package su.terrafirmagreg.modules.core;
 
-import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
+import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
+import su.terrafirmagreg.framework.manager.network.api.INetworkRegistrar;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
-import su.terrafirmagreg.framework.network.api.INetworkManager;
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityHandlerAmbiental;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
@@ -44,8 +45,10 @@ import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedOut;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerRespawn;
 import su.terrafirmagreg.modules.core.helper.OreDictHelper;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.core.init.CommandsCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.EntitiesCore;
+import su.terrafirmagreg.modules.core.init.FeaturesCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.LootTablesCore;
@@ -53,6 +56,7 @@ import su.terrafirmagreg.modules.core.init.PacketsCore;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -61,53 +65,55 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.function.Supplier;
-
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.modules.ModulesContainer.CORE;
 
 @ModuleInfo(
-  moduleID = CORE,
-  containerID = MOD_ID,
-  name = "Core",
-  coreModule = true,
+  id = "core",
   author = "Xikaro",
   version = "1.0.0",
-  description = {
-    "Core TerraFirmaGreg content. ",
-    "Disabling this disables the entire mod and all its module."
-  })
+  description = "Core TerraFirmaGreg content."
+)
 public final class ModuleCore extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class.getSimpleName());
 
-  public static IRegistryManager REGISTRY;
-  public static INetworkManager NETWORK;
-
-  public static Supplier<BaseItemGroup> GROUP;
 
   public ModuleCore() {
 
-    GROUP = BaseItemGroup.of(this, "wand");
-    REGISTRY = enableRegistry().group(GROUP);
-    NETWORK = enableNetwork();
+    enableRegistry();
+    enableNetwork();
+    enableCommand();
+    enableFeature();
 
   }
 
   @Override
-  public void onRegister(IRegistryManager registry) {
-    FluidsCore.onRegister(registry);
-    BlocksCore.onRegister(registry);
-    ItemsCore.onRegister(registry);
-    EntitiesCore.onRegister(registry);
-    EffectsCore.onRegister(registry);
-    LootTablesCore.onRegister(registry);
+  public void onRegistry(IRegistryRegistrar registrar) {
+    registrar.group("wand");
+
+    FluidsCore.onRegister(registrar);
+    BlocksCore.onRegister(registrar);
+    ItemsCore.onRegister(registrar);
+    EntitiesCore.onRegister(registrar);
+    EffectsCore.onRegister(registrar);
+    LootTablesCore.onRegister(registrar);
   }
 
   @Override
-  public void onNetworkRegister(INetworkManager network) {
+  public void onCommand(ICommandRegistrar registrar) {
 
-    PacketsCore.onRegister(network);
+    CommandsCore.onRegister(registrar);
+  }
+
+  @Override
+  public void onFeature(IFeatureRegistrar registrar) {
+
+    FeaturesCore.onRegister(registrar);
+  }
+
+  @Override
+  public void onNetwork(INetworkRegistrar registrar) {
+
+    PacketsCore.onRegister(registrar);
   }
 
   @Override
@@ -145,7 +151,7 @@ public final class ModuleCore extends ModuleBase {
   }
 
   @Override
-  public void onRecipeRegister() {
+  public void onPostInit(FMLPostInitializationEvent event) {
     OreDictHelper.init();
   }
 

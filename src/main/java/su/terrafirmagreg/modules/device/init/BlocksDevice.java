@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.device.object.block.BlockAlloyCalculator;
 import su.terrafirmagreg.modules.device.object.block.BlockBearTrap;
 import su.terrafirmagreg.modules.device.object.block.BlockBellows;
@@ -88,48 +88,48 @@ public final class BlocksDevice {
 //  public static Supplier<BlockDryingMat> DRYING_MAT;
 
 
-  public static void onRegister(IRegistryManager registry) {
+  public static void onRegister(IRegistryRegistrar registrar) {
 
-    ALLOY_CALCULATOR = registry.block(new BlockAlloyCalculator());
-    BEAR_TRAP = registry.block(new BlockBearTrap());
-    SNARE = registry.block(new BlockSnare());
-//    CRATE = registry.block(new BlockCrate());
-    BELLOWS = registry.block(new BlockBellows());
-    BLAST_FURNACE = registry.block(new BlockBlastFurnace());
-    BLOOM = registry.block(new BlockBloom());
-    BLOOMERY = registry.block(new BlockBloomery());
-    CHARCOAL_FORGE = registry.block(new BlockCharcoalForge());
-    CHARCOAL_PILE = registry.block(new BlockCharcoalPile());
-    CRUCIBLE = registry.block(new BlockCrucible());
-    FIRE_PIT = registry.block(new BlockFirePit());
-    PIT_KILN = registry.block(new BlockPitKiln());
-//    QUERN_MANUAL = registry.block(new BlockQuernManual());
-//    QUERN_HORSE = registry.block(new BlockQuernHorse());
-    MOLTEN = registry.block(new BlockMolten());
-//    LOG_PILE = registry.block(new BlockLogPile());
-    CELLAR_SHELF = registry.block(new BlockCellarShelf());
-    CELLAR_DOOR = registry.block(new BlockCellarDoor());
-    CELLAR_WALL = registry.block(new BlockCellarWall());
-    ICE_BUNKER = registry.block(new BlockIceBunker());
-    INFECTED_AIR = registry.block(new BlockInfectedAir());
-    FREEZE_DRYER = registry.block(new BlockFreezeDryer());
-    POWDERKEG = registry.block(new BlockPowderKeg());
-//    THATCH_BED = registry.block(new BlockThatchBed());
-//    GRINDSTONE_MANUAL = registry.block(new BlockGrindstoneManual());
-//    ELECTRIC_FORGE = registry.block(new BlockElectricForge());
-//    INDUCTION_CRUCIBLE = registry.block(new BlockInductionCrucible());
-//    FRIDGE = registry.block(new BlockFridge());
-    LATEX_EXTRACTOR = registry.block(new BlockLatexExtractor());
-    SMELTERY_CAULDRON = registry.block(new BlockSmelteryCauldron());
-    SMELTERY_FIREBOX = registry.block(new BlockSmelteryFirebox());
-//    GREENHOUSE_DOOR = registry.block(new BlockGreenhouseDoor());
-//    GREENHOUSE_ROOF = registry.block(new BlockGreenhouseRoof());
-//    GREENHOUSE_WALL = registry.block(new BlockGreenhouseWall());
-//    OVEN = registry.block(new BlockOven());
-//    OVEN_WALL = registry.block(new BlockOvenWall());
-//    OVEN_CHIMNEY = registry.block(new BlockOvenChimney());
-//    LEAF_MAT = registry.block(new BlockLeafMat());
-//    DRYING_MAT = registry.block(new BlockDryingMat());
+    ALLOY_CALCULATOR = registrar.addBlock(new BlockAlloyCalculator());
+    BEAR_TRAP = registrar.addBlock(new BlockBearTrap());
+    SNARE = registrar.addBlock(new BlockSnare());
+//    CRATE = registrar.addBlock(new BlockCrate());
+    BELLOWS = registrar.addBlock(new BlockBellows());
+    BLAST_FURNACE = registrar.addBlock(new BlockBlastFurnace());
+    BLOOM = registrar.addBlock(new BlockBloom());
+    BLOOMERY = registrar.addBlock(new BlockBloomery());
+    CHARCOAL_FORGE = registrar.addBlock(new BlockCharcoalForge());
+    CHARCOAL_PILE = registrar.addBlock(new BlockCharcoalPile());
+    CRUCIBLE = registrar.addBlock(new BlockCrucible());
+    FIRE_PIT = registrar.addBlock(new BlockFirePit());
+    PIT_KILN = registrar.addBlock(new BlockPitKiln());
+//    QUERN_MANUAL = registrar.addBlock(new BlockQuernManual());
+//    QUERN_HORSE = registrar.addBlock(new BlockQuernHorse());
+    MOLTEN = registrar.addBlock(new BlockMolten());
+//    LOG_PILE = registrar.addBlock(new BlockLogPile());
+    CELLAR_SHELF = registrar.addBlock(new BlockCellarShelf());
+    CELLAR_DOOR = registrar.addBlock(new BlockCellarDoor());
+    CELLAR_WALL = registrar.addBlock(new BlockCellarWall());
+    ICE_BUNKER = registrar.addBlock(new BlockIceBunker());
+    INFECTED_AIR = registrar.addBlock(new BlockInfectedAir());
+    FREEZE_DRYER = registrar.addBlock(new BlockFreezeDryer());
+    POWDERKEG = registrar.addBlock(new BlockPowderKeg());
+//    THATCH_BED = registrar.addBlock(new BlockThatchBed());
+//    GRINDSTONE_MANUAL = registrar.addBlock(new BlockGrindstoneManual());
+//    ELECTRIC_FORGE = registrar.addBlock(new BlockElectricForge());
+//    INDUCTION_CRUCIBLE = registrar.addBlock(new BlockInductionCrucible());
+//    FRIDGE = registrar.addBlock(new BlockFridge());
+    LATEX_EXTRACTOR = registrar.addBlock(new BlockLatexExtractor());
+    SMELTERY_CAULDRON = registrar.addBlock(new BlockSmelteryCauldron());
+    SMELTERY_FIREBOX = registrar.addBlock(new BlockSmelteryFirebox());
+//    GREENHOUSE_DOOR = registrar.addBlock(new BlockGreenhouseDoor());
+//    GREENHOUSE_ROOF = registrar.addBlock(new BlockGreenhouseRoof());
+//    GREENHOUSE_WALL = registrar.addBlock(new BlockGreenhouseWall());
+//    OVEN = registrar.addBlock(new BlockOven());
+//    OVEN_WALL = registrar.addBlock(new BlockOvenWall());
+//    OVEN_CHIMNEY = registrar.addBlock(new BlockOvenChimney());
+//    LEAF_MAT = registrar.addBlock(new BlockLeafMat());
+//    DRYING_MAT = registrar.addBlock(new BlockDryingMat());
 
   }
 }

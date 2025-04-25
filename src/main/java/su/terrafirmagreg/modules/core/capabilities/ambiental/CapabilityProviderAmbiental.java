@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.core.capabilities.ambiental;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalModifierStorage;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierBase;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierBlock;
@@ -33,7 +32,7 @@ public class CapabilityProviderAmbiental implements ICapabilityAmbiental {
   public static final String TAG_TEMPERATURE = "temperature";
   public static final String TAG_TARGET = "target";
   public static final String TAG_POTENCY = "potency";
-  
+
 
   public static final float BAD_MULTIPLIER = 0.002f;
   public static final float GOOD_MULTIPLIER = 0.002f;
@@ -242,7 +241,7 @@ public class CapabilityProviderAmbiental implements ICapabilityAmbiental {
   public void updateAndSync() {
     EntityPlayer player = getPlayer();
     if (player instanceof EntityPlayerMP entityPlayerMP) {
-      ModuleCore.NETWORK.sendTo(new SCPacketAmbiental(serializeNBT()), entityPlayerMP);
+      new SCPacketAmbiental(serializeNBT()).sendTo(entityPlayerMP);
     }
   }
 

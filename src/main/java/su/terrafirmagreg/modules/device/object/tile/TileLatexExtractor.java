@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.SCPacketLatexExtractor;
 
 import net.minecraft.block.state.IBlockState;
@@ -195,7 +194,7 @@ public class TileLatexExtractor extends BaseTileTickable {
       }
       if (++serverUpdate % 40 == 0) {
         serverUpdate = 0;
-        ModuleDevice.NETWORK.sendToAllAround(new SCPacketLatexExtractor(this), world.provider.getDimension(), pos, 64);
+        new SCPacketLatexExtractor(this).sendToAllAround(world.provider.getDimension(), pos, 64);
       }
     }
   }

@@ -1,12 +1,11 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.framework.network.spi.datasync.DataSerializers;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
-import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
@@ -417,10 +416,10 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
           if (!this.world.isRemote) {
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
-              ModuleAnimal.NETWORK.sendTo(SCPacketSimple.translateMessage(
-                  SCPacketSimple.MessageCategory.ANIMAL,
-                  ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()),
-                (EntityPlayerMP) player);
+              SCPacketSimple.translateMessage(
+                SCPacketSimple.MessageCategory.ANIMAL,
+                ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()
+              ).sendTo((EntityPlayerMP) player);
             }
           }
         }

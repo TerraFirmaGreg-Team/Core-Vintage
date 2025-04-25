@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.init;
 
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 
 import net.minecraft.util.ResourceLocation;
 
@@ -48,48 +48,48 @@ public final class LootTablesAnimal {
   public static ResourceLocation ANIMALS_YAK;
   public static ResourceLocation ANIMALS_ZEBU;
 
-  public static void onRegister(IRegistryManager registry) {
+  public static void onRegister(IRegistryRegistrar registrar) {
 
-    ANIMALS_BLACK_BEAR = registry.loot("black_bear");
-    ANIMALS_GRIZZLY_BEAR = registry.loot("grizzly_bear");
-    ANIMALS_POLAR_BEAR = registry.loot("polar_bear");
-    ANIMALS_CHICKEN = registry.loot("chicken");
-    ANIMALS_COW = registry.loot("cow");
-    ANIMALS_DEER = registry.loot("deer");
-    ANIMALS_PHEASANT = registry.loot("pheasant");
-    ANIMALS_PIG = registry.loot("pig");
-    ANIMALS_SHEEP = registry.loot("sheep");
-    ANIMALS_RABBIT = registry.loot("rabbit");
-    ANIMALS_WOLF = registry.loot("wolf");
-    ANIMALS_HORSE = registry.loot("horse");
-    ANIMALS_ALPACA = registry.loot("alpaca");
-    ANIMALS_DUCK = registry.loot("duck");
-    ANIMALS_GOAT = registry.loot("goat");
-    ANIMALS_CAMEL = registry.loot("camel");
-    ANIMALS_COUGAR = registry.loot("cougar");
-    ANIMALS_LLAMA = registry.loot("llama");
-    ANIMALS_OCELOT = registry.loot("ocelot");
-    ANIMALS_SQUID = registry.loot("squid");
-    ANIMALS_PARROT = registry.loot("parrot");
-    ANIMALS_HYENA = registry.loot("hyena");
-    ANIMALS_MUSKOX = registry.loot("muskox");
-    ANIMALS_BOAR = registry.loot("boar");
-    ANIMALS_COYOTE = registry.loot("coyote");
-    ANIMALS_DIREWOLF = registry.loot("direwolf");
-    ANIMALS_DONKEY = registry.loot("donkey");
-    ANIMALS_GAZELLE = registry.loot("gazelle");
-    ANIMALS_GROUSE = registry.loot("grouse");
-    ANIMALS_HARE = registry.loot("hare");
-    ANIMALS_JACKAL = registry.loot("jackal");
-    ANIMALS_LION = registry.loot("lion");
-    ANIMALS_MONGOOSE = registry.loot("mongoose");
-    ANIMALS_MULE = registry.loot("mule");
-    ANIMALS_PANTHER = registry.loot("panther");
-    ANIMALS_QUAIL = registry.loot("quail");
-    ANIMALS_SABERTOOTH = registry.loot("sabertooth");
-    ANIMALS_TURKEY = registry.loot("turkey");
-    ANIMALS_WILDEBEEST = registry.loot("wildebeest");
-    ANIMALS_YAK = registry.loot("yak");
-    ANIMALS_ZEBU = registry.loot("zebu");
+    ANIMALS_BLACK_BEAR = registrar.addLoot("black_bear");
+    ANIMALS_GRIZZLY_BEAR = registrar.addLoot("grizzly_bear");
+    ANIMALS_POLAR_BEAR = registrar.addLoot("polar_bear");
+    ANIMALS_CHICKEN = registrar.addLoot("chicken");
+    ANIMALS_COW = registrar.addLoot("cow");
+    ANIMALS_DEER = registrar.addLoot("deer");
+    ANIMALS_PHEASANT = registrar.addLoot("pheasant");
+    ANIMALS_PIG = registrar.addLoot("pig");
+    ANIMALS_SHEEP = registrar.addLoot("sheep");
+    ANIMALS_RABBIT = registrar.addLoot("rabbit");
+    ANIMALS_WOLF = registrar.addLoot("wolf");
+    ANIMALS_HORSE = registrar.addLoot("horse");
+    ANIMALS_ALPACA = registrar.addLoot("alpaca");
+    ANIMALS_DUCK = registrar.addLoot("duck");
+    ANIMALS_GOAT = registrar.addLoot("goat");
+    ANIMALS_CAMEL = registrar.addLoot("camel");
+    ANIMALS_COUGAR = registrar.addLoot("cougar");
+    ANIMALS_LLAMA = registrar.addLoot("llama");
+    ANIMALS_OCELOT = registrar.addLoot("ocelot");
+    ANIMALS_SQUID = registrar.addLoot("squid");
+    ANIMALS_PARROT = registrar.addLoot("parrot");
+    ANIMALS_HYENA = registrar.addLoot("hyena");
+    ANIMALS_MUSKOX = registrar.addLoot("muskox");
+    ANIMALS_BOAR = registrar.addLoot("boar");
+    ANIMALS_COYOTE = registrar.addLoot("coyote");
+    ANIMALS_DIREWOLF = registrar.addLoot("direwolf");
+    ANIMALS_DONKEY = registrar.addLoot("donkey");
+    ANIMALS_GAZELLE = registrar.addLoot("gazelle");
+    ANIMALS_GROUSE = registrar.addLoot("grouse");
+    ANIMALS_HARE = registrar.addLoot("hare");
+    ANIMALS_JACKAL = registrar.addLoot("jackal");
+    ANIMALS_LION = registrar.addLoot("lion");
+    ANIMALS_MONGOOSE = registrar.addLoot("mongoose");
+    ANIMALS_MULE = registrar.addLoot("mule");
+    ANIMALS_PANTHER = registrar.addLoot("panther");
+    ANIMALS_QUAIL = registrar.addLoot("quail");
+    ANIMALS_SABERTOOTH = registrar.addLoot("sabertooth");
+    ANIMALS_TURKEY = registrar.addLoot("turkey");
+    ANIMALS_WILDEBEEST = registrar.addLoot("wildebeest");
+    ANIMALS_YAK = registrar.addLoot("yak");
+    ANIMALS_ZEBU = registrar.addLoot("zebu");
   }
 }

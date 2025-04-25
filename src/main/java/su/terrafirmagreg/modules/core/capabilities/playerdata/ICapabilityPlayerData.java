@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.core.capabilities.playerdata;
 
-import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.feature.skill.Skill;
 import su.terrafirmagreg.modules.core.feature.skill.SkillType;
 import su.terrafirmagreg.modules.core.network.SCPacketPlayerDataUpdate;
@@ -85,7 +84,7 @@ public interface ICapabilityPlayerData extends ICapabilitySerializable<NBTTagCom
   default void updateAndSync() {
     EntityPlayer player = getPlayer();
     if (player instanceof EntityPlayerMP entityPlayerMP) {
-      ModuleCore.NETWORK.sendTo(new SCPacketPlayerDataUpdate(serializeNBT()), entityPlayerMP);
+      new SCPacketPlayerDataUpdate(serializeNBT()).sendTo(entityPlayerMP);
     }
   }
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 
 import net.minecraft.util.SoundEvent;
 
@@ -20,18 +20,18 @@ public final class SoundsDevice {
   public static Supplier<SoundEvent> LATEX_EXTRACTOR_BOWL_GRAB;
   public static Supplier<SoundEvent> LATEX_EXTRACTOR_TRUNK_SCRATH;
 
-  public static void onRegister(IRegistryManager registry) {
+  public static void onRegister(IRegistryRegistrar registrar) {
 
-    FLASK_BREAK = registry.sound("item/flaskbreak");
-    FIRE_STARTER = registry.sound("item/firestarter");
-    BELLOWS_BLOW_AIR = registry.sound("block/bellows/blow/air");
-    FRIDGE_OPEN = registry.sound("block/fridge/open");
-    FRIDGE_CLOSE = registry.sound("block/fridge/close");
-    INDUCTION_WORK = registry.sound("block/induction_smelter/work");
-    LATEX_EXTRACTOR_GROOVE_FIT = registry.sound("block/latex_extractor/fit/groove");
-    LATEX_EXTRACTOR_MOUNT_FIT = registry.sound("block/latex_extractor/fit/mount");
-    LATEX_EXTRACTOR_BOWL_FIT = registry.sound("block/latex_extractor/fit/bowl");
-    LATEX_EXTRACTOR_BOWL_GRAB = registry.sound("block/latex_extractor/grab/bowl");
-    LATEX_EXTRACTOR_TRUNK_SCRATH = registry.sound("block/latex_extractor/trunk/scratch");
+    FLASK_BREAK = registrar.addSound("item/flaskbreak");
+    FIRE_STARTER = registrar.addSound("item/firestarter");
+    BELLOWS_BLOW_AIR = registrar.addSound("block/bellows/blow/air");
+    FRIDGE_OPEN = registrar.addSound("block/fridge/open");
+    FRIDGE_CLOSE = registrar.addSound("block/fridge/close");
+    INDUCTION_WORK = registrar.addSound("block/induction_smelter/work");
+    LATEX_EXTRACTOR_GROOVE_FIT = registrar.addSound("block/latex_extractor/fit/groove");
+    LATEX_EXTRACTOR_MOUNT_FIT = registrar.addSound("block/latex_extractor/fit/mount");
+    LATEX_EXTRACTOR_BOWL_FIT = registrar.addSound("block/latex_extractor/fit/bowl");
+    LATEX_EXTRACTOR_BOWL_GRAB = registrar.addSound("block/latex_extractor/grab/bowl");
+    LATEX_EXTRACTOR_TRUNK_SCRATH = registrar.addSound("block/latex_extractor/trunk/scratch");
   }
 }

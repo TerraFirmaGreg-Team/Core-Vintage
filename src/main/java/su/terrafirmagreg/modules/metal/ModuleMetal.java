@@ -11,13 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.modules.ModulesContainer.METAL;
-
 @ModuleInfo(
-  moduleID = METAL,
-  containerID = MOD_ID,
-  name = "Metal",
+  id = "metal",
   author = "Xikaro",
   version = "1.0.0"
 )

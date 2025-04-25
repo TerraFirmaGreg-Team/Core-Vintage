@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.api.data.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.network.CSPacketFreezeDryer;
 import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 
@@ -136,19 +135,19 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
 
     if (mouseX >= guiLeft + 61 && mouseX <= guiLeft + 79 && mouseY >= guiTop + 16 && mouseY <= guiTop + 34) {
       if (!tile.isSealed()) {
-        ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos(), 0, true));
+        new CSPacketFreezeDryer(tile.getPos(), 0, true).sendToServer();
         // tile.seal();
       } else {
-        ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos(), 0, false));
+        new CSPacketFreezeDryer(tile.getPos(), 0, false).sendToServer();
         //tile.unseal();
       }
     } else if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 159 && mouseY >= guiTop + 52 && mouseY <= guiTop + 70) {
       if ((tile.isSealed() && tile.getPower() > 0) || tile.isPump()) {
         if (!tile.isPump()) {
-          ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos(), 1, true));
+          new CSPacketFreezeDryer(tile.getPos(), 1, true).sendToServer();
           //tile.startPump();
         } else {
-          ModuleDevice.NETWORK.sendToServer(new CSPacketFreezeDryer(tile.getPos(), 1, false));
+          new CSPacketFreezeDryer(tile.getPos(), 1, false).sendToServer();
           //tile.stopPump();
         }
       }

@@ -1,12 +1,14 @@
 package su.terrafirmagreg;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
-import su.terrafirmagreg.api.util.AnnotationUtils;
-import su.terrafirmagreg.framework.module.ModuleManager;
-import su.terrafirmagreg.framework.module.api.IModuleManager;
+import su.terrafirmagreg.framework.Framework;
+import su.terrafirmagreg.modules.animal.ModuleAnimal;
+import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.device.ModuleDevice;
+import su.terrafirmagreg.modules.integration.ModuleIntegration;
+import su.terrafirmagreg.modules.rock.ModuleRock;
 import su.terrafirmagreg.proxy.IProxy;
 
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -21,8 +23,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
-import lombok.Getter;
-
 import static su.terrafirmagreg.Tags.CLIENT_PROXY;
 import static su.terrafirmagreg.Tags.DEPENDENCIES;
 import static su.terrafirmagreg.Tags.MOD_ID;
@@ -32,82 +32,85 @@ import static su.terrafirmagreg.Tags.SERVER_PROXY;
 
 @SuppressWarnings("unused")
 @Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = DEPENDENCIES)
-public class TerraFirmaGreg {
+public class TerraFirmaGreg extends Framework {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of();
 
-  @Getter
   @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
-  public static IProxy proxy;
+  public static IProxy PROXY;
 
-  @Getter
   @Mod.Instance(MOD_ID)
-  private static TerraFirmaGreg instance;
+  public static TerraFirmaGreg INSTANCE;
 
-  private static IModuleManager moduleManager;
 
   public TerraFirmaGreg() {
-    FluidRegistry.enableUniversalBucket();
+    super(MOD_ID);
+
+    this.addModule(new ModuleCore());
+    this.addModule(new ModuleRock());
+    this.addModule(new ModuleDevice());
+    this.addModule(new ModuleAnimal());
+    this.addModule(new ModuleIntegration());
   }
 
   @EventHandler
   public void onConstruction(FMLConstructionEvent event) {
-    AnnotationUtils.configureAsmData(event);
-    moduleManager = ModuleManager.of(MOD_ID);
-    moduleManager.routeEvent(event);
+
+    this.configure(event);
+    this.routeEvent(event);
   }
 
   @EventHandler
-  public void preInit(FMLPreInitializationEvent event) {
+  public void onPreInit(FMLPreInitializationEvent event) {
 
-    moduleManager.routeEvent(event);
+    this.routeEvent(event);
   }
 
   @EventHandler
-  public void init(FMLInitializationEvent event) {
+  public void onInit(FMLInitializationEvent event) {
 
-    moduleManager.routeEvent(event);
+    this.routeEvent(event);
   }
 
   @EventHandler
-  public void postInit(FMLPostInitializationEvent event) {
+  public void onPostInit(FMLPostInitializationEvent event) {
 
-    moduleManager.routeEvent(event);
+    this.routeEvent(event);
   }
 
   @EventHandler
-  public void loadComplete(FMLLoadCompleteEvent event) {
+  public void onLoadComplete(FMLLoadCompleteEvent event) {
 
-    moduleManager.routeEvent(event);
+    this.routeEvent(event);
   }
 
   @EventHandler
-  public void serverAboutToStart(FMLServerAboutToStartEvent event) {
+  public void onServerAboutToStart(FMLServerAboutToStartEvent event) {
 
-    moduleManager.routeEvent(event);
+    this.routeEvent(event);
   }
 
   @EventHandler
-  public void serverStarting(FMLServerStartingEvent event) {
+  public void onServerStarting(FMLServerStartingEvent event) {
 
-    moduleManager.routeEvent(event);
+    this.routeEvent(event);
   }
 
   @EventHandler
-  public void serverStarted(FMLServerStartedEvent event) {
+  public void onServerStarted(FMLServerStartedEvent event) {
 
-    moduleManager.routeEvent(event);
+    this.routeEvent(event);
   }
 
   @EventHandler
-  public void serverStopping(FMLServerStoppingEvent event) {
+  public void onServerStopping(FMLServerStoppingEvent event) {
 
-    moduleManager.routeEvent(event);
+    this.routeEvent(event);
   }
 
   @EventHandler
-  public void serverStopped(FMLServerStoppedEvent event) {
+  public void onServerStopped(FMLServerStoppedEvent event) {
 
-    moduleManager.routeEvent(event);
+    this.routeEvent(event);
   }
 }

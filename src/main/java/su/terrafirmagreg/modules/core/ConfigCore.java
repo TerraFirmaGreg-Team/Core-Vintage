@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.modules.core.config.ConfigBlock;
 import su.terrafirmagreg.modules.core.config.ConfigEntity;
+import su.terrafirmagreg.modules.core.config.ConfigFeature;
 import su.terrafirmagreg.modules.core.config.ConfigItem;
 import su.terrafirmagreg.modules.core.config.ConfigMisc;
 
@@ -30,6 +31,10 @@ public class ConfigCore {
   @Config.Name("Misc")
   @Config.Comment("Misc setting")
   public static final ConfigMisc MISC = new ConfigMisc();
+
+  @Config.Name("Feature")
+  @Config.Comment("Feature setting")
+  public static final ConfigFeature FEATURE = new ConfigFeature();
 
   static {
     ConfigAnytime.register(ConfigCore.class);

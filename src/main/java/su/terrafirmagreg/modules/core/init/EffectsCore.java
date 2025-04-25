@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.init;
 
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.core.object.effect.EffectCaffeine;
 import su.terrafirmagreg.modules.core.object.effect.EffectHyperthermia;
 import su.terrafirmagreg.modules.core.object.effect.EffectHypothermia;
@@ -25,15 +25,15 @@ public final class EffectsCore {
   public static Supplier<EffectResistHeat> HEAT_RESIST;
   public static Supplier<EffectCaffeine> CAFFEINE;
 
-  public static void onRegister(IRegistryManager registry) {
-    OVERBURDENED = registry.effect(new EffectOverburdened());
-    THIRST = registry.effect(new EffectThirst());
-    PARASITES = registry.effect(new EffectParasites());
-    SWARM = registry.effect(new EffectSwarm());
-    HYPERTHERMIA = registry.effect(new EffectHyperthermia());
-    HYPOTHERMIA = registry.effect(new EffectHypothermia());
-    COLD_RESIST = registry.effect(new EffectResistCold());
-    HEAT_RESIST = registry.effect(new EffectResistHeat());
-    CAFFEINE = registry.effect(new EffectCaffeine());
+  public static void onRegister(IRegistryRegistrar registry) {
+    OVERBURDENED = registry.addEffect(new EffectOverburdened());
+    THIRST = registry.addEffect(new EffectThirst());
+    PARASITES = registry.addEffect(new EffectParasites());
+    SWARM = registry.addEffect(new EffectSwarm());
+    HYPERTHERMIA = registry.addEffect(new EffectHyperthermia());
+    HYPOTHERMIA = registry.addEffect(new EffectHypothermia());
+    COLD_RESIST = registry.addEffect(new EffectResistCold());
+    HEAT_RESIST = registry.addEffect(new EffectResistHeat());
+    CAFFEINE = registry.addEffect(new EffectCaffeine());
   }
 }

@@ -1,26 +1,30 @@
 package su.terrafirmagreg.modules.integration;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
+import su.terrafirmagreg.modules.integration.gregtech.event.MaterialEventHandler;
+import su.terrafirmagreg.modules.integration.gregtech.init.BlocksGregTech;
+import su.terrafirmagreg.modules.integration.gregtech.init.ItemsGregTech;
+import su.terrafirmagreg.modules.integration.gregtech.init.RecipesGregTech;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 
-import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.modules.ModulesContainer.INTEGRATION;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.GREGTECH;
 
 @ModuleInfo(
-  moduleID = INTEGRATION,
-  containerID = MOD_ID,
-  name = "Integration",
+  id = "integration",
   author = "Xikaro",
-  version = "1.0.0"
+  version = "1.0.0",
+  modDependencies = {GREGTECH}
 )
 public class ModuleIntegration extends ModuleBase {
 
@@ -29,15 +33,29 @@ public class ModuleIntegration extends ModuleBase {
   public ModuleIntegration() {}
 
   @Override
+  public void onPreInit(FMLPreInitializationEvent event) {
+    ItemsGregTech.preInit();
+    BlocksGregTech.preInit();
+  }
+
+  @Override
+  public void onPostInit(FMLPostInitializationEvent event) {
+    RecipesGregTech.postInit();
+  }
+
+
+  @Override
+  public @NotNull List<Class<?>> getEventBusSubscribers() {
+    ObjectList<Class<?>> list = new ObjectArrayList<>();
+
+    list.add(MaterialEventHandler.class);
+
+    return list;
+  }
+
+  @Override
   public @NotNull LoggingHelper getLogger() {
     return LOGGER;
   }
-
-  public abstract static class SubModule extends ModuleIntegration {
-
-    @Override
-    public @NotNull Set<ResourceLocation> getDependencyUids() {
-      return Collections.singleton(ModUtils.resource(INTEGRATION));
-    }
-  }
+  
 }

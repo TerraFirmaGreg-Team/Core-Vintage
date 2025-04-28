@@ -1,0 +1,59 @@
+package su.terrafirmagreg.framework.manager.registry;
+
+import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
+
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+
+import lombok.Data;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForgeRegistryEntry<?>>, List<RegistryWrapper>> {
+
+  public static RegistryMap of() {
+    return new RegistryMap();
+  }
+
+  public <T extends IForgeRegistryEntry<T>> List<RegistryWrapper> computeIfAbsent(Class<T> registry) {
+
+    return super.computeIfAbsent(registry, o -> new LinkedList<>());
+  }
+
+  public <T extends IForgeRegistryEntry<T>> void computeIfAbsent(Class<T> registry, RegistryWrapper wrapper) {
+    computeIfAbsent(registry).add(wrapper);
+  }
+
+  public <T extends IForgeRegistryEntry<T>> List<RegistryWrapper> get(IForgeRegistry<T> forgeRegistry) {
+    return this.computeIfAbsent(forgeRegistry.getRegistrySuperType());
+  }
+
+  @SuppressWarnings("unchecked")
+  public <T extends IForgeRegistryEntry<T>> void register(Class<T> registry, final Consumer<T> consumer) {
+    this.get(registry).forEach(wrapper -> consumer.accept((T) wrapper.getEntry()));
+  }
+
+
+  @SuppressWarnings("unchecked")
+  public <T extends IForgeRegistryEntry<T>> void register(IForgeRegistry<T> registry) {
+    
+    this.get(registry).forEach(wrapper -> registry.register((T) wrapper.getEntry()));
+  }
+
+  @Data(staticConstructor = "of")
+  public static class RegistryWrapper {
+
+    private final ResourceLocation identifier;
+    private final Supplier<? extends IForgeRegistryEntry<?>> entry;
+
+    public IForgeRegistryEntry<?> getEntry() {
+      return entry.get();
+    }
+  }
+}

@@ -1,0 +1,117 @@
+package su.terrafirmagreg.datafix.mapping;
+
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
+
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionType;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+@SuppressWarnings("unused")
+public class Remapping {
+
+  public static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{
+    add(ModIDs.TFCF);
+    add(ModIDs.CAFFEINEADDON);
+    add(ModIDs.CELLARS);
+  }};
+
+  public static final Map<String, Supplier<? extends Block>> BLOCK_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Supplier<? extends Item>> ITEM_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Supplier<? extends EntityEntry>> ENTITY_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Supplier<? extends Potion>> EFFECT_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Supplier<? extends PotionType>> POTION_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Supplier<? extends SoundEvent>> SOUND_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Supplier<? extends Biome>> BIOME_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Supplier<? extends Enchantment>> ENCHANTMENT_MAP = new Object2ObjectOpenHashMap<>();
+
+  private static <T extends IForgeRegistryEntry<T>> void remap(RegistryEvent.MissingMappings<T> event, Map<String, Supplier<? extends T>> map) {
+
+    event.getAllMappings().forEach(mapping -> {
+      String mappingKey = mapping.key.toString();
+      String mappingNamespace = mapping.key.getNamespace();
+      String mappingPath = mapping.key.getPath();
+
+//      if (!MOD_ID_SET.contains(mappingNamespace)) {
+//        mapping.warn();
+//      }
+
+      if (!Mods.contains(mappingNamespace)) {
+        mapping.warn();
+      }
+
+      map.forEach((key, value) -> {
+        if (mappingPath.endsWith(key)) {
+          mapping.remap(value.get());
+        }
+      });
+      return;
+
+    });
+  }
+
+  public static <K, V> void put(Map<K, V> map, Consumer<Map<K, V>> consumer) {
+    Map<K, V> temp = new HashMap<>();
+    consumer.accept(temp);
+    map.putAll(temp);
+    temp.clear();
+  }
+
+  @SubscribeEvent
+  public static void onBlockRemapping(final RegistryEvent.MissingMappings<Block> event) {
+    Remapping.remap(event, BLOCK_MAP);
+  }
+
+  @SubscribeEvent
+  public static void onEffectRemapping(final RegistryEvent.MissingMappings<Potion> event) {
+    Remapping.remap(event, EFFECT_MAP);
+  }
+
+  @SubscribeEvent
+  public static void onEntityRemapping(final RegistryEvent.MissingMappings<EntityEntry> event) {
+    Remapping.remap(event, ENTITY_MAP);
+  }
+
+  @SubscribeEvent
+  public static void onItemRemapping(final RegistryEvent.MissingMappings<Item> event) {
+    Remapping.remap(event, ITEM_MAP);
+  }
+
+  @SubscribeEvent
+  public static void onPotionRemapping(final RegistryEvent.MissingMappings<PotionType> event) {
+    Remapping.remap(event, POTION_MAP);
+  }
+
+  @SubscribeEvent
+  public static void onSoundRemapping(final RegistryEvent.MissingMappings<SoundEvent> event) {
+    Remapping.remap(event, SOUND_MAP);
+  }
+
+  @SubscribeEvent
+  public static void onBiomeRemapping(final RegistryEvent.MissingMappings<Biome> event) {
+    Remapping.remap(event, BIOME_MAP);
+  }
+
+  @SubscribeEvent
+  public static void onEnchantmentRemapping(final RegistryEvent.MissingMappings<Enchantment> event) {
+    Remapping.remap(event, ENCHANTMENT_MAP);
+  }
+
+}

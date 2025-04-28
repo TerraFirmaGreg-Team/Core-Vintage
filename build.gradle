@@ -49,8 +49,6 @@ tasks.decompressDecompiledSources.enabled !propertyBool('change_minecraft_source
 java {
   toolchain {
     languageVersion.set(JavaLanguageVersion.of(propertyBool('use_modern_java_syntax') ? 17 : 8))
-    // Azul covers the most platforms for Java 8 toolchains, crucially including MacOS arm64
-    vendor.set(JvmVendorSpec.AZUL)
   }
   if (propertyBool('generate_sources_jar')) {
     withSourcesJar()
@@ -60,10 +58,28 @@ java {
   }
 }
 
+
 configurations {
   embed
-  implementation.extendsFrom(embed)
+  mainImplementation
+  coreImplementation
+  frameworkImplementation
+
+  implementation { extendsFrom embed }
+
+  // Для core
+  coreImplementation { extendsFrom implementation }
+  coreCompileOnly { extendsFrom compileOnly }
+  coreRuntimeOnly { extendsFrom runtimeOnly }
+  coreAnnotationProcessor { extendsFrom annotationProcessor }
+
+  // Для framework
+  frameworkImplementation { extendsFrom implementation }
+  frameworkCompileOnly { extendsFrom compileOnly }
+  frameworkRuntimeOnly { extendsFrom runtimeOnly }
+  frameworkAnnotationProcessor { extendsFrom annotationProcessor }
 }
+
 
 minecraft {
   mcVersion.set(propertyString('minecraft_version'))
@@ -111,6 +127,13 @@ minecraft {
         injectedTags.set(props.collectEntries { k, v -> [(k): interpolate(v)] })
       }
     }
+  }
+
+  runClient {
+    workingDir = file('run/client')
+  }
+  runServer {
+    workingDir = file('run/server')
   }
 }
 
@@ -164,6 +187,31 @@ dependencies {
   annotationProcessor 'org.projectlombok:lombok:1.18.+'
   testCompileOnly 'org.projectlombok:lombok:1.18.+'
   testAnnotationProcessor 'org.projectlombok:lombok:1.18.+'
+
+}
+
+sourceSets {
+  framework {
+    compileClasspath += sourceSets.main.compileClasspath
+    runtimeClasspath += sourceSets.main.runtimeClasspath
+  }
+  core {
+    compileClasspath += sourceSets.framework.output
+    runtimeClasspath += sourceSets.framework.output
+
+//    compileClasspath += sourceSets.main.output
+//    runtimeClasspath += sourceSets.main.output
+
+    compileClasspath += sourceSets.main.compileClasspath
+    runtimeClasspath += sourceSets.main.runtimeClasspath
+  }
+  main {
+    compileClasspath += sourceSets.core.output
+    runtimeClasspath += sourceSets.core.output
+
+    compileClasspath += sourceSets.framework.output
+    runtimeClasspath += sourceSets.framework.output
+  }
 }
 
 apply from: 'gradle/scripts/dependencies.gradle'
@@ -184,22 +232,21 @@ if (propertyBool('use_access_transformer')) {
 processResources {
 
   var replaceProperties = [
-    'mod_id'                 : propertyString('mod_id'),
-    'mod_name'               : propertyString('mod_name'),
-    'mod_version'            : propertyString('mod_version'),
-    'mod_description'        : propertyString('mod_description'),
-    'mod_authors'            : propertyString('mod_authors'),
-    'mod_credits'            : propertyString('mod_credits'),
-    'mod_url'                : propertyString('mod_url'),
-    'mod_update_json'        : propertyString('mod_update_json'),
-    'mod_logo_path'          : propertyString('mod_logo_path'),
+    'mod_id'           : propertyString('mod_id'),
+    'mod_name'         : propertyString('mod_name'),
+    'mod_version'      : propertyString('mod_version'),
+    'mod_description'  : propertyString('mod_description'),
+    'mod_authors'      : propertyString('mod_authors'),
+    'mod_credits'      : propertyString('mod_credits'),
+    'mod_url'          : propertyString('mod_url'),
+    'mod_update_json'  : propertyString('mod_update_json'),
+    'mod_logo_path'    : propertyString('mod_logo_path'),
 
-    'minecraft_version'      : propertyString('minecraft_version'),
-    'minecraft_version_range': propertyString('minecraft_version_range'),
+    'minecraft_version': propertyString('minecraft_version'),
 
-    'mixin_refmap'           : propertyString('mixin_refmap'),
-    'mixin_package'          : propertyString('mixin_package'),
-    'mixin_configs'          : propertyStringList('mixin_configs', ', ').join(' ').collect(config -> "mixins.${config}.json" as String)
+    'mixin_refmap'     : propertyString('mixin_refmap'),
+    'mixin_package'    : propertyString('mixin_package'),
+    'mixin_configs'    : propertyStringList('mixin_configs', ', ').join(' ').collect(config -> "mixins.${config}.json" as String)
   ]
 
   var filterList = [
@@ -218,12 +265,6 @@ processResources {
 
 }
 
-runClient {
-  workingDir = file('run/client')
-}
-runServer {
-  workingDir = file('run/server')
-}
 
 jar {
   manifest {
@@ -245,7 +286,13 @@ jar {
   }
   zip64 = true
   // Add all embedded dependencies into the jar
-  from(provider { configurations.embed.collect { it.isDirectory() ? it : zipTree(it) } })
+  from(
+    provider {
+      configurations.embed.collect {
+        it.isDirectory() ? it : zipTree(it)
+      }
+    }
+  )
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -315,7 +362,6 @@ tasks.withType(JavaCompile).configureEach {
     options.release.set(8)
     javaCompiler.set(javaToolchains.compilerFor {
       languageVersion.set(JavaLanguageVersion.of(17))
-      vendor.set(JvmVendorSpec.AZUL)
     })
   }
 }
@@ -360,10 +406,4 @@ idea.project.settings {
 }
 
 
-// Include resources generated by data generators.
-sourceSets.main {
-  resources.srcDir "src/generated/resources"
-  // Make sure resources are available for 1.12
-  output.setResourcesDir output.classesDirs.asPath
-}
 

@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.base.object.block.api.IBlockSettings.Settings;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemBlock;
 import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderOreDict;
 
@@ -22,6 +23,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IRarity;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,26 +41,25 @@ import java.util.function.Supplier;
 
 
 @SuppressWarnings("unused")
-public interface IBlockSettings extends IBaseSettings<Settings> {
+public interface IBlockSettings extends IBaseSettings<Settings, Block> {
 
-
-  default Block asBlock() {
-    return (Block) this;
-  }
 
   default Item asItem() {
-    return Item.getItemFromBlock(asBlock());
+    return Item.getItemFromBlock(asEntry());
   }
 
-  default void overrideSetter() {
+  @Override
+  default void register(IForgeRegistry<Block> registry) {
     var settings = getSettings();
-    settings.getGroups().forEach(group -> asBlock().setCreativeTab(group));
-    asBlock()
+    settings.getGroups().forEach(group -> asEntry().setCreativeTab(group));
+    asEntry()
       .setResistance(settings.getResistance())
       .setHardness(settings.getHardness())
       .setSoundType(settings.getSoundType())
       .setTickRandomly(settings.isTicksRandomly())
       .setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
+
+    TileUtils.addTile(asEntry());
   }
 
   @Getter

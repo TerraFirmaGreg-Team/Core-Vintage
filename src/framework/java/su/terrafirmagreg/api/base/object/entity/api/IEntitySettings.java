@@ -6,11 +6,12 @@ import su.terrafirmagreg.api.library.IBaseSettings;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 
 import lombok.Getter;
 
-public interface IEntitySettings extends IBaseSettings<Settings> {
+public interface IEntitySettings extends IBaseSettings<Settings, EntityEntry> {
 
   @Getter
   class Settings extends BaseSettings<Settings> {

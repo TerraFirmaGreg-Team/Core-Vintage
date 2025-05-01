@@ -1,6 +1,7 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,6 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.SmelteryRecipe;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;

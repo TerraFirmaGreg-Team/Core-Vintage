@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,11 +34,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-public interface IItemSettings extends IBaseSettings<Settings> {
-
-  default Item asItem() {
-    return (Item) this;
-  }
+public interface IItemSettings extends IBaseSettings<Settings, Item> {
 
   default ICapabilityProvider settings$initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
     ArrayList<ICapabilityProvider> providers = new ArrayList<>();
@@ -47,13 +44,15 @@ public interface IItemSettings extends IBaseSettings<Settings> {
     return new CombinedCapabilityProvider(providers);
   }
 
-  default void overrideSetter() {
+  @Override
+  default void register(IForgeRegistry<Item> registry) {
     var settings = getSettings();
-    settings.getGroups().forEach(group -> asItem().setCreativeTab(group));
-    asItem()
+    settings.getGroups().forEach(group -> asEntry().setCreativeTab(group));
+    asEntry()
       .setMaxDamage(settings.getMaxDamage())
       .setMaxStackSize(settings.getMaxStackSize());
   }
+
 
   @Getter
   class Settings extends BaseSettings<Settings> implements IProviderOreDict {

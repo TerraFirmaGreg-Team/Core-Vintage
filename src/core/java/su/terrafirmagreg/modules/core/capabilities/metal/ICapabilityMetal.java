@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.metal;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -7,7 +9,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -59,10 +60,10 @@ public interface ICapabilityMetal {
     if (metal != null) {
       int melttemp = (int) metal.getMeltTemp();
       text.add("");
-      text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(metal))));
+      text.add(I18n.format("tfc.tooltip.metal", I18n.format(TranslatorUtils.getTypeName(metal))));
       text.add(I18n.format("tfc.tooltip.units", getSmeltAmount(stack)));
       text.add(I18n.format("tfc.tooltip.melttemp", melttemp));
-      text.add(I18n.format(Helpers.getEnumName(metal.getTier())));
+      text.add(I18n.format(TranslatorUtils.getEnumName(metal.getTier())));
     }
   }
 }

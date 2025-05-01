@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -21,15 +22,13 @@ import net.minecraft.world.biome.Biome;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock {
 
   @SuppressWarnings("unused")
   public EntityAnimalMuskOx(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       getRandomGrowth(ConfigAnimal.ENTITY.MUSKOX.adulthood, ConfigAnimal.ENTITY.MUSKOX.elder),
-      EntitySheep.getRandomSheepColor(RNG));
+      EntitySheep.getRandomSheepColor(MathUtils.RNG));
   }
 
   public EntityAnimalMuskOx(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {
@@ -68,7 +67,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
     int numberOfChildren = ConfigAnimal.ENTITY.MUSKOX.babies;
     for (int i = 0; i < numberOfChildren; i++) {
       EntityAnimalMuskOx baby = new EntityAnimalMuskOx(world,
-        Gender.valueOf(RNG.nextBoolean()),
+        Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(

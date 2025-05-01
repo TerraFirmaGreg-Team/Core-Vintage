@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.core.capabilities.forge;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

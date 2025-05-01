@@ -1,11 +1,5 @@
 package net.dries007.tfc.compat.crafttweaker;
 
-import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistryModifiable;
-
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
@@ -14,10 +8,17 @@ import crafttweaker.api.liquid.ILiquidStack;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.forge.ForgeRule;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistryModifiable;
+
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 
 import java.util.ArrayList;
 import java.util.List;

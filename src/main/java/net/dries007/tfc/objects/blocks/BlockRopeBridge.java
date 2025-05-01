@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -20,10 +21,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import net.dries007.tfcthings.init.TFCThingsItems;
 import net.dries007.tfc.objects.items.TFCThingsConfigurableItem;
+import net.dries007.tfcthings.init.TFCThingsItems;
 import net.dries007.tfcthings.main.ConfigTFCThings;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -85,7 +85,7 @@ public class BlockRopeBridge extends Block implements TFCThingsConfigurableItem 
   }
 
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    if (OreDictionaryHelper.doesStackMatchOre(playerIn.getHeldItem(hand), "stickWood")) {
+    if (OreDictUtils.contains(playerIn.getHeldItem(hand), "stickWood")) {
       state = state.cycleProperty(OFFSET);
       worldIn.setBlockState(pos, state, 2);
       return true;

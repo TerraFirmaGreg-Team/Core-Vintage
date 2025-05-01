@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.core.capabilities.egg;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.Nullable;
 

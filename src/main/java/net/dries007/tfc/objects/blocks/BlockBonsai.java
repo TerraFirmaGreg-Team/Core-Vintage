@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import net.minecraft.block.material.Material;
@@ -18,7 +19,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
@@ -88,7 +88,7 @@ public class BlockBonsai extends BlockNonCube {
       if (held.isEmpty() && state.getValue(STAGE) == 2) {
         BlockPos spawnPos = tier == 4 ? pos.up() : pos.down(); // who let me learn to code???
         Helpers.spawnItemStack(world, spawnPos, new ItemStack(fruit.get(), tier == 4 ? 3 : 1));
-        if (Constants.RNG.nextInt(7) == 0) {Helpers.spawnItemStack(world, spawnPos, new ItemStack(seed.get()));}
+        if (MathUtils.RNG.nextInt(7) == 0) {Helpers.spawnItemStack(world, spawnPos, new ItemStack(seed.get()));}
         world.setBlockState(pos, state.withProperty(STAGE, 0));
         te.resetCounter();
         return true;

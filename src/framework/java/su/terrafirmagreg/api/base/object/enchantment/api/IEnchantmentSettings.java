@@ -9,7 +9,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 
 import lombok.Getter;
 
-public interface IEnchantmentSettings extends IBaseSettings<Settings> {
+public interface IEnchantmentSettings extends IBaseSettings<Settings, Enchantment> {
 
   @Getter
   class Settings extends BaseSettings<Settings> {

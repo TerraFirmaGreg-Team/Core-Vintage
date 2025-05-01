@@ -1,5 +1,8 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.api.util.TranslatorUtils;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -12,9 +15,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.Helpers;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 @SideOnly(Side.CLIENT)
 public class GuiLiquidTransfer extends GuiContainerTFC {
@@ -35,7 +35,7 @@ public class GuiLiquidTransfer extends GuiContainerTFC {
     if (cap instanceof IMoldHandler) {
       Metal metal = ((IMoldHandler) cap).getMetal();
       if (metal != null) {
-        String metalName = I18n.format(Helpers.getTypeName(metal));
+        String metalName = I18n.format(TranslatorUtils.getTypeName(metal));
         String amountName = I18n.format("tfc.tooltip.units", ((IMoldHandler) cap).getAmount());
         fontRenderer.drawString(metalName, xSize / 2 - fontRenderer.getStringWidth(metalName) / 2, 14, 0x404040);
         fontRenderer.drawString(amountName, xSize / 2 - fontRenderer.getStringWidth(amountName) / 2, 23, 0x404040);

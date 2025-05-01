@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -37,7 +38,6 @@ import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -147,7 +147,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
     if (world.isRemote || hand == EnumHand.OFF_HAND) {return false;}
     if (state.getValue(STAGE) == 2) {
       world.setBlockState(pos, state.withProperty(STAGE, 1));
-      Item giveItem = !OreDictionaryHelper.doesStackMatchOre(player.getHeldItem(hand), "knife") ? ItemsFL.getFood(FoodFL.RAW_HONEY) : ItemsFL.HONEYCOMB;
+      Item giveItem = !OreDictUtils.contains(player.getHeldItem(hand), "knife") ? ItemsFL.getFood(FoodFL.RAW_HONEY) : ItemsFL.HONEYCOMB;
       ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(giveItem));
       if (isNotCalm(world, pos, state)) {
         player.addPotionEffect(new PotionEffect(EffectsCore.SWARM.get(), 30 * 20));

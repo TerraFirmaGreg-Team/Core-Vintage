@@ -1,6 +1,8 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ICreature;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -100,6 +102,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.GameRuleChangeEvent;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
@@ -124,20 +128,22 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
-
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.firmalife.init.FoodFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Metal.ItemType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Rock.Type;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.network.PacketCalendarUpdate;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.objects.Gem;
+import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
@@ -156,22 +162,92 @@ import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
 import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.items.ItemFruitPole;
+import net.dries007.tfc.objects.items.ItemGem;
+import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ItemsTFCF;
+import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
+
+import java.util.Map;
+import java.util.function.Supplier;
+
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)
 public final class CommonEventHandler {
 
   private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+
+  private static final Map<String, Supplier<? extends Item>> ITEM_MAP = new Object2ObjectOpenHashMap<>() {{
+
+    put("gem/amber", () -> ItemGem.get(Gem.AMBER));
+    put("powder/pearl", () -> ItemPowder.get(Powder.PEARL));
+    put("powder/black_pearl", () -> ItemPowder.get(Powder.BLACK_PEARL));
+
+    put("blue_steel_ice_saw_head", () -> ItemMetal.get(Metal.BLUE_STEEL, ItemType.ICE_SAW_HEAD));
+    put("black_steel_ice_saw_head", () -> ItemMetal.get(Metal.BLACK_STEEL, ItemType.ICE_SAW_HEAD));
+    put("red_steel_ice_saw_head", () -> ItemMetal.get(Metal.RED_STEEL, ItemType.ICE_SAW_HEAD));
+    put("steel_ice_saw_head", () -> ItemMetal.get(Metal.STEEL, ItemType.ICE_SAW_HEAD));
+    put("bismuth_bronze_ice_saw_head", () -> ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.ICE_SAW_HEAD));
+    put("wrought_iron_ice_saw_head", () -> ItemMetal.get(Metal.WROUGHT_IRON, ItemType.ICE_SAW_HEAD));
+    put("black_bronze_ice_saw_head", () -> ItemMetal.get(Metal.BLACK_BRONZE, ItemType.ICE_SAW_HEAD));
+    put("bronze_ice_saw_head", () -> ItemMetal.get(Metal.BRONZE, ItemType.ICE_SAW_HEAD));
+
+    put("blue_steel_ice_saw", () -> ItemMetal.get(Metal.BLUE_STEEL, ItemType.ICE_SAW));
+    put("black_steel_ice_saw", () -> ItemMetal.get(Metal.BLACK_STEEL, ItemType.ICE_SAW));
+    put("red_steel_ice_saw", () -> ItemMetal.get(Metal.RED_STEEL, ItemType.ICE_SAW));
+    put("steel_ice_saw", () -> ItemMetal.get(Metal.STEEL, ItemType.ICE_SAW));
+    put("bismuth_bronze_ice_saw", () -> ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.ICE_SAW));
+    put("wrought_iron_ice_saw", () -> ItemMetal.get(Metal.WROUGHT_IRON, ItemType.ICE_SAW));
+    put("black_bronze_ice_saw", () -> ItemMetal.get(Metal.BLACK_BRONZE, ItemType.ICE_SAW));
+    put("bronze_ice_saw", () -> ItemMetal.get(Metal.BRONZE, ItemType.ICE_SAW));
+
+    put("blue_steel_mallet_head", () -> ItemMetal.get(Metal.BLUE_STEEL, ItemType.MALLET_HEAD));
+    put("black_steel_mallet_head", () -> ItemMetal.get(Metal.BLACK_STEEL, ItemType.MALLET_HEAD));
+    put("red_steel_mallet_head", () -> ItemMetal.get(Metal.RED_STEEL, ItemType.MALLET_HEAD));
+    put("steel_mallet_head", () -> ItemMetal.get(Metal.STEEL, ItemType.MALLET_HEAD));
+    put("bismuth_bronze_mallet_head", () -> ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.MALLET_HEAD));
+    put("wrought_iron_mallet_head", () -> ItemMetal.get(Metal.WROUGHT_IRON, ItemType.MALLET_HEAD));
+    put("black_bronze_mallet_head", () -> ItemMetal.get(Metal.BLACK_BRONZE, ItemType.MALLET_HEAD));
+    put("bronze_mallet_head", () -> ItemMetal.get(Metal.BRONZE, ItemType.MALLET_HEAD));
+
+    put("blue_steel_mallet", () -> ItemMetal.get(Metal.BLUE_STEEL, ItemType.MALLET));
+    put("black_steel_mallet", () -> ItemMetal.get(Metal.BLACK_STEEL, ItemType.MALLET));
+    put("red_steel_mallet", () -> ItemMetal.get(Metal.RED_STEEL, ItemType.MALLET));
+    put("steel_mallet", () -> ItemMetal.get(Metal.STEEL, ItemType.MALLET));
+    put("bismuth_bronze_mallet", () -> ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.MALLET));
+    put("wrought_iron_mallet", () -> ItemMetal.get(Metal.WROUGHT_IRON, ItemType.MALLET));
+    put("black_bronze_mallet", () -> ItemMetal.get(Metal.BLACK_BRONZE, ItemType.MALLET));
+    put("bronze_mallet", () -> ItemMetal.get(Metal.BRONZE, ItemType.MALLET));
+  }};
+
+  @SubscribeEvent
+  public static void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
+    for (Mapping<Item> mapping : event.getAllMappings()) {
+      String mappingKey = mapping.key.toString();
+      String mappingNamespace = mapping.key.getNamespace();
+      String mappingPath = mapping.key.getPath();
+
+//      if (!Mods.contains(mappingNamespace)) {
+//        mapping.warn();
+//      }
+
+      ITEM_MAP.forEach((key, value) -> {
+        if (mappingPath.endsWith(key)) {
+          mapping.remap(value.get());
+        }
+      });
+      return;
+    }
+  }
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onNeighborNotify(BlockEvent.NeighborNotifyEvent event) {
@@ -272,14 +348,14 @@ public final class CommonEventHandler {
         .getToolClasses(heldItem), ConfigTFC.General.TREE.leafStickDropChanceBonusClasses)) {
         chance = ConfigTFC.General.TREE.leafStickDropChanceBonus;
       }
-      if (Constants.RNG.nextFloat() < chance) {
+      if (MathUtils.RNG.nextFloat() < chance) {
         event.getDrops().add(new ItemStack(Items.STICK));
       }
     }
 
     // Drop shards from glass
     ItemStack stackAt = new ItemStack(Item.getItemFromBlock(state.getBlock()), 1, state.getBlock().damageDropped(state));
-    if (!event.isSilkTouching() && OreDictionaryHelper.doesStackMatchOre(stackAt, "blockGlass")) {
+    if (!event.isSilkTouching() && OreDictUtils.contains(stackAt, "blockGlass")) {
       event.getDrops().add(new ItemStack(ItemsCore.GLASS_SHARD.get()));
     }
 
@@ -292,7 +368,7 @@ public final class CommonEventHandler {
       }
       if (!tool.isEmpty()) {
         float skillModifier = SmithingSkill.getSkillBonus(tool, SmithingSkill.Type.TOOLS) / 2.0F;
-        if (skillModifier > 0 && Constants.RNG.nextFloat() < skillModifier) {
+        if (skillModifier > 0 && MathUtils.RNG.nextFloat() < skillModifier) {
           // Up to 50% negating damage, for double durability
           player.setHeldItem(EnumHand.MAIN_HAND, tool);
         }
@@ -300,7 +376,7 @@ public final class CommonEventHandler {
     }
 
     if (block instanceof BlockFruitTreeLeaves) {
-      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + Constants.RNG.nextInt(4)));
+      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathUtils.RNG.nextInt(4)));
     } else if (block instanceof BlockFruitTreeTrunk blockFruitTreeTrunk) {
       if (event.isCanceled()) {event.setCanceled(false);}
       IFruitTree tree = blockFruitTreeTrunk.getTree();
@@ -309,28 +385,28 @@ public final class CommonEventHandler {
     }
 
     if (block instanceof BlockCassiaCinnamonLeaves || block instanceof BlockCeylonCinnamonLeaves || block instanceof BlockBambooLeaves) {
-      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + Constants.RNG.nextInt(4)));
+      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathUtils.RNG.nextInt(4)));
     }
     if (block == BlocksFL.MELON_FRUIT && (heldItem.getItem().getHarvestLevel(heldItem, "knife", player, state) != -1)) {
       event.getDrops().clear();
-      event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + Constants.RNG.nextInt(4)));
+      event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + MathUtils.RNG.nextInt(4)));
     }
 
     if (block instanceof BlockCactusTFC blockCactusTFC) {
       if (blockCactusTFC.getPlant() == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS)
           && (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
-        int chance = Constants.RNG.nextInt(2);
+        int chance = MathUtils.RNG.nextInt(2);
         if (chance == 0) {
           event.getDrops().clear();
-          event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + Constants.RNG.nextInt(3)));
+          event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + MathUtils.RNG.nextInt(3)));
         }
       }
     }
 
     if (block instanceof BlockPackedIce) {
-      if (OreDictionaryHelper.doesStackMatchOre(heldItem, "iceSaw")) {
+      if (OreDictUtils.contains(heldItem, "iceSaw")) {
         event.getDrops().clear();
-        event.getDrops().add(new ItemStack(ItemsCore.ICE_SHARD.get(), 3 + Constants.RNG.nextInt(4)));
+        event.getDrops().add(new ItemStack(ItemsCore.ICE_SHARD.get(), 3 + MathUtils.RNG.nextInt(4)));
       }
     }
 
@@ -350,7 +426,7 @@ public final class CommonEventHandler {
           event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.ANDESITE, Rock.Type.RAW)));
       }
     }
-    if (OreDictionaryHelper.doesStackMatchOre(stackAt, "cobblestone")) {
+    if (OreDictUtils.contains(stackAt, "cobblestone")) {
       event.getDrops().clear();
       event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.ANDESITE, Type.COBBLE)));
     }
@@ -413,7 +489,7 @@ public final class CommonEventHandler {
       event.getDrops().clear();
       event.getDrops().add(new ItemStack(BlockFenceTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
     }
-    if (block instanceof BlockPotato || block instanceof BlockCarrot || OreDictionaryHelper.doesStackMatchOre(stackAt, "cropWheat")) {
+    if (block instanceof BlockPotato || block instanceof BlockCarrot || OreDictUtils.contains(stackAt, "cropWheat")) {
       event.getDrops().clear();
       event.getDrops().add(new ItemStack(Items.STICK));
     }
@@ -700,7 +776,7 @@ public final class CommonEventHandler {
         MonsterEquipment equipment = MonsterEquipment.get(entity);
         if (equipment != null) {
           for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
-            equipment.getEquipment(slot, Constants.RNG).ifPresent(stack -> entity.setItemStackToSlot(slot, stack));
+            equipment.getEquipment(slot, MathUtils.RNG).ifPresent(stack -> entity.setItemStackToSlot(slot, stack));
           }
         }
       }
@@ -743,7 +819,7 @@ public final class CommonEventHandler {
       }
       float itemTemp = heatCap.getTemperature();
       if (itemTemp > 0) {
-        float rand = Constants.RNG.nextFloat();
+        float rand = MathUtils.RNG.nextFloat();
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos((int) entityItem.posX, (int) entityItem.posY, (int) entityItem.posZ);
         IBlockState state;
         if ((state = entityItem.world.getBlockState(pos)).getBlock() instanceof BlockFluidBase) {
@@ -968,24 +1044,24 @@ public final class CommonEventHandler {
           }
 
           // Swap two letters
-          if (Constants.RNG.nextFloat() < drunkChance && word.length() >= 2) {
-            int pos = Constants.RNG.nextInt(word.length() - 1);
+          if (MathUtils.RNG.nextFloat() < drunkChance && word.length() >= 2) {
+            int pos = MathUtils.RNG.nextInt(word.length() - 1);
             word = word.substring(0, pos) + word.charAt(pos + 1) + word.charAt(pos) + word.substring(pos + 2);
           }
 
           // Repeat / slur letters
-          if (Constants.RNG.nextFloat() < drunkChance) {
-            int pos = Constants.RNG.nextInt(word.length());
+          if (MathUtils.RNG.nextFloat() < drunkChance) {
+            int pos = MathUtils.RNG.nextInt(word.length());
             char repeat = word.charAt(pos);
-            int amount = 1 + Constants.RNG.nextInt(3);
+            int amount = 1 + MathUtils.RNG.nextInt(3);
             word = word.substring(0, pos) + new String(new char[amount]).replace('\0', repeat) + (pos + 1 < word.length() ? word.substring(pos + 1) : "");
           }
 
           // Add additional letters
-          if (Constants.RNG.nextFloat() < drunkChance) {
-            int pos = Constants.RNG.nextInt(word.length());
-            char replacement = ALPHABET.charAt(Constants.RNG.nextInt(ALPHABET.length()));
-            if (Character.isUpperCase(word.charAt(Constants.RNG.nextInt(word.length())))) {
+          if (MathUtils.RNG.nextFloat() < drunkChance) {
+            int pos = MathUtils.RNG.nextInt(word.length());
+            char replacement = ALPHABET.charAt(MathUtils.RNG.nextInt(ALPHABET.length()));
+            if (Character.isUpperCase(word.charAt(MathUtils.RNG.nextInt(word.length())))) {
               replacement = Character.toUpperCase(replacement);
             }
             word = word.substring(0, pos) + replacement + (pos + 1 < word.length() ? word.substring(pos + 1) : "");

@@ -1,10 +1,14 @@
 package su.terrafirmagreg.modules.food.api;
 
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.network.PacketFoodStatsReplace;
-import net.dries007.tfc.network.PacketFoodStatsUpdate;
+import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.ModuleCore;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.NutritionStats;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.init.EffectsCore;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -18,14 +22,10 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import su.terrafirmagreg.api.data.DamageSources;
-import su.terrafirmagreg.modules.core.ModuleCore;
-import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
-import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
-import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.modules.core.capabilities.food.spi.NutritionStats;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.init.EffectsCore;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.network.PacketFoodStatsReplace;
+import net.dries007.tfc.network.PacketFoodStatsUpdate;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -91,9 +91,9 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
     } else if (this.sourcePlayer instanceof EntityPlayerMP) // Check for server side first
     {
       // Minor effects from eating rotten food
-      if (Constants.RNG.nextFloat() < 0.6) {
+      if (MathUtils.RNG.nextFloat() < 0.6) {
         sourcePlayer.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 1800, 1));
-        if (Constants.RNG.nextFloat() < 0.15) {
+        if (MathUtils.RNG.nextFloat() < 0.15) {
           sourcePlayer.addPotionEffect(new PotionEffect(EffectsCore.PARASITES.get(), 1800, 0));
         }
       }
@@ -283,7 +283,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         resetCooldown();
         addThirst(value);
         // Salty drink effect
-        if (value < 0 && Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
+        if (value < 0 && MathUtils.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
           sourcePlayer.addPotionEffect(new PotionEffect(EffectsCore.THIRST.get(), 600, 0));
         }
       }

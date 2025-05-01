@@ -1,6 +1,15 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import com.google.common.collect.ImmutableMap;
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderBlockState;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderTile;
+import su.terrafirmagreg.modules.device.client.render.TESRPitKiln;
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -31,18 +40,9 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.jetbrains.annotations.Nullable;
+import com.google.common.collect.ImmutableMap;
 
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
-import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderBlockState;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
-import su.terrafirmagreg.modules.device.client.render.TESRPitKiln;
-import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
-import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 

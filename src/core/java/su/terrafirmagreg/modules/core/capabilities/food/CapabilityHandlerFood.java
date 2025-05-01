@@ -1,12 +1,11 @@
 package su.terrafirmagreg.modules.core.capabilities.food;
 
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import java.util.HashMap;
 import java.util.Map;

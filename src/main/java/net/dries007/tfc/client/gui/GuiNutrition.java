@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -17,7 +18,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.util.Helpers;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
@@ -56,7 +56,7 @@ public class GuiNutrition extends GuiContainerTFC {
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     super.drawGuiContainerForegroundLayer(mouseX, mouseY);
     for (Nutrient n : Nutrient.values()) {
-      String caption = I18n.format(Helpers.getEnumName(n));
+      String caption = I18n.format(TranslatorUtils.getEnumName(n));
       fontRenderer.drawString(caption, 112 - fontRenderer.getStringWidth(caption), 19 + 13 * n.ordinal(), 0x404040);
     }
   }

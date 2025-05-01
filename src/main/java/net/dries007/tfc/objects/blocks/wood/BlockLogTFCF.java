@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -25,7 +26,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -191,7 +191,7 @@ public class BlockLogTFCF extends BlockLog implements ICapabilitySize {
 //      if (!state.getValue(PLACED) && ConfigTFC.General.TREE.enableFelling) {
 //        player.setHeldItem(EnumHand.MAIN_HAND, stack); // Reset so we can damage however we want before vanilla
 //        if (!removeTree(world, pos, player, stack,
-//                        OreDictionaryHelper.doesStackMatchOre(stack, "axeStone") || OreDictionaryHelper.doesStackMatchOre(stack, "hammerStone"))) {
+//                        OreDictUtils.contains(stack, "axeStone") || OreDictUtils.contains(stack, "hammerStone"))) {
 //          // Don't remove the block, the rest of the tree broke instead
 //          return false;
 //        }
@@ -286,14 +286,14 @@ public class BlockLogTFCF extends BlockLog implements ICapabilitySize {
     for (final BlockPos pos1 : logs.subList(0, Math.min(logs.size(), maxLogs))) {
       if (explosion) {
         // Explosions are 30% Efficient: no TNT powered tree farms.
-        if (Constants.RNG.nextFloat() < 0.3) {
+        if (MathUtils.RNG.nextFloat() < 0.3) {
           if (!world.isRemote) {
             Helpers.spawnItemStack(world, pos.add(0.5d, 0.5d, 0.5d), new ItemStack(Item.getItemFromBlock(this)));
           }
         }
       } else {
         // Stone tools are 60% efficient (default config)
-        if (!stoneTool || Constants.RNG.nextFloat() < ConfigTFC.General.TREE.stoneAxeReturnRate && !world.isRemote) {
+        if (!stoneTool || MathUtils.RNG.nextFloat() < ConfigTFC.General.TREE.stoneAxeReturnRate && !world.isRemote) {
           harvestBlock(world, player, pos1, world.getBlockState(pos1), null, stack);
         }
         stack.damageItem(1, player);

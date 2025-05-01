@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 
 import net.minecraft.block.Block;
@@ -19,7 +20,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.firmalife.init.FoodFL;
 import net.dries007.firmalife.registry.ItemsFL;
-import net.dries007.tfc.Constants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -54,9 +54,9 @@ public class BlockBeeNest extends BlockNonCube {
 
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    int count1 = Constants.RNG.nextInt(3);
+    int count1 = MathUtils.RNG.nextInt(3);
     drops.add(new ItemStack(ItemsFL.HONEYCOMB, count1));
-    int count2 = Constants.RNG.nextInt(3);
+    int count2 = MathUtils.RNG.nextInt(3);
     drops.add(new ItemStack(ItemsFL.getFood(FoodFL.RAW_HONEY), count2));
   }
 

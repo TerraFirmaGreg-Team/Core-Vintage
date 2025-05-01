@@ -1,6 +1,7 @@
 package net.dries007.tfcthings.registry;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileGrindstone;
@@ -26,7 +27,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemOreDict;
 import net.dries007.tfc.objects.items.TFCThingsConfigurableItem;
 import net.dries007.tfc.objects.items.metal.ItemMetal;

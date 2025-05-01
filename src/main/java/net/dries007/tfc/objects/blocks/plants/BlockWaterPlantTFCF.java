@@ -1,7 +1,12 @@
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
-
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
@@ -33,22 +38,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
-
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
@@ -279,7 +274,7 @@ public class BlockWaterPlantTFCF extends BlockFluidTFC implements ICapabilitySiz
   public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
     if (!worldIn.isRemote && (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1
                               || stack.getItem().getHarvestLevel(stack, "scythe", player, state) != -1)) {
-      if (Constants.RNG.nextDouble() <= (state.getValue(AGE) + 1) / 3.0D) //+33% change for each age
+      if (MathUtils.RNG.nextDouble() <= (state.getValue(AGE) + 1) / 3.0D) //+33% change for each age
       {
         spawnAsEntity(worldIn, pos, new ItemStack(ItemFoodTFC.get(Food.SEAWEED), 1));
       }

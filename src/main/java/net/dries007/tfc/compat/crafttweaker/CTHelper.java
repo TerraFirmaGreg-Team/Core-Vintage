@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.crafttweaker;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -7,7 +9,6 @@ import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.item.IngredientStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.oredict.IOreDictEntry;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nonnull;
 

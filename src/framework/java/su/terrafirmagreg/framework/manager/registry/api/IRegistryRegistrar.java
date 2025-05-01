@@ -18,10 +18,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.storage.loot.functions.LootFunction;
+import net.minecraft.world.storage.loot.functions.LootFunction.Serializer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -31,13 +32,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
+
 public interface IRegistryRegistrar {
 
   BaseItemGroup group(String icon);
 
   BaseItemGroup group(BaseItemGroup group);
 
-  <T extends IForgeRegistryEntry<T>> void addEntry(Class<T> registry, String identifier, T entry);
+  <T extends IForgeRegistryEntry<T>> T addEntry(Class<T> registry, String identifier, T entry);
 
   // --------------------------------------------------------------------------
   // - Block
@@ -158,12 +160,6 @@ public interface IRegistryRegistrar {
   <V extends Entity> EntityEntry addEntity(String identifier, Class<V> entClass, int primary, int seconday);
 
   // --------------------------------------------------------------------------
-  // - Tile
-  // --------------------------------------------------------------------------
-
-  <V extends TileEntity> Class<V> addTile(String identifier, Class<V> tileClass);
-
-  // --------------------------------------------------------------------------
   // - KeyBinding
   // --------------------------------------------------------------------------
 
@@ -174,4 +170,6 @@ public interface IRegistryRegistrar {
   // --------------------------------------------------------------------------
 
   ResourceLocation addLoot(String name);
+
+  <T extends LootFunction> void addLootFunction(Serializer<? extends T> serializer);
 }

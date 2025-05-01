@@ -1,6 +1,24 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderTile;
+import su.terrafirmagreg.modules.animal.api.util.AnimalFood;
+import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalHare;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalPheasant;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
+import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalTurkey;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDuck;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGrouse;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalQuail;
+import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.device.ConfigDevice;
+import su.terrafirmagreg.modules.device.object.tile.TileSnare;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -23,27 +41,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import org.jetbrains.annotations.Nullable;
+import net.dries007.tfc.objects.items.ItemSeedsTFC;
 
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
-import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
-import su.terrafirmagreg.modules.animal.api.util.AnimalFood;
-import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalHare;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalPheasant;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalTurkey;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDuck;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGrouse;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalQuail;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.object.tile.TileSnare;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 import java.util.function.Supplier;

@@ -5,10 +5,11 @@ import su.terrafirmagreg.api.library.IBaseSettings;
 
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
 
 import lombok.Getter;
 
-public interface IPotionSettings extends IBaseSettings<Settings> {
+public interface IPotionSettings extends IBaseSettings<Settings, PotionType> {
 
 
   @Getter

@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.container;
 
 import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 
@@ -16,16 +17,15 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.recipes.GlassworkingRecipe;
 import net.dries007.tfc.objects.inventory.slot.SlotKnappingOutput;
 import net.dries007.tfc.objects.items.glassworking.ItemGlassMolder;
 import net.dries007.tfc.util.SimpleCraftMatrix;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
@@ -173,7 +173,7 @@ public class ContainerGlassworking extends Container implements IButtonHandler {
     if (cap instanceof ItemGlassMolder.GlassMolderCapability) {
       ((ItemGlassMolder.GlassMolderCapability) cap).empty();
     }
-    emptyBlowpipe.attemptDamageItem(1, Constants.RNG, null);
+    emptyBlowpipe.attemptDamageItem(1, MathUtils.RNG, null);
     if (emptyBlowpipe.getItemDamage() >= emptyBlowpipe.getMaxDamage()) {
       emptyBlowpipe = ItemStack.EMPTY;
     }

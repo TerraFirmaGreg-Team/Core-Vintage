@@ -1,14 +1,13 @@
 package su.terrafirmagreg.modules.core.capabilities.damage;
 
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.Nullable;
 

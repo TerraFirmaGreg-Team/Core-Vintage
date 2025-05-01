@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.ceramics;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
@@ -31,14 +32,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.EnumMap;
-import java.util.List;
-
-import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
-
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
@@ -47,7 +40,14 @@ import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.container.ContainerEmpty;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.recipes.UnmoldRecipe;
-import net.dries007.tfc.util.Helpers;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.EnumMap;
+import java.util.List;
+
+import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 
 @ParametersAreNonnullByDefault
 public class ItemMold extends ItemPottery {
@@ -214,7 +214,7 @@ public class ItemMold extends ItemPottery {
     public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
       Metal metal = getMetal();
       if (metal != null) {
-        String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
+        String desc = TextFormatting.DARK_GREEN + I18n.format(TranslatorUtils.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
         if (isMolten()) {
           desc += I18n.format("tfc.tooltip.liquid");
         } else {

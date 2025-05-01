@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.api.data.NBTTags;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.network.spi.GuiHandler;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -42,6 +42,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
+import net.dries007.tfc.objects.blocks.BlockTorchTFC;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -49,8 +51,6 @@ import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.SEALED;
-
-import net.dries007.tfc.objects.blocks.BlockTorchTFC;
 
 /**
  * Powderkeg is an inventory that preserves the contents when sealed It can be picked up and keeps it's inventory Sealed state is stored in a block state property, and cached in the TE (for gui purposes)

@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +15,6 @@ import net.dries007.tfc.api.recipes.LoomRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.wood.BlockLoom;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

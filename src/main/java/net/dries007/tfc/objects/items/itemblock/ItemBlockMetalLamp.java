@@ -4,6 +4,7 @@ import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,7 +26,6 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;

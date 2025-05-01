@@ -1,15 +1,10 @@
 package su.terrafirmagreg.modules.metal;
 
-import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
-import su.terrafirmagreg.framework.network.api.INetworkManager;
-import su.terrafirmagreg.framework.registry.api.IRegistryManager;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Supplier;
 
 @ModuleInfo(
   id = "metal",
@@ -21,15 +16,7 @@ public class ModuleMetal extends ModuleBase {
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleMetal.class.getSimpleName());
 
 
-  public static Supplier<BaseItemGroup> GROUP;
-  public static IRegistryManager REGISTRY;
-  public static INetworkManager NETWORK;
-
   public ModuleMetal() {
-
-    GROUP = BaseItemGroup.of(this, "anvil/red_steel");
-    REGISTRY = enableRegistry().group(GROUP);
-    NETWORK = enableNetwork();
 
   }
 

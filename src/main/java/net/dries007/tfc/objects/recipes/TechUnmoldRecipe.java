@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
@@ -179,7 +179,7 @@ public class TechUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implemen
    * @return ItemStack.EMPTY on break, the mold (empty) if pass
    */
   public ItemStack getMoldResult(ItemStack moldIn) {
-    if (Constants.RNG.nextFloat() <= chance) {
+    if (MathUtils.RNG.nextFloat() <= chance) {
       return new ItemStack(moldIn.getItem());
     } else {
       return ItemStack.EMPTY;

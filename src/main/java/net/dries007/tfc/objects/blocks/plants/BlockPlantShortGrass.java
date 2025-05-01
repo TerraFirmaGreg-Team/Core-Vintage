@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
@@ -22,7 +23,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IShearable;
 
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 
 import javax.annotation.Nonnull;
@@ -62,7 +62,7 @@ public class BlockPlantShortGrass extends BlockPlantTFC implements IShearable {
         if (stack.getItem() == Items.SHEARS) {
           spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
         }
-      } else if (Constants.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
+      } else if (MathUtils.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
         spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW.get()));
       }
     }

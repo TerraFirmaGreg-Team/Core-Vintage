@@ -1,10 +1,11 @@
 package net.dries007.tfc.api.recipes;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.types.TechRegistries;
 
 import javax.annotation.Nonnull;

@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -52,8 +53,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable, ILivestock {
 
   private static final DataParameter<Integer> DYE_COLOR = EntityDataManager.createKey(EntityAnimalSheep.class, DataSerializers.VARINT);
@@ -61,10 +60,10 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
   @SuppressWarnings("unused")
   public EntityAnimalSheep(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
 
       getRandomGrowth(ConfigAnimal.ENTITY.SHEEP.adulthood, ConfigAnimal.ENTITY.SHEEP.elder),
-      EntitySheep.getRandomSheepColor(RNG));
+      EntitySheep.getRandomSheepColor(MathUtils.RNG));
 
     getSettings()
       .entity(EntityAnimalSheep.class, RenderAnimalSheep::new);
@@ -119,7 +118,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   public void birthChildren() {
     int numberOfChildren = ConfigAnimal.ENTITY.SHEEP.babies;
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalSheep baby = new EntityAnimalSheep(world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalSheep baby = new EntityAnimalSheep(world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays(), getDyeColor());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(

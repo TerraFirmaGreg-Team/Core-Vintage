@@ -1,5 +1,8 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IngredientFluidItem;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -14,9 +17,6 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFluidMixing;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
-import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
-
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;

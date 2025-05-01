@@ -1,6 +1,9 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.data.ArmorMaterials;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,11 +26,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import net.dries007.tfc.ConfigTFC;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -73,7 +73,7 @@ public class ItemQuiver extends ItemArmorTFC {
   //true = we picked up the whole stack, false = none or some picked up
   public static boolean pickupAmmo(EntityItemPickupEvent event) {
     ItemStack stack = event.getItem().getItem(); //really.
-    if (OreDictionaryHelper.doesStackMatchOre(stack, "javelin")) { // if no javelin on hotbar, don't put in quiver unless no empty slots
+    if (OreDictUtils.contains(stack, "javelin")) { // if no javelin on hotbar, don't put in quiver unless no empty slots
       InventoryPlayer inv = event.getEntityPlayer().inventory;
       boolean found = false;
       boolean empty = false;
@@ -83,7 +83,7 @@ public class ItemQuiver extends ItemArmorTFC {
           empty = true;
           continue;
         }
-        if (OreDictionaryHelper.doesStackMatchOre(slot, "javelin")) {
+        if (OreDictUtils.contains(slot, "javelin")) {
           found = true;
           break;
         }
@@ -93,7 +93,7 @@ public class ItemQuiver extends ItemArmorTFC {
       }
     }
     Item item = stack.getItem();
-    if (OreDictionaryHelper.doesStackMatchOre(stack, "javelin") || item instanceof ItemArrow) {
+    if (OreDictUtils.contains(stack, "javelin") || item instanceof ItemArrow) {
       QuiverCapability quiver = findQuiver(event.getEntityPlayer().inventory);
       if (quiver != null) {
         stack.setCount(ItemHandlerHelper.insertItem(quiver, stack, false).getCount());
@@ -197,14 +197,14 @@ public class ItemQuiver extends ItemArmorTFC {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-      return OreDictionaryHelper.doesStackMatchOre(stack, "javelin") ||
+      return OreDictUtils.contains(stack, "javelin") ||
              stack.getItem() instanceof ItemArrow;
     }
 
     public ItemStack findJavelin() {
       for (int i = 0; i < getSlots(); i++) {
         ItemStack stack = extractItem(i, 1, true);
-        if (!stack.isEmpty() && (OreDictionaryHelper.doesStackMatchOre(stack, "javelin"))) {
+        if (!stack.isEmpty() && (OreDictUtils.contains(stack, "javelin"))) {
           return extractItem(i, 1, false);
         }
       }

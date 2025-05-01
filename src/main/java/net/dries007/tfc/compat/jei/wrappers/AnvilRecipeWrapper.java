@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,7 +10,6 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeStep;
 
@@ -58,7 +59,7 @@ public class AnvilRecipeWrapper extends SimpleRecipeWrapper {
         int x = 50 + xOffset;
         int y = 0;
         if (mouseX >= x && mouseX <= x + 14 && mouseY >= y && mouseY <= y + 19) {
-          GuiUtils.drawHoveringText(Collections.singletonList(I18n.format(Helpers.getEnumName(rule))), mouseX, mouseY, 154, 80, -1, minecraft.fontRenderer);
+          GuiUtils.drawHoveringText(Collections.singletonList(I18n.format(TranslatorUtils.getEnumName(rule))), mouseX, mouseY, 154, 80, -1, minecraft.fontRenderer);
         }
       }
     }

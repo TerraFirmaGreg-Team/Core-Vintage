@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.api.base.object.tile.spi.BaseTileInventory;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
 import su.terrafirmagreg.modules.device.object.container.ContainerAlloyCalculator;
@@ -14,11 +14,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.util.Alloy;
+
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
-
-import net.dries007.tfc.util.Alloy;
 
 @Getter
 public class TileAlloyCalculator extends BaseTileInventory implements IProviderContainer<ContainerAlloyCalculator, GuiAlloyCalculator> {

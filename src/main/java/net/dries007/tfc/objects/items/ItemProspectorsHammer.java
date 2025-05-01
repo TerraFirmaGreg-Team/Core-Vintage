@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
@@ -35,7 +36,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
@@ -112,7 +112,7 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
           checkRockLayers(playerIn, worldIn, blockpos, skill);
           playerIn.getCooldownTracker().setCooldown(this, 10);
           float skillModifier = SmithingSkill.getSkillBonus(itemstack, SmithingSkill.Type.TOOLS) / 2.0F;
-          boolean flag = !(skillModifier > 0.0F) || !(Constants.RNG.nextFloat() < skillModifier);
+          boolean flag = !(skillModifier > 0.0F) || !(MathUtils.RNG.nextFloat() < skillModifier);
           if (flag) {
             playerIn.getHeldItem(handIn).damageItem(20, playerIn);
           } else {
@@ -161,7 +161,7 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
             break;
         }
         float skillModifier = SmithingSkill.getSkillBonus(itemstack, SmithingSkill.Type.TOOLS) / 2.0F;
-        boolean flag = !(skillModifier > 0.0F) || !(Constants.RNG.nextFloat() < skillModifier);
+        boolean flag = !(skillModifier > 0.0F) || !(MathUtils.RNG.nextFloat() < skillModifier);
         if (flag) {
           playerIn.getHeldItem(handIn).damageItem(1, playerIn);
         }

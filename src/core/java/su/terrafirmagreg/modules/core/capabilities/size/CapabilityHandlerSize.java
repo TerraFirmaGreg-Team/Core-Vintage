@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.capabilities.size;
 
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLadder;
@@ -14,6 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.ore.OrePrefix;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -57,10 +61,6 @@ import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.ore
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.toolHeadSense;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.toolHeadShovel;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.toolHeadSword;
-
-import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 public class CapabilityHandlerSize {
 

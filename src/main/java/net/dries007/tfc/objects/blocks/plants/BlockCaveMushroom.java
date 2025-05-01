@@ -1,7 +1,6 @@
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
-
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFoodHeat;
 import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
@@ -40,11 +39,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
 import net.dries007.tfc.objects.items.food.PotionEffectToHave;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -123,7 +122,7 @@ public class BlockCaveMushroom extends BlockBush implements IGrowable, ICapabili
   protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
     if (!PotionEffects.isEmpty()) {
       for (PotionEffectToHave Effect : PotionEffects) {
-        if (Constants.RNG.nextInt(Effect.chance) == 0) {player.addPotionEffect(new PotionEffect(Effect.PotionEffect, Effect.Duration, Effect.Power));}
+        if (MathUtils.RNG.nextInt(Effect.chance) == 0) {player.addPotionEffect(new PotionEffect(Effect.PotionEffect, Effect.Duration, Effect.Power));}
       }
     }
   }

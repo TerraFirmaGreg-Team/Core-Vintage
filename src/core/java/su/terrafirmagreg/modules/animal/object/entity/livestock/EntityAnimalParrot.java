@@ -1,11 +1,12 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.framework.network.spi.datasync.DataSerializers;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -42,8 +43,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivestock {
 
   private static final int DAYS_TO_ADULTHOOD = 96;
@@ -62,7 +61,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 
   @SuppressWarnings("unused")
   public EntityAnimalParrot(World world) {
-    this(world, Gender.valueOf(RNG.nextBoolean()),
+    this(world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
@@ -197,7 +196,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
 
   @Override
   public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
-    return new EntityAnimalParrot(this.world, Gender.valueOf(RNG.nextBoolean()),
+    return new EntityAnimalParrot(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
   }
 

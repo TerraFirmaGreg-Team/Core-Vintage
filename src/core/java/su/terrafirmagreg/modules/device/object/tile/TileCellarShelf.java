@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;

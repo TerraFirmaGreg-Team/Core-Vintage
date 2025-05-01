@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.network.spi.GuiHandler;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -35,14 +35,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.api.util.IHeatConsumerBlock;
+import net.dries007.tfc.util.Alloy;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
-
-import net.dries007.tfc.api.util.IHeatConsumerBlock;
-import net.dries007.tfc.util.Alloy;
 
 @SuppressWarnings("deprecation")
 public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBlock {

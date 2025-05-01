@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableMeasurableMetalHandler;
 import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
@@ -18,7 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -80,9 +80,9 @@ public class ItemBloom extends ItemTFC implements ICapabilityMetal {
     ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
     if (cap instanceof IForgeableMeasurableMetal forgeableMeasurableMetal) {
       text.add("");
-      text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(forgeableMeasurableMetal.getMetal()))));
+      text.add(I18n.format("tfc.tooltip.metal", I18n.format(TranslatorUtils.getTypeName(forgeableMeasurableMetal.getMetal()))));
       text.add(I18n.format("tfc.tooltip.units", forgeableMeasurableMetal.getMetalAmount()));
-      text.add(I18n.format(Helpers.getEnumName(forgeableMeasurableMetal.getMetal().getTier())));
+      text.add(I18n.format(TranslatorUtils.getEnumName(forgeableMeasurableMetal.getMetal().getTier())));
     }
   }
 

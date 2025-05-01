@@ -1,12 +1,11 @@
 package su.terrafirmagreg.modules.core.capabilities.heat.spi;
 
 import su.terrafirmagreg.api.data.enums.OreTooltipMode;
+import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nullable;
 
@@ -62,7 +61,7 @@ public enum Heat {
     Heat heat = Heat.getHeat(temperature);
     if (heat != null) {
       StringBuilder b = new StringBuilder();
-      b.append(I18n.format(Helpers.getEnumName(heat)));
+      b.append(I18n.format(TranslatorUtils.getEnumName(heat)));
       if (heat != Heat.BRILLIANT_WHITE) {
         for (int i = 1; i <= 4; i++) {
           if (temperature <= heat.getMin() + ((float) i * 0.2f) * (heat.getMax() - heat.getMin())) {continue;}
@@ -80,7 +79,7 @@ public enum Heat {
     String tooltip = getTooltipColorless(temperature);
     if (tooltip != null && heat != null) {
       tooltip = heat.format + tooltip;
-      if (ConfigTFC.Client.TOOLTIP.oreTooltipMode == OreTooltipMode.ADVANCED) {
+      if (ConfigCore.MISC.HEAT.oreTooltipMode == OreTooltipMode.ADVANCED) {
         tooltip = tooltip + " : " + I18n.format("tfc.tooltip.melttemp", Math.round(temperature));
       }
 
@@ -94,7 +93,7 @@ public enum Heat {
     String tooltip = getTooltipColorless(temperature);
     if (tooltip != null && heat != null) {
       tooltip = heat.alternate + tooltip;
-      if (ConfigTFC.Client.TOOLTIP.oreTooltipMode == OreTooltipMode.ADVANCED) {
+      if (ConfigCore.MISC.HEAT.oreTooltipMode == OreTooltipMode.ADVANCED) {
         tooltip = tooltip + " : " + I18n.format("tfc.tooltip.melttemp", Math.round(temperature));
       }
     }

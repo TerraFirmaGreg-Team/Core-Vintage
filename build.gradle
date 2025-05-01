@@ -147,11 +147,11 @@ repositories {
 dependencies {
   if (propertyBool('use_modern_java_syntax')) {
     annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
-    // Workaround for https://github.com/bsideup/jabel/issues/174
-    annotationProcessor 'net.java.dev.jna:jna-platform:5.13.0'
     compileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
       transitive = false
     }
+    // Workaround for https://github.com/bsideup/jabel/issues/174
+    annotationProcessor 'net.java.dev.jna:jna-platform:5.13.0'
     // Allow jdk.unsupported classes like sun.misc.Unsafe, workaround for JDK-8206937 and fixes crashes in tests
     patchedMinecraft 'me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0'
     // Include for tests
@@ -164,13 +164,14 @@ dependencies {
     implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
   }
   if (propertyBool('use_mixins')) {
+    annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
+    annotationProcessor 'com.google.guava:guava:32.1.2-jre'
+    annotationProcessor 'com.google.code.gson:gson:2.8.9'
+
     String mixin = modUtils.enableMixins("zone.rong:mixinbooter:${propertyString('mixin_booter_version')}", propertyString('mixin_refmap'))
     api(mixin) {
       transitive = false
     }
-    annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
-    annotationProcessor 'com.google.guava:guava:32.1.2-jre'
-    annotationProcessor 'com.google.code.gson:gson:2.8.9'
     annotationProcessor(mixin) {
       transitive = false
     }
@@ -190,27 +191,42 @@ dependencies {
 
 }
 
+//configurations.configureEach {
+//  resolutionStrategy.dependencySubstitution {
+//    substitute module('org.scala-lang:scala-library:2.11.1') using module('org.scala-lang:scala-library:2.11.5') because('To allow mixing with Java 8 targets')
+//  }
+//}
+
 sourceSets {
   framework {
     compileClasspath += sourceSets.main.compileClasspath
     runtimeClasspath += sourceSets.main.runtimeClasspath
   }
-  core {
-    compileClasspath += sourceSets.framework.output
-    runtimeClasspath += sourceSets.framework.output
+//  core {
+//    compileClasspath += sourceSets.main.compileClasspath
+//    runtimeClasspath += sourceSets.main.runtimeClasspath
+//
+//    compileClasspath += sourceSets.framework.output
+//    runtimeClasspath += sourceSets.framework.output
+//
+////    compileClasspath += sourceSets.main.output
+////    runtimeClasspath += sourceSets.main.output
+//
+//  }
 
-//    compileClasspath += sourceSets.main.output
-//    runtimeClasspath += sourceSets.main.output
-
-    compileClasspath += sourceSets.main.compileClasspath
-    runtimeClasspath += sourceSets.main.runtimeClasspath
-  }
   main {
-    compileClasspath += sourceSets.core.output
-    runtimeClasspath += sourceSets.core.output
+//    compileClasspath += sourceSets.core.output
+//    runtimeClasspath += sourceSets.core.output
 
     compileClasspath += sourceSets.framework.output
     runtimeClasspath += sourceSets.framework.output
+
+    java {
+      srcDir 'src/core/java'
+    }
+    resources {
+      srcDir 'src/core/resources'
+    }
   }
 }
 

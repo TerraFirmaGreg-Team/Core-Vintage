@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
@@ -16,7 +17,6 @@ import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.firmalife.util.GreenhouseHelpers;
 import net.dries007.firmalife.util.IWaterable;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.recipes.PlanterRecipe;
 
 import javax.annotation.Nonnull;
@@ -115,7 +115,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
     long growthTicks = (long) (ICalendar.TICKS_IN_DAY * tierModifier * ConfigTFC.General.FOOD.cropGrowthTimeModifier);
     while (getTicksSinceUpdate() > growthTicks) {
       reduceCounter(growthTicks);
-      int slot = Constants.RNG.nextInt(4);
+      int slot = MathUtils.RNG.nextInt(4);
       if (waterUses < 0) {
         resetCounter();
         return;
@@ -164,7 +164,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
     if (recipe != null && PlanterRecipe.getMaxStage(recipe) == getStage(slot)) {
       ItemStack returnStack = recipe.getOutputItem(inventory.getStackInSlot(slot));
       ItemHandlerHelper.giveItemToPlayer(player, returnStack);
-      final int seeds = 1 + Constants.RNG.nextInt(2);
+      final int seeds = 1 + MathUtils.RNG.nextInt(2);
       ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(inventory.getStackInSlot(slot).getItem(), seeds));
       inventory.setStackInSlot(slot, ItemStack.EMPTY);
       stages[slot] = 0;

@@ -1,6 +1,7 @@
 package net.dries007.tfcthings.event;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
@@ -22,11 +23,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
-import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownRopeJavelin;
+import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 import net.dries007.tfc.objects.items.ItemRopeJavelin;
+import net.dries007.tfc.util.Helpers;
 import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nullable;
@@ -152,7 +152,7 @@ public class TFCThingsEventHandler {
   @SubscribeEvent
   public static void onPlayerInteractEntity(PlayerInteractEvent.EntityInteract event) {
     if (event.getTarget() instanceof EntityAnimalSheep sheep) {
-      if ((OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "shears") || OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "knife"))
+      if ((OreDictUtils.contains(event.getItemStack(), "shears") || OreDictUtils.contains(event.getItemStack(), "knife"))
           && sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
         if (!sheep.world.isRemote) {
           ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL.get(), 1);

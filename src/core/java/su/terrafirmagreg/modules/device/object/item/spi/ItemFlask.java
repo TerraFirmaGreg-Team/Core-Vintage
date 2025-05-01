@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.object.item.spi;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemFluid;
 import su.terrafirmagreg.api.library.MeshDefinitionFix;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderItemMesh;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemMesh;
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityFluidItem;
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
 import su.terrafirmagreg.modules.device.ConfigDevice;

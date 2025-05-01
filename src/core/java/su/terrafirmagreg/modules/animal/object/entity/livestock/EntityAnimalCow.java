@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
@@ -47,15 +48,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
   private static final DataParameter<Long> MILKED = EntityDataManager.createKey(EntityAnimalCow.class, DataSerializers.LONG);
 
   @SuppressWarnings("unused")
   public EntityAnimalCow(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       getRandomGrowth(ConfigAnimal.ENTITY.COW.adulthood, ConfigAnimal.ENTITY.COW.elder));
   }
 
@@ -106,7 +105,7 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
   public void birthChildren() {
     int numberOfChildren = ConfigAnimal.ENTITY.COW.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalCow baby = new EntityAnimalCow(world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalCow baby = new EntityAnimalCow(world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
       baby.setFamiliarity(

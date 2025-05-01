@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
@@ -34,7 +35,6 @@ import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 
@@ -179,9 +179,9 @@ public class TEAnvilTFC extends TEInventory {
       case SLOT_INPUT_2:
         return stack.hasCapability(CapabilityForgeable.CAPABILITY, null);
       case SLOT_FLUX:
-        return OreDictionaryHelper.doesStackMatchOre(stack, "dustFlux");
+        return OreDictUtils.contains(stack, "dustFlux");
       case SLOT_HAMMER:
-        return OreDictionaryHelper.doesStackMatchOre(stack, "toolHammer");
+        return OreDictUtils.contains(stack, "toolHammer");
       default:
         return false;
     }

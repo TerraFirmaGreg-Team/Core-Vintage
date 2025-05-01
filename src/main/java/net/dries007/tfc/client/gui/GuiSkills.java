@@ -1,5 +1,6 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.skill.Skill;
@@ -19,7 +20,6 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.util.Helpers;
 
 import java.util.List;
 
@@ -132,7 +132,7 @@ public class GuiSkills extends GuiContainerTFC {
         SkillType<? extends Skill> skillType = skillOrder.get(startSkill + i);
         Skill skill = skills.getSkill(skillType);
         if (skill != null) {
-          skillTooltips[i] = I18n.format("tfc.skill." + skillType.getName(), I18n.format(Helpers.getEnumName(skill.getTier())));
+          skillTooltips[i] = I18n.format("tfc.skill." + skillType.getName(), I18n.format(TranslatorUtils.getEnumName(skill.getTier())));
           skillBarWidths[i] = (int) (160 * skill.getLevel());
           skillBarColors[i] = skill.getTier().ordinal();
         }

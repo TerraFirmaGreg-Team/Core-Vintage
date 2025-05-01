@@ -1,5 +1,6 @@
 package net.dries007.firmalife.registry;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -21,7 +22,6 @@ import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;

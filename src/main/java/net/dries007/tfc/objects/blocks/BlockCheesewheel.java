@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
@@ -33,7 +34,6 @@ import net.dries007.firmalife.init.AgingFL;
 import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -68,7 +68,7 @@ public class BlockCheesewheel extends BlockNonCube implements ICapabilitySize {
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand handIn, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = playerIn.getHeldItem(handIn);
-    if (OreDictionaryHelper.doesStackMatchOre(stack, "knife")) {
+    if (OreDictUtils.contains(stack, "knife")) {
       if (!worldIn.isRemote) {
         stack.damageItem(1, playerIn);
         return this.cutCheese(worldIn, pos, state, playerIn);

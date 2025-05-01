@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -19,7 +20,6 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -83,7 +83,7 @@ public class ItemAnimalHide extends ItemTFC {
       BlockPos posAbove = pos.up();
       IBlockState stateAbove = worldIn.getBlockState(posAbove);
       ItemStack stackAt = stateAt.getBlock().getPickBlock(stateAt, null, worldIn, pos, player);
-      if (facing == EnumFacing.UP && OreDictionaryHelper.doesStackMatchOre(stackAt, "logWood") && stateAbove.getBlock().isAir(stateAbove, worldIn, posAbove)) {
+      if (facing == EnumFacing.UP && OreDictUtils.contains(stackAt, "logWood") && stateAbove.getBlock().isAir(stateAbove, worldIn, posAbove)) {
         if (!worldIn.isRemote) {
           worldIn.setBlockState(posAbove, BlocksTFC.PLACED_HIDE.getDefaultState().withProperty(SIZE, size));
         }

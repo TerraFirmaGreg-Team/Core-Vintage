@@ -5,10 +5,11 @@ import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
 import lombok.Getter;
 
-public interface ISoundSettings extends IBaseSettings<Settings> {
+public interface ISoundSettings extends IBaseSettings<Settings, SoundEvent> {
 
   @Getter
   class Settings extends BaseSettings<Settings> {

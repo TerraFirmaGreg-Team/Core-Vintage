@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.groundcover;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -30,7 +32,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfcflorae.client.GuiHandler;
 
 import javax.annotation.Nonnull;
@@ -195,7 +196,7 @@ public class BlockSurfaceFlint extends BlockBush {
   @Nonnull
   public void onRightClick(PlayerInteractEvent.RightClickItem event) {
     EnumHand hand = event.getHand();
-    if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "flint") && hand == EnumHand.MAIN_HAND) {
+    if (OreDictUtils.contains(event.getItemStack(), "flint") && hand == EnumHand.MAIN_HAND) {
       EntityPlayer player = event.getEntityPlayer();
       World world = event.getWorld();
       if (!world.isRemote && !player.isSneaking()) {

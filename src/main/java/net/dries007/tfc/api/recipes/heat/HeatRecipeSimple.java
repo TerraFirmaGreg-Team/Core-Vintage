@@ -1,14 +1,14 @@
 package net.dries007.tfc.api.recipes.heat;
 
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

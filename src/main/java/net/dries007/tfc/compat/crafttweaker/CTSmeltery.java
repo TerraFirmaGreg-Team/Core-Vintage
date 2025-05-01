@@ -1,5 +1,7 @@
 package net.dries007.tfc.compat.crafttweaker;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
@@ -9,7 +11,6 @@ import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.liquid.ILiquidStack;
 import net.dries007.tfc.api.recipes.SmelteryRecipe;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.types.TechRegistries;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;

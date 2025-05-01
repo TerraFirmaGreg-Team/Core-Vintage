@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
@@ -17,10 +19,8 @@ import net.minecraft.util.math.MathHelper;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -108,7 +108,7 @@ public class TileLogPile extends TEInventory implements ITickable {
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    return OreDictionaryHelper.doesStackMatchOre(stack, "logWood");
+    return OreDictUtils.contains(stack, "logWood");
   }
 
   /**
@@ -201,7 +201,7 @@ public class TileLogPile extends TEInventory implements ITickable {
       }
     } while (block == Blocks.AIR || block instanceof BlockCharcoalPile);
 
-    double logs = countLogs() * (0.25 + 0.25 * Constants.RNG.nextFloat());
+    double logs = countLogs() * (0.25 + 0.25 * MathUtils.RNG.nextFloat());
     int charcoal = (int) MathHelper.clamp(logs, 0, 8);
     if (charcoal == 0) {
       world.setBlockState(pos, Blocks.AIR.getDefaultState());

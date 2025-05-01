@@ -1,11 +1,12 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
+import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.framework.network.spi.datasync.DataSerializers;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
@@ -51,8 +52,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, IPredator,
                                                                       EntityAnimalAIStandAttack.IEntityStandAttack {
 
@@ -67,7 +66,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 
   @SuppressWarnings("unused")
   public EntityAnimalPolarBear(World world) {
-    this(world, Gender.valueOf(RNG.nextBoolean()),
+    this(world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
@@ -98,7 +97,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
 
   @Override
   public EntityAgeable createChild(@NotNull EntityAgeable ageable) {
-    return new EntityAnimalPolarBear(this.world, Gender.valueOf(RNG.nextBoolean()),
+    return new EntityAnimalPolarBear(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       (int) Calendar.PLAYER_TIME.getTotalDays()); // Used by spawn eggs
   }
 

@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.recipes.anvil;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.forge.ForgeSteps;

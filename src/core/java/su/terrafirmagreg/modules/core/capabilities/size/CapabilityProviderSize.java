@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.size;
 
-import su.terrafirmagreg.framework.registry.api.provider.IProviderItemCapability;
+
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 

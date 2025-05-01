@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.inventory.ingredient;
+package su.terrafirmagreg.modules.core.data.ingredient;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

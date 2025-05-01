@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
 import net.minecraft.block.Block;
@@ -28,7 +29,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -120,7 +120,7 @@ public class BlockPlacedItem extends Block {
     if (te != null) {
       ItemStack stack = playerIn.getHeldItemMainhand();
       // Check for pit kiln conversion
-      if (!playerIn.isSneaking() && (OreDictionaryHelper.doesStackMatchOre(stack, "straw") || OreDictionaryHelper.doesStackMatchOre(stack, "blockStraw"))) {
+      if (!playerIn.isSneaking() && (OreDictUtils.contains(stack, "straw") || OreDictUtils.contains(stack, "blockStraw"))) {
         TilePitKiln.convertPlacedItemToPitKiln(worldIn, pos, stack.splitStack(1));
         return true;
       }

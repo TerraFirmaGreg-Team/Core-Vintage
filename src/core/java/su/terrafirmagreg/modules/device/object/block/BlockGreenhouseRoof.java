@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockFaceShape;
@@ -15,7 +17,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.dries007.firmalife.util.HelpersFL;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -46,9 +47,9 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       ItemStack held = player.getHeldItem(hand);
-      if (OreDictionaryHelper.doesStackMatchOre(held, "greenhouse")) {return false;}
+      if (OreDictUtils.contains(held, "greenhouse")) {return false;}
       if (!state.getValue(GLASS)) {
-        if (held.getCount() > 1 && OreDictionaryHelper.doesStackMatchOre(held, "paneGlass")) {
+        if (held.getCount() > 1 && OreDictUtils.contains(held, "paneGlass")) {
           world.setBlockState(pos, state.withProperty(GLASS, true));
           if (!player.isCreative()) {held.shrink(2);}
           return true;

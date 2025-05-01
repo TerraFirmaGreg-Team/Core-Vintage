@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.manager.registry;
 
+import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
 
 import net.minecraft.util.ResourceLocation;
@@ -27,23 +28,37 @@ public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForge
   }
 
   public <T extends IForgeRegistryEntry<T>> void computeIfAbsent(Class<T> registry, RegistryWrapper wrapper) {
+
     computeIfAbsent(registry).add(wrapper);
   }
 
   public <T extends IForgeRegistryEntry<T>> List<RegistryWrapper> get(IForgeRegistry<T> forgeRegistry) {
+
     return this.computeIfAbsent(forgeRegistry.getRegistrySuperType());
   }
 
   @SuppressWarnings("unchecked")
   public <T extends IForgeRegistryEntry<T>> void register(Class<T> registry, final Consumer<T> consumer) {
+
     this.get(registry).forEach(wrapper -> consumer.accept((T) wrapper.getEntry()));
   }
 
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public <T extends IForgeRegistryEntry<T>> void register(IForgeRegistry<T> registry) {
-    
-    this.get(registry).forEach(wrapper -> registry.register((T) wrapper.getEntry()));
+
+    this.get(registry).forEach(wrapper -> {
+      var entry = wrapper.getEntry();
+      entry.setRegistryName(wrapper.getIdentifier());
+      registry.register((T) entry);
+
+      if (entry instanceof IBaseSettings settings) {
+
+        settings.register(registry);
+      }
+
+
+    });
   }
 
   @Data(staticConstructor = "of")

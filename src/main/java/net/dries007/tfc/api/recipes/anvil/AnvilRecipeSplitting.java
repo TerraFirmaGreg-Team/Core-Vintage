@@ -3,21 +3,20 @@ package net.dries007.tfc.api.recipes.anvil;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.forge.ForgeRule;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * This is an anvil recipe that will split an {@link IForgeableMeasurableMetal} into a specific "chunk" size Used by blooms to split a 560 -> 5x 100 blooms and
- * 1x 60 bloom for example
+ * This is an anvil recipe that will split an {@link IForgeableMeasurableMetal} into a specific "chunk" size Used by blooms to split a 560 -> 5x 100 blooms and 1x 60 bloom for example
  */
 @ParametersAreNonnullByDefault
 public class AnvilRecipeSplitting extends AnvilRecipeMeasurable {

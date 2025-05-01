@@ -1,15 +1,15 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.util.MathUtils;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-
-import net.dries007.tfc.Constants;
 
 import javax.annotation.Nonnull;
 
 public class TEStemCrop extends TECropBase {
 
-  private EnumFacing fruitDirection = EnumFacing.Plane.HORIZONTAL.random(Constants.RNG);
+  private EnumFacing fruitDirection = EnumFacing.Plane.HORIZONTAL.random(MathUtils.RNG);
 
   @Override
   @Nonnull

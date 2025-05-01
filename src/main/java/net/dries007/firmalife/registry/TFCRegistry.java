@@ -2,6 +2,8 @@ package net.dries007.firmalife.registry;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.data.ingredient.IngredientItemFood;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 
@@ -37,8 +39,6 @@ import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.Powder;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;

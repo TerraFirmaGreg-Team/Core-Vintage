@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
+import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
-import su.terrafirmagreg.framework.network.spi.datasync.DataSerializers;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -55,7 +56,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
   @SuppressWarnings("unused")
   public EntityAnimalLion(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityAnimalLion(World worldIn, Gender gender, int birthDay) {
@@ -114,7 +115,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
   public void birthChildren() {
     int numberOfChildren = 1; //one always
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalLion baby = new EntityAnimalLion(this.world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalLion baby = new EntityAnimalLion(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       this.world.spawnEntity(baby);

@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlockHorizontal;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.network.spi.GuiHandler;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;

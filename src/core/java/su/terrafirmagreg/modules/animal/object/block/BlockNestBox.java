@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.animal.object.block;
 
+import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.network.spi.GuiHandler;
 import su.terrafirmagreg.modules.animal.object.tile.TileNestBox;
 
 import net.minecraft.block.Block;

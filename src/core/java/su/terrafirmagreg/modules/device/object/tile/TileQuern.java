@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 
 import net.minecraft.entity.passive.EntityCow;
@@ -16,7 +17,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -60,7 +60,7 @@ public class TileQuern extends TEInventory implements ITickable {
   public boolean isItemValid(int slot, ItemStack stack) {
     switch (slot) {
       case SLOT_HANDSTONE:
-        return OreDictionaryHelper.doesStackMatchOre(stack, "handstone");
+        return OreDictUtils.contains(stack, "handstone");
       case SLOT_INPUT:
         return QuernRecipe.get(stack) != null;
       default:
@@ -72,7 +72,7 @@ public class TileQuern extends TEInventory implements ITickable {
   public void setAndUpdateSlots(int slot) {
     markForBlockUpdate();
     if (slot == SLOT_HANDSTONE) {
-      hasHandstone = OreDictionaryHelper.doesStackMatchOre(inventory.getStackInSlot(SLOT_HANDSTONE), "handstone");
+      hasHandstone = OreDictUtils.contains(inventory.getStackInSlot(SLOT_HANDSTONE), "handstone");
     }
     super.setAndUpdateSlots(slot);
   }
@@ -81,7 +81,7 @@ public class TileQuern extends TEInventory implements ITickable {
   public void readFromNBT(NBTTagCompound nbt) {
     rotationTimer = nbt.getInteger("rotationTimer");
     super.readFromNBT(nbt);
-    hasHandstone = OreDictionaryHelper.doesStackMatchOre(inventory.getStackInSlot(SLOT_HANDSTONE), "handstone");
+    hasHandstone = OreDictUtils.contains(inventory.getStackInSlot(SLOT_HANDSTONE), "handstone");
   }
 
   @Override

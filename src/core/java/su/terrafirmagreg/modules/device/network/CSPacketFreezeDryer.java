@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.network;
 
-import su.terrafirmagreg.framework.network.spi.packet.PacketBaseTile;
+import su.terrafirmagreg.api.base.network.packet.spi.NetworkPacketBaseTile;
 import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 
 import net.minecraft.util.math.BlockPos;
 
-public class CSPacketFreezeDryer extends PacketBaseTile<TileFreezeDryer, CSPacketFreezeDryer> {
+public class CSPacketFreezeDryer extends NetworkPacketBaseTile<TileFreezeDryer> {
 
   public int bool;
   public boolean mode;

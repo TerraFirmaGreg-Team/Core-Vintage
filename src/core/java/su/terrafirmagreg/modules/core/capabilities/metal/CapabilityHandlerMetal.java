@@ -1,10 +1,17 @@
 package su.terrafirmagreg.modules.core.capabilities.metal;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -50,12 +57,6 @@ import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.ore
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.toolHeadSense;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.toolHeadShovel;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.toolHeadSword;
-
-import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.ore.OrePrefix;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 public class CapabilityHandlerMetal {
 

@@ -1,7 +1,6 @@
 package su.terrafirmagreg.api.base.object.group.spi;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.manager.registry.RegistryManager;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -40,21 +39,28 @@ public class BaseItemGroup extends CreativeTabs {
   }
 
   public static BaseItemGroup of(String identifier, String icon) {
+
     return of(identifier, ModUtils.resource(icon));
   }
 
+  public static BaseItemGroup of(ResourceLocation identifier, String icon) {
 
-  public static BaseItemGroup of(IModule module, String icon) {
-    var identifier = module.getIdentifier();
     return of(ModUtils.localize(identifier), ModUtils.regKey(identifier.getPath(), icon));
   }
 
+  public static BaseItemGroup of(ResourceLocation identifier, ResourceLocation icon) {
+
+    return of(ModUtils.localize(identifier), icon);
+  }
+
   public static BaseItemGroup of(String identifier, ResourceLocation icon) {
+
     return of(identifier, () -> new ItemStack(ForgeRegistries.ITEMS.getValue(icon)));
   }
 
 
   public static BaseItemGroup of(String identifier, Supplier<ItemStack> icon) {
+
     return new BaseItemGroup(identifier, icon);
   }
 

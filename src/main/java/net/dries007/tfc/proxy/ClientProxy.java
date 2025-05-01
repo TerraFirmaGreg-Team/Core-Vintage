@@ -1,5 +1,9 @@
 package net.dries007.tfc.proxy;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,12 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.util.Helpers;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -55,7 +53,7 @@ public class ClientProxy implements IProxy {
   @Nonnull
   @Override
   public String getMonthName(Month month, boolean useSeasons) {
-    return I18n.format(useSeasons ? "tfc.enum.season." + month.name().toLowerCase() : Helpers.getEnumName(month));
+    return I18n.format(useSeasons ? "tfc.enum.season." + month.name().toLowerCase() : TranslatorUtils.getEnumName(month));
   }
 
   @Nonnull

@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
@@ -20,7 +22,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.objects.items.ItemTFC;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
@@ -104,17 +105,17 @@ public class ItemOreTFC extends ItemTFC implements ICapabilityMetal {
     if (metal != null) {
       int smeltAmount = this.getSmeltAmount(stack);
       int meltTemp = (int) this.getMeltTemp(stack);
-      switch (ConfigTFC.Client.TOOLTIP.oreTooltipMode) {
+      switch (ConfigCore.MISC.HEAT.oreTooltipMode) {
         case HIDE:
           break;
         case UNIT_ONLY:
           // Like classic, "Metal: xx units"
-          String info = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units", smeltAmount));
+          String info = String.format("%s: %s", I18n.format(TranslatorUtils.getTypeName(metal)), I18n.format("tfc.tooltip.units", smeltAmount));
           tooltip.add(info);
           break;
         case TOTAL_ONLY:
           // not like Classic, "Metal: xx total units" Adds the whole stacks worth up.
-          String stackTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units.total",
+          String stackTotal = String.format("%s: %s", I18n.format(TranslatorUtils.getTypeName(metal)), I18n.format("tfc.tooltip.units.total",
             smeltAmount * stack.getCount()));
           tooltip.add(stackTotal);
           break;
@@ -122,10 +123,10 @@ public class ItemOreTFC extends ItemTFC implements ICapabilityMetal {
           // All info: "Metal: xx units / xx total"
           String infoTotal;
           if (stack.getCount() > 1) {
-            infoTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units.info_total", smeltAmount,
+            infoTotal = String.format("%s: %s", I18n.format(TranslatorUtils.getTypeName(metal)), I18n.format("tfc.tooltip.units.info_total", smeltAmount,
               smeltAmount * stack.getCount()));
           } else {
-            infoTotal = String.format("%s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units", smeltAmount), I18n.format("tfc.tooltip.melttemp", meltTemp));
+            infoTotal = String.format("%s: %s", I18n.format(TranslatorUtils.getTypeName(metal)), I18n.format("tfc.tooltip.units", smeltAmount), I18n.format("tfc.tooltip.melttemp", meltTemp));
           }
           tooltip.add(infoTotal);
           break;
@@ -133,11 +134,11 @@ public class ItemOreTFC extends ItemTFC implements ICapabilityMetal {
           // All info: "Metal: xx units / xx total"
           String advancedTotal;
           if (stack.getCount() > 1) {
-            advancedTotal = String.format("%s: %s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units.info_total", smeltAmount,
+            advancedTotal = String.format("%s: %s: %s", I18n.format(TranslatorUtils.getTypeName(metal)), I18n.format("tfc.tooltip.units.info_total", smeltAmount,
               smeltAmount
               * stack.getCount()), I18n.format("tfc.tooltip.melttemp", meltTemp));
           } else {
-            advancedTotal = String.format("%s: %s: %s", I18n.format(Helpers.getTypeName(metal)), I18n.format("tfc.tooltip.units", smeltAmount), I18n.format("tfc.tooltip.melttemp", meltTemp));
+            advancedTotal = String.format("%s: %s: %s", I18n.format(TranslatorUtils.getTypeName(metal)), I18n.format("tfc.tooltip.units", smeltAmount), I18n.format("tfc.tooltip.melttemp", meltTemp));
           }
           tooltip.add(advancedTotal);
 

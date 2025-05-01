@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
@@ -19,7 +20,6 @@ import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.items.food.ItemDynamicBowlFood;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
 
 import javax.annotation.Nonnull;
@@ -47,12 +47,12 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
 
     // move bowls from inventory to bowl slot
     ItemStack bowl = playerInv.player.getHeldItemMainhand();
-    if (OreDictionaryHelper.doesStackMatchOre(bowl, "bowl")) {
+    if (OreDictUtils.contains(bowl, "bowl")) {
       inventory.setStackInSlot(SLOT_BOWLS, bowl);
       playerInv.player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
     } else {
       bowl = playerInv.player.getHeldItemOffhand();
-      if (OreDictionaryHelper.doesStackMatchOre(bowl, "bowl")) {
+      if (OreDictUtils.contains(bowl, "bowl")) {
         inventory.setStackInSlot(SLOT_BOWLS, bowl);
         playerInv.player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
       }
@@ -88,7 +88,7 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
   public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
     switch (slot) {
       case SLOT_BOWLS:
-        return OreDictionaryHelper.doesStackMatchOre(stack, "bowl");
+        return OreDictUtils.contains(stack, "bowl");
       case SLOT_OUTPUT:
         return false;
       default:

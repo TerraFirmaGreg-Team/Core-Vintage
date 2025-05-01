@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.ceramics;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
@@ -26,7 +27,6 @@ import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.metal.ItemTechMetal;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -157,7 +157,7 @@ public class ItemTechMold extends ItemPottery {
     public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
       Metal metal = getMetal();
       if (metal != null) {
-        String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
+        String desc = TextFormatting.DARK_GREEN + I18n.format(TranslatorUtils.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
         if (isMolten()) {
           desc += I18n.format("tfc.tooltip.liquid");
         }

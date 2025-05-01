@@ -1,20 +1,20 @@
-package net.dries007.tfc.objects.inventory.ingredient;
+package su.terrafirmagreg.modules.core.data.ingredient;
 
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-/**
- * Accepts only valid, not rotten foods on recipes
- */
-public class IngredientItemFood implements IIngredient<ItemStack> {
+public class IngredientItemFoodTrait implements IIngredient<ItemStack> {
 
   private final IIngredient<ItemStack> innerIngredient;
+  private final FoodTrait trait;
 
-  public IngredientItemFood(IIngredient<ItemStack> innerIngredient) {
+  public IngredientItemFoodTrait(IIngredient<ItemStack> innerIngredient, FoodTrait trait) {
     this.innerIngredient = innerIngredient;
+    this.trait = trait;
   }
 
   @Override
@@ -23,7 +23,7 @@ public class IngredientItemFood implements IIngredient<ItemStack> {
     for (ItemStack stack : ingredients) {
       ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (food != null) {
-        food.setNonDecaying();
+        CapabilityFood.applyTrait(food, trait);
       }
     }
     return ingredients;
@@ -31,12 +31,12 @@ public class IngredientItemFood implements IIngredient<ItemStack> {
 
   @Override
   public boolean test(ItemStack input) {
-    return innerIngredient.test(input) && !isRotten(input);
+    return innerIngredient.test(input) && hasTrait(input);
   }
 
   @Override
   public boolean testIgnoreCount(ItemStack stack) {
-    return innerIngredient.testIgnoreCount(stack) && !isRotten(stack);
+    return innerIngredient.testIgnoreCount(stack) && hasTrait(stack);
   }
 
   @Override
@@ -46,11 +46,11 @@ public class IngredientItemFood implements IIngredient<ItemStack> {
 
   @Override
   public int getAmount() {
-    return innerIngredient.getAmount();
+    return this.innerIngredient.getAmount();
   }
 
-  private boolean isRotten(ItemStack stack) {
+  private boolean hasTrait(ItemStack stack) {
     ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-    return cap != null && cap.isRotten();
+    return cap != null && cap.getTraits().contains(trait);
   }
 }

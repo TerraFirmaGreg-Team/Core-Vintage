@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -25,7 +26,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -58,8 +58,8 @@ public class BlockGreenhouseWall extends Block implements ICapabilitySize {
       ItemStack held = player.getHeldItem(hand);
       if (!state.getValue(GLASS)) {
         int count = held.getCount();
-        if (OreDictionaryHelper.doesStackMatchOre(held, "greenhouse")) {return false;}
-        if (count > 1 && OreDictionaryHelper.doesStackMatchOre(held, "paneGlass")) {
+        if (OreDictUtils.contains(held, "greenhouse")) {return false;}
+        if (count > 1 && OreDictUtils.contains(held, "paneGlass")) {
           world.setBlockState(pos, state.withProperty(GLASS, true));
           if (!player.isCreative()) {held.shrink(2);}
 

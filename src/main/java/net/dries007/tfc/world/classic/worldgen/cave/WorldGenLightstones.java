@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.cave;
 
+import su.terrafirmagreg.api.util.MathUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -8,7 +10,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.groundcover.BlockLightstone;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
@@ -30,7 +31,7 @@ public class WorldGenLightstones implements IWorldGenerator {
     final float floraDensity = data.getFloraDensity();
     final float floraDiversity = data.getFloraDiversity();
 
-    int lightstoneCount = (Constants.RNG.nextInt(8) + 1);
+    int lightstoneCount = (MathUtils.RNG.nextInt(8) + 1);
     for (int i = rng.nextInt(Math.round(1 / floraDiversity)); i < (4 + floraDensity + floraDiversity) * lightstoneCount; i++) {
       BlockPos blockPos = chunkPos.add(rng.nextInt(16) + 8, rng.nextInt(16), rng.nextInt(16) + 8);
       if (blockPos.getY() < WorldTypeTFC.SEALEVEL - 30 && blockPos.getY() > 10) {

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 
@@ -24,7 +25,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.Gem;
@@ -58,7 +58,7 @@ public class TileSluice extends BaseTile implements ITickable {
     if (!world.isRemote) {
       if (ticksRemaining > 0) {
         if (--ticksRemaining <= 0) {
-          if (Constants.RNG.nextDouble() < ConfigTFC.Devices.SLUICE.oreChance) {
+          if (MathUtils.RNG.nextDouble() < ConfigTFC.Devices.SLUICE.oreChance) {
             ChunkDataTFC chunkData = getChunkData(true);
             if (chunkData != null) {
               // Only check for not null veins
@@ -67,21 +67,21 @@ public class TileSluice extends BaseTile implements ITickable {
                 .collect(Collectors.toList());
 
               //noinspection ConstantConditions
-              Ore ore = veinList.get(Constants.RNG.nextInt(veinList.size())).getType().getOre();
+              Ore ore = veinList.get(MathUtils.RNG.nextInt(veinList.size())).getType().getOre();
               ItemStack output = new ItemStack(ItemSmallOre.get(ore));
               Helpers.spawnItemStack(world, getFrontWaterPos(), output);
               chunkData.addWork(3);
             }
-          } else if (Constants.RNG.nextDouble() < ConfigTFC.Devices.SLUICE.gemChance) {
+          } else if (MathUtils.RNG.nextDouble() < ConfigTFC.Devices.SLUICE.gemChance) {
             ChunkDataTFC chunkData = getChunkData(false);
             if (chunkData != null) {
               Gem dropGem;
-              if (Constants.RNG.nextDouble() < ConfigTFC.Devices.SLUICE.diamondGemChance) {
+              if (MathUtils.RNG.nextDouble() < ConfigTFC.Devices.SLUICE.diamondGemChance) {
                 dropGem = Gem.DIAMOND;
               } else {
-                dropGem = Gem.getRandomDropGem(Constants.RNG);
+                dropGem = Gem.getRandomDropGem(MathUtils.RNG);
               }
-              Gem.Grade grade = Gem.Grade.randomGrade(Constants.RNG);
+              Gem.Grade grade = Gem.Grade.randomGrade(MathUtils.RNG);
               Helpers.spawnItemStack(world, getFrontWaterPos(), ItemGem.get(dropGem, grade, 1));
               chunkData.addWork(3);
             }
@@ -233,7 +233,7 @@ public class TileSluice extends BaseTile implements ITickable {
       }
     }
     if (chunks.size() > 0) {
-      Chunk workingChunk = chunks.get(Constants.RNG.nextInt(chunks.size()));
+      Chunk workingChunk = chunks.get(MathUtils.RNG.nextInt(chunks.size()));
       return ChunkDataTFC.get(workingChunk);
     }
     return null;

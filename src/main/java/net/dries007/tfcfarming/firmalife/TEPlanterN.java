@@ -1,5 +1,6 @@
 package net.dries007.tfcfarming.firmalife;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
@@ -8,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TEPlanter;
@@ -33,7 +33,7 @@ public class TEPlanterN extends TEPlanter {
 
     while (this.getTicksSinceUpdate() > growthTicks) {
       this.reduceCounter(growthTicks);
-      int slot = Constants.RNG.nextInt(4);
+      int slot = MathUtils.RNG.nextInt(4);
       if (waterUses < 0) {
         this.resetCounter();
         return;

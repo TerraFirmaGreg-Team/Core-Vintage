@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -111,7 +112,7 @@ public class BlockTorchTFC extends BlockTorch implements ICapabilitySize, ILight
     if (!worldIn.isRemote) {
       ItemStack stack = playerIn.getHeldItem(hand);
       if (state.getValue(LIT)) {
-        if (OreDictionaryHelper.doesStackMatchOre(stack, "stickWood")) {
+        if (OreDictUtils.contains(stack, "stickWood")) {
           stack.shrink(1);
           ItemHandlerHelper.giveItemToPlayer(playerIn, new ItemStack(Blocks.TORCH));
         }

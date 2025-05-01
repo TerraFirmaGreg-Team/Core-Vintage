@@ -5,13 +5,13 @@ import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFC;
 
 import javax.annotation.Nonnull;

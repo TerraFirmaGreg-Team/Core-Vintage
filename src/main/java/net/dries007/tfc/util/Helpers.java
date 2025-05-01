@@ -1,6 +1,8 @@
 package net.dries007.tfc.util;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
@@ -59,7 +61,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.common.base.Joiner;
 import io.netty.buffer.ByteBuf;
-import net.dries007.tfc.Constants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -198,17 +199,17 @@ public final class Helpers {
 
   public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {
     for (ItemStack stack : playerInv.mainInventory) {
-      if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
+      if (!stack.isEmpty() && OreDictUtils.contains(stack, ore)) {
         return true;
       }
     }
     for (ItemStack stack : playerInv.armorInventory) {
-      if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
+      if (!stack.isEmpty() && OreDictUtils.contains(stack, ore)) {
         return true;
       }
     }
     for (ItemStack stack : playerInv.offHandInventory) {
-      if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, ore)) {
+      if (!stack.isEmpty() && OreDictUtils.contains(stack, ore)) {
         return true;
       }
     }
@@ -239,7 +240,7 @@ public final class Helpers {
    * @param stack the stack to be damaged
    */
   public static void damageItem(ItemStack stack, int amount) {
-    if (stack.attemptDamageItem(amount, Constants.RNG, null)) {
+    if (stack.attemptDamageItem(amount, MathUtils.RNG, null)) {
       stack.shrink(1);
       stack.setItemDamage(0);
     }
@@ -255,12 +256,10 @@ public final class Helpers {
   }
 
   /**
-   * Method for hanging blocks to check if they can hang. 11/10 description. NOTE: where applicable, remember to still check if the blockstate allows for the
-   * specified direction!
+   * Method for hanging blocks to check if they can hang. 11/10 description. NOTE: where applicable, remember to still check if the blockstate allows for the specified direction!
    *
    * @param pos    position of the block that makes the check
-   * @param facing the direction the block is facing. This is the direction the block should be pointing and the side it hangs ON, not the side it sticks WITH.
-   *               e.g: a sign facing north also hangs on the north side of the support block
+   * @param facing the direction the block is facing. This is the direction the block should be pointing and the side it hangs ON, not the side it sticks WITH. e.g: a sign facing north also hangs on the north side of the support block
    * @return true if the side is solid, false otherwise.
    */
   public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
@@ -404,8 +403,8 @@ public final class Helpers {
   }
 
   /**
-   * This is meant to avoid Intellij's warnings about null fields that are injected to at runtime Use this for things like @ObjectHolder, @CapabilityInject,
-   * etc. AKA - The @Nullable is intentional. If it crashes your dev env, then fix your dev env, not this. :)
+   * This is meant to avoid Intellij's warnings about null fields that are injected to at runtime Use this for things like @ObjectHolder, @CapabilityInject, etc. AKA - The @Nullable is intentional. If it crashes your dev env, then fix your
+   * dev env, not this. :)
    *
    * @param <T> anything and everything
    * @return null, but not null

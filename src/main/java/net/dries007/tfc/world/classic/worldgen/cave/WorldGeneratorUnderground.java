@@ -1,5 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen.cave;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.util.math.BlockPos;
@@ -9,7 +10,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.types.DefaultPlants;
@@ -66,7 +66,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
         switch (plant.getPlantType()) {
           case MUSHROOM: {
             if (avgTemperature >= -13f && avgTemperature <= 50f && rainfall >= 250f && rainfall <= 500) {
-              int plantCount = (Constants.RNG.nextInt(3) + 1);
+              int plantCount = (MathUtils.RNG.nextInt(3) + 1);
               for (int i = rng.nextInt(Math.round(plantCount / floraDiversity)); i < (floraDensity + floraDiversity) * fungiUndergroundCount; i++) {
                 BlockPos blockPos = chunkPos.add(rng.nextInt(16) + 8, rng.nextInt(16) + 8, rng.nextInt(16) + 8);
                 //TFCFlorae.getLog().warn("TFCFlorae: Mushroom " + plant + " attempted to generate at " + "X: " + blockPos.getX() + ", Y: " + blockPos.getY() + ", Z: " + blockPos.getZ());
@@ -78,7 +78,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
             }
           }
           case HANGING: {
-            switch (Constants.RNG.nextInt(2)) {
+            switch (MathUtils.RNG.nextInt(2)) {
               case 0: {
                 if ((b != BiomesTFC.OCEAN || b != BiomesTFC.OCEAN) && (
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
@@ -89,7 +89,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
                   int y1 = rng.nextInt((WorldTypeTFC.SEALEVEL - 5) - WorldTypeTFC.ROCKLAYER2) + WorldTypeTFC.ROCKLAYER2;
                   BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
-                  int plantCount = (Constants.RNG.nextInt(3) + 1);
+                  int plantCount = (MathUtils.RNG.nextInt(3) + 1);
                   for (int i = rng.nextInt(Math.round(plantCount / floraDiversity)); i < (floraDensity + floraDiversity) * hangingVinesUndergroundCount; i++) {
                     BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
                     //TFCFlorae.getLog().warn("TFCFlorae: Vines " + plant + " attempted to generate at " + "X: " + blockPos.getX() + ", Y: " + blockPos.getY() + ", Z: " + blockPos.getZ());
@@ -109,7 +109,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
                   int y1 = rng.nextInt((WorldTypeTFC.SEALEVEL - 5) - WorldTypeTFC.ROCKLAYER2) + WorldTypeTFC.ROCKLAYER2;
                   BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
-                  int plantCount = (Constants.RNG.nextInt(3) + 1);
+                  int plantCount = (MathUtils.RNG.nextInt(3) + 1);
                   for (int i = rng.nextInt(Math.round(plantCount / floraDiversity)); i < (floraDensity + floraDiversity) * creepingVinesUndergroundCount; i++) {
                     BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
                     //TFCFlorae.getLog().warn("TFCFlorae: CreepingVines " + plant + " attempted to generate at " + "X: " + blockPos.getX() + ", Y: " + blockPos.getY() + ", Z: " + blockPos.getZ());
@@ -135,7 +135,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
               int y1 = rng.nextInt((WorldTypeTFC.SEALEVEL - 5) - WorldTypeTFC.ROCKLAYER3) + WorldTypeTFC.ROCKLAYER3;
               BlockPos chunkBlockPos = new BlockPos(chunkX << 4, y1, chunkZ << 4);
 
-              int plantCount = (Constants.RNG.nextInt(3) + 1);
+              int plantCount = (MathUtils.RNG.nextInt(3) + 1);
               for (int i = rng.nextInt(Math.round(plantCount / floraDiversity)); i < (floraDensity + floraDiversity) * creepingUndergroundCount; i++) {
                 BlockPos blockPos = chunkBlockPos.add(rng.nextInt(16) + 8, 0, rng.nextInt(16) + 8);
                 //TFCFlorae.getLog().warn("TFCFlorae: Moss " + plant + " attempted to generate at " + "X: " + blockPos.getX() + ", Y: " + blockPos.getY() + ", Z: " + blockPos.getZ());

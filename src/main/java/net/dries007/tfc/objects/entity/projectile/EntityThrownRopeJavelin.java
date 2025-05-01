@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.projectile;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 
 import net.minecraft.entity.Entity;
@@ -23,7 +24,6 @@ import net.minecraftforge.fml.common.registry.IThrowableEntity;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.objects.items.ItemRopeJavelin;
-import net.dries007.tfc.Constants;
 
 import javax.annotation.Nonnull;
 
@@ -115,7 +115,7 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
       if (this.getThrower() instanceof EntityLivingBase thrower && javelin.getCapturedEntity(getWeapon(), getEntityWorld()) == null) {
         float skillModifier = SmithingSkill.getSkillBonus(getWeapon(), SmithingSkill.Type.WEAPONS) / 2.0F;
         int damageAmount = 1;
-        if (skillModifier > 0.0F && Constants.RNG.nextFloat() < skillModifier) {
+        if (skillModifier > 0.0F && MathUtils.RNG.nextFloat() < skillModifier) {
           damageAmount -= 1;
         }
         if (entity != null) {

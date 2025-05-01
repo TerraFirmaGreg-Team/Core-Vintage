@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -38,7 +39,6 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TEOven;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -62,8 +62,7 @@ public class BlockOven extends Block implements ILightableBlock, ICapabilitySize
   }
 
   /**
-   * This is a local way for an oven to check if it's valid. Does not care about chimneys. The ifs are nested like that for readability, I know it's not
-   * something a real dev would write.
+   * This is a local way for an oven to check if it's valid. Does not care about chimneys. The ifs are nested like that for readability, I know it's not something a real dev would write.
    *
    * @param world     The world! What more did you want
    * @param ovenPos   The oven
@@ -169,7 +168,7 @@ public class BlockOven extends Block implements ILightableBlock, ICapabilitySize
         IItemHandler inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (inventory == null) {return false;}
         boolean handEmpty = held.isEmpty();
-        if (!handEmpty && !player.isSneaking() && !OreDictionaryHelper.doesStackMatchOre(held, "peel")) {
+        if (!handEmpty && !player.isSneaking() && !OreDictUtils.contains(held, "peel")) {
           for (int i = 2; i >= 0; i--) {
             if (inventory.getStackInSlot(i).isEmpty()) {
               ItemStack leftover = inventory.insertItem(i, held.splitStack(1), false);
@@ -178,7 +177,7 @@ public class BlockOven extends Block implements ILightableBlock, ICapabilitySize
               return true;
             }
           }
-        } else if (handEmpty || OreDictionaryHelper.doesStackMatchOre(held, "peel")) {
+        } else if (handEmpty || OreDictUtils.contains(held, "peel")) {
           for (int i = 2; i >= 0; i--) // take stuff out. starts with the main slot and cycles backwards
           {
             ItemStack slotStack = inventory.getStackInSlot(i);
@@ -186,7 +185,7 @@ public class BlockOven extends Block implements ILightableBlock, ICapabilitySize
               ItemStack takeStack = inventory.extractItem(i, 1, false);
               ItemHandlerHelper.giveItemToPlayer(player, takeStack);
               te.markForSync();
-              if (ConfigFL.General.BALANCE.peelNeeded && te.willDamage() && !OreDictionaryHelper.doesStackMatchOre(held, "peel") && state.getValue(CURED)) {
+              if (ConfigFL.General.BALANCE.peelNeeded && te.willDamage() && !OreDictUtils.contains(held, "peel") && state.getValue(CURED)) {
                 player.attackEntityFrom(DamageSources.GRILL, 2.0F); // damage player if they don't use peel
               }
               return true;

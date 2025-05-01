@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -42,7 +42,7 @@ public class TEToolRack extends BaseTile {
     Item item = stack.getItem();
     return item instanceof ItemMetalTool || item instanceof ItemTool || item instanceof ItemBow || item instanceof ItemHoe || item instanceof ItemSword
            || item instanceof ItemFireStarter || item instanceof ItemFlintAndSteel || !item.getToolClasses(stack).isEmpty()
-           || OreDictionaryHelper.doesStackMatchOre(stack, "tool");
+           || OreDictUtils.contains(stack, "tool");
   }
 
   public NonNullList<ItemStack> getItems() {

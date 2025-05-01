@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -37,7 +38,7 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 
   @SuppressWarnings("unused")
   public EntityAnimalCougar(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 

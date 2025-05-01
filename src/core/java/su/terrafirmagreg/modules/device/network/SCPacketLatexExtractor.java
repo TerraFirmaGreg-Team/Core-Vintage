@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.network;
 
-import su.terrafirmagreg.framework.network.spi.packet.PacketBaseTile;
+import su.terrafirmagreg.api.base.network.packet.spi.NetworkPacketBaseTile;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 
 import org.jetbrains.annotations.NotNull;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Update latex status on client, for render purposes
  */
-public class SCPacketLatexExtractor extends PacketBaseTile<TileLatexExtractor, SCPacketLatexExtractor> {
+public class SCPacketLatexExtractor extends NetworkPacketBaseTile<TileLatexExtractor> {
 
   private int cutState = -1;
   private int fluid = 0;

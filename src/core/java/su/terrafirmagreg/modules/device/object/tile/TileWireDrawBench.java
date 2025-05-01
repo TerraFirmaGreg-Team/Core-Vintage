@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.util.MathUtils;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,7 +15,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.recipes.WireDrawingRecipe;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.network.PacketTileEntityUpdate;
@@ -186,7 +187,7 @@ public class TileWireDrawBench extends TEInventory implements ITickable {
         working = false;
         if (progress >= 100 && !world.isRemote) {
           world.playSound(null, pos, TechSounds.WIREDRAW_TONGS_FALL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-          if (inventory.getStackInSlot(0).attemptDamageItem(32, Constants.RNG, null)) {
+          if (inventory.getStackInSlot(0).attemptDamageItem(32, MathUtils.RNG, null)) {
             inventory.setStackInSlot(0, ItemStack.EMPTY);
           }
           TechRegistries.WIRE_DRAWING.getValuesCollection().stream()

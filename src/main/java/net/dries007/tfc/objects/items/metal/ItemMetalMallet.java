@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
@@ -29,7 +30,6 @@ import net.dries007.firmalife.ConfigFL;
 import net.dries007.firmalife.init.FoodFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
@@ -65,7 +65,7 @@ public class ItemMetalMallet extends ItemMetalTool {
         CrackingRecipe entry = CrackingRecipe.get(tile.getStack());
         if (entry == null) {return EnumActionResult.FAIL;}
 
-        if (Constants.RNG.nextInt(100) < entry.getChance()) {
+        if (MathUtils.RNG.nextInt(100) < entry.getChance()) {
           InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), entry.getOutputItem(tile.getStack()));
           worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 2.0F, 1.0F);
         } else {worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_FALL, SoundCategory.BLOCKS, 2.0F, 1.0F);}
@@ -134,14 +134,14 @@ public class ItemMetalMallet extends ItemMetalTool {
             leafCount = (int) Math.ceil(leafCount * 0.66);
             while (leafCount > 0)// batches drops a few times
             {
-              int dropCount = Math.min(Constants.RNG.nextInt(4) + 1, leafCount);
-              BlockPos dropPos = logPos.offset(EnumFacing.random(Constants.RNG), Constants.RNG.nextInt(3) + 1);
-              Helpers.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut().getItem(), Constants.RNG.nextInt(dropCount)));//should be querying nut
+              int dropCount = Math.min(MathUtils.RNG.nextInt(4) + 1, leafCount);
+              BlockPos dropPos = logPos.offset(EnumFacing.random(MathUtils.RNG), MathUtils.RNG.nextInt(3) + 1);
+              Helpers.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut().getItem(), MathUtils.RNG.nextInt(dropCount)));//should be querying nut
               TFCParticles.LEAF1.sendToAllNear(worldIn,
                 dropPos.getX() + RNG.nextFloat() / 10,
                 dropPos.getY() - RNG.nextFloat() / 10,
                 dropPos.getZ() + RNG.nextFloat() / 10,
-                (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, 90);
+                (MathUtils.RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10, (MathUtils.RNG.nextFloat() - 0.5) / 10, 90);
               leafCount -= dropCount;
             }
             worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 3.0F, 1.0F);

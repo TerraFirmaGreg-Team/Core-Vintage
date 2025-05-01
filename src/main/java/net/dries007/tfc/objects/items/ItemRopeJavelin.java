@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -28,7 +29,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.CreativeTabsTFC;
@@ -171,7 +171,7 @@ public class ItemRopeJavelin extends ItemTFC implements ICapabilityMetal, ItemOr
           getJavelin(stack, worldIn);
           worldIn.spawnEntity(javelin);
           worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-            1.0F / (Constants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+            1.0F / (MathUtils.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
       }
     }

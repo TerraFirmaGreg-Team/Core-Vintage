@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContainer;
 import su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg;
 import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.container.ContainerPowderKeg;
@@ -35,6 +35,9 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,9 +49,6 @@ import java.util.List;
 import static su.terrafirmagreg.api.data.NBTTags.INVENTORY_TAG;
 import static su.terrafirmagreg.api.data.NBTTags.SEALED_TAG;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.SEALED;
-
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 
 /**
  * @see BlockPowderKeg

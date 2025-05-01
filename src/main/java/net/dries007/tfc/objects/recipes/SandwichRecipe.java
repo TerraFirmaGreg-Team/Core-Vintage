@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
@@ -17,7 +18,6 @@ import net.minecraftforge.common.crafting.JsonContext;
 
 import com.google.gson.JsonObject;
 import net.dries007.tfc.objects.items.food.ItemSandwich;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class SandwichRecipe extends ShapedDamageRecipe {
           ingredients.clear();
           return;
         }
-        if (OreDictionaryHelper.doesStackMatchOre(ingredientStack, "categoryBread")) {
+        if (OreDictUtils.contains(ingredientStack, "categoryBread")) {
           // Found a bread item
           breads.add(ingredientCap.getData());
         } else {

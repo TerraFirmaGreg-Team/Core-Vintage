@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.Month;
@@ -348,30 +349,30 @@ public class BlockLeavesTFCF extends BlockLeaves {
     double y = pos.getY();
     double z = pos.getZ();
     for (int i = 1; i < RNG.nextInt(4); i++) {
-      switch (RNG.nextInt(4)) {
+      switch (MathUtils.RNG.nextInt(4)) {
         case 1:
           TFCParticles.LEAF1.sendToAllNear(world,
             x + RNG.nextFloat() / particleScale,
             y - RNG.nextFloat() / particleScale,
             z + RNG.nextFloat() / particleScale,
-            (RNG.nextFloat() - 0.5) / particleScale,
-            -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 90);
+            (MathUtils.RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (MathUtils.RNG.nextFloat() - 0.5) / particleScale, 90);
           break;
         case 2:
           TFCParticles.LEAF2.sendToAllNear(world,
             x + RNG.nextFloat() / particleScale,
             y - RNG.nextFloat() / particleScale,
             z + RNG.nextFloat() / particleScale,
-            (RNG.nextFloat() - 0.5) / particleScale,
-            -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 70);
+            (MathUtils.RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (MathUtils.RNG.nextFloat() - 0.5) / particleScale, 70);
           break;
         case 3:
           TFCParticles.LEAF3.sendToAllNear(world,
             x + RNG.nextFloat() / particleScale,
             y - RNG.nextFloat() / particleScale,
             z + RNG.nextFloat() / particleScale,
-            (RNG.nextFloat() - 0.5) / particleScale,
-            -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 80);
+            (MathUtils.RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (MathUtils.RNG.nextFloat() - 0.5) / particleScale, 80);
           break;
       }
     }

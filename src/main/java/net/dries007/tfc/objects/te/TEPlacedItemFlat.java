@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,7 +11,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
@@ -23,7 +23,7 @@ public class TEPlacedItemFlat extends BaseTile {
   private ItemStack inventory;
 
   public TEPlacedItemFlat() {
-    rotation = (byte) Constants.RNG.nextInt(4);
+    rotation = (byte) MathUtils.RNG.nextInt(4);
     inventory = ItemStack.EMPTY;
   }
 

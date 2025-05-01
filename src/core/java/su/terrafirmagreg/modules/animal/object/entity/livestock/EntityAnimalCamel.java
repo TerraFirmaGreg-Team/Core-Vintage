@@ -1,8 +1,9 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.framework.network.spi.datasync.DataSerializers;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -57,7 +58,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
     EntityAnimalCamel.class, DataSerializers.BOOLEAN);
 
   public EntityAnimalCamel(World world) {
-    this(world, Gender.valueOf(RNG.nextBoolean()),
+    this(world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.CAMEL.adulthood,
         ConfigAnimal.ENTITY.CAMEL.elder));
     this.setSize(0.9F, 2.0F);
@@ -311,7 +312,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
     } else if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
-      return new EntityAnimalCamel(this.world, Gender.valueOf(RNG.nextBoolean()),
+      return new EntityAnimalCamel(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
     }
     return null;
@@ -326,7 +327,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
   public void birthChildren() {
     int numberOfChildren = ConfigAnimal.ENTITY.CAMEL.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalCamel baby = new EntityAnimalCamel(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       if (this.geneHealth > 0) {

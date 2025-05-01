@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.library;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.client.renderer.GlStateManager;
@@ -210,12 +211,11 @@ public class MCColor extends Color {
    * @return int: An integer based representation of a Color.
    */
   public static int getRandomColor() {
-    return new Color(RNG.nextFloat(), RNG.nextFloat(), RNG.nextFloat()).getRGB();
+    return new Color(MathUtils.RNG.nextFloat(), RNG.nextFloat(), RNG.nextFloat()).getRGB();
   }
 
   /**
-   * Checks if an ItemStack is acceptable. For an ItemStack to be acceptable, it must not be null or empty, and must have an NBTTagCompound which is deemed
-   * acceptable by {@link #isAcceptable(NBTTagCompound)}.
+   * Checks if an ItemStack is acceptable. For an ItemStack to be acceptable, it must not be null or empty, and must have an NBTTagCompound which is deemed acceptable by {@link #isAcceptable(NBTTagCompound)}.
    *
    * @param stack The ItemStack to check.
    * @return Whether or not the ItemStack was acceptable.
@@ -226,8 +226,7 @@ public class MCColor extends Color {
   }
 
   /**
-   * Checks if a NBTTagCompound is acceptable. For an NBTTagCompound to be acceptable, it must not be null, and must have an integer array named Color with 3
-   * elements.
+   * Checks if a NBTTagCompound is acceptable. For an NBTTagCompound to be acceptable, it must not be null, and must have an integer array named Color with 3 elements.
    *
    * @param tag The NBTTagCompound to check.
    * @return Whether or not the ItemStack was acceptable.
@@ -250,8 +249,7 @@ public class MCColor extends Color {
   }
 
   /**
-   * Checks if a tile entity is acceptable. For a TileEntity to be acceptable, it must not be null or invalid, and must have an NBTTagCompound which is deemed
-   * acceptable by {@link #isAcceptable(NBTTagCompound)}.
+   * Checks if a tile entity is acceptable. For a TileEntity to be acceptable, it must not be null or invalid, and must have an NBTTagCompound which is deemed acceptable by {@link #isAcceptable(NBTTagCompound)}.
    *
    * @param tile The TileEntity to check.
    * @return Whether or not the TileEntity was acceptable.

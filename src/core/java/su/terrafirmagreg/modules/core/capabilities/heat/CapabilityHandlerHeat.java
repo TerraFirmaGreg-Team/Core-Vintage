@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.heat;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.init.Items;
@@ -13,7 +14,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.types.DefaultPlants;

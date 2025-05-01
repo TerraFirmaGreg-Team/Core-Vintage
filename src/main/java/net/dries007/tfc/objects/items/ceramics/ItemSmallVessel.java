@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.items.ceramics;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
@@ -60,7 +61,6 @@ import net.dries007.tfc.objects.items.ItemFoodFL;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -246,7 +246,7 @@ public class ItemSmallVessel extends ItemPottery {
     public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
       Metal metal = getMetal();
       if (metal != null) {
-        String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
+        String desc = TextFormatting.DARK_GREEN + I18n.format(TranslatorUtils.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
         if (isMolten()) {
           desc += I18n.format("tfc.tooltip.liquid");
         } else {
@@ -449,11 +449,9 @@ public class ItemSmallVessel extends ItemPottery {
     }
 
     /**
-     * This is used for a very unique situation, see #1083 By tracing the call path through
-     * {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in that massive
-     * chain, for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot which a reference has been
-     * obtained to) Thus, we don't actually care about the stack being put in the slot. We do assume that since this stack is being put in the slot, a different
-     * stack is being taken out.
+     * This is used for a very unique situation, see #1083 By tracing the call path through {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in that
+     * massive chain, for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot which a reference has been obtained to) Thus, we don't actually care about the stack being put in the
+     * slot. We do assume that since this stack is being put in the slot, a different stack is being taken out.
      */
     @Override
     public void beforePutStack(SlotCallback slot, @Nonnull ItemStack stack) {

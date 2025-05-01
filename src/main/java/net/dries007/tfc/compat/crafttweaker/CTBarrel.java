@@ -1,5 +1,8 @@
 package net.dries007.tfc.compat.crafttweaker;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
@@ -12,10 +15,6 @@ import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

@@ -1,9 +1,11 @@
 package net.dries007.tfc.objects.items.tools;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
-
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,15 +23,10 @@ import net.minecraft.world.World;
 
 import com.google.common.collect.ImmutableSet;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
-
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.objects.items.ItemQuiver;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -108,7 +105,7 @@ public class ItemJavelinTFCF extends ItemTool implements ICapabilitySize {
           javelin.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 1.5F, 0.5F);
           worldIn.spawnEntity(javelin);
           worldIn.playSound(null, player.posX, player.posY, player.posZ, TFCSounds.ITEM_THROW, SoundCategory.PLAYERS, 1.0F,
-            1.0F / (Constants.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+            1.0F / (MathUtils.RNG.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
         }
         player.inventory.deleteStack(stack);
         player.addStat(StatList.getObjectUseStats(this));

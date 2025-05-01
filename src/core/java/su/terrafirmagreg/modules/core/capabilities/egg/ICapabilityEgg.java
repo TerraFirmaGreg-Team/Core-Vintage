@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.egg;
 
+import su.terrafirmagreg.modules.core.event.player.EventHandlerItemTooltip;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.client.resources.I18n;
@@ -11,8 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.client.ClientEvents;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +40,7 @@ public interface ICapabilityEgg extends ICapabilitySerializable<NBTTagCompound> 
   void setFertilized(@NotNull Entity entity, long hatchDay);
 
   /**
-   * Tooltip added to the egg item Called from {@link ClientEvents}
+   * Tooltip added to the egg item Called from {@link EventHandlerItemTooltip}
    *
    * @param stack the stack in question
    * @param text  the tooltip

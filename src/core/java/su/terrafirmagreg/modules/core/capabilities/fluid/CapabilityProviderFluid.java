@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.fluid;
 
-import su.terrafirmagreg.framework.registry.api.provider.IProviderItemCapability;
+
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -51,8 +52,7 @@ public class CapabilityProviderFluid implements IProviderItemCapability {
   }
 
   /**
-   * Lavishly copied from tfc FluidWhitelistHandler. This Handler just inherits from FluidHandlerItemStack instead of FluidHandlerItemStackSimple, which allows
-   * it to be partially full.
+   * Lavishly copied from tfc FluidWhitelistHandler. This Handler just inherits from FluidHandlerItemStack instead of FluidHandlerItemStackSimple, which allows it to be partially full.
    */
   public static class WhitelistComplex extends FluidHandlerItemStack {
 

@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -28,7 +29,6 @@ import gregtech.api.items.toolitem.ToolHelper;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -140,7 +140,7 @@ public class BlockPlacedHide extends Block {
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = playerIn.getHeldItem(hand);
-    if (OreDictionaryHelper.doesStackMatchOre(stack, ToolClasses.KNIFE)) {
+    if (OreDictUtils.contains(stack, ToolClasses.KNIFE)) {
       if (!worldIn.isRemote) {
         // Account for the distance between the hitbox and where the hide is rendered
         Vec3d point = calculatePoint(playerIn.getLookVec(), new Vec3d(hitX, hitY, hitZ));

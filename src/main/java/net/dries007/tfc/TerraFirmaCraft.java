@@ -148,8 +148,8 @@ public final class TerraFirmaCraft {
       MinecraftForge.EVENT_BUS.register(PlayerDataOverlay.getInstance());
     } else {
       MinecraftServer server = FMLServerHandler.instance().getServer();
-      if (server instanceof DedicatedServer) {
-        PropertyManager settings = ((DedicatedServer) server).settings;
+      if (server instanceof DedicatedServer dedicatedServer) {
+        PropertyManager settings = dedicatedServer.settings;
         if (ConfigTFC.General.OVERRIDES.forceTFCWorldType) {
           // This is called before vanilla defaults it, meaning we intercept it's default with ours
           // However, we can't actually set this due to fears of overriding the existing world

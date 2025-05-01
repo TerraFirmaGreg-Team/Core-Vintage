@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.network.spi.GuiHandler;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.client.render.TESRFirePit;

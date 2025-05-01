@@ -11,13 +11,11 @@ import su.terrafirmagreg.api.base.object.potion.api.IPotionSettings;
 import su.terrafirmagreg.api.base.object.sound.api.ISoundSettings;
 import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.api.library.types.type.Type;
-import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.KeyBindUtils;
+import su.terrafirmagreg.api.util.LootUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderTile;
 import su.terrafirmagreg.framework.module.api.IModule;
 
 import net.minecraft.block.Block;
@@ -27,11 +25,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.functions.LootFunction;
+import net.minecraft.world.storage.loot.functions.LootFunction.Serializer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -61,9 +59,10 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     this.idSupplier = new IdSupplier();
   }
 
+  // Предмет должен быть в рамках модуля
   @Override
   public BaseItemGroup group(String icon) {
-    this.group = BaseItemGroup.of(module, icon);
+    this.group = BaseItemGroup.of(module.getIdentifier(), getIdentifier(icon));
     return this.group;
   }
 
@@ -73,33 +72,31 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return this.group;
   }
 
-  // region Block
-
   public ResourceLocation getIdentifier(String identifier) {
+
     return ModUtils.resource(module.getIdentifier(), identifier);
   }
 
   @Override
-  public <T extends IForgeRegistryEntry<T>> void addEntry(Class<T> registry, String identifier, T entry) {
-    entry.setRegistryName(getIdentifier(identifier));
+  public <T extends IForgeRegistryEntry<T>> T addEntry(Class<T> registry, String identifier, T entry) {
+
     this.map.computeIfAbsent(registry, RegistryWrapper.of(getIdentifier(identifier), () -> entry));
+    return entry;
   }
+
+  // region Block
 
   @Override
   public <V extends Block> V addBlock(String identifier, V entry) {
 
     entry.setCreativeTab(group);
     addEntry(Block.class, identifier, entry);
-    if (entry instanceof IProviderTile provider) {
-      this.addTile(identifier, provider.getTileClass());
-    }
     return entry;
   }
 
   @Override
   public <V extends Block & IBlockSettings> V addBlock(V entry) {
 
-    entry.overrideSetter();
     var settings = entry.getSettings();
     if (settings.getItemBlock() != null) {
       this.addItem(settings.getRegistryKey(), settings.getItemBlock().apply(entry));
@@ -115,10 +112,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return collection;
   }
 
-  // endregion
-
-  // region Item
-
   @Override
   public <V extends Block & IBlockSettings, T extends Type<T>> Map<T, V> addBlock(Map<T, V> entry) {
 
@@ -132,6 +125,10 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBlock(factory.apply(type))));
   }
 
+  // endregion
+
+  // region Item
+
   @Override
   public <V extends Item> V addItem(String identifier, V entry) {
     entry.setCreativeTab(group);
@@ -142,7 +139,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Item & IItemSettings> V addItem(V entry) {
 
-    entry.overrideSetter();
     var settings = entry.getSettings();
     return this.addItem(settings.getRegistryKey(), entry);
   }
@@ -153,10 +149,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     collection.forEach(this::addItem);
     return collection;
   }
-
-  // endregion
-
-  // region Biome
 
   @Override
   public <V extends Item & IItemSettings, T extends Type<T>> Map<T, V> addItem(Map<T, V> map) {
@@ -171,14 +163,15 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addItem(factory.apply(type))));
   }
 
+  // endregion
+
+  // region Biome
+
+
   @Override
   public <V extends Biome> V addBiome(String identifier, V entry) {
 
     addEntry(Biome.class, identifier, entry);
-    if (entry instanceof IBiomeSettings provider) {
-      var settings = provider.getSettings();
-      BiomeUtils.addTypes(entry, settings.getTypes());
-    }
     return entry;
   }
 
@@ -196,10 +189,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return collection;
   }
 
-  // endregion
-
-  // region Enchantment
-
   @Override
   public <V extends Biome & IBiomeSettings, T extends Type<T>> Map<T, V> addBiome(Map<T, V> map) {
 
@@ -212,6 +201,11 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBiome(factory.apply(type))));
   }
+
+  // endregion
+
+  // region Enchantment
+
 
   @Override
   public <V extends Enchantment> V addEnchantment(String identifier, V entry) {
@@ -234,10 +228,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return collection;
   }
 
-  // endregion
-
-  // region Effect
-
   @Override
   public <V extends Enchantment & IEnchantmentSettings, T extends Type<T>> Map<T, V> addEnchantment(Map<T, V> map) {
 
@@ -250,6 +240,11 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEnchantment(factory.apply(type))));
   }
+
+  // endregion
+
+  // region Effect
+
 
   @Override
   public <V extends Potion> V addEffect(String identifier, V entry) {
@@ -272,10 +267,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return collection;
   }
 
-  // endregion
-
-  // region Potion
-
   @Override
   public <V extends Potion & IEffectSettings, T extends Type<T>> Map<T, V> addEffect(Map<T, V> map) {
 
@@ -288,6 +279,11 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEffect(factory.apply(type))));
   }
+
+  // endregion
+
+  // region Potion
+
 
   @Override
   public <V extends PotionType> V addPotion(String identifier, V entry) {
@@ -310,10 +306,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return collection;
   }
 
-  // endregion
-
-  // region Sound
-
   @Override
   public <V extends PotionType & IPotionSettings, T extends Type<T>> Map<T, V> addPotion(Map<T, V> map) {
 
@@ -326,6 +318,11 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addPotion(factory.apply(type))));
   }
+
+  // endregion
+
+  // region Sound
+
 
   @Override
   public <V extends SoundEvent> V addSound(String identifier, V entry) {
@@ -353,10 +350,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return collection;
   }
 
-  // endregion
-
-  // region Entity
-
   @Override
   public <V extends SoundEvent & ISoundSettings, T extends Type<T>> Map<T, V> addSound(Map<T, V> map) {
 
@@ -369,6 +362,11 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addSound(factory.apply(type))));
   }
+
+  // endregion
+
+  // region Entity
+
 
   @Override
   public <V extends EntityEntry> V addEntity(String identifier, V entry) {
@@ -426,32 +424,28 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
   // endregion
 
-  // region Tile
-
-  @Override
-  public <V extends TileEntity> Class<V> addTile(String identifier, Class<V> tileClass) {
-    TileUtils.register(tileClass, getIdentifier(identifier));
-    return tileClass;
-  }
-
-  // endregion
-
   // region Key Binding
 
   @Override
   public KeyBinding addKeyBinding(String name, int keyCode) {
-    final KeyBinding key = new KeyBinding(ModUtils.localize("key", getIdentifier(name)), keyCode, ModUtils.localize("categories", module.getIdentifier()));
-    KeyBindUtils.register(key);
-    return key;
+
+    return KeyBindUtils.addKeyBinding(ModUtils.localize("key", getIdentifier(name)), keyCode, ModUtils.localize("categories", module.getIdentifier()));
   }
 
   // endregion
 
   // region Key Binding
 
+  @Override
   public ResourceLocation addLoot(String name) {
 
-    return LootTableList.register(getIdentifier(name));
+    return LootUtils.addLoot(getIdentifier(name));
+  }
+
+  @Override
+  public <T extends LootFunction> void addLootFunction(Serializer<? extends T> serializer) {
+
+    LootUtils.addLootFunction(serializer);
   }
 
   // endregion

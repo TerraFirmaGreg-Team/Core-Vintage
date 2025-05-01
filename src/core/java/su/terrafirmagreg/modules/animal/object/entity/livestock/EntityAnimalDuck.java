@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -34,7 +35,7 @@ import static su.terrafirmagreg.api.util.MathUtils.RNG;
 public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock {
 
   public EntityAnimalDuck(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       getRandomGrowth(ConfigAnimal.ENTITY.DUCK.adulthood, ConfigAnimal.ENTITY.DUCK.elder));
   }
 

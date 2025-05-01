@@ -1,11 +1,13 @@
 package su.terrafirmagreg.modules.core.capabilities.food;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.food.ConfigFood;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -16,9 +18,6 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -65,17 +64,15 @@ public interface ICapabilityFood extends ICapabilitySerializable<NBTTagCompound>
   FoodData getData();
 
   /**
-   * Gets the current decay date modifier, including traits Note: there's a difference between the DECAY modifier, and the DECAY DATE modifier, in that they are
-   * reciprocals of eachother
+   * Gets the current decay date modifier, including traits Note: there's a difference between the DECAY modifier, and the DECAY DATE modifier, in that they are reciprocals of eachother
    *
    * @return a value between 0 and infinity (0 = instant decay, infinity = never decay)
    */
   float getDecayDateModifier();
 
   /**
-   * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item, and it was
-   * created before the post init, we assume that it is a technical stack, and will not appear in the world without a copy. As such, we set it to non-decaying.
-   * This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()}, See TerraFirmaCraft#458
+   * Called from {@link net.dries007.tfc.CommonEventHandler#attachItemCapabilities(AttachCapabilitiesEvent)} If the item is a food capability item, and it was created before the post init, we assume that it is a technical stack, and will
+   * not appear in the world without a copy. As such, we set it to non-decaying. This is NOT SERIALIZED on the capability - as a result it will not persist across {@link ItemStack#copy()}, See TerraFirmaCraft#458
    */
   void setNonDecaying();
 
@@ -107,7 +104,7 @@ public interface ICapabilityFood extends ICapabilitySerializable<NBTTagCompound>
         long rottenCalendarTime = rottenDate - Calendar.PLAYER_TIME.getTicks() + Calendar.CALENDAR_TIME.getTicks();
         // Days till food rots.
         long daysToRotInTicks = rottenCalendarTime - Calendar.CALENDAR_TIME.getTicks();
-        switch (ConfigTFC.Client.TOOLTIP.decayTooltipMode) {
+        switch (ConfigFood.FEATURE.DECAY.tooltipMode) {
           case HIDE:
             break;
           case EXPIRATION_ONLY:
@@ -125,7 +122,7 @@ public interface ICapabilityFood extends ICapabilitySerializable<NBTTagCompound>
         }
       }
     }
-    if (ConfigTFC.General.DEBUG.enable) {
+    if (ConfigFood.MISC.DEBUG.enable) {
       text.add("Created at " + getCreationDate());
     }
 
@@ -147,7 +144,7 @@ public interface ICapabilityFood extends ICapabilitySerializable<NBTTagCompound>
         float value = getData().getNutrients()[nutrient.ordinal()];
         if (value > 0) {
           text.add(
-            nutrient.getColor() + I18n.format("tfc.tooltip.nutrition_nutrient", I18n.format(Helpers.getEnumName(nutrient)), String.format("%.1f", value)));
+            nutrient.getColor() + I18n.format("tfc.tooltip.nutrition_nutrient", I18n.format(TranslatorUtils.getEnumName(nutrient)), String.format("%.1f", value)));
         }
       }
     } else {

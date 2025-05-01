@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.recipes;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 
@@ -21,16 +22,15 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.gson.JsonObject;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.ItemTFCThingsMold;
 import net.dries007.tfcthings.init.TFCThingsItems;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
@@ -160,7 +160,7 @@ public class TFCThingsUnmoldRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
   }
 
   public ItemStack getMoldResult(ItemStack moldIn) {
-    return Constants.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
+    return MathUtils.RNG.nextFloat() <= this.chance ? new ItemStack(moldIn.getItem()) : ItemStack.EMPTY;
   }
 
   public ItemStack getOutputItem(IMoldHandler moldHandler) {

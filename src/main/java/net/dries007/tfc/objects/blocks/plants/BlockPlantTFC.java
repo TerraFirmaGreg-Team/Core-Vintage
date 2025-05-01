@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -31,7 +32,6 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -159,17 +159,17 @@ public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
       if (this.plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BLUE_GINGER)) {
         int chance;
         if (currentStage != 0 && expectedStage != 0) {
-          chance = Constants.RNG.nextInt(2);
+          chance = MathUtils.RNG.nextInt(2);
           if (chance == 0) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), Constants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathUtils.RNG.nextInt(2)));
           }
         } else {
-          chance = Constants.RNG.nextInt(2);
+          chance = MathUtils.RNG.nextInt(2);
           if (chance == 0) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.GINGER, 1 + Constants.RNG.nextInt(2)));
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), Constants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.GINGER, 1 + MathUtils.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathUtils.RNG.nextInt(2)));
           } else if (chance == 1) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), 1 + Constants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), 1 + MathUtils.RNG.nextInt(2)));
           }
         }
       } else {

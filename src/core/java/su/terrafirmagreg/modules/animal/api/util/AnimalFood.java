@@ -22,11 +22,10 @@ import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import org.jetbrains.annotations.Nullable;
 

@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.object.block;
 
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
@@ -37,7 +38,6 @@ import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -142,7 +142,7 @@ public class BlockLogPile extends Block implements ILightableBlock {
         }
         return true;
       }
-      if (OreDictionaryHelper.doesStackMatchOre(stack, "logWood")) {
+      if (OreDictUtils.contains(stack, "logWood")) {
         // Copy from InteractionManager since this is called first when player is not sneaking
         if (!player.isSneaking()) {
           if (te.insertLog(stack.copy())) {

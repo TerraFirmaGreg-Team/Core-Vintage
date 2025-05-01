@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -20,13 +21,11 @@ import net.minecraft.world.biome.Biome;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
   @SuppressWarnings("unused")
   public EntityAnimalYak(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       getRandomGrowth(ConfigAnimal.ENTITY.YAK.adulthood, ConfigAnimal.ENTITY.YAK.elder));
   }
 
@@ -55,7 +54,7 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
   public void birthChildren() {
     int numberOfChildren = ConfigAnimal.ENTITY.YAK.babies;
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalYak baby = new EntityAnimalYak(this.world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalYak baby = new EntityAnimalYak(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F

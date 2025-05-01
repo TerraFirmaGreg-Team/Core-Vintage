@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
@@ -24,7 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.firmalife.registry.ItemsFL;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -92,7 +92,7 @@ public class BlockCinnamonLog extends Block {
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       ItemStack held = player.getHeldItem(hand);
-      if (OreDictionaryHelper.doesStackMatchOre(held, "knife")) {
+      if (OreDictUtils.contains(held, "knife")) {
         if (!state.getValue(CONNECTED) && state.getValue(GROWN)) {
           world.setBlockState(pos, state.withProperty(GROWN, false));
           held.damageItem(1, player);

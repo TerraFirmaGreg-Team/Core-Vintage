@@ -56,20 +56,20 @@ public final class TileUtils {
            && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
   }
 
-  public static void register(Block block) {
+  public static void addTile(Block block) {
     if (block instanceof IProviderTile provider) {
       var registryName = block.getRegistryName();
       assert registryName != null;
-      TileUtils.register(provider.getTileClass(), registryName.getNamespace(), registryName.getPath());
+      TileUtils.addTile(provider.getTileClass(), registryName.getNamespace(), registryName.getPath());
     }
   }
 
-  public static void register(Class<? extends TileEntity> tileClass, ResourceLocation name) {
-    TileUtils.register(tileClass, name.getNamespace(), name.getPath());
+  public static void addTile(Class<? extends TileEntity> tileClass, ResourceLocation name) {
+    TileUtils.addTile(tileClass, name.getNamespace(), name.getPath());
   }
 
 
-  public static void register(Class<? extends TileEntity> tileClass, String namespace, String name) {
+  public static void addTile(Class<? extends TileEntity> tileClass, String namespace, String name) {
     GameRegistry.registerTileEntity(tileClass, ModUtils.resource(namespace, "tile", name)); // tileClass.getSimpleName().replaceFirst("Tile", "")
   }
 

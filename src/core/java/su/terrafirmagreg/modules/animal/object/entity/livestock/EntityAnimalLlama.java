@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
@@ -51,8 +52,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestock {
 
   //Values that has a visual effect on client
@@ -77,7 +76,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
 
   @SuppressWarnings("unused")
   public EntityAnimalLlama(World world) {
-    this(world, Gender.valueOf(RNG.nextBoolean()),
+    this(world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.LLAMA.adulthood,
         ConfigAnimal.ENTITY.LLAMA.elder));
   }
@@ -441,7 +440,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
     } else if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
-      return new EntityAnimalLlama(this.world, Gender.valueOf(RNG.nextBoolean()),
+      return new EntityAnimalLlama(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
     }
     return null;
@@ -508,7 +507,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
   public void birthChildren() {
     int numberOfChildren = ConfigAnimal.ENTITY.LLAMA.babies; //one always
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalLlama baby = new EntityAnimalLlama(this.world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalLlama baby = new EntityAnimalLlama(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       if (this.geneHealth > 0) {

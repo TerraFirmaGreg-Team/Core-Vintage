@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
@@ -12,7 +13,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfcflorae.client.GuiHandler;
 
 import javax.annotation.Nonnull;
@@ -64,7 +64,7 @@ public class ItemFlint extends ItemTFCF implements ICapabilitySize {
   @Nonnull
   public void onRightClick(PlayerInteractEvent.RightClickItem event) {
     EnumHand hand = event.getHand();
-    if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "flint") && hand == EnumHand.MAIN_HAND) {
+    if (OreDictUtils.contains(event.getItemStack(), "flint") && hand == EnumHand.MAIN_HAND) {
       EntityPlayer player = event.getEntityPlayer();
       World world = event.getWorld();
       ItemStack stack = player.getHeldItem(hand);

@@ -1,8 +1,7 @@
 package net.dries007.tfc.objects.items.food;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
-
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemFood;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFoodHeat;
 import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
@@ -13,8 +12,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.items.ItemTFCF;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,7 +58,7 @@ public class ItemFoodTFCF extends BaseItemFood implements IItemFoodTFC {
   protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
     if (!potionEffects.isEmpty()) {
       for (PotionEffectToHave effect : potionEffects) {
-        if (Constants.RNG.nextInt(effect.chance) == 0) {player.addPotionEffect(new PotionEffect(effect.PotionEffect, effect.Duration, effect.Power));}
+        if (MathUtils.RNG.nextInt(effect.chance) == 0) {player.addPotionEffect(new PotionEffect(effect.PotionEffect, effect.Duration, effect.Power));}
       }
     }
   }

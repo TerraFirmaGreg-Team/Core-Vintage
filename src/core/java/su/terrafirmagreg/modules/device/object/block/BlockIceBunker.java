@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
-import su.terrafirmagreg.framework.network.spi.GuiHandler;
 import su.terrafirmagreg.modules.device.object.tile.TileIceBunker;
 
 import net.minecraft.block.material.Material;

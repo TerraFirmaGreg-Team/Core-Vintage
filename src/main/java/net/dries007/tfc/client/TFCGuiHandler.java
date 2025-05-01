@@ -1,5 +1,6 @@
 package net.dries007.tfc.client;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerLogPile;
@@ -14,11 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
@@ -58,7 +54,11 @@ import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.objects.te.TELargeVessel;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public class TFCGuiHandler implements IGuiHandler {
 
@@ -110,13 +110,13 @@ public class TFCGuiHandler implements IGuiHandler {
         return new ContainerKnapping(KnappingType.STONE, player.inventory, stack.getItem() instanceof ItemRock ? stack : player.getHeldItemOffhand());
       case KNAPPING_CLAY:
         return new ContainerKnapping(KnappingType.CLAY, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "clay") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "clay") ? stack : player.getHeldItemOffhand());
       case KNAPPING_LEATHER:
         return new ContainerKnapping(KnappingType.LEATHER, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "leather") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "leather") ? stack : player.getHeldItemOffhand());
       case KNAPPING_FIRE_CLAY:
         return new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory,
-          OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "fireClay") ? stack : player.getHeldItemOffhand());
       case LARGE_VESSEL:
         return new ContainerLargeVessel(player.inventory, Helpers.getTE(world, pos, TELargeVessel.class));
       case CALENDAR:

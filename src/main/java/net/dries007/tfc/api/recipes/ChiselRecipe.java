@@ -1,11 +1,12 @@
 package net.dries007.tfc.api.recipes;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

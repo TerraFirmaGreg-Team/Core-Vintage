@@ -2,6 +2,8 @@ package net.dries007.tfc.types;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.data.ingredient.IngredientFluidItem;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -48,8 +50,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.items.ItemsTFC;

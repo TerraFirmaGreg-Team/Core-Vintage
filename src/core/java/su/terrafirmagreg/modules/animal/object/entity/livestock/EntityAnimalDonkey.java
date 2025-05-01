@@ -1,11 +1,12 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.framework.network.spi.datasync.DataSerializers;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
@@ -57,8 +58,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 
 public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivestock, IRidable {
 
@@ -85,7 +84,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
   private float geneJump, geneHealth, geneSpeed; // Basic genetic selection based on vanilla's horse offspring
 
   public EntityAnimalDonkey(World world) {
-    this(world, Gender.valueOf(RNG.nextBoolean()),
+    this(world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.DONKEY.adulthood,
         ConfigAnimal.ENTITY.DONKEY.elder));
   }
@@ -577,7 +576,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
     } else if (other == this) {
       // Only called if this animal is interacted with a spawn egg
       EntityAnimalDonkey baby = new EntityAnimalDonkey(this.world,
-        Gender.valueOf(RNG.nextBoolean()),
+        Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       return baby;

@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.device.ConfigDevice;

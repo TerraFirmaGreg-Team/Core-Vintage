@@ -1,5 +1,7 @@
 package net.dries007.tfc.client.particle;
 
+import su.terrafirmagreg.api.util.MathUtils;
+
 import net.minecraft.client.particle.Particle;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,7 +20,7 @@ public class ParticleSpark extends Particle {
     this.motionX *= speedX;
     this.motionY *= speedY;
     this.motionZ *= speedZ;
-    float f = (float) (RNG.nextFloat() * 0.3D + 0.6D);
+    float f = (float) (MathUtils.RNG.nextFloat() * 0.3D + 0.6D);
     float f2 = RNG.nextFloat() / 5;
     this.particleRed = f;
     this.particleGreen = f - f2;

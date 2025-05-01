@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -38,7 +39,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
   @SuppressWarnings("unused")
   public EntityAnimalGoat(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       getRandomGrowth(ConfigAnimal.ENTITY.GOAT.adulthood, ConfigAnimal.ENTITY.GOAT.elder));
   }
 
@@ -90,7 +91,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
   public void birthChildren() {
     int numberOfChildren = ConfigAnimal.ENTITY.GOAT.babies;
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalGoat baby = new EntityAnimalGoat(this.world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalGoat baby = new EntityAnimalGoat(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F

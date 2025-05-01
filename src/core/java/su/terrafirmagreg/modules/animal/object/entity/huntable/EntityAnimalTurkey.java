@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.huntable;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -26,8 +27,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
 
   private static final int DAYS_TO_ADULTHOOD = 32;
@@ -39,7 +38,7 @@ public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
   public float wingRotDelta = 1.0F;
 
   public EntityAnimalTurkey(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()), getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 
   public EntityAnimalTurkey(World worldIn, Gender gender, int birthDay) {

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.items.rock;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
@@ -17,7 +18,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.objects.items.ItemTFCF;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfcflorae.client.GuiHandler;
 
 import javax.annotation.Nonnull;
@@ -100,7 +100,7 @@ public class ItemMud extends ItemTFCF implements IRockObject {
   @Nonnull
   public void onRightClick(PlayerInteractEvent.RightClickItem event) {
     EnumHand hand = event.getHand();
-    if (OreDictionaryHelper.doesStackMatchOre(event.getItemStack(), "mud") && hand == EnumHand.MAIN_HAND) {
+    if (OreDictUtils.contains(event.getItemStack(), "mud") && hand == EnumHand.MAIN_HAND) {
       EntityPlayer player = event.getEntityPlayer();
       World world = event.getWorld();
       ItemStack stack = player.getHeldItem(hand);

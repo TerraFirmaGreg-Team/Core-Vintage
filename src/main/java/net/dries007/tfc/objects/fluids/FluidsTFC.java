@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.fluids;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
@@ -24,7 +25,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.ConfigTFC.General;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
@@ -122,7 +122,7 @@ public final class FluidsTFC {
     FluidsCore.SALT_WATER = registerFluid(new Fluid("salt_water", WATER_STILL, WATER_FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC) {
         ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
-        if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
+        if (MathUtils.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
           player.addPotionEffect(new PotionEffect(EffectsCore.THIRST.get(), 600, 0));
         }
       }
@@ -133,7 +133,7 @@ public final class FluidsTFC {
       if (player.getFoodStats() instanceof FoodStatsTFC && playerData != null) {
         ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
         playerData.addIntoxicatedTime(4 * ICalendar.TICKS_IN_HOUR);
-        if (playerData.getIntoxicatedTime() > 24 * ICalendar.TICKS_IN_HOUR && Constants.RNG.nextFloat() < 0.5f) {
+        if (playerData.getIntoxicatedTime() > 24 * ICalendar.TICKS_IN_HOUR && MathUtils.RNG.nextFloat() < 0.5f) {
           player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 1200, 1));
         }
       }

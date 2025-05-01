@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.recipes.heat;
 
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
@@ -8,16 +10,14 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Generic recipe for items that heat up and transform Used by pit kilns, fire pit, and charcoal forge for item transformations Note! This recipe only supports
- * inputs of stack size = 1, as they get "transformed" independent of their size. As of currently, all inventories that use this recipe also have a stack size
- * limit of 1, which is as intended
+ * Generic recipe for items that heat up and transform Used by pit kilns, fire pit, and charcoal forge for item transformations Note! This recipe only supports inputs of stack size = 1, as they get "transformed" independent of their size.
+ * As of currently, all inventories that use this recipe also have a stack size limit of 1, which is as intended
  */
 @ParametersAreNonnullByDefault
 public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> implements IJEISimpleRecipe {
@@ -59,8 +59,8 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
   }
 
   /**
-   * Use this to check if the recipe matches the input. Since querying the recipe is somewhat intensive (i.e. not a do every tick thing), cache the recipe and
-   * only re-check on input change Check if the recipe is hot enough to complete with {@link HeatRecipe#isValidTemperature(float)}
+   * Use this to check if the recipe matches the input. Since querying the recipe is somewhat intensive (i.e. not a do every tick thing), cache the recipe and only re-check on input change Check if the recipe is hot enough to complete with
+   * {@link HeatRecipe#isValidTemperature(float)}
    *
    * @param input the input
    * @param tier  the tier of the device doing the heating
@@ -79,8 +79,7 @@ public abstract class HeatRecipe extends IForgeRegistryEntry.Impl<HeatRecipe> im
   }
 
   /**
-   * Gets the output item. This output will be placed in the same slot if possible (charcoal forge), or an output slot if not (fire pit) If EMPTY is returned,
-   * then this recipe produces no special output
+   * Gets the output item. This output will be placed in the same slot if possible (charcoal forge), or an output slot if not (fire pit) If EMPTY is returned, then this recipe produces no special output
    *
    * @param input the input stack
    * @return the stack to replace the input with

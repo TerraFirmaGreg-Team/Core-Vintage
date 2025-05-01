@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.core.capabilities.food;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.food.ConfigFood;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -10,7 +11,6 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 
-import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.util.agriculture.Food;
 
 import javax.annotation.Nonnull;
@@ -90,7 +90,7 @@ public class CapabilityProviderFood implements ICapabilityFood {
   @Override
   public float getDecayDateModifier() {
     // Decay modifiers are higher = shorter
-    float mod = data.getDecayModifier() * (float) ConfigTFC.General.FOOD.decayModifier;
+    float mod = data.getDecayModifier() * (float) ConfigFood.FEATURE.DECAY.modifier;
     for (FoodTrait trait : foodTraits) {
       mod *= trait.getDecayModifier();
     }
@@ -157,8 +157,7 @@ public class CapabilityProviderFood implements ICapabilityFood {
   }
 
   /**
-   * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via CapabilityFood. Only
-   * mark this if food data will change per item stack
+   * This marks if the food data should be serialized. For normal food items, it isn't, because all values are provided on construction via CapabilityFood. Only mark this if food data will change per item stack
    */
   protected boolean isDynamic() {
     return false;

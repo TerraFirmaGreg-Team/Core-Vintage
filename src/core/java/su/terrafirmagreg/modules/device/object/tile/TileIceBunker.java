@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;

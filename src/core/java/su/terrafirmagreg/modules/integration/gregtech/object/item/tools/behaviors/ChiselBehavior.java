@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.integration.gregtech.object.item.tools.behaviors;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
@@ -34,7 +35,6 @@ import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.ContainerEmpty;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -53,12 +53,10 @@ public class ChiselBehavior implements IToolBehavior {
   protected ChiselBehavior() {/**/}
 
   /**
-   * Calculates the block that would be set in the specified position if the chisel were used. In most conditions will return null. If not null, then a
-   * successful chisel operation can be completed.
+   * Calculates the block that would be set in the specified position if the chisel were used. In most conditions will return null. If not null, then a successful chisel operation can be completed.
    * <br><br>
-   * code logic overview for finding result state:<br> state = world.getStateAt(pos)<br> block = state.getBlock()<br> itemStack = block.getPickBlock(state,
-   * pos)<br> resultStack = CraftingInventory.getResult(itemStack)<br> resultBlock = (resultStack.getItem() as ItemBlock).getBlock()<br> resultState =
-   * resultBlock.getPlacementState()<br>
+   * code logic overview for finding result state:<br> state = world.getStateAt(pos)<br> block = state.getBlock()<br> itemStack = block.getPickBlock(state, pos)<br> resultStack = CraftingInventory.getResult(itemStack)<br> resultBlock =
+   * (resultStack.getItem() as ItemBlock).getBlock()<br> resultState = resultBlock.getPlacementState()<br>
    * <br>
    *
    * @param player  player who clicked on the block
@@ -83,12 +81,12 @@ public class ChiselBehavior implements IToolBehavior {
 
   public static boolean hasHammerForChisel(EntityPlayer player) {
     // offhand always counts as a hammer slot
-    if (OreDictionaryHelper.doesStackMatchOre(player.inventory.offHandInventory.get(0), "toolHammer")) {return true;}
+    if (OreDictUtils.contains(player.inventory.offHandInventory.get(0), "toolHammer")) {return true;}
 
     // config alters whether toolbar counts as a hammer slot or not.
     if (!ConfigTFC.Devices.CHISEL.requireHammerInOffHand) {
       for (int i = 0; i < 9; i++) {
-        if (OreDictionaryHelper.doesStackMatchOre(player.inventory.mainInventory.get(i), "toolHammer")) {
+        if (OreDictUtils.contains(player.inventory.mainInventory.get(i), "toolHammer")) {
           return true;
         }
       }

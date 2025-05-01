@@ -3,13 +3,13 @@ package net.dries007.tfc.api.recipes.anvil;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.forge.ForgeRule;
 
 import javax.annotation.Nonnull;

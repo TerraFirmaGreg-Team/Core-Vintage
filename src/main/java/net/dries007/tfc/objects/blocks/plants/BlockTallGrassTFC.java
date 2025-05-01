@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
@@ -24,7 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -136,7 +136,7 @@ public class BlockTallGrassTFC extends BlockPlantShortGrass implements IGrowable
         }
       } else {
         for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
-          if (Constants.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
+          if (MathUtils.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
             spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW.get()));
           }
         }

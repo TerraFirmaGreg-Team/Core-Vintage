@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
@@ -54,8 +55,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock, IRidable {
 
   //Values that has a visual effect on client
@@ -72,7 +71,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   private long lastDeath; //Last time(in days) this entity checked for dying of old age
 
   public EntityAnimalMule(World world) {
-    this(world, Gender.valueOf(RNG.nextBoolean()),
+    this(world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.MULE.adulthood,
         ConfigAnimal.ENTITY.MULE.elder));
   }
@@ -313,7 +312,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   public EntityAgeable createChild(@NotNull EntityAgeable other) {
     if (other == this) {
       // Only called if this animal is interacted with a spawn egg
-      EntityAnimalMule baby = new EntityAnimalMule(this.world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalMule baby = new EntityAnimalMule(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       return baby;

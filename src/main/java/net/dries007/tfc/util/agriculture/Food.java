@@ -1,5 +1,6 @@
 package net.dries007.tfc.util.agriculture;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
 import net.minecraft.item.ItemStack;
@@ -199,7 +200,7 @@ public enum Food {
 
     public static boolean doesStackMatchCategories(ItemStack stack, Category... categories) {
       for (Category cat : categories) {
-        if (OreDictionaryHelper.doesStackMatchOre(stack, OreDictionaryHelper.toString("category_" + cat.name()))) {
+        if (OreDictUtils.contains(stack, OreDictionaryHelper.toString("category_" + cat.name()))) {
           return true;
         }
       }

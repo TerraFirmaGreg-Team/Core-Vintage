@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
@@ -53,8 +54,6 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 // Changes in config allow placing this animal in livestock and still respawn
 public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock {
 
@@ -78,7 +77,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
 
   @SuppressWarnings("unused")
   public EntityAnimalWolf(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.WOLF.adulthood,
         ConfigAnimal.ENTITY.WOLF.elder));
   }
@@ -382,7 +381,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   public void birthChildren() {
     int numberOfChildren = ConfigAnimal.ENTITY.WOLF.babies;
     for (int i = 0; i < numberOfChildren; i++) {
-      EntityAnimalWolf baby = new EntityAnimalWolf(this.world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalWolf baby = new EntityAnimalWolf(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       baby.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
       baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
@@ -476,7 +475,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
       // Try to return to vanilla's default method a baby of this animal, as if bred normally
       try {
         EntityAnimalWolf baby = new EntityAnimalWolf(this.world);
-        baby.setGender(Gender.valueOf(RNG.nextBoolean()));
+        baby.setGender(Gender.valueOf(MathUtils.RNG.nextBoolean()));
         baby.setBirthDay((int) Calendar.PLAYER_TIME.getTotalDays());
         baby.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F
                                                          : this.getFamiliarity() * 0.9F);

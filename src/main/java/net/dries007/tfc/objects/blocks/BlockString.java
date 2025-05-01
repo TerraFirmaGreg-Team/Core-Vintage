@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
@@ -30,7 +31,6 @@ import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.te.TEString;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -71,7 +71,7 @@ public class BlockString extends BlockNonCube {
           if (cap != null) {
             for (int i = TileFirePit.SLOT_FUEL_CONSUME; i <= TileFirePit.SLOT_FUEL_INPUT; i++) {
               ItemStack stack = cap.getStackInSlot(i);
-              if (stack.isEmpty() || OreDictionaryHelper.doesStackMatchOre(stack, "logWood")) {continue;}
+              if (stack.isEmpty() || OreDictUtils.contains(stack, "logWood")) {continue;}
               return false;
             }
             return true;
@@ -120,8 +120,8 @@ public class BlockString extends BlockNonCube {
         if (cap != null) {
           List<FoodTrait> traits = cap.getTraits();
           boolean isFoodValid =
-            (traits.contains(FoodTrait.BRINED) && OreDictionaryHelper.doesStackMatchOre(held, "categoryMeat") && HeatRecipe.get(held) != null)
-            || OreDictionaryHelper.doesStackMatchOre(held, "cheese");
+            (traits.contains(FoodTrait.BRINED) && OreDictUtils.contains(held, "categoryMeat") && HeatRecipe.get(held) != null)
+            || OreDictUtils.contains(held, "cheese");
           if (!traits.contains(FoodTrait.SMOKED) && isFoodValid) {
             ItemStack leftover = inv.insertItem(0, held.splitStack(1), false);
             Helpers.spawnItemStack(world, pos.add(0.5D, 0.5D, 0.5D), leftover);

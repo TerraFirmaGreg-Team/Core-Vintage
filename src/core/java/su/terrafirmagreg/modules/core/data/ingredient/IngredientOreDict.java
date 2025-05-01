@@ -1,10 +1,10 @@
-package net.dries007.tfc.objects.inventory.ingredient;
+package su.terrafirmagreg.modules.core.data.ingredient;
+
+import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
-
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 
@@ -40,7 +40,7 @@ public class IngredientOreDict implements IIngredient<ItemStack> {
 
   @Override
   public boolean testIgnoreCount(ItemStack stack) {
-    return stack != null && !stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, oreName);
+    return stack != null && !stack.isEmpty() && OreDictUtils.contains(stack, oreName);
   }
 
   @Override

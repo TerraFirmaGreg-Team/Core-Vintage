@@ -9,7 +9,7 @@ public final class LootTablesCore {
 
   public static void onRegister(IRegistryRegistrar registry) {
 
-    registry.loot(new ApplySimpleSkill.Serializer());
-    registry.loot(new ApplyRequiredSkill.Serializer());
+    registry.addLootFunction(new ApplySimpleSkill.Serializer());
+    registry.addLootFunction(new ApplyRequiredSkill.Serializer());
   }
 }

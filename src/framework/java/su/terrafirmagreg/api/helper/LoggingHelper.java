@@ -41,6 +41,11 @@ public class LoggingHelper {
     this.logger = logger;
   }
 
+  private LoggingHelper() {
+
+    this.logger = LogManager.getLogger();
+  }
+
   /**
    * Constructs the helper using a logger name.
    *

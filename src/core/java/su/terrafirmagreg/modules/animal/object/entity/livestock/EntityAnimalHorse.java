@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
@@ -53,8 +54,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 @MethodsReturnNonnullByDefault
 public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestock, IRidable {
 
@@ -82,7 +81,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
   private int geneHorseVariant;
 
   public EntityAnimalHorse(World world) {
-    this(world, Gender.valueOf(RNG.nextBoolean()),
+    this(world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(ConfigAnimal.ENTITY.HORSE.adulthood,
         ConfigAnimal.ENTITY.HORSE.elder));
   }
@@ -423,7 +422,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
       this.onFertilized((IAnimal) other);
     } else if (other == this) {
       // Only called if this animal is interacted with a spawn egg
-      EntityAnimalHorse baby = new EntityAnimalHorse(this.world, Gender.valueOf(RNG.nextBoolean()),
+      EntityAnimalHorse baby = new EntityAnimalHorse(this.world, Gender.valueOf(MathUtils.RNG.nextBoolean()),
         (int) Calendar.PLAYER_TIME.getTotalDays());
       this.setOffspringAttributes(this, baby);
       baby.setHorseVariant(this.getHorseVariant());

@@ -1,10 +1,8 @@
 package net.dries007.tfc;
 
-import su.terrafirmagreg.api.data.enums.DecayTooltipMode;
 import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
 import su.terrafirmagreg.api.data.enums.HemisphereType;
 import su.terrafirmagreg.api.data.enums.InventoryCraftingMode;
-import su.terrafirmagreg.api.data.enums.OreTooltipMode;
 import su.terrafirmagreg.api.data.enums.QuiverSearch;
 import su.terrafirmagreg.api.data.enums.TemperatureMode;
 import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
@@ -62,10 +60,6 @@ public final class ConfigTFC {
     @Config.Comment("Spawn protection settings")
     @Config.LangKey("config." + TFC + ".general.spawn_protection")
     public static final SpawnProtectionCFG SPAWN_PROTECTION = new SpawnProtectionCFG();
-
-    @Config.Comment("Damage settings")
-    @Config.LangKey("config." + TFC + ".general.damage")
-    public static final DamageCFG DAMAGE = new DamageCFG();
 
     @Config.Comment("Player settings")
     @Config.LangKey("config." + TFC + ".general.player")
@@ -315,36 +309,6 @@ public final class ConfigTFC {
       public int maxYPredators = 255;
     }
 
-    public static final class DamageCFG {
-
-      @Config.Comment("Damage Source Types that will default to Slashing damage.")
-      @Config.LangKey("config." + TFC + ".general.damage.slashingSources")
-      public String[] slashingSources = new String[]{};
-
-      @Config.Comment("Damage Source Types that will default to Piercing damage.")
-      @Config.LangKey("config." + TFC + ".general.damage.piercingSources")
-      public String[] piercingSources = new String[]{"arrow", "cactus", "thorns"};
-
-      @Config.Comment("Damage Source Types that will default to Crushing damage.")
-      @Config.LangKey("config." + TFC + ".general.damage.crushingSources")
-      public String[] crushingSources = new String[]{"anvil", "falling_block"};
-
-      @Config.Comment("Damage Source Entities that will default to Slashing damage.")
-      @Config.LangKey("config." + TFC + ".general.damage.slashingEntities")
-      public String[] slashingEntities = new String[]{"minecraft:wither_skeleton", "minecraft:vex", "minecraft:vindication_illager", "minecraft:zombie_pigman",
-                                                      "minecraft:wolf", "minecraft:polar_bear"};
-
-      @Config.Comment("Damage Source Entities that will default to Piercing damage.")
-      @Config.LangKey("config." + TFC + ".general.damage.piercingEntities")
-      public String[] piercingEntities = new String[]{"minecraft:stray", "minecraft:skeleton"};
-
-      @Config.Comment("Damage Source Entities that will default to Crushing damage.")
-      @Config.LangKey("config." + TFC + ".general.damage.crushingEntities")
-      public String[] crushingEntities = new String[]{"minecraft:husk", "minecraft:skeleton_horse", "minecraft:zombie_horse", "minecraft:spider",
-                                                      "minecraft:giant", "minecraft:zombie", "minecraft:slime", "minecraft:cave_spider", "minecraft:silverfish",
-                                                      "minecraft:villager_golem", "minecraft:zombie_villager"};
-    }
-
     public static final class PlayerCFG {
 
       @Config.Comment("Enable a 3x3 crafting inventory via key binding.")
@@ -580,15 +544,6 @@ public final class ConfigTFC {
 
     public static final class FoodCFG {
 
-      @Config.Comment("Modifier for how quickly food will decay. Higher values = faster decay. Set to 0 for infinite expiration time")
-      @Config.RangeDouble(min = 0, max = 10)
-      @Config.LangKey("config." + TFC + ".general.food.decayModifier")
-      public double decayModifier = 1.0;
-
-      @Config.Comment("The number of hours to which initial food decay will be synced. When a food item is dropped, it's initial expiration date will be rounded to the closest multiple of this (in hours).")
-      @Config.RangeInt(min = 1, max = 48)
-      @Config.LangKey("config." + TFC + ".general.food.decayStackTime")
-      public int decayStackTime = 6;
 
       @Config.Comment("If false, crops will never die under any circumstances. THIS DOES NOT MEAN THEY WILL ALWAYS GROW!")
       @Config.LangKey("config." + TFC + ".general.food.enableCropDeath")
@@ -1063,13 +1018,6 @@ public final class ConfigTFC {
       @Config.LangKey("config." + TFC + ".client.tooltip.animalsOutputToActionBar")
       public boolean animalsOutputToActionBar = true;
 
-      @Config.Comment("Ore tooltip info mode.")
-      @Config.LangKey("config." + TFC + ".client.tooltip.oreTooltipMode")
-      public OreTooltipMode oreTooltipMode = OreTooltipMode.ALL_INFO;
-
-      @Config.Comment("Food decay tooltip mode.")
-      @Config.LangKey("config." + TFC + ".client.tooltip.decayTooltipMode")
-      public DecayTooltipMode decayTooltipMode = DecayTooltipMode.ALL_INFO;
 
       @Config.Comment({"Time tooltip info mode."})
       @Config.LangKey("config." + TFC + ".client.tooltip.timeTooltipMode")

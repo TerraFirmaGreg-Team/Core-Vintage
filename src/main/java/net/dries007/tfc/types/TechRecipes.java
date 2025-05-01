@@ -1,6 +1,8 @@
 package net.dries007.tfc.types;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -36,13 +38,11 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.TechItems;
 import net.dries007.tfc.objects.items.glassworking.ItemBlowpipe;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 import net.dries007.tfc.objects.recipes.ShapelessDamageRecipe;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfctech.TechConfig;
 
@@ -64,7 +64,7 @@ public final class TechRecipes {
       List<ItemStack> removeList = new ArrayList<>();
       FurnaceRecipes.instance().getSmeltingList().keySet().forEach(stack -> {
         ItemStack result = FurnaceRecipes.instance().getSmeltingResult(stack);
-        if (OreDictionaryHelper.doesStackMatchOre(result, "blockGlass")) {
+        if (OreDictUtils.contains(result, "blockGlass")) {
           removeList.add(result);
         }
       });

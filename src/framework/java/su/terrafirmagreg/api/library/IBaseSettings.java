@@ -2,13 +2,24 @@ package su.terrafirmagreg.api.library;
 
 import su.terrafirmagreg.api.library.IBaseSettings.BaseSettings;
 
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
 import lombok.Getter;
 
-public interface IBaseSettings<T extends BaseSettings<T>> {
+public interface IBaseSettings<T extends BaseSettings<T>, V extends IForgeRegistryEntry<V>> {
 
   T getSettings();
 
-  default void overrideSetter() {}
+  @SuppressWarnings("unchecked")
+  default V asEntry() {
+    return (V) this;
+  }
+
+  default void register(IForgeRegistry<V> registry) {
+
+  }
+
 
   @Getter
   abstract class BaseSettings<T> {

@@ -1,8 +1,10 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -25,9 +27,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
-import net.dries007.tfc.util.Helpers;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -162,7 +161,7 @@ public class ItemTFCThingsMold extends ItemPottery {
     public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
       Metal metal = getMetal();
       if (metal != null) {
-        String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
+        String desc = TextFormatting.DARK_GREEN + I18n.format(TranslatorUtils.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
         if (isMolten()) {
           desc += I18n.format("tfc.tooltip.liquid");
         }

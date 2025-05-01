@@ -1,6 +1,7 @@
 package net.dries007.tfcflorae.client;
 
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrate;
 import su.terrafirmagreg.modules.device.object.container.ContainerCrate;
 import su.terrafirmagreg.modules.device.object.tile.TileCrate;
@@ -30,7 +31,6 @@ import net.dries007.tfc.objects.items.ItemSack;
 import net.dries007.tfc.objects.items.rock.ItemMud;
 import net.dries007.tfc.objects.te.TEUrn;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfcflorae.TFCFlorae;
 
 import javax.annotation.Nonnull;
@@ -81,37 +81,37 @@ public class GuiHandler implements IGuiHandler {
         return new ContainerBag(player.inventory, stack.getItem() instanceof ItemBag ? stack : player.getHeldItemOffhand());
       case PINEAPPLE_LEATHER:
         return new ContainerKnapping(KnappingType.PINEAPPLE_LEATHER, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "leatherPineapple") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "leatherPineapple") ? stack : player.getHeldItemOffhand());
       case BURLAP_CLOTH:
         return new ContainerKnapping(KnappingType.BURLAP_CLOTH, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothBurlap") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "clothBurlap") ? stack : player.getHeldItemOffhand());
       case WOOL_CLOTH:
         return new ContainerKnapping(KnappingType.WOOL_CLOTH, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothWool") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "clothWool") ? stack : player.getHeldItemOffhand());
       case SILK_CLOTH:
         return new ContainerKnapping(KnappingType.SILK_CLOTH, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothSilk") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "clothSilk") ? stack : player.getHeldItemOffhand());
       case SISAL_CLOTH:
         return new ContainerKnapping(KnappingType.SISAL_CLOTH, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothSisal") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "clothSisal") ? stack : player.getHeldItemOffhand());
       case COTTON_CLOTH:
         return new ContainerKnapping(KnappingType.COTTON_CLOTH, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothCotton") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "clothCotton") ? stack : player.getHeldItemOffhand());
       case LINEN_CLOTH:
         return new ContainerKnapping(KnappingType.LINEN_CLOTH, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothLinen") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "clothLinen") ? stack : player.getHeldItemOffhand());
       case HEMP_CLOTH:
         return new ContainerKnapping(KnappingType.HEMP_CLOTH, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "clothHemp") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "clothHemp") ? stack : player.getHeldItemOffhand());
       case YUCCA_CANVAS:
         return new ContainerKnapping(KnappingType.YUCCA_CANVAS, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "canvasYucca") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "canvasYucca") ? stack : player.getHeldItemOffhand());
       case MUD:
         return new ContainerKnapping(KnappingType.MUD, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "mud") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "mud") ? stack : player.getHeldItemOffhand());
       case FLINT:
         return new ContainerKnapping(KnappingType.FLINT, player.inventory,
-          net.dries007.tfc.util.OreDictionaryHelper.doesStackMatchOre(stack, "flint") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "flint") ? stack : player.getHeldItemOffhand());
       case URN:
         return new ContainerUrn(player.inventory, Helpers.getTE(world, pos, TEUrn.class));
       case CRATE:
@@ -159,7 +159,7 @@ public class GuiHandler implements IGuiHandler {
         return new GuiKnappingTFCF(container, player, KnappingType.YUCCA_CANVAS, YUCCA_CANVAS_TEXTURE);
       case MUD:
         ItemStack stackMud = player.getHeldItemMainhand();
-        stackMud = OreDictionaryHelper.doesStackMatchOre(stackMud, "mud") ? stackMud : player.getHeldItemOffhand();
+        stackMud = OreDictUtils.contains(stackMud, "mud") ? stackMud : player.getHeldItemOffhand();
         ItemMud mud = (ItemMud) (stackMud.getItem());
         return new GuiKnappingTFCF(container, player, KnappingType.MUD, mud.getForegroundTexture(), mud.getBackgroundTexture());
       case FLINT:

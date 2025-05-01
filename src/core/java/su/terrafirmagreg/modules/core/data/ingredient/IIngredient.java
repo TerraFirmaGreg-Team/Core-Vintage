@@ -1,4 +1,4 @@
-package net.dries007.tfc.objects.inventory.ingredient;
+package su.terrafirmagreg.modules.core.data.ingredient;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -88,8 +88,7 @@ public interface IIngredient<T> extends Predicate<T> {
   boolean test(T input);
 
   /**
-   * This is used by recipes to test if an input is valid, but necessarily high enough quantity i.e. used to check if an item is valid for a slot, not if the
-   * recipe will complete.
+   * This is used by recipes to test if an input is valid, but necessarily high enough quantity i.e. used to check if an item is valid for a slot, not if the recipe will complete.
    *
    * @param input the input supplied to the recipe
    * @return true if the ingredient matches the input, ignoring the amount of input

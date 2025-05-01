@@ -1,5 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.damage.spi;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
 
@@ -9,9 +11,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
-
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -56,17 +55,17 @@ public enum DamageType {
     // Unblockable damage types don't have a special damage source
     if (!source.isUnblockable()) {
       // First try and match damage types specified via config
-      for (String damageType : ConfigTFC.General.DAMAGE.slashingSources) {
+      for (String damageType : ConfigCore.MISC.DAMAGE.slashingSources) {
         if (damageType.equals(source.damageType)) {
           return SLASHING;
         }
       }
-      for (String damageType : ConfigTFC.General.DAMAGE.crushingSources) {
+      for (String damageType : ConfigCore.MISC.DAMAGE.crushingSources) {
         if (damageType.equals(source.damageType)) {
           return CRUSHING;
         }
       }
-      for (String damageType : ConfigTFC.General.DAMAGE.piercingSources) {
+      for (String damageType : ConfigCore.MISC.DAMAGE.piercingSources) {
         if (damageType.equals(source.damageType)) {
           return PIERCING;
         }
@@ -91,17 +90,17 @@ public enum DamageType {
         ResourceLocation entityType = EntityList.getKey(sourceEntity);
         if (entityType != null) {
           String entityTypeName = entityType.toString();
-          for (String damageType : ConfigTFC.General.DAMAGE.slashingEntities) {
+          for (String damageType : ConfigCore.MISC.DAMAGE.slashingEntities) {
             if (damageType.equals(entityTypeName)) {
               return SLASHING;
             }
           }
-          for (String damageType : ConfigTFC.General.DAMAGE.crushingEntities) {
+          for (String damageType : ConfigCore.MISC.DAMAGE.crushingEntities) {
             if (damageType.equals(entityTypeName)) {
               return CRUSHING;
             }
           }
-          for (String damageType : ConfigTFC.General.DAMAGE.piercingEntities) {
+          for (String damageType : ConfigCore.MISC.DAMAGE.piercingEntities) {
             if (damageType.equals(entityTypeName)) {
               return PIERCING;
             }
@@ -115,11 +114,11 @@ public enum DamageType {
 
   @Nonnull
   private static DamageType getFromItem(ItemStack stack) {
-    if (OreDictionaryHelper.doesStackMatchOre(stack, "damageTypeCrushing")) {
+    if (OreDictUtils.contains(stack, "damageTypeCrushing")) {
       return CRUSHING;
-    } else if (OreDictionaryHelper.doesStackMatchOre(stack, "damageTypeSlashing")) {
+    } else if (OreDictUtils.contains(stack, "damageTypeSlashing")) {
       return SLASHING;
-    } else if (OreDictionaryHelper.doesStackMatchOre(stack, "damageTypePiercing")) {
+    } else if (OreDictUtils.contains(stack, "damageTypePiercing")) {
       return PIERCING;
     }
     return GENERIC;

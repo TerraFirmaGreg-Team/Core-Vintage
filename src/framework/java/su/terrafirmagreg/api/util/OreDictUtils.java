@@ -27,7 +27,7 @@ import java.util.Set;
 public final class OreDictUtils {
 
   public static <T extends IForgeRegistryEntry<T>> void register(T object) {
-    if (object instanceof IBaseSettings<?> baseSettings) {
+    if (object instanceof IBaseSettings<?, ?> baseSettings) {
       if (baseSettings.getSettings() instanceof IProviderOreDict provider) {
         provider.getOreDict().forEach(oreDict -> {
           if (oreDict != null && oreDict.length != 0) {

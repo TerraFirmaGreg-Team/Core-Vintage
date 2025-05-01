@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
@@ -27,8 +28,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import org.jetbrains.annotations.Nullable;
 
-import static su.terrafirmagreg.api.util.MathUtils.RNG;
-
 public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IPredator,
                                                                               EntityAnimalAIStandAttack.IEntityStandAttack {
 
@@ -36,7 +35,7 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
 
   @SuppressWarnings("unused")
   public EntityAnimalBlackBear(World worldIn) {
-    this(worldIn, Gender.valueOf(RNG.nextBoolean()),
+    this(worldIn, Gender.valueOf(MathUtils.RNG.nextBoolean()),
       EntityAnimalBase.getRandomGrowth(DAYS_TO_ADULTHOOD, 0));
   }
 

@@ -55,8 +55,8 @@ public class ItemAnimalHide extends ItemTFC {
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     if (ConfigTFC.General.OVERRIDES.enableThatchBed && type == HideType.RAW && size == HideSize.LARGE && facing == EnumFacing.UP
-        && worldIn.getBlockState(pos).getBlock() == BlocksCore.THATCH.get()
-        && worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksCore.THATCH.get()) {
+        && worldIn.getBlockState(pos).getBlock() == BlocksCore.THATCH
+        && worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksCore.THATCH) {
       // Try and create a thatch bed
       BlockPos headPos = pos.offset(player.getHorizontalFacing());
       //Creating a thatch bed

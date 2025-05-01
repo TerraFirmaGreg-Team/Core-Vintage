@@ -92,17 +92,17 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_DUCK_HURT.get();
+    return SoundsAnimal.ANIMAL_DUCK_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_DUCK_DEATH.get();
+    return SoundsAnimal.ANIMAL_DUCK_DEATH;
   }
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_DUCK_CRY.get() : SoundsAnimal.ANIMAL_DUCK_SAY.get();
+    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_DUCK_CRY : SoundsAnimal.ANIMAL_DUCK_SAY;
   }
 
   @Nullable

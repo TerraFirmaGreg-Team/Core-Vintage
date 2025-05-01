@@ -123,7 +123,7 @@ public class BlockShortGrassTFCF extends BlockPlantTFCF implements IShearable {
         {
           if (MathUtils.RNG.nextDouble() <= (age + 1) / 4.0D) //+25% change for each age
           {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW.get()));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW));
           }
         }
       } else if (stack.getItem() == Items.SHEARS) {

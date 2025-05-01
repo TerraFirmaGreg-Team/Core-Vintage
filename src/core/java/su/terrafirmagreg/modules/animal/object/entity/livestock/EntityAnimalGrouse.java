@@ -86,17 +86,17 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_GROUSE_HURT.get();
+    return SoundsAnimal.ANIMAL_GROUSE_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_GROUSE_DEATH.get();
+    return SoundsAnimal.ANIMAL_GROUSE_DEATH;
   }
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_GROUSE_SAY.get();
+    return SoundsAnimal.ANIMAL_GROUSE_SAY;
   }
 
   @Nullable

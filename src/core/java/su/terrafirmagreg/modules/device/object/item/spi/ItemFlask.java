@@ -187,12 +187,12 @@ public abstract class ItemFlask extends BaseItemFluid implements IProviderItemMe
             if (stack.getItemDamage() == stack.getMaxDamage()) {
               ResourceLocation name = stack.getItem().getRegistryName();
               //break item, play sound
-              worldIn.playSound(null, entityLiving.getPosition(), SoundsDevice.FLASK_BREAK.get(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+              worldIn.playSound(null, entityLiving.getPosition(), SoundsDevice.FLASK_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
               if (name.toString().contains("leather")) {
-                ItemHandlerHelper.giveItemToPlayer((EntityPlayer) entityLiving, new ItemStack(ItemsDevice.LEATHER_FLASK_BROKEN.get()));
+                ItemHandlerHelper.giveItemToPlayer((EntityPlayer) entityLiving, new ItemStack(ItemsDevice.LEATHER_FLASK_BROKEN));
               } else {
                 ItemHandlerHelper.giveItemToPlayer((EntityPlayer) entityLiving,
-                  new ItemStack(ItemsDevice.METAL_FLASK_BROKEN.get()));
+                  new ItemStack(ItemsDevice.METAL_FLASK_BROKEN));
               }
               stack.shrink(1); //race condition here, seems to only sometimes work if done before giving broken flask
             } else {

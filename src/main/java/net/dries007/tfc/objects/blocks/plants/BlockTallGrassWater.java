@@ -183,7 +183,7 @@ public class BlockTallGrassWater extends BlockShortGrassTFCF implements IGrowabl
         for (int i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
           if (MathUtils.RNG.nextDouble() <= (worldIn.getBlockState(pos.up(i)).getValue(AGE) + 1) / 4.0D) //+25% change for each age
           {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW.get()));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW));
           }
         }
       }

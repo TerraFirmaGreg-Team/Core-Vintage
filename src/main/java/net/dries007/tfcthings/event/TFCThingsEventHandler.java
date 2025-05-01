@@ -155,7 +155,7 @@ public class TFCThingsEventHandler {
       if ((OreDictUtils.contains(event.getItemStack(), "shears") || OreDictUtils.contains(event.getItemStack(), "knife"))
           && sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
         if (!sheep.world.isRemote) {
-          ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL.get(), 1);
+          ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL);
           Helpers.spawnItemStack(sheep.world, new BlockPos(sheep.posX, sheep.posY, sheep.posZ), woolStack);
         }
       }

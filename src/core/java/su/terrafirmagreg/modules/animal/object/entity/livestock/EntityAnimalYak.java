@@ -91,12 +91,12 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_YAK_HURT.get();
+    return SoundsAnimal.ANIMAL_YAK_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_YAK_DEATH.get();
+    return SoundsAnimal.ANIMAL_YAK_DEATH;
   }
 
   @Override
@@ -107,7 +107,7 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_YAK_SAY.get();
+    return SoundsAnimal.ANIMAL_YAK_SAY;
   }
 
   @Nullable

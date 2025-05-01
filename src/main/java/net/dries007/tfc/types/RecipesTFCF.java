@@ -828,10 +828,10 @@ public final class RecipesTFCF {
       new HeatRecipeSimple(IIngredient.of("driftwood"), new ItemStack(Blocks.TORCH, 12), 60).setRegistryName("torch_driftwood"),
 
       // Ash
-      new HeatRecipeSimple(IIngredient.of("straw"), new ItemStack(ItemsCore.WOOD_ASH.get(), 1), 350, 750).setRegistryName("straw_ash"),
-      new HeatRecipeSimple(IIngredient.of("twig"), new ItemStack(ItemsCore.WOOD_ASH.get(), 2), 350, 750).setRegistryName("twig_ash"),
-      new HeatRecipeSimple(IIngredient.of("torch"), new ItemStack(ItemsCore.WOOD_ASH.get(), 2), 350, 750).setRegistryName("torch_ash_1"),
-      new HeatRecipeSimple(IIngredient.of(Blocks.TORCH), new ItemStack(ItemsCore.WOOD_ASH.get(), 2), 350, 750).setRegistryName("torch_ash_2"),
+      new HeatRecipeSimple(IIngredient.of("straw"), new ItemStack(ItemsCore.WOOD_ASH, 1), 350, 750).setRegistryName("straw_ash"),
+      new HeatRecipeSimple(IIngredient.of("twig"), new ItemStack(ItemsCore.WOOD_ASH, 2), 350, 750).setRegistryName("twig_ash"),
+      new HeatRecipeSimple(IIngredient.of("torch"), new ItemStack(ItemsCore.WOOD_ASH, 2), 350, 750).setRegistryName("torch_ash_1"),
+      new HeatRecipeSimple(IIngredient.of(Blocks.TORCH), new ItemStack(ItemsCore.WOOD_ASH, 2), 350, 750).setRegistryName("torch_ash_2"),
 
       // Charred Bones
       new HeatRecipeSimple(IIngredient.of("bone"), new ItemStack(ItemsTFCF.CHARRED_BONES), 425, 850).setRegistryName("charred_bones_heat"),
@@ -901,7 +901,7 @@ public final class RecipesTFCF {
       new LoomRecipe(new ResourceLocation(TFCF, "sisal_cloth"), IIngredient.of(ItemsTFCF.SISAL_STRING, 12), new ItemStack(ItemsTFCF.SISAL_CLOTH), 12, new ResourceLocation(TFCF, "textures/blocks/devices/loom/product/sisal.png")),
       new LoomRecipe(new ResourceLocation(TFCF, "wool_block_cotton"), IIngredient.of(ItemsTFCF.COTTON_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
       new LoomRecipe(new ResourceLocation(TFCF, "wool_block_linen"), IIngredient.of(ItemsTFCF.LINEN_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(TFCF, "wool_block_silk"), IIngredient.of(ItemsAnimal.SILK_CLOTH.get(), 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+      new LoomRecipe(new ResourceLocation(TFCF, "wool_block_silk"), IIngredient.of(ItemsAnimal.SILK_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
     );
   }
 

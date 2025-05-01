@@ -356,7 +356,7 @@ public final class CommonEventHandler {
     // Drop shards from glass
     ItemStack stackAt = new ItemStack(Item.getItemFromBlock(state.getBlock()), 1, state.getBlock().damageDropped(state));
     if (!event.isSilkTouching() && OreDictUtils.contains(stackAt, "blockGlass")) {
-      event.getDrops().add(new ItemStack(ItemsCore.GLASS_SHARD.get()));
+      event.getDrops().add(new ItemStack(ItemsCore.GLASS_SHARD));
     }
 
     // Apply durability modifier on tools
@@ -406,7 +406,7 @@ public final class CommonEventHandler {
     if (block instanceof BlockPackedIce) {
       if (OreDictUtils.contains(heldItem, "iceSaw")) {
         event.getDrops().clear();
-        event.getDrops().add(new ItemStack(ItemsCore.ICE_SHARD.get(), 3 + MathUtils.RNG.nextInt(4)));
+        event.getDrops().add(new ItemStack(ItemsCore.ICE_SHARD, 3 + MathUtils.RNG.nextInt(4)));
       }
     }
 
@@ -721,8 +721,8 @@ public final class CommonEventHandler {
 
     // Stop mob spawning in thatch - the list of non-spawnable light-blocking, non-collidable blocks is hardcoded in WorldEntitySpawner#canEntitySpawnBody
     // This is intentionally outside the previous world type check as this is a fix for the thatch block, not a generic spawning check.
-    if (world.getBlockState(pos).getBlock() == BlocksCore.THATCH.get()
-        || world.getBlockState(pos.up()).getBlock() == BlocksCore.THATCH.get()) {
+    if (world.getBlockState(pos).getBlock() == BlocksCore.THATCH
+        || world.getBlockState(pos.up()).getBlock() == BlocksCore.THATCH) {
       event.setResult(Event.Result.DENY);
     }
   }
@@ -969,7 +969,7 @@ public final class CommonEventHandler {
       }
       if (hugeHeavyCount >= 2) {
         // Player is barely able to move
-        event.player.addPotionEffect(new PotionEffect(EffectsCore.OVERBURDENED.get(), 25, 125, false, false));
+        event.player.addPotionEffect(new PotionEffect(EffectsCore.OVERBURDENED, 25, 125, false, false));
       }
     }
 

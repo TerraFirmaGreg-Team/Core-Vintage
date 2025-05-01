@@ -11,27 +11,25 @@ import su.terrafirmagreg.modules.device.object.item.ItemFlaskMetalUnfinished;
 
 import net.minecraft.item.Item;
 
-import java.util.function.Supplier;
-
 public final class ItemsDevice {
 
-  public static Supplier<ItemFireStarter> FIRESTARTER;
-  public static Supplier<ItemFlaskLeatherUnfinished> LEATHER_FLASK_UNFINISHED;
-  public static Supplier<ItemFlaskLeather> LEATHER_FLASK;
-  public static Supplier<ItemFlaskLeatherBroken> LEATHER_FLASK_BROKEN;
-  public static Supplier<ItemFlaskMetalUnfinished> METAL_FLASK_UNFINISHED;
-  public static Supplier<ItemFlaskMetal> METAL_FLASK;
-  public static Supplier<ItemFlaskMetalBroken> METAL_FLASK_BROKEN;
-  public static Supplier<Item> SLING;
-  public static Supplier<Item> SLING_REINFORCED;
-  public static Supplier<Item> SLING_AMMO;
-  public static Supplier<Item> SLING_AMMO_SPREAD;
-  public static Supplier<Item> SLING_AMMO_LIGHT;
-  public static Supplier<Item> SLING_AMMO_FIRE;
-  public static Supplier<Item> HANDSTONE;
-  public static Supplier<Item> GRINDSTONE_QUARTZ;
-  public static Supplier<Item> GRINDSTONE_STEEL;
-  public static Supplier<Item> GRINDSTONE_DIAMOND;
+  public static ItemFireStarter FIRESTARTER;
+  public static ItemFlaskLeatherUnfinished LEATHER_FLASK_UNFINISHED;
+  public static ItemFlaskLeather LEATHER_FLASK;
+  public static ItemFlaskLeatherBroken LEATHER_FLASK_BROKEN;
+  public static ItemFlaskMetalUnfinished METAL_FLASK_UNFINISHED;
+  public static ItemFlaskMetal METAL_FLASK;
+  public static ItemFlaskMetalBroken METAL_FLASK_BROKEN;
+  public static Item SLING;
+  public static Item SLING_REINFORCED;
+  public static Item SLING_AMMO;
+  public static Item SLING_AMMO_SPREAD;
+  public static Item SLING_AMMO_LIGHT;
+  public static Item SLING_AMMO_FIRE;
+  public static Item HANDSTONE;
+  public static Item GRINDSTONE_QUARTZ;
+  public static Item GRINDSTONE_STEEL;
+  public static Item GRINDSTONE_DIAMOND;
 
   public static void onRegister(IRegistryRegistrar registrar) {
 

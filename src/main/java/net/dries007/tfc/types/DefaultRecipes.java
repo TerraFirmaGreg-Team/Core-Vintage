@@ -256,7 +256,7 @@ public final class DefaultRecipes {
       new BarrelRecipe(IIngredient.of(LIMEWATER.get(), 100), IIngredient.of("sand"), null, new ItemStack(ItemsTFC.MORTAR, 16),
         8 * ICalendar.TICKS_IN_HOUR).setRegistryName("mortar"),
       new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 125), IIngredient.of("dustSalt"), new FluidStack(SALT_WATER.get(), 125), ItemStack.EMPTY, 0).setRegistryName("fresh_to_salt_water"),
-      new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 125), IIngredient.of(new ItemStack(ItemsCore.WOOD_ASH.get())), new FluidStack(LYE.get(), 125), ItemStack.EMPTY, 0).setRegistryName("lye"),
+      new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 125), IIngredient.of(new ItemStack(ItemsCore.WOOD_ASH)), new FluidStack(LYE.get(), 125), ItemStack.EMPTY, 0).setRegistryName("lye"),
       new BarrelRecipe(IIngredient.of(MILK_VINEGAR.get(), 1), IIngredient.of(ItemStack.EMPTY), new FluidStack(CURDLED_MILK.get(), 1), ItemStack.EMPTY,
         8 * ICalendar.TICKS_IN_HOUR).setRegistryName("curdled_milk"),
       // based on eating 5 oz in classic, and 1 item in TNG, the full barrel recipe generated 160 oz of cheese, now 32 items. Therefore 625mb creates 2 cheese.
@@ -576,7 +576,7 @@ public final class DefaultRecipes {
 
     // WaterFlask
     event.getRegistry().registerAll(
-      new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsDevice.LEATHER_FLASK_UNFINISHED.get()),
+      new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsDevice.LEATHER_FLASK_UNFINISHED),
         "  XX ", " XXX ", "XXXXX", " XXX ", "  X  ").setRegistryName("leather_side")
     );
 
@@ -633,7 +633,7 @@ public final class DefaultRecipes {
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_BOWL), new ItemStack(ItemsTFC.FIRED_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_bowl"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_SPINDLE), new ItemStack(ItemsTFC.FIRED_SPINDLE), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_spindle"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_LARGE_VESSEL), new ItemStack(BlocksTFC.FIRED_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_large_vessel"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE.get()), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_crucible"),
+      new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_crucible"),
 
       // Fired Pottery - doesn't burn up
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.FIRED_FIRE_BRICK), new ItemStack(ItemsTFC.FIRED_FIRE_BRICK), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_fire_brick"),
@@ -644,13 +644,13 @@ public final class DefaultRecipes {
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.FIRED_BOWL), new ItemStack(ItemsTFC.FIRED_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_bowl"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.FIRED_SPINDLE), new ItemStack(ItemsTFC.FIRED_SPINDLE), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_spindle"),
       new HeatRecipeSimple(IIngredient.of(BlocksTFC.FIRED_LARGE_VESSEL), new ItemStack(BlocksTFC.FIRED_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_large_vessel"),
-      new HeatRecipeSimple(IIngredient.of(BlocksDevice.CRUCIBLE.get()), new ItemStack(BlocksDevice.CRUCIBLE.get()), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_crucible"),
+      new HeatRecipeSimple(IIngredient.of(BlocksDevice.CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_crucible"),
 
       // Misc
       new HeatRecipeSimple(IIngredient.of("stickWood"), new ItemStack(Blocks.TORCH, 2), 40).setRegistryName("torch"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.STICK_BUNCH), new ItemStack(Blocks.TORCH, 18), 60).setRegistryName("torch_stick_bunch"),
       new HeatRecipeSimple(IIngredient.of("sand"), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass"),
-      new HeatRecipeSimple(IIngredient.of(ItemsCore.GLASS_SHARD.get()), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass_shard"),
+      new HeatRecipeSimple(IIngredient.of(ItemsCore.GLASS_SHARD), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass_shard"),
       new HeatRecipeSimple(IIngredient.of("blockClay"), new ItemStack(Blocks.HARDENED_CLAY), 600).setRegistryName("terracotta"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_BRICK), new ItemStack(Items.BRICK), 1500).setRegistryName("unfired_brick"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_FLOWER_POT), new ItemStack(Items.FLOWER_POT), 1500).setRegistryName("unfired_flower_pot"),
@@ -808,7 +808,7 @@ public final class DefaultRecipes {
     // waterflasks
     r.register(new AnvilRecipe(new ResourceLocation(TFC, "unfinished_iron_flask"),
       IIngredient.of("plateWroughtIron"),
-      new ItemStack(ItemsDevice.METAL_FLASK_UNFINISHED.get()), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST
+      new ItemStack(ItemsDevice.METAL_FLASK_UNFINISHED), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST
     ));
 
     // FirmaLife
@@ -853,10 +853,10 @@ public final class DefaultRecipes {
 
     r.registerAll(
       new LoomRecipe(new ResourceLocation(TFC, "burlap_cloth"), IIngredient.of(ItemsTFC.JUTE_FIBER, 12), new ItemStack(ItemsTFC.BURLAP_CLOTH), 12, new ResourceLocation(TFC, "textures/blocks/devices/loom/product/burlap.png")),
-      new LoomRecipe(new ResourceLocation(TFC, "wool_cloth"), IIngredient.of(ItemsAnimal.WOOL_YARN.get(), 16), new ItemStack(ItemsAnimal.WOOL_CLOTH.get()), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsAnimal.SILK_CLOTH.get()), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFC, "wool_cloth"), IIngredient.of(ItemsAnimal.WOOL_YARN, 16), new ItemStack(ItemsAnimal.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsAnimal.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
 
-      new LoomRecipe(new ResourceLocation(TFC, "wool_block"), IIngredient.of(ItemsAnimal.WOOL_CLOTH.get(), 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+      new LoomRecipe(new ResourceLocation(TFC, "wool_block"), IIngredient.of(ItemsAnimal.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
     );
   }
 

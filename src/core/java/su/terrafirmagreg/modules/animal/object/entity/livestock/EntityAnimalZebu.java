@@ -91,12 +91,12 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_ZEBU_HURT.get();
+    return SoundsAnimal.ANIMAL_ZEBU_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_ZEBU_DEATH.get();
+    return SoundsAnimal.ANIMAL_ZEBU_DEATH;
   }
 
   @Override
@@ -107,7 +107,7 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_ZEBU_SAY.get();
+    return SoundsAnimal.ANIMAL_ZEBU_SAY;
   }
 
   @Nullable

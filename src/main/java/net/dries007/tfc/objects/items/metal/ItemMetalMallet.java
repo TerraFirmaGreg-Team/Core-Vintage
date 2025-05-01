@@ -154,7 +154,7 @@ public class ItemMetalMallet extends ItemMetalTool {
               player.sendStatusMessage(new TextComponentTranslation("tooltip.firmalife.distance"), true);
             }
             player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1));
-            player.addPotionEffect(new PotionEffect(EffectsCore.THIRST.get(), 200, 0));
+            player.addPotionEffect(new PotionEffect(EffectsCore.THIRST, 200, 0));
           }
           return EnumActionResult.SUCCESS;
         }

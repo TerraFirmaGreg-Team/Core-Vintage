@@ -74,17 +74,17 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_CAMEL_CRY.get() : SoundsAnimal.ANIMAL_CAMEL_SAY.get();
+    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_CAMEL_CRY : SoundsAnimal.ANIMAL_CAMEL_SAY;
   }
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_CAMEL_HURT.get();
+    return SoundsAnimal.ANIMAL_CAMEL_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_CAMEL_DEATH.get();
+    return SoundsAnimal.ANIMAL_CAMEL_DEATH;
   }
 
   @SuppressWarnings("deprecation")

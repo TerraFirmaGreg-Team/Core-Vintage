@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class Remapping {
@@ -33,16 +32,16 @@ public class Remapping {
     add(ModIDs.CELLARS);
   }};
 
-  public static final Map<String, Supplier<? extends Block>> BLOCK_MAP = new Object2ObjectOpenHashMap<>();
-  public static final Map<String, Supplier<? extends Item>> ITEM_MAP = new Object2ObjectOpenHashMap<>();
-  public static final Map<String, Supplier<? extends EntityEntry>> ENTITY_MAP = new Object2ObjectOpenHashMap<>();
-  public static final Map<String, Supplier<? extends Potion>> EFFECT_MAP = new Object2ObjectOpenHashMap<>();
-  public static final Map<String, Supplier<? extends PotionType>> POTION_MAP = new Object2ObjectOpenHashMap<>();
-  public static final Map<String, Supplier<? extends SoundEvent>> SOUND_MAP = new Object2ObjectOpenHashMap<>();
-  public static final Map<String, Supplier<? extends Biome>> BIOME_MAP = new Object2ObjectOpenHashMap<>();
-  public static final Map<String, Supplier<? extends Enchantment>> ENCHANTMENT_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Block> BLOCK_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Item> ITEM_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, EntityEntry> ENTITY_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Potion> EFFECT_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, PotionType> POTION_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, SoundEvent> SOUND_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Biome> BIOME_MAP = new Object2ObjectOpenHashMap<>();
+  public static final Map<String, Enchantment> ENCHANTMENT_MAP = new Object2ObjectOpenHashMap<>();
 
-  private static <T extends IForgeRegistryEntry<T>> void remap(RegistryEvent.MissingMappings<T> event, Map<String, Supplier<? extends T>> map) {
+  private static <T extends IForgeRegistryEntry<T>> void remap(RegistryEvent.MissingMappings<T> event, Map<String, T> map) {
 
     event.getAllMappings().forEach(mapping -> {
       String mappingKey = mapping.key.toString();
@@ -59,7 +58,7 @@ public class Remapping {
 
       map.forEach((key, value) -> {
         if (mappingPath.endsWith(key)) {
-          mapping.remap(value.get());
+          mapping.remap(value);
         }
       });
       return;

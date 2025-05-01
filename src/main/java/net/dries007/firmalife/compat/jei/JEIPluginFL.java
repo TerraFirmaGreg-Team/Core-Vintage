@@ -72,7 +72,7 @@ public class JEIPluginFL implements IModPlugin {
         .getGuiHelper()))
       .collect(Collectors.toList());
 
-    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE.get()), CASTING_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.CRUCIBLE), CASTING_UID);
     registry.addRecipeCatalyst(new ItemStack(ItemsTFC.FIRED_VESSEL), CASTING_UID);
     registry.addRecipes(pumpkinknapRecipes, KNAP_PUMPKIN_UID);
     registry.addRecipeCatalyst(new ItemStack(Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT)), KNAP_PUMPKIN_UID);

@@ -8,16 +8,14 @@ import su.terrafirmagreg.modules.animal.object.item.ItemAnimalWool;
 import su.terrafirmagreg.modules.animal.object.item.ItemAnimalWoolCloth;
 import su.terrafirmagreg.modules.animal.object.item.ItemAnimalWoolYarn;
 
-import java.util.function.Supplier;
-
 public final class ItemsAnimal {
 
-  public static Supplier<ItemAnimalBladder> BLADDER;
-  public static Supplier<ItemAnimalWool> WOOL;
-  public static Supplier<ItemAnimalWoolYarn> WOOL_YARN;
-  public static Supplier<ItemAnimalWoolCloth> WOOL_CLOTH;
-  public static Supplier<ItemAnimalSilkCloth> SILK_CLOTH;
-  public static Supplier<ItemAnimalHalter> HALTER;
+  public static ItemAnimalBladder BLADDER;
+  public static ItemAnimalWool WOOL;
+  public static ItemAnimalWoolYarn WOOL_YARN;
+  public static ItemAnimalWoolCloth WOOL_CLOTH;
+  public static ItemAnimalSilkCloth SILK_CLOTH;
+  public static ItemAnimalHalter HALTER;
 
   public static void onRegister(IRegistryRegistrar registrar) {
 

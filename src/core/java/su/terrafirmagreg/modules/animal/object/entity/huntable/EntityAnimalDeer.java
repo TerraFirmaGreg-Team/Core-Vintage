@@ -109,12 +109,12 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_DEER_HURT.get();
+    return SoundsAnimal.ANIMAL_DEER_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_DEER_DEATH.get();
+    return SoundsAnimal.ANIMAL_DEER_DEATH;
   }
 
   @Override
@@ -140,7 +140,7 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_DEER_CRY.get() : SoundsAnimal.ANIMAL_DEER_SAY.get();
+    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_DEER_CRY : SoundsAnimal.ANIMAL_DEER_SAY;
   }
 
   @Nullable

@@ -84,7 +84,7 @@ public class ItemGroove extends ItemTechMetal {
         player.getHeldItem(hand).shrink(1);
         if (!worldIn.isRemote) {
           worldIn.playSound(null, pos, TechSounds.RUBBER_GROOVE_FIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-          worldIn.setBlockState(pos.offset(facing), BlocksDevice.LATEX_EXTRACTOR.get().getDefaultState().withProperty(FACING, facing));
+          worldIn.setBlockState(pos.offset(facing), BlocksDevice.LATEX_EXTRACTOR.getDefaultState().withProperty(FACING, facing));
         }
         return EnumActionResult.SUCCESS;
       }

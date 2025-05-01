@@ -1,10 +1,7 @@
 package net.dries007.tfc.client;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
-import su.terrafirmagreg.modules.device.object.container.ContainerFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerLogPile;
-import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -96,9 +93,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
       case MOLD:
         return new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemMold ? stack : player.getHeldItemOffhand());
-      case FIRE_PIT:
-        //noinspection ConstantConditions
-        return new ContainerFirePit(player.inventory, Helpers.getTE(world, pos, TileFirePit.class));
       case BARREL:
         return new ContainerBarrel(player.inventory, Helpers.getTE(world, pos, TEBarrel.class));
       case ANVIL:
@@ -158,8 +152,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemSmallVessel);
       case MOLD:
         return new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemMold);
-      case FIRE_PIT:
-        return new GuiFirePit(container, player.inventory, Helpers.getTE(world, pos, TileFirePit.class));
       case BARREL:
         return new GuiBarrel(container, player.inventory, Helpers.getTE(world, pos, TEBarrel.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
           .getTranslationKey());
@@ -209,7 +201,6 @@ public class TFCGuiHandler implements IGuiHandler {
     SMALL_VESSEL,
     SMALL_VESSEL_LIQUID,
     MOLD,
-    FIRE_PIT,
     BARREL,
     KNAPPING_STONE,
     KNAPPING_CLAY,

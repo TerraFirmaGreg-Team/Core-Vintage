@@ -30,8 +30,8 @@ import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfcflorae.TFCFlorae;
 import net.dries007.tfc.objects.items.ItemsTFCF;
+import net.dries007.tfcflorae.TFCFlorae;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -126,7 +126,7 @@ public class BlockUrnLoot extends Block implements ICapabilitySize {
       Item[] dropList = {ItemsTFCF.MADDER, ItemsTFCF.WELD, ItemsTFCF.WOAD, ItemsTFCF.INDIGO, ItemsTFCF.RAPE, ItemsTFCF.HOPS, ItemsTFCF.FLAX,
                          ItemsTFCF.LINEN_STRING, ItemsTFCF.COTTON_BOLL, ItemsTFCF.COTTON_YARN, ItemsTFCF.AGAVE, ItemsTFCF.SISAL_STRING,
                          ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsTFC.MORTAR, ItemsTFC.FIRE_CLAY, Items.CLAY_BALL,
-                         ItemsAnimal.WOOL.get(), ItemsAnimal.WOOL_YARN.get(),
+                         ItemsAnimal.WOOL, ItemsAnimal.WOOL_YARN,
 
                          // TODO заменить на gt
 //                           ItemPowder.get(Powder.KAOLINITE), ItemPowder.get(Powder.GRAPHITE), ItemPowder.get(Powder.FLUX),

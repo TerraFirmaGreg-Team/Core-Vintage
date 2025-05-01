@@ -85,17 +85,17 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_QUAIL_HURT.get();
+    return SoundsAnimal.ANIMAL_QUAIL_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_QUAIL_DEATH.get();
+    return SoundsAnimal.ANIMAL_QUAIL_DEATH;
   }
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_QUAIL_SAY.get();
+    return SoundsAnimal.ANIMAL_QUAIL_SAY;
   }
 
   @Nullable

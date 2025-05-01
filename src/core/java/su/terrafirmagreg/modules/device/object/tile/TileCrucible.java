@@ -288,7 +288,7 @@ public class TileCrucible extends BaseTileTickableInventory
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
     // Only carry to itemstack the alloy fluid
     super.onBreakBlock(world, pos, state);
-    ItemStack stack = new ItemStack(BlocksDevice.CRUCIBLE.get());
+    ItemStack stack = new ItemStack(BlocksDevice.CRUCIBLE);
     if (alloy.getAmount() > 0) {
       stack.setTagCompound(this.writeToItemTag());
     }

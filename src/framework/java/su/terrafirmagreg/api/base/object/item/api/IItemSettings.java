@@ -44,6 +44,10 @@ public interface IItemSettings extends IBaseSettings<Settings, Item> {
     return new CombinedCapabilityProvider(providers);
   }
 
+  default void addCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+
+  }
+
   @Override
   default void register(IForgeRegistry<Item> registry) {
     var settings = getSettings();

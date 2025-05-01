@@ -29,7 +29,7 @@ public class ItemBlockTorch extends ItemBlockTFC {
     World world = entityItem.getEntityWorld();
     IBlockState state = entityItem.getEntityWorld().getBlockState(pos);
 
-    if (state.getBlock() == BlocksTFC.LOG_PILE || state.getBlock() == BlocksDevice.PIT_KILN.get()) {
+    if (state.getBlock() == BlocksTFC.LOG_PILE || state.getBlock() == BlocksDevice.PIT_KILN) {
       int count = entityItem.getEntityData().getInteger("torchCount");
       if (count > 160) {
         if (state.getBlock() == BlocksTFC.LOG_PILE) {
@@ -41,7 +41,7 @@ public class ItemBlockTorch extends ItemBlockTFC {
           if (Blocks.FIRE.canPlaceBlockAt(world, pos.up())) {
             world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
           }
-        } else if (state.getBlock() == BlocksDevice.PIT_KILN.get()) {
+        } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
           TilePitKiln te = Helpers.getTE(world, pos, TilePitKiln.class);
           if (te != null) {
             te.tryLight();

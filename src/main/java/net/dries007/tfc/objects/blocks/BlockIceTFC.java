@@ -91,7 +91,7 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
     if (player != null) {
       var tool = player.getHeldItemMainhand().getItem();
       if (tool instanceof ItemMetalTool itemMetalTool && itemMetalTool.getType().equals(ItemType.ICE_SAW)) {
-        drops.add(new ItemStack(ItemsCore.ICE_SHARD.get()));
+        drops.add(new ItemStack(ItemsCore.ICE_SHARD));
       } else {
         super.getDrops(drops, world, pos, state, fortune);
       }

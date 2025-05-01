@@ -60,12 +60,12 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_COUGAR_HURT.get();
+    return SoundsAnimal.ANIMAL_COUGAR_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_COUGAR_DEATH.get();
+    return SoundsAnimal.ANIMAL_COUGAR_DEATH;
   }
 
   @Override
@@ -101,7 +101,7 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COUGAR_CRY.get() : SoundsAnimal.ANIMAL_COUGAR_SAY.get();
+    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COUGAR_CRY : SoundsAnimal.ANIMAL_COUGAR_SAY;
   }
 
   @Nullable

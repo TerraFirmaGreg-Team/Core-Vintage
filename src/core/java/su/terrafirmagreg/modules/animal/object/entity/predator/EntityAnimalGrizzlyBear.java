@@ -161,12 +161,12 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_BEAR_HURT.get();
+    return SoundsAnimal.ANIMAL_BEAR_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_BEAR_DEATH.get();
+    return SoundsAnimal.ANIMAL_BEAR_DEATH;
   }
 
   @Override
@@ -265,7 +265,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_BEAR_CRY.get() : SoundsAnimal.ANIMAL_BEAR_SAY.get();
+    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_BEAR_CRY : SoundsAnimal.ANIMAL_BEAR_SAY;
   }
 
   @Nullable

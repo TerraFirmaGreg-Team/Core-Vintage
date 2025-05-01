@@ -1,13 +1,13 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.api.base.object.item.spi.BaseItemFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
 import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 
+import net.minecraft.item.ItemFood;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-public class ItemFoodFL extends BaseItemFood implements IItemFoodTFC {
+public class ItemFoodFL extends ItemFood implements IItemFoodTFC {
 
   public FoodData data;
 

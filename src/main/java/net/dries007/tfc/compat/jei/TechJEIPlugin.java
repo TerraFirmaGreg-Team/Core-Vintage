@@ -89,7 +89,7 @@ public class TechJEIPlugin implements IModPlugin {
       .collect(Collectors.toList());
 
     registry.addRecipes(smelteryList, SMELTERY_UID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.SMELTERY_CAULDRON.get()), SMELTERY_UID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.SMELTERY_CAULDRON), SMELTERY_UID);
 
     // Click areas
     registry.addRecipeClickArea(GuiSmelteryCauldron.class, 52, 58, 72, 15, SMELTERY_UID);

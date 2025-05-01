@@ -11,19 +11,17 @@ import su.terrafirmagreg.modules.core.object.effect.EffectResistHeat;
 import su.terrafirmagreg.modules.core.object.effect.EffectSwarm;
 import su.terrafirmagreg.modules.core.object.effect.EffectThirst;
 
-import java.util.function.Supplier;
-
 public final class EffectsCore {
 
-  public static Supplier<EffectOverburdened> OVERBURDENED;
-  public static Supplier<EffectThirst> THIRST;
-  public static Supplier<EffectParasites> PARASITES;
-  public static Supplier<EffectSwarm> SWARM;
-  public static Supplier<EffectHyperthermia> HYPERTHERMIA;
-  public static Supplier<EffectHypothermia> HYPOTHERMIA;
-  public static Supplier<EffectResistCold> COLD_RESIST;
-  public static Supplier<EffectResistHeat> HEAT_RESIST;
-  public static Supplier<EffectCaffeine> CAFFEINE;
+  public static EffectOverburdened OVERBURDENED;
+  public static EffectThirst THIRST;
+  public static EffectParasites PARASITES;
+  public static EffectSwarm SWARM;
+  public static EffectHyperthermia HYPERTHERMIA;
+  public static EffectHypothermia HYPOTHERMIA;
+  public static EffectResistCold COLD_RESIST;
+  public static EffectResistHeat HEAT_RESIST;
+  public static EffectCaffeine CAFFEINE;
 
   public static void onRegister(IRegistryRegistrar registry) {
     OVERBURDENED = registry.addEffect(new EffectOverburdened());

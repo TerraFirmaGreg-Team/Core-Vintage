@@ -3,14 +3,13 @@ package su.terrafirmagreg.api.base.network.packet.spi;
 import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
 import su.terrafirmagreg.api.util.TileUtils;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class NetworkPacketBaseTile<T extends TileEntity> extends NetworkPacketBaseBlockPos implements INetworkPacket.Server {
+public abstract class NetworkPacketBaseTile<T extends TileEntity> extends NetworkPacketBaseBlockPos {
 
   /**
    * The TileEntity.
@@ -37,19 +36,20 @@ public abstract class NetworkPacketBaseTile<T extends TileEntity> extends Networ
   }
 
 
-  @SuppressWarnings("unchecked")
   @Override
-  public void process(EntityPlayerMP player) {
-    final World world = player.getEntityWorld();
-    TileUtils.getTile(world, this.blockPos).ifPresent(tile -> {
-      this.tile = (T) tile;
-      if (world.isBlockLoaded(blockPos)) {
+  public INetworkPacket process(MessageContext context) {
+    this.context = context;
+    final World world = context.getServerHandler().player.getEntityWorld();
+    TileUtils.getTile(world, blockPos, this.tile.getClass()).ifPresent(tile -> {
+      if (world.isBlockLoaded(this.blockPos)) {
         if (world instanceof WorldServer worldServer) {
-          worldServer.addScheduledTask(getAction());
+          worldServer.addScheduledTask(this::getAction);
         }
       }
     });
+    return null;
   }
+
 
   public abstract Runnable getAction();
 }

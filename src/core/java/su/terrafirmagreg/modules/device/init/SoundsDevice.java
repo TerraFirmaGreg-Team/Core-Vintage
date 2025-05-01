@@ -4,21 +4,19 @@ import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 
 import net.minecraft.util.SoundEvent;
 
-import java.util.function.Supplier;
-
 public final class SoundsDevice {
 
-  public static Supplier<SoundEvent> FLASK_BREAK;
-  public static Supplier<SoundEvent> FIRE_STARTER;
-  public static Supplier<SoundEvent> BELLOWS_BLOW_AIR;
-  public static Supplier<SoundEvent> FRIDGE_OPEN;
-  public static Supplier<SoundEvent> FRIDGE_CLOSE;
-  public static Supplier<SoundEvent> INDUCTION_WORK;
-  public static Supplier<SoundEvent> LATEX_EXTRACTOR_GROOVE_FIT;
-  public static Supplier<SoundEvent> LATEX_EXTRACTOR_MOUNT_FIT;
-  public static Supplier<SoundEvent> LATEX_EXTRACTOR_BOWL_FIT;
-  public static Supplier<SoundEvent> LATEX_EXTRACTOR_BOWL_GRAB;
-  public static Supplier<SoundEvent> LATEX_EXTRACTOR_TRUNK_SCRATH;
+  public static SoundEvent FLASK_BREAK;
+  public static SoundEvent FIRE_STARTER;
+  public static SoundEvent BELLOWS_BLOW_AIR;
+  public static SoundEvent FRIDGE_OPEN;
+  public static SoundEvent FRIDGE_CLOSE;
+  public static SoundEvent INDUCTION_WORK;
+  public static SoundEvent LATEX_EXTRACTOR_GROOVE_FIT;
+  public static SoundEvent LATEX_EXTRACTOR_MOUNT_FIT;
+  public static SoundEvent LATEX_EXTRACTOR_BOWL_FIT;
+  public static SoundEvent LATEX_EXTRACTOR_BOWL_GRAB;
+  public static SoundEvent LATEX_EXTRACTOR_TRUNK_SCRATH;
 
   public static void onRegister(IRegistryRegistrar registrar) {
 

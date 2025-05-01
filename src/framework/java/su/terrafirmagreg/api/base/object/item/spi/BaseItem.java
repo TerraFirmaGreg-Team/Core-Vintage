@@ -23,8 +23,6 @@ public abstract class BaseItem extends Item implements IItemSettings {
   public BaseItem() {
     this.settings = Settings.of();
 
-    setMaxStackSize(settings.getMaxStackSize());
-    setMaxDamage(settings.getMaxDamage());
   }
 
   @Override
@@ -46,8 +44,10 @@ public abstract class BaseItem extends Item implements IItemSettings {
 
   @Override
   public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+    addCapabilities(stack, nbt);
+
     if (getSettings().getCapability().isEmpty()) {
-      return null;
+      return super.initCapabilities(stack, nbt);
     }
     return settings$initCapabilities(stack, nbt);
   }

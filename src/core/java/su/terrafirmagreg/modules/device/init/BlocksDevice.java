@@ -41,51 +41,49 @@ import su.terrafirmagreg.modules.device.object.block.BlockSmelteryFirebox;
 import su.terrafirmagreg.modules.device.object.block.BlockSnare;
 import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
 
-import java.util.function.Supplier;
-
 public final class BlocksDevice {
 
 
-  public static Supplier<BlockAlloyCalculator> ALLOY_CALCULATOR;
-  public static Supplier<BlockBearTrap> BEAR_TRAP;
-  public static Supplier<BlockSnare> SNARE;
-  public static Supplier<BlockCrate> CRATE;
-  public static Supplier<BlockBellows> BELLOWS;
-  public static Supplier<BlockBlastFurnace> BLAST_FURNACE;
-  public static Supplier<BlockBloom> BLOOM; // TODO noItems
-  public static Supplier<BlockBloomery> BLOOMERY;
-  public static Supplier<BlockCharcoalForge> CHARCOAL_FORGE;
-  public static Supplier<BlockCharcoalPile> CHARCOAL_PILE; // TODO noItems
-  public static Supplier<BlockCrucible> CRUCIBLE;
-  public static Supplier<BlockFirePit> FIRE_PIT;
-  public static Supplier<BlockPitKiln> PIT_KILN;
-  public static Supplier<BlockQuernManual> QUERN_MANUAL;
-  public static Supplier<BlockQuernHorse> QUERN_HORSE;
-  public static Supplier<BlockMolten> MOLTEN; // TODO noItems
-  public static Supplier<BlockLogPile> LOG_PILE;
-  public static Supplier<BlockCellarShelf> CELLAR_SHELF;
-  public static Supplier<BlockCellarDoor> CELLAR_DOOR;
-  public static Supplier<BlockCellarWall> CELLAR_WALL;
-  public static Supplier<BlockIceBunker> ICE_BUNKER;
-  public static Supplier<BlockInfectedAir> INFECTED_AIR;
-  public static Supplier<BlockFreezeDryer> FREEZE_DRYER;
-  public static Supplier<BlockPowderKeg> POWDERKEG;
-  public static Supplier<BlockThatchBed> THATCH_BED;
-  public static Supplier<BlockGrindstoneManual> GRINDSTONE_MANUAL;
-  public static Supplier<BlockElectricForge> ELECTRIC_FORGE;
-  public static Supplier<BlockInductionCrucible> INDUCTION_CRUCIBLE;
-  public static Supplier<BlockFridge> FRIDGE;
-  public static Supplier<BlockLatexExtractor> LATEX_EXTRACTOR; // TODO noItems
-  public static Supplier<BlockSmelteryCauldron> SMELTERY_CAULDRON;
-  public static Supplier<BlockSmelteryFirebox> SMELTERY_FIREBOX;
-  public static Supplier<BlockGreenhouseDoor> GREENHOUSE_DOOR;
-  public static Supplier<BlockGreenhouseRoof> GREENHOUSE_ROOF;
-  public static Supplier<BlockGreenhouseWall> GREENHOUSE_WALL;
-  public static Supplier<BlockOven> OVEN;
-  public static Supplier<BlockOvenWall> OVEN_WALL;
-  public static Supplier<BlockOvenChimney> OVEN_CHIMNEY;
-  public static Supplier<BlockLeafMat> LEAF_MAT;
-//  public static Supplier<BlockDryingMat> DRYING_MAT;
+  public static BlockAlloyCalculator ALLOY_CALCULATOR;
+  public static BlockBearTrap BEAR_TRAP;
+  public static BlockSnare SNARE;
+  public static BlockCrate CRATE;
+  public static BlockBellows BELLOWS;
+  public static BlockBlastFurnace BLAST_FURNACE;
+  public static BlockBloom BLOOM; // TODO noItems
+  public static BlockBloomery BLOOMERY;
+  public static BlockCharcoalForge CHARCOAL_FORGE;
+  public static BlockCharcoalPile CHARCOAL_PILE; // TODO noItems
+  public static BlockCrucible CRUCIBLE;
+  public static BlockFirePit FIRE_PIT;
+  public static BlockPitKiln PIT_KILN;
+  public static BlockQuernManual QUERN_MANUAL;
+  public static BlockQuernHorse QUERN_HORSE;
+  public static BlockMolten MOLTEN; // TODO noItems
+  public static BlockLogPile LOG_PILE;
+  public static BlockCellarShelf CELLAR_SHELF;
+  public static BlockCellarDoor CELLAR_DOOR;
+  public static BlockCellarWall CELLAR_WALL;
+  public static BlockIceBunker ICE_BUNKER;
+  public static BlockInfectedAir INFECTED_AIR;
+  public static BlockFreezeDryer FREEZE_DRYER;
+  public static BlockPowderKeg POWDERKEG;
+  public static BlockThatchBed THATCH_BED;
+  public static BlockGrindstoneManual GRINDSTONE_MANUAL;
+  public static BlockElectricForge ELECTRIC_FORGE;
+  public static BlockInductionCrucible INDUCTION_CRUCIBLE;
+  public static BlockFridge FRIDGE;
+  public static BlockLatexExtractor LATEX_EXTRACTOR; // TODO noItems
+  public static BlockSmelteryCauldron SMELTERY_CAULDRON;
+  public static BlockSmelteryFirebox SMELTERY_FIREBOX;
+  public static BlockGreenhouseDoor GREENHOUSE_DOOR;
+  public static BlockGreenhouseRoof GREENHOUSE_ROOF;
+  public static BlockGreenhouseWall GREENHOUSE_WALL;
+  public static BlockOven OVEN;
+  public static BlockOvenWall OVEN_WALL;
+  public static BlockOvenChimney OVEN_CHIMNEY;
+  public static BlockLeafMat LEAF_MAT;
+//  public static BlockDryingMat DRYING_MAT;
 
 
   public static void onRegister(IRegistryRegistrar registrar) {

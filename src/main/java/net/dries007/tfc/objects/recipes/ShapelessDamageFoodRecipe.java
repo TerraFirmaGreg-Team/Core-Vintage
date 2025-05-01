@@ -59,7 +59,7 @@ public class ShapelessDamageFoodRecipe extends ShapelessDamageRecipe {
     EntityPlayer player = ForgeHooks.getCraftingPlayer();
     if (player != null && !player.world.isRemote && OreDictUtils.contains(output, "grain"))// only give straw if output is grain
     {
-      ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ItemsCore.STRAW.get())); // gives one at a time
+      ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ItemsCore.STRAW)); // gives one at a time
     }
 
     return super.getRemainingItems(inventoryCrafting);

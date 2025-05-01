@@ -132,7 +132,7 @@ public class TileBlastFurnace extends BaseTileTickableInventory
   public void onBreakBlock(World worldIn, BlockPos pos, IBlockState state) {
     // Dump everything in world
     for (int i = 1; i < 6; i++) {
-      if (world.getBlockState(pos.up(i)).getBlock() == BlocksDevice.MOLTEN.get()) {
+      if (world.getBlockState(pos.up(i)).getBlock() == BlocksDevice.MOLTEN) {
         world.setBlockToAir(pos.up(i));
       }
     }
@@ -417,18 +417,18 @@ public class TileBlastFurnace extends BaseTileTickableInventory
       if (slagLayers > 0) {
         if (slagLayers >= 4) {
           slagLayers -= 4;
-          world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.get().getDefaultState()
+          world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
             .withProperty(LIT, cooking)
             .withProperty(LAYERS, 4));
         } else {
-          world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.get().getDefaultState()
+          world.setBlockState(pos.up(i), BlocksDevice.MOLTEN.getDefaultState()
             .withProperty(LIT, cooking)
             .withProperty(LAYERS, slagLayers));
           slagLayers = 0;
         }
       } else {
         //Remove any surplus slag(ie: after cooking/structure became compromised)
-        if (world.getBlockState(pos.up(i)).getBlock() == BlocksDevice.MOLTEN.get()) {
+        if (world.getBlockState(pos.up(i)).getBlock() == BlocksDevice.MOLTEN) {
           world.setBlockToAir(pos.up(i));
         }
       }

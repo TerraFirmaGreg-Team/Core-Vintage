@@ -94,7 +94,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
       if (MathUtils.RNG.nextFloat() < 0.6) {
         sourcePlayer.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 1800, 1));
         if (MathUtils.RNG.nextFloat() < 0.15) {
-          sourcePlayer.addPotionEffect(new PotionEffect(EffectsCore.PARASITES.get(), 1800, 0));
+          sourcePlayer.addPotionEffect(new PotionEffect(EffectsCore.PARASITES, 1800, 0));
         }
       }
     }
@@ -284,7 +284,7 @@ public class FoodStatsTFC extends FoodStats implements IFoodStatsTFC {
         addThirst(value);
         // Salty drink effect
         if (value < 0 && MathUtils.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
-          sourcePlayer.addPotionEffect(new PotionEffect(EffectsCore.THIRST.get(), 600, 0));
+          sourcePlayer.addPotionEffect(new PotionEffect(EffectsCore.THIRST, 600, 0));
         }
       }
       return true;

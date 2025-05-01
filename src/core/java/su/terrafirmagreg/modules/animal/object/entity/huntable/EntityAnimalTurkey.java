@@ -95,12 +95,12 @@ public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_TURKEY_HURT.get();
+    return SoundsAnimal.ANIMAL_TURKEY_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_TURKEY_DEATH.get();
+    return SoundsAnimal.ANIMAL_TURKEY_DEATH;
   }
 
   @Override
@@ -119,7 +119,7 @@ public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_TURKEY_SAY.get();
+    return SoundsAnimal.ANIMAL_TURKEY_SAY;
   }
 
   @Nullable

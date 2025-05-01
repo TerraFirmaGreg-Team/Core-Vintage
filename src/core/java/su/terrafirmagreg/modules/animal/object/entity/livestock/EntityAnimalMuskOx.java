@@ -104,17 +104,17 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_MUSKOX_HURT.get();
+    return SoundsAnimal.ANIMAL_MUSKOX_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_MUSKOX_DEATH.get();
+    return SoundsAnimal.ANIMAL_MUSKOX_DEATH;
   }
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_MUSKOX_SAY.get();
+    return SoundsAnimal.ANIMAL_MUSKOX_SAY;
   }
 
   @Nullable

@@ -18,6 +18,6 @@ public class EffectResistHeat extends BaseEffect {
 
   @Override
   public void performEffect(EntityLivingBase entity, int amplifier) {
-    removePotionEffect(entity, EffectsCore.HYPERTHERMIA.get());
+    removePotionEffect(entity, EffectsCore.HYPERTHERMIA);
   }
 }

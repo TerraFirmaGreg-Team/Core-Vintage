@@ -316,7 +316,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
   @Override
   public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    drops.add(new ItemStack(ItemsCore.WOOD_ASH.get(), 3 + RNG.nextInt(5)));
+    drops.add(new ItemStack(ItemsCore.WOOD_ASH, 3 + RNG.nextInt(5)));
   }
 
   @Nullable

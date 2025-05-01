@@ -106,12 +106,12 @@ public class EntityAnimalGazelle extends EntityAnimalMammal implements IHuntable
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_GAZELLE_HURT.get();
+    return SoundsAnimal.ANIMAL_GAZELLE_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_GAZELLE_DEATH.get();
+    return SoundsAnimal.ANIMAL_GAZELLE_DEATH;
   }
 
   @Override
@@ -136,7 +136,7 @@ public class EntityAnimalGazelle extends EntityAnimalMammal implements IHuntable
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_GAZELLE_SAY.get();
+    return SoundsAnimal.ANIMAL_GAZELLE_SAY;
   }
 
   @Nullable

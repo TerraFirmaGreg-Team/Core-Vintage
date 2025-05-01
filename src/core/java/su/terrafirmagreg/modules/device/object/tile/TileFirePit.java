@@ -748,11 +748,13 @@ public class TileFirePit extends BaseTileTickableInventory
 
   @Override
   public ContainerFirePit getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+
     return new ContainerFirePit(inventoryPlayer, this);
   }
 
   @Override
   public GuiFirePit getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    
     return new GuiFirePit(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
   }
 

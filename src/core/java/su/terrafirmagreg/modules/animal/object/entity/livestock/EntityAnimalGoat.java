@@ -128,12 +128,12 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_GOAT_HURT.get();
+    return SoundsAnimal.ANIMAL_GOAT_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_GOAT_DEATH.get();
+    return SoundsAnimal.ANIMAL_GOAT_DEATH;
   }
 
   @Override
@@ -152,7 +152,7 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_GOAT_CRY.get() : SoundsAnimal.ANIMAL_GOAT_SAY.get();
+    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_GOAT_CRY : SoundsAnimal.ANIMAL_GOAT_SAY;
   }
 
   @Nullable

@@ -130,7 +130,7 @@ public class TileIceBunker extends BaseTileTickableInventory
               coolantAmount = coolantAmount + ConfigDevice.BLOCK.ICE_BUNKER.seaIceCoolant;
               seaIce = true;
               dryIce = false;
-            } else if (item == ItemsCore.ICE_SHARD.get() || Block.getBlockFromItem(item) == Blocks.ICE) {
+            } else if (item == ItemsCore.ICE_SHARD || Block.getBlockFromItem(item) == Blocks.ICE) {
               coolantAmount = coolantAmount + ConfigDevice.BLOCK.ICE_BUNKER.iceCoolant;
               seaIce = false;
               dryIce = false;
@@ -207,7 +207,7 @@ public class TileIceBunker extends BaseTileTickableInventory
     //1st door
     var doorPos1 = new BlockPos(posX, posY, posZ);
     Block door = world.getBlockState(doorPos1).getBlock();
-    if (door == BlocksDevice.CELLAR_DOOR.get() && BlockDoor.isOpen(world, doorPos1)) {
+    if (door == BlocksDevice.CELLAR_DOOR && BlockDoor.isOpen(world, doorPos1)) {
 
       loss = 0.05f;
     }
@@ -220,7 +220,7 @@ public class TileIceBunker extends BaseTileTickableInventory
 
     var doorPos2 = new BlockPos(posX + entrance[2], posY, posZ + entrance[3]);
     door = world.getBlockState(doorPos2).getBlock();
-    if (door == BlocksDevice.CELLAR_DOOR.get() && BlockDoor.isOpen(world, doorPos2)) {
+    if (door == BlocksDevice.CELLAR_DOOR && BlockDoor.isOpen(world, doorPos2)) {
 
       return loss * 13 + 0.05f;
     }

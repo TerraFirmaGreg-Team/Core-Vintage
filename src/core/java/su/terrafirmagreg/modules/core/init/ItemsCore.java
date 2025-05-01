@@ -9,18 +9,16 @@ import su.terrafirmagreg.modules.core.object.item.ItemWoodAsh;
 
 import net.minecraft.item.Item;
 
-import java.util.function.Supplier;
-
 public final class ItemsCore {
 
-  public static Supplier<ItemDebugWand> DEBUG_WAND;
-  public static Supplier<Item> GLUE;
-  public static Supplier<ItemGlassShard> GLASS_SHARD;
-  public static Supplier<ItemIceShard> ICE_SHARD;
-  public static Supplier<ItemStraw> STRAW;
-  public static Supplier<ItemWoodAsh> WOOD_ASH;
-  public static Supplier<Item> JAR;
-  public static Supplier<Item> MORTAR;
+  public static ItemDebugWand DEBUG_WAND;
+  public static Item GLUE;
+  public static ItemGlassShard GLASS_SHARD;
+  public static ItemIceShard ICE_SHARD;
+  public static ItemStraw STRAW;
+  public static ItemWoodAsh WOOD_ASH;
+  public static Item JAR;
+  public static Item MORTAR;
 
   public static void onRegister(IRegistryRegistrar registry) {
 

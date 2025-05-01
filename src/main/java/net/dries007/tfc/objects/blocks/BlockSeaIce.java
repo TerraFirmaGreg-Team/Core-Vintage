@@ -30,7 +30,7 @@ public class BlockSeaIce extends BlockIceTFC {
       var tool = player.getHeldItemMainhand();
       if (OreDictUtils.contains(tool, "iceSaw")) {
         drops.clear();
-        drops.add(new ItemStack(ItemsCore.ICE_SHARD.get(), 2 + MathUtils.RNG.nextInt(4)));
+        drops.add(new ItemStack(ItemsCore.ICE_SHARD, 2 + MathUtils.RNG.nextInt(4)));
       } else {
         super.getDrops(drops, world, pos, state, fortune);
       }

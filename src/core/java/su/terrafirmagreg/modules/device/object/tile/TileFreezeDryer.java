@@ -165,7 +165,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory
       coolantToAdd = ConfigDevice.BLOCK.FREEZE_DRYER.packedIceCoolant;
     } else if (block == BlocksTFC.SEA_ICE) {
       coolantToAdd = ConfigDevice.BLOCK.FREEZE_DRYER.seaIceCoolant;
-    } else if (item == ItemsCore.ICE_SHARD.get() || block == Blocks.ICE) {
+    } else if (item == ItemsCore.ICE_SHARD || block == Blocks.ICE) {
       coolantToAdd = ConfigDevice.BLOCK.FREEZE_DRYER.iceCoolant;
     } else if (block == Blocks.SNOW) {
       coolantToAdd = ConfigDevice.BLOCK.FREEZE_DRYER.snowCoolant;
@@ -367,7 +367,7 @@ public class TileFreezeDryer extends BaseTileTickableInventory
       return false;
     }
     var item = itemStack.getItem();
-    return ((item == ItemsCore.ICE_SHARD.get() || item == Items.SNOWBALL || item == Item.getItemFromBlock(Blocks.ICE) ||
+    return ((item == ItemsCore.ICE_SHARD || item == Items.SNOWBALL || item == Item.getItemFromBlock(Blocks.ICE) ||
              item == Item.getItemFromBlock(Blocks.PACKED_ICE) || item == Item.getItemFromBlock(BlocksTFC.SEA_ICE) ||
              item == Item.getItemFromBlock(Blocks.SNOW)) || slot != 9);
   }

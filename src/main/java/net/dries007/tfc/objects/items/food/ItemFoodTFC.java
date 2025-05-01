@@ -1,6 +1,5 @@
 package net.dries007.tfc.objects.items.food;
 
-import su.terrafirmagreg.api.base.object.item.spi.BaseItemFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFoodHeat;
@@ -11,6 +10,7 @@ import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
 import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class ItemFoodTFC extends BaseItemFood implements ICapabilitySize, IItemFoodTFC {
+public class ItemFoodTFC extends ItemFood implements ICapabilitySize, IItemFoodTFC {
 
   private static final Map<Food, ItemFoodTFC> MAP = new HashMap<>();
   protected final Food food;

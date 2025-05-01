@@ -68,7 +68,11 @@ public interface INetworkPacket {
     }
 
 
-    void process(EntityPlayerMP player);
+    default void process(EntityPlayerMP player) {
+
+    }
+
+    ;
 
     // Send To Server
 
@@ -93,7 +97,11 @@ public interface INetworkPacket {
     }
 
     @SideOnly(Side.CLIENT)
-    void process(Minecraft minecraft);
+    default void process(Minecraft minecraft) {
+
+    }
+
+    ;
 
 
     default Packet<?> getPacketFrom() {

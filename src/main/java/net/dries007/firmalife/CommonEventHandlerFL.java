@@ -105,7 +105,7 @@ public class CommonEventHandlerFL {
     EntityPlayer player = event.getEntityPlayer();
     BlockPos pos = event.getPos();
     EnumFacing facing = event.getFace();
-    if (item == ItemsAnimal.WOOL_YARN.get() && player.isSneaking() && facing != null) {
+    if (item == ItemsAnimal.WOOL_YARN && player.isSneaking() && facing != null) {
       BlockPos offsetPos = pos.offset(facing);
       if (world.isAirBlock(offsetPos)) {
         IBlockState string = BlocksFL.WOOL_STRING.getStateForPlacement(world, player, facing, offsetPos);

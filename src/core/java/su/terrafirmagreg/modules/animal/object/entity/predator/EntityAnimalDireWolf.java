@@ -106,12 +106,12 @@ public class EntityAnimalDireWolf extends EntityAnimalMammal implements IPredato
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_DIREWOLF_HURT.get();
+    return SoundsAnimal.ANIMAL_DIREWOLF_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_DIREWOLF_DEATH.get();
+    return SoundsAnimal.ANIMAL_DIREWOLF_DEATH;
   }
 
   @Override
@@ -172,8 +172,8 @@ public class EntityAnimalDireWolf extends EntityAnimalMammal implements IPredato
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_DIREWOLF_CRY.get()
-                                : SoundsAnimal.ANIMAL_DIREWOLF_SAY.get();
+    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_DIREWOLF_CRY
+                                : SoundsAnimal.ANIMAL_DIREWOLF_SAY;
   }
 
   @Nullable

@@ -146,7 +146,7 @@ public final class InteractionManager {
     USE_ACTIONS.put(stack -> OreDictUtils.contains(stack, "charcoal"), (stack, player, worldIn, pos, hand, direction, hitX, hitY, hitZ) -> {
       if (direction != null) {
         IBlockState state = worldIn.getBlockState(pos);
-        if (state.getBlock() == BlocksDevice.CHARCOAL_PILE.get() && state.getValue(TYPE) < 8) {
+        if (state.getBlock() == BlocksDevice.CHARCOAL_PILE && state.getValue(TYPE) < 8) {
           // Check the player isn't standing inside the placement area for the next layer
           IBlockState stateToPlace = state.withProperty(TYPE, state.getValue(TYPE) + 1);
           if (worldIn.checkNoEntityCollision(stateToPlace.getBoundingBox(worldIn, pos).offset(pos))) {
@@ -165,7 +165,7 @@ public final class InteractionManager {
         }
         if (worldIn.getBlockState(posAt.down()).isSideSolid(worldIn, posAt.down(), EnumFacing.UP) && worldIn.getBlockState(posAt).getBlock()
           .isReplaceable(worldIn, pos)) {
-          IBlockState stateToPlace = BlocksDevice.CHARCOAL_PILE.get().getDefaultState().withProperty(TYPE, 1);
+          IBlockState stateToPlace = BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(TYPE, 1);
           if (worldIn.checkNoEntityCollision(stateToPlace.getBoundingBox(worldIn, posAt).offset(posAt))) {
             // Create a new charcoal pile
             if (!worldIn.isRemote) {

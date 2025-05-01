@@ -100,12 +100,12 @@ public class EntityAnimalBoar extends EntityAnimalMammal implements IHuntable {
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_BOAR_HURT.get();
+    return SoundsAnimal.ANIMAL_BOAR_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_BOAR_DEATH.get();
+    return SoundsAnimal.ANIMAL_BOAR_DEATH;
   }
 
   @Override
@@ -124,7 +124,7 @@ public class EntityAnimalBoar extends EntityAnimalMammal implements IHuntable {
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_BOAR_SAY.get();
+    return SoundsAnimal.ANIMAL_BOAR_SAY;
   }
 
   @Nullable

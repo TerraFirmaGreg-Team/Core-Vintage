@@ -142,12 +142,12 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_LION_HURT.get();
+    return SoundsAnimal.ANIMAL_LION_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_LION_DEATH.get();
+    return SoundsAnimal.ANIMAL_LION_DEATH;
   }
 
   @Override
@@ -207,7 +207,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_LION_CRY.get() : SoundsAnimal.ANIMAL_LION_SAY.get();
+    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_LION_CRY : SoundsAnimal.ANIMAL_LION_SAY;
   }
 
   @Nullable
@@ -225,7 +225,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
 
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
-    playSound(SoundsAnimal.ANIMAL_FELINE_STEP.get(), 0.15F, 1.0F);
+    playSound(SoundsAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
   }
 
   /**

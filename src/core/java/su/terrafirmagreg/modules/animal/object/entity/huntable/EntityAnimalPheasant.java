@@ -120,12 +120,12 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_PHEASANT_HURT.get();
+    return SoundsAnimal.ANIMAL_PHEASANT_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_PHEASANT_DEATH.get();
+    return SoundsAnimal.ANIMAL_PHEASANT_DEATH;
   }
 
   @Override
@@ -144,7 +144,7 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_PHEASANT_SAY.get();
+    return SoundsAnimal.ANIMAL_PHEASANT_SAY;
   }
 
   @Nullable

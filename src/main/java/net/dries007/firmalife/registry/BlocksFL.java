@@ -262,7 +262,7 @@ public class BlocksFL {
     normalIBs.add(register(r, "pumpkin_hanging_planter", new BlockHangingPlanter(() -> Item.getItemFromBlock(BlocksFL.PUMPKIN_FRUIT), () -> ItemSeedsTFC.get(StemCrop.PUMPKIN), 13), CT_MISC));
     normalIBs.add(register(r, "melon_hanging_planter", new BlockHangingPlanter(() -> Item.getItemFromBlock(BlocksFL.MELON_FRUIT), () -> ItemSeedsTFC.get(StemCrop.MELON), 13), CT_MISC));
     normalIBs.add(register(r, "squash_hanging_planter", new BlockHangingPlanter(() -> ItemFoodTFC.get(Food.SQUASH), () -> ItemSeedsTFC.get(Crop.SQUASH), 13), CT_MISC));
-    register(r, "wool_string", new BlockString(() -> ItemsAnimal.WOOL_YARN.get()));
+    register(r, "wool_string", new BlockString(() -> ItemsAnimal.WOOL_YARN));
     normalIBs.add(register(r, "trellis", new BlockTrellis(), CT_MISC));
     normalIBs.add(register(r, "beehive", new BlockBeehive(), CT_MISC));
     register(r, "honey_jar", new BlockJars(() -> ItemsFL.HONEY_JAR), CT_FOOD);

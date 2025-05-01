@@ -194,7 +194,7 @@ public final class TechRecipes {
         .setOutput(new FluidStack(FluidsCore.GLASS.get(), 375), 800).build()
         .setRegistryName(new ResourceLocation(TFCTECH, "glass_pane")),
       new SmelteryRecipe.Builder()
-        .addInput(IIngredient.of(ItemsCore.GLASS_SHARD.get()))
+        .addInput(IIngredient.of(ItemsCore.GLASS_SHARD))
         .setOutput(new FluidStack(FluidsCore.GLASS.get(), 500), 800).build()
         .setRegistryName(new ResourceLocation(TFCTECH, "glass_shard")),
       new SmelteryRecipe.Builder()

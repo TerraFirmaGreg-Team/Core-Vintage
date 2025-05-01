@@ -63,7 +63,7 @@ public class BlockPlantShortGrass extends BlockPlantTFC implements IShearable {
           spawnAsEntity(worldIn, pos, new ItemStack(this, 1));
         }
       } else if (MathUtils.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
-        spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW.get()));
+        spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW));
       }
     }
 

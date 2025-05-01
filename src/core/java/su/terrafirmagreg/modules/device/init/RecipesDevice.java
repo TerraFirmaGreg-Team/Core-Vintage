@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import com.cleanroommc.groovyscript.helper.ingredient.ItemsIngredient;
 import com.cleanroommc.groovyscript.helper.ingredient.OreDictIngredient;
 
-import static com.cleanroommc.groovyscript.compat.vanilla.VanillaModule.crafting;
-
 import net.dries007.tfc.objects.items.ItemsTFC;
+
+import static com.cleanroommc.groovyscript.compat.vanilla.VanillaModule.crafting;
 
 public class RecipesDevice {
 
@@ -28,7 +28,7 @@ public class RecipesDevice {
       .key("R", new OreDictIngredient("rock"))
       .key("L", new OreDictIngredient("lumber"))
       .name("device/alloy_calculator")
-      .output(new ItemStack(BlocksDevice.ALLOY_CALCULATOR.get()))
+      .output(new ItemStack(BlocksDevice.ALLOY_CALCULATOR))
       .register();
 
     crafting.shapedBuilder()
@@ -38,7 +38,7 @@ public class RecipesDevice {
       .key("X", new OreDictIngredient("lumber"))
       .key("S", new OreDictIngredient("leather"))
       .name("device/bellows")
-      .output(new ItemStack(BlocksDevice.BELLOWS.get()))
+      .output(new ItemStack(BlocksDevice.BELLOWS))
       .register();
 
     crafting.shapedBuilder()
@@ -48,7 +48,7 @@ public class RecipesDevice {
       .key("X", new OreDictIngredient("plateDoubleWroughtIron"))
       .key("Z", new OreDictIngredient("crucible"))
       .name("device/blast_furnace")
-      .output(new ItemStack(BlocksDevice.BLAST_FURNACE.get()))
+      .output(new ItemStack(BlocksDevice.BLAST_FURNACE))
       .register();
 
     crafting.shapedBuilder()
@@ -57,43 +57,43 @@ public class RecipesDevice {
       .row("XXX")
       .key("X", new OreDictIngredient("plateDoubleAnyBronze"))
       .name("device/bloomery")
-      .output(new ItemStack(BlocksDevice.BLOOMERY.get()))
+      .output(new ItemStack(BlocksDevice.BLOOMERY))
       .register();
 
     crafting.shapedBuilder()
       .row(" SK")
       .row("CBC")
       .row("LIL")
-      .key("I", new ItemsIngredient(new ItemStack(ItemsDevice.METAL_FLASK_UNFINISHED.get())))
+      .key("I", new ItemsIngredient(new ItemStack(ItemsDevice.METAL_FLASK_UNFINISHED)))
       .key("K", new OreDictIngredient(ToolOreDict.toolKnife))
       .key("C", new ItemsIngredient(new ItemStack(ItemsTFC.BURLAP_CLOTH)))
       .key("S", new OreDictIngredient("string"))
-      .key("L", new ItemsIngredient(new ItemStack(ItemsDevice.LEATHER_FLASK_UNFINISHED.get())))
-      .key("B", new ItemsIngredient(new ItemStack(ItemsAnimal.BLADDER.get())))
+      .key("L", new ItemsIngredient(new ItemStack(ItemsDevice.LEATHER_FLASK_UNFINISHED)))
+      .key("B", new ItemsIngredient(new ItemStack(ItemsAnimal.BLADDER)))
       .name("device/flask/metal")
-      .output(new ItemStack(ItemsDevice.METAL_FLASK.get()))
+      .output(new ItemStack(ItemsDevice.METAL_FLASK))
       .register();
 
     crafting.shapedBuilder()
       .row("FB")
       .row("CK")
-      .key("F", new ItemsIngredient(new ItemStack(ItemsDevice.METAL_FLASK_BROKEN.get())))
+      .key("F", new ItemsIngredient(new ItemStack(ItemsDevice.METAL_FLASK_BROKEN)))
       .key("K", new OreDictIngredient(ToolOreDict.toolKnife))
       .key("C", new ItemsIngredient(new ItemStack(ItemsTFC.BURLAP_CLOTH)))
-      .key("B", new ItemsIngredient(new ItemStack(ItemsAnimal.BLADDER.get())))
+      .key("B", new ItemsIngredient(new ItemStack(ItemsAnimal.BLADDER)))
       .name("device/flask/metal/broken_repair")
-      .output(new ItemStack(ItemsDevice.METAL_FLASK.get()))
+      .output(new ItemStack(ItemsDevice.METAL_FLASK))
       .register();
 
     crafting.shapedBuilder()
       .row("FB")
       .row("CK")
-      .key("F", new ItemsIngredient(new ItemStack(ItemsDevice.METAL_FLASK.get())))
+      .key("F", new ItemsIngredient(new ItemStack(ItemsDevice.METAL_FLASK)))
       .key("K", new OreDictIngredient(ToolOreDict.toolKnife))
       .key("C", new ItemsIngredient(new ItemStack(ItemsTFC.BURLAP_CLOTH)))
-      .key("B", new ItemsIngredient(new ItemStack(ItemsAnimal.BLADDER.get())))
+      .key("B", new ItemsIngredient(new ItemStack(ItemsAnimal.BLADDER)))
       .name("device/flask/metal/repair")
-      .output(new ItemStack(ItemsDevice.METAL_FLASK.get()))
+      .output(new ItemStack(ItemsDevice.METAL_FLASK))
       .register();
 
   }
@@ -105,7 +105,7 @@ public class RecipesDevice {
         new OreDictIngredient("dyeRed"),
         new OreDictIngredient("dustGunpowder"))
       .name("device/powderkeg")
-      .output(new ItemStack(BlocksDevice.POWDERKEG.get()))
+      .output(new ItemStack(BlocksDevice.POWDERKEG))
       .register();
   }
 }

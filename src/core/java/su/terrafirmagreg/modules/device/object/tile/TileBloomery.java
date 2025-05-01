@@ -108,7 +108,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
   protected void dumpItems() {
     //Dump everything in world
     for (int i = 1; i < 4; i++) {
-      if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN.get()) {
+      if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
         world.setBlockToAir(getInternalBlock().up(i));
       }
     }
@@ -170,7 +170,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
             }
           }
           if (cachedRecipe != null) {
-            world.setBlockState(getInternalBlock(), BlocksDevice.BLOOM.get().getDefaultState());
+            world.setBlockState(getInternalBlock(), BlocksDevice.BLOOM.getDefaultState());
             TileUtils.getTile(world, getInternalBlock(), TileBloom.class).ifPresent(tile -> tile.setBloom(cachedRecipe.getOutput(oreStacks)));
           }
 
@@ -188,7 +188,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
       // Update multiblock status
       int newMaxItems = BlockBloomery.getChimneyLevels(world, getInternalBlock()) * 8;
       EnumFacing direction = world.getBlockState(pos).getValue(HORIZONTAL);
-      if (!BlocksDevice.BLOOMERY.get().isFormed(world, getInternalBlock(), direction)) {
+      if (!BlocksDevice.BLOOMERY.isFormed(world, getInternalBlock(), direction)) {
         newMaxItems = 0;
       }
 
@@ -213,7 +213,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
         state = state.withProperty(LIT, false);
         world.setBlockState(pos, state);
       }
-      if (!BlocksDevice.BLOOMERY.get().canGateStayInPlace(world, pos, direction.getAxis())) {
+      if (!BlocksDevice.BLOOMERY.canGateStayInPlace(world, pos, direction.getAxis())) {
         // Bloomery gate (the front facing) structure became compromised
         world.destroyBlock(pos, true);
         return;
@@ -246,18 +246,18 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
       if (slagLayers > 0) {
         if (slagLayers >= 4) {
           slagLayers -= 4;
-          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.get().getDefaultState()
+          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
             .withProperty(LIT, cooking)
             .withProperty(LAYERS, 4));
         } else {
-          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.get().getDefaultState()
+          world.setBlockState(getInternalBlock().up(i), BlocksDevice.MOLTEN.getDefaultState()
             .withProperty(LIT, cooking)
             .withProperty(LAYERS, slagLayers));
           slagLayers = 0;
         }
       } else {
         //Remove any surplus slag(ie: after cooking/structure became compromised)
-        if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN.get()) {
+        if (world.getBlockState(getInternalBlock().up(i)).getBlock() == BlocksDevice.MOLTEN) {
           world.setBlockToAir(getInternalBlock().up(i));
         }
       }
@@ -266,7 +266,7 @@ public class TileBloomery extends BaseTileTickableInventory implements IAmbienta
 
   protected boolean isInternalBlockComplete() {
     IBlockState inside = world.getBlockState(getInternalBlock());
-    return inside.getBlock() == BlocksDevice.CHARCOAL_PILE.get() && inside.getValue(TYPE) >= 8;
+    return inside.getBlock() == BlocksDevice.CHARCOAL_PILE && inside.getValue(TYPE) >= 8;
   }
 
   protected void addItemsFromWorld() {

@@ -81,7 +81,7 @@ public class BlockBeeNest extends BlockNonCube {
     if (world.isDaytime()) {
       EntityPlayer player = world.getNearestAttackablePlayer(pos, 10, 10);
       if (player != null) {
-        player.addPotionEffect(new PotionEffect(EffectsCore.SWARM.get(), 30 * 20));
+        player.addPotionEffect(new PotionEffect(EffectsCore.SWARM, 30 * 20));
       }
     }
     super.breakBlock(world, pos, state);

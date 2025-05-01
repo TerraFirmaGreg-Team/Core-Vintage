@@ -150,7 +150,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
       Item giveItem = !OreDictUtils.contains(player.getHeldItem(hand), "knife") ? ItemsFL.getFood(FoodFL.RAW_HONEY) : ItemsFL.HONEYCOMB;
       ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(giveItem));
       if (isNotCalm(world, pos, state)) {
-        player.addPotionEffect(new PotionEffect(EffectsCore.SWARM.get(), 30 * 20));
+        player.addPotionEffect(new PotionEffect(EffectsCore.SWARM, 30 * 20));
       }
       TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
       if (te != null) {te.resetCounter();}
@@ -162,7 +162,7 @@ public class BlockBeehive extends Block implements ICapabilitySize {
   @Override
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
     if (isNotCalm(world, pos, state)) {
-      player.addPotionEffect(new PotionEffect(EffectsCore.SWARM.get(), 30 * 20));
+      player.addPotionEffect(new PotionEffect(EffectsCore.SWARM, 30 * 20));
     }
     return super.removedByPlayer(state, world, pos, player, willHarvest);
   }

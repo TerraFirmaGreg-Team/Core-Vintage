@@ -240,7 +240,7 @@ public class RegistryHandlerCommon {
   public static void registerWeldingRecipes(RegistryEvent.Register<WeldingRecipe> event) {
     if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableBearTrap) {
       event.getRegistry()
-        .register(new WeldingRecipe(new ResourceLocation(Mods.ModIDs.TFCTHINGS, "bear_trap"), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), new ItemStack(BlocksDevice.BEAR_TRAP.get()), Metal.STEEL.getTier()));
+        .register(new WeldingRecipe(new ResourceLocation(Mods.ModIDs.TFCTHINGS, "bear_trap"), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), IIngredient.of(new ItemStack(TFCThingsItems.ITEM_BEAR_TRAP_HALF)), new ItemStack(BlocksDevice.BEAR_TRAP), Metal.STEEL.getTier()));
     }
     if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableWhetstones) {
       event.getRegistry()

@@ -137,7 +137,7 @@ public class BlockTallGrassTFC extends BlockPlantShortGrass implements IGrowable
       } else {
         for (i = 1; worldIn.getBlockState(pos.up(i)).getBlock() == this; ++i) {
           if (MathUtils.RNG.nextDouble() <= (double) (age + 1) / 4.0) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW.get()));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsCore.STRAW));
           }
         }
       }

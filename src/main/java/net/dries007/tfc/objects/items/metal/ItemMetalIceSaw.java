@@ -12,16 +12,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Mod;
 
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
-
-@Mod.EventBusSubscriber(modid = TFC)
 public class ItemMetalIceSaw extends ItemMetalTool implements ICapabilityMetal {
 
 
@@ -64,7 +60,7 @@ public class ItemMetalIceSaw extends ItemMetalTool implements ICapabilityMetal {
     Block block = state.getBlock();
 
     if (block == BlocksTFC.SEA_ICE || block == Blocks.PACKED_ICE || block == Blocks.ICE) {
-      return ItemsCore.ICE_SHARD.get();
+      return ItemsCore.ICE_SHARD;
     }
 
     return null;

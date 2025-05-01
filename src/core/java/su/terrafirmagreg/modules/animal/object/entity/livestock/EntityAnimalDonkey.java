@@ -451,7 +451,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
         }
         if (hugeHeavyCount >= 2) {
           // Does not work when ridden, mojang bug: https://bugs.mojang.com/browse/MC-121788
-          this.addPotionEffect(new PotionEffect(EffectsCore.OVERBURDENED.get(), 25, 125, false, false));
+          this.addPotionEffect(new PotionEffect(EffectsCore.OVERBURDENED, 25, 125, false, false));
         }
       }
       if (this.isFertilized()

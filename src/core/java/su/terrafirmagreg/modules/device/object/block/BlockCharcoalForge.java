@@ -59,7 +59,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
     BiPredicate<World, BlockPos> isValidSide = (world, pos) -> BlockCharcoalForge.isValidSide(world.getBlockState(pos));
     CHARCOAL_FORGE_MULTIBLOCK = new Multiblock()
       // Top block
-      .match(new BlockPos(0, 1, 0), state -> state.getBlock() == BlocksDevice.CRUCIBLE.get() || state.getBlock() == Blocks.AIR)
+      .match(new BlockPos(0, 1, 0), state -> state.getBlock() == BlocksDevice.CRUCIBLE || state.getBlock() == Blocks.AIR)
       // Chimney
       .matchOneOf(new BlockPos(0, 1, 0),
         new Multiblock()

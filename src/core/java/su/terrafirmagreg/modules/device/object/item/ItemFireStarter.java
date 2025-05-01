@@ -31,14 +31,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
-
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 
 public class ItemFireStarter extends BaseItem {
 
@@ -142,7 +142,7 @@ public class ItemFireStarter extends BaseItem {
       }
 
       if (count % 3 == 1) {
-        player.playSound(SoundsDevice.FIRE_STARTER.get(), 0.5f, 0.05F);
+        player.playSound(SoundsDevice.FIRE_STARTER, 0.5f, 0.05F);
       }
     } else if (countLeft == 1) // Server, and last tick of use
     {
@@ -157,7 +157,7 @@ public class ItemFireStarter extends BaseItem {
             world.setBlockState(pos, Blocks.FIRE.getDefaultState());
           }
         }
-      } else if (state.getBlock() == BlocksDevice.PIT_KILN.get()) {
+      } else if (state.getBlock() == BlocksDevice.PIT_KILN) {
         // Pit Kiln
         if (itemRand.nextFloat() < chance) {
           TileUtils.getTile(world, pos.down(), TilePitKiln.class).ifPresent(TilePitKiln::tryLight);
@@ -190,7 +190,7 @@ public class ItemFireStarter extends BaseItem {
         if (sticks >= 3 && log != null) {
           final float kindlingModifier = Math.min(0.1f * (float) kindling, 0.5f);
           if (itemRand.nextFloat() < chance + kindlingModifier) {
-            world.setBlockState(pos, BlocksDevice.FIRE_PIT.get().getDefaultState().withProperty(LIT, true));
+            world.setBlockState(pos, BlocksDevice.FIRE_PIT.getDefaultState().withProperty(LIT, true));
             EntityItem finalLog = log;
             TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> tile.onCreate(finalLog.getItem()));
             stuffToUse.forEach(Entity::setDead);

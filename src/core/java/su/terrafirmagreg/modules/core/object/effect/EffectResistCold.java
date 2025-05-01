@@ -18,6 +18,6 @@ public class EffectResistCold extends BaseEffect {
 
   @Override
   public void performEffect(EntityLivingBase entity, int amplifier) {
-    removePotionEffect(entity, EffectsCore.HYPOTHERMIA.get());
+    removePotionEffect(entity, EffectsCore.HYPOTHERMIA);
   }
 }

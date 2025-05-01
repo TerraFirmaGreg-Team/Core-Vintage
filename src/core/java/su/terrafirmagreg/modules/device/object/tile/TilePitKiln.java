@@ -18,7 +18,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -73,7 +72,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
         }
       }
       // Replace the block
-      world.setBlockState(pos, BlocksDevice.PIT_KILN.get().getDefaultState());
+      world.setBlockState(pos, BlocksDevice.PIT_KILN.getDefaultState());
       // Play placement sound
       world.playSound(null, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 0.5f, 1.0f);
 
@@ -103,7 +102,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
 
   private void addStrawBlock() {
     for (int i = 0; i < 4; i++) {
-      addStraw(new ItemStack(ItemsCore.STRAW.get()));
+      addStraw(new ItemStack(ItemsCore.STRAW));
     }
   }
 
@@ -269,7 +268,7 @@ public class TilePitKiln extends TEPlacedItem implements ITickable {
       }
 
       // Straw via thatch block (special exception)
-      if (stack.getItem() == Item.getItemFromBlock(BlocksCore.THATCH.get())
+      if (stack.getItem() == BlocksCore.THATCH.asItem()
           && strawCount <= STRAW_NEEDED - 4) {
         stack.shrink(1);
         addStrawBlock();

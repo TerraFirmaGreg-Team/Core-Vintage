@@ -76,16 +76,16 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
   static {
     Predicate<IBlockState> stoneMatcher = BlockBloomery::isValidSideBlock;
     Predicate<IBlockState> insideChimney = state ->
-      state.getBlock() == BlocksDevice.MOLTEN.get() || state.getMaterial().isReplaceable();
+      state.getBlock() == BlocksDevice.MOLTEN || state.getMaterial().isReplaceable();
     Predicate<IBlockState> center = state ->
-      state.getBlock() == BlocksDevice.CHARCOAL_PILE.get() || state.getBlock() == BlocksDevice.BLOOM.get() || state.getMaterial().isReplaceable();
+      state.getBlock() == BlocksDevice.CHARCOAL_PILE || state.getBlock() == BlocksDevice.BLOOM || state.getMaterial().isReplaceable();
 
     // Bloomery center is the charcoal pile pos
     BLOOMERY_BASE = new Multiblock[4];
     BLOOMERY_BASE[EnumFacing.NORTH.getHorizontalIndex()] = new Multiblock()
       .match(new BlockPos(0, 0, 0), center)
       .match(new BlockPos(0, -1, 0), stoneMatcher)
-      .match(new BlockPos(0, 0, 1), state -> state.getBlock() == BlocksDevice.BLOOMERY.get())
+      .match(new BlockPos(0, 0, 1), state -> state.getBlock() == BlocksDevice.BLOOMERY)
       .match(new BlockPos(1, 0, 1), stoneMatcher)
       .match(new BlockPos(-1, 0, 1), stoneMatcher)
       .match(new BlockPos(0, 1, 1), stoneMatcher)
@@ -100,7 +100,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
     BLOOMERY_BASE[EnumFacing.SOUTH.getHorizontalIndex()] = new Multiblock()
       .match(new BlockPos(0, 0, 0), center)
       .match(new BlockPos(0, -1, 0), stoneMatcher)
-      .match(new BlockPos(0, 0, -1), state -> state.getBlock() == BlocksDevice.BLOOMERY.get())
+      .match(new BlockPos(0, 0, -1), state -> state.getBlock() == BlocksDevice.BLOOMERY)
       .match(new BlockPos(1, 0, -1), stoneMatcher)
       .match(new BlockPos(-1, 0, -1), stoneMatcher)
       .match(new BlockPos(0, 1, 1), stoneMatcher)
@@ -115,7 +115,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
     BLOOMERY_BASE[EnumFacing.WEST.getHorizontalIndex()] = new Multiblock()
       .match(new BlockPos(0, 0, 0), center)
       .match(new BlockPos(0, -1, 0), stoneMatcher)
-      .match(new BlockPos(1, 0, 0), state -> state.getBlock() == BlocksDevice.BLOOMERY.get())
+      .match(new BlockPos(1, 0, 0), state -> state.getBlock() == BlocksDevice.BLOOMERY)
       .match(new BlockPos(1, 0, -1), stoneMatcher)
       .match(new BlockPos(1, 0, 1), stoneMatcher)
       .match(new BlockPos(0, 1, 1), stoneMatcher)
@@ -130,7 +130,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
     BLOOMERY_BASE[EnumFacing.EAST.getHorizontalIndex()] = new Multiblock()
       .match(new BlockPos(0, 0, 0), center)
       .match(new BlockPos(0, -1, 0), stoneMatcher)
-      .match(new BlockPos(-1, 0, 0), state -> state.getBlock() == BlocksDevice.BLOOMERY.get())
+      .match(new BlockPos(-1, 0, 0), state -> state.getBlock() == BlocksDevice.BLOOMERY)
       .match(new BlockPos(-1, 0, -1), stoneMatcher)
       .match(new BlockPos(-1, 0, 1), stoneMatcher)
       .match(new BlockPos(0, 1, 1), stoneMatcher)
@@ -152,7 +152,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
     // Gate center is the bloomery gate block
     GATE_Z = new Multiblock()
       .match(new BlockPos(0, 0, 0),
-        state -> state.getBlock() == BlocksDevice.BLOOMERY.get() || state.getBlock() == Blocks.AIR)
+        state -> state.getBlock() == BlocksDevice.BLOOMERY || state.getBlock() == Blocks.AIR)
       .match(new BlockPos(1, 0, 0), stoneMatcher)
       .match(new BlockPos(-1, 0, 0), stoneMatcher)
       .match(new BlockPos(0, 1, 0), stoneMatcher)
@@ -160,7 +160,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
 
     GATE_X = new Multiblock()
       .match(new BlockPos(0, 0, 0),
-        state -> state.getBlock() == BlocksDevice.BLOOMERY.get() || state.getBlock() == Blocks.AIR)
+        state -> state.getBlock() == BlocksDevice.BLOOMERY || state.getBlock() == Blocks.AIR)
       .match(new BlockPos(0, 0, 1), stoneMatcher)
       .match(new BlockPos(0, 0, -1), stoneMatcher)
       .match(new BlockPos(0, 1, 0), stoneMatcher)

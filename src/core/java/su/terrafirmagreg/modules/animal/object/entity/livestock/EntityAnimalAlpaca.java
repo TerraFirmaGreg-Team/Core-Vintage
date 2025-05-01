@@ -122,18 +122,18 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_ALPACA_HURT.get();
+    return SoundsAnimal.ANIMAL_ALPACA_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_ALPACA_DEATH.get();
+    return SoundsAnimal.ANIMAL_ALPACA_DEATH;
   }
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return MathUtils.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_ALPACA_CRY.get()
-                                          : SoundsAnimal.ANIMAL_ALPACA_SAY.get();
+    return MathUtils.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_ALPACA_CRY
+                                          : SoundsAnimal.ANIMAL_ALPACA_SAY;
   }
 
   @Nullable

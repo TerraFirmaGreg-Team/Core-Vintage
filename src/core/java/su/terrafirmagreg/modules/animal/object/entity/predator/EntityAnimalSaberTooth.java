@@ -105,12 +105,12 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_SABERTOOTH_HURT.get();
+    return SoundsAnimal.ANIMAL_SABERTOOTH_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_SABERTOOTH_DEATH.get();
+    return SoundsAnimal.ANIMAL_SABERTOOTH_DEATH;
   }
 
   @Override
@@ -179,8 +179,8 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_SABERTOOTH_CRY.get()
-                                : SoundsAnimal.ANIMAL_SABERTOOTH_SAY.get();
+    return RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_SABERTOOTH_CRY
+                                : SoundsAnimal.ANIMAL_SABERTOOTH_SAY;
   }
 
   @Nullable
@@ -191,6 +191,6 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
 
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
-    playSound(SoundsAnimal.ANIMAL_FELINE_STEP.get(), 0.15F, 1.0F);
+    playSound(SoundsAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
   }
 }

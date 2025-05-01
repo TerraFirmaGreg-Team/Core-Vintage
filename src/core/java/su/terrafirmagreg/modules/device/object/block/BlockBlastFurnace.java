@@ -49,7 +49,7 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
       return false;
     };
     BLAST_FURNACE_CHIMNEY = new Multiblock()
-      .match(new BlockPos(0, 0, 0), state -> state.getBlock() == BlocksDevice.MOLTEN.get() || state.getMaterial().isReplaceable())
+      .match(new BlockPos(0, 0, 0), state -> state.getBlock() == BlocksDevice.MOLTEN || state.getMaterial().isReplaceable())
       .match(new BlockPos(0, 0, 1), stoneMatcher)
       .match(new BlockPos(0, 0, -1), stoneMatcher)
       .match(new BlockPos(1, 0, 0), stoneMatcher)

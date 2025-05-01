@@ -53,7 +53,7 @@ public class CapabilityHandlerHeat {
 
     CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL), () -> new CapabilityProviderHeat(null, 1, 1599));
     CUSTOM_ITEMS.put(IIngredient.of(BlockLogTFCF.get(TFCRegistries.TREES.getValue(TreesTFCF.EUCALYPTUS))), () -> new CapabilityProviderHeat(null, 1, 1599));
-    CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.STRAW.get()), () -> new CapabilityProviderHeat(null, 1, 30));
+    CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.STRAW), () -> new CapabilityProviderHeat(null, 1, 30));
     CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.TWIG), () -> new CapabilityProviderHeat(null, 1, 50));
     CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.DRIFTWOOD), () -> new CapabilityProviderHeat(null, 1, 60));
     CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.BONES), () -> new CapabilityProviderHeat(null, 1, 425));

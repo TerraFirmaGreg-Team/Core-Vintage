@@ -114,12 +114,12 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_COYOTE_HURT.get();
+    return SoundsAnimal.ANIMAL_COYOTE_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_COYOTE_DEATH.get();
+    return SoundsAnimal.ANIMAL_COYOTE_DEATH;
   }
 
   @Override
@@ -180,8 +180,8 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return MathUtils.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COYOTE_CRY.get()
-                                          : SoundsAnimal.ANIMAL_COYOTE_SAY.get();
+    return MathUtils.RNG.nextInt(100) < 5 ? SoundsAnimal.ANIMAL_COYOTE_CRY
+                                          : SoundsAnimal.ANIMAL_COYOTE_SAY;
   }
 
   @Nullable

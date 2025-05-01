@@ -169,7 +169,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
       if (!world.isRemote) {
         if (isReadyForAnimalProduct()) {
           stack.damageItem(1, player);
-          ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL.get());
+          ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL);
           StackUtils.spawnItemStack(player.world, new BlockPos(posX, posY, posZ), woolStack);
           playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
           setProductsCooldown();
@@ -231,7 +231,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   @Override
   public List<ItemStack> getProducts() {
     // Only white for now
-    return Collections.singletonList(new ItemStack(ItemsAnimal.WOOL.get()));
+    return Collections.singletonList(new ItemStack(ItemsAnimal.WOOL));
   }
 
   @Override

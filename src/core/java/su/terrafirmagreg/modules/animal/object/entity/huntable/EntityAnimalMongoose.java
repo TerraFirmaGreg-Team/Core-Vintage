@@ -100,12 +100,12 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_MONGOOSE_HURT.get();
+    return SoundsAnimal.ANIMAL_MONGOOSE_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_MONGOOSE_DEATH.get();
+    return SoundsAnimal.ANIMAL_MONGOOSE_DEATH;
   }
 
   @Override
@@ -124,7 +124,7 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_MONGOOSE_SAY.get();
+    return SoundsAnimal.ANIMAL_MONGOOSE_SAY;
   }
 
   @Nullable

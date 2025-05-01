@@ -92,10 +92,10 @@ public final class ModifierHandlerEnvironmental {
   }
 
   public static Optional<ModifierEnvironmental> handlePotionEffects(EntityPlayer player) {
-    if (player.isPotionActive(EffectsCore.HYPOTHERMIA.get())) {
+    if (player.isPotionActive(EffectsCore.HYPOTHERMIA)) {
       return ModifierEnvironmental.defined("hypothermia_effect", -10F, 0);
     }
-    if (player.isPotionActive(EffectsCore.HYPERTHERMIA.get())) {
+    if (player.isPotionActive(EffectsCore.HYPERTHERMIA)) {
       return ModifierEnvironmental.defined("hyperthermia_effect", 10F, 0);
     }
     return ModifierEnvironmental.none();

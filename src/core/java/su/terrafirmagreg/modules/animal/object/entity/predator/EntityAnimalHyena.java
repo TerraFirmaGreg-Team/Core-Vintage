@@ -113,12 +113,12 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_HYENA_HURT.get();
+    return SoundsAnimal.ANIMAL_HYENA_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_HYENA_DEATH.get();
+    return SoundsAnimal.ANIMAL_HYENA_DEATH;
   }
 
   @Override
@@ -180,8 +180,8 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
   @Override
   protected SoundEvent getAmbientSound() {
     return MathUtils.RNG.nextInt(100) < 5
-           ? SoundsAnimal.ANIMAL_HYENA_CRY.get()
-           : SoundsAnimal.ANIMAL_HYENA_SAY.get();
+           ? SoundsAnimal.ANIMAL_HYENA_CRY
+           : SoundsAnimal.ANIMAL_HYENA_SAY;
   }
 
   @Nullable

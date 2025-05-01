@@ -208,7 +208,7 @@ public class TEOven extends TEInventory implements ITickable {
   public boolean isCuringRecipe() {
     if (recipeExists()) {
       ItemStack input = inventory.getStackInSlot(SLOT_MAIN);
-      return input.isItemEqual(new ItemStack(ItemsCore.STRAW.get()));
+      return input.isItemEqual(new ItemStack(ItemsCore.STRAW));
     }
     return false;
   }

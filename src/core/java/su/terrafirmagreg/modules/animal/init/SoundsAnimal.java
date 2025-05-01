@@ -4,128 +4,126 @@ import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 
 import net.minecraft.util.SoundEvent;
 
-import java.util.function.Supplier;
-
 public final class SoundsAnimal {
 
-  public static Supplier<SoundEvent> ANIMAL_BEAR_SAY;
-  public static Supplier<SoundEvent> ANIMAL_BEAR_CRY;
-  public static Supplier<SoundEvent> ANIMAL_BEAR_HURT;
-  public static Supplier<SoundEvent> ANIMAL_BEAR_DEATH;
+  public static SoundEvent ANIMAL_BEAR_SAY;
+  public static SoundEvent ANIMAL_BEAR_CRY;
+  public static SoundEvent ANIMAL_BEAR_HURT;
+  public static SoundEvent ANIMAL_BEAR_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_DEER_SAY;
-  public static Supplier<SoundEvent> ANIMAL_DEER_CRY;
-  public static Supplier<SoundEvent> ANIMAL_DEER_HURT;
-  public static Supplier<SoundEvent> ANIMAL_DEER_DEATH;
+  public static SoundEvent ANIMAL_DEER_SAY;
+  public static SoundEvent ANIMAL_DEER_CRY;
+  public static SoundEvent ANIMAL_DEER_HURT;
+  public static SoundEvent ANIMAL_DEER_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_PHEASANT_SAY;
-  public static Supplier<SoundEvent> ANIMAL_PHEASANT_HURT;
-  public static Supplier<SoundEvent> ANIMAL_PHEASANT_DEATH;
+  public static SoundEvent ANIMAL_PHEASANT_SAY;
+  public static SoundEvent ANIMAL_PHEASANT_HURT;
+  public static SoundEvent ANIMAL_PHEASANT_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_ROOSTER_CRY;
+  public static SoundEvent ANIMAL_ROOSTER_CRY;
 
-  public static Supplier<SoundEvent> ANIMAL_ALPACA_SAY;
-  public static Supplier<SoundEvent> ANIMAL_ALPACA_CRY;
-  public static Supplier<SoundEvent> ANIMAL_ALPACA_HURT;
-  public static Supplier<SoundEvent> ANIMAL_ALPACA_DEATH;
-  public static Supplier<SoundEvent> ANIMAL_ALPACA_STEP;
+  public static SoundEvent ANIMAL_ALPACA_SAY;
+  public static SoundEvent ANIMAL_ALPACA_CRY;
+  public static SoundEvent ANIMAL_ALPACA_HURT;
+  public static SoundEvent ANIMAL_ALPACA_DEATH;
+  public static SoundEvent ANIMAL_ALPACA_STEP;
 
-  public static Supplier<SoundEvent> ANIMAL_DUCK_SAY;
-  public static Supplier<SoundEvent> ANIMAL_DUCK_CRY;
-  public static Supplier<SoundEvent> ANIMAL_DUCK_HURT;
-  public static Supplier<SoundEvent> ANIMAL_DUCK_DEATH;
+  public static SoundEvent ANIMAL_DUCK_SAY;
+  public static SoundEvent ANIMAL_DUCK_CRY;
+  public static SoundEvent ANIMAL_DUCK_HURT;
+  public static SoundEvent ANIMAL_DUCK_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_GOAT_SAY;
-  public static Supplier<SoundEvent> ANIMAL_GOAT_CRY;
-  public static Supplier<SoundEvent> ANIMAL_GOAT_HURT;
-  public static Supplier<SoundEvent> ANIMAL_GOAT_DEATH;
+  public static SoundEvent ANIMAL_GOAT_SAY;
+  public static SoundEvent ANIMAL_GOAT_CRY;
+  public static SoundEvent ANIMAL_GOAT_HURT;
+  public static SoundEvent ANIMAL_GOAT_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_CAMEL_SAY;
-  public static Supplier<SoundEvent> ANIMAL_CAMEL_CRY;
-  public static Supplier<SoundEvent> ANIMAL_CAMEL_HURT;
-  public static Supplier<SoundEvent> ANIMAL_CAMEL_DEATH;
+  public static SoundEvent ANIMAL_CAMEL_SAY;
+  public static SoundEvent ANIMAL_CAMEL_CRY;
+  public static SoundEvent ANIMAL_CAMEL_HURT;
+  public static SoundEvent ANIMAL_CAMEL_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_PANTHER_SAY;
-  public static Supplier<SoundEvent> ANIMAL_PANTHER_CRY;
-  public static Supplier<SoundEvent> ANIMAL_PANTHER_HURT;
-  public static Supplier<SoundEvent> ANIMAL_PANTHER_DEATH;
+  public static SoundEvent ANIMAL_PANTHER_SAY;
+  public static SoundEvent ANIMAL_PANTHER_CRY;
+  public static SoundEvent ANIMAL_PANTHER_HURT;
+  public static SoundEvent ANIMAL_PANTHER_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_SABERTOOTH_SAY;
-  public static Supplier<SoundEvent> ANIMAL_SABERTOOTH_CRY;
-  public static Supplier<SoundEvent> ANIMAL_SABERTOOTH_HURT;
-  public static Supplier<SoundEvent> ANIMAL_SABERTOOTH_DEATH;
+  public static SoundEvent ANIMAL_SABERTOOTH_SAY;
+  public static SoundEvent ANIMAL_SABERTOOTH_CRY;
+  public static SoundEvent ANIMAL_SABERTOOTH_HURT;
+  public static SoundEvent ANIMAL_SABERTOOTH_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_LION_SAY;
-  public static Supplier<SoundEvent> ANIMAL_LION_CRY;
-  public static Supplier<SoundEvent> ANIMAL_LION_HURT;
-  public static Supplier<SoundEvent> ANIMAL_LION_DEATH;
+  public static SoundEvent ANIMAL_LION_SAY;
+  public static SoundEvent ANIMAL_LION_CRY;
+  public static SoundEvent ANIMAL_LION_HURT;
+  public static SoundEvent ANIMAL_LION_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_HYENA_SAY;
-  public static Supplier<SoundEvent> ANIMAL_HYENA_CRY;
-  public static Supplier<SoundEvent> ANIMAL_HYENA_HURT;
-  public static Supplier<SoundEvent> ANIMAL_HYENA_DEATH;
+  public static SoundEvent ANIMAL_HYENA_SAY;
+  public static SoundEvent ANIMAL_HYENA_CRY;
+  public static SoundEvent ANIMAL_HYENA_HURT;
+  public static SoundEvent ANIMAL_HYENA_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_ZEBU_SAY;
-  public static Supplier<SoundEvent> ANIMAL_ZEBU_HURT;
-  public static Supplier<SoundEvent> ANIMAL_ZEBU_DEATH;
+  public static SoundEvent ANIMAL_ZEBU_SAY;
+  public static SoundEvent ANIMAL_ZEBU_HURT;
+  public static SoundEvent ANIMAL_ZEBU_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_MUSKOX_SAY;
-  public static Supplier<SoundEvent> ANIMAL_MUSKOX_HURT;
-  public static Supplier<SoundEvent> ANIMAL_MUSKOX_DEATH;
+  public static SoundEvent ANIMAL_MUSKOX_SAY;
+  public static SoundEvent ANIMAL_MUSKOX_HURT;
+  public static SoundEvent ANIMAL_MUSKOX_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_TURKEY_SAY;
-  public static Supplier<SoundEvent> ANIMAL_TURKEY_HURT;
-  public static Supplier<SoundEvent> ANIMAL_TURKEY_DEATH;
+  public static SoundEvent ANIMAL_TURKEY_SAY;
+  public static SoundEvent ANIMAL_TURKEY_HURT;
+  public static SoundEvent ANIMAL_TURKEY_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_BOAR_SAY;
-  public static Supplier<SoundEvent> ANIMAL_BOAR_HURT;
-  public static Supplier<SoundEvent> ANIMAL_BOAR_DEATH;
+  public static SoundEvent ANIMAL_BOAR_SAY;
+  public static SoundEvent ANIMAL_BOAR_HURT;
+  public static SoundEvent ANIMAL_BOAR_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_WILDEBEEST_SAY;
-  public static Supplier<SoundEvent> ANIMAL_WILDEBEEST_HURT;
-  public static Supplier<SoundEvent> ANIMAL_WILDEBEEST_DEATH;
+  public static SoundEvent ANIMAL_WILDEBEEST_SAY;
+  public static SoundEvent ANIMAL_WILDEBEEST_HURT;
+  public static SoundEvent ANIMAL_WILDEBEEST_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_GROUSE_SAY;
-  public static Supplier<SoundEvent> ANIMAL_GROUSE_HURT;
-  public static Supplier<SoundEvent> ANIMAL_GROUSE_DEATH;
+  public static SoundEvent ANIMAL_GROUSE_SAY;
+  public static SoundEvent ANIMAL_GROUSE_HURT;
+  public static SoundEvent ANIMAL_GROUSE_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_QUAIL_SAY;
-  public static Supplier<SoundEvent> ANIMAL_QUAIL_HURT;
-  public static Supplier<SoundEvent> ANIMAL_QUAIL_DEATH;
+  public static SoundEvent ANIMAL_QUAIL_SAY;
+  public static SoundEvent ANIMAL_QUAIL_HURT;
+  public static SoundEvent ANIMAL_QUAIL_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_COYOTE_SAY;
-  public static Supplier<SoundEvent> ANIMAL_COYOTE_CRY;
-  public static Supplier<SoundEvent> ANIMAL_COYOTE_HURT;
-  public static Supplier<SoundEvent> ANIMAL_COYOTE_DEATH;
+  public static SoundEvent ANIMAL_COYOTE_SAY;
+  public static SoundEvent ANIMAL_COYOTE_CRY;
+  public static SoundEvent ANIMAL_COYOTE_HURT;
+  public static SoundEvent ANIMAL_COYOTE_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_COUGAR_SAY;
-  public static Supplier<SoundEvent> ANIMAL_COUGAR_CRY;
-  public static Supplier<SoundEvent> ANIMAL_COUGAR_HURT;
-  public static Supplier<SoundEvent> ANIMAL_COUGAR_DEATH;
+  public static SoundEvent ANIMAL_COUGAR_SAY;
+  public static SoundEvent ANIMAL_COUGAR_CRY;
+  public static SoundEvent ANIMAL_COUGAR_HURT;
+  public static SoundEvent ANIMAL_COUGAR_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_GAZELLE_SAY;
-  public static Supplier<SoundEvent> ANIMAL_GAZELLE_HURT;
-  public static Supplier<SoundEvent> ANIMAL_GAZELLE_DEATH;
+  public static SoundEvent ANIMAL_GAZELLE_SAY;
+  public static SoundEvent ANIMAL_GAZELLE_HURT;
+  public static SoundEvent ANIMAL_GAZELLE_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_DIREWOLF_SAY;
-  public static Supplier<SoundEvent> ANIMAL_DIREWOLF_CRY;
-  public static Supplier<SoundEvent> ANIMAL_DIREWOLF_HURT;
-  public static Supplier<SoundEvent> ANIMAL_DIREWOLF_DEATH;
+  public static SoundEvent ANIMAL_DIREWOLF_SAY;
+  public static SoundEvent ANIMAL_DIREWOLF_CRY;
+  public static SoundEvent ANIMAL_DIREWOLF_HURT;
+  public static SoundEvent ANIMAL_DIREWOLF_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_YAK_SAY;
-  public static Supplier<SoundEvent> ANIMAL_YAK_HURT;
-  public static Supplier<SoundEvent> ANIMAL_YAK_DEATH;
+  public static SoundEvent ANIMAL_YAK_SAY;
+  public static SoundEvent ANIMAL_YAK_HURT;
+  public static SoundEvent ANIMAL_YAK_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_JACKAL_SAY;
-  public static Supplier<SoundEvent> ANIMAL_JACKAL_CRY;
-  public static Supplier<SoundEvent> ANIMAL_JACKAL_HURT;
-  public static Supplier<SoundEvent> ANIMAL_JACKAL_DEATH;
+  public static SoundEvent ANIMAL_JACKAL_SAY;
+  public static SoundEvent ANIMAL_JACKAL_CRY;
+  public static SoundEvent ANIMAL_JACKAL_HURT;
+  public static SoundEvent ANIMAL_JACKAL_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_MONGOOSE_SAY;
-  public static Supplier<SoundEvent> ANIMAL_MONGOOSE_HURT;
-  public static Supplier<SoundEvent> ANIMAL_MONGOOSE_DEATH;
+  public static SoundEvent ANIMAL_MONGOOSE_SAY;
+  public static SoundEvent ANIMAL_MONGOOSE_HURT;
+  public static SoundEvent ANIMAL_MONGOOSE_DEATH;
 
-  public static Supplier<SoundEvent> ANIMAL_FELINE_STEP;
+  public static SoundEvent ANIMAL_FELINE_STEP;
 
   public static void onRegister(IRegistryRegistrar registrar) {
 

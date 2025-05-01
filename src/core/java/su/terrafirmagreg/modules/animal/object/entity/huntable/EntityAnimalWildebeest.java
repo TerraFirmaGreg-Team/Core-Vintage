@@ -106,12 +106,12 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
 
   @Override
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundsAnimal.ANIMAL_WILDEBEEST_HURT.get();
+    return SoundsAnimal.ANIMAL_WILDEBEEST_HURT;
   }
 
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundsAnimal.ANIMAL_WILDEBEEST_DEATH.get();
+    return SoundsAnimal.ANIMAL_WILDEBEEST_DEATH;
   }
 
   @Override
@@ -136,7 +136,7 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundsAnimal.ANIMAL_WILDEBEEST_SAY.get();
+    return SoundsAnimal.ANIMAL_WILDEBEEST_SAY;
   }
 
   @Nullable

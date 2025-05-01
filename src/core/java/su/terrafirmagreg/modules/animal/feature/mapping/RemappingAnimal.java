@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.feature.mapping;
 
-import su.terrafirmagreg.datafix.mapping.Remapping;
+import su.terrafirmagreg.api.util.DataFixUtils;
 import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
@@ -10,11 +10,11 @@ import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 public class RemappingAnimal extends FeatureBase {
 
   static {
-    Remapping.put(Remapping.BLOCK_MAP, m -> {
+    DataFixUtils.put(DataFixUtils.BLOCK_MAP, m -> {
       m.put("nest_box", BlocksAnimal.NEST_BOX);
     });
 
-    Remapping.put(Remapping.ITEM_MAP, m -> {
+    DataFixUtils.put(DataFixUtils.ITEM_MAP, m -> {
       m.put("bladder", ItemsAnimal.BLADDER);
       m.put("halter", ItemsAnimal.HALTER);
       m.put("product/silk_cloth", ItemsAnimal.SILK_CLOTH);
@@ -23,7 +23,7 @@ public class RemappingAnimal extends FeatureBase {
       m.put("product/wool", ItemsAnimal.WOOL);
     });
 
-    Remapping.put(Remapping.ENTITY_MAP, m -> {
+    DataFixUtils.put(DataFixUtils.ENTITY_MAP, m -> {
       m.put("sheeptfc", EntitiesAnimal.SHEEP);
       m.put("cowtfc", EntitiesAnimal.COW);
       m.put("grizzlybeartfc", EntitiesAnimal.GRIZZLYBEAR);
@@ -66,7 +66,7 @@ public class RemappingAnimal extends FeatureBase {
       m.put("coyotetfc", EntitiesAnimal.COYOTE);
     });
 
-    Remapping.put(Remapping.SOUND_MAP, m -> {
+    DataFixUtils.put(DataFixUtils.SOUND_MAP, m -> {
       m.put("animal.alpaca.cry", SoundsAnimal.ANIMAL_ALPACA_CRY);
       m.put("animal.alpaca.death", SoundsAnimal.ANIMAL_ALPACA_DEATH);
       m.put("animal.alpaca.hurt", SoundsAnimal.ANIMAL_ALPACA_HURT);

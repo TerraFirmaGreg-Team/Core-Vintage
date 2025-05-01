@@ -25,7 +25,9 @@ public class NetworkRegistrar implements INetworkRegistrar {
 
     if (validate(packetClass)) {
       var channel = NetworkThreadedWrapper.of(module.getIdentifier());
-      this.map.put(packetClass, NetworkWrapper.of(channel, packetClass.getSimpleName()));
+      var wrapper = NetworkWrapper.of(channel, packetClass.getSimpleName());
+      NetworkManager.ALL_NETWORK_MAP.put(packetClass, wrapper);
+      this.map.put(packetClass, wrapper);
     }
   }
 

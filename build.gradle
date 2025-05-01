@@ -198,10 +198,10 @@ dependencies {
 //}
 
 sourceSets {
-  framework {
-    compileClasspath += sourceSets.main.compileClasspath
-    runtimeClasspath += sourceSets.main.runtimeClasspath
-  }
+//  framework {
+//    compileClasspath += sourceSets.main.compileClasspath
+//    runtimeClasspath += sourceSets.main.runtimeClasspath
+//  }
 //  core {
 //    compileClasspath += sourceSets.main.compileClasspath
 //    runtimeClasspath += sourceSets.main.runtimeClasspath
@@ -218,14 +218,20 @@ sourceSets {
 //    compileClasspath += sourceSets.core.output
 //    runtimeClasspath += sourceSets.core.output
 
-    compileClasspath += sourceSets.framework.output
-    runtimeClasspath += sourceSets.framework.output
+//    compileClasspath += sourceSets.framework.output
+//    runtimeClasspath += sourceSets.framework.output
+//    compileClasspath += sourceSets.framework.compileClasspath
+//    runtimeClasspath += sourceSets.framework.runtimeClasspath
 
     java {
       srcDir 'src/core/java'
+      srcDir 'src/main/java'
+      srcDir 'src/framework/java'
     }
     resources {
       srcDir 'src/core/resources'
+      srcDir 'src/main/resources'
+      srcDir 'src/framework/resources'
     }
   }
 }

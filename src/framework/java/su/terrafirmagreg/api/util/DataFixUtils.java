@@ -1,4 +1,4 @@
-package su.terrafirmagreg.datafix.mapping;
+package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
@@ -10,6 +10,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
@@ -24,7 +25,12 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
-public class Remapping {
+public class DataFixUtils {
+
+
+  public static void of() {
+    MinecraftForge.EVENT_BUS.register(DataFixUtils.class);
+  }
 
   public static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{
     add(ModIDs.TFCF);
@@ -75,42 +81,42 @@ public class Remapping {
 
   @SubscribeEvent
   public static void onBlockRemapping(final RegistryEvent.MissingMappings<Block> event) {
-    Remapping.remap(event, BLOCK_MAP);
+    DataFixUtils.remap(event, BLOCK_MAP);
   }
 
   @SubscribeEvent
   public static void onEffectRemapping(final RegistryEvent.MissingMappings<Potion> event) {
-    Remapping.remap(event, EFFECT_MAP);
+    DataFixUtils.remap(event, EFFECT_MAP);
   }
 
   @SubscribeEvent
   public static void onEntityRemapping(final RegistryEvent.MissingMappings<EntityEntry> event) {
-    Remapping.remap(event, ENTITY_MAP);
+    DataFixUtils.remap(event, ENTITY_MAP);
   }
 
   @SubscribeEvent
   public static void onItemRemapping(final RegistryEvent.MissingMappings<Item> event) {
-    Remapping.remap(event, ITEM_MAP);
+    DataFixUtils.remap(event, ITEM_MAP);
   }
 
   @SubscribeEvent
   public static void onPotionRemapping(final RegistryEvent.MissingMappings<PotionType> event) {
-    Remapping.remap(event, POTION_MAP);
+    DataFixUtils.remap(event, POTION_MAP);
   }
 
   @SubscribeEvent
   public static void onSoundRemapping(final RegistryEvent.MissingMappings<SoundEvent> event) {
-    Remapping.remap(event, SOUND_MAP);
+    DataFixUtils.remap(event, SOUND_MAP);
   }
 
   @SubscribeEvent
   public static void onBiomeRemapping(final RegistryEvent.MissingMappings<Biome> event) {
-    Remapping.remap(event, BIOME_MAP);
+    DataFixUtils.remap(event, BIOME_MAP);
   }
 
   @SubscribeEvent
   public static void onEnchantmentRemapping(final RegistryEvent.MissingMappings<Enchantment> event) {
-    Remapping.remap(event, ENCHANTMENT_MAP);
+    DataFixUtils.remap(event, ENCHANTMENT_MAP);
   }
 
 }

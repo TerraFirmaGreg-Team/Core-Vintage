@@ -74,22 +74,25 @@ public final class BufUtils extends ByteBufUtils {
   public static Pair<BufReader, BufWriter> getHandler(Type type) {
     return HANDLERS.computeIfAbsent(type.getClass(), aClass -> {
 
-      if (aClass.isEnum()) {
-        EnumBufSerializer serializer = new EnumBufSerializer(aClass);
-        return Pair.of(serializer, serializer);
-      }
-      if (aClass.isArray()) {
-        Class componentType = aClass.getComponentType();
-        var pair = getHandler(componentType);
-        var serializer = new ArrayBufSerializer(componentType, pair);
-        return Pair.of(serializer, serializer);
+      if (type instanceof Class clazz) {
+        if (clazz.isEnum()) {
+          EnumBufSerializer serializer = new EnumBufSerializer(clazz);
+          return Pair.of(serializer, serializer);
+        }
+        if (clazz.isArray()) {
+          Class componentType = clazz.getComponentType();
+          var pair = getHandler(componentType);
+          var serializer = new ArrayBufSerializer(componentType, pair);
+          return Pair.of(serializer, serializer);
+        }
+        Pair<BufReader, BufWriter> handler = HANDLERS.get(clazz);
+        if (handler == null) {
+          throw new RuntimeException("No R/W handler for type: " + clazz.getName());
+        }
+        return handler;
       }
 
-      Pair<BufReader, BufWriter> handler = HANDLERS.get(aClass);
-      if (handler == null) {
-        throw new RuntimeException("No R/W handler for type: " + aClass.getName());
-      }
-      return handler;
+      throw new RuntimeException("No R/W handler for type: " + type.getTypeName());
     });
   }
 

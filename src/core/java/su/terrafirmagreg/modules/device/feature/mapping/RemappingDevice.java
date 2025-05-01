@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.feature.mapping;
 
-import su.terrafirmagreg.datafix.mapping.Remapping;
+import su.terrafirmagreg.api.util.DataFixUtils;
 import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -9,7 +9,7 @@ import su.terrafirmagreg.modules.device.init.SoundsDevice;
 public class RemappingDevice extends FeatureBase {
 
   static {
-    Remapping.put(Remapping.BLOCK_MAP, m -> {
+    DataFixUtils.put(DataFixUtils.BLOCK_MAP, m -> {
       m.put("alloy_calculator", BlocksDevice.ALLOY_CALCULATOR);
       m.put("bear_trap", BlocksDevice.BEAR_TRAP);
       m.put("snare", BlocksDevice.SNARE);
@@ -35,7 +35,7 @@ public class RemappingDevice extends FeatureBase {
       m.put("powderkeg", BlocksDevice.POWDERKEG);
     });
 
-    Remapping.put(Remapping.ITEM_MAP, m -> {
+    DataFixUtils.put(DataFixUtils.ITEM_MAP, m -> {
       m.put("firestarter", ItemsDevice.FIRESTARTER);
       m.put("leather_flask", ItemsDevice.LEATHER_FLASK);
       m.put("leather_side", ItemsDevice.LEATHER_FLASK_UNFINISHED);
@@ -45,7 +45,7 @@ public class RemappingDevice extends FeatureBase {
       m.put("broken_iron_flask", ItemsDevice.METAL_FLASK_BROKEN);
     });
 
-    Remapping.put(Remapping.SOUND_MAP, m -> {
+    DataFixUtils.put(DataFixUtils.SOUND_MAP, m -> {
       m.put("item.flaskbreak", SoundsDevice.FLASK_BREAK);
       m.put("item.firestarter", SoundsDevice.FIRE_STARTER);
       m.put("bellows.blow.air", SoundsDevice.BELLOWS_BLOW_AIR);

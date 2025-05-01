@@ -67,7 +67,6 @@ public class RegistryService implements IRegistryService {
   public void onRegisterItemColor(ColorHandlerEvent.Item event) {
 
     this.map.register(Block.class, block -> ModelUtils.color(event, block));
-
     this.map.register(Item.class, item -> ModelUtils.color(event, item));
   }
 

@@ -47,7 +47,6 @@ import su.terrafirmagreg.modules.core.helper.OreDictHelper;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.CommandsCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
-import su.terrafirmagreg.modules.core.init.EntitiesCore;
 import su.terrafirmagreg.modules.core.init.FeaturesCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -93,7 +92,7 @@ public final class ModuleCore extends ModuleBase {
     FluidsCore.onRegister(registrar);
     BlocksCore.onRegister(registrar);
     ItemsCore.onRegister(registrar);
-    EntitiesCore.onRegister(registrar);
+    //EntitiesCore.onRegister(registrar);
     EffectsCore.onRegister(registrar);
     LootTablesCore.onRegister(registrar);
   }

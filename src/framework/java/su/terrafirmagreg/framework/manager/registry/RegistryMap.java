@@ -14,7 +14,6 @@ import lombok.Data;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForgeRegistryEntry<?>>, List<RegistryWrapper>> {
 
@@ -49,9 +48,13 @@ public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForge
 
     this.get(registry).forEach(wrapper -> {
       var entry = wrapper.getEntry();
-      entry.setRegistryName(wrapper.getIdentifier());
-      registry.register((T) entry);
+      var identifier = wrapper.getIdentifier();
 
+      if (!identifier.equals(entry.getRegistryName())) {
+        entry.setRegistryName(identifier);
+      }
+      registry.register((T) entry);
+      RegistryManager.LOGGER.debug("Registry {}: {}", entry.getRegistryType().getSimpleName(), identifier);
       if (entry instanceof IBaseSettings settings) {
 
         settings.register(registry);
@@ -65,10 +68,10 @@ public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForge
   public static class RegistryWrapper {
 
     private final ResourceLocation identifier;
-    private final Supplier<? extends IForgeRegistryEntry<?>> entry;
+    private final IForgeRegistryEntry<?> entry;
 
-    public IForgeRegistryEntry<?> getEntry() {
-      return entry.get();
-    }
+//    public IForgeRegistryEntry<?> getEntry() {
+//      return entry.get();
+//    }
   }
 }

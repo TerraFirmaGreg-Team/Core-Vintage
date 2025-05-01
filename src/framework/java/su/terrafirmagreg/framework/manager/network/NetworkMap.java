@@ -18,7 +18,6 @@ public class NetworkMap extends Object2ObjectOpenHashMap<Class<? extends INetwor
   @Override
   public NetworkWrapper put(Class<? extends INetworkPacket> packetClass, NetworkWrapper wrapper) {
 
-    NetworkManager.ALL_NETWORK_MAP.put(packetClass, wrapper);
     return super.put(packetClass, wrapper);
   }
 

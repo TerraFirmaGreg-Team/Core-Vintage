@@ -2,12 +2,11 @@ package su.terrafirmagreg.framework;
 
 import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.util.AnnotationUtils;
-import su.terrafirmagreg.datafix.mapping.Remapping;
+import su.terrafirmagreg.api.util.DataFixUtils;
 import su.terrafirmagreg.framework.module.ModuleManager;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
 
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLStateEvent;
@@ -38,7 +37,7 @@ public abstract class Framework {
     AnnotationUtils.of(event);
     FluidRegistry.enableUniversalBucket();
     GuiHandler.of(modId);
-    MinecraftForge.EVENT_BUS.register(Remapping.class);
+    DataFixUtils.of();
   }
 
 

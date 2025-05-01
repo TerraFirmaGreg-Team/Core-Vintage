@@ -143,7 +143,7 @@ public final class OreDictUtils {
     }
 
     if (!OreDictionary.doesOreNameExist(oreDict)) {
-      LoggingHelper.LOGGER.warn("Method called with non-existing name. stack: {} name: {}", itemStack, oreDict);
+      LoggingHelper.LOGGER.debug("Method called with non-existing name. stack: {} name: {}", itemStack, oreDict);
       return false;
     }
 

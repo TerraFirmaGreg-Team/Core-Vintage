@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.manager.feature;
 
+import su.terrafirmagreg.framework.manager.feature.FeatureMap.FeatureWrapper;
 import su.terrafirmagreg.framework.manager.feature.api.IFeature;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.module.api.IModule;
@@ -32,5 +33,7 @@ public class FeatureRegistrar implements IFeatureRegistrar {
     if (feature.hasSubscriptions()) {
       MinecraftForge.EVENT_BUS.register(featureClass);
     }
+
+    this.map.put(featureClass, FeatureWrapper.of(feature));
   }
 }

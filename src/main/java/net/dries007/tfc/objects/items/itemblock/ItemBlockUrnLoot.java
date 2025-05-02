@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 

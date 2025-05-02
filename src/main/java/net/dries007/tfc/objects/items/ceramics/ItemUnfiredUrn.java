@@ -1,9 +1,7 @@
 package net.dries007.tfc.objects.items.ceramics;
 
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
-
-import net.dries007.tfc.objects.items.ceramics.ItemPottery;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 

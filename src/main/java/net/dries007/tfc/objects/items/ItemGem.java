@@ -5,8 +5,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 import mcp.MethodsReturnNonnullByDefault;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.util.OreDictionaryHelper;
 

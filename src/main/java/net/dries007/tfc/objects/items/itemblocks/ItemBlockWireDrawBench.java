@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.itemblocks;
 
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 import su.terrafirmagreg.modules.device.object.block.BlockWireDrawBench;
 
 import net.minecraft.block.Block;

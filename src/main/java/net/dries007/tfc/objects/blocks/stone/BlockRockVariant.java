@@ -18,9 +18,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;

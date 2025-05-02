@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.size;
+package su.terrafirmagreg.modules.core.feature.size.capability;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;

@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
 
 import net.minecraftforge.common.config.Config;
 
-public final class ConfigMisc {
+public final class ConfigCoreMisc {
 
   @Config.Comment("Weight settings")
   public final Weight WEIGHT = new Weight();

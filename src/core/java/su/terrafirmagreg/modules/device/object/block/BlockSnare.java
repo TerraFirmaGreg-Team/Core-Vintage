@@ -14,9 +14,9 @@ import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChic
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDuck;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGrouse;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalQuail;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileSnare;
 

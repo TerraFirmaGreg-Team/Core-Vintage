@@ -3,9 +3,9 @@ package net.dries007.tfc.objects.items.metal;
 import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;

@@ -7,7 +7,7 @@ import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.EntitiesCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
-public class RemappingCore extends FeatureBase {
+public class FeatureRemappingCore extends FeatureBase {
 
   static {
     DataFixUtils.put(DataFixUtils.BLOCK_MAP, m -> {

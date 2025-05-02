@@ -17,6 +17,7 @@ public class FeatureMap extends Object2ObjectOpenHashMap<Class<? extends IFeatur
   @Data(staticConstructor = "of")
   public static class FeatureWrapper {
 
+    private final IFeature feature;
 
   }
 }

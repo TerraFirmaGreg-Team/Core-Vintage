@@ -26,9 +26,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.te.TELargeVessel;

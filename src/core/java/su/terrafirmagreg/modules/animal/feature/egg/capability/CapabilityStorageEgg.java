@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.egg;
+package su.terrafirmagreg.modules.animal.feature.egg.capability;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;

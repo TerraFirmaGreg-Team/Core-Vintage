@@ -2,17 +2,18 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
+import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIFindNest;
-import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
 
@@ -120,17 +121,15 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
   @Override
   public List<ItemStack> getProducts() {
     List<ItemStack> eggs = new ArrayList<>();
-    ItemStack egg = new ItemStack(Items.EGG);
+    ItemStack stack = new ItemStack(Items.EGG);
     if (this.isFertilized()) {
-      var cap = CapabilityEgg.get(egg);
-      if (cap != null) {
+      CapabilityUtils.getOptional(stack, CapabilityEgg.CAPABILITY).ifPresent(cap -> {
         EntityAnimalChicken chick = new EntityAnimalChicken(this.world);
         chick.setFamiliarity(this.getFamiliarity() < 0.9F ? this.getFamiliarity() / 2.0F : this.getFamiliarity() * 0.9F);
-        cap.setFertilized(chick,
-          ConfigAnimal.ENTITY.CHICKEN.hatch + Calendar.PLAYER_TIME.getTotalDays());
-      }
+        cap.setFertilized(chick, ConfigAnimal.ENTITY.CHICKEN.hatch + Calendar.PLAYER_TIME.getTotalDays());
+      });
     }
-    eggs.add(egg);
+    eggs.add(stack);
     return eggs;
   }
 
@@ -141,8 +140,7 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
 
   @Override
   public long getProductsCooldown() {
-    return Math.max(0,
-      ConfigAnimal.ENTITY.CHICKEN.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
+    return Math.max(0, ConfigAnimal.ENTITY.CHICKEN.eggTicks + getLaidTicks() - Calendar.PLAYER_TIME.getTicks());
   }
 
   @Override

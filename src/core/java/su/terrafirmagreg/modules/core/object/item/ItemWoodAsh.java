@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.core.object.item;
 
 import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 public class ItemWoodAsh extends BaseItem {
 

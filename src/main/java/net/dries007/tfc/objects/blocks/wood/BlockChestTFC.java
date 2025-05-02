@@ -19,9 +19,9 @@ import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.inventory.capability.TFCInventoryLargeChest;

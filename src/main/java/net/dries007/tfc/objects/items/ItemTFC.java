@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

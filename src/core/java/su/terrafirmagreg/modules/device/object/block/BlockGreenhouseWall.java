@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

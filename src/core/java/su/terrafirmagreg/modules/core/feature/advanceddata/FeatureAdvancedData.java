@@ -18,9 +18,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class FeatureAdvancedData extends FeatureBase {
+
+  private static final String TEXT_PRE = TextFormatting.DARK_GRAY + "     "; //§8
+  private static final String HEADER_PRE = TextFormatting.GRAY + "  -"; //§7
 
   @SubscribeEvent(priority = EventPriority.LOWEST)
   @SideOnly(Side.CLIENT)
@@ -34,7 +38,42 @@ public class FeatureAdvancedData extends FeatureBase {
       return;
     }
 
-    advancedData(tooltip, stack);
+    if (!ConfigCore.FEATURE.ADVANCED_DATA.requireCTRL || GuiScreen.isCtrlKeyDown()) {
+      tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + "Advanced Data:");
+
+      if (ConfigCore.FEATURE.ADVANCED_DATA.showOreDictionary) {
+        oreDictNames(tooltip, stack);
+      }
+
+      if (ConfigCore.FEATURE.ADVANCED_DATA.showToolClass) {
+        toolClass(tooltip, stack);
+      }
+
+      if (ConfigCore.FEATURE.ADVANCED_DATA.showCodeName) {
+        codeName(tooltip, stack);
+      }
+
+      if (ConfigCore.FEATURE.ADVANCED_DATA.showUnlocalizedName) {
+        unlocalizedName(tooltip, stack);
+      }
+
+      // Metadata
+      if (ConfigCore.FEATURE.ADVANCED_DATA.showMetaData) {
+        metadata(tooltip, stack);
+      }
+
+      // Meta's Unlocalized Name
+      if (ConfigCore.FEATURE.ADVANCED_DATA.showMetaUnlocalizedName) {
+        metaUnlocalizedName(tooltip, stack);
+      }
+
+      //NBT
+      if (ConfigCore.FEATURE.ADVANCED_DATA.showNBT) {
+        nbt(tooltip, stack);
+      }
+    } else {
+      tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + "[Press CTRL] for Advanced Data");
+    }
 
     if (isAdvanced) {
       // MC debug tooltips. Remove these always, as we will format them differently later
@@ -50,101 +89,85 @@ public class FeatureAdvancedData extends FeatureBase {
 
   }
 
-  private static void advancedData(List<String> tooltips, ItemStack stack) {
-
-    if (!ConfigCore.FEATURE.ADVANCED_DATA.enable) {
-      return;
+  private static void oreDictNames(List<String> tooltip, ItemStack stack) {
+    Set<String> oreNames = OreDictUtils.getOreNames(stack);
+    if (!oreNames.isEmpty()) {
+      tooltip.add(HEADER_PRE + "Ore Dictionary Names:");
+      for (String oreName : oreNames) {
+        tooltip.add(TEXT_PRE + oreName);
+      }
     }
+  }
+
+  private static void toolClass(List<String> tooltip, ItemStack stack) {
+    Item item = stack.getItem();
+    Set<String> toolClasses = item.getToolClasses(stack);
+
+    if (!toolClasses.isEmpty()) {
+      tooltip.add(HEADER_PRE + "Tool Classes:");
+      for (String toolClass : toolClasses) {
+        int harvestLevel = item.getHarvestLevel(stack, toolClass, null, null);
+        tooltip.add(TEXT_PRE + toolClass + " (" + harvestLevel + ")");
+      }
+    }
+  }
+
+  private static void codeName(List<String> tooltip, ItemStack stack) {
+    Item item = stack.getItem();
+    String registryName = Objects.requireNonNull(item.getRegistryName()).toString();
+
+    tooltip.add(HEADER_PRE + "Code Name:");
+    tooltip.add(TEXT_PRE + registryName);
+  }
+
+  private static void unlocalizedName(List<String> tooltip, ItemStack stack) {
     Item item = stack.getItem();
     String translationKey = item.getTranslationKey();
-    String registryName = item.getRegistryName().toString();
-    String metaName = item.getTranslationKey(stack);
+    tooltip.add(HEADER_PRE + "Item's Unlocalized Name:");
+    tooltip.add(TEXT_PRE + translationKey);
+  }
+
+  private static void metadata(List<String> tooltip, ItemStack stack) {
     int itemDamage = stack.getItemDamage();
     int maxDamage = stack.getMaxDamage();
 
-    final String TEXT_PRE = TextFormatting.DARK_GRAY + "     "; //§8
-    final String HEADER_PRE = TextFormatting.GRAY + "  -"; //§7
+    tooltip.add(HEADER_PRE + "Metadata:");
+    tooltip.add(TEXT_PRE + itemDamage + (maxDamage > 0 ? "/" + maxDamage : ""));
+  }
 
-    if (!ConfigCore.FEATURE.ADVANCED_DATA.requireCTRL || GuiScreen.isCtrlKeyDown()) {
+  private static void metaUnlocalizedName(List<String> tooltip, ItemStack stack) {
+    Item item = stack.getItem();
+    String translationKey = item.getTranslationKey();
+    String metaName = item.getTranslationKey(stack);
 
-      tooltips.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + "Advanced Data:");
-
-      // OreDict Names
-      if (ConfigCore.FEATURE.ADVANCED_DATA.showOreDictionary) {
-        Set<String> oreNames = OreDictUtils.getOreNames(stack);
-        if (!oreNames.isEmpty()) {
-          tooltips.add(HEADER_PRE + "Ore Dictionary Names:");
-          for (String oreName : oreNames) {
-            tooltips.add(TEXT_PRE + oreName);
-          }
-        }
-      }
-
-      // Tool Class
-      if (ConfigCore.FEATURE.ADVANCED_DATA.showToolClass) {
-        Set<String> toolClasses = item.getToolClasses(stack);
-
-        if (!toolClasses.isEmpty()) {
-          tooltips.add(HEADER_PRE + "Tool Classes:");
-          for (String toolClass : toolClasses) {
-            int harvestLevel = item.getHarvestLevel(stack, toolClass, null, null);
-            tooltips.add(TEXT_PRE + toolClass + " (" + harvestLevel + ")");
-          }
-        }
-      }
-
-      // Code Name
-      if (ConfigCore.FEATURE.ADVANCED_DATA.showCodeName) {
-        tooltips.add(HEADER_PRE + "Code Name:");
-        tooltips.add(TEXT_PRE + registryName);
-      }
-
-      // Base Item's Unlocalized Name
-      if (ConfigCore.FEATURE.ADVANCED_DATA.showOreDictionary) {
-        tooltips.add(HEADER_PRE + "Item's Unlocalized Name:");
-        tooltips.add(TEXT_PRE + translationKey);
-      }
-
-      // Metadata
-      if (ConfigCore.FEATURE.ADVANCED_DATA.showMetadata) {
-        tooltips.add(HEADER_PRE + "Metadata:");
-        tooltips.add(TEXT_PRE + itemDamage + (maxDamage > 0 ? "/" + maxDamage : ""));
-      }
-
-      // Meta's Unlocalized Name
-      if (ConfigCore.FEATURE.ADVANCED_DATA.showMetaUnlocalizedName) {
-        if (!metaName.equals(translationKey)) {
-          tooltips.add(HEADER_PRE + "Meta's Unlocalized Name:");
-          tooltips.add(TEXT_PRE + metaName);
-        }
-      }
-
-      //NBT
-      if (ConfigCore.FEATURE.ADVANCED_DATA.showNBT) {
-        NBTTagCompound compound = stack.getTagCompound();
-        if (compound != null && !compound.isEmpty()) {
-          tooltips.add(HEADER_PRE + "NBT:");
-          if (GuiScreen.isShiftKeyDown()) {
-            int limit = ConfigCore.FEATURE.ADVANCED_DATA.charLimitNBT;
-            String compoundStrg = compound.toString();
-            int compoundStrgLength = compoundStrg.length();
-
-            String compoundDisplay;
-            if (limit > 0 && compoundStrgLength > limit) {
-              compoundDisplay = compoundStrg.substring(0, limit) + TextFormatting.GRAY + " (" + (compoundStrgLength - limit) + " more characters...)";
-            } else {
-              compoundDisplay = compoundStrg;
-            }
-            tooltips.add(TEXT_PRE + compoundDisplay);
-          } else {
-            tooltips.add(TEXT_PRE + TextFormatting.ITALIC + "[Press Shift] " + compound.getKeySet().size() + " tag(s)");
-          }
-        }
-      }
-    } else {
-      tooltips.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + "[Press CTRL] for Advanced Data");
+    if (!metaName.equals(translationKey)) {
+      tooltip.add(HEADER_PRE + "Meta's Unlocalized Name:");
+      tooltip.add(TEXT_PRE + metaName);
     }
   }
+
+  private static void nbt(List<String> tooltip, ItemStack stack) {
+    NBTTagCompound compound = stack.getTagCompound();
+    if (compound != null && !compound.isEmpty()) {
+      tooltip.add(HEADER_PRE + "NBT:");
+      if (GuiScreen.isShiftKeyDown()) {
+        int limit = ConfigCore.FEATURE.ADVANCED_DATA.charLimitNBT;
+        String compoundStrg = compound.toString();
+        int compoundStrgLength = compoundStrg.length();
+
+        String compoundDisplay;
+        if (limit > 0 && compoundStrgLength > limit) {
+          compoundDisplay = compoundStrg.substring(0, limit) + TextFormatting.GRAY + " (" + (compoundStrgLength - limit) + " more characters...)";
+        } else {
+          compoundDisplay = compoundStrg;
+        }
+        tooltip.add(TEXT_PRE + compoundDisplay);
+      } else {
+        tooltip.add(TEXT_PRE + TextFormatting.ITALIC + "[Press Shift] " + compound.getKeySet().size() + " tag(s)");
+      }
+    }
+  }
+
 
   @Override
   public boolean isEnabled() {

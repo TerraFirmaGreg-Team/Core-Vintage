@@ -21,8 +21,8 @@ public class FeatureManager implements IFeatureManager {
   public static final Map<IModule, IFeatureManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
 
   private final IModule module;
-
   private final FeatureMap map;
+
   private final IFeatureRegistrar registrar;
   private final IFeatureService service;
 

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.egg;
+package su.terrafirmagreg.modules.animal.feature.egg.capability;
 
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 

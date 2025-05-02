@@ -6,9 +6,9 @@ import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilityProviderSize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 import su.terrafirmagreg.modules.device.object.tile.TileSmelteryCauldron;
 
 import net.minecraft.block.SoundType;

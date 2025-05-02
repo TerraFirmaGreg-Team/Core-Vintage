@@ -59,10 +59,6 @@ public class ModuleService implements IModuleService {
     this.wrapperMap.put(FMLPreInitializationEvent.class, (EventWrapper<FMLPreInitializationEvent>) (event) -> {
       this.fireEvent(module -> {
 
-        module.getLogger().debug("Pre-Init start");
-        module.onPreInit(event);
-        module.getLogger().debug("Pre-Init complete");
-
         Optional.ofNullable(module.getNetworkManager()).ifPresent(network -> {
           module.getLogger().debug("Registering network");
           module.onNetwork(network.getRegistrar());
@@ -76,32 +72,46 @@ public class ModuleService implements IModuleService {
         Optional.ofNullable(module.getRegistryManager()).ifPresent(registry -> {
           module.getLogger().debug("Registering registry");
           module.onRegistry(registry.getRegistrar());
+
+          if (ModUtils.isClient()) {
+            module.getLogger().debug("Client Registering registry");
+            module.onRegistryClient(registry.getRegistrar());
+          }
         });
+
+        module.getLogger().debug("Pre-Init start");
+        module.onPreInit(event);
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          feature.getService().onPreInit(event);
+        });
+        module.getLogger().debug("Pre-Init complete");
 
         if (ModUtils.isClient()) {
           module.getLogger().debug("Client Pre-Init start");
           module.onClientPreInit(event);
-          module.getLogger().debug("Client Pre-Init complete");
-
-          Optional.ofNullable(module.getRegistryManager()).ifPresent(registry -> {
-            module.getLogger().debug("Client Registering registry");
-            module.onRegistryClient(registry.getRegistrar());
+          Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+            feature.getService().onClientPreInit(event);
           });
+          module.getLogger().debug("Client Pre-Init complete");
         }
       });
-
-
     });
 
     this.wrapperMap.put(FMLInitializationEvent.class, (EventWrapper<FMLInitializationEvent>) (event) -> {
       this.fireEvent(module -> {
         module.getLogger().debug("Init start");
         module.onInit(event);
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          feature.getService().onInit(event);
+        });
         module.getLogger().debug("Init complete");
 
         if (ModUtils.isClient()) {
           module.getLogger().debug("Client Init start");
           module.onClientInit(event);
+          Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+            feature.getService().onClientInit(event);
+          });
           module.getLogger().debug("Client Init complete");
         }
       });
@@ -111,11 +121,17 @@ public class ModuleService implements IModuleService {
       this.fireEvent(module -> {
         module.getLogger().debug("Post-Init start");
         module.onPostInit(event);
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          feature.getService().onPostInit(event);
+        });
         module.getLogger().debug("Post-Init complete");
 
         if (ModUtils.isClient()) {
           module.getLogger().debug("Client Post-Init start");
           module.onClientPostInit(event);
+          Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+            feature.getService().onClientPostInit(event);
+          });
           module.getLogger().debug("Client Post-Init complete");
         }
       });
@@ -148,7 +164,7 @@ public class ModuleService implements IModuleService {
         Optional.ofNullable(module.getCommandManager()).ifPresent(command -> {
           module.getLogger().debug("Registering command");
           module.onCommand(command.getRegistrar());
-          module.getCommandManager().routeEvent(event);
+          command.getService().routeEvent(event);
         });
       });
     });

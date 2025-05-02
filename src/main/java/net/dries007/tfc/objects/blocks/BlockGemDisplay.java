@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;

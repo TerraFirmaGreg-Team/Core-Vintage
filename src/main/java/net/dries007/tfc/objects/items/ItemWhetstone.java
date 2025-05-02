@@ -4,9 +4,9 @@ import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandle
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.ICapabilitySharpness;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

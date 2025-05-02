@@ -8,10 +8,10 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.client.resources.I18n;

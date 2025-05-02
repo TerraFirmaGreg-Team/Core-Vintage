@@ -5,9 +5,9 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFoodHeat;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemFood;

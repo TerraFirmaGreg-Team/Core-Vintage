@@ -78,7 +78,8 @@ public interface IModule {
   // ===== FML Lifecycle: Client
 
   @SideOnly(Side.CLIENT)
-  default void onClientPreInit(FMLPreInitializationEvent event) {}
+  default void onClientPreInit(FMLPreInitializationEvent event) {
+  }
 
   @SideOnly(Side.CLIENT)
   default void onClientInit(FMLInitializationEvent event) {}

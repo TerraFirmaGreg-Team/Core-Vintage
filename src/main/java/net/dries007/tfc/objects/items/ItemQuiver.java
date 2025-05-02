@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.data.ArmorMaterials;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

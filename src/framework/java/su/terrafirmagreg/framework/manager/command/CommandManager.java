@@ -8,7 +8,6 @@ import su.terrafirmagreg.framework.manager.command.api.ICommandService;
 import su.terrafirmagreg.framework.module.api.IModule;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
@@ -47,21 +46,5 @@ public class CommandManager implements ICommandManager {
 
     return MANAGER_MAP.computeIfAbsent(module, CommandManager::new);
   }
-
-  @Override
-  public void routeEvent(FMLServerStartingEvent event) {
-
-    this.service.routeEvent(event);
-  }
-
-//  @Override
-//  public void addCommand(ICommand command) {
-//    this.wrapper.addSubcommand(command);
-//  }
-//
-//  @Override
-//  public void onRegisterCommand(FMLServerStartingEvent event) {
-//    this.getWrapper().register(event);
-//  }
 
 }

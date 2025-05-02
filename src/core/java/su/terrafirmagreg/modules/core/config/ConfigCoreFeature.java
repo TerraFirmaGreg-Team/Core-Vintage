@@ -4,22 +4,22 @@ import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.RangeInt;
 import net.minecraftforge.common.config.Config.RequiresMcRestart;
 
-public final class ConfigFeature {
+public final class ConfigCoreFeature {
 
   @Comment("Advanced Data settings")
-  public final AdvancedData ADVANCED_DATA = new AdvancedData();
+  public final ConfigFeatureAdvancedData ADVANCED_DATA = new ConfigFeatureAdvancedData();
 
   @Comment("Sink or Swim settings")
-  public final SinkOrSwim SINK_OR_SWIM = new SinkOrSwim();
+  public final ConfigFeatureSinkOrSwim SINK_OR_SWIM = new ConfigFeatureSinkOrSwim();
 
   @Comment("Hot Or Not settings")
-  public final HotOrNot HOT_OR_NOT = new HotOrNot();
+  public final ConfigFeatureHotOrNot HOT_OR_NOT = new ConfigFeatureHotOrNot();
 
   @Comment("Size And Weight settings")
-  public final SizeAndWeight SIZE_OR_WEIGHT = new SizeAndWeight();
+  public final ConfigFeatureSizeAndWeight SIZE_OR_WEIGHT = new ConfigFeatureSizeAndWeight();
 
 
-  public static final class AdvancedData {
+  public static final class ConfigFeatureAdvancedData {
 
     @Comment({
       "If true, advanced data enable ",
@@ -59,10 +59,16 @@ public final class ConfigFeature {
     public boolean showCodeName = true;
 
     @Comment({
+      "Show ItemStack Unlocalized Name when advanced tooltips are enabled. (F3+H)",
+      "Default = true"
+    })
+    public boolean showUnlocalizedName = true;
+
+    @Comment({
       "Show ItemStack Metadata when advanced tooltips are enabled. (F3+H)",
       "Default = true"
     })
-    public boolean showMetadata = true;
+    public boolean showMetaData = true;
 
     @Comment({
       "Show ItemStack Meta's Unlocalized Name when advanced tooltips are enabled. (F3+H)",
@@ -77,7 +83,7 @@ public final class ConfigFeature {
     public boolean showNBT = true;
   }
 
-  public static final class SinkOrSwim {
+  public static final class ConfigFeatureSinkOrSwim {
 
     @Comment({
       "If true, sink or swim enable ",
@@ -129,7 +135,7 @@ public final class ConfigFeature {
       };
   }
 
-  public static final class HotOrNot {
+  public static final class ConfigFeatureHotOrNot {
 
     @Comment({
       "If true, hot or not enable ",
@@ -215,7 +221,7 @@ public final class ConfigFeature {
 
   }
 
-  public static final class SizeAndWeight {
+  public static final class ConfigFeatureSizeAndWeight {
 
     @Comment({
       "If true, size and weight enable ",

@@ -9,9 +9,9 @@ import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContai
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.ConfigDevice;

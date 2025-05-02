@@ -11,8 +11,6 @@ import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental
 import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityHandlerAmbiental;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
-import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
-import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityHandlerEgg;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
@@ -21,9 +19,8 @@ import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilityHandlerSharpness;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilityHandlerSize;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
 import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
 import su.terrafirmagreg.modules.core.event.block.EventHandlerPortalSpawn;
@@ -47,6 +44,7 @@ import su.terrafirmagreg.modules.core.helper.OreDictHelper;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.CommandsCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
+import su.terrafirmagreg.modules.core.init.EntitiesCore;
 import su.terrafirmagreg.modules.core.init.FeaturesCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
@@ -92,7 +90,7 @@ public final class ModuleCore extends ModuleBase {
     FluidsCore.onRegister(registrar);
     BlocksCore.onRegister(registrar);
     ItemsCore.onRegister(registrar);
-    //EntitiesCore.onRegister(registrar);
+    EntitiesCore.onRegister(registrar);
     EffectsCore.onRegister(registrar);
     LootTablesCore.onRegister(registrar);
   }
@@ -119,14 +117,13 @@ public final class ModuleCore extends ModuleBase {
   public void onPreInit(FMLPreInitializationEvent event) {
 
     CapabilityWorldTracker.register();
-    CapabilityEgg.register();
     CapabilityHeat.register();
     CapabilityFood.register();
     CapabilityMetal.register();
     CapabilityForgeable.register();
-    CapabilitySize.register();
     CapabilityPlayerData.register();
     CapabilityAmbiental.register();
+    CapabilitySharpness.register();
     CapabilityDamageResistance.register();
 
   }
@@ -139,12 +136,10 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public void onInit(FMLInitializationEvent event) {
 
-    CapabilityHandlerEgg.init();
     CapabilityHandlerHeat.init();
     CapabilityHandlerFood.init();
     CapabilityHandlerMetal.init();
-    CapabilitySharpness.register();
-    CapabilityHandlerSize.init();
+    CapabilityHandlerSharpness.init();
     CapabilityHandlerAmbiental.init();
     CapabilityHandlerDamageResistance.init();
   }

@@ -7,7 +7,7 @@ import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 
-public class RemappingAnimal extends FeatureBase {
+public class FeatureRemappingAnimal extends FeatureBase {
 
   static {
     DataFixUtils.put(DataFixUtils.BLOCK_MAP, m -> {

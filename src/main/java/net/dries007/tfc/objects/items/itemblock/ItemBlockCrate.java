@@ -1,9 +1,7 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.device.object.block.BlockCrate;
-
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

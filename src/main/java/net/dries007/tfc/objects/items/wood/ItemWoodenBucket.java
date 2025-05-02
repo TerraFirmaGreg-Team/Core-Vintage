@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.items.wood;
 
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;

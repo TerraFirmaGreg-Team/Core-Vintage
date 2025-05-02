@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.core;
 
-import su.terrafirmagreg.modules.core.config.ConfigBlock;
-import su.terrafirmagreg.modules.core.config.ConfigEntity;
-import su.terrafirmagreg.modules.core.config.ConfigFeature;
-import su.terrafirmagreg.modules.core.config.ConfigItem;
-import su.terrafirmagreg.modules.core.config.ConfigMisc;
+import su.terrafirmagreg.modules.core.config.ConfigCoreBlock;
+import su.terrafirmagreg.modules.core.config.ConfigCoreEntity;
+import su.terrafirmagreg.modules.core.config.ConfigCoreFeature;
+import su.terrafirmagreg.modules.core.config.ConfigCoreItem;
+import su.terrafirmagreg.modules.core.config.ConfigCoreMisc;
 
 import net.minecraftforge.common.config.Config;
 
@@ -18,23 +18,23 @@ public class ConfigCore {
 
   @Config.Name("Block")
   @Config.Comment("Block setting")
-  public static final ConfigBlock BLOCK = new ConfigBlock();
+  public static final ConfigCoreBlock BLOCK = new ConfigCoreBlock();
 
   @Config.Name("Item")
   @Config.Comment("Items settings")
-  public static final ConfigItem ITEM = new ConfigItem();
+  public static final ConfigCoreItem ITEM = new ConfigCoreItem();
 
   @Config.Name("Entity")
   @Config.Comment("Entity setting")
-  public static final ConfigEntity ENTITY = new ConfigEntity();
+  public static final ConfigCoreEntity ENTITY = new ConfigCoreEntity();
 
   @Config.Name("Misc")
   @Config.Comment("Misc setting")
-  public static final ConfigMisc MISC = new ConfigMisc();
+  public static final ConfigCoreMisc MISC = new ConfigCoreMisc();
 
   @Config.Name("Feature")
   @Config.Comment("Feature setting")
-  public static final ConfigFeature FEATURE = new ConfigFeature();
+  public static final ConfigCoreFeature FEATURE = new ConfigCoreFeature();
 
   static {
     ConfigAnytime.register(ConfigCore.class);

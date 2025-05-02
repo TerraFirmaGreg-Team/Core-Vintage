@@ -6,8 +6,8 @@ import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContainer;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.client.gui.GuiNestBox;
+import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.object.container.ContainerNestBox;
-import su.terrafirmagreg.modules.core.capabilities.egg.CapabilityEgg;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.object.entity.EntitySeatOn;
 

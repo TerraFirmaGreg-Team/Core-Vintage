@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -12,7 +7,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.util.IFruitTreeGenerator;
-import net.dries007.tfc.util.calendar.Month;
+
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

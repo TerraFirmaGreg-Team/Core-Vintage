@@ -1,9 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
+
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
+import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -16,20 +16,16 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.forge.ForgeStep;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_PLAN;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_STEP_MAX;
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.BUTTON_ID_STEP_MIN;
@@ -37,6 +33,7 @@ import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_FLUX;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_HAMMER;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_1;
 import static net.dries007.tfc.objects.te.TEAnvilTFC.SLOT_INPUT_2;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @ParametersAreNonnullByDefault
 public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButtonHandler {
@@ -90,7 +87,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
     if (slotInput == null) {return false;}
 
     ItemStack stack = slotInput.getStack();
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
 
     // The input must have the forge item capability
     if (cap == null) {return false;}
@@ -126,7 +123,7 @@ public class ContainerAnvilTFC extends ContainerTE<TEAnvilTFC> implements IButto
     } else {
       // Fallback to the held item if it is a hammer
       stack = player.inventory.mainInventory.get(player.inventory.currentItem);
-      if (!stack.isEmpty() && OreDictionaryHelper.doesStackMatchOre(stack, "toolHammer")) {
+      if (!stack.isEmpty() && OreDictUtils.contains(stack, "toolHammer")) {
         stack.damageItem(1, player);
         return true;
       } else {

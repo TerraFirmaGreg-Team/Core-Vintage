@@ -1,9 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
+
+import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -12,9 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.IItemSize;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.ItemArmorTFC;
 
@@ -24,7 +20,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemMetalArmor extends ItemArmorTFC implements IMetalItem, IItemSize {
+public class ItemMetalArmor extends ItemArmorTFC implements ICapabilityMetal, ICapabilitySize {
 
   private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetalArmor>> TABLE = new HashMap<>();
   private final Metal metal;

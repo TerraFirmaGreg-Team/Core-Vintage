@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import net.minecraft.client.Minecraft;
@@ -28,8 +23,8 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class BarrelCategory extends BaseRecipeCategory<BarrelRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFC, "textures/gui/icons/jei.png");
-  private static final ResourceLocation BARREL_TEXTURES = new ResourceLocation(Mods.Names.TFC, "textures/gui/barrel.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Mods.ModIDs.TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation BARREL_TEXTURES = new ResourceLocation(Mods.ModIDs.TFC, "textures/gui/barrel.png");
 
   private final IDrawableStatic fluidSlotBackgroound, fluidSlot;
   private final IDrawableStatic slot;

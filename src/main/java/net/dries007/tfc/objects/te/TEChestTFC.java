@@ -1,9 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
+
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -24,9 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.container.ContainerChestTFC;
@@ -107,7 +103,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
       }
 
       world.playSound(null, centerX,
-                      pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+        pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
     }
 
     if (numPlayersUsing == 0 && lidAngle > 0.0F || numPlayersUsing > 0 && lidAngle < 1.0F) {
@@ -135,7 +131,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
         }
 
         world.playSound(null, centerX,
-                        pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+          pos.getY() + 0.5D, centerZ, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
       }
 
       if (lidAngle < 0.0F) {
@@ -174,7 +170,7 @@ public class TEChestTFC extends TileEntityChest implements ISlotCallback {
   @Override
   public boolean isItemValidForSlot(int index, ItemStack stack) {
     // Blocks input from hopper
-    IItemSize cap = CapabilityItemSize.getIItemSize(stack);
+    ICapabilitySize cap = CapabilitySize.get(stack);
     if (cap != null) {
       return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
     }

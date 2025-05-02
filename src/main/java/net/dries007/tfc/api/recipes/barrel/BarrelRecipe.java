@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.barrel;
+
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +12,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
@@ -38,8 +34,7 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
    * @param inputStack  item ingredients used to check if it is valid on barrel seal
    * @param outputFluid the output fluid, when this recipe is completed
    * @param outputStack the output stack, when this recipe is completed
-   * @param duration    the duration, in ticks, for this recipe to complete. 0 = Instant while negative means this recipe is infinite (for custom recipes that
-   *                    wait for unseal)
+   * @param duration    the duration, in ticks, for this recipe to complete. 0 = Instant while negative means this recipe is infinite (for custom recipes that wait for unseal)
    */
   public BarrelRecipe(@Nonnull IIngredient<FluidStack> inputFluid, @Nonnull IIngredient<ItemStack> inputStack, @Nullable FluidStack outputFluid, @Nonnull ItemStack outputStack, int duration) {
     this.inputStack = inputStack;
@@ -173,8 +168,7 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
 
 
   /**
-   * Called by TEBarrel when the barrel is unsealed mid operation (the recipe didn't finish) Use this if you want to do something to the input (like remove a
-   * food trait, or consume part of it) when the recipe is "broken"
+   * Called by TEBarrel when the barrel is unsealed mid operation (the recipe didn't finish) Use this if you want to do something to the input (like remove a food trait, or consume part of it) when the recipe is "broken"
    *
    * @param inputFluid the fluid that was in the barrel when the recipe "broke"
    * @param inputStack the stack that was in the barrel when the recipe "broke"
@@ -186,8 +180,7 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
   }
 
   /**
-   * Called by TEBarrel when the barrel is unsealed mid operation (the recipe didn't finish) Use this if you want to do something to the input (like remove a
-   * food trait, or consume part of it) when the recipe is "broken"
+   * Called by TEBarrel when the barrel is unsealed mid operation (the recipe didn't finish) Use this if you want to do something to the input (like remove a food trait, or consume part of it) when the recipe is "broken"
    *
    * @param inputFluid the fluid that was in the barrel when the recipe "broke"
    * @param inputStack the stack that was in the barrel when the recipe "broke"

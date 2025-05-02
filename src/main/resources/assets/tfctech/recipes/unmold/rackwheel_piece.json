@@ -1,5 +1,5 @@
 {
-  "type": "tfctech:unmold_recipe",
+  "type": "tfc:tfcthings_unmold_recipe",
   "ingredients": [
     {
       "item": "tfctech:ceramics/mold/rackwheel_piece"

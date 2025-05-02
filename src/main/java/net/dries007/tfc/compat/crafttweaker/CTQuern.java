@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
+
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +13,6 @@ import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -55,9 +51,9 @@ public class CTQuern {
     ItemStack item = (ItemStack) output.getInternal();
     List<QuernRecipe> removeList = new ArrayList<>();
     TFCRegistries.QUERN.getValuesCollection()
-                       .stream()
-                       .filter(x -> x.getOutputs().get(0).isItemEqual(item))
-                       .forEach(removeList::add);
+      .stream()
+      .filter(x -> x.getOutputs().get(0).isItemEqual(item))
+      .forEach(removeList::add);
     for (QuernRecipe rem : removeList) {
       CraftTweakerAPI.apply(new IAction() {
         @Override

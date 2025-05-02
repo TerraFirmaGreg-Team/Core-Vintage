@@ -1,19 +1,15 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
-import net.minecraft.nbt.NBTTagCompound;
-
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+
+import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class TETickCounter extends TEBase {
+public class TETickCounter extends BaseTile {
 
   private long lastUpdateTick;
 

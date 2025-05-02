@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.types;
 
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +7,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Plant;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = TFC)

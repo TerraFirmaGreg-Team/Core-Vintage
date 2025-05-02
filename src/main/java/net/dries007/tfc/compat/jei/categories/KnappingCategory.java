@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import net.minecraft.client.Minecraft;
@@ -19,7 +14,7 @@ import net.dries007.tfc.compat.jei.wrappers.KnappingRecipeWrapper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @ParametersAreNonnullByDefault
 public class KnappingCategory extends BaseRecipeCategory<KnappingRecipeWrapper> {

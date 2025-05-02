@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import net.minecraft.block.Block;
@@ -39,6 +34,7 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 
@@ -65,7 +61,8 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
   public BlockFruitTreeLeaves(IFruitTree tree) {
     this.tree = tree;
     if (MAP.put(tree, this) != null) {throw new IllegalStateException("There can only be one.");}
-    setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(LEAF_STATE, EnumLeafState.NORMAL).withProperty(HARVESTABLE, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(DECAYABLE, false).withProperty(LEAF_STATE, EnumLeafState.NORMAL)
+      .withProperty(HARVESTABLE, false));
     leavesFancy = true; // Fast / Fancy graphics works correctly
     OreDictionaryHelper.register(this, "tree", "leaves");
     OreDictionaryHelper.register(this, "tree", "leaves", tree.getName());

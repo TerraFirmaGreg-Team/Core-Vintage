@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client;
 
 import net.minecraft.client.Minecraft;
@@ -14,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Set;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
 
 @SideOnly(Side.CLIENT)

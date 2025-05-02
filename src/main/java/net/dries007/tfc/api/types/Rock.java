@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
+
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -12,7 +9,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.util.FallingBlockManager.Specification;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.items.rock.ItemRockAxe;
 import net.dries007.tfc.objects.items.rock.ItemRockHammer;
@@ -26,7 +22,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 
 public class Rock extends IForgeRegistryEntry.Impl<Rock> {

@@ -1,16 +1,12 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.barrel;
+
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.data.ingredient.IngredientFluidItem;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;

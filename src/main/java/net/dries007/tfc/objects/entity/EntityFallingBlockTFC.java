@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity;
+
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -26,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
 
 import javax.annotation.Nullable;
@@ -187,7 +183,7 @@ public class EntityFallingBlockTFC extends EntityFallingBlock implements IEntity
 
   private void dropItems(BlockPos pos) {
     currentSpecification.getDrops(world, pos, currentSpecification.getResultingState(fallTile), tileEntityData, fallTime, fallDistance)
-                        .forEach(x -> entityDropItem(x, 0));
+      .forEach(x -> entityDropItem(x, 0));
   }
 
   @Override

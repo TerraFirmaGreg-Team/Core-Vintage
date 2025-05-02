@@ -1,10 +1,7 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.stone;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.temp.util.GemsFromRawRocks;
 
 import net.minecraft.block.Block;
@@ -23,7 +20,6 @@ import net.minecraft.world.World;
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -86,7 +82,7 @@ public class BlockRockRaw extends BlockRockVariant {
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = playerIn.getHeldItemMainhand();
-    if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && OreDictionaryHelper.doesStackMatchOre(stack, "toolHammer")
+    if (ConfigTFC.General.OVERRIDES.enableStoneAnvil && OreDictUtils.contains(stack, "toolHammer")
         && !worldIn.isBlockNormalCube(pos.up(), true)) {
       if (!worldIn.isRemote) {
         // Create a stone anvil

@@ -1,9 +1,11 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
+
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -19,12 +21,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
@@ -41,7 +37,7 @@ import java.util.Map;
  */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemMetalSword extends ItemSword implements IMetalItem, IItemSize {
+public class ItemMetalSword extends ItemSword implements ICapabilityMetal, ICapabilitySize {
 
   private static final Map<Metal, ItemMetalSword> TABLE = new HashMap<>();
   public final ToolMaterial material;

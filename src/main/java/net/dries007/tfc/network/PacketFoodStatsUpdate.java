@@ -1,10 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.network;
 
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +11,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.Nutrient;
 
 public class PacketFoodStatsUpdate implements IMessage {
 

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.minecraft.block.state.IBlockState;
@@ -16,8 +11,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 

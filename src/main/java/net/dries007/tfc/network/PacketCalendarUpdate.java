@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.network;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -11,6 +6,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 public class PacketCalendarUpdate implements IMessage {

@@ -1,12 +1,19 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.types;
 
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
+import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
+import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.data.ingredient.IngredientFluidItem;
+import su.terrafirmagreg.modules.core.data.ingredient.IngredientItemFood;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixHandler;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
+import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -22,14 +29,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import com.eerussianguy.firmalife.FirmaLife;
-import com.eerussianguy.firmalife.registry.BlocksFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
+import gregtech.api.unification.ore.OrePrefix;
+import net.dries007.firmalife.FirmaLife;
+import net.dries007.firmalife.registry.BlocksFL;
+import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.recipes.BlastFurnaceRecipe;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
@@ -65,9 +70,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.objects.inventory.ingredient.IngredientFluidItem;
-import net.dries007.tfc.objects.inventory.ingredient.IngredientItemFood;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemsTFC;
@@ -81,11 +83,8 @@ import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.rock.ItemRockToolHead;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import net.dries007.tfc.util.forge.ForgeRule;
 import net.dries007.tfc.util.fuel.FuelManager;
-import net.dries007.tfc.util.skills.SmithingSkill;
-import org.labellum.mc.waterflasks.item.ModItems;
 
 import javax.annotation.Nullable;
 
@@ -146,12 +145,12 @@ import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_SECOND_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_THIRD_LAST;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.ARMOR;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.GENERAL;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.TOOLS;
-import static net.dries007.tfc.util.skills.SmithingSkill.Type.WEAPONS;
 import static su.terrafirmagreg.Tags.MOD_ID;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.ARMOR;
+import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.GENERAL;
+import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.TOOLS;
+import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.WEAPONS;
 import static su.terrafirmagreg.modules.core.init.FluidsCore.BRINE;
 import static su.terrafirmagreg.modules.core.init.FluidsCore.CURDLED_MILK;
 import static su.terrafirmagreg.modules.core.init.FluidsCore.FRESH_WATER;
@@ -257,7 +256,7 @@ public final class DefaultRecipes {
       new BarrelRecipe(IIngredient.of(LIMEWATER.get(), 100), IIngredient.of("sand"), null, new ItemStack(ItemsTFC.MORTAR, 16),
         8 * ICalendar.TICKS_IN_HOUR).setRegistryName("mortar"),
       new BarrelRecipe(IIngredient.of(FRESH_WATER.get(), 125), IIngredient.of("dustSalt"), new FluidStack(SALT_WATER.get(), 125), ItemStack.EMPTY, 0).setRegistryName("fresh_to_salt_water"),
-      new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 125), IIngredient.of(new ItemStack(ItemsTFC.WOOD_ASH)), new FluidStack(LYE.get(), 125), ItemStack.EMPTY, 0).setRegistryName("lye"),
+      new BarrelRecipe(IIngredient.of(HOT_WATER.get(), 125), IIngredient.of(new ItemStack(ItemsCore.WOOD_ASH)), new FluidStack(LYE.get(), 125), ItemStack.EMPTY, 0).setRegistryName("lye"),
       new BarrelRecipe(IIngredient.of(MILK_VINEGAR.get(), 1), IIngredient.of(ItemStack.EMPTY), new FluidStack(CURDLED_MILK.get(), 1), ItemStack.EMPTY,
         8 * ICalendar.TICKS_IN_HOUR).setRegistryName("curdled_milk"),
       // based on eating 5 oz in classic, and 1 item in TNG, the full barrel recipe generated 160 oz of cheese, now 32 items. Therefore 625mb creates 2 cheese.
@@ -513,25 +512,25 @@ public final class DefaultRecipes {
     // these recipes cover all cases where multiple stone items can be made
     // recipes are already mirror checked
     event.getRegistry().registerAll(
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixHandler.toolHeadKnife, Materials.Stone, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_1"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixHandler.toolHeadKnife, Materials.Stone, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_2"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixHandler.toolHeadKnife, Materials.Stone, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_3"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCore.toolHeadKnife, Materials.Stone, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_1"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCore.toolHeadKnife, Materials.Stone, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_2"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCore.toolHeadKnife, Materials.Stone, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "stone_knife_head_3"),
 
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "stone_hoe_head_1"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_2"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_3"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "stone_hoe_head_4"),
-      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Stone, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_5"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "stone_hoe_head_1"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Stone, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_2"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_3"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Stone, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "stone_hoe_head_4"),
+      new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Stone, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "stone_hoe_head_5"),
 
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixHandler.toolHeadKnife, Materials.Flint, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_1"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixHandler.toolHeadKnife, Materials.Flint, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_2"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixHandler.toolHeadKnife, Materials.Flint, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_3"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCore.toolHeadKnife, Materials.Flint, 2), "X  X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_1"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCore.toolHeadKnife, Materials.Flint, 2), "X   X", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_2"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCore.toolHeadKnife, Materials.Flint, 2), " X X ", "XX XX", "XX XX", "XX XX", "XX XX").setRegistryName(MOD_ID, "flint_knife_head_3"),
 
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "flint_hoe_head_1"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_2"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_3"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "flint_hoe_head_4"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixHandler.toolHeadHoe, Materials.Flint, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_5")
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(MOD_ID, "flint_hoe_head_1"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Flint, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_2"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_3"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Flint, 2), "XXXXX", "   XX", "     ", "     ", "     ").setRegistryName(MOD_ID, "flint_hoe_head_4"),
+      new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(OrePrefixCore.toolHeadHoe, Materials.Flint, 2), "     ", "     ", "     ", "XXXXX", "   XX").setRegistryName(MOD_ID, "flint_hoe_head_5")
 
     );
 
@@ -577,7 +576,7 @@ public final class DefaultRecipes {
 
     // WaterFlask
     event.getRegistry().registerAll(
-      new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ModItems.leatherSide),
+      new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsDevice.LEATHER_FLASK_UNFINISHED),
         "  XX ", " XXX ", "XXXXX", " XXX ", "  X  ").setRegistryName("leather_side")
     );
 
@@ -634,7 +633,7 @@ public final class DefaultRecipes {
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_BOWL), new ItemStack(ItemsTFC.FIRED_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_bowl"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_SPINDLE), new ItemStack(ItemsTFC.FIRED_SPINDLE), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_spindle"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_LARGE_VESSEL), new ItemStack(BlocksTFC.FIRED_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_large_vessel"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_CRUCIBLE), new ItemStack(BlocksTFC.CRUCIBLE), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_crucible"),
+      new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE), 1599f, Metal.Tier.TIER_I).setRegistryName("unfired_crucible"),
 
       // Fired Pottery - doesn't burn up
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.FIRED_FIRE_BRICK), new ItemStack(ItemsTFC.FIRED_FIRE_BRICK), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_fire_brick"),
@@ -645,13 +644,13 @@ public final class DefaultRecipes {
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.FIRED_BOWL), new ItemStack(ItemsTFC.FIRED_BOWL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_bowl"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.FIRED_SPINDLE), new ItemStack(ItemsTFC.FIRED_SPINDLE), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_spindle"),
       new HeatRecipeSimple(IIngredient.of(BlocksTFC.FIRED_LARGE_VESSEL), new ItemStack(BlocksTFC.FIRED_LARGE_VESSEL), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_large_vessel"),
-      new HeatRecipeSimple(IIngredient.of(BlocksTFC.CRUCIBLE), new ItemStack(BlocksTFC.CRUCIBLE), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_crucible"),
+      new HeatRecipeSimple(IIngredient.of(BlocksDevice.CRUCIBLE), new ItemStack(BlocksDevice.CRUCIBLE), 1599f, Metal.Tier.TIER_I).setRegistryName("fired_crucible"),
 
       // Misc
       new HeatRecipeSimple(IIngredient.of("stickWood"), new ItemStack(Blocks.TORCH, 2), 40).setRegistryName("torch"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.STICK_BUNCH), new ItemStack(Blocks.TORCH, 18), 60).setRegistryName("torch_stick_bunch"),
       new HeatRecipeSimple(IIngredient.of("sand"), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass"),
-      new HeatRecipeSimple(IIngredient.of(ItemsTFC.GLASS_SHARD), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass_shard"),
+      new HeatRecipeSimple(IIngredient.of(ItemsCore.GLASS_SHARD), new ItemStack(Blocks.GLASS), 600).setRegistryName("glass_shard"),
       new HeatRecipeSimple(IIngredient.of("blockClay"), new ItemStack(Blocks.HARDENED_CLAY), 600).setRegistryName("terracotta"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_BRICK), new ItemStack(Items.BRICK), 1500).setRegistryName("unfired_brick"),
       new HeatRecipeSimple(IIngredient.of(ItemsTFC.UNFIRED_FLOWER_POT), new ItemStack(Items.FLOWER_POT), 1500).setRegistryName("unfired_flower_pot"),
@@ -768,13 +767,13 @@ public final class DefaultRecipes {
     r.register(new AnvilRecipeSplitting(new ResourceLocation(TFC, "splitting_bloom"), IIngredient.of(ItemsTFC.REFINED_BLOOM), new ItemStack(ItemsTFC.REFINED_BLOOM), 144, Metal.Tier.TIER_II, PUNCH_LAST));
     r.register(new AnvilRecipe(new ResourceLocation(TFC, "iron_bloom"), x -> {
       if (x.getItem() == ItemsTFC.REFINED_BLOOM) {
-        IForgeable cap = x.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+        ICapabilityForge cap = x.getCapability(CapabilityForgeable.CAPABILITY, null);
         if (cap instanceof IForgeableMeasurableMetal) {
           return ((IForgeableMeasurableMetal) cap).getMetal() == Metal.WROUGHT_IRON && ((IForgeableMeasurableMetal) cap).getMetalAmount() == 144;
         }
       }
       return false;
-    }, OreDictUnifier.get(gregtech.api.unification.ore.OrePrefix.ingot, Materials.WroughtIron), Metal.Tier.TIER_II, null, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
+    }, OreDictUnifier.get(OrePrefix.ingot, Materials.WroughtIron), Metal.Tier.TIER_II, null, HIT_LAST, HIT_SECOND_LAST, HIT_THIRD_LAST));
 
     // Shields
     addAnvil(r, DOUBLE_SHEET, SHIELD, true, ARMOR, UPSET_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST);
@@ -809,7 +808,7 @@ public final class DefaultRecipes {
     // waterflasks
     r.register(new AnvilRecipe(new ResourceLocation(TFC, "unfinished_iron_flask"),
       IIngredient.of("plateWroughtIron"),
-      new ItemStack(ModItems.unfinishedFlask), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST
+      new ItemStack(ItemsDevice.METAL_FLASK_UNFINISHED), Metal.WROUGHT_IRON.getTier(), GENERAL, PUNCH_LAST, BEND_SECOND_LAST, BEND_THIRD_LAST
     ));
 
     // FirmaLife
@@ -854,10 +853,10 @@ public final class DefaultRecipes {
 
     r.registerAll(
       new LoomRecipe(new ResourceLocation(TFC, "burlap_cloth"), IIngredient.of(ItemsTFC.JUTE_FIBER, 12), new ItemStack(ItemsTFC.BURLAP_CLOTH), 12, new ResourceLocation(TFC, "textures/blocks/devices/loom/product/burlap.png")),
-      new LoomRecipe(new ResourceLocation(TFC, "wool_cloth"), IIngredient.of(ItemsTFC.WOOL_YARN, 16), new ItemStack(ItemsTFC.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
-      new LoomRecipe(new ResourceLocation(TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsTFC.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFC, "wool_cloth"), IIngredient.of(ItemsAnimal.WOOL_YARN, 16), new ItemStack(ItemsAnimal.WOOL_CLOTH), 16, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
+      new LoomRecipe(new ResourceLocation(TFC, "silk_cloth"), IIngredient.of(Items.STRING, 24), new ItemStack(ItemsAnimal.SILK_CLOTH), 24, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png")),
 
-      new LoomRecipe(new ResourceLocation(TFC, "wool_block"), IIngredient.of(ItemsTFC.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
+      new LoomRecipe(new ResourceLocation(TFC, "wool_block"), IIngredient.of(ItemsAnimal.WOOL_CLOTH, 4), new ItemStack(Blocks.WOOL, 8), 4, new ResourceLocation("minecraft", "textures/blocks/wool_colored_white.png"))
     );
   }
 

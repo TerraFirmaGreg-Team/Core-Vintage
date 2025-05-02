@@ -1,9 +1,7 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
+
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -22,8 +20,6 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -75,7 +71,7 @@ public class ShapelessFluidFoodRecipe extends ShapelessOreRecipe {
     for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
       ItemStack stack = inv.getStackInSlot(slot);
       if (!stack.isEmpty()) {
-        IFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (foodCap != null && (smallestRottenDate == -1 || smallestRottenDate > foodCap.getRottenDate())) {
           smallestRottenDate = foodCap.getRottenDate();
           foodStack = stack;

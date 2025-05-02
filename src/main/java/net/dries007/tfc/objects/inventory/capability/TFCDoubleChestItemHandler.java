@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.capability;
 
 import net.minecraft.block.Block;
@@ -52,7 +47,7 @@ public class TFCDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
         if (otherTE instanceof TileEntityChest) {
           TileEntityChest otherChest = (TileEntityChest) otherTE;
           return new TFCDoubleChestItemHandler(chest, otherChest,
-                                               enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH);
+            enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH);
 
         }
       }

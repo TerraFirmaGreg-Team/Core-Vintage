@@ -1,7 +1,6 @@
 /**
  * It is advised that you do not edit anything in the build.gradle; unless you are sure of what you are doing
  */
-
 import com.gtnewhorizons.retrofuturagradle.mcp.InjectTagsTask
 import org.jetbrains.gradle.ext.Gradle
 
@@ -28,6 +27,8 @@ assertSubProperties 'is_coremod', 'coremod_includes_mod', 'coremod_debug', 'core
 assertSubProperties 'use_asset_mover', 'asset_mover_version'
 
 setDefaultProperty 'use_modern_java_syntax', false, false
+setDefaultProperty 'generate_sources_jar', true, false
+setDefaultProperty 'generate_javadocs_jar', true, false
 setDefaultProperty 'mapping_channel', true, 'stable'
 setDefaultProperty 'mapping_version', true, '39'
 setDefaultProperty 'use_dependency_at_files', true, true
@@ -48,10 +49,7 @@ tasks.decompressDecompiledSources.enabled !propertyBool('change_minecraft_source
 java {
   toolchain {
     languageVersion.set(JavaLanguageVersion.of(propertyBool('use_modern_java_syntax') ? 17 : 8))
-    // Azul covers the most platforms for Java 8 toolchains, crucially including MacOS arm64
-    vendor.set(JvmVendorSpec.AZUL)
   }
-
   if (propertyBool('generate_sources_jar')) {
     withSourcesJar()
   }
@@ -60,28 +58,28 @@ java {
   }
 }
 
-tasks.withType(JavaCompile).configureEach {
-  options.encoding = 'UTF-8'
-  if (propertyBool('use_modern_java_syntax')) {
-    if (it.name in ['compileMcLauncherJava', 'compilePatchedMcJava']) {
-      return
-    }
-    sourceCompatibility = 17
-    options.release.set(8)
-
-    javaCompiler.set(javaToolchains.compilerFor {
-      languageVersion.set(JavaLanguageVersion.of(17))
-      if (propertyBool('use_azul_jmv')) {
-        vendor.set(JvmVendorSpec.AZUL)
-      }
-    })
-  }
-}
 
 configurations {
   embed
-  implementation.extendsFrom(embed)
+  mainImplementation
+  coreImplementation
+  frameworkImplementation
+
+  implementation { extendsFrom embed }
+
+  // Для core
+  coreImplementation { extendsFrom implementation }
+  coreCompileOnly { extendsFrom compileOnly }
+  coreRuntimeOnly { extendsFrom runtimeOnly }
+  coreAnnotationProcessor { extendsFrom annotationProcessor }
+
+  // Для framework
+  frameworkImplementation { extendsFrom implementation }
+  frameworkCompileOnly { extendsFrom compileOnly }
+  frameworkRuntimeOnly { extendsFrom runtimeOnly }
+  frameworkAnnotationProcessor { extendsFrom annotationProcessor }
 }
+
 
 minecraft {
   mcVersion.set(propertyString('minecraft_version'))
@@ -107,7 +105,7 @@ minecraft {
   if (propertyBool('is_coremod')) {
     for (runTask in ['runClient', 'runServer']) {
       tasks.named(runTask).configure {
-        args << '-Dfml.coreMods.load=' + coremod_plugin_class_name
+        args << '-Dfml.coreMods.load=' + propertyString('coremod_plugin_class_name')
       }
     }
 
@@ -119,10 +117,9 @@ minecraft {
     }
   }
 
-
   extraRunJvmArguments.addAll(args)
   extraRunJvmArguments.addAll(propertyStringList('extra_jvm_args'))
-  // Automatic token injection with RetroFuturaGradle
+
   if (propertyBool('use_tags')) {
     if (file('tags.properties').exists()) {
       Properties props = new Properties().tap { it.load(file('tags.properties').newInputStream()); it }
@@ -131,6 +128,13 @@ minecraft {
       }
     }
   }
+
+  runClient {
+    workingDir = file('run/client')
+  }
+  runServer {
+    workingDir = file('run/server')
+  }
 }
 
 repositories {
@@ -138,61 +142,98 @@ repositories {
     name 'CleanroomMC Maven'
     url 'https://maven.cleanroommc.com'
   }
-
-  maven {
-    name 'GTNH Maven'
-    url 'https://nexus.gtnewhorizons.com/repository/public/'
-  }
 }
 
 dependencies {
   if (propertyBool('use_modern_java_syntax')) {
-    annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.1'
-    compileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.1') {
+    annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
+    compileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
       transitive = false
     }
-    // workaround for https://github.com/bsideup/jabel/issues/174
+    // Workaround for https://github.com/bsideup/jabel/issues/174
     annotationProcessor 'net.java.dev.jna:jna-platform:5.13.0'
-    // Allow jdk.unsupported classes like sun.misc.Unsafe, workaround for JDK-8206937 and fixes Forge crashes in tests.
+    // Allow jdk.unsupported classes like sun.misc.Unsafe, workaround for JDK-8206937 and fixes crashes in tests
     patchedMinecraft 'me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0'
-
-    // allow Jabel to work in tests
-    testAnnotationProcessor "com.github.bsideup.jabel:jabel-javac-plugin:1.0.1"
-    testCompileOnly("com.github.bsideup.jabel:jabel-javac-plugin:1.0.1") {
+    // Include for tests
+    testAnnotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
+    testCompileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
       transitive = false // We only care about the 1 annotation class
     }
-    testCompileOnly "me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0"
   }
   if (propertyBool('use_asset_mover')) {
     implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
   }
   if (propertyBool('use_mixins')) {
+    annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
+    annotationProcessor 'com.google.guava:guava:32.1.2-jre'
+    annotationProcessor 'com.google.code.gson:gson:2.8.9'
+
     String mixin = modUtils.enableMixins("zone.rong:mixinbooter:${propertyString('mixin_booter_version')}", propertyString('mixin_refmap'))
     api(mixin) {
       transitive = false
     }
-    annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
-    annotationProcessor 'com.google.guava:guava:32.1.2-jre'
-    annotationProcessor 'com.google.code.gson:gson:2.8.9'
     annotationProcessor(mixin) {
       transitive = false
     }
   }
+  if (propertyBool('enable_junit_testing')) {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  }
 
   compileOnlyApi 'org.jetbrains:annotations:26.0.1'
   annotationProcessor 'org.jetbrains:annotations:26.0.1'
-  patchedMinecraft('net.minecraft:launchwrapper:1.17.4') {
-    transitive = false
-  }
-
-  if (propertyBool('use_mixins') && propertyBool('stripForgeRequirements')) {
-    compileOnly 'com.cleanroommc:strip-latest-forge-requirements:1.0'
-  }
 
   compileOnly 'org.projectlombok:lombok:1.18.+'
   annotationProcessor 'org.projectlombok:lombok:1.18.+'
   testCompileOnly 'org.projectlombok:lombok:1.18.+'
   testAnnotationProcessor 'org.projectlombok:lombok:1.18.+'
+
+}
+
+//configurations.configureEach {
+//  resolutionStrategy.dependencySubstitution {
+//    substitute module('org.scala-lang:scala-library:2.11.1') using module('org.scala-lang:scala-library:2.11.5') because('To allow mixing with Java 8 targets')
+//  }
+//}
+
+sourceSets {
+//  framework {
+//    compileClasspath += sourceSets.main.compileClasspath
+//    runtimeClasspath += sourceSets.main.runtimeClasspath
+//  }
+//  core {
+//    compileClasspath += sourceSets.main.compileClasspath
+//    runtimeClasspath += sourceSets.main.runtimeClasspath
+//
+//    compileClasspath += sourceSets.framework.output
+//    runtimeClasspath += sourceSets.framework.output
+//
+////    compileClasspath += sourceSets.main.output
+////    runtimeClasspath += sourceSets.main.output
+//
+//  }
+
+  main {
+//    compileClasspath += sourceSets.core.output
+//    runtimeClasspath += sourceSets.core.output
+
+//    compileClasspath += sourceSets.framework.output
+//    runtimeClasspath += sourceSets.framework.output
+//    compileClasspath += sourceSets.framework.compileClasspath
+//    runtimeClasspath += sourceSets.framework.runtimeClasspath
+
+    java {
+      srcDir 'src/core/java'
+      srcDir 'src/main/java'
+      srcDir 'src/framework/java'
+    }
+    resources {
+      srcDir 'src/core/resources'
+      srcDir 'src/main/resources'
+      srcDir 'src/framework/resources'
+    }
+  }
 }
 
 apply from: 'gradle/scripts/dependencies.gradle'
@@ -210,46 +251,42 @@ if (propertyBool('use_access_transformer')) {
   }
 }
 
-
 processResources {
 
-  inputs.property 'mod_id', propertyString('mod_id')
-  inputs.property 'mod_name', propertyString('mod_name')
-  inputs.property 'mod_version', propertyString('mod_version')
-  inputs.property 'mod_description', propertyString('mod_description')
-  inputs.property 'mod_authors', "${propertyStringList('mod_authors', ',').join(', ')}"
-  inputs.property 'mod_credits', propertyString('mod_credits')
-  inputs.property 'mod_url', propertyString('mod_url')
-  inputs.property 'mod_update_json', propertyString('mod_update_json')
-  inputs.property 'mod_logo_path', propertyString('mod_logo_path')
-  inputs.property 'mixin_refmap', propertyString('mixin_refmap')
-  inputs.property 'mixin_package', propertyString('mixin_package')
-  inputs.property 'mixin_configs', propertyStringList('mixin_configs').join(' ')
+  var replaceProperties = [
+    'mod_id'           : propertyString('mod_id'),
+    'mod_name'         : propertyString('mod_name'),
+    'mod_version'      : propertyString('mod_version'),
+    'mod_description'  : propertyString('mod_description'),
+    'mod_authors'      : propertyString('mod_authors'),
+    'mod_credits'      : propertyString('mod_credits'),
+    'mod_url'          : propertyString('mod_url'),
+    'mod_update_json'  : propertyString('mod_update_json'),
+    'mod_logo_path'    : propertyString('mod_logo_path'),
 
-  def filterList = ['mcmod.info', 'pack.mcmeta']
+    'minecraft_version': propertyString('minecraft_version'),
 
+    'mixin_refmap'     : propertyString('mixin_refmap'),
+    'mixin_package'    : propertyString('mixin_package'),
+    'mixin_configs'    : propertyStringList('mixin_configs', ', ').join(' ').collect(config -> "mixins.${config}.json" as String)
+  ]
+
+  var filterList = [
+    'mcmod.info',
+    'pack.mcmeta'
+  ]
+
+  inputs.properties replaceProperties
   filesMatching(filterList) { fcd ->
-    fcd.expand(
-      'mod_id': propertyString('mod_id'),
-      'mod_name': propertyString('mod_name'),
-      'mod_version': propertyString('mod_version'),
-      'mod_description': propertyString('mod_description'),
-      'mod_authors': "${propertyStringList('mod_authors', ',').join(', ')}",
-      'mod_credits': propertyString('mod_credits'),
-      'mod_url': propertyString('mod_url'),
-      'mod_update_json': propertyString('mod_update_json'),
-      'mod_logo_path': propertyString('mod_logo_path'),
-
-      'mixin_refmap': propertyString('mixin_refmap'),
-      'mixin_package': propertyString('mixin_package')
-    )
+    fcd.expand(replaceProperties)
   }
-
 
   if (propertyBool('use_access_transformer')) {
     rename '(.+_at.cfg)', 'META-INF/$1'
   }
+
 }
+
 
 jar {
   manifest {
@@ -269,36 +306,29 @@ jar {
     }
     attributes(attribute_map)
   }
-  // Add all embedded dependencies into the jar
   zip64 = true
-  from provider {
-    configurations.embed.collect {
-      it.isDirectory() ? it : zipTree(it)
+  // Add all embedded dependencies into the jar
+  from(
+    provider {
+      configurations.embed.collect {
+        it.isDirectory() ? it : zipTree(it)
+      }
     }
-  }
+  )
 }
 
-runClient {
-  workingDir = file('run/client')
-}
-runServer {
-  workingDir = file('run/server')
-}
-
-wrapper {
+tasks.named('wrapper', Wrapper).configure {
   gradleVersion = gradle_version
-  distributionUrl = distributionUrl.replace("bin", "all")
+  distributionType = Wrapper.DistributionType.ALL
 }
 
 idea {
   module {
-    inheritOutputDirs true
-    downloadJavadoc true
-    downloadSources true
+    inheritOutputDirs = true
+    downloadJavadoc = true
+    downloadSources = true
 
     excludeDirs = [file(".github"), file(".idea"), file("build"), file("run"), file("resources_templates")]
-
-
   }
   project {
     settings {
@@ -328,6 +358,35 @@ idea {
   }
 }
 
+compileTestJava {
+  sourceCompatibility = targetCompatibility = 8
+}
+
+test {
+  useJUnitPlatform()
+  javaLauncher.set(javaToolchains.launcherFor {
+    languageVersion = JavaLanguageVersion.of(8)
+  })
+  if (propertyBool('show_testing_output')) {
+    testLogging {
+      showStandardStreams = true
+    }
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.encoding = 'UTF-8'
+  if (propertyBool('use_modern_java_syntax')) {
+    if (it.name in ['compileMcLauncherJava', 'compilePatchedMcJava']) {
+      return
+    }
+    sourceCompatibility = 17
+    options.release.set(8)
+    javaCompiler.set(javaToolchains.compilerFor {
+      languageVersion.set(JavaLanguageVersion.of(17))
+    })
+  }
+}
 
 tasks.register('cleanroomAfterSync') {
   group 'cleanroom helpers'
@@ -339,7 +398,6 @@ if (propertyBool('use_modern_java_syntax')) {
     sourceCompatibility = 17
   }
 }
-
 
 tasks.named('injectTags', InjectTagsTask).configure {
   onlyIf {
@@ -370,10 +428,4 @@ idea.project.settings {
 }
 
 
-// Include resources generated by data generators.
-sourceSets.main {
-  resources.srcDir "src/generated/resources"
-  // Make sure resources are available for 1.12
-  output.setResourcesDir output.classesDirs.asPath
-}
 

@@ -1,12 +1,18 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -38,21 +44,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import com.eerussianguy.firmalife.items.ItemFoodFL;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.capability.ISmallVesselHandler;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.network.PacketSimpleMessage;
@@ -61,11 +57,10 @@ import net.dries007.tfc.objects.container.CapabilityContainerListener;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
+import net.dries007.tfc.objects.items.ItemFoodFL;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
 import net.dries007.tfc.util.Alloy;
-import net.dries007.tfc.util.Helpers;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import tfcflorae.objects.items.food.ItemFoodTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -73,7 +68,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Map.Entry;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 import static su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat.CAPABILITY;
 
 @ParametersAreNonnullByDefault
@@ -251,7 +246,7 @@ public class ItemSmallVessel extends ItemPottery {
     public void addHeatInfo(@Nonnull ItemStack stack, @Nonnull List<String> text) {
       Metal metal = getMetal();
       if (metal != null) {
-        String desc = TextFormatting.DARK_GREEN + I18n.format(Helpers.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
+        String desc = TextFormatting.DARK_GREEN + I18n.format(TranslatorUtils.getTypeName(metal)) + ": " + I18n.format("tfc.tooltip.units", getAmount());
         if (isMolten()) {
           desc += I18n.format("tfc.tooltip.liquid");
         } else {
@@ -264,13 +259,13 @@ public class ItemSmallVessel extends ItemPottery {
         boolean onlySmeltables = true;
         for (ItemStack slot : super.stacks) {
           if (!slot.isEmpty()) {
-            IMetalItem itemMetal = CapabilityMetalItem.getMetalItem(slot);
+            ICapabilityMetal itemMetal = CapabilityMetal.get(slot);
             if (itemMetal != null) {
               materials.merge(itemMetal.getMetal(slot), itemMetal.getSmeltAmount(slot) * slot.getCount(), Integer::sum);
             } else {
               onlySmeltables = false;
             }
-            text.add(1, I18n.format(Mods.Names.TFC + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
+            text.add(1, I18n.format(Mods.ModIDs.TFC + ".tooltip.small_vessel_item", slot.getCount(), slot.getItem().getItemStackDisplayName(slot)));
             hasContent = true;
           }
         }
@@ -284,14 +279,14 @@ public class ItemSmallVessel extends ItemPottery {
               if (key != null) {
                 int metalAmount = entry.getValue();
                 text.add(textPosition, I18n.format(
-                  Mods.Names.TFC + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()), metalAmount,
+                  Mods.ModIDs.TFC + ".tooltip.small_vessel_unit_total", I18n.format(key.getTranslationKey()), metalAmount,
                   Math.round((float) metalAmount / totalAmount * 1000) / 10f));
               }
             }
             text.add(textPosition, ""); // Separator between the contents of the vessel and the above units text, not needed but I feel that it helps visually
           }
         } else {
-          text.add(1, I18n.format(Mods.Names.TFC + ".tooltip.small_vessel_empty"));
+          text.add(1, I18n.format(Mods.ModIDs.TFC + ".tooltip.small_vessel_empty"));
         }
       }
       ISmallVesselHandler.super.addHeatInfo(stack, text);
@@ -359,7 +354,7 @@ public class ItemSmallVessel extends ItemPottery {
 
     @Override
     public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-      IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
       }
@@ -370,7 +365,7 @@ public class ItemSmallVessel extends ItemPottery {
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
       if (!simulate) {
-        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (cap != null) {
           CapabilityFood.applyTrait(cap, FoodTrait.PRESERVED);
         }
@@ -382,7 +377,7 @@ public class ItemSmallVessel extends ItemPottery {
     @Nonnull
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
       ItemStack stack = super.extractItem(slot, amount, simulate).copy();
-      IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }
@@ -391,7 +386,7 @@ public class ItemSmallVessel extends ItemPottery {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-      IItemSize size = CapabilityItemSize.getIItemSize(stack);
+      ICapabilitySize size = CapabilitySize.get(stack);
       if (size != null) {
         if (size.getSize(stack).isSmallerThan(Size.NORMAL)) {
           if (stack.hasCapability(CAPABILITY, null) && !(stack.getItem() instanceof ItemPottery)) {
@@ -454,15 +449,13 @@ public class ItemSmallVessel extends ItemPottery {
     }
 
     /**
-     * This is used for a very unique situation, see #1083 By tracing the call path through
-     * {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in that massive
-     * chain, for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot which a reference has been
-     * obtained to) Thus, we don't actually care about the stack being put in the slot. We do assume that since this stack is being put in the slot, a different
-     * stack is being taken out.
+     * This is used for a very unique situation, see #1083 By tracing the call path through {@link net.minecraft.inventory.Container#slotClick(int, int, ClickType, EntityPlayer)}, the *only* method that can possibly intercept in that
+     * massive chain, for clicking on a slot with a stack is either this one (in which case we handle the previous item stack in the slot which a reference has been obtained to) Thus, we don't actually care about the stack being put in the
+     * slot. We do assume that since this stack is being put in the slot, a different stack is being taken out.
      */
     @Override
     public void beforePutStack(SlotCallback slot, @Nonnull ItemStack stack) {
-      IFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
+      ICapabilityFood cap = slot.getStack().getCapability(CapabilityFood.CAPABILITY, null);
       if (cap != null) {
         CapabilityFood.removeTrait(cap, FoodTrait.PRESERVED);
       }

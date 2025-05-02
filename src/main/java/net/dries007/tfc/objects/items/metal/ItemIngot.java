@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.minecraft.block.state.IBlockState;
@@ -72,8 +67,8 @@ public class ItemIngot extends ItemMetal {
           if (stateTop.getBlock() == BlocksTFC.INGOT_PILE) {
             TEIngotPile te = Helpers.getTE(worldIn, posTop, TEIngotPile.class);
             if (te != null && te.getCount() < 64 && (te.getMetal() == item.metal) && worldIn.checkNoEntityCollision(new AxisAlignedBB(0, 0, 0, 1,
-                                                                                                                                      (1 + te.getCount())
-                                                                                                                                      / 64d, 1).offset(posTop))) {
+              (1 + te.getCount())
+              / 64d, 1).offset(posTop))) {
               te.setCount(te.getCount() + 1);
               worldIn.playSound(null, posTop, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 0.3F, 1.5F);
               stack.shrink(1);

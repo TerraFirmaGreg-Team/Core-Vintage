@@ -1,9 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
+
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
@@ -20,10 +20,6 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.objects.items.ItemsTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -46,7 +42,7 @@ public class ShapelessDamageFoodRecipe extends ShapelessDamageRecipe {
     for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
       ItemStack stack = inv.getStackInSlot(slot);
       if (!stack.isEmpty()) {
-        IFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood foodCap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (foodCap != null && (smallestRottenDate == -1 || smallestRottenDate > foodCap.getRottenDate())) {
           smallestRottenDate = foodCap.getRottenDate();
           foodStack = stack;
@@ -61,9 +57,9 @@ public class ShapelessDamageFoodRecipe extends ShapelessDamageRecipe {
   public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
     // Give straw to player as well.
     EntityPlayer player = ForgeHooks.getCraftingPlayer();
-    if (player != null && !player.world.isRemote && OreDictionaryHelper.doesStackMatchOre(output, "grain"))// only give straw if output is grain
+    if (player != null && !player.world.isRemote && OreDictUtils.contains(output, "grain"))// only give straw if output is grain
     {
-      ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ItemsTFC.STRAW)); // gives one at a time
+      ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ItemsCore.STRAW)); // gives one at a time
     }
 
     return super.getRemainingItems(inventoryCrafting);

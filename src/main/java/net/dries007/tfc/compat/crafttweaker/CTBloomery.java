@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
+
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
@@ -14,7 +11,6 @@ import crafttweaker.api.liquid.ILiquidStack;
 import net.dries007.tfc.api.recipes.BloomeryRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -27,7 +23,7 @@ public class CTBloomery {
   public static void addRecipe(String metal, crafttweaker.api.item.IIngredient additive) {
     //noinspection ConstantConditions
     Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                                       .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
     if (result == null) {
       throw new IllegalArgumentException("Metal specified not found!");
     }
@@ -57,7 +53,7 @@ public class CTBloomery {
   public static void removeRecipe(String metal) {
     //noinspection ConstantConditions
     Metal result = TFCRegistries.METALS.getValuesCollection().stream()
-                                       .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(metal)).findFirst().orElse(null);
     if (result == null) {
       throw new IllegalArgumentException("Metal specified not found!");
     }

@@ -1,9 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
+
+import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -18,10 +18,6 @@ import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
 import net.dries007.tfc.objects.items.ItemTFC;
@@ -36,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class ItemMetal extends ItemTFC implements IMetalItem {
+public class ItemMetal extends ItemTFC implements ICapabilityMetal {
 
   private static final Map<Metal, EnumMap<Metal.ItemType, ItemMetal>> TABLE = new HashMap<>();
   protected final Metal metal;

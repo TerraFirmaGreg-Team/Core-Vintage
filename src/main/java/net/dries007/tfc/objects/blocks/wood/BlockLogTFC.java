@@ -1,11 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
@@ -28,10 +27,6 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -49,7 +44,7 @@ import java.util.Set;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockLogTFC extends BlockLog implements IItemSize {
+public class BlockLogTFC extends BlockLog implements ICapabilitySize {
 
   public static final PropertyBool PLACED = PropertyBool.create("placed");
   public static final PropertyBool SMALL = PropertyBool.create("small");
@@ -62,7 +57,7 @@ public class BlockLogTFC extends BlockLog implements IItemSize {
   public BlockLogTFC(Tree wood) {
     this.wood = wood;
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
-    setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y).withProperty(PLACED, true).withProperty(SMALL, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y).withProperty(PLACED, true).withProperty(SMALL, false));
     setHarvestLevel(ToolClasses.AXE, 0);
     setHardness(2.0F);
     setResistance(5.0F);
@@ -189,7 +184,7 @@ public class BlockLogTFC extends BlockLog implements IItemSize {
 //      if (!state.getValue(PLACED) && ConfigTFC.General.TREE.enableFelling) {
 //        player.setHeldItem(EnumHand.MAIN_HAND, stack); // Reset so we can damage however we want before vanilla
 //        if (!removeTree(world, pos, player, stack,
-//                        OreDictionaryHelper.doesStackMatchOre(stack, "axeStone") || OreDictionaryHelper.doesStackMatchOre(stack, "hammerStone"))) {
+//                        OreDictUtils.contains(stack, "axeStone") || OreDictUtils.contains(stack, "hammerStone"))) {
 //          // Don't remove the block, the rest of the tree broke instead
 //          return false;
 //        }
@@ -284,14 +279,14 @@ public class BlockLogTFC extends BlockLog implements IItemSize {
     for (final BlockPos pos1 : logs.subList(0, Math.min(logs.size(), maxLogs))) {
       if (explosion) {
         // Explosions are 30% Efficient: no TNT powered tree farms.
-        if (Constants.RNG.nextFloat() < 0.3) {
+        if (MathUtils.RNG.nextFloat() < 0.3) {
           if (!world.isRemote) {
             Helpers.spawnItemStack(world, pos.add(0.5d, 0.5d, 0.5d), new ItemStack(Item.getItemFromBlock(this)));
           }
         }
       } else {
         // Stone tools are 60% efficient (default config)
-        if (!stoneTool || Constants.RNG.nextFloat() < ConfigTFC.General.TREE.stoneAxeReturnRate && !world.isRemote) {
+        if (!stoneTool || MathUtils.RNG.nextFloat() < ConfigTFC.General.TREE.stoneAxeReturnRate && !world.isRemote) {
           harvestBlock(world, player, pos1, world.getBlockState(pos1), null, stack);
         }
         stack.damageItem(1, player);

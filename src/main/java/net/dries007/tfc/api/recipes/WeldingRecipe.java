@@ -1,9 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes;
+
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,14 +12,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.compat.jei.IJEISimpleRecipe;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.skills.SkillType;
-import net.dries007.tfc.util.skills.SmithingSkill;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -64,7 +60,7 @@ public class WeldingRecipe extends IForgeRegistryEntry.Impl<WeldingRecipe> imple
   public ItemStack getOutput(@Nullable EntityPlayer player) {
     ItemStack stack = output.copy();
     if (player != null) {
-      IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (cap != null) {
         SmithingSkill skill = cap.getSkill(SkillType.SMITHING);
         if (skill != null && skillType != null) {

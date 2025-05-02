@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
 
 import net.minecraft.block.state.IBlockState;
@@ -25,8 +20,7 @@ public class OreProvider implements IWailaBlock {
   @Override
   public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
     IBlockState state = world.getBlockState(pos);
-    if (state.getBlock() instanceof BlockOreTFC) {
-      BlockOreTFC b = (BlockOreTFC) state.getBlock();
+    if (state.getBlock() instanceof BlockOreTFC b) {
       return ItemOreTFC.get(b.ore, 1);
     }
     return ItemStack.EMPTY;

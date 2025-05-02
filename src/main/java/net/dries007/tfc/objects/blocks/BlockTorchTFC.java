@@ -1,9 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
+
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.SoundType;
@@ -26,11 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
@@ -41,10 +38,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
-public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBlock {
+public class BlockTorchTFC extends BlockTorch implements ICapabilitySize, ILightableBlock {
 
   public BlockTorchTFC() {
-    setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));
+    setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(LIT, true));
     setHardness(0f);
     setLightLevel(0.9375F);
     setTickRandomly(true);
@@ -115,7 +112,7 @@ public class BlockTorchTFC extends BlockTorch implements IItemSize, ILightableBl
     if (!worldIn.isRemote) {
       ItemStack stack = playerIn.getHeldItem(hand);
       if (state.getValue(LIT)) {
-        if (OreDictionaryHelper.doesStackMatchOre(stack, "stickWood")) {
+        if (OreDictUtils.contains(stack, "stickWood")) {
           stack.shrink(1);
           ItemHandlerHelper.giveItemToPlayer(playerIn, new ItemStack(Blocks.TORCH));
         }

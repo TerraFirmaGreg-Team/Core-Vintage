@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
+
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -55,7 +52,7 @@ public class BlockLeavesTFC extends BlockLeaves {
   public BlockLeavesTFC(Tree wood) {
     this.wood = wood;
     if (MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
-    setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
+    setDefaultState(getBlockState().getBaseState().withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
     leavesFancy = true; // Fast / Fancy graphics works correctly
     OreDictionaryHelper.register(this, "tree", "leaves");
     //noinspection ConstantConditions
@@ -229,30 +226,30 @@ public class BlockLeavesTFC extends BlockLeaves {
     double y = pos.getY();
     double z = pos.getZ();
     for (int i = 1; i < RNG.nextInt(4); i++) {
-      switch (RNG.nextInt(4)) {
+      switch (MathUtils.RNG.nextInt(4)) {
         case 1:
           TFCParticles.LEAF1.sendToAllNear(world,
-                                           x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 90);
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (MathUtils.RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (MathUtils.RNG.nextFloat() - 0.5) / particleScale, 90);
           break;
         case 2:
           TFCParticles.LEAF2.sendToAllNear(world,
-                                           x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 70);
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (MathUtils.RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (MathUtils.RNG.nextFloat() - 0.5) / particleScale, 70);
           break;
         case 3:
           TFCParticles.LEAF3.sendToAllNear(world,
-                                           x + RNG.nextFloat() / particleScale,
-                                           y - RNG.nextFloat() / particleScale,
-                                           z + RNG.nextFloat() / particleScale,
-                                           (RNG.nextFloat() - 0.5) / particleScale,
-                                           -0.15D + RNG.nextFloat() / particleScale, (RNG.nextFloat() - 0.5) / particleScale, 80);
+            x + RNG.nextFloat() / particleScale,
+            y - RNG.nextFloat() / particleScale,
+            z + RNG.nextFloat() / particleScale,
+            (MathUtils.RNG.nextFloat() - 0.5) / particleScale,
+            -0.15D + RNG.nextFloat() / particleScale, (MathUtils.RNG.nextFloat() - 0.5) / particleScale, 80);
           break;
       }
     }

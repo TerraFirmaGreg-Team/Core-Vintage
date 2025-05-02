@@ -1,0 +1,329 @@
+
+# Stuff
+gui.advancements=Quests
+
+# Tooltips
+tooltip.tfg.toohot=Too hot to handle! Wear protection.
+tooltip.tfg.toocold=Too cold to handle! Wear protection.
+tooltip.tfg.toolight=Too light to handle! Wear protection.
+
+
+############################################################
+
+# Damage Sources
+death.attack.dehydration=%1$s died of dehydration.
+death.attack.parasites=%1$s died of parasites.
+death.attack.plucking=%1$s died by having it's feathers plucked.
+death.attack.grill=%1$s grilled themselves well-done.
+death.attack.soup=%1$s made their hand into stew.
+death.attack.berry_bush=%1$s was pricked to death.
+death.attack.hypothermia=%1$s froze to death.
+death.attack.hyperthermia=%1$s died of heatstroke.
+death.attack.swarm=%1$s died due to a swarm of bees.
+death.attack.bear_trap=%1$s didn't watch their step
+death.attack.pigvil=%1$s was squashed by a falling...Pigvil?
+
+## Size
+enum.tfg.size.tiny=Tiny
+enum.tfg.size.very_small=Very Small
+enum.tfg.size.small=Small
+enum.tfg.size.normal=Normal
+enum.tfg.size.large=Large
+enum.tfg.size.very_large=Very Large
+enum.tfg.size.huge=Huge
+
+## Weight
+enum.tfg.weight.very_light=Very Light
+enum.tfg.weight.light=Light
+enum.tfg.weight.medium=Medium
+enum.tfg.weight.heavy=Heavy
+enum.tfg.weight.very_heavy=Very Heavy
+
+# Module Core ################################################
+
+# Tooltip
+tooltip.tfg.core.advanced_data.tool_class=§7  -Tool Class:§8 %s
+tooltip.tfg.core.advanced_data.tool_classes=§7  -Tool Classes:§8 %s
+tooltip.tfg.core.advanced_data.ore_dict=§7  -Ore Dictionary Name:§8 %s
+tooltip.tfg.core.advanced_data.ore_dicts=§7  -Ore Dictionary Names:§8 %s
+
+tooltip.tfg.core.hot_or_not.hot=Too hot to handle! Wear protection.
+tooltip.tfg.core.hot_or_not.cold=Too cold to handle! Wear protection.
+tooltip.tfg.core.hot_or_not.light=Too light to handle! Wear protection.
+
+## Item Group
+item_group.tfg.core.name=[ TFG ] Core
+
+## Block
+block.tfg.core.debug.name=Debug Block
+block.tfg.core.puddle.name=Puddle
+block.tfg.core.fire_bricks.name=Fire Bricks
+block.tfg.core.thatch.name=Thatch
+
+## Item
+item.tfg.core.wand.name=Debug Wand
+item.tfg.core.wood_ash.name=Wood Ash
+item.tfg.core.straw.name=Straw
+item.tfg.core.shard.glass.name=Glass Shard
+item.tfg.core.shard.ice.name=Ice Shard
+
+## Effect
+effect.tfg.core.overburdened=Overburdened
+effect.tfg.core.thirst=Thirst
+effect.tfg.core.parasites=Parasites
+effect.tfg.core.swarm=Swarm
+effect.tfg.core.hyperthermia=Hyperthermia
+effect.tfg.core.hypothermia=Hypothermia
+effect.tfg.core.resist_cold=Resist Cold
+effect.tfg.core.resist_heat=Resist Heat
+effect.tfg.core.caffeine=Caffeine
+
+
+
+# Module Device ##############################################
+
+# The One Probe
+top.tfg.device.bloomery.output=Making: %d units of %s
+top.tfg.device.bloomery.ores=Ores: %d/%d
+top.tfg.device.bloomery.fuel=Fuel: %d/%d
+top.tfg.device.blast_furnace.not_formed=Not Formed
+top.tfg.device.latex_extractor.quantity=Latex: %dmB
+top.tfg.device.pit_kiln.unlit=Unlit
+top.tfg.device.pit_kiln.straw=Needs %d Straw
+top.tfg.device.pit_kiln.logs=Needs %d Logs
+top.tfg.device.pit_kiln.remaining.ticks=Remaining %d Ticks
+top.tfg.device.pit_kiln.remaining.hours=Remaining %d Hours
+top.tfg.device.pit_kiln.remaining.minutes=Remaining %d Minutes
+
+# Just Enough Items
+jei.tfg.category.blast_furnace=Blast Furnace recipes
+
+# Tooltip
+tooltip.tfg.device.blast_furnace.ore_amount=Ore
+tooltip.tfg.device.blast_furnace.fuel_amount=Fuel
+tooltip.tfg.device.blast_furnace.melt_amount=Melt
+tooltip.tfg.device.blast_furnace.invalid_structure=Invalid Structure!
+tooltip.tfg.device.powderkeg.amount=Contains %1$dx %2$s
+tooltip.tfg.device.powderkeg.empty=Empty
+tooltip.tfg.device.powderkeg.unseal=Unseal Powderkeg
+tooltip.tfg.device.powderkeg.seal=Seal Powderkeg
+
+## Item Group
+item_group.tfg.device.name=[ TFG ] Device
+
+## Block
+block.tfg.device.alloy_calculator.name=Alloy Calculator
+block.tfg.device.bear_trap.name=Bear Trap
+block.tfg.device.snare.name=Snare
+block.tfg.device.bellows.name=Bellows
+block.tfg.device.blast_furnace.name=Blast Furnace
+block.tfg.device.bloomery.name=Bloomery
+block.tfg.device.molten.name=Molten
+block.tfg.device.bloom.name=Bloom
+block.tfg.device.charcoal_forge.name=Charcoal Forge
+block.tfg.device.crucible.name=Crucible
+block.tfg.device.charcoal_pile.name=Charcoal Pile
+block.tfg.device.fire_pit.name=Firepit
+block.tfg.device.cellar.door.name=Cellar Door
+block.tfg.device.cellar.shelf.name=Cellar Shelf
+block.tfg.device.cellar.wall.name=Cellar Wall
+block.tfg.device.infected_air.name=Infected Air
+block.tfg.device.smeltery.cauldron.name=Smeltery Cauldron
+block.tfg.device.smeltery.firebox.name=Smeltery Firebox
+block.tfg.device.latex_extractor.name=Latex Extractor
+block.tfg.device.freeze_dryer.name=Freeze Dryer
+block.tfg.device.ice_bunker.name=Ice Bunker
+block.tfg.device.powderkeg.name=Powderkeg
+
+## Item
+item.tfg.device.flask.leather.name=Empty Leather Flask
+item.tfg.device.flask.leather.filled.name=Leather Flask (%s)
+item.tfg.device.flask.leather.broken.name=Broken Leather Flask
+item.tfg.device.flask.leather.unfinished.name=Unfinished Leather Flask
+item.tfg.device.flask.metal.name=Empty Metal Flask
+item.tfg.device.flask.metal.filled.name=Metal Flask ( %s )
+item.tfg.device.flask.metal.broken.name=Broken Metal Flask
+item.tfg.device.flask.metal.unfinished.name=Unfinished Metal Flask
+item.tfg.device.firestarter.name=Firestarter
+
+## Sound
+sound.tfg.device.item.firestarter=Firestarter sizzles
+
+sound.tfg.device.block.bellows.blow.air=Bellows puff
+
+
+# Module Animal ##############################################
+
+# TheOneProbe
+top.tfg.animal.male=Male ♂
+top.tfg.animal.female=Female ♀
+top.tfg.animal.has_milk=Can Milk
+top.tfg.animal.can_mate=Can Mate
+top.tfg.animal.has_eggs=Has Eggs
+top.tfg.animal.childhood_end=Becomes adult in %s
+top.tfg.animal.familiarized=Familiarized
+top.tfg.animal.not_familiarized=Not familiarized
+top.tfg.animal.old=Animal is old
+top.tfg.animal.pregnant=Pregnant
+top.tfg.animal.can_shear=Shearable
+top.tfg.animal.pregnant_end=Will give birth in %s days
+
+
+## Item Group
+item_group.tfg.animal.name=[ TFG ] Animal
+
+## Block
+block.tfg.animal.nest_box.name=Nest Box
+
+## Item
+item.tfg.animal.halter.name=Halter
+item.tfg.animal.product.bladder.name=Bladder
+item.tfg.animal.product.wool.name=Wool
+item.tfg.animal.product.wool_yarn.name=Wool Yarn
+item.tfg.animal.product.wool_cloth.name=Wool Cloth
+item.tfg.animal.product.silk_cloth.name=Silk Cloth
+
+## Entity
+entity.tfg.animal.sheep.name=Sheep
+entity.tfg.animal.cow.name=Cow
+entity.tfg.animal.grizzlybear.name=Grizzly Bear
+entity.tfg.animal.pig.name=Pig
+entity.tfg.animal.chicken.name=Chicken
+entity.tfg.animal.deer.name=Deer
+entity.tfg.animal.pheasant.name=Pheasant
+entity.tfg.animal.rabbit.name=Rabbit
+entity.tfg.animal.wolf.name=Wolf
+entity.tfg.animal.horse.name=Horse
+entity.tfg.animal.donkey.name=Donkey
+entity.tfg.animal.mule.name=Mule
+entity.tfg.animal.parrot.name=Parrot
+entity.tfg.animal.llama.name=Llama
+entity.tfg.animal.polarbear.name=Polar Bear
+entity.tfg.animal.alpaca.name=Alpaca
+entity.tfg.animal.duck.name=Duck
+entity.tfg.animal.goat.name=Goat
+entity.tfg.animal.panther.name=Black Panther
+entity.tfg.animal.ocelot.name=Ocelot
+entity.tfg.animal.sabertooth.name=Saber Tooth
+entity.tfg.animal.camel.name=Camel
+entity.tfg.animal.lion.name=Lion
+entity.tfg.animal.hyena.name=Hyena
+entity.tfg.animal.direwolf.name=Direwolf
+entity.tfg.animal.hare.name=Hare
+entity.tfg.animal.boar.name=Boar
+entity.tfg.animal.zebu.name=Zebu
+entity.tfg.animal.gazelle.name=Gazelle
+entity.tfg.animal.wildebeest.name=Wildebeest
+entity.tfg.animal.quail.name=Quail
+entity.tfg.animal.grouse.name=Grouse
+entity.tfg.animal.mongoose.name=Mongoose
+entity.tfg.animal.turkey.name=Turkey
+entity.tfg.animal.jackal.name=Jackal
+entity.tfg.animal.muskox.name=MuskOx
+entity.tfg.animal.yak.name=Yak
+entity.tfg.animal.blackbear.name=Black Bear
+entity.tfg.animal.cougar.name=Cougar
+entity.tfg.animal.coyote.name=Coyote
+
+## Sound
+sound.tfg.animal.entity.deer.say=Deer snorts
+sound.tfg.animal.entity.deer.cry=Deer cries
+sound.tfg.animal.entity.deer.hurt=Deer hurts
+sound.tfg.animal.entity.deer.death=Deer dies
+sound.tfg.animal.entity.bear.say=Bear grunts
+sound.tfg.animal.entity.bear.cry=Bear cries
+sound.tfg.animal.entity.bear.cub.cry=Baby bear cries
+sound.tfg.animal.entity.bear.hurt=Bear hurts
+sound.tfg.animal.entity.bear.death=Bear dies
+sound.tfg.animal.entity.pheasant.say=Pheasant clucks
+sound.tfg.animal.entity.pheasant.chick.say=Baby pheasant clucks
+sound.tfg.animal.entity.pheasant.hurt=Pheasant hurts
+sound.tfg.animal.entity.pheasant.death=Pheasant dies
+sound.tfg.animal.entity.alpaca.say=Alpaca bleats
+sound.tfg.animal.entity.alpaca.cry=Alpaca bleats
+sound.tfg.animal.entity.alpaca.hurt=Alpaca hurt
+sound.tfg.animal.entity.alpaca.death=Alpaca dies
+sound.tfg.animal.entity.alpaca.step=Footsteps
+sound.tfg.animal.entity.duck.say=Duck clucks
+sound.tfg.animal.entity.duck.cry=Duck clucks
+sound.tfg.animal.entity.duck.hurt=Duck hurt
+sound.tfg.animal.entity.duck.death=Duck dies
+sound.tfg.animal.entity.goat.say=Goat baahs
+sound.tfg.animal.entity.goat.cry=Goat baahs
+sound.tfg.animal.entity.goat.hurt=Goat hurt
+sound.tfg.animal.entity.goat.death=Goat dies
+sound.tfg.animal.entity.camel.say=Camel grunts
+sound.tfg.animal.entity.camel.cry=Camel cries
+sound.tfg.animal.entity.camel.hurt=Camel hurt
+sound.tfg.animal.entity.camel.death=Camel dies
+sound.tfg.animal.entity.panther.say=Panther grunts
+sound.tfg.animal.entity.panther.cry=Panther cries
+sound.tfg.animal.entity.panther.hurt=Panther hurt
+sound.tfg.animal.entity.panther.death=Panther dies
+sound.tfg.animal.entity.sabertooth.say=Saber Tooth grunts
+sound.tfg.animal.entity.sabertooth.cry=Saber Tooth cries
+sound.tfg.animal.entity.sabertooth.hurt=Saber Tooth hurt
+sound.tfg.animal.entity.sabertooth.death=Saber Tooth dies
+sound.tfg.animal.entity.lion.say=Lion grunts
+sound.tfg.animal.entity.lion.cry=Lion roars
+sound.tfg.animal.entity.lion.hurt=Lion hurt
+sound.tfg.animal.entity.lion.death=Lion dies
+sound.tfg.animal.entity.hyena.say=Hyena grunts
+sound.tfg.animal.entity.hyena.cry=Hyena cries
+sound.tfg.animal.entity.hyena.hurt=Hyena hurts
+sound.tfg.animal.entity.hyena.death=Hyena dies
+sound.tfg.animal.entity.zebu.say=Zebu grunts
+sound.tfg.animal.entity.zebu.cry=Zebu cries
+sound.tfg.animal.entity.zebu.hurt=Zebu hurts
+sound.tfg.animal.entity.zebu.death=Zebu dies
+sound.tfg.animal.entity.muskox.say=Muskox grunts
+sound.tfg.animal.entity.muskox.cry=Muskox cries
+sound.tfg.animal.entity.muskox.hurt=Muskox hurts
+sound.tfg.animal.entity.muskox.death=Muskox dies
+sound.tfg.animal.entity.turkey.say=Turkey grunts
+sound.tfg.animal.entity.turkey.cry=Turkey cries
+sound.tfg.animal.entity.turkey.hurt=Turkey hurts
+sound.tfg.animal.entity.turkey.death=Turkey dies
+sound.tfg.animal.entity.boar.say=Boar grunts
+sound.tfg.animal.entity.boar.cry=Boar cries
+sound.tfg.animal.entity.boar.hurt=Boar hurts
+sound.tfg.animal.entity.boar.death=Boar dies
+sound.tfg.animal.entity.wildebeest.say=Wildebeest grunts
+sound.tfg.animal.entity.wildebeest.hurt=Wildebeest hurts
+sound.tfg.animal.entity.wildebeest.death=Wildebeest dies
+sound.tfg.animal.entity.quail.say=Quail chirps
+sound.tfg.animal.entity.quail.hurt=Quail hurts
+sound.tfg.animal.entity.quail.death=Quail dies
+sound.tfg.animal.entity.grouse.say=Grouse chirps
+sound.tfg.animal.entity.grouse.hurt=Grouse hurts
+sound.tfg.animal.entity.grouse.death=Grouse dies
+sound.tfg.animal.entity.cougar.say=Cougar grunts
+sound.tfg.animal.entity.cougar.cry=Cougar cries
+sound.tfg.animal.entity.cougar.hurt=Cougar hurts
+sound.tfg.animal.entity.cougar.death=Cougar dies
+sound.tfg.animal.entity.coyote.say=Coyote grunts
+sound.tfg.animal.entity.coyote.cry=Coyote cries
+sound.tfg.animal.entity.coyote.hurt=Coyote hurts
+sound.tfg.animal.entity.coyote.death=Coyote dies
+sound.tfg.animal.entity.gazelle.say=Gazelle grunts
+sound.tfg.animal.entity.gazelle.hurt=Gazelle hurts
+sound.tfg.animal.entity.gazelle.death=Gazelle dies
+sound.tfg.animal.entity.direwolf.cry=Direwolf howls
+sound.tfg.animal.entity.direwolf.say=Direwolf barks
+sound.tfg.animal.entity.direwolf.hurt=Direwolf whimpers
+sound.tfg.animal.entity.direwolf.death=Direwolf dies
+sound.tfg.animal.entity.yak.say=Yak moos
+sound.tfg.animal.entity.yak.hurt=Yak groans
+sound.tfg.animal.entity.yak.death=Yak dies
+sound.tfg.animal.entity.jackal.say=Jackal grunts
+sound.tfg.animal.entity.jackal.cry=Jackal yelps
+sound.tfg.animal.entity.jackal.hurt=Jackal hurts
+sound.tfg.animal.entity.jackal.death=Jackal dies
+sound.tfg.animal.entity.mongoose.say=Mongoose grunts
+sound.tfg.animal.entity.mongoose.hurt=Mongoose hurts
+sound.tfg.animal.entity.mongoose.death=Mongoose dies
+sound.tfg.animal.entity.feline.step=Feline walks
+sound.tfg.animal.entity.cricket=Crickets
+sound.tfg.animal.entity.frog=Frogs
+sound.tfg.animal.entity.rooster.cry=Rooster cries
+

@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
+
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -16,7 +13,6 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.util.skills.SmithingSkill;
 
 import javax.annotation.Nonnull;
 

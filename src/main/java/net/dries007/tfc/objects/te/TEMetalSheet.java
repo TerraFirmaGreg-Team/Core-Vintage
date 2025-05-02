@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
+
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
 
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
@@ -20,7 +17,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class TEMetalSheet extends TEBase {
+public class TEMetalSheet extends BaseTile {
 
   private final boolean[] faces;
 
@@ -29,8 +26,8 @@ public class TEMetalSheet extends TEBase {
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-    super.onDataPacket(net, pkt);
+  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+    super.onDataPacket(net, packet);
     markForBlockUpdate();
   }
 

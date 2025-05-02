@@ -1,0 +1,74 @@
+package su.terrafirmagreg.modules.animal;
+
+import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.module.api.ModuleInfo;
+import su.terrafirmagreg.framework.module.spi.ModuleBase;
+import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
+import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
+import su.terrafirmagreg.modules.animal.init.FeaturesAnimal;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
+import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
+import su.terrafirmagreg.modules.animal.plugin.top.TheOneProbeAnimal;
+
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+
+import org.jetbrains.annotations.NotNull;
+
+@ModuleInfo(
+  id = "animal",
+  author = "Xikaro",
+  version = "1.0.0",
+  description = "Animal module"
+)
+public final class ModuleAnimal extends ModuleBase {
+
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class.getSimpleName());
+
+
+  public ModuleAnimal() {
+
+    enableRegistry();
+    enableNetwork();
+    enableFeature();
+  }
+
+
+  @Override
+  public void onRegistry(IRegistryRegistrar registrar) {
+    registrar.group("halter");
+
+    BlocksAnimal.onRegister(registrar);
+    ItemsAnimal.onRegister(registrar);
+    EntitiesAnimal.onRegister(registrar);
+    SoundsAnimal.onRegister(registrar);
+    LootTablesAnimal.onRegister(registrar);
+  }
+
+  @Override
+  public void onRegistryClient(IRegistryRegistrar registrar) {
+
+    EntitiesAnimal.onClientRegister(registrar);
+
+  }
+
+  @Override
+  public void onFeature(IFeatureRegistrar registrar) {
+
+    FeaturesAnimal.onRegister(registrar);
+  }
+
+
+  @Override
+  public void onInit(FMLInitializationEvent event) {
+
+    TheOneProbeAnimal.init();
+  }
+
+  @Override
+  public @NotNull LoggingHelper getLogger() {
+    return LOGGER;
+  }
+}

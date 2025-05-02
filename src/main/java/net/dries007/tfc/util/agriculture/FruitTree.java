@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.agriculture;
 
 import net.minecraft.client.gui.GuiScreen;
@@ -16,9 +11,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import net.dries007.tfc.util.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
+
 import net.dries007.tfc.world.classic.worldgen.WorldGenFruitTrees;
 
 import javax.annotation.Nullable;
@@ -80,7 +77,9 @@ public enum FruitTree implements IFruitTree {
   public boolean isFlowerMonth(Month month) {
     Month testing = this.flowerMonthStart;
     for (int i = 0; i < this.floweringMonths; i++) {
-      if (testing.equals(month)) {return true;}
+      if (testing.equals(month)) {
+        return true;
+      }
       testing = testing.next();
     }
     return false;
@@ -90,7 +89,9 @@ public enum FruitTree implements IFruitTree {
   public boolean isHarvestMonth(Month month) {
     Month testing = this.harvestMonthStart;
     for (int i = 0; i < this.harvestingMonths; i++) {
-      if (testing.equals(month)) {return true;}
+      if (testing.equals(month)) {
+        return true;
+      }
       testing = testing.next();
     }
     return false;

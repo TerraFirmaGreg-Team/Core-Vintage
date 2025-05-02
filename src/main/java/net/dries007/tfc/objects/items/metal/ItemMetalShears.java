@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.metal;
 
 import net.minecraft.block.Block;
@@ -38,7 +33,7 @@ public class ItemMetalShears extends ItemMetalTool {
       BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ);
       if (target.isShearable(itemstack, entity.world, pos)) {
         java.util.List<ItemStack> drops = target.onSheared(itemstack, entity.world, pos,
-                                                           net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.FORTUNE, itemstack));
+          net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.FORTUNE, itemstack));
 
         java.util.Random rand = new java.util.Random();
         for (ItemStack stack : drops) {
@@ -66,7 +61,7 @@ public class ItemMetalShears extends ItemMetalTool {
       net.minecraftforge.common.IShearable target = (net.minecraftforge.common.IShearable) block;
       if (target.isShearable(itemstack, player.world, pos)) {
         java.util.List<ItemStack> drops = target.onSheared(itemstack, player.world, pos,
-                                                           net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.FORTUNE, itemstack));
+          net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.FORTUNE, itemstack));
         java.util.Random rand = new java.util.Random();
 
         for (ItemStack stack : drops) {
@@ -75,8 +70,8 @@ public class ItemMetalShears extends ItemMetalTool {
           double d1 = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
           double d2 = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
           net.minecraft.entity.item.EntityItem entityitem = new net.minecraft.entity.item.EntityItem(player.world,
-                                                                                                     (double) pos.getX() + d,
-                                                                                                     (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
+            (double) pos.getX() + d,
+            (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
           entityitem.setDefaultPickupDelay();
           player.world.spawnEntity(entityitem);
         }

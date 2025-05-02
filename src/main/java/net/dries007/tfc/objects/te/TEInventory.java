@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
+
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +26,7 @@ import java.util.function.BiFunction;
  * based on the input side Without overriding the getCapability methods, this will not accept items from external automation
  */
 @ParametersAreNonnullByDefault
-public abstract class TEInventory extends TEBase implements ISlotCallback {
+public abstract class TEInventory extends BaseTile implements ISlotCallback {
 
   protected final ItemStackHandler inventory;
 

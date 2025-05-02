@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.command;
 
 import net.minecraft.command.CommandBase;
@@ -210,27 +205,27 @@ public class CommandFindVeins extends CommandBase {
         ChunkDataTFC chunkData = ChunkDataTFC.get(target);
 
         chunkData.getGeneratedVeins().stream()
-                 .filter(vein -> !veinsFound.contains(vein.getPos()))
-                 .filter(vein -> filter == null || filter.equals(vein.getType()))
-                 .forEach(vein ->
-                          {
-                            veinsFound.add(vein.getPos());
-                            String veinName = "Unregistered Vein";
-                            if (vein.getType() != null) {
-                              veinName = vein.getType().getRegistryName();
-                            }
-                            if (type == 0) {
-                              listener.sendMessage(new TextComponentTranslation("tfc.command.findveins.output", veinName, vein.getPos()));
-                            } else if (type == 1) {
-                              outputLog.add(String.format("Found %s at %s", veinName, vein.getPos()));
-                            } else if (type == 2 && vein.getType() != null) {
-                              int count = 1;
-                              if (veinRateMap.containsKey(vein.getType())) {
-                                count += veinRateMap.get(vein.getType());
-                              }
-                              veinRateMap.put(vein.getType(), count);
-                            }
-                          });
+          .filter(vein -> !veinsFound.contains(vein.getPos()))
+          .filter(vein -> filter == null || filter.equals(vein.getType()))
+          .forEach(vein ->
+          {
+            veinsFound.add(vein.getPos());
+            String veinName = "Unregistered Vein";
+            if (vein.getType() != null) {
+              veinName = vein.getType().getRegistryName();
+            }
+            if (type == 0) {
+              listener.sendMessage(new TextComponentTranslation("tfc.command.findveins.output", veinName, vein.getPos()));
+            } else if (type == 1) {
+              outputLog.add(String.format("Found %s at %s", veinName, vein.getPos()));
+            } else if (type == 2 && vein.getType() != null) {
+              int count = 1;
+              if (veinRateMap.containsKey(vein.getType())) {
+                count += veinRateMap.get(vein.getType());
+              }
+              veinRateMap.put(vein.getType(), count);
+            }
+          });
 
         if (type == 2) {
           // Also count rock layers

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.wrappers;
 
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -43,7 +38,7 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     ItemStack recipeOutput = new ItemStack(recipe.getOutputState().getBlock());
     if (recipeOutput.isEmpty()) {
       // Failed to grab the output block, using debug block
-      recipeOutput = new ItemStack(BlocksCore.DEBUG.get());
+      recipeOutput = new ItemStack(BlocksCore.DEBUG);
     }
     this.output = recipeOutput;
   }

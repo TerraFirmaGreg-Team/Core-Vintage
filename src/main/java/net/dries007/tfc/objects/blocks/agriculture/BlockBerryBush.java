@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.data.DamageSources;
@@ -69,7 +64,7 @@ public class BlockBerryBush extends Block implements IGrowingPlant {
     setHardness(1.0F);
     setTickRandomly(true);
     setSoundType(SoundType.PLANT);
-    setDefaultState(blockState.getBaseState().withProperty(FRUITING, false));
+    setDefaultState(getBlockState().getBaseState().withProperty(FRUITING, false));
   }
 
   public static BlockBerryBush get(IBerryBush bush) {

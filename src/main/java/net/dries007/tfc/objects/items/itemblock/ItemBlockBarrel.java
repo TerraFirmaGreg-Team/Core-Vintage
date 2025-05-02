@@ -1,9 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.itemblock;
+
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -41,13 +41,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandlerComplex;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -123,22 +118,22 @@ public class ItemBlockBarrel extends ItemBlockTFC {
 
       if (fluidStack == null || fluidStack.amount == 0) {
         if (inventory.isEmpty()) {
-          tooltip.add(TextFormatting.BLUE + I18n.format(Mods.Names.TFC + ".tooltip.barrel_empty"));
+          tooltip.add(TextFormatting.BLUE + I18n.format(Mods.ModIDs.TFC + ".tooltip.barrel_empty"));
         } else {
           tooltip.add(TextFormatting.BLUE + I18n.format(
-            Mods.Names.TFC + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+            Mods.ModIDs.TFC + ".tooltip.barrel_item", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
         }
       } else {
-        tooltip.add(TextFormatting.BLUE + I18n.format(Mods.Names.TFC + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
+        tooltip.add(TextFormatting.BLUE + I18n.format(Mods.ModIDs.TFC + ".tooltip.barrel_fluid", fluidStack.amount, fluidStack.getLocalizedName()));
 
         if (!inventory.isEmpty()) {
           tooltip.add(TextFormatting.BLUE + I18n.format(
-            Mods.Names.TFC + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
+            Mods.ModIDs.TFC + ".tooltip.barrel_item_in_fluid", inventory.getCount(), inventory.getItem().getItemStackDisplayName(inventory)));
         }
       }
 
       String formattedDate = ICalendarFormatted.getTimeAndDate(stack.getTagCompound()
-                                                                    .getLong("sealedCalendarTick"), Calendar.CALENDAR_TIME.getDaysInMonth());
+        .getLong("sealedCalendarTick"), Calendar.CALENDAR_TIME.getDaysInMonth());
       tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("waila.tfc.barrel.sealed", formattedDate).getFormattedText());
     }
   }
@@ -186,7 +181,7 @@ public class ItemBlockBarrel extends ItemBlockTFC {
   }
 
   // This is not an item handler, but still saves items from a sealed barrel
-  public static class ItemBarrelFluidHandler extends FluidWhitelistHandlerComplex {
+  public static class ItemBarrelFluidHandler extends CapabilityProviderFluid.WhitelistComplex {
 
     protected ItemBarrelFluidHandler(@Nonnull ItemStack container) {
       super(container, ConfigTFC.Devices.BARREL.tank, ConfigTFC.Devices.BARREL.fluidWhitelist);

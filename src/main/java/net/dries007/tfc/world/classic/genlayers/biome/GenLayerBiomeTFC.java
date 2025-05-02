@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.genlayers.biome;
 
 import net.minecraft.world.biome.Biome;
@@ -27,7 +22,7 @@ public class GenLayerBiomeTFC extends GenLayerTFC {
     if (ConfigTFC.General.DEBUG.debugWorldGenSafe) {
       TerraFirmaCraft.getLog().info("Worldgen biome list (ints): {}", biomes);
       TerraFirmaCraft.getLog()
-                     .info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes).mapToObj(Biome::getBiomeForId).map(Objects::toString).toArray());
+        .info("Worldgen biome list (names): {}", (Object) Arrays.stream(biomes).mapToObj(Biome::getBiomeForId).map(Objects::toString).toArray());
     }
   }
 

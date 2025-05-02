@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.itemblock;
+
+import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.blocks.devices.BlockSluice;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -35,11 +31,11 @@ public class ItemBlockSluice extends ItemBlockTFC {
       return EnumActionResult.FAIL;
     } else {
       if (!worldIn.getBlockState(pos).getMaterial().isReplaceable() || !worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getMaterial()
-                                                                               .isReplaceable()) {
+        .isReplaceable()) {
         pos = pos.up(); //try the above
       }
       if (!worldIn.getBlockState(pos).getMaterial().isReplaceable() || !worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getMaterial()
-                                                                               .isReplaceable()) {
+        .isReplaceable()) {
         return EnumActionResult.FAIL;
       }
       ItemStack stack = player.getHeldItem(hand);
@@ -48,9 +44,9 @@ public class ItemBlockSluice extends ItemBlockTFC {
       if (player.canPlayerEdit(upperPos, facing, stack) && player.canPlayerEdit(pos, facing, stack)) {
         stack.shrink(1);
         IBlockState lowerState = this.block.getDefaultState().withProperty(BlockSluice.FACING, player.getHorizontalFacing())
-                                           .withProperty(BlockSluice.UPPER, false);
+          .withProperty(BlockSluice.UPPER, false);
         IBlockState upperState = this.block.getDefaultState().withProperty(BlockSluice.FACING, player.getHorizontalFacing())
-                                           .withProperty(BlockSluice.UPPER, true);
+          .withProperty(BlockSluice.UPPER, true);
         worldIn.setBlockState(pos, lowerState);
         worldIn.setBlockState(upperPos, upperState);
         return EnumActionResult.SUCCESS;

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
 
 import net.minecraft.block.Block;
@@ -63,9 +58,9 @@ public class CTChisel {
     ItemStack item = (ItemStack) output.getInternal();
     List<ChiselRecipe> removeList = new ArrayList<>();
     TFCRegistries.CHISEL.getValuesCollection()
-                        .stream()
-                        .filter(x -> x.getOutputState().getBlock().equals(outputBlock))
-                        .forEach(removeList::add);
+      .stream()
+      .filter(x -> x.getOutputState().getBlock().equals(outputBlock))
+      .forEach(removeList::add);
     for (ChiselRecipe rem : removeList) {
       CraftTweakerAPI.apply(new IAction() {
         @Override

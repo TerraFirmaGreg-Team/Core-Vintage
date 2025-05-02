@@ -1,9 +1,7 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.ceramics;
+
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,10 +31,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.util.FluidTransferHelper;
@@ -70,8 +66,8 @@ public class ItemJug extends ItemPottery {
             world.playSound(null, player.posX, player.posY + 0.5, player.posZ, TFCSounds.JUG_FILL, SoundCategory.BLOCKS, 1.0F, 0.5F);
             Vec3d look = player.getLookVec();
             ((WorldServer) world).spawnParticle(EnumParticleTypes.WATER_DROP,
-                                                player.posX + look.x,
-                                                player.posY + 0.3 + world.rand.nextDouble(), player.posZ + look.z, 42, 0.1D, 0.4D, 0.2D, 0.0D);
+              player.posX + look.x,
+              player.posY + 0.3 + world.rand.nextDouble(), player.posZ + look.z, 42, 0.1D, 0.4D, 0.2D, 0.0D);
           } else {
             player.setActiveHand(hand);
           }
@@ -111,7 +107,7 @@ public class ItemJug extends ItemPottery {
           drinkable.onDrink((EntityPlayer) entityLiving);
         }
       }
-      if (Constants.RNG.nextFloat() < 0.02) // 1/50 chance, same as 1.7.10
+      if (MathUtils.RNG.nextFloat() < 0.02) // 1/50 chance, same as 1.7.10
       {
         stack.shrink(1);
         worldIn.playSound(null, entityLiving.getPosition(), TFCSounds.CERAMIC_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f);
@@ -169,7 +165,7 @@ public class ItemJug extends ItemPottery {
 
   @Override
   public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new FluidWhitelistHandler(stack, CAPACITY, FluidsTFC.getAllWrappers().stream().filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
-                                                               .map(FluidWrapper::get).collect(Collectors.toSet()));
+    return new CapabilityProviderFluid.Whitelist(stack, CAPACITY, FluidsTFC.getAllWrappers().stream().filter(x -> x.get(DrinkableProperty.DRINKABLE) != null)
+      .map(FluidWrapper::get).collect(Collectors.toSet()));
   }
 }

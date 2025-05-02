@@ -1,9 +1,12 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
+
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.InventoryHelper;
@@ -16,16 +19,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodTrait;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.blocks.BlockLargeVessel;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -157,7 +153,7 @@ public class TELargeVessel extends TEInventory implements IItemHandlerSidedCallb
 
   @Override
   public boolean isItemValid(int slot, ItemStack stack) {
-    IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
+    ICapabilitySize sizeCap = CapabilitySize.get(stack);
     if (sizeCap != null) {
       return sizeCap.getSize(stack).isSmallerThan(Size.LARGE);
     }

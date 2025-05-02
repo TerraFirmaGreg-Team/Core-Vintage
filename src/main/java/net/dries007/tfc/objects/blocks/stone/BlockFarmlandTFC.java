@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.stone;
+
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -26,7 +23,6 @@ import net.minecraftforge.common.IPlantable;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.util.FallingBlockManager;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -60,7 +56,7 @@ public class BlockFarmlandTFC extends BlockRockVariantFallable {
 
   public BlockFarmlandTFC(Rock.Type type, Rock rock) {
     super(type, rock);
-    setDefaultState(blockState.getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
+    setDefaultState(getBlockState().getBaseState().withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
     setTickRandomly(true);
     setLightOpacity(255);
     useNeighborBrightness = true;

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.biomes;
 
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
@@ -18,7 +13,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.world.classic.spawner.WorldEntitySpawnerTFC;
+import net.dries007.tfc.world.classic.spawner.WorldEntitySpawner;
 
 import javax.annotation.Nonnull;
 import java.awt.Color;
@@ -71,7 +66,7 @@ public class BiomeTFC extends Biome {
       }
     }
     // todo: Experimental Livestock respawning
-    for (Class<? extends EntityLiving> entityClass : WorldEntitySpawnerTFC.LIVESTOCK.keySet()) {
+    for (Class<? extends EntityLiving> entityClass : WorldEntitySpawner.LIVESTOCK.keySet()) {
       spawnableCreatureList.add(new Biome.SpawnListEntry(entityClass, 300, 1, 1));
     }
   }

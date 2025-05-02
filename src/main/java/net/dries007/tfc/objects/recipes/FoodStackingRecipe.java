@@ -1,9 +1,7 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.recipes;
+
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -14,8 +12,6 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -59,7 +55,7 @@ public class FoodStackingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implem
       ItemStack stack = inv.getStackInSlot(i);
       if (!stack.isEmpty()) {
         // Get the food capability
-        IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+        ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
         if (cap != null) {
           // Increment output amount
           outputAmount++;
@@ -79,7 +75,7 @@ public class FoodStackingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implem
 
     // Update the capability and count of the result
     resultStack.setCount(outputAmount);
-    IFood cap = resultStack.getCapability(CapabilityFood.CAPABILITY, null);
+    ICapabilityFood cap = resultStack.getCapability(CapabilityFood.CAPABILITY, null);
     if (cap != null) {
       cap.setCreationDate(minCreationDate);
     }

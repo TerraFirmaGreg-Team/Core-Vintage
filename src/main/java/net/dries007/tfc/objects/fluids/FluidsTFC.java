@@ -1,10 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.fluids;
 
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
@@ -26,10 +25,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.ConfigTFC.General;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.properties.DrinkableProperty;
@@ -47,12 +42,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public final class FluidsTFC {
 
   private static final ResourceLocation STILL = new ResourceLocation(TFC, "blocks/fluid_still");
   private static final ResourceLocation FLOW = new ResourceLocation(TFC, "blocks/fluid_flow");
+
+  private static final ResourceLocation WATER_STILL = new ResourceLocation(TFC, "blocks/water_still");
+  private static final ResourceLocation WATER_FLOW = new ResourceLocation(TFC, "blocks/water_flow");
+  private static final ResourceLocation FRESH_WATER_STILL = new ResourceLocation(TFC, "blocks/fresh_water_still");
+  private static final ResourceLocation FRESH_WATER_FLOW = new ResourceLocation(TFC, "blocks/fresh_water_flow");
 
   private static final HashBiMap<Fluid, FluidWrapper> WRAPPERS = HashBiMap.create();
   private static final ResourceLocation LAVA_STILL = new ResourceLocation(TFC, "blocks/lava_still");
@@ -99,28 +99,41 @@ public final class FluidsTFC {
     return DYE_FLUIDS.get(dyeColor);
   }
 
+  public static void registerFluidsPost() {
+//noinspection ConstantConditions
+    allMetalFluids = ImmutableMap.<Metal, FluidWrapper>builder().putAll(
+      TFCRegistries.METALS.getValuesCollection()
+        .stream()
+        .collect(Collectors.toMap(
+          metal -> metal,
+          metal -> registerFluid(new Fluid(metal.getRegistryName().getPath(), LAVA_STILL, LAVA_FLOW, metal.getColor()))
+            .with(MetalProperty.METAL, new MetalProperty(metal))
+        ))
+    ).build();
+  }
+
   public static void registerFluids() {
-    FluidsCore.FRESH_WATER = registerFluid(new Fluid("fresh_water", STILL, FLOW, 0xFF296ACD)).with(DrinkableProperty.DRINKABLE, player -> {
+    FluidsCore.FRESH_WATER = registerFluid(new Fluid("fresh_water", FRESH_WATER_STILL, FRESH_WATER_FLOW, 0xFF296ACD)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC foodStatsTFC) {
         foodStatsTFC.addThirst(40);
       }
     });
-    FluidsCore.HOT_WATER = registerFluid(new Fluid("hot_water", STILL, FLOW, 0xFF345FDA).setTemperature(350));
-    FluidsCore.SALT_WATER = registerFluid(new Fluid("salt_water", STILL, FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
+    FluidsCore.HOT_WATER = registerFluid(new Fluid("hot_water", WATER_STILL, WATER_FLOW, 0xFF345FDA).setTemperature(350));
+    FluidsCore.SALT_WATER = registerFluid(new Fluid("salt_water", WATER_STILL, WATER_FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
       if (player.getFoodStats() instanceof FoodStatsTFC) {
         ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
-        if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
-          player.addPotionEffect(new PotionEffect(EffectsCore.THIRST.get(), 600, 0));
+        if (MathUtils.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
+          player.addPotionEffect(new PotionEffect(EffectsCore.THIRST, 600, 0));
         }
       }
     });
 
     DrinkableProperty alcoholProperty = player -> {
-      IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (player.getFoodStats() instanceof FoodStatsTFC && playerData != null) {
         ((FoodStatsTFC) player.getFoodStats()).addThirst(10);
         playerData.addIntoxicatedTime(4 * ICalendar.TICKS_IN_HOUR);
-        if (playerData.getIntoxicatedTime() > 24 * ICalendar.TICKS_IN_HOUR && Constants.RNG.nextFloat() < 0.5f) {
+        if (playerData.getIntoxicatedTime() > 24 * ICalendar.TICKS_IN_HOUR && MathUtils.RNG.nextFloat() < 0.5f) {
           player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 1200, 1));
         }
       }
@@ -165,32 +178,21 @@ public final class FluidsTFC {
       FluidsCore.TEA = registerFluid(new Fluid("tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
         if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
           foodStats.addThirst(40);
-          player.addPotionEffect(new PotionEffect(EffectsCore.CAFFEINE.get(), 14400, 0));
+          player.addPotionEffect(new PotionEffect(EffectsCore.CAFFEINE, 14400, 0));
         }
       }),
       FluidsCore.SWEET_TEA = registerFluid(new Fluid("sweet_tea", STILL, FLOW, 0xFF1C120B)).with(DrinkableProperty.DRINKABLE, player -> {
         if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
           foodStats.addThirst(40);
-          player.addPotionEffect(new PotionEffect(EffectsCore.CAFFEINE.get(), 14400, 1));
+          player.addPotionEffect(new PotionEffect(EffectsCore.CAFFEINE, 14400, 1));
         }
       }),
       FluidsCore.SWEET_COFFEE = registerFluid(new Fluid("sweet_coffee", STILL, FLOW, 0xFF210B00)).with(DrinkableProperty.DRINKABLE, player -> {
         if (player.getFoodStats() instanceof FoodStatsTFC foodStats) {
           foodStats.addThirst(40);
-          player.addPotionEffect(new PotionEffect(EffectsCore.CAFFEINE.get(), 14400, 3));
+          player.addPotionEffect(new PotionEffect(EffectsCore.CAFFEINE, 14400, 3));
         }
       })
-    ).build();
-
-    //noinspection ConstantConditions
-    allMetalFluids = ImmutableMap.<Metal, FluidWrapper>builder().putAll(
-      TFCRegistries.METALS.getValuesCollection()
-        .stream()
-        .collect(Collectors.toMap(
-          metal -> metal,
-          metal -> registerFluid(new Fluid(metal.getRegistryName().getPath(), LAVA_STILL, LAVA_FLOW, metal.getColor()))
-            .with(MetalProperty.METAL, new MetalProperty(metal))
-        ))
     ).build();
 
     DYE_FLUIDS.putAll(Arrays.stream(EnumDyeColor.values()).collect(Collectors.toMap(

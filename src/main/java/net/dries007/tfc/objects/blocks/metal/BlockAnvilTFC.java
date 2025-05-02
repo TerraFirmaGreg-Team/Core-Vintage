@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.metal;
+
+import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -193,8 +190,8 @@ public class BlockAnvilTFC extends Block {
           double z = pos.getZ() + 0.5;
           for (int i = 0; i < RNG.nextInt(5) + 3; i++) {
             TFCParticles.SPARK.sendToAllNear(worldIn,
-                                             x + (RNG.nextFloat() - 0.5) / 7, y,
-                                             z + (RNG.nextFloat() - 0.5) / 7, 6 * (RNG.nextFloat() - 0.5), 2D, 6 * (RNG.nextFloat() - 0.5), 22);
+              x + (MathUtils.RNG.nextFloat() - 0.5) / 7, y,
+              z + (MathUtils.RNG.nextFloat() - 0.5) / 7, 6 * (MathUtils.RNG.nextFloat() - 0.5), 2D, 6 * (MathUtils.RNG.nextFloat() - 0.5), 22);
           }
           return true;
         }

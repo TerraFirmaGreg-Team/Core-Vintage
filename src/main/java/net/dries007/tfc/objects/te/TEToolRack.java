@@ -1,9 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
+
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
@@ -22,16 +21,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.objects.items.ItemFireStarter;
 import net.dries007.tfc.objects.items.metal.ItemMetalTool;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class TEToolRack extends TEBase {
+public class TEToolRack extends BaseTile {
 
   private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
 
@@ -45,7 +42,7 @@ public class TEToolRack extends TEBase {
     Item item = stack.getItem();
     return item instanceof ItemMetalTool || item instanceof ItemTool || item instanceof ItemBow || item instanceof ItemHoe || item instanceof ItemSword
            || item instanceof ItemFireStarter || item instanceof ItemFlintAndSteel || !item.getToolClasses(stack).isEmpty()
-           || OreDictionaryHelper.doesStackMatchOre(stack, "tool");
+           || OreDictUtils.contains(stack, "tool");
   }
 
   public NonNullList<ItemStack> getItems() {
@@ -72,8 +69,8 @@ public class TEToolRack extends TEBase {
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-    super.onDataPacket(net, pkt);
+  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+    super.onDataPacket(net, packet);
     markForBlockUpdate();
   }
 

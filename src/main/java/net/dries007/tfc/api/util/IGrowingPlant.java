@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.util;
 
 import net.minecraft.block.state.IBlockState;
@@ -39,7 +34,7 @@ public interface IGrowingPlant {
 
     @Override
     public String toString() {
-      return Mods.Names.TFC + ".enum.growstatus." + name().toLowerCase();
+      return Mods.ModIDs.TFC + ".enum.growstatus." + name().toLowerCase();
     }
   }
 

@@ -1,9 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util.interaction;
+
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
+import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
@@ -24,17 +23,15 @@ import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.te.TELogPile;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
-import static net.dries007.tfc.objects.blocks.BlockCharcoalPile.LAYERS;
+import static su.terrafirmagreg.api.data.Properties.IntProp.TYPE;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @Mod.EventBusSubscriber(modid = TFC)
 public final class InteractionManager {
@@ -45,7 +42,7 @@ public final class InteractionManager {
 
   static {
     // Clay knapping
-    putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "clay")
+    putBoth(stack -> OreDictUtils.contains(stack, "clay")
                      && stack.getCount() >= KnappingType.CLAY.getAmountToConsume(), (worldIn, playerIn, handIn) -> {
       if (!worldIn.isRemote) {
         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_CLAY);
@@ -54,7 +51,7 @@ public final class InteractionManager {
     });
 
     // Fire clay knapping
-    putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "fireClay")
+    putBoth(stack -> OreDictUtils.contains(stack, "fireClay")
                      && stack.getCount() >= KnappingType.FIRE_CLAY.getAmountToConsume(), ((worldIn, playerIn, handIn) -> {
       if (!worldIn.isRemote) {
         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_FIRE_CLAY);
@@ -63,7 +60,7 @@ public final class InteractionManager {
     }));
 
     // Leather knapping
-    putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "leather"), ((worldIn, playerIn, handIn) -> {
+    putBoth(stack -> OreDictUtils.contains(stack, "leather"), ((worldIn, playerIn, handIn) -> {
       if (Helpers.playerHasItemMatchingOre(playerIn.inventory, "knife")) {
         if (!worldIn.isRemote) {
           TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_LEATHER);
@@ -73,9 +70,9 @@ public final class InteractionManager {
       return EnumActionResult.FAIL;
     }));
 
-    putBoth(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "bowl"), ((worldIn, playerIn, handIn) -> {
+    putBoth(stack -> OreDictUtils.contains(stack, "bowl"), ((worldIn, playerIn, handIn) -> {
       // Offhand must contain a knife - avoids opening the salad gui whenever you empty a bowl form eating
-      if (OreDictionaryHelper.doesStackMatchOre(playerIn.getHeldItem(handIn == EnumHand.MAIN_HAND ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND), "knife")) {
+      if (OreDictUtils.contains(playerIn.getHeldItem(handIn == EnumHand.MAIN_HAND ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND), "knife")) {
         if (!worldIn.isRemote) {
           TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.SALAD);
         }
@@ -85,13 +82,13 @@ public final class InteractionManager {
     }));
 
     // Logs -> Log Piles (placement + insertion)
-    USE_ACTIONS.put(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "logWood"), (stack, player, worldIn, pos, hand, direction, hitX, hitY, hitZ) -> {
+    USE_ACTIONS.put(stack -> OreDictUtils.contains(stack, "logWood"), (stack, player, worldIn, pos, hand, direction, hitX, hitY, hitZ) -> {
       if (direction != null) {
         IBlockState stateAt = worldIn.getBlockState(pos);
         if (stateAt.getBlock() == BlocksTFC.LOG_PILE) {
           // Clicked on a log pile, so try to insert into the original
           // This is called first when player is sneaking, otherwise the call chain is passed to the BlockLogPile#onBlockActivated
-          TELogPile te = Helpers.getTE(worldIn, pos, TELogPile.class);
+          TileLogPile te = Helpers.getTE(worldIn, pos, TileLogPile.class);
           if (te != null) {
             if (!player.isSneaking()) {
               if (te.insertLog(stack)) {
@@ -126,7 +123,7 @@ public final class InteractionManager {
             if (!worldIn.isRemote) {
               worldIn.setBlockState(posAt, BlocksTFC.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
 
-              TELogPile te = Helpers.getTE(worldIn, posAt, TELogPile.class);
+              TileLogPile te = Helpers.getTE(worldIn, posAt, TileLogPile.class);
               if (te != null) {
                 te.insertLog(stack.copy());
               }
@@ -146,15 +143,15 @@ public final class InteractionManager {
 
     // Charcoal -> charcoal piles
     // This is also where charcoal piles grow
-    USE_ACTIONS.put(stack -> OreDictionaryHelper.doesStackMatchOre(stack, "charcoal"), (stack, player, worldIn, pos, hand, direction, hitX, hitY, hitZ) -> {
+    USE_ACTIONS.put(stack -> OreDictUtils.contains(stack, "charcoal"), (stack, player, worldIn, pos, hand, direction, hitX, hitY, hitZ) -> {
       if (direction != null) {
         IBlockState state = worldIn.getBlockState(pos);
-        if (state.getBlock() == BlocksTFC.CHARCOAL_PILE && state.getValue(LAYERS) < 8) {
+        if (state.getBlock() == BlocksDevice.CHARCOAL_PILE && state.getValue(TYPE) < 8) {
           // Check the player isn't standing inside the placement area for the next layer
-          IBlockState stateToPlace = state.withProperty(LAYERS, state.getValue(LAYERS) + 1);
+          IBlockState stateToPlace = state.withProperty(TYPE, state.getValue(TYPE) + 1);
           if (worldIn.checkNoEntityCollision(stateToPlace.getBoundingBox(worldIn, pos).offset(pos))) {
             if (!worldIn.isRemote) {
-              worldIn.setBlockState(pos, state.withProperty(LAYERS, state.getValue(LAYERS) + 1));
+              worldIn.setBlockState(pos, state.withProperty(TYPE, state.getValue(TYPE) + 1));
               worldIn.playSound(null, pos, TFCSounds.CHARCOAL_PILE.getPlaceSound(), SoundCategory.BLOCKS, 1.0f, 1.0f);
               stack.shrink(1);
               player.setHeldItem(hand, stack);
@@ -167,8 +164,8 @@ public final class InteractionManager {
           posAt = posAt.offset(direction);
         }
         if (worldIn.getBlockState(posAt.down()).isSideSolid(worldIn, posAt.down(), EnumFacing.UP) && worldIn.getBlockState(posAt).getBlock()
-                                                                                                            .isReplaceable(worldIn, pos)) {
-          IBlockState stateToPlace = BlocksTFC.CHARCOAL_PILE.getDefaultState().withProperty(LAYERS, 1);
+          .isReplaceable(worldIn, pos)) {
+          IBlockState stateToPlace = BlocksDevice.CHARCOAL_PILE.getDefaultState().withProperty(TYPE, 1);
           if (worldIn.checkNoEntityCollision(stateToPlace.getBoundingBox(worldIn, posAt).offset(posAt))) {
             // Create a new charcoal pile
             if (!worldIn.isRemote) {

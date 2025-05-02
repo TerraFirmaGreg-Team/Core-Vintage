@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui;
 
 import net.minecraft.client.gui.Gui;
@@ -21,7 +16,7 @@ import net.dries007.tfc.objects.container.ContainerKnapping;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public class GuiKnapping extends GuiContainerTFC {
 

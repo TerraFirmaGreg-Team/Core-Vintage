@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.types;
 
 import net.minecraft.util.IStringSerializable;
@@ -17,7 +12,7 @@ import net.dries007.tfc.util.Helpers;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 
 @GameRegistry.ObjectHolder(TFC)

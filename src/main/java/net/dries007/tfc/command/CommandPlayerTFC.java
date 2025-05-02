@@ -1,10 +1,12 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.command;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.NutritionStats;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.skill.Skill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -18,14 +20,6 @@ import net.minecraft.util.FoodStats;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
-
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.Nutrient;
-import net.dries007.tfc.api.capability.food.NutritionStats;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -116,7 +110,7 @@ public class CommandPlayerTFC extends CommandBase {
       ));
       for (Nutrient nutrient : Nutrient.values()) {
         sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_nutrients_nutrient",
-          new TextComponentTranslation(Helpers.getEnumName(nutrient)),
+          new TextComponentTranslation(TranslatorUtils.getEnumName(nutrient)),
           String.format("%.2f", nutritionStats.getNutrient(nutrient))
         ));
       }
@@ -130,7 +124,7 @@ public class CommandPlayerTFC extends CommandBase {
         ));
         for (Nutrient nutrient : Nutrient.values()) {
           sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_nutrients_last_eaten_nutrient",
-            new TextComponentTranslation(Helpers.getEnumName(nutrient)),
+            new TextComponentTranslation(TranslatorUtils.getEnumName(nutrient)),
             String.format("%.2f", nutrients[nutrient.ordinal()])
           ));
         }
@@ -149,7 +143,7 @@ public class CommandPlayerTFC extends CommandBase {
     Skill skill = CapabilityPlayerData.getSkill(player, inputSkill);
     if (skill != null) {
       if (executeType == ExecuteType.GET) {
-        sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_skill", inputSkill.getName(), skill.getTotalLevel(), new TextComponentTranslation(Helpers.getEnumName(skill.getTier())), skill.getLevel()));
+        sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.get_skill", inputSkill.getName(), skill.getTotalLevel(), new TextComponentTranslation(TranslatorUtils.getEnumName(skill.getTier())), skill.getLevel()));
       } else if (executeType == ExecuteType.RESET) {
         skill.setTotalLevel(0);
         sender.sendMessage(new TextComponentTranslation("tfc.command.playertfc.set_skill", inputSkill.getName(), 0));

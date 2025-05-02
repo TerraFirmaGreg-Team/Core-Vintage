@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.minecraft.block.state.IBlockState;
@@ -46,9 +41,9 @@ public class WorldGenOreVeins implements IWorldGenerator {
   private static void getVeinsAtChunk(List<Vein> listToAdd, int chunkX, int chunkZ, long worldSeed) {
     LOCAL_RANDOM.setSeed(worldSeed + chunkX * 341873128712L + chunkZ * 132897987541L);
     listToAdd.addAll(VeinRegistry.INSTANCE.getVeins().values().stream()
-                                          .filter(veinType -> LOCAL_RANDOM.nextInt(veinType.getRarity()) == 0)
-                                          .map(veinType -> veinType.createVein(LOCAL_RANDOM, chunkX, chunkZ))
-                                          .collect(Collectors.toList()));
+      .filter(veinType -> LOCAL_RANDOM.nextInt(veinType.getRarity()) == 0)
+      .map(veinType -> veinType.createVein(LOCAL_RANDOM, chunkX, chunkZ))
+      .collect(Collectors.toList()));
   }
 
   @Override
@@ -92,10 +87,10 @@ public class WorldGenOreVeins implements IWorldGenerator {
           // This can be by a number of factors, mainly because at each expected replacing position we didn't find a matching raw rock.
           // Some possible causes: Width / Height / Shape / Density / Y / Rock Layer
           TerraFirmaCraft.getLog().debug("Failed to generate vein '{}' in chunk ({}, {}). Vein center pos ({}x, {}y, {}z)", vein.getType()
-                                                                                                                                .getRegistryName(), chunkX, chunkZ, vein.getPos()
-                                                                                                                                                                        .getX(), vein.getPos()
-                                                                                                                                                                                     .getY(), vein.getPos()
-                                                                                                                                                                                                  .getZ());
+            .getRegistryName(), chunkX, chunkZ, vein.getPos()
+            .getX(), vein.getPos()
+            .getY(), vein.getPos()
+            .getZ());
         }
       }
     }

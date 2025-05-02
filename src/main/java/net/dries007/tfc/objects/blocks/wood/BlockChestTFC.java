@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.wood;
 
 import net.minecraft.block.Block;
@@ -24,9 +19,9 @@ import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.inventory.capability.TFCInventoryLargeChest;
@@ -40,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class BlockChestTFC extends BlockChest implements IItemSize {
+public class BlockChestTFC extends BlockChest implements ICapabilitySize {
 
   // Using custom types here to make our chests not connect to vanilla's (fixes https://github.com/TerraFirmaCraft/TerraFirmaCraft/issues/855)
   // in 1.15, if this is still needed we should re-evaluate the option to not extend vanilla's BlockChest and make one of our own
@@ -160,8 +155,8 @@ public class BlockChestTFC extends BlockChest implements IItemSize {
 
   private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {
     for (Entity entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(),
-                                                                                             pos.getY() + 1, pos.getZ(),
-                                                                                             pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
+      pos.getY() + 1, pos.getZ(),
+      pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
       EntityOcelot entityocelot = (EntityOcelot) entity;
 
       if (entityocelot.isSitting()) {

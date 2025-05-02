@@ -1,13 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.registries;
 
 import net.minecraft.util.ResourceLocation;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 /**
  * The names are separate from the instances TFCRegistries so they can be used without loading the class prematurely.

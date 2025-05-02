@@ -1,9 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.container;
+
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,16 +15,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.IFood;
-import net.dries007.tfc.api.capability.food.Nutrient;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
 import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 import net.dries007.tfc.objects.items.food.ItemDynamicBowlFood;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Food;
 
 import javax.annotation.Nonnull;
@@ -51,12 +47,12 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
 
     // move bowls from inventory to bowl slot
     ItemStack bowl = playerInv.player.getHeldItemMainhand();
-    if (OreDictionaryHelper.doesStackMatchOre(bowl, "bowl")) {
+    if (OreDictUtils.contains(bowl, "bowl")) {
       inventory.setStackInSlot(SLOT_BOWLS, bowl);
       playerInv.player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
     } else {
       bowl = playerInv.player.getHeldItemOffhand();
-      if (OreDictionaryHelper.doesStackMatchOre(bowl, "bowl")) {
+      if (OreDictUtils.contains(bowl, "bowl")) {
         inventory.setStackInSlot(SLOT_BOWLS, bowl);
         playerInv.player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
       }
@@ -92,7 +88,7 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
   public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
     switch (slot) {
       case SLOT_BOWLS:
-        return OreDictionaryHelper.doesStackMatchOre(stack, "bowl");
+        return OreDictUtils.contains(stack, "bowl");
       case SLOT_OUTPUT:
         return false;
       default:
@@ -114,7 +110,7 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
         int minIngredientCount = 64; // The minimum stack size of the ingredients
         for (int i = SLOT_INPUT_START; i <= SLOT_INPUT_END; i++) {
           ItemStack ingredient = inventory.getStackInSlot(i);
-          IFood food = ingredient.getCapability(CapabilityFood.CAPABILITY, null);
+          ICapabilityFood food = ingredient.getCapability(CapabilityFood.CAPABILITY, null);
           if (food != null) {
             if (food.isRotten()) {
               // Rotten food is not allowed
@@ -152,12 +148,12 @@ public class ContainerSalad extends ContainerSimple implements ISlotCallback {
 
           if (maxNutrient != null) {
             ItemStack salad = new ItemStack(getSaladItem(maxNutrient), minIngredientCount);
-            IFood saladCap = salad.getCapability(CapabilityFood.CAPABILITY, null);
+            ICapabilityFood saladCap = salad.getCapability(CapabilityFood.CAPABILITY, null);
             if (saladCap instanceof ItemDynamicBowlFood.DynamicFoodHandler) {
               saladCap.setCreationDate(CapabilityFood.getRoundedCreationDate());
               ((ItemDynamicBowlFood.DynamicFoodHandler) saladCap).initCreationDataAndBowl(bowlStack.copy()
-                                                                                                   .splitStack(1), new FoodData(4, water, saturation, nutrition, Food.SALAD_VEGETABLE.getData()
-                                                                                                                                                                                     .getDecayModifier()));
+                .splitStack(1), new FoodData(4, water, saturation, nutrition, Food.SALAD_VEGETABLE.getData()
+                .getDecayModifier()));
             }
             inventory.setStackInSlot(SLOT_OUTPUT, salad);
             return;

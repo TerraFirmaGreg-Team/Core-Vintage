@@ -1,14 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 

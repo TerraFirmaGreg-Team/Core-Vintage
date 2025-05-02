@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.fluids.properties;
 
 public final class FluidProperty<T> {
@@ -20,6 +15,6 @@ public final class FluidProperty<T> {
 
   @Override
   public boolean equals(Object obj) {
-    return obj instanceof FluidProperty && ((FluidProperty) obj).name.equals(this.name);
+    return obj instanceof FluidProperty<?> property && property.name.equals(this.name);
   }
 }

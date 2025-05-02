@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -24,7 +19,7 @@ import net.dries007.tfc.network.PacketPlaceBlockSpecial;
 import net.dries007.tfc.network.PacketStackFood;
 import org.lwjgl.input.Keyboard;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 import static net.dries007.tfc.TerraFirmaCraft.MOD_NAME;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = TFC)

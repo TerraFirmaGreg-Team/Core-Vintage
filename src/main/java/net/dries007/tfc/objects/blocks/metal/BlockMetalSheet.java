@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.metal;
 
 import net.minecraft.block.Block;
@@ -71,8 +66,8 @@ public class BlockMetalSheet extends Block {
     setHarvestLevel("pickaxe", 0);
 
     setDefaultState(this.blockState.getBaseState().withProperty(FACE_PROPERTIES[0], false).withProperty(FACE_PROPERTIES[1], false)
-                                   .withProperty(FACE_PROPERTIES[2], false).withProperty(FACE_PROPERTIES[3], false).withProperty(FACE_PROPERTIES[4], false)
-                                   .withProperty(FACE_PROPERTIES[5], false));
+      .withProperty(FACE_PROPERTIES[2], false).withProperty(FACE_PROPERTIES[3], false).withProperty(FACE_PROPERTIES[4], false)
+      .withProperty(FACE_PROPERTIES[5], false));
   }
 
   public static BlockMetalSheet get(Metal metal) {

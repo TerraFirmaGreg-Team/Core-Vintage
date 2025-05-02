@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.minecraft.block.BlockLog;
@@ -42,8 +37,8 @@ public class TreeGenWillow implements ITreeGenerator {
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
     //noinspection ConstantConditions
-    ResourceLocation base = new ResourceLocation(Mods.Names.TFC, tree.getRegistryName().getPath() + "/base");
-    ResourceLocation overlay = new ResourceLocation(Mods.Names.TFC, tree.getRegistryName().getPath() + "/overlay");
+    ResourceLocation base = new ResourceLocation(Mods.ModIDs.TFC, tree.getRegistryName().getPath() + "/base");
+    ResourceLocation overlay = new ResourceLocation(Mods.ModIDs.TFC, tree.getRegistryName().getPath() + "/overlay");
 
     structureBase = manager.get(world.getMinecraftServer(), base);
     structureOverlay = manager.get(world.getMinecraftServer(), overlay);
@@ -91,7 +86,7 @@ public class TreeGenWillow implements ITreeGenerator {
 
   private void tryPlaceLog(World world, BlockPos pos, Tree tree, BlockLog.EnumAxis axis) {
     if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
-                                                                                                                                         .getBlock() instanceof BlockLeavesTFC) {
+      .getBlock() instanceof BlockLeavesTFC) {
       world.setBlockState(pos, BlockLogTFC.get(tree).getDefaultState().withProperty(LOG_AXIS, axis).withProperty(PLACED, false));
     }
   }

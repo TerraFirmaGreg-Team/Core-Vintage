@@ -1,9 +1,15 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
+
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid.Callback;
+import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidHandlerSidedCallback;
+import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidTankCallback;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -27,21 +33,11 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
-import net.dries007.tfc.objects.fluids.capability.FluidHandlerSided;
-import net.dries007.tfc.objects.fluids.capability.FluidTankCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidHandlerSidedCallback;
-import net.dries007.tfc.objects.fluids.capability.IFluidTankCallback;
 import net.dries007.tfc.objects.inventory.capability.IItemHandlerSidedCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemHandlerSidedWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
 import net.dries007.tfc.util.FluidTransferHelper;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -363,7 +359,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
     }
 
     if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-      return (T) new FluidHandlerSided(this, tank, facing);
+      return (T) new CapabilityProviderFluid.Sided(this, tank, facing);
     }
 
     return super.getCapability(capability, facing);
@@ -398,7 +394,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
       case SLOT_FLUID_CONTAINER_IN:
         return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
       case SLOT_ITEM:
-        IItemSize size = CapabilityItemSize.getIItemSize(stack);
+        ICapabilitySize size = CapabilitySize.get(stack);
         if (size != null) {
           return size.getSize(stack).isSmallerThan(Size.HUGE);
         }
@@ -450,7 +446,7 @@ public class TEBarrel extends TETickableInventory implements ITickable, ICalenda
     this.lastPlayerTick = tick;
   }
 
-  protected static class BarrelFluidTank extends FluidTankCallback {
+  protected static class BarrelFluidTank extends Callback {
 
     private final Set<Fluid> whitelist;
 

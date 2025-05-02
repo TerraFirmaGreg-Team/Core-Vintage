@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,11 +9,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 
 import javax.annotation.Nonnull;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public final class CreativeTabsTFC {
 

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -41,7 +36,7 @@ public class PowderKegExplosion extends Explosion {
   @Override
   public void doExplosionB(boolean spawnParticles) {
     world.playSound(null, x, y, z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0f,
-                    (1.0f + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2f) * 0.7f);
+      (1.0f + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2f) * 0.7f);
 
     if (size >= 2.0F) {
       world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, x, y, z, 1.0d, 0.d, 0.0d);

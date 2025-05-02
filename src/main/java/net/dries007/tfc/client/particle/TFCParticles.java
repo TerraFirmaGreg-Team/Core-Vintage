@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.particle;
 
 import net.minecraft.client.Minecraft;
@@ -24,7 +19,7 @@ import net.dries007.tfc.network.PacketSpawnTFCParticle;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 /**
  * TFC Particles, wrapped up in a nice enum

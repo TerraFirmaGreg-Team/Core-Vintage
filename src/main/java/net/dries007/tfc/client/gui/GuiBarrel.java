@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui;
+
+import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -25,22 +22,21 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import net.dries007.tfc.client.FluidSpriteCache;
 import net.dries007.tfc.client.button.GuiButtonBarrelSeal;
-import net.dries007.tfc.client.button.IButtonTooltip;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.objects.container.ContainerBarrel;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.util.Helpers;
 import org.lwjgl.opengl.GL11;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
 
 public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 
@@ -121,7 +117,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
         fontRenderer.drawString(resultName, xSize / 2 - (isLong ? recipeWidth / 2 - 6 : 28), isLong ? 73 : 61, 0x404040);
       }
       fontRenderer.drawString(tile.getSealedDate(),
-                              xSize / 2 - (isLong ? 28 : fontRenderer.getStringWidth(tile.getSealedDate()) / 2), isLong ? 19 : 73, 0x404040);
+        xSize / 2 - (isLong ? 28 : fontRenderer.getStringWidth(tile.getSealedDate()) / 2), isLong ? 19 : 73, 0x404040);
     }
   }
 

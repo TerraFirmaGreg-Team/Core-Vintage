@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.chunkdata;
 
 import net.minecraft.nbt.NBTBase;
@@ -23,8 +18,10 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.NBTBuilder;
+
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+
 import net.dries007.tfc.world.classic.DataLayer;
 import net.dries007.tfc.world.classic.worldgen.vein.Vein;
 
@@ -291,17 +288,17 @@ public final class ChunkDataTFC {
 
   public List<Tree> getValidTrees() {
     return TFCRegistries.TREES.getValuesCollection().stream()
-                              .filter(t -> t.isValidLocation(avgTemp, rainfall, floraDensity))
-                              .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
-                              .collect(Collectors.toList());
+      .filter(t -> t.isValidLocation(avgTemp, rainfall, floraDensity))
+      .sorted((s, t) -> (int) (t.getDominance() - s.getDominance()))
+      .collect(Collectors.toList());
   }
 
   @Nullable
   public Tree getSparseGenTree() {
     return TFCRegistries.TREES.getValuesCollection().stream()
-                              .filter(t -> t.isValidLocation(0.5f * avgTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
-                              .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
-                              .orElse(null);
+      .filter(t -> t.isValidLocation(0.5f * avgTemp + 10f, 0.5f * rainfall + 120f, 0.5f))
+      .min((s, t) -> (int) (t.getDominance() - s.getDominance()))
+      .orElse(null);
   }
 
   // Directly accessing the DataLayer is discouraged (except for getting the name). It's easy to use the wrong value.

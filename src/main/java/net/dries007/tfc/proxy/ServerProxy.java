@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.proxy;
 
 import su.terrafirmagreg.api.exception.WrongSideException;
@@ -15,7 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import net.dries007.tfc.util.calendar.Month;
+
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

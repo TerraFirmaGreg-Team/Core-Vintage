@@ -1,9 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.te;
+
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,9 +18,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.Helpers;
 
@@ -40,7 +37,7 @@ public class TEPlacedItem extends TEInventory {
   }
 
   public static void convertPitKilnToPlacedItem(World world, BlockPos pos) {
-    TEPitKiln teOld = Helpers.getTE(world, pos, TEPitKiln.class);
+    TilePitKiln teOld = Helpers.getTE(world, pos, TilePitKiln.class);
     if (teOld != null) {
       // Remove inventory items
       // This happens here to stop the block dropping its items in onBreakBlock()
@@ -122,7 +119,7 @@ public class TEPlacedItem extends TEInventory {
   public boolean insertItem(EntityPlayer player, ItemStack stack, int slot) {
     // Try and insert an item
     // Check the size of item to determine if insertion is possible, or if it requires the large slot
-    IItemSize sizeCap = CapabilityItemSize.getIItemSize(stack);
+    ICapabilitySize sizeCap = CapabilitySize.get(stack);
     Size size = Size.NORMAL;
     if (sizeCap != null) {
       size = sizeCap.getSize(stack);

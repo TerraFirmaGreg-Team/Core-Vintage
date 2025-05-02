@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.rock;
+
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,10 +20,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
@@ -41,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class ItemRockShovel extends ItemSpade implements IItemSize, IRockObject {
+public class ItemRockShovel extends ItemSpade implements ICapabilitySize, IRockObject {
 
   private static final Map<RockCategory, ItemRockShovel> MAP = new HashMap<>();
   public final RockCategory category;
@@ -79,10 +75,9 @@ public class ItemRockShovel extends ItemSpade implements IItemSize, IRockObject 
     } else {
       IBlockState iblockstate = worldIn.getBlockState(pos);
       Block block = iblockstate.getBlock();
-      if (!(block instanceof BlockRockVariant)) {
+      if (!(block instanceof BlockRockVariant rockVariant)) {
         return EnumActionResult.PASS;
       }
-      BlockRockVariant rockVariant = (BlockRockVariant) block;
       if (ConfigTFC.General.OVERRIDES.enableGrassPath && facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR
           && rockVariant.getType() == Rock.Type.GRASS || rockVariant.getType() == Rock.Type.DRY_GRASS || rockVariant.getType() == Rock.Type.DIRT) {
         IBlockState iblockstate1 = BlockRockVariant.get(rockVariant.getRock(), Rock.Type.PATH).getDefaultState();

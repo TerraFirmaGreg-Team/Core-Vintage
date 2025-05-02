@@ -1,10 +1,11 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.plants;
 
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
@@ -31,22 +32,16 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
+import net.dries007.tfc.objects.items.ItemsTFCF;
+import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.util.OreDictionaryHelper;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import net.dries007.tfc.util.calendar.Month;
+import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import tfcflorae.objects.blocks.BlocksTFCF;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.types.PlantsTFCF;
-import tfcflorae.util.agriculture.CropTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -56,7 +51,7 @@ import java.util.Map;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
-public class BlockPlantTFC extends BlockBush implements IItemSize {
+public class BlockPlantTFC extends BlockBush implements ICapabilitySize {
 
   public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
   public static final PropertyInteger DAYPERIOD = PropertyInteger.create("dayperiod", 0, 3);
@@ -164,17 +159,17 @@ public class BlockPlantTFC extends BlockBush implements IItemSize {
       if (this.plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BLUE_GINGER)) {
         int chance;
         if (currentStage != 0 && expectedStage != 0) {
-          chance = Constants.RNG.nextInt(2);
+          chance = MathUtils.RNG.nextInt(2);
           if (chance == 0) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), Constants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathUtils.RNG.nextInt(2)));
           }
         } else {
-          chance = Constants.RNG.nextInt(2);
+          chance = MathUtils.RNG.nextInt(2);
           if (chance == 0) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.GINGER, 1 + Constants.RNG.nextInt(2)));
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), Constants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemsTFCF.GINGER, 1 + MathUtils.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), MathUtils.RNG.nextInt(2)));
           } else if (chance == 1) {
-            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), 1 + Constants.RNG.nextInt(2)));
+            spawnAsEntity(worldIn, pos, new ItemStack(ItemSeedsTFC.get(CropTFCF.GINGER), 1 + MathUtils.RNG.nextInt(2)));
           }
         }
       } else {

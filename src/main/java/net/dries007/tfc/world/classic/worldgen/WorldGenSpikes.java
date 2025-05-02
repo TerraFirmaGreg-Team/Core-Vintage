@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.worldgen;
 
 import net.minecraft.block.state.IBlockState;
@@ -55,9 +50,9 @@ public class WorldGenSpikes implements IWorldGenerator {
       if (canPlace) {
         BlockRockRaw rockBlock = (BlockRockRaw) world.getBlockState(stoneAttach).getBlock();
         IBlockState baseState = BlockRockVariant.get(rockBlock.getRock(), Rock.Type.SPIKE).getDefaultState().withProperty(BlockRockSpike.BASE, true)
-                                                .withProperty(BlockRockSpike.CEILING, ceiling);
+          .withProperty(BlockRockSpike.CEILING, ceiling);
         IBlockState topState = BlockRockVariant.get(rockBlock.getRock(), Rock.Type.SPIKE).getDefaultState().withProperty(BlockRockSpike.BASE, false)
-                                               .withProperty(BlockRockSpike.CEILING, ceiling);
+          .withProperty(BlockRockSpike.CEILING, ceiling);
         world.setBlockState(basePos, baseState, 2);
         world.setBlockState(topPos, topState, 2);
       }

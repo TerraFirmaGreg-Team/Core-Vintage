@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import net.minecraft.item.ItemStack;
@@ -25,7 +20,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class RockLayerCategory extends BaseRecipeCategory<RockLayerWrapper> {
 
-  private static final ResourceLocation BACKGROUND = new ResourceLocation(Mods.Names.TFC, "textures/gui/jei_rocklayer.png");
+  private static final ResourceLocation BACKGROUND = new ResourceLocation(Mods.ModIDs.TFC, "textures/gui/jei_rocklayer.png");
 
   public RockLayerCategory(IGuiHelper helper, String Uid) {
     super(new BackgroundDrawable(BACKGROUND, 164, 110), Uid);

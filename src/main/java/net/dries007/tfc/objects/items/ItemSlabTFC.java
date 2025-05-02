@@ -1,14 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 
 import net.minecraft.item.ItemSlab;
@@ -19,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ItemSlabTFC extends ItemSlab implements IItemSize {
+public class ItemSlabTFC extends ItemSlab implements ICapabilitySize {
 
   public ItemSlabTFC(BlockSlabTFC.Half slab, BlockSlabTFC.Half slab1, BlockSlabTFC.Double doubleSlab) {
     super(slab, slab1, doubleSlab);

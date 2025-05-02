@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render;
 
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,7 +10,7 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.model.ModelIngotPile;
 import net.dries007.tfc.objects.te.TEIngotPile;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRIngotPile extends TileEntitySpecialRenderer<TEIngotPile> {

@@ -1,9 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.gui;
+
+import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.skill.Skill;
+import su.terrafirmagreg.modules.core.feature.skill.SkillType;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -15,19 +16,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPage;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.skills.Skill;
-import net.dries007.tfc.util.skills.SkillType;
 
 import java.util.List;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkills extends GuiContainerTFC {
@@ -93,8 +89,7 @@ public class GuiSkills extends GuiContainerTFC {
 
   @Override
   protected void actionPerformed(GuiButton button) {
-    if (button instanceof GuiButtonPlayerInventoryTab && ((GuiButtonPlayerInventoryTab) button).isActive()) {
-      GuiButtonPlayerInventoryTab tabButton = (GuiButtonPlayerInventoryTab) button;
+    if (button instanceof GuiButtonPlayerInventoryTab tabButton && tabButton.isActive()) {
       if (tabButton.isActive()) {
         if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
           this.mc.displayGuiScreen(new GuiInventory(playerInv.player));
@@ -115,7 +110,7 @@ public class GuiSkills extends GuiContainerTFC {
     buttonLeft.enabled = currentPage >= 1;
     buttonRight.enabled = false;
 
-    IPlayerData skills = playerInv.player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+    ICapabilityPlayerData skills = playerInv.player.getCapability(CapabilityPlayerData.CAPABILITY, null);
     if (skills != null) {
       List<SkillType<? extends Skill>> skillOrder = SkillType.getSkills();
       int totalSkills = skillOrder.size();
@@ -137,7 +132,7 @@ public class GuiSkills extends GuiContainerTFC {
         SkillType<? extends Skill> skillType = skillOrder.get(startSkill + i);
         Skill skill = skills.getSkill(skillType);
         if (skill != null) {
-          skillTooltips[i] = I18n.format("tfc.skill." + skillType.getName(), I18n.format(Helpers.getEnumName(skill.getTier())));
+          skillTooltips[i] = I18n.format("tfc.skill." + skillType.getName(), I18n.format(TranslatorUtils.getEnumName(skill.getTier())));
           skillBarWidths[i] = (int) (160 * skill.getLevel());
           skillBarColors[i] = skill.getTier().ordinal();
         }

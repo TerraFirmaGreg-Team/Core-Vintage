@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client.render;
 
 import net.minecraft.client.renderer.BufferBuilder;
@@ -17,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import org.lwjgl.opengl.GL11;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SideOnly(Side.CLIENT)
 public class TESRPlacedHide extends TileEntitySpecialRenderer<TEPlacedHide> {

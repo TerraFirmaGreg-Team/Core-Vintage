@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.entity;
 
 import net.minecraft.entity.MoverType;
@@ -44,8 +39,8 @@ public class EntityBoatTFC extends EntityBoat {
   public Tree getWood() {
     //noinspection ConstantConditions
     return TFCRegistries.TREES.getValuesCollection().stream()
-                              .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
-                              .findFirst().orElse(null);
+      .filter(x -> x.getRegistryName().getPath().equalsIgnoreCase(this.dataManager.get(WOOD_NAME)))
+      .findFirst().orElse(null);
   }
 
   public void setWood(@Nullable Tree wood) {
@@ -135,7 +130,7 @@ public class EntityBoatTFC extends EntityBoat {
             double d0 = i == 1 ? -vec3d.z : vec3d.z;
             double d1 = i == 1 ? vec3d.x : -vec3d.x;
             this.world.playSound(null,
-                                 this.posX + d0, this.posY, this.posZ + d1, soundevent, this.getSoundCategory(), 1.0F, 0.8F + 0.4F * this.rand.nextFloat());
+              this.posX + d0, this.posY, this.posZ + d1, soundevent, this.getSoundCategory(), 1.0F, 0.8F + 0.4F * this.rand.nextFloat());
           }
         }
 

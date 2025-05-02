@@ -1,10 +1,10 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.util;
 
+import su.terrafirmagreg.modules.animal.api.type.ICreature;
+import su.terrafirmagreg.modules.animal.api.type.IHuntable;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.block.Block;
@@ -34,9 +34,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import com.google.common.collect.Lists;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.ICreatureTFC;
-import net.dries007.tfc.api.types.IHuntable;
-import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
@@ -47,13 +44,10 @@ import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.types.DefaultPlants;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenBerryBushes;
 import net.dries007.tfc.world.classic.worldgen.WorldGenPlantTFC;
 import net.dries007.tfc.world.classic.worldgen.WorldGenTrees;
-import tfcflorae.util.RegenWildCropsTFCF;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -62,7 +56,7 @@ import java.util.Map;
 import java.util.Random;
 
 import static net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC.WILD;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 /**
  * Seasonally regenerates rocks, sticks, snow, plants, crops and bushes.
@@ -235,10 +229,10 @@ public class WorldRegenHandler {
     final float floraDensity = ChunkDataTFC.getFloraDensity(worldIn, chunkBlockPos);
     final float floraDiversity = ChunkDataTFC.getFloraDiversity(worldIn, chunkBlockPos);
     ForgeRegistries.ENTITIES.getValuesCollection().stream().filter((x) -> {
-      if (ICreatureTFC.class.isAssignableFrom(x.getEntityClass())) {
+      if (ICreature.class.isAssignableFrom(x.getEntityClass())) {
         Entity ent = x.newInstance(worldIn);
         if (ent instanceof IPredator || ent instanceof IHuntable) {
-          int weight = ((ICreatureTFC) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
+          int weight = ((ICreature) ent).getSpawnWeight(biomeIn, temperature, rainfall, floraDensity, floraDiversity);
           return weight > 0 && randomIn.nextInt(weight) == 0;
         }
       }
@@ -249,7 +243,7 @@ public class WorldRegenHandler {
   private static void doGroupSpawning(EntityEntry entityEntry, World worldIn, int centerX, int centerZ, int diameterX, int diameterZ, Random rand) {
     List<EntityLiving> group = Lists.newArrayList();
     EntityLiving creature = (EntityLiving) entityEntry.newInstance(worldIn);
-    if (creature instanceof ICreatureTFC creatureTFC) {
+    if (creature instanceof ICreature creatureTFC) {
       int fallback = 5;
       int individuals =
         Math.max(1, creatureTFC.getMinGroupSize()) + rand.nextInt(creatureTFC.getMaxGroupSize() - Math.max(0, creatureTFC.getMinGroupSize() - 1));
@@ -274,7 +268,7 @@ public class WorldRegenHandler {
             --individuals;
             if (individuals > 0) {
               creature = (EntityLiving) entityEntry.newInstance(worldIn);
-              creatureTFC = (ICreatureTFC) creature;
+              creatureTFC = (ICreature) creature;
             }
           }
         } else {

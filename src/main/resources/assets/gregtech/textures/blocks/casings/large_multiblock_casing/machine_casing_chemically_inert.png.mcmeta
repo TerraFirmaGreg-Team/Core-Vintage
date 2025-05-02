@@ -1,0 +1,10 @@
+
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "CTM",
+        "layer": "CUTOUT",
+        "textures": [ "gtadditions:blocks/casings/machine_casing_chemically_inert_ctm" ],
+        "extra": { "connect_inside": true }
+    }
+}

@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.network;
 
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
@@ -13,7 +8,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 
 /**
  * This packet is send to client to signal that it may need to replace the vanilla FoodStats with a TFC version Since all the relevant events where this is

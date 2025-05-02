@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FB"
+  ],
+  "key": {
+    "F": {
+      "item": "tfg:device/flask/leather",
+      "data": 32767
+    },
+    "B": {
+      "item": "tfg:animal/product/bladder"
+    }
+  },
+  "result": {
+    "item": "tfg:device/flask/leather",
+    "data": 0
+  }
+}

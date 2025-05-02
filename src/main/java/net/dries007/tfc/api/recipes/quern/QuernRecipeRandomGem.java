@@ -1,15 +1,11 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.quern;
+
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.item.ItemStack;
 
-import net.dries007.tfc.Constants;
 import net.dries007.tfc.objects.Gem;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 import net.dries007.tfc.objects.items.ItemGem;
 
 import javax.annotation.Nonnull;
@@ -26,7 +22,7 @@ public class QuernRecipeRandomGem extends QuernRecipe {
   @Nonnull
   @Override
   public ItemStack getOutputItem(ItemStack stack) {
-    Gem.Grade grade = Gem.Grade.randomGrade(Constants.RNG);
+    Gem.Grade grade = Gem.Grade.randomGrade(MathUtils.RNG);
     return ItemGem.get(gem, grade, 1);
   }
 }

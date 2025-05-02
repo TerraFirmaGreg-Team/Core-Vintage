@@ -1,19 +1,42 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc;
 
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
+import su.terrafirmagreg.modules.animal.api.type.ICreature;
+import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
+import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityHandlerForge;
+import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.ProviderPlayerData;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.CalendarWorldData;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -57,15 +80,10 @@ import net.minecraft.init.PotionTypes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -74,27 +92,23 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.GameRuleChangeEvent;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
@@ -112,99 +126,128 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.items.ItemFruitPole;
-import com.eerussianguy.firmalife.registry.BlocksFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
-import net.dries007.tfc.ConfigTFC.Devices;
-import net.dries007.tfc.api.capability.damage.CapabilityDamageResistance;
-import net.dries007.tfc.api.capability.damage.DamageType;
-import net.dries007.tfc.api.capability.egg.CapabilityEgg;
-import net.dries007.tfc.api.capability.egg.EggHandler;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.FoodData;
-import net.dries007.tfc.api.capability.food.FoodHandler;
-import net.dries007.tfc.api.capability.food.IItemFoodTFC;
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.ForgeableHeatableHandler;
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.player.CapabilityPlayerData;
-import net.dries007.tfc.api.capability.player.IPlayerData;
-import net.dries007.tfc.api.capability.player.PlayerDataHandler;
-import net.dries007.tfc.api.capability.size.CapabilityItemSize;
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.api.capability.worldtracker.CapabilityWorldTracker;
-import net.dries007.tfc.api.capability.worldtracker.WorldTracker;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.dries007.firmalife.init.FoodFL;
+import net.dries007.firmalife.registry.BlocksFL;
+import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.IAnimalTFC;
-import net.dries007.tfc.api.types.ICreatureTFC;
 import net.dries007.tfc.api.types.IFruitTree;
-import net.dries007.tfc.api.types.IPredator;
 import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Metal.ItemType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Rock.Type;
-import net.dries007.tfc.api.util.FallingBlockManager;
 import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.network.PacketCalendarUpdate;
-import net.dries007.tfc.network.PacketPlayerDataUpdate;
 import net.dries007.tfc.network.PacketSimpleMessage;
 import net.dries007.tfc.network.PacketSimpleMessage.MessageCategory;
+import net.dries007.tfc.objects.Gem;
+import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlockFluidTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
-import net.dries007.tfc.objects.blocks.devices.BlockQuern;
-import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
+import net.dries007.tfc.objects.blocks.blocktype.BlockRockVariantTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockCactusTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockFenceGateTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockFenceTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
+import net.dries007.tfc.objects.blocks.wood.bamboo.BlockBambooLeaves;
+import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
+import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
-import net.dries007.tfc.objects.entity.ai.EBEntityAI;
-import net.dries007.tfc.objects.entity.animal.EntityAnimalTFC;
+import net.dries007.tfc.objects.items.ItemFruitPole;
+import net.dries007.tfc.objects.items.ItemGem;
+import net.dries007.tfc.objects.items.ItemPowder;
 import net.dries007.tfc.objects.items.ItemQuiver;
-import net.dries007.tfc.objects.items.ItemsTFC;
+import net.dries007.tfc.objects.items.ItemsTFCF;
+import net.dries007.tfc.objects.items.metal.ItemMetal;
+import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
-import net.dries007.tfc.util.OreDictionaryHelper;
-import net.dries007.tfc.util.calendar.CalendarWorldData;
-import net.dries007.tfc.util.calendar.Month;
-import net.dries007.tfc.util.skills.SmithingSkill;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.sharkbark.cellars.init.ModItems;
-import tfcflorae.objects.blocks.blocktype.BlockRockVariantTFCF;
-import tfcflorae.objects.blocks.wood.bamboo.BlockBambooLeaves;
-import tfcflorae.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
-import tfcflorae.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
-import tfcflorae.objects.items.ItemsTFCF;
-import tfcflorae.types.BlockTypesTFCF.RockTFCF;
 
-import java.util.Iterator;
-import java.util.Random;
+import java.util.Map;
+import java.util.function.Supplier;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)
 public final class CommonEventHandler {
 
   private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+
+  private static final Map<String, Supplier<? extends Item>> ITEM_MAP = new Object2ObjectOpenHashMap<>() {{
+
+    put("gem/amber", () -> ItemGem.get(Gem.AMBER));
+    put("powder/pearl", () -> ItemPowder.get(Powder.PEARL));
+    put("powder/black_pearl", () -> ItemPowder.get(Powder.BLACK_PEARL));
+
+    put("blue_steel_ice_saw_head", () -> ItemMetal.get(Metal.BLUE_STEEL, ItemType.ICE_SAW_HEAD));
+    put("black_steel_ice_saw_head", () -> ItemMetal.get(Metal.BLACK_STEEL, ItemType.ICE_SAW_HEAD));
+    put("red_steel_ice_saw_head", () -> ItemMetal.get(Metal.RED_STEEL, ItemType.ICE_SAW_HEAD));
+    put("steel_ice_saw_head", () -> ItemMetal.get(Metal.STEEL, ItemType.ICE_SAW_HEAD));
+    put("bismuth_bronze_ice_saw_head", () -> ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.ICE_SAW_HEAD));
+    put("wrought_iron_ice_saw_head", () -> ItemMetal.get(Metal.WROUGHT_IRON, ItemType.ICE_SAW_HEAD));
+    put("black_bronze_ice_saw_head", () -> ItemMetal.get(Metal.BLACK_BRONZE, ItemType.ICE_SAW_HEAD));
+    put("bronze_ice_saw_head", () -> ItemMetal.get(Metal.BRONZE, ItemType.ICE_SAW_HEAD));
+
+    put("blue_steel_ice_saw", () -> ItemMetal.get(Metal.BLUE_STEEL, ItemType.ICE_SAW));
+    put("black_steel_ice_saw", () -> ItemMetal.get(Metal.BLACK_STEEL, ItemType.ICE_SAW));
+    put("red_steel_ice_saw", () -> ItemMetal.get(Metal.RED_STEEL, ItemType.ICE_SAW));
+    put("steel_ice_saw", () -> ItemMetal.get(Metal.STEEL, ItemType.ICE_SAW));
+    put("bismuth_bronze_ice_saw", () -> ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.ICE_SAW));
+    put("wrought_iron_ice_saw", () -> ItemMetal.get(Metal.WROUGHT_IRON, ItemType.ICE_SAW));
+    put("black_bronze_ice_saw", () -> ItemMetal.get(Metal.BLACK_BRONZE, ItemType.ICE_SAW));
+    put("bronze_ice_saw", () -> ItemMetal.get(Metal.BRONZE, ItemType.ICE_SAW));
+
+    put("blue_steel_mallet_head", () -> ItemMetal.get(Metal.BLUE_STEEL, ItemType.MALLET_HEAD));
+    put("black_steel_mallet_head", () -> ItemMetal.get(Metal.BLACK_STEEL, ItemType.MALLET_HEAD));
+    put("red_steel_mallet_head", () -> ItemMetal.get(Metal.RED_STEEL, ItemType.MALLET_HEAD));
+    put("steel_mallet_head", () -> ItemMetal.get(Metal.STEEL, ItemType.MALLET_HEAD));
+    put("bismuth_bronze_mallet_head", () -> ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.MALLET_HEAD));
+    put("wrought_iron_mallet_head", () -> ItemMetal.get(Metal.WROUGHT_IRON, ItemType.MALLET_HEAD));
+    put("black_bronze_mallet_head", () -> ItemMetal.get(Metal.BLACK_BRONZE, ItemType.MALLET_HEAD));
+    put("bronze_mallet_head", () -> ItemMetal.get(Metal.BRONZE, ItemType.MALLET_HEAD));
+
+    put("blue_steel_mallet", () -> ItemMetal.get(Metal.BLUE_STEEL, ItemType.MALLET));
+    put("black_steel_mallet", () -> ItemMetal.get(Metal.BLACK_STEEL, ItemType.MALLET));
+    put("red_steel_mallet", () -> ItemMetal.get(Metal.RED_STEEL, ItemType.MALLET));
+    put("steel_mallet", () -> ItemMetal.get(Metal.STEEL, ItemType.MALLET));
+    put("bismuth_bronze_mallet", () -> ItemMetal.get(Metal.BISMUTH_BRONZE, ItemType.MALLET));
+    put("wrought_iron_mallet", () -> ItemMetal.get(Metal.WROUGHT_IRON, ItemType.MALLET));
+    put("black_bronze_mallet", () -> ItemMetal.get(Metal.BLACK_BRONZE, ItemType.MALLET));
+    put("bronze_mallet", () -> ItemMetal.get(Metal.BRONZE, ItemType.MALLET));
+  }};
+
+  @SubscribeEvent
+  public static void onMissingItemMapping(RegistryEvent.MissingMappings<Item> event) {
+    for (Mapping<Item> mapping : event.getAllMappings()) {
+      String mappingKey = mapping.key.toString();
+      String mappingNamespace = mapping.key.getNamespace();
+      String mappingPath = mapping.key.getPath();
+
+//      if (!Mods.contains(mappingNamespace)) {
+//        mapping.warn();
+//      }
+
+      ITEM_MAP.forEach((key, value) -> {
+        if (mappingPath.endsWith(key)) {
+          mapping.remap(value.get());
+        }
+      });
+      return;
+    }
+  }
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onNeighborNotify(BlockEvent.NeighborNotifyEvent event) {
@@ -277,7 +320,7 @@ public final class CommonEventHandler {
     final ItemStack heldItem = player == null ? ItemStack.EMPTY : player.getHeldItemMainhand();
 
     if (player != null) {
-      IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (cap != null) {
         cap.setHarvestingTool(player.getHeldItemMainhand());
       }
@@ -305,27 +348,27 @@ public final class CommonEventHandler {
         .getToolClasses(heldItem), ConfigTFC.General.TREE.leafStickDropChanceBonusClasses)) {
         chance = ConfigTFC.General.TREE.leafStickDropChanceBonus;
       }
-      if (Constants.RNG.nextFloat() < chance) {
+      if (MathUtils.RNG.nextFloat() < chance) {
         event.getDrops().add(new ItemStack(Items.STICK));
       }
     }
 
     // Drop shards from glass
     ItemStack stackAt = new ItemStack(Item.getItemFromBlock(state.getBlock()), 1, state.getBlock().damageDropped(state));
-    if (!event.isSilkTouching() && OreDictionaryHelper.doesStackMatchOre(stackAt, "blockGlass")) {
-      event.getDrops().add(new ItemStack(ItemsTFC.GLASS_SHARD));
+    if (!event.isSilkTouching() && OreDictUtils.contains(stackAt, "blockGlass")) {
+      event.getDrops().add(new ItemStack(ItemsCore.GLASS_SHARD));
     }
 
     // Apply durability modifier on tools
     if (player != null) {
       ItemStack tool = ItemStack.EMPTY;
-      IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (cap != null) {
         tool = cap.getHarvestingTool();
       }
       if (!tool.isEmpty()) {
         float skillModifier = SmithingSkill.getSkillBonus(tool, SmithingSkill.Type.TOOLS) / 2.0F;
-        if (skillModifier > 0 && Constants.RNG.nextFloat() < skillModifier) {
+        if (skillModifier > 0 && MathUtils.RNG.nextFloat() < skillModifier) {
           // Up to 50% negating damage, for double durability
           player.setHeldItem(EnumHand.MAIN_HAND, tool);
         }
@@ -333,7 +376,7 @@ public final class CommonEventHandler {
     }
 
     if (block instanceof BlockFruitTreeLeaves) {
-      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + Constants.RNG.nextInt(4)));
+      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathUtils.RNG.nextInt(4)));
     } else if (block instanceof BlockFruitTreeTrunk blockFruitTreeTrunk) {
       if (event.isCanceled()) {event.setCanceled(false);}
       IFruitTree tree = blockFruitTreeTrunk.getTree();
@@ -342,28 +385,28 @@ public final class CommonEventHandler {
     }
 
     if (block instanceof BlockCassiaCinnamonLeaves || block instanceof BlockCeylonCinnamonLeaves || block instanceof BlockBambooLeaves) {
-      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + Constants.RNG.nextInt(4)));
+      event.getDrops().add(new ItemStack(ItemsFL.FRUIT_LEAF, 2 + MathUtils.RNG.nextInt(4)));
     }
     if (block == BlocksFL.MELON_FRUIT && (heldItem.getItem().getHarvestLevel(heldItem, "knife", player, state) != -1)) {
       event.getDrops().clear();
-      event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + Constants.RNG.nextInt(4)));
+      event.getDrops().add(new ItemStack(ItemsFL.getFood(FoodFL.MELON), 2 + MathUtils.RNG.nextInt(4)));
     }
 
     if (block instanceof BlockCactusTFC blockCactusTFC) {
       if (blockCactusTFC.getPlant() == TFCRegistries.PLANTS.getValue(DefaultPlants.BARREL_CACTUS)
           && (month == Month.SEPTEMBER || month == Month.OCTOBER || month == Month.NOVEMBER)) {
-        int chance = Constants.RNG.nextInt(2);
+        int chance = MathUtils.RNG.nextInt(2);
         if (chance == 0) {
           event.getDrops().clear();
-          event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + Constants.RNG.nextInt(3)));
+          event.getDrops().add(new ItemStack(ItemsTFCF.BARREL_CACTUS_FRUIT, 1 + MathUtils.RNG.nextInt(3)));
         }
       }
     }
 
     if (block instanceof BlockPackedIce) {
-      if (OreDictionaryHelper.doesStackMatchOre(heldItem, "iceSaw")) {
+      if (OreDictUtils.contains(heldItem, "iceSaw")) {
         event.getDrops().clear();
-        event.getDrops().add(new ItemStack(ModItems.PACKED_ICE_SHARD, 2 + Constants.RNG.nextInt(4)));
+        event.getDrops().add(new ItemStack(ItemsCore.ICE_SHARD, 3 + MathUtils.RNG.nextInt(4)));
       }
     }
 
@@ -383,7 +426,7 @@ public final class CommonEventHandler {
           event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.ANDESITE, Rock.Type.RAW)));
       }
     }
-    if (OreDictionaryHelper.doesStackMatchOre(stackAt, "cobblestone")) {
+    if (OreDictUtils.contains(stackAt, "cobblestone")) {
       event.getDrops().clear();
       event.getDrops().add(new ItemStack(BlockRockVariant.get(Rock.ANDESITE, Type.COBBLE)));
     }
@@ -446,7 +489,7 @@ public final class CommonEventHandler {
       event.getDrops().clear();
       event.getDrops().add(new ItemStack(BlockFenceTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
     }
-    if (block instanceof BlockPotato || block instanceof BlockCarrot || OreDictionaryHelper.doesStackMatchOre(stackAt, "cropWheat")) {
+    if (block instanceof BlockPotato || block instanceof BlockCarrot || OreDictUtils.contains(stackAt, "cropWheat")) {
       event.getDrops().clear();
       event.getDrops().add(new ItemStack(Items.STICK));
     }
@@ -472,83 +515,6 @@ public final class CommonEventHandler {
     }
   }
 
-  /**
-   * Handles drinking water when right clicking an underwater block
-   */
-  @SubscribeEvent
-  public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-    final World world = event.getWorld();
-    final BlockPos pos = event.getPos();
-    final IBlockState state = world.getBlockState(pos);
-    final ItemStack stack = event.getItemStack();
-    final EntityPlayer player = event.getEntityPlayer();
-
-    // Fire onBlockActivated for in world crafting devices
-    if (state.getBlock() instanceof BlockAnvilTFC || state.getBlock() instanceof BlockStoneAnvil
-        || state.getBlock() instanceof BlockQuern || state.getBlock() instanceof BlockSupport) {
-      event.setUseBlock(Event.Result.ALLOW);
-    }
-
-    if (state.getBlock() == BlocksTFC.PUDDLE) {
-      if (stack.getItem() == Items.GLASS_BOTTLE && Devices.PUDDLE.canUseGlassBottle) {
-        if (event.getFace() == EnumFacing.UP) {
-          if (!world.isRemote) {
-            stack.shrink(1);
-            if (!player.inventory.addItemStackToInventory(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER))) {
-              player.dropItem(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), false);
-            }
-            world.setBlockToAir(pos);
-          } else {
-            world.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-          }
-        }
-      }
-      if (stack.getItem() instanceof ItemHoe hoe) {
-        world.setBlockToAir(pos);
-        hoe.onItemUse(player, world, pos.down(), event.getHand(), event.getFace(), 0, 0, 0);
-      }
-      if (stack.getItem() instanceof ItemSpade shovel) {
-        world.setBlockToAir(pos);
-        shovel.onItemUse(player, world, pos.down(), event.getHand(), event.getFace(), 0, 0, 0);
-      }
-    }
-
-    // Try to drink water
-    // Only possible with main hand - fixes attempting to drink even when it doesn't make sense
-    if (!player.isCreative() && stack.isEmpty() && player.getFoodStats() instanceof IFoodStatsTFC foodStats && event.getHand() == EnumHand.MAIN_HAND) {
-      RayTraceResult result = Helpers.rayTrace(event.getWorld(), player, true);
-      if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
-        IBlockState waterState = world.getBlockState(result.getBlockPos());
-        IBlockState puddleState = world.getBlockState(result.getBlockPos().add(0, 1, 0));
-
-        boolean isFreshWater = BlocksTFC.isFreshWater(waterState);
-        boolean isSaltWater = BlocksTFC.isSaltWater(waterState);
-        boolean isPuddle = puddleState == BlocksTFC.PUDDLE.getDefaultState();
-
-        if (isFreshWater && foodStats.attemptDrink(10.0F, true) ||
-            isSaltWater && foodStats.attemptDrink(-1.0F, true) ||
-            isPuddle && foodStats.attemptDrink(5.0F, true)) {
-
-          //Simulated so client will check if he would drink before updating stats
-          if (!world.isRemote) {
-            player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            if (isFreshWater) {
-              foodStats.attemptDrink(10.0F, false);
-            } else if (isSaltWater) {
-              foodStats.attemptDrink(-1.0F, false);
-            } else {
-              foodStats.attemptDrink(5.0F, false);
-              world.setBlockToAir(result.getBlockPos().add(0, 1, 0));
-            }
-          } else {
-            foodStats.resetCooldown();
-          }
-          event.setCancellationResult(EnumActionResult.SUCCESS);
-          event.setCanceled(true);
-        }
-      }
-    }
-  }
 
   @SubscribeEvent
   public static void onUseHoe(UseHoeEvent event) {
@@ -594,8 +560,8 @@ public final class CommonEventHandler {
     // Modifier for damage type + damage resistance
     actualDamage *= DamageType.getModifier(event.getSource(), event.getEntityLiving());
     if (event.getEntityLiving() instanceof EntityPlayer player) {
-      if (player.getFoodStats() instanceof IFoodStatsTFC) {
-        float healthModifier = ((IFoodStatsTFC) player.getFoodStats()).getHealthModifier();
+      if (player.getFoodStats() instanceof IFoodStatsTFC foodStatsTFC) {
+        float healthModifier = foodStatsTFC.getHealthModifier();
         if (healthModifier < ConfigTFC.General.PLAYER.minHealthModifier) {
           healthModifier = (float) ConfigTFC.General.PLAYER.minHealthModifier;
         }
@@ -613,19 +579,6 @@ public final class CommonEventHandler {
     ItemStack stack = event.getObject();
     Item item = stack.getItem();
     if (!stack.isEmpty()) {
-      // Size
-      if (CapabilityItemSize.getIItemSize(stack) == null) {
-        ICapabilityProvider sizeHandler = CapabilityItemSize.getCustomSize(stack);
-        event.addCapability(CapabilityItemSize.KEY, sizeHandler);
-        if (sizeHandler instanceof IItemSize) {
-          // Only modify the stack size if the item was stackable in the first place
-          // Note: this is called in many cases BEFORE all custom capabilities are added.
-          int prevStackSize = stack.getMaxStackSize();
-          if (prevStackSize != 1) {
-            item.setMaxStackSize(((IItemSize) sizeHandler).getStackSize(stack));
-          }
-        }
-      }
 
       // Food
       // Because our foods supply a custom capability in Item#initCapabilities, we need to avoid attaching a duplicate, otherwise it breaks food stacking recipes.
@@ -633,17 +586,17 @@ public final class CommonEventHandler {
       // We allow custom defined capabilities to attach to non-food items, that should have rot (such as eggs).
       ICapabilityProvider foodHandler = CapabilityFood.getCustomFood(stack);
       if (foodHandler != null || stack.getItem() instanceof ItemFood) {
-        if (stack.getItem() instanceof IItemFoodTFC) {
-          foodHandler = ((IItemFoodTFC) stack.getItem()).getCustomFoodHandler();
+        if (stack.getItem() instanceof IItemFoodTFC iItemFoodTFC) {
+          foodHandler = iItemFoodTFC.getCustomFoodHandler();
         }
         if (foodHandler == null) {
-          foodHandler = new FoodHandler(stack.getTagCompound(), new FoodData());
+          foodHandler = new CapabilityProviderFood(stack.getTagCompound(), new FoodData());
         }
         event.addCapability(CapabilityFood.KEY, foodHandler);
       }
 
       // Forge / Metal / Heat. Try forge first, because it's more specific
-      ICapabilityProvider forgeHandler = CapabilityForgeable.getCustomForgeable(stack);
+      ICapabilityProvider forgeHandler = CapabilityHandlerForge.getCustom(stack);
       boolean isForgeable = false;
       boolean isHeatable = false;
       if (forgeHandler != null) {
@@ -652,12 +605,13 @@ public final class CommonEventHandler {
         isHeatable = forgeHandler instanceof ICapabilityHeat;
       }
       // Metal
-      ICapabilityProvider metalCapability = CapabilityMetalItem.getCustomMetalItem(stack);
+      ICapabilityProvider metalCapability = CapabilityHandlerMetal.getCustom(stack);
       if (metalCapability != null) {
-        event.addCapability(CapabilityMetalItem.KEY, metalCapability);
+        event.addCapability(CapabilityMetal.KEY, metalCapability);
         if (!isForgeable) {
+
           // Add a forgeable capability for this item, if none is found
-          IMetalItem cap = (IMetalItem) metalCapability;
+          ICapabilityMetal cap = (ICapabilityMetal) metalCapability;
           Metal metal = cap.getMetal(stack);
           if (metal != null) {
             event.addCapability(CapabilityForgeable.KEY, new ForgeableHeatableHandler(null, metal.getSpecificHeat(), metal.getMeltTemp()));
@@ -672,107 +626,9 @@ public final class CommonEventHandler {
           event.addCapability(CapabilityHeat.KEY, heatHandler);
         }
       }
-
-      // Armor
-      if (item instanceof ItemArmor) {
-        ICapabilityProvider damageResistance = CapabilityDamageResistance.getCustomDamageResistance(stack);
-        if (damageResistance != null) {
-          event.addCapability(CapabilityDamageResistance.KEY, damageResistance);
-        }
-      }
-
-      // Eggs
-      if (stack.getItem() == Items.EGG) {
-        event.addCapability(CapabilityEgg.KEY, new EggHandler());
-      }
     }
   }
 
-  @SubscribeEvent
-  public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-    if (event.getObject() instanceof EntityPlayer player) {
-      // Player skills
-      if (!player.hasCapability(CapabilityPlayerData.CAPABILITY, null)) {
-        event.addCapability(CapabilityPlayerData.KEY, new PlayerDataHandler(player));
-      }
-    }
-  }
-
-  /**
-   * Fired on server only when a player logs in
-   *
-   * @param event {@link PlayerEvent.PlayerLoggedInEvent}
-   */
-  @SubscribeEvent
-  public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-    if (event.player instanceof EntityPlayerMP player) {
-      // Capability Sync Handler
-      CapabilityContainerListener.addTo(player.inventoryContainer, player);
-
-      // Food Stats
-      FoodStatsTFC.replaceFoodStats(player);
-      if (player.getFoodStats() instanceof IFoodStatsTFC) {
-        // Also need to read the food stats from nbt, as they were not present when the player was loaded
-        MinecraftServer server = player.world.getMinecraftServer();
-        if (server != null) {
-          NBTTagCompound nbt = server.getPlayerList().getPlayerNBT(player);
-          // This can be null if the server is unable to read the file
-          //noinspection ConstantConditions
-          if (nbt != null) {
-            player.foodStats.readNBT(nbt);
-          }
-        }
-      }
-
-      // layer Data
-      IPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      if (playerData != null) {
-
-        // Sync
-        TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(playerData.serializeNBT()), player);
-      }
-    }
-  }
-
-  /**
-   * Fired on server only when a player logs out
-   *
-   * @param event {@link PlayerEvent.PlayerLoggedOutEvent}
-   */
-  @SubscribeEvent
-  public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-    if (event.player instanceof EntityPlayerMP) {
-      // Capability sync handler, we can remove it now
-      CapabilityContainerListener.removeFrom((EntityPlayerMP) event.player);
-    }
-  }
-
-  /**
-   * Fired on server only when a player dies and respawns, or travels through dimensions
-   *
-   * @param event {@link PlayerEvent.PlayerRespawnEvent event}
-   */
-  @SubscribeEvent
-  public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-    if (event.player instanceof EntityPlayerMP player) {
-      // Capability Sync Handler
-      CapabilityContainerListener.addTo(player.inventoryContainer, player);
-
-      // Food Stats
-      FoodStatsTFC.replaceFoodStats(player);
-      FoodStatsTFC foodStatsTFC = (FoodStatsTFC) player.getFoodStats();
-      foodStatsTFC.setFoodLevel(4);
-      foodStatsTFC.setThirst(25F);
-      player.setHealth(5);
-
-      // Skills / Player data
-      IPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      if (cap != null) {
-
-        TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(cap.serializeNBT()), player);
-      }
-    }
-  }
 
   /**
    * Fired on server only when a player dies and respawns. Used to copy skill level before respawning since we need the original (AKA the body) player entity
@@ -784,8 +640,8 @@ public final class CommonEventHandler {
     if (event.getEntityPlayer() instanceof EntityPlayerMP player) {
 
       // Skills
-      IPlayerData newSkills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      IPlayerData originalSkills = event.getOriginal().getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData newSkills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
+      ICapabilityPlayerData originalSkills = event.getOriginal().getCapability(CapabilityPlayerData.CAPABILITY, null);
       if (newSkills != null && originalSkills != null) {
         newSkills.deserializeNBT(originalSkills.serializeNBT());
         // To properly sync, we need to use PlayerRespawnEvent
@@ -793,25 +649,6 @@ public final class CommonEventHandler {
     }
   }
 
-  /*
-   * Fired on server, sync capabilities to client whenever player changes dimension.
-   */
-  @SubscribeEvent
-  public static void onChangeDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
-    if (event.player instanceof EntityPlayerMP player) {
-      // Capability Sync Handler
-      CapabilityContainerListener.addTo(player.inventoryContainer, player);
-
-      // Food Stats
-      FoodStatsTFC.replaceFoodStats(player);
-
-      // Skills
-      IPlayerData skills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      if (skills != null) {
-        TerraFirmaCraft.getNetwork().sendTo(new PacketPlayerDataUpdate(skills.serializeNBT()), player);
-      }
-    }
-  }
 
   /**
    * Only fired on server
@@ -828,10 +665,10 @@ public final class CommonEventHandler {
   public static void onLivingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
     World world = event.getWorld();
     BlockPos pos = new BlockPos(event.getX(), event.getY(), event.getZ());
-    if (world.getWorldType() == TerraFirmaCraft.getWorldType() && event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
+    if (world.getWorldType() == TerraFirmaCraft.getWorldType() && world.provider.getDimensionType() == DimensionType.OVERWORLD) {
       if (ConfigTFC.General.SPAWN_PROTECTION.preventMobs && event.getEntity().isCreatureType(EnumCreatureType.MONSTER, false)) {
         // Prevent Mobs
-        ChunkDataTFC data = ChunkDataTFC.get(event.getWorld(), pos);
+        ChunkDataTFC data = ChunkDataTFC.get(world, pos);
         int minY = ConfigTFC.General.SPAWN_PROTECTION.minYMobs;
         int maxY = ConfigTFC.General.SPAWN_PROTECTION.maxYMobs;
         if (data.isSpawnProtected() && minY <= maxY && event.getY() >= minY && event.getY() <= maxY) {
@@ -841,7 +678,7 @@ public final class CommonEventHandler {
 
       if (ConfigTFC.General.SPAWN_PROTECTION.preventPredators && event.getEntity() instanceof IPredator) {
         // Prevent Predators
-        ChunkDataTFC data = ChunkDataTFC.get(event.getWorld(), pos);
+        ChunkDataTFC data = ChunkDataTFC.get(world, pos);
         int minY = ConfigTFC.General.SPAWN_PROTECTION.minYPredators;
         int maxY = ConfigTFC.General.SPAWN_PROTECTION.maxYPredators;
         if (data.isSpawnProtected() && minY <= maxY && event.getY() >= minY && event.getY() <= maxY) {
@@ -858,7 +695,7 @@ public final class CommonEventHandler {
       }
 
       // Check creature spawning - Prevents vanilla's respawning mechanic to spawn creatures outside their allowed conditions
-      if (event.getEntity() instanceof ICreatureTFC creature) {
+      if (event.getEntity() instanceof ICreature creature) {
         float rainfall = ChunkDataTFC.getRainfall(world, pos);
         float temperature = Climate.getAvgTemp(world, pos);
         float floraDensity = ChunkDataTFC.getFloraDensity(world, pos);
@@ -884,7 +721,8 @@ public final class CommonEventHandler {
 
     // Stop mob spawning in thatch - the list of non-spawnable light-blocking, non-collidable blocks is hardcoded in WorldEntitySpawner#canEntitySpawnBody
     // This is intentionally outside the previous world type check as this is a fix for the thatch block, not a generic spawning check.
-    if (event.getWorld().getBlockState(pos).getBlock() == BlocksTFC.THATCH || event.getWorld().getBlockState(pos.up()).getBlock() == BlocksTFC.THATCH) {
+    if (world.getBlockState(pos).getBlock() == BlocksCore.THATCH
+        || world.getBlockState(pos.up()).getBlock() == BlocksCore.THATCH) {
       event.setResult(Event.Result.DENY);
     }
   }
@@ -938,7 +776,7 @@ public final class CommonEventHandler {
         MonsterEquipment equipment = MonsterEquipment.get(entity);
         if (equipment != null) {
           for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
-            equipment.getEquipment(slot, Constants.RNG).ifPresent(stack -> entity.setItemStackToSlot(slot, stack));
+            equipment.getEquipment(slot, MathUtils.RNG).ifPresent(stack -> entity.setItemStackToSlot(slot, stack));
           }
         }
       }
@@ -957,9 +795,8 @@ public final class CommonEventHandler {
   /**
    * This implementation utilizes EntityJoinWorldEvent and ItemExpireEvent, they go hand-in-hand with each other.
    * <p>
-   * By manually editing the tag of the EntityItem upon spawning, we can identify what EntityItems should be subjected to the cooling process. We also apply an
-   * extremely short lifespan to mimic the speed of the barrel recipe, albeit slightly longer (half a second, but modifiable via config). Then all the checks
-   * are done in ItemExpireEvent to set a new cooler temperature depending on if the conditions are met.
+   * By manually editing the tag of the EntityItem upon spawning, we can identify what EntityItems should be subjected to the cooling process. We also apply an extremely short lifespan to mimic the speed of the barrel recipe, albeit
+   * slightly longer (half a second, but modifiable via config). Then all the checks are done in ItemExpireEvent to set a new cooler temperature depending on if the conditions are met.
    * <p>
    * First of all, if temperature is 0 or less, then nothing needs to be done and the original lifespan is restored/added on.
    * <p>
@@ -982,7 +819,7 @@ public final class CommonEventHandler {
       }
       float itemTemp = heatCap.getTemperature();
       if (itemTemp > 0) {
-        float rand = Constants.RNG.nextFloat();
+        float rand = MathUtils.RNG.nextFloat();
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos((int) entityItem.posX, (int) entityItem.posY, (int) entityItem.posZ);
         IBlockState state;
         if ((state = entityItem.world.getBlockState(pos)).getBlock() instanceof BlockFluidBase) {
@@ -1132,7 +969,7 @@ public final class CommonEventHandler {
       }
       if (hugeHeavyCount >= 2) {
         // Player is barely able to move
-        event.player.addPotionEffect(new PotionEffect(EffectsCore.OVERBURDENED.get(), 25, 125, false, false));
+        event.player.addPotionEffect(new PotionEffect(EffectsCore.OVERBURDENED, 25, 125, false, false));
       }
     }
 
@@ -1182,7 +1019,7 @@ public final class CommonEventHandler {
         if (pluckable.equals(entityTypeName)) {
           target.dropItem(Items.FEATHER, 1);
           target.attackEntityFrom(DamageSources.PLUCKING, (float) ConfigTFC.General.MISC.damagePerFeather);
-          if (target instanceof IAnimalTFC animalTarget) {
+          if (target instanceof IAnimal animalTarget) {
             animalTarget.setFamiliarity(animalTarget.getFamiliarity() - 0.04f);
           }
           return;
@@ -1192,27 +1029,12 @@ public final class CommonEventHandler {
   }
 
   @SubscribeEvent
-  public static void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
-    event.addCapability(CapabilityWorldTracker.KEY, new WorldTracker());
-  }
-
-  @SubscribeEvent
-  public static void onWorldTick(TickEvent.WorldTickEvent event) {
-    if (event.phase == TickEvent.Phase.START) {
-      WorldTracker tracker = event.world.getCapability(CapabilityWorldTracker.CAPABILITY, null);
-      if (tracker != null) {
-        tracker.tick(event.world);
-      }
-    }
-  }
-
-  @SubscribeEvent
   public static void onServerChatEvent(ServerChatEvent event) {
-    IPlayerData cap = event.getPlayer().getCapability(CapabilityPlayerData.CAPABILITY, null);
+    ICapabilityPlayerData cap = event.getPlayer().getCapability(CapabilityPlayerData.CAPABILITY, null);
     if (cap != null) {
       long intoxicatedTicks = cap.getIntoxicatedTime() - 6 * ICalendar.TICKS_IN_HOUR; // Only apply intoxication after 6 hr
       if (intoxicatedTicks > 0) {
-        float drunkChance = MathHelper.clamp((float) intoxicatedTicks / PlayerDataHandler.MAX_INTOXICATED_TICKS, 0, 0.7f);
+        float drunkChance = MathHelper.clamp((float) intoxicatedTicks / ProviderPlayerData.MAX_INTOXICATED_TICKS, 0, 0.7f);
         String originalMessage = event.getMessage();
         String[] words = originalMessage.split(" ");
         for (int i = 0; i < words.length; i++) {
@@ -1222,24 +1044,24 @@ public final class CommonEventHandler {
           }
 
           // Swap two letters
-          if (Constants.RNG.nextFloat() < drunkChance && word.length() >= 2) {
-            int pos = Constants.RNG.nextInt(word.length() - 1);
+          if (MathUtils.RNG.nextFloat() < drunkChance && word.length() >= 2) {
+            int pos = MathUtils.RNG.nextInt(word.length() - 1);
             word = word.substring(0, pos) + word.charAt(pos + 1) + word.charAt(pos) + word.substring(pos + 2);
           }
 
           // Repeat / slur letters
-          if (Constants.RNG.nextFloat() < drunkChance) {
-            int pos = Constants.RNG.nextInt(word.length());
+          if (MathUtils.RNG.nextFloat() < drunkChance) {
+            int pos = MathUtils.RNG.nextInt(word.length());
             char repeat = word.charAt(pos);
-            int amount = 1 + Constants.RNG.nextInt(3);
+            int amount = 1 + MathUtils.RNG.nextInt(3);
             word = word.substring(0, pos) + new String(new char[amount]).replace('\0', repeat) + (pos + 1 < word.length() ? word.substring(pos + 1) : "");
           }
 
           // Add additional letters
-          if (Constants.RNG.nextFloat() < drunkChance) {
-            int pos = Constants.RNG.nextInt(word.length());
-            char replacement = ALPHABET.charAt(Constants.RNG.nextInt(ALPHABET.length()));
-            if (Character.isUpperCase(word.charAt(Constants.RNG.nextInt(word.length())))) {
+          if (MathUtils.RNG.nextFloat() < drunkChance) {
+            int pos = MathUtils.RNG.nextInt(word.length());
+            char replacement = ALPHABET.charAt(MathUtils.RNG.nextInt(ALPHABET.length()));
+            if (Character.isUpperCase(word.charAt(MathUtils.RNG.nextInt(word.length())))) {
               replacement = Character.toUpperCase(replacement);
             }
             word = word.substring(0, pos) + replacement + (pos + 1 < word.length() ? word.substring(pos + 1) : "");
@@ -1256,7 +1078,7 @@ public final class CommonEventHandler {
     // This is just optimized (probably uselessly, but whatever) for use in onPlayerTick
     int hugeHeavyCount = 0;
     for (ItemStack stack : inventory.mainInventory) {
-      if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
         hugeHeavyCount++;
         if (hugeHeavyCount >= 2) {
           return hugeHeavyCount;
@@ -1264,7 +1086,7 @@ public final class CommonEventHandler {
       }
     }
     for (ItemStack stack : inventory.armorInventory) {
-      if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
         hugeHeavyCount++;
         if (hugeHeavyCount >= 2) {
           return hugeHeavyCount;
@@ -1272,7 +1094,7 @@ public final class CommonEventHandler {
       }
     }
     for (ItemStack stack : inventory.offHandInventory) {
-      if (CapabilityItemSize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
+      if (CapabilitySize.checkItemSize(stack, Size.HUGE, Weight.VERY_HEAVY)) {
         hugeHeavyCount++;
         if (hugeHeavyCount >= 2) {
           return hugeHeavyCount;
@@ -1282,89 +1104,5 @@ public final class CommonEventHandler {
     return hugeHeavyCount;
   }
 
-  @SubscribeEvent
-  public void addAI(LivingEvent.LivingUpdateEvent event) {
-    if (event.getEntityLiving() instanceof EntityAnimalTFC animal && event.getEntityLiving().ticksExisted < 5 && !event.getEntityLiving().isChild()) {
-      animal.tasks.addTask(2, new EBEntityAI(animal));
-    }
-  }
 
-  @SubscribeEvent
-  public void makeBigSplash(LivingFallEvent event) {
-    EntityLivingBase entity = event.getEntityLiving();
-    BlockPos pos = entity.getPosition();
-    World world = entity.getEntityWorld();
-
-    if (!world.isRemote) {
-      if (world.getBlockState(pos).getBlock() == BlocksTFC.PUDDLE) {
-        float distance = event.getDistance();
-        if (distance < 3.0F) {
-          ((WorldServer) world).spawnParticle(EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D, 0.0D, 0.13D, Block.getStateId(BlocksTFC.PUDDLE.getDefaultState()));
-          ((WorldServer) world).spawnParticle(EnumParticleTypes.WATER_SPLASH, entity.posX, entity.posY, entity.posZ, 15, 0.0D, 0.0D, 0.0D, 0.13D, Block.getStateId(BlocksTFC.PUDDLE.getDefaultState()));
-        } else {
-          float f = (float) MathHelper.ceil(distance - 3.0F);
-
-          double d0 = Math.min(0.2F + f / 15.0F, 2.5D);
-          int i = (int) (200.0D * d0);
-
-          for (int a = 0; a < 20; a++) {
-            double x = 0.8 * (world.rand.nextDouble() - world.rand.nextDouble());
-            double z = 0.8 * (world.rand.nextDouble() - world.rand.nextDouble());
-            ((WorldServer) world).spawnParticle(EnumParticleTypes.WATER_SPLASH, entity.posX + x, entity.posY, entity.posZ + z, i / 2, 0.0D, 0.0D, 0.0D, 0.25D);
-          }
-          ((WorldServer) world).spawnParticle(EnumParticleTypes.BLOCK_DUST, entity.posX, entity.posY, entity.posZ, i, 0.0D, 0.0D, 0.0D, 0.4D, Block.getStateId(BlocksTFC.PUDDLE.getDefaultState()));
-          world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-        }
-      }
-    }
-  }
-
-  @SubscribeEvent
-  public void placePuddles(TickEvent.ServerTickEvent event) {
-    if (event.phase == TickEvent.Phase.END) {
-      WorldServer world = DimensionManager.getWorld(0);
-      try {
-        if (world.getTotalWorldTime() % 10 == 0) {
-          Iterator<Chunk> iterator = world.getPlayerChunkMap().getChunkIterator();
-
-          while (iterator.hasNext()) {
-            Random random = world.rand;
-            ChunkPos chunkPos = iterator.next().getPos();
-
-            int x = random.nextInt(8) - random.nextInt(8);
-            int z = random.nextInt(8) - random.nextInt(8);
-            BlockPos pos = chunkPos.getBlock(8 + x, 0, 8 + z);
-
-            int y = world.getHeight(pos).getY() + random.nextInt(4) - random.nextInt(4);
-            BlockPos puddlePos = pos.add(0, y, 0);
-
-            if (this.canSpawnPuddle(world, puddlePos)) {
-              if (random.nextInt(100) < Devices.PUDDLE.puddleRate) {
-                world.setBlockState(puddlePos.up(), BlocksTFC.PUDDLE.getDefaultState(), 2);
-              }
-            }
-          }
-        }
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
-  }
-
-  private boolean canSpawnPuddle(World world, BlockPos pos) {
-    if (!world.isSideSolid(pos, EnumFacing.UP)) {return false;}
-    if (!world.isAirBlock(pos.up())) {return false;}
-    if (!world.isRaining()) {return false;}
-
-    Biome biome = world.getBiomeForCoordsBody(pos);
-    if (biome.canRain() && !biome.getEnableSnow() && (Climate.getActualTemp(pos) > 0)) {
-      for (int y = pos.getY() + 1; y < world.getHeight(); y++) {
-        BlockPos up = new BlockPos(pos.getX(), y, pos.getZ());
-        if (!world.isAirBlock(up)) {return false;}
-      }
-      return true;
-    }
-
-    return false;
-  }
 }

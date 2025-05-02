@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei.categories;
 
 import net.minecraft.client.Minecraft;
@@ -25,7 +20,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class BlastFurnaceCategory extends BaseRecipeCategory<BlastFurnaceRecipeWrapper> {
 
-  private static final ResourceLocation ICONS = new ResourceLocation(Mods.Names.TFC, "textures/gui/icons/jei.png");
+  private static final ResourceLocation ICONS = new ResourceLocation(Mods.ModIDs.TFC, "textures/gui/icons/jei.png");
 
   private final IDrawableStatic slot;
   private final IDrawableStatic fire;

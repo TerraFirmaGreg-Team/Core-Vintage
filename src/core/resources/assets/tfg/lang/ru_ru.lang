@@ -1,0 +1,318 @@
+
+
+############################################################
+
+# Damage Sources
+death.attack.dehydration=%1$s умер от жажды.
+death.attack.parasites=%1$s умер от паразитов.
+death.attack.plucking=%1$s  умер от вырванных перьев.
+death.attack.grill=%1$s поджарен до корочки.
+death.attack.soup=%1$s превратился в фарш.
+death.attack.berry_bush=%1$s was pricked to death.
+death.attack.hypothermia=%1$s froze to death.
+death.attack.hyperthermia=%1$s died of heatstroke.
+death.attack.swarm=%1$s died due to a swarm of bees.
+death.attack.bear_trap=%1$s didn't watch their step
+death.attack.pigvil=%1$s was squashed by a falling...Pigvil?
+
+## Size
+enum.tfg.size.tiny=Крошечный
+enum.tfg.size.very_small=Очень маленький
+enum.tfg.size.small=Маленький
+enum.tfg.size.normal=Нормальный
+enum.tfg.size.large=Большой
+enum.tfg.size.very_large=Очень большой
+enum.tfg.size.huge=Огромный
+
+## Weight
+enum.tfg.weight.very_light=Очень легкий
+enum.tfg.weight.light=Легкий
+enum.tfg.weight.medium=Средний
+enum.tfg.weight.heavy=Тяжелый
+enum.tfg.weight.very_heavy=Очень тяжелый
+
+# Module Core ################################################
+
+# Tooltip
+tooltip.tfg.core.advanced_data.tool_class=§7  -Класс Инструмента:§8 %s
+tooltip.tfg.core.advanced_data.tool_classes=§7  -Классы Инструмента:§8 %s
+tooltip.tfg.core.advanced_data.ore_dict=§7  -Имя в словаре руд:§8 %s
+tooltip.tfg.core.advanced_data.ore_dicts=§7  -Имена в словаре руд:§8 %s
+
+## Item Group
+item_group.tfg.core.name=[ TFG ] Ядро
+
+## Block
+block.tfg.core.debug.name=Отладочный блок
+block.tfg.core.puddle.name=Лужа
+block.tfg.core.fire_bricks.name=Огнеупорный кирпич
+block.tfg.core.thatch.name=Сноп соломы
+
+## Item
+item.tfg.core.wand.name=Отладочная палочка
+item.tfg.core.wood_ash.name=Древесная зола
+item.tfg.core.straw.name=Солома
+item.tfg.core.shard.glass.name=Осколок стекла
+item.tfg.core.shard.ice.name=Осколок льда
+
+## Effect
+effect.tfg.core.overburdened=Перегружен
+effect.tfg.core.thirst=Жажда
+effect.tfg.core.parasites=Паразиты
+effect.tfg.core.swarm=Swarm
+effect.tfg.core.hyperthermia=Hyperthermia
+effect.tfg.core.hypothermia=Hypothermia
+effect.tfg.core.resist_cold=Resist Cold
+effect.tfg.core.resist_heat=Resist Heat
+effect.tfg.core.caffeine=Caffeine
+
+
+
+# Module Device ##############################################
+
+# TheOneProbe
+top.tfg.device.bloomery.output=Изготовление: %d единицы %s
+top.tfg.device.bloomery.ores=Руды: %d/%d
+top.tfg.device.bloomery.fuel=Топливо: %d/%d
+top.tfg.device.blast_furnace.not_formed=Не сформирован
+top.tfg.device.latex_extractor.quantity=Латекс: %dmB
+top.tfg.device.pit_kiln.unlit=Не горит
+top.tfg.device.pit_kiln.straw=Нужно %d солома/ы
+top.tfg.device.pit_kiln.logs=Нужно %d бревна/ен
+top.tfg.device.pit_kiln.remaining.ticks=Осталось %d тик(ов)
+top.tfg.device.pit_kiln.remaining.hours=Осталось %d час(ов)
+top.tfg.device.pit_kiln.remaining.minutes=Осталось %d минут(ы)
+
+# Just Enough Items
+jei.tfg.category.blast_furnace=Рецепты доменной печи
+
+# Tooltip
+tooltip.tfg.device.blast_furnace.ore_amount=Руда
+tooltip.tfg.device.blast_furnace.fuel_amount=Топливо
+tooltip.tfg.device.blast_furnace.melt_amount=Расплавлено
+tooltip.tfg.device.blast_furnace.invalid_structure=Неверная структура!
+tooltip.tfg.device.powderkeg.amount=Содержит %1$dx из %2$s
+tooltip.tfg.device.powderkeg.empty=Пусто
+tooltip.tfg.device.powderkeg.unseal=Распечатать пороховую бочку
+tooltip.tfg.device.powderkeg.seal=Запечатать пороховую бочку
+
+## Item Group
+item_group.tfg.device.name=[ TFG ] Девайсы
+
+## Block
+block.tfg.device.alloy_calculator.name=Калькулятор сплава
+block.tfg.device.bear_trap.name=Медвежий капкан
+block.tfg.device.snare.name=Ловушка
+block.tfg.device.bellows.name=Кузнечные меха
+block.tfg.device.blast_furnace.name=Доменная печь
+block.tfg.device.bloomery.name=Кричной горн
+block.tfg.device.molten.name=Расплав
+block.tfg.device.bloom.name=Крица
+block.tfg.device.charcoal_forge.name=Угольная кузница
+block.tfg.device.crucible.name=Тигель
+block.tfg.device.charcoal_pile.name=Угольная куча
+block.tfg.device.fire_pit.name=Костер
+block.tfg.device.cellar.door.name=Дверь подвала
+block.tfg.device.cellar.shelf.name=Полка подвала
+block.tfg.device.cellar.wall.name=Стена подвала
+block.tfg.device.infected_air.name=Зараженный воздух
+block.tfg.device.smeltery.cauldron.name=Плавильный котёл
+block.tfg.device.smeltery.firebox.name=Плавильная печь
+block.tfg.device.latex_extractor.name=Латексный экстрактор
+block.tfg.device.freeze_dryer.name=Сублимационная камера
+block.tfg.device.ice_bunker.name=Морозильная камера
+block.tfg.device.powderkeg.name=Пороховая бочка
+
+## Item
+item.tfg.device.flask.leather.name=Пустая кожаная фляга
+item.tfg.device.flask.leather.filled.name=Кожаная фляга (%s)
+item.tfg.device.flask.leather.broken.name=Поврежденная кожаная фляга
+item.tfg.device.flask.leather.unfinished.name=Незавершенная кожаная фляга
+item.tfg.device.flask.metal.name=Пустая металлическая фляга
+item.tfg.device.flask.metal.filled.name=Металлическая фляга ( %s )
+item.tfg.device.flask.metal.broken.name=Поврежденная металлическая фляга
+item.tfg.device.flask.metal.unfinished.name=Незавершенная металлическая фляга
+item.tfg.device.firestarter.name=Поджигатель
+
+## Sound
+sound.tfg.device.item.firestarter=Поджигатель шипит
+
+sound.tfg.device.block.bellows.blow.air=Меха пыхают
+
+
+# Module Animal ##############################################
+
+# TheOneProbe
+top.tfg.animal.male=Cамец ♂
+top.tfg.animal.female=Cамка ♀
+
+top.tfg.animal.has_milk=Можно доить
+top.tfg.animal.can_mate=Может спариваться
+top.tfg.animal.has_eggs=Может отложить яйцо
+top.tfg.animal.childhood_end=Вырастет через %s дней
+top.tfg.animal.familiarized=Приручен
+top.tfg.animal.not_familiarized=Не Приручен
+top.tfg.animal.old=Старое животное
+top.tfg.animal.pregnant=Беременная
+top.tfg.animal.can_shear=Можно стричь
+top.tfg.animal.pregnant_end=Родит через %s дней
+
+
+## Item Group
+item_group.tfg.animal.name=[ TFG ] Животные
+
+## Block
+block.tfg.animal.nest_box.name=Насест
+
+## Item
+item.tfg.animal.halter.name=Узда
+item.tfg.animal.product.bladder.name=Мочевой пузырь
+item.tfg.animal.product.wool.name=Шерсть
+item.tfg.animal.product.wool_yarn.name=Шерстяная пряжа
+item.tfg.animal.product.wool_cloth.name=Шерстяная ткань
+item.tfg.animal.product.silk_cloth.name=Шелковая ткань
+
+## Entity
+entity.tfg.animal.sheep.name=Овца
+entity.tfg.animal.cow.name=Корова
+entity.tfg.animal.grizzlybear.name=Медведь гризли
+entity.tfg.animal.pig.name=Свинья
+entity.tfg.animal.chicken.name=Курица
+entity.tfg.animal.deer.name=Олень
+entity.tfg.animal.pheasant.name=Фазан
+entity.tfg.animal.rabbit.name=Кролик
+entity.tfg.animal.wolf.name=Волк
+entity.tfg.animal.horse.name=Лошадь
+entity.tfg.animal.donkey.name=Осел
+entity.tfg.animal.mule.name=Мул
+entity.tfg.animal.parrot.name=Попугай
+entity.tfg.animal.llama.name=Лама
+entity.tfg.animal.polarbear.name=Полярный медведь
+entity.tfg.animal.alpaca.name=Альпака
+entity.tfg.animal.duck.name=Утка
+entity.tfg.animal.goat.name=Козел
+entity.tfg.animal.panther.name=Чёрная пантера
+entity.tfg.animal.ocelot.name=Оцелот
+entity.tfg.animal.sabertooth.name=Саблезуб
+entity.tfg.animal.camel.name=Верблюд
+entity.tfg.animal.lion.name=Лев
+entity.tfg.animal.hyena.name=Гиена
+entity.tfg.animal.direwolf.name=Лютоволк
+entity.tfg.animal.hare.name=Заяц
+entity.tfg.animal.boar.name=Кабан
+entity.tfg.animal.zebu.name=Зебу
+entity.tfg.animal.gazelle.name=Газель
+entity.tfg.animal.wildebeest.name=Гну
+entity.tfg.animal.quail.name=Перепел
+entity.tfg.animal.grouse.name=Рябчик
+entity.tfg.animal.mongoose.name=Мангуст
+entity.tfg.animal.turkey.name=Индейка
+entity.tfg.animal.jackal.name=Шакал
+entity.tfg.animal.muskox.name=Овцебык
+entity.tfg.animal.yak.name=Як
+entity.tfg.animal.blackbear.name=Черный медведь
+entity.tfg.animal.cougar.name=Пума
+entity.tfg.animal.coyote.name=Койот
+
+## Sound
+sound.tfg.animal.entity.deer.say=Олень фыркает
+sound.tfg.animal.entity.deer.cry=Олень плачет
+sound.tfg.animal.entity.deer.hurt=Олень ранен
+sound.tfg.animal.entity.deer.death=Олень погибает
+sound.tfg.animal.entity.bear.say=Медведь рычит
+sound.tfg.animal.entity.bear.cry=Медведь плачет
+sound.tfg.animal.entity.bear.cub.cry=Детеныш медведя плачет
+sound.tfg.animal.entity.bear.hurt=Медведь ранен
+sound.tfg.animal.entity.bear.death=Медведь погибает
+sound.tfg.animal.entity.pheasant.say=Фазан крякает
+sound.tfg.animal.entity.pheasant.chick.say=Детеныш фазана кряхтит
+sound.tfg.animal.entity.pheasant.hurt=Фазан ранен
+sound.tfg.animal.entity.pheasant.death=Фазан погибает
+sound.tfg.animal.entity.alpaca.say=Альпака кричит
+sound.tfg.animal.entity.alpaca.cry=Альпака скулит
+sound.tfg.animal.entity.alpaca.hurt=Альпака ранена
+sound.tfg.animal.entity.alpaca.death=Альпака погибает
+sound.tfg.animal.entity.alpaca.step=Шаги
+sound.tfg.animal.entity.duck.say=Утка крякает
+sound.tfg.animal.entity.duck.cry=Утка крякает
+sound.tfg.animal.entity.duck.hurt=Утка ранена
+sound.tfg.animal.entity.duck.death=Утка погибает
+sound.tfg.animal.entity.goat.say=Блеяние козла
+sound.tfg.animal.entity.goat.cry=Блеяние козла
+sound.tfg.animal.entity.goat.hurt=Козел ранен
+sound.tfg.animal.entity.goat.death=Козел погибает
+sound.tfg.animal.entity.camel.say=Верблюд рычит
+sound.tfg.animal.entity.camel.cry=Верблюд плачет
+sound.tfg.animal.entity.camel.hurt=Верблюд ранен
+sound.tfg.animal.entity.camel.death=Верблюд погибает
+sound.tfg.animal.entity.panther.say=Пантера рычит
+sound.tfg.animal.entity.panther.cry=Пантера плачет
+sound.tfg.animal.entity.panther.hurt=Пантера ранена
+sound.tfg.animal.entity.panther.death=Пантера погибает
+sound.tfg.animal.entity.sabertooth.say=Саблезуб рычит
+sound.tfg.animal.entity.sabertooth.cry=Саблезуб плачет
+sound.tfg.animal.entity.sabertooth.hurt=Саблезуб ранен
+sound.tfg.animal.entity.sabertooth.death=Саблезуб погибает
+sound.tfg.animal.entity.lion.say=Лев рычит
+sound.tfg.animal.entity.lion.cry=Лев рев
+sound.tfg.animal.entity.lion.hurt=Лев ранен
+sound.tfg.animal.entity.lion.death=Лев погибает
+sound.tfg.animal.entity.hyena.say=Гиена рычит
+sound.tfg.animal.entity.hyena.cry=Гиена плачет
+sound.tfg.animal.entity.hyena.hurt=Гиена ранена
+sound.tfg.animal.entity.hyena.death=Гиена погибает
+sound.tfg.animal.entity.zebu.say=Зебу рычит
+sound.tfg.animal.entity.zebu.cry=Зебу плачет
+sound.tfg.animal.entity.zebu.hurt=Зебу ранена
+sound.tfg.animal.entity.zebu.death=Зебу погибает
+sound.tfg.animal.entity.muskox.say=Овцебык рычит
+sound.tfg.animal.entity.muskox.cry=Овцебык плачет
+sound.tfg.animal.entity.muskox.hurt=Овцебык ранен
+sound.tfg.animal.entity.muskox.death=Овцебык погибает
+sound.tfg.animal.entity.turkey.say=Индейка рычит
+sound.tfg.animal.entity.turkey.cry=Индейка плачет
+sound.tfg.animal.entity.turkey.hurt=Индейка ранена
+sound.tfg.animal.entity.turkey.death=Индейка погибает
+sound.tfg.animal.entity.boar.say=Кабан рычит
+sound.tfg.animal.entity.boar.cry=Кабан плачет
+sound.tfg.animal.entity.boar.hurt=Кабан ранен
+sound.tfg.animal.entity.boar.death=Кабан погибает
+sound.tfg.animal.entity.wildebeest.say=Гну рычит
+sound.tfg.animal.entity.wildebeest.hurt=Гну ранен
+sound.tfg.animal.entity.wildebeest.death=Гну погибает
+sound.tfg.animal.entity.quail.say=Перепел чирикает
+sound.tfg.animal.entity.quail.hurt=Перепел ранен
+sound.tfg.animal.entity.quail.death=Перепел погибает
+sound.tfg.animal.entity.grouse.say=Рябчик чирикает
+sound.tfg.animal.entity.grouse.hurt=Рябчик ранен
+sound.tfg.animal.entity.grouse.death=Рябчик погибает
+sound.tfg.animal.entity.cougar.say=Пума рычит
+sound.tfg.animal.entity.cougar.cry=Пума плачет
+sound.tfg.animal.entity.cougar.hurt=Пума ранена
+sound.tfg.animal.entity.cougar.death=Пума погибает
+sound.tfg.animal.entity.coyote.say=Койот рычит
+sound.tfg.animal.entity.coyote.cry=Койот плачет
+sound.tfg.animal.entity.coyote.hurt=Койот ранен
+sound.tfg.animal.entity.coyote.death=Койот погибает
+sound.tfg.animal.entity.gazelle.say=Газель рычит
+sound.tfg.animal.entity.gazelle.hurt=Газель ранен
+sound.tfg.animal.entity.gazelle.death=Газель погибает
+sound.tfg.animal.entity.direwolf.cry=Лютоволк воет
+sound.tfg.animal.entity.direwolf.say=Лютоволк рявкает
+sound.tfg.animal.entity.direwolf.hurt=Лютоволк скулит
+sound.tfg.animal.entity.direwolf.death=Лютоволк погибает
+sound.tfg.animal.entity.yak.say=Як мычит
+sound.tfg.animal.entity.yak.hurt=Як вздыхает
+sound.tfg.animal.entity.yak.death=Як погибает
+sound.tfg.animal.entity.jackal.say=Шакал рычит
+sound.tfg.animal.entity.jackal.cry=Шакал вызжит
+sound.tfg.animal.entity.jackal.hurt=Шакал ранен
+sound.tfg.animal.entity.jackal.death=Шакал погибает
+sound.tfg.animal.entity.mongoose.say=Мангуст мычать
+sound.tfg.animal.entity.mongoose.hurt=Мангуст ранен
+sound.tfg.animal.entity.mongoose.death=Мангуст погибает
+sound.tfg.animal.entity.feline.step=Шаги животного
+sound.tfg.animal.entity.cricket=Сверчки
+sound.tfg.animal.entity.frog=Лягушки
+sound.tfg.animal.entity.rooster.cry=Петух плачет
+

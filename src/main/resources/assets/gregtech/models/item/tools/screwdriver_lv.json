@@ -1,0 +1,7 @@
+{
+  "parent": "gregtech:item/handheld",
+  "textures": {
+    "layer0": "gregtech:items/tools/power_unit_lv",
+    "layer1": "gregtech:items/tools/screwdriver_short"
+  }
+}

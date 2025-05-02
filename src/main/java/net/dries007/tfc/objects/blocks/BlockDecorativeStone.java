@@ -1,13 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
-import net.dries007.tfc.api.capability.size.IItemSize;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -22,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
-public class BlockDecorativeStone extends Block implements IItemSize {
+public class BlockDecorativeStone extends Block implements ICapabilitySize {
 
   public static final Map<EnumDyeColor, BlockDecorativeStone> ALABASTER_BRICKS = new HashMap<>();
   public static final Map<EnumDyeColor, BlockDecorativeStone> ALABASTER_POLISHED = new HashMap<>();

@@ -1,15 +1,11 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.api.recipes.heat;
+
+import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import net.dries007.tfc.api.capability.metal.CapabilityMetalItem;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 
@@ -23,7 +19,7 @@ public class HeatRecipeMetalMelting extends HeatRecipe {
 
   public HeatRecipeMetalMelting(Metal metal) {
     super(input -> {
-      IMetalItem metalObject = CapabilityMetalItem.getMetalItem(input);
+      ICapabilityMetal metalObject = CapabilityMetal.get(input);
       if (metalObject != null) {
         return metalObject.getMetal(input) == metal;
       }
@@ -35,7 +31,7 @@ public class HeatRecipeMetalMelting extends HeatRecipe {
   @Nullable
   @Override
   public FluidStack getOutputFluid(ItemStack input) {
-    IMetalItem metalObject = CapabilityMetalItem.getMetalItem(input);
+    ICapabilityMetal metalObject = CapabilityMetal.get(input);
     if (metalObject != null) {
       Metal metal = metalObject.getMetal(input);
       if (metal != null) {

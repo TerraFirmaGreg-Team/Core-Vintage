@@ -1,9 +1,6 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.waila.providers;
+
+import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +10,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
-import net.dries007.tfc.objects.te.TELogPile;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
@@ -25,7 +21,7 @@ public class LogPileProvider implements IWailaBlock {
   @Nonnull
   @Override
   public ItemStack getIcon(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull NBTTagCompound nbt) {
-    TELogPile logPile = Helpers.getTE(world, pos, TELogPile.class);
+    TileLogPile logPile = Helpers.getTE(world, pos, TileLogPile.class);
     if (logPile != null) {
       IItemHandler inventory = logPile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       ItemStack icon = ItemStack.EMPTY;
@@ -48,7 +44,7 @@ public class LogPileProvider implements IWailaBlock {
   @Nonnull
   @Override
   public List<Class<?>> getLookupClass() {
-    return Collections.singletonList(TELogPile.class);
+    return Collections.singletonList(TileLogPile.class);
   }
 
   @Override

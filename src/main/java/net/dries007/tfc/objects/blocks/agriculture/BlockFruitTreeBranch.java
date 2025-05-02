@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks.agriculture;
 
 import su.terrafirmagreg.api.data.ToolClasses;
@@ -80,7 +75,7 @@ public class BlockFruitTreeBranch extends Block implements IGrowingPlant {
     setSoundType(SoundType.WOOD);
     this.tree = tree;
     Blocks.FIRE.setFireInfo(this, 5, 20);
-    setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(NORTH, 0).withProperty(EAST, 0).withProperty(SOUTH, 0)
+    setDefaultState(getBlockState().getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(NORTH, 0).withProperty(EAST, 0).withProperty(SOUTH, 0)
       .withProperty(WEST, 0).withProperty(UP, 0));
   }
 

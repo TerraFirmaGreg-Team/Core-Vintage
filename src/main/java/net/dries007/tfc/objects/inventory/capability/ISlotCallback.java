@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.inventory.capability;
 
 import net.minecraft.item.ItemStack;
@@ -44,6 +39,7 @@ public interface ISlotCallback {
    * @param slot the slot index, or -1 if the call method had no specific slot
    */
   default void setAndUpdateSlots(int slot) {}
+
 
   default void beforePutStack(@Nonnull SlotCallback slot, @Nonnull ItemStack stack) {}
 }

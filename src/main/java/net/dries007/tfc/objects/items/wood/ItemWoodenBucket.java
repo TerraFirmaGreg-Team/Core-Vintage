@@ -1,9 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items.wood;
+
+import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockLiquid;
@@ -38,9 +37,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
-import net.dries007.tfc.objects.fluids.capability.FluidWhitelistHandler;
 import net.dries007.tfc.objects.items.ItemTFC;
 
 import javax.annotation.Nonnull;
@@ -179,6 +175,6 @@ public class ItemWoodenBucket extends ItemTFC {
 
   @Override
   public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new FluidWhitelistHandler(stack, CAPACITY, ConfigTFC.General.MISC.woodenBucketWhitelist);
+    return new CapabilityProviderFluid.Whitelist(stack, CAPACITY, ConfigTFC.General.MISC.woodenBucketWhitelist);
   }
 }

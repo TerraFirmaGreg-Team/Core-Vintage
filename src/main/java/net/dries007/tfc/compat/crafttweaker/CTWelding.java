@@ -1,9 +1,7 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.crafttweaker;
+
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -17,8 +15,6 @@ import crafttweaker.api.liquid.ILiquidStack;
 import net.dries007.tfc.api.recipes.WeldingRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
-import net.dries007.tfc.util.skills.SmithingSkill;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -67,9 +63,9 @@ public class CTWelding {
     ItemStack item = (ItemStack) output.getInternal();
     List<WeldingRecipe> removeList = new ArrayList<>();
     TFCRegistries.WELDING.getValuesCollection()
-                         .stream()
-                         .filter(x -> x.getOutputs().get(0).isItemEqual(item))
-                         .forEach(removeList::add);
+      .stream()
+      .filter(x -> x.getOutputs().get(0).isItemEqual(item))
+      .forEach(removeList::add);
     for (WeldingRecipe rem : removeList) {
       CraftTweakerAPI.apply(new IAction() {
         @Override

@@ -1,6 +1,5 @@
-
 {
-  "type": "tfcthings:unmold_recipe",
+  "type": "tfc:tfcthings_unmold_recipe",
   "ingredients": [
     {
       "item": "tfcthings:mold/prospectors_hammer_head"

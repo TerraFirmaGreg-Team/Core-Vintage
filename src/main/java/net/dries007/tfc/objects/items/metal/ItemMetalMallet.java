@@ -1,6 +1,11 @@
 package net.dries007.tfc.objects.items.metal;
 
+import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.Month;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 
 import net.minecraft.block.Block;
@@ -20,24 +25,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-import com.eerussianguy.firmalife.ConfigFL;
-import com.eerussianguy.firmalife.init.FoodFL;
-import com.eerussianguy.firmalife.player.CapPlayerDataFL;
-import com.eerussianguy.firmalife.player.IPlayerDataFL;
-import com.eerussianguy.firmalife.recipe.CrackingRecipe;
-import com.eerussianguy.firmalife.recipe.NutRecipe;
-import com.eerussianguy.firmalife.registry.BlocksFL;
-import com.eerussianguy.firmalife.registry.ItemsFL;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.Constants;
-import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.dries007.tfc.api.capability.food.IFood;
+import net.dries007.firmalife.ConfigFL;
+import net.dries007.firmalife.init.FoodFL;
+import net.dries007.firmalife.registry.BlocksFL;
+import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
+import net.dries007.tfc.objects.recipes.CrackingRecipe;
+import net.dries007.tfc.objects.recipes.NutRecipe;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.calendar.Month;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -66,7 +65,7 @@ public class ItemMetalMallet extends ItemMetalTool {
         CrackingRecipe entry = CrackingRecipe.get(tile.getStack());
         if (entry == null) {return EnumActionResult.FAIL;}
 
-        if (Constants.RNG.nextInt(100) < entry.getChance()) {
+        if (MathUtils.RNG.nextInt(100) < entry.getChance()) {
           InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), entry.getOutputItem(tile.getStack()));
           worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 2.0F, 1.0F);
         } else {worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_FALL, SoundCategory.BLOCKS, 2.0F, 1.0F);}
@@ -79,7 +78,7 @@ public class ItemMetalMallet extends ItemMetalTool {
         List<ItemStack> drops = block.getDrops(worldIn, pos, worldIn.getBlockState(pos), 0);
         ItemStack stack = drops.get(0);
         if (stack.getItem() == Item.getItemFromBlock(block)) {
-          IFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+          ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
           if (cap != null) {
             if (!cap.isRotten()) {
               for (int i = 0; i < 2 + RNG.nextInt(4); i++) {Helpers.spawnItemStack(worldIn, pos, new ItemStack(ItemsFL.getFood(FoodFL.MELON)));}
@@ -125,7 +124,7 @@ public class ItemMetalMallet extends ItemMetalTool {
           return EnumActionResult.PASS;
         }
 
-        IPlayerDataFL playerData = player.getCapability(CapPlayerDataFL.CAPABILITY, null);
+        var playerData = CapabilityPlayerData.get(player);
         if (playerData != null) {
           boolean timePassed = (int) Calendar.CALENDAR_TIME.getTicks() - playerData.getNuttedTime() > ConfigFL.General.BALANCE.nutTime;
           boolean distanced = playerData.getNutDistance(pos) > ConfigFL.General.BALANCE.nutDistance;
@@ -135,14 +134,14 @@ public class ItemMetalMallet extends ItemMetalTool {
             leafCount = (int) Math.ceil(leafCount * 0.66);
             while (leafCount > 0)// batches drops a few times
             {
-              int dropCount = Math.min(Constants.RNG.nextInt(4) + 1, leafCount);
-              BlockPos dropPos = logPos.offset(EnumFacing.random(Constants.RNG), Constants.RNG.nextInt(3) + 1);
-              Helpers.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut().getItem(), Constants.RNG.nextInt(dropCount)));//should be querying nut
+              int dropCount = Math.min(MathUtils.RNG.nextInt(4) + 1, leafCount);
+              BlockPos dropPos = logPos.offset(EnumFacing.random(MathUtils.RNG), MathUtils.RNG.nextInt(3) + 1);
+              Helpers.spawnItemStack(worldIn, dropPos, new ItemStack(entry.getNut().getItem(), MathUtils.RNG.nextInt(dropCount)));//should be querying nut
               TFCParticles.LEAF1.sendToAllNear(worldIn,
                 dropPos.getX() + RNG.nextFloat() / 10,
                 dropPos.getY() - RNG.nextFloat() / 10,
                 dropPos.getZ() + RNG.nextFloat() / 10,
-                (RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10, (RNG.nextFloat() - 0.5) / 10, 90);
+                (MathUtils.RNG.nextFloat() - 0.5) / 10, -0.15D + RNG.nextFloat() / 10, (MathUtils.RNG.nextFloat() - 0.5) / 10, 90);
               leafCount -= dropCount;
             }
             worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 3.0F, 1.0F);
@@ -155,7 +154,7 @@ public class ItemMetalMallet extends ItemMetalTool {
               player.sendStatusMessage(new TextComponentTranslation("tooltip.firmalife.distance"), true);
             }
             player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 200, 1));
-            player.addPotionEffect(new PotionEffect(EffectsCore.THIRST.get(), 200, 0));
+            player.addPotionEffect(new PotionEffect(EffectsCore.THIRST, 200, 0));
           }
           return EnumActionResult.SUCCESS;
         }

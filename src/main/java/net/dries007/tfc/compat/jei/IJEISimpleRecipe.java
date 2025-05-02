@@ -1,14 +1,9 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.compat.jei;
+
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-
-import net.dries007.tfc.objects.inventory.ingredient.IIngredient;
 
 /**
  * Wraps simple ItemStacks -> ItemStacks recipes to JEI

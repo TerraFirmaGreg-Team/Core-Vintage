@@ -1,9 +1,8 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.client;
+
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.modules.device.object.container.ContainerLogPile;
+import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -18,42 +17,28 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.IRockObject;
-import net.dries007.tfc.client.gui.GuiAlloyCalculator;
 import net.dries007.tfc.client.gui.GuiAnvilPlan;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
 import net.dries007.tfc.client.gui.GuiBarrel;
-import net.dries007.tfc.client.gui.GuiBlastFurnace;
 import net.dries007.tfc.client.gui.GuiCalendar;
-import net.dries007.tfc.client.gui.GuiCharcoalForge;
 import net.dries007.tfc.client.gui.GuiChestTFC;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
-import net.dries007.tfc.client.gui.GuiCrucible;
-import net.dries007.tfc.client.gui.GuiFirePit;
 import net.dries007.tfc.client.gui.GuiInventoryCrafting;
 import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.client.gui.GuiLargeVessel;
 import net.dries007.tfc.client.gui.GuiLiquidTransfer;
 import net.dries007.tfc.client.gui.GuiNutrition;
-import net.dries007.tfc.client.gui.GuiPowderkeg;
 import net.dries007.tfc.client.gui.GuiSalad;
 import net.dries007.tfc.client.gui.GuiSkills;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
-import net.dries007.tfc.objects.container.ContainerAlloyCalculator;
 import net.dries007.tfc.objects.container.ContainerAnvilPlan;
 import net.dries007.tfc.objects.container.ContainerAnvilTFC;
 import net.dries007.tfc.objects.container.ContainerBarrel;
-import net.dries007.tfc.objects.container.ContainerBlastFurnace;
-import net.dries007.tfc.objects.container.ContainerCharcoalForge;
 import net.dries007.tfc.objects.container.ContainerChestTFC;
-import net.dries007.tfc.objects.container.ContainerCrucible;
-import net.dries007.tfc.objects.container.ContainerFirePit;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 import net.dries007.tfc.objects.container.ContainerLargeVessel;
 import net.dries007.tfc.objects.container.ContainerLiquidTransfer;
-import net.dries007.tfc.objects.container.ContainerLogPile;
-import net.dries007.tfc.objects.container.ContainerNestBox;
-import net.dries007.tfc.objects.container.ContainerPowderKeg;
 import net.dries007.tfc.objects.container.ContainerQuiver;
 import net.dries007.tfc.objects.container.ContainerSalad;
 import net.dries007.tfc.objects.container.ContainerSimple;
@@ -62,24 +47,15 @@ import net.dries007.tfc.objects.items.ItemQuiver;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.items.ceramics.ItemSmallVessel;
 import net.dries007.tfc.objects.items.rock.ItemRock;
-import net.dries007.tfc.objects.te.TEAlloyCalculator;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.objects.te.TEBlastFurnace;
-import net.dries007.tfc.objects.te.TECharcoalForge;
-import net.dries007.tfc.objects.te.TECrucible;
-import net.dries007.tfc.objects.te.TEFirePit;
 import net.dries007.tfc.objects.te.TELargeVessel;
-import net.dries007.tfc.objects.te.TELogPile;
-import net.dries007.tfc.objects.te.TENestBox;
-import net.dries007.tfc.objects.te.TEPowderKeg;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 public class TFCGuiHandler implements IGuiHandler {
 
@@ -108,11 +84,8 @@ public class TFCGuiHandler implements IGuiHandler {
     ItemStack stack = player.getHeldItemMainhand();
     Type type = Type.valueOf(ID);
     switch (type) {
-      case NEST_BOX:
-        TENestBox teNestBox = Helpers.getTE(world, pos, TENestBox.class);
-        return teNestBox == null ? null : new ContainerNestBox(player.inventory, teNestBox);
       case LOG_PILE:
-        TELogPile teLogPile = Helpers.getTE(world, pos, TELogPile.class);
+        TileLogPile teLogPile = Helpers.getTE(world, pos, TileLogPile.class);
         return teLogPile == null ? null : new ContainerLogPile(player.inventory, teLogPile);
       case SMALL_VESSEL:
         return new ContainerSmallVessel(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
@@ -120,14 +93,8 @@ public class TFCGuiHandler implements IGuiHandler {
         return new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
       case MOLD:
         return new ContainerLiquidTransfer(player.inventory, stack.getItem() instanceof ItemMold ? stack : player.getHeldItemOffhand());
-      case FIRE_PIT:
-        //noinspection ConstantConditions
-        return new ContainerFirePit(player.inventory, Helpers.getTE(world, pos, TEFirePit.class));
       case BARREL:
         return new ContainerBarrel(player.inventory, Helpers.getTE(world, pos, TEBarrel.class));
-      case CHARCOAL_FORGE:
-        //noinspection ConstantConditions
-        return new ContainerCharcoalForge(player.inventory, Helpers.getTE(world, pos, TECharcoalForge.class));
       case ANVIL:
         //noinspection ConstantConditions
         return new ContainerAnvilTFC(player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
@@ -137,25 +104,19 @@ public class TFCGuiHandler implements IGuiHandler {
         return new ContainerKnapping(KnappingType.STONE, player.inventory, stack.getItem() instanceof ItemRock ? stack : player.getHeldItemOffhand());
       case KNAPPING_CLAY:
         return new ContainerKnapping(KnappingType.CLAY, player.inventory,
-                                     OreDictionaryHelper.doesStackMatchOre(stack, "clay") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "clay") ? stack : player.getHeldItemOffhand());
       case KNAPPING_LEATHER:
         return new ContainerKnapping(KnappingType.LEATHER, player.inventory,
-                                     OreDictionaryHelper.doesStackMatchOre(stack, "leather") ? stack : player.getHeldItemOffhand());
+          OreDictUtils.contains(stack, "leather") ? stack : player.getHeldItemOffhand());
       case KNAPPING_FIRE_CLAY:
         return new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory,
-                                     OreDictionaryHelper.doesStackMatchOre(stack, "fireClay") ? stack : player.getHeldItemOffhand());
-      case CRUCIBLE:
-        return new ContainerCrucible(player.inventory, Helpers.getTE(world, pos, TECrucible.class));
+          OreDictUtils.contains(stack, "fireClay") ? stack : player.getHeldItemOffhand());
       case LARGE_VESSEL:
         return new ContainerLargeVessel(player.inventory, Helpers.getTE(world, pos, TELargeVessel.class));
-      case POWDERKEG:
-        return new ContainerPowderKeg(player.inventory, Helpers.getTE(world, pos, TEPowderKeg.class));
       case CALENDAR:
       case SKILLS:
       case NUTRITION:
         return new ContainerSimple(player.inventory);
-      case BLAST_FURNACE:
-        return new ContainerBlastFurnace(player.inventory, Helpers.getTE(world, pos, TEBlastFurnace.class));
       case CRAFTING:
         return new ContainerInventoryCrafting(player.inventory, player.world);
       case QUIVER:
@@ -172,8 +133,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return null;
       case SALAD:
         return new ContainerSalad(player.inventory);
-      case ALLOY_CALCULATOR:
-        return new ContainerAlloyCalculator(player.inventory, Helpers.getTE(world, pos, TEAlloyCalculator.class));
       default:
         return null;
     }
@@ -186,7 +145,6 @@ public class TFCGuiHandler implements IGuiHandler {
     Type type = Type.valueOf(ID);
     BlockPos pos = new BlockPos(x, y, z);
     switch (type) {
-      case NEST_BOX:
       case SMALL_VESSEL:
       case LOG_PILE:
         return new GuiContainerTFC(container, player.inventory, SMALL_INVENTORY_BACKGROUND);
@@ -194,13 +152,9 @@ public class TFCGuiHandler implements IGuiHandler {
         return new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemSmallVessel);
       case MOLD:
         return new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemMold);
-      case FIRE_PIT:
-        return new GuiFirePit(container, player.inventory, Helpers.getTE(world, pos, TEFirePit.class));
       case BARREL:
         return new GuiBarrel(container, player.inventory, Helpers.getTE(world, pos, TEBarrel.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
-                                                                                                          .getTranslationKey());
-      case CHARCOAL_FORGE:
-        return new GuiCharcoalForge(container, player.inventory, Helpers.getTE(world, pos, TECharcoalForge.class));
+          .getTranslationKey());
       case ANVIL:
         return new GuiAnvilTFC(container, player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
       case ANVIL_PLAN:
@@ -217,22 +171,15 @@ public class TFCGuiHandler implements IGuiHandler {
         return new GuiKnapping(container, player, KnappingType.LEATHER, LEATHER_TEXTURE);
       case KNAPPING_FIRE_CLAY:
         return new GuiKnapping(container, player, KnappingType.FIRE_CLAY, FIRE_CLAY_TEXTURE);
-      case CRUCIBLE:
-        return new GuiCrucible(container, player.inventory, Helpers.getTE(world, pos, TECrucible.class));
       case LARGE_VESSEL:
         return new GuiLargeVessel(container, player.inventory, Helpers.getTE(world, pos, TELargeVessel.class), world.getBlockState(new BlockPos(x, y, z))
-                                                                                                                    .getBlock().getTranslationKey());
-      case POWDERKEG:
-        return new GuiPowderkeg(container, player.inventory, Helpers.getTE(world, pos, TEPowderKeg.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
-                                                                                                                .getTranslationKey());
+          .getBlock().getTranslationKey());
       case CALENDAR:
         return new GuiCalendar(container, player.inventory);
       case NUTRITION:
         return new GuiNutrition(container, player.inventory);
       case SKILLS:
         return new GuiSkills(container, player.inventory);
-      case BLAST_FURNACE:
-        return new GuiBlastFurnace(container, player.inventory, Helpers.getTE(world, pos, TEBlastFurnace.class));
       case CRAFTING:
         return new GuiInventoryCrafting(container);
       case QUIVER:
@@ -244,32 +191,24 @@ public class TFCGuiHandler implements IGuiHandler {
         return null;
       case SALAD:
         return new GuiSalad(container, player.inventory);
-      case ALLOY_CALCULATOR:
-        return new GuiAlloyCalculator((ContainerAlloyCalculator) container, player.inventory, Helpers.getTE(world, pos, TEAlloyCalculator.class));
       default:
         return null;
     }
   }
 
   public enum Type {
-    NEST_BOX,
     LOG_PILE,
     SMALL_VESSEL,
     SMALL_VESSEL_LIQUID,
     MOLD,
-    FIRE_PIT,
     BARREL,
     KNAPPING_STONE,
     KNAPPING_CLAY,
     KNAPPING_FIRE_CLAY,
     KNAPPING_LEATHER,
-    CHARCOAL_FORGE,
     ANVIL,
     ANVIL_PLAN,
-    CRUCIBLE,
-    BLAST_FURNACE,
     LARGE_VESSEL,
-    POWDERKEG,
     CALENDAR,
     NUTRITION,
     SKILLS,
@@ -278,7 +217,6 @@ public class TFCGuiHandler implements IGuiHandler {
     INVENTORY, // This is special, it is used by GuiButtonPlayerInventoryTab to signal to open the vanilla inventory
     CRAFTING, // In-inventory 3x3 crafting grid
     QUIVER,
-    ALLOY_CALCULATOR,
     NULL; // This is special, it is a non-null null.
 
     private static final Type[] values = values();

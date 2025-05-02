@@ -1,11 +1,14 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
+import su.terrafirmagreg.modules.device.object.block.BlockQuern;
+import su.terrafirmagreg.modules.device.object.block.BlockSluice;
+import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
+import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
+import su.terrafirmagreg.modules.device.object.tile.TileQuern;
+import su.terrafirmagreg.modules.device.object.tile.TileSluice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGravel;
@@ -24,110 +27,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
-import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
-import net.dries007.tfc.api.types.Plant;
-import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.FallingBlockManager;
-import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
-import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
-import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
-import net.dries007.tfc.objects.blocks.devices.BlockAlloyCalculator;
-import net.dries007.tfc.objects.blocks.devices.BlockBellows;
-import net.dries007.tfc.objects.blocks.devices.BlockBlastFurnace;
-import net.dries007.tfc.objects.blocks.devices.BlockBloomery;
-import net.dries007.tfc.objects.blocks.devices.BlockCharcoalForge;
-import net.dries007.tfc.objects.blocks.devices.BlockCrucible;
-import net.dries007.tfc.objects.blocks.devices.BlockFirePit;
-import net.dries007.tfc.objects.blocks.devices.BlockPitKiln;
-import net.dries007.tfc.objects.blocks.devices.BlockQuern;
-import net.dries007.tfc.objects.blocks.devices.BlockSluice;
-import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
-import net.dries007.tfc.objects.blocks.metal.BlockIngotPile;
-import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
-import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
-import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockButtonStoneTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockPressurePlateTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
-import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.stone.BlockWallTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockWoodPressurePlateTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.blocks.wood.BlockBookshelfTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockButtonWoodTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockFenceGateTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockFenceTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLogPile;
-import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockLoom;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
-import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
-import net.dries007.tfc.objects.blocks.wood.BlockTrapDoorWoodTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockWorkbenchTFC;
-import net.dries007.tfc.objects.fluids.FluidsTFC;
-import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockCrucible;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockFloatingWaterTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockHeat;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockPlant;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockPowderKeg;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockSluice;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.objects.te.TEAlloyCalculator;
-import net.dries007.tfc.objects.te.TEAnvilTFC;
-import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.objects.te.TEBellows;
-import net.dries007.tfc.objects.te.TEBlastFurnace;
-import net.dries007.tfc.objects.te.TEBloom;
-import net.dries007.tfc.objects.te.TEBloomery;
-import net.dries007.tfc.objects.te.TECharcoalForge;
-import net.dries007.tfc.objects.te.TEChestTFC;
-import net.dries007.tfc.objects.te.TECropBase;
-import net.dries007.tfc.objects.te.TECropSpreading;
-import net.dries007.tfc.objects.te.TECrucible;
-import net.dries007.tfc.objects.te.TEFirePit;
-import net.dries007.tfc.objects.te.TEIngotPile;
-import net.dries007.tfc.objects.te.TELamp;
-import net.dries007.tfc.objects.te.TELargeVessel;
-import net.dries007.tfc.objects.te.TELogPile;
-import net.dries007.tfc.objects.te.TELoom;
-import net.dries007.tfc.objects.te.TEMetalSheet;
-import net.dries007.tfc.objects.te.TENestBox;
-import net.dries007.tfc.objects.te.TEPitKiln;
-import net.dries007.tfc.objects.te.TEPlacedHide;
-import net.dries007.tfc.objects.te.TEPlacedItem;
-import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.objects.te.TEPowderKeg;
-import net.dries007.tfc.objects.te.TEQuern;
-import net.dries007.tfc.objects.te.TESluice;
-import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.objects.te.TEToolRack;
-import net.dries007.tfc.util.agriculture.BerryBush;
-import net.dries007.tfc.util.agriculture.Crop;
-import net.dries007.tfc.util.agriculture.FruitTree;
 
 import lombok.Getter;
 
@@ -153,7 +52,83 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_POTTERY;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_ROCK;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 import static net.dries007.tfc.util.Helpers.getNull;
-import static su.terrafirmagreg.api.data.enums.Mods.Names.TFC;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
+import net.dries007.tfc.ConfigTFC;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Metal;
+import net.dries007.tfc.api.types.Ore;
+import net.dries007.tfc.api.types.Plant;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
+import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
+import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeBranch;
+import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
+import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeSapling;
+import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeTrunk;
+import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
+import net.dries007.tfc.objects.blocks.metal.BlockIngotPile;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalLamp;
+import net.dries007.tfc.objects.blocks.metal.BlockMetalSheet;
+import net.dries007.tfc.objects.blocks.metal.BlockTrapDoorMetalTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockFloatingWaterTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockButtonStoneTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockPressurePlateTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.objects.blocks.stone.BlockWallTFC;
+import net.dries007.tfc.objects.blocks.stone.BlockWoodPressurePlateTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
+import net.dries007.tfc.objects.blocks.wood.BlockBookshelfTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockButtonWoodTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockFenceGateTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockFenceTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockLoom;
+import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockSupport;
+import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
+import net.dries007.tfc.objects.blocks.wood.BlockTrapDoorWoodTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockWorkbenchTFC;
+import net.dries007.tfc.objects.fluids.FluidsTFC;
+import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockFloatingWaterTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockHeat;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockLargeVessel;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockPlant;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockSaplingTFC;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockSluice;
+import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import net.dries007.tfc.objects.te.TEAnvilTFC;
+import net.dries007.tfc.objects.te.TEBarrel;
+import net.dries007.tfc.objects.te.TEChestTFC;
+import net.dries007.tfc.objects.te.TECropBase;
+import net.dries007.tfc.objects.te.TECropSpreading;
+import net.dries007.tfc.objects.te.TEIngotPile;
+import net.dries007.tfc.objects.te.TELamp;
+import net.dries007.tfc.objects.te.TELargeVessel;
+import net.dries007.tfc.objects.te.TELoom;
+import net.dries007.tfc.objects.te.TEMetalSheet;
+import net.dries007.tfc.objects.te.TEPlacedHide;
+import net.dries007.tfc.objects.te.TEPlacedItem;
+import net.dries007.tfc.objects.te.TEPlacedItemFlat;
+import net.dries007.tfc.objects.te.TETickCounter;
+import net.dries007.tfc.objects.te.TEToolRack;
+import net.dries007.tfc.util.agriculture.BerryBush;
+import net.dries007.tfc.util.agriculture.Crop;
+import net.dries007.tfc.util.agriculture.FruitTree;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = TFC)
@@ -172,30 +147,15 @@ public final class BlocksTFC {
 
   public static final BlockPeat PEAT = getNull();
   public static final BlockPeat PEAT_GRASS = getNull();
-  public static final BlockFirePit FIREPIT = getNull();
-  public static final BlockThatch THATCH = getNull();
   public static final BlockThatchBed THATCH_BED = getNull();
-  public static final BlockPitKiln PIT_KILN = getNull();
   public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
   public static final BlockPlacedItem PLACED_ITEM = getNull();
   public static final BlockPlacedHide PLACED_HIDE = getNull();
-  public static final BlockCharcoalPile CHARCOAL_PILE = getNull();
-  public static final BlockNestBox NEST_BOX = getNull();
   public static final BlockLogPile LOG_PILE = getNull();
   public static final BlockIngotPile INGOT_PILE = getNull();
-  public static final BlockCharcoalForge CHARCOAL_FORGE = getNull();
-  public static final BlockCrucible CRUCIBLE = getNull();
-  public static final BlockMolten MOLTEN = getNull();
-  public static final BlockBlastFurnace BLAST_FURNACE = getNull();
-  public static final BlockBloom BLOOM = getNull();
-  public static final BlockBloomery BLOOMERY = getNull();
   public static final BlockQuern QUERN = getNull();
   public static final BlockSeaIce SEA_ICE = getNull();
-  public static final BlockPowderKeg POWDERKEG = getNull();
   public static final BlockGravel AGGREGATE = getNull();
-  public static final Block FIRE_BRICKS = getNull();
-  public static final BlockAlloyCalculator ALLOY_CALCULATOR = getNull();
-  public static final BlockPuddle PUDDLE = getNull();
 
   // All these are for use in model registration. Do not use for block lookups.
   // Use the static get methods in the classes instead.
@@ -273,7 +233,8 @@ public final class BlocksTFC {
   @SuppressWarnings("ConstantConditions")
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
     // This is called here because it needs to wait until Metal registry has fired
-    FluidsTFC.registerFluids();
+
+    FluidsTFC.registerFluidsPost();
 
     IForgeRegistry<Block> r = event.getRegistry();
 
@@ -286,24 +247,12 @@ public final class BlocksTFC {
     normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockPeat(Material.GROUND), CT_ROCK)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockPeatGrass(Material.GRASS), CT_ROCK)));
 
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "thatch", new BlockThatch(), CT_MISC)));
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_bricks", new BlockFireBrick(), CT_MISC)));
-
     normalItemBlocks.add(new ItemBlockTFC(register(r, "quern", new BlockQuern(), CT_MISC)));
-    normalItemBlocks.add(new ItemBlockCrucible(register(r, "crucible", new BlockCrucible(), CT_MISC)));
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "blast_furnace", new BlockBlastFurnace(), CT_MISC)));
 
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bellows", new BlockBellows(), CT_MISC)));
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "bloomery", new BlockBloomery(), CT_MISC)));
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "nest_box", new BlockNestBox(), CT_MISC)));
     inventoryItemBlocks.add(new ItemBlockSluice(register(r, "sluice", new BlockSluice(), CT_MISC)));
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "alloy_calculator", new BlockAlloyCalculator(), CT_MISC)));
-    inventoryItemBlocks.add(new ItemBlockTFC(register(r, "puddle", new BlockPuddle(), CT_MISC)));
-
     normalItemBlocks.add(new ItemBlockTFC(register(r, "sea_ice", new BlockSeaIce(), CT_MISC)));
 
     normalItemBlocks.add(new ItemBlockLargeVessel(register(r, "ceramics/fired/large_vessel", new BlockLargeVessel(), CT_POTTERY)));
-    normalItemBlocks.add(new ItemBlockPowderKeg(register(r, "powderkeg", new BlockPowderKeg(), CT_WOOD)));
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/raw/plain", new BlockDecorativeStone(MapColor.SNOW), CT_MISC)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "alabaster/polished/plain", new BlockDecorativeStone(MapColor.SNOW), CT_MISC)));
@@ -671,19 +620,13 @@ public final class BlocksTFC {
     }
 
     // Registering JEI only blocks (for info)
-    inventoryItemBlocks.add(new ItemBlock(register(r, "firepit", new BlockFirePit())));
-    inventoryItemBlocks.add(new ItemBlock(register(r, "charcoal_forge", new BlockCharcoalForge())));
-    inventoryItemBlocks.add(new ItemBlock(register(r, "pit_kiln", new BlockPitKiln())));
     inventoryItemBlocks.add(new ItemBlock(register(r, "placed_item", new BlockPlacedItem())));
     // technical blocks
     // These have no ItemBlock or Creative Tab
     register(r, "placed_item_flat", new BlockPlacedItemFlat());
     register(r, "placed_hide", new BlockPlacedHide());
-    register(r, "charcoal_pile", new BlockCharcoalPile());
     register(r, "ingot_pile", new BlockIngotPile());
     register(r, "log_pile", new BlockLogPile());
-    register(r, "molten", new BlockMolten());
-    register(r, "bloom", new BlockBloom());
     register(r, "thatch_bed", new BlockThatchBed());
 
     // Note: if you add blocks you don't need to put them in this list of todos. Feel free to add them where they make sense :)
@@ -700,31 +643,20 @@ public final class BlocksTFC {
     register(TEPlacedItem.class, "placed_item");
     register(TEPlacedItemFlat.class, "placed_item_flat");
     register(TEPlacedHide.class, "placed_hide");
-    register(TEPitKiln.class, "pit_kiln");
     register(TEChestTFC.class, "chest");
-    register(TENestBox.class, "nest_box");
-    register(TELogPile.class, "log_pile");
+    register(TileLogPile.class, "log_pile");
     register(TEIngotPile.class, "ingot_pile");
-    register(TEFirePit.class, "fire_pit");
     register(TEToolRack.class, "tool_rack");
     register(TELoom.class, "loom");
     register(TELamp.class, "lamp");
-    register(TEBellows.class, "bellows");
     register(TEBarrel.class, "barrel");
-    register(TECharcoalForge.class, "charcoal_forge");
     register(TEAnvilTFC.class, "anvil");
-    register(TECrucible.class, "crucible");
     register(TECropBase.class, "crop_base");
     register(TECropSpreading.class, "crop_spreading");
-    register(TEBlastFurnace.class, "blast_furnace");
-    register(TEBloomery.class, "bloomery");
-    register(TEBloom.class, "bloom");
     register(TEMetalSheet.class, "metal_sheet");
-    register(TEQuern.class, "quern");
+    register(TileQuern.class, "quern");
     register(TELargeVessel.class, "large_vessel");
-    register(TEPowderKeg.class, "powderkeg");
-    register(TESluice.class, "sluice");
-    register(TEAlloyCalculator.class, "alloy_calculator");
+    register(TileSluice.class, "sluice");
   }
 
   @SubscribeEvent(priority = EventPriority.LOWEST)

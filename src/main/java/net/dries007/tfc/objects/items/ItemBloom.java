@@ -1,9 +1,13 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.objects.items;
+
+import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
+import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableMeasurableMetalHandler;
+import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
+import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
+import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,15 +18,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfc.api.capability.forge.CapabilityForgeable;
-import net.dries007.tfc.api.capability.forge.ForgeableMeasurableMetalHandler;
-import net.dries007.tfc.api.capability.forge.IForgeable;
-import net.dries007.tfc.api.capability.forge.IForgeableMeasurableMetal;
-import net.dries007.tfc.api.capability.metal.IMetalItem;
-import net.dries007.tfc.api.capability.size.Size;
-import net.dries007.tfc.api.capability.size.Weight;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,7 +26,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class ItemBloom extends ItemTFC implements IMetalItem {
+public class ItemBloom extends ItemTFC implements ICapabilityMetal {
 
   private final boolean meltable;
 
@@ -53,7 +49,7 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
   @Nullable
   @Override
   public Metal getMetal(ItemStack stack) {
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
     if (cap instanceof IForgeableMeasurableMetal handler) {
       return handler.getMetal();
     }
@@ -62,7 +58,7 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
 
   @Override
   public int getSmeltAmount(ItemStack stack) {
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+    ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
     if (cap instanceof IForgeableMeasurableMetal handler) {
       int amount = handler.getMetalAmount();
       if (amount > 144) {
@@ -81,12 +77,12 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
   @SideOnly(Side.CLIENT)
   @Override
   public void addMetalInfo(ItemStack stack, List<String> text) {
-    IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
-    if (cap instanceof IForgeableMeasurableMetal) {
+    ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
+    if (cap instanceof IForgeableMeasurableMetal forgeableMeasurableMetal) {
       text.add("");
-      text.add(I18n.format("tfc.tooltip.metal", I18n.format(Helpers.getTypeName(((IForgeableMeasurableMetal) cap).getMetal()))));
-      text.add(I18n.format("tfc.tooltip.units", ((IForgeableMeasurableMetal) cap).getMetalAmount()));
-      text.add(I18n.format(Helpers.getEnumName(((IForgeableMeasurableMetal) cap).getMetal().getTier())));
+      text.add(I18n.format("tfc.tooltip.metal", I18n.format(TranslatorUtils.getTypeName(forgeableMeasurableMetal.getMetal()))));
+      text.add(I18n.format("tfc.tooltip.units", forgeableMeasurableMetal.getMetalAmount()));
+      text.add(I18n.format(TranslatorUtils.getEnumName(forgeableMeasurableMetal.getMetal().getTier())));
     }
   }
 
@@ -103,7 +99,7 @@ public class ItemBloom extends ItemTFC implements IMetalItem {
     if (isInCreativeTab(tab)) {
       for (int i = 144; i <= 576; i += 144) {
         ItemStack stack = new ItemStack(this);
-        IForgeable cap = stack.getCapability(CapabilityForgeable.FORGEABLE_CAPABILITY, null);
+        ICapabilityForge cap = stack.getCapability(CapabilityForgeable.CAPABILITY, null);
         if (cap instanceof IForgeableMeasurableMetal handler) {
           handler.setMetal(Metal.WROUGHT_IRON);
           handler.setMetalAmount(i);

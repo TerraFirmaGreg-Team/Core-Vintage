@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.mapgen;
 
 import net.minecraft.block.state.IBlockState;
@@ -123,9 +118,9 @@ public class MapGenCavesTFC extends MapGenBase {
 
       if (!onlyOne && i1 == rndRange2 && f1 > 1.0F && rndRange > 0) {
         this.generateCaveNode(rng.nextLong(), chunkX, chunkZ, primer, xOffset, yOffset, zOffset,
-                              rng.nextFloat() * 0.5F + 0.5F, f2 - ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
+          rng.nextFloat() * 0.5F + 0.5F, f2 - ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
         this.generateCaveNode(rng.nextLong(), chunkX, chunkZ, primer, xOffset, yOffset, zOffset,
-                              rng.nextFloat() * 0.5F + 0.5F, f2 + ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
+          rng.nextFloat() * 0.5F + 0.5F, f2 + ((float) Math.PI / 2F), f3 / 3.0F, i1, 1.0D, width);
         return;
       }
 

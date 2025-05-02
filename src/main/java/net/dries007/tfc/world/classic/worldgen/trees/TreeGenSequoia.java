@@ -1,8 +1,3 @@
-/*
- * Work under Copyright. Licensed under the EUPL.
- * See the project README.md and LICENSE.txt for more information.
- */
-
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import net.minecraft.block.state.IBlockState;
@@ -97,7 +92,7 @@ public class TreeGenSequoia implements ITreeGenerator {
 
   private void checkAndPlace(World world, BlockPos pos) {
     if (world.getBlockState(pos).getMaterial().isReplaceable() || world.getBlockState(pos).getBlock() instanceof BlockSaplingTFC || world.getBlockState(pos)
-                                                                                                                                         .getBlock() instanceof BlockLeavesTFC) {
+      .getBlock() instanceof BlockLeavesTFC) {
       world.setBlockState(pos, trunk);
     }
   }

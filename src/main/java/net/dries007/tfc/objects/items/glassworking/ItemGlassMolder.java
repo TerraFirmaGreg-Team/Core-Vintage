@@ -5,8 +5,8 @@ import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.client.resources.I18n;

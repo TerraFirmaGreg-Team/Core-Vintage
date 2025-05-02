@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidHandlerSidedCallb
 import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidTankCallback;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;

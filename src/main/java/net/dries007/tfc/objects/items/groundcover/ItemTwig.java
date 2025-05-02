@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 
 import mcp.MethodsReturnNonnullByDefault;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.blocks.groundcover.BlockTwig;

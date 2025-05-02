@@ -19,8 +19,8 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.property.ITallPlant;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;

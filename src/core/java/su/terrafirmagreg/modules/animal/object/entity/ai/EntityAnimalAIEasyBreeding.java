@@ -1,27 +1,38 @@
 package su.terrafirmagreg.modules.animal.object.entity.ai;
 
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
-import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
+import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
-public class EntityAnimalAIEasyBreeding extends EntityAIBase {
+public class EntityAnimalAIEasyBreeding<T extends EntityAnimal & IAnimal> extends EntityAIBase {
 
-  private final EntityAnimalBase animal;
+  private final T animal;
   private final World world;
 
-  public EntityAnimalAIEasyBreeding(EntityAnimalBase animal) {
+  public EntityAnimalAIEasyBreeding(T animal) {
     this.animal = animal;
     this.world = animal.world;
   }
+
+//  @SubscribeEvent
+//  public void addAI(LivingEvent.LivingUpdateEvent event) {
+//    var entityLiving = event.getEntityLiving();
+//    if (entityLiving instanceof EntityAnimalBase animal && entityLiving.ticksExisted < 5 && !entityLiving.isChild()) {
+//      animal.tasks.addTask(2, new EntityAnimalAIEasyBreeding(animal));
+//    }
+//  }
 
   public boolean shouldExecute() {
     EntityItem closeFood = checkFood();
@@ -39,6 +50,7 @@ public class EntityAnimalAIEasyBreeding extends EntityAIBase {
     return false;
   }
 
+  @Nullable
   public EntityItem checkFood() {
     List<EntityItem> items = getItems();
     for (EntityItem item : items) {
@@ -47,7 +59,7 @@ public class EntityAnimalAIEasyBreeding extends EntityAIBase {
     return null;
   }
 
-  public void execute(EntityAnimalBase animal, EntityItem item) {
+  public void execute(T animal, EntityItem item) {
     if (animal.getNavigator().tryMoveToXYZ(item.posX, item.posY, item.posZ, 1.25F)) {
       if (animal.getDistance(item) < 1.0F) {
         consumeFood(item);
@@ -76,6 +88,6 @@ public class EntityAnimalAIEasyBreeding extends EntityAIBase {
       item.setDead();
     }
     this.world.playSound(null, item.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-                         SoundCategory.AMBIENT, 1.0F, 1.0F);
+      SoundCategory.AMBIENT, 1.0F, 1.0F);
   }
 }

@@ -1,6 +1,6 @@
-package su.terrafirmagreg.modules.core.feature.ambiental;
+package su.terrafirmagreg.modules.core.feature.ambiental.spi;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProvider;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProvider;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 

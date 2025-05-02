@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.container;
 
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

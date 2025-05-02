@@ -1,6 +1,6 @@
-package su.terrafirmagreg.modules.core.feature.ambiental.provider;
+package su.terrafirmagreg.modules.core.feature.ambiental.spi.provider;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEquipment;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierEquipment;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

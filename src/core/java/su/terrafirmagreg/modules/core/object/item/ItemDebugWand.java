@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.util.EntityUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ModuleCore;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

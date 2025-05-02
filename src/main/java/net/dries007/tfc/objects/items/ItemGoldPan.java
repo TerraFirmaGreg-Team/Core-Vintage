@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

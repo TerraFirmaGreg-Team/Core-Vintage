@@ -1,15 +1,15 @@
-package su.terrafirmagreg.modules.core.capabilities.ambiental;
+package su.terrafirmagreg.modules.core.feature.ambiental.capability;
 
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalModifierStorage;
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierBase;
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierBlock;
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEnvironmental;
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierEquipment;
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierItem;
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierBlock;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierEnvironmental;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierEquipment;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierItem;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.network.SCPacketAmbiental;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 

@@ -25,6 +25,7 @@ public class EventHandlerCapabilitiesWorld {
   }
 
   private static void worldtracker(AttachCapabilitiesEvent<World> event, @NotNull World world) {
+
     event.addCapability(CapabilityWorldTracker.KEY, new ProviderWorldTracker());
   }
 }

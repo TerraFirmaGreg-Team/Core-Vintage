@@ -3,8 +3,8 @@ package net.dries007.tfc.objects.items;
 import net.dries007.tfc.objects.entity.projectile.EntityRopeBridgeThrown;
 import net.dries007.tfcthings.main.ConfigTFCThings;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.dries007.tfc.objects.CreativeTabsTFC;
 

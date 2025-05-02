@@ -42,8 +42,8 @@ public class FeatureHotOrNot extends FeatureBase {
     }
 
     // Fluids
-    CapabilityUtils.getOptional(itemStack, CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(capabilityFluidItem -> {
-      FluidStack fluidStack = capabilityFluidItem.drain(1000, false);
+    CapabilityUtils.getOptional(itemStack, CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(cap -> {
+      FluidStack fluidStack = cap.drain(1000, false);
       if (fluidStack != null) {
         for (FluidEffect effect : FluidEffect.values()) {
           if (effect.isValid.test(fluidStack)) {
@@ -156,6 +156,7 @@ public class FeatureHotOrNot extends FeatureBase {
   }
 
   private static boolean isRemoved(ItemStack stack) {
+    
     return StackUtils.compareStackToList(stack, Arrays.asList(ConfigCore.FEATURE.HOT_OR_NOT.itemRemovals));
   }
 

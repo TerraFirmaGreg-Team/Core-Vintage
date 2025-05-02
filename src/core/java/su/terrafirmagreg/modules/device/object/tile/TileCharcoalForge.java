@@ -8,8 +8,8 @@ import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContai
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
-import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 import su.terrafirmagreg.modules.device.ConfigDevice;

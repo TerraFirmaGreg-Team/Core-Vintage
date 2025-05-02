@@ -7,8 +7,6 @@ import su.terrafirmagreg.framework.manager.network.api.INetworkRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityHandlerAmbiental;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
@@ -31,7 +29,6 @@ import su.terrafirmagreg.modules.core.event.client.EventHandlerGuiOpen;
 import su.terrafirmagreg.modules.core.event.client.EventHandlerGuiScreen;
 import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerOnConfigChanged;
 import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerPostConfigChanged;
-import su.terrafirmagreg.modules.core.event.feature.EventHandlerAmbiental;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerCalendar;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerFallingBlock;
 import su.terrafirmagreg.modules.core.event.feature.EventHandlerPuddles;
@@ -122,7 +119,7 @@ public final class ModuleCore extends ModuleBase {
     CapabilityMetal.register();
     CapabilityForgeable.register();
     CapabilityPlayerData.register();
-    CapabilityAmbiental.register();
+
     CapabilitySharpness.register();
     CapabilityDamageResistance.register();
 
@@ -140,7 +137,6 @@ public final class ModuleCore extends ModuleBase {
     CapabilityHandlerFood.init();
     CapabilityHandlerMetal.init();
     CapabilityHandlerSharpness.init();
-    CapabilityHandlerAmbiental.init();
     CapabilityHandlerDamageResistance.init();
   }
 
@@ -173,7 +169,6 @@ public final class ModuleCore extends ModuleBase {
     list.add(EventHandlerPostConfigChanged.class);
 
     list.add(EventHandlerCalendar.class);
-    list.add(EventHandlerAmbiental.class);
     list.add(EventHandlerFallingBlock.class);
     list.add(EventHandlerPuddles.class);
 

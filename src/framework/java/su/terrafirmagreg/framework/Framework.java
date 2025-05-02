@@ -13,8 +13,8 @@ import net.minecraftforge.fml.common.event.FMLStateEvent;
 
 public abstract class Framework {
 
-  protected final String modId;
-  protected final IModuleManager manager;
+  private final String modId;
+  private final IModuleManager manager;
 
   protected Framework(String modId) {
     this.modId = modId;
@@ -24,12 +24,12 @@ public abstract class Framework {
 
   protected void routeEvent(FMLStateEvent event) {
 
-    this.manager.routeEvent(event);
+    this.manager.getService().routeEvent(event);
   }
 
   protected <T extends IModule> void addModule(T module) {
 
-    this.manager.addModule(module);
+    this.manager.getRegistrar().addModule(module);
   }
 
 

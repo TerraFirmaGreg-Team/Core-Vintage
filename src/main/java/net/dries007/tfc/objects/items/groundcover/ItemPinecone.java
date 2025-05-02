@@ -4,8 +4,8 @@ import mcp.MethodsReturnNonnullByDefault;
 
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 

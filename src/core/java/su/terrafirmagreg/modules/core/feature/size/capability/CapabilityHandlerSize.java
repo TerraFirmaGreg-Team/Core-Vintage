@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.size.capability;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.block.Block;

@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Implements pregnancy for mammals in TFC
  */
-
 public abstract class EntityAnimalMammal extends EntityAnimalBase {
 
   // The time(in days) this entity became pregnant

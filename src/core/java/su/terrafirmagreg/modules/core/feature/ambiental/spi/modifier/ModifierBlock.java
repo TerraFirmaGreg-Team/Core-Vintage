@@ -1,7 +1,8 @@
-package su.terrafirmagreg.modules.core.feature.ambiental.modifier;
+package su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalModifierStorage;
-import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderBlock;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHandlerAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -10,11 +11,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 
 import java.util.Optional;
-
-import static su.terrafirmagreg.modules.core.feature.ambiental.handler.ModifierHandlerBlock.BLOCK;
 
 public class ModifierBlock extends ModifierBase {
 
@@ -55,7 +55,7 @@ public class ModifierBlock extends ModifierBase {
       if (state == skipState) {
         continue;
       }
-      if (state.getBlock() instanceof BlockRockVariant) {
+      if (block instanceof BlockRockVariant || block instanceof BlockRockRaw) {
         continue;
       }
 //            if (block instanceof BlockRock || block instanceof BlockSoil) {
@@ -81,7 +81,7 @@ public class ModifierBlock extends ModifierBase {
           storage.add(mod);
         });
       } else {
-        for (IAmbientalProviderBlock provider : BLOCK) {
+        for (IAmbientalProviderBlock provider : CapabilityHandlerAmbiental.BLOCK) {
           provider.getModifier(player, pos, state).ifPresent(mod -> {
             mod.setChange(mod.getChange() * finalDistanceMultiplier);
             mod.setPotency(mod.getPotency() * finalDistanceMultiplier);

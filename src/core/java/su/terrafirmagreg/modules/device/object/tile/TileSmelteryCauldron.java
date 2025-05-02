@@ -9,8 +9,8 @@ import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
 import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidHandlerSidedCallback;
 import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidTankCallback;
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
-import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
 import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.object.container.ContainerSmelteryCauldron;
 

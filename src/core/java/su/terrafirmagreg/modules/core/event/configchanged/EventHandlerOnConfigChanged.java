@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.event.configchanged;
 
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.ModuleCore;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityProviderAmbiental;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;

@@ -1,8 +1,8 @@
 package net.dries007.firmalife.registry;
 
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

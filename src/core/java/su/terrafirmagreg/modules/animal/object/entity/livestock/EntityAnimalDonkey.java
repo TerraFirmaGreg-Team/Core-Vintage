@@ -16,10 +16,10 @@ import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
-import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 
@@ -406,8 +406,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
   protected void initEntityAI() {
     EntityAnimalBase.addCommonLivestockAI(this, 1.2D);
     EntityAnimalBase.addCommonPreyAI(this, 1.2);
-    tasks.addTask(2,
-      new EntityAIMate(this, 1.0D, EntityAnimalHorse.class)); // Missing horses (for mules)
+    tasks.addTask(2, new EntityAIMate(this, 1.0D, EntityAnimalHorse.class)); // Missing horses (for mules)
     tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
     tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
   }

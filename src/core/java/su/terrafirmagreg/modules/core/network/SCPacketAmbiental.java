@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.network;
 
 import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
 import su.terrafirmagreg.api.base.network.packet.spi.NetworkPacketBase;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;

@@ -1,10 +1,10 @@
-package su.terrafirmagreg.modules.core.feature.ambiental.modifier;
+package su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier;
 
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
-import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalModifierStorage;
-import su.terrafirmagreg.modules.core.feature.ambiental.handler.ModifierHandlerEnvironmental;
-import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderEnvironmental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHandlerAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityProviderAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderEnvironmental;
 import su.terrafirmagreg.modules.core.feature.climate.Climate;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,8 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 
 import java.util.Optional;
-
-import static su.terrafirmagreg.modules.core.feature.ambiental.handler.ModifierHandlerEnvironmental.ENVIRONMENT;
 
 public class ModifierEnvironmental extends ModifierBase {
 
@@ -36,7 +34,7 @@ public class ModifierEnvironmental extends ModifierBase {
       storage.add(provider.getModifier(player));
     }
 
-    for (IAmbientalProviderEnvironmental provider : ENVIRONMENT) {
+    for (IAmbientalProviderEnvironmental provider : CapabilityHandlerAmbiental.ENVIRONMENT) {
       storage.add(provider.getModifier(player));
     }
   }
@@ -66,7 +64,7 @@ public class ModifierEnvironmental extends ModifierBase {
   }
 
   public static float getEnvironmentTemperatureWithTimeOfDay(EntityPlayer player) {
-    return getEnvironmentTemperature(player) + ModifierHandlerEnvironmental.handleTimeOfDay(player).get().getChange();
+    return getEnvironmentTemperature(player) + CapabilityHandlerAmbiental.handleTimeOfDay(player).get().getChange();
   }
 
   public static int getBlockLight(EntityPlayer player) {

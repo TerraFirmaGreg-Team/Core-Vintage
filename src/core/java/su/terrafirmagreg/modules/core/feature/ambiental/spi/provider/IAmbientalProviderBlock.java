@@ -1,6 +1,6 @@
-package su.terrafirmagreg.modules.core.feature.ambiental.provider;
+package su.terrafirmagreg.modules.core.feature.ambiental.spi.provider;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierBlock;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierBlock;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

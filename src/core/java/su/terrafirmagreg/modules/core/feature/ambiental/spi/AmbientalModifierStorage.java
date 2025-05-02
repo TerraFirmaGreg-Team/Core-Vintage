@@ -1,6 +1,6 @@
-package su.terrafirmagreg.modules.core.feature.ambiental;
+package su.terrafirmagreg.modules.core.feature.ambiental.spi;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierBase;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierBase;
 
 import io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Consumer;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;

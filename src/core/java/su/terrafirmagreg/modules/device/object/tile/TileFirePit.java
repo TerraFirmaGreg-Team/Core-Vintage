@@ -17,8 +17,8 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
-import su.terrafirmagreg.modules.core.feature.ambiental.modifier.ModifierTile;
-import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
 import su.terrafirmagreg.modules.device.ConfigDevice;
@@ -754,7 +754,7 @@ public class TileFirePit extends BaseTileTickableInventory
 
   @Override
   public GuiFirePit getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    
+
     return new GuiFirePit(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, this);
   }
 

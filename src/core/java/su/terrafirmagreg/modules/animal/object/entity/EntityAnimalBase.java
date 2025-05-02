@@ -9,6 +9,7 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIEasyBreeding;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIPanic;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAITamableAvoidPlayer;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
@@ -101,7 +102,7 @@ public abstract class EntityAnimalBase extends BaseEntityAnimal implements IAnim
 
   public static <T extends EntityAnimal & IAnimal> void addCommonLivestockAI(T entity, double speedMult) {
     entity.tasks.addTask(2, new EntityAIMate(entity, 1.0D));
-
+    entity.tasks.addTask(2, new EntityAnimalAIEasyBreeding<>(entity));
     for (ItemStack is : OreDictionary.getOres("grain")) {
       Item item = is.getItem();
       entity.tasks.addTask(3, new EntityAITempt(entity, 1.1D, item, false));
@@ -127,11 +128,10 @@ public abstract class EntityAnimalBase extends BaseEntityAnimal implements IAnim
     entity.tasks.addTask(0, new EntityAISwimming(entity));
     entity.tasks.addTask(1, new EntityAnimalAIPanic(entity, 1.4D * speedMult));
     //space for livestock AIMate and AITempt
+
     entity.tasks.addTask(4, new EntityAIAvoidEntity<>(entity, EntityAnimalWolf.class, 8.0F, farSpeed, nearSpeed));
-    entity.tasks.addTask(4, new EntityAIAvoidEntity<>(entity, EntityAnimalMammal.class,
-      Predicates.instanceOf(IPredator.class), 12.0F, farSpeed, nearSpeed));
-    entity.tasks.addTask(4, new EntityAIAvoidEntity<>(entity, EntityMob.class, 8.0F, farSpeed * 0.7D,
-      nearSpeed * 0.7D));
+    entity.tasks.addTask(4, new EntityAIAvoidEntity<>(entity, EntityAnimalMammal.class, Predicates.instanceOf(IPredator.class), 12.0F, farSpeed, nearSpeed));
+    entity.tasks.addTask(4, new EntityAIAvoidEntity<>(entity, EntityMob.class, 8.0F, farSpeed * 0.7D, nearSpeed * 0.7D));
     // space for follow parent for mammals, find nest for oviparous, and eat grass for livestock
     entity.tasks.addTask(7, new EntityAIWanderAvoidWater(entity, 1.0D));
     entity.tasks.addTask(8, new EntityAIWatchClosest(entity, EntityPlayer.class, 6.0F));
@@ -413,8 +413,7 @@ public abstract class EntityAnimalBase extends BaseEntityAnimal implements IAnim
         }
         this.setFamiliarity(familiarity);
       }
-      world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,
-        SoundCategory.AMBIENT, 1.0F, 1.0F);
+      world.playSound(null, this.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
     }
     return true;
   }

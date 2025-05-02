@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.init;
 
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.modules.core.feature.advanceddata.FeatureAdvancedData;
+import su.terrafirmagreg.modules.core.feature.ambiental.FeatureAmbiental;
 import su.terrafirmagreg.modules.core.feature.hotornot.FeatureHotOrNot;
 import su.terrafirmagreg.modules.core.feature.mapping.FeatureRemappingCore;
 import su.terrafirmagreg.modules.core.feature.sinkorswim.FeatureSinkOrSwim;
@@ -15,6 +16,7 @@ public final class FeaturesCore {
     registrar.addFeature(new FeatureSize());
     registrar.addFeature(new FeatureSinkOrSwim());
     registrar.addFeature(new FeatureHotOrNot());
+    registrar.addFeature(new FeatureAmbiental());
     registrar.addFeature(new FeatureAdvancedData());
   }
 

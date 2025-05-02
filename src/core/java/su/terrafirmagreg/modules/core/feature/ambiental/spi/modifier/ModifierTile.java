@@ -1,9 +1,9 @@
-package su.terrafirmagreg.modules.core.feature.ambiental.modifier;
+package su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalModifierStorage;
-import su.terrafirmagreg.modules.core.feature.ambiental.handler.ModifierHandlerTile;
-import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderTile;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHandlerAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -13,6 +13,9 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 
 import java.util.Optional;
 
@@ -60,9 +63,12 @@ public class ModifierTile extends ModifierBase {
 
       if (block.hasTileEntity(state)) {
 
-        //            if (block instanceof BlockRock || block instanceof BlockSoil) {
-//                continue;
-//            }
+//        if (block instanceof BlockRock || block instanceof BlockSoil) {
+//          continue;
+//        }
+        if (block instanceof BlockRockVariant || block instanceof BlockRockRaw) {
+          continue;
+        }
 
         double distance = Math.sqrt(player.getPosition().distanceSq(pos));
         float distanceMultiplier = (float) distance / 9f;
@@ -70,8 +76,7 @@ public class ModifierTile extends ModifierBase {
         distanceMultiplier = Math.min(1f, Math.max(0f, distanceMultiplier));
         distanceMultiplier = 1f - distanceMultiplier;
 
-        boolean isInside = ModifierEnvironmental.getSkylight(player) < 14
-                           && ModifierEnvironmental.getBlockLight(player) > 3;
+        boolean isInside = ModifierEnvironmental.getSkylight(player) < 14 && ModifierEnvironmental.getBlockLight(player) > 3;
         if (isInside) {
           distanceMultiplier *= 1.3f;
         }
@@ -86,7 +91,7 @@ public class ModifierTile extends ModifierBase {
               storage.add(mod);
             });
           } else {
-            for (IAmbientalProviderTile provider : ModifierHandlerTile.TILE) {
+            for (IAmbientalProviderTile provider : CapabilityHandlerAmbiental.TILE) {
               provider.getModifier(player, tile).ifPresent(mod -> {
                 mod.setChange(mod.getChange() * finalDistanceMultiplier);
                 mod.setPotency(mod.getPotency() * finalDistanceMultiplier);

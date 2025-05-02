@@ -1,9 +1,9 @@
-package su.terrafirmagreg.modules.core.feature.ambiental.modifier;
+package su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityProviderAmbiental;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -79,4 +79,5 @@ public class ModifierBase implements Comparable<ModifierBase> {
   public int compareTo(@NotNull ModifierBase modifierBase) {
     return Float.compare(this.change, modifierBase.change);
   }
+  
 }

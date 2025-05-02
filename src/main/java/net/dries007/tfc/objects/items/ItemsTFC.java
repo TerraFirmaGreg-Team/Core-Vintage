@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;

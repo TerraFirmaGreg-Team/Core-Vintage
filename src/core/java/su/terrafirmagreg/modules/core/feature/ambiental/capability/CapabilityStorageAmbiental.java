@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.ambiental;
+package su.terrafirmagreg.modules.core.feature.ambiental.capability;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;

@@ -24,8 +24,8 @@ import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerDa
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.ProviderPlayerData;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.CalendarWorldData;
 import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;

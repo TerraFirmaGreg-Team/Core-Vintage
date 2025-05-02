@@ -8,11 +8,9 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 
 //AI to avoid players unless familiarized. Must be applied to EntityAnimal that implements IAnimalTFC
-public class EntityAnimalAITamableAvoidPlayer<T extends EntityCreature & IAnimal> extends
-                                                                                  EntityAIAvoidEntity<EntityPlayer> {
+public class EntityAnimalAITamableAvoidPlayer<T extends EntityCreature & IAnimal> extends EntityAIAvoidEntity<EntityPlayer> {
 
-  public EntityAnimalAITamableAvoidPlayer(T entityIn, float avoidDistanceIn, double farSpeedIn,
-                                          double nearSpeedIn) {
+  public EntityAnimalAITamableAvoidPlayer(T entityIn, float avoidDistanceIn, double farSpeedIn, double nearSpeedIn) {
     super(entityIn, EntityPlayer.class, avoidDistanceIn, farSpeedIn, nearSpeedIn);
   }
 

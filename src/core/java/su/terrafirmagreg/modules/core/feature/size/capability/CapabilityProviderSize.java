@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.core.feature.size.capability;
 
 
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;

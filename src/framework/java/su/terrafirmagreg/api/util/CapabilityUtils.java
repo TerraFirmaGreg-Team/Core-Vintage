@@ -24,11 +24,20 @@ public final class CapabilityUtils {
     return provider.hasCapability(capability, facing) ? provider.getCapability(capability, facing) : null;
   }
 
+  public static <T> boolean has(ICapabilityProvider provider, Capability<T> capability) {
+    return has(provider, capability, null);
+  }
+
+  public static <T> boolean has(ICapabilityProvider provider, Capability<T> capability, @Nullable EnumFacing facing) {
+    return provider.hasCapability(capability, facing);
+  }
+
+
   public static <T> Optional<T> getOptional(ICapabilityProvider provider, Capability<T> capability) {
     return getOptional(provider, capability, null);
   }
 
   public static <T> Optional<T> getOptional(ICapabilityProvider provider, Capability<T> capability, @Nullable EnumFacing facing) {
-    return Optional.ofNullable(provider.hasCapability(capability, facing) ? provider.getCapability(capability, facing) : null);
+    return Optional.ofNullable(has(provider, capability, facing) ? provider.getCapability(capability, facing) : null);
   }
 }

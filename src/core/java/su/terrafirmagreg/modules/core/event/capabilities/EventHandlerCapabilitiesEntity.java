@@ -1,7 +1,5 @@
 package su.terrafirmagreg.modules.core.event.capabilities;
 
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
@@ -28,7 +26,6 @@ public class EventHandlerCapabilitiesEntity {
     }
 
     skill(event, entity);
-    ambiental(event, entity);
 //    pull(event, entity);
     damageResistance(event, entity);
   }
@@ -42,18 +39,6 @@ public class EventHandlerCapabilitiesEntity {
       }
     }
 
-  }
-
-  public static void ambiental(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
-
-    if (entity instanceof EntityPlayer player) {
-      // Each player should have their own instance for each stat, as associated values may vary
-
-      //if (!event.getCapabilities().containsKey(CapabilityTemperature.KEY))
-      if (!CapabilityAmbiental.has(player)) {
-        event.addCapability(CapabilityAmbiental.KEY, new CapabilityProviderAmbiental(player));
-      }
-    }
   }
 
 //  public static void pull(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {

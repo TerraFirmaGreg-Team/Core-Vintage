@@ -29,7 +29,6 @@ public class FeatureSinkOrSwim extends FeatureBase {
 
   @SubscribeEvent
   public static void onLivingUpdateEvent(LivingEvent.LivingUpdateEvent event) {
-    if (!ConfigCore.FEATURE.SINK_OR_SWIM.enable) {return;}
 
     var entityLiving = event.getEntityLiving();
 

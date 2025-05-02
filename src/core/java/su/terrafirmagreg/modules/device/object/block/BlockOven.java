@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.device.object.block;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.capability.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 
 import net.minecraft.block.Block;

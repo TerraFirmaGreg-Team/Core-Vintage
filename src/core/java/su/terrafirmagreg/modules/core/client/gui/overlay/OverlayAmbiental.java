@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.data.Unicode;
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityAmbiental;
-import su.terrafirmagreg.modules.core.capabilities.ambiental.CapabilityProviderAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityProviderAmbiental;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.Block;

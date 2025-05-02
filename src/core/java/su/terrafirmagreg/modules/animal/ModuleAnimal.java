@@ -5,7 +5,6 @@ import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
-import su.terrafirmagreg.modules.animal.event.EasyBreedingEventHandler;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.init.FeaturesAnimal;
@@ -16,12 +15,7 @@ import su.terrafirmagreg.modules.animal.plugin.top.TheOneProbeAnimal;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectList;
-
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 @ModuleInfo(
   id = "animal",
@@ -71,16 +65,6 @@ public final class ModuleAnimal extends ModuleBase {
   public void onInit(FMLInitializationEvent event) {
 
     TheOneProbeAnimal.init();
-  }
-
-
-  @Override
-  public @NotNull List<Class<?>> getEventBusSubscribers() {
-    ObjectList<Class<?>> list = new ObjectArrayList<>();
-
-    list.add(EasyBreedingEventHandler.class);
-
-    return list;
   }
 
   @Override

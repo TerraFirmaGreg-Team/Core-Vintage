@@ -1,14 +1,13 @@
-package su.terrafirmagreg.modules.core.feature.ambiental.modifier;
+package su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.AmbientalModifierStorage;
-import su.terrafirmagreg.modules.core.feature.ambiental.provider.IAmbientalProviderEquipment;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHandlerAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
+import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderEquipment;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import java.util.Optional;
-
-import static su.terrafirmagreg.modules.core.feature.ambiental.handler.ModifierHandlerEquipment.EQUIPMENT;
 
 public class ModifierEquipment extends ModifierBase {
 
@@ -39,7 +38,7 @@ public class ModifierEquipment extends ModifierBase {
         storage.add(provider.getModifier(player, stack));
       }
 
-      for (IAmbientalProviderEquipment provider : EQUIPMENT) {
+      for (IAmbientalProviderEquipment provider : CapabilityHandlerAmbiental.EQUIPMENT) {
         storage.add(provider.getModifier(player, stack));
       }
     }

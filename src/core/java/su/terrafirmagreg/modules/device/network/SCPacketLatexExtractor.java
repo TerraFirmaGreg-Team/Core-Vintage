@@ -28,24 +28,6 @@ public class SCPacketLatexExtractor extends NetworkPacketBaseTile<TileLatexExtra
     this.base = tile.hasBase();
   }
 
-//  @Override
-//  public void fromBytes(ByteBuf buf) {
-//    this.pos = BlockPos.fromLong(buf.readLong());
-//    this.cutState = buf.readInt();
-//    this.fluid = buf.readInt();
-//    this.pot = buf.readBoolean();
-//    this.base = buf.readBoolean();
-//  }
-//
-//  @Override
-//  public void toBytes(ByteBuf buf) {
-//    buf.writeLong(pos.toLong());
-//    buf.writeInt(cutState);
-//    buf.writeInt(fluid);
-//    buf.writeBoolean(pot);
-//    buf.writeBoolean(base);
-//  }
-
   @Override
   public Runnable getAction() {
     return () -> tile.updateClient(cutState, fluid, pot, base);

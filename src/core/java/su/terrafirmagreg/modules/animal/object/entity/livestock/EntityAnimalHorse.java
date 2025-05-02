@@ -31,7 +31,6 @@ import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -394,7 +393,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
               SCPacketSimple.translateMessage(
                 SCPacketSimple.MessageCategory.ANIMAL,
                 ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()
-              ).sendTo((EntityPlayerMP) player);
+              ).sendTo(player);
             }
           }
         }

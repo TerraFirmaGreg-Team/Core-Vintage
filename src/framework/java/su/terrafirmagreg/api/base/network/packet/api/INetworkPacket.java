@@ -7,42 +7,21 @@ import su.terrafirmagreg.framework.manager.network.spi.NetworkThreadedWrapper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface INetworkPacket {
 
-//  /**
-//   * Used to write data from a Packet into a PacketBuffer.<br>
-//   * <br>
-//   * <p>
-//   * This is the first step in sending a Packet to a different thread, and is done on the "sending" side.
-//   *
-//   * @param buffer The PacketBuffer to write Packet data to.
-//   */
-//  void write(PacketBuffer buffer);
-//
-//  /**
-//   * Used to read data from a PacketBuffer into this Packet.<br>
-//   * <br>
-//   * <p>
-//   * This is the next step of sending a Packet to a different thread, and is done on the "receiving" side.
-//   *
-//   * @param buffer The PacketBuffer to read Packet data from.
-//   */
-//  void read(PacketBuffer buffer);
-
-  default NetworkThreadedWrapper getWrapper() {
-
-    return NetworkManager.getChannel(this);
-  }
 
   /**
    * Checks whether the received values are valid. If {@code false} is returned, the packet will be discarded.
@@ -53,7 +32,19 @@ public interface INetworkPacket {
     return true;
   }
 
-  INetworkPacket process(MessageContext context);
+  /**
+   * Called when the message is received and handled. This is where you process the message.
+   *
+   * @param context The context for the message.
+   * @return A message to send as a response.
+   */
+  IMessage process(MessageContext context);
+
+
+  default NetworkThreadedWrapper getWrapper() {
+
+    return NetworkManager.getChannel(this);
+  }
 
 
   /**
@@ -62,7 +53,7 @@ public interface INetworkPacket {
   interface Server extends INetworkPacket {
 
     @Override
-    default INetworkPacket process(MessageContext context) {
+    default IMessage process(MessageContext context) {
       NetworkUtils.queueTask(context, () -> context.getServerHandler().player, this::process);
       return null;
     }
@@ -71,8 +62,6 @@ public interface INetworkPacket {
     default void process(EntityPlayerMP player) {
 
     }
-
-    ;
 
     // Send To Server
 
@@ -91,7 +80,7 @@ public interface INetworkPacket {
   interface Client extends INetworkPacket {
 
     @Override
-    default INetworkPacket process(MessageContext context) {
+    default IMessage process(MessageContext context) {
       NetworkUtils.queueTask(context, GameUtils::getMinecraft, this::process);
       return null;
     }
@@ -100,8 +89,6 @@ public interface INetworkPacket {
     default void process(Minecraft minecraft) {
 
     }
-
-    ;
 
 
     default Packet<?> getPacketFrom() {
@@ -122,9 +109,17 @@ public interface INetworkPacket {
     // Send To
 
 
-    default void sendTo(EntityPlayerMP player) {
+    default void sendTo(EntityPlayer player) {
+      if (player instanceof EntityPlayerMP playerMP) {
+        getWrapper().sendTo(this, playerMP);
+      }
 
-      getWrapper().sendTo(this, player);
+    }
+
+    default void sendTo(EntityLivingBase player) {
+      if (player instanceof EntityPlayerMP playerMP) {
+        getWrapper().sendTo(this, playerMP);
+      }
     }
 
 

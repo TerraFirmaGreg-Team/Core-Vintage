@@ -29,7 +29,6 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -377,7 +376,7 @@ public abstract class EntityAnimalBase extends BaseEntityAnimal implements IAnim
               SCPacketSimple.translateMessage(
                 SCPacketSimple.MessageCategory.ANIMAL,
                 ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()
-              ).sendTo((EntityPlayerMP) player);
+              ).sendTo(player);
             }
           }
         }

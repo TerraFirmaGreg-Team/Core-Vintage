@@ -31,7 +31,7 @@ public class CSPacketGuiButton extends NetworkPacketBase implements INetworkPack
     this.buttonID = buttonID;
     this.extraNBT = extraNBT;
   }
-  
+
 
   @Override
   public void process(EntityPlayerMP player) {

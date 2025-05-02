@@ -7,9 +7,9 @@ import su.terrafirmagreg.modules.device.network.SCPacketLatexExtractor;
 public final class PacketsDevice {
 
   public static void onRegister(INetworkRegistrar registrar) {
-    registrar.addPacket(CSPacketFreezeDryer.class);
+    registrar.addPacket(new CSPacketFreezeDryer());
 //    registrar.addPacket(Side.CLIENT, SCPacketFridge.class);
-    registrar.addPacket(SCPacketLatexExtractor.class);
+    registrar.addPacket(new SCPacketLatexExtractor());
 //    registrar.addPacket(Side.CLIENT, SCPacketTileEntity.class);
   }
 }

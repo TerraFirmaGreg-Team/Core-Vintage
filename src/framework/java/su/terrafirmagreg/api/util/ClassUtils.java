@@ -71,6 +71,7 @@ public final class ClassUtils {
   }
 
   public static MethodHandle unreflectGetter(Field field) {
+
     return GETTER_CACHE.computeIfAbsent(field, f -> {
       try {
         return LOOKUP.unreflectGetter(f);
@@ -78,6 +79,7 @@ public final class ClassUtils {
         throw new RuntimeException(e);
       }
     });
+
   }
 
   public static MethodHandle unreflectSetter(Field field) {

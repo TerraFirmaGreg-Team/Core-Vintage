@@ -67,7 +67,7 @@ public class FeatureAdvancedData extends FeatureBase {
 
     if (!ConfigCore.FEATURE.ADVANCED_DATA.requireCTRL || GuiScreen.isCtrlKeyDown()) {
 
-      tooltips.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + "Advanced Info:");
+      tooltips.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + "Advanced Data:");
 
       // OreDict Names
       if (ConfigCore.FEATURE.ADVANCED_DATA.showOreDictionary) {
@@ -142,7 +142,7 @@ public class FeatureAdvancedData extends FeatureBase {
         }
       }
     } else {
-      tooltips.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + "[Press CTRL] for Advanced Info");
+      tooltips.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + "[Press CTRL] for Advanced Data");
     }
   }
 

@@ -17,6 +17,8 @@ import java.util.function.Supplier;
 public final class NetworkUtils {
 
 
+  public static final int DEFAULT_RANGE = 64;
+
   public static boolean isValidChannel(String channel) {
     Objects.requireNonNull(channel);
     ModUtils.isValidIdentifier(channel);
@@ -40,10 +42,12 @@ public final class NetworkUtils {
   }
 
   public static void queueTask(MessageContext context, Runnable task) {
+
     queueTask(context.side, task);
   }
 
   public static <T> void queueTask(MessageContext context, Supplier<T> supplier, Consumer<T> consumer) {
+
     queueTask(context.side, () -> consumer.accept(supplier.get()));
   }
 

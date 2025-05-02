@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static su.terrafirmagreg.api.util.ModUtils.MOD_NAME;
-
 
 /**
  * A wrapper to the Log4J wrapper, which adds some extra utility, such as the stack trace being added to warning messages.
@@ -41,11 +39,6 @@ public class LoggingHelper {
     this.logger = logger;
   }
 
-  private LoggingHelper() {
-
-    this.logger = LogManager.getLogger();
-  }
-
   /**
    * Constructs the helper using a logger name.
    *
@@ -68,7 +61,7 @@ public class LoggingHelper {
 
   public static LoggingHelper of() {
 
-    return new LoggingHelper(LogManager.getLogger(MOD_NAME));
+    return new LoggingHelper(LogManager.getLogger());
   }
 
 

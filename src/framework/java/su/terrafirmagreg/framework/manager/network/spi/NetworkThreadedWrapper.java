@@ -1,20 +1,25 @@
 package su.terrafirmagreg.framework.manager.network.spi;
 
 import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.library.IdSupplier;
-import su.terrafirmagreg.api.library.serialization.ClassBufSerializer;
+import su.terrafirmagreg.api.util.BufUtils;
+import su.terrafirmagreg.api.util.ClassUtils;
 import su.terrafirmagreg.api.util.NetworkUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.server.management.PlayerChunkMap;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IntIdentityHashBiMap;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -30,24 +35,26 @@ import lombok.Getter;
 import java.util.Map;
 
 @Getter
-public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
+public class NetworkThreadedWrapper {
 
-  public static final Map<String, NetworkThreadedWrapper> WRAPPER_MAP = new Object2ObjectOpenHashMap<>();
+  private static final Map<String, NetworkThreadedWrapper> WRAPPER_MAP = new Object2ObjectOpenHashMap<>();
 
 
-  public static final int DEFAULT_RANGE = 64;
-
+  private final IntIdentityHashBiMap<Class<? extends INetworkPacket>> packetMap;
   private final String netId;
+  private final SimpleNetworkWrapper channel;
   private final IdSupplier idSupplier;
 
   public NetworkThreadedWrapper(String netId) {
-    super(netId);
 
     this.netId = netId;
+    this.channel = NetworkRegistry.INSTANCE.newSimpleChannel(netId);
     this.idSupplier = new IdSupplier();
+    this.packetMap = new IntIdentityHashBiMap<>(10);
 
-    this.registerMessage(new PacketInternal(this), PacketInternal.class, 0, Side.SERVER);
-    this.registerMessage(new PacketInternal(this), PacketInternal.class, 1, Side.CLIENT);
+    this.channel.registerMessage(new PacketWrapper(this), PacketWrapper.class, 0, Side.SERVER);
+    this.channel.registerMessage(new PacketWrapper(this), PacketWrapper.class, 1, Side.CLIENT);
+
   }
 
   // ContainerId : ModuleId
@@ -61,6 +68,21 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
     return WRAPPER_MAP.computeIfAbsent(netId, NetworkThreadedWrapper::new);
   }
 
+  public <P extends INetworkPacket> void registerPacket(Class<P> packetClass) {
+
+    packetMap.put(packetClass, idSupplier.getAndIncrement());
+  }
+
+  public int getPacketId(Class<? extends INetworkPacket> packetClass) {
+
+    return packetMap.getId(packetClass);
+  }
+
+  public Class<? extends INetworkPacket> getPacketClass(int packetId) {
+
+    return packetMap.get(packetId);
+  }
+
 
   /**
    * Retrieves the packet corresponding to the given packet from the server parent.
@@ -70,7 +92,7 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
    */
   public Packet<?> getPacketFrom(INetworkPacket packet) {
 
-    return this.getPacketFrom(new PacketInternal(this).setPacket(packet));
+    return this.channel.getPacketFrom(new PacketWrapper(this).setPacket(packet));
   }
 
   // region ====== Send Messages ======
@@ -83,7 +105,7 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
    */
   public void sendToAll(INetworkPacket packet) {
 
-    this.sendToAll(new PacketInternal(this).setPacket(packet));
+    this.channel.sendToAll(new PacketWrapper(this).setPacket(packet));
   }
 
   /**
@@ -94,7 +116,7 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
    */
   public void sendTo(INetworkPacket packet, EntityPlayerMP player) {
 
-    this.sendTo(new PacketInternal(this).setPacket(packet), player);
+    this.channel.sendTo(new PacketWrapper(this).setPacket(packet), player);
   }
 
   /**
@@ -118,7 +140,7 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
       if (playerObj instanceof EntityPlayerMP player) {
 
         if (playerManager.isPlayerWatchingChunk(player, chunkX, chunkZ)) {
-          sendTo(packet, player);
+          this.sendTo(packet, player);
         }
       }
     }
@@ -132,7 +154,7 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
    */
   public void sendToAllAround(INetworkPacket packet, TargetPoint point) {
 
-    this.sendToAllAround(new PacketInternal(this).setPacket(packet), point);
+    this.channel.sendToAllAround(new PacketWrapper(this).setPacket(packet), point);
   }
 
   /**
@@ -145,32 +167,32 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
    */
   public void sendToAllAround(INetworkPacket packet, World world, BlockPos pos, double range) {
 
-    sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, range));
+    this.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, range));
   }
 
   public void sendToAllAround(INetworkPacket packet, World world, BlockPos pos) {
 
-    sendToAllAround(packet, world, pos, DEFAULT_RANGE);
+    this.sendToAllAround(packet, world, pos, NetworkUtils.DEFAULT_RANGE);
   }
 
   public void sendToAllAround(INetworkPacket packet, int dimension, BlockPos blockPos, double range) {
 
-    sendToAllAround(packet, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), range);
+    this.sendToAllAround(packet, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), range);
   }
 
   public void sendToAllAround(INetworkPacket packet, int dimension, BlockPos blockPos) {
 
-    sendToAllAround(packet, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), DEFAULT_RANGE);
+    this.sendToAllAround(packet, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), NetworkUtils.DEFAULT_RANGE);
   }
 
   public void sendToAllAround(INetworkPacket packet, int dimension, double x, double y, double z, double range) {
 
-    sendToAllAround(packet, new TargetPoint(dimension, x, y, z, range));
+    this.sendToAllAround(packet, new TargetPoint(dimension, x, y, z, range));
   }
 
   public void sendToAllAround(INetworkPacket packet, int dimension, double x, double y, double z) {
 
-    sendToAllAround(packet, dimension, x, y, z, DEFAULT_RANGE);
+    this.sendToAllAround(packet, dimension, x, y, z, NetworkUtils.DEFAULT_RANGE);
   }
 
   public void sendToAllAround(INetworkPacket packet, TileEntity tile, int range) {
@@ -178,12 +200,12 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
     World world = tile.getWorld();
     WorldProvider provider = world.provider;
     int dimension = provider.getDimension();
-    sendToAllAround(packet, dimension, pos.getX(), pos.getY(), pos.getZ(), range);
+    this.sendToAllAround(packet, dimension, pos.getX(), pos.getY(), pos.getZ(), range);
   }
 
   public void sendToAllAround(INetworkPacket packet, TileEntity tile) {
 
-    sendToAllAround(packet, tile, DEFAULT_RANGE);
+    this.sendToAllAround(packet, tile, NetworkUtils.DEFAULT_RANGE);
   }
 
   /**
@@ -194,22 +216,22 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
    */
   public void sendToAllTracking(INetworkPacket packet, Entity entity) {
 
-    this.sendToAllTracking(new PacketInternal(this).setPacket(packet), entity);
+    this.channel.sendToAllTracking(new PacketWrapper(this).setPacket(packet), entity);
   }
 
   public void sendToAllTracking(INetworkPacket packet, TargetPoint point) {
 
-    this.sendToAllTracking(new PacketInternal(this).setPacket(packet), point);
+    this.channel.sendToAllTracking(new PacketWrapper(this).setPacket(packet), point);
   }
 
   public void sendToAllTracking(INetworkPacket packet, int dimension, BlockPos blockPos, double range) {
 
-    sendToAllTracking(packet, new TargetPoint(dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), range));
+    this.sendToAllTracking(packet, new TargetPoint(dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), range));
   }
 
   public void sendToAllTracking(INetworkPacket packet, int dimension, double x, double y, double z, double range) {
 
-    sendToAllTracking(packet, new TargetPoint(dimension, x, y, z, range));
+    this.sendToAllTracking(packet, new TargetPoint(dimension, x, y, z, range));
   }
 
   /**
@@ -220,7 +242,7 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
    */
   public void sendToDimension(INetworkPacket packet, int dimensionId) {
 
-    this.sendToDimension(new PacketInternal(this).setPacket(packet), dimensionId);
+    this.channel.sendToDimension(new PacketWrapper(this).setPacket(packet), dimensionId);
   }
 
   public void sendToDimension(INetworkPacket packet, TileEntity tileEntity) {
@@ -228,7 +250,7 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
     WorldProvider provider = world.provider;
     int dimensionId = provider.getDimension();
 
-    sendToDimension(packet, dimensionId);
+    this.sendToDimension(packet, dimensionId);
   }
 
 
@@ -239,99 +261,86 @@ public class NetworkThreadedWrapper extends SimpleNetworkWrapper {
    */
   public void sendToServer(INetworkPacket packet) {
 
-    this.sendToServer(new PacketInternal(this).setPacket(packet));
+    this.channel.sendToServer(new PacketWrapper(this).setPacket(packet));
   }
 
   // endregion
 
+  private void write(INetworkPacket packet, PacketBuffer buffer) {
+    // assume the packet has already been checked for registration here
+    int index = this.getPacketId(packet.getClass());
+    buffer.writeInt(index);
+//    packet.write(buffer);
+    ClassUtils.processFields(packet, (obj, field) -> BufUtils.writeField(obj, field, buffer));
+  }
 
-  public final class PacketInternal implements IMessage, IMessageHandler<PacketInternal, IMessage> {
+  private INetworkPacket read(PacketBuffer buffer) {
+    int index = buffer.readInt();
+
+    var clazz = this.getPacketClass(index);
+    INetworkPacket packet = this.instantiate(clazz);
+//    packet.read(buffer);
+    ClassUtils.processFields(packet, (obj, field) -> BufUtils.readField(obj, field, buffer));
+    return packet;
+  }
+
+  private INetworkPacket instantiate(Class<? extends INetworkPacket> packetClass) {
+    try {
+      return packetClass.getDeclaredConstructor().newInstance();
+    } catch (Throwable e) {
+      LoggingHelper.LOGGER.error("Failed to instanciate " + packetClass);
+      throw new RuntimeException(e);
+    }
+  }
+
+  private void handle(INetworkPacket packet, MessageContext context) {
+    if (packet.verify(context)) {
+      packet.process(context);
+    }
+  }
+
+  /**
+   * Don't access this, this may change between versions and is only public because the {@link SimpleNetworkWrapper} requires it to be
+   */
+  public static class PacketWrapper implements IMessage, IMessageHandler<PacketWrapper, IMessage> {
 
     private NetworkThreadedWrapper channel;
     private INetworkPacket packet;
 
-    private PacketInternal() {}
+    public PacketWrapper() {
+    }
 
-    public PacketInternal(NetworkThreadedWrapper channel) {
-
+    public PacketWrapper(NetworkThreadedWrapper channel) {
       this.channel = channel;
     }
 
-    private PacketInternal setPacket(INetworkPacket packet) {
+    private PacketWrapper setPacket(INetworkPacket packet) {
       this.packet = packet;
       return this;
     }
 
     @Override
-    public IMessage onMessage(final PacketInternal packet, final MessageContext ctx) {
-
-      NetworkUtils.queueTask(ctx.side, new Runner(ctx));
-      return null;
-    }
-
-    @Override
-    public int hashCode() {
-      return this.packet.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (obj instanceof PacketInternal wrapper) {
-        return this.packet.equals(wrapper.packet);
-
-      } else {
-        return this.packet.equals(obj);
-      }
-    }
-
-    @Override
-    public String toString() {
-      return this.packet.toString();
-    }
-
-    @Override
     public void fromBytes(ByteBuf buffer) {
+      PacketBuffer packetBuffer = new PacketBuffer(buffer);
+      this.channel = WRAPPER_MAP.get(packetBuffer.readString(32767));
+      if (this.channel == null) {throw new IllegalStateException("Couldn't find received channel name!");}
 
-      ClassBufSerializer.read(packet, buffer);
+      this.packet = this.channel.read(packetBuffer);
     }
 
     @Override
     public void toBytes(ByteBuf buffer) {
+      PacketBuffer packetBuffer = new PacketBuffer(buffer);
+      packetBuffer.writeString(this.channel.netId);
 
-      ClassBufSerializer.write(packet, buffer);
+      this.channel.write(this.packet, packetBuffer);
     }
 
-    private final class Runner implements Runnable {
-
-      private final MessageContext context;
-
-      public Runner(final MessageContext context) {
-        this.context = context;
-      }
-
-      @Override
-      public void run() {
-
-        if (!packet.verify(context)) {
-          return;
-        }
-        final INetworkPacket reply = packet.process(this.context);
-
-        if (reply != null) {
-          if (this.context.side == Side.CLIENT) {
-            NetworkThreadedWrapper.this.sendToServer(reply);
-
-          } else {
-            final EntityPlayerMP player = this.context.getServerHandler().player;
-
-            if (player != null) {
-              NetworkThreadedWrapper.this.sendTo(reply, player);
-            }
-          }
-        }
-      }
-
+    @Override
+    public IMessage onMessage(PacketWrapper message, MessageContext context) {
+      this.channel.handle(message.packet, context);
+      return null;
     }
-
   }
+
 }

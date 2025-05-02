@@ -10,5 +10,5 @@ public interface INetworkRegistrar {
    * @param clazz The class of the packet. This class must implement IMessage and IMessageHandler!
    * @param side  The side that receives this packet.
    */
-  <P extends INetworkPacket> void addPacket(Class<P> clazz);
+  <P extends INetworkPacket> void addPacket(P packet);
 }

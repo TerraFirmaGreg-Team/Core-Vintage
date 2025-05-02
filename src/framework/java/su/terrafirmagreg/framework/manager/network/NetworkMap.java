@@ -4,6 +4,8 @@ import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
 import su.terrafirmagreg.framework.manager.network.NetworkMap.NetworkWrapper;
 import su.terrafirmagreg.framework.manager.network.spi.NetworkThreadedWrapper;
 
+import net.minecraftforge.fml.relauncher.Side;
+
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import lombok.Data;
@@ -15,18 +17,12 @@ public class NetworkMap extends Object2ObjectOpenHashMap<Class<? extends INetwor
     return new NetworkMap();
   }
 
-  @Override
-  public NetworkWrapper put(Class<? extends INetworkPacket> packetClass, NetworkWrapper wrapper) {
-
-    return super.put(packetClass, wrapper);
-  }
-
 
   @Data(staticConstructor = "of")
   public static class NetworkWrapper {
 
     private final NetworkThreadedWrapper channel;
-    private final String className;
+    private final Side side;
 
   }
 }

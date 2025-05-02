@@ -6,17 +6,10 @@ import java.io.Serializable;
 
 public abstract class NetworkPacketBase implements Serializable, INetworkPacket {
 
-//  @Override
-//  public final void write(PacketBuffer buffer) {
-//
-//    ClassUtils.processFields(this, (obj, field) -> BufUtils.writeField(obj, field, buffer));
-//  }
-//
-//  @Override
-//  public final void read(PacketBuffer buffer) {
-//
-//    ClassUtils.processFields(this, (obj, field) -> BufUtils.readField(obj, field, buffer));
-//  }
-
+  /**
+   * The serial version for this UID.
+   */
+  private static final long serialVersionUID = 3214832642504369023L;
+  
 
 }

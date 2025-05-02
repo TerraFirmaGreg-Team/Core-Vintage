@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 public class SCPacketPlayerDataUpdate extends NetworkPacketBase implements INetworkPacket.Client {
 
-  private NBTTagCompound tag;
+  public NBTTagCompound tag;
 
   public SCPacketPlayerDataUpdate() {}
 

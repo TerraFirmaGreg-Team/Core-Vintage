@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.manager.network;
 
+import su.terrafirmagreg.framework.manager.network.api.INetworkManager;
 import su.terrafirmagreg.framework.manager.network.api.INetworkService;
 import su.terrafirmagreg.framework.module.api.IModule;
 
@@ -12,12 +13,11 @@ public class NetworkService implements INetworkService {
   private final NetworkMap map;
 
 
-  public NetworkService(NetworkManager manager) {
+  public NetworkService(INetworkManager manager) {
 
     this.module = manager.getModule();
     this.map = manager.getMap();
 
   }
-
 
 }

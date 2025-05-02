@@ -35,7 +35,7 @@ import static su.terrafirmagreg.Tags.SERVER_PROXY;
 @Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg extends Framework {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of();
+  public static final LoggingHelper LOGGER = LoggingHelper.of(MOD_NAME);
 
   @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
   public static IProxy PROXY;

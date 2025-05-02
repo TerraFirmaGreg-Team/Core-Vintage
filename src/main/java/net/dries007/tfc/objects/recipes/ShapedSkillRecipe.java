@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.recipes;
 
-import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.heat;
 
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

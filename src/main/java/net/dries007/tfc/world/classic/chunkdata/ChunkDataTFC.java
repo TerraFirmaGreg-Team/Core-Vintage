@@ -19,8 +19,8 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.util.NBTBuilder;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import net.dries007.tfc.world.classic.DataLayer;
 import net.dries007.tfc.world.classic.worldgen.vein.Vein;

@@ -1,9 +1,9 @@
 package net.dries007.tfc.util.agriculture;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.skill.Skill;
-import su.terrafirmagreg.modules.core.feature.skill.SkillTier;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.Skill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillTier;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

@@ -11,8 +11,8 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;

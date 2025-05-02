@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -25,9 +26,6 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;

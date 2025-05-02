@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.core.event.player;
 
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
-import su.terrafirmagreg.modules.core.network.SCPacketPlayerDataUpdate;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,13 +29,6 @@ public class EventHandlerPlayerRespawn {
       foodStatsTFC.setFoodLevel(4);
       foodStatsTFC.setThirst(25F);
       playerMP.setHealth(5);
-
-      // Skills / Player data
-      ICapabilityPlayerData playerData = CapabilityPlayerData.get(playerMP);
-      if (playerData != null) {
-
-        new SCPacketPlayerDataUpdate(playerData.serializeNBT()).sendTo(playerMP);
-      }
     }
   }
 }

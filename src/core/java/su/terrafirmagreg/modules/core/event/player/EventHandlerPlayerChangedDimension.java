@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.core.event.player;
 
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
-import su.terrafirmagreg.modules.core.network.SCPacketPlayerDataUpdate;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,12 +23,7 @@ public class EventHandlerPlayerChangedDimension {
 
       // Food Stats
       FoodStatsTFC.replaceFoodStats(playerMP);
-
-      // Skills
-      ICapabilityPlayerData playerData = CapabilityPlayerData.get(playerMP);
-      if (playerData != null) {
-        new SCPacketPlayerDataUpdate(playerData.serializeNBT()).sendTo(playerMP);
-      }
+      
     }
   }
 }

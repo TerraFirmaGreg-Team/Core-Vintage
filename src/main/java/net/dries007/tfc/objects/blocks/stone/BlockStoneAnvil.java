@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks.stone;
 
-import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

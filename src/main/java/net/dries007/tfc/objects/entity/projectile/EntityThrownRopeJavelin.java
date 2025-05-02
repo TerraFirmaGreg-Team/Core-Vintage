@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.entity.projectile;
 
 import su.terrafirmagreg.api.util.MathUtils;
-import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

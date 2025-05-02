@@ -1,6 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -13,9 +14,6 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 import net.dries007.tfc.util.agriculture.Crop;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 

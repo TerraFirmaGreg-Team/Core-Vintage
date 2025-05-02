@@ -6,7 +6,7 @@ import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityHandlerEgg;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

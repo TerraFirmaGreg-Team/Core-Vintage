@@ -15,8 +15,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.tfc.api.types.ICrop;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import net.dries007.tfc.world.classic.worldgen.WorldGenWildCrops;
 

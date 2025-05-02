@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.types;
 
-import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager.Specification;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;

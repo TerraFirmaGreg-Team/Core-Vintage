@@ -34,7 +34,7 @@ import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.te.TELamp;
 import net.dries007.tfc.util.Helpers;
 
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

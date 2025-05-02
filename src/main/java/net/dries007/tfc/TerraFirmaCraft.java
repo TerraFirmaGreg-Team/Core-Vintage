@@ -1,7 +1,7 @@
 package net.dries007.tfc;
 
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;

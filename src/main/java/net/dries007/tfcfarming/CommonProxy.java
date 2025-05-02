@@ -1,6 +1,6 @@
 package net.dries007.tfcfarming;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

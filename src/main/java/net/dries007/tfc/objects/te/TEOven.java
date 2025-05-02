@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockOven;
 import su.terrafirmagreg.modules.device.object.block.BlockOvenChimney;

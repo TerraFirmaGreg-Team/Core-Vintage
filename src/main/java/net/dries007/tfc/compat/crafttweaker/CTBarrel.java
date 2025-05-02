@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.crafttweaker;
 
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

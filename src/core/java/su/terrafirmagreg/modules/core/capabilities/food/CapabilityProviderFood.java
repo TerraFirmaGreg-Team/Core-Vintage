@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.capabilities.food;
 
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.food.ConfigFood;
 
 import net.minecraft.nbt.NBTTagCompound;

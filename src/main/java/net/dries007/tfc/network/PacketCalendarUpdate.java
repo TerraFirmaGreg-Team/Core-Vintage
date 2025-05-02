@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.dries007.tfc.TerraFirmaCraft;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 public class PacketCalendarUpdate implements IMessage {
 

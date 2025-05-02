@@ -1,6 +1,7 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -10,8 +11,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
 import net.dries007.tfc.ConfigTFC;
-
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import java.awt.Color;
 import java.time.Month;

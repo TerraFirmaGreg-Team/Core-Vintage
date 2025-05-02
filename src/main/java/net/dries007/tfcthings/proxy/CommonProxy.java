@@ -1,7 +1,6 @@
 package net.dries007.tfcthings.proxy;
 
 import su.terrafirmagreg.api.exception.WrongSideException;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
 
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -12,17 +11,13 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import net.dries007.tfcthings.init.TFCThingsEntities;
-import net.dries007.tfcthings.main.ConfigTFCThings;
 
 public class CommonProxy {
 
   public void preInit(FMLPreInitializationEvent event) {
 
     TFCThingsEntities.registerEntities();
-    Calendar.BIRTHDAYS.put("OCTOBER4", "Lyeoj's Birthday");
-    for (int i = 0; i < ConfigTFCThings.Misc.BIRTHDAYS.dayList.length; i++) {
-      ConfigTFCThings.addBirthday(ConfigTFCThings.Misc.BIRTHDAYS.dayList[i]);
-    }
+
   }
 
   public void init(FMLInitializationEvent event) {}

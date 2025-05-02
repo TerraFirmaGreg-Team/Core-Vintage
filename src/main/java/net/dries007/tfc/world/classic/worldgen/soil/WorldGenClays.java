@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen.soil;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

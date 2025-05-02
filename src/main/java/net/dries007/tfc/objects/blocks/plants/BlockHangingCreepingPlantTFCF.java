@@ -1,8 +1,6 @@
 package net.dries007.tfc.objects.blocks.plants;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -22,6 +20,7 @@ import net.minecraft.world.World;
 
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.Nonnull;

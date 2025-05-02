@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.te;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;

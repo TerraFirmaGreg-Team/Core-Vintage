@@ -1,7 +1,7 @@
 package net.dries007.tfc.api.recipes.anvil;
 
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
-import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

@@ -5,8 +5,8 @@ import net.minecraft.util.ITickable;
 
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropTFC;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarTickable;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarTickable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -13,8 +13,8 @@ import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIEasyBreed
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIPanic;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAITamableAvoidPlayer;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.network.SCPacketSimple;
 
 import net.minecraft.entity.EntityAgeable;

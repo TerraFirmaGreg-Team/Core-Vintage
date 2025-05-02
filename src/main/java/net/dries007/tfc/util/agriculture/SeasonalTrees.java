@@ -1,8 +1,8 @@
 package net.dries007.tfc.util.agriculture;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;

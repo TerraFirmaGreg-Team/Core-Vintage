@@ -1,7 +1,7 @@
 package net.dries007.tfcthings.main;
 
 import su.terrafirmagreg.api.data.enums.Mods;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -237,8 +237,11 @@ public class ConfigTFCThings {
                        "An invalid day string won't be read by the calendar. See defaults for examples."})
       @Config.LangKey("config.tfcthings.misc.daylist")
       @Config.RequiresMcRestart
-      public String[] dayList = new String[]{"APRIL2 MeteorFreak's Birthday", "APRIL10 Pakratt0013's Birthday", "NOVEMBER11 HonneyPlay's Birthday",
-                                             "MARCH2 Firedale's Birthday"};
+      public String[] dayList = new String[]{
+        "APRIL2 MeteorFreak's Birthday",
+        "APRIL10 Pakratt0013's Birthday",
+        "NOVEMBER11 HonneyPlay's Birthday",
+        "MARCH2 Firedale's Birthday"};
     }
 
     public static final class PigvilCFG {

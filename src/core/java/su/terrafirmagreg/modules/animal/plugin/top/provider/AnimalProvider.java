@@ -4,9 +4,9 @@ import su.terrafirmagreg.api.base.plugin.top.provider.spi.BaseEntityProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarFormatted;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

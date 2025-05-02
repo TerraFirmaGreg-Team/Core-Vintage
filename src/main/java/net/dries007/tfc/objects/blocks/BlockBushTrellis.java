@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;

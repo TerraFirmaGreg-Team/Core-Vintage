@@ -20,9 +20,9 @@ import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalShee
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -113,8 +113,7 @@ public final class WorldEntitySpawner {
 
 
   /**
-   * Experimental: Handles wild livestock respawning This event runs after CheckSpawn, which means you can safely assume that all other restrictions passed
-   * (biome, temp, rainfall, etc)
+   * Experimental: Handles wild livestock respawning This event runs after CheckSpawn, which means you can safely assume that all other restrictions passed (biome, temp, rainfall, etc)
    */
   @SubscribeEvent
   public static void onLivestockRespawn(LivingSpawnEvent.SpecialSpawn event) {
@@ -143,8 +142,7 @@ public final class WorldEntitySpawner {
   }
 
   /**
-   * **Modified version from vanilla's {@link net.minecraft.world.WorldEntitySpawner} Called during chunk generation to spawn initial creatures. Spawns group of
-   * animals together
+   * **Modified version from vanilla's {@link net.minecraft.world.WorldEntitySpawner} Called during chunk generation to spawn initial creatures. Spawns group of animals together
    *
    * @param centerX   The X coordinate of the point to spawn mobs around.
    * @param centerZ   The Z coordinate of the point to spawn mobs around.

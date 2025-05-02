@@ -5,9 +5,9 @@ import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.feature.skill.SkillType;
-import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

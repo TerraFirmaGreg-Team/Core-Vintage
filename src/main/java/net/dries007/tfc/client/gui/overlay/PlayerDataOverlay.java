@@ -2,8 +2,8 @@ package net.dries007.tfc.client.gui.overlay;
 
 import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.client.Minecraft;

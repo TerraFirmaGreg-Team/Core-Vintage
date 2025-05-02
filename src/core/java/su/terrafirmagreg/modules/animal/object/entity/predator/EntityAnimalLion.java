@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIWanderHuntArea;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
 
 import net.minecraft.block.Block;

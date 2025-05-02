@@ -2,13 +2,13 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.skill.SimpleSkill;
-import su.terrafirmagreg.modules.core.feature.skill.SkillType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;

@@ -2,7 +2,7 @@ package net.dries007.tfcthings.registry;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
-import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileGrindstone;
 
@@ -57,9 +57,9 @@ import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_NOT_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.SHRINK_THIRD_LAST;
 import static net.dries007.tfc.util.forge.ForgeRule.UPSET_NOT_LAST;
-import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.GENERAL;
-import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.TOOLS;
-import static su.terrafirmagreg.modules.core.feature.skill.SmithingSkill.Type.WEAPONS;
+import static su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill.Type.GENERAL;
+import static su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill.Type.TOOLS;
+import static su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill.Type.WEAPONS;
 
 @Mod.EventBusSubscriber(modid = Mods.ModIDs.TFCTHINGS)
 public class RegistryHandlerCommon {

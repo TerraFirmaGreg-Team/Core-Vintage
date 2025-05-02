@@ -5,7 +5,7 @@ import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHan
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityProviderAmbiental;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderEnvironmental;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -42,11 +42,11 @@ public class ModifierEnvironmental extends ModifierBase {
   public static float getEnvironmentTemperature(EntityPlayer player) {
     float avg = Climate.getAvgTemp(player.world, player.getPosition());
     float actual = Climate.getActualTemp(player.world, player.getPosition());
-    if (ConfigCore.MISC.AMBIENTAL.harsherTemperateAreas) {
+    if (ConfigCore.FEATURE.AMBIENTAL.harsherTemperateAreas) {
       float diff = actual - CapabilityProviderAmbiental.AVERAGE;
       float sign = Math.signum(diff);
       float generalDiff = Math.abs(avg - CapabilityProviderAmbiental.AVERAGE);
-      float mult0 = Math.max(0f, ConfigCore.MISC.AMBIENTAL.harsherMultiplier - 1f);
+      float mult0 = Math.max(0f, ConfigCore.FEATURE.AMBIENTAL.harsherMultiplier - 1f);
       float multiplier = 1 + Math.max(0, 1 - generalDiff / 55) * mult0;
       actual = CapabilityProviderAmbiental.AVERAGE + (diff + 1.5f * sign) * multiplier;
     }

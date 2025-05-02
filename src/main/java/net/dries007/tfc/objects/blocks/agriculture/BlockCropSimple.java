@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.feature.skill.SimpleSkill;
-import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
 
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;

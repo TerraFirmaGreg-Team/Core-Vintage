@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.integration.gregtech.object.item.tools.behaviors;
 
 import su.terrafirmagreg.modules.core.ModuleCore;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.feature.skill.ProspectingSkill;
-import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.ProspectingSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

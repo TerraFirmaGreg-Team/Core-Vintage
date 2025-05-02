@@ -1,10 +1,10 @@
 package net.dries007.tfc.client;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
-import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.spi.ClimateHelper;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.cave;
 
 import su.terrafirmagreg.api.util.MathUtils;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

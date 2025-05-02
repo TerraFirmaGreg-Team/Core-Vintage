@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.feature.skill.SimpleSkill;
-import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -27,10 +27,10 @@ import net.dries007.tfc.api.types.ICrop;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockEmergentTallWaterPlantTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFC;
+import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
 import net.dries007.tfc.objects.items.ItemSeedsTFC;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

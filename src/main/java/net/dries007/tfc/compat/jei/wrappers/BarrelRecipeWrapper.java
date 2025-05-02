@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
 import su.terrafirmagreg.modules.core.data.ingredient.IngredientFluidItem;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

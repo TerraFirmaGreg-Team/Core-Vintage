@@ -3,7 +3,7 @@ package net.dries007.firmalife.util;
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;

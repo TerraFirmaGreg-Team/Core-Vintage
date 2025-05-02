@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.core.object.loot;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
-import su.terrafirmagreg.modules.core.feature.skill.SimpleSkill;
-import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SimpleSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

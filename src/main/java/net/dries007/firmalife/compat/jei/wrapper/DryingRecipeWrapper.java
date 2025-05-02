@@ -1,6 +1,6 @@
 package net.dries007.firmalife.compat.jei.wrapper;
 
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

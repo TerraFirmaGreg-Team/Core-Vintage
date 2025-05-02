@@ -1,10 +1,10 @@
 package net.dries007.tfc.client.gui;
 
 import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
-import su.terrafirmagreg.modules.core.feature.skill.Skill;
-import su.terrafirmagreg.modules.core.feature.skill.SkillType;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.ICapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.Skill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;

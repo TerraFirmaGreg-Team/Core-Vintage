@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.plants;
 
 import su.terrafirmagreg.api.util.MathUtils;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;

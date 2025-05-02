@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.object.tile;
 import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickable;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.network.SCPacketLatexExtractor;
 

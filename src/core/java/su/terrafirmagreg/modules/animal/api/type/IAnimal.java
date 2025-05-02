@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.api.type;
 
 import su.terrafirmagreg.modules.animal.api.util.AnimalFood;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

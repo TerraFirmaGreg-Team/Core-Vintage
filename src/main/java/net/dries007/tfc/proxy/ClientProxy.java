@@ -1,8 +1,8 @@
 package net.dries007.tfc.proxy;
 
 import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

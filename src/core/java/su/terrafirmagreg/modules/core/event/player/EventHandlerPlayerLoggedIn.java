@@ -1,8 +1,5 @@
 package su.terrafirmagreg.modules.core.event.player;
 
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
-import su.terrafirmagreg.modules.core.network.SCPacketPlayerDataUpdate;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
@@ -43,14 +40,6 @@ public class EventHandlerPlayerLoggedIn {
             playerMP.foodStats.readNBT(nbt);
           }
         }
-      }
-
-      // Player Data
-      ICapabilityPlayerData playerData = CapabilityPlayerData.get(playerMP);
-      if (playerData != null) {
-
-        // Sync
-        new SCPacketPlayerDataUpdate(playerData.serializeNBT()).sendTo(playerMP);
       }
     }
   }

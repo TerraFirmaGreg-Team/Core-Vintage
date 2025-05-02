@@ -10,11 +10,11 @@ import lombok.Getter;
 
 @Getter
 public enum Weight implements IStringSerializable {
-  VERY_LIGHT(ConfigCore.MISC.WEIGHT.veryLight),
-  LIGHT(ConfigCore.MISC.WEIGHT.light),
-  MEDIUM(ConfigCore.MISC.WEIGHT.medium),
-  HEAVY(ConfigCore.MISC.WEIGHT.heavy),
-  VERY_HEAVY(ConfigCore.MISC.WEIGHT.veryHeavy);
+  VERY_LIGHT(ConfigCore.FEATURE.SIZE.veryLight),
+  LIGHT(ConfigCore.FEATURE.SIZE.light),
+  MEDIUM(ConfigCore.FEATURE.SIZE.medium),
+  HEAVY(ConfigCore.FEATURE.SIZE.heavy),
+  VERY_HEAVY(ConfigCore.FEATURE.SIZE.veryHeavy);
 
   public final int stackSize;
 

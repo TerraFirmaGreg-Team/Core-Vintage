@@ -1,6 +1,6 @@
 package net.dries007.firmalife.compat.waila;
 
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;

@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
-import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.ICapabilityPlayerData;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;

@@ -1,9 +1,9 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -513,8 +513,8 @@ public class BlockJoshuaTreeFlower extends Block {
   }
 
   /**
-   * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include when redstone
-   * power is updated, cactus blocks popping off due to a neighboring solid block, etc.
+   * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid block,
+   * etc.
    */
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {

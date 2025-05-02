@@ -20,19 +20,15 @@ import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ICapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ProviderPlayerData;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.storage.WorldDataCalendar;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.CalendarWorldData;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
-import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
@@ -87,13 +83,10 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -104,7 +97,6 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.GameRuleChangeEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
-import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
@@ -184,7 +176,6 @@ import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 @Mod.EventBusSubscriber(modid = TFC)
 public final class CommonEventHandler {
 
-  private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
   private static final Map<String, Supplier<? extends Item>> ITEM_MAP = new Object2ObjectOpenHashMap<>() {{
 
@@ -319,13 +310,6 @@ public final class CommonEventHandler {
     final EntityPlayer player = event.getPlayer();
     final ItemStack heldItem = player == null ? ItemStack.EMPTY : player.getHeldItemMainhand();
 
-    if (player != null) {
-      ICapabilityPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      if (cap != null) {
-        cap.setHarvestingTool(player.getHeldItemMainhand());
-      }
-    }
-
     FallingBlockManager.Specification spec = FallingBlockManager.getSpecification(event.getState());
     if (spec != null && spec.isCollapsable()) {
       FallingBlockManager.checkCollapsingArea(event.getWorld(), event.getPos());
@@ -357,22 +341,6 @@ public final class CommonEventHandler {
     ItemStack stackAt = new ItemStack(Item.getItemFromBlock(state.getBlock()), 1, state.getBlock().damageDropped(state));
     if (!event.isSilkTouching() && OreDictUtils.contains(stackAt, "blockGlass")) {
       event.getDrops().add(new ItemStack(ItemsCore.GLASS_SHARD));
-    }
-
-    // Apply durability modifier on tools
-    if (player != null) {
-      ItemStack tool = ItemStack.EMPTY;
-      ICapabilityPlayerData cap = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      if (cap != null) {
-        tool = cap.getHarvestingTool();
-      }
-      if (!tool.isEmpty()) {
-        float skillModifier = SmithingSkill.getSkillBonus(tool, SmithingSkill.Type.TOOLS) / 2.0F;
-        if (skillModifier > 0 && MathUtils.RNG.nextFloat() < skillModifier) {
-          // Up to 50% negating damage, for double durability
-          player.setHeldItem(EnumHand.MAIN_HAND, tool);
-        }
-      }
     }
 
     if (block instanceof BlockFruitTreeLeaves) {
@@ -625,26 +593,6 @@ public final class CommonEventHandler {
         if (heatHandler != null) {
           event.addCapability(CapabilityHeat.KEY, heatHandler);
         }
-      }
-    }
-  }
-
-
-  /**
-   * Fired on server only when a player dies and respawns. Used to copy skill level before respawning since we need the original (AKA the body) player entity
-   *
-   * @param event {@link net.minecraftforge.event.entity.player.PlayerEvent.Clone}
-   */
-  @SubscribeEvent
-  public static void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
-    if (event.getEntityPlayer() instanceof EntityPlayerMP player) {
-
-      // Skills
-      ICapabilityPlayerData newSkills = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
-      ICapabilityPlayerData originalSkills = event.getOriginal().getCapability(CapabilityPlayerData.CAPABILITY, null);
-      if (newSkills != null && originalSkills != null) {
-        newSkills.deserializeNBT(originalSkills.serializeNBT());
-        // To properly sync, we need to use PlayerRespawnEvent
       }
     }
   }
@@ -906,7 +854,7 @@ public final class CommonEventHandler {
 
     if (world.provider.getDimension() == 0 && !world.isRemote) {
       // Calendar Sync / Initialization
-      CalendarWorldData data = CalendarWorldData.get(world);
+      WorldDataCalendar data = WorldDataCalendar.get(world);
       Calendar.INSTANCE.resetTo(data.getCalendar());
       TerraFirmaCraft.getNetwork().sendToAll(new PacketCalendarUpdate(Calendar.INSTANCE));
     }
@@ -1028,51 +976,6 @@ public final class CommonEventHandler {
     }
   }
 
-  @SubscribeEvent
-  public static void onServerChatEvent(ServerChatEvent event) {
-    ICapabilityPlayerData cap = event.getPlayer().getCapability(CapabilityPlayerData.CAPABILITY, null);
-    if (cap != null) {
-      long intoxicatedTicks = cap.getIntoxicatedTime() - 6 * ICalendar.TICKS_IN_HOUR; // Only apply intoxication after 6 hr
-      if (intoxicatedTicks > 0) {
-        float drunkChance = MathHelper.clamp((float) intoxicatedTicks / ProviderPlayerData.MAX_INTOXICATED_TICKS, 0, 0.7f);
-        String originalMessage = event.getMessage();
-        String[] words = originalMessage.split(" ");
-        for (int i = 0; i < words.length; i++) {
-          String word = words[i];
-          if (word.isEmpty()) {
-            continue;
-          }
-
-          // Swap two letters
-          if (MathUtils.RNG.nextFloat() < drunkChance && word.length() >= 2) {
-            int pos = MathUtils.RNG.nextInt(word.length() - 1);
-            word = word.substring(0, pos) + word.charAt(pos + 1) + word.charAt(pos) + word.substring(pos + 2);
-          }
-
-          // Repeat / slur letters
-          if (MathUtils.RNG.nextFloat() < drunkChance) {
-            int pos = MathUtils.RNG.nextInt(word.length());
-            char repeat = word.charAt(pos);
-            int amount = 1 + MathUtils.RNG.nextInt(3);
-            word = word.substring(0, pos) + new String(new char[amount]).replace('\0', repeat) + (pos + 1 < word.length() ? word.substring(pos + 1) : "");
-          }
-
-          // Add additional letters
-          if (MathUtils.RNG.nextFloat() < drunkChance) {
-            int pos = MathUtils.RNG.nextInt(word.length());
-            char replacement = ALPHABET.charAt(MathUtils.RNG.nextInt(ALPHABET.length()));
-            if (Character.isUpperCase(word.charAt(MathUtils.RNG.nextInt(word.length())))) {
-              replacement = Character.toUpperCase(replacement);
-            }
-            word = word.substring(0, pos) + replacement + (pos + 1 < word.length() ? word.substring(pos + 1) : "");
-          }
-
-          words[i] = word;
-        }
-        event.setComponent(new TextComponentTranslation("<" + event.getUsername() + "> " + String.join(" ", words)));
-      }
-    }
-  }
 
   private static int countPlayerOverburdened(InventoryPlayer inventory) {
     // This is just optimized (probably uselessly, but whatever) for use in onPlayerTick

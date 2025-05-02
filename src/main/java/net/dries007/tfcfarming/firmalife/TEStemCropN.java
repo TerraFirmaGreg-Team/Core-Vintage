@@ -1,6 +1,6 @@
 package net.dries007.tfcfarming.firmalife;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.nbt.NBTTagCompound;
 

@@ -1,8 +1,7 @@
 package net.dries007.tfc.objects.blocks.wood;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -26,13 +25,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
-
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-
+import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import net.dries007.tfc.objects.blocks.BlocksTFCF;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

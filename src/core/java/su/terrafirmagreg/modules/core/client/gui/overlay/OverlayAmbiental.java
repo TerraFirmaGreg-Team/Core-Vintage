@@ -150,11 +150,11 @@ public final class OverlayAmbiental {
         drawTexturedModalRect(mid - 8, armorRowHeight - 4 + offsetYArrow, 16, 16, MINUS);
       }
     }
-    if (player.isSneaking() || !ConfigCore.MISC.AMBIENTAL.sneakyDetails) {
+    if (player.isSneaking() || !ConfigCore.FEATURE.AMBIENTAL.sneakyDetails) {
       float targetFormatted = tempSystem.getTarget();
       float tempFormatted = tempSystem.getTemperature();
       float changeFormatted = tempSystem.getChange();
-      if (!ConfigCore.MISC.AMBIENTAL.celsius) {
+      if (!ConfigCore.FEATURE.AMBIENTAL.celsius) {
         targetFormatted = targetFormatted * ((float) 9 / 5) + 32;
         tempFormatted = tempFormatted * ((float) 9 / 5) + 32;
         changeFormatted = changeFormatted * ((float) 9 / 5);

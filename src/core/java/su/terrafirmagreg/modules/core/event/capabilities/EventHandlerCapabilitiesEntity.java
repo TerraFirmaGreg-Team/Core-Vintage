@@ -2,12 +2,9 @@ package su.terrafirmagreg.modules.core.event.capabilities;
 
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.ProviderPlayerData;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -25,20 +22,8 @@ public class EventHandlerCapabilitiesEntity {
       return;
     }
 
-    skill(event, entity);
 //    pull(event, entity);
     damageResistance(event, entity);
-  }
-
-  public static void skill(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
-
-    if (entity instanceof EntityPlayer player) {
-      // Player skills
-      if (!CapabilityPlayerData.has(player)) {
-        event.addCapability(CapabilityPlayerData.KEY, new ProviderPlayerData(player));
-      }
-    }
-
   }
 
 //  public static void pull(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {

@@ -79,6 +79,6 @@ public class FeatureSize extends FeatureBase {
 
   @Override
   public boolean isEnabled() {
-    return ConfigCore.FEATURE.SIZE_OR_WEIGHT.enable;
+    return ConfigCore.FEATURE.SIZE.enable;
   }
 }

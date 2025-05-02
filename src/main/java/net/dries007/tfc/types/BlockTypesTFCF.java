@@ -1,6 +1,6 @@
 package net.dries007.tfc.types;
 
-import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager.Specification;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager.Specification;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.util.ResourceLocation;
@@ -291,7 +291,7 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
     }
 
     public static boolean isDryGrass(RockTFCF grass) {
-      if (!grass.isGrass) {throw new IllegalArgumentException("Non-grass can't spread.");} else
+      if (!grass.isGrass) {throw new IllegalArgumentException("Non-grass can't spread.");} else {
         return grass == DRY_BOG_IRON_GRASS ||
                grass == DRY_LOAMY_SAND_GRASS ||
                grass == DRY_SANDY_LOAM_GRASS ||
@@ -305,10 +305,11 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                grass == DRY_SILT_GRASS ||
                grass == DRY_HUMUS_GRASS ||
                grass == DRY_CLAY_HUMUS_GRASS;
+      }
     }
 
     public static boolean isSparseGrass(RockTFCF grass) {
-      if (!grass.isGrass) {throw new IllegalArgumentException("Non-grass can't spread.");} else
+      if (!grass.isGrass) {throw new IllegalArgumentException("Non-grass can't spread.");} else {
         return grass == SPARSE_BOG_IRON_GRASS ||
                grass == SPARSE_GRASS ||
                grass == SPARSE_CLAY_GRASS ||
@@ -324,6 +325,7 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
                grass == SPARSE_SILT_GRASS ||
                grass == SPARSE_HUMUS_GRASS ||
                grass == SPARSE_CLAY_HUMUS_GRASS;
+      }
     }
 
     public boolean canFall() {

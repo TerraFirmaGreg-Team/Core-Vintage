@@ -16,22 +16,16 @@ import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilityHandlerSharpness;
 import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.modules.core.capabilities.worldtracker.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
-import su.terrafirmagreg.modules.core.event.block.EventHandlerPortalSpawn;
+import su.terrafirmagreg.modules.core.event.EventHandlerGuiOpen;
+import su.terrafirmagreg.modules.core.event.EventHandlerGuiScreen;
+import su.terrafirmagreg.modules.core.event.EventHandlerOnConfigChanged;
+import su.terrafirmagreg.modules.core.event.EventHandlerPortalSpawn;
+import su.terrafirmagreg.modules.core.event.EventHandlerPuddles;
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesEntity;
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesItemStack;
-import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesWorld;
-import su.terrafirmagreg.modules.core.event.client.EventHandlerGuiOpen;
-import su.terrafirmagreg.modules.core.event.client.EventHandlerGuiScreen;
-import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerOnConfigChanged;
-import su.terrafirmagreg.modules.core.event.configchanged.EventHandlerPostConfigChanged;
-import su.terrafirmagreg.modules.core.event.feature.EventHandlerCalendar;
-import su.terrafirmagreg.modules.core.event.feature.EventHandlerFallingBlock;
-import su.terrafirmagreg.modules.core.event.feature.EventHandlerPuddles;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerItemTooltip;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDimension;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedIn;
@@ -113,12 +107,10 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
 
-    CapabilityWorldTracker.register();
     CapabilityHeat.register();
     CapabilityFood.register();
     CapabilityMetal.register();
     CapabilityForgeable.register();
-    CapabilityPlayerData.register();
 
     CapabilitySharpness.register();
     CapabilityDamageResistance.register();
@@ -159,17 +151,13 @@ public final class ModuleCore extends ModuleBase {
 
     list.add(EventHandlerCapabilitiesItemStack.class);
     list.add(EventHandlerCapabilitiesEntity.class);
-    list.add(EventHandlerCapabilitiesWorld.class);
 
     list.add(EventHandlerPortalSpawn.class);
 
     list.add(EventHandlerItemTooltip.class);
 
     list.add(EventHandlerOnConfigChanged.class);
-    list.add(EventHandlerPostConfigChanged.class);
 
-    list.add(EventHandlerCalendar.class);
-    list.add(EventHandlerFallingBlock.class);
     list.add(EventHandlerPuddles.class);
 
     return list;

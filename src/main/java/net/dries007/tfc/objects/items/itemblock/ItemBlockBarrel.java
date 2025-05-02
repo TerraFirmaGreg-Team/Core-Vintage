@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.items.itemblock;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendarFormatted;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarFormatted;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;

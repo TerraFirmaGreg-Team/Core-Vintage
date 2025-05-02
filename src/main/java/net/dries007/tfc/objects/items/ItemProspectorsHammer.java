@@ -3,13 +3,13 @@ package net.dries007.tfc.objects.items;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.playerdata.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.ProspectingSkill;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
-import su.terrafirmagreg.modules.core.feature.skill.ProspectingSkill;
-import su.terrafirmagreg.modules.core.feature.skill.SkillType;
-import su.terrafirmagreg.modules.core.feature.skill.SmithingSkill;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;

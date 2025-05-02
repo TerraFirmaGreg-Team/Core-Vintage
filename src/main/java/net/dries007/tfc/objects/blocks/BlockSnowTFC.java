@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-import su.terrafirmagreg.modules.core.feature.climate.ITemperatureBlock;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
+import su.terrafirmagreg.modules.core.feature.climate.spi.ITemperatureBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;

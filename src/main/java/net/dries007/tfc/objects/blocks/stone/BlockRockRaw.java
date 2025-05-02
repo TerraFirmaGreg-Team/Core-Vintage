@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.blocks.stone;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.core.feature.falling.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 import su.terrafirmagreg.temp.util.GemsFromRawRocks;
 
 import net.minecraft.block.Block;

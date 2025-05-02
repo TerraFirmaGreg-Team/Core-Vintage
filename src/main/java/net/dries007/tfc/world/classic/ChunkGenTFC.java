@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic;
 
-import su.terrafirmagreg.modules.core.feature.calendar.Month;
-import su.terrafirmagreg.modules.core.feature.climate.ClimateHelper;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
+import su.terrafirmagreg.modules.core.feature.climate.spi.ClimateHelper;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 

@@ -38,11 +38,11 @@ public class ModifierBase implements Comparable<ModifierBase> {
   }
 
   public float getChange() {
-    return change * multiplier * (count == 1 ? 1f : ConfigCore.MISC.AMBIENTAL.diminishedModifierMultiplier);
+    return change * multiplier * (count == 1 ? 1f : ConfigCore.FEATURE.AMBIENTAL.diminishedModifierMultiplier);
   }
 
   public float getPotency() {
-    return potency * multiplier * (count == 1 ? 1f : ConfigCore.MISC.AMBIENTAL.diminishedModifierMultiplier);
+    return potency * multiplier * (count == 1 ? 1f : ConfigCore.FEATURE.AMBIENTAL.diminishedModifierMultiplier);
   }
 
   public void addCount() {
@@ -50,7 +50,7 @@ public class ModifierBase implements Comparable<ModifierBase> {
   }
 
   public void absorb(ModifierBase modifier) {
-    if (count >= ConfigCore.MISC.AMBIENTAL.modifierCap) {
+    if (count >= ConfigCore.FEATURE.AMBIENTAL.modifierCap) {
       return;
     }
     this.count += modifier.count;
@@ -79,5 +79,5 @@ public class ModifierBase implements Comparable<ModifierBase> {
   public int compareTo(@NotNull ModifierBase modifierBase) {
     return Float.compare(this.change, modifierBase.change);
   }
-  
+
 }

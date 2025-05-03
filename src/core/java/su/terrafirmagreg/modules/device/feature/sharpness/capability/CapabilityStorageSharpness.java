@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.sharpness;
+package su.terrafirmagreg.modules.device.feature.sharpness.capability;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTPrimitive;
@@ -13,8 +13,7 @@ public class CapabilityStorageSharpness implements IStorage<ICapabilitySharpness
 
   @Nullable
   @Override
-  public NBTBase writeNBT(Capability<ICapabilitySharpness> capability,
-                          ICapabilitySharpness instance, EnumFacing side) {
+  public NBTBase writeNBT(Capability<ICapabilitySharpness> capability, ICapabilitySharpness instance, EnumFacing side) {
     return new NBTTagInt(instance.getCharges());
   }
 

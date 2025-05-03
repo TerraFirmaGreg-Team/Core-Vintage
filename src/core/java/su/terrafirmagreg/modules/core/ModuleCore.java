@@ -14,8 +14,6 @@ import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilityHandlerSharpness;
-import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
 import su.terrafirmagreg.modules.core.event.EventHandlerGuiOpen;
 import su.terrafirmagreg.modules.core.event.EventHandlerGuiScreen;
@@ -23,7 +21,6 @@ import su.terrafirmagreg.modules.core.event.EventHandlerOnConfigChanged;
 import su.terrafirmagreg.modules.core.event.EventHandlerPortalSpawn;
 import su.terrafirmagreg.modules.core.event.EventHandlerPuddles;
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesEntity;
-import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesItemStack;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerItemTooltip;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDimension;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedIn;
@@ -110,8 +107,6 @@ public final class ModuleCore extends ModuleBase {
     CapabilityMetal.register();
     CapabilityForgeable.register();
 
-    CapabilitySharpness.register();
-
 
   }
 
@@ -126,7 +121,7 @@ public final class ModuleCore extends ModuleBase {
     CapabilityHandlerHeat.init();
     CapabilityHandlerFood.init();
     CapabilityHandlerMetal.init();
-    CapabilityHandlerSharpness.init();
+
 
   }
 
@@ -147,7 +142,6 @@ public final class ModuleCore extends ModuleBase {
     list.add(EventHandlerPlayerLoggedOut.class);
     list.add(EventHandlerPlayerRespawn.class);
 
-    list.add(EventHandlerCapabilitiesItemStack.class);
     list.add(EventHandlerCapabilitiesEntity.class);
 
     list.add(EventHandlerPortalSpawn.class);

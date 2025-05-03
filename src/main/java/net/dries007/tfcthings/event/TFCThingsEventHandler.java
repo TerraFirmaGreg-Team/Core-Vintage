@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
-import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.modules.core.capabilities.sharpness.ICapabilitySharpness;
+import su.terrafirmagreg.modules.device.feature.sharpness.capability.CapabilitySharpness;
+import su.terrafirmagreg.modules.device.feature.sharpness.capability.ICapabilitySharpness;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

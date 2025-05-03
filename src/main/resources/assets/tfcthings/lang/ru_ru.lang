@@ -108,7 +108,7 @@ tile.gem_display_slate.name=Отображение сланцевых драго
 entity.pigvil.name=Пигвил
 
 tfcthings.tooltip.whetstone=Используйте металлический инструмент в левой руке
-tfcthings.tooltip.sharpness=%sSharp для %s использований
+
 tfcthings.tooltip.maximum_sharpness=Этот предмет сейчас не может стать острее
 
 tfcthings.tooltip.crown.gem=Камень: %s

@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -31,7 +30,6 @@ public class EventHandlerItemTooltip {
     capabilityMetal(tooltip, stack);
     capabilityForge(tooltip, stack);
     capabilityFood(tooltip, stack);
-    capabilitySharpness(tooltip, stack);
   }
 
   private static void capabilityMetal(List<String> tooltips, ItemStack stack) {
@@ -59,13 +57,6 @@ public class EventHandlerItemTooltip {
     var heat = CapabilityHeat.get(stack);
     if (heat != null) {
       heat.addHeatInfo(stack, tooltips);
-    }
-  }
-
-  private static void capabilitySharpness(List<String> tooltips, ItemStack stack) {
-    var sharpness = CapabilitySharpness.get(stack);
-    if (sharpness != null) {
-      sharpness.addTooltipInfo(stack, tooltips);
     }
   }
 

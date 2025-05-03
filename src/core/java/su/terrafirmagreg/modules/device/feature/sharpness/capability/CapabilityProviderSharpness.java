@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.sharpness;
+package su.terrafirmagreg.modules.device.feature.sharpness.capability;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

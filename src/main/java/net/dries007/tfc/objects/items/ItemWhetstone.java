@@ -2,11 +2,11 @@ package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.modules.core.capabilities.sharpness.ICapabilitySharpness;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.device.feature.sharpness.capability.CapabilitySharpness;
+import su.terrafirmagreg.modules.device.feature.sharpness.capability.ICapabilitySharpness;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

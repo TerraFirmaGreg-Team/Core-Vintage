@@ -106,7 +106,6 @@ tile.gem_display_slate.name=Slate Gem Display
 entity.pigvil.name=Pigvil
 
 tfcthings.tooltip.whetstone=Use with a metal tool in your off-hand
-tfcthings.tooltip.sharpness=%sSharp for %s uses
 tfcthings.tooltip.maximum_sharpness=This item can't get any sharper right now
 
 tfcthings.tooltip.crown.gem=Gem: %s

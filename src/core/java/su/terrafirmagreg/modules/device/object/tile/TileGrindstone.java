@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.modules.core.capabilities.sharpness.CapabilitySharpness;
-import su.terrafirmagreg.modules.core.capabilities.sharpness.ICapabilitySharpness;
+import su.terrafirmagreg.modules.device.feature.sharpness.capability.CapabilitySharpness;
+import su.terrafirmagreg.modules.device.feature.sharpness.capability.ICapabilitySharpness;
 
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.init.SoundEvents;
@@ -15,11 +15,11 @@ import net.minecraft.util.math.BlockPos;
 
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlockFluidWater;
+import net.dries007.tfc.objects.items.ItemGrindstone;
 import net.dries007.tfc.objects.te.TEInventory;
 import net.dries007.tfcthings.event.TFCThingsEventHandler;
 import net.dries007.tfcthings.init.TFCThingsItems;
 import net.dries007.tfcthings.init.TFCThingsSoundEvents;
-import net.dries007.tfc.objects.items.ItemGrindstone;
 
 import javax.annotation.Nonnull;
 

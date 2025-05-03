@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.recipes;
 
 import su.terrafirmagreg.api.util.MathUtils;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
 import su.terrafirmagreg.temp.util.TFGModUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
-import static su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat.CAPABILITY;
+import static su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat.CAPABILITY;
 
 @SuppressWarnings("unused")
 @ParametersAreNonnullByDefault

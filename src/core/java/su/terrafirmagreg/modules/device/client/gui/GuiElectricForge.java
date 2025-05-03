@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 
 import net.minecraft.client.gui.GuiButton;
@@ -9,15 +9,15 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-import java.io.IOException;
-
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonSetter;
 import net.dries007.tfc.client.gui.GuiContainerTE;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfctech.client.TechGuiHandler;
+
+import java.io.IOException;
+
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCTECH;
 
 public class GuiElectricForge extends GuiContainerTE<TileElectricForge> {
 

@@ -3,6 +3,7 @@ package su.terrafirmagreg.framework;
 import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.util.AnnotationUtils;
 import su.terrafirmagreg.api.util.DataFixUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.ModuleManager;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
@@ -14,10 +15,12 @@ import net.minecraftforge.fml.common.event.FMLStateEvent;
 public abstract class Framework {
 
   private final String modId;
+  private final String modName;
   private final IModuleManager manager;
 
-  protected Framework(String modId) {
+  protected Framework(String modId, String modName) {
     this.modId = modId;
+    this.modName = modName;
 
     this.manager = ModuleManager.of(modId);
   }
@@ -35,8 +38,9 @@ public abstract class Framework {
 
   protected void configure(FMLConstructionEvent event) {
     AnnotationUtils.of(event);
-    FluidRegistry.enableUniversalBucket();
+    ModUtils.of(modId, modName);
     GuiHandler.of(modId);
+    FluidRegistry.enableUniversalBucket();
     DataFixUtils.of();
   }
 

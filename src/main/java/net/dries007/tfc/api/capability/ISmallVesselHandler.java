@@ -1,6 +1,6 @@
 package net.dries007.tfc.api.capability;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;

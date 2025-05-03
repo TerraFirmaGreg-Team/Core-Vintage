@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.forge;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityProviderHeat;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

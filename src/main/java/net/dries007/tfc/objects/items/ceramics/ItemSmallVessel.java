@@ -5,14 +5,14 @@ import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -69,7 +69,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
-import static su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat.CAPABILITY;
+import static su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat.CAPABILITY;
 
 @ParametersAreNonnullByDefault
 public class ItemSmallVessel extends ItemPottery {

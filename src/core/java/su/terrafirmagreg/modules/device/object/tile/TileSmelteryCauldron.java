@@ -79,7 +79,7 @@ public class TileSmelteryCauldron extends BaseTileTickableInventory
                 inventory.setStackInSlot(i, input.get(i));
               }
               tank.fillInternal(output, true);
-              temp -= (float) (ConfigCore.MISC.HEAT.heatingModifier * 150);
+              temp -= (float) (ConfigCore.FEATURE.HEAT.heatingModifier * 150);
               tile.setTemperature(temp);
             }
           }

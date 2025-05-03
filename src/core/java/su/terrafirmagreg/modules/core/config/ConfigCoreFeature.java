@@ -4,6 +4,8 @@ import su.terrafirmagreg.modules.core.feature.advanceddata.FeatureAdvancedDataCo
 import su.terrafirmagreg.modules.core.feature.ambiental.FeatureAmbientalConfig;
 import su.terrafirmagreg.modules.core.feature.calendar.FeatureCalendarConfig;
 import su.terrafirmagreg.modules.core.feature.damageresistance.FeatureDamageResistanceConfig;
+import su.terrafirmagreg.modules.core.feature.falling.FeatureFallingConfig;
+import su.terrafirmagreg.modules.core.feature.heat.FeatureHeatConfig;
 import su.terrafirmagreg.modules.core.feature.hotornot.FeatureHotOrNotConfig;
 import su.terrafirmagreg.modules.core.feature.sinkorswim.FeatureSinkOrSwimConfig;
 import su.terrafirmagreg.modules.core.feature.size.FeatureSizeConfig;
@@ -34,5 +36,9 @@ public final class ConfigCoreFeature {
   @Config.Comment("Damage settings")
   public final FeatureDamageResistanceConfig DAMAGE_RESISTANCE = new FeatureDamageResistanceConfig();
 
+  @Config.Comment("Heat settings")
+  public final FeatureHeatConfig HEAT = new FeatureHeatConfig();
 
+  @Config.Comment("Fallable settings")
+  public final FeatureFallingConfig FALLABLE = new FeatureFallingConfig();
 }

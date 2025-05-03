@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.recipes;
 
 import su.terrafirmagreg.api.util.MathUtils;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;

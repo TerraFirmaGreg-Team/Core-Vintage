@@ -1,9 +1,9 @@
 package net.dries007.tfc.api.recipes.heat;
 
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

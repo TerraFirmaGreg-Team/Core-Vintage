@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.core.event.player;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 
 import net.minecraft.item.ItemStack;
@@ -26,7 +25,6 @@ public class EventHandlerItemTooltip {
 
     if (!StackUtils.isValid(stack)) {return;}
 
-    capabilityHeat(tooltip, stack);
     capabilityMetal(tooltip, stack);
     capabilityForge(tooltip, stack);
     capabilityFood(tooltip, stack);
@@ -50,13 +48,6 @@ public class EventHandlerItemTooltip {
     var food = CapabilityFood.get(stack);
     if (food != null) {
       food.addTooltipInfo(stack, tooltips);
-    }
-  }
-
-  private static void capabilityHeat(List<String> tooltips, ItemStack stack) {
-    var heat = CapabilityHeat.get(stack);
-    if (heat != null) {
-      heat.addHeatInfo(stack, tooltips);
     }
   }
 

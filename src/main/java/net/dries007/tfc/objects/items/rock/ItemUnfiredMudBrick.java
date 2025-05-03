@@ -1,21 +1,18 @@
 package net.dries007.tfc.objects.items.rock;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityProviderHeat;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.util.IRockObject;
-
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
-
 import net.dries007.tfc.objects.items.ItemTFCF;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

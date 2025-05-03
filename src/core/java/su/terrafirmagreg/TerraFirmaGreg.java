@@ -45,7 +45,7 @@ public class TerraFirmaGreg extends Framework {
 
 
   public TerraFirmaGreg() {
-    super(MOD_ID);
+    super(MOD_ID, MOD_NAME);
 
     this.addModule(new ModuleCore());
     this.addModule(new ModuleRock());

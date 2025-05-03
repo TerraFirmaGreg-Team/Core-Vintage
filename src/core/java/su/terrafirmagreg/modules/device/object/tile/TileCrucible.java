@@ -10,9 +10,9 @@ import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContai
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
@@ -108,10 +108,10 @@ public class TileCrucible extends BaseTileTickableInventory
     super.update();
     if (!world.isRemote) {
       temperature = CapabilityHeat.adjustTempTowards(temperature, targetTemperature,
-        (float) ConfigCore.MISC.HEAT.heatingModifier);
+        (float) ConfigCore.FEATURE.HEAT.heatingModifier);
       if (targetTemperature > 0) {
         // Crucible target temperature decays constantly, since it is set by outside providers
-        targetTemperature -= (float) ConfigCore.MISC.HEAT.heatingModifier;
+        targetTemperature -= (float) ConfigCore.FEATURE.HEAT.heatingModifier;
       }
 
       // Input draining

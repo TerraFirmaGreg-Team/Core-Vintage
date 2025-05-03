@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.recipes;
 
 import su.terrafirmagreg.api.util.MathUtils;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
@@ -31,7 +31,7 @@ import net.dries007.tfc.objects.items.metal.ItemTechMetal;
 import javax.annotation.Nonnull;
 
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
-import static su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat.CAPABILITY;
+import static su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat.CAPABILITY;
 
 /**
  * Since TFC has Metal.ItemType we can't reuse {@link net.dries007.tfc.objects.recipes.UnmoldRecipe} directly

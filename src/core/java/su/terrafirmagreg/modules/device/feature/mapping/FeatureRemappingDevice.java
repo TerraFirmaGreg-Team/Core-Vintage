@@ -6,7 +6,7 @@ import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 
-public class RemappingDevice extends FeatureBase {
+public class FeatureRemappingDevice extends FeatureBase {
 
   static {
     DataFixUtils.put(DataFixUtils.BLOCK_MAP, m -> {

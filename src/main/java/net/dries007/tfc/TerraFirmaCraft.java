@@ -29,7 +29,6 @@ import net.dries007.tfc.command.CommandDebugInfo;
 import net.dries007.tfc.command.CommandFindVeins;
 import net.dries007.tfc.command.CommandGenTree;
 import net.dries007.tfc.command.CommandHeat;
-import net.dries007.tfc.command.CommandPlayerTFC;
 import net.dries007.tfc.command.CommandStripWorld;
 import net.dries007.tfc.command.CommandTimeTFC;
 import net.dries007.tfc.command.CommandWorkChunk;
@@ -181,7 +180,6 @@ public final class TerraFirmaCraft {
 
     event.registerServerCommand(new CommandStripWorld());
     event.registerServerCommand(new CommandHeat());
-    event.registerServerCommand(new CommandPlayerTFC());
     event.registerServerCommand(new CommandTimeTFC());
     event.registerServerCommand(new CommandFindVeins());
     event.registerServerCommand(new CommandDebugInfo());

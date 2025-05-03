@@ -1,23 +1,16 @@
 package su.terrafirmagreg.modules.core.config;
 
 import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
-import su.terrafirmagreg.api.data.enums.OreTooltipMode;
 import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
 
 import net.minecraftforge.common.config.Config;
 
 public final class ConfigCoreMisc {
 
-  @Config.Comment("Heat settings")
-  public final Heat HEAT = new Heat();
-
 
   @Config.Comment("Debug settings")
   public final Debug DEBUG = new Debug();
-
-
-  @Config.Comment("Fallable settings")
-  public final Fallable FALLABLE = new Fallable();
+  
 
   @Config.Comment("Display settings")
   public final Display DISPLAY = new Display();
@@ -25,31 +18,6 @@ public final class ConfigCoreMisc {
   @Config.Comment("Tooltip settings")
   public final Tooltip TOOLTIP = new Tooltip();
 
-  public static final class Heat {
-
-    @Config.Comment("Ore tooltip info mode.")
-    public OreTooltipMode oreTooltipMode = OreTooltipMode.ALL_INFO;
-
-    @Config.Comment("Modifier for how quickly items will gain or lose heat. Smaller number = slower temperature changes.")
-    @Config.RangeDouble(min = 0, max = 10)
-    public double globalModifier = 0.5;
-
-    @Config.Comment(
-      "Modifier for how quickly devices (i.e. charcoal forge, fire pit) will gain or lose heat. Smaller number = slower temperature changes.")
-    @Config.RangeDouble(min = 0, max = 10)
-    public double heatingModifier = 1;
-
-    @Config.Comment("Can heatable items be cooled down in the world? Such as putting it in a pool of water or on top of some snow?")
-    public boolean coolHeatablesInWorld = true;
-
-    @Config.Comment("If heatable items can be cooled down in world, after how many ticks should the item attempt to be cooled down?")
-    @Config.RangeInt(min = 1, max = 5999)
-    public int ticksBeforeAttemptToCool = 10;
-  }
-
-  public static final class Damage {
-
-  }
 
   public static final class Debug {
 
@@ -78,46 +46,6 @@ public final class ConfigCoreMisc {
     public boolean debugWorldGenSafe = false;
   }
 
-  public static final class Fallable {
-
-    @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never fall.")
-    public boolean enable = true;
-
-    @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never destroy ore blocks.")
-    public boolean destroyOres = true;
-
-    @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never destroy loose items.")
-    public boolean destroyItems = true;
-
-    @Config.Comment("If false, fallable blocks (ie: dirt, stone) will never hurt entities.")
-    public boolean hurtEntities = true;
-
-    @Config.Comment("Chance that mining raw rocks triggers a collapse.")
-    @Config.RangeDouble(min = 0, max = 1)
-    public double collapseChance = 0.1;
-
-    @Config.Comment("Chance that collapsing blocks propagate the collapse. Influenced by distance from epicenter of collapse.")
-    @Config.RangeDouble(min = 0, max = 1)
-    public double propagateCollapseChance = 0.55;
-
-    @Config.Comment("Horizontal radius of the support range of support beams.")
-    @Config.RangeInt(min = 0, max = 8)
-    public int supportBeamRangeHor = 4;
-
-    @Config.Comment("Upwards support range of support beams.")
-    @Config.RangeInt(min = 0, max = 3)
-    public int supportBeamRangeUp = 1;
-
-    @Config.Comment("Downwards support range of support beams.")
-    @Config.RangeInt(min = 0, max = 3)
-    public int supportBeamRangeDown = 1;
-
-    @Config.Comment("Should chiseling raw stone blocks cause collapses?")
-    public boolean chiselCausesCollapse = true;
-
-    @Config.Comment("Should exploding raw stone blocks cause collapses?")
-    public boolean explosionCausesCollapse = true;
-  }
 
   public static final class Display {
 

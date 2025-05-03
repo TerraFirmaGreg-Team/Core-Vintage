@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.heat;
+package su.terrafirmagreg.modules.core.feature.heat.capability;
 
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * This is an implementation of ItemHeat that automatically cools down over time Prefer extending or using this than implementing IItemHeat directly Exceptions
- * if you want to extend another capability object (see SmallVessel) but you should still implement this functionality somewhere
+ * This is an implementation of ItemHeat that automatically cools down over time Prefer extending or using this than implementing IItemHeat directly Exceptions if you want to extend another capability object (see SmallVessel) but you should
+ * still implement this functionality somewhere
  */
 public class CapabilityProviderHeat implements ICapabilityHeat {
 
@@ -97,8 +97,8 @@ public class CapabilityProviderHeat implements ICapabilityHeat {
   }
 
   /**
-   * This gets the outwards facing temperature. It will differ from the internal temperature value or the value saved to NBT Note: if checking the temperature
-   * internally, DO NOT use temperature, use this instead, as temperature does not represent the current temperature
+   * This gets the outwards facing temperature. It will differ from the internal temperature value or the value saved to NBT Note: if checking the temperature internally, DO NOT use temperature, use this instead, as temperature does not
+   * represent the current temperature
    *
    * @return The current temperature
    */

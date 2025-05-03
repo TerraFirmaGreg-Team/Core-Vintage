@@ -13,18 +13,18 @@ import lombok.Getter;
 @Getter
 public class CapabilityProviderSharpness implements ICapabilitySharpness {
 
-  protected ItemStack container;
+  protected ItemStack itemStack;
 
   public CapabilityProviderSharpness() {
     this(null);
   }
 
-  public CapabilityProviderSharpness(ItemStack container) {
-    this.container = container;
+  public CapabilityProviderSharpness(ItemStack itemStack) {
+    this.itemStack = itemStack;
   }
 
   public int getCharges() {
-    NBTTagCompound tag = container.getTagCompound();
+    NBTTagCompound tag = itemStack.getTagCompound();
     if (tag != null && tag.hasKey("sharpness")) {
       return tag.getInteger("sharpness");
     }
@@ -32,10 +32,10 @@ public class CapabilityProviderSharpness implements ICapabilitySharpness {
   }
 
   public void setCharges(int charges) {
-    if (!container.hasTagCompound()) {
-      container.setTagCompound(new NBTTagCompound());
+    if (!itemStack.hasTagCompound()) {
+      itemStack.setTagCompound(new NBTTagCompound());
     }
-    container.getTagCompound().setInteger("sharpness", charges);
+    itemStack.getTagCompound().setInteger("sharpness", charges);
   }
 
   public void addCharge() {

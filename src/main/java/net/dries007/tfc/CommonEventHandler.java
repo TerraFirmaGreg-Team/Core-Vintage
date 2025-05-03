@@ -13,9 +13,6 @@ import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityHandlerForge;
 import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
@@ -24,7 +21,8 @@ import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.storage.WorldDataCalendar;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 import su.terrafirmagreg.modules.core.feature.damageresistance.spi.DamageType;
-import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
@@ -82,7 +80,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -110,7 +107,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
@@ -240,52 +236,6 @@ public final class CommonEventHandler {
     }
   }
 
-  @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void onNeighborNotify(BlockEvent.NeighborNotifyEvent event) {
-    IBlockState state = event.getState();
-    FallingBlockManager.Specification spec = FallingBlockManager.getSpecification(state);
-    if (spec != null && !spec.isCollapsable()) {
-      if (FallingBlockManager.checkFalling(event.getWorld(), event.getPos(), state)) {
-        event.getWorld().playSound(null, event.getPos(), spec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
-      }
-    } else {
-      for (EnumFacing notifiedSide : event.getNotifiedSides()) {
-        BlockPos offsetPos = event.getPos().offset(notifiedSide);
-        IBlockState notifiedState = event.getWorld().getBlockState(offsetPos);
-        FallingBlockManager.Specification notifiedSpec = FallingBlockManager.getSpecification(notifiedState);
-        if (notifiedSpec != null && !notifiedSpec.isCollapsable()) {
-          if (FallingBlockManager.checkFalling(event.getWorld(), offsetPos, notifiedState)) {
-            event.getWorld().playSound(null, offsetPos, notifiedSpec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
-          }
-        }
-      }
-    }
-  }
-
-  @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
-    if (event.getWorld().isRemote) {
-      return;
-    }
-    IBlockState state = event.getPlacedBlock();
-    FallingBlockManager.Specification spec = FallingBlockManager.getSpecification(state);
-    if (spec != null && !spec.isCollapsable()) {
-      if (FallingBlockManager.checkFalling(event.getWorld(), event.getPos(), state)) {
-        event.getWorld().playSound(null, event.getPos(), spec.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
-      }
-    }
-  }
-
-  @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
-    if (ConfigTFC.General.FALLABLE.explosionCausesCollapse) {
-      for (BlockPos pos : event.getAffectedBlocks()) {
-        if (FallingBlockManager.checkCollapsingArea(event.getWorld(), pos)) {
-          break;
-        }
-      }
-    }
-  }
 
   /**
    * Fill thirst after drinking vanilla water bottles or milk
@@ -295,24 +245,10 @@ public final class CommonEventHandler {
     ItemStack usedItem = event.getItem();
     if (usedItem.getItem() == Items.MILK_BUCKET || PotionUtils.getPotionFromItem(usedItem) == PotionTypes.WATER) {
       if (event.getEntityLiving() instanceof EntityPlayerMP player) {
-        if (player.getFoodStats() instanceof FoodStatsTFC) {
-          ((FoodStatsTFC) player.getFoodStats()).addThirst(40); //Same as jug
+        if (player.getFoodStats() instanceof FoodStatsTFC foodStatsTFC) {
+          foodStatsTFC.addThirst(40); //Same as jug
         }
       }
-    }
-  }
-
-  /**
-   * Update harvesting tool before it takes damage
-   */
-  @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void breakEvent(BlockEvent.BreakEvent event) {
-    final EntityPlayer player = event.getPlayer();
-    final ItemStack heldItem = player == null ? ItemStack.EMPTY : player.getHeldItemMainhand();
-
-    FallingBlockManager.Specification spec = FallingBlockManager.getSpecification(event.getState());
-    if (spec != null && spec.isCollapsable()) {
-      FallingBlockManager.checkCollapsingArea(event.getWorld(), event.getPos());
     }
   }
 
@@ -589,7 +525,7 @@ public final class CommonEventHandler {
       }
       // If one of the above is also heatable, skip this
       if (!isHeatable) {
-        ICapabilityProvider heatHandler = CapabilityHandlerHeat.getCustom(stack);
+        ICapabilityProvider heatHandler = CapabilityHeat.getCustom(stack);
         if (heatHandler != null) {
           event.addCapability(CapabilityHeat.KEY, heatHandler);
         }

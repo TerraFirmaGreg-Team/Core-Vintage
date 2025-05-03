@@ -1,11 +1,11 @@
 package net.dries007.tfc.objects.items.itemblock;
 
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityProviderHeat;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 
 import javax.annotation.Nullable;
 

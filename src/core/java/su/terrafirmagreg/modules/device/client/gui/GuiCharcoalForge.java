@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
 
 import net.minecraft.entity.player.InventoryPlayer;

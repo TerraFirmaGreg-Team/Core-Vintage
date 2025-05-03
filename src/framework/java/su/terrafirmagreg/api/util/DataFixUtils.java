@@ -1,6 +1,5 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 
 import net.minecraft.block.Block;
@@ -10,7 +9,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
@@ -29,7 +27,7 @@ public class DataFixUtils {
 
 
   public static void of() {
-    MinecraftForge.EVENT_BUS.register(DataFixUtils.class);
+    //MinecraftForge.EVENT_BUS.register(DataFixUtils.class);
   }
 
   public static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{
@@ -49,18 +47,18 @@ public class DataFixUtils {
 
   private static <T extends IForgeRegistryEntry<T>> void remap(RegistryEvent.MissingMappings<T> event, Map<String, T> map) {
 
-    event.getAllMappings().forEach(mapping -> {
+    event.getMappings().forEach(mapping -> {
       String mappingKey = mapping.key.toString();
       String mappingNamespace = mapping.key.getNamespace();
       String mappingPath = mapping.key.getPath();
 
-//      if (!MOD_ID_SET.contains(mappingNamespace)) {
-//        mapping.warn();
-//      }
-
-      if (!Mods.contains(mappingNamespace)) {
+      if (!MOD_ID_SET.contains(mappingNamespace)) {
         mapping.warn();
       }
+
+//      if (!Mods.contains(mappingNamespace)) {
+//        mapping.warn();
+//      }
 
       map.forEach((key, value) -> {
         if (mappingPath.endsWith(key)) {

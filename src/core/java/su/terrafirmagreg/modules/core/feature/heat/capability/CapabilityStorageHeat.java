@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.heat;
+package su.terrafirmagreg.modules.core.feature.heat.capability;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;

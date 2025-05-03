@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.core.feature.ambiental.capability;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalRegistry;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierBlock;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierEnvironmental;
@@ -14,6 +13,7 @@ import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalP
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderEquipment;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderItem;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.capabilities.forge;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -16,8 +16,7 @@ import java.util.List;
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
 /**
- * This is an advanced IForgeable capability that also needs heat If you implement this capability, you MUST implement {@link CapabilityHeat} as well You should
- * return the same instance from the getCapability calls
+ * This is an advanced IForgeable capability that also needs heat If you implement this capability, you MUST implement {@link CapabilityHeat} as well You should return the same instance from the getCapability calls
  */
 public interface IForgeableHeatable extends ICapabilityForge, ICapabilityHeat {
 

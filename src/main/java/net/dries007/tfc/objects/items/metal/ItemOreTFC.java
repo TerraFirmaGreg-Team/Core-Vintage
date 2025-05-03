@@ -2,8 +2,8 @@ package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
@@ -105,7 +105,7 @@ public class ItemOreTFC extends ItemTFC implements ICapabilityMetal {
     if (metal != null) {
       int smeltAmount = this.getSmeltAmount(stack);
       int meltTemp = (int) this.getMeltTemp(stack);
-      switch (ConfigCore.MISC.HEAT.oreTooltipMode) {
+      switch (ConfigCore.FEATURE.HEAT.oreTooltipMode) {
         case HIDE:
           break;
         case UNIT_ONLY:

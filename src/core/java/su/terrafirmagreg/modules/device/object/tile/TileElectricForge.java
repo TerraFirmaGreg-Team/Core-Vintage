@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
 import su.terrafirmagreg.modules.device.object.block.BlockElectricForge;
 
 import net.minecraft.block.state.IBlockState;

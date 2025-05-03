@@ -1,10 +1,10 @@
 package net.dries007.tfc.objects.items.itemblock;
 
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat.Handler;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityProviderHeat;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -48,7 +48,7 @@ public class ItemBlockMetalLamp extends ItemBlockTFC implements ICapabilityMetal
     if (!TABLE.containsKey(metal)) {TABLE.put(metal, this);}
 
     // In the interest of not writing a joint heat / fluid capability that extends ICapabilityProvider, I think this is justified
-    CapabilityHandlerHeat.CUSTOM_ITEMS.put(IIngredient.of(this), () -> new CapabilityProviderHeat(null, metal.getSpecificHeat(), metal.getMeltTemp()));
+    Handler.CUSTOM_ITEMS.put(IIngredient.of(this), () -> new CapabilityProviderHeat(null, metal.getSpecificHeat(), metal.getMeltTemp()));
     OreDictionaryHelper.register(this, "lamp");
   }
 

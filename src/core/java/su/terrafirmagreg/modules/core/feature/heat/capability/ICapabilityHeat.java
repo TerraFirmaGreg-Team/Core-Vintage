@@ -1,10 +1,5 @@
-package su.terrafirmagreg.modules.core.capabilities.heat;
+package su.terrafirmagreg.modules.core.feature.heat.capability;
 
-import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
-
-import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
@@ -63,18 +58,18 @@ public interface ICapabilityHeat extends ICapabilitySerializable<NBTTagCompound>
    */
   @SideOnly(Side.CLIENT)
   default void addHeatInfo(ItemStack stack, List<String> text) {
-    float temperature = getTemperature();
-    if (stack.getItem() == Items.STICK) {
-      if (temperature > getMeltTemp() * 0.9f) {
-        text.add(I18n.format(TranslatorUtils.getEnumName("heat", "torch.lit")));
-      } else if (temperature > 1f) {
-        text.add(I18n.format(TranslatorUtils.getEnumName("heat", "torch.catching_fire")));
-      }
-    } else {
-      String tooltip = Heat.getTooltip(temperature);
-      if (tooltip != null) {
-        text.add(tooltip);
-      }
-    }
+//    float temperature = getTemperature();
+//    if (stack.getItem() == Items.STICK) {
+//      if (temperature > getMeltTemp() * 0.9f) {
+//        text.add(I18n.format(TranslatorUtils.getEnumName("heat", "torch.lit")));
+//      } else if (temperature > 1f) {
+//        text.add(I18n.format(TranslatorUtils.getEnumName("heat", "torch.catching_fire")));
+//      }
+//    } else {
+//      String tooltip = Heat.getTooltip(temperature);
+//      if (tooltip != null) {
+//        text.add(tooltip);
+//      }
+//    }
   }
 }

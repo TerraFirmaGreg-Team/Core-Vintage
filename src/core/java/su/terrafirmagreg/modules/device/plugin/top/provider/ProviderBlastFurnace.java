@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.plugin.top.provider;
 import su.terrafirmagreg.api.base.plugin.top.provider.spi.BaseProvider;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.object.block.BlockBlastFurnace;
 import su.terrafirmagreg.modules.device.object.tile.TileBlastFurnace;
 

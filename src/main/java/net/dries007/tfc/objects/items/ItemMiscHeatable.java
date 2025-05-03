@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityProviderHeat;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 

@@ -1,5 +1,7 @@
-package net.dries007.tfc.command;
+package su.terrafirmagreg.modules.core.command;
 
+import su.terrafirmagreg.api.base.command.spi.CmdBase;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
@@ -10,7 +12,6 @@ import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
-import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -23,25 +24,22 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ParametersAreNonnullByDefault
-public class CommandPlayerTFC extends CommandBase {
+public class CommandPlayer extends CmdBase {
 
-  @Nonnull
   @Override
   public String getName() {
-    return "playertfc";
+    return "player";
   }
 
-  @Nonnull
   @Override
   public String getUsage(ICommandSender sender) {
-    return "tfc.command.playertfc.usage";
+    return ModUtils.localize("command", "core.player.usage");
   }
+
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
@@ -236,6 +234,7 @@ public class CommandPlayerTFC extends CommandBase {
       }
     }
   }
+
 
   private enum ExecuteType {
     SET, RESET, ADD, GET;

@@ -51,7 +51,7 @@ public class ProviderWorldTracker implements ICapabilityWorldTracker {
               world, posAt.down(), Material.ROCK) &&
                 specAt.canCollapse(world, posAt)
                 && posAt.distanceSq(collapse.centerPos) < collapse.radiusSquared &&
-                MathUtils.RNG.nextFloat() < ConfigCore.MISC.FALLABLE.propagateCollapseChance) {
+                MathUtils.RNG.nextFloat() < ConfigCore.FEATURE.FALLABLE.propagateCollapseChance) {
               IBlockState fallState = specAt.getResultingState(stateAt);
               world.setBlockState(posAt, fallState);
               FallingBlockManager.checkFalling(world, posAt, fallState, true);

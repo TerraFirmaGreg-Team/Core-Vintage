@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.heat.spi;
+package su.terrafirmagreg.modules.core.feature.heat.spi;
 
 import su.terrafirmagreg.api.data.enums.OreTooltipMode;
 import su.terrafirmagreg.api.util.TranslatorUtils;
@@ -79,7 +79,7 @@ public enum Heat {
     String tooltip = getTooltipColorless(temperature);
     if (tooltip != null && heat != null) {
       tooltip = heat.format + tooltip;
-      if (ConfigCore.MISC.HEAT.oreTooltipMode == OreTooltipMode.ADVANCED) {
+      if (ConfigCore.FEATURE.HEAT.oreTooltipMode == OreTooltipMode.ADVANCED) {
         tooltip = tooltip + " : " + I18n.format("tfc.tooltip.melttemp", Math.round(temperature));
       }
 
@@ -93,7 +93,7 @@ public enum Heat {
     String tooltip = getTooltipColorless(temperature);
     if (tooltip != null && heat != null) {
       tooltip = heat.alternate + tooltip;
-      if (ConfigCore.MISC.HEAT.oreTooltipMode == OreTooltipMode.ADVANCED) {
+      if (ConfigCore.FEATURE.HEAT.oreTooltipMode == OreTooltipMode.ADVANCED) {
         tooltip = tooltip + " : " + I18n.format("tfc.tooltip.melttemp", Math.round(temperature));
       }
     }

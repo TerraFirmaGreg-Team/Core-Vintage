@@ -22,6 +22,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Setter;
 import lombok.experimental.UtilityClass;
 
 import java.util.Map;
@@ -31,8 +32,15 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public final class ModUtils {
 
-  public static final String MOD_ID = "tfg";
-  public static final String MOD_NAME = "TerraFirmaGreg-Core";
+  @Setter
+  public static String modId;
+  @Setter
+  public static String modName;
+
+  public static void of(String modId, String modName) {
+    setModId(modId);
+    setModName(modName);
+  }
 
   /**
    * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat performance of the method. Calling {@link #getSortedEntries(IForgeRegistry)} before all entries have been registered will lock out new ones from being
@@ -47,7 +55,7 @@ public final class ModUtils {
    * @return идентификатор ресурса
    */
   public static ResourceLocation resource(String name) {
-    return ModUtils.resource(MOD_ID, name);
+    return ModUtils.resource(modId, name);
   }
 
   public static ResourceLocation resource(String key, String name) {
@@ -64,7 +72,7 @@ public final class ModUtils {
   }
 
   public static String id(String name) {
-    return String.format("%s:%s", MOD_ID, name);
+    return String.format("%s:%s", modId, name);
   }
 
   public static String id(String key, String name) {
@@ -76,7 +84,7 @@ public final class ModUtils {
   }
 
   public static String name(String name) {
-    return String.format("%s [ %s ]", MOD_NAME, name);
+    return String.format("%s [ %s ]", modName, name);
   }
 
   public static String name(String key, String name) {
@@ -84,7 +92,7 @@ public final class ModUtils {
   }
 
   public static String localize(String key) {
-    return replace(String.format("%s.%s", key, MOD_ID));
+    return replace(String.format("%s.%s", key, modId));
   }
 
   public static String localize(String key, String name) {
@@ -108,7 +116,7 @@ public final class ModUtils {
   }
 
   public static String split(String name) {
-    return String.format("%s / %s", MOD_NAME, name);
+    return String.format("%s / %s", modName, name);
   }
 
   public static String replace(String key) {

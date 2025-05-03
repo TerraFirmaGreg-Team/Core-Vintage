@@ -10,8 +10,6 @@ import su.terrafirmagreg.framework.module.spi.ModuleBase;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHandlerHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
@@ -101,8 +99,7 @@ public final class ModuleCore extends ModuleBase {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
-
-    CapabilityHeat.register();
+    
     CapabilityFood.register();
     CapabilityMetal.register();
     CapabilityForgeable.register();
@@ -118,7 +115,6 @@ public final class ModuleCore extends ModuleBase {
   @Override
   public void onInit(FMLInitializationEvent event) {
 
-    CapabilityHandlerHeat.init();
     CapabilityHandlerFood.init();
     CapabilityHandlerMetal.init();
 

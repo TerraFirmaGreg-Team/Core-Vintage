@@ -1,10 +1,10 @@
 package net.dries007.tfc.objects.items.ceramics;
 
 import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.CapabilityProviderHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.ICapabilityHeat;
-import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityProviderHeat;
+import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
+import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

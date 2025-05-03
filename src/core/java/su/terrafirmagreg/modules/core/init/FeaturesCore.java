@@ -6,7 +6,9 @@ import su.terrafirmagreg.modules.core.feature.ambiental.FeatureAmbiental;
 import su.terrafirmagreg.modules.core.feature.calendar.FeatureCalendar;
 import su.terrafirmagreg.modules.core.feature.climate.FeatureClimate;
 import su.terrafirmagreg.modules.core.feature.damageresistance.FeatureDamageResistance;
+import su.terrafirmagreg.modules.core.feature.debuginfo.FeatureDebugInfo;
 import su.terrafirmagreg.modules.core.feature.falling.FeatureFalling;
+import su.terrafirmagreg.modules.core.feature.heat.FeatureHeat;
 import su.terrafirmagreg.modules.core.feature.hotornot.FeatureHotOrNot;
 import su.terrafirmagreg.modules.core.feature.mapping.FeatureRemappingCore;
 import su.terrafirmagreg.modules.core.feature.playerdata.FeaturePlayerData;
@@ -19,6 +21,7 @@ public final class FeaturesCore {
 
     registrar.addFeature(new FeatureRemappingCore());
     registrar.addFeature(new FeatureSize());
+    registrar.addFeature(new FeatureHeat());
     registrar.addFeature(new FeaturePlayerData());
     registrar.addFeature(new FeatureCalendar());
     registrar.addFeature(new FeatureClimate());
@@ -28,6 +31,7 @@ public final class FeaturesCore {
     registrar.addFeature(new FeatureAmbiental());
     registrar.addFeature(new FeatureFalling());
     registrar.addFeature(new FeatureAdvancedData());
+    registrar.addFeature(new FeatureDebugInfo());
   }
 
 }

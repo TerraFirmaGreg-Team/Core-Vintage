@@ -43,7 +43,6 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     }
   };
 
-  public static final String[] DAY_NAMES = new String[]{"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
   public static final Map<String, String> BIRTHDAYS = new Object2ObjectOpenHashMap<>();
 
   static {
@@ -85,9 +84,11 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     }
   }
 
-  private long playerTime, calendarTime;
+  private long playerTime;
+  private long calendarTime;
   private int daysInMonth;
-  private boolean doDaylightCycle, arePlayersLoggedOn;
+  private boolean doDaylightCycle;
+  private boolean arePlayersLoggedOn;
   private MinecraftServer server;
 
   public Calendar() {

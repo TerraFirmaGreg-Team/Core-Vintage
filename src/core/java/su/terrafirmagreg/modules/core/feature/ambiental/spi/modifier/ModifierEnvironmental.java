@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier;
 
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHandlerAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental.Handler;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityProviderAmbiental;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderEnvironmental;
@@ -34,7 +34,7 @@ public class ModifierEnvironmental extends ModifierBase {
       storage.add(provider.getModifier(player));
     }
 
-    for (IAmbientalProviderEnvironmental provider : CapabilityHandlerAmbiental.ENVIRONMENT) {
+    for (IAmbientalProviderEnvironmental provider : Handler.ENVIRONMENT) {
       storage.add(provider.getModifier(player));
     }
   }
@@ -64,7 +64,7 @@ public class ModifierEnvironmental extends ModifierBase {
   }
 
   public static float getEnvironmentTemperatureWithTimeOfDay(EntityPlayer player) {
-    return getEnvironmentTemperature(player) + CapabilityHandlerAmbiental.handleTimeOfDay(player).get().getChange();
+    return getEnvironmentTemperature(player) + Handler.handleTimeOfDay(player).get().getChange();
   }
 
   public static int getBlockLight(EntityPlayer player) {

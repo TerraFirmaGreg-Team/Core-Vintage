@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.items.metal;
 
-import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
 import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
+import su.terrafirmagreg.modules.core.feature.damageresistance.spi.DamageType;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;

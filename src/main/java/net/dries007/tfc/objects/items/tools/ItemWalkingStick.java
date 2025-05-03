@@ -1,8 +1,9 @@
 package net.dries007.tfc.objects.items.tools;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.feature.damageresistance.spi.DamageType;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -13,10 +14,7 @@ import net.minecraft.item.ItemStack;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
-
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

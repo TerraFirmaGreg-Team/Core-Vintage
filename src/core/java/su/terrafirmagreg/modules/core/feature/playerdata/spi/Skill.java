@@ -24,7 +24,7 @@ public abstract class Skill implements INBTSerializable<NBTTagCompound> {
    * @return the current tier of the skill
    */
   @Nonnull
-  public abstract SkillTier getTier();
+  public abstract Skill.Tier getTier();
 
   /**
    * This is the progress per skill tier, not the total skill. Should return a value between [0, 1)
@@ -63,5 +63,25 @@ public abstract class Skill implements INBTSerializable<NBTTagCompound> {
    */
   protected final void updateAndSync() {
     playerData.updateAndSync();
+  }
+
+  public enum Tier {
+    NOVICE, ADEPT, EXPERT, MASTER;
+
+    private static final Tier[] VALUES = values();
+
+    @Nonnull
+    public static Tier valueOf(int index) {
+      return index < 0 ? NOVICE : index >= VALUES.length ? MASTER : VALUES[index];
+    }
+
+    @Nonnull
+    public Tier next() {
+      return this == MASTER ? MASTER : VALUES[this.ordinal() + 1];
+    }
+
+    public boolean isAtLeast(Tier otherInclusive) {
+      return this.ordinal() >= otherInclusive.ordinal();
+    }
   }
 }

@@ -35,12 +35,25 @@ public final class TranslatorUtils {
   }
 
   public static String getEnumName(Enum<?> anEnum) {
-    return ModUtils.localize(ModUtils.localize("enum"), anEnum.getDeclaringClass().getSimpleName(), anEnum.name());
+    return getEnumName(anEnum.getDeclaringClass().getSimpleName(), anEnum);
+  }
+
+  public static String getEnumName(String type, Enum<?> anEnum) {
+    return ModUtils.localize(ModUtils.localize("enum"), type, anEnum.name());
+  }
+
+  public static String getEnumName(String type, String anEnum) {
+    return ModUtils.localize(ModUtils.localize("enum"), type, anEnum);
   }
 
   public static String getTypeName(IForgeRegistryEntry<?> type) {
     //noinspection ConstantConditions
     return ModUtils.localize(ModUtils.localize("types"), type.getRegistryType().getSimpleName(), type.getRegistryName().getPath());
+  }
+
+  public static String getTypeName(String type, String name) {
+    //noinspection ConstantConditions
+    return ModUtils.localize(ModUtils.localize("types"), type, name);
   }
 
   /**

@@ -65,8 +65,8 @@ public class SmithingSkill extends Skill {
 
   @Override
   @Nonnull
-  public SkillTier getTier() {
-    return SkillTier.valueOf(getSkillSum() / 40);
+  public Tier getTier() {
+    return Tier.valueOf(getSkillSum() / 40);
   }
 
   @Override

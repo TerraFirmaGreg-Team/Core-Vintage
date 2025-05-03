@@ -1,7 +1,5 @@
 package net.dries007.tfc.proxy;
 
-import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
@@ -21,15 +19,5 @@ public interface IProxy {
   @Nullable
   World getWorld(MessageContext context);
 
-  // Calendar Translation / Localization Methods
-
-  @Nonnull
-  String getMonthName(Month month, boolean useSeasons);
-
-  @Nonnull
-  String getDayName(int dayOfMonth, long totalDays);
-
-  @Nonnull
-  String getDate(int hour, int minute, String monthName, int day, long years);
 
 }

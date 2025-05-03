@@ -1,8 +1,9 @@
 package su.terrafirmagreg.modules.core.feature.calendar.spi;
 
-import net.minecraft.world.World;
+import su.terrafirmagreg.api.library.MCDate.Week;
+import su.terrafirmagreg.api.util.TranslatorUtils;
 
-import net.dries007.tfc.TerraFirmaCraft;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
@@ -38,13 +39,32 @@ public interface ICalendarFormatted extends ICalendar {
   }
 
   static String getTimeAndDate(int hour, int minute, Month month, int day, long years) {
-    String monthName = TerraFirmaCraft.getProxy().getMonthName(month, false);
-    return TerraFirmaCraft.getProxy().getDate(hour, minute, monthName, day, years);
+    String monthName = getMonthName(month, false);
+    return getDate(hour, minute, monthName, day, years);
   }
 
   @Nonnull
   static Month getMonthOfYear(long time, long daysInMonth) {
     return Month.valueOf((int) ((time / (TICKS_IN_DAY * daysInMonth)) % 12));
+  }
+
+  static String getMonthName(Month month, boolean useSeasons) {
+    return TranslatorUtils.translate(useSeasons ? TranslatorUtils.getEnumName("season", month) : TranslatorUtils.getEnumName(month));
+  }
+
+  static String getDate(int hour, int minute, String monthName, int day, long years) {
+    // We call an additional String.format for the time, because vanilla doesn't support %02d format specifiers
+    return TranslatorUtils.translate("tooltip.tfg.core.calendar.full_date", String.format("%02d:%02d", hour, minute), monthName, day, years);
+  }
+
+  static String getDayName(int dayOfMonth, long totalDays) {
+    String date = Calendar.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
+    String birthday = Calendar.BIRTHDAYS.get(date);
+    if (birthday != null) {
+      return birthday;
+    }
+
+    return TranslatorUtils.translate(TranslatorUtils.getEnumName("day", Week.valueOf((int) (totalDays % 7))));
   }
 
   /**
@@ -67,11 +87,12 @@ public interface ICalendarFormatted extends ICalendar {
   }
 
   default String getSeasonDisplayName() {
-    return TerraFirmaCraft.getProxy().getMonthName(getMonthOfYear(), true);
+    return getMonthName(getMonthOfYear(), true);
   }
 
+
   default String getDisplayDayName() {
-    return TerraFirmaCraft.getProxy().getDayName(getDayOfMonth(), getTotalDays());
+    return getDayName(getDayOfMonth(), getTotalDays());
   }
 
   /**

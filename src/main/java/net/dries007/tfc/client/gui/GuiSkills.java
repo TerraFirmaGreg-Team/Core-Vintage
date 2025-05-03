@@ -132,7 +132,10 @@ public class GuiSkills extends GuiContainerTFC {
         SkillType<? extends Skill> skillType = skillOrder.get(startSkill + i);
         Skill skill = skills.getSkill(skillType);
         if (skill != null) {
-          skillTooltips[i] = I18n.format("tfc.skill." + skillType.getName(), I18n.format(TranslatorUtils.getEnumName(skill.getTier())));
+          skillTooltips[i] = I18n.format(
+            TranslatorUtils.getTypeName("skill", skillType.getName()),
+            I18n.format(TranslatorUtils.getEnumName("skill.tier", skill.getTier()))
+          );
           skillBarWidths[i] = (int) (160 * skill.getLevel());
           skillBarColors[i] = skill.getTier().ordinal();
         }

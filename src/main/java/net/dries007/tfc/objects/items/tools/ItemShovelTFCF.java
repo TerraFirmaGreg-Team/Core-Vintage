@@ -1,8 +1,9 @@
 package net.dries007.tfc.objects.items.tools;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.feature.damageresistance.spi.DamageType;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,13 +20,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.ConfigTFC;
-
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

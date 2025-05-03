@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.damage;
+package su.terrafirmagreg.modules.core.feature.damageresistance.capability;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
@@ -11,13 +11,11 @@ public class CapabilityStorageDamageResistance implements IStorage<ICapabilityDa
 
   @Nullable
   @Override
-  public NBTBase writeNBT(Capability<ICapabilityDamageResistance> capability,
-                          ICapabilityDamageResistance instance, EnumFacing side) {
+  public NBTBase writeNBT(Capability<ICapabilityDamageResistance> capability, ICapabilityDamageResistance instance, EnumFacing side) {
     return null;
   }
 
   @Override
-  public void readNBT(Capability<ICapabilityDamageResistance> capability,
-                      ICapabilityDamageResistance instance, EnumFacing side, NBTBase nbt) {
+  public void readNBT(Capability<ICapabilityDamageResistance> capability, ICapabilityDamageResistance instance, EnumFacing side, NBTBase nbt) {
   }
 }

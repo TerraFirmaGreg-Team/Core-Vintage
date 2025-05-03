@@ -31,6 +31,134 @@ enum.tfg.weight.medium=Средний
 enum.tfg.weight.heavy=Тяжелый
 enum.tfg.weight.very_heavy=Очень тяжелый
 
+## Skills
+enum.tfg.skill.tier.novice=Начинающий
+enum.tfg.skill.tier.adept=Знаток
+enum.tfg.skill.tier.expert=Эксперт
+enum.tfg.skill.tier.master=Мастер
+
+types.tfg.skill.prospecting=Геологоразведка: %s
+types.tfg.skill.smithing=Кузнечное дело: %s
+types.tfg.skill.agriculture=Сельское хозяйство: %s
+types.tfg.skill.butchering=Разделка животных: %s
+
+## Calendar
+enum.tfg.season.january=Зима
+enum.tfg.season.february=Поздняя зима
+enum.tfg.season.march=Ранняя весна
+enum.tfg.season.april=Весна
+enum.tfg.season.may=Поздняя весна
+enum.tfg.season.june=Раннее лето
+enum.tfg.season.july=Лето
+enum.tfg.season.august=Позднее лето
+enum.tfg.season.september=Ранняя осень
+enum.tfg.season.october=Осень
+enum.tfg.season.november=Поздняя осень
+enum.tfg.season.december=Ранняя зима
+
+enum.tfg.month.january=Январь
+enum.tfg.month.february=Февраль
+enum.tfg.month.march=Март
+enum.tfg.month.april=Апрель
+enum.tfg.month.may=Май
+enum.tfg.month.june=Июнь
+enum.tfg.month.july=Июль
+enum.tfg.month.august=Август
+enum.tfg.month.september=Сентябрь
+enum.tfg.month.october=Октябрь
+enum.tfg.month.november=Ноябрь
+enum.tfg.month.december=Декабрь
+
+
+enum.tfg.day.sunday=Воскресенье
+enum.tfg.day.monday=Понедельник
+enum.tfg.day.tuesday=Вторник
+enum.tfg.day.wednesday=Среда
+enum.tfg.day.thursday=Четверг
+enum.tfg.day.friday=Пятница
+enum.tfg.day.saturday=Суббота
+
+## Nutrient
+enum.tfg.nutrient.grain=Зерновые
+enum.tfg.nutrient.vegetables=Овощи
+enum.tfg.nutrient.fruit=Фрукты
+enum.tfg.nutrient.protein=Белки
+enum.tfg.nutrient.dairy=Молочные
+
+## Tier
+enum.tfg.tier.tier_0=Уровень 0
+enum.tfg.tier.tier_i=Уровень I
+enum.tfg.tier.tier_ii=Уровень II
+enum.tfg.tier.tier_iii=Уровень III
+enum.tfg.tier.tier_iv=Уровень IV
+enum.tfg.tier.tier_v=Уровень V
+enum.tfg.tier.tier_vi=Уровень VI
+
+## Heat
+enum.tfg.heat.warming=Нагревается
+enum.tfg.heat.hot=Горячий
+enum.tfg.heat.very_hot=Очень горячий
+enum.tfg.heat.faint_red=Тусклый красный
+enum.tfg.heat.dark_red=Темно-красный
+enum.tfg.heat.bright_red=Ярко-красный
+enum.tfg.heat.orange=Оранжевый
+enum.tfg.heat.yellow=Желтый
+enum.tfg.heat.yellow_white=Желтобелый
+enum.tfg.heat.white=Белый
+enum.tfg.heat.brilliant_white=Кристально-белый
+
+enum.tfg.heat.torch.catching_fire=Воспламеняется
+enum.tfg.heat.torch.lit=Зажженый
+
+## Forge Step
+enum.tfg.forge_step.hit_light=Легкий удар
+enum.tfg.forge_step.hit_medium=Средный удар
+enum.tfg.forge_step.hit_hard=Сильный удар
+enum.tfg.forge_step.draw=Вытянуть
+enum.tfg.forge_step.bend=Согнуть
+enum.tfg.forge_step.punch=Перфорировать
+enum.tfg.forge_step.shrink=Сжать
+enum.tfg.forge_step.upset=Обжать
+
+## Forge Rule
+enum.tfg.forgerule.hit_any=Ударить хоть как
+enum.tfg.forgerule.hit_not_last=Ударить не последним
+enum.tfg.forgerule.hit_last=Ударить последним
+enum.tfg.forgerule.hit_second_last=Ударить последний вторым
+enum.tfg.forgerule.hit_third_last=Ударить последний третьим
+enum.tfg.forgerule.draw_any=Вытянуть хоть как
+enum.tfg.forgerule.draw_last=Вытянуть последним
+enum.tfg.forgerule.draw_not_last=Вытянуть не последним
+enum.tfg.forgerule.draw_second_last=Вытянуть последний вторым
+enum.tfg.forgerule.draw_third_last=Вытянуть последний третьим
+enum.tfg.forgerule.punch_any=Перфорировать хоть как
+enum.tfg.forgerule.punch_last=Перфорировать последним
+enum.tfg.forgerule.punch_not_last=Перфорировать не последним
+enum.tfg.forgerule.punch_second_last=Перфорировать последним вторым
+enum.tfg.forgerule.punch_third_last=Перфорировать последним третьим
+enum.tfg.forgerule.bend_any=Согнуть хоть как
+enum.tfg.forgerule.bend_last=Согнуть последним
+enum.tfg.forgerule.bend_not_last=Согнуть не последним
+enum.tfg.forgerule.bend_second_last=Согнуть последним вторым
+enum.tfg.forgerule.bend_third_last=Согнуть последним третьим
+enum.tfg.forgerule.upset_any=Обжать хоть как
+enum.tfg.forgerule.upset_last=Обжать последним
+enum.tfg.forgerule.upset_not_last=Обжать не последним
+enum.tfg.forgerule.upset_second_last=Обжать последним вторым
+enum.tfg.forgerule.upset_third_last=Обжать последним третьим
+enum.tfg.forgerule.shrink_any=Сжать хоть как
+enum.tfg.forgerule.shrink_last=Сжать последним
+enum.tfg.forgerule.shrink_not_last=Сжать не последним
+enum.tfg.forgerule.shrink_second_last=Сжать последним вторым
+enum.tfg.forgerule.shrink_third_last=Сжать последним третьим
+
+## Grow Status
+enum.tfg.growstatus.dead=This plant is dead
+enum.tfg.growstatus.not_growing=This plant is not growing
+enum.tfg.growstatus.can_grow=This plant is able to grow
+enum.tfg.growstatus.growing=This plant is growing
+enum.tfg.growstatus.fully_grown=This plant is fully grown
+
 # Module Core ################################################
 
 # Tooltip
@@ -38,6 +166,16 @@ tooltip.tfg.core.advanced_data.tool_class=§7  -Класс Инструмент�
 tooltip.tfg.core.advanced_data.tool_classes=§7  -Классы Инструмента:§8 %s
 tooltip.tfg.core.advanced_data.ore_dict=§7  -Имя в словаре руд:§8 %s
 tooltip.tfg.core.advanced_data.ore_dicts=§7  -Имена в словаре руд:§8 %s
+
+tooltip.tfg.core.hot_or_not.hot=Слишком горячо, чтобы держать в руках! Надевайте защиту.
+tooltip.tfg.core.hot_or_not.cold=Слишком холодно, чтобы держать! Надевайте защиту.
+tooltip.tfg.core.hot_or_not.light=Слишком легкий для переноски! Надевайте защиту.
+
+tooltip.tfg.core.calendar=Календарь
+tooltip.tfg.core.calendar.full_date=%s %s %02d, %04d
+tooltip.tfg.core.calendar.season=Сезон : %s
+tooltip.tfg.core.calendar.day=День : %s
+tooltip.tfg.core.calendar.date=Дата : %s
 
 ## Item Group
 item_group.tfg.core.name=[ TFG ] Ядро

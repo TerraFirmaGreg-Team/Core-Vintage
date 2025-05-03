@@ -120,11 +120,6 @@ tfc.tooltip.crucible_result=Результат:
 tfc.tooltip.barrel_seal=Запечатать бочку
 tfc.tooltip.barrel_unseal=Распечатать бочку
 tfc.tooltip.barrel_cooling=Охдаждается
-tfc.tooltip.calendar=Календарь
-tfc.tooltip.season=Сезон : %s
-tfc.tooltip.day=День : %s
-tfc.tooltip.date=Дата : %s
-tfc.tooltip.calendar_full_date=%s %s %02d, %04d
 tfc.tooltip.debug_times=PT: %d | CT: %d
 tfc.tooltip.food_expiry_date=Испортится: %s
 tfc.tooltip.food_rotten=Испорчено - Я бы не стал это есть.
@@ -214,15 +209,8 @@ tfc.tooltip.barrel_recipe_brining=Засаливание
 tfc.tooltip.barrel_recipe_vinegar=Консервирование в уксусе
 
 ## Skills
-tfc.skill.prospecting=Геологоразведка: %s
-tfc.skill.smithing=Кузнечное дело: %s
-tfc.skill.agriculture=Сельское хозяйство: %s
-tfc.skill.butchering=Разделка животных: %s
 
-tfc.enum.skilltier.novice=Начинающий
-tfc.enum.skilltier.adept=Знаток
-tfc.enum.skilltier.expert=Эксперт
-tfc.enum.skilltier.master=Мастер
+
 
 ## Keybindings
 tfc.key.craft=Интерфейс создания
@@ -994,113 +982,6 @@ tfc.types.rock_category.sedimentary=Осадочная
 tfc.types.rock_category.metamorphic=Метаморфическая
 tfc.types.rock_category.igneous_intrusive=Магматическая интрузивная
 tfc.types.rock_category.igneous_extrusive=Магматическая экструзивная
-
-## Tier
-
-tfc.enum.tier.tier_0=Уровень 0
-tfc.enum.tier.tier_i=Уровень I
-tfc.enum.tier.tier_ii=Уровень II
-tfc.enum.tier.tier_iii=Уровень III
-tfc.enum.tier.tier_iv=Уровень IV
-tfc.enum.tier.tier_v=Уровень V
-tfc.enum.tier.tier_vi=Уровень VI
-
-## Heat
-tfc.enum.heat.warming=Нагревается
-tfc.enum.heat.hot=Горячий
-tfc.enum.heat.very_hot=Очень горячий
-tfc.enum.heat.faint_red=Тусклый красный
-tfc.enum.heat.dark_red=Темно-красный
-tfc.enum.heat.bright_red=Ярко-красный
-tfc.enum.heat.orange=Оранжевый
-tfc.enum.heat.yellow=Желтый
-tfc.enum.heat.yellow_white=Желтобелый
-tfc.enum.heat.white=Белый
-tfc.enum.heat.brilliant_white=Кристально-белый
-
-tfc.enum.heat.torch.catching_fire=Воспламеняется
-tfc.enum.heat.torch.lit=Зажженый
-
-tfc.enum.forge_step.hit_light=Легкий удар
-tfc.enum.forge_step.hit_medium=Средный удар
-tfc.enum.forge_step.hit_hard=Сильный удар
-tfc.enum.forge_step.draw=Вытянуть
-tfc.enum.forge_step.bend=Согнуть
-tfc.enum.forge_step.punch=Перфорировать
-tfc.enum.forge_step.shrink=Сжать
-tfc.enum.forge_step.upset=Обжать
-
-tfc.enum.forgerule.hit_any=Ударить хоть как
-tfc.enum.forgerule.hit_not_last=Ударить не последним
-tfc.enum.forgerule.hit_last=Ударить последним
-tfc.enum.forgerule.hit_second_last=Ударить последний вторым
-tfc.enum.forgerule.hit_third_last=Ударить последний третьим
-tfc.enum.forgerule.draw_any=Вытянуть хоть как
-tfc.enum.forgerule.draw_last=Вытянуть последним
-tfc.enum.forgerule.draw_not_last=Вытянуть не последним
-tfc.enum.forgerule.draw_second_last=Вытянуть последний вторым
-tfc.enum.forgerule.draw_third_last=Вытянуть последний третьим
-tfc.enum.forgerule.punch_any=Перфорировать хоть как
-tfc.enum.forgerule.punch_last=Перфорировать последним
-tfc.enum.forgerule.punch_not_last=Перфорировать не последним
-tfc.enum.forgerule.punch_second_last=Перфорировать последним вторым
-tfc.enum.forgerule.punch_third_last=Перфорировать последним третьим
-tfc.enum.forgerule.bend_any=Согнуть хоть как
-tfc.enum.forgerule.bend_last=Согнуть последним
-tfc.enum.forgerule.bend_not_last=Согнуть не последним
-tfc.enum.forgerule.bend_second_last=Согнуть последним вторым
-tfc.enum.forgerule.bend_third_last=Согнуть последним третьим
-tfc.enum.forgerule.upset_any=Обжать хоть как
-tfc.enum.forgerule.upset_last=Обжать последним
-tfc.enum.forgerule.upset_not_last=Обжать не последним
-tfc.enum.forgerule.upset_second_last=Обжать последним вторым
-tfc.enum.forgerule.upset_third_last=Обжать последним третьим
-tfc.enum.forgerule.shrink_any=Сжать хоть как
-tfc.enum.forgerule.shrink_last=Сжать последним
-tfc.enum.forgerule.shrink_not_last=Сжать не последним
-tfc.enum.forgerule.shrink_second_last=Сжать последним вторым
-tfc.enum.forgerule.shrink_third_last=Сжать последним третьим
-
-
-tfc.enum.season.january=Зима
-tfc.enum.season.february=Поздняя зима
-tfc.enum.season.march=Ранняя весна
-tfc.enum.season.april=Весна
-tfc.enum.season.may=Поздняя весна
-tfc.enum.season.june=Раннее лето
-tfc.enum.season.july=Лето
-tfc.enum.season.august=Позднее лето
-tfc.enum.season.september=Ранняя осень
-tfc.enum.season.october=Осень
-tfc.enum.season.november=Поздняя осень
-tfc.enum.season.december=Ранняя зима
-
-tfc.enum.month.january=Январь
-tfc.enum.month.february=Февраль
-tfc.enum.month.march=Март
-tfc.enum.month.april=Апрель
-tfc.enum.month.may=Май
-tfc.enum.month.june=Июнь
-tfc.enum.month.july=Июль
-tfc.enum.month.august=Август
-tfc.enum.month.september=Сентябрь
-tfc.enum.month.october=Октябрь
-tfc.enum.month.november=Ноябрь
-tfc.enum.month.december=Декабрь
-
-tfc.enum.day.sunday=Воскресенье
-tfc.enum.day.monday=Понедельник
-tfc.enum.day.tuesday=Вторник
-tfc.enum.day.wednesday=Среда
-tfc.enum.day.thursday=Четверг
-tfc.enum.day.friday=Пятница
-tfc.enum.day.saturday=Суббота
-
-tfc.enum.nutrient.grain=Зерновые
-tfc.enum.nutrient.vegetables=Овощи
-tfc.enum.nutrient.fruit=Фрукты
-tfc.enum.nutrient.protein=Белки
-tfc.enum.nutrient.dairy=Молочные
 
 #JEI
 jei.category.tfc.alloy=Рецепты сплавления

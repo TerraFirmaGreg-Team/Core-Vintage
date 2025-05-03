@@ -1,6 +1,5 @@
 package net.dries007.tfc.util;
 
-import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
@@ -57,7 +56,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.common.base.Joiner;
 import io.netty.buffer.ByteBuf;
@@ -186,15 +184,6 @@ public final class Helpers {
     TileEntity te = world.getTileEntity(pos);
     if (!aClass.isInstance(te)) {return null;}
     return (T) te;
-  }
-
-  public static String getEnumName(Enum<?> anEnum) {
-    return JOINER_DOT.join(Mods.ModIDs.TFC, "enum", anEnum.getDeclaringClass().getSimpleName(), anEnum).toLowerCase();
-  }
-
-  public static String getTypeName(IForgeRegistryEntry<?> type) {
-    //noinspection ConstantConditions
-    return JOINER_DOT.join(Mods.ModIDs.TFC, "types", type.getRegistryType().getSimpleName(), type.getRegistryName().getPath()).toLowerCase();
   }
 
   public static boolean playerHasItemMatchingOre(InventoryPlayer playerInv, String ore) {

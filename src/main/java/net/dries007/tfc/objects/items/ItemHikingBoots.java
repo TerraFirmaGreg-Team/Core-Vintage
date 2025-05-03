@@ -1,7 +1,10 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.data.ArmorMaterials;
-import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.damageresistance.capability.ICapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,14 +16,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfcthings.main.ConfigTFCThings;
 import net.dries007.tfc.ConfigTFC;
-
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nonnull;
 

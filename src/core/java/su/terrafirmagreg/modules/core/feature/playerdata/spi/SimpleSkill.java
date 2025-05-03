@@ -17,8 +17,8 @@ public class SimpleSkill extends Skill {
 
   @Override
   @Nonnull
-  public SkillTier getTier() {
-    return SkillTier.valueOf((int) amount);
+  public Tier getTier() {
+    return Tier.valueOf((int) amount);
   }
 
   @Override

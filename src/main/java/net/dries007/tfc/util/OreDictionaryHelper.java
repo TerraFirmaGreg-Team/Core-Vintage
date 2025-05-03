@@ -1,6 +1,6 @@
 package net.dries007.tfc.util;
 
-import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.feature.damageresistance.spi.DamageType;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

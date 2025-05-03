@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.SimpleSkill;
-import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillTier;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.Skill.Tier;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
 
 import net.minecraft.entity.Entity;
@@ -29,10 +29,10 @@ import java.util.Random;
 public class ApplyRequiredSkill extends LootFunction {
 
   private final SkillType<? extends SimpleSkill> skillType;
-  private final SkillTier tier;
+  private final Tier tier;
   private final float rarity;
 
-  private ApplyRequiredSkill(LootCondition[] conditionsIn, SkillType<? extends SimpleSkill> skillType, SkillTier tier, float rarity) {
+  private ApplyRequiredSkill(LootCondition[] conditionsIn, SkillType<? extends SimpleSkill> skillType, Tier tier, float rarity) {
     super(conditionsIn);
     this.skillType = skillType;
     this.tier = tier;
@@ -85,7 +85,7 @@ public class ApplyRequiredSkill extends LootFunction {
       }
       int tierIndex = JsonUtils.getInt(object, PROPERTY_TIER);
       float amount = JsonUtils.getFloat(object, PROPERTY_RARITY);
-      return new ApplyRequiredSkill(conditionsIn, skillType, SkillTier.valueOf(tierIndex), amount);
+      return new ApplyRequiredSkill(conditionsIn, skillType, Tier.valueOf(tierIndex), amount);
     }
   }
 }

@@ -47,7 +47,7 @@ public class AnvilRecipeWrapper extends SimpleRecipeWrapper {
       Gui.drawScaledCustomSizeModalRect(x, y, step.getU(), step.getV(), 32, 32, 16, 16, 256, 256);
     }
     //Draw tier requirement info
-    String text = I18n.format("tfc.enum.tier." + recipe.getTier().name().toLowerCase());
+    String text = I18n.format(TranslatorUtils.getEnumName(recipe.getTier()));
     float xPos = 20f - minecraft.fontRenderer.getStringWidth(text) / 2.0f;
     float yPos = 33f;
     minecraft.fontRenderer.drawString(text, xPos, yPos, 0x000000, false);

@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.button;
 
 import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
+import su.terrafirmagreg.api.util.TranslatorUtils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,11 +9,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.util.forge.ForgeStep;
+
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiAnvilTFC.ANVIL_BACKGROUND;
-
-import net.dries007.tfc.util.forge.ForgeStep;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonAnvilStep extends GuiButtonTFC implements IButtonTooltip {
@@ -26,7 +27,7 @@ public class GuiButtonAnvilStep extends GuiButtonTFC implements IButtonTooltip {
 
     this.textureU = step.getU();
     this.textureV = step.getV();
-    this.tooltip = I18n.format("tfc.enum.forge_step." + step.name().toLowerCase());
+    this.tooltip = I18n.format(TranslatorUtils.getEnumName("forge_step", step));
   }
 
   @Override

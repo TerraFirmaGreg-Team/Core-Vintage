@@ -1,8 +1,6 @@
 package net.dries007.tfc.proxy;
 
 import su.terrafirmagreg.api.exception.WrongSideException;
-import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
@@ -48,21 +46,4 @@ public class ServerProxy implements IProxy {
     }
   }
 
-  @Nonnull
-  @Override
-  public String getMonthName(Month month, boolean useSeasons) {
-    return month.name().toLowerCase();
-  }
-
-  @Nonnull
-  @Override
-  public String getDayName(int dayOfMonth, long totalDays) {
-    return Calendar.DAY_NAMES[(int) (totalDays % 7)];
-  }
-
-  @Nonnull
-  @Override
-  public String getDate(int hour, int minute, String monthName, int day, long years) {
-    return String.format("%02d:%02d %s %02d, %04d", hour, minute, monthName, day, years);
-  }
 }

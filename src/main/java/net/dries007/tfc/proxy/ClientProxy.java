@@ -1,11 +1,6 @@
 package net.dries007.tfc.proxy;
 
-import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
@@ -50,27 +45,4 @@ public class ClientProxy implements IProxy {
     }
   }
 
-  @Nonnull
-  @Override
-  public String getMonthName(Month month, boolean useSeasons) {
-    return I18n.format(useSeasons ? "tfc.enum.season." + month.name().toLowerCase() : TranslatorUtils.getEnumName(month));
-  }
-
-  @Nonnull
-  @Override
-  public String getDayName(int dayOfMonth, long totalDays) {
-    String date = Calendar.CALENDAR_TIME.getMonthOfYear().name() + dayOfMonth;
-    String birthday = Calendar.BIRTHDAYS.get(date);
-    if (birthday != null) {
-      return birthday;
-    }
-    return I18n.format("tfc.enum.day." + Calendar.DAY_NAMES[(int) (totalDays % 7)]);
-  }
-
-  @Nonnull
-  @Override
-  public String getDate(int hour, int minute, String monthName, int day, long years) {
-    // We call an additional String.format for the time, because vanilla doesn't support %02d format specifiers
-    return I18n.format("tfc.tooltip.calendar_full_date", String.format("%02d:%02d", hour, minute), monthName, day, years);
-  }
 }

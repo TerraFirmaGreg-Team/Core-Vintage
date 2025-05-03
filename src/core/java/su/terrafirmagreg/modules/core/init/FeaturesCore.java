@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.core.feature.advanceddata.FeatureAdvancedData;
 import su.terrafirmagreg.modules.core.feature.ambiental.FeatureAmbiental;
 import su.terrafirmagreg.modules.core.feature.calendar.FeatureCalendar;
 import su.terrafirmagreg.modules.core.feature.climate.FeatureClimate;
+import su.terrafirmagreg.modules.core.feature.damageresistance.FeatureDamageResistance;
 import su.terrafirmagreg.modules.core.feature.falling.FeatureFalling;
 import su.terrafirmagreg.modules.core.feature.hotornot.FeatureHotOrNot;
 import su.terrafirmagreg.modules.core.feature.mapping.FeatureRemappingCore;
@@ -23,6 +24,7 @@ public final class FeaturesCore {
     registrar.addFeature(new FeatureClimate());
     registrar.addFeature(new FeatureSinkOrSwim());
     registrar.addFeature(new FeatureHotOrNot());
+    registrar.addFeature(new FeatureDamageResistance());
     registrar.addFeature(new FeatureAmbiental());
     registrar.addFeature(new FeatureFalling());
     registrar.addFeature(new FeatureAdvancedData());

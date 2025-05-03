@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHandlerAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental.Handler;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderBlock;
 
@@ -81,7 +81,7 @@ public class ModifierBlock extends ModifierBase {
           storage.add(mod);
         });
       } else {
-        for (IAmbientalProviderBlock provider : CapabilityHandlerAmbiental.BLOCK) {
+        for (IAmbientalProviderBlock provider : Handler.BLOCK) {
           provider.getModifier(player, pos, state).ifPresent(mod -> {
             mod.setChange(mod.getChange() * finalDistanceMultiplier);
             mod.setPotency(mod.getPotency() * finalDistanceMultiplier);

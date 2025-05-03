@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.core.capabilities.heat;
 
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.capabilities.heat.spi.Heat;
 
 import net.minecraft.client.resources.I18n;
@@ -13,14 +14,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 /**
- * It is recommended that if you extend {@link CapabilityProviderHeat} rather than implement this directly. If you do extend this, look at ItemHeatHandler to
- * observe how heat decays over time.
+ * It is recommended that if you extend {@link CapabilityProviderHeat} rather than implement this directly. If you do extend this, look at ItemHeatHandler to observe how heat decays over time.
  */
 public interface ICapabilityHeat extends ICapabilitySerializable<NBTTagCompound> {
 
   /**
-   * Gets the Heat capacity. (A measure of how fast this items heats up or cools down) Implementation is left up to the heating object. (See TEFirePit for
-   * example)
+   * Gets the Heat capacity. (A measure of how fast this items heats up or cools down) Implementation is left up to the heating object. (See TEFirePit for example)
    *
    * @return the heat capacity. Typically 0 - 1, can be outside this range, must be non-negative
    */
@@ -67,9 +66,9 @@ public interface ICapabilityHeat extends ICapabilitySerializable<NBTTagCompound>
     float temperature = getTemperature();
     if (stack.getItem() == Items.STICK) {
       if (temperature > getMeltTemp() * 0.9f) {
-        text.add(I18n.format("tfc.enum.heat.torch.lit"));
+        text.add(I18n.format(TranslatorUtils.getEnumName("heat", "torch.lit")));
       } else if (temperature > 1f) {
-        text.add(I18n.format("tfc.enum.heat.torch.catching_fire"));
+        text.add(I18n.format(TranslatorUtils.getEnumName("heat", "torch.catching_fire")));
       }
     } else {
       String tooltip = Heat.getTooltip(temperature);

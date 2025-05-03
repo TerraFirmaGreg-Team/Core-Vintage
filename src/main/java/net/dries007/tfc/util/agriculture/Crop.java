@@ -3,7 +3,7 @@ package net.dries007.tfc.util.agriculture;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.Skill;
-import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillTier;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.Skill.Tier;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -120,7 +120,7 @@ public enum Crop implements ICrop {
    * @return amount to add to item stack count
    */
   public static int getSkillSeedBonus(Skill skill, Random random) {
-    if (skill.getTier().isAtLeast(SkillTier.ADEPT) && random.nextInt(10 - 2 * skill.getTier().ordinal()) == 0) {return 1;} else {return 0;}
+    if (skill.getTier().isAtLeast(Tier.ADEPT) && random.nextInt(10 - 2 * skill.getTier().ordinal()) == 0) {return 1;} else {return 0;}
   }
 
   @Override

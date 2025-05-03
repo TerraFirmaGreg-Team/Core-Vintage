@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier;
 
-import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHandlerAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental.Handler;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderEquipment;
 
@@ -38,7 +38,7 @@ public class ModifierEquipment extends ModifierBase {
         storage.add(provider.getModifier(player, stack));
       }
 
-      for (IAmbientalProviderEquipment provider : CapabilityHandlerAmbiental.EQUIPMENT) {
+      for (IAmbientalProviderEquipment provider : Handler.EQUIPMENT) {
         storage.add(provider.getModifier(player, stack));
       }
     }

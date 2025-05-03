@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHandlerAmbiental;
+import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental.Handler;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.AmbientalModifierStorage;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
 
@@ -91,7 +91,7 @@ public class ModifierTile extends ModifierBase {
               storage.add(mod);
             });
           } else {
-            for (IAmbientalProviderTile provider : CapabilityHandlerAmbiental.TILE) {
+            for (IAmbientalProviderTile provider : Handler.TILE) {
               provider.getModifier(player, tile).ifPresent(mod -> {
                 mod.setChange(mod.getChange() * finalDistanceMultiplier);
                 mod.setPotency(mod.getPotency() * finalDistanceMultiplier);

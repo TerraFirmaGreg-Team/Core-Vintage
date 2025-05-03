@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.capabilities.damage;
+package su.terrafirmagreg.modules.core.feature.damageresistance.capability;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

@@ -2,6 +2,7 @@ package net.dries007.tfc.compat.waila.providers;
 
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarFormatted;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 
@@ -12,7 +13,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
 import net.dries007.tfc.objects.te.TETickCounter;
@@ -49,7 +49,7 @@ public class BerryBushProvider implements IWailaBlock {
         currentTooltip.add(new TextComponentTranslation("waila.tfc.agriculture.harvesting_months").getFormattedText());
         for (Month month : Month.values()) {
           if (block.getBush().isHarvestMonth(month)) {
-            currentTooltip.add(TerraFirmaCraft.getProxy().getMonthName(month, true));
+            currentTooltip.add(ICalendarFormatted.getMonthName(month, true));
           }
         }
       }

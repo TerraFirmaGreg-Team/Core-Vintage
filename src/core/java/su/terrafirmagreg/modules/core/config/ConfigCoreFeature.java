@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.core.config;
 import su.terrafirmagreg.modules.core.feature.advanceddata.FeatureAdvancedDataConfig;
 import su.terrafirmagreg.modules.core.feature.ambiental.FeatureAmbientalConfig;
 import su.terrafirmagreg.modules.core.feature.calendar.FeatureCalendarConfig;
+import su.terrafirmagreg.modules.core.feature.damageresistance.FeatureDamageResistanceConfig;
 import su.terrafirmagreg.modules.core.feature.hotornot.FeatureHotOrNotConfig;
 import su.terrafirmagreg.modules.core.feature.sinkorswim.FeatureSinkOrSwimConfig;
 import su.terrafirmagreg.modules.core.feature.size.FeatureSizeConfig;
@@ -29,6 +30,9 @@ public final class ConfigCoreFeature {
 
   @Comment("Size And Weight settings")
   public final FeatureSizeConfig SIZE = new FeatureSizeConfig();
+
+  @Config.Comment("Damage settings")
+  public final FeatureDamageResistanceConfig DAMAGE_RESISTANCE = new FeatureDamageResistanceConfig();
 
 
 }

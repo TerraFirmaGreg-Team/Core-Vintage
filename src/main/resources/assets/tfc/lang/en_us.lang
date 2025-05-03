@@ -112,11 +112,8 @@ tfc.tooltip.crucible_result=Result:
 tfc.tooltip.barrel_seal=Seal Barrel
 tfc.tooltip.barrel_unseal=Unseal Barrel
 tfc.tooltip.barrel_cooling=Cooling
-tfc.tooltip.calendar=Calendar
-tfc.tooltip.season=Season : %s
-tfc.tooltip.day=Day : %s
-tfc.tooltip.date=Date : %s
-tfc.tooltip.calendar_full_date=%s %s %02d, %04d
+
+
 tfc.tooltip.debug_times=PT: %d | CT: %d
 tfc.tooltip.food_expiry_date=Expires on: %s
 tfc.tooltip.food_rotten=Rotten - I wouldn't eat that.
@@ -208,16 +205,7 @@ tfc.tooltip.barrel_recipe_pickling=Pickling
 tfc.tooltip.barrel_recipe_brining=Brining
 tfc.tooltip.barrel_recipe_vinegar=Preserving in vinegar
 
-## Skills
-tfc.skill.prospecting=Prospecting: %s
-tfc.skill.smithing=Smithing: %s
-tfc.skill.agriculture=Agriculture: %s
-tfc.skill.butchering=Butchering: %s
 
-tfc.enum.skilltier.novice=Novice
-tfc.enum.skilltier.adept=Adept
-tfc.enum.skilltier.expert=Expert
-tfc.enum.skilltier.master=Master
 
 ## Keybindings
 tfc.key.craft=Crafting GUI
@@ -1011,119 +999,7 @@ tfc.types.rock_category.metamorphic=Metamorphic
 tfc.types.rock_category.igneous_intrusive=Igneous Intrusive
 tfc.types.rock_category.igneous_extrusive=Igneous Extrusive
 
-## Tier
 
-tfc.enum.tier.tier_0=Tier 0
-tfc.enum.tier.tier_i=Tier I
-tfc.enum.tier.tier_ii=Tier II
-tfc.enum.tier.tier_iii=Tier III
-tfc.enum.tier.tier_iv=Tier IV
-tfc.enum.tier.tier_v=Tier V
-tfc.enum.tier.tier_vi=Tier VI
-
-
-## Heat
-tfc.enum.heat.warming=Warming
-tfc.enum.heat.hot=Hot
-tfc.enum.heat.very_hot=Very Hot
-tfc.enum.heat.faint_red=Faint Red
-tfc.enum.heat.dark_red=Dark Red
-tfc.enum.heat.bright_red=Bright Red
-tfc.enum.heat.orange=Orange
-tfc.enum.heat.yellow=Yellow
-tfc.enum.heat.yellow_white=Yellow White
-tfc.enum.heat.white=White
-tfc.enum.heat.brilliant_white=Brilliant White
-
-tfc.enum.heat.torch.catching_fire=Catching Fire
-tfc.enum.heat.torch.lit=Lit
-
-tfc.enum.forge_step.hit_light=Light Hit
-tfc.enum.forge_step.hit_medium=Medium Hit
-tfc.enum.forge_step.hit_hard=Hard Hit
-tfc.enum.forge_step.draw=Draw
-tfc.enum.forge_step.bend=Bend
-tfc.enum.forge_step.punch=Punch
-tfc.enum.forge_step.shrink=Shrink
-tfc.enum.forge_step.upset=Upset
-
-tfc.enum.forgerule.hit_any=Hit Any
-tfc.enum.forgerule.hit_not_last=Hit Not Last
-tfc.enum.forgerule.hit_last=Hit Last
-tfc.enum.forgerule.hit_second_last=Hit Second Last
-tfc.enum.forgerule.hit_third_last=Hit Third Last
-tfc.enum.forgerule.draw_any=Draw Any
-tfc.enum.forgerule.draw_last=Draw Last
-tfc.enum.forgerule.draw_not_last=Draw Not Last
-tfc.enum.forgerule.draw_second_last=Draw Second Last
-tfc.enum.forgerule.draw_third_last=Draw Third Last
-tfc.enum.forgerule.punch_any=Punch Any
-tfc.enum.forgerule.punch_last=Punch Last
-tfc.enum.forgerule.punch_not_last=Punch Not Last
-tfc.enum.forgerule.punch_second_last=Punch Second Last
-tfc.enum.forgerule.punch_third_last=Punch Third Last
-tfc.enum.forgerule.bend_any=Bend Any
-tfc.enum.forgerule.bend_last=Bend Last
-tfc.enum.forgerule.bend_not_last=Bend Not Last
-tfc.enum.forgerule.bend_second_last=Bend Second Last
-tfc.enum.forgerule.bend_third_last=Bend Third Last
-tfc.enum.forgerule.upset_any=Upset Any
-tfc.enum.forgerule.upset_last=Upset Last
-tfc.enum.forgerule.upset_not_last=Upset Not Last
-tfc.enum.forgerule.upset_second_last=Upset Second Last
-tfc.enum.forgerule.upset_third_last=Upset Third Last
-tfc.enum.forgerule.shrink_any=Shrink Any
-tfc.enum.forgerule.shrink_last=Shrink Last
-tfc.enum.forgerule.shrink_not_last=Shrink Not Last
-tfc.enum.forgerule.shrink_second_last=Shrink Second Last
-tfc.enum.forgerule.shrink_third_last=Shrink Third Last
-
-
-tfc.enum.season.january=Winter
-tfc.enum.season.february=Late Winter
-tfc.enum.season.march=Early Spring
-tfc.enum.season.april=Spring
-tfc.enum.season.may=Late Spring
-tfc.enum.season.june=Early Summer
-tfc.enum.season.july=Summer
-tfc.enum.season.august=Late Summer
-tfc.enum.season.september=Early Autumn
-tfc.enum.season.october=Autumn
-tfc.enum.season.november=Late Autumn
-tfc.enum.season.december=Early Winter
-
-tfc.enum.month.january=January
-tfc.enum.month.february=February
-tfc.enum.month.march=March
-tfc.enum.month.april=April
-tfc.enum.month.may=May
-tfc.enum.month.june=June
-tfc.enum.month.july=July
-tfc.enum.month.august=August
-tfc.enum.month.september=September
-tfc.enum.month.october=October
-tfc.enum.month.november=November
-tfc.enum.month.december=December
-
-tfc.enum.day.sunday=Sunday
-tfc.enum.day.monday=Monday
-tfc.enum.day.tuesday=Tuesday
-tfc.enum.day.wednesday=Wednesday
-tfc.enum.day.thursday=Thursday
-tfc.enum.day.friday=Friday
-tfc.enum.day.saturday=Saturday
-
-tfc.enum.nutrient.grain=Grain
-tfc.enum.nutrient.vegetables=Vegetables
-tfc.enum.nutrient.fruit=Fruit
-tfc.enum.nutrient.protein=Protein
-tfc.enum.nutrient.dairy=Dairy
-
-tfc.enum.growstatus.dead=This plant is dead
-tfc.enum.growstatus.not_growing=This plant is not growing
-tfc.enum.growstatus.can_grow=This plant is able to grow
-tfc.enum.growstatus.growing=This plant is growing
-tfc.enum.growstatus.fully_grown=This plant is fully grown
 
 #JEI
 jei.category.tfc.alloy=Alloying recipes

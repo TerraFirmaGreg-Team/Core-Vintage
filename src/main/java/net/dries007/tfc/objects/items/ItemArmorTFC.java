@@ -1,15 +1,14 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.data.ArmorMaterials;
-import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.damageresistance.capability.ICapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import javax.annotation.Nonnull;
 

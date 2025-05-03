@@ -1,9 +1,10 @@
-package su.terrafirmagreg.modules.core.capabilities.damage.spi;
+package su.terrafirmagreg.modules.core.feature.damageresistance.spi;
 
+import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
-import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.damageresistance.capability.CapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.damageresistance.capability.ICapabilityDamageResistance;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -32,16 +33,18 @@ public enum DamageType {
     if (type != DamageType.GENERIC) {
       // Apply damage type specific resistances, from the entity under attack and from their armor
       {
-        ICapabilityDamageResistance resist = entityUnderAttack.getCapability(CapabilityDamageResistance.CAPABILITY, null);
+
+        ICapabilityDamageResistance resist = CapabilityUtils.get(entityUnderAttack, CapabilityDamageResistance.CAPABILITY);
+
         resistance += type.getModifier(resist);
       }
       if (!source.isUnblockable()) {
         for (ItemStack stack : entityUnderAttack.getArmorInventoryList()) {
           ICapabilityDamageResistance resist;
-          if (stack.getItem() instanceof ICapabilityDamageResistance) {
-            resist = (ICapabilityDamageResistance) stack.getItem();
+          if (stack.getItem() instanceof ICapabilityDamageResistance capabilityDamageResistance) {
+            resist = capabilityDamageResistance;
           } else {
-            resist = stack.getCapability(CapabilityDamageResistance.CAPABILITY, null);
+            resist = CapabilityUtils.get(stack, CapabilityDamageResistance.CAPABILITY);
           }
           resistance += type.getModifier(resist);
         }
@@ -55,17 +58,17 @@ public enum DamageType {
     // Unblockable damage types don't have a special damage source
     if (!source.isUnblockable()) {
       // First try and match damage types specified via config
-      for (String damageType : ConfigCore.MISC.DAMAGE.slashingSources) {
+      for (String damageType : ConfigCore.FEATURE.DAMAGE_RESISTANCE.slashingSources) {
         if (damageType.equals(source.damageType)) {
           return SLASHING;
         }
       }
-      for (String damageType : ConfigCore.MISC.DAMAGE.crushingSources) {
+      for (String damageType : ConfigCore.FEATURE.DAMAGE_RESISTANCE.crushingSources) {
         if (damageType.equals(source.damageType)) {
           return CRUSHING;
         }
       }
-      for (String damageType : ConfigCore.MISC.DAMAGE.piercingSources) {
+      for (String damageType : ConfigCore.FEATURE.DAMAGE_RESISTANCE.piercingSources) {
         if (damageType.equals(source.damageType)) {
           return PIERCING;
         }
@@ -75,8 +78,8 @@ public enum DamageType {
       Entity sourceEntity = source.getTrueSource();
       if (sourceEntity != null) {
         // Check for the attacking weapon
-        if (sourceEntity instanceof EntityLivingBase) {
-          ItemStack heldItem = ((EntityLivingBase) sourceEntity).getHeldItemMainhand();
+        if (sourceEntity instanceof EntityLivingBase entityLivingBase) {
+          ItemStack heldItem = entityLivingBase.getHeldItemMainhand();
           if (!heldItem.isEmpty()) {
             // Find a unique damage type for the weapon, if it exists
             DamageType weaponDamageType = getFromItem(heldItem);
@@ -90,17 +93,17 @@ public enum DamageType {
         ResourceLocation entityType = EntityList.getKey(sourceEntity);
         if (entityType != null) {
           String entityTypeName = entityType.toString();
-          for (String damageType : ConfigCore.MISC.DAMAGE.slashingEntities) {
+          for (String damageType : ConfigCore.FEATURE.DAMAGE_RESISTANCE.slashingEntities) {
             if (damageType.equals(entityTypeName)) {
               return SLASHING;
             }
           }
-          for (String damageType : ConfigCore.MISC.DAMAGE.crushingEntities) {
+          for (String damageType : ConfigCore.FEATURE.DAMAGE_RESISTANCE.crushingEntities) {
             if (damageType.equals(entityTypeName)) {
               return CRUSHING;
             }
           }
-          for (String damageType : ConfigCore.MISC.DAMAGE.piercingEntities) {
+          for (String damageType : ConfigCore.FEATURE.DAMAGE_RESISTANCE.piercingEntities) {
             if (damageType.equals(entityTypeName)) {
               return PIERCING;
             }

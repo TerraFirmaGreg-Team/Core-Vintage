@@ -1,15 +1,8 @@
 package su.terrafirmagreg.modules.core.event.capabilities;
 
-import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
-import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
-
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 public class EventHandlerCapabilitiesEntity {
@@ -23,7 +16,6 @@ public class EventHandlerCapabilitiesEntity {
     }
 
 //    pull(event, entity);
-    damageResistance(event, entity);
   }
 
 //  public static void pull(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
@@ -40,20 +32,5 @@ public class EventHandlerCapabilitiesEntity {
 //
 //  }
 
-  public static void damageResistance(AttachCapabilitiesEvent<Entity> event, @NotNull Entity entity) {
-    ResourceLocation entityType = EntityList.getKey(entity);
-    if (entityType == null) {
-      return;
-    }
-
-    // Give certain entities damage resistance
-    if (!CapabilityDamageResistance.has(entity)) {
-
-      var provider = CapabilityHandlerDamageResistance.getCustom(entityType);
-      if (provider != null) {
-        event.addCapability(CapabilityDamageResistance.KEY, provider);
-      }
-    }
-  }
 
 }

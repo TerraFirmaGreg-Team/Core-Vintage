@@ -23,8 +23,8 @@ public class ProspectingSkill extends Skill {
 
   @Override
   @Nonnull
-  public SkillTier getTier() {
-    return SkillTier.valueOf(level / 10);
+  public Tier getTier() {
+    return Tier.valueOf(level / 10);
   }
 
   @Override

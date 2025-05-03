@@ -7,8 +7,6 @@ import su.terrafirmagreg.framework.manager.network.api.INetworkRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
-import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityDamageResistance;
-import su.terrafirmagreg.modules.core.capabilities.damage.CapabilityHandlerDamageResistance;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
@@ -113,7 +111,7 @@ public final class ModuleCore extends ModuleBase {
     CapabilityForgeable.register();
 
     CapabilitySharpness.register();
-    CapabilityDamageResistance.register();
+
 
   }
 
@@ -129,7 +127,7 @@ public final class ModuleCore extends ModuleBase {
     CapabilityHandlerFood.init();
     CapabilityHandlerMetal.init();
     CapabilityHandlerSharpness.init();
-    CapabilityHandlerDamageResistance.init();
+
   }
 
   @Override

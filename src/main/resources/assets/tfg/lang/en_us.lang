@@ -39,6 +39,134 @@ enum.tfg.weight.medium=Medium
 enum.tfg.weight.heavy=Heavy
 enum.tfg.weight.very_heavy=Very Heavy
 
+## Skills
+enum.tfg.skill.tier.novice=Novice
+enum.tfg.skill.tier.adept=Adept
+enum.tfg.skill.tier.expert=Expert
+enum.tfg.skill.tier.master=Master
+
+types.tfg.skill.prospecting=Prospecting: %s
+types.tfg.skill.smithing=Smithing: %s
+types.tfg.skill.agriculture=Agriculture: %s
+types.tfg.skill.butchering=Butchering: %s
+
+## Calendar
+enum.tfg.season.january=Winter
+enum.tfg.season.february=Late Winter
+enum.tfg.season.march=Early Spring
+enum.tfg.season.april=Spring
+enum.tfg.season.may=Late Spring
+enum.tfg.season.june=Early Summer
+enum.tfg.season.july=Summer
+enum.tfg.season.august=Late Summer
+enum.tfg.season.september=Early Autumn
+enum.tfg.season.october=Autumn
+enum.tfg.season.november=Late Autumn
+enum.tfg.season.december=Early Winter
+
+enum.tfg.month.january=January
+enum.tfg.month.february=February
+enum.tfg.month.march=March
+enum.tfg.month.april=April
+enum.tfg.month.may=May
+enum.tfg.month.june=June
+enum.tfg.month.july=July
+enum.tfg.month.august=August
+enum.tfg.month.september=September
+enum.tfg.month.october=October
+enum.tfg.month.november=November
+enum.tfg.month.december=December
+
+enum.tfg.day.sunday=Sunday
+enum.tfg.day.monday=Monday
+enum.tfg.day.tuesday=Tuesday
+enum.tfg.day.wednesday=Wednesday
+enum.tfg.day.thursday=Thursday
+enum.tfg.day.friday=Friday
+enum.tfg.day.saturday=Saturday
+
+## Nutrient
+enum.tfg.nutrient.grain=Grain
+enum.tfg.nutrient.vegetables=Vegetables
+enum.tfg.nutrient.fruit=Fruit
+enum.tfg.nutrient.protein=Protein
+enum.tfg.nutrient.dairy=Dairy
+
+## Tier
+enum.tfg.tier.tier_0=Tier 0
+enum.tfg.tier.tier_i=Tier I
+enum.tfg.tier.tier_ii=Tier II
+enum.tfg.tier.tier_iii=Tier III
+enum.tfg.tier.tier_iv=Tier IV
+enum.tfg.tier.tier_v=Tier V
+enum.tfg.tier.tier_vi=Tier VI
+
+## Heat
+enum.tfg.heat.warming=Warming
+enum.tfg.heat.hot=Hot
+enum.tfg.heat.very_hot=Very Hot
+enum.tfg.heat.faint_red=Faint Red
+enum.tfg.heat.dark_red=Dark Red
+enum.tfg.heat.bright_red=Bright Red
+enum.tfg.heat.orange=Orange
+enum.tfg.heat.yellow=Yellow
+enum.tfg.heat.yellow_white=Yellow White
+enum.tfg.heat.white=White
+enum.tfg.heat.brilliant_white=Brilliant White
+
+enum.tfg.heat.torch.catching_fire=Catching Fire
+enum.tfg.heat.torch.lit=Lit
+
+## Forge Step
+enum.tfg.forge_step.hit_light=Light Hit
+enum.tfg.forge_step.hit_medium=Medium Hit
+enum.tfg.forge_step.hit_hard=Hard Hit
+enum.tfg.forge_step.draw=Draw
+enum.tfg.forge_step.bend=Bend
+enum.tfg.forge_step.punch=Punch
+enum.tfg.forge_step.shrink=Shrink
+enum.tfg.forge_step.upset=Upset
+
+## Forge Rule
+enum.tfg.forgerule.hit_any=Hit Any
+enum.tfg.forgerule.hit_not_last=Hit Not Last
+enum.tfg.forgerule.hit_last=Hit Last
+enum.tfg.forgerule.hit_second_last=Hit Second Last
+enum.tfg.forgerule.hit_third_last=Hit Third Last
+enum.tfg.forgerule.draw_any=Draw Any
+enum.tfg.forgerule.draw_last=Draw Last
+enum.tfg.forgerule.draw_not_last=Draw Not Last
+enum.tfg.forgerule.draw_second_last=Draw Second Last
+enum.tfg.forgerule.draw_third_last=Draw Third Last
+enum.tfg.forgerule.punch_any=Punch Any
+enum.tfg.forgerule.punch_last=Punch Last
+enum.tfg.forgerule.punch_not_last=Punch Not Last
+enum.tfg.forgerule.punch_second_last=Punch Second Last
+enum.tfg.forgerule.punch_third_last=Punch Third Last
+enum.tfg.forgerule.bend_any=Bend Any
+enum.tfg.forgerule.bend_last=Bend Last
+enum.tfg.forgerule.bend_not_last=Bend Not Last
+enum.tfg.forgerule.bend_second_last=Bend Second Last
+enum.tfg.forgerule.bend_third_last=Bend Third Last
+enum.tfg.forgerule.upset_any=Upset Any
+enum.tfg.forgerule.upset_last=Upset Last
+enum.tfg.forgerule.upset_not_last=Upset Not Last
+enum.tfg.forgerule.upset_second_last=Upset Second Last
+enum.tfg.forgerule.upset_third_last=Upset Third Last
+enum.tfg.forgerule.shrink_any=Shrink Any
+enum.tfg.forgerule.shrink_last=Shrink Last
+enum.tfg.forgerule.shrink_not_last=Shrink Not Last
+enum.tfg.forgerule.shrink_second_last=Shrink Second Last
+enum.tfg.forgerule.shrink_third_last=Shrink Third Last
+
+## Grow Status
+enum.tfg.growstatus.dead=This plant is dead
+enum.tfg.growstatus.not_growing=This plant is not growing
+enum.tfg.growstatus.can_grow=This plant is able to grow
+enum.tfg.growstatus.growing=This plant is growing
+enum.tfg.growstatus.fully_grown=This plant is fully grown
+
+
 # Module Core ################################################
 
 # Tooltip
@@ -50,6 +178,12 @@ tooltip.tfg.core.advanced_data.ore_dicts=§7  -Ore Dictionary Names:§8 %s
 tooltip.tfg.core.hot_or_not.hot=Too hot to handle! Wear protection.
 tooltip.tfg.core.hot_or_not.cold=Too cold to handle! Wear protection.
 tooltip.tfg.core.hot_or_not.light=Too light to handle! Wear protection.
+
+tooltip.tfg.core.calendar=Calendar
+tooltip.tfg.core.calendar.full_date=%s %s %02d, %04d
+tooltip.tfg.core.calendar.season=Season : %s
+tooltip.tfg.core.calendar.day=Day : %s
+tooltip.tfg.core.calendar.date=Date : %s
 
 ## Item Group
 item_group.tfg.core.name=[ TFG ] Core

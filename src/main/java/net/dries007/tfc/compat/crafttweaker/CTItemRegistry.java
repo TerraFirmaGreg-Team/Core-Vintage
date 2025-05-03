@@ -5,11 +5,11 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityProviderMetal;
-import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityHandlerSize;
+import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize.Handler;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
@@ -32,13 +32,13 @@ public class CTItemRegistry {
     IIngredient inputIngredient = CTHelper.getInternalIngredient(input);
     Size size = Size.valueOf(inputSize.toUpperCase());
     Weight weight = Weight.valueOf(inputWeight.toUpperCase());
-    if (CapabilityHandlerSize.CUSTOM_ITEMS.get(inputIngredient) != null) {
+    if (Handler.CUSTOM_ITEMS.get(inputIngredient) != null) {
       throw new IllegalStateException("Input registered more than once!");
     } else {
       CraftTweakerAPI.apply(new IAction() {
         @Override
         public void apply() {
-          CapabilityHandlerSize.CUSTOM_ITEMS.put(inputIngredient, () -> CapabilityProviderSize.of(size, weight, true));
+          Handler.CUSTOM_ITEMS.put(inputIngredient, () -> CapabilityProviderSize.of(size, weight, true));
         }
 
         @Override

@@ -3,7 +3,6 @@ package su.terrafirmagreg.modules.core.feature.ambiental;
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental;
-import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityHandlerAmbiental;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityProviderAmbiental;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.ICapabilityAmbiental;
 
@@ -22,12 +21,14 @@ public class FeatureAmbiental extends FeatureBase {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
+
     CapabilityAmbiental.register();
   }
 
   @Override
   public void onInit(FMLInitializationEvent event) {
-    CapabilityHandlerAmbiental.init();
+    
+    CapabilityAmbiental.Handler.init();
   }
 
   @SubscribeEvent

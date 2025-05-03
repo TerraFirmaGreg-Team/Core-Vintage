@@ -3,7 +3,7 @@ package net.dries007.tfcfarming.network;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.ICapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.Skill;
-import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillTier;
+import su.terrafirmagreg.modules.core.feature.playerdata.spi.Skill.Tier;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -64,7 +64,7 @@ public class CPacketRequestNutrientData implements IMessage {
       ICapabilityPlayerData playerData = player.getCapability(CapabilityPlayerData.CAPABILITY, null);
       Skill skill = playerData.getSkill(SkillType.AGRICULTURE);
       // TODO:                                                                                                     V config
-      if (Math.abs(player.posX - message.x) <= 5 && Math.abs(player.posZ - message.z) <= 5 && (skill.getTier().isAtLeast(SkillTier.ADEPT)
+      if (Math.abs(player.posX - message.x) <= 5 && Math.abs(player.posZ - message.z) <= 5 && (skill.getTier().isAtLeast(Tier.ADEPT)
                                                                                                || player.capabilities.isCreativeMode)) {
         if (message.y == -1) {
           NutrientValues values = TFCFarming.INSTANCE.worldStorage.getNutrientValues(message.x, message.z);

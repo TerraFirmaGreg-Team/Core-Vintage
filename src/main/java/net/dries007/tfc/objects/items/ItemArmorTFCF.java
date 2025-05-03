@@ -1,16 +1,15 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.api.data.ArmorMaterials;
-import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.damageresistance.capability.ICapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import javax.annotation.Nonnull;
 
@@ -68,8 +67,7 @@ public class ItemArmorTFCF extends ItemArmor implements ICapabilitySize, ICapabi
   }
 
   /**
-   * Determines if this armor will be rendered with the secondary 'overlay' texture. If this is true, the first texture will be rendered using a tint of the
-   * color specified by getColor(ItemStack)
+   * Determines if this armor will be rendered with the secondary 'overlay' texture. If this is true, the first texture will be rendered using a tint of the color specified by getColor(ItemStack)
    *
    * @param stack The stack
    * @return true/false

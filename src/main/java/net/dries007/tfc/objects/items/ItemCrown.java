@@ -1,6 +1,9 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.modules.core.capabilities.damage.ICapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.damageresistance.capability.ICapabilityDamageResistance;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,13 +16,8 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.tfcthings.main.ConfigTFCThings;
-
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-
 import net.dries007.tfc.objects.Gem;
+import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

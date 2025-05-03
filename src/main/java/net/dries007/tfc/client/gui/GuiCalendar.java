@@ -1,8 +1,12 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.api.library.TextComponents;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -14,8 +18,6 @@ import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-
-import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
@@ -43,14 +45,14 @@ public class GuiCalendar extends GuiContainerTFC {
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-    String tooltip = TextFormatting.WHITE + "" + TextFormatting.UNDERLINE + I18n.format("tfc.tooltip.calendar") + ":";
+    String tooltip = TextComponents.empty().color(TextFormatting.DARK_BLUE).underline()
+      .translation(ModUtils.localize("tooltip", "core.calendar")).string(":").format();
+
     fontRenderer.drawString(tooltip, xSize / 2 - fontRenderer.getStringWidth(tooltip) / 2, 7, 0x404040);
 
-    String season, day, date;
-
-    season = I18n.format("tfc.tooltip.season", Calendar.CALENDAR_TIME.getSeasonDisplayName());
-    day = I18n.format("tfc.tooltip.day", Calendar.CALENDAR_TIME.getDisplayDayName());
-    date = I18n.format("tfc.tooltip.date", Calendar.CALENDAR_TIME.getTimeAndDate());
+    String season = TranslatorUtils.translate(ModUtils.localize("tooltip", "core.calendar.season"), Calendar.CALENDAR_TIME.getSeasonDisplayName());
+    String day = TranslatorUtils.translate(ModUtils.localize("tooltip", "core.calendar.day"), Calendar.CALENDAR_TIME.getDisplayDayName());
+    String date = TranslatorUtils.translate(ModUtils.localize("tooltip", "core.calendar.date"), Calendar.CALENDAR_TIME.getTimeAndDate());
 
     fontRenderer.drawString(season, xSize / 2 - fontRenderer.getStringWidth(season) / 2, 25, 0x404040);
     fontRenderer.drawString(day, xSize / 2 - fontRenderer.getStringWidth(day) / 2, 34, 0x404040);
@@ -59,8 +61,7 @@ public class GuiCalendar extends GuiContainerTFC {
 
   @Override
   protected void actionPerformed(GuiButton button) {
-    if (button instanceof GuiButtonPlayerInventoryTab && ((GuiButtonPlayerInventoryTab) button).isActive()) {
-      GuiButtonPlayerInventoryTab tabButton = (GuiButtonPlayerInventoryTab) button;
+    if (button instanceof GuiButtonPlayerInventoryTab tabButton && tabButton.isActive()) {
       if (tabButton.isActive()) {
         if (tabButton.getGuiType() == TFCGuiHandler.Type.INVENTORY) {
           this.mc.displayGuiScreen(new GuiInventory(playerInv.player));

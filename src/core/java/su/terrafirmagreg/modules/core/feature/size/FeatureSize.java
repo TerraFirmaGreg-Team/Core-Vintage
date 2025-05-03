@@ -6,7 +6,6 @@ import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
 import su.terrafirmagreg.modules.core.ConfigCore;
-import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityHandlerSize;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 
@@ -27,12 +26,13 @@ public class FeatureSize extends FeatureBase {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
+
     CapabilitySize.register();
   }
 
   @Override
   public void onInit(FMLInitializationEvent event) {
-    CapabilityHandlerSize.init();
+    CapabilitySize.Handler.init();
   }
 
   @SubscribeEvent
@@ -44,7 +44,7 @@ public class FeatureSize extends FeatureBase {
 //      return;
 //    }
 
-    ICapabilityProvider provider = CapabilityHandlerSize.getCustom(stack);
+    ICapabilityProvider provider = CapabilitySize.getCustom(stack);
 
     event.addCapability(CapabilitySize.KEY, provider);
 

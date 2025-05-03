@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.modules.core.capabilities.damage.spi.DamageType;
+import su.terrafirmagreg.modules.core.feature.damageresistance.spi.DamageType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

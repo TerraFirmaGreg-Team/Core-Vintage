@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.helper.LoggingHelper;
-import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderOreDict;
 
 import net.minecraft.block.Block;

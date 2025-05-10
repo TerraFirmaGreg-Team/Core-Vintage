@@ -47,12 +47,12 @@ public class TerraFirmaGreg extends Framework {
   public TerraFirmaGreg() {
     super(MOD_ID, MOD_NAME);
 
-    this.addModule(new ModuleCore());
-    this.addModule(new ModuleRock());
-    this.addModule(new ModuleDevice());
-    this.addModule(new ModuleAnimal());
-    this.addModule(new ModuleFood());
-    this.addModule(new ModuleIntegration());
+    addModule(new ModuleCore());
+    addModule(new ModuleRock());
+    addModule(new ModuleDevice());
+    addModule(new ModuleAnimal());
+    addModule(new ModuleFood());
+    addModule(new ModuleIntegration());
   }
 
   @EventHandler

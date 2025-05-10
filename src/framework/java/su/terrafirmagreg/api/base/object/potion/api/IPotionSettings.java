@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.object.potion.api;
 
+import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.base.object.potion.api.IPotionSettings.Settings;
-import su.terrafirmagreg.api.library.IBaseSettings;
 
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;

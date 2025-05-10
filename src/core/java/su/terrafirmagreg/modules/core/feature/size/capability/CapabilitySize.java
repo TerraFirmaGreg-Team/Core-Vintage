@@ -131,7 +131,7 @@ public final class CapabilitySize {
       if (block instanceof BlockLadder) {
         return CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT, true); // Fits small vessels and stacksize = 64
       }
-      return CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT, true); // Fits small vessels and stacksize = 32
+      return CapabilityProviderSize.of(); // Fits small vessels and stacksize = 32
 
     }
     return getMetalItemFromOre(stack);

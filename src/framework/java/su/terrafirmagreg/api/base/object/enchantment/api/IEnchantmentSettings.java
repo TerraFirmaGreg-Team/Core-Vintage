@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.object.enchantment.api;
 
+import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.base.object.enchantment.api.IEnchantmentSettings.Settings;
-import su.terrafirmagreg.api.library.IBaseSettings;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;

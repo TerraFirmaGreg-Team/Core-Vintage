@@ -73,7 +73,7 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile, IProviderB
     getSettings()
       .registryKey("pit_kiln")
       .nonFullCube()
-      .noItemBlock()
+//      .noItemBlock()
       .nonOpaque()
       .harvestLevel(ToolClasses.AXE, 0)
       .hardness(0.5f);

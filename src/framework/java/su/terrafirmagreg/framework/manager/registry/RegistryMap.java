@@ -1,6 +1,5 @@
 package su.terrafirmagreg.framework.manager.registry;
 
-import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
 
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +12,6 @@ import lombok.Data;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForgeRegistryEntry<?>>, List<RegistryWrapper>> {
 
@@ -36,42 +34,11 @@ public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForge
     return this.computeIfAbsent(forgeRegistry.getRegistrySuperType());
   }
 
-  @SuppressWarnings("unchecked")
-  public <T extends IForgeRegistryEntry<T>> void register(Class<T> registry, final Consumer<T> consumer) {
-
-    this.get(registry).forEach(wrapper -> consumer.accept((T) wrapper.getEntry()));
-  }
-
-
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  public <T extends IForgeRegistryEntry<T>> void register(IForgeRegistry<T> registry) {
-
-    this.get(registry).forEach(wrapper -> {
-      var entry = wrapper.getEntry();
-      var identifier = wrapper.getIdentifier();
-
-      if (!identifier.equals(entry.getRegistryName())) {
-        entry.setRegistryName(identifier);
-      }
-      registry.register((T) entry);
-      RegistryManager.LOGGER.debug("Registry {}: {}", entry.getRegistryType().getSimpleName(), identifier);
-      if (entry instanceof IBaseSettings settings) {
-
-        settings.register(registry);
-      }
-
-
-    });
-  }
 
   @Data(staticConstructor = "of")
   public static class RegistryWrapper {
 
     private final ResourceLocation identifier;
     private final IForgeRegistryEntry<?> entry;
-
-//    public IForgeRegistryEntry<?> getEntry() {
-//      return entry.get();
-//    }
   }
 }

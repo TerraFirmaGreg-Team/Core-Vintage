@@ -96,7 +96,7 @@ public final class ModUtils {
   }
 
   public static String localize(String key, String name) {
-    return replace(String.format("%s.%s", ModUtils.localize(key), name));
+    return replace(String.format("%s.%s", localize(key), name));
   }
 
   public static String localize(String key, ResourceLocation resourceLocation) {
@@ -107,8 +107,20 @@ public final class ModUtils {
     return replace(resourceLocation.toString());
   }
 
+  public static String localize(String key, String name, String... subname) {
+    return replace(String.format("%s.%s", localize(key), replace(name, subname)));
+  }
+
   public static String localize(String key, String name, String subname) {
     return replace(String.format("%s.%s.%s", key, name, subname));
+  }
+
+  public static String format(String key, String name) {
+    return String.format("%s.%s", key, name);
+  }
+
+  public static String format(String key, String... subname) {
+    return String.format("%s.%s", key, String.join(".", subname));
   }
 
   public static String regKey(String key, String name) {
@@ -121,6 +133,10 @@ public final class ModUtils {
 
   public static String replace(String key) {
     return key.toLowerCase().replaceAll("[/:]", ".");
+  }
+
+  public static String replace(String key, String... subname) {
+    return replace(String.format("%s.%s", key, String.join(".", subname)));
   }
 
   /**

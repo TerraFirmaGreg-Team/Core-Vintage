@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.base.object.block.api;
 
+import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings.Settings;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemBlock;
-import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
@@ -23,7 +23,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IRarity;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +48,7 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
   }
 
   @Override
-  default void register(IForgeRegistry<Block> registry) {
+  default void postRegister() {
     var settings = getSettings();
     settings.getGroups().forEach(group -> asEntry().setCreativeTab(group));
     asEntry()

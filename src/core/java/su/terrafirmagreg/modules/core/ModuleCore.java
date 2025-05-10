@@ -55,7 +55,7 @@ import java.util.List;
 )
 public final class ModuleCore extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class);
 
 
   public ModuleCore() {
@@ -99,7 +99,7 @@ public final class ModuleCore extends ModuleBase {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {
-    
+
     CapabilityFood.register();
     CapabilityMetal.register();
     CapabilityForgeable.register();

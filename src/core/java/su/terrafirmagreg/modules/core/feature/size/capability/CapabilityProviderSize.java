@@ -35,7 +35,7 @@ public class CapabilityProviderSize implements ICapabilitySize, ICapabilityProvi
   }
 
   public static CapabilityProviderSize of() {
-    return of(Size.SMALL, Weight.LIGHT, true); // Default to fitting in small vessels and stacksize = 32
+    return of(Size.SMALL, Weight.VERY_LIGHT, true); // Default to fitting in small vessels and stacksize = 32
   }
 
   public static CapabilityProviderSize of(Size size, Weight weight) {

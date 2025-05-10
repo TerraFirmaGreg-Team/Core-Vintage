@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.manager.registry;
 
+import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryService;
 import su.terrafirmagreg.framework.module.api.IModule;
@@ -13,10 +14,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.common.base.Preconditions;
 
 import lombok.Getter;
+
+import java.util.function.Consumer;
 
 @Getter
 public class RegistryService implements IRegistryService {
@@ -40,7 +44,7 @@ public class RegistryService implements IRegistryService {
       event.getRegistry(), "Registry not found: %s", event.getName()
     );
 
-    this.map.register(registry);
+    this.register(registry);
   }
 
   // --------------------------------------------------------------------------
@@ -51,25 +55,51 @@ public class RegistryService implements IRegistryService {
   @SideOnly(Side.CLIENT)
   public void onRegisterModels(ModelRegistryEvent event) {
 
-    this.map.register(Block.class, ModelUtils::register);
-    this.map.register(Item.class, ModelUtils::register);
+    this.register(Block.class, ModelUtils::register);
+    this.register(Item.class, ModelUtils::register);
   }
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
   public void onRegisterBlockColor(ColorHandlerEvent.Block event) {
 
-    this.map.register(Block.class, block -> ModelUtils.color(event, block));
+    this.register(Block.class, block -> ModelUtils.color(event, block));
   }
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
   public void onRegisterItemColor(ColorHandlerEvent.Item event) {
 
-    this.map.register(Block.class, block -> ModelUtils.color(event, block));
-    this.map.register(Item.class, item -> ModelUtils.color(event, item));
+    this.register(Block.class, block -> ModelUtils.color(event, block));
+    this.register(Item.class, item -> ModelUtils.color(event, item));
   }
 
+
+  @SuppressWarnings("unchecked")
+  public <T extends IForgeRegistryEntry<T>> void register(Class<T> registry, final Consumer<T> consumer) {
+
+    this.map.get(registry).forEach(wrapper -> consumer.accept((T) wrapper.getEntry()));
+  }
+
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public <T extends IForgeRegistryEntry<T>> void register(IForgeRegistry<T> registry) {
+
+    this.map.get(registry).forEach(wrapper -> {
+      var entry = wrapper.getEntry();
+      var identifier = wrapper.getIdentifier();
+
+      if (!identifier.equals(entry.getRegistryName())) {
+        entry.setRegistryName(identifier);
+      }
+      registry.register((T) entry);
+      RegistryManager.LOGGER.debug("Registry {}: {}", entry.getRegistryType().getSimpleName(), identifier);
+      if (entry instanceof IBaseSettings settings) {
+
+        settings.postRegister();
+      }
+    });
+  }
 
 }
 

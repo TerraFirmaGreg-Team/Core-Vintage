@@ -27,7 +27,7 @@ public abstract class ModuleBase implements IModule {
   private IFeatureManager featureManager;
 
 
-  protected void enableNetwork() {
+  public void enableNetwork() {
 
     this.networkManager = NetworkManager.of(this);
   }

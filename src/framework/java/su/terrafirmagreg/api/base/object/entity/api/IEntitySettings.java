@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.object.entity.api;
 
+import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.base.object.entity.api.IEntitySettings.Settings;
-import su.terrafirmagreg.api.library.IBaseSettings;
 
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;

@@ -14,13 +14,13 @@ import net.minecraftforge.fml.common.event.FMLStateEvent;
 
 public abstract class Framework {
 
-  private final String modId;
-  private final String modName;
   private final IModuleManager manager;
 
   protected Framework(String modId, String modName) {
-    this.modId = modId;
-    this.modName = modName;
+
+    ModUtils.of(modId, modName);
+    GuiHandler.of(modId);
+    FluidRegistry.enableUniversalBucket();
 
     this.manager = ModuleManager.of(modId);
   }
@@ -38,9 +38,6 @@ public abstract class Framework {
 
   protected void configure(FMLConstructionEvent event) {
     AnnotationUtils.of(event);
-    ModUtils.of(modId, modName);
-    GuiHandler.of(modId);
-    FluidRegistry.enableUniversalBucket();
     DataFixUtils.of();
   }
 

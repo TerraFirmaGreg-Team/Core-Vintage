@@ -1133,7 +1133,6 @@ vein.surface_tetrahedrite.name=Поверхностный тетраэдрит
 
 tile.tfc.placed_item.name=Установленные предметы
 tile.tfc.placed_item_flat.name=Мусор
-tile.tfc.pit_kiln.name=Яма для обжига
 tile.tfc.peat.name=Торф
 tile.tfc.peat_grass.name=Торфяная трава
 tile.tfc.torch.name=Факел

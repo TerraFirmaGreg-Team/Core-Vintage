@@ -6,10 +6,12 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.common.base.Joiner;
+import mezz.jei.util.Log;
 
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 @UtilityClass
@@ -147,10 +149,17 @@ public final class TranslatorUtils {
   }
 
   public static String translateToLocal(String key) {
-    if (net.minecraft.util.text.translation.I18n.canTranslate(key)) {
-      return net.minecraft.util.text.translation.I18n.translateToLocal(key);
-    } else {
-      return net.minecraft.util.text.translation.I18n.translateToFallback(key);
+    return net.minecraft.util.text.translation.I18n.canTranslate(key) ? net.minecraft.util.text.translation.I18n.translateToLocal(key) : net.minecraft.util.text.translation.I18n.translateToFallback(key);
+  }
+
+  public static String translateToLocalFormatted(String key, Object... format) {
+    String string = translateToLocal(key);
+
+    try {
+      return String.format(string, format);
+    } catch (IllegalFormatException e) {
+      Log.get().error("Format error: {}", string, e);
+      return "Format error: " + string;
     }
   }
 

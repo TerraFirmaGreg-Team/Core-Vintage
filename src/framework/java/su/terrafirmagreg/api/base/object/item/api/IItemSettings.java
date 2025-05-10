@@ -1,10 +1,10 @@
 package su.terrafirmagreg.api.base.object.item.api;
 
 
+import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.base.capability.spi.CombinedCapabilityProvider;
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings.Settings;
-import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderOreDict;
@@ -18,7 +18,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,7 +48,7 @@ public interface IItemSettings extends IBaseSettings<Settings, Item> {
   }
 
   @Override
-  default void register(IForgeRegistry<Item> registry) {
+  default void postRegister() {
     var settings = getSettings();
     settings.getGroups().forEach(group -> asEntry().setCreativeTab(group));
     asEntry()
@@ -104,6 +103,7 @@ public interface IItemSettings extends IBaseSettings<Settings, Item> {
       return settingsItem;
     }
 
+    @Override
     public Settings registryKey(String registryKey) {
       super.registryKey(registryKey);
       this.oreDict.add(new Object[]{registryKey});

@@ -1,13 +1,12 @@
 package su.terrafirmagreg.api.base.object.biome.api;
 
+import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.base.object.biome.api.IBiomeSettings.Settings;
-import su.terrafirmagreg.api.library.IBaseSettings;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import com.google.common.collect.Lists;
 
@@ -20,7 +19,7 @@ import java.util.List;
 public interface IBiomeSettings extends IBaseSettings<Settings, Biome> {
 
   @Override
-  default void register(IForgeRegistry<Biome> registry) {
+  default void postRegister() {
     var settings = getSettings();
 
     BiomeUtils.addTypes(asEntry());

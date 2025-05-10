@@ -185,6 +185,36 @@ tooltip.tfg.core.calendar.season=Season : %s
 tooltip.tfg.core.calendar.day=Day : %s
 tooltip.tfg.core.calendar.date=Date : %s
 
+## Command
+command.tfg.core.player.usage=/tfg player <get|set|add|reset> [nutrition|food|saturation|water|skill <name>] [value]
+command.tfg.core.player.usage.expected.first_argument=Expected <get|set|add|reset> after /tfg player
+command.tfg.core.player.usage.expected.second_argument=Expected [nutrition|food|saturation|water|skill <name>] after /tfg player %s
+command.tfg.core.player.usage.expected.id=Expected <name> after /tfg player %s
+command.tfg.core.player.usage.expected.value=Expected [value] after /tfg player %s
+command.tfg.core.player.usage.expected.cant_set_add_nutrients=Can't set / add nutrients directly as it's based on food history. Run /tfg player reset nutrients instead.
+command.tfg.core.player.usage.expected.unknown_skill=Unknown skill: %s
+command.tfg.core.player.usage.expected.needs_player=Must be used by a player
+command.tfg.core.player.usage.reset.nutrients=Reset nutrients
+command.tfg.core.player.usage.get.nutrients=Average Nutrition: %s
+command.tfg.core.player.usage.get.nutrients_nutrient= - %s: %s
+command.tfg.core.player.usage.get.nutrients_last_eaten=Last Eaten: %d Hunger, %s Saturation, %s Decay Modifier.
+command.tfg.core.player.usage.get.nutrients_last_eaten_nutrient= - %s: %s
+command.tfg.core.player.usage.add.skill=Added %.2f to skill %s
+command.tfg.core.player.usage.set.skill=Set %s to %.2f
+command.tfg.core.player.usage.get.skill=Skill %s: Total Level = %.2f, Tier = %s, Level = %.2f
+command.tfg.core.player.usage.get.food=Hunger: %d
+command.tfg.core.player.usage.set.food=Set hunger to %d
+command.tfg.core.player.usage.reset.food=Reset hunger to %d
+command.tfg.core.player.usage.add.food=Add hunger to %d
+command.tfg.core.player.usage.get.saturation=Saturation: %.2f
+command.tfg.core.player.usage.set.saturation=Set saturation to %.2f
+command.tfg.core.player.usage.reset.saturation=Reset saturation to %.2f
+command.tfg.core.player.usage.add.saturation=Add saturation to %.2f
+command.tfg.core.player.usage.get.water=Water: %.1f%%
+command.tfg.core.player.usage.set.water=Set water to %.1f%%
+command.tfg.core.player.usage.add.water=Add water to %.1f%%
+command.tfg.core.player.usage.reset.water=Reset water to %.1f%%
+
 ## Item Group
 item_group.tfg.core.name=[ TFG ] Core
 
@@ -261,6 +291,7 @@ block.tfg.device.charcoal_forge.name=Charcoal Forge
 block.tfg.device.crucible.name=Crucible
 block.tfg.device.charcoal_pile.name=Charcoal Pile
 block.tfg.device.fire_pit.name=Firepit
+block.tfg.device.pit_kiln.name=Pit Kiln
 block.tfg.device.cellar.door.name=Cellar Door
 block.tfg.device.cellar.shelf.name=Cellar Shelf
 block.tfg.device.cellar.wall.name=Cellar Wall

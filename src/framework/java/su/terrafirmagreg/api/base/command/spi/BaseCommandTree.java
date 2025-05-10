@@ -6,43 +6,36 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.server.command.CommandTreeBase;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.StringJoiner;
 
 /**
  * This implementation of CommandTreeBase fixes a few permission issues, and adds a better help screen.
  */
-public class CmdTreeBase extends CommandTreeBase {
+public class BaseCommandTree extends CommandTreeBase {
 
   private final String identifier;
 
-  //TODO ContainerId : ModuleId
-  public CmdTreeBase(ResourceLocation identifier) {
-    this(identifier.toString());
-  }
 
-  public CmdTreeBase(String identifier) {
+  public BaseCommandTree(String identifier) {
 
     this.identifier = identifier;
   }
 
   @Override
-  public @NotNull String getName() {
+  public String getName() {
     return identifier;
   }
 
   @Override
-  public @NotNull String getUsage(@NotNull ICommandSender sender) {
+  public String getUsage(ICommandSender sender) {
     return ModUtils.localize("command", identifier, "usage");
   }
 
   @Override
-  public void execute(@NotNull MinecraftServer server, @NotNull ICommandSender sender, String[] args) throws CommandException {
+  public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 
     if (args.length == 0) {
 
@@ -72,7 +65,7 @@ public class CmdTreeBase extends CommandTreeBase {
   }
 
   @Override
-  public boolean checkPermission(@NotNull MinecraftServer server, @NotNull ICommandSender sender) {
+  public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
 
     return this.getRequiredPermissionLevel() <= 0 || super.checkPermission(server, sender);
   }

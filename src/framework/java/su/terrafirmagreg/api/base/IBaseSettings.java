@@ -1,25 +1,20 @@
-package su.terrafirmagreg.api.library;
+package su.terrafirmagreg.api.base;
 
-import su.terrafirmagreg.api.library.IBaseSettings.BaseSettings;
-
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
+import su.terrafirmagreg.api.base.IBaseSettings.BaseSettings;
 
 import lombok.Getter;
 
-public interface IBaseSettings<T extends BaseSettings<T>, V extends IForgeRegistryEntry<V>> {
-
-  T getSettings();
+public interface IBaseSettings<T extends BaseSettings<T>, V> {
 
   @SuppressWarnings("unchecked")
   default V asEntry() {
     return (V) this;
   }
 
-  default void register(IForgeRegistry<V> registry) {
+  T getSettings();
 
-  }
 
+  default void postRegister() {}
 
   @Getter
   abstract class BaseSettings<T> {
@@ -30,7 +25,7 @@ public interface IBaseSettings<T extends BaseSettings<T>, V extends IForgeRegist
 
     /**
      * Устанавливает ключ реестра для элемента. Во время регистрации, будет подставлено имя контейнера (modId) и имя модуля
-     * <p>Формат test:moduleName/registryKey</p>
+     * <p>Формат modId:moduleName/registryKey</p>
      */
     @SuppressWarnings("unchecked")
     public T registryKey(String registryKey) {

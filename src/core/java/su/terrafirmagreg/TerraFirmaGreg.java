@@ -7,6 +7,7 @@ import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.food.ModuleFood;
 import su.terrafirmagreg.modules.integration.ModuleIntegration;
+import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.rock.ModuleRock;
 import su.terrafirmagreg.proxy.IProxy;
 
@@ -48,6 +49,7 @@ public class TerraFirmaGreg extends Framework {
     super(MOD_ID, MOD_NAME);
 
     addModule(new ModuleCore());
+    addModule(new ModuleMetal());
     addModule(new ModuleRock());
     addModule(new ModuleDevice());
     addModule(new ModuleAnimal());

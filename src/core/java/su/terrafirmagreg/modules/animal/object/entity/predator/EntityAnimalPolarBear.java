@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
-import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
+import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
@@ -38,7 +39,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -171,7 +171,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
     if (this.isChild()) {
       attackDamage /= 2;
     }
-    boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this),
+    boolean flag = entityIn.attackEntityFrom(DamageSources.causeMobDamage(this),
       (float) attackDamage);
     if (flag) {
       this.applyEnchantments(this, entityIn);

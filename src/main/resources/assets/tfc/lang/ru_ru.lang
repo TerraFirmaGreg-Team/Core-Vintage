@@ -43,8 +43,6 @@ tfc.command.findveins.output=Найдена жила %s около %s
 tfc.command.findveins.output_file=Файл сохранён в %s
 tfc.command.findveins.output_file.error=Ошибка при попытке записи файла: %s
 
-tfc.command.debuginfo.usage=/tfcdebuginfodump - записывать много отладочной информации в лог-файл ... ну, ОЧЕНЬ МНОГО. Не используйте, если об этом не попросит разработчик.
-
 tfc.command.gentree.useage=/maketree [wood] -> Выращивает дерево указанного типа.
 tfc.command.gentree.failed=Отсутствует параметр дерева! /maketree [wood]
 tfc.command.gentree.failed.woodtype=Тип дерева %s не найден!
@@ -920,45 +918,6 @@ item.tfc.dye.white.name=Белый краситель
 
 generator.tfc_classic=Класический TFC
 
-# Enum types
-# todo: add other enums
-## Metal related
-tfc.types.metal.unknown=Неизвестный сплав
-tfc.types.metal.bismuth=Висмут
-tfc.types.metal.bismuth_bronze=Висмутовая бронза
-tfc.types.metal.black_bronze=Черная бронза
-tfc.types.metal.brass=Латунь
-tfc.types.metal.bronze=Бронза
-tfc.types.metal.copper=Медь
-tfc.types.metal.gold=Золото
-tfc.types.metal.lead=Свинец
-tfc.types.metal.nickel=Никель
-tfc.types.metal.rose_gold=Розовое золото
-tfc.types.metal.silver=Серебро
-tfc.types.metal.tin=Олово
-tfc.types.metal.zinc=Цинк
-tfc.types.metal.sterling_silver=Стерлинг (чистое серебро)
-tfc.types.metal.wrought_iron=Кованое железо
-tfc.types.metal.pig_iron=Чугун
-tfc.types.metal.steel=Сталь
-tfc.types.metal.platinum=Платина
-tfc.types.metal.black_steel=Черная сталь
-tfc.types.metal.blue_steel=Синяя сталь
-tfc.types.metal.red_steel=Красная сталь
-tfc.types.metal.weak_steel=Слабая сталь
-tfc.types.metal.weak_black_steel=Черная слабая сталь
-tfc.types.metal.weak_blue_steel=Синяя слабая сталь
-tfc.types.metal.weak_red_steel=Красная слабая сталь
-tfc.types.metal.high_carbon_steel=Высокоуглеродистая сталь
-tfc.types.metal.high_carbon_black_steel=Черная высокоуглеродистая сталь
-tfc.types.metal.high_carbon_blue_steel=Синяя высокоуглеродистая сталь
-tfc.types.metal.high_carbon_red_steel=Красная высокоуглеродистая сталь
-
-## Rock category
-tfc.types.rock_category.sedimentary=Осадочная
-tfc.types.rock_category.metamorphic=Метаморфическая
-tfc.types.rock_category.igneous_intrusive=Магматическая интрузивная
-tfc.types.rock_category.igneous_extrusive=Магматическая экструзивная
 
 #JEI
 jei.category.tfc.alloy=Рецепты сплавления

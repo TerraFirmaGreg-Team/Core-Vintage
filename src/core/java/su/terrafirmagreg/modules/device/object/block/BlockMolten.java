@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.api.data.DamageSources;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -10,7 +11,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -74,7 +74,7 @@ public class BlockMolten extends BaseBlock {
   public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
     IBlockState state = worldIn.getBlockState(pos);
     if (state.getValue(LIT) && !entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase && state.getValue(LIT)) {
-      entityIn.attackEntityFrom(DamageSource.IN_FIRE, 4.0f);
+      entityIn.attackEntityFrom(DamageSources.IN_FIRE, 4.0f);
     }
     super.onEntityWalk(worldIn, pos, entityIn);
   }

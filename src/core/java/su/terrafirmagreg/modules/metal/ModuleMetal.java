@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 )
 public class ModuleMetal extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleMetal.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleMetal.class);
 
 
   public ModuleMetal() {

@@ -23,7 +23,7 @@ public enum ItemEffect {
 
     entityPlayer.setFire(1);
 
-  }, TextFormatting.RED, "Too hot to handle! Wear protection."),
+  }, TextFormatting.RED, "tooltip.tfg.core.hot_or_not.hot"),
 
   ITEM_COLD(itemStack ->
     StackUtils.compareStackToList(itemStack, Arrays.asList(ConfigCore.FEATURE.HOT_OR_NOT.coldItemAdditions)),
@@ -32,7 +32,7 @@ public enum ItemEffect {
       entityPlayer.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 21, 1));
       entityPlayer.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 21, 1));
 
-    }, TextFormatting.AQUA, "Too cold to handle! Wear protection."),
+    }, TextFormatting.AQUA, "tooltip.tfg.core.hot_or_not.cold"),
 
   ITEM_GAS(itemStack ->
     StackUtils.compareStackToList(itemStack, Arrays.asList(ConfigCore.FEATURE.HOT_OR_NOT.gaseousItemAdditions)),
@@ -40,7 +40,7 @@ public enum ItemEffect {
 
       entityPlayer.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 21, 1));
 
-    }, TextFormatting.YELLOW, "Too light to handle! Wear protection.");
+    }, TextFormatting.YELLOW, "tooltip.tfg.core.hot_or_not.light");
 
 
   public final Predicate<ItemStack> isValid;

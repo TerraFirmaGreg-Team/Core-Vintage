@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.object.entity;
 
-import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
+import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;

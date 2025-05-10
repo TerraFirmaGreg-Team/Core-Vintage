@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 )
 public final class ModuleAnimal extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class);
 
 
   public ModuleAnimal() {

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity;
 
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 
 import net.minecraft.block.Block;
@@ -14,7 +15,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -191,7 +191,7 @@ public class EntityFallingBlockTFC extends EntityFallingBlock implements IEntity
     List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox());
     for (Entity entity : list) {
       if (ConfigTFC.General.FALLABLE.hurtEntities && distance > 1.0F && entity instanceof EntityLivingBase) {
-        entity.attackEntityFrom(DamageSource.FALLING_BLOCK, distance);
+        entity.attackEntityFrom(DamageSources.FALLING_BLOCK, distance);
       } else if (ConfigTFC.General.FALLABLE.destroyItems && entity instanceof EntityItem) {
         entity.setDead();
       }

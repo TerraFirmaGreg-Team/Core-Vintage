@@ -30,10 +30,6 @@ public class HelpersFL {
 
   }
 
-  public static boolean doesStackMatchTool(ItemStack stack, String toolClass) {
-    Set<String> toolClasses = stack.getItem().getToolClasses(stack);
-    return toolClasses.contains(toolClass);
-  }
 
   public static void insertWhitelist() {
     ConfigManager.sync(Mods.ModIDs.TFC, Config.Type.INSTANCE);

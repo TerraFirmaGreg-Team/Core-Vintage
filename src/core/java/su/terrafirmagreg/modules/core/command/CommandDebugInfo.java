@@ -1,6 +1,9 @@
-package net.dries007.tfc.command;
+package su.terrafirmagreg.modules.core.command;
 
-import net.minecraft.command.CommandBase;
+import su.terrafirmagreg.api.base.command.spi.BaseCommand;
+import su.terrafirmagreg.api.util.CommandUtils.Level;
+import su.terrafirmagreg.framework.manager.command.CommandManager;
+
 import net.minecraft.command.ICommandSender;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.server.MinecraftServer;
@@ -12,56 +15,44 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * This is part of an effort to find the cause of TerraFirmaCraft#355 and TerraFirmaCraft#361
  */
-@ParametersAreNonnullByDefault
-public class CommandDebugInfo extends CommandBase {
+public class CommandDebugInfo extends BaseCommand {
 
-  private static final Logger LOGGER = LogManager.getLogger("tfc-infodump");
+  public CommandDebugInfo() {
 
-  @Override
-  @Nonnull
-  public String getName() {
-    return "tfcdebuginfodump";
-  }
-
-  @Override
-  @Nonnull
-  public String getUsage(ICommandSender sender) {
-    return "tfc.command.debuginfo.usage";
+    getSettings()
+      .registryKey("debug_info")
+      .level(Level.SERVER);
   }
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
     World world = sender.getEntityWorld();
     BlockPos pos = sender.getPosition();
+    var registryKey = getSettings().getRegistryKey();
 
     // Chunk data
     ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
 
-    LOGGER.info("ROCK LAYER DATA");
+    CommandManager.LOGGER.info("[{}] {}", registryKey, "ROCK LAYER DATA");
     for (int x = 0; x < 16; x++) {
       for (int z = 0; z < 16; z++) {
-        LOGGER.info("Pos: {} {} - Rock 1: {}, Rock 2: {}, Rock 3: {}", x, z, chunkData.getRock1(x, z), chunkData.getRock2(x, z), chunkData.getRock3(x, z));
+        CommandManager.LOGGER.info("[{}] Pos: {} {} - Rock 1: {}, Rock 2: {}, Rock 3: {}", registryKey, x, z, chunkData.getRock1(x, z), chunkData.getRock2(x, z), chunkData.getRock3(x, z));
       }
     }
 
-    LOGGER.info("RAW CHUNK DATA VIEW");
+    CommandManager.LOGGER.info("[{}] {}", registryKey, "RAW CHUNK DATA VIEW");
     NBTBase nbt = ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(chunkData, null);
-    LOGGER.info(nbt == null ? "writeNBT returned null" : nbt.toString());
+    CommandManager.LOGGER.info("[{}] {}", registryKey, nbt == null ? "writeNBT returned null" : nbt.toString());
 
     // Rock Registry Information
-    LOGGER.info("ROCK REGISTRY");
+    CommandManager.LOGGER.info("[{}] {}", registryKey, "ROCK REGISTRY");
     for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
       //noinspection ConstantConditions
-      LOGGER.info("Rock: {} -> Id: {}", rock.getRegistryName().getPath(), ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getID(rock));
+      CommandManager.LOGGER.info("[{}] {}", registryKey, "Rock: {} -> Id: {}", rock.getRegistryName().getPath(), ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getID(rock));
     }
   }
 }

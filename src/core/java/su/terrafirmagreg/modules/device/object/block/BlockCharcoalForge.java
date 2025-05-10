@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
@@ -24,7 +25,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -214,7 +214,7 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
     IBlockState state = worldIn.getBlockState(pos);
     if (state.getValue(LIT) && !entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase && state.getValue(LIT)) {
-      entityIn.attackEntityFrom(DamageSource.IN_FIRE, 2.0F);
+      entityIn.attackEntityFrom(DamageSources.IN_FIRE, 2.0F);
     }
     super.onEntityWalk(worldIn, pos, entityIn);
   }

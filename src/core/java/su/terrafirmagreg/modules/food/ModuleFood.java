@@ -12,7 +12,7 @@ import su.terrafirmagreg.framework.module.spi.ModuleBase;
 )
 public class ModuleFood extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleFood.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleFood.class);
 
   public ModuleFood() {
     enableRegistry();

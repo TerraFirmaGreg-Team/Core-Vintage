@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.feature.calendar.spi.storage;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.WorldUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,9 +22,15 @@ public class WorldDataCalendar extends WorldSavedData {
 
   private final Calendar calendar;
 
-  @SuppressWarnings("unused")
+
   public WorldDataCalendar() {
-    super(DATA_ID);
+    this(DATA_ID);
+  }
+
+  @SuppressWarnings("unused")
+  public WorldDataCalendar(String dataId) {
+    super(dataId);
+
     this.calendar = new Calendar();
   }
 
@@ -34,7 +41,7 @@ public class WorldDataCalendar extends WorldSavedData {
       throw new IllegalStateException("Unable to access calendar data - everything is wrong now");
     }
 
-    WorldDataCalendar data = (WorldDataCalendar) mapStorage.getOrLoadData(WorldDataCalendar.class, DATA_ID);
+    WorldDataCalendar data = WorldUtils.getOrLoadData(mapStorage, WorldDataCalendar.class, DATA_ID);
     if (data == null) {
       // Unable to load data, so assign default values
       LOGGER.info("Creating default calendar world data.");

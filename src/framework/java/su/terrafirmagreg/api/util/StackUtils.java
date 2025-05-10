@@ -85,8 +85,8 @@ public final class StackUtils {
    */
   public static boolean isEmpty(Collection<ItemStack> stacks) {
     if (stacks.isEmpty()) {return true;}
-    for (ItemStack stack : stacks) {if (!stack.isEmpty()) {return false;}}
-    return true;
+    for (ItemStack stack : stacks) {if (stack.isEmpty()) {return true;}}
+    return false;
   }
 
   /**

@@ -18,7 +18,7 @@ public enum FluidEffect {
 
       entityPlayer.setFire(1);
 
-    }, TextFormatting.RED, "Too hot to handle! Wear protection."),
+    }, TextFormatting.RED, "tooltip.tfg.core.hot_or_not.hot"),
 
   FLUID_COLD(fluidStack ->
     fluidStack.getFluid().getTemperature(fluidStack) <= ConfigCore.FEATURE.HOT_OR_NOT.coldFluid + 273,
@@ -27,7 +27,7 @@ public enum FluidEffect {
       entityPlayer.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 21, 1));
       entityPlayer.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 21, 1));
 
-    }, TextFormatting.AQUA, "Too cold to handle! Wear protection."),
+    }, TextFormatting.AQUA, "tooltip.tfg.core.hot_or_not.cold"),
 
   FLUID_GAS(fluidStack ->
     fluidStack.getFluid().isGaseous(fluidStack),
@@ -35,7 +35,7 @@ public enum FluidEffect {
 
       entityPlayer.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 21, 1));
 
-    }, TextFormatting.YELLOW, "Too light to handle! Wear protection.");
+    }, TextFormatting.YELLOW, "tooltip.tfg.core.hot_or_not.light");
 
 
   public final Predicate<FluidStack> isValid;

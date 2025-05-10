@@ -2,7 +2,6 @@ package net.dries007.tfc.util;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 
@@ -16,11 +15,6 @@ import java.util.Set;
 public class HelpersTFCF {
 
   public HelpersTFCF() {
-  }
-
-  public static boolean doesStackMatchTool(ItemStack stack, String toolClass) {
-    Set<String> toolClasses = stack.getItem().getToolClasses(stack);
-    return toolClasses.contains(toolClass);
   }
 
   public static void insertWhitelistFluids() {

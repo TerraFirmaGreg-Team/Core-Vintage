@@ -1,12 +1,12 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.modules.core.capabilities.forge.ForgeableHeatableHandler;
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.device.feature.sharpness.capability.CapabilitySharpness;
-import su.terrafirmagreg.modules.device.feature.sharpness.capability.ICapabilitySharpness;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -31,7 +31,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.types.DefaultMetals;
-import net.dries007.tfcthings.event.TFCThingsEventHandler;
 import net.dries007.tfcthings.init.TFCThingsSoundEvents;
 import net.dries007.tfcthings.main.ConfigTFCThings;
 
@@ -85,27 +84,30 @@ public class ItemWhetstone extends Item implements ICapabilitySize, ICapabilityM
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
       }
     }
-    return new ActionResult(EnumActionResult.FAIL, itemstack);
+    return new ActionResult<>(EnumActionResult.FAIL, itemstack);
   }
 
 
+  @Override
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
     if (entityLiving instanceof EntityPlayer playerIn) {
-      if (timeLeft < 985 && playerIn.getHeldItemOffhand() != null && playerIn.getHeldItemOffhand()
-        .hasCapability(CapabilitySharpness.CAPABILITY, null)) {
-        ItemStack item = playerIn.getHeldItemOffhand();
-        ICapabilitySharpness capability = TFCThingsEventHandler.getSharpnessCapability(item);
-        if (capability != null && capability.getCharges() < getMaxCharges()) {
-          for (int i = 0; i < tier; i++) {
-            if (capability.getCharges() >= getMaxCharges()) {break;}
-            capability.addCharge();
+      var itemStack = playerIn.getHeldItemOffhand();
+      if (timeLeft < 985) {
+        var sharpness = CapabilityUtils.getOptional(itemStack, CapabilitySharpness.CAPABILITY);
+        sharpness.ifPresent(cap -> {
+          if (cap.getCharges() < getMaxCharges()) {
+            for (int i = 0; i < tier; i++) {
+              if (cap.getCharges() >= getMaxCharges()) {break;}
+              cap.addCharge();
+            }
+            if (Math.random() < 0.8) {
+              itemStack.damageItem(1, entityLiving);
+            }
+            stack.damageItem(1, entityLiving);
+            playerIn.playSound(TFCThingsSoundEvents.WHETSTONE_SHARPEN, 1.0f, 1.0f);
           }
-          if (Math.random() < 0.8) {
-            item.damageItem(1, entityLiving);
-          }
-          stack.damageItem(1, entityLiving);
-          playerIn.playSound(TFCThingsSoundEvents.WHETSTONE_SHARPEN, 1.0f, 1.0f);
-        } else {
+        });
+        if (!sharpness.isPresent()) {
           if (!worldIn.isRemote) {
             playerIn.sendMessage(new TextComponentTranslation("tfcthings.tooltip.maximum_sharpness"));
           }

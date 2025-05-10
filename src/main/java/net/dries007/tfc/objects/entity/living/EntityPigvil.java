@@ -27,11 +27,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Sets;
-import net.dries007.tfcthings.init.TFCThingsBlocks;
-import net.dries007.tfcthings.init.TFCThingsItems;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.items.metal.ItemIngot;
+import net.dries007.tfcthings.init.TFCThingsBlocks;
+import net.dries007.tfcthings.init.TFCThingsItems;
 
 import java.util.Set;
 
@@ -74,8 +74,8 @@ public class EntityPigvil extends EntityCreature {
   }
 
   public boolean attackEntityFrom(DamageSource source, float amount) {
-    if (source.equals(DamageSource.OUT_OF_WORLD) || source.equals(DamageSource.LAVA) || source.equals(DamageSource.IN_FIRE)
-        || source.equals((DamageSource.DROWN))) {
+    if (source.equals(DamageSources.OUT_OF_WORLD) || source.equals(DamageSources.LAVA) || source.equals(DamageSources.IN_FIRE)
+        || source.equals((DamageSources.DROWN))) {
       return super.attackEntityFrom(source, amount);
     }
     return false;

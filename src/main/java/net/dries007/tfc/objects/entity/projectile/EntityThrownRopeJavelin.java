@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.entity.projectile;
 
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 
@@ -135,9 +136,9 @@ public class EntityThrownRopeJavelin extends EntityArrow implements IThrowableEn
 
         DamageSource damagesource;
         if (this.shootingEntity == null) {
-          damagesource = DamageSource.causeArrowDamage(this, this);
+          damagesource = DamageSources.causeArrowDamage(this, this);
         } else {
-          damagesource = DamageSource.causeArrowDamage(this, this.shootingEntity);
+          damagesource = DamageSources.causeArrowDamage(this, this.shootingEntity);
         }
 
         if (this.isBurning() && !(entity instanceof EntityEnderman)) {

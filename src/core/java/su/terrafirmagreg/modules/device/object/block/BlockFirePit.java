@@ -27,7 +27,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -295,7 +294,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
   public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
     IBlockState state = worldIn.getBlockState(pos);
     if (state.getValue(LIT) && !entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase) {
-      entityIn.attackEntityFrom(DamageSource.IN_FIRE, 1.0F);
+      entityIn.attackEntityFrom(DamageSources.IN_FIRE, 1.0F);
     }
     super.onEntityWalk(worldIn, pos, entityIn);
   }
@@ -303,7 +302,7 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
   @Override
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     if (state.getValue(LIT) && !entityIn.isImmuneToFire() && entityIn instanceof EntityLivingBase) {
-      entityIn.attackEntityFrom(DamageSource.IN_FIRE, 1.0F);
+      entityIn.attackEntityFrom(DamageSources.IN_FIRE, 1.0F);
     }
     //todo: handle fuel and item inputs from thrown entities
     super.onEntityCollision(worldIn, pos, state, entityIn);

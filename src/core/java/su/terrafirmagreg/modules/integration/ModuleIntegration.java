@@ -28,7 +28,7 @@ import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.GREGTECH;
 )
 public class ModuleIntegration extends ModuleBase {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleIntegration.class.getSimpleName());
+  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleIntegration.class);
 
   public ModuleIntegration() {}
 
@@ -57,5 +57,5 @@ public class ModuleIntegration extends ModuleBase {
   public @NotNull LoggingHelper getLogger() {
     return LOGGER;
   }
-  
+
 }

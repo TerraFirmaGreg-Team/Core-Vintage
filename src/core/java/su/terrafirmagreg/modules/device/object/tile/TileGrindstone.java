@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.modules.device.feature.sharpness.capability.CapabilitySharpness;
-import su.terrafirmagreg.modules.device.feature.sharpness.capability.ICapabilitySharpness;
 
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.init.SoundEvents;
@@ -17,7 +17,6 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.BlockFluidWater;
 import net.dries007.tfc.objects.items.ItemGrindstone;
 import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfcthings.event.TFCThingsEventHandler;
 import net.dries007.tfcthings.init.TFCThingsItems;
 import net.dries007.tfcthings.init.TFCThingsSoundEvents;
 
@@ -135,20 +134,12 @@ public class TileGrindstone extends TEInventory implements ITickable {
   private BlockPos getFluidLocation() {
     int dir = getBlockMetadata();
     BlockPos check = pos.down();
-    switch (dir) {
-      case 0:
-        check = check.east();
-        break;
-      case 1:
-        check = check.south();
-        break;
-      case 2:
-        check = check.west();
-        break;
-      default:
-        check = check.north();
-    }
-    return check;
+    return switch (dir) {
+      case 0 -> check.east();
+      case 1 -> check.south();
+      case 2 -> check.west();
+      default -> check.north();
+    };
   }
 
 
@@ -177,24 +168,27 @@ public class TileGrindstone extends TEInventory implements ITickable {
     if (inputStack.isEmpty() || grindstoneStack.isEmpty() || getFlowDirection() == 0) {
       return false;
     }
-    if (inputStack.hasCapability(CapabilitySharpness.CAPABILITY, null)) {
-      ICapabilitySharpness capability = TFCThingsEventHandler.getSharpnessCapability(inputStack);
+    var cap = CapabilityUtils.getOptional(inputStack, CapabilitySharpness.CAPABILITY);
+    if (cap.isPresent()) {
       ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
-      return inputStack.getMaxDamage() - inputStack.getItemDamage() > 1 && capability.getCharges() < grindstone.getMaxCharges();
+      return inputStack.getMaxDamage() - inputStack.getItemDamage() > 1 && cap.get().getCharges() < grindstone.getMaxCharges();
     }
     return false;
   }
 
   private void sharpenItem(ItemStack inputStack, ItemStack grindstoneStack) {
-    ICapabilitySharpness capability = TFCThingsEventHandler.getSharpnessCapability(inputStack);
     ItemGrindstone grindstone = (ItemGrindstone) grindstoneStack.getItem();
-    if (capability != null && capability.getCharges() < grindstone.getMaxCharges()) {
-      for (int i = 0; i < grindstone.getTier(); i++) {
-        if (capability.getCharges() >= grindstone.getMaxCharges()) {break;}
-        capability.addCharge();
+    CapabilityUtils.getOptional(inputStack, CapabilitySharpness.CAPABILITY).ifPresent(cap -> {
+      if (cap.getCharges() < grindstone.getMaxCharges()) {
+        for (int i = 0; i < grindstone.getTier(); i++) {
+          if (cap.getCharges() >= grindstone.getMaxCharges()) {
+            break;
+          }
+          cap.addCharge();
+        }
+        inputStack.damageItem(1, new EntityCow(this.world));
+        grindstoneStack.damageItem(1, new EntityCow(this.world));
       }
-      inputStack.damageItem(1, new EntityCow(this.world));
-      grindstoneStack.damageItem(1, new EntityCow(this.world));
-    }
+    });
   }
 }

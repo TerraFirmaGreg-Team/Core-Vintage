@@ -33,8 +33,6 @@ tfc.command.findveins.output=Found vein %s at %s
 tfc.command.findveins.output_file=File saved at %s
 tfc.command.findveins.output_file.error=Error while trying to write dump file: %s
 
-tfc.command.debuginfo.usage=/tfcdebuginfodump - write a lot of debug info to the log... like, A LOT. Don't use unless a dev asks you to.
-
 tfc.command.gentree.useage=/maketree [wood] -> Grows a tree of the type specified.
 tfc.command.gentree.failed=Missing Wood argument! /maketree [wood]
 tfc.command.gentree.failed.woodtype=Tree type %s not found!
@@ -935,46 +933,6 @@ item.tfc.dye.brown.name=Brown Dye
 item.tfc.dye.white.name=White Dye
 
 generator.tfc_classic=TFC Classic
-
-# Enum types
-# todo: add other enums
-## Metal related
-tfc.types.metal.unknown=Unknown Alloy
-tfc.types.metal.bismuth=Bismuth
-tfc.types.metal.bismuth_bronze=Bismuth Bronze
-tfc.types.metal.black_bronze=Black Bronze
-tfc.types.metal.brass=Brass
-tfc.types.metal.bronze=Bronze
-tfc.types.metal.copper=Copper
-tfc.types.metal.gold=Gold
-tfc.types.metal.lead=Lead
-tfc.types.metal.nickel=Nickel
-tfc.types.metal.rose_gold=Rose Gold
-tfc.types.metal.silver=Silver
-tfc.types.metal.tin=Tin
-tfc.types.metal.zinc=Zinc
-tfc.types.metal.sterling_silver=Sterling Silver
-tfc.types.metal.wrought_iron=Wrought Iron
-tfc.types.metal.pig_iron=Pig Iron
-tfc.types.metal.steel=Steel
-tfc.types.metal.platinum=Platinum
-tfc.types.metal.black_steel=Black Steel
-tfc.types.metal.blue_steel=Blue Steel
-tfc.types.metal.red_steel=Red Steel
-tfc.types.metal.weak_steel=Weak Steel
-tfc.types.metal.weak_black_steel=Black Weak Steel
-tfc.types.metal.weak_blue_steel=Blue Weak Steel
-tfc.types.metal.weak_red_steel=Red Weak Steel
-tfc.types.metal.high_carbon_steel=High Carbon Steel
-tfc.types.metal.high_carbon_black_steel=Black High Carbon Steel
-tfc.types.metal.high_carbon_blue_steel=Blue High Carbon Steel
-tfc.types.metal.high_carbon_red_steel=Red High Carbon Steel
-
-## Rock category
-tfc.types.rock_category.sedimentary=Sedimentary
-tfc.types.rock_category.metamorphic=Metamorphic
-tfc.types.rock_category.igneous_intrusive=Igneous Intrusive
-tfc.types.rock_category.igneous_extrusive=Igneous Extrusive
 
 
 

@@ -26,6 +26,10 @@ public abstract class BaseCommand extends CommandBase implements ICommandSetting
     @Setter
     private ResourceLocation registryName;
 
+    public BaseCommand() {
+        this(Settings.of());
+    }
+
     public BaseCommand(Settings settings) {
 
         this.settings = settings;

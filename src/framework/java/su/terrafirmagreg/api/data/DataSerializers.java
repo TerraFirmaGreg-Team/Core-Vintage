@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.base.network.datasync;
+package su.terrafirmagreg.api.data;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;

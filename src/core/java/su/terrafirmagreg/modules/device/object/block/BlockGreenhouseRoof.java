@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -15,8 +16,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import net.dries007.firmalife.util.HelpersFL;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -55,7 +54,7 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
           return true;
         }
       }
-      if (HelpersFL.doesStackMatchTool(held, "hammer")) {
+      if (StackUtils.doesStackMatchTool(held, "hammer")) {
         if (!player.isSneaking()) {
           world.setBlockState(pos, state.withProperty(TOP, !state.getValue(TOP)));
         } else if (!state.getValue(TOP)) {

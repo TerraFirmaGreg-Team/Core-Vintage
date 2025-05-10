@@ -5,8 +5,12 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.MapStorage;
+import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import org.jetbrains.annotations.Nullable;
 
 import lombok.experimental.UtilityClass;
 
@@ -78,6 +82,13 @@ public final class WorldUtils {
   public static boolean areSameChunk(BlockPos first, BlockPos second) {
 
     return new ChunkPos(first).equals(new ChunkPos(second));
+  }
+
+  @SuppressWarnings("unchecked")
+  @Nullable
+  public static <T extends WorldSavedData> T getOrLoadData(MapStorage mapStorage, Class<T> clazz, String dataIdentifier) {
+
+    return (T) mapStorage.getOrLoadData(clazz, dataIdentifier);
   }
 
   /**

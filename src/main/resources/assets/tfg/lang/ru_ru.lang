@@ -1,4 +1,5 @@
-
+# Stuff
+gui.advancements=Квесты
 
 ############################################################
 
@@ -41,6 +42,44 @@ types.tfg.skill.prospecting=Геологоразведка: %s
 types.tfg.skill.smithing=Кузнечное дело: %s
 types.tfg.skill.agriculture=Сельское хозяйство: %s
 types.tfg.skill.butchering=Разделка животных: %s
+
+## Metal
+types.tfg.metal.unknown=Неизвестный сплав
+types.tfg.metal.bismuth=Висмут
+types.tfg.metal.bismuth_bronze=Висмутовая бронза
+types.tfg.metal.black_bronze=Черная бронза
+types.tfg.metal.brass=Латунь
+types.tfg.metal.bronze=Бронза
+types.tfg.metal.copper=Медь
+types.tfg.metal.gold=Золото
+types.tfg.metal.lead=Свинец
+types.tfg.metal.nickel=Никель
+types.tfg.metal.rose_gold=Розовое золото
+types.tfg.metal.silver=Серебро
+types.tfg.metal.tin=Олово
+types.tfg.metal.zinc=Цинк
+types.tfg.metal.sterling_silver=Стерлинг (чистое серебро)
+types.tfg.metal.wrought_iron=Кованое железо
+types.tfg.metal.pig_iron=Чугун
+types.tfg.metal.steel=Сталь
+types.tfg.metal.platinum=Платина
+types.tfg.metal.black_steel=Черная сталь
+types.tfg.metal.blue_steel=Синяя сталь
+types.tfg.metal.red_steel=Красная сталь
+types.tfg.metal.weak_steel=Слабая сталь
+types.tfg.metal.weak_black_steel=Черная слабая сталь
+types.tfg.metal.weak_blue_steel=Синяя слабая сталь
+types.tfg.metal.weak_red_steel=Красная слабая сталь
+types.tfg.metal.high_carbon_steel=Высокоуглеродистая сталь
+types.tfg.metal.high_carbon_black_steel=Черная высокоуглеродистая сталь
+types.tfg.metal.high_carbon_blue_steel=Синяя высокоуглеродистая сталь
+types.tfg.metal.high_carbon_red_steel=Красная высокоуглеродистая сталь
+
+## Rock category
+types.tfg.rock_category.sedimentary=Осадочная
+types.tfg.rock_category.metamorphic=Метаморфическая
+types.tfg.rock_category.igneous_intrusive=Магматическая интрузивная
+types.tfg.rock_category.igneous_extrusive=Магматическая экструзивная
 
 ## Calendar
 enum.tfg.season.january=Зима
@@ -206,6 +245,8 @@ command.tfg.core.player.usage.get.water=Вода: %.1f%%
 command.tfg.core.player.usage.set.water=Вода установлена на %.1f%%
 command.tfg.core.player.usage.add.water=Вода добавлена на %.1f%%
 command.tfg.core.player.usage.reset.water=Вода сброшена на %.1f%%
+command.tfg.core.debug_info.usage=/tfg debug_info - записывать много отладочной информации в лог-файл ... ну, ОЧЕНЬ МНОГО. Не используйте, если об этом не попросит разработчик.
+
 
 ## Item Group
 item_group.tfg.core.name=[ TFG ] Ядро

@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 public class CommandPlayer extends BaseCommand {
 
   public CommandPlayer() {
-    super(Settings.of());
 
     getSettings()
       .registryKey("player")

@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.entity.projectile;
 
+import su.terrafirmagreg.api.data.DamageSources;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -84,9 +86,9 @@ public class EntityThrownWeapon extends EntityArrow implements IThrowableEntity,
 
       if (this.shootingEntity == null) {
         //TODO custom damage sources?
-        damagesource = DamageSource.causeArrowDamage(this, this);
+        damagesource = DamageSources.causeArrowDamage(this, this);
       } else {
-        damagesource = DamageSource.causeArrowDamage(this, this.shootingEntity);
+        damagesource = DamageSources.causeArrowDamage(this, this.shootingEntity);
       }
 
       if (this.isBurning() && !(entity instanceof EntityEnderman)) {

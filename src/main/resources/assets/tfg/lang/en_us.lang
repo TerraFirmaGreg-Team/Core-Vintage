@@ -1,11 +1,5 @@
-
 # Stuff
 gui.advancements=Quests
-
-# Tooltips
-tooltip.tfg.toohot=Too hot to handle! Wear protection.
-tooltip.tfg.toocold=Too cold to handle! Wear protection.
-tooltip.tfg.toolight=Too light to handle! Wear protection.
 
 
 ############################################################
@@ -49,6 +43,44 @@ types.tfg.skill.prospecting=Prospecting: %s
 types.tfg.skill.smithing=Smithing: %s
 types.tfg.skill.agriculture=Agriculture: %s
 types.tfg.skill.butchering=Butchering: %s
+
+## Metal
+types.tfg.metal.unknown=Unknown Alloy
+types.tfg.metal.bismuth=Bismuth
+types.tfg.metal.bismuth_bronze=Bismuth Bronze
+types.tfg.metal.black_bronze=Black Bronze
+types.tfg.metal.brass=Brass
+types.tfg.metal.bronze=Bronze
+types.tfg.metal.copper=Copper
+types.tfg.metal.gold=Gold
+types.tfg.metal.lead=Lead
+types.tfg.metal.nickel=Nickel
+types.tfg.metal.rose_gold=Rose Gold
+types.tfg.metal.silver=Silver
+types.tfg.metal.tin=Tin
+types.tfg.metal.zinc=Zinc
+types.tfg.metal.sterling_silver=Sterling Silver
+types.tfg.metal.wrought_iron=Wrought Iron
+types.tfg.metal.pig_iron=Pig Iron
+types.tfg.metal.steel=Steel
+types.tfg.metal.platinum=Platinum
+types.tfg.metal.black_steel=Black Steel
+types.tfg.metal.blue_steel=Blue Steel
+types.tfg.metal.red_steel=Red Steel
+types.tfg.metal.weak_steel=Weak Steel
+types.tfg.metal.weak_black_steel=Black Weak Steel
+types.tfg.metal.weak_blue_steel=Blue Weak Steel
+types.tfg.metal.weak_red_steel=Red Weak Steel
+types.tfg.metal.high_carbon_steel=High Carbon Steel
+types.tfg.metal.high_carbon_black_steel=Black High Carbon Steel
+types.tfg.metal.high_carbon_blue_steel=Blue High Carbon Steel
+types.tfg.metal.high_carbon_red_steel=Red High Carbon Steel
+
+## Rock category
+types.tfg.rock_category.sedimentary=Sedimentary
+types.tfg.rock_category.metamorphic=Metamorphic
+types.tfg.rock_category.igneous_intrusive=Igneous Intrusive
+types.tfg.rock_category.igneous_extrusive=Igneous Extrusive
 
 ## Calendar
 enum.tfg.season.january=Winter
@@ -214,6 +246,8 @@ command.tfg.core.player.usage.get.water=Water: %.1f%%
 command.tfg.core.player.usage.set.water=Set water to %.1f%%
 command.tfg.core.player.usage.add.water=Add water to %.1f%%
 command.tfg.core.player.usage.reset.water=Reset water to %.1f%%
+command.tfg.core.debug_info.usage=/tfg debug_info - write a lot of debug info to the log... like, A LOT. Don't use unless a dev asks you to.
+
 
 ## Item Group
 item_group.tfg.core.name=[ TFG ] Core
@@ -494,4 +528,6 @@ sound.tfg.animal.entity.feline.step=Feline walks
 sound.tfg.animal.entity.cricket=Crickets
 sound.tfg.animal.entity.frog=Frogs
 sound.tfg.animal.entity.rooster.cry=Rooster cries
+
+# Module Metal ##############################################
 

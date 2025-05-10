@@ -1,12 +1,12 @@
 package net.dries007.tfc.objects.entity.projectile;
 
+import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -53,7 +53,7 @@ public class EntitySlingStone extends EntityThrowable {
       if (this.isBurning()) {
         result.entityHit.setFire(5);
       }
-      result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), i);
+      result.entityHit.attackEntityFrom(DamageSources.causeThrownDamage(this, this.getThrower()), i);
     }
 
     if (!this.world.isRemote) {

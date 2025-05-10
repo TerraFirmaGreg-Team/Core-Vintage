@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.predator;
 
-import su.terrafirmagreg.api.base.network.datasync.DataSerializers;
+import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
@@ -157,7 +158,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
     if (this.isChild()) {
       attackDamage /= 2;
     }
-    boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this),
+    boolean flag = entityIn.attackEntityFrom(DamageSources.causeMobDamage(this),
       (float) attackDamage);
     if (flag) {
       this.applyEnchantments(this, entityIn);

@@ -22,29 +22,6 @@ tfc.command.timetfc.set_calendar_time=Set Calendar Time to %s.
 
 tfc.command.time.disabled=This command has been disabled by TFC. Use /timetfc instead!
 
-tfc.command.playertfc.usage=/playertfc <get|set|add|reset> [nutrition|food|saturation|water|skill <name>] [value]
-tfc.command.playertfc.usage_expected_first_argument=Expected <get|set|add|reset> after /playertfc
-tfc.command.playertfc.usage_expected_second_argument=Expected [nutrition|food|saturation|water|skill <name>] after /playertfc %s
-tfc.command.playertfc.usage_expected_id=Expected <name> after /playertfc %s
-tfc.command.playertfc.usage_expected_value=Expected [value] after /playertfc %s
-tfc.command.playertfc.usage_cant_set_add_nutrients=Can't set / add nutrients directly as it's based on food history. Run /playertfc reset nutrients instead.
-tfc.command.playertfc.usage_unknown_skill=Unknown skill: %s
-tfc.command.playertfc.usage_needs_player=Must be used by a player
-tfc.command.playertfc.reset_nutrients=Reset nutrients
-tfc.command.playertfc.get_nutrients=Average Nutrition: %s
-tfc.command.playertfc.get_nutrients_nutrient= - %s: %s
-tfc.command.playertfc.get_nutrients_last_eaten=Last Eaten: %d Hunger, %s Saturation, %s Decay Modifier.
-tfc.command.playertfc.get_nutrients_last_eaten_nutrient= - %s: %s
-tfc.command.playertfc.add_skill=Added %.2f to skill %s
-tfc.command.playertfc.set_skill=Set %s to %.2f
-tfc.command.playertfc.get_skill=Skill %s: Total Level = %.2f, Tier = %s, Level = %.2f
-tfc.command.playertfc.get_food=Hunger: %d
-tfc.command.playertfc.set_food=Set hunger to %d
-tfc.command.playertfc.get_saturation=Saturation: %.2f
-tfc.command.playertfc.set_saturation=Set saturation to %.2f
-tfc.command.playertfc.get_water=Water: %.1f%%
-tfc.command.playertfc.set_water=Set water to %.1f%%
-
 tfc.command.findveins.usage=/findveins [all|<vein name>] <radius> [dump|rate]
 tfc.command.findveins.usage_expected_player=Can only be used by a player.
 tfc.command.findveins.usage_first_argument_not_vein=No Vein found with name %s

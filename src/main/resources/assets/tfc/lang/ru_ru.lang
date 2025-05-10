@@ -32,29 +32,6 @@ tfc.command.timetfc.set_calendar_time=Установлено календарн�
 
 tfc.command.time.disabled=Эта комманда была отключена в TFC. Используй /timetfc
 
-tfc.command.playertfc.usage=/playertfc <get|set|add|reset> [nutrition|food|saturation|water|skill <name>] [value]
-tfc.command.playertfc.usage_expected_first_argument=/playertfc <get|set|add|reset>
-tfc.command.playertfc.usage_expected_second_argument=/playertfc %s [nutrition|food|saturation|water|skill <name>]
-tfc.command.playertfc.usage_expected_id=/playertfc %s <name>
-tfc.command.playertfc.usage_expected_value=/playertfc %s [value]
-tfc.command.playertfc.usage_cant_set_add_nutrients=Не могу установить / добавить питательные вещества, так как это основано на пищевой истории. Используйте /playertfc reset nutrition
-tfc.command.playertfc.usage_unknown_skill=Неизвестный навык: %s
-tfc.command.playertfc.usage_needs_player=Должен использоваться игроком
-tfc.command.playertfc.reset_nutrients=Уровень питательных веществ сброшен
-tfc.command.playertfc.get_nutrients=Усредненное Питание: %s
-tfc.command.playertfc.get_nutrients_nutrient= - %s: %s
-tfc.command.playertfc.get_nutrients_last_eaten=Последне съеденное: %d Голод, %s Питательность, %s Уровень гниения.
-tfc.command.playertfc.get_nutrients_last_eaten_nutrient= - %s: %s
-tfc.command.playertfc.add_skill=Добавлено %.2f уровней к %s
-tfc.command.playertfc.set_skill=Задан уровень %s на %.2f
-tfc.command.playertfc.get_skill=Навык %s: Общий уровень = %.2f, Уровень = %s, Уровень = %.2f
-tfc.command.playertfc.get_food=Голод: %d
-tfc.command.playertfc.set_food=Установить голод на %d
-tfc.command.playertfc.get_saturation=Питательность: %.2f
-tfc.command.playertfc.set_saturation=Питательность установлена на %.2f
-tfc.command.playertfc.get_water=Вода: %.1f%%
-tfc.command.playertfc.set_water=Вода установлена на %.1f%%
-
 tfc.command.findveins.usage=/findveins [all|<vein name>] <radius> [dump|rate]
 tfc.command.findveins.usage_expected_player=Может использоваться только игроком.
 tfc.command.findveins.usage_first_argument_not_vein=Жила %s не найдена

@@ -177,6 +177,36 @@ tooltip.tfg.core.calendar.season=Сезон : %s
 tooltip.tfg.core.calendar.day=День : %s
 tooltip.tfg.core.calendar.date=Дата : %s
 
+## Command
+command.tfg.core.player.usage=/tfg player <get|set|add|reset> [nutrition|food|saturation|water|skill <name>] [value]
+command.tfg.core.player.usage.expected.first_argument=Ожидается <get|set|add|reset> после /tfg player
+command.tfg.core.player.usage.expected.second_argument=Ожидается [nutrition|food|saturation|water|skill <name>] после /tfg player %s
+command.tfg.core.player.usage.expected.id=Ожидается <name> после /tfg player %s
+command.tfg.core.player.usage.expected.value=Ожидается [value] после /tfg player %s
+command.tfg.core.player.usage.expected.cant_set_add_nutrients=Не могу установить / добавить питательные вещества, так как это основано на пищевой истории. Используйте /tfg player reset nutrients
+command.tfg.core.player.usage.expected.unknown_skill=Неизвестный навык: %s
+command.tfg.core.player.usage.expected.needs_player=Должен использоваться игроком
+command.tfg.core.player.usage.reset.nutrients=Уровень питательных веществ сброшен
+command.tfg.core.player.usage.get.nutrients=Усредненное Питание: %s
+command.tfg.core.player.usage.get.nutrients_nutrient= - %s: %s
+command.tfg.core.player.usage.get.nutrients_last_eaten=Последне съеденное: %d Голод, %s Питательность, %s Уровень гниения
+command.tfg.core.player.usage.get.nutrients_last_eaten_nutrient= - %s: %s
+command.tfg.core.player.usage.add.skill=Добавлено %.2f к навыку %s
+command.tfg.core.player.usage.set.skill=Установлен уровень %s на %.2f
+command.tfg.core.player.usage.get.skill=Навык %s: Общий уровень = %.2f, Уровень = %s, Уровень = %.2f
+command.tfg.core.player.usage.get.food=Голод: %d
+command.tfg.core.player.usage.set.food=Установлен голод на %d
+command.tfg.core.player.usage.reset.food=Сброшен голод на %d
+command.tfg.core.player.usage.add.food=Добавлен голод на %d
+command.tfg.core.player.usage.get.saturation=Питательность: %.2f
+command.tfg.core.player.usage.set.saturation=Питательность установлена на %.2f
+command.tfg.core.player.usage.reset.saturation=Питательность сброшена на %.2f
+command.tfg.core.player.usage.add.saturation=Питательность добавлена на %.2f
+command.tfg.core.player.usage.get.water=Вода: %.1f%%
+command.tfg.core.player.usage.set.water=Вода установлена на %.1f%%
+command.tfg.core.player.usage.add.water=Вода добавлена на %.1f%%
+command.tfg.core.player.usage.reset.water=Вода сброшена на %.1f%%
+
 ## Item Group
 item_group.tfg.core.name=[ TFG ] Ядро
 

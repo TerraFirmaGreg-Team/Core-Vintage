@@ -1,0 +1,7 @@
+[submodule "libs"]
+	path = libs
+	url = https://github.com/TerraFirmaGreg-Team/Mods-Vintage.git
+
+[submodule "modpack"]
+	path = run/obfuscated
+	url = https://github.com/TerraFirmaGreg-Team/Modpack-Vintage.git

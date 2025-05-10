@@ -1,6 +1,7 @@
-package su.terrafirmagreg.modules.core.event;
+package su.terrafirmagreg.modules.core.feature.puddles;
 
 import su.terrafirmagreg.api.util.WorldUtils;
+import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -35,8 +36,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.Iterator;
 import java.util.Random;
 
-@SuppressWarnings("unused")
-public class EventHandlerPuddles {
+
+public class FeaturePuddles extends FeatureBase {
 
   @SubscribeEvent
   public static void placePuddles(TickEvent.ServerTickEvent event) {

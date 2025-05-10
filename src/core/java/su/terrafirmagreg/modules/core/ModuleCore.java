@@ -17,7 +17,6 @@ import su.terrafirmagreg.modules.core.event.EventHandlerGuiOpen;
 import su.terrafirmagreg.modules.core.event.EventHandlerGuiScreen;
 import su.terrafirmagreg.modules.core.event.EventHandlerOnConfigChanged;
 import su.terrafirmagreg.modules.core.event.EventHandlerPortalSpawn;
-import su.terrafirmagreg.modules.core.event.EventHandlerPuddles;
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesEntity;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerItemTooltip;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDimension;
@@ -64,7 +63,6 @@ public final class ModuleCore extends ModuleBase {
     enableNetwork();
     enableCommand();
     enableFeature();
-
   }
 
   @Override
@@ -117,8 +115,6 @@ public final class ModuleCore extends ModuleBase {
 
     CapabilityHandlerFood.init();
     CapabilityHandlerMetal.init();
-
-
   }
 
   @Override
@@ -145,8 +141,6 @@ public final class ModuleCore extends ModuleBase {
     list.add(EventHandlerItemTooltip.class);
 
     list.add(EventHandlerOnConfigChanged.class);
-
-    list.add(EventHandlerPuddles.class);
 
     return list;
   }

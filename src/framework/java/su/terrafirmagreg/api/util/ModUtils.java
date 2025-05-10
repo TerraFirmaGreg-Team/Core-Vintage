@@ -128,7 +128,11 @@ public final class ModUtils {
   }
 
   public static String split(String name) {
-    return String.format("%s / %s", modName, name);
+    return split(modName, name);
+  }
+
+  public static String split(String key, String name) {
+    return String.format("%s / %s", key, name);
   }
 
   public static String replace(String key) {

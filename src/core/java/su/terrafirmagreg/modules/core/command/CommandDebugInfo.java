@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.command;
 
 import su.terrafirmagreg.api.base.command.spi.BaseCommand;
 import su.terrafirmagreg.api.util.CommandUtils.Level;
-import su.terrafirmagreg.framework.manager.command.CommandManager;
+import su.terrafirmagreg.modules.core.ModuleCore;
 
 import net.minecraft.command.ICommandSender;
 import net.minecraft.nbt.NBTBase;
@@ -32,27 +32,27 @@ public class CommandDebugInfo extends BaseCommand {
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
     World world = sender.getEntityWorld();
     BlockPos pos = sender.getPosition();
-    var registryKey = getSettings().getRegistryKey();
+    var registryKey = getName();
 
     // Chunk data
     ChunkDataTFC chunkData = ChunkDataTFC.get(world, pos);
 
-    CommandManager.LOGGER.info("[{}] {}", registryKey, "ROCK LAYER DATA");
+    ModuleCore.LOGGER.info("[{}] {}", registryKey, "ROCK LAYER DATA");
     for (int x = 0; x < 16; x++) {
       for (int z = 0; z < 16; z++) {
-        CommandManager.LOGGER.info("[{}] Pos: {} {} - Rock 1: {}, Rock 2: {}, Rock 3: {}", registryKey, x, z, chunkData.getRock1(x, z), chunkData.getRock2(x, z), chunkData.getRock3(x, z));
+        ModuleCore.LOGGER.info("[{}] Pos: {} {} - Rock 1: {}, Rock 2: {}, Rock 3: {}", registryKey, x, z, chunkData.getRock1(x, z), chunkData.getRock2(x, z), chunkData.getRock3(x, z));
       }
     }
 
-    CommandManager.LOGGER.info("[{}] {}", registryKey, "RAW CHUNK DATA VIEW");
+    ModuleCore.LOGGER.info("[{}] {}", registryKey, "RAW CHUNK DATA VIEW");
     NBTBase nbt = ChunkDataProvider.CHUNK_DATA_CAPABILITY.writeNBT(chunkData, null);
-    CommandManager.LOGGER.info("[{}] {}", registryKey, nbt == null ? "writeNBT returned null" : nbt.toString());
+    ModuleCore.LOGGER.info("[{}] {}", registryKey, nbt == null ? "writeNBT returned null" : nbt.toString());
 
     // Rock Registry Information
-    CommandManager.LOGGER.info("[{}] {}", registryKey, "ROCK REGISTRY");
+    ModuleCore.LOGGER.info("[{}] {}", registryKey, "ROCK REGISTRY");
     for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
       //noinspection ConstantConditions
-      CommandManager.LOGGER.info("[{}] {}", registryKey, "Rock: {} -> Id: {}", rock.getRegistryName().getPath(), ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getID(rock));
+      ModuleCore.LOGGER.info("[{}] {}", registryKey, "Rock: {} -> Id: {}", rock.getRegistryName().getPath(), ((ForgeRegistry<Rock>) TFCRegistries.ROCKS).getID(rock));
     }
   }
 }

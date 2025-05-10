@@ -1,6 +1,5 @@
 package su.terrafirmagreg.framework.manager.command;
 
-import su.terrafirmagreg.api.base.command.spi.BaseCommandTree;
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.command.api.ICommandManager;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
@@ -20,9 +19,7 @@ public class CommandManager implements ICommandManager {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(CommandManager.class);
   public static final Map<IModule, ICommandManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
-
-  private static final Map<String, BaseCommandTree> COMMAND_WRAPPER_MAP = new Object2ObjectOpenHashMap<>();
-
+  
 
   private final IModule module;
   private final CommandMap map;

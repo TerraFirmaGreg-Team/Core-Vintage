@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.network;
 
 import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
-import su.terrafirmagreg.api.base.network.packet.spi.NetworkPacketBase;
+import su.terrafirmagreg.api.base.network.packet.spi.BasePacket;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +13,7 @@ import net.dries007.tfc.ConfigTFC;
 
 import java.util.function.BooleanSupplier;
 
-public class SCPacketSimple extends NetworkPacketBase implements INetworkPacket.Client {
+public class SCPacketSimple extends BasePacket implements INetworkPacket.Client {
 
   private ITextComponent text;
   private MessageCategory category;

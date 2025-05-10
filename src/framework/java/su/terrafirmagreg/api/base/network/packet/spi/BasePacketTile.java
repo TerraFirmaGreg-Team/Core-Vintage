@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public abstract class NetworkPacketBaseTile<T extends TileEntity> extends NetworkPacketBase {
+public abstract class BasePacketTile<T extends TileEntity> extends BasePacket {
 
   /**
    * The TileEntity.
@@ -31,7 +31,7 @@ public abstract class NetworkPacketBaseTile<T extends TileEntity> extends Networ
    *
    * @param blockPos The position of the tile entity.
    */
-  public NetworkPacketBaseTile(BlockPos blockPos) {
+  public BasePacketTile(BlockPos blockPos) {
     this.blockPos = blockPos;
   }
 

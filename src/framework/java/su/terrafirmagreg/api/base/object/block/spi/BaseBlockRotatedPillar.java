@@ -86,7 +86,7 @@ public abstract class BaseBlockRotatedPillar extends BaseBlock {
   }
 
   @Override
-  protected ItemStack getSilkTouchDrop(IBlockState state) {
+  public ItemStack getSilkTouchDrop(IBlockState state) {
     return new ItemStack(Item.getItemFromBlock(this));
   }
 

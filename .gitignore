@@ -32,8 +32,9 @@ build
 
 
 # other
+!./run/obfuscated
 run
-!run/obfuscated
+
 # libs
 
 *.jar

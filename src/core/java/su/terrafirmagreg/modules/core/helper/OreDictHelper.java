@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import gregtech.api.unification.OreDictUnifier;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import java.util.Arrays;
 
@@ -26,15 +27,10 @@ import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.ore
 public class OreDictHelper {
 
   public static void init() {
-
+    OreDictionaryHelper.init();
     // Vanilla ore dict values
-    OreDictionary.registerOre("clay", Items.CLAY_BALL);
-    OreDictionary.registerOre("gemCoal", new ItemStack(Items.COAL, 1, 0));
-    OreDictionary.registerOre("charcoal", new ItemStack(Items.COAL, 1, 1));
     OreDictionary.registerOre("fireStarter", new ItemStack(Items.FLINT_AND_STEEL, 1, OreDictionary.WILDCARD_VALUE));
     OreDictionary.registerOre("fireStarter", new ItemStack(Items.FIRE_CHARGE));
-    OreDictionary.registerOre("bowl", Items.BOWL);
-    OreDictionary.registerOre("blockClay", Blocks.CLAY);
 
     //adding oredict to dyeables for dye support. Instead of adding specific recipes color can be changed universally.
     OreDictionary.registerOre("bed", new ItemStack(Items.BED, 1, OreDictionary.WILDCARD_VALUE));
@@ -42,15 +38,6 @@ public class OreDictHelper {
     OreDictionary.registerOre("powderConcrete", new ItemStack(Blocks.CONCRETE_POWDER, 1, OreDictionary.WILDCARD_VALUE));
     OreDictionary.registerOre("terracotta", new ItemStack(Blocks.HARDENED_CLAY, 1, OreDictionary.WILDCARD_VALUE));
     OreDictionary.registerOre("terracotta", new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, OreDictionary.WILDCARD_VALUE));
-
-    // TFC Florae
-    OreDictionary.registerOre("thatch", new ItemStack(Blocks.HAY_BLOCK));
-    OreDictionary.registerOre("bale", new ItemStack(Blocks.HAY_BLOCK));
-    OreDictionary.registerOre("baleHay", new ItemStack(Blocks.HAY_BLOCK));
-
-    // Flint
-    OreDictionary.registerOre("flint", new ItemStack(Items.FLINT));
-    OreDictionary.registerOre("itemFlint", new ItemStack(Items.FLINT));
 
     // Register a name without any items
     OreDictionary.getOres("infiniteFire", true);

@@ -9,6 +9,9 @@ pluginManagement {
         includeGroup 'com.gtnewhorizons.retrofuturagradle'
       }
     }
+    flatDir {
+      dirs 'libs'
+    }
     gradlePluginPortal()
     mavenCentral()
     mavenLocal()

@@ -701,10 +701,6 @@ public final class ConfigTFC {
     @Config.LangKey("config." + TFC + ".devices.barrel")
     public static final BarrelCFG BARREL = new BarrelCFG();
 
-    @Config.Comment("Bloomery")
-    @Config.LangKey("config." + TFC + ".devices.bloomery")
-    public static final BloomeryCFG BLOOMERY = new BloomeryCFG();
-
     @Config.Comment("Crucible")
     @Config.LangKey("config." + TFC + ".devices.crucible")
     public static final CrucibleCFG CRUCIBLE = new CrucibleCFG();
@@ -749,10 +745,6 @@ public final class ConfigTFC {
     @Config.LangKey("config." + TFC + ".devices.goldpan")
     public static final GoldPanCFG GOLD_PAN = new GoldPanCFG();
 
-    @Config.Comment("Bellows")
-    @Config.LangKey("config." + TFC + ".devices.bellows")
-    public static final BellowsCFG BELLOWS = new BellowsCFG();
-
     @Config.Comment("Puddle")
     @Config.LangKey("config." + TFC + ".devices.puddle")
     public static final PuddleCFG PUDDLE = new PuddleCFG();
@@ -793,14 +785,6 @@ public final class ConfigTFC {
                                                     "milk", "milk_curdled", "milk_vinegar", "white_dye", "orange_dye", "magenta_dye", "light_blue_dye",
                                                     "yellow_dye", "lime_dye", "pink_dye", "gray_dye", "light_gray_dye", "cyan_dye", "purple_dye", "blue_dye",
                                                     "brown_dye", "green_dye", "red_dye", "black_dye"};
-    }
-
-    public static final class BloomeryCFG {
-
-      @Config.Comment("Number of ticks required for a bloomery to complete. (1000 = 1 in game hour = 50 seconds), default is 15 hours.")
-      @Config.RangeInt(min = 20)
-      @Config.LangKey("config." + TFC + ".devices.bloomery.ticks")
-      public int ticks = 15_000;
     }
 
     public static final class CrucibleCFG {
@@ -962,19 +946,6 @@ public final class ConfigTFC {
       @Config.Comment("Cooldown ticks after panning.")
       @Config.LangKey("config." + TFC + ".devices.gold_pan.cooldownTicks")
       public int cooldownTicks = 20;
-    }
-
-    public static final class BellowsCFG {
-
-      @Config.Comment("The max number of air ticks, devices get a temperature bonus up to this amount. (1000 = 1 in game hour = 50 seconds), default is 600 ticks.")
-      @Config.RangeInt(min = 0)
-      @Config.LangKey("config." + TFC + ".devices.bellows.maxTicks")
-      public int maxTicks = 600;
-
-      @Config.Comment("Amount of air ticks given to the connected devices. (1000 = 1 in game hour = 50 seconds), default is 200 ticks.")
-      @Config.RangeInt(min = 0)
-      @Config.LangKey("config." + TFC + ".devices.bellows.ticks")
-      public int ticks = 200;
     }
 
   }

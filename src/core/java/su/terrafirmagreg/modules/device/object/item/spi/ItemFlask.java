@@ -59,11 +59,12 @@ public abstract class ItemFlask extends BaseItemFluid implements IProviderItemMe
     getSettings()
       .maxStackSize(1)
       .oreDict("flask")
+      .hasSubtypes()
       .capability(
         CapabilityProviderFluid.of(capacity, true, getValidFluids())
       );
 
-    setHasSubtypes(true);
+//    setHasSubtypes(true);
     if (ConfigDevice.ITEM.WATER_FLASKS.damageFactor == 0) {
       getSettings()
         .maxDamage(Integer.MAX_VALUE);

@@ -8,18 +8,25 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+import gregtech.api.unification.Element;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import static gregtech.api.GTValues.L;
+import static gregtech.api.GTValues.M;
 import static gregtech.api.unification.ore.OrePrefix.block;
 import static gregtech.api.unification.ore.OrePrefix.bolt;
 import static gregtech.api.unification.ore.OrePrefix.crushed;
@@ -30,13 +37,18 @@ import static gregtech.api.unification.ore.OrePrefix.dustImpure;
 import static gregtech.api.unification.ore.OrePrefix.dustPure;
 import static gregtech.api.unification.ore.OrePrefix.dustSmall;
 import static gregtech.api.unification.ore.OrePrefix.dustTiny;
+import static gregtech.api.unification.ore.OrePrefix.foil;
 import static gregtech.api.unification.ore.OrePrefix.gear;
 import static gregtech.api.unification.ore.OrePrefix.ingot;
 import static gregtech.api.unification.ore.OrePrefix.ingotHot;
 import static gregtech.api.unification.ore.OrePrefix.nugget;
 import static gregtech.api.unification.ore.OrePrefix.plate;
+import static gregtech.api.unification.ore.OrePrefix.plateDense;
 import static gregtech.api.unification.ore.OrePrefix.plateDouble;
+import static gregtech.api.unification.ore.OrePrefix.ring;
 import static gregtech.api.unification.ore.OrePrefix.screw;
+import static gregtech.api.unification.ore.OrePrefix.spring;
+import static gregtech.api.unification.ore.OrePrefix.springSmall;
 import static gregtech.api.unification.ore.OrePrefix.stick;
 import static gregtech.api.unification.ore.OrePrefix.stickLong;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadBuzzSaw;
@@ -44,7 +56,9 @@ import static gregtech.api.unification.ore.OrePrefix.toolHeadChainsaw;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadDrill;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadScrewdriver;
 import static gregtech.api.unification.ore.OrePrefix.toolHeadWrench;
+import static gregtech.api.unification.ore.OrePrefix.wireFine;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.ingotDouble;
+import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.oreChunk;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.toolHeadAxe;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.toolHeadChisel;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.toolHeadFile;
@@ -82,10 +96,17 @@ public class CapabilityHandlerMetal {
     ORE_DICT_METAL_ITEMS.put(crushedCentrifuged, 134);
     ORE_DICT_METAL_ITEMS.put(dustPure, 134);
     ORE_DICT_METAL_ITEMS.put(dust, 144);
+    ORE_DICT_METAL_ITEMS.put(wireFine, 18);
+    ORE_DICT_METAL_ITEMS.put(plateDense, 1296);
     ORE_DICT_METAL_ITEMS.put(stick, 72);
     ORE_DICT_METAL_ITEMS.put(stickLong, 144);
     ORE_DICT_METAL_ITEMS.put(bolt, 36);
+    ORE_DICT_METAL_ITEMS.put(ring, 36);
+    ORE_DICT_METAL_ITEMS.put(foil, 36);
+    ORE_DICT_METAL_ITEMS.put(springSmall, 36);
+    ORE_DICT_METAL_ITEMS.put(spring, 144);
     ORE_DICT_METAL_ITEMS.put(screw, 36);
+    ORE_DICT_METAL_ITEMS.put(oreChunk, 36);
     ORE_DICT_METAL_ITEMS.put(gear, 576);
     ORE_DICT_METAL_ITEMS.put(block, 1296);
 
@@ -126,42 +147,59 @@ public class CapabilityHandlerMetal {
     if (item instanceof ItemBlock itemBlock && itemBlock.getBlock() instanceof ICapabilityMetal capability) {
       return CapabilityProviderMetal.of(capability.getMetal(stack), capability.getSmeltAmount(stack), capability.canMelt(stack));
     }
-    return getMetalItemFromOre(stack);
-
-  }
-
-  @Nullable
-  private static ICapabilityProvider getMetalItemFromOre(ItemStack stack) {
     var unificationEntry = OreDictUnifier.getUnificationEntry(stack);
-    return ORE_DICT_METAL_ITEMS.entrySet().stream()
-      .filter(entry -> unificationEntry != null)
-      .filter(entry -> unificationEntry.orePrefix.equals(entry.getKey()))
-      .flatMap(entry -> {
-        var material = unificationEntry.material;
-        if (material != null) {
-          return TFCRegistries.METALS.getValuesCollection().stream()
-            .filter(m -> material.getName().equals(m.getRegistryName().getPath()))
-            .map(m -> CapabilityProviderMetal.of(m, entry.getValue(), true));
-        }
-        return null;
-      })
-      .findFirst()
-      .orElse(null);
-//    return OreDictUtils.getOreNames(stack).stream()
-//      .map(CapabilityHandlerMetal::getMetalItemFromOreDict)
-//      .filter(Objects::nonNull)
-//      .findFirst()
-//      .orElse(null);
+    if (unificationEntry != null && ORE_DICT_METAL_ITEMS.containsKey(unificationEntry.orePrefix)) {
+      return getMetalItemFromOre(unificationEntry);
+    }
+    return null;
+
   }
 
-//  @Nullable
-//  private static ICapabilityProvider getMetalItemFromOreDict(String oreDict) {
-//    return ORE_DICT_METAL_ITEMS.entrySet().stream()
-//      .filter(entry -> oreDict.startsWith(entry.getKey()))
-//      .flatMap(entry -> TFCRegistries.METALS.getValuesCollection().stream()
-//        .filter(m -> oreDict.equals(OreDictUtils.toString(entry.getKey(), m.getRegistryName().getPath())))
-//        .map(m -> CapabilityProviderMetal.of(m, entry.getValue(), true)))
-//      .findFirst()
-//      .orElse(null);
-//  }
+  private static ICapabilityProvider getMetalItemFromOre(UnificationEntry unificationEntry) {
+    var prefix = unificationEntry.orePrefix;
+    var material = unificationEntry.material;
+
+    if (material == null) {
+      return null;
+    }
+
+    List<Element> elements = new ArrayList<>();
+
+    getElements(elements, material);
+
+    // Ищем совпадения в металлах
+    for (Element element : elements) {
+      var elementName = element.getName();
+      var matchingMetal = TFCRegistries.METALS.getValuesCollection().stream()
+        .filter(metal -> elementName.equalsIgnoreCase(metal.getRegistryName().getPath()))
+        .findFirst()
+        .orElse(null);
+
+      if (matchingMetal != null) {
+        return CapabilityProviderMetal.of(matchingMetal, getMaterialAmount(prefix, material), true);
+      }
+    }
+
+    return null;
+  }
+
+  private static void getElements(List<Element> elementList, Material material) {
+    if (material.isElement()) {
+      elementList.add(material.getElement());
+    } else if (material.getMaterialComponents() != null && !material.getMaterialComponents().isEmpty()) {
+      material.getMaterialComponents().stream()
+        .filter(materialStack -> materialStack.material.isElement())
+        .forEach(materialStack -> getElements(elementList, materialStack.material));
+    }
+  }
+
+  private static int getMaterialAmount(OrePrefix prefix, Material material) {
+    var materialAmount = prefix.getMaterialAmount(material);
+    var amount = (int) (L * (materialAmount / M));
+    if (amount == 0) {
+      return ORE_DICT_METAL_ITEMS.get(prefix);
+    }
+    return amount;
+  }
+
 }

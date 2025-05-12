@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.base.capability.spi.CombinedCapabilityProvider;
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings.Settings;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderOreDict;
 
@@ -52,8 +53,11 @@ public interface IItemSettings extends IBaseSettings<Settings, Item> {
     var settings = getSettings();
     settings.getGroups().forEach(group -> asEntry().setCreativeTab(group));
     asEntry()
+      .setHasSubtypes(settings.isHasSubtypes())
       .setMaxDamage(settings.getMaxDamage())
       .setMaxStackSize(settings.getMaxStackSize());
+    
+    OreDictUtils.register(asEntry());
   }
 
 
@@ -67,6 +71,7 @@ public interface IItemSettings extends IBaseSettings<Settings, Item> {
     ResourceLocation resource;
 
     boolean isFireResistant;
+    boolean hasSubtypes;
     int maxDamage;
     int maxStackSize;
 
@@ -175,6 +180,11 @@ public interface IItemSettings extends IBaseSettings<Settings, Item> {
 
     public Settings fireResistant() {
       this.isFireResistant = true;
+      return this;
+    }
+
+    public Settings hasSubtypes() {
+      this.hasSubtypes = true;
       return this;
     }
   }

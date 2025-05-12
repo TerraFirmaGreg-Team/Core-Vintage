@@ -47,14 +47,4 @@ public abstract class BaseItemFluid extends ItemFluidContainer implements IItemS
     }
     return settings$initCapabilities(stack, nbt);
   }
-
-
-  @Override
-  public int getItemStackLimit() {
-    return getSettings().getMaxStackSize();
-  }
-
-  public int getItemStackLimit(ItemStack stack) {
-    return getItemStackLimit();
-  }
 }

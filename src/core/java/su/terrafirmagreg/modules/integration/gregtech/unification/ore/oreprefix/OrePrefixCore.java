@@ -2,6 +2,14 @@ package su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix
 
 import su.terrafirmagreg.modules.integration.gregtech.unification.material.info.MaterialIconTypeCore;
 
+import gregtech.api.GTValues;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.info.MaterialIconType;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.MaterialStack;
+import gregtech.common.items.MetaItems;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -53,14 +61,6 @@ import static su.terrafirmagreg.modules.integration.gregtech.unification.materia
 import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Slate;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Travertine;
 import static su.terrafirmagreg.modules.integration.gregtech.unification.material.MaterialsCore.Wackestone;
-
-import gregtech.api.GTValues;
-import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.info.MaterialIconType;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.MaterialStack;
-import gregtech.common.items.MetaItems;
 
 public class OrePrefixCore extends OrePrefix {
 
@@ -127,7 +127,7 @@ public class OrePrefixCore extends OrePrefix {
   public static final OrePrefix toolHeadJavelin;
 
   static {
-    oreChunk = new OrePrefixCore("oreChunk", MaterialIconTypeCore.oreChunk, new MaterialStack(Materials.Stone, M));
+    oreChunk = new OrePrefixCore("oreChunk", M / 4, MaterialIconTypeCore.oreChunk, new MaterialStack(Materials.Stone, M));
     ingotDouble = new OrePrefixCore("ingotDouble", M * 2, null, MaterialIconType.ingotDouble, Flags.ENABLE_UNIFICATION, hasIngotProperty);
 
     oreRockSalt = new OrePrefixCore("oreRockSalt", new MaterialStack(RockSalt, GTValues.M));
@@ -225,8 +225,14 @@ public class OrePrefixCore extends OrePrefix {
     this.addSecondaryMaterial(secondaryMaterial);
   }
 
+  public OrePrefixCore(String name, long materialAmount, @Nullable MaterialIconType materialIconType, MaterialStack secondaryMaterial) {
+    super(name, materialAmount, null, materialIconType, Flags.ENABLE_UNIFICATION, Conditions.hasOreProperty);
+    this.addSecondaryMaterial(secondaryMaterial);
+  }
+
   public OrePrefixCore(String name, long materialAmount, @Nullable MaterialIconType materialIconType, long flags, @Nullable Predicate<Material> condition) {
     super(name, materialAmount, null, materialIconType, flags, condition);
+
   }
 
 

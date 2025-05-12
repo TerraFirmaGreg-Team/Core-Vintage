@@ -25,6 +25,7 @@ assertSubProperties 'use_access_transformer', 'access_transformer_locations'
 assertSubProperties 'use_mixins', 'mixin_booter_version', 'mixin_refmap'
 assertSubProperties 'is_coremod', 'coremod_includes_mod', 'coremod_debug', 'coremod_plugin_class_name'
 assertSubProperties 'use_asset_mover', 'asset_mover_version'
+assertSubProperties 'use_config_any_time', 'config_any_time_version'
 
 setDefaultProperty 'use_modern_java_syntax', false, false
 setDefaultProperty 'generate_sources_jar', true, false
@@ -61,23 +62,8 @@ java {
 
 configurations {
   embed
-  mainImplementation
-  coreImplementation
-  frameworkImplementation
 
   implementation { extendsFrom embed }
-
-  // Для core
-  coreImplementation { extendsFrom implementation }
-  coreCompileOnly { extendsFrom compileOnly }
-  coreRuntimeOnly { extendsFrom runtimeOnly }
-  coreAnnotationProcessor { extendsFrom annotationProcessor }
-
-  // Для framework
-  frameworkImplementation { extendsFrom implementation }
-  frameworkCompileOnly { extendsFrom compileOnly }
-  frameworkRuntimeOnly { extendsFrom runtimeOnly }
-  frameworkAnnotationProcessor { extendsFrom annotationProcessor }
 }
 
 
@@ -161,7 +147,10 @@ dependencies {
     }
   }
   if (propertyBool('use_asset_mover')) {
-    implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
+    compileOnly "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
+  }
+  if (propertyBool('use_config_any_time')) {
+    compileOnly "com.cleanroommc:configanytime:${propertyString('config_any_time_version')}"
   }
   if (propertyBool('use_mixins')) {
     annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
@@ -188,6 +177,9 @@ dependencies {
   annotationProcessor 'org.projectlombok:lombok:1.18.+'
   testCompileOnly 'org.projectlombok:lombok:1.18.+'
   testAnnotationProcessor 'org.projectlombok:lombok:1.18.+'
+
+  embed "org.apache.groovy:groovy:4.0.21"
+
 
 }
 
@@ -323,7 +315,14 @@ idea {
     downloadJavadoc = true
     downloadSources = true
 
-    excludeDirs = [file(".github"), file(".idea"), file("build"), file("run"), file("resources_templates")]
+    excludeDirs = [
+      file(".github"),
+      file(".idea"),
+      file("build"),
+      file("resources_templates"),
+      file("run/client"),
+      file("run/natives")
+    ]
   }
   project {
     settings {
@@ -402,6 +401,7 @@ tasks.named('injectTags', InjectTagsTask).configure {
 }
 
 tasks.named('prepareObfModsFolder').configure {
+  finalizedBy 'copyJarToMods'
   finalizedBy 'prioritizeCoremods'
 }
 
@@ -414,6 +414,12 @@ tasks.register('prioritizeCoremods') {
       }
     }
   }
+}
+
+tasks.register('copyJarToMods', Copy) {
+  dependsOn 'prepareObfModsFolder'
+  from fileTree(dir: "libs", include: ["**/*.jar"])
+  into file("run/obfuscated/mods")
 }
 
 idea.project.settings {

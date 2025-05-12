@@ -10,12 +10,10 @@ import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.FeaturesDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.init.PacketsDevice;
-import su.terrafirmagreg.modules.device.init.RecipesDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.plugin.top.TheOneProbeDevice;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -65,12 +63,6 @@ public final class ModuleDevice extends ModuleBase {
   public void onInit(FMLInitializationEvent event) {
 
     TheOneProbeDevice.init();
-  }
-
-  @Override
-  public void onPostInit(FMLPostInitializationEvent event) {
-
-    RecipesDevice.onRegister();
   }
 
 

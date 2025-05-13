@@ -17,8 +17,7 @@ public final class CTHelper {
   @Nonnull
   public static IIngredient getInternalIngredient(@Nonnull crafttweaker.api.item.IIngredient ingredient) {
     int amount = ingredient.getAmount();
-    if (ingredient instanceof IngredientStack) {
-      IngredientStack is = (IngredientStack) ingredient;
+    if (ingredient instanceof IngredientStack is) {
       ingredient = (crafttweaker.api.item.IIngredient) is.getInternal();
     }
     if (ingredient instanceof IOreDictEntry) {

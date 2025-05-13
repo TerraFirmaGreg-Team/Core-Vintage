@@ -320,6 +320,7 @@ idea {
       file(".idea"),
       file("build"),
       file("resources_templates"),
+      file("run"),
       file("run/client"),
       file("run/natives")
     ]

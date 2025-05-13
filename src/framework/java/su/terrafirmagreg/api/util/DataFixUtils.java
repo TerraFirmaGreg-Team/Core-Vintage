@@ -9,6 +9,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
@@ -27,7 +28,7 @@ public class DataFixUtils {
 
 
   public static void of() {
-    //MinecraftForge.EVENT_BUS.register(DataFixUtils.class);
+    MinecraftForge.EVENT_BUS.register(DataFixUtils.class);
   }
 
   public static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{

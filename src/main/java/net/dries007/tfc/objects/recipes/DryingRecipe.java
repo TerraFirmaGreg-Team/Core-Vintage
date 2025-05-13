@@ -32,6 +32,10 @@ public class DryingRecipe extends IForgeRegistryEntry.Impl<DryingRecipe> impleme
     }
   }
 
+  public static void addRecipe(String recipe_name, ItemStack input, ItemStack output, int duration) {
+    TFCRegistries.DRYING.register(new DryingRecipe(IIngredient.of(input), output, duration).setRegistryName(recipe_name));
+  }
+
   @Nullable
   public static DryingRecipe get(ItemStack item) {
     return TFCRegistries.DRYING.getValuesCollection().stream().filter(x -> x.isValidInput(item)).findFirst().orElse(null);

@@ -23,12 +23,12 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
-
-import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
 
 @Getter
 @SuppressWarnings("deprecation")
@@ -41,10 +41,6 @@ public abstract class BaseBlock extends Block implements IBlockSettings, IFluidl
     super(settings.getMaterial(), settings.getMapColor());
 
     this.settings = settings;
-
-    // Fix some potential issues with these fields being set prematurely by the super ctor
-    this.fullBlock = getDefaultState().isOpaqueCube();
-    this.lightOpacity = this.fullBlock ? 255 : 0;
   }
 
   public static VoxelShape createShape(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -80,6 +76,11 @@ public abstract class BaseBlock extends Block implements IBlockSettings, IFluidl
   @Override
   public boolean isOpaqueCube(IBlockState state) {
     return settings != null && settings.isOpaque();
+  }
+
+  @Override
+  public int getLightOpacity(IBlockState state) {
+    return isFullCube(state) ? 255 : 0;
   }
 
   @Override

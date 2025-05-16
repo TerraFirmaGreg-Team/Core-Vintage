@@ -15,7 +15,7 @@ import net.minecraft.world.chunk.storage.AnvilChunkLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.WorldWorkerManager;
 
-import gnu.trove.map.hash.TObjectIntHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.vein.VeinRegistry;
@@ -135,8 +135,8 @@ public class CommandFindVeins extends CommandBase {
     private final List<String> outputLog = new ArrayList<>();
 
     // Only used in type = 2
-    private final TObjectIntHashMap<VeinType> veinRateMap = new TObjectIntHashMap<>();
-    private final TObjectIntHashMap<Rock> rockRateMap = new TObjectIntHashMap<>();
+    private final Object2IntOpenHashMap<VeinType> veinRateMap = new Object2IntOpenHashMap<>();
+    private final Object2IntOpenHashMap<Rock> rockRateMap = new Object2IntOpenHashMap<>();
 
 
     private long lastNotifcationTime;

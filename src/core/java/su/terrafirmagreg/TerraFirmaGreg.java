@@ -59,8 +59,7 @@ public class TerraFirmaGreg extends Framework {
 
   @EventHandler
   public void onConstruction(FMLConstructionEvent event) {
-
-    this.configure(event);
+    
     this.routeEvent(event);
   }
 

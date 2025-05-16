@@ -1,5 +1,8 @@
 package su.terrafirmagreg.framework.module;
 
+import su.terrafirmagreg.api.base.client.gui.GuiHandler;
+import su.terrafirmagreg.api.util.AnnotationUtils;
+import su.terrafirmagreg.api.util.DataFixUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
@@ -44,6 +47,8 @@ public class ModuleService implements IModuleService {
 
     this.wrapperMap = new Object2ObjectOpenHashMap<>();
     this.wrapperMap.put(FMLConstructionEvent.class, (EventWrapper<FMLConstructionEvent>) (event) -> {
+      AnnotationUtils.of(event);
+      GuiHandler.of(modId);
 
       this.fireEvent(module -> {
 
@@ -57,6 +62,8 @@ public class ModuleService implements IModuleService {
     });
 
     this.wrapperMap.put(FMLPreInitializationEvent.class, (EventWrapper<FMLPreInitializationEvent>) (event) -> {
+      DataFixUtils.of();
+
       this.fireEvent(module -> {
 
         Optional.ofNullable(module.getNetworkManager()).ifPresent(network -> {

@@ -5,11 +5,11 @@ import su.terrafirmagreg.framework.module.api.IModule;
 
 import net.minecraft.util.ResourceLocation;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
 import lombok.Data;
 
-public class ModuleMap extends Object2ObjectOpenHashMap<Class<? extends IModule>, ModuleWrapper> {
+public class ModuleMap extends Object2ObjectLinkedOpenHashMap<Class<? extends IModule>, ModuleWrapper> {
 
 
   public static ModuleMap of() {

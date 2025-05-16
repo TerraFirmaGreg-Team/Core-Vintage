@@ -10,9 +10,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
 import io.netty.buffer.ByteBuf;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.container.CapabilityContainerListener;
 
@@ -27,7 +27,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class PacketCapabilityContainerUpdate implements IMessage {
 
-  private final TIntObjectMap<NBTTagCompound> capabilityData = new TIntObjectHashMap<>();
+  private final Int2ObjectMap<NBTTagCompound> capabilityData = new Int2ObjectOpenHashMap<>();
   private int windowID;
 
   @SuppressWarnings("unused")
@@ -71,10 +71,9 @@ public class PacketCapabilityContainerUpdate implements IMessage {
     buf.writeInt(windowID);
 
     buf.writeInt(capabilityData.size());
-    capabilityData.forEachEntry((index, data) -> {
+    capabilityData.forEach((index, data) -> {
       buf.writeInt(index);
       ByteBufUtils.writeTag(buf, data);
-      return true;
     });
   }
 
@@ -104,9 +103,8 @@ public class PacketCapabilityContainerUpdate implements IMessage {
             return;
           }
 
-          message.capabilityData.forEachEntry((index, nbt) -> {
+          message.capabilityData.forEach((index, nbt) -> {
             CapabilityContainerListener.applyCapabilityData(container.getSlot(index).getStack(), nbt);
-            return true;
           });
         }
       });

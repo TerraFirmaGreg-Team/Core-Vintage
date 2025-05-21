@@ -1,19 +1,20 @@
 package su.terrafirmagreg.mixin;
 
+import su.terrafirmagreg.Tags;
+
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
+import com.google.common.collect.Lists;
 import zone.rong.mixinbooter.IEarlyMixinLoader;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@IFMLLoadingPlugin.Name("EarlyMixin")
+@IFMLLoadingPlugin.Name(Tags.MOD_NAME + "|EarlyMixin")
 @IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
-@IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE)
 public class EarlyMixin implements IEarlyMixinLoader, IFMLLoadingPlugin {
 
   @Override
@@ -43,10 +44,7 @@ public class EarlyMixin implements IEarlyMixinLoader, IFMLLoadingPlugin {
 
   @Override
   public List<String> getMixinConfigs() {
-    List<String> configs = new ArrayList<>();
 
-    configs.add("mixins.tfg.minecraft.json");
-
-    return configs;
+    return Lists.newArrayList("mixins.tfg.minecraft.json");
   }
 }

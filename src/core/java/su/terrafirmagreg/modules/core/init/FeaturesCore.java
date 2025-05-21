@@ -13,6 +13,7 @@ import su.terrafirmagreg.modules.core.feature.hotornot.FeatureHotOrNot;
 import su.terrafirmagreg.modules.core.feature.mapping.FeatureRemappingCore;
 import su.terrafirmagreg.modules.core.feature.playerdata.FeaturePlayerData;
 import su.terrafirmagreg.modules.core.feature.puddles.FeaturePuddles;
+import su.terrafirmagreg.modules.core.feature.pull.FeaturePull;
 import su.terrafirmagreg.modules.core.feature.sinkorswim.FeatureSinkOrSwim;
 import su.terrafirmagreg.modules.core.feature.size.FeatureSize;
 
@@ -22,6 +23,7 @@ public final class FeaturesCore {
 
     registrar.addFeature(new FeatureRemappingCore());
     registrar.addFeature(new FeatureSize());
+    registrar.addFeature(new FeaturePull());
     registrar.addFeature(new FeatureHeat());
     registrar.addFeature(new FeaturePlayerData());
     registrar.addFeature(new FeatureCalendar());

@@ -1,5 +1,7 @@
 package net.dries007.astikorcarts.packets;
 
+import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.Vec3d;
@@ -8,7 +10,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.astikorcarts.capabilities.PullProvider;
 import net.dries007.astikorcarts.entity.AbstractDrawn;
 
 import java.util.List;
@@ -51,8 +52,8 @@ public class CPacketActionKey implements IMessage {
             }
           }
           if (closest.canBePulledBy(target)) {
-            if (target.hasCapability(PullProvider.PULL, null)) {
-              AbstractDrawn drawn = target.getCapability(PullProvider.PULL, null).getDrawn();
+            if (target.hasCapability(CapabilityPull.CAPABILITY, null)) {
+              AbstractDrawn drawn = target.getCapability(CapabilityPull.CAPABILITY, null).getDrawn();
               if (drawn != null && drawn.getPulling() == target) {
                 return;
               }

@@ -1,9 +1,9 @@
 package net.dries007.astikorcarts.entity.ai;
 
+import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
-
-import net.dries007.astikorcarts.capabilities.PullProvider;
 
 public class EntityAIPullCart extends EntityAIBase {
 
@@ -16,8 +16,8 @@ public class EntityAIPullCart extends EntityAIBase {
 
   @Override
   public boolean shouldExecute() {
-    if (this.living.hasCapability(PullProvider.PULL, null)) {
-      return this.living.getCapability(PullProvider.PULL, null).getDrawn() != null;
+    if (this.living.hasCapability(CapabilityPull.CAPABILITY, null)) {
+      return this.living.getCapability(CapabilityPull.CAPABILITY, null).getDrawn() != null;
     }
     return false;
   }

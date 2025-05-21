@@ -1,5 +1,7 @@
 package net.dries007.astikorcarts.packets;
 
+import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -9,7 +11,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.astikorcarts.capabilities.PullProvider;
 import net.dries007.astikorcarts.entity.AbstractDrawn;
 
 public class CPacketToggleSlow implements IMessage {
@@ -35,8 +36,8 @@ public class CPacketToggleSlow implements IMessage {
       EntityPlayerMP player = ctx.getServerHandler().player;
       if (player.isRiding()) {
         Entity ridden = player.getRidingEntity();
-        if (ridden instanceof EntityLivingBase && ridden.hasCapability(PullProvider.PULL, null)) {
-          if (ridden.getCapability(PullProvider.PULL, null).getDrawn() != null) {
+        if (ridden instanceof EntityLivingBase && ridden.hasCapability(CapabilityPull.CAPABILITY, null)) {
+          if (ridden.getCapability(CapabilityPull.CAPABILITY, null).getDrawn() != null) {
             if (((EntityLivingBase) ridden).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER)) {
               ((EntityLivingBase) ridden).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER);
             } else {

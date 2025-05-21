@@ -1,0 +1,19 @@
+package su.terrafirmagreg.modules.core.feature.pull.capability;
+
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.Capability.IStorage;
+
+public class CapabilityStoragePull implements IStorage<ICapabilityPull> {
+
+  @Override
+  public NBTBase writeNBT(Capability<ICapabilityPull> capability, ICapabilityPull instance, EnumFacing side) {
+    return null;
+  }
+
+  @Override
+  public void readNBT(Capability<ICapabilityPull> capability, ICapabilityPull instance, EnumFacing side, NBTBase nbt) {
+
+  }
+}

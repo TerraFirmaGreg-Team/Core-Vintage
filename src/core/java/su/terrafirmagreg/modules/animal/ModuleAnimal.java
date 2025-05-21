@@ -21,12 +21,11 @@ import org.jetbrains.annotations.NotNull;
   id = "animal",
   author = "Xikaro",
   version = "1.0.0",
-  description = "Animal module"
+  description = "Animal module."
 )
 public class ModuleAnimal extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class);
-
 
   public ModuleAnimal() {
 

@@ -1,6 +1,5 @@
 package net.dries007.astikorcarts;
 
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -10,9 +9,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-import net.dries007.astikorcarts.capabilities.IPull;
-import net.dries007.astikorcarts.capabilities.PullFactory;
-import net.dries007.astikorcarts.capabilities.PullStorage;
 import net.dries007.astikorcarts.handler.GuiHandler;
 import net.dries007.astikorcarts.handler.PacketHandler;
 import net.dries007.astikorcarts.proxy.IProxy;
@@ -32,7 +28,6 @@ public class AstikorCarts {
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     PacketHandler.registerPackets();
-    CapabilityManager.INSTANCE.register(IPull.class, new PullStorage(), PullFactory::new);
     proxy.preInit();
   }
 

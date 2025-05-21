@@ -1,5 +1,7 @@
 package net.dries007.astikorcarts.entity;
 
+import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -28,7 +30,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import io.netty.buffer.ByteBuf;
-import net.dries007.astikorcarts.capabilities.PullProvider;
 import net.dries007.astikorcarts.config.ModConfig;
 import net.dries007.astikorcarts.handler.PacketHandler;
 import net.dries007.astikorcarts.packets.SPacketDrawnUpdate;
@@ -105,7 +106,7 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
             if (this.pulling instanceof EntityLivingBase) {
               ((EntityLivingBase) this.pulling).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(AbstractDrawn.PULL_SLOWLY_MODIFIER);
             }
-            this.pulling.getCapability(PullProvider.PULL, null).setDrawn(null);
+            this.pulling.getCapability(CapabilityPull.CAPABILITY, null).setDrawn(null);
             this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.5F, 0.1F);
           }
           ((WorldServer) this.world).getEntityTracker()
@@ -114,7 +115,7 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
           if (entityIn instanceof EntityLiving) {
             ((EntityLiving) entityIn).getNavigator().clearPath();
           }
-          entityIn.getCapability(PullProvider.PULL, null).setDrawn(this);
+          entityIn.getCapability(CapabilityPull.CAPABILITY, null).setDrawn(this);
           ((WorldServer) this.world).getEntityTracker()
             .sendToTracking(this, PacketHandler.INSTANCE.getPacketFrom(new SPacketDrawnUpdate(entityIn.getEntityId(), this.getEntityId())));
           this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5F, 1.0F);

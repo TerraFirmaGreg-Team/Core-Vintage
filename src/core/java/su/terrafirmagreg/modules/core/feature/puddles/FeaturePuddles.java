@@ -41,33 +41,34 @@ public class FeaturePuddles extends FeatureBase {
 
   @SubscribeEvent
   public static void placePuddles(TickEvent.ServerTickEvent event) {
-    if (event.phase == TickEvent.Phase.END) {
-      WorldServer world = DimensionManager.getWorld(WorldUtils.EARTH);
-      try {
-        if (world.getTotalWorldTime() % 10 == 0) {
-          Iterator<Chunk> iterator = world.getPlayerChunkMap().getChunkIterator();
+    if (event.phase != TickEvent.Phase.END) {
+      return;
+    }
+    WorldServer world = DimensionManager.getWorld(WorldUtils.EARTH);
+    try {
+      if (world.getTotalWorldTime() % 10 == 0) {
+        Iterator<Chunk> iterator = world.getPlayerChunkMap().getChunkIterator();
 
-          while (iterator.hasNext()) {
-            Random random = world.rand;
-            ChunkPos chunkPos = iterator.next().getPos();
+        while (iterator.hasNext()) {
+          Random random = world.rand;
+          ChunkPos chunkPos = iterator.next().getPos();
 
-            int x = random.nextInt(8) - random.nextInt(8);
-            int z = random.nextInt(8) - random.nextInt(8);
-            BlockPos pos = chunkPos.getBlock(8 + x, 0, 8 + z);
+          int x = random.nextInt(8) - random.nextInt(8);
+          int z = random.nextInt(8) - random.nextInt(8);
+          BlockPos pos = chunkPos.getBlock(8 + x, 0, 8 + z);
 
-            int y = world.getHeight(pos).getY() + random.nextInt(4) - random.nextInt(4);
-            BlockPos puddlePos = pos.add(0, y, 0);
+          int y = world.getHeight(pos).getY() + random.nextInt(4) - random.nextInt(4);
+          BlockPos puddlePos = pos.add(0, y, 0);
 
-            if (canSpawnPuddle(world, puddlePos)) {
-              if (random.nextInt(100) < ConfigCore.BLOCK.PUDDLE.puddleRate) {
-                world.setBlockState(puddlePos.up(), BlocksCore.PUDDLE.getDefaultState(), 2);
-              }
+          if (canSpawnPuddle(world, puddlePos)) {
+            if (random.nextInt(100) < ConfigCore.BLOCK.PUDDLE.puddleRate) {
+              world.setBlockState(puddlePos.up(), BlocksCore.PUDDLE.getDefaultState(), 2);
             }
           }
         }
-      } catch (Exception e) {
-        e.printStackTrace();
       }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 

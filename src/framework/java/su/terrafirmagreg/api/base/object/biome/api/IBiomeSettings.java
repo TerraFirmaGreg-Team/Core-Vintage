@@ -22,7 +22,9 @@ public interface IBiomeSettings extends IBaseSettings<Settings, Biome> {
   default void postRegister() {
     var settings = getSettings();
 
-    BiomeUtils.addTypes(asEntry());
+    BiomeUtils.addTypes(asEntry(), settings.getTypes());
+    BiomeUtils.addSpawn(asEntry(), settings.isSpawnBiome());
+    BiomeUtils.addWorldGen(asEntry(), settings.isWorldGen());
   }
 
   @Getter
@@ -53,6 +55,7 @@ public interface IBiomeSettings extends IBaseSettings<Settings, Biome> {
 
     protected Settings(String name) {
       this.name = ModUtils.name(name);
+
     }
 
     public static Settings of(String name) {

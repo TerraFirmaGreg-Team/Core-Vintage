@@ -52,7 +52,7 @@ import java.util.List;
   version = "1.0.0",
   description = "Core TerraFirmaGreg content."
 )
-public final class ModuleCore extends ModuleBase {
+public class ModuleCore extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class);
 

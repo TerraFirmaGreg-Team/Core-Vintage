@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
   version = "1.0.0",
   description = "Device module"
 )
-public final class ModuleDevice extends ModuleBase {
+public class ModuleDevice extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleDevice.class);
 

@@ -11,12 +11,14 @@ import org.jetbrains.annotations.NotNull;
   author = "Xikaro",
   version = "1.0.0"
 )
-public final class ModuleRock extends ModuleBase {
+public class ModuleRock extends ModuleBase {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleRock.class);
 
 
   public ModuleRock() {
+
+    enableFeature();
 
   }
 

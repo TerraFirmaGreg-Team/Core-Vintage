@@ -148,6 +148,9 @@ public class ModuleService implements IModuleService {
       this.fireEvent(module -> {
         module.getLogger().debug("Load-complete start");
         module.onLoadComplete(event);
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          feature.getService().onLoadComplete(event);
+        });
         module.getLogger().debug("Load-complete complete");
       });
     });
@@ -156,6 +159,9 @@ public class ModuleService implements IModuleService {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-about-to-start start");
         module.onServerAboutToStart(event);
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          feature.getService().onServerAboutToStart(event);
+        });
         module.getLogger().debug("Server-about-to-start complete");
       });
     });
@@ -164,15 +170,15 @@ public class ModuleService implements IModuleService {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-starting start");
         module.onServerStarting(event);
-        module.getLogger().debug("Server-starting complete");
-      });
-
-      this.fireEvent(module -> {
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          feature.getService().onServerStarting(event);
+        });
         Optional.ofNullable(module.getCommandManager()).ifPresent(command -> {
           module.getLogger().debug("Registering command");
           module.onCommand(command.getRegistrar());
           command.getService().routeEvent(event);
         });
+        module.getLogger().debug("Server-starting complete");
       });
     });
 
@@ -180,6 +186,9 @@ public class ModuleService implements IModuleService {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-started start");
         module.onServerStarted(event);
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          feature.getService().onServerStarted(event);
+        });
         module.getLogger().debug("Server-started complete");
       });
     });
@@ -188,6 +197,9 @@ public class ModuleService implements IModuleService {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-stopping start");
         module.onServerStopping(event);
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          feature.getService().onServerStopping(event);
+        });
         module.getLogger().debug("Server-stopping complete");
       });
     });
@@ -196,6 +208,9 @@ public class ModuleService implements IModuleService {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-stopped start");
         module.onServerStopped(event);
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          feature.getService().onServerStopped(event);
+        });
         module.getLogger().debug("Server-stopped complete");
       });
     });

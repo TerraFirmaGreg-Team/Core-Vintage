@@ -24,6 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
@@ -842,8 +843,7 @@ public final class StackUtils {
           item.getSubItems(tab, subItems);
         } catch (final Exception e) {
 
-          LoggingHelper.LOGGER.error("Caught the following exception while getting sub items for {}. It should be reported to that mod's author.",
-            item.getRegistryName().toString());
+          LoggingHelper.LOGGER.error("Caught the following exception while getting sub items for {}. It should be reported to that mod's author.", item.getRegistryName().toString());
           LoggingHelper.LOGGER.catching(e);
         }
 
@@ -911,4 +911,34 @@ public final class StackUtils {
 
     throw new IllegalArgumentException("Cannot convert object of type " + object.getClass() + " to an Ingredient!");
   }
+
+  public static NonNullList<Item> getItemsByModID(String modID) {
+    NonNullList<Item> items = NonNullList.create();
+
+    if (modID == null || modID.isEmpty()) {
+      return items;
+    }
+
+    ForgeRegistries.ITEMS.getValuesCollection()
+      .stream()
+      .filter(item -> item.getRegistryName() != null && item.getRegistryName().getNamespace().equals(modID))
+      .forEach(items::add);
+
+    return items;
+  }
+
+  public static void moveTabModID(String modID, String toTab) {
+    for (CreativeTabs tab : CreativeTabs.CREATIVE_TAB_ARRAY) {
+      if (tab.tabLabel.equals(toTab)) {
+        moveTabModID(modID, tab);
+      }
+    }
+  }
+
+  public static void moveTabModID(String modID, CreativeTabs toTab) {
+    getItemsByModID(modID).forEach(item -> {
+      item.setCreativeTab(toTab);
+    });
+  }
+
 }

@@ -33,6 +33,7 @@ public class FeatureRemappingDevice extends FeatureBase {
       m.put("freeze_dryer", BlocksDevice.FREEZE_DRYER);
       m.put("ice_bunker", BlocksDevice.ICE_BUNKER);
       m.put("powderkeg", BlocksDevice.POWDERKEG);
+      m.put("thatch_bed", BlocksDevice.THATCH_BED);
     });
 
     DataFixUtils.put(DataFixUtils.ITEM_MAP, m -> {

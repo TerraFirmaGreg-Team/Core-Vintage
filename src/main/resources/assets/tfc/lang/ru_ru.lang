@@ -159,10 +159,6 @@ tfc.propick.found_large=Найден большой след
 tfc.propick.found_very_large=Найден большой след
 tfc.propick.found_nothing=Ничего не найдено.
 
-## Thatch Bed
-tfc.thatch_bed.spawnpoint=Точка возраждения задана.
-tfc.thatch_bed.not_thundering=Эта кровать слишком не удобная для сна.
-
 ## Food Traits
 tfc.food_traits.smoked=Копченое
 tfc.food_traits.brined=В рассоле

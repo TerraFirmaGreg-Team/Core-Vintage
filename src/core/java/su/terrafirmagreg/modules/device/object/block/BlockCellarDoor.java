@@ -16,6 +16,6 @@ public class BlockCellarDoor extends BaseBlockDoor {
       .sound(SoundType.WOOD)
       .hardness(2F);
 
-    BlockUtils.setFireInfo(this, 5, 20);
+    BlockUtils.addFireInfo(this, 5, 20);
   }
 }

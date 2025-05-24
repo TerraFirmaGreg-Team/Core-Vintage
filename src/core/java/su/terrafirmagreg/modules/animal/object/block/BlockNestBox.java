@@ -38,7 +38,7 @@ public class BlockNestBox extends BaseBlockContainer {
       .nonCube()
       .hardness(0.5F);
 
-    BlockUtils.setFireInfo(this, 60, 20);
+    BlockUtils.addFireInfo(this, 60, 20);
   }
 
   @Override

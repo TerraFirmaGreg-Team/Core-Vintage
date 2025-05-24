@@ -22,7 +22,7 @@ public class MinerLogicMixin {
   @Inject(method = "getRegularBlockDrops", at = @At(value = "HEAD"), remap = false, cancellable = true)
   protected void onGetRegularBlockDrops(NonNullList<ItemStack> blockDrops, WorldServer world, BlockPos blockToMine, IBlockState blockState, CallbackInfo ci) {
     if (blockState.getBlock() instanceof BlockOre blockOre) {
-      blockDrops.add(OreDictUnifier.get(OrePrefixCore.oreChunk, blockOre.field_149764_J));
+      blockDrops.add(OreDictUnifier.get(OrePrefixCore.oreChunk, blockOre.material));
       ci.cancel();
     }
   }

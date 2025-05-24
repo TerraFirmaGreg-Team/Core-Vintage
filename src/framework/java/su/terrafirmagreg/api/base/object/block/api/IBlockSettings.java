@@ -3,10 +3,11 @@ package su.terrafirmagreg.api.base.object.block.api;
 import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings.Settings;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemBlock;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.api.util.GroupTabUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderOreDict;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -24,16 +25,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IRarity;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -50,7 +50,6 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
   @Override
   default void postRegister() {
     var settings = getSettings();
-    settings.getGroups().forEach(group -> asEntry().setCreativeTab(group));
     asEntry()
       .setResistance(settings.getResistance())
       .setHardness(settings.getHardness())
@@ -59,15 +58,17 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
       .setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
 
     TileUtils.addTile(asEntry());
+    GroupTabUtils.addGroupTab(asEntry(), settings.getGroups());
+    BlockUtils.addFireInfo(asEntry(), settings.getEncouragement(), settings.getFlammability());
   }
 
   @Getter
   @SuppressWarnings("deprecation")
-  class Settings extends BaseSettings<Settings> implements IProviderOreDict {
+  class Settings extends BaseSettings<Settings> {
 
     final List<Object[]> oreDict;
-    final Set<IProviderItemCapability> capability;
-    final Set<CreativeTabs> groups;
+    final List<IProviderItemCapability> capability;
+    final List<CreativeTabs> groups;
 
     // Block
     final Material material;
@@ -88,6 +89,8 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
 
     String harvestTool;
     int harvestLevel;
+    int encouragement;
+    int flammability;
 
     float resistance;
     float hardness;
@@ -107,9 +110,9 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
 
     protected Settings(Material material, MapColor color) {
 
-      this.oreDict = new ArrayList<>();
-      this.capability = new HashSet<>();
-      this.groups = new HashSet<>();
+      this.oreDict = new ObjectArrayList<>();
+      this.capability = new ObjectArrayList<>();
+      this.groups = new ObjectArrayList<>();
 
       this.material = material;
       this.mapColor = color;
@@ -123,6 +126,8 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
       this.renderLayer = BlockRenderLayer.SOLID;
       this.itemBlock = BaseItemBlock::new;
       this.harvestLevel = -1;
+      this.encouragement = -1;
+      this.flammability = -1;
       this.resistance = 1.0F;
       this.canFall = false;
       this.collidable = true;
@@ -280,6 +285,12 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
     public Settings harvestLevel(String harvestTool, int harvestLevel) {
       this.harvestTool = harvestTool;
       this.harvestLevel = harvestLevel;
+      return this;
+    }
+
+    public Settings fireInfo(int encouragement, int flammability) {
+      this.encouragement = encouragement;
+      this.flammability = flammability;
       return this;
     }
 

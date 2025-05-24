@@ -5,10 +5,10 @@ import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.base.capability.spi.CombinedCapabilityProvider;
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings.Settings;
+import su.terrafirmagreg.api.util.GroupTabUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderOreDict;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,6 +20,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,9 +30,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
@@ -51,22 +51,22 @@ public interface IItemSettings extends IBaseSettings<Settings, Item> {
   @Override
   default void postRegister() {
     var settings = getSettings();
-    settings.getGroups().forEach(group -> asEntry().setCreativeTab(group));
     asEntry()
       .setHasSubtypes(settings.isHasSubtypes())
       .setMaxDamage(settings.getMaxDamage())
       .setMaxStackSize(settings.getMaxStackSize());
-    
-    OreDictUtils.register(asEntry());
+
+    GroupTabUtils.addGroupTab(asEntry(), settings.getGroups());
+    OreDictUtils.addOreDict(asEntry(), settings.getOreDict());
   }
 
 
   @Getter
-  class Settings extends BaseSettings<Settings> implements IProviderOreDict {
+  class Settings extends BaseSettings<Settings> {
 
     final List<Object[]> oreDict;
-    final Set<IProviderItemCapability> capability;
-    final Set<CreativeTabs> groups;
+    final List<IProviderItemCapability> capability;
+    final List<CreativeTabs> groups;
 
     ResourceLocation resource;
 
@@ -79,9 +79,9 @@ public interface IItemSettings extends IBaseSettings<Settings, Item> {
 
     protected Settings() {
 
-      this.groups = new HashSet<>();
-      this.capability = new HashSet<>();
-      this.oreDict = new ArrayList<>();
+      this.oreDict = new ObjectArrayList<>();
+      this.capability = new ObjectArrayList<>();
+      this.groups = new ObjectArrayList<>();
 
       this.rarity = EnumRarity.COMMON;
       this.maxStackSize = 64;
@@ -168,7 +168,7 @@ public interface IItemSettings extends IBaseSettings<Settings, Item> {
       return this;
     }
 
-    public Settings capability(Set<IProviderItemCapability> providers) {
+    public Settings capability(List<IProviderItemCapability> providers) {
       providers.forEach(this::capability);
       return this;
     }

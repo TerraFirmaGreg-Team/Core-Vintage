@@ -1,5 +1,6 @@
 package net.dries007.tfc.compat.jei;
 
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
@@ -399,7 +400,7 @@ public final class TFCJEIPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(Items.COAL, 1, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.description.tfc.charcoal_pit").getFormattedText());
 
     List<ScrapingWrapper> scrapingList = new ArrayList<>();
-    for (ItemAnimalHide.HideSize size : ItemAnimalHide.HideSize.values()) {
+    for (EnumHideSize size : EnumHideSize.values()) {
       scrapingList.add(new ScrapingWrapper(ItemAnimalHide.get(HideType.SOAKED, size), ItemAnimalHide.get(HideType.SCRAPED, size)));
     }
     registry.addRecipes(scrapingList, SCRAPING_UID);

@@ -12,7 +12,7 @@
 - [TFCTech](https://github.com/TFC-Metallum/TFCTech)
 - [WaterFlasks](https://github.com/Gaelmare/WaterFlasks) +
 - [TerraFirmaThings](https://github.com/Lyeoj/TerraFirmaThings)
-- [astikor-carts-tfc](https://github.com/ACGaming/astikor-carts-tfc)
+- [Astikor-Carts-TFC](https://github.com/ACGaming/astikor-carts-tfc)
 - [HorsePowerTFC](https://github.com/ACGaming/HorsePowerTFC)
 - [TFC-Farming](https://github.com/BananaFructa/TFC-Farming)
 - [EasyBreedingTFC](https://github.com/ACGaming/EasyBreedingTFC) +

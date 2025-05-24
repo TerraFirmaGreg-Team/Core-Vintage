@@ -1,7 +1,6 @@
 # Stuff
 gui.advancements=Quests
 
-
 ############################################################
 
 # Damage Sources
@@ -309,6 +308,10 @@ tooltip.tfg.device.powderkeg.seal=Seal Powderkeg
 
 tooltip.tfg.device.sharpness=%sSharp for %s uses
 
+## Message
+message.tfg.thatch_bed.spawnpoint=Spawn point set.
+message.tfg.thatch_bed.not_thundering=This bed is too uncomfortable to sleep.
+
 ## Item Group
 item_group.tfg.device.name=[ TFG ] Device
 
@@ -336,6 +339,7 @@ block.tfg.device.latex_extractor.name=Latex Extractor
 block.tfg.device.freeze_dryer.name=Freeze Dryer
 block.tfg.device.ice_bunker.name=Ice Bunker
 block.tfg.device.powderkeg.name=Powderkeg
+block.tfg.device.thatch_bed.name=Thatch Bed
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

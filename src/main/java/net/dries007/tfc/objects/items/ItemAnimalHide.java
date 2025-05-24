@@ -1,9 +1,11 @@
 package net.dries007.tfc.objects.items;
 
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -13,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -31,11 +32,11 @@ import static net.dries007.tfc.objects.blocks.BlockPlacedHide.SIZE;
 @ParametersAreNonnullByDefault
 public class ItemAnimalHide extends ItemTFC {
 
-  private static final Map<HideType, Map<HideSize, ItemAnimalHide>> TABLE = new HashMap<>();
-  protected final HideSize size;
+  private static final Map<HideType, Map<EnumHideSize, ItemAnimalHide>> TABLE = new HashMap<>();
+  protected final EnumHideSize size;
   private final HideType type;
 
-  public ItemAnimalHide(HideType type, HideSize size) {
+  public ItemAnimalHide(HideType type, EnumHideSize size) {
     this.type = type;
     this.size = size;
 
@@ -46,7 +47,7 @@ public class ItemAnimalHide extends ItemTFC {
   }
 
   @Nonnull
-  public static ItemAnimalHide get(HideType type, HideSize size) {
+  public static ItemAnimalHide get(HideType type, EnumHideSize size) {
     return TABLE.get(type).get(size);
   }
 
@@ -54,7 +55,7 @@ public class ItemAnimalHide extends ItemTFC {
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
-    if (ConfigTFC.General.OVERRIDES.enableThatchBed && type == HideType.RAW && size == HideSize.LARGE && facing == EnumFacing.UP
+    if (ConfigTFC.General.OVERRIDES.enableThatchBed && type == HideType.RAW && size == EnumHideSize.LARGE && facing == EnumFacing.UP
         && worldIn.getBlockState(pos).getBlock() == BlocksCore.THATCH
         && worldIn.getBlockState(pos.offset(player.getHorizontalFacing())).getBlock() == BlocksCore.THATCH) {
       // Try and create a thatch bed
@@ -62,15 +63,15 @@ public class ItemAnimalHide extends ItemTFC {
       //Creating a thatch bed
       if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(headPos, facing, stack)) {
         if (!worldIn.isRemote) {
-          IBlockState footState = BlocksTFC.THATCH_BED.getDefaultState().withProperty(BlockBed.OCCUPIED, false)
+          IBlockState footState = BlocksDevice.THATCH_BED.getDefaultState().withProperty(BlockBed.OCCUPIED, false)
             .withProperty(BlockBed.FACING, player.getHorizontalFacing())
             .withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
-          IBlockState headState = BlocksTFC.THATCH_BED.getDefaultState().withProperty(BlockBed.OCCUPIED, false)
+          IBlockState headState = BlocksDevice.THATCH_BED.getDefaultState().withProperty(BlockBed.OCCUPIED, false)
             .withProperty(BlockBed.FACING, player.getHorizontalFacing().getOpposite())
             .withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
           worldIn.setBlockState(pos, footState, 10);
           worldIn.setBlockState(headPos, headState, 10);
-          SoundType soundtype = BlocksTFC.THATCH_BED.getSoundType(footState, worldIn, pos, player);
+          SoundType soundtype = BlocksDevice.THATCH_BED.getSoundType(footState, worldIn, pos, player);
           worldIn.playSound(null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 
           stack.shrink(1);
@@ -101,13 +102,13 @@ public class ItemAnimalHide extends ItemTFC {
   public ItemStack getContainerItem(ItemStack itemStack) {
     switch (size) {
       case SMALL:
-        return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.SMALL));
+        return new ItemStack(ItemAnimalHide.get(HideType.RAW, EnumHideSize.SMALL));
       case MEDIUM:
-        return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.MEDIUM));
+        return new ItemStack(ItemAnimalHide.get(HideType.RAW, EnumHideSize.MEDIUM));
       case LARGE:
-        return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.LARGE));
+        return new ItemStack(ItemAnimalHide.get(HideType.RAW, EnumHideSize.LARGE));
     }
-    return new ItemStack(ItemAnimalHide.get(HideType.RAW, HideSize.SMALL));
+    return new ItemStack(ItemAnimalHide.get(HideType.RAW, EnumHideSize.SMALL));
   }
 
   @Override
@@ -129,22 +130,6 @@ public class ItemAnimalHide extends ItemTFC {
       case MEDIUM -> Weight.LIGHT; // Stacksize = 32
       default -> Weight.VERY_LIGHT; // Stacksize = 64
     };
-  }
-
-  public enum HideSize implements IStringSerializable {
-    SMALL, MEDIUM, LARGE;
-
-    private static final HideSize[] VALUES = values();
-
-    @Nonnull
-    public static HideSize valueOf(int index) {
-      return index < 0 || index > VALUES.length ? MEDIUM : VALUES[index];
-    }
-
-    @Override
-    public String getName() {
-      return this.name().toLowerCase();
-    }
   }
 
   public enum HideType {

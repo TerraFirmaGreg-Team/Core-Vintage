@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.api.util.OreDictUtils;
 
 import net.minecraft.block.Block;
@@ -40,13 +41,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class BlockPlacedHide extends Block {
 
-  public static final PropertyEnum<ItemAnimalHide.HideSize> SIZE = PropertyEnum.create("size", ItemAnimalHide.HideSize.class);
+  public static final PropertyEnum<EnumHideSize> SIZE = PropertyEnum.create("size", EnumHideSize.class);
 
   public BlockPlacedHide() {
     super(Material.CIRCUITS);
     setHardness(0.2f);
 
-    setDefaultState(getBlockState().getBaseState().withProperty(SIZE, ItemAnimalHide.HideSize.MEDIUM));
+    setDefaultState(getBlockState().getBaseState().withProperty(SIZE, EnumHideSize.MEDIUM));
   }
 
   private static Vec3d calculatePoint(Vec3d rayVector, Vec3d rayPoint) {
@@ -70,7 +71,7 @@ public class BlockPlacedHide extends Block {
   @Override
   @Nonnull
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(SIZE, ItemAnimalHide.HideSize.valueOf(meta));
+    return getDefaultState().withProperty(SIZE, EnumHideSize.valueOf(meta));
   }
 
   @Override

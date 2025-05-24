@@ -1,14 +1,16 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlockBed;
+import su.terrafirmagreg.api.data.enums.EnumHideSize;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -20,30 +22,38 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.items.ItemAnimalHide;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
+
 import java.util.Random;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
-public class BlockThatchBed extends BlockBed {
+@Getter
+@SuppressWarnings("deprecation")
+public class BlockThatchBed extends BaseBlockBed {
 
   public BlockThatchBed() {
-    setSoundType(SoundType.PLANT);
-    setHardness(0.6F);
-    Blocks.FIRE.setFireInfo(this, 60, 20);
+    super(Settings.of(Material.CLOTH));
+
+    getSettings()
+      .registryKey("thatch_bed")
+      .ignoresProperties(OCCUPIED)
+      .sound(SoundType.CLOTH)
+      .fireInfo(60, 20)
+      .hardness(0.6F);
   }
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!worldIn.isRemote) {
       playerIn.setSpawnPoint(pos, false);
-      playerIn.sendMessage(new TextComponentTranslation("tfc.thatch_bed.spawnpoint"));
+      playerIn.sendMessage(
+        new TextComponentTranslation(ModUtils.localize("message", "thatch_bed.spawnpoint")));
       if (!worldIn.isThundering()) {
-        playerIn.sendStatusMessage(new TextComponentTranslation("tfc.thatch_bed.not_thundering"), true);
+        playerIn.sendStatusMessage(
+          new TextComponentTranslation(ModUtils.localize("message", "thatch_bed.not_thundering")), true);
         return true;
       }
     }
@@ -53,7 +63,7 @@ public class BlockThatchBed extends BlockBed {
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     EnumFacing enumfacing = state.getValue(FACING);
-    if (state.getValue(PART) == BlockBed.EnumPartType.FOOT) {
+    if (state.getValue(PART) == EnumPartType.FOOT) {
       if (!(worldIn.getBlockState(pos.offset(enumfacing)).getBlock() instanceof BlockThatchBed)) {
         worldIn.setBlockToAir(pos);
       }
@@ -68,18 +78,18 @@ public class BlockThatchBed extends BlockBed {
 
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return Item.getItemFromBlock(BlocksCore.THATCH);
+    return BlocksCore.THATCH.asItem();
   }
 
   @Override
   public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {
-    if (state.getValue(PART) == BlockBed.EnumPartType.HEAD) {
-      spawnAsEntity(worldIn, pos, new ItemStack(ItemAnimalHide.get(ItemAnimalHide.HideType.RAW, ItemAnimalHide.HideSize.LARGE)));
+    if (state.getValue(PART) == EnumPartType.HEAD) {
+      spawnAsEntity(worldIn, pos, new ItemStack(
+        ItemAnimalHide.get(ItemAnimalHide.HideType.RAW, EnumHideSize.LARGE)));
       spawnAsEntity(worldIn, pos, new ItemStack(BlocksCore.THATCH, 2));
     }
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public EnumBlockRenderType getRenderType(IBlockState state) {
     return EnumBlockRenderType.MODEL;
@@ -91,7 +101,7 @@ public class BlockThatchBed extends BlockBed {
   }
 
   @Override
-  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
+  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tile, ItemStack stack) {
     super.harvestBlock(worldIn, player, pos, state, null, stack); //Force vanilla to use #dropBlockAsItemWithChance
   }
 
@@ -105,14 +115,9 @@ public class BlockThatchBed extends BlockBed {
     return false;
   }
 
-  @Nullable
-  @Override
-  public TileEntity createTileEntity(World world, IBlockState state) {
-    return null;
-  }
-
   @Override
   public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity player) {
     return true;
   }
+
 }

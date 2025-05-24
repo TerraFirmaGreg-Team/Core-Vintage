@@ -1,8 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.api.helper.LoggingHelper;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderOreDict;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -20,29 +18,24 @@ import org.jetbrains.annotations.NotNull;
 import lombok.experimental.UtilityClass;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 @UtilityClass
 @SuppressWarnings("unused")
 public final class OreDictUtils {
 
-  public static <T extends IForgeRegistryEntry<T>> void register(T object) {
-    if (object instanceof IBaseSettings<?, ?> baseSettings) {
-      if (baseSettings.getSettings() instanceof IProviderOreDict provider) {
-        provider.getOreDict().forEach(oreDict -> {
-          if (oreDict != null && oreDict.length != 0) {
-            if (object instanceof Item item) {
-              OreDictUtils.register(item, oreDict);
-            }
+  public static <T extends IForgeRegistryEntry<T>> void addOreDict(T object, List<Object[]> list) {
+    list.forEach(oreDict -> {
+      if (oreDict != null && oreDict.length != 0) {
+        if (object instanceof Item item) {
+          OreDictUtils.register(item, oreDict);
+        }
 //            if (object instanceof Block block) {
 //              OreDictUtils.register(block, oreDict);
 //            }
-          }
-        });
-
       }
-    }
-
+    });
   }
 
   public static void register(Block block, Object... parts) {

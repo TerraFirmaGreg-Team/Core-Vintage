@@ -308,6 +308,10 @@ tooltip.tfg.device.powderkeg.seal=Запечатать пороховую боч
 
 tooltip.tfg.device.sharpness=%sОстрый для %s использований
 
+## Message
+message.tfg.thatch_bed.spawnpoint=Точка возраждения задана.
+message.tfg.thatch_bed.not_thundering=Эта кровать слишком не удобная для сна.
+
 ## Item Group
 item_group.tfg.device.name=[ TFG ] Девайсы
 
@@ -335,6 +339,7 @@ block.tfg.device.latex_extractor.name=Латексный экстрактор
 block.tfg.device.freeze_dryer.name=Сублимационная камера
 block.tfg.device.ice_bunker.name=Морозильная камера
 block.tfg.device.powderkeg.name=Пороховая бочка
+block.tfg.device.thatch_bed.name=Cоломенная кровать
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

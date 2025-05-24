@@ -60,7 +60,7 @@ public final class BlocksDevice {
   public static BlockQuernManual QUERN_MANUAL;
   public static BlockQuernHorse QUERN_HORSE;
   public static BlockMolten MOLTEN; // TODO noItems
-  public static BlockLogPile LOG_PILE;
+  public static BlockLogPile LOG_PILE; // TODO noItems
   public static BlockCellarShelf CELLAR_SHELF;
   public static BlockCellarDoor CELLAR_DOOR;
   public static BlockCellarWall CELLAR_WALL;
@@ -112,7 +112,7 @@ public final class BlocksDevice {
     INFECTED_AIR = registrar.addBlock(new BlockInfectedAir());
     FREEZE_DRYER = registrar.addBlock(new BlockFreezeDryer());
     POWDERKEG = registrar.addBlock(new BlockPowderKeg());
-//    THATCH_BED = registrar.addBlock(new BlockThatchBed());
+    THATCH_BED = registrar.addBlock(new BlockThatchBed());
 //    GRINDSTONE_MANUAL = registrar.addBlock(new BlockGrindstoneManual());
 //    ELECTRIC_FORGE = registrar.addBlock(new BlockElectricForge());
 //    INDUCTION_CRUCIBLE = registrar.addBlock(new BlockInductionCrucible());

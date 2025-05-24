@@ -33,24 +33,28 @@ public enum Mods {
   TFCFARMING(ModIDs.TFCFARMING),
   TFCPASSINGDAYS(ModIDs.TFCPASSINGDAYS),
   FLUIDLOGGED(ModIDs.FLUIDLOGGED),
-  GREGTECH(ModIDs.GREGTECH);
+  GREGTECH(ModIDs.GREGTECH),
+  PUDDLES(ModIDs.PUDDLES),
+  WATERFLASKS(ModIDs.WATERFLASKS),
+  TFCTOWERHEAT(ModIDs.TFCTOWERHEAT);
 
+  private static final Mods[] VALUES = values();
 
-  private final String modid;
+  private final String modId;
   private Boolean modLoaded;
 
-  Mods(String modid) {
-    this.modid = modid;
+  Mods(String modId) {
+    this.modId = modId;
   }
 
-  public static boolean contains(String modid) {
-    return Arrays.stream(Mods.values())
-      .anyMatch(mod -> mod.getModid().equals(modid));
+  public static boolean contains(String modId) {
+    return Arrays.stream(VALUES)
+      .anyMatch(mod -> mod.getModId().equals(modId));
   }
 
   public boolean isModLoaded() {
     if (this.modLoaded == null) {
-      this.modLoaded = Loader.isModLoaded(this.modid);
+      this.modLoaded = Loader.isModLoaded(this.modId);
     }
     return this.modLoaded;
   }
@@ -72,12 +76,12 @@ public enum Mods {
   @NotNull
   public ItemStack getItem(@NotNull String name, int count, int meta, @Nullable String nbt) {
     // The following statement is intentional.
-    return GameRegistry.makeItemStack(modid + ":" + name, meta, count, nbt);
+    return GameRegistry.makeItemStack(modId + ":" + name, meta, count, nbt);
   }
 
   @NotNull
   public ResourceLocation getResource(@NotNull String path) {
-    return ModUtils.resource(modid, path);
+    return ModUtils.resource(modId, path);
   }
 
   public static class ModIDs {
@@ -100,6 +104,9 @@ public enum Mods {
     public static final String TFCPASSINGDAYS = "tfcpassingdays";
     public static final String FLUIDLOGGED = "fluidlogged_api";
     public static final String GREGTECH = "gregtech";
+    public static final String TFCTOWERHEAT = "tfctowerheat";
+    public static final String PUDDLES = "puddles";
+    public static final String WATERFLASKS = "waterflasks";
   }
 
 }

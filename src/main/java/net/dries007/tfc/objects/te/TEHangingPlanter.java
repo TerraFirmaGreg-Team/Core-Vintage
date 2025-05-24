@@ -1,12 +1,12 @@
 package net.dries007.tfc.objects.te;
 
-import net.minecraft.nbt.NBTTagCompound;
+import su.terrafirmagreg.modules.device.helper.GreenhouseHelper;
 
-import net.dries007.firmalife.util.GreenhouseHelpers;
+import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nonnull;
 
-public class TEHangingPlanter extends TETickCounter implements GreenhouseHelpers.IGreenhouseReceiver {
+public class TEHangingPlanter extends TETickCounter implements GreenhouseHelper.IGreenhouseReceiver {
 
   private boolean isClimateValid;
   private int tier;

@@ -340,6 +340,9 @@ block.tfg.device.freeze_dryer.name=Freeze Dryer
 block.tfg.device.ice_bunker.name=Ice Bunker
 block.tfg.device.powderkeg.name=Powderkeg
 block.tfg.device.thatch_bed.name=Thatch Bed
+block.tfg.device.greenhouse.door.name=Greenhouse Door
+block.tfg.device.greenhouse.wall.name=Greenhouse Wall
+block.tfg.device.greenhouse.roof.name=Greenhouse Roof
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

@@ -1,4 +1,4 @@
-package net.dries007.firmalife.util;
+package su.terrafirmagreg.modules.device.helper;
 
 import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseDoor;
 import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseRoof;
@@ -11,6 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import net.dries007.firmalife.util.HelpersFL;
 import net.dries007.tfc.objects.te.TEClimateStation;
 import net.dries007.tfc.util.Helpers;
 
@@ -18,9 +19,9 @@ import static net.dries007.firmalife.init.StatePropertiesFL.GLASS;
 import static net.dries007.firmalife.init.StatePropertiesFL.TOP;
 import static net.minecraft.block.BlockHorizontal.FACING;
 
-public class GreenhouseHelpers {
+public class GreenhouseHelper {
 
-  public GreenhouseHelpers() {}
+  public GreenhouseHelper() {}
 
   /**
    * Used for initial check in planters for growth

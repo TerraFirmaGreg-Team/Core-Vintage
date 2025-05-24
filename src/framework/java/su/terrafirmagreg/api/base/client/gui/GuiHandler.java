@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.base.client.gui;
 
+import su.terrafirmagreg.framework.Framework;
 import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContainer;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,19 +14,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class GuiHandler implements IGuiHandler {
 
-  private static String namespace;
-
-  public GuiHandler(String namespace) {
-    GuiHandler.namespace = namespace;
-    NetworkRegistry.INSTANCE.registerGuiHandler(namespace, this);
-  }
-
-  public static IGuiHandler of(String modId) {
-    return new GuiHandler(modId);
+  public static void enableGui() {
+    NetworkRegistry.INSTANCE.registerGuiHandler(Framework.modId, new GuiHandler());
   }
 
   public static void openGui(World world, BlockPos pos, EntityPlayer player) {
-    player.openGui(namespace, 0, world, pos.getX(), pos.getY(), pos.getZ());
+    player.openGui(Framework.modId, 0, world, pos.getX(), pos.getY(), pos.getZ());
   }
 
   @Override

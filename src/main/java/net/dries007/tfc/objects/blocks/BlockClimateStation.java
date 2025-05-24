@@ -3,6 +3,7 @@ package net.dries007.tfc.objects.blocks;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.device.helper.GreenhouseHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -25,7 +26,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.firmalife.util.GreenhouseHelpers;
 import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.objects.te.TEClimateStation;
 
@@ -56,14 +56,14 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
 
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-    world.setBlockState(pos, state.withProperty(STASIS, GreenhouseHelpers.isMultiblockValid(world, pos, state, false, tier)));
+    world.setBlockState(pos, state.withProperty(STASIS, GreenhouseHelper.isMultiblockValid(world, pos, state, false, tier)));
   }
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
       boolean visual = tier > 0;
-      boolean valid = GreenhouseHelpers.isMultiblockValid(world, pos, state, visual, tier);
+      boolean valid = GreenhouseHelper.isMultiblockValid(world, pos, state, visual, tier);
       world.setBlockState(pos, state.withProperty(STASIS, valid));
       if (!valid || !visual) {
         player.sendMessage(new TextComponentTranslation(valid ? "tooltip.firmalife.valid" : "tooltip.firmalife.invalid"));
@@ -99,7 +99,7 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
     for (EnumFacing d : EnumFacing.HORIZONTALS) {
-      GreenhouseHelpers.setApproval(world, pos, state, d, false, false, 0);
+      GreenhouseHelper.setApproval(world, pos, state, d, false, false, 0);
     }
     super.breakBlock(world, pos, state);
   }

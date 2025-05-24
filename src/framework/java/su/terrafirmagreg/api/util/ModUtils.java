@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.framework.Framework;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.launchwrapper.Launch;
@@ -22,31 +24,20 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import lombok.Setter;
 import lombok.experimental.UtilityClass;
 
 import java.util.Map;
 import java.util.Objects;
 
 @UtilityClass
-@SuppressWarnings("unused")
 public final class ModUtils {
-
-  @Setter
-  public static String modId;
-  @Setter
-  public static String modName;
-
-  public static void of(String modId, String modName) {
-    setModId(modId);
-    setModName(modName);
-  }
 
   /**
    * This cache is used by {@link #getSortedEntries(IForgeRegistry)} to improve repeat performance of the method. Calling {@link #getSortedEntries(IForgeRegistry)} before all entries have been registered will lock out new ones from being
    * found.
    */
   private static final Map<IForgeRegistry<?>, Multimap<String, ?>> REGISTRY_CACHE = new Object2ObjectOpenHashMap<>();
+
 
   /**
    * Возвращает идентификатор ресурса на основе строки.
@@ -55,7 +46,7 @@ public final class ModUtils {
    * @return идентификатор ресурса
    */
   public static ResourceLocation resource(String name) {
-    return ModUtils.resource(modId, name);
+    return ModUtils.resource(Framework.modId, name);
   }
 
   public static ResourceLocation resource(String key, String name) {
@@ -72,7 +63,7 @@ public final class ModUtils {
   }
 
   public static String id(String name) {
-    return String.format("%s:%s", modId, name);
+    return String.format("%s:%s", Framework.modId, name);
   }
 
   public static String id(String key, String name) {
@@ -84,7 +75,7 @@ public final class ModUtils {
   }
 
   public static String name(String name) {
-    return String.format("%s [ %s ]", modName, name);
+    return String.format("%s [ %s ]", Framework.modId, name);
   }
 
   public static String name(String key, String name) {
@@ -92,7 +83,7 @@ public final class ModUtils {
   }
 
   public static String localize(String key) {
-    return replace(String.format("%s.%s", key, modId));
+    return replace(String.format("%s.%s", key, Framework.modId));
   }
 
   public static String localize(String key, String name) {
@@ -128,11 +119,11 @@ public final class ModUtils {
   }
 
   public static String split(String name) {
-    return split(modName, name);
+    return split(Framework.modId, name);
   }
 
   public static String split(String key, String name) {
-    return String.format("%s / %s", key, name);
+    return String.format("%s | %s", key, name);
   }
 
   public static String replace(String key) {

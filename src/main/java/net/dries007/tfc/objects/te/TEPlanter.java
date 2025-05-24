@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarTickable;
+import su.terrafirmagreg.modules.device.helper.GreenhouseHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,6 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.firmalife.init.StatePropertiesFL;
-import net.dries007.firmalife.util.GreenhouseHelpers;
 import net.dries007.firmalife.util.IWaterable;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.recipes.PlanterRecipe;
@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
 /**
  * Evil combination of TEInventory and TECropBase because I can't code
  */
-public class TEPlanter extends TEInventory implements ITickable, ICalendarTickable, IWaterable, GreenhouseHelpers.IGreenhouseReceiver {
+public class TEPlanter extends TEInventory implements ITickable, ICalendarTickable, IWaterable, GreenhouseHelper.IGreenhouseReceiver {
 
   public boolean isClimateValid;
   protected int[] stages;
@@ -147,7 +147,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
   protected boolean canGrow(int slot) {
     PlanterRecipe recipe = getRecipe(slot);
     return isClimateValid && recipe != null && getStage(slot) < PlanterRecipe.getMaxStage(recipe) &&
-           tier >= PlanterRecipe.getTier(recipe) && world.getBlockState(pos).getValue(StatePropertiesFL.WET) && GreenhouseHelpers.isSkylightValid(world, pos);
+           tier >= PlanterRecipe.getTier(recipe) && world.getBlockState(pos).getValue(StatePropertiesFL.WET) && GreenhouseHelper.isSkylightValid(world, pos);
   }
 
   public PlanterRecipe getRecipe(int slot) {

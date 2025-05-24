@@ -120,9 +120,9 @@ public final class BlocksDevice {
     LATEX_EXTRACTOR = registrar.addBlock(new BlockLatexExtractor());
     SMELTERY_CAULDRON = registrar.addBlock(new BlockSmelteryCauldron());
     SMELTERY_FIREBOX = registrar.addBlock(new BlockSmelteryFirebox());
-//    GREENHOUSE_DOOR = registrar.addBlock(new BlockGreenhouseDoor());
-//    GREENHOUSE_ROOF = registrar.addBlock(new BlockGreenhouseRoof());
-//    GREENHOUSE_WALL = registrar.addBlock(new BlockGreenhouseWall());
+    GREENHOUSE_DOOR = registrar.addBlock(new BlockGreenhouseDoor());
+    GREENHOUSE_ROOF = registrar.addBlock(new BlockGreenhouseRoof());
+    GREENHOUSE_WALL = registrar.addBlock(new BlockGreenhouseWall());
 //    OVEN = registrar.addBlock(new BlockOven());
 //    OVEN_WALL = registrar.addBlock(new BlockOvenWall());
 //    OVEN_CHIMNEY = registrar.addBlock(new BlockOvenChimney());

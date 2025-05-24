@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,14 +16,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.GLASS;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.TOP;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.GLASS;
-import static net.dries007.firmalife.init.StatePropertiesFL.TOP;
-import static net.minecraft.block.BlockHorizontal.FACING;
-
-@ParametersAreNonnullByDefault
 public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 
   public static final AxisAlignedBB BASE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
@@ -34,41 +29,22 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
   public static final AxisAlignedBB ROOF_SHAPE_NORTH = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D).union(BASE);
 
   public BlockGreenhouseRoof() {
-    super();
-    setHardness(2.0f);
-    setResistance(3.0f);
-    setLightOpacity(0);
-    setSoundType(SoundType.METAL);
-    this.setDefaultState(this.blockState.getBaseState().withProperty(GLASS, false).withProperty(FACING, EnumFacing.EAST).withProperty(TOP, false));
+
+    getSettings()
+      .registryKey("greenhouse/roof");
   }
 
   @Override
-  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-    if (!world.isRemote) {
-      ItemStack held = player.getHeldItem(hand);
-      if (OreDictUtils.contains(held, "greenhouse")) {return false;}
-      if (!state.getValue(GLASS)) {
-        if (held.getCount() > 1 && OreDictUtils.contains(held, "paneGlass")) {
-          world.setBlockState(pos, state.withProperty(GLASS, true));
-          if (!player.isCreative()) {held.shrink(2);}
-          return true;
-        }
-      }
-      if (StackUtils.doesStackMatchTool(held, "hammer")) {
-        if (!player.isSneaking()) {
-          world.setBlockState(pos, state.withProperty(TOP, !state.getValue(TOP)));
-        } else if (!state.getValue(TOP)) {
-          world.setBlockState(pos, state.withProperty(FACING, state.getValue(FACING).rotateY()));
-        }
-      }
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    if (state.getValue(TOP)) {
+      return BASE;
     }
-    return true;
-  }
-
-  @Override
-  @Nonnull
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    return switch (state.getValue(HORIZONTAL)) {
+      case SOUTH -> ROOF_SHAPE_SOUTH;
+      case WEST -> ROOF_SHAPE_WEST;
+      case EAST -> ROOF_SHAPE_EAST;
+      default -> ROOF_SHAPE_NORTH;
+    };
   }
 
   @Override
@@ -77,39 +53,49 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
   }
 
   @Override
+  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (!world.isRemote) {
+      ItemStack held = player.getHeldItem(hand);
+      if (OreDictUtils.contains(held, "greenhouse")) {
+        return false;
+      }
+      if (!state.getValue(GLASS)) {
+        if (held.getCount() > 1 && OreDictUtils.contains(held, "paneGlass")) {
+          world.setBlockState(pos, state.withProperty(GLASS, true));
+          if (!player.isCreative()) {
+            held.shrink(2);
+          }
+          return true;
+        }
+      }
+      if (StackUtils.doesStackMatchTool(held, "hammer")) {
+        if (!player.isSneaking()) {
+          world.setBlockState(pos, state.withProperty(TOP, !state.getValue(TOP)));
+        } else if (!state.getValue(TOP)) {
+          world.setBlockState(pos, state.withProperty(HORIZONTAL, state.getValue(HORIZONTAL).rotateY()));
+        }
+      }
+    }
+    return true;
+  }
+
+  @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    return getDefaultState().withProperty(HORIZONTAL, placer.getHorizontalFacing().getOpposite());
+  }
+
+  @Override
   public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
-    return state.getValue(FACING).getOpposite() == side || side == EnumFacing.DOWN;
+    return state.getValue(HORIZONTAL).getOpposite() == side || side == EnumFacing.DOWN;
   }
 
   @Override
-  @Nonnull
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    if (state.getValue(TOP)) {
-      return BASE;
-    }
-    switch (state.getValue(FACING)) {
-      case NORTH:
-      default:
-        return ROOF_SHAPE_NORTH;
-      case SOUTH:
-        return ROOF_SHAPE_SOUTH;
-      case WEST:
-        return ROOF_SHAPE_WEST;
-      case EAST:
-        return ROOF_SHAPE_EAST;
-    }
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    return (state.getValue(GLASS) && (face == EnumFacing.DOWN || face == state.getValue(HORIZONTAL).getOpposite())) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
   @Override
-  @SuppressWarnings("deprecation")
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return blockState.getValue(TOP) ? BASE : FULL_BLOCK_AABB;
-  }
-
-  @Override
-  @Nonnull
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    return (state.getValue(GLASS) && (face == EnumFacing.DOWN || face == state.getValue(FACING).getOpposite())) ? BlockFaceShape.SOLID
-                                                                                                                : BlockFaceShape.UNDEFINED;
   }
 }

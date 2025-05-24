@@ -1,17 +1,15 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.Framework;
 
 import net.minecraft.util.Tuple;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 
 import com.google.common.base.Preconditions;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.UtilityClass;
 
 import java.lang.annotation.Annotation;
@@ -28,14 +26,6 @@ import java.util.function.Function;
 @SuppressWarnings("unused")
 public final class AnnotationUtils {
 
-  @Getter
-  @Setter
-  private static ASMDataTable asmData;
-
-  public static void of(FMLConstructionEvent event) {
-    setAsmData(event.getASMHarvestedData());
-  }
-
   /**
    * Gets the ASMData for all classes annotated with the annotation class.
    *
@@ -44,7 +34,7 @@ public final class AnnotationUtils {
    */
   public static <A extends Annotation> Set<ASMData> getData(Class<A> annotation) {
 
-    return getData(asmData, annotation);
+    return getData(Framework.asmData, annotation);
   }
 
   /**
@@ -67,7 +57,7 @@ public final class AnnotationUtils {
    */
   public static <A extends Annotation> List<Tuple<Class<?>, A>> getAnnotatedClasses(Class<A> annotation) {
 
-    return getAnnotatedClasses(asmData, annotation);
+    return getAnnotatedClasses(Framework.asmData, annotation);
   }
 
   /**
@@ -126,12 +116,12 @@ public final class AnnotationUtils {
    */
   public static <T, A extends Annotation> Map<T, A> getAnnotations(Class<A> annotation, Class<T> instance) {
 
-    return getAnnotations(asmData, annotation, instance, aClass -> true);
+    return getAnnotations(Framework.asmData, annotation, instance, aClass -> true);
   }
 
   public static <T, A extends Annotation> Map<T, A> getAnnotations(Class<A> annotation, Class<T> instance, Function<A, Boolean> createInstance) {
 
-    return getAnnotations(asmData, annotation, instance, createInstance);
+    return getAnnotations(Framework.asmData, annotation, instance, createInstance);
   }
 
   /**

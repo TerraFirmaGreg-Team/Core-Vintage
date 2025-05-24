@@ -1,6 +1,5 @@
 package su.terrafirmagreg;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.Framework;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.core.ModuleCore;
@@ -37,8 +36,6 @@ import static su.terrafirmagreg.Tags.SERVER_PROXY;
 @Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg extends Framework {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(MOD_NAME);
-
   @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
   public static IProxy PROXY;
 
@@ -61,7 +58,7 @@ public class TerraFirmaGreg extends Framework {
 
   @EventHandler
   public void onConstruction(FMLConstructionEvent event) {
-
+    this.setup(event);
     this.routeEvent(event);
   }
 

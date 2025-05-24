@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.device.helper.GreenhouseHelper;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,7 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.firmalife.particle.ParticlesFL;
-import net.dries007.firmalife.util.GreenhouseHelpers;
 import net.dries007.firmalife.util.HelpersFL;
 import net.dries007.firmalife.util.IWaterable;
 import net.dries007.tfc.util.Helpers;
@@ -34,7 +34,7 @@ import static net.dries007.firmalife.init.StatePropertiesFL.NEEDS_SOURCE;
 import static net.dries007.firmalife.init.StatePropertiesFL.WATERED;
 
 @ParametersAreNonnullByDefault
-public class BlockSpout extends BlockNonCube implements GreenhouseHelpers.IGreenhouseReceiverBlock {
+public class BlockSpout extends BlockNonCube implements GreenhouseHelper.IGreenhouseReceiverBlock {
 
   private static final AxisAlignedBB SHAPE = new AxisAlignedBB(5.0D / 16, 7.0D / 16, 5.0D / 16, 11.0D / 16, 16.0D / 16, 11.0D / 16);
   private final boolean range;

@@ -2,42 +2,62 @@ package su.terrafirmagreg.modules.core.feature.mapping;
 
 import su.terrafirmagreg.api.util.DataFixUtils;
 import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.EntitiesCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+
 public class FeatureRemappingCore extends FeatureBase {
 
-  static {
-    DataFixUtils.put(DataFixUtils.BLOCK_MAP, m -> {
-      m.put("debug", BlocksCore.DEBUG);
-      m.put("puddle", BlocksCore.PUDDLE);
-      m.put("fire_bricks", BlocksCore.FIRE_BRICKS);
-      m.put("thatch", BlocksCore.THATCH);
-    });
+  @SubscribeEvent
+  public static void onBlockRemapping(final RegistryEvent.MissingMappings<Block> event) {
+    DataFixUtils.remap(event, ModuleCore.LOGGER.getLogger(), new Object2ObjectOpenHashMap<>() {{
+      put("debug", () -> BlocksCore.DEBUG);
+      put("puddle", () -> BlocksCore.PUDDLE);
+      put("fire_bricks", () -> BlocksCore.FIRE_BRICKS);
+      put("thatch", () -> BlocksCore.THATCH);
+    }});
+  }
 
-    DataFixUtils.put(DataFixUtils.ITEM_MAP, m -> {
-      m.put("wand", ItemsCore.DEBUG_WAND);
-      m.put("wood_ash", ItemsCore.WOOD_ASH);
-      m.put("straw", ItemsCore.STRAW);
-      m.put("glass_shard", ItemsCore.GLASS_SHARD);
-      m.put("ice_shard", ItemsCore.ICE_SHARD);
-      m.put("packed_ice_shard", ItemsCore.ICE_SHARD);
-      m.put("sea_ice_shard", ItemsCore.ICE_SHARD);
-    });
+  @SubscribeEvent
+  public static void onItemRemapping(final RegistryEvent.MissingMappings<Item> event) {
+    DataFixUtils.remap(event, ModuleCore.LOGGER.getLogger(), new Object2ObjectOpenHashMap<>() {{
+      put("wand", () -> ItemsCore.DEBUG_WAND);
+      put("wood_ash", () -> ItemsCore.WOOD_ASH);
+      put("straw", () -> ItemsCore.STRAW);
+      put("glass_shard", () -> ItemsCore.GLASS_SHARD);
+      put("ice_shard", () -> ItemsCore.ICE_SHARD);
+      put("packed_ice_shard", () -> ItemsCore.ICE_SHARD);
+      put("sea_ice_shard", () -> ItemsCore.ICE_SHARD);
+    }});
+  }
 
-    DataFixUtils.put(DataFixUtils.ENTITY_MAP, m -> {
-      m.put("sitblock", EntitiesCore.SIT_BLOCK);
-    });
+  @SubscribeEvent
+  public static void onEntityRemapping(final RegistryEvent.MissingMappings<EntityEntry> event) {
+    DataFixUtils.remap(event, ModuleCore.LOGGER.getLogger(), new Object2ObjectOpenHashMap<>() {{
+      put("sitblock", () -> EntitiesCore.SIT_BLOCK);
+    }});
+  }
 
-    DataFixUtils.put(DataFixUtils.EFFECT_MAP, m -> {
-      m.put("cool", EffectsCore.HYPOTHERMIA);
-      m.put("warm", EffectsCore.HYPERTHERMIA);
-      m.put("overburdened", EffectsCore.OVERBURDENED);
-      m.put("thirst", EffectsCore.THIRST);
-      m.put("parasites", EffectsCore.PARASITES);
-      m.put("swarm", EffectsCore.SWARM);
-    });
+  @SubscribeEvent
+  public static void onEffectRemapping(final RegistryEvent.MissingMappings<Potion> event) {
+    DataFixUtils.remap(event, ModuleCore.LOGGER.getLogger(), new Object2ObjectOpenHashMap<>() {{
+      put("cool", () -> EffectsCore.HYPOTHERMIA);
+      put("warm", () -> EffectsCore.HYPERTHERMIA);
+      put("overburdened", () -> EffectsCore.OVERBURDENED);
+      put("thirst", () -> EffectsCore.THIRST);
+      put("parasites", () -> EffectsCore.PARASITES);
+      put("swarm", () -> EffectsCore.SWARM);
+    }});
   }
 }

@@ -1,12 +1,11 @@
 package net.dries007.firmalife.util;
 
-import net.dries007.firmalife.registry.BlocksFL;
+import net.minecraft.init.Items;
+import net.minecraftforge.oredict.OreDictionary;
+
 import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.util.agriculture.Food;
-
-import net.minecraft.init.Items;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class OreDictsFL {
 
@@ -37,9 +36,6 @@ public class OreDictsFL {
     OreDictionary.registerOre("leather", ItemsFL.PINEAPPLE_LEATHER);
     OreDictionary.registerOre("string", ItemsFL.PINEAPPLE_YARN);
     OreDictionary.registerOre("tool", ItemsFL.PEEL);
-    OreDictionary.registerOre("greenhouse", BlocksFL.GREENHOUSE_ROOF);
-    OreDictionary.registerOre("greenhouse", BlocksFL.GREENHOUSE_WALL);
-    //OreDictionary.registerOre("greenhouse", BlocksFL.GREENHOUSE_DOOR); broken?
 
   }
 }

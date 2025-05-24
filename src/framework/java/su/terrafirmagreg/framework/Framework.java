@@ -1,23 +1,36 @@
 package su.terrafirmagreg.framework;
 
-import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.framework.module.ModuleManager;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
 
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.discovery.ASMDataTable;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLStateEvent;
+
 
 public abstract class Framework {
 
-  private final IModuleManager manager;
+  public static String modId;
+  public static String modName;
+  public static ASMDataTable asmData;
+
+  public final IModuleManager manager;
+
 
   protected Framework(String modId, String modName) {
-
-    FluidRegistry.enableUniversalBucket();
-    ModUtils.of(modId, modName);
+    Framework.modId = modId;
+    Framework.modName = modName;
 
     this.manager = ModuleManager.of(modId);
+  }
+
+  protected void setup(FMLConstructionEvent event) {
+    Framework.asmData = event.getASMHarvestedData();
+    FluidRegistry.enableUniversalBucket();
+    GuiHandler.enableGui();
   }
 
   protected void routeEvent(FMLStateEvent event) {

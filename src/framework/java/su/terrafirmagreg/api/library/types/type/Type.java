@@ -2,8 +2,6 @@ package su.terrafirmagreg.api.library.types.type;
 
 import su.terrafirmagreg.api.library.types.variant.Variant;
 
-import net.minecraft.block.state.IBlockState;
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
@@ -19,13 +17,6 @@ public abstract class Type<T extends Type<T>> implements Comparable<Type<T>> {
     if (name.isEmpty()) {
       throw new RuntimeException(String.format("Type name must contain any character: [%s]", name));
     }
-  }
-
-  public static boolean isType(IBlockState blockState, Type<?>... types) {
-    if (blockState.getBlock() instanceof IType<?> variantIn) {
-      return isType(variantIn.getType(), types);
-    }
-    return false;
   }
 
   public static boolean isType(Type<?> typeIn, Type<?>... types) {

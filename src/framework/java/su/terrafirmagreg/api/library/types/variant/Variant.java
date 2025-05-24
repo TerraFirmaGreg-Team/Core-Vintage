@@ -2,8 +2,6 @@ package su.terrafirmagreg.api.library.types.variant;
 
 import su.terrafirmagreg.api.library.types.type.Type;
 
-import net.minecraft.block.state.IBlockState;
-
 import org.jetbrains.annotations.NotNull;
 
 import lombok.Getter;
@@ -21,12 +19,6 @@ public abstract class Variant<V, T extends Type<T>> implements Comparable<Varian
     }
   }
 
-  public static boolean isVariant(IBlockState blockState, Variant<?, ?>... variants) {
-    if (blockState.getBlock() instanceof IVariant<?> variantIn) {
-      return isVariant(variantIn.getVariant(), variants);
-    }
-    return false;
-  }
 
   public static boolean isVariant(Variant<?, ?> variantIn, Variant<?, ?>... variants) {
     for (var variant : variants) {

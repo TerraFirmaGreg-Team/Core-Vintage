@@ -1,9 +1,11 @@
 package su.terrafirmagreg.api.library.types.variant.block;
 
 import su.terrafirmagreg.api.library.types.type.Type;
+import su.terrafirmagreg.api.library.types.variant.IVariant;
 import su.terrafirmagreg.api.library.types.variant.Variant;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
@@ -24,6 +26,18 @@ public abstract class VariantBlock<V, T extends Type<T>> extends Variant<V, T> {
 
     this.map = new Object2ObjectOpenHashMap<>();
     this.factory = factory;
+  }
+
+  public static boolean isVariant(IBlockState blockState, Variant<?, ?>... variants) {
+
+    return isVariant(blockState.getBlock(), variants);
+  }
+
+  public static boolean isVariant(Block block, Variant<?, ?>... variants) {
+    if (block instanceof IVariant<?> variantIn) {
+      return isVariant(variantIn.getVariant(), variants);
+    }
+    return false;
   }
 
 

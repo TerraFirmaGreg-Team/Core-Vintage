@@ -32,8 +32,8 @@ public class DryingRecipe extends IForgeRegistryEntry.Impl<DryingRecipe> impleme
     }
   }
 
-  public static void addRecipe(String recipe_name, ItemStack input, ItemStack output, int duration) {
-    TFCRegistries.DRYING.register(new DryingRecipe(IIngredient.of(input), output, duration).setRegistryName(recipe_name));
+  public static void addRecipe(String recipeName, ItemStack input, ItemStack output, int duration) {
+    TFCRegistries.DRYING.register(new DryingRecipe(IIngredient.of(input), output, duration).setRegistryName(recipeName));
   }
 
   @Nullable

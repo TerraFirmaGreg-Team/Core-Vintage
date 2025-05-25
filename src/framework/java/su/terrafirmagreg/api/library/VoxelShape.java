@@ -22,4 +22,8 @@ public class VoxelShape extends AxisAlignedBB {
   public VoxelShape(double x1, double y1, double z1, double x2, double y2, double z2) {
     super(x1 / 16, y1 / 16, z1 / 16, x2 / 16, y2 / 16, z2 / 16);
   }
+
+  public static VoxelShape createShape(double x1, double y1, double z1, double x2, double y2, double z2) {
+    return new VoxelShape(x1, y1, z1, x2, y2, z2);
+  }
 }

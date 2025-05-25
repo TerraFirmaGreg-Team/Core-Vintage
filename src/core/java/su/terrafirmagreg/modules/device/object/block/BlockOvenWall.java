@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -20,92 +20,80 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import mcp.MethodsReturnNonnullByDefault;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CURED;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+@SuppressWarnings("deprecation")
+public class BlockOvenWall extends BaseBlock {
 
-import static net.dries007.firmalife.init.StatePropertiesFL.CURED;
-import static net.dries007.tfc.Constants.RNG;
-import static net.minecraft.block.BlockHorizontal.FACING;
-
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class BlockOvenWall extends Block implements ICapabilitySize {
-
-  public static final AxisAlignedBB OVEN_WALL_WEST = new AxisAlignedBB(0.0D, 0.0D, 9.0 / 16, 16.0D / 16, 16.0D / 16, 16.0D / 16);
-  public static final AxisAlignedBB OVEN_WALL_EAST = new AxisAlignedBB(0.0D, 0.0D, 7.0D / 16, 16.0D / 16, 16.0D / 16, 0.0D);
-  public static final AxisAlignedBB OVEN_WALL_NORTH = new AxisAlignedBB(7.0D / 16, 0.0D, 0.0D, 0.0D, 16.0D / 16, 16.0D / 16);
-  public static final AxisAlignedBB OVEN_WALL_SOUTH = new AxisAlignedBB(9.0D / 16, 0.0D, 0.0D, 16.0D / 16, 16.0D / 16, 16.0D / 16);
+  public static final AxisAlignedBB OVEN_WALL_WEST = new AxisAlignedBB(0.0D, 0.0D, 9.0 / 16,
+    16.0D / 16, 16.0D / 16, 16.0D / 16);
+  public static final AxisAlignedBB OVEN_WALL_EAST = new AxisAlignedBB(0.0D, 0.0D, 7.0D / 16,
+    16.0D / 16, 16.0D / 16, 0.0D);
+  public static final AxisAlignedBB OVEN_WALL_NORTH = new AxisAlignedBB(7.0D / 16, 0.0D, 0.0D, 0.0D,
+    16.0D / 16, 16.0D / 16);
+  public static final AxisAlignedBB OVEN_WALL_SOUTH = new AxisAlignedBB(9.0D / 16, 0.0D, 0.0D,
+    16.0D / 16, 16.0D / 16, 16.0D / 16);
 
   public BlockOvenWall() {
-    super(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY);
-    setHardness(2.0f);
-    setResistance(3.0f);
-    setLightOpacity(0);
-    this.setDefaultState(this.blockState.getBaseState().withProperty(CURED, false).withProperty(FACING, EnumFacing.NORTH));
+    super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
+
+    getSettings()
+      .registryKey("oven/wall")
+      .hardness(2.0F)
+      .resistance(3.0F)
+      .lightValue(0)
+      .nonOpaque()
+      .nonFullCube()
+      .capability(
+        CapabilityProviderSize.of(Size.NORMAL, Weight.HEAVY)
+      );
+
+    setDefaultState(blockState.getBaseState()
+      .withProperty(CURED, false)
+      .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-    if (facing.getAxis() == EnumFacing.Axis.Y) {
-      facing = placer.getHorizontalFacing().getOpposite();
-    }
-    return getDefaultState().withProperty(FACING, facing);
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta)).withProperty(CURED, meta > 3);
+    return this.getDefaultState()
+      .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
+      .withProperty(CURED, meta > 3);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex() + (state.getValue(CURED) ? 4 : 0);
+    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(CURED) ? 4 : 0);
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public boolean isFullCube(IBlockState state) {
-    return false;
+  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return switch (state.getValue(HORIZONTAL)) {
+      case SOUTH -> OVEN_WALL_SOUTH;
+      case WEST -> OVEN_WALL_WEST;
+      case EAST -> OVEN_WALL_EAST;
+      default -> OVEN_WALL_NORTH;
+    };
   }
 
   @Override
-  public Size getSize(ItemStack stack) {
-    return Size.NORMAL;
-  }
-
-  @Override
-  public Weight getWeight(ItemStack stack) {
-    return Weight.HEAVY;
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing,
+                                          float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    if (facing.getAxis() == EnumFacing.Axis.Y) {
+      facing = placer.getHorizontalFacing().getOpposite();
+    }
+    return getDefaultState().withProperty(HORIZONTAL, facing);
   }
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, CURED);
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    switch (state.getValue(FACING)) {
-      case NORTH:
-      default:
-        return OVEN_WALL_NORTH;
-      case SOUTH:
-        return OVEN_WALL_SOUTH;
-      case WEST:
-        return OVEN_WALL_WEST;
-      case EAST:
-        return OVEN_WALL_EAST;
-    }
+    return new BlockStateContainer(this, HORIZONTAL, CURED);
   }
 
   @Override
@@ -115,11 +103,5 @@ public class BlockOvenWall extends Block implements ICapabilitySize {
     } else {
       super.getDrops(drops, world, pos, state, fortune);
     }
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 }

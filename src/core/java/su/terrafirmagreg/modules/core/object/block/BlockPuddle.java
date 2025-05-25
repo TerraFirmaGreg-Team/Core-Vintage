@@ -32,21 +32,14 @@ public class BlockPuddle extends BaseBlock {
       .renderLayer(BlockRenderLayer.TRANSLUCENT)
       .useNeighborBrightness()
       .unbreakable()
+      .translucent()
       .noCollision()
+      .passable()
       .nonFullCube()
       .randomTicks()
       .replaceable();
   }
 
-  @Override
-  public boolean isTranslucent(IBlockState state) {
-    return true;
-  }
-
-  @Override
-  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-    return true;
-  }
 
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {

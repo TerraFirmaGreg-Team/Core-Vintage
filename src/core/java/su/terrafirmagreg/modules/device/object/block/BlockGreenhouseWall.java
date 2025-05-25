@@ -51,9 +51,9 @@ public class BlockGreenhouseWall extends BaseBlock {
       .nonCube();
 
     setDefaultState(blockState.getBaseState()
-      .withProperty(GLASS, Boolean.FALSE)
+      .withProperty(GLASS, false)
       .withProperty(HORIZONTAL, EnumFacing.EAST)
-      .withProperty(TOP, Boolean.FALSE));
+      .withProperty(TOP, false));
   }
 
   @Override

@@ -61,8 +61,8 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH)
-      .withProperty(BURIED, Boolean.FALSE)
-      .withProperty(CLOSED, Boolean.FALSE));
+      .withProperty(BURIED, false)
+      .withProperty(CLOSED, false));
   }
 
   public IBlockState getStateFromMeta(int meta) {
@@ -161,7 +161,7 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
           tile.setCapturedEntity(entityLiving);
           entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
           tile.setOpen(false);
-          iBlockState = iBlockState.withProperty(CLOSED, Boolean.TRUE);
+          iBlockState = iBlockState.withProperty(CLOSED, true);
           world.setBlockState(pos, iBlockState, 2);
           entityLiving.playSound(SoundEvents.ENTITY_ITEM_BREAK, 2.0F, 0.4F);
         } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity().equals(entityLiving)) {

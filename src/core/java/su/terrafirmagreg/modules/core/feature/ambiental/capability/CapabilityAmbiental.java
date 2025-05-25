@@ -20,6 +20,7 @@ import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
+import su.terrafirmagreg.modules.device.object.tile.TileOven;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.block.state.IBlockState;
@@ -41,7 +42,6 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import net.dries007.tfc.objects.te.TELamp;
-import net.dries007.tfc.objects.te.TEOven;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.util.Optional;
@@ -184,7 +184,7 @@ public final class CapabilityAmbiental {
 
 
     public static Optional<ModifierTile> handleClayOven(EntityPlayer player, TileEntity tile) {
-      if (tile instanceof TEOven oven) {
+      if (tile instanceof TileOven oven) {
 
         boolean isBurning = false;
 

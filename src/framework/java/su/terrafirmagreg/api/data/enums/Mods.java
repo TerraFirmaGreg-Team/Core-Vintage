@@ -4,7 +4,6 @@ import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +53,7 @@ public enum Mods {
 
   public boolean isModLoaded() {
     if (this.modLoaded == null) {
-      this.modLoaded = Loader.isModLoaded(this.modId);
+      this.modLoaded = ModUtils.isModLoaded(this.modId);
     }
     return this.modLoaded;
   }

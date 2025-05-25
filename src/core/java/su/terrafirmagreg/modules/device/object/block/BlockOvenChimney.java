@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -17,36 +17,35 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-import javax.annotation.Nonnull;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CURED;
+import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.CURED;
-import static net.dries007.tfc.Constants.RNG;
+@SuppressWarnings("deprecation")
+public class BlockOvenChimney extends BaseBlock {
 
-public class BlockOvenChimney extends Block implements ICapabilitySize {
-
-  public static final AxisAlignedBB CHIMNEY_BB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.25D).union(new AxisAlignedBB(0.0D, 0.0D, 0.75D, 1.0D, 1.0D, 1.0D).union(new AxisAlignedBB(0.0D, 0.0D, 0.25D, 0.25D, 1.0D, 0.75D))
-    .union(new AxisAlignedBB(0.75D, 0.0D, 0.25D, 1.0D, 1.0D, 0.75D)));
+  public static final AxisAlignedBB CHIMNEY_BB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.25D)
+    .union(new AxisAlignedBB(0.0D, 0.0D, 0.75D, 1.0D, 1.0D, 1.0D)
+      .union(new AxisAlignedBB(0.0D, 0.0D, 0.25D, 0.25D, 1.0D, 0.75D))
+      .union(new AxisAlignedBB(0.75D, 0.0D, 0.25D, 1.0D, 1.0D, 0.75D)));
 
   public BlockOvenChimney() {
-    super(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY);
-    setHardness(2.0f);
-    setResistance(3.0f);
-    setLightOpacity(0);
-    this.setDefaultState(this.blockState.getBaseState().withProperty(CURED, false));
+    super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
+
+    getSettings()
+      .registryKey("oven/chimney")
+      .hardness(2.0f)
+      .resistance(3.0f)
+      .nonOpaque()
+      .lightValue(0)
+      .capability(
+        CapabilityProviderSize.of(Size.NORMAL, Weight.HEAVY)
+      );
+
+    setDefaultState(blockState.getBaseState()
+      .withProperty(CURED, false));
   }
 
   @Override
-  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    if (state.getValue(CURED)) {
-      drops.add(new ItemStack(Items.BRICK, 3 + RNG.nextInt(3)));
-    } else {
-      super.getDrops(drops, world, pos, state, fortune);
-    }
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  @Nonnull
   public IBlockState getStateFromMeta(int meta) {
     return this.getDefaultState().withProperty(CURED, meta == 1);
   }
@@ -57,40 +56,26 @@ public class BlockOvenChimney extends Block implements ICapabilitySize {
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
-  }
-
-  @Nonnull
-  @Override
-  public Size getSize(@Nonnull ItemStack stack) {
-    return Size.NORMAL;
-  }
-
-  @Nonnull
-  @Override
-  public Weight getWeight(@Nonnull ItemStack stack) {
-    return Weight.HEAVY;
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return EnumBlockRenderType.MODEL;
   }
 
   @Override
-  @Nonnull
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, CURED);
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  @Nonnull
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return CHIMNEY_BB;
   }
 
   @Override
-  @SuppressWarnings("deprecation")
-  @Nonnull
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, CURED);
+  }
+
+  @Override
+  public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    if (state.getValue(CURED)) {
+      drops.add(new ItemStack(Items.BRICK, 3 + RNG.nextInt(3)));
+    } else {
+      super.getDrops(drops, world, pos, state, fortune);
+    }
   }
 }

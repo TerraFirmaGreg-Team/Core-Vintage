@@ -1,7 +1,8 @@
 package net.dries007.firmalife.compat;
 
+import su.terrafirmagreg.api.util.ModUtils;
+
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -10,6 +11,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.dries007.firmalife.compat.dynamictrees.DTModule;
 import net.dries007.tfc.objects.recipes.NutRecipe;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 
 import static net.dries007.firmalife.FirmaLife.MOD_ID;
@@ -17,16 +20,13 @@ import static net.dries007.firmalife.FirmaLife.MOD_ID;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class ModuleManager {
 
+  @Getter
   private static final ArrayList<ModuleCore> modules = new ArrayList<>();
 
   public static void registerModule(ModuleCore module) {
     if (isLoaded(module.getDep())) {
       modules.add(module);
     }
-  }
-
-  public static ArrayList<ModuleCore> getModules() {
-    return modules;
   }
 
   public static void initModules() {
@@ -45,6 +45,6 @@ public class ModuleManager {
   }
 
   private static boolean isLoaded(String modName) {
-    return Loader.isModLoaded(modName);
+    return ModUtils.isModLoaded(modName);
   }
 }

@@ -343,6 +343,9 @@ block.tfg.device.thatch_bed.name=Thatch Bed
 block.tfg.device.greenhouse.door.name=Greenhouse Door
 block.tfg.device.greenhouse.wall.name=Greenhouse Wall
 block.tfg.device.greenhouse.roof.name=Greenhouse Roof
+block.tfg.device.oven.base.name=Oven
+block.tfg.device.oven.wall.name=Oven Wall
+block.tfg.device.oven.chimney.name=Oven Chimney
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

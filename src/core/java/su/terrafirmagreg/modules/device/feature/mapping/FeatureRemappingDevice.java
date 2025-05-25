@@ -48,6 +48,9 @@ public class FeatureRemappingDevice extends FeatureBase {
       put("greenhouse_door", () -> BlocksDevice.GREENHOUSE_DOOR);
       put("greenhouse_wall", () -> BlocksDevice.GREENHOUSE_WALL);
       put("greenhouse_roof", () -> BlocksDevice.GREENHOUSE_ROOF);
+      put("oven", () -> BlocksDevice.OVEN_BASE);
+      put("oven_wall", () -> BlocksDevice.OVEN_WALL);
+      put("oven_chimney", () -> BlocksDevice.OVEN_CHIMNEY);
     }});
   }
 
@@ -64,6 +67,9 @@ public class FeatureRemappingDevice extends FeatureBase {
       put("greenhouse_door", () -> BlocksDevice.GREENHOUSE_DOOR.asItem());
       put("greenhouse_wall", () -> BlocksDevice.GREENHOUSE_WALL.asItem());
       put("greenhouse_roof", () -> BlocksDevice.GREENHOUSE_ROOF.asItem());
+      put("oven", () -> BlocksDevice.OVEN_BASE.asItem());
+      put("oven_wall", () -> BlocksDevice.OVEN_WALL.asItem());
+      put("oven_chimney", () -> BlocksDevice.OVEN_CHIMNEY.asItem());
     }});
   }
 

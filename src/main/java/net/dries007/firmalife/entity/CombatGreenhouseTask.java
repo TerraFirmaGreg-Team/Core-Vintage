@@ -16,7 +16,7 @@ public class CombatGreenhouseTask extends EntityAIBreakDoor {
   public CombatGreenhouseTask(EntityLiving entityIn) {
     super(entityIn);
   }
-
+ 
   @Override
   public void startExecuting() {
     super.startExecuting();

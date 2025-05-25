@@ -55,7 +55,7 @@ public class JEIPluginFL implements IModPlugin {
 
     List<SimpleRecipeWrapper> ovenList = TFCRegistries.OVEN.getValuesCollection().stream().map(OvenRecipeWrapper::new).collect(Collectors.toList());
     registry.addRecipes(ovenList, OVEN_ID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksFL.OVEN), OVEN_ID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.OVEN_BASE), OVEN_ID);
 
     List<SimpleRecipeWrapper> dryList = TFCRegistries.DRYING.getValuesCollection().stream().map(DryingRecipeWrapper::new).collect(Collectors.toList());
     registry.addRecipes(dryList, DRY_ID);

@@ -1,7 +1,6 @@
 package net.dries007.firmalife;
 
 import su.terrafirmagreg.modules.device.client.render.TESRLeafMat;
-import su.terrafirmagreg.modules.device.client.render.TESROven;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
@@ -51,7 +50,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.items.ItemFruitDoor;
 import net.dries007.tfc.objects.recipes.PlanterRecipe;
 import net.dries007.tfc.objects.te.TELeafMat;
-import net.dries007.tfc.objects.te.TEOven;
 import net.dries007.tfc.objects.te.TEString;
 import net.dries007.tfc.objects.te.TETurntable;
 
@@ -110,7 +108,6 @@ public class ClientRegisterEventsFL {
     ModelLoader.setCustomStateMapper(BlocksFL.QUAD_PLANTER, new QuadPlanterStateMapper());
     ModelLoader.setCustomStateMapper(BlocksFL.LARGE_PLANTER, new LargePlanterStateMapper());
 
-    ClientRegistry.bindTileEntitySpecialRenderer(TEOven.class, new TESROven());
     ClientRegistry.bindTileEntitySpecialRenderer(TEString.class, new TESRString());
     ClientRegistry.bindTileEntitySpecialRenderer(TELeafMat.class, new TESRLeafMat());
     ClientRegistry.bindTileEntitySpecialRenderer(TETurntable.class, new TESRTurntable());

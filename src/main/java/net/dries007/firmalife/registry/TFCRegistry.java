@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 import su.terrafirmagreg.modules.core.data.ingredient.IngredientItemFood;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -86,9 +87,9 @@ public class TFCRegistry {
   @SubscribeEvent
   public static void onRegisterKnappingRecipeEvent(RegistryEvent.Register<KnappingRecipe> event) {
     event.getRegistry().registerAll(
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksFL.OVEN), "XXXXX", "XX XX", "X   X", "X   X", "XXXXX").setRegistryName("clay_oven"),
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksFL.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X", "X   X").setRegistryName("clay_oven_chimney"),
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksFL.OVEN_WALL), "    X", "   XX", "   XX", "  XXX", "  XXX").setRegistryName("clay_oven_wall"),
+      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksDevice.OVEN_BASE), "XXXXX", "XX XX", "X   X", "X   X", "XXXXX").setRegistryName("clay_oven"),
+      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksDevice.OVEN_CHIMNEY), "XX XX", "X   X", "X   X", "X   X", "X   X").setRegistryName("clay_oven_chimney"),
+      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(BlocksDevice.OVEN_WALL), "    X", "   XX", "   XX", "  XXX", "  XXX").setRegistryName("clay_oven_wall"),
 
       new KnappingRecipeFood(KnappingFL.PUMPKIN, true, new ItemStack(ItemSeedsTFC.get(StemCrop.PUMPKIN)), "XXXXX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("pumpkin_scoop"),
       new KnappingRecipeFood(KnappingFL.PUMPKIN, true, new ItemStack(ItemsFL.getFood(FoodFL.PUMPKIN_CHUNKS), 4), "XX XX", "XX XX", "     ", "XX XX", "XX XX").setRegistryName("pumpkin_chunk")

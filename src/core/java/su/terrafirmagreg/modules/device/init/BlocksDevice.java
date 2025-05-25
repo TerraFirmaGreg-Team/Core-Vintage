@@ -79,7 +79,7 @@ public final class BlocksDevice {
   public static BlockGreenhouseDoor GREENHOUSE_DOOR;
   public static BlockGreenhouseRoof GREENHOUSE_ROOF;
   public static BlockGreenhouseWall GREENHOUSE_WALL;
-  public static BlockOven OVEN;
+  public static BlockOven OVEN_BASE;
   public static BlockOvenWall OVEN_WALL;
   public static BlockOvenChimney OVEN_CHIMNEY;
   public static BlockLeafMat LEAF_MAT;
@@ -123,9 +123,9 @@ public final class BlocksDevice {
     GREENHOUSE_DOOR = registrar.addBlock(new BlockGreenhouseDoor());
     GREENHOUSE_ROOF = registrar.addBlock(new BlockGreenhouseRoof());
     GREENHOUSE_WALL = registrar.addBlock(new BlockGreenhouseWall());
-//    OVEN = registrar.addBlock(new BlockOven());
-//    OVEN_WALL = registrar.addBlock(new BlockOvenWall());
-//    OVEN_CHIMNEY = registrar.addBlock(new BlockOvenChimney());
+    OVEN_BASE = registrar.addBlock(new BlockOven());
+    OVEN_WALL = registrar.addBlock(new BlockOvenWall());
+    OVEN_CHIMNEY = registrar.addBlock(new BlockOvenChimney());
 //    LEAF_MAT = registrar.addBlock(new BlockLeafMat());
 //    DRYING_MAT = registrar.addBlock(new BlockDryingMat());
 

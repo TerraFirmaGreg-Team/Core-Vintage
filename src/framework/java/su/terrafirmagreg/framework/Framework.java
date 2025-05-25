@@ -21,8 +21,8 @@ public abstract class Framework {
 
 
   protected Framework(String modId, String modName) {
-    Framework.modId = modId;
-    Framework.modName = modName;
+    Framework.modId = modId != null ? modId : "tfg";
+    Framework.modName = modName != null ? modName : "TerraFirmaGreg";
 
     this.manager = ModuleManager.of(modId);
   }

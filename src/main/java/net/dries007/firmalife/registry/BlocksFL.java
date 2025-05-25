@@ -3,9 +3,6 @@ package net.dries007.firmalife.registry;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockLeafMat;
-import su.terrafirmagreg.modules.device.object.block.BlockOven;
-import su.terrafirmagreg.modules.device.object.block.BlockOvenChimney;
-import su.terrafirmagreg.modules.device.object.block.BlockOvenWall;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -68,7 +65,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TEClimateStation;
 import net.dries007.tfc.objects.te.TEHangingPlanter;
 import net.dries007.tfc.objects.te.TELeafMat;
-import net.dries007.tfc.objects.te.TEOven;
 import net.dries007.tfc.objects.te.TEPlanter;
 import net.dries007.tfc.objects.te.TEStemCrop;
 import net.dries007.tfc.objects.te.TEString;
@@ -78,6 +74,8 @@ import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
 import net.dries007.tfc.util.agriculture.FruitTree;
+
+import lombok.Getter;
 
 import java.util.Optional;
 
@@ -91,12 +89,6 @@ import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
 @GameRegistry.ObjectHolder(MOD_ID)
 public class BlocksFL {
 
-  @GameRegistry.ObjectHolder("oven")
-  public static final BlockOven OVEN = Helpers.getNull();
-  @GameRegistry.ObjectHolder("oven_wall")
-  public static final BlockOvenWall OVEN_WALL = Helpers.getNull();
-  @GameRegistry.ObjectHolder("oven_chimney")
-  public static final BlockOvenChimney OVEN_CHIMNEY = Helpers.getNull();
   @GameRegistry.ObjectHolder("pumpkin_fruit")
   public static final BlockStemFruit PUMPKIN_FRUIT = Helpers.getNull();
   @GameRegistry.ObjectHolder("melon_fruit")
@@ -134,25 +126,31 @@ public class BlocksFL {
   @GameRegistry.ObjectHolder("turntable")
   public static final BlockTurntable TURNTABLE = Helpers.getNull();
 
+  @Getter
   private static ImmutableList<ItemBlock> allIBs;
   private static ImmutableList<Block> allNormalIBs = Helpers.getNull();
   private static ImmutableList<Block> allFoodIBs = Helpers.getNull();
+  @Getter
   private static ImmutableList<BlockFruitTreeLeaves> allFruitLeaves = Helpers.getNull();
   private static ImmutableList<BlockFruitTreeSapling> allFruitSaps = Helpers.getNull();
   private static ImmutableList<BlockFruitFence> allFruitFences = Helpers.getNull();
+  @Getter
   private static ImmutableList<BlockFruitFenceGate> allFruitFenceGates = Helpers.getNull();
+  @Getter
   private static ImmutableList<BlockFruitDoor> allFruitDoors = Helpers.getNull();
   private static ImmutableList<BlockFruitTrapDoor> allFruitTrapDoors = Helpers.getNull();
+  @Getter
   private static ImmutableList<BlockFluidBase> allFluidBlocks = Helpers.getNull();
+  @Getter
   private static ImmutableList<BlockCropDead> allDeadCrops = Helpers.getNull();
+  @Getter
   private static ImmutableList<BlockStemCrop> allCropBlocks = Helpers.getNull();
+  @Getter
   private static ImmutableList<BlockJackOLantern> allJackOLanterns = Helpers.getNull();
+  @Getter
   private static ImmutableList<Block> allInventoryIBs = Helpers.getNull();
+  @Getter
   private static ImmutableList<BlockBonsai> allBonsai = Helpers.getNull();
-
-  public static ImmutableList<ItemBlock> getAllIBs() {
-    return allIBs;
-  }
 
   public static ImmutableList<Block> getAllNormalIBs() {
     return allNormalIBs;
@@ -162,45 +160,13 @@ public class BlocksFL {
     return allFoodIBs;
   }
 
-  public static ImmutableList<BlockFruitTreeLeaves> getAllFruitLeaves() {
-    return allFruitLeaves;
-  }
-
-  public static ImmutableList<BlockBonsai> getAllBonsai() {
-    return allBonsai;
-  }
-
   public static ImmutableList<BlockFruitTreeSapling> getAllFruitSaps() {
     return allFruitSaps;
   }
 
   public static ImmutableList<BlockFruitFence> getAllFruitFences() {return allFruitFences;}
 
-  public static ImmutableList<BlockFruitFenceGate> getAllFruitFenceGates() {return allFruitFenceGates;}
-
-  public static ImmutableList<BlockFruitDoor> getAllFruitDoors() {return allFruitDoors;}
-
   public static ImmutableList<BlockFruitTrapDoor> getAllFruitTrapdoors() {return allFruitTrapDoors;}
-
-  public static ImmutableList<BlockCropDead> getAllDeadCrops() {
-    return allDeadCrops;
-  }
-
-  public static ImmutableList<BlockStemCrop> getAllCropBlocks() {
-    return allCropBlocks;
-  }
-
-  public static ImmutableList<BlockFluidBase> getAllFluidBlocks() {
-    return allFluidBlocks;
-  }
-
-  public static ImmutableList<BlockJackOLantern> getAllJackOLanterns() {
-    return allJackOLanterns;
-  }
-
-  public static ImmutableList<Block> getAllInventoryIBs() {
-    return allInventoryIBs;
-  }
 
   @SubscribeEvent
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -236,9 +202,6 @@ public class BlocksFL {
       doFruitAdditions(r, name, fruitFences, fruitFenceGates, fruitDoors, fruitTrapdoors, bonsais, Optional.of(fruitTree));
     }
 
-    normalIBs.add(register(r, "oven", new BlockOven(), CT_MISC));
-    normalIBs.add(register(r, "oven_wall", new BlockOvenWall(), CT_MISC));
-    normalIBs.add(register(r, "oven_chimney", new BlockOvenChimney(), CT_MISC));
     normalIBs.add(register(r, "leaf_mat", new BlockLeafMat(), CT_MISC));
     normalIBs.add(register(r, "cinnamon_log", new BlockCinnamonLog(), CT_WOOD));
     normalIBs.add(register(r, "cinnamon_leaves", new BlockCinnamonLeaves(), CT_WOOD));
@@ -338,7 +301,6 @@ public class BlocksFL {
     allDeadCrops = deadCrops.build();
     allCropBlocks = cropBlocks.build();
 
-    register(TEOven.class, "oven");
     register(TEPlanter.class, "quad_planter");
     register(TELeafMat.class, "leaf_mat");
     register(TEHangingPlanter.class, "hanging_planter");

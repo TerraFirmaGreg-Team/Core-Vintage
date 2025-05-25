@@ -3,7 +3,6 @@ package su.terrafirmagreg.api.base.object.block.spi;
 
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
-import su.terrafirmagreg.api.library.VoxelShape;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.Block;
@@ -43,9 +42,16 @@ public abstract class BaseBlock extends Block implements IBlockSettings, IFluidl
     this.settings = settings;
   }
 
-  public static VoxelShape createShape(double x1, double y1, double z1, double x2, double y2, double z2) {
-    return new VoxelShape(x1, y1, z1, x2, y2, z2);
+  @Override
+  public boolean isTranslucent(IBlockState state) {
+    return this.settings.isTranslucent();
   }
+
+  @Override
+  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    return this.settings.isPassable();
+  }
+
 
   @Override
   @SideOnly(Side.CLIENT)
@@ -55,7 +61,7 @@ public abstract class BaseBlock extends Block implements IBlockSettings, IFluidl
 
   @Override
   public boolean getUseNeighborBrightness(IBlockState state) {
-    return this.settings.isUseNeighborBrightness();
+    return this.settings.isUseNeighborBrightness() || lightOpacity == 0;
   }
 
   @Override

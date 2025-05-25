@@ -75,7 +75,7 @@ public final class ModUtils {
   }
 
   public static String name(String name) {
-    return String.format("%s [ %s ]", Framework.modId, name);
+    return String.format("%s [ %s ]", Framework.modName, name);
   }
 
   public static String name(String key, String name) {
@@ -119,7 +119,7 @@ public final class ModUtils {
   }
 
   public static String split(String name) {
-    return split(Framework.modId, name);
+    return split(Framework.modName, name);
   }
 
   public static String split(String key, String name) {

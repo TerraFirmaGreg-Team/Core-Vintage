@@ -104,9 +104,11 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
     boolean requiresCorrectTool;
     boolean useNeighborBrightness;
     boolean isReplaceable;
+    boolean isTranslucent;
+    boolean isPassable;
 
     boolean isAir;
-    boolean nonCanStack = false;
+    boolean nonCanStack;
 
     protected Settings(Material material, MapColor color) {
 
@@ -129,10 +131,14 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
       this.encouragement = -1;
       this.flammability = -1;
       this.resistance = 1.0F;
+      this.isTranslucent = !material.blocksLight();
+      this.useNeighborBrightness = !isAir || isTranslucent;
+      this.isPassable = !material.blocksMovement();
       this.canFall = false;
       this.collidable = true;
       this.opaque = true;
       this.fullCube = true;
+      this.nonCanStack = false;
       this.hasItemSubtypes = false;
       this.requiresCorrectTool = false;
     }
@@ -321,6 +327,16 @@ public interface IBlockSettings extends IBaseSettings<Settings, Block> {
 
     public Settings noReplaceable() {
       this.isReplaceable = false;
+      return this;
+    }
+
+    public Settings translucent() {
+      this.isTranslucent = true;
+      return this;
+    }
+
+    public Settings passable() {
+      this.isPassable = true;
       return this;
     }
 

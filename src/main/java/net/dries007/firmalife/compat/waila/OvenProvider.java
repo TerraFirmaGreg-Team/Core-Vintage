@@ -1,6 +1,7 @@
 package net.dries007.firmalife.compat.waila;
 
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.device.object.tile.TileOven;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -15,14 +16,13 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.compat.waila.interfaces.IWailaBlock;
 import net.dries007.tfc.objects.blocks.property.ILightableBlock;
 import net.dries007.tfc.objects.recipes.OvenRecipe;
-import net.dries007.tfc.objects.te.TEOven;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static net.dries007.tfc.objects.te.TEOven.SLOT_MAIN;
+import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_MAIN;
 
 public class OvenProvider implements IWailaBlock {
 
@@ -32,7 +32,7 @@ public class OvenProvider implements IWailaBlock {
     List<String> currentTooltip = new ArrayList<>();
     IBlockState state = world.getBlockState(pos);
     TileEntity te = world.getTileEntity(pos);
-    if (te instanceof TEOven oven) {
+    if (te instanceof TileOven oven) {
       ItemStack mainSlot = oven.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(SLOT_MAIN);
       OvenRecipe recipe = OvenRecipe.get(mainSlot);
       if (state.getValue(ILightableBlock.LIT) && recipe != null) {
@@ -52,7 +52,7 @@ public class OvenProvider implements IWailaBlock {
             break;
         }
         currentTooltip.add(new TextComponentTranslation(recipe.getOutputItem(mainSlot).getDisplayName()).getFormattedText());
-        if (((TEOven) te).isCuringRecipe()) {
+        if (((TileOven) te).isCuringRecipe()) {
           currentTooltip.add("Curing");
         }
       }
@@ -63,6 +63,6 @@ public class OvenProvider implements IWailaBlock {
   @Nonnull
   @Override
   public List<Class<?>> getLookupClass() {
-    return Collections.singletonList(TEOven.class);
+    return Collections.singletonList(TileOven.class);
   }
 }

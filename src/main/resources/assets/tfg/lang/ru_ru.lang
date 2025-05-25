@@ -343,6 +343,9 @@ block.tfg.device.thatch_bed.name=Cоломенная кровать
 block.tfg.device.greenhouse.door.name=Дверь теплицы
 block.tfg.device.greenhouse.wall.name=Стена теплицы
 block.tfg.device.greenhouse.roof.name=Крыша теплицы
+block.tfg.device.oven.base.name=Печь
+block.tfg.device.oven.wall.name=Стенка печи
+block.tfg.device.oven.chimney.name=Дымоход печи
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

@@ -43,7 +43,11 @@ public final class OreDictUtils {
   }
 
   public static void register(Item item, Object... parts) {
-    register(new ItemStack(item), toString(parts));
+    int meta = -1;
+    if (item.isDamageable()) {
+      meta = OreDictionary.WILDCARD_VALUE;
+    }
+    register(new ItemStack(item, 1, meta), toString(parts));
   }
 
   public static void register(ItemStack itemStack, String oreName) {

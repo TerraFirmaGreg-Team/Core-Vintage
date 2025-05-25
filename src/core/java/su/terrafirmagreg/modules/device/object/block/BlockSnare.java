@@ -75,8 +75,8 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH)
-      .withProperty(BAITED, Boolean.FALSE)
-      .withProperty(CLOSED, Boolean.FALSE));
+      .withProperty(BAITED, false)
+      .withProperty(CLOSED, false));
   }
 
   @Override
@@ -116,8 +116,8 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
           if ((isCapturable(animal)) && !(worldIn.getBlockState(animal.getPosition()).getBlock() instanceof BlockSnare)) {
             tile.setCapturedEntity(animal);
             tile.setOpen(false);
-            state.withProperty(CLOSED, Boolean.TRUE);
-            state.withProperty(BAITED, Boolean.FALSE);
+            state.withProperty(CLOSED, true);
+            state.withProperty(BAITED, false);
             worldIn.setBlockState(pos, state, 2);
             animal.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
             return;
@@ -150,11 +150,11 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
             worldIn.spawnEntity(animal);
             tile.setCapturedEntity(animal);
             tile.setOpen(false);
-            state.withProperty(CLOSED, Boolean.TRUE);
-            state.withProperty(BAITED, Boolean.FALSE);
+            state.withProperty(CLOSED, true);
+            state.withProperty(BAITED, false);
             worldIn.setBlockState(pos, state, 2);
           } else if (rand.nextDouble() < ConfigDevice.BLOCK.SNARE.baitExpireChance) {
-            state.withProperty(BAITED, Boolean.FALSE);
+            state.withProperty(BAITED, false);
             worldIn.setBlockState(pos, state, 2);
           }
         }
@@ -205,7 +205,7 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
             playerIn.inventory.deleteStack(stack);
           }
         }
-        state = state.withProperty(BAITED, Boolean.TRUE);
+        state = state.withProperty(BAITED, true);
         worldIn.setBlockState(pos, state, 2);
       }
     }
@@ -228,8 +228,8 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
           tile.setCapturedEntity(entityLiving);
           entityIn.setPositionAndUpdate(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
           tile.setOpen(false);
-          state.withProperty(CLOSED, Boolean.TRUE);
-          state.withProperty(BAITED, Boolean.FALSE);
+          state.withProperty(CLOSED, true);
+          state.withProperty(BAITED, false);
           worldIn.setBlockState(pos, state, 2);
         } else if (tile.getCapturedEntity() != null && tile.getCapturedEntity().equals(entityLiving)) {
           entityLiving.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);

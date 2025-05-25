@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.core.network;
 
-import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
-import su.terrafirmagreg.api.base.network.packet.spi.BasePacket;
+import su.terrafirmagreg.api.base.packet.spi.BasePacket;
+import su.terrafirmagreg.framework.manager.packet.api.IPacket;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class SCPacketAmbiental extends BasePacket implements INetworkPacket.Client {
+public class SCPacketAmbiental extends BasePacket implements IPacket.Client {
 
   public NBTTagCompound tag;
 

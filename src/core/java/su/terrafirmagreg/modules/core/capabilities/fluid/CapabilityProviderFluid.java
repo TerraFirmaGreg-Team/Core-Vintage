@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.capabilities.fluid;
 
 
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemCapability;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;

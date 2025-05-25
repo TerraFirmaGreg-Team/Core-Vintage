@@ -8,19 +8,12 @@ import su.terrafirmagreg.framework.module.api.IModule;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-
 import lombok.Getter;
-
-import java.util.Map;
 
 @Getter
 public class RegistryManager implements IRegistryManager {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(RegistryManager.class);
-  public static final Map<IModule, IRegistryManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
-
-  public static final RegistryMap ALL_REGISTRY_MAP = RegistryMap.of();
 
   private final IModule module;
   private final RegistryMap map;
@@ -45,4 +38,8 @@ public class RegistryManager implements IRegistryManager {
   }
 
 
+  @Override
+  public LoggingHelper getLogger() {
+    return LOGGER;
+  }
 }

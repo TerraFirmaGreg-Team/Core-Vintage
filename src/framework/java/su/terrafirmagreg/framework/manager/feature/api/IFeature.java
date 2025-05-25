@@ -13,7 +13,8 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-// Это пока реализации чего то, что может быть изменено с помощью системы событий
+// Это пока реализации чего-то, что может быть изменено с помощью системы событий,
+// альтернатива есть в модулях, но от туда она будет удалена, в пользу этой реализации
 public interface IFeature {
 
   boolean hasSubscriptions();
@@ -33,8 +34,7 @@ public interface IFeature {
   // ===== FML Lifecycle: Client
 
   @SideOnly(Side.CLIENT)
-  default void onClientPreInit(FMLPreInitializationEvent event) {
-  }
+  default void onClientPreInit(FMLPreInitializationEvent event) {}
 
   @SideOnly(Side.CLIENT)
   default void onClientInit(FMLInitializationEvent event) {}

@@ -5,8 +5,8 @@ import su.terrafirmagreg.framework.manager.command.api.ICommandManager;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureManager;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
-import su.terrafirmagreg.framework.manager.network.api.INetworkManager;
-import su.terrafirmagreg.framework.manager.network.api.INetworkRegistrar;
+import su.terrafirmagreg.framework.manager.packet.api.IPacketManager;
+import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryManager;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 
@@ -39,7 +39,7 @@ public interface IModule {
 
   LoggingHelper getLogger();
 
-  INetworkManager getNetworkManager();
+  IPacketManager getNetworkManager();
 
   IRegistryManager getRegistryManager();
 
@@ -115,7 +115,7 @@ public interface IModule {
 
   default void onRegistryClient(IRegistryRegistrar registrar) {}
 
-  default void onNetwork(INetworkRegistrar registrar) {}
+  default void onNetwork(IPacketRegistrar registrar) {}
 
   default void onCommand(ICommandRegistrar registrar) {}
 

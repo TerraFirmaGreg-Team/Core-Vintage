@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.api.library.Pair;
-import su.terrafirmagreg.framework.manager.network.NetworkManager;
+import su.terrafirmagreg.framework.manager.packet.PacketManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -115,7 +115,7 @@ public final class BufUtils extends ByteBufUtils {
 //      if (!accessible) {field.setAccessible(false);}
 
     } catch (final Throwable e) {
-      NetworkManager.LOGGER.error(e, "Error processing packet: {}", target.getClass().getSimpleName());
+      PacketManager.LOGGER.error(e, "Error processing packet: {}", target.getClass().getSimpleName());
       throw new RuntimeException(e);
     }
   }
@@ -132,7 +132,7 @@ public final class BufUtils extends ByteBufUtils {
       handler.getRight().write(value, buffer);
 
     } catch (final Throwable e) {
-      NetworkManager.LOGGER.error(e, "Error processing packet: {}", target.getClass().getSimpleName());
+      PacketManager.LOGGER.error(e, "Error processing packet: {}", target.getClass().getSimpleName());
       throw new RuntimeException(e);
     }
 

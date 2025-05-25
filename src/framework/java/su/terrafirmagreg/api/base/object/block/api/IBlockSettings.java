@@ -7,7 +7,7 @@ import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.GroupTabUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

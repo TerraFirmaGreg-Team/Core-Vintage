@@ -8,7 +8,7 @@ import su.terrafirmagreg.api.base.object.item.api.IItemSettings.Settings;
 import su.terrafirmagreg.api.util.GroupTabUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemCapability;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;

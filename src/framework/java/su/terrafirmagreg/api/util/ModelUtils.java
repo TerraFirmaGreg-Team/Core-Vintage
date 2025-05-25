@@ -3,12 +3,12 @@ package su.terrafirmagreg.api.util;
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 import su.terrafirmagreg.api.library.model.CustomStateMap;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderBlockColor;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderBlockState;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderEntityRenderer;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemColor;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderItemMesh;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderTile;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockState;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderEntityRenderer;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemColor;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemMesh;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

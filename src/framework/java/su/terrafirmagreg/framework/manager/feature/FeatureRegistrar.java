@@ -2,6 +2,7 @@ package su.terrafirmagreg.framework.manager.feature;
 
 import su.terrafirmagreg.framework.manager.feature.FeatureMap.FeatureWrapper;
 import su.terrafirmagreg.framework.manager.feature.api.IFeature;
+import su.terrafirmagreg.framework.manager.feature.api.IFeatureManager;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.module.api.IModule;
 
@@ -15,7 +16,7 @@ public class FeatureRegistrar implements IFeatureRegistrar {
   private final IModule module;
   private final FeatureMap map;
 
-  public FeatureRegistrar(FeatureManager manager) {
+  public FeatureRegistrar(IFeatureManager manager) {
     this.module = manager.getModule();
     this.map = manager.getMap();
   }

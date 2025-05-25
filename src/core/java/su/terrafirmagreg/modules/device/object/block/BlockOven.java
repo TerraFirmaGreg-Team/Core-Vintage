@@ -1,7 +1,17 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import net.dries007.firmalife.ConfigFL;
-import net.dries007.tfc.client.particle.TFCParticles;
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.device.client.render.TESROven;
+import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.object.tile.TileOven;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -14,7 +24,12 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -23,18 +38,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+
+import net.dries007.firmalife.ConfigFL;
+import net.dries007.tfc.client.particle.TFCParticles;
+
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
-import su.terrafirmagreg.api.data.DamageSources;
-import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderTile;
-import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.device.client.render.TESROven;
-import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
-import su.terrafirmagreg.modules.device.object.tile.TileOven;
 
 import java.util.Random;
 
@@ -50,25 +58,24 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
 
     getSettings()
-        .registryKey("oven/base")
-        .hardness(2.0f)
-        .resistance(3.0f)
-        .nonOpaque()
-        .randomTicks()
-        .useNeighborBrightness()
-        .capability(
-            CapabilityProviderSize.of(Size.LARGE, Weight.HEAVY)
-        );
+      .registryKey("oven/base")
+      .hardness(2.0f)
+      .resistance(3.0f)
+      .nonOpaque()
+      .randomTicks()
+      .useNeighborBrightness()
+      .capability(
+        CapabilityProviderSize.of(Size.LARGE, Weight.HEAVY)
+      );
 
     setDefaultState(blockState.getBaseState()
-        .withProperty(CURED, false)
-        .withProperty(HORIZONTAL, EnumFacing.NORTH)
-        .withProperty(LIT, false));
+      .withProperty(CURED, false)
+      .withProperty(HORIZONTAL, EnumFacing.NORTH)
+      .withProperty(LIT, false));
   }
 
   /**
-   * This is a local way for an oven to check if it's valid. Does not care about chimneys. The ifs are nested like that for readability, I know it's not
-   * something a real dev would write.
+   * This is a local way for an oven to check if it's valid. Does not care about chimneys. The ifs are nested like that for readability, I know it's not something a real dev would write.
    *
    * @param world     The world! What more did you want
    * @param ovenPos   The oven
@@ -145,11 +152,11 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     EnumFacing right = facing.rotateY();
 
     BlockPos[] checkPositions = {
-        ovenPos.up(),
-        ovenPos.offset(left).up(),
-        ovenPos.offset(left, 2).up(),
-        ovenPos.offset(right).up(),
-        ovenPos.offset(right, 2).up()
+      ovenPos.up(),
+      ovenPos.offset(left).up(),
+      ovenPos.offset(left, 2).up(),
+      ovenPos.offset(right).up(),
+      ovenPos.offset(right, 2).up()
     };
     boolean noChimneys = true;
     for (BlockPos pos : checkPositions) {
@@ -182,9 +189,9 @@ public class BlockOven extends BaseBlock implements IProviderTile {
       facing -= 8;
     }
     return this.getDefaultState()
-        .withProperty(CURED, cured)
-        .withProperty(LIT, lit)
-        .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(facing));
+      .withProperty(CURED, cured)
+      .withProperty(LIT, lit)
+      .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(facing));
   }
 
   @Override
@@ -246,21 +253,21 @@ public class BlockOven extends BaseBlock implements IProviderTile {
       };
       //chimney particles
       particle.spawn(worldIn, pos.getX() + (rand.nextFloat() / 2) + 0.25, pos.getY() + 3,
-          pos.getZ() + (rand.nextFloat() / 2) + 0.25, 0f,
-          0.2F + rand.nextFloat() / 2, 0f,
-          110);
+        pos.getZ() + (rand.nextFloat() / 2) + 0.25, 0f,
+        0.2F + rand.nextFloat() / 2, 0f,
+        110);
     }
     // inside the oven
     worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + rand.nextFloat(),
-        pos.getY() + 0.11, pos.getZ() + rand.nextFloat() / 2,
-        0.02f, 0.05f * rand.nextFloat(), 0.02f);
+      pos.getY() + 0.11, pos.getZ() + rand.nextFloat() / 2,
+      0.02f, 0.05f * rand.nextFloat(), 0.02f);
     worldIn.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + rand.nextFloat(),
-        pos.getY() + 0.11, pos.getZ() + rand.nextFloat() / 2,
-        0.02f, 0.05f * rand.nextFloat(), 0.02f);
+      pos.getY() + 0.11, pos.getZ() + rand.nextFloat() / 2,
+      0.02f, 0.05f * rand.nextFloat(), 0.02f);
     if (worldIn.getTotalWorldTime() % 80 == 0) {
       worldIn.playSound((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D,
-          SoundEvents.BLOCK_FIRE_AMBIENT,
-          SoundCategory.BLOCKS, 0.5F, 0.6F, false);
+        SoundEvents.BLOCK_FIRE_AMBIENT,
+        SoundCategory.BLOCKS, 0.5F, 0.6F, false);
     }
   }
 
@@ -321,7 +328,7 @@ public class BlockOven extends BaseBlock implements IProviderTile {
                     && !OreDictUtils.contains(held, "peel") &&
                     state.getValue(CURED)) {
                   player.attackEntityFrom(DamageSources.GRILL,
-                      2.0F); // damage player if they don't use peel
+                    2.0F); // damage player if they don't use peel
                 }
                 return true;
               }

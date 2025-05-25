@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
-import su.terrafirmagreg.framework.manager.network.api.INetworkRegistrar;
+import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
@@ -37,7 +37,7 @@ public class ModuleDevice extends ModuleBase {
   }
 
   @Override
-  public void onNetwork(INetworkRegistrar registrar) {
+  public void onNetwork(IPacketRegistrar registrar) {
 
     PacketsDevice.onRegister(registrar);
   }

@@ -8,17 +8,13 @@ import su.terrafirmagreg.framework.module.api.IModuleService;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-
 import lombok.Getter;
-
-import java.util.Map;
 
 @Getter
 public class ModuleManager implements IModuleManager {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleManager.class);
-  public static final Map<String, IModuleManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
+
 
   private final String modId;
   private final ModuleMap map;

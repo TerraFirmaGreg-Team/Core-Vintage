@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.network;
 
-import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
-import su.terrafirmagreg.api.base.network.packet.spi.BasePacket;
+import su.terrafirmagreg.api.base.packet.spi.BasePacket;
 import su.terrafirmagreg.api.util.CapabilityUtils;
+import su.terrafirmagreg.framework.manager.packet.api.IPacket;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
 
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SCPacketPlayerDataUpdate extends BasePacket implements INetworkPacket.Client {
+public class SCPacketPlayerDataUpdate extends BasePacket implements IPacket.Client {
 
   public NBTTagCompound tag;
 

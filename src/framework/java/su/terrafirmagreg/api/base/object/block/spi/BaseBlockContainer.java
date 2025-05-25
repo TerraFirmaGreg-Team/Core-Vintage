@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.object.block.spi;
 
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderTile;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

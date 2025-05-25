@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.object.tile;
 
 import su.terrafirmagreg.api.base.object.tile.api.ITileFields;
 import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;

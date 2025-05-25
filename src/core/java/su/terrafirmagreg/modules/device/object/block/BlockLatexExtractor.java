@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.object.block;
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.api.provider.IProviderTile;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.device.client.render.TESRLatexExtractor;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;

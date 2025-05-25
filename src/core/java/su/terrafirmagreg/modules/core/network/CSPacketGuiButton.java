@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.network;
 
 import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
-import su.terrafirmagreg.api.base.network.packet.api.INetworkPacket;
-import su.terrafirmagreg.api.base.network.packet.spi.BasePacket;
+import su.terrafirmagreg.api.base.packet.spi.BasePacket;
+import su.terrafirmagreg.framework.manager.packet.api.IPacket;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 // *
 // * @author AlcatrazEscapee
 // */
-public class CSPacketGuiButton extends BasePacket implements INetworkPacket.Server {
+public class CSPacketGuiButton extends BasePacket implements IPacket.Server {
 
   private int buttonID;
   private NBTTagCompound extraNBT;

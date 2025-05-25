@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.core;
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
-import su.terrafirmagreg.framework.manager.network.api.INetworkRegistrar;
+import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
@@ -90,7 +90,7 @@ public class ModuleCore extends ModuleBase {
   }
 
   @Override
-  public void onNetwork(INetworkRegistrar registrar) {
+  public void onNetwork(IPacketRegistrar registrar) {
 
     PacketsCore.onRegister(registrar);
   }

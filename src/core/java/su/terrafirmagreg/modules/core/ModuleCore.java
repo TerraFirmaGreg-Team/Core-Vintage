@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
@@ -33,6 +34,7 @@ import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.init.LootTablesCore;
 import su.terrafirmagreg.modules.core.init.PacketsCore;
+import su.terrafirmagreg.modules.core.init.PluginsCore;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -63,6 +65,7 @@ public class ModuleCore extends ModuleBase {
     enableNetwork();
     enableCommand();
     enableFeature();
+    enablePlugin();
   }
 
   @Override
@@ -87,6 +90,12 @@ public class ModuleCore extends ModuleBase {
   public void onFeature(IFeatureRegistrar registrar) {
 
     FeaturesCore.onRegister(registrar);
+  }
+
+  @Override
+  public void onPlugin(IPluginRegistrar registrar) {
+
+    PluginsCore.onRegister(registrar);
   }
 
   @Override

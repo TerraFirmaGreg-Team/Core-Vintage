@@ -22,7 +22,7 @@ import static gregtech.api.unification.ore.OrePrefix.ingot;
 import static gregtech.api.unification.ore.OrePrefix.nugget;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.plateDouble;
-import static su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore.ingotDouble;
+import static su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.oreprefix.OrePrefixCore.ingotDouble;
 
 public class OreDictHelper {
 

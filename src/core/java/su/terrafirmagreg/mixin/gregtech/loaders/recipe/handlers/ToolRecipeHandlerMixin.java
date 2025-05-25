@@ -1,9 +1,7 @@
 package su.terrafirmagreg.mixin.gregtech.loaders.recipe.handlers;
 
-import su.terrafirmagreg.modules.integration.gregtech.init.ItemsGregTech;
-import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore;
-
-import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.addToolRecipe;
+import su.terrafirmagreg.modules.core.plugin.gregtech.init.ItemsGregTech;
+import su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.oreprefix.OrePrefixCore;
 
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
@@ -18,6 +16,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static gregtech.loaders.recipe.handlers.ToolRecipeHandler.addToolRecipe;
 
 @Mixin(value = ToolRecipeHandler.class, remap = false)
 public class ToolRecipeHandlerMixin {

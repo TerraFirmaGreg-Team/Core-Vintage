@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.gregtech.integration.jei;
 
-import su.terrafirmagreg.modules.integration.gregtech.init.ItemsGregTech;
+import su.terrafirmagreg.modules.core.plugin.gregtech.init.ItemsGregTech;
 
 import net.minecraft.item.ItemStack;
 

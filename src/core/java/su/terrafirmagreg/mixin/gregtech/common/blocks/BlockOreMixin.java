@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.gregtech.common.blocks;
 
-import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore;
+import su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.oreprefix.OrePrefixCore;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;

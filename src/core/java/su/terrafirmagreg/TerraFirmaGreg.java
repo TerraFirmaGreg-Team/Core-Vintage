@@ -5,7 +5,6 @@ import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.food.ModuleFood;
-import su.terrafirmagreg.modules.integration.ModuleIntegration;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.rock.ModuleRock;
 import su.terrafirmagreg.modules.wood.ModuleWood;
@@ -53,7 +52,6 @@ public class TerraFirmaGreg extends Framework {
     addModule(new ModuleDevice());
     addModule(new ModuleAnimal());
     addModule(new ModuleFood());
-    addModule(new ModuleIntegration());
   }
 
   @EventHandler

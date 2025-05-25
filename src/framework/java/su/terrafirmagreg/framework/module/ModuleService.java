@@ -53,6 +53,30 @@ public class ModuleService implements IModuleService {
 
         module.getLogger().debug("Construction start");
         module.onConstruction(event);
+        Optional.ofNullable(module.getNetworkManager()).ifPresent(network -> {
+          module.getLogger().debug("Construction network");
+          module.onNetwork(network.getRegistrar());
+        });
+
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          module.getLogger().debug("Construction plugin");
+          module.onPlugin(plugin.getRegistrar());
+        });
+
+        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
+          module.getLogger().debug("Construction feature");
+          module.onFeature(feature.getRegistrar());
+        });
+
+        Optional.ofNullable(module.getRegistryManager()).ifPresent(registry -> {
+          module.getLogger().debug("Construction registry");
+          module.onRegistry(registry.getRegistrar());
+
+          if (ModUtils.isClient()) {
+            module.getLogger().debug("Client Construction registry");
+            module.onRegistryClient(registry.getRegistrar());
+          }
+        });
         module.getLogger().debug("Construction complete");
       });
     });
@@ -60,31 +84,6 @@ public class ModuleService implements IModuleService {
     this.wrapperMap.put(FMLPreInitializationEvent.class, (EventStateWrapper<FMLPreInitializationEvent>) (event) -> {
 
       this.fireEvent(module -> {
-
-        Optional.ofNullable(module.getNetworkManager()).ifPresent(network -> {
-          module.getLogger().debug("Registering network");
-          module.onNetwork(network.getRegistrar());
-        });
-
-        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
-          module.getLogger().debug("Registering plugin");
-          module.onPlugin(plugin.getRegistrar());
-        });
-
-        Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
-          module.getLogger().debug("Registering feature");
-          module.onFeature(feature.getRegistrar());
-        });
-
-        Optional.ofNullable(module.getRegistryManager()).ifPresent(registry -> {
-          module.getLogger().debug("Registering registry");
-          module.onRegistry(registry.getRegistrar());
-
-          if (ModUtils.isClient()) {
-            module.getLogger().debug("Client Registering registry");
-            module.onRegistryClient(registry.getRegistrar());
-          }
-        });
 
         module.getLogger().debug("Pre-Init start");
         module.onPreInit(event);

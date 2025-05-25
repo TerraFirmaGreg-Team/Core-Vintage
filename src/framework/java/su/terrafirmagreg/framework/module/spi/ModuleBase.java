@@ -6,6 +6,8 @@ import su.terrafirmagreg.framework.manager.feature.FeatureManager;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureManager;
 import su.terrafirmagreg.framework.manager.packet.PacketManager;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketManager;
+import su.terrafirmagreg.framework.manager.plugin.PluginManager;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginManager;
 import su.terrafirmagreg.framework.manager.registry.RegistryManager;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryManager;
 import su.terrafirmagreg.framework.module.api.IModule;
@@ -25,6 +27,7 @@ public abstract class ModuleBase implements IModule {
   private IRegistryManager registryManager;
   private ICommandManager commandManager;
   private IFeatureManager featureManager;
+  private IPluginManager pluginManager;
 
 
   public void enableNetwork() {
@@ -45,6 +48,11 @@ public abstract class ModuleBase implements IModule {
   protected void enableFeature() {
 
     this.featureManager = FeatureManager.of(this);
+  }
+
+  protected void enablePlugin() {
+
+    this.pluginManager = PluginManager.of(this);
   }
 
 }

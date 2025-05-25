@@ -7,6 +7,8 @@ import su.terrafirmagreg.framework.manager.feature.api.IFeatureManager;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketManager;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginManager;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryManager;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 
@@ -46,6 +48,8 @@ public interface IModule {
   ICommandManager getCommandManager();
 
   IFeatureManager getFeatureManager();
+
+  IPluginManager getPluginManager();
 
   /**
    * What other modules this module depends on.
@@ -120,6 +124,8 @@ public interface IModule {
   default void onCommand(ICommandRegistrar registrar) {}
 
   default void onFeature(IFeatureRegistrar registrar) {}
+
+  default void onPlugin(IPluginRegistrar registrar) {}
 
 
 }

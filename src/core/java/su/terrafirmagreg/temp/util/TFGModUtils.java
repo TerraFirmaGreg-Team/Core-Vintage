@@ -1,14 +1,14 @@
 package su.terrafirmagreg.temp.util;
 
-import su.terrafirmagreg.modules.integration.gregtech.unification.ore.oreprefix.OrePrefixCore;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.oreprefix.OrePrefixCore;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.dries007.tfc.api.types.Metal;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class TFGModUtils {
 

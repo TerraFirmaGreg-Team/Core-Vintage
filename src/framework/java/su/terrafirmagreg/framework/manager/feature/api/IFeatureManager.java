@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.manager.feature.api;
 
+import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.feature.FeatureMap;
 import su.terrafirmagreg.framework.module.api.IModule;
 
@@ -19,4 +20,5 @@ public interface IFeatureManager {
 
   IFeatureService getService();
 
+  LoggingHelper getLogger();
 }

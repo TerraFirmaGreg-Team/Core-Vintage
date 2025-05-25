@@ -245,7 +245,6 @@ public final class ModelUtils {
     if (entity instanceof IProviderEntityRenderer provider) {
       if (provider.renderClass() != null) {
         ModelUtils.entity(entity.getEntityClass(), provider.getRenderFactory());
-        return;
       }
     }
   }

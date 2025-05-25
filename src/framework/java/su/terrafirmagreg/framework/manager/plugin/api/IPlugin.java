@@ -12,10 +12,11 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 public interface IPlugin {
 
   boolean hasSubscriptions();
-  
+
   String getModRequired();
 
   boolean isEnabled();

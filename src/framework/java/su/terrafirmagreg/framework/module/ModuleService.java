@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.module;
 
+import su.terrafirmagreg.api.library.EventStateWrapper;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
@@ -35,7 +36,7 @@ public class ModuleService implements IModuleService {
   private final ModuleMap map;
 
   @SuppressWarnings("rawtypes")
-  private final Map<Class<? extends FMLStateEvent>, EventWrapper> wrapperMap;
+  private final Map<Class<? extends FMLStateEvent>, EventStateWrapper> wrapperMap;
 
 
   public ModuleService(IModuleManager manager) {
@@ -43,7 +44,7 @@ public class ModuleService implements IModuleService {
     this.map = manager.getMap();
 
     this.wrapperMap = new Object2ObjectOpenHashMap<>();
-    this.wrapperMap.put(FMLConstructionEvent.class, (EventWrapper<FMLConstructionEvent>) (event) -> {
+    this.wrapperMap.put(FMLConstructionEvent.class, (EventStateWrapper<FMLConstructionEvent>) (event) -> {
 
       this.fireEvent(module -> {
 
@@ -56,13 +57,18 @@ public class ModuleService implements IModuleService {
       });
     });
 
-    this.wrapperMap.put(FMLPreInitializationEvent.class, (EventWrapper<FMLPreInitializationEvent>) (event) -> {
+    this.wrapperMap.put(FMLPreInitializationEvent.class, (EventStateWrapper<FMLPreInitializationEvent>) (event) -> {
 
       this.fireEvent(module -> {
 
         Optional.ofNullable(module.getNetworkManager()).ifPresent(network -> {
           module.getLogger().debug("Registering network");
           module.onNetwork(network.getRegistrar());
+        });
+
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          module.getLogger().debug("Registering plugin");
+          module.onPlugin(plugin.getRegistrar());
         });
 
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
@@ -82,6 +88,9 @@ public class ModuleService implements IModuleService {
 
         module.getLogger().debug("Pre-Init start");
         module.onPreInit(event);
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          plugin.getService().onPreInit(event);
+        });
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           feature.getService().onPreInit(event);
         });
@@ -90,6 +99,9 @@ public class ModuleService implements IModuleService {
         if (ModUtils.isClient()) {
           module.getLogger().debug("Client Pre-Init start");
           module.onClientPreInit(event);
+          Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+            plugin.getService().onClientPreInit(event);
+          });
           Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
             feature.getService().onClientPreInit(event);
           });
@@ -98,10 +110,13 @@ public class ModuleService implements IModuleService {
       });
     });
 
-    this.wrapperMap.put(FMLInitializationEvent.class, (EventWrapper<FMLInitializationEvent>) (event) -> {
+    this.wrapperMap.put(FMLInitializationEvent.class, (EventStateWrapper<FMLInitializationEvent>) (event) -> {
       this.fireEvent(module -> {
         module.getLogger().debug("Init start");
         module.onInit(event);
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          plugin.getService().onInit(event);
+        });
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           feature.getService().onInit(event);
         });
@@ -110,6 +125,9 @@ public class ModuleService implements IModuleService {
         if (ModUtils.isClient()) {
           module.getLogger().debug("Client Init start");
           module.onClientInit(event);
+          Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+            plugin.getService().onClientInit(event);
+          });
           Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
             feature.getService().onClientInit(event);
           });
@@ -118,10 +136,13 @@ public class ModuleService implements IModuleService {
       });
     });
 
-    this.wrapperMap.put(FMLPostInitializationEvent.class, (EventWrapper<FMLPostInitializationEvent>) (event) -> {
+    this.wrapperMap.put(FMLPostInitializationEvent.class, (EventStateWrapper<FMLPostInitializationEvent>) (event) -> {
       this.fireEvent(module -> {
         module.getLogger().debug("Post-Init start");
         module.onPostInit(event);
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          plugin.getService().onPostInit(event);
+        });
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           feature.getService().onPostInit(event);
         });
@@ -130,6 +151,9 @@ public class ModuleService implements IModuleService {
         if (ModUtils.isClient()) {
           module.getLogger().debug("Client Post-Init start");
           module.onClientPostInit(event);
+          Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+            plugin.getService().onClientPostInit(event);
+          });
           Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
             feature.getService().onClientPostInit(event);
           });
@@ -138,10 +162,13 @@ public class ModuleService implements IModuleService {
       });
     });
 
-    this.wrapperMap.put(FMLLoadCompleteEvent.class, (EventWrapper<FMLLoadCompleteEvent>) (event) -> {
+    this.wrapperMap.put(FMLLoadCompleteEvent.class, (EventStateWrapper<FMLLoadCompleteEvent>) (event) -> {
       this.fireEvent(module -> {
         module.getLogger().debug("Load-complete start");
         module.onLoadComplete(event);
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          plugin.getService().onLoadComplete(event);
+        });
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           feature.getService().onLoadComplete(event);
         });
@@ -149,10 +176,13 @@ public class ModuleService implements IModuleService {
       });
     });
 
-    this.wrapperMap.put(FMLServerAboutToStartEvent.class, (EventWrapper<FMLServerAboutToStartEvent>) (event) -> {
+    this.wrapperMap.put(FMLServerAboutToStartEvent.class, (EventStateWrapper<FMLServerAboutToStartEvent>) (event) -> {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-about-to-start start");
         module.onServerAboutToStart(event);
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          plugin.getService().onServerAboutToStart(event);
+        });
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           feature.getService().onServerAboutToStart(event);
         });
@@ -160,10 +190,13 @@ public class ModuleService implements IModuleService {
       });
     });
 
-    this.wrapperMap.put(FMLServerStartingEvent.class, (EventWrapper<FMLServerStartingEvent>) (event) -> {
+    this.wrapperMap.put(FMLServerStartingEvent.class, (EventStateWrapper<FMLServerStartingEvent>) (event) -> {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-starting start");
         module.onServerStarting(event);
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          plugin.getService().onServerStarting(event);
+        });
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           feature.getService().onServerStarting(event);
         });
@@ -176,10 +209,13 @@ public class ModuleService implements IModuleService {
       });
     });
 
-    this.wrapperMap.put(FMLServerStartedEvent.class, (EventWrapper<FMLServerStartedEvent>) (event) -> {
+    this.wrapperMap.put(FMLServerStartedEvent.class, (EventStateWrapper<FMLServerStartedEvent>) (event) -> {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-started start");
         module.onServerStarted(event);
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          plugin.getService().onServerStarted(event);
+        });
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           feature.getService().onServerStarted(event);
         });
@@ -187,10 +223,13 @@ public class ModuleService implements IModuleService {
       });
     });
 
-    this.wrapperMap.put(FMLServerStoppingEvent.class, (EventWrapper<FMLServerStoppingEvent>) (event) -> {
+    this.wrapperMap.put(FMLServerStoppingEvent.class, (EventStateWrapper<FMLServerStoppingEvent>) (event) -> {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-stopping start");
         module.onServerStopping(event);
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          plugin.getService().onServerStopping(event);
+        });
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           feature.getService().onServerStopping(event);
         });
@@ -198,10 +237,13 @@ public class ModuleService implements IModuleService {
       });
     });
 
-    this.wrapperMap.put(FMLServerStoppedEvent.class, (EventWrapper<FMLServerStoppedEvent>) (event) -> {
+    this.wrapperMap.put(FMLServerStoppedEvent.class, (EventStateWrapper<FMLServerStoppedEvent>) (event) -> {
       this.fireEvent(module -> {
         module.getLogger().debug("Server-stopped start");
         module.onServerStopped(event);
+        Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
+          plugin.getService().onServerStopped(event);
+        });
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           feature.getService().onServerStopped(event);
         });
@@ -225,7 +267,7 @@ public class ModuleService implements IModuleService {
   public <E extends FMLStateEvent> void routeEvent(E event) {
     var eventClass = event.getClass();
     //noinspection unchecked
-    EventWrapper<E> route = Preconditions.checkNotNull(
+    EventStateWrapper<E> route = Preconditions.checkNotNull(
       this.wrapperMap.get(eventClass), "No route found for event: %s", eventClass
     );
 
@@ -233,10 +275,4 @@ public class ModuleService implements IModuleService {
   }
 
 
-  @FunctionalInterface
-  private interface EventWrapper<E extends FMLStateEvent> {
-
-    void route(E event);
-
-  }
 }

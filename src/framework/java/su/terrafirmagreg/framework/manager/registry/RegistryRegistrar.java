@@ -73,13 +73,11 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   public ResourceLocation getIdentifier(String identifier) {
-
     return ModUtils.resource(module.getIdentifier(), identifier);
   }
 
   @Override
   public <T extends IForgeRegistryEntry<T>> T addEntry(Class<T> registry, String identifier, T entry) {
-//    entry.setRegistryName(getIdentifier(identifier));
     this.map.computeIfAbsent(registry, RegistryWrapper.of(getIdentifier(identifier), entry));
     return entry;
   }

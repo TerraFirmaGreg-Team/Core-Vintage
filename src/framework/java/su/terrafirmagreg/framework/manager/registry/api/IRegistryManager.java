@@ -1,6 +1,5 @@
 package su.terrafirmagreg.framework.manager.registry.api;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.registry.RegistryMap;
 import su.terrafirmagreg.framework.module.api.IModule;
 
@@ -19,7 +18,5 @@ public interface IRegistryManager {
   IRegistryRegistrar getRegistrar();
 
   IRegistryService getService();
-
-  LoggingHelper getLogger();
 
 }

@@ -7,9 +7,9 @@ import su.terrafirmagreg.framework.module.spi.ModuleBase;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleInfo(
-  id = "metal",
   author = "Xikaro",
-  version = "1.0.0"
+  version = "1.0.0",
+  description = "Metal module."
 )
 public class ModuleMetal extends ModuleBase {
 
@@ -17,6 +17,7 @@ public class ModuleMetal extends ModuleBase {
 
 
   public ModuleMetal() {
+    super("metal");
 
   }
 

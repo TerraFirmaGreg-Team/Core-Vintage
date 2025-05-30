@@ -49,7 +49,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 @ModuleInfo(
-  id = "core",
   author = "Xikaro",
   version = "1.0.0",
   description = "Core TerraFirmaGreg content."
@@ -60,6 +59,7 @@ public class ModuleCore extends ModuleBase {
 
 
   public ModuleCore() {
+    super("core");
 
     enableRegistry();
     enableNetwork();

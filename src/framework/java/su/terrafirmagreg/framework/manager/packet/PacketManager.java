@@ -1,11 +1,9 @@
 package su.terrafirmagreg.framework.manager.packet;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
-import su.terrafirmagreg.framework.manager.packet.api.IPacket;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketManager;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketService;
-import su.terrafirmagreg.framework.manager.packet.spi.NetworkThreadedWrapper;
 import su.terrafirmagreg.framework.module.api.IModule;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -38,15 +36,6 @@ public class PacketManager implements IPacketManager {
   public static synchronized IPacketManager of(IModule module) {
 
     return MANAGER_MAP.computeIfAbsent(module, PacketManager::new);
-  }
-
-  public static NetworkThreadedWrapper getChannel(IPacket packet) {
-    var packetClass = packet.getClass();
-    var wrapper = IPacketManager.ALL_PACKET_MAP.get(packetClass);
-    if (wrapper == null) {
-      throw new RuntimeException("Trying to send unregistered network packet: " + packetClass.getSimpleName());
-    }
-    return wrapper.getChannel();
   }
 
 

@@ -540,3 +540,11 @@ sound.tfg.animal.entity.cricket=Сверчки
 sound.tfg.animal.entity.frog=Лягушки
 sound.tfg.animal.entity.rooster.cry=Петух плачет
 
+
+# Module Wood ###############################################
+
+## Item Group
+item_group.tfg.wood.name=[ TFG ] Древесина
+
+
+# Module Metal ##############################################

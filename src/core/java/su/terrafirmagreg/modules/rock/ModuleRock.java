@@ -7,9 +7,9 @@ import su.terrafirmagreg.framework.module.spi.ModuleBase;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleInfo(
-  id = "rock",
   author = "Xikaro",
-  version = "1.0.0"
+  version = "1.0.0",
+  description = "Rock module."
 )
 public class ModuleRock extends ModuleBase {
 
@@ -17,6 +17,7 @@ public class ModuleRock extends ModuleBase {
 
 
   public ModuleRock() {
+    super("rock");
 
     enableFeature();
 

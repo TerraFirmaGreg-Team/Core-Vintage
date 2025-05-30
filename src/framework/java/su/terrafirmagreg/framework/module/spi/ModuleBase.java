@@ -20,6 +20,7 @@ import lombok.Setter;
 @Getter
 public abstract class ModuleBase implements IModule {
 
+  private final String name;
   @Setter
   private ResourceLocation identifier;
 
@@ -28,6 +29,10 @@ public abstract class ModuleBase implements IModule {
   private ICommandManager commandManager;
   private IFeatureManager featureManager;
   private IPluginManager pluginManager;
+
+  public ModuleBase(String name) {
+    this.name = name;
+  }
 
 
   public void enableNetwork() {

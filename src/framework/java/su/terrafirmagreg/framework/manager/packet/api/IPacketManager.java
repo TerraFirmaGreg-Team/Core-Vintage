@@ -2,6 +2,7 @@ package su.terrafirmagreg.framework.manager.packet.api;
 
 import su.terrafirmagreg.framework.manager.packet.PacketMap;
 import su.terrafirmagreg.framework.manager.packet.PacketMap.PacketWrapper;
+import su.terrafirmagreg.framework.manager.packet.spi.NetworkThreadedWrapper;
 import su.terrafirmagreg.framework.module.api.IModule;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -13,6 +14,15 @@ public interface IPacketManager {
   Map<IModule, IPacketManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
 
   Map<Class<? extends IPacket>, PacketWrapper> ALL_PACKET_MAP = new Object2ObjectOpenHashMap<>();
+
+  static NetworkThreadedWrapper getChannel(IPacket packet) {
+    var packetClass = packet.getClass();
+    var wrapper = IPacketManager.ALL_PACKET_MAP.get(packetClass);
+    if (wrapper == null) {
+      throw new RuntimeException("Trying to send unregistered network packet: " + packetClass.getSimpleName());
+    }
+    return wrapper.getChannel();
+  }
 
   IModule getModule();
 

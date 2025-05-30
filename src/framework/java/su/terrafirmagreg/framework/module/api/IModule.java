@@ -35,6 +35,8 @@ import java.util.Set;
 
 public interface IModule {
 
+  String getName();
+
   ResourceLocation getIdentifier();
 
   void setIdentifier(ResourceLocation identifier);
@@ -56,6 +58,7 @@ public interface IModule {
    * <p>
    * for example <code>ModUtils.resource("tfg", "soil")</code> represents a dependency on the module "soil" in the container "tfg"
    */
+  @Deprecated
   default @NotNull Set<ResourceLocation> getDependencyUids() {
     return Collections.emptySet();
   }
@@ -82,8 +85,7 @@ public interface IModule {
   // ===== FML Lifecycle: Client
 
   @SideOnly(Side.CLIENT)
-  default void onClientPreInit(FMLPreInitializationEvent event) {
-  }
+  default void onClientPreInit(FMLPreInitializationEvent event) {}
 
   @SideOnly(Side.CLIENT)
   default void onClientInit(FMLInitializationEvent event) {}

@@ -2,7 +2,6 @@ package su.terrafirmagreg.framework.manager.packet.api;
 
 import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.NetworkUtils;
-import su.terrafirmagreg.framework.manager.packet.PacketManager;
 import su.terrafirmagreg.framework.manager.packet.spi.NetworkThreadedWrapper;
 
 import net.minecraft.client.Minecraft;
@@ -43,7 +42,7 @@ public interface IPacket {
 
   default NetworkThreadedWrapper getWrapper() {
 
-    return PacketManager.getChannel(this);
+    return IPacketManager.getChannel(this);
   }
 
 

@@ -8,11 +8,7 @@ import su.terrafirmagreg.framework.module.api.IModuleManager;
 import su.terrafirmagreg.framework.module.api.IModuleRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 
-import net.minecraftforge.fml.common.Loader;
-
 import lombok.Getter;
-
-import java.util.Arrays;
 
 @Getter
 public class ModuleRegistrar implements IModuleRegistrar {
@@ -31,10 +27,9 @@ public class ModuleRegistrar implements IModuleRegistrar {
 
     var moduleClass = module.getClass();
     if (validate(moduleClass)) {
-      var moduleInfo = AnnotationUtils.getAnnotation(module, ModuleInfo.class);
-      var identifier = ModUtils.resource(modId, moduleInfo.id());
+      var identifier = ModUtils.resource(modId, module.getName());
       module.setIdentifier(identifier);
-      map.put(moduleClass, ModuleWrapper.of(identifier, module));
+      map.put(moduleClass, ModuleWrapper.of(module.getName(), module));
     }
   }
 
@@ -42,10 +37,9 @@ public class ModuleRegistrar implements IModuleRegistrar {
   private <T extends IModule> boolean validate(Class<T> module) {
     var annotation = AnnotationUtils.getAnnotation(module, ModuleInfo.class);
     boolean moduleIsEnabled = annotation.enabled();
-    boolean dependenciesAreLoaded = Arrays.stream(annotation.modDependencies()).allMatch(Loader::isModLoaded);
     boolean moduleIsNotRegistered = !map.containsKey(module);
 
-    return moduleIsEnabled && dependenciesAreLoaded && moduleIsNotRegistered;
+    return moduleIsEnabled && moduleIsNotRegistered;
   }
 
 }

@@ -17,7 +17,6 @@ import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleInfo(
-  id = "animal",
   author = "Xikaro",
   version = "1.0.0",
   description = "Animal module."
@@ -27,6 +26,7 @@ public class ModuleAnimal extends ModuleBase {
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class);
 
   public ModuleAnimal() {
+    super("animal");
 
     enableRegistry();
     enableNetwork();

@@ -13,13 +13,11 @@ import lombok.Getter;
 @Getter
 public class FeatureRegistrar implements IFeatureRegistrar {
 
-  private final IFeatureManager manager;
   private final IModule module;
   private final FeatureMap map;
 
   public FeatureRegistrar(IFeatureManager manager) {
 
-    this.manager = manager;
     this.module = manager.getModule();
     this.map = manager.getMap();
   }
@@ -30,7 +28,7 @@ public class FeatureRegistrar implements IFeatureRegistrar {
     var featureClass = feature.getClass();
 
     if (!feature.isEnabled()) {
-      manager.getLogger().debug("Feature {} is disabled: {}", featureClass.getSimpleName());
+      module.getLogger().debug("Feature {} is disabled: {}", featureClass.getSimpleName());
       return;
     }
 

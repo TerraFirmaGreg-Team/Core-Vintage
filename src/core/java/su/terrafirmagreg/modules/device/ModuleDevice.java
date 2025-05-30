@@ -18,7 +18,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleInfo(
-  id = "device",
   author = "Xikaro",
   version = "1.0.0",
   description = "Device module"
@@ -29,6 +28,7 @@ public class ModuleDevice extends ModuleBase {
 
 
   public ModuleDevice() {
+    super("device");
 
     enableRegistry();
     enableNetwork();

@@ -539,5 +539,12 @@ sound.tfg.animal.entity.cricket=Crickets
 sound.tfg.animal.entity.frog=Frogs
 sound.tfg.animal.entity.rooster.cry=Rooster cries
 
+
+# Module Wood ###############################################
+
+## Item Group
+item_group.tfg.wood.name=[ TFG ] Wood
+
+
 # Module Metal ##############################################
 

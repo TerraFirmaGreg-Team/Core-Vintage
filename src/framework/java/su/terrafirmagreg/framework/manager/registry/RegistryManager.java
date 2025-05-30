@@ -37,9 +37,4 @@ public class RegistryManager implements IRegistryManager {
     return MANAGER_MAP.computeIfAbsent(module, RegistryManager::new);
   }
 
-
-  @Override
-  public LoggingHelper getLogger() {
-    return LOGGER;
-  }
 }

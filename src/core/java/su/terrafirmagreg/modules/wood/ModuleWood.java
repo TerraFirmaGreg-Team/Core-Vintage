@@ -8,7 +8,6 @@ import su.terrafirmagreg.framework.module.spi.ModuleBase;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleInfo(
-  id = "wood",
   author = "Xikaro",
   version = "1.0.0",
   description = "Wood module."
@@ -18,6 +17,7 @@ public class ModuleWood extends ModuleBase {
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class);
 
   public ModuleWood() {
+    super("wood");
 
     enableRegistry();
     enableNetwork();

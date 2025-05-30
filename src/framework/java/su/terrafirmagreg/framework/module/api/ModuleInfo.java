@@ -9,20 +9,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ModuleInfo {
 
-  /**
-   * The ID of this module. Must be unique within its container.
-   */
-  String id();
-
 
   String version() default "";
 
   String[] author() default "";
-
-  /**
-   * A list of mod IDs that this module depends on. If any mods specified are not present, the module will not load.
-   */
-  String[] modDependencies() default {};
 
 
   /**
@@ -30,6 +20,6 @@ public @interface ModuleInfo {
    */
   String[] description() default "";
 
-
+  @Deprecated
   boolean enabled() default true;
 }

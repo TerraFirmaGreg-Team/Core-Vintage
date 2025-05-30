@@ -36,9 +36,4 @@ public class FeatureManager implements IFeatureManager {
 
     return MANAGER_MAP.computeIfAbsent(module, FeatureManager::new);
   }
-
-  @Override
-  public LoggingHelper getLogger() {
-    return LOGGER;
-  }
 }

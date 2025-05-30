@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.base.object.entity.spi;
 
 import su.terrafirmagreg.api.base.object.entity.api.IEntitySettings;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
 
@@ -32,7 +33,7 @@ public abstract class BaseEntityAnimal extends EntityAnimal implements IEntitySe
         string = "generic";
       }
 
-      return TranslatorUtils.translateToLocal(ModUtils.localize("entity", string, "name"));
+      return TranslatorUtils.translateToLocal(ModUtils.localize(ToolTipKeys.ENTITY, string, "name"));
     }
   }
 }

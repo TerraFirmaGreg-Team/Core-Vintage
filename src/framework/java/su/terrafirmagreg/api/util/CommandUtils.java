@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.api.data.ToolTipKeys;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
@@ -98,7 +100,7 @@ public final class CommandUtils {
         return ExecuteType.valueOf(text.toUpperCase());
       } catch (IllegalArgumentException e) {
         throw new WrongUsageException(
-          ModUtils.localize("command", "player.usage_expected_first_argument"));
+          ModUtils.localize(ToolTipKeys.COMMAND, "player.usage_expected_first_argument"));
       }
     }
   }

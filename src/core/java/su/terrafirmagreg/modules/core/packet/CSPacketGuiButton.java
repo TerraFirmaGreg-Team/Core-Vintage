@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.network;
+package su.terrafirmagreg.modules.core.packet;
 
 import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
 import su.terrafirmagreg.api.base.packet.spi.BasePacket;

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.feature.playerdata.capability;
 
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.Skill;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.SkillType;
-import su.terrafirmagreg.modules.core.network.SCPacketPlayerDataUpdate;
+import su.terrafirmagreg.modules.core.packet.SCPacketPlayerDataUpdate;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

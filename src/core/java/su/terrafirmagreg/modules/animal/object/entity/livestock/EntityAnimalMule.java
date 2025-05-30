@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.data.DataSerializers;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -20,7 +21,7 @@ import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
-import su.terrafirmagreg.modules.core.network.SCPacketSimple;
+import su.terrafirmagreg.modules.core.packet.SCPacketSimple;
 
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityAgeable;
@@ -115,7 +116,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
         string = "generic";
       }
 
-      return TranslatorUtils.translateToLocal(ModUtils.localize("entity", string, "name"));
+      return TranslatorUtils.translateToLocal(ModUtils.localize(ToolTipKeys.ENTITY, string, "name"));
     }
   }
 
@@ -197,7 +198,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   @Override
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
-    return new TextComponentTranslation(ModUtils.localize("animal", entityString, this.getGender().name()));
+    return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.ANIMAL, entityString, this.getGender().name()));
   }
 
   @Override
@@ -417,7 +418,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               SCPacketSimple.translateMessage(
                 SCPacketSimple.MessageCategory.ANIMAL,
-                ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()
+                ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.mating.pregnant"), getAnimalName()
               ).sendTo((EntityPlayerMP) player);
             }
           }

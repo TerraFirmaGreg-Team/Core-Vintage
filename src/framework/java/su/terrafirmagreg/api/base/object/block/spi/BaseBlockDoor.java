@@ -2,6 +2,7 @@ package su.terrafirmagreg.api.base.object.block.spi;
 
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemDoor;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
@@ -50,7 +51,7 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockSettings 
 
   @Override
   public String getTranslationKey() {
-    return ModUtils.localize("block", this.getRegistryName());
+    return ModUtils.localize(ToolTipKeys.BLOCK, this.getRegistryName());
   }
 
   @Override

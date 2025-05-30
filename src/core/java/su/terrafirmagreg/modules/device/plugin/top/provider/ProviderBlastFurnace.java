@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
-import su.terrafirmagreg.api.base.plugin.top.provider.spi.BaseProvider;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
@@ -18,18 +18,17 @@ import net.minecraft.world.World;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProviderBlastFurnace extends BaseProvider {
+public class ProviderBlastFurnace implements IProbeInfoProvider {
 
   @Override
-  public @NotNull String getID() {
-    return ModUtils.localize("top", "device.blast_furnace");
+  public String getID() {
+    return ModUtils.localize(ToolTipKeys.TOP, "device.blast_furnace");
   }
 
   @Override
@@ -46,25 +45,25 @@ public class ProviderBlastFurnace extends BaseProvider {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt = tile.writeToNBT(nbt);
 
-        int chinmey = BlockBlastFurnace.getChimneyLevels(tile.getWorld(), tile.getPos());
-        if (chinmey > 0) {
-          int maxItems = chinmey * 4;
+        int chimney = BlockBlastFurnace.getChimneyLevels(tile.getWorld(), tile.getPos());
+        if (chimney > 0) {
+          int maxItems = chimney * 4;
           int oreStacks = tile.getOreStacks().size();
           int fuelStacks = tile.getFuelStacks().size();
           float temperature = nbt.getFloat("temperature");
           String heatTooltip = Heat.getTooltip(temperature);
           currentTooltip.add(
-            new TextComponentTranslation(ModUtils.localize("top", "device.bloomery.ores"),
+            new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "device.bloomery.ores"),
               oreStacks, maxItems).getFormattedText());
           currentTooltip.add(
-            new TextComponentTranslation(ModUtils.localize("top", "device.bloomery.fuel"),
+            new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "device.bloomery.fuel"),
               fuelStacks, maxItems).getFormattedText());
           if (heatTooltip != null) {
             currentTooltip.add(heatTooltip);
           }
         } else {
           currentTooltip.add(new TextComponentTranslation(
-            ModUtils.localize("top", "device.blast_furnace.not_formed")).getFormattedText());
+            ModUtils.localize(ToolTipKeys.TOP, "device.blast_furnace.not_formed")).getFormattedText());
         }
 
         for (String string : currentTooltip) {

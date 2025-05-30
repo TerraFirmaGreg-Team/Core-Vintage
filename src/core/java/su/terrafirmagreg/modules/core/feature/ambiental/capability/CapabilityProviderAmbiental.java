@@ -10,7 +10,7 @@ import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierEnv
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierEquipment;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierItem;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
-import su.terrafirmagreg.modules.core.network.SCPacketAmbiental;
+import su.terrafirmagreg.modules.core.packet.SCPacketAmbiental;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.entity.player.EntityPlayer;

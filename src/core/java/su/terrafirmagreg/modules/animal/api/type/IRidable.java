@@ -1,8 +1,9 @@
 package su.terrafirmagreg.modules.animal.api.type;
 
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.core.network.SCPacketSimple;
+import su.terrafirmagreg.modules.core.packet.SCPacketSimple;
 
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,11 +28,11 @@ public interface IRidable {
       if (!world.isRemote) {
         if (animal.getAge() == IAnimal.Age.CHILD) {
           SCPacketSimple.translateMessage(SCPacketSimple.MessageCategory.ANIMAL,
-            ModUtils.localize("tooltip", "animal.product.young"), animal.getAnimalName()
+            ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.young"), animal.getAnimalName()
           ).sendTo((EntityPlayerMP) player);
         } else {
           SCPacketSimple.translateMessage(SCPacketSimple.MessageCategory.ANIMAL,
-            ModUtils.localize("tooltip", "animal.product.low_familiarity"),
+            ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.low_familiarity"),
             animal.getAnimalName()).sendTo((EntityPlayerMP) player);
         }
       }

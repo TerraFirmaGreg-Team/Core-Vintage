@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.network;
+package su.terrafirmagreg.modules.core.packet;
 
 import su.terrafirmagreg.api.base.packet.spi.BasePacket;
 import su.terrafirmagreg.api.util.CapabilityUtils;

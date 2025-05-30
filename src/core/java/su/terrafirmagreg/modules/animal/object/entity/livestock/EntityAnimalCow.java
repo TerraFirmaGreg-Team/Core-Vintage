@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.data.DataSerializers;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -14,7 +15,7 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
-import su.terrafirmagreg.modules.core.network.SCPacketSimple;
+import su.terrafirmagreg.modules.core.packet.SCPacketSimple;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -211,18 +212,18 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
   @Override
   public TextComponentTranslation getTooltip() {
     if (getGender() == Gender.MALE) {
-      return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.male_milk"));
+      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.male_milk"));
     } else if (getAge() == Age.OLD) {
-      return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.old"),
+      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.old"),
         getAnimalName());
     } else if (getAge() == Age.CHILD) {
-      return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.young"),
+      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.young"),
         getAnimalName());
     } else if (getFamiliarity() <= 0.15f) {
       return new TextComponentTranslation(
-        ModUtils.localize("tooltip", "animal.product.low_familiarity"), getAnimalName());
+        ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.low_familiarity"), getAnimalName());
     } else if (!hasMilk()) {
-      return new TextComponentTranslation(ModUtils.localize("tooltip", "animal.product.no_milk"),
+      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.no_milk"),
         getAnimalName());
     }
     return null;

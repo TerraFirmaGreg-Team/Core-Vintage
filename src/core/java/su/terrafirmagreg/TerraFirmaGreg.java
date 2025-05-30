@@ -31,7 +31,7 @@ import static su.terrafirmagreg.Tags.MOD_NAME;
 import static su.terrafirmagreg.Tags.MOD_VERSION;
 import static su.terrafirmagreg.Tags.SERVER_PROXY;
 
-@SuppressWarnings("unused")
+
 @Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = DEPENDENCIES)
 public class TerraFirmaGreg extends Framework {
 
@@ -56,6 +56,7 @@ public class TerraFirmaGreg extends Framework {
 
   @EventHandler
   public void onConstruction(FMLConstructionEvent event) {
+
     this.setup(event);
     this.routeEvent(event);
   }

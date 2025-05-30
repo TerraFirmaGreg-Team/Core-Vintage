@@ -7,7 +7,7 @@ import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.ProviderPlayerData;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
-import su.terrafirmagreg.modules.core.network.SCPacketPlayerDataUpdate;
+import su.terrafirmagreg.modules.core.packet.SCPacketPlayerDataUpdate;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,11 +30,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 public class FeaturePlayerData extends FeatureBase {
 
   private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
-
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-    CapabilityPlayerData.register();
-  }
 
   @SubscribeEvent
   public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
@@ -195,5 +190,10 @@ public class FeaturePlayerData extends FeatureBase {
         event.setComponent(new TextComponentTranslation("<" + event.getUsername() + "> " + String.join(" ", words)));
       }
     });
+  }
+
+  @Override
+  public void onPreInit(FMLPreInitializationEvent event) {
+    CapabilityPlayerData.register();
   }
 }

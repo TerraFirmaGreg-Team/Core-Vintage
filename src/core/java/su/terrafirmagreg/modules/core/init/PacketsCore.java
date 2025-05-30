@@ -2,10 +2,10 @@ package su.terrafirmagreg.modules.core.init;
 
 
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
-import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
-import su.terrafirmagreg.modules.core.network.SCPacketAmbiental;
-import su.terrafirmagreg.modules.core.network.SCPacketPlayerDataUpdate;
-import su.terrafirmagreg.modules.core.network.SCPacketSimple;
+import su.terrafirmagreg.modules.core.packet.CSPacketGuiButton;
+import su.terrafirmagreg.modules.core.packet.SCPacketAmbiental;
+import su.terrafirmagreg.modules.core.packet.SCPacketPlayerDataUpdate;
+import su.terrafirmagreg.modules.core.packet.SCPacketSimple;
 
 public final class PacketsCore {
 

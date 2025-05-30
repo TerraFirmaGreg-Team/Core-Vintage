@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.animal;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
@@ -10,10 +11,8 @@ import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.init.FeaturesAnimal;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
+import su.terrafirmagreg.modules.animal.init.PluginsAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
-import su.terrafirmagreg.modules.animal.plugin.top.TheOneProbeAnimal;
-
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -59,12 +58,12 @@ public class ModuleAnimal extends ModuleBase {
     FeaturesAnimal.onRegister(registrar);
   }
 
-
   @Override
-  public void onInit(FMLInitializationEvent event) {
+  public void onPlugin(IPluginRegistrar registrar) {
 
-    TheOneProbeAnimal.init();
+    PluginsAnimal.onRegister(registrar);
   }
+
 
   @Override
   public @NotNull LoggingHelper getLogger() {

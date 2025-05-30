@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.feature.sharpness;
 
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.StackUtils;
@@ -34,18 +35,6 @@ import net.dries007.tfcthings.main.ConfigTFCThings.Items;
 
 public class FeatureSharpness extends FeatureBase {
 
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-
-    CapabilitySharpness.register();
-  }
-
-  @Override
-  public void onPostInit(FMLPostInitializationEvent event) {
-
-    Handler.init();
-  }
-
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   @SideOnly(Side.CLIENT)
   public static void onItemTooltipEvent(ItemTooltipEvent event) {
@@ -56,7 +45,7 @@ public class FeatureSharpness extends FeatureBase {
     CapabilityUtils.getOptional(stack, CapabilitySharpness.CAPABILITY).ifPresent(cap -> {
       if (cap.getCharges() > 0) {
         TextFormatting color = cap.getCharges() > 64 ? cap.getCharges() > 256 ? TextFormatting.DARK_PURPLE : TextFormatting.BLUE : TextFormatting.DARK_GREEN;
-        tooltip.add(I18n.format(ModUtils.localize("tooltip", "device.sharpness"), color, "" + cap.getCharges()));
+        tooltip.add(I18n.format(ModUtils.localize(ToolTipKeys.TOOLTIP, "device.sharpness"), color, "" + cap.getCharges()));
       }
     });
   }
@@ -170,6 +159,18 @@ public class FeatureSharpness extends FeatureBase {
         });
       }
     }
+  }
+
+  @Override
+  public void onPreInit(FMLPreInitializationEvent event) {
+
+    CapabilitySharpness.register();
+  }
+
+  @Override
+  public void onPostInit(FMLPostInitializationEvent event) {
+
+    Handler.init();
   }
 
 

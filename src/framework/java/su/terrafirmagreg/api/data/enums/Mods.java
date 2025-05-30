@@ -35,6 +35,7 @@ public enum Mods {
   GREGTECH(ModIDs.GREGTECH),
   PUDDLES(ModIDs.PUDDLES),
   WATERFLASKS(ModIDs.WATERFLASKS),
+  THEONEPROBE(ModIDs.THEONEPROBE),
   TFCTOWERHEAT(ModIDs.TFCTOWERHEAT);
 
   private static final Mods[] VALUES = values();
@@ -106,6 +107,7 @@ public enum Mods {
     public static final String TFCTOWERHEAT = "tfctowerheat";
     public static final String PUDDLES = "puddles";
     public static final String WATERFLASKS = "waterflasks";
+    public static final String THEONEPROBE = "theoneprobe";
   }
 
 }

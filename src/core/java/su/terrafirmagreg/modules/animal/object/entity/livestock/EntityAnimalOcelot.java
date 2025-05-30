@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.data.DataSerializers;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
@@ -17,7 +18,7 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
-import su.terrafirmagreg.modules.core.network.SCPacketSimple;
+import su.terrafirmagreg.modules.core.packet.SCPacketSimple;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -286,7 +287,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   public TextComponentTranslation getAnimalName() {
     String entityString = isTamed() ? "cat" : EntityList.getEntityString(this);
     return new TextComponentTranslation(
-      ModUtils.localize("animal", entityString, this.getGender().name()));
+      ModUtils.localize(ToolTipKeys.ANIMAL, entityString, this.getGender().name()));
   }
 
   @Override
@@ -408,7 +409,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               SCPacketSimple.translateMessage(
                 SCPacketSimple.MessageCategory.ANIMAL,
-                ModUtils.localize("tooltip", "animal.mating.pregnant"), getAnimalName()
+                ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.mating.pregnant"), getAnimalName()
               ).sendTo((EntityPlayerMP) player);
             }
           }
@@ -470,7 +471,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
         string = "generic";
       }
 
-      return TranslatorUtils.translateToLocal(ModUtils.localize("entity", string, "name"));
+      return TranslatorUtils.translateToLocal(ModUtils.localize(ToolTipKeys.ENTITY, string, "name"));
     }
   }
 }

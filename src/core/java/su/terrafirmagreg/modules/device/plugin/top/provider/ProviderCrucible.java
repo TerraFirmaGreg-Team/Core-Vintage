@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
-import su.terrafirmagreg.api.base.plugin.top.provider.spi.BaseProvider;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
@@ -18,14 +18,15 @@ import net.minecraft.world.World;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.api.types.Metal;
 
-public class ProviderCrucible extends BaseProvider {
+public class ProviderCrucible implements IProbeInfoProvider {
 
   @Override
   public String getID() {
-    return ModUtils.localize("top", "device.crucible");
+    return ModUtils.localize(ToolTipKeys.TOP, "device.crucible");
   }
 
   @Override
@@ -44,7 +45,7 @@ public class ProviderCrucible extends BaseProvider {
         if (amount > 0) {
           Metal metal = tile.getAlloyResult();
           probeInfo.text(
-            new TextComponentTranslation(ModUtils.localize("top", "metal.output"), amount, new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+            new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "metal.output"), amount, new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
         }
         float temperature = nbt.getFloat("temp");
         String heatTooltip = Heat.getTooltip(temperature);

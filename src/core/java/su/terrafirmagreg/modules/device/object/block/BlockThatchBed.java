@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlockBed;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -50,10 +51,10 @@ public class BlockThatchBed extends BaseBlockBed {
     if (!worldIn.isRemote) {
       playerIn.setSpawnPoint(pos, false);
       playerIn.sendMessage(
-        new TextComponentTranslation(ModUtils.localize("message", "thatch_bed.spawnpoint")));
+        new TextComponentTranslation(ModUtils.localize(ToolTipKeys.MESSAGE, "thatch_bed.spawnpoint")));
       if (!worldIn.isThundering()) {
         playerIn.sendStatusMessage(
-          new TextComponentTranslation(ModUtils.localize("message", "thatch_bed.not_thundering")), true);
+          new TextComponentTranslation(ModUtils.localize(ToolTipKeys.MESSAGE, "thatch_bed.not_thundering")), true);
         return true;
       }
     }

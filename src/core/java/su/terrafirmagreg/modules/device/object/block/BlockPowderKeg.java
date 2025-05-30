@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.device.object.block;
 import su.terrafirmagreg.api.base.client.gui.GuiHandler;
 import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.api.data.NBTTags;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
@@ -124,10 +125,10 @@ public class BlockPowderKeg extends BaseBlockContainer {
       }
 
       if (count == 0) {
-        tooltip.add(I18n.format(ModUtils.localize("tooltip", "device.powderkeg.empty")));
+        tooltip.add(I18n.format(ModUtils.localize(ToolTipKeys.TOOLTIP, "device.powderkeg.empty")));
       } else {
         ItemStack itemStack = stackHandler.getStackInSlot(firstSlot);
-        tooltip.add(I18n.format(ModUtils.localize("tooltip", "device.powderkeg.amount"), count, itemStack.getItem().getItemStackDisplayName(itemStack)));
+        tooltip.add(I18n.format(ModUtils.localize(ToolTipKeys.TOOLTIP, "device.powderkeg.amount"), count, itemStack.getItem().getItemStackDisplayName(itemStack)));
       }
     }
   }

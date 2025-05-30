@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.device.object.item.spi;
 
 import su.terrafirmagreg.api.base.object.item.spi.BaseItemFluid;
+import su.terrafirmagreg.api.data.ToolTipKeys;
 import su.terrafirmagreg.api.library.MeshDefinitionFix;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemMesh;
@@ -223,7 +224,7 @@ public abstract class ItemFlask extends BaseItemFluid implements IProviderItemMe
       FluidStack fluidStack = bucketCap.drain(capacity, false);
       if (fluidStack != null) {
         String fluidname = fluidStack.getLocalizedName();
-        return new TextComponentTranslation(ModUtils.localize("item", ModUtils.localize(getRegistryName()), "filled.name"), fluidname).getFormattedText();
+        return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.ITEM, ModUtils.localize(getRegistryName()), "filled.name"), fluidname).getFormattedText();
       }
     }
     return super.getItemStackDisplayName(stack);

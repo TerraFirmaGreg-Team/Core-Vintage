@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.client.gui;
 import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
 import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
+import su.terrafirmagreg.modules.core.packet.CSPacketGuiButton;
 import su.terrafirmagreg.modules.device.client.button.GuiButtonPowderkegSeal;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 

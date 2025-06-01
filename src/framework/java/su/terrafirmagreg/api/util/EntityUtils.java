@@ -1,10 +1,14 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.api.library.IdSupplier;
+import su.terrafirmagreg.framework.Framework;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,19 +25,31 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @UtilityClass
 @SuppressWarnings("unused")
 public final class EntityUtils {
+
+  private static final Map<String, IdSupplier> SUPPLIER_MAP = new Object2ObjectOpenHashMap<>();
 
   /**
    * An array of armor equipment slots.
@@ -69,6 +85,40 @@ public final class EntityUtils {
       return entityEntry.getEntityClass();
     }
     return null;
+  }
+
+  public static IdSupplier getIdSupplier() {
+    return SUPPLIER_MAP.computeIfAbsent(Framework.modId, s -> new IdSupplier());
+  }
+
+  public static IdSupplier getIdSupplier(String modId) {
+    return SUPPLIER_MAP.computeIfAbsent(modId, s -> new IdSupplier());
+  }
+
+  public static <T extends EntityEntry> void addEntity(T entry, UpdateInfo updateInfo) {
+    var registryName = checkNotNull(entry.getRegistryName(), "name");
+
+    EntityRegistry.registerModEntity(registryName,
+      entry.getEntityClass(), entry.getName(),
+      getIdSupplier(registryName.getNamespace()).getAndIncrement(), registryName.getNamespace(),
+      updateInfo.getTrackingRange(), updateInfo.getUpdateFrequency(), updateInfo.isSendVelocityUpdates()
+    );
+  }
+
+  public static <T extends EntityEntry> void addEgg(T entry, EggInfo eggInfo) {
+    if (eggInfo != null) {
+      EntityRegistry.registerEgg(entry.getRegistryName(), eggInfo.primaryColor, eggInfo.secondaryColor);
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T extends EntityEntry> void addSpawn(T entry, SpawnInfo spawnInfo) {
+    if (spawnInfo != null) {
+      var entityClass = entry.getEntityClass();
+      if (EntityLiving.class.isAssignableFrom(entityClass)) {
+        EntityRegistry.addSpawn((Class<? extends EntityLiving>) entityClass, spawnInfo.getWeighted(), spawnInfo.getMinimum(), spawnInfo.getMaximum(), spawnInfo.getCreatureType(), spawnInfo.getSpawnBiomes());
+      }
+    }
   }
 
 
@@ -383,6 +433,39 @@ public final class EntityUtils {
     }
 
     entity.setWorld(worldNew);
+  }
+
+  @Getter
+  @AllArgsConstructor
+  public class SpawnInfo {
+
+    private int weighted;
+    private int minimum;
+    private int maximum;
+    private EnumCreatureType creatureType;
+    private Biome[] spawnBiomes;
+
+  }
+
+  @Getter
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public class UpdateInfo {
+
+    private int trackingRange = 64;
+    private int updateFrequency = 1;
+    private boolean sendVelocityUpdates = true;
+
+  }
+
+  @Getter
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public class EggInfo {
+
+    private int primaryColor;
+    private int secondaryColor;
+
   }
 
 

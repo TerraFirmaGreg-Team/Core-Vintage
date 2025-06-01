@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
@@ -26,7 +26,7 @@ public class ProviderPitKiln implements IProbeInfoProvider {
 
   @Override
   public String getID() {
-    return ModUtils.localize(ToolTipKeys.TOP, "device.pit_kiln");
+    return ModUtils.localize(LocalizeKeys.TOP, "device.pit_kiln");
   }
 
   @Override
@@ -48,17 +48,17 @@ public class ProviderPitKiln implements IProbeInfoProvider {
             case TICKS:
               probeInfo.text(
                 new TextComponentTranslation(
-                  ModUtils.localize(ToolTipKeys.TOP, "devices.pit_kiln.remaining.ticks"), remainingTicks).getFormattedText());
+                  ModUtils.localize(LocalizeKeys.TOP, "devices.pit_kiln.remaining.ticks"), remainingTicks).getFormattedText());
               break;
             case MINECRAFT_HOURS:
               probeInfo.text(
                 new TextComponentTranslation(
-                  ModUtils.localize(ToolTipKeys.TOP, "devices.pit_kiln.remaining.hours"), remainingHours).getFormattedText());
+                  ModUtils.localize(LocalizeKeys.TOP, "devices.pit_kiln.remaining.hours"), remainingHours).getFormattedText());
               break;
             case REAL_MINUTES:
               probeInfo.text(
                 new TextComponentTranslation(
-                  ModUtils.localize(ToolTipKeys.TOP, "devices.pit_kiln.remaining.minutes"), remainingMinutes).getFormattedText());
+                  ModUtils.localize(LocalizeKeys.TOP, "devices.pit_kiln.remaining.minutes"), remainingMinutes).getFormattedText());
               break;
           }
         } else {
@@ -66,17 +66,17 @@ public class ProviderPitKiln implements IProbeInfoProvider {
           int logs = tile.getLogCount();
           if (straw == 8 && logs == 8) {
             probeInfo.text(new TextComponentTranslation(
-              ModUtils.localize(ToolTipKeys.TOP, "devices.pit_kiln.unlit")).getFormattedText());
+              ModUtils.localize(LocalizeKeys.TOP, "devices.pit_kiln.unlit")).getFormattedText());
           } else {
             if (straw < 8) {
               probeInfo.text(
                 new TextComponentTranslation(
-                  ModUtils.localize(ToolTipKeys.TOP, "devices.pit_kiln.straw"), 8 - straw).getFormattedText());
+                  ModUtils.localize(LocalizeKeys.TOP, "devices.pit_kiln.straw"), 8 - straw).getFormattedText());
             }
             if (logs < 8) {
               probeInfo.text(
                 new TextComponentTranslation(
-                  ModUtils.localize(ToolTipKeys.TOP, "devices.pit_kiln.logs"), 8 - logs).getFormattedText());
+                  ModUtils.localize(LocalizeKeys.TOP, "devices.pit_kiln.logs"), 8 - logs).getFormattedText());
             }
           }
         }

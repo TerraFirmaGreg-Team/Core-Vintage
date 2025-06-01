@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.data;
 
-public final class ToolTipKeys {
+public final class LocalizeKeys {
 
   public static final String TOP = "top";
   public static final String TOOLTIP = "tooltip";

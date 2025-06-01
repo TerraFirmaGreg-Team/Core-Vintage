@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.object.entity.spi;
 
 import su.terrafirmagreg.api.base.object.entity.api.IEntitySettings;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
 
@@ -11,6 +11,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 
 import lombok.Getter;
+
+import java.util.Objects;
 
 public abstract class BaseEntity extends Entity {
 
@@ -29,7 +31,7 @@ public abstract class BaseEntity extends Entity {
         string = "generic";
       }
 
-      return TranslatorUtils.translateToLocal(ModUtils.localize(ToolTipKeys.ENTITY, string, "name"));
+      return TranslatorUtils.translateToLocal(ModUtils.localize(LocalizeKeys.ENTITY, string, "name"));
     }
   }
 
@@ -40,11 +42,23 @@ public abstract class BaseEntity extends Entity {
     protected final Settings settings;
 
     public BaseEntityType(Settings settings) {
-      super(settings.getEntityClass(), settings.getRegistryKey());
+      super(settings.getEntity(), settings.getRegistryKey());
 
       this.settings = settings;
     }
 
+    public String getLocalizedName() {
+      return TranslatorUtils.translateToLocal(this.getTranslationKey() + ".name");
+    }
 
+
+    public String getTranslationKey() {
+      return ModUtils.localize(LocalizeKeys.ENTITY, this.getRegistryName());
+    }
+
+    @Override
+    public String getName() {
+      return ModUtils.localize(Objects.requireNonNull(this.getRegistryName()));
+    }
   }
 }

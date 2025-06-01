@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.device.client.button;
 
 import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
 import su.terrafirmagreg.api.base.client.gui.button.spi.BaseGuiButton;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
@@ -24,7 +24,7 @@ public class GuiButtonPowderkegSeal extends BaseGuiButton implements IButtonTool
 
   @Override
   public String getTooltip() {
-    return ModUtils.localize(ToolTipKeys.TOOLTIP, tile.isSealed() ? "device.powderkeg.unseal" : "device.powderkeg.seal");
+    return ModUtils.localize(LocalizeKeys.TOOLTIP, tile.isSealed() ? "device.powderkeg.unseal" : "device.powderkeg.seal");
   }
 
   @Override

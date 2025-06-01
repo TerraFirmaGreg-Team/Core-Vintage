@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.api.type;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.packet.SCPacketSimple;
@@ -28,11 +28,11 @@ public interface IRidable {
       if (!world.isRemote) {
         if (animal.getAge() == IAnimal.Age.CHILD) {
           SCPacketSimple.translateMessage(SCPacketSimple.MessageCategory.ANIMAL,
-            ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.young"), animal.getAnimalName()
+            ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.young"), animal.getAnimalName()
           ).sendTo((EntityPlayerMP) player);
         } else {
           SCPacketSimple.translateMessage(SCPacketSimple.MessageCategory.ANIMAL,
-            ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.low_familiarity"),
+            ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.low_familiarity"),
             animal.getAnimalName()).sendTo((EntityPlayerMP) player);
         }
       }

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.data.DataSerializers;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
@@ -158,7 +158,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
         string = "generic";
       }
 
-      return TranslatorUtils.translateToLocal(ModUtils.localize(ToolTipKeys.ENTITY, string, "name"));
+      return TranslatorUtils.translateToLocal(ModUtils.localize(LocalizeKeys.ENTITY, string, "name"));
     }
   }
 
@@ -252,7 +252,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   @Override
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
-    return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.ANIMAL, entityString, this.getGender().name()));
+    return new TextComponentTranslation(ModUtils.localize(LocalizeKeys.ANIMAL, entityString, this.getGender().name()));
   }
 
   @Override
@@ -451,7 +451,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
               if (this.isFertilized() && this.getType() == Type.MAMMAL) {
                 SCPacketSimple.translateMessage(
                   SCPacketSimple.MessageCategory.ANIMAL,
-                  ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.mating.pregnant"), getAnimalName()
+                  ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.mating.pregnant"), getAnimalName()
                 ).sendTo((EntityPlayerMP) player);
               }
             }

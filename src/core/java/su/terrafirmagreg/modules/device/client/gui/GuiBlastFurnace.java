@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
 import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
@@ -80,13 +80,13 @@ public class GuiBlastFurnace extends BaseGuiContainerTile<TileBlastFurnace> {
     }
 
     // Отображение текста с количеством руды, топлива и сплавленного материала
-    fontRenderer.drawString(I18n.format(ModUtils.localize(ToolTipKeys.TOOLTIP, "device.blast_furnace.ore_amount")), guiLeft + 40, guiTop + 17, 0x000000);
-    fontRenderer.drawString(I18n.format(ModUtils.localize(ToolTipKeys.TOOLTIP, "device.blast_furnace.fuel_amount")), guiLeft + 40, guiTop + 35, 0x000000);
-    fontRenderer.drawString(I18n.format(ModUtils.localize(ToolTipKeys.TOOLTIP, "device.blast_furnace.melt_amount")), guiLeft + 40, guiTop + 53, 0x000000);
+    fontRenderer.drawString(I18n.format(ModUtils.localize(LocalizeKeys.TOOLTIP, "device.blast_furnace.ore_amount")), guiLeft + 40, guiTop + 17, 0x000000);
+    fontRenderer.drawString(I18n.format(ModUtils.localize(LocalizeKeys.TOOLTIP, "device.blast_furnace.fuel_amount")), guiLeft + 40, guiTop + 35, 0x000000);
+    fontRenderer.drawString(I18n.format(ModUtils.localize(LocalizeKeys.TOOLTIP, "device.blast_furnace.melt_amount")), guiLeft + 40, guiTop + 53, 0x000000);
 
     // Отображение предупреждения, если нет дымохода
     if (tile.getField(TileBlastFurnace.CHIMNEY_LEVELS) < 1) {
-      fontRenderer.drawString(I18n.format(ModUtils.localize(ToolTipKeys.TOOLTIP, "device.blast_furnace.invalid_structure")), guiLeft + 40, guiTop + 71, 0xDC2400);
+      fontRenderer.drawString(I18n.format(ModUtils.localize(LocalizeKeys.TOOLTIP, "device.blast_furnace.invalid_structure")), guiLeft + 40, guiTop + 71, 0xDC2400);
     }
 
     if (!tempList.isEmpty()) {

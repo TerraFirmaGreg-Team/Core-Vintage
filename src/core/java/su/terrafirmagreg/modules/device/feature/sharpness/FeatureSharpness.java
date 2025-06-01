@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.feature.sharpness;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.StackUtils;
@@ -45,7 +45,7 @@ public class FeatureSharpness extends FeatureBase {
     CapabilityUtils.getOptional(stack, CapabilitySharpness.CAPABILITY).ifPresent(cap -> {
       if (cap.getCharges() > 0) {
         TextFormatting color = cap.getCharges() > 64 ? cap.getCharges() > 256 ? TextFormatting.DARK_PURPLE : TextFormatting.BLUE : TextFormatting.DARK_GREEN;
-        tooltip.add(I18n.format(ModUtils.localize(ToolTipKeys.TOOLTIP, "device.sharpness"), color, "" + cap.getCharges()));
+        tooltip.add(I18n.format(ModUtils.localize(LocalizeKeys.TOOLTIP, "device.sharpness"), color, "" + cap.getCharges()));
       }
     });
   }

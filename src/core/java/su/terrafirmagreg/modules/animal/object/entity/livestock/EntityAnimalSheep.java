@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
+import su.terrafirmagreg.api.base.object.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.api.data.DataSerializers;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -249,13 +250,13 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   @Override
   public @Nullable TextComponentTranslation getTooltip() {
     if (getAge() == Age.CHILD) {
-      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.young"),
+      return new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.young"),
         getAnimalName());
     } else if (getFamiliarity() <= 0.15f) {
       return new TextComponentTranslation(
-        ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.low_familiarity"), getAnimalName());
+        ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.low_familiarity"), getAnimalName());
     } else if (!hasWool()) {
-      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.no_wool"),
+      return new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.no_wool"),
         getAnimalName());
     }
     return null;
@@ -326,6 +327,18 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
     playSound(SoundEvents.ENTITY_SHEEP_STEP, 0.15F, 1.0F);
+  }
+
+  public static class EntityTypeAnimalSheep extends BaseEntityType {
+
+    public EntityTypeAnimalSheep() {
+      super(Settings.of()
+        .registryKey("sheep")
+        .entity(EntityAnimalSheep.class, RenderAnimalSheep::new)
+        .egg(0xFFFFFF, 0xFF6347)
+        .updateInfo(64, 1, true));
+    }
+
   }
 
 }

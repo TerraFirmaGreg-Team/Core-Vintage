@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.library.TextComponents;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -25,7 +25,7 @@ public final class ProviderLatexExtractor implements IProbeInfoProvider {
 
   @Override
   public @NotNull String getID() {
-    return ModUtils.localize(ToolTipKeys.TOP, "device.latex_extractor");
+    return ModUtils.localize(LocalizeKeys.TOP, "device.latex_extractor");
   }
 
   @Override

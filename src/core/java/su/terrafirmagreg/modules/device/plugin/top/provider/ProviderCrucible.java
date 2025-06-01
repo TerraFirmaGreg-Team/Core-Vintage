@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
@@ -26,7 +26,7 @@ public class ProviderCrucible implements IProbeInfoProvider {
 
   @Override
   public String getID() {
-    return ModUtils.localize(ToolTipKeys.TOP, "device.crucible");
+    return ModUtils.localize(LocalizeKeys.TOP, "device.crucible");
   }
 
   @Override
@@ -45,7 +45,7 @@ public class ProviderCrucible implements IProbeInfoProvider {
         if (amount > 0) {
           Metal metal = tile.getAlloyResult();
           probeInfo.text(
-            new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "metal.output"), amount, new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+            new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "metal.output"), amount, new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
         }
         float temperature = nbt.getFloat("temp");
         String heatTooltip = Heat.getTooltip(temperature);

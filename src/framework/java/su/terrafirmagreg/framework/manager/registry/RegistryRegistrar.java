@@ -9,8 +9,8 @@ import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 import su.terrafirmagreg.api.base.object.potion.api.IPotionSettings;
 import su.terrafirmagreg.api.base.object.sound.api.ISoundSettings;
-import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.api.library.types.type.Type;
+import su.terrafirmagreg.api.util.EntityUtils;
 import su.terrafirmagreg.api.util.KeyBindUtils;
 import su.terrafirmagreg.api.util.LootUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -48,15 +48,12 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   private final IModule module;
   private final RegistryMap map;
 
-  private final IdSupplier idSupplier;
   private BaseItemGroup group;
 
   public RegistryRegistrar(RegistryManager manager) {
 
     this.module = manager.getModule();
     this.map = manager.getMap();
-
-    this.idSupplier = new IdSupplier();
   }
 
   // Предмет должен быть в рамках модуля
@@ -377,7 +374,9 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends EntityEntry & IEntitySettings> V addEntity(V entry) {
 
     var settings = entry.getSettings();
-    return this.addEntity(settings.getRegistryKey(), entry);
+
+    this.addEntity(settings.getRegistryKey(), entry);
+    return entry;
   }
 
   @Override
@@ -403,7 +402,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Entity> EntityEntry addEntity(String identifier, EntityEntryBuilder<V> builder) {
 
-    builder.id(getIdentifier(identifier), this.idSupplier.getAndIncrement());
+    builder.id(getIdentifier(identifier), EntityUtils.getIdSupplier().getAndIncrement());
     builder.name(ModUtils.localize(getIdentifier(identifier)));
 
     return this.addEntity(identifier, builder.build());

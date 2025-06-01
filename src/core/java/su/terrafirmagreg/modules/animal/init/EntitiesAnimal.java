@@ -35,7 +35,6 @@ import su.terrafirmagreg.modules.animal.client.render.RenderAnimalPolarBear;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalQuail;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalRabbit;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalSaberTooth;
-import su.terrafirmagreg.modules.animal.client.render.RenderAnimalSheep;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalTurkey;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalWildebeest;
 import su.terrafirmagreg.modules.animal.client.render.RenderAnimalWolf;
@@ -66,7 +65,7 @@ import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalOcel
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalParrot;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalQuail;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
+import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep.EntityTypeAnimalSheep;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
@@ -130,8 +129,8 @@ public final class EntitiesAnimal {
   public static EntityEntry COYOTE;
 
   public static void onRegister(IRegistryRegistrar registrar) {
-
-    SHEEP = registrar.addEntity("sheep", EntityAnimalSheep.class, 0xFFFFFF, 0xFF6347);
+    SHEEP = registrar.addEntity(new EntityTypeAnimalSheep());
+    // SHEEP = registrar.addEntity("sheep", EntityAnimalSheep.class, 0xFFFFFF, 0xFF6347);
     COW = registrar.addEntity("cow", EntityAnimalCow.class, 0xA52A2A, 0xFFFFFF);
     GRIZZLYBEAR = registrar.addEntity("grizzlybear", EntityAnimalGrizzlyBear.class, 0xB22222, 0xDEB887);
     CHICKEN = registrar.addEntity("chicken", EntityAnimalChicken.class, 0x557755, 0xFFF91F);
@@ -176,7 +175,7 @@ public final class EntitiesAnimal {
   @SideOnly(Side.CLIENT)
   public static void onClientRegister(IRegistryRegistrar registrar) {
 
-    ModelUtils.entity(EntityAnimalSheep.class, RenderAnimalSheep::new);
+    //ModelUtils.entity(EntityAnimalSheep.class, RenderAnimalSheep::new);
     ModelUtils.entity(EntityAnimalCow.class, RenderAnimalCow::new);
     ModelUtils.entity(EntityAnimalGrizzlyBear.class, RenderAnimalGrizzlyBear::new);
     ModelUtils.entity(EntityAnimalChicken.class, RenderAnimalChicken::new);

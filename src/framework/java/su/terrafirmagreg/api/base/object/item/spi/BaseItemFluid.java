@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.base.object.item.spi;
 
 
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.item.ItemStack;
@@ -37,7 +37,7 @@ public abstract class BaseItemFluid extends ItemFluidContainer implements IItemS
 
   @Override
   public String getTranslationKey() {
-    return ModUtils.localize(ToolTipKeys.ITEM, this.getRegistryName());
+    return ModUtils.localize(LocalizeKeys.ITEM, this.getRegistryName());
   }
 
 

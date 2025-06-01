@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.object.entity.predator;
 
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.data.DataSerializers;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
@@ -204,7 +204,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
         string = "generic";
       }
 
-      return TranslatorUtils.translateToLocal(ModUtils.localize(ToolTipKeys.ENTITY, string, "name"));
+      return TranslatorUtils.translateToLocal(ModUtils.localize(LocalizeKeys.ENTITY, string, "name"));
     }
   }
 
@@ -274,7 +274,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   @Override
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
-    return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.ANIMAL, entityString, this.getGender().name()));
+    return new TextComponentTranslation(ModUtils.localize(LocalizeKeys.ANIMAL, entityString, this.getGender().name()));
   }
 
   @Override

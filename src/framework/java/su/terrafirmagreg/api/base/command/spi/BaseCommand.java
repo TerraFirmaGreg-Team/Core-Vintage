@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.command.spi;
 
 import su.terrafirmagreg.api.base.command.api.ICommandSettings;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.CommandUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 
@@ -64,7 +64,7 @@ public abstract class BaseCommand extends CommandBase implements ICommandSetting
   }
 
   public String getTranslationKey() {
-    return ModUtils.localize(ToolTipKeys.COMMAND, this.getRegistryName());
+    return ModUtils.localize(LocalizeKeys.COMMAND, this.getRegistryName());
   }
 
   @Override

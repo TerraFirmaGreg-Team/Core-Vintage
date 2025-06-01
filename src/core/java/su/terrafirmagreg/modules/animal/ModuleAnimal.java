@@ -30,6 +30,7 @@ public class ModuleAnimal extends ModuleBase {
 
     enableRegistry();
     enableNetwork();
+    enablePlugin();
     enableFeature();
   }
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
@@ -28,7 +28,7 @@ public class ProviderBlastFurnace implements IProbeInfoProvider {
 
   @Override
   public String getID() {
-    return ModUtils.localize(ToolTipKeys.TOP, "device.blast_furnace");
+    return ModUtils.localize(LocalizeKeys.TOP, "device.blast_furnace");
   }
 
   @Override
@@ -53,17 +53,17 @@ public class ProviderBlastFurnace implements IProbeInfoProvider {
           float temperature = nbt.getFloat("temperature");
           String heatTooltip = Heat.getTooltip(temperature);
           currentTooltip.add(
-            new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "device.bloomery.ores"),
+            new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "device.bloomery.ores"),
               oreStacks, maxItems).getFormattedText());
           currentTooltip.add(
-            new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "device.bloomery.fuel"),
+            new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "device.bloomery.fuel"),
               fuelStacks, maxItems).getFormattedText());
           if (heatTooltip != null) {
             currentTooltip.add(heatTooltip);
           }
         } else {
           currentTooltip.add(new TextComponentTranslation(
-            ModUtils.localize(ToolTipKeys.TOP, "device.blast_furnace.not_formed")).getFormattedText());
+            ModUtils.localize(LocalizeKeys.TOP, "device.blast_furnace.not_formed")).getFormattedText());
         }
 
         for (String string : currentTooltip) {

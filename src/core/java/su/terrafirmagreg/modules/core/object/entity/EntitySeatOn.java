@@ -114,17 +114,15 @@ public class EntitySeatOn extends BaseEntity {
     return this.height * 0.0D;
   }
 
-//  public static class EntityTypeSeatOn extends BaseEntityType {
-//
-//    public EntityTypeSeatOn() {
-//      super(Settings.of());
-//
-//      getSettings()
-//        .registryKey("sit_block")
-//        .entity(EntitySeatOn.class)
-//        .tracker(160, 20, true);
-//    }
-//
-//  }
+  public static class EntityTypeSeatOn extends BaseEntityType {
+
+    public EntityTypeSeatOn() {
+      super(Settings.of()
+        .registryKey("sit_block")
+        .entity(EntitySeatOn.class)
+        .updateInfo(160, 20, true));
+    }
+
+  }
 
 }

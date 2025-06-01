@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.plugin.top.provider;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
@@ -36,7 +36,7 @@ public class ProviderBloomery implements IProbeInfoProvider {
 
   @Override
   public @NotNull String getID() {
-    return ModUtils.localize(ToolTipKeys.TOP, "device.bloomery");
+    return ModUtils.localize(LocalizeKeys.TOP, "device.bloomery");
   }
 
   @Override
@@ -58,17 +58,17 @@ public class ProviderBloomery implements IProbeInfoProvider {
               break;
             case TICKS:
               probeInfo.text(
-                new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "devices.ticks.remaining"), remainingTicks).getFormattedText());
+                new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "devices.ticks.remaining"), remainingTicks).getFormattedText());
               break;
             case MINECRAFT_HOURS:
               long remainingHours = Math.round(remainingTicks / (float) ICalendar.TICKS_IN_HOUR);
               probeInfo.text(
-                new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "devices.hours.remaining"), remainingHours).getFormattedText());
+                new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "devices.hours.remaining"), remainingHours).getFormattedText());
               break;
             case REAL_MINUTES:
               long remainingMinutes = Math.round(remainingTicks / 1200.0f);
               probeInfo.text(
-                new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "devices.minutes.remaining"), remainingMinutes).getFormattedText());
+                new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "devices.minutes.remaining"), remainingMinutes).getFormattedText());
               break;
           }
           if (recipe != null) {
@@ -76,7 +76,7 @@ public class ProviderBloomery implements IProbeInfoProvider {
             ICapabilityForge cap = output.getCapability(CapabilityForgeable.CAPABILITY, null);
             if (cap instanceof IForgeableMeasurableMetal forgeCap) {
               probeInfo.text(
-                new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "devices.bloomery.output"), forgeCap.getMetalAmount(),
+                new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "devices.bloomery.output"), forgeCap.getMetalAmount(),
                   new TextComponentTranslation(forgeCap.getMetal().getTranslationKey()).getFormattedText()).getFormattedText());
             }
           }
@@ -85,9 +85,9 @@ public class ProviderBloomery implements IProbeInfoProvider {
           int fuel = tile.getFuelStacks().size();
           int max = BlockBloomery.getChimneyLevels(world, tile.getInternalBlock()) * 8;
           probeInfo.text(
-            new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "devices.bloomery.ores"), ores, max).getFormattedText());
+            new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "devices.bloomery.ores"), ores, max).getFormattedText());
           probeInfo.text(
-            new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "devices.bloomery.fuel"), fuel, max).getFormattedText());
+            new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "devices.bloomery.fuel"), fuel, max).getFormattedText());
         }
       });
 

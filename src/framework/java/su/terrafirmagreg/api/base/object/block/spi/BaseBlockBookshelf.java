@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.base.object.block.spi;
 
 import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.block.BlockBookshelf;
@@ -28,6 +28,6 @@ public abstract class BaseBlockBookshelf extends BlockBookshelf implements IBloc
 
   @Override
   public String getTranslationKey() {
-    return ModUtils.localize(ToolTipKeys.BLOCK, this.getRegistryName());
+    return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
   }
 }

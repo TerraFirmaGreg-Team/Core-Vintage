@@ -4,6 +4,8 @@ import su.terrafirmagreg.api.base.IBaseSettings.BaseSettings;
 
 import lombok.Getter;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public interface IBaseSettings<T extends BaseSettings<T>, V> {
 
   @SuppressWarnings("unchecked")
@@ -29,7 +31,7 @@ public interface IBaseSettings<T extends BaseSettings<T>, V> {
      */
     @SuppressWarnings("unchecked")
     public T registryKey(String registryKey) {
-      this.registryKey = registryKey;
+      this.registryKey = checkNotNull(registryKey, "name");
       return (T) this;
     }
 

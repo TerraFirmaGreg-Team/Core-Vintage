@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.plugin.top.provider;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
@@ -27,7 +27,7 @@ public class AnimalProvider implements IProbeInfoEntityProvider {
 
   @Override
   public String getID() {
-    return ModUtils.localize(ToolTipKeys.TOP, "animal.gender");
+    return ModUtils.localize(LocalizeKeys.TOP, "animal.gender");
   }
 
   @Override
@@ -40,8 +40,8 @@ public class AnimalProvider implements IProbeInfoEntityProvider {
       if (animal.getAdultFamiliarityCap() > 0) {
         currentTooltip.add(new TextComponentTranslation(
           familiarized
-          ? ModUtils.localize(ToolTipKeys.TOP, "animal.familiarized")
-          : ModUtils.localize(ToolTipKeys.TOP, "animal.not_familiarized")).getFormattedText()
+          ? ModUtils.localize(LocalizeKeys.TOP, "animal.familiarized")
+          : ModUtils.localize(LocalizeKeys.TOP, "animal.not_familiarized")).getFormattedText()
         );
       }
       switch (animal.getAge()) {
@@ -50,24 +50,24 @@ public class AnimalProvider implements IProbeInfoEntityProvider {
           long delta = endPlayerTick - Calendar.PLAYER_TIME.getTicks();
           long endCalendarTick = Calendar.CALENDAR_TIME.getTicks() + delta;
           String date = ICalendarFormatted.getTimeAndDate(endCalendarTick, Calendar.CALENDAR_TIME.getDaysInMonth());
-          currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.childhood_end"), date).getFormattedText());
+          currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.childhood_end"), date).getFormattedText());
           break;
         case OLD:
-          currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.old")).getFormattedText());
+          currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.old")).getFormattedText());
           // fall through here, can become old yet still be pregnant and give birth and/or give wool. All data retrieval below check correctly for age.
         case ADULT:
           if (familiarized) {
             if (animal.isReadyToMate()) {
-              currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.can_mate")).getFormattedText());
+              currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.can_mate")).getFormattedText());
             }
             if (animal.isFertilized()) {
               if (animal.getType() == IAnimal.Type.MAMMAL) {
-                currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.pregnant")).getFormattedText());
+                currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.pregnant")).getFormattedText());
                 // In 1.15+ this will move to AnimalProperties and everything needed will be there
                 // For 1.12, addons will need to either extend EntityAnimalMammal or handle the tooltip themselves
                 if (animal instanceof EntityAnimalMammal mother) {
                   long gestationDaysRemaining = mother.getPregnantTime() + mother.gestationDays() - Calendar.PLAYER_TIME.getTotalDays();
-                  currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.pregnant_end"), gestationDaysRemaining).getFormattedText());
+                  currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.pregnant_end"), gestationDaysRemaining).getFormattedText());
                 }
               } else {
                 currentTooltip.add(new TextComponentTranslation("tfc.tooltip.fertilized").getFormattedText());
@@ -75,11 +75,11 @@ public class AnimalProvider implements IProbeInfoEntityProvider {
             }
             if (animal.isReadyForAnimalProduct()) {
               if (animal instanceof IShearable) {
-                currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.can_shear")).getFormattedText());
+                currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.can_shear")).getFormattedText());
               } else if (animal.getType() == IAnimal.Type.OVIPAROUS) {
-                currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.has_eggs")).getFormattedText());
+                currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.has_eggs")).getFormattedText());
               } else {
-                currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.has_milk")).getFormattedText());
+                currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.has_milk")).getFormattedText());
               }
             }
           }
@@ -87,10 +87,10 @@ public class AnimalProvider implements IProbeInfoEntityProvider {
       }
       switch (animal.getGender()) {
         case MALE:
-          currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.male")).getFormattedText());
+          currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.male")).getFormattedText());
           break;
         case FEMALE:
-          currentTooltip.add(new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOP, "animal.female")).getFormattedText());
+          currentTooltip.add(new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "animal.female")).getFormattedText());
           break;
       }
 

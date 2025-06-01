@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.data.DataSerializers;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
@@ -291,7 +291,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
   @Override
   public TextComponentTranslation getAnimalName() {
     String entityString = EntityList.getEntityString(this);
-    return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.ANIMAL, entityString, this.getGender().name()));
+    return new TextComponentTranslation(ModUtils.localize(LocalizeKeys.ANIMAL, entityString, this.getGender().name()));
   }
 
   public long getPregnantTime() {
@@ -379,7 +379,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
             //Show tooltips
             if (this.isFertilized() && this.getType() == Type.MAMMAL) {
               player.sendMessage(new TextComponentTranslation(
-                ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.mating.pregnant"), getName()));
+                ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.mating.pregnant"), getName()));
             }
           }
         }
@@ -399,7 +399,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
         string = "generic";
       }
 
-      return TranslatorUtils.translateToLocal(ModUtils.localize(ToolTipKeys.ENTITY, string, "name"));
+      return TranslatorUtils.translateToLocal(ModUtils.localize(LocalizeKeys.ENTITY, string, "name"));
     }
   }
 

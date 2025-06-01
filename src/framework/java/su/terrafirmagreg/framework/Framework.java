@@ -10,19 +10,22 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLStateEvent;
 
+import lombok.Getter;
 
+
+@Getter
 public abstract class Framework {
 
   public static String modId;
   public static String modName;
   public static ASMDataTable asmData;
 
-  public final IModuleManager manager;
+  private final IModuleManager manager;
 
 
   protected Framework(String modId, String modName) {
-    Framework.modId = modId != null ? modId : "tfg";
-    Framework.modName = modName != null ? modName : "TerraFirmaGreg";
+    Framework.modId = modId != null ? modId : "UnknownModId";
+    Framework.modName = modName != null ? modName : "UnknownModName";
 
     this.manager = ModuleManager.of(modId);
   }

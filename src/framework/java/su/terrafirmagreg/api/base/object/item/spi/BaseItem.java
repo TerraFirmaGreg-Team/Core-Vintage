@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.base.object.item.spi;
 
 
 import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.item.Item;
@@ -39,7 +39,7 @@ public abstract class BaseItem extends Item implements IItemSettings {
 
   @Override
   public String getTranslationKey() {
-    return ModUtils.localize(ToolTipKeys.ITEM, this.getRegistryName());
+    return ModUtils.localize(LocalizeKeys.ITEM, this.getRegistryName());
   }
 
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.base.command.spi;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.command.CommandException;
@@ -32,7 +32,7 @@ public class BaseCommandTree extends CommandTreeBase {
 
   @Override
   public String getUsage(ICommandSender sender) {
-    return ModUtils.localize(ToolTipKeys.COMMAND, identifier, "usage");
+    return ModUtils.localize(LocalizeKeys.COMMAND, identifier, "usage");
   }
 
   @Override

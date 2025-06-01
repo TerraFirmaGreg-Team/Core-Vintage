@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.library.TextComponents;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
@@ -47,13 +47,13 @@ public class GuiCalendar extends GuiContainerTFC {
     super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
     String tooltip = TextComponents.empty().color(TextFormatting.DARK_BLUE).underline()
-      .translation(ModUtils.localize(ToolTipKeys.TOOLTIP, "core.calendar")).string(":").format();
+      .translation(ModUtils.localize(LocalizeKeys.TOOLTIP, "core.calendar")).string(":").format();
 
     fontRenderer.drawString(tooltip, xSize / 2 - fontRenderer.getStringWidth(tooltip) / 2, 7, 0x404040);
 
-    String season = TranslatorUtils.translate(ModUtils.localize(ToolTipKeys.TOOLTIP, "core.calendar.season"), Calendar.CALENDAR_TIME.getSeasonDisplayName());
-    String day = TranslatorUtils.translate(ModUtils.localize(ToolTipKeys.TOOLTIP, "core.calendar.day"), Calendar.CALENDAR_TIME.getDisplayDayName());
-    String date = TranslatorUtils.translate(ModUtils.localize(ToolTipKeys.TOOLTIP, "core.calendar.date"), Calendar.CALENDAR_TIME.getTimeAndDate());
+    String season = TranslatorUtils.translate(ModUtils.localize(LocalizeKeys.TOOLTIP, "core.calendar.season"), Calendar.CALENDAR_TIME.getSeasonDisplayName());
+    String day = TranslatorUtils.translate(ModUtils.localize(LocalizeKeys.TOOLTIP, "core.calendar.day"), Calendar.CALENDAR_TIME.getDisplayDayName());
+    String date = TranslatorUtils.translate(ModUtils.localize(LocalizeKeys.TOOLTIP, "core.calendar.date"), Calendar.CALENDAR_TIME.getTimeAndDate());
 
     fontRenderer.drawString(season, xSize / 2 - fontRenderer.getStringWidth(season) / 2, 25, 0x404040);
     fontRenderer.drawString(day, xSize / 2 - fontRenderer.getStringWidth(day) / 2, 34, 0x404040);

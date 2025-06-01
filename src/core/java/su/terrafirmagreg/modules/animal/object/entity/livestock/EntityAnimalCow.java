@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.data.DataSerializers;
-import su.terrafirmagreg.api.data.ToolTipKeys;
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -212,18 +212,18 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
   @Override
   public TextComponentTranslation getTooltip() {
     if (getGender() == Gender.MALE) {
-      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.male_milk"));
+      return new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.male_milk"));
     } else if (getAge() == Age.OLD) {
-      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.old"),
+      return new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.old"),
         getAnimalName());
     } else if (getAge() == Age.CHILD) {
-      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.young"),
+      return new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.young"),
         getAnimalName());
     } else if (getFamiliarity() <= 0.15f) {
       return new TextComponentTranslation(
-        ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.low_familiarity"), getAnimalName());
+        ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.low_familiarity"), getAnimalName());
     } else if (!hasMilk()) {
-      return new TextComponentTranslation(ModUtils.localize(ToolTipKeys.TOOLTIP, "animal.product.no_milk"),
+      return new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOOLTIP, "animal.product.no_milk"),
         getAnimalName());
     }
     return null;

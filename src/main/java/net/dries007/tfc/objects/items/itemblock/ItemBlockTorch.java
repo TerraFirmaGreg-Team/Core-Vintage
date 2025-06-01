@@ -12,7 +12,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.objects.blocks.property.ILightableBlock.LIT;
@@ -29,10 +28,10 @@ public class ItemBlockTorch extends ItemBlockTFC {
     World world = entityItem.getEntityWorld();
     IBlockState state = entityItem.getEntityWorld().getBlockState(pos);
 
-    if (state.getBlock() == BlocksTFC.LOG_PILE || state.getBlock() == BlocksDevice.PIT_KILN) {
+    if (state.getBlock() == BlocksDevice.LOG_PILE || state.getBlock() == BlocksDevice.PIT_KILN) {
       int count = entityItem.getEntityData().getInteger("torchCount");
       if (count > 160) {
-        if (state.getBlock() == BlocksTFC.LOG_PILE) {
+        if (state.getBlock() == BlocksDevice.LOG_PILE) {
           world.setBlockState(pos, state.withProperty(LIT, true));
           TileLogPile te = Helpers.getTE(world, pos, TileLogPile.class);
           if (te != null) {

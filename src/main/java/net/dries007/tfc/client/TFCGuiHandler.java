@@ -1,8 +1,6 @@
 package net.dries007.tfc.client;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.device.object.container.ContainerLogPile;
-import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -84,9 +82,6 @@ public class TFCGuiHandler implements IGuiHandler {
     ItemStack stack = player.getHeldItemMainhand();
     Type type = Type.valueOf(ID);
     switch (type) {
-      case LOG_PILE:
-        TileLogPile teLogPile = Helpers.getTE(world, pos, TileLogPile.class);
-        return teLogPile == null ? null : new ContainerLogPile(player.inventory, teLogPile);
       case SMALL_VESSEL:
         return new ContainerSmallVessel(player.inventory, stack.getItem() instanceof ItemSmallVessel ? stack : player.getHeldItemOffhand());
       case SMALL_VESSEL_LIQUID:
@@ -146,7 +141,6 @@ public class TFCGuiHandler implements IGuiHandler {
     BlockPos pos = new BlockPos(x, y, z);
     switch (type) {
       case SMALL_VESSEL:
-      case LOG_PILE:
         return new GuiContainerTFC(container, player.inventory, SMALL_INVENTORY_BACKGROUND);
       case SMALL_VESSEL_LIQUID:
         return new GuiLiquidTransfer(container, player, player.getHeldItemMainhand().getItem() instanceof ItemSmallVessel);
@@ -197,7 +191,6 @@ public class TFCGuiHandler implements IGuiHandler {
   }
 
   public enum Type {
-    LOG_PILE,
     SMALL_VESSEL,
     SMALL_VESSEL_LIQUID,
     MOLD,

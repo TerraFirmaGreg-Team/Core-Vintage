@@ -22,7 +22,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nullable;
@@ -85,7 +84,7 @@ public final class InteractionManager {
     USE_ACTIONS.put(stack -> OreDictUtils.contains(stack, "logWood"), (stack, player, worldIn, pos, hand, direction, hitX, hitY, hitZ) -> {
       if (direction != null) {
         IBlockState stateAt = worldIn.getBlockState(pos);
-        if (stateAt.getBlock() == BlocksTFC.LOG_PILE) {
+        if (stateAt.getBlock() == BlocksDevice.LOG_PILE) {
           // Clicked on a log pile, so try to insert into the original
           // This is called first when player is sneaking, otherwise the call chain is passed to the BlockLogPile#onBlockActivated
           TileLogPile te = Helpers.getTE(worldIn, pos, TileLogPile.class);
@@ -118,10 +117,10 @@ public final class InteractionManager {
           if (!stateAt.getBlock().isReplaceable(worldIn, pos)) {
             posAt = posAt.offset(direction);
           }
-          if (worldIn.getBlockState(posAt.down()).isNormalCube() && worldIn.mayPlace(BlocksTFC.LOG_PILE, posAt, false, direction, null)) {
+          if (worldIn.getBlockState(posAt.down()).isNormalCube() && worldIn.mayPlace(BlocksDevice.LOG_PILE, posAt, false, direction, null)) {
             // Place log pile
             if (!worldIn.isRemote) {
-              worldIn.setBlockState(posAt, BlocksTFC.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
+              worldIn.setBlockState(posAt, BlocksDevice.LOG_PILE.getStateForPlacement(worldIn, posAt, direction, 0, 0, 0, 0, player));
 
               TileLogPile te = Helpers.getTE(worldIn, posAt, TileLogPile.class);
               if (te != null) {

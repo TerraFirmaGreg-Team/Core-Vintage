@@ -346,6 +346,7 @@ block.tfg.device.greenhouse.roof.name=Крыша теплицы
 block.tfg.device.oven.base.name=Печь
 block.tfg.device.oven.wall.name=Стенка печи
 block.tfg.device.oven.chimney.name=Дымоход печи
+block.tfg.device.log_pile.name=Куча бревен
 
 ## Item
 item.tfg.device.flask.leather.name=Пустая кожаная фляга

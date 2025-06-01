@@ -1,42 +1,39 @@
 package su.terrafirmagreg.modules.device.object.container;
 
+import su.terrafirmagreg.api.base.object.inventory.spi.container.BaseContainerTile;
+import su.terrafirmagreg.api.base.object.inventory.spi.slot.SlotCallback;
+import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.container.ContainerTE;
-import net.dries007.tfc.objects.inventory.slot.SlotCallback;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ContainerLogPile extends ContainerTE<TileLogPile> {
+public class ContainerLogPile extends BaseContainerTile<TileLogPile> {
 
-  public ContainerLogPile(InventoryPlayer playerInv, TileLogPile te) {
-    super(playerInv, te);
-    te.setContainerOpen(true);
-  }
-
-  @Override
-  public boolean canInteractWith(@Nonnull EntityPlayer player) {
-    return tile.canInteractWith(player);
+  public ContainerLogPile(InventoryPlayer playerInv, TileLogPile tile) {
+    super(playerInv, tile);
+    tile.setContainerOpen(true);
   }
 
   @Override
   protected void addContainerSlots() {
-    IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-    if (inventory != null) {
-      addSlotToContainer(new SlotCallback(inventory, 0, 71, 23, tile));
-      addSlotToContainer(new SlotCallback(inventory, 1, 89, 23, tile));
-      addSlotToContainer(new SlotCallback(inventory, 2, 71, 41, tile));
-      addSlotToContainer(new SlotCallback(inventory, 3, 89, 41, tile));
-    }
+    CapabilityUtils.getOptional(tile, CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(cap -> {
+      addSlotToContainer(new SlotCallback(cap, 0, 71, 23, tile));
+      addSlotToContainer(new SlotCallback(cap, 1, 89, 23, tile));
+      addSlotToContainer(new SlotCallback(cap, 2, 71, 41, tile));
+      addSlotToContainer(new SlotCallback(cap, 3, 89, 41, tile));
+    });
+  }
+
+  @Override
+  public boolean canInteractWith(@NotNull EntityPlayer player) {
+    return tile.canInteractWith(player);
   }
 
   @Override

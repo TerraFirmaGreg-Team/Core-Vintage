@@ -31,8 +31,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import net.dries007.tfc.objects.blocks.BlocksTFC;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -148,7 +146,7 @@ public class ItemFireStarter extends BaseItem {
     {
       stack.damageItem(1, player);
       final IBlockState state = world.getBlockState(pos.down());
-      if (state.getBlock() == BlocksTFC.LOG_PILE) {
+      if (state.getBlock() == BlocksDevice.LOG_PILE) {
         // Log pile
         if (itemRand.nextFloat() < chance) {
           world.setBlockState(pos.down(), state.withProperty(LIT, true));

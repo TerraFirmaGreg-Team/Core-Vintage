@@ -104,7 +104,7 @@ public final class BlocksDevice {
 //    QUERN_MANUAL = registrar.addBlock(new BlockQuernManual());
 //    QUERN_HORSE = registrar.addBlock(new BlockQuernHorse());
     MOLTEN = registrar.addBlock(new BlockMolten());
-//    LOG_PILE = registrar.addBlock(new BlockLogPile());
+    LOG_PILE = registrar.addBlock(new BlockLogPile());
     CELLAR_SHELF = registrar.addBlock(new BlockCellarShelf());
     CELLAR_DOOR = registrar.addBlock(new BlockCellarDoor());
     CELLAR_WALL = registrar.addBlock(new BlockCellarWall());

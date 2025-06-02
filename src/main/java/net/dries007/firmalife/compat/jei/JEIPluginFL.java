@@ -59,7 +59,7 @@ public class JEIPluginFL implements IModPlugin {
 
     List<SimpleRecipeWrapper> dryList = TFCRegistries.DRYING.getValuesCollection().stream().map(DryingRecipeWrapper::new).collect(Collectors.toList());
     registry.addRecipes(dryList, DRY_ID);
-    registry.addRecipeCatalyst(new ItemStack(BlocksFL.LEAF_MAT, 1), DRY_ID);
+    registry.addRecipeCatalyst(new ItemStack(BlocksDevice.LEAF_MAT, 1), DRY_ID);
 
     registry.addIngredientInfo(new ItemStack(ItemsFL.FRUIT_LEAF, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.tooltip.firmalife.fruit_leaf").getFormattedText());
     registry.addIngredientInfo(new ItemStack(ItemsFL.COCOA_POWDER, 1), VanillaTypes.ITEM, new TextComponentTranslation("jei.tooltip.firmalife.cocoa_powder").getFormattedText());

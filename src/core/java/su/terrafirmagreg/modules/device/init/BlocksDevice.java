@@ -126,7 +126,7 @@ public final class BlocksDevice {
     OVEN_BASE = registrar.addBlock(new BlockOven());
     OVEN_WALL = registrar.addBlock(new BlockOvenWall());
     OVEN_CHIMNEY = registrar.addBlock(new BlockOvenChimney());
-//    LEAF_MAT = registrar.addBlock(new BlockLeafMat());
+    LEAF_MAT = registrar.addBlock(new BlockLeafMat());
 //    DRYING_MAT = registrar.addBlock(new BlockDryingMat());
 
   }

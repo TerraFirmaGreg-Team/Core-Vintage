@@ -4,6 +4,9 @@ import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderBlastFurnace
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderBloomery;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderCrucible;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLatexExtractor;
+import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLeafMat;
+import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLogPile;
+import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderOven;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderPitKiln;
 
 import mcjty.theoneprobe.TheOneProbe;
@@ -23,9 +26,10 @@ public final class TheOneProbeDevice {
     oneProbe.registerProvider(new ProviderBlastFurnace());
 //    oneProbe.registerProvider(new ProviderBloom());
     oneProbe.registerProvider(new ProviderBloomery());
-//    oneProbe.registerProvider(new ProviderLogPile());
-//    oneProbe.registerProvider(new ProviderOven());
-//    oneProbe.registerProvider(new ProviderLeafMat());
+    oneProbe.registerProvider(new ProviderLogPile());
+    oneProbe.registerBlockDisplayOverride(new ProviderLogPile());
+    oneProbe.registerProvider(new ProviderOven());
+    oneProbe.registerProvider(new ProviderLeafMat());
 
   }
 }

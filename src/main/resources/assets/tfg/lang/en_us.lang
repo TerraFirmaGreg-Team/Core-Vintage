@@ -291,6 +291,12 @@ top.tfg.device.pit_kiln.logs=Needs %d Logs
 top.tfg.device.pit_kiln.remaining.ticks=Remaining %d Ticks
 top.tfg.device.pit_kiln.remaining.hours=Remaining %d Hours
 top.tfg.device.pit_kiln.remaining.minutes=Remaining %d Minutes
+top.tfg.device.leaf_mat.remaining.ticks=Remaining %d Ticks
+top.tfg.device.leaf_mat.remaining.hours=Remaining %d Hours
+top.tfg.device.leaf_mat.remaining.minutes=Remaining %d Minutes
+top.tfg.device.oven.remaining.ticks=Remaining %d Ticks
+top.tfg.device.oven.remaining.hours=Remaining %d Hours
+top.tfg.device.oven.remaining.minutes=Remaining %d Minutes
 
 # Just Enough Items
 jei.tfg.category.blast_furnace=Blast Furnace recipes
@@ -300,12 +306,10 @@ tooltip.tfg.device.blast_furnace.ore_amount=Ore
 tooltip.tfg.device.blast_furnace.fuel_amount=Fuel
 tooltip.tfg.device.blast_furnace.melt_amount=Melt
 tooltip.tfg.device.blast_furnace.invalid_structure=Invalid Structure!
-
 tooltip.tfg.device.powderkeg.amount=Contains %1$dx %2$s
 tooltip.tfg.device.powderkeg.empty=Empty
 tooltip.tfg.device.powderkeg.unseal=Unseal Powderkeg
 tooltip.tfg.device.powderkeg.seal=Seal Powderkeg
-
 tooltip.tfg.device.sharpness=%sSharp for %s uses
 
 ## Message

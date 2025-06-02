@@ -11,7 +11,6 @@ import net.dries007.tfc.compat.waila.providers.FruitTreeProvider;
 import net.dries007.tfc.compat.waila.providers.InfoProvider;
 import net.dries007.tfc.compat.waila.providers.IngotPileProvider;
 import net.dries007.tfc.compat.waila.providers.LampProvider;
-import net.dries007.tfc.compat.waila.providers.LogPileProvider;
 import net.dries007.tfc.compat.waila.providers.OreProvider;
 import net.dries007.tfc.compat.waila.providers.PlacedItemProvider;
 import net.dries007.tfc.compat.waila.providers.QuernProvider;
@@ -34,7 +33,6 @@ public class HwylaPluginTFC implements IWailaPlugin {
     new HwylaBlockInterface(new InfoProvider()),
     new HwylaBlockInterface(new TreeProvider()),
     new HwylaBlockInterface(new IngotPileProvider()),
-    new HwylaBlockInterface(new LogPileProvider()),
     new HwylaBlockInterface(new QuernProvider())
   );
 

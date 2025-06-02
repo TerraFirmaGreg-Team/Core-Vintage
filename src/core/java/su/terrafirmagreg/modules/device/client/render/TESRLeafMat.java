@@ -1,24 +1,26 @@
 package su.terrafirmagreg.modules.device.client.render;
 
+import su.terrafirmagreg.api.base.client.tesr.spi.BaseTESR;
+import su.terrafirmagreg.api.util.CapabilityUtils;
+import su.terrafirmagreg.modules.device.object.tile.TileLeafMat;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
-import net.dries007.tfc.objects.te.TELeafMat;
-
-public class TESRLeafMat extends TileEntitySpecialRenderer<TELeafMat> {
+@SideOnly(Side.CLIENT)
+public class TESRLeafMat extends BaseTESR<TileLeafMat> {
 
   @Override
-  public void render(TELeafMat te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-    super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+  public void render(TileLeafMat tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    super.render(tile, x, y, z, partialTicks, destroyStage, alpha);
 
-    if (te.hasWorld()) {
-      IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      if (cap != null) {
+    if (tile.hasWorld()) {
+      CapabilityUtils.getOptional(tile, CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(cap -> {
         double magic = 0.003125D;
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5, y + 0.125 + magic, z + 0.5);
@@ -30,7 +32,7 @@ public class TESRLeafMat extends TileEntitySpecialRenderer<TELeafMat> {
           Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
         }
         GlStateManager.popMatrix();
-      }
+      });
     }
   }
 }

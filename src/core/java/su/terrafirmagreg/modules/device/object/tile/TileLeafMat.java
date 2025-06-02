@@ -1,28 +1,26 @@
-package net.dries007.tfc.objects.te;
+package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import net.dries007.firmalife.util.HelpersFL;
 import net.dries007.tfc.objects.recipes.DryingRecipe;
-import net.dries007.tfc.util.Helpers;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jetbrains.annotations.NotNull;
 
-@ParametersAreNonnullByDefault
-public class TELeafMat extends TEInventory implements ITickable {
+public class TileLeafMat extends BaseTileTickableInventory {
 
   private long startTick;
   private int tickGoal;
 
-  public TELeafMat() {
+  public TileLeafMat() {
     super(1);
     startTick = 0;
     tickGoal = 0;
@@ -44,6 +42,28 @@ public class TELeafMat extends TEInventory implements ITickable {
     }
   }
 
+  private boolean recipeExists() {
+    ItemStack input = inventory.getStackInSlot(0);
+    DryingRecipe recipe = null;
+    if (!input.isEmpty() && !world.isRemote) {
+      recipe = DryingRecipe.get(input);
+    }
+    return recipe != null;
+  }
+
+  private void dry() {
+    ItemStack input = inventory.getStackInSlot(0);
+    if (!input.isEmpty()) {
+      DryingRecipe recipe = DryingRecipe.get(input);
+      if (recipe != null && !world.isRemote) {
+        inventory.setStackInSlot(0, HelpersFL.updateFoodFuzzed(input, recipe.getOutputItem(input)));
+        setAndUpdateSlots(0);
+        markForSync();
+      }
+    }
+    markDirty();
+  }
+
   @Override
   public void readFromNBT(NBTTagCompound nbt) {
     startTick = nbt.getLong("startTick");
@@ -52,7 +72,7 @@ public class TELeafMat extends TEInventory implements ITickable {
   }
 
   @Override
-  @Nonnull
+  @NotNull
   public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
     nbt.setLong("startTick", startTick);
     nbt.setInteger("tickGoal", tickGoal);
@@ -60,7 +80,7 @@ public class TELeafMat extends TEInventory implements ITickable {
   }
 
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
-    Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
+    StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(0));
   }
 
   public void clear() {
@@ -69,32 +89,15 @@ public class TELeafMat extends TEInventory implements ITickable {
     markDirty();
   }
 
-  public void deleteSlot() {
-    inventory.setStackInSlot(0, ItemStack.EMPTY);
-  }
-
   public void start() {
     if (recipeExists()) {
       startTick = Calendar.PLAYER_TIME.getTicks();
       setDuration();
     } else {
-      Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
+      StackUtils.spawnItemStack(world, pos, inventory.getStackInSlot(0));
       deleteSlot();
     }
     markDirty();
-  }
-
-  public void rain() {
-    tickGoal += 25;
-  }
-
-  private boolean recipeExists() {
-    ItemStack input = inventory.getStackInSlot(0);
-    DryingRecipe recipe = null;
-    if (!input.isEmpty() && !world.isRemote) {
-      recipe = DryingRecipe.get(input);
-    }
-    return recipe != null;
   }
 
   private void setDuration() {
@@ -109,17 +112,12 @@ public class TELeafMat extends TEInventory implements ITickable {
     tickGoal = recipeTime;
   }
 
-  private void dry() {
-    ItemStack input = inventory.getStackInSlot(0);
-    if (!input.isEmpty()) {
-      DryingRecipe recipe = DryingRecipe.get(input);
-      if (recipe != null && !world.isRemote) {
-        inventory.setStackInSlot(0, HelpersFL.updateFoodFuzzed(input, recipe.getOutputItem(input)));
-        setAndUpdateSlots(0);
-        markForSync();
-      }
-    }
-    markDirty();
+  public void deleteSlot() {
+    inventory.setStackInSlot(0, ItemStack.EMPTY);
+  }
+
+  public void rain() {
+    tickGoal += 25;
   }
 
   public long getTicksRemaining() {

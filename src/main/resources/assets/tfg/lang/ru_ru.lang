@@ -291,6 +291,12 @@ top.tfg.device.pit_kiln.logs=Нужно %d бревна/ен
 top.tfg.device.pit_kiln.remaining.ticks=Осталось %d тик(ов)
 top.tfg.device.pit_kiln.remaining.hours=Осталось %d час(ов)
 top.tfg.device.pit_kiln.remaining.minutes=Осталось %d минут(ы)
+top.tfg.device.leaf_mat.remaining.ticks=Осталось %d тик(ов)
+top.tfg.device.leaf_mat.remaining.hours=Осталось %d час(ов)
+top.tfg.device.leaf_mat.remaining.minutes=Осталось %d минут(ы)
+top.tfg.device.oven.remaining.ticks=Осталось %d тик(ов)
+top.tfg.device.oven.remaining.hours=Осталось %d час(ов)
+top.tfg.device.oven.remaining.minutes=Осталось %d минут(ы)
 
 # Just Enough Items
 jei.tfg.category.blast_furnace=Рецепты доменной печи
@@ -300,12 +306,10 @@ tooltip.tfg.device.blast_furnace.ore_amount=Руда
 tooltip.tfg.device.blast_furnace.fuel_amount=Топливо
 tooltip.tfg.device.blast_furnace.melt_amount=Расплавлено
 tooltip.tfg.device.blast_furnace.invalid_structure=Неверная структура!
-
 tooltip.tfg.device.powderkeg.amount=Содержит %1$dx из %2$s
 tooltip.tfg.device.powderkeg.empty=Пусто
 tooltip.tfg.device.powderkeg.unseal=Распечатать пороховую бочку
 tooltip.tfg.device.powderkeg.seal=Запечатать пороховую бочку
-
 tooltip.tfg.device.sharpness=%sОстрый для %s использований
 
 ## Message

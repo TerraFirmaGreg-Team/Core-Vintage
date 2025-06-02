@@ -25,7 +25,6 @@ item.tfc.wood.boat.hevea.name=Лодка из гевеи
 tile.tfctech.electric_forge.name=Электрическая кузня
 tile.tfctech.induction_crucible.name=Индукционный тигель
 tile.tfctech.wire_draw_bench.name=Станок для волочения проволоки
-tile.tfctech.fridge.name=Холодильник
 
 # Items
 ## Ceramics
@@ -182,4 +181,3 @@ jei.information.tfctech.fill_mold=Щелкните правой кнопкой �
 
 # Waila/Hwyla/TOP
 waila.tfctech.wiredraw.progress=Прогресс: %d%%
-waila.tfctech.fridge.efficiency=Эффективность: %d%%

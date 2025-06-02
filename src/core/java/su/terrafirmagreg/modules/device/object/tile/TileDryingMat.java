@@ -35,7 +35,8 @@ public class TileDryingMat extends BaseTileTickableInventory implements IProvide
   public ItemStack insertOrSwapItem(int slot, ItemStack playerStack) {
     ItemStack quernStack = inventory.getStackInSlot(slot);
 
-    if (quernStack.isEmpty() || (playerStack.isStackable() && quernStack.isStackable()
+    if (quernStack.isEmpty() || (playerStack.isStackable()
+                                 && quernStack.isStackable()
                                  && quernStack.getItem() == playerStack.getItem()
                                  && (!playerStack.getHasSubtypes() || playerStack.getMetadata() == quernStack.getMetadata())
                                  && ItemStack.areItemStackTagsEqual(playerStack, quernStack))) {

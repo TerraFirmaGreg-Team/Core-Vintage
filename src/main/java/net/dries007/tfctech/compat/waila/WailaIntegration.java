@@ -1,10 +1,7 @@
 package net.dries007.tfctech.compat.waila;
 
-import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
-import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.device.object.block.BlockFridge;
 import su.terrafirmagreg.modules.device.object.block.BlockWireDrawBench;
-import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
 
@@ -12,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -48,29 +44,6 @@ public final class WailaIntegration implements IWailaDataProvider, IWailaPlugin 
       if (bench != null) {
         if (bench.getProgress() > 0) {
           currenttip.add((new TextComponentTranslation("waila.tfctech.wiredraw.progress", bench.getProgress())).getFormattedText());
-        }
-      }
-    }
-    if (b instanceof BlockFridge) {
-      BlockPos TEPos = accessor.getPosition();
-      if (!accessor.getBlockState().getValue(BlockWireDrawBench.UPPER)) {
-        TEPos = TEPos.up();
-      }
-      TileFridge fridge = Helpers.getTE(accessor.getWorld(), TEPos, TileFridge.class);
-      if (fridge != null) {
-        currenttip.add((new TextComponentTranslation("waila.tfctech.fridge.efficiency", (int) fridge.getEfficiency())).getFormattedText());
-        if (fridge.isOpen()) {
-          int slot = BlockFridge.getPlayerLookingItem(TEPos.down(), accessor.getPlayer(), accessor.getBlockState().getValue(BlockFridge.FACING));
-          if (slot > -1) {
-            ItemStack stack = fridge.getSlot(slot);
-            if (!stack.isEmpty()) {
-              currenttip.add(TextFormatting.WHITE + stack.getDisplayName());
-              ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
-              if (cap != null) {
-                cap.addTooltipInfo(stack, currenttip);
-              }
-            }
-          }
         }
       }
     }

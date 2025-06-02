@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderHighlight;
+
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +23,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.firmalife.render.UnlistedCropProperty;
-import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.objects.recipes.PlanterRecipe;
 import net.dries007.tfc.objects.te.TEPlanter;
 import net.dries007.tfc.util.Helpers;
@@ -32,7 +33,7 @@ import static net.dries007.firmalife.init.StatePropertiesFL.WET;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHandler {
+public class BlockQuadPlanter extends BlockLargePlanter implements IProviderHighlight {
 
   public static final AxisAlignedBB QUAD_SHAPE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D);
   public static final UnlistedCropProperty CROP_1 = new UnlistedCropProperty(1);
@@ -105,7 +106,7 @@ public class BlockQuadPlanter extends BlockLargePlanter implements IHighlightHan
 
     int lookingSlot = getSlotForHit(rayTraceResult.hitVec.x - pos.getX(), rayTraceResult.hitVec.z - pos.getZ());
     for (int i = 0; i < 4; i++) {
-      IHighlightHandler.drawBox(HITBOXES[i].offset(pos).offset(-dx, -dy, -dz).grow(0.002D), 1.0F, lookingSlot == i ? 1.0F : 0, 0, 0, 0.4F);
+      IProviderHighlight.drawBox(HITBOXES[i].offset(pos).offset(-dx, -dy, -dz).grow(0.002D), 1.0F, lookingSlot == i ? 1.0F : 0, 0, 0, 0.4F);
     }
     return true;
   }

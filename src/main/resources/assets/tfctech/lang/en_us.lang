@@ -30,7 +30,6 @@ tile.wood/hanger/hevea.name=Hevea Hanger
 tile.tfctech.electric_forge.name=Electric Forge
 tile.tfctech.induction_crucible.name=Induction Crucible
 tile.tfctech.wire_draw_bench.name=Wire Drawing Bench
-tile.tfctech.fridge.name=Fridge
 
 # Items
 ## Ceramics
@@ -202,4 +201,3 @@ jei.information.tfctech.fill_mold=Right click an empty mold into any container h
 
 # Waila/Hwyla/TOP
 waila.tfctech.wiredraw.progress=Progress: %d%%
-waila.tfctech.fridge.efficiency=Efficiency: %d%%

@@ -53,6 +53,7 @@ public class FeatureRemappingDevice extends FeatureBase {
       put("oven_chimney", () -> BlocksDevice.OVEN_CHIMNEY);
       put("log_pile", () -> BlocksDevice.LOG_PILE);
       put("leaf_mat", () -> BlocksDevice.LEAF_MAT);
+      put("fridge", () -> BlocksDevice.FRIDGE);
     }});
   }
 
@@ -74,6 +75,7 @@ public class FeatureRemappingDevice extends FeatureBase {
       put("oven_chimney", () -> BlocksDevice.OVEN_CHIMNEY.asItem());
       put("log_pile", () -> BlocksDevice.LOG_PILE.asItem());
       put("leaf_mat", () -> BlocksDevice.LEAF_MAT.asItem());
+      put("fridge", () -> BlocksDevice.FRIDGE.asItem());
     }});
   }
 

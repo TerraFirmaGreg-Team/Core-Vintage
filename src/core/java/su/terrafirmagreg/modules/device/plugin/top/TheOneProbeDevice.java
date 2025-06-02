@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.device.plugin.top;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderBlastFurnace;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderBloomery;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderCrucible;
+import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderFridge;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLatexExtractor;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLeafMat;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLogPile;
@@ -17,7 +18,7 @@ public final class TheOneProbeDevice {
   public static void init() {
     ITheOneProbe oneProbe = TheOneProbe.theOneProbeImp;
 
-//    oneProbe.registerProvider(new ProviderFridge());
+    oneProbe.registerProvider(new ProviderFridge());
     oneProbe.registerProvider(new ProviderLatexExtractor());
     oneProbe.registerProvider(new ProviderPitKiln());
     oneProbe.registerProvider(new ProviderCrucible());

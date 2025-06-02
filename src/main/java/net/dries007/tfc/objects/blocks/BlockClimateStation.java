@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderHighlight;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
@@ -26,7 +27,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.objects.te.TEClimateStation;
 
 import javax.annotation.Nonnull;
@@ -40,7 +40,7 @@ import static net.minecraft.block.BlockHorizontal.FACING;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockClimateStation extends Block implements ICapabilitySize, IHighlightHandler {
+public class BlockClimateStation extends Block implements ICapabilitySize, IProviderHighlight {
 
   public final int tier;
 
@@ -132,7 +132,7 @@ public class BlockClimateStation extends Block implements ICapabilitySize, IHigh
     if (state.getBlock() instanceof BlockClimateStation) {
       stasis = state.getValue(STASIS);
     }
-    IHighlightHandler.drawBox(Block.FULL_BLOCK_AABB.offset(pos).offset(-dx, -dy, -dz).grow(0.002D), 3.0F, stasis ? 0 : 1.0F, stasis ? 1.0F : 0, 0, 0.4F);
+    IProviderHighlight.drawBox(Block.FULL_BLOCK_AABB.offset(pos).offset(-dx, -dy, -dz).grow(0.002D), 3.0F, stasis ? 0 : 1.0F, stasis ? 1.0F : 0, 0, 0.4F);
     return true;
   }
 

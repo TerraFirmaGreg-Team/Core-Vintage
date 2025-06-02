@@ -98,7 +98,7 @@ public class TechJEIPlugin implements IModPlugin {
     // Information
     registry.addIngredientInfo(new ItemStack(TechItems.IRON_GROOVE), VanillaTypes.ITEM, "jei.information.tfctech.groove");
     registry.addIngredientInfo(new FluidStack(FluidsCore.LATEX.get(), 1000), VanillaTypes.FLUID, "jei.information.tfctech.latex");
-    registry.addIngredientInfo(new ItemStack(TechBlocks.FRIDGE), VanillaTypes.ITEM, "jei.information.tfctech.fridge");
+    registry.addIngredientInfo(new ItemStack(BlocksDevice.FRIDGE), VanillaTypes.ITEM, "jei.information.tfctech.fridge");
     registry.addIngredientInfo(new ItemStack(TechBlocks.WIRE_DRAW_BENCH), VanillaTypes.ITEM, "jei.information.tfctech.wiredraw");
     registry.addIngredientInfo(new ItemStack(TechBlocks.INDUCTION_CRUCIBLE), VanillaTypes.ITEM, "jei.information.tfctech.crucible");
     registry.addIngredientInfo(new ItemStack(TechBlocks.ELECTRIC_FORGE), VanillaTypes.ITEM, "jei.information.tfctech.forge");

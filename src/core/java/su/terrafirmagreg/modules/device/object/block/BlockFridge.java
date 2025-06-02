@@ -1,14 +1,25 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.api.base.object.block.spi.BaseBlockHorizontal;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockState;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderHighlight;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.device.client.render.TESRFridge;
+import su.terrafirmagreg.modules.device.object.item.ItemBlockFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,21 +40,17 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.util.Helpers;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collections;
 import java.util.Random;
 
 import static net.minecraft.util.EnumFacing.NORTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.UPPER;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class BlockFridge extends BlockHorizontal {
-
-  public static final PropertyBool UPPER = PropertyBool.create("upper"); //true if this is the upper half
-
+@SuppressWarnings("deprecation")
+public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, IProviderBlockState, IProviderHighlight {
 
   private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0D, 0D, 0.125D, 1D, 1D, 1D);
   private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0D, 0D, 0.0D, 1D, 1D, 0.875D);
@@ -65,10 +72,38 @@ public class BlockFridge extends BlockHorizontal {
   }
 
   public BlockFridge() {
-    super(Material.IRON);
-    setHardness(3.0F);
-    setHarvestLevel("pickaxe", 0);
-    setDefaultState(getBlockState().getBaseState().withProperty(FACING, NORTH).withProperty(UPPER, false));
+    super(Settings.of(Material.IRON));
+
+    getSettings()
+      .registryKey("fridge")
+      .hardness(3.0F)
+      .nonOpaque()
+      .nonFullCube()
+      .harvestLevel(ToolClasses.PICKAXE, 0)
+      .itemBlock(ItemBlockFridge::new)
+      .capability(CapabilityProviderSize.of(Size.HUGE, Weight.MEDIUM, false));
+
+    setDefaultState(blockState.getBaseState()
+      .withProperty(HORIZONTAL, NORTH)
+      .withProperty(UPPER, false));
+  }
+
+  public static int getPlayerLookingItem(BlockPos bottomPos, EntityPlayer player, EnumFacing facing) {
+    double length = Math.sqrt(bottomPos.distanceSqToCenter(player.posX, player.posY, player.posZ)) + 0.7D;
+    Vec3d startPos = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
+    Vec3d endPos = startPos.add(new Vec3d(player.getLookVec().x * length, player.getLookVec().y * length, player.getLookVec().z * length));
+    Vec3d[] items = getItems(facing);
+    for (int i = 0; i < 8; i++) {
+      Vec3d itemPos = items[i];
+      AxisAlignedBB offsetAABB = new AxisAlignedBB(itemPos.x, itemPos.y, itemPos.z, itemPos.x, itemPos.y, itemPos.z)
+        .grow(0.1D)
+        .offset(bottomPos)
+        .grow(0.002D);
+      if (offsetAABB.calculateIntercept(startPos, endPos) != null) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   public static Vec3d[] getItems(EnumFacing facing) {
@@ -84,75 +119,45 @@ public class BlockFridge extends BlockHorizontal {
     return items;
   }
 
-  public static int getPlayerLookingItem(BlockPos bottomPos, EntityPlayer player, EnumFacing facing) {
-    double length = Math.sqrt(bottomPos.distanceSqToCenter(player.posX, player.posY, player.posZ)) + 0.7D;
-    Vec3d startPos = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
-    Vec3d endPos = startPos.add(new Vec3d(player.getLookVec().x * length, player.getLookVec().y * length, player.getLookVec().z * length));
-    Vec3d[] items = getItems(facing);
-    for (int i = 0; i < 8; i++) {
-      Vec3d itemPos = items[i];
-      AxisAlignedBB offsetAABB = new AxisAlignedBB(itemPos.x, itemPos.y, itemPos.z, itemPos.x, itemPos.y, itemPos.z).grow(0.1D)
-        .offset(bottomPos).grow(0.002D);
-      if (offsetAABB.calculateIntercept(startPos, endPos) != null) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  @SuppressWarnings("deprecation")
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta)).withProperty(UPPER, meta > 3);
+    return this.getDefaultState()
+      .withProperty(HORIZONTAL, EnumFacing.byHorizontalIndex(meta))
+      .withProperty(UPPER, meta > 3);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getHorizontalIndex() + (state.getValue(UPPER) ? 4 : 0);
+    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(UPPER) ? 4 : 0);
   }
 
-  @SuppressWarnings("deprecation")
   @Override
-  public boolean isFullCube(IBlockState state) {
-    return false;
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, HORIZONTAL, UPPER);
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   @SideOnly(Side.CLIENT)
   public boolean hasCustomBreakingProgress(IBlockState state) {
     return true;
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public EnumBlockRenderType getRenderType(IBlockState state) {
     return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    switch (state.getValue(FACING)) {
-      case NORTH:
-        return state.getValue(UPPER) ? NORTH_AABB.setMaxY(0.75D) : NORTH_AABB;
-      case SOUTH:
-        return state.getValue(UPPER) ? SOUTH_AABB.setMaxY(0.75D) : SOUTH_AABB;
-      case EAST:
-        return state.getValue(UPPER) ? EAST_AABB.setMaxY(0.75D) : EAST_AABB;
-      case WEST:
-        return state.getValue(UPPER) ? WEST_AABB.setMaxY(0.75D) : WEST_AABB;
-    }
-    return NORTH_AABB;
+    return switch (state.getValue(HORIZONTAL)) {
+      case NORTH -> state.getValue(UPPER) ? NORTH_AABB.setMaxY(0.75D) : NORTH_AABB;
+      case SOUTH -> state.getValue(UPPER) ? SOUTH_AABB.setMaxY(0.75D) : SOUTH_AABB;
+      case EAST -> state.getValue(UPPER) ? EAST_AABB.setMaxY(0.75D) : EAST_AABB;
+      case WEST -> state.getValue(UPPER) ? WEST_AABB.setMaxY(0.75D) : WEST_AABB;
+      default -> NORTH_AABB;
+    };
   }
 
-  @SuppressWarnings("deprecation")
-  @Override
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
-  }
-
-  @SuppressWarnings("deprecation")
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     if (!state.getValue(UPPER)) {
@@ -169,8 +174,7 @@ public class BlockFridge extends BlockHorizontal {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileFridge te = Helpers.getTE(worldIn, pos, TileFridge.class);
-    if (te != null) {te.onBreakBlock(worldIn, pos, state);}
+    TileUtils.getTile(worldIn, pos, getTileClass()).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -188,55 +192,42 @@ public class BlockFridge extends BlockHorizontal {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    BlockPos TEPos = pos;
+    BlockPos tilePos;
     if (!state.getValue(UPPER)) {
-      TEPos = pos.up();
+      tilePos = pos.up();
+    } else {
+      tilePos = pos;
     }
-    TileFridge te = Helpers.getTE(world, TEPos, TileFridge.class);
-    if (te != null && !te.isAnimating() && hand == EnumHand.MAIN_HAND && facing == state.getValue(FACING)) {
-      if (te.isOpen()) {
-        int slot = getPlayerLookingItem(TEPos.down(), player, facing);
-        ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty()) {
-          if (slot != -1) {
-            if (!world.isRemote) {
-              player.setHeldItem(hand, te.insertItem(slot, stack));
+    return TileUtils.getTile(world, tilePos, getTileClass()).map(tile -> {
+      if (!tile.isAnimating() && hand == EnumHand.MAIN_HAND && facing == state.getValue(HORIZONTAL)) {
+        if (tile.isOpen()) {
+          int slot = getPlayerLookingItem(tilePos.down(), player, facing);
+          ItemStack stack = player.getHeldItem(hand);
+          if (!stack.isEmpty()) {
+            if (slot != -1) {
+              if (!world.isRemote) {
+                player.setHeldItem(hand, tile.insertItem(slot, stack));
+              }
+              return true;
             }
-            return true;
+          } else {
+            if (slot != -1 && tile.hasStack(slot)) {
+              if (!world.isRemote) {
+                player.setHeldItem(hand, tile.extractItem(slot));
+              }
+              return true;
+            } else {
+              return tile.setOpening(false);
+            }
           }
         } else {
-          if (slot != -1 && te.hasStack(slot)) {
-            if (!world.isRemote) {
-              player.setHeldItem(hand, te.extractItem(slot));
-            }
-            return true;
-          } else {
-            return te.setOpening(false);
+          if (!player.isSneaking()) {
+            return tile.setOpening(true);
           }
         }
-      } else {
-        if (!player.isSneaking()) {
-          return te.setOpening(true);
-        }
       }
-    }
-    return false;
-  }
-
-  @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING, UPPER);
-  }
-
-  @Override
-  public boolean hasTileEntity(IBlockState state) {
-    return true;
-  }
-
-  @Nullable
-  @Override
-  public TileEntity createTileEntity(World world, IBlockState state) {
-    return new TileFridge();
+      return false;
+    }).orElse(false);
   }
 
   @Override
@@ -259,5 +250,48 @@ public class BlockFridge extends BlockHorizontal {
   @Override
   public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
     return true;
+  }
+
+  @Nullable
+  @Override
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new TileFridge();
+  }
+
+  @Override
+  public Class<TileFridge> getTileClass() {
+    return TileFridge.class;
+  }
+
+  @Override
+  public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
+    return new TESRFridge();
+  }
+
+  @Override
+  public IStateMapper getStateMapper() {
+    return blockIn -> Collections.emptyMap();
+  }
+
+  @Override
+  public boolean drawHighlight(World world, BlockPos pos, EntityPlayer player, RayTraceResult rayTrace, double partialTicks) {
+    IBlockState state = world.getBlockState(pos);
+    if (state.getValue(UPPER)) {
+      pos = pos.down();
+    }
+    int slot = getPlayerLookingItem(pos, player, state.getValue(HORIZONTAL));
+    if (slot > -1) {
+      Vec3d itemPos = getItems(state.getValue(HORIZONTAL))[slot];
+      double d3 = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
+      double d4 = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
+      double d5 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
+      AxisAlignedBB box = new AxisAlignedBB(itemPos.x, itemPos.y, itemPos.z, itemPos.x, itemPos.y, itemPos.z)
+        .grow(0.1D)
+        .offset(pos)
+        .grow(0.002D)
+        .offset(-d3, -d4, -d5);
+      IProviderHighlight.drawBox(box, 2F, 0, 0, 0, 0.4F);
+    }
+    return false;
   }
 }

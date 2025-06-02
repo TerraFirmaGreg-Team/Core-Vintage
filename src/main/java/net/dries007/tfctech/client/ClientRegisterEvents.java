@@ -150,13 +150,6 @@ public final class ClientRegisterEvents {
         return Collections.emptyMap();
       }
     });
-    ModelLoader.setCustomStateMapper(TechBlocks.FRIDGE, new IStateMapper() {
-      @Override
-      @Nonnull
-      public Map<IBlockState, ModelResourceLocation> putStateModelLocations(@Nonnull Block blockIn) {
-        return Collections.emptyMap();
-      }
-    });
 
     // TESRs //
     ClientRegistry.bindTileEntitySpecialRenderer(TileWireDrawBench.class, new TESRWireDrawBench());

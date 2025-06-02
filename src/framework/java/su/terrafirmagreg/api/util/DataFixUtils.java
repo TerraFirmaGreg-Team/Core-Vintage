@@ -20,6 +20,7 @@ public final class DataFixUtils {
   public static final Set<String> MOD_ID_SET = new ObjectOpenHashSet<>() {{
     add(ModIDs.TFCF);
     add(ModIDs.TFC);
+    add(ModIDs.TFCTECH);
     add(ModIDs.FL);
     add(ModIDs.TFCTOWERHEAT);
     add(ModIDs.PUDDLES);

@@ -2,11 +2,9 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockElectricForge;
-import su.terrafirmagreg.modules.device.object.block.BlockFridge;
 import su.terrafirmagreg.modules.device.object.block.BlockInductionCrucible;
 import su.terrafirmagreg.modules.device.object.block.BlockWireDrawBench;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
-import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
 
@@ -25,7 +23,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import com.google.common.collect.ImmutableList;
 import net.dries007.tfc.objects.fluids.TechFluids;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
-import net.dries007.tfc.objects.items.itemblocks.ItemBlockFridge;
 import net.dries007.tfc.objects.items.itemblocks.ItemBlockWireDrawBench;
 
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
@@ -40,7 +37,6 @@ public final class TechBlocks {
   public static final BlockElectricForge ELECTRIC_FORGE = getNull();
   public static final BlockInductionCrucible INDUCTION_CRUCIBLE = getNull();
   public static final BlockWireDrawBench WIRE_DRAW_BENCH = getNull();
-  public static final BlockFridge FRIDGE = getNull();
 
   private static ImmutableList<ItemBlock> allInventoryItemBlocks, allTEISRBlocks;
   private static ImmutableList<BlockFluidBase> allFluidBlocks;
@@ -81,7 +77,6 @@ public final class TechBlocks {
     ImmutableList.Builder<ItemBlock> teisrItemBlocks = ImmutableList.builder();
 
     teisrItemBlocks.add(new ItemBlockWireDrawBench(register(r, "wire_draw_bench", new BlockWireDrawBench(), CT_MISC)));
-    teisrItemBlocks.add(new ItemBlockFridge(register(r, "fridge", new BlockFridge(), CT_MISC)));
 
     allTEISRBlocks = teisrItemBlocks.build();
 
@@ -89,7 +84,6 @@ public final class TechBlocks {
     register(TileElectricForge.class, "electric_forge");
     register(TileInductionCrucible.class, "induction_crucible");
     register(TileWireDrawBench.class, "wire_draw_bench");
-    register(TileFridge.class, "fridge");
   }
 
   private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block, CreativeTabs ct) {

@@ -117,7 +117,7 @@ public final class BlocksDevice {
 //    GRINDSTONE_MANUAL = registrar.addBlock(new BlockGrindstoneManual());
 //    ELECTRIC_FORGE = registrar.addBlock(new BlockElectricForge());
 //    INDUCTION_CRUCIBLE = registrar.addBlock(new BlockInductionCrucible());
-//    FRIDGE = registrar.addBlock(new BlockFridge());
+    FRIDGE = registrar.addBlock(new BlockFridge());
     LATEX_EXTRACTOR = registrar.addBlock(new BlockLatexExtractor());
     SMELTERY_CAULDRON = registrar.addBlock(new BlockSmelteryCauldron());
     SMELTERY_FIREBOX = registrar.addBlock(new BlockSmelteryFirebox());

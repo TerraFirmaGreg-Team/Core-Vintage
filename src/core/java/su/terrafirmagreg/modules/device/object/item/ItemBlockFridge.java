@@ -1,8 +1,7 @@
-package net.dries007.tfc.objects.items.itemblocks;
+package su.terrafirmagreg.modules.device.object.item;
 
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.device.object.block.BlockFridge;
+import su.terrafirmagreg.api.base.object.item.spi.BaseItemBlock;
+import su.terrafirmagreg.modules.device.client.render.TEISRFridge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -14,35 +13,15 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.UPPER;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class ItemBlockFridge extends ItemBlockTFC {
+public class ItemBlockFridge extends BaseItemBlock {
 
   public ItemBlockFridge(Block block) {
     super(block);
-  }
 
-  @Nonnull
-  @Override
-  public Size getSize(@Nonnull ItemStack stack) {
-    return Size.HUGE;
-  }
-
-  @Nonnull
-  @Override
-  public Weight getWeight(@Nonnull ItemStack stack) {
-    return Weight.MEDIUM;
-  }
-
-  @Override
-  public boolean canStack(@Nonnull ItemStack stack) {
-    return false;
+    setTileEntityItemStackRenderer(new TEISRFridge());
   }
 
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -56,10 +35,12 @@ public class ItemBlockFridge extends ItemBlockTFC {
     if (player.canPlayerEdit(pos.up(), facing, stack) && player.canPlayerEdit(pos, facing, stack)) {
       if (!worldIn.isRemote) {
         stack.shrink(1);
-        IBlockState lowerState = this.block.getDefaultState().withProperty(BlockFridge.FACING, player.getHorizontalFacing().getOpposite())
-          .withProperty(BlockFridge.UPPER, false);
-        IBlockState upperState = this.block.getDefaultState().withProperty(BlockFridge.FACING, player.getHorizontalFacing().getOpposite())
-          .withProperty(BlockFridge.UPPER, true);
+        IBlockState lowerState = this.block.getDefaultState()
+          .withProperty(HORIZONTAL, player.getHorizontalFacing().getOpposite())
+          .withProperty(UPPER, false);
+        IBlockState upperState = this.block.getDefaultState()
+          .withProperty(HORIZONTAL, player.getHorizontalFacing().getOpposite())
+          .withProperty(UPPER, true);
         worldIn.setBlockState(pos, lowerState);
         worldIn.setBlockState(pos.up(), upperState);
       }

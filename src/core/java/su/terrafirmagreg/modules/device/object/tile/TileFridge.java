@@ -43,7 +43,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static su.terrafirmagreg.modules.device.object.block.BlockFridge.UPPER;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.UPPER;
+
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault

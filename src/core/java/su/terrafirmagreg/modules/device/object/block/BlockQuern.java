@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.device.object.block;
 
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderHighlight;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
@@ -28,7 +29,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.client.TFCSounds;
-import net.dries007.tfc.client.gui.overlay.IHighlightHandler;
 import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
@@ -39,7 +39,7 @@ import java.util.List;
 import static su.terrafirmagreg.modules.device.object.tile.TileQuern.SLOT_HANDSTONE;
 
 @ParametersAreNonnullByDefault
-public class BlockQuern extends Block implements ICapabilitySize, IHighlightHandler {
+public class BlockQuern extends Block implements ICapabilitySize, IProviderHighlight {
 
   private static final AxisAlignedBB BASE_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.625D, 1D);
   private static final AxisAlignedBB QUERN_AABB = new AxisAlignedBB(0D, 0D, 0D, 1D, 0.875D, 1D);
@@ -241,16 +241,16 @@ public class BlockQuern extends Block implements ICapabilitySize, IHighlightHand
     // Draws the correct selection box depending on where the player is looking at
     if (selection == SelectionPlace.HANDLE) {
       // Draws handle AABB if player is looking at it
-      IHighlightHandler.drawBox(HANDLE_AABB.offset(pos).offset(-dx, -dy, -dz), 1f, 0, 0, 0, 0.4f);
+      IProviderHighlight.drawBox(HANDLE_AABB.offset(pos).offset(-dx, -dy, -dz), 1f, 0, 0, 0, 0.4f);
     } else if (selection == SelectionPlace.INPUT_SLOT) {
       // Draws item input AABB if user has item in main hand or there is an item in slot
-      IHighlightHandler.drawBox(INPUT_SLOT_AABB.offset(pos).offset(-dx, -dy, -dz), 1f, 0, 0, 0, 0.4f);
+      IProviderHighlight.drawBox(INPUT_SLOT_AABB.offset(pos).offset(-dx, -dy, -dz), 1f, 0, 0, 0, 0.4f);
     } else if (selection == SelectionPlace.HANDSTONE) {
       // Draws handstone AABB if player is looking at it
-      IHighlightHandler.drawBox(HANDSTONE_AABB.offset(pos).offset(-dx, -dy, -dz).grow(0.002D), 1f, 0, 0, 0, 0.4f);
+      IProviderHighlight.drawBox(HANDSTONE_AABB.offset(pos).offset(-dx, -dy, -dz).grow(0.002D), 1f, 0, 0, 0, 0.4f);
     } else {
       // Just draw the base outline (last grow is just what MC does to actually make the outline visible
-      IHighlightHandler.drawBox(BASE_AABB.offset(pos).offset(-dx, -dy, -dz).grow(0.002D), 1f, 0, 0, 0, 0.4f);
+      IProviderHighlight.drawBox(BASE_AABB.offset(pos).offset(-dx, -dy, -dz).grow(0.002D), 1f, 0, 0, 0, 0.4f);
     }
     return true;
   }

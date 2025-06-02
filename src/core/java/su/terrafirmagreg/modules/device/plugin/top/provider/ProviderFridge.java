@@ -1,0 +1,74 @@
+package su.terrafirmagreg.modules.device.plugin.top.provider;
+
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.device.object.block.BlockFridge;
+import su.terrafirmagreg.modules.device.object.tile.TileFridge;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
+
+import mcjty.theoneprobe.api.ElementAlignment;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static su.terrafirmagreg.api.data.Properties.BoolProp.UPPER;
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
+
+public final class ProviderFridge implements IProbeInfoProvider {
+
+  @Override
+  public String getID() {
+    return ModUtils.localize("top", "device.fridge");
+  }
+
+  @Override
+  public void addProbeInfo(ProbeMode mode, IProbeInfo info, EntityPlayer player, World world, IBlockState state, IProbeHitData hitData) {
+    Block block = state.getBlock();
+
+    if (block instanceof BlockFridge) {
+      TileUtils.getTile(world, hitData.getPos(), TileFridge.class).ifPresent(tile -> {
+        BlockPos pos = hitData.getPos();
+        if (!state.getValue(UPPER)) {
+          pos = pos.up();
+        }
+
+        IProbeInfo horizontalPane = info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
+        horizontalPane.text(new TextComponentTranslation(ModUtils.localize("top", "device.fridge.efficiency"), (int) tile.getEfficiency()).getFormattedText());
+
+        if (tile.isOpen()) {
+          int slot = BlockFridge.getPlayerLookingItem(pos.down(), player, state.getValue(HORIZONTAL));
+          if (slot > -1) {
+            ItemStack stack = tile.getSlot(slot);
+            if (!stack.isEmpty()) {
+              info.horizontal(info.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+                .item(stack)
+                .vertical()
+                .itemLabel(stack);
+              ICapabilityFood cap = stack.getCapability(CapabilityFood.CAPABILITY, null);
+              List<String> list = new ArrayList<>();
+              if (cap != null) {
+                cap.addTooltipInfo(stack, list);
+              }
+              for (String text : list) {
+                info.text(text);
+              }
+            }
+          }
+        }
+      });
+    }
+  }
+}

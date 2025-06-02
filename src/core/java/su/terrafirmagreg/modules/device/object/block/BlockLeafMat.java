@@ -62,7 +62,7 @@ public class BlockLeafMat extends BaseBlockContainer {
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(world, pos, TileLeafMat.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
+    TileUtils.getTile(world, pos, getTileClass()).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
     super.breakBlock(world, pos, state);
   }
 
@@ -74,7 +74,7 @@ public class BlockLeafMat extends BaseBlockContainer {
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (!worldIn.isRainingAt(pos.up())) {return;}
-    TileUtils.getTile(worldIn, pos, TileLeafMat.class).ifPresent(TileLeafMat::rain);
+    TileUtils.getTile(worldIn, pos, getTileClass()).ifPresent(TileLeafMat::rain);
 
   }
 
@@ -85,7 +85,7 @@ public class BlockLeafMat extends BaseBlockContainer {
     if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
       return false;
     }
-    TileUtils.getTile(world, pos, TileLeafMat.class).map(tile -> {
+    TileUtils.getTile(world, pos, getTileClass()).map(tile -> {
       IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       if (inventory != null) {
         ItemStack tryStack = new ItemStack(held.getItem(), 1);

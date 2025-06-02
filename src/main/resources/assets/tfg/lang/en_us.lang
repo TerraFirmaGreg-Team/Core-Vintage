@@ -297,6 +297,7 @@ top.tfg.device.leaf_mat.remaining.minutes=Remaining %d Minutes
 top.tfg.device.oven.remaining.ticks=Remaining %d Ticks
 top.tfg.device.oven.remaining.hours=Remaining %d Hours
 top.tfg.device.oven.remaining.minutes=Remaining %d Minutes
+top.tfg.device.fridge.efficiency=Efficiency: %d%%
 
 # Just Enough Items
 jei.tfg.category.blast_furnace=Blast Furnace recipes
@@ -353,6 +354,7 @@ block.tfg.device.oven.chimney.name=Oven Chimney
 block.tfg.device.log_pile.name=Log Pile
 block.tfg.device.drying_mat.name=Drying Mat
 block.tfg.device.leaf_mat.name=Leaf Mat
+block.tfg.device.fridge.name=Fridge
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

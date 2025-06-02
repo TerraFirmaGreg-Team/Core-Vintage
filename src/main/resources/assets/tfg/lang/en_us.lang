@@ -351,6 +351,8 @@ block.tfg.device.oven.base.name=Oven
 block.tfg.device.oven.wall.name=Oven Wall
 block.tfg.device.oven.chimney.name=Oven Chimney
 block.tfg.device.log_pile.name=Log Pile
+block.tfg.device.drying_mat.name=Drying Mat
+block.tfg.device.leaf_mat.name=Leaf Mat
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask

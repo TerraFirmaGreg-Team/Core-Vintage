@@ -8,7 +8,6 @@ import su.terrafirmagreg.modules.device.object.tile.TileQuern;
 import su.terrafirmagreg.modules.device.object.tile.TileSluice;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockGravel;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -150,7 +149,6 @@ public final class BlocksTFC {
   public static final BlockIngotPile INGOT_PILE = getNull();
   public static final BlockQuern QUERN = getNull();
   public static final BlockSeaIce SEA_ICE = getNull();
-  public static final BlockGravel AGGREGATE = getNull();
 
   // All these are for use in model registration. Do not use for block lookups.
   // Use the static get methods in the classes instead.
@@ -236,7 +234,6 @@ public final class BlocksTFC {
     Builder<ItemBlock> normalItemBlocks = ImmutableList.builder();
     Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
 
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "aggregate", new BlockAggregate(), CT_ROCK)));
     normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), CT_ROCK)));
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockPeat(Material.GROUND), CT_ROCK)));

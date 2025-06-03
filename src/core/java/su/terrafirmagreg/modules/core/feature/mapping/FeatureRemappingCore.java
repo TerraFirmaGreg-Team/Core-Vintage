@@ -26,6 +26,7 @@ public class FeatureRemappingCore extends FeatureBase {
       put("puddle", () -> BlocksCore.PUDDLE);
       put("fire_bricks", () -> BlocksCore.FIRE_BRICKS);
       put("thatch", () -> BlocksCore.THATCH);
+      put("aggregate", () -> BlocksCore.AGGREGATE);
     }});
   }
 
@@ -39,6 +40,12 @@ public class FeatureRemappingCore extends FeatureBase {
       put("ice_shard", () -> ItemsCore.ICE_SHARD);
       put("packed_ice_shard", () -> ItemsCore.ICE_SHARD);
       put("sea_ice_shard", () -> ItemsCore.ICE_SHARD);
+
+      put("debug", () -> BlocksCore.DEBUG.asItem());
+      put("puddle", () -> BlocksCore.PUDDLE.asItem());
+      put("fire_bricks", () -> BlocksCore.FIRE_BRICKS.asItem());
+      put("thatch", () -> BlocksCore.THATCH.asItem());
+      put("aggregate", () -> BlocksCore.AGGREGATE.asItem());
     }});
   }
 

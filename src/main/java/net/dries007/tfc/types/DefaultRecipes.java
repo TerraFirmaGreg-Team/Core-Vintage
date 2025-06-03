@@ -10,6 +10,7 @@ import su.terrafirmagreg.modules.core.data.ingredient.IngredientFluidItem;
 import su.terrafirmagreg.modules.core.data.ingredient.IngredientItemFood;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
+import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.oreprefix.OrePrefixCore;
@@ -319,7 +320,7 @@ public final class DefaultRecipes {
         // Concrete (vanilla + aggregate)
         new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(new ItemStack(Blocks.CONCRETE_POWDER, 1, 0)), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName(
           "concrete_" + dyeName),
-        new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksTFC.AGGREGATE), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName(
+        new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksCore.AGGREGATE), null, new ItemStack(Blocks.CONCRETE_POWDER, 1, dyeMeta), ICalendar.TICKS_IN_HOUR).setRegistryName(
           "aggregate_" + dyeName),
         // Alabaster
         new BarrelRecipe(IIngredient.of(fluid, 125), IIngredient.of(BlocksTFC.ALABASTER_BRICKS_PLAIN), null, new ItemStack(BlockDecorativeStone.ALABASTER_BRICKS.get(dyeColor)), ICalendar.TICKS_IN_HOUR).setRegistryName(
@@ -340,7 +341,7 @@ public final class DefaultRecipes {
       new BarrelRecipe(IIngredient.of(FluidsCore.LYE.get(), 125), IIngredient.of("blockGlass"), null, new ItemStack(Blocks.GLASS), ICalendar.TICKS_IN_HOUR).setRegistryName("glass_undo"),
       new BarrelRecipe(IIngredient.of(FluidsCore.LYE.get(), 125), IIngredient.of("paneGlass"), null, new ItemStack(Blocks.GLASS_PANE), ICalendar.TICKS_IN_HOUR).setRegistryName("glass_pane_undo"),
       // Concrete
-      new BarrelRecipe(IIngredient.of(FluidsCore.LYE.get(), 125), IIngredient.of("powderConcrete"), null, new ItemStack(BlocksTFC.AGGREGATE), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_undo"),
+      new BarrelRecipe(IIngredient.of(FluidsCore.LYE.get(), 125), IIngredient.of("powderConcrete"), null, new ItemStack(BlocksCore.AGGREGATE), ICalendar.TICKS_IN_HOUR).setRegistryName("concrete_undo"),
       // Alabaster
       new BarrelRecipe(IIngredient.of(FluidsCore.LYE.get(), 125), IIngredient.of("alabasterBricks"), null, new ItemStack(BlocksTFC.ALABASTER_BRICKS_PLAIN), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_bricks_undo"),
       new BarrelRecipe(IIngredient.of(FluidsCore.LYE.get(), 125), IIngredient.of("alabasterRaw"), null, new ItemStack(BlocksTFC.ALABASTER_RAW_PLAIN), ICalendar.TICKS_IN_HOUR).setRegistryName("alabaster_raw_undo"),

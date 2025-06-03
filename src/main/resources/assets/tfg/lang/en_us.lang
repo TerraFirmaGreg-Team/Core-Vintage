@@ -256,6 +256,7 @@ block.tfg.core.debug.name=Debug Block
 block.tfg.core.puddle.name=Puddle
 block.tfg.core.fire_bricks.name=Fire Bricks
 block.tfg.core.thatch.name=Thatch
+block.tfg.core.aggregate.name=Aggregate
 
 ## Item
 item.tfg.core.wand.name=Debug Wand

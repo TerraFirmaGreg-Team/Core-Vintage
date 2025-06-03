@@ -108,6 +108,7 @@ public enum Mods {
     public static final String PUDDLES = "puddles";
     public static final String WATERFLASKS = "waterflasks";
     public static final String THEONEPROBE = "theoneprobe";
+    public static final String JEI = "jei";
   }
 
 }

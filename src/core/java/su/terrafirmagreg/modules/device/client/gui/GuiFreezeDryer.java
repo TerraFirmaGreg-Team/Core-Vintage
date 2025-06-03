@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.api.data.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.network.CSPacketFreezeDryer;
 import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
+import su.terrafirmagreg.modules.device.packet.CSPacketFreezeDryer;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

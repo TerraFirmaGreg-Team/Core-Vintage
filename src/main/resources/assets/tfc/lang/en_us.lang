@@ -4592,7 +4592,6 @@ waila.tfc.ore_drop=Contains %s
 waila.tfc.flux_stone=Flux
 waila.tfc.temperature=Air Temperature: %dºC
 waila.tfc.rainfall=Rainfall: %d
-waila.tfc.metal.output=Contains %d units of %s
 waila.tfc.quern.handstone_durability=Handstone Durability: %d / %d
 
 ## Devices

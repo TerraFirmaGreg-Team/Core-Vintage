@@ -44,8 +44,11 @@ public class ProviderCrucible implements IProbeInfoProvider {
         var amount = tile.getAlloy().getAmount();
         if (amount > 0) {
           Metal metal = tile.getAlloyResult();
-          probeInfo.text(
-            new TextComponentTranslation(ModUtils.localize(LocalizeKeys.TOP, "metal.output"), amount, new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText());
+          probeInfo.text(new TextComponentTranslation(
+            ModUtils.localize(LocalizeKeys.TOP, "device.crucible.metal.output"),
+            amount,
+            new TextComponentTranslation(metal.getTranslationKey()).getFormattedText()).getFormattedText()
+          );
         }
         float temperature = nbt.getFloat("temp");
         String heatTooltip = Heat.getTooltip(temperature);

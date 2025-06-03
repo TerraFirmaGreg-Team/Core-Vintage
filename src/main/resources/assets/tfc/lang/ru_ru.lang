@@ -4414,7 +4414,6 @@ waila.tfc.ore_drop=Содержит: %s
 waila.tfc.flux_stone=Флюс
 waila.tfc.temperature=Температура воздуха: %dºC
 waila.tfc.rainfall=Осадки: %d
-waila.tfc.metal.output=Содержит: %d единицы %s
 
 ## Devices
 waila.tfc.devices.minutes_remaining=Осталось %d минут(ы)

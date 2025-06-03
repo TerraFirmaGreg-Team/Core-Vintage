@@ -1,10 +1,17 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
-import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
-import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
-import su.terrafirmagreg.modules.device.object.block.BlockFridge;
-
+import gregtech.api.capability.GregtechCapabilities;
+import ic2.api.energy.tile.IEnergyEmitter;
+import ic2.api.energy.tile.IEnergySink;
+import mcp.MethodsReturnNonnullByDefault;
+import net.dries007.tfc.network.PacketFridgeUpdate;
+import net.dries007.tfc.network.PacketTileEntityUpdate;
+import net.dries007.tfc.objects.storage.MachineEnergyContainer;
+import net.dries007.tfc.objects.te.TEInventory;
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfctech.TFCTech;
+import net.dries007.tfctech.TechConfig;
+import net.dries007.tfctech.client.TechSounds;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemFood;
@@ -25,19 +32,10 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import gregtech.api.capability.GregtechCapabilities;
-import ic2.api.energy.tile.IEnergyEmitter;
-import ic2.api.energy.tile.IEnergySink;
-import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.network.PacketFridgeUpdate;
-import net.dries007.tfc.network.PacketTileEntityUpdate;
-import net.dries007.tfc.objects.storage.MachineEnergyContainer;
-import net.dries007.tfc.objects.te.TEInventory;
-import net.dries007.tfc.util.Helpers;
-import net.dries007.tfctech.TFCTech;
-import net.dries007.tfctech.TechConfig;
-import net.dries007.tfctech.client.TechSounds;
+import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
+import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
+import su.terrafirmagreg.modules.device.object.block.BlockFridge;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -126,7 +124,7 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
   @Override
   public void setAndUpdateSlots(int slot) {
     TFCTech.getNetwork()
-      .sendToAllTracking(new PacketTileEntityUpdate(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
+        .sendToAllTracking(new PacketTileEntityUpdate(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
     super.setAndUpdateSlots(slot);
   }
 
@@ -342,7 +340,9 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
     if (Loader.isModLoaded("ic2")) {
       ic2Load();
     }
-    if (!isMainBlock()) {return;}
+    if (!isMainBlock()) {
+      return;
+    }
     lastOpen = open;
     if (openingState == 1) {
       //opening
@@ -367,11 +367,15 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
         consumption = (int) Math.max(1.0D, consumption / 4.0D);
       }
       if (this.isOpen() || !energyContainer.consumeEnergy(consumption, false)) {
-        efficiency -= (100.0F / (6000.0F / TechConfig.DEVICES.fridgeLoseEfficiency)); //5 Minutes to 0 default
-        if (efficiency <= 0) {efficiency = 0;}
+        efficiency -= (float) (100.0F / (6000.0F / TechConfig.DEVICES.fridgeLoseEfficiency)); //5 Minutes to 0 default
+        if (efficiency <= 0) {
+          efficiency = 0;
+        }
       } else {
-        efficiency += (100.0F / (36000.0F / TechConfig.DEVICES.fridgeEfficiency)); //30 Minutes to 100 default
-        if (efficiency >= 100) {efficiency = 100;}
+        efficiency += (float) (100.0F / (36000.0F / TechConfig.DEVICES.fridgeEfficiency)); //30 Minutes to 100 default
+        if (efficiency >= 100) {
+          efficiency = 100;
+        }
       }
       if (++applyTrait >= 100) {
         applyTrait = 0;
@@ -404,7 +408,7 @@ public class TileFridge extends TEInventory implements ITickable, IEnergySink {
       if (++serverUpdate % 40 == 0) {
         serverUpdate = 0;
         TFCTech.getNetwork()
-          .sendToAllTracking(new PacketFridgeUpdate(pos, efficiency), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 20));
+            .sendToAllTracking(new PacketFridgeUpdate(pos, efficiency), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 20));
       }
     }
   }

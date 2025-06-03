@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.network.SCPacketLatexExtractor;
+import su.terrafirmagreg.modules.device.packet.SCPacketLatexExtractor;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;

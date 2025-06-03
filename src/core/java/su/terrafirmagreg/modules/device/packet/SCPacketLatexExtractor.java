@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.device.network;
+package su.terrafirmagreg.modules.device.packet;
 
 import su.terrafirmagreg.api.base.packet.spi.BasePacketTile;
 import su.terrafirmagreg.framework.manager.packet.api.IPacket;

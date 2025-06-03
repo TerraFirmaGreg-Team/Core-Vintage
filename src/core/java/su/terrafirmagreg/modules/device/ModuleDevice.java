@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.device;
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.spi.ModuleBase;
@@ -10,10 +11,8 @@ import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.FeaturesDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
 import su.terrafirmagreg.modules.device.init.PacketsDevice;
+import su.terrafirmagreg.modules.device.init.PluginsDevice;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
-import su.terrafirmagreg.modules.device.plugin.top.TheOneProbeDevice;
-
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,6 +33,7 @@ public class ModuleDevice extends ModuleBase {
     enableNetwork();
     enableCommand();
     enableFeature();
+    enablePlugin();
   }
 
   @Override
@@ -60,11 +60,10 @@ public class ModuleDevice extends ModuleBase {
   }
 
   @Override
-  public void onInit(FMLInitializationEvent event) {
+  public void onPlugin(IPluginRegistrar registrar) {
 
-    TheOneProbeDevice.init();
+    PluginsDevice.onRegister(registrar);
   }
-
 
   @Override
   public @NotNull LoggingHelper getLogger() {

@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
+import su.terrafirmagreg.api.util.StructureUtils;
+
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -16,7 +18,6 @@ import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.world.classic.StructureHelper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +29,7 @@ import static net.minecraft.block.BlockLog.LOG_AXIS;
 
 public class TreeGenAcacia implements ITreeGenerator {
 
-  private static final PlacementSettings settings = StructureHelper.getDefaultSettings();
+  private static final PlacementSettings settings = StructureUtils.getDefaultSettings();
   private IBlockState trunk;
   private IBlockState bark;
 
@@ -82,7 +83,7 @@ public class TreeGenAcacia implements ITreeGenerator {
     BlockPos size = structureBase.getSize();
     pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
 
-    StructureHelper.addStructureToWorld(world, pos, structureBase, settings);
+    StructureUtils.addStructureToWorld(world, pos, structureBase, settings);
   }
 
   private void placeLog(World world, BlockPos pos, boolean useBark) {

@@ -1,5 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.api.util.StructureUtils;
+
 import net.minecraft.block.BlockLog;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -14,9 +17,6 @@ import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.world.classic.StructureHelper;
-
-import su.terrafirmagreg.api.data.enums.Mods;
 
 import java.util.Random;
 
@@ -24,13 +24,13 @@ import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 import static net.minecraft.block.BlockLog.LOG_AXIS;
 
 /**
- * This is a tree generator only used for the willow tree shapes. Requires two structure blocks: both found in /assets/tfc/[TREE NAME]/, named base.nbt and
- * overlay.nbt respectively. See the examples for TFC willow tree for what the structure blocks should look like.
+ * This is a tree generator only used for the willow tree shapes. Requires two structure blocks: both found in /assets/tfc/[TREE NAME]/, named base.nbt and overlay.nbt respectively. See the examples for TFC willow tree for what the
+ * structure blocks should look like.
  */
 public class TreeGenWillow implements ITreeGenerator {
 
-  private static final PlacementSettings settingsFull = StructureHelper.getDefaultSettings();
-  private static final PlacementSettings settingsWeak = StructureHelper.getDefaultSettings().setIntegrity(0.5F);
+  private static final PlacementSettings settingsFull = StructureUtils.getDefaultSettings();
+  private static final PlacementSettings settingsWeak = StructureUtils.getDefaultSettings().setIntegrity(0.5F);
   private Template structureBase;
   private Template structureOverlay;
 
@@ -80,8 +80,8 @@ public class TreeGenWillow implements ITreeGenerator {
     BlockPos size = structureBase.getSize();
     pos = pos.add(-size.getX() / 2, -size.getY() / 2, -size.getZ() / 2);
 
-    StructureHelper.addStructureToWorld(world, pos, structureBase, settingsFull);
-    StructureHelper.addStructureToWorld(world, pos, structureOverlay, settingsWeak);
+    StructureUtils.addStructureToWorld(world, pos, structureBase, settingsFull);
+    StructureUtils.addStructureToWorld(world, pos, structureOverlay, settingsWeak);
   }
 
   private void tryPlaceLog(World world, BlockPos pos, Tree tree, BlockLog.EnumAxis axis) {

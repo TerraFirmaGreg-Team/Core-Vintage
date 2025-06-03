@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.structures;
 
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -13,7 +15,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfcflorae.ConfigTFCF;
 
@@ -35,7 +36,7 @@ public class WorldGenStructuresCorals implements IWorldGenerator {
         IBlockState up = world.getBlockState(pos.up());
 
         if (ConfigTFCF.General.STRUCTURES.activateStructureGeneration) {
-          if (data.isInitialized() && (b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN || b == BiomesTFC.BEACH || b == BiomesTFC.GRAVEL_BEACH)) {
+          if (data.isInitialized() && (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH || b == BiomesWorld.GRAVEL_BEACH)) {
             if ((up.getBlock() instanceof BlockCoral || world.getBlockState(pos).getBlock() instanceof BlockCoral || BlocksTFC.isGround(down)
                  || world.getBlockState(pos).getBlock() == ChunkGenTFC.SALT_WATER.getBlock()) && (pos.getY() < WorldTypeTFC.SEALEVEL - 7 && pos.getY() > 119
                                                                                                   && data.getFloraDiversity() >= 0.3f

@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -14,7 +16,6 @@ import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import java.util.ArrayList;
@@ -43,8 +44,8 @@ public class WorldGenFissure implements IWorldGenerator {
     BlockPos start = new ChunkPos(chunkX, chunkZ).getBlock(random.nextInt(14) + 9, 0, random.nextInt(14) + 9);
     Biome biome = world.getBiome(start);
 
-    if (biome == BiomesTFC.BEACH || biome == BiomesTFC.OCEAN || biome == BiomesTFC.GRAVEL_BEACH || biome == BiomesTFC.LAKE || biome == BiomesTFC.RIVER
-        || biome == BiomesTFC.DEEP_OCEAN) {
+    if (biome == BiomesWorld.BEACH || biome == BiomesWorld.OCEAN || biome == BiomesWorld.GRAVEL_BEACH || biome == BiomesWorld.LAKE || biome == BiomesWorld.RIVER
+        || biome == BiomesWorld.DEEP_OCEAN) {
       return;
     }
 

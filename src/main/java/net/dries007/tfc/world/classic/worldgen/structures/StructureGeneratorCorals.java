@@ -4,6 +4,7 @@
 package net.dries007.tfc.world.classic.worldgen.structures;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -29,7 +30,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfcflorae.TFCFlorae;
 
 import java.util.Map;
@@ -190,13 +190,13 @@ public class StructureGeneratorCorals extends WorldGenerator {
       }
 
       // Places foundations under flying structures
-      if ((!structureName.startsWith("underground_") || world.provider.getDimension() != DimensionType.NETHER.getId()) || !(b == BiomesTFC.OCEAN
-                                                                                                                            || b == BiomesTFC.DEEP_OCEAN
-                                                                                                                            || b == BiomesTFC.BEACH
-                                                                                                                            || b == BiomesTFC.GRAVEL_BEACH
-                                                                                                                            || b == BiomesTFC.BAYOU
-                                                                                                                            || b == BiomesTFC.MANGROVE
-                                                                                                                            || b == BiomesTFC.MARSH)) {
+      if ((!structureName.startsWith("underground_") || world.provider.getDimension() != DimensionType.NETHER.getId()) || !(b == BiomesWorld.OCEAN
+                                                                                                                            || b == BiomesWorld.DEEP_OCEAN
+                                                                                                                            || b == BiomesWorld.BEACH
+                                                                                                                            || b == BiomesWorld.GRAVEL_BEACH
+                                                                                                                            || b == BiomesWorld.BAYOU
+                                                                                                                            || b == BiomesWorld.MANGROVE
+                                                                                                                            || b == BiomesWorld.MARSH)) {
         final int searchRange = 10;
         int posX = position.getX();
         int posY = position.getY();

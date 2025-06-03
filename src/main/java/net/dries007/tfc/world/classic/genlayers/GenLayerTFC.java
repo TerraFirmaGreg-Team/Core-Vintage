@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.genlayers;
 
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
+
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -8,7 +10,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.genlayers.biome.GenLayerAddIslandTFC;
 import net.dries007.tfc.world.classic.genlayers.biome.GenLayerBiomeEdge;
 import net.dries007.tfc.world.classic.genlayers.biome.GenLayerBiomeTFC;
@@ -86,31 +87,31 @@ public abstract class GenLayerTFC extends GenLayer {
 
   public GenLayerTFC(long seed) {
     super(seed);
-    this.oceanID = Biome.getIdForBiome(BiomesTFC.OCEAN);
-    this.plainsID = Biome.getIdForBiome(BiomesTFC.PLAINS);
-    this.highPlainsID = Biome.getIdForBiome(BiomesTFC.HIGH_PLAINS);
-    this.deepOceanID = Biome.getIdForBiome(BiomesTFC.DEEP_OCEAN);
-    this.lakeID = Biome.getIdForBiome(BiomesTFC.LAKE);
-    this.riverID = Biome.getIdForBiome(BiomesTFC.RIVER);
-    this.swamplandID = Biome.getIdForBiome(BiomesTFC.SWAMPLAND);
-    this.highHillsID = Biome.getIdForBiome(BiomesTFC.HIGH_HILLS);
-    this.highHillsEdgeID = Biome.getIdForBiome(BiomesTFC.HIGH_HILLS_EDGE);
-    this.rollingHillsID = Biome.getIdForBiome(BiomesTFC.ROLLING_HILLS);
-    this.beachID = Biome.getIdForBiome(BiomesTFC.BEACH);
-    this.gravelBeachID = Biome.getIdForBiome(BiomesTFC.GRAVEL_BEACH);
-    this.mountainsID = Biome.getIdForBiome(BiomesTFC.MOUNTAINS);
-    this.mountainsEdgeID = Biome.getIdForBiome(BiomesTFC.MOUNTAINS_EDGE);
-    this.flatlandsID = Biome.getIdForBiome(BiomesTFC.FLATLANDS);
-    this.fieldsID = Biome.getIdForBiome(BiomesTFC.FIELDS);
-    this.meadowsID = Biome.getIdForBiome(BiomesTFC.MEADOWS);
-    this.bayouID = Biome.getIdForBiome(BiomesTFC.BAYOU);
-    this.mangroveID = Biome.getIdForBiome(BiomesTFC.MANGROVE);
-    this.marshID = Biome.getIdForBiome(BiomesTFC.MARSH);
-    this.cragID = Biome.getIdForBiome(BiomesTFC.CRAG);
-    this.mesaID = Biome.getIdForBiome(BiomesTFC.MESA);
-    this.mesaPlateauID = Biome.getIdForBiome(BiomesTFC.MESA_PLATEAU);
-    this.mesaBryceID = Biome.getIdForBiome(BiomesTFC.MESA_BRYCE);
-    this.mesaPlateauMID = Biome.getIdForBiome(BiomesTFC.MESA_PLATEAU_M);
+    this.oceanID = Biome.getIdForBiome(BiomesWorld.OCEAN);
+    this.plainsID = Biome.getIdForBiome(BiomesWorld.PLAINS);
+    this.highPlainsID = Biome.getIdForBiome(BiomesWorld.HIGH_PLAINS);
+    this.deepOceanID = Biome.getIdForBiome(BiomesWorld.DEEP_OCEAN);
+    this.lakeID = Biome.getIdForBiome(BiomesWorld.LAKE);
+    this.riverID = Biome.getIdForBiome(BiomesWorld.RIVER);
+    this.swamplandID = Biome.getIdForBiome(BiomesWorld.SWAMPLAND);
+    this.highHillsID = Biome.getIdForBiome(BiomesWorld.HIGH_HILLS);
+    this.highHillsEdgeID = Biome.getIdForBiome(BiomesWorld.HIGH_HILLS_EDGE);
+    this.rollingHillsID = Biome.getIdForBiome(BiomesWorld.ROLLING_HILLS);
+    this.beachID = Biome.getIdForBiome(BiomesWorld.BEACH);
+    this.gravelBeachID = Biome.getIdForBiome(BiomesWorld.GRAVEL_BEACH);
+    this.mountainsID = Biome.getIdForBiome(BiomesWorld.MOUNTAINS);
+    this.mountainsEdgeID = Biome.getIdForBiome(BiomesWorld.MOUNTAINS_EDGE);
+    this.flatlandsID = Biome.getIdForBiome(BiomesWorld.FLATLANDS);
+    this.fieldsID = Biome.getIdForBiome(BiomesWorld.FIELDS);
+    this.meadowsID = Biome.getIdForBiome(BiomesWorld.MEADOWS);
+    this.bayouID = Biome.getIdForBiome(BiomesWorld.BAYOU);
+    this.mangroveID = Biome.getIdForBiome(BiomesWorld.MANGROVE);
+    this.marshID = Biome.getIdForBiome(BiomesWorld.MARSH);
+    this.cragID = Biome.getIdForBiome(BiomesWorld.CRAG);
+    this.mesaID = Biome.getIdForBiome(BiomesWorld.MESA);
+    this.mesaPlateauID = Biome.getIdForBiome(BiomesWorld.MESA_PLATEAU);
+    this.mesaBryceID = Biome.getIdForBiome(BiomesWorld.MESA_BRYCE);
+    this.mesaPlateauMID = Biome.getIdForBiome(BiomesWorld.MESA_PLATEAU_M);
   }
 
   public static GenLayerTFC[] initializeBiomes(long seed) {

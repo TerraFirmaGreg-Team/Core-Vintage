@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
+import su.terrafirmagreg.api.util.StructureUtils;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,14 +12,13 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.api.util.ITreeGenerator;
-import net.dries007.tfc.world.classic.StructureHelper;
 
 import java.util.Random;
 import java.util.stream.IntStream;
 
 public class TreeGenVariants implements ITreeGenerator {
 
-  private static final PlacementSettings settings = StructureHelper.getDefaultSettings();
+  private static final PlacementSettings settings = StructureUtils.getDefaultSettings();
   private final String[] variants;
   private final boolean useRotation;
 
@@ -25,8 +26,7 @@ public class TreeGenVariants implements ITreeGenerator {
    * A tree generator which select a random structure to place. Can choose to use a random rotation as well
    *
    * @param useRotation Should it try and randomly rotate the structures on placement
-   * @param variants    The list of variants for the generator to look for. Structure files should be placed in assets/tfc/[TREE NAME]/ This needs to be the
-   *                    list of file names, (i.e. "tree1.nbt" should pass in "tree1")
+   * @param variants    The list of variants for the generator to look for. Structure files should be placed in assets/tfc/[TREE NAME]/ This needs to be the list of file names, (i.e. "tree1.nbt" should pass in "tree1")
    */
   public TreeGenVariants(boolean useRotation, String... variants) {
     this.variants = variants;
@@ -54,11 +54,11 @@ public class TreeGenVariants implements ITreeGenerator {
       return;
     }
 
-    PlacementSettings settings2 = useRotation ? StructureHelper.getRandomSettings(rand) : settings;
+    PlacementSettings settings2 = useRotation ? StructureUtils.getRandomSettings(rand) : settings;
 
     BlockPos size = structureBase.getSize().rotate(settings2.getRotation());
     // Begin rotation things
     pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
-    StructureHelper.addStructureToWorld(world, pos, structureBase, settings2);
+    StructureUtils.addStructureToWorld(world, pos, structureBase, settings2);
   }
 }

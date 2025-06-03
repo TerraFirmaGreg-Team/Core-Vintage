@@ -1,5 +1,7 @@
 package net.dries007.firmalife.world;
 
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +14,6 @@ import net.dries007.firmalife.init.PlantsFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -59,7 +60,7 @@ public class WorldgenCinnamon extends WorldGenerator {
     if (!chunkData.isInitialized()) {return false;}
 
     final Biome b = world.getBiome(pos);
-    if (!(b instanceof BiomeTFC) || b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN) {return false;}
+    if (!(b instanceof BiomeTFC) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN) {return false;}
 
     final float temp = chunkData.getAverageTemp();
     final float rain = chunkData.getRainfall();

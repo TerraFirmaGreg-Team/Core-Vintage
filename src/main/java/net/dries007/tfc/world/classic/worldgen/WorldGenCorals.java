@@ -1,6 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.EnumDyeColor;
@@ -16,7 +17,6 @@ import net.dries007.tfc.objects.blocks.groundcover.BlockCoral;
 import net.dries007.tfc.objects.blocks.groundcover.BlockCoralBlock;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -48,7 +48,7 @@ public class WorldGenCorals implements IWorldGenerator {
       final int z = (chunkZ << 4) + random.nextInt(16) + 8;
       final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
-      if ((b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN || b == BiomesTFC.BEACH || b == BiomesTFC.GRAVEL_BEACH) && world.provider.getDimension() == 0) {
+      if ((b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH || b == BiomesWorld.GRAVEL_BEACH) && world.provider.getDimension() == 0) {
         if (isValidPosition(world, pos) && pos.getY() < WorldTypeTFC.SEALEVEL - 1 && pos.getY() > 119 && floraDensity >= 0.4f && floraDiversity >= 0.3f
             && floraDensity <= 0.6f && floraDiversity <= 0.5f && avgTemperature >= 10f && avgTemperature <= 28f && rainfall >= 150f) {
           int dyeColorRandom = random.nextInt(16);
@@ -429,7 +429,7 @@ public class WorldGenCorals implements IWorldGenerator {
       final int z = (chunkZ << 4) + random.nextInt(16) + 8;
       final BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 
-      if ((b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN || b == BiomesTFC.BEACH || b == BiomesTFC.GRAVEL_BEACH) && world.provider.getDimension() == 0) {
+      if ((b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH || b == BiomesWorld.GRAVEL_BEACH) && world.provider.getDimension() == 0) {
         if (isValidPosition2(world, pos) && pos.getY() < WorldTypeTFC.SEALEVEL - 1 && pos.getY() > 119 && floraDensity >= 0.4f && floraDiversity >= 0.3f
             && avgTemperature >= 10f && rainfall >= 150f) {
           int dyeColorRandom = random.nextInt(16);

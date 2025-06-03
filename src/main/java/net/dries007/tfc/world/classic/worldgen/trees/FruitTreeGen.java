@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
+import su.terrafirmagreg.api.util.StructureUtils;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,13 +12,12 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.util.IFruitTreeGenerator;
-import net.dries007.tfc.world.classic.StructureHelper;
 
 import java.util.Random;
 
 public class FruitTreeGen implements IFruitTreeGenerator {
 
-  private static final PlacementSettings SETTINGS = StructureHelper.getDefaultSettings();
+  private static final PlacementSettings SETTINGS = StructureUtils.getDefaultSettings();
 
   @Override
   public void generateTree(TemplateManager manager, World world, BlockPos pos, IFruitTree tree, Random rand) {
@@ -31,6 +32,6 @@ public class FruitTreeGen implements IFruitTreeGenerator {
     BlockPos size = structureBase.getSize();
     pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
 
-    StructureHelper.addStructureToWorld(world, pos, structureBase, SETTINGS);
+    StructureUtils.addStructureToWorld(world, pos, structureBase, SETTINGS);
   }
 }

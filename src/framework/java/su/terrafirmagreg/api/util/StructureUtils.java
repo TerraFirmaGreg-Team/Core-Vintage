@@ -19,13 +19,11 @@ import lombok.experimental.UtilityClass;
 import java.util.Random;
 
 @UtilityClass
-@SuppressWarnings("unused")
 public final class StructureUtils {
 
   /**
-   * This is a copy of the method included in the Template class, with some key differences. This will ignore TEs / Entities, and does less checks for bad
-   * usage, since it will only be used for tree worldgen It will do an additional check that the block is replaceable; important for tree growth; as to not
-   * replace other blocks
+   * This is a copy of the method included in the Template class, with some key differences. This will ignore TEs / Entities, and does less checks for bad usage, since it will only be used for tree worldgen It will do an additional check
+   * that the block is replaceable; important for tree growth; as to not replace other blocks
    *
    * @param worldIn     the world
    * @param pos         the position
@@ -66,7 +64,7 @@ public final class StructureUtils {
         worldIn.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(),
           false);
       }
-
+ 
     }
   }
 
@@ -85,8 +83,8 @@ public final class StructureUtils {
    *
    * @return A default set of placement settings for tree generation
    */
-
   public static PlacementSettings getDefaultSettings() {
     return new PlacementSettings().setIgnoreStructureBlock(false);
   }
+
 }

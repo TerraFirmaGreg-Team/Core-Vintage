@@ -2,6 +2,7 @@ package net.dries007.tfc.world.classic.worldgen.cave;
 
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,7 +17,6 @@ import net.dries007.tfc.types.DefaultPlants;
 import net.dries007.tfc.types.PlantsTFCF;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfcflorae.ConfigTFCF;
 
@@ -80,7 +80,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
           case HANGING: {
             switch (MathUtils.RNG.nextInt(2)) {
               case 0: {
-                if ((b != BiomesTFC.OCEAN || b != BiomesTFC.OCEAN) && (
+                if ((b != BiomesWorld.OCEAN || b != BiomesWorld.OCEAN) && (
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
@@ -101,7 +101,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
                 }
               }
               case 1: {
-                if ((b != BiomesTFC.OCEAN || b != BiomesTFC.OCEAN) && (
+                if ((b != BiomesWorld.OCEAN || b != BiomesWorld.OCEAN) && (
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
@@ -125,7 +125,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
             }
           }
           case CREEPING: {
-            if ((b != BiomesTFC.OCEAN || b != BiomesTFC.OCEAN) && (
+            if ((b != BiomesWorld.OCEAN || b != BiomesWorld.OCEAN) && (
               plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TACKWEED) ||
               plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TAKAKIA) ||
               plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.IVY) ||

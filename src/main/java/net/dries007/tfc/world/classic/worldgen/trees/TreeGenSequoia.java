@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
+import su.terrafirmagreg.api.util.StructureUtils;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +17,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.world.classic.StructureHelper;
 
 import java.util.Random;
 
@@ -26,7 +27,7 @@ public class TreeGenSequoia implements ITreeGenerator {
   private static final BlockPos[] OFFSETS = new BlockPos[]{
     new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
   };
-  private final PlacementSettings settings = StructureHelper.getDefaultSettings();
+  private final PlacementSettings settings = StructureUtils.getDefaultSettings();
   private IBlockState trunk;
 
   @Override
@@ -80,7 +81,7 @@ public class TreeGenSequoia implements ITreeGenerator {
     BlockPos size = structureBase.getSize();
     pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
 
-    StructureHelper.addStructureToWorld(world, pos, structureBase, settings);
+    StructureUtils.addStructureToWorld(world, pos, structureBase, settings);
     return size.getY();
   }
 

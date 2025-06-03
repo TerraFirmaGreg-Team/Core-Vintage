@@ -36,6 +36,8 @@ public class FeatureRemappingAnimal extends FeatureBase {
       put("product/wool_cloth", () -> ItemsAnimal.WOOL_CLOTH);
       put("product/wool_yarn", () -> ItemsAnimal.WOOL_YARN);
       put("product/wool", () -> ItemsAnimal.WOOL);
+
+      put("nest_box", () -> BlocksAnimal.NEST_BOX.asItem());
     }});
   }
 

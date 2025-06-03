@@ -1,5 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen;
 
+import su.terrafirmagreg.api.util.StructureUtils;
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -15,9 +18,7 @@ import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.types.TreesTFCF;
-import net.dries007.tfc.world.classic.StructureHelper;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfcflorae.ConfigTFCF;
 
@@ -26,7 +27,7 @@ import java.util.stream.IntStream;
 
 public class WorldGenCinnamon extends WorldGenerator {
 
-  private static final PlacementSettings settings = StructureHelper.getDefaultSettings();
+  private static final PlacementSettings settings = StructureUtils.getDefaultSettings();
 
   private static final int numVariants = 1; // should always be 1 or higher
   private static final String[] variants = IntStream.range(1, numVariants).mapToObj(String::valueOf).toArray(String[]::new);
@@ -40,7 +41,7 @@ public class WorldGenCinnamon extends WorldGenerator {
     if (!chunkData.isInitialized()) {return false;}
 
     final Biome b = world.getBiome(pos);
-    if (!(b instanceof BiomeTFC) || b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN) {return false;}
+    if (!(b instanceof BiomeTFC) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN) {return false;}
 
     final float diversity = chunkData.getFloraDiversity();
     final float density = chunkData.getFloraDensity();

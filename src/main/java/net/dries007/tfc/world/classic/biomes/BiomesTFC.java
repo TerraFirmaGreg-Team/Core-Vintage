@@ -10,8 +10,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import net.dries007.tfc.util.Helpers;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,31 +20,6 @@ import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 @GameRegistry.ObjectHolder(TFC)
 public final class BiomesTFC {
 
-  public static final BiomeTFC OCEAN = Helpers.getNull();
-  public static final BiomeTFC RIVER = Helpers.getNull();
-  public static final BiomeTFC BEACH = Helpers.getNull();
-  public static final BiomeTFC GRAVEL_BEACH = Helpers.getNull();
-  public static final BiomeTFC HIGH_HILLS = Helpers.getNull();
-  public static final BiomeTFC PLAINS = Helpers.getNull();
-  public static final BiomeTFC SWAMPLAND = Helpers.getNull();
-  public static final BiomeTFC HIGH_HILLS_EDGE = Helpers.getNull();
-  public static final BiomeTFC ROLLING_HILLS = Helpers.getNull();
-  public static final BiomeTFC MOUNTAINS = Helpers.getNull();
-  public static final BiomeTFC MOUNTAINS_EDGE = Helpers.getNull();
-  public static final BiomeTFC HIGH_PLAINS = Helpers.getNull();
-  public static final BiomeTFC DEEP_OCEAN = Helpers.getNull();
-  public static final BiomeTFC LAKE = Helpers.getNull();
-  public static final BiomeTFC FLATLANDS = Helpers.getNull();
-  public static final BiomeTFC FIELDS = Helpers.getNull();
-  public static final BiomeTFC MEADOWS = Helpers.getNull();
-  public static final BiomeTFC BAYOU = Helpers.getNull();
-  public static final BiomeTFC MANGROVE = Helpers.getNull();
-  public static final BiomeTFC MARSH = Helpers.getNull();
-  public static final BiomeMesaTFC CRAG = Helpers.getNull();
-  public static final BiomeMesaTFC MESA = Helpers.getNull();
-  public static final BiomeMesaTFC MESA_PLATEAU = Helpers.getNull();
-  public static final BiomeMesaTFC MESA_BRYCE = Helpers.getNull();
-  public static final BiomeMesaTFC MESA_PLATEAU_M = Helpers.getNull();
   private static final List<Biome> SPAWN_BIOMES = new ArrayList();
   private static final List<Biome> WORLD_GEN_BIOMES = new ArrayList();
 

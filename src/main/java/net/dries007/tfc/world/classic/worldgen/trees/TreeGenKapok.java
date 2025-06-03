@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
+import su.terrafirmagreg.api.util.StructureUtils;
+
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
@@ -18,7 +20,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.world.classic.StructureHelper;
 
 import java.util.Random;
 
@@ -31,7 +32,7 @@ import static net.minecraft.block.BlockVine.WEST;
 
 public class TreeGenKapok implements ITreeGenerator {
 
-  private static final PlacementSettings settings = StructureHelper.getDefaultSettings();
+  private static final PlacementSettings settings = StructureUtils.getDefaultSettings();
   private static final BlockPos[] trunkPos = new BlockPos[]{
     new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
   };
@@ -90,7 +91,7 @@ public class TreeGenKapok implements ITreeGenerator {
     BlockPos size = structureBase.getSize();
     pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
 
-    StructureHelper.addStructureToWorld(world, pos, structureBase, settings);
+    StructureUtils.addStructureToWorld(world, pos, structureBase, settings);
   }
 
   private void placeTrunk(World world, BlockPos pos) {

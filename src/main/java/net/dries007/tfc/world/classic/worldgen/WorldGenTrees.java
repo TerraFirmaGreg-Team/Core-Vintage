@@ -1,5 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -20,7 +22,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import java.util.Collections;
@@ -62,7 +63,7 @@ public class WorldGenTrees implements IWorldGenerator {
     if (!chunkData.isInitialized()) {return;}
 
     final Biome b = world.getBiome(chunkBlockPos);
-    if (!(b instanceof BiomeTFC) || b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN) {return;}
+    if (!(b instanceof BiomeTFC) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN) {return;}
 
     final TemplateManager manager = ((WorldServer) world).getStructureTemplateManager();
     final float diversity = chunkData.getFloraDiversity();

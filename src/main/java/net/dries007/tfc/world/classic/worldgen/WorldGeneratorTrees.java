@@ -2,6 +2,7 @@ package net.dries007.tfc.world.classic.worldgen;
 
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -24,7 +25,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.types.TreesTFCF;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.structures.StructureGeneratorCorals;
 
@@ -61,36 +61,36 @@ public class WorldGeneratorTrees implements IWorldGenerator {
 
     // Dense foliage chaparral/shrubland forests in dry & sparsely populated mountain regions
     // Similarly to Mediterranean and Californian areas
-    if ((b == BiomesTFC.MOUNTAINS || b == BiomesTFC.MOUNTAINS_EDGE || b == BiomesTFC.HIGH_HILLS || b == BiomesTFC.HIGH_HILLS_EDGE) && (avgTemperature
-                                                                                                                                       >= 4 + gauss)) {
+    if ((b == BiomesWorld.MOUNTAINS || b == BiomesWorld.MOUNTAINS_EDGE || b == BiomesWorld.HIGH_HILLS || b == BiomesWorld.HIGH_HILLS_EDGE) && (avgTemperature
+                                                                                                                                               >= 4 + gauss)) {
       genBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.3f, 60f + gauss, 200f + gauss, 4 + random.nextInt(10), trees);
     }
 
     // Mid-dense foliage chaparral/shrubland forests in dry & sparsely populated hilly landscapes
     // Similarly to South African areas
-    if ((b == BiomesTFC.ROLLING_HILLS || b == BiomesTFC.HIGH_PLAINS) && (avgTemperature >= 1 + gauss)) {
+    if ((b == BiomesWorld.ROLLING_HILLS || b == BiomesWorld.HIGH_PLAINS) && (avgTemperature >= 1 + gauss)) {
       genBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.3f, 70f + gauss, 230f + gauss, 4 + random.nextInt(9), trees);
     }
 
     // Mid-dense foliage chaparral/shrubland forests in temperate regions
     // Similarly to steppes across Eurasian regions
-    if ((b == BiomesTFC.ROLLING_HILLS || b == BiomesTFC.FIELDS || b == BiomesTFC.FLATLANDS || b == BiomesTFC.PLAINS || b == BiomesTFC.HIGH_PLAINS) && (
+    if ((b == BiomesWorld.ROLLING_HILLS || b == BiomesWorld.FIELDS || b == BiomesWorld.FLATLANDS || b == BiomesWorld.PLAINS || b == BiomesWorld.HIGH_PLAINS) && (
       avgTemperature <= 10 + gauss)) {
       genBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.3f, 150f + gauss, 380f + gauss, 1 + random.nextInt(7), trees);
     }
 
     // More foliage bushes to woodlands
-    if (!(b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN)) {
+    if (!(b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN)) {
       genBush(random, chunkX, chunkZ, world, chunkData, 0.3f, 1f, 150f + gauss, 500f - gauss, 1 + random.nextInt(5), trees);
     }
 
     // Jungle Foliage
-    if (!(b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN) && (avgTemperature >= 10 + gauss)) {
+    if (!(b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN) && (avgTemperature >= 10 + gauss)) {
       genBush(random, chunkX, chunkZ, world, chunkData, 0.3f, 1f, 150f + gauss, 500f - gauss, 5 + random.nextInt(10), trees);
     }
 
     // Sparse foliage were it's otherwise just completely barren and boring...
-    if (!(b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN)) {
+    if (!(b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN)) {
       genBush(random, chunkX, chunkZ, world, chunkData, 0.0f, 0.2f, 260f + gauss, 500f - gauss, random.nextInt(5), trees);
     }
 
@@ -105,7 +105,7 @@ public class WorldGeneratorTrees implements IWorldGenerator {
         //BlockPos blockPos = world.getHeight(chunkPos.add(random.nextInt(16) + 8, (random.nextInt(7) - random.nextInt(7)) * -1, random.nextInt(16) + 8));
 
         if ((BlocksTFC.isGround(down) || BlocksTFCF.isGround(down) || world.getBlockState(blockPos).getBlock() == ChunkGenTFC.FRESH_WATER.getBlock())
-            && b1 == BiomesTFC.BAYOU) {
+            && b1 == BiomesWorld.BAYOU) {
           //if (TFCRegistries.TREES.getValue(TreesTFCF.BALD_CYPRESS).isValidLocation(avgTemperature, rainfall, density))
           if (10f <= avgTemperature && 38f >= avgTemperature && 180f <= rainfall && 500f >= rainfall && blockPos.getY() >= WorldTypeTFC.SEALEVEL - 8) {
             int randomTree = random.nextInt(13) + 1;
@@ -129,7 +129,7 @@ public class WorldGeneratorTrees implements IWorldGenerator {
         //BlockPos blockPos = world.getHeight(chunkPos.add(random.nextInt(16) + 8, (random.nextInt(7) - random.nextInt(7)) * -1, random.nextInt(16) + 8));
 
         if ((BlocksTFC.isGround(down) || BlocksTFCF.isGround(down) || world.getBlockState(blockPos).getBlock() == ChunkGenTFC.SALT_WATER.getBlock())
-            && b1 == BiomesTFC.MANGROVE) {
+            && b1 == BiomesWorld.MANGROVE) {
           //if (TFCRegistries.TREES.getValue(TreesTFCF.MANGROVE).isValidLocation(avgTemperature, rainfall, density))
           if (15f <= avgTemperature && 40f >= avgTemperature && 200f <= rainfall && 500f >= rainfall && blockPos.getY() >= WorldTypeTFC.SEALEVEL - 8) {
             int randomTree = random.nextInt(13) + 1;
@@ -151,7 +151,7 @@ public class WorldGeneratorTrees implements IWorldGenerator {
         IBlockState down = world.getBlockState(blockPos.down());
         final Biome b1 = world.getBiome(blockPos);
 
-        if (b1 != BiomesTFC.BAYOU && b1 != BiomesTFC.MARSH && !BiomeHelper.isOceanic(b1) && !BiomeHelper.isLake(b1) && !BiomeHelper.isBeach(b1)
+        if (b1 != BiomesWorld.BAYOU && b1 != BiomesWorld.MARSH && !BiomeHelper.isOceanic(b1) && !BiomeHelper.isLake(b1) && !BiomeHelper.isBeach(b1)
             && !BiomeHelper.isMesa(b1)) {
           if ((BlocksTFC.isSand(down) || BlocksTFC.isSoilOrGravel(down) || BlocksTFCF.isSand(down) || BlocksTFCF.isSoilOrGravel(down)) && (
             down != Blocks.HARDENED_CLAY && down != Blocks.STAINED_HARDENED_CLAY)) {

@@ -4,6 +4,7 @@
 package net.dries007.tfc.world.classic.worldgen.structures;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -36,7 +37,6 @@ import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfcflorae.TFCFlorae;
 
@@ -87,14 +87,14 @@ public class StructureGenerator extends WorldGenerator {
     final Biome b3 = world.getBiome(x3);
 
     return (world.getBlockState(x1).getBlock() != ChunkGenTFC.FRESH_WATER.getBlock() && world.getBlockState(x1).getBlock() != ChunkGenTFC.SALT_WATER.getBlock()
-            && world.getBlockState(x1).getBlock() != ChunkGenTFC.HOT_WATER.getBlock() && b1 != BiomesTFC.OCEAN && b1 != BiomesTFC.DEEP_OCEAN
-            && b1 != BiomesTFC.LAKE && b1 != BiomesTFC.RIVER && b1 != BiomesTFC.BEACH && b1 != BiomesTFC.GRAVEL_BEACH) &&
+            && world.getBlockState(x1).getBlock() != ChunkGenTFC.HOT_WATER.getBlock() && b1 != BiomesWorld.OCEAN && b1 != BiomesWorld.DEEP_OCEAN
+            && b1 != BiomesWorld.LAKE && b1 != BiomesWorld.RIVER && b1 != BiomesWorld.BEACH && b1 != BiomesWorld.GRAVEL_BEACH) &&
            (world.getBlockState(x2).getBlock() != ChunkGenTFC.FRESH_WATER.getBlock() && world.getBlockState(x2).getBlock() != ChunkGenTFC.SALT_WATER.getBlock()
-            && world.getBlockState(x2).getBlock() != ChunkGenTFC.HOT_WATER.getBlock() && b2 != BiomesTFC.OCEAN && b2 != BiomesTFC.DEEP_OCEAN
-            && b2 != BiomesTFC.LAKE && b2 != BiomesTFC.RIVER && b2 != BiomesTFC.BEACH && b2 != BiomesTFC.GRAVEL_BEACH) &&
+            && world.getBlockState(x2).getBlock() != ChunkGenTFC.HOT_WATER.getBlock() && b2 != BiomesWorld.OCEAN && b2 != BiomesWorld.DEEP_OCEAN
+            && b2 != BiomesWorld.LAKE && b2 != BiomesWorld.RIVER && b2 != BiomesWorld.BEACH && b2 != BiomesWorld.GRAVEL_BEACH) &&
            (world.getBlockState(x3).getBlock() != ChunkGenTFC.FRESH_WATER.getBlock() && world.getBlockState(x3).getBlock() != ChunkGenTFC.SALT_WATER.getBlock()
-            && world.getBlockState(x3).getBlock() != ChunkGenTFC.HOT_WATER.getBlock() && b3 != BiomesTFC.OCEAN && b3 != BiomesTFC.DEEP_OCEAN
-            && b3 != BiomesTFC.LAKE && b3 != BiomesTFC.RIVER && b3 != BiomesTFC.BEACH && b3 != BiomesTFC.GRAVEL_BEACH);
+            && world.getBlockState(x3).getBlock() != ChunkGenTFC.HOT_WATER.getBlock() && b3 != BiomesWorld.OCEAN && b3 != BiomesWorld.DEEP_OCEAN
+            && b3 != BiomesWorld.LAKE && b3 != BiomesWorld.RIVER && b3 != BiomesWorld.BEACH && b3 != BiomesWorld.GRAVEL_BEACH);
   }
 
   public static int getGroundFromAbove(World world, int x, int z) {

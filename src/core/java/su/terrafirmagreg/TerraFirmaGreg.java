@@ -8,6 +8,7 @@ import su.terrafirmagreg.modules.food.ModuleFood;
 import su.terrafirmagreg.modules.metal.ModuleMetal;
 import su.terrafirmagreg.modules.rock.ModuleRock;
 import su.terrafirmagreg.modules.wood.ModuleWood;
+import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;
@@ -52,6 +53,7 @@ public class TerraFirmaGreg extends Framework {
     addModule(new ModuleDevice());
     addModule(new ModuleAnimal());
     addModule(new ModuleFood());
+    addModule(new ModuleWorld());
   }
 
   @EventHandler

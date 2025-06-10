@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.feature.sinkorswim;
 
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.ConfigCore;
 
 import net.minecraft.block.Block;
@@ -25,7 +25,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class FeatureSinkOrSwim extends FeatureBase {
+public class FeatureSinkOrSwim extends BaseFeature {
+
+  public FeatureSinkOrSwim() {
+    super(Settings.of()
+      .registryKey("sink_or_swim")
+      .enabled(ConfigCore.FEATURE.SINK_OR_SWIM.enabled)
+    );
+  }
 
   @SubscribeEvent
   public static void onLivingUpdateEvent(LivingEvent.LivingUpdateEvent event) {
@@ -148,11 +155,6 @@ public class FeatureSinkOrSwim extends FeatureBase {
       }
     }
     return listBaubles;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return ConfigCore.FEATURE.SINK_OR_SWIM.enable;
   }
 
 }

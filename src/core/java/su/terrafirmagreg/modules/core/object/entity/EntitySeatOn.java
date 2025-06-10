@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.object.entity;
 
-import su.terrafirmagreg.api.base.object.entity.spi.BaseEntity;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

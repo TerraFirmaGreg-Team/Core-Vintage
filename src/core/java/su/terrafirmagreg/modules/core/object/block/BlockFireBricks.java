@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.object.block;
 
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;

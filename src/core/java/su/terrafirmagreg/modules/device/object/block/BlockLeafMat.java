@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;

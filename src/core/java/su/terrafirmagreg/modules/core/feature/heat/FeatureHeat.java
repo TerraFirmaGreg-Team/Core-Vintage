@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.core.feature.heat;
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
 import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class FeatureHeat extends FeatureBase {
+public class FeatureHeat extends BaseFeature {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {

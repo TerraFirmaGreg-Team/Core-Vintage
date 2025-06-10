@@ -1,7 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen;
 
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+
 import su.terrafirmagreg.api.util.StructureUtils;
-import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -41,7 +42,7 @@ public class WorldGenCinnamon extends WorldGenerator {
     if (!chunkData.isInitialized()) {return false;}
 
     final Biome b = world.getBiome(pos);
-    if (!(b instanceof BiomeTFC) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN) {return false;}
+    if (!(b instanceof BiomeTFC) || b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN) {return false;}
 
     final float diversity = chunkData.getFloraDiversity();
     final float density = chunkData.getFloraDensity();

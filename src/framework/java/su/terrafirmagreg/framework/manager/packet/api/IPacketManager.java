@@ -13,9 +13,9 @@ public interface IPacketManager {
 
   Map<IModule, IPacketManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
 
-  Map<Class<? extends IPacket>, PacketWrapper> ALL_PACKET_MAP = new Object2ObjectOpenHashMap<>();
+  Map<Class<? extends IPacketEntry>, PacketWrapper> ALL_PACKET_MAP = new Object2ObjectOpenHashMap<>();
 
-  static NetworkThreadedWrapper getChannel(IPacket packet) {
+  static NetworkThreadedWrapper getChannel(IPacketEntry packet) {
     var packetClass = packet.getClass();
     var wrapper = IPacketManager.ALL_PACKET_MAP.get(packetClass);
     if (wrapper == null) {

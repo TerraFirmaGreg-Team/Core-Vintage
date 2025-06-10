@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.feature.playerdata;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.MathUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.ProviderPlayerData;
@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensio
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
-public class FeaturePlayerData extends FeatureBase {
+public class FeaturePlayerData extends BaseFeature {
 
   private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 

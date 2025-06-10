@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
-import su.terrafirmagreg.api.base.object.entity.spi.BaseEntity.BaseEntityType;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.BiomeUtils;

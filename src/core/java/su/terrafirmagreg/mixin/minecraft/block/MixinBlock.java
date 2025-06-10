@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.minecraft.block;
 
-import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
+import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = Block.class)
-public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements IBlockSettings {
+public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements IBlockEntry {
 
   @Unique
   @Mutable

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.framework.manager.registry.provider;
 
-import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +16,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import net.dries007.tfc.objects.items.metal.ItemMetalChisel;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
@@ -54,10 +55,10 @@ public interface IProviderHighlight {
   static void drawBox(AxisAlignedBB box, float lineWidth, float red, float green, float blue, float alpha) {
     GlStateManager.enableBlend();
     GlStateManager.tryBlendFuncSeparate(
-        GlStateManager.SourceFactor.SRC_ALPHA,
-        GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-        GlStateManager.SourceFactor.ONE,
-        GlStateManager.DestFactor.ZERO
+      GlStateManager.SourceFactor.SRC_ALPHA,
+      GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+      GlStateManager.SourceFactor.ONE,
+      GlStateManager.DestFactor.ZERO
     );
     GlStateManager.glLineWidth(lineWidth);
     GlStateManager.disableTexture2D();
@@ -103,9 +104,9 @@ public interface IProviderHighlight {
         if (player.getHeldItemMainhand().getItem() instanceof ItemMetalChisel) {
           // Get the state that the chisel would turn the block into if it clicked
           IBlockState newState = ItemMetalChisel.getChiselResultState(player, player.world, lookingAt, traceResult.sideHit,
-              (float) traceResult.hitVec.x - lookingAt.getX(),
-              (float) traceResult.hitVec.y - lookingAt.getY(),
-              (float) traceResult.hitVec.z - lookingAt.getZ()
+            (float) traceResult.hitVec.x - lookingAt.getX(),
+            (float) traceResult.hitVec.y - lookingAt.getY(),
+            (float) traceResult.hitVec.z - lookingAt.getZ()
           );
           if (newState != null) {
             AxisAlignedBB box = IProviderHighlight.getBox(player, lookingAt, event.getPartialTicks()).grow(0.001);

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.feature.calendar;
 
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
@@ -26,7 +26,7 @@ import java.util.Objects;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
 
-public class FeatureCalendar extends FeatureBase {
+public class FeatureCalendar extends BaseFeature {
 
 
   /**

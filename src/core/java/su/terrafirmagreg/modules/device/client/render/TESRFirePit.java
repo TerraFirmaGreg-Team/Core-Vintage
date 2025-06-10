@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.api.base.client.tesr.spi.BaseTESR;
 import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
+import su.terrafirmagreg.framework.manager.registry.base.tesr.spi.BaseTESR;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;

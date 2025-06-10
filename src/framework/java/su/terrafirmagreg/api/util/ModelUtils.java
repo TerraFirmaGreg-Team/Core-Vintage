@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
-import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
 import su.terrafirmagreg.api.library.model.CustomStateMap;
+import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
+import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockState;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderEntityRenderer;
@@ -72,7 +72,7 @@ public final class ModelUtils {
       ModelUtils.stateMapper(block, provider.getStateMapper());
       return;
     }
-    if (block instanceof IBlockSettings provider) {
+    if (block instanceof IBlockEntry provider) {
       final var settings = provider.getSettings();
       final var ignored = settings.getIgnoredProperties();
       final var resource = settings.getResource();
@@ -93,7 +93,7 @@ public final class ModelUtils {
 
 
   public static void model(Block block) {
-    if (block instanceof IBlockSettings provider) {
+    if (block instanceof IBlockEntry provider) {
       if (provider.getSettings().getResource() != null) {
         ModelUtils.model(block, provider.getSettings().getResource());
         return;
@@ -142,7 +142,7 @@ public final class ModelUtils {
   //region ===== Item
 
   public static void model(Item item) {
-    if (item instanceof IItemSettings provider) {
+    if (item instanceof IItemEntry provider) {
       if (provider.getSettings().getResource() != null) {
         ModelUtils.model(item, provider.getSettings().getResource());
         return;
@@ -151,7 +151,7 @@ public final class ModelUtils {
     }
     if (item instanceof ItemBlock itemBlock) {
       var block = itemBlock.getBlock();
-      if (block instanceof IBlockSettings provider) {
+      if (block instanceof IBlockEntry provider) {
         if (provider.getSettings().getResource() != null) {
           ModelUtils.model(itemBlock, provider.getSettings().getResource());
           return;

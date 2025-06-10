@@ -8,5 +8,5 @@ public interface IPacketRegistrar {
    * @param clazz The class of the packet. This class must implement IMessage and IMessageHandler!
    * @param side  The side that receives this packet.
    */
-  <P extends IPacket> void addPacket(P packet);
+  <P extends IPacketEntry> void addPacket(P packet);
 }

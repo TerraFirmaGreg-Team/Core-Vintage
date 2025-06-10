@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.manager.plugin;
 
-import su.terrafirmagreg.framework.manager.plugin.api.IPlugin;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginEntry;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginManager;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginService;
 import su.terrafirmagreg.framework.module.api.IModule;
@@ -104,8 +104,8 @@ public class PluginService implements IPluginService {
     fireEvent(plugin -> plugin.onServerStopped(event));
   }
 
-  protected void fireEvent(Consumer<IPlugin> consumer) {
+  protected void fireEvent(Consumer<IPluginEntry> consumer) {
 
-    this.map.values().forEach(wrapper -> consumer.accept(wrapper.getPlugin()));
+    this.map.values().forEach(consumer);
   }
 }

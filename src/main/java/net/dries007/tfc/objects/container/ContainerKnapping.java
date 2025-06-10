@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.container;
 
-import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
+import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,15 +11,15 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.slot.SlotKnappingOutput;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.SimpleCraftMatrix;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class ContainerKnapping extends ContainerItemStack implements IButtonHandler {

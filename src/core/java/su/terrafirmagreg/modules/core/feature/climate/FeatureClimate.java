@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.feature.climate;
 
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 
-public class FeatureClimate extends FeatureBase {
+public class FeatureClimate extends BaseFeature {
 }

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.ambiental;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityProviderAmbiental;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.ICapabilityAmbiental;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class FeatureAmbiental extends FeatureBase {
+public class FeatureAmbiental extends BaseFeature {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {

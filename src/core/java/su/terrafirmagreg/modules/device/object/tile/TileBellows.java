@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTile;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;

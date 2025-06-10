@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlockBed;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockBed;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.api.util.ModUtils;

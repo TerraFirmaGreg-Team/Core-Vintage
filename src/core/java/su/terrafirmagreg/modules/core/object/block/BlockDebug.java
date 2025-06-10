@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.object.block;
 
 
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 
 import net.minecraft.block.material.Material;
 

@@ -1,7 +1,6 @@
 package su.terrafirmagreg.framework.manager.feature;
 
-import su.terrafirmagreg.framework.manager.feature.FeatureMap.FeatureWrapper;
-import su.terrafirmagreg.framework.manager.feature.api.IFeature;
+import su.terrafirmagreg.framework.manager.feature.api.IFeatureEntry;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureManager;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.module.api.IModule;
@@ -24,18 +23,19 @@ public class FeatureRegistrar implements IFeatureRegistrar {
 
 
   @Override
-  public <T extends IFeature> void addFeature(T feature) {
+  public <T extends IFeatureEntry> void addFeature(T feature) {
     var featureClass = feature.getClass();
+    var settings = feature.getSettings();
 
-    if (!feature.isEnabled()) {
+    if (!settings.isEnabled()) {
       module.getLogger().debug("Feature {} is disabled: {}", featureClass.getSimpleName());
       return;
     }
 
-    if (feature.hasSubscriptions()) {
+    if (settings.isHasSubscriptions()) {
       MinecraftForge.EVENT_BUS.register(featureClass);
     }
 
-    this.map.put(featureClass, FeatureWrapper.of(feature));
+    this.map.put(featureClass, feature);
   }
 }

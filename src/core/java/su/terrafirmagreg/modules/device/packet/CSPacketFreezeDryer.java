@@ -1,12 +1,11 @@
 package su.terrafirmagreg.modules.device.packet;
 
-import su.terrafirmagreg.api.base.packet.spi.BasePacketTile;
-import su.terrafirmagreg.framework.manager.packet.api.IPacket;
+import su.terrafirmagreg.framework.manager.packet.base.BasePacketTile;
 import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 
 import net.minecraft.util.math.BlockPos;
 
-public class CSPacketFreezeDryer extends BasePacketTile<TileFreezeDryer> implements IPacket.Server {
+public class CSPacketFreezeDryer extends BasePacketTile<TileFreezeDryer> {
 
   public int bool;
   public boolean mode;

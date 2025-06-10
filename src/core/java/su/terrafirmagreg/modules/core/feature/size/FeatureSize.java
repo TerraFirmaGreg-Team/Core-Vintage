@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.data.Unicode;
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
@@ -21,18 +21,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class FeatureSize extends FeatureBase {
+public class FeatureSize extends BaseFeature {
 
 
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-
-    CapabilitySize.register();
-  }
-
-  @Override
-  public void onInit(FMLInitializationEvent event) {
-    CapabilitySize.Handler.init();
+  public FeatureSize() {
+    super(Settings.of()
+      .registryKey("size")
+      .enabled(ConfigCore.FEATURE.SIZE.enabled)
+    );
   }
 
   @SubscribeEvent
@@ -78,7 +74,13 @@ public class FeatureSize extends FeatureBase {
   }
 
   @Override
-  public boolean isEnabled() {
-    return ConfigCore.FEATURE.SIZE.enable;
+  public void onPreInit(FMLPreInitializationEvent event) {
+
+    CapabilitySize.register();
+  }
+
+  @Override
+  public void onInit(FMLInitializationEvent event) {
+    CapabilitySize.Handler.init();
   }
 }

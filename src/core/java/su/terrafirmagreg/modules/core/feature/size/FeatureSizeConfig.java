@@ -10,7 +10,7 @@ public class FeatureSizeConfig {
     "If true, size and weight enable ",
     "Default = true"
   })
-  public boolean enable = true;
+  public boolean enabled = true;
 
   @RequiresMcRestart
   @Comment("Stack size of Very Heavy items. I wouldn't change this one. Default = 1")

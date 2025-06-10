@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.container;
 
-import su.terrafirmagreg.api.base.object.inventory.spi.container.BaseContainerTile;
-import su.terrafirmagreg.api.base.object.inventory.spi.slot.SlotCallback;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.container.BaseContainerTile;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.slot.SlotCallback;
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.modules.device.object.tile.TileAlloyCalculator;
 

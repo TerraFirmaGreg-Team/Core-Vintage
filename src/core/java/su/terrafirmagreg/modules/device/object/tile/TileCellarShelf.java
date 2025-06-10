@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.inventory.api.IItemHandlerSidedCallback;
-import su.terrafirmagreg.api.base.object.inventory.spi.ItemHandlerSidedWrapper;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.api.IItemHandlerSidedCallback;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemHandlerSidedWrapper;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;

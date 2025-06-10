@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.api.util.BufUtils;
 import su.terrafirmagreg.api.util.ClassUtils;
 import su.terrafirmagreg.api.util.NetworkUtils;
-import su.terrafirmagreg.framework.manager.packet.api.IPacket;
+import su.terrafirmagreg.framework.manager.packet.api.IPacketEntry;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -40,7 +40,7 @@ public class NetworkThreadedWrapper {
   private static final Map<String, NetworkThreadedWrapper> WRAPPER_MAP = new Object2ObjectOpenHashMap<>();
 
 
-  private final IntIdentityHashBiMap<Class<? extends IPacket>> packetMap;
+  private final IntIdentityHashBiMap<Class<? extends IPacketEntry>> packetMap;
   private final String netId;
   private final SimpleNetworkWrapper channel;
   private final IdSupplier idSupplier;
@@ -68,17 +68,17 @@ public class NetworkThreadedWrapper {
     return WRAPPER_MAP.computeIfAbsent(netId, NetworkThreadedWrapper::new);
   }
 
-  public <P extends IPacket> void registerPacket(Class<P> packetClass) {
+  public <P extends IPacketEntry> void registerPacket(Class<P> packetClass) {
 
     packetMap.put(packetClass, idSupplier.getAndIncrement());
   }
 
-  public int getPacketId(Class<? extends IPacket> packetClass) {
+  public int getPacketId(Class<? extends IPacketEntry> packetClass) {
 
     return packetMap.getId(packetClass);
   }
 
-  public Class<? extends IPacket> getPacketClass(int packetId) {
+  public Class<? extends IPacketEntry> getPacketClass(int packetId) {
 
     return packetMap.get(packetId);
   }
@@ -90,7 +90,7 @@ public class NetworkThreadedWrapper {
    * @param packet The packet for which to retrieve the packet.
    * @return The packet corresponding to the packet.
    */
-  public Packet<?> getPacketFrom(IPacket packet) {
+  public Packet<?> getPacketFrom(IPacketEntry packet) {
 
     return this.channel.getPacketFrom(new PacketWrapper(this).setPacket(packet));
   }
@@ -103,7 +103,7 @@ public class NetworkThreadedWrapper {
    *
    * @param packet The packet to send.
    */
-  public void sendToAll(IPacket packet) {
+  public void sendToAll(IPacketEntry packet) {
 
     this.channel.sendToAll(new PacketWrapper(this).setPacket(packet));
   }
@@ -114,7 +114,7 @@ public class NetworkThreadedWrapper {
    * @param packet The packet to send.
    * @param player The player to receive the packet.
    */
-  public void sendTo(IPacket packet, EntityPlayerMP player) {
+  public void sendTo(IPacketEntry packet, EntityPlayerMP player) {
 
     this.channel.sendTo(new PacketWrapper(this).setPacket(packet), player);
   }
@@ -126,7 +126,7 @@ public class NetworkThreadedWrapper {
    * @param pos    The position around which to send the packet packet.
    * @param world  The world in which to send the packet packet.
    */
-  public void sendTo(IPacket packet, BlockPos pos, World world) {
+  public void sendTo(IPacketEntry packet, BlockPos pos, World world) {
     if (!(world instanceof WorldServer worldServer)) {
       return;
     }
@@ -152,7 +152,7 @@ public class NetworkThreadedWrapper {
    * @param packet The packet to send.
    * @param point  The point to send the packet to.
    */
-  public void sendToAllAround(IPacket packet, TargetPoint point) {
+  public void sendToAllAround(IPacketEntry packet, TargetPoint point) {
 
     this.channel.sendToAllAround(new PacketWrapper(this).setPacket(packet), point);
   }
@@ -165,37 +165,37 @@ public class NetworkThreadedWrapper {
    * @param pos    The position to send the packet to.
    * @param range  The range of the packet.
    */
-  public void sendToAllAround(IPacket packet, World world, BlockPos pos, double range) {
+  public void sendToAllAround(IPacketEntry packet, World world, BlockPos pos, double range) {
 
     this.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, range));
   }
 
-  public void sendToAllAround(IPacket packet, World world, BlockPos pos) {
+  public void sendToAllAround(IPacketEntry packet, World world, BlockPos pos) {
 
     this.sendToAllAround(packet, world, pos, NetworkUtils.DEFAULT_RANGE);
   }
 
-  public void sendToAllAround(IPacket packet, int dimension, BlockPos blockPos, double range) {
+  public void sendToAllAround(IPacketEntry packet, int dimension, BlockPos blockPos, double range) {
 
     this.sendToAllAround(packet, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), range);
   }
 
-  public void sendToAllAround(IPacket packet, int dimension, BlockPos blockPos) {
+  public void sendToAllAround(IPacketEntry packet, int dimension, BlockPos blockPos) {
 
     this.sendToAllAround(packet, dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), NetworkUtils.DEFAULT_RANGE);
   }
 
-  public void sendToAllAround(IPacket packet, int dimension, double x, double y, double z, double range) {
+  public void sendToAllAround(IPacketEntry packet, int dimension, double x, double y, double z, double range) {
 
     this.sendToAllAround(packet, new TargetPoint(dimension, x, y, z, range));
   }
 
-  public void sendToAllAround(IPacket packet, int dimension, double x, double y, double z) {
+  public void sendToAllAround(IPacketEntry packet, int dimension, double x, double y, double z) {
 
     this.sendToAllAround(packet, dimension, x, y, z, NetworkUtils.DEFAULT_RANGE);
   }
 
-  public void sendToAllAround(IPacket packet, TileEntity tile, int range) {
+  public void sendToAllAround(IPacketEntry packet, TileEntity tile, int range) {
     BlockPos pos = tile.getPos();
     World world = tile.getWorld();
     WorldProvider provider = world.provider;
@@ -203,7 +203,7 @@ public class NetworkThreadedWrapper {
     this.sendToAllAround(packet, dimension, pos.getX(), pos.getY(), pos.getZ(), range);
   }
 
-  public void sendToAllAround(IPacket packet, TileEntity tile) {
+  public void sendToAllAround(IPacketEntry packet, TileEntity tile) {
 
     this.sendToAllAround(packet, tile, NetworkUtils.DEFAULT_RANGE);
   }
@@ -214,22 +214,22 @@ public class NetworkThreadedWrapper {
    * @param packet The packet to send.
    * @param entity The entity whose tracking entities should receive the packet.
    */
-  public void sendToAllTracking(IPacket packet, Entity entity) {
+  public void sendToAllTracking(IPacketEntry packet, Entity entity) {
 
     this.channel.sendToAllTracking(new PacketWrapper(this).setPacket(packet), entity);
   }
 
-  public void sendToAllTracking(IPacket packet, TargetPoint point) {
+  public void sendToAllTracking(IPacketEntry packet, TargetPoint point) {
 
     this.channel.sendToAllTracking(new PacketWrapper(this).setPacket(packet), point);
   }
 
-  public void sendToAllTracking(IPacket packet, int dimension, BlockPos blockPos, double range) {
+  public void sendToAllTracking(IPacketEntry packet, int dimension, BlockPos blockPos, double range) {
 
     this.sendToAllTracking(packet, new TargetPoint(dimension, blockPos.getX(), blockPos.getY(), blockPos.getZ(), range));
   }
 
-  public void sendToAllTracking(IPacket packet, int dimension, double x, double y, double z, double range) {
+  public void sendToAllTracking(IPacketEntry packet, int dimension, double x, double y, double z, double range) {
 
     this.sendToAllTracking(packet, new TargetPoint(dimension, x, y, z, range));
   }
@@ -240,12 +240,12 @@ public class NetworkThreadedWrapper {
    * @param packet      The packet to send.
    * @param dimensionId The id of the dimension to send the packet to.
    */
-  public void sendToDimension(IPacket packet, int dimensionId) {
+  public void sendToDimension(IPacketEntry packet, int dimensionId) {
 
     this.channel.sendToDimension(new PacketWrapper(this).setPacket(packet), dimensionId);
   }
 
-  public void sendToDimension(IPacket packet, TileEntity tileEntity) {
+  public void sendToDimension(IPacketEntry packet, TileEntity tileEntity) {
     World world = tileEntity.getWorld();
     WorldProvider provider = world.provider;
     int dimensionId = provider.getDimension();
@@ -259,14 +259,14 @@ public class NetworkThreadedWrapper {
    *
    * @param packet The packet to send.
    */
-  public void sendToServer(IPacket packet) {
+  public void sendToServer(IPacketEntry packet) {
 
     this.channel.sendToServer(new PacketWrapper(this).setPacket(packet));
   }
 
   // endregion
 
-  private void write(IPacket packet, PacketBuffer buffer) {
+  private void write(IPacketEntry packet, PacketBuffer buffer) {
     // assume the packet has already been checked for registration here
     int index = this.getPacketId(packet.getClass());
     buffer.writeInt(index);
@@ -274,17 +274,17 @@ public class NetworkThreadedWrapper {
     ClassUtils.processFields(packet, (obj, field) -> BufUtils.writeField(obj, field, buffer));
   }
 
-  private IPacket read(PacketBuffer buffer) {
+  private IPacketEntry read(PacketBuffer buffer) {
     int index = buffer.readInt();
 
     var clazz = this.getPacketClass(index);
-    IPacket packet = this.instantiate(clazz);
+    IPacketEntry packet = this.instantiate(clazz);
 //    packet.read(buffer);
     ClassUtils.processFields(packet, (obj, field) -> BufUtils.readField(obj, field, buffer));
     return packet;
   }
 
-  private IPacket instantiate(Class<? extends IPacket> packetClass) {
+  private IPacketEntry instantiate(Class<? extends IPacketEntry> packetClass) {
     try {
       return packetClass.getDeclaredConstructor().newInstance();
     } catch (Throwable e) {
@@ -293,7 +293,7 @@ public class NetworkThreadedWrapper {
     }
   }
 
-  private void handle(IPacket packet, MessageContext context) {
+  private void handle(IPacketEntry packet, MessageContext context) {
     if (packet.verify(context)) {
       packet.process(context);
     }
@@ -305,7 +305,7 @@ public class NetworkThreadedWrapper {
   public static class PacketWrapper implements IMessage, IMessageHandler<PacketWrapper, IMessage> {
 
     private NetworkThreadedWrapper channel;
-    private IPacket packet;
+    private IPacketEntry packet;
 
     public PacketWrapper() {
     }
@@ -314,7 +314,7 @@ public class NetworkThreadedWrapper {
       this.channel = channel;
     }
 
-    private PacketWrapper setPacket(IPacket packet) {
+    private PacketWrapper setPacket(IPacketEntry packet) {
       this.packet = packet;
       return this;
     }

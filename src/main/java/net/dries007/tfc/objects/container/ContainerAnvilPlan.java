@@ -1,17 +1,17 @@
 package net.dries007.tfc.objects.container;
 
-import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
+import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonHandler;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nullable;
-
 import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
+
+import javax.annotation.Nullable;
 
 public class ContainerAnvilPlan extends ContainerTE<TEAnvilTFC> implements IButtonHandler {
 

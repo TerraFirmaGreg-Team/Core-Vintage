@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.button;
 
-import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
+import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonTooltip;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,11 +9,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
+
 import javax.annotation.Nonnull;
 
 import static net.dries007.tfc.client.gui.GuiAnvilPlan.PLAN_BACKGROUND;
-
-import net.dries007.tfc.api.recipes.anvil.AnvilRecipe;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonAnvilPlanIcon extends GuiButtonTFC implements IButtonTooltip {

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.food;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.spi.ModuleBase;
+import su.terrafirmagreg.framework.module.base.ModuleBase;
 
 @ModuleInfo(
   author = "Xikaro",

@@ -34,6 +34,7 @@ public final class TileUtils {
    * @return экземпляр типизированного объекта TileEntity
    */
   public static <T extends TileEntity> Optional<T> getTile(IBlockAccess world, BlockPos pos, Class<T> aClass) {
+
     return getTile(world, pos).filter(aClass::isInstance).map(aClass::cast);
   }
 
@@ -65,11 +66,13 @@ public final class TileUtils {
   }
 
   public static void addTile(Class<? extends TileEntity> tileClass, ResourceLocation name) {
+
     TileUtils.addTile(tileClass, name.getNamespace(), name.getPath());
   }
 
 
   public static void addTile(Class<? extends TileEntity> tileClass, String namespace, String name) {
+
     GameRegistry.registerTileEntity(tileClass, ModUtils.resource(namespace, "tile", name)); // tileClass.getSimpleName().replaceFirst("Tile", "")
   }
 

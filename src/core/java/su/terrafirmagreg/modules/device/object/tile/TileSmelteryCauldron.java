@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.tile.api.ITileFields;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTileFields;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
 import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidHandlerSidedCallback;
@@ -39,7 +39,7 @@ import java.util.Optional;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 public class TileSmelteryCauldron extends BaseTileTickableInventory
-  implements IFluidHandlerSidedCallback, IFluidTankCallback, ITileFields, IAmbientalProviderTile,
+  implements IFluidHandlerSidedCallback, IFluidTankCallback, IProviderTileFields, IAmbientalProviderTile,
              IProviderContainer<ContainerSmelteryCauldron, GuiSmelteryCauldron> {
 
   public static final int FLUID_CAPACITY = 4000;

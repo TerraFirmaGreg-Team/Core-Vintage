@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.feature.mapping;
 
 import su.terrafirmagreg.api.util.DataFixUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.device.ModuleDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
-public class FeatureRemappingDevice extends FeatureBase {
+public class FeatureRemappingDevice extends BaseFeature {
 
 
   @SubscribeEvent

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.object.block;
 
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlock;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
 
 import net.minecraft.block.SoundType;

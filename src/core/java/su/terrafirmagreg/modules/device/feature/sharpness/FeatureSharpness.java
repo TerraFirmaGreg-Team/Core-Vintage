@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.device.feature.sharpness.capability.CapabilitySharpness;
 import su.terrafirmagreg.modules.device.feature.sharpness.capability.CapabilitySharpness.Handler;
 
@@ -33,7 +33,7 @@ import net.dries007.tfc.objects.entity.projectile.EntityThrownRopeJavelin;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
 import net.dries007.tfcthings.main.ConfigTFCThings.Items;
 
-public class FeatureSharpness extends FeatureBase {
+public class FeatureSharpness extends BaseFeature {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   @SideOnly(Side.CLIENT)

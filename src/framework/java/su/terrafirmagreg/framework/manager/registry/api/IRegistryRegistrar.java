@@ -1,15 +1,15 @@
 package su.terrafirmagreg.framework.manager.registry.api;
 
-import su.terrafirmagreg.api.base.object.biome.api.IBiomeSettings;
-import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
-import su.terrafirmagreg.api.base.object.effect.api.IEffectSettings;
-import su.terrafirmagreg.api.base.object.enchantment.api.IEnchantmentSettings;
-import su.terrafirmagreg.api.base.object.entity.api.IEntitySettings;
-import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
-import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
-import su.terrafirmagreg.api.base.object.potion.api.IPotionSettings;
-import su.terrafirmagreg.api.base.object.sound.api.ISoundSettings;
 import su.terrafirmagreg.api.library.types.type.Type;
+import su.terrafirmagreg.framework.manager.registry.base.biome.api.IBiomeEntry;
+import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
+import su.terrafirmagreg.framework.manager.registry.base.effect.api.IEffectEntry;
+import su.terrafirmagreg.framework.manager.registry.base.enchantment.api.IEnchantmentEntry;
+import su.terrafirmagreg.framework.manager.registry.base.entity.api.IEntityEntry;
+import su.terrafirmagreg.framework.manager.registry.base.group.spi.BaseItemGroup;
+import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
+import su.terrafirmagreg.framework.manager.registry.base.potion.api.IPotionEntry;
+import su.terrafirmagreg.framework.manager.registry.base.sound.api.ISoundEntry;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.settings.KeyBinding;
@@ -47,13 +47,13 @@ public interface IRegistryRegistrar {
 
   <V extends Block> V addBlock(String identifier, V block);
 
-  <V extends Block & IBlockSettings> V addBlock(V block);
+  <V extends Block & IBlockEntry> V addBlock(V block);
 
-  <V extends Block & IBlockSettings> Collection<V> addBlock(Collection<V> collection);
+  <V extends Block & IBlockEntry> Collection<V> addBlock(Collection<V> collection);
 
-  <V extends Block & IBlockSettings, T extends Type<T>> Map<T, V> addBlock(Map<T, V> map);
+  <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Map<T, V> map);
 
-  <V extends Block & IBlockSettings, T extends Type<T>> Map<T, V> addBlock(Set<T> types, Function<T, V> factory);
+  <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Set<T> types, Function<T, V> factory);
 
   // --------------------------------------------------------------------------
   // - Item
@@ -61,13 +61,13 @@ public interface IRegistryRegistrar {
 
   <V extends Item> V addItem(String identifier, V item);
 
-  <V extends Item & IItemSettings> V addItem(V item);
+  <V extends Item & IItemEntry> V addItem(V item);
 
-  <V extends Item & IItemSettings> Collection<V> addItem(Collection<V> collection);
+  <V extends Item & IItemEntry> Collection<V> addItem(Collection<V> collection);
 
-  <V extends Item & IItemSettings, T extends Type<T>> Map<T, V> addItem(Map<T, V> map);
+  <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Map<T, V> map);
 
-  <V extends Item & IItemSettings, T extends Type<T>> Map<T, V> addItem(Set<T> types, Function<T, V> factory);
+  <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Set<T> types, Function<T, V> factory);
 
   // --------------------------------------------------------------------------
   // - Biome
@@ -75,13 +75,13 @@ public interface IRegistryRegistrar {
 
   <V extends Biome> V addBiome(String identifier, V item);
 
-  <V extends Biome & IBiomeSettings> V addBiome(V item);
+  <V extends Biome & IBiomeEntry> V addBiome(V item);
 
-  <V extends Biome & IBiomeSettings> Collection<V> addBiome(Collection<V> collection);
+  <V extends Biome & IBiomeEntry> Collection<V> addBiome(Collection<V> collection);
 
-  <V extends Biome & IBiomeSettings, T extends Type<T>> Map<T, V> addBiome(Map<T, V> map);
+  <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Map<T, V> map);
 
-  <V extends Biome & IBiomeSettings, T extends Type<T>> Map<T, V> addBiome(Set<T> types, Function<T, V> factory);
+  <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Set<T> types, Function<T, V> factory);
 
   // --------------------------------------------------------------------------
   // - Enchantment
@@ -89,13 +89,13 @@ public interface IRegistryRegistrar {
 
   <V extends Enchantment> V addEnchantment(String identifier, V entry);
 
-  <V extends Enchantment & IEnchantmentSettings> V addEnchantment(V entry);
+  <V extends Enchantment & IEnchantmentEntry> V addEnchantment(V entry);
 
-  <V extends Enchantment & IEnchantmentSettings> Collection<V> addEnchantment(Collection<V> collection);
+  <V extends Enchantment & IEnchantmentEntry> Collection<V> addEnchantment(Collection<V> collection);
 
-  <V extends Enchantment & IEnchantmentSettings, T extends Type<T>> Map<T, V> addEnchantment(Map<T, V> map);
+  <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Map<T, V> map);
 
-  <V extends Enchantment & IEnchantmentSettings, T extends Type<T>> Map<T, V> addEnchantment(Set<T> types, Function<T, V> factory);
+  <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Set<T> types, Function<T, V> factory);
 
   // --------------------------------------------------------------------------
   // - Effect
@@ -103,13 +103,13 @@ public interface IRegistryRegistrar {
 
   <V extends Potion> V addEffect(String identifier, V entry);
 
-  <V extends Potion & IEffectSettings> V addEffect(V entry);
+  <V extends Potion & IEffectEntry> V addEffect(V entry);
 
-  <V extends Potion & IEffectSettings> Collection<V> addEffect(Collection<V> collection);
+  <V extends Potion & IEffectEntry> Collection<V> addEffect(Collection<V> collection);
 
-  <V extends Potion & IEffectSettings, T extends Type<T>> Map<T, V> addEffect(Map<T, V> map);
+  <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Map<T, V> map);
 
-  <V extends Potion & IEffectSettings, T extends Type<T>> Map<T, V> addEffect(Set<T> types, Function<T, V> factory);
+  <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Set<T> types, Function<T, V> factory);
 
   // --------------------------------------------------------------------------
   // - Potion
@@ -117,13 +117,13 @@ public interface IRegistryRegistrar {
 
   <V extends PotionType> V addPotion(String identifier, V entry);
 
-  <V extends PotionType & IPotionSettings> V addPotion(V entry);
+  <V extends PotionType & IPotionEntry> V addPotion(V entry);
 
-  <V extends PotionType & IPotionSettings> Collection<V> addPotion(Collection<V> collection);
+  <V extends PotionType & IPotionEntry> Collection<V> addPotion(Collection<V> collection);
 
-  <V extends PotionType & IPotionSettings, T extends Type<T>> Map<T, V> addPotion(Map<T, V> map);
+  <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Map<T, V> map);
 
-  <V extends PotionType & IPotionSettings, T extends Type<T>> Map<T, V> addPotion(Set<T> types, Function<T, V> factory);
+  <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Set<T> types, Function<T, V> factory);
 
   // --------------------------------------------------------------------------
   // - Sound
@@ -131,15 +131,15 @@ public interface IRegistryRegistrar {
 
   <V extends SoundEvent> V addSound(String identifier, V entry);
 
-  <V extends SoundEvent & ISoundSettings> V addSound(V entry);
+  <V extends SoundEvent & ISoundEntry> V addSound(V entry);
 
   <V extends SoundEvent> SoundEvent addSound(String identifier);
 
-  <V extends SoundEvent & ISoundSettings> Collection<V> addSound(Collection<V> collection);
+  <V extends SoundEvent & ISoundEntry> Collection<V> addSound(Collection<V> collection);
 
-  <V extends SoundEvent & ISoundSettings, T extends Type<T>> Map<T, V> addSound(Map<T, V> map);
+  <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Map<T, V> map);
 
-  <V extends SoundEvent & ISoundSettings, T extends Type<T>> Map<T, V> addSound(Set<T> types, Function<T, V> factory);
+  <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Set<T> types, Function<T, V> factory);
 
   // --------------------------------------------------------------------------
   // - Entity
@@ -147,13 +147,13 @@ public interface IRegistryRegistrar {
 
   <V extends EntityEntry> V addEntity(String identifier, V entry);
 
-  <V extends EntityEntry & IEntitySettings> V addEntity(V entry);
+  <V extends EntityEntry & IEntityEntry> V addEntity(V entry);
 
-  <V extends EntityEntry & IEntitySettings> Collection<V> addEntity(Collection<V> collection);
+  <V extends EntityEntry & IEntityEntry> Collection<V> addEntity(Collection<V> collection);
 
-  <V extends EntityEntry & IEntitySettings, T extends Type<T>> Map<T, V> addEntity(Map<T, V> map);
+  <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Map<T, V> map);
 
-  <V extends EntityEntry & IEntitySettings, T extends Type<T>> Map<T, V> addEntity(Set<T> types, Function<T, V> factory);
+  <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Set<T> types, Function<T, V> factory);
 
   <V extends Entity> EntityEntry addEntity(String identifier, EntityEntryBuilder<V> builder);
 

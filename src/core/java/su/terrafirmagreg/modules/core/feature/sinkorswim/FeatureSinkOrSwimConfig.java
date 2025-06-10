@@ -9,7 +9,7 @@ public class FeatureSinkOrSwimConfig {
     "If true, sink or swim enable ",
     "Default = true"
   })
-  public boolean enable = true;
+  public boolean enabled = true;
 
   @Comment({
     "Armor what will not weigh you down in water."

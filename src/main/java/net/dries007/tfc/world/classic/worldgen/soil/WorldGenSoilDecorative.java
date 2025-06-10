@@ -1,7 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen.soil;
 
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
-import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -78,7 +79,7 @@ public class WorldGenSoilDecorative implements IWorldGenerator {
   private void generateSand(World world, Random rng, BlockPos start) {
     if (ConfigTFCF.General.WORLD.enableAllBlockTypes && ConfigTFCF.General.WORLD.enableSandGen) {
       final Biome b = world.getBiome(start);
-      if (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH || b == BiomesWorld.LAKE) {
+      if (b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN || b == BiomesTFC.BEACH || b == BiomesTFC.LAKE) {
         ChunkDataTFC data = ChunkDataTFC.get(world, start);
         if (data.isInitialized() && start.getY() <= WorldTypeTFC.SEALEVEL && data.getFloraDensity() >= 0.2f + (rng.nextGaussian() / 10)
             && ChunkDataTFC.getRainfall(world, start) >= RAINFALL_SAND + 15) {
@@ -175,7 +176,7 @@ public class WorldGenSoilDecorative implements IWorldGenerator {
     if (rng.nextInt(ConfigTFCF.General.WORLD.mudRarity) == 0 && start.getY() >= WorldTypeTFC.SEALEVEL && start.getY() <= 150
         && ChunkDataTFC.getDrainage(world, start) <= 2) {
       final Biome b = world.getBiome(start);
-      if (b == BiomesWorld.SWAMPLAND || b == BiomesWorld.BAYOU || b == BiomesWorld.MANGROVE || b == BiomesWorld.MARSH) {
+      if (b == BiomesTFC.SWAMPLAND || b == BiomesTFC.BAYOU || b == BiomesTFC.MANGROVE || b == BiomesTFC.MARSH) {
         ChunkDataTFC data = ChunkDataTFC.get(world, start);
         if (data.isInitialized() && data.getRainfall() >= RAINFALL_SAND_SANDY_MIX) {
           int length = rng.nextInt(4) + 3;
@@ -229,7 +230,7 @@ public class WorldGenSoilDecorative implements IWorldGenerator {
       if (rng.nextInt(ConfigTFCF.General.WORLD.bogIronRarity) == 0 && start.getY() <= 150 && data.getAverageTemp() >= 0f
           && ChunkDataTFC.getDrainage(world, start) <= 2) {
         final Biome b = world.getBiome(start);
-        if (b == BiomesWorld.SWAMPLAND || b == BiomesWorld.BAYOU || b == BiomesWorld.MANGROVE || b == BiomesWorld.MARSH) {
+        if (b == BiomesTFC.SWAMPLAND || b == BiomesTFC.BAYOU || b == BiomesTFC.MANGROVE || b == BiomesTFC.MARSH) {
           int radius = rng.nextInt(5) + 2;
           int depth = rng.nextInt(3) + 1;
 
@@ -296,7 +297,7 @@ public class WorldGenSoilDecorative implements IWorldGenerator {
     if (rng.nextInt(30) != 0 || start.getY() > WorldTypeTFC.SEALEVEL) {return false;}
     ChunkDataTFC data = ChunkDataTFC.get(world, start);
     final Biome b = world.getBiome(start);
-    if (b == BiomesWorld.SWAMPLAND || b == BiomesWorld.BAYOU || b == BiomesWorld.MANGROVE || b == BiomesWorld.MARSH) {
+    if (b == BiomesTFC.SWAMPLAND || b == BiomesTFC.BAYOU || b == BiomesTFC.MANGROVE || b == BiomesTFC.MARSH) {
       if (data.isInitialized() && data.getRainfall() >= 375f && data.getFloraDiversity() >= 0.5f && data.getFloraDensity() >= 0.5f
           && world.getBiome(start).getHeightVariation() < 0.15) {return false;}
 

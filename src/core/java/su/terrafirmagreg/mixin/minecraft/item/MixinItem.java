@@ -1,7 +1,7 @@
 package su.terrafirmagreg.mixin.minecraft.item;
 
 
-import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
+import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = Item.class, remap = false)
-public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implements IItemSettings {
+public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implements IItemEntry {
 
   @Unique
   @Mutable

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlockDoor;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockDoor;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

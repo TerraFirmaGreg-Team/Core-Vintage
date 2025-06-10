@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.world;
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.spi.ModuleBase;
+import su.terrafirmagreg.framework.module.base.ModuleBase;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 @ModuleInfo(

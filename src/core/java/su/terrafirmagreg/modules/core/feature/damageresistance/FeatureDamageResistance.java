@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.feature.damageresistance;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.feature.damageresistance.capability.CapabilityDamageResistance;
 
 import net.minecraft.entity.Entity;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class FeatureDamageResistance extends FeatureBase {
+public class FeatureDamageResistance extends BaseFeature {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {

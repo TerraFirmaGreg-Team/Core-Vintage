@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.feature.pull;
 
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityProviderPull;
 import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
 
@@ -10,7 +10,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class FeaturePull extends FeatureBase {
+public class FeaturePull extends BaseFeature {
 
   @SubscribeEvent
   public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {

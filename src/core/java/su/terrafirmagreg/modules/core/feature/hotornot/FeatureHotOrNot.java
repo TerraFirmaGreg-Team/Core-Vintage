@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.feature.hotornot;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.hotornot.spi.FluidEffect;
 import su.terrafirmagreg.modules.core.feature.hotornot.spi.ItemEffect;
@@ -27,7 +27,15 @@ import java.util.List;
 
 import static su.terrafirmagreg.api.data.ToolClasses.TONGS;
 
-public class FeatureHotOrNot extends FeatureBase {
+public class FeatureHotOrNot extends BaseFeature {
+
+  public FeatureHotOrNot() {
+    super(Settings.of()
+      .registryKey("hot_or_not")
+      .enabled(ConfigCore.FEATURE.HOT_OR_NOT.enabled)
+    );
+
+  }
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
@@ -156,13 +164,8 @@ public class FeatureHotOrNot extends FeatureBase {
   }
 
   private static boolean isRemoved(ItemStack stack) {
-    
-    return StackUtils.compareStackToList(stack, Arrays.asList(ConfigCore.FEATURE.HOT_OR_NOT.itemRemovals));
-  }
 
-  @Override
-  public boolean isEnabled() {
-    return ConfigCore.FEATURE.HOT_OR_NOT.enable;
+    return StackUtils.compareStackToList(stack, Arrays.asList(ConfigCore.FEATURE.HOT_OR_NOT.itemRemovals));
   }
 
 

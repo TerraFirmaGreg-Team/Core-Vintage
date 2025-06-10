@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.rock;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.spi.ModuleBase;
+import su.terrafirmagreg.framework.module.base.ModuleBase;
 
 import org.jetbrains.annotations.NotNull;
 

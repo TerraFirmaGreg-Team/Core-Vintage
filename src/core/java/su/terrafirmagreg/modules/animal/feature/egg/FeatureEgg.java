@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.animal.feature.egg;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityHandlerEgg;
@@ -21,21 +21,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class FeatureEgg extends FeatureBase {
+public class FeatureEgg extends BaseFeature {
 
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-    CapabilityEgg.register();
-  }
-
-  @Override
-  public void onInit(FMLInitializationEvent event) {
-    CapabilityHandlerEgg.init();
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return ConfigAnimal.FEATURE.EGG.enable;
+  public FeatureEgg() {
+    super(Settings.of()
+      .registryKey("egg")
+      .enabled(ConfigAnimal.FEATURE.EGG.enable)
+    );
   }
 
   @SubscribeEvent
@@ -71,5 +63,15 @@ public class FeatureEgg extends FeatureBase {
         }
       }
     });
+  }
+
+  @Override
+  public void onPreInit(FMLPreInitializationEvent event) {
+    CapabilityEgg.register();
+  }
+
+  @Override
+  public void onInit(FMLInitializationEvent event) {
+    CapabilityHandlerEgg.init();
   }
 }

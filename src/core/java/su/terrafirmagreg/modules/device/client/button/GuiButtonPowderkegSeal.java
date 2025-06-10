@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.client.button;
 
-import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
-import su.terrafirmagreg.api.base.client.gui.button.spi.BaseGuiButton;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonTooltip;
+import su.terrafirmagreg.framework.manager.registry.base.gui.button.spi.BaseGuiButton;
 import su.terrafirmagreg.modules.device.object.tile.TilePowderKeg;
 
 import net.minecraft.client.Minecraft;

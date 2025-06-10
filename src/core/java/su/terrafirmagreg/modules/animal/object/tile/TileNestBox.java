@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.animal.object.tile;
 
-import su.terrafirmagreg.api.base.object.inventory.api.IItemHandlerSidedCallback;
-import su.terrafirmagreg.api.base.object.inventory.spi.ItemHandlerSidedWrapper;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.api.IItemHandlerSidedCallback;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemHandlerSidedWrapper;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.client.gui.GuiNestBox;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickable;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickable;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;

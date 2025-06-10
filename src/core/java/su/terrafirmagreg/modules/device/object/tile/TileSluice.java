@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTile;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;

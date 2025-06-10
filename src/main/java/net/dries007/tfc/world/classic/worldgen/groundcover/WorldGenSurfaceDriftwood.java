@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen.groundcover;
 
-import su.terrafirmagreg.modules.world.init.BiomesWorld;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -56,7 +56,7 @@ public class WorldGenSurfaceDriftwood implements IWorldGenerator {
   private void generateRock(World world, Random rand, BlockPos pos) {
     if (pos.getY() >= WorldTypeTFC.SEALEVEL && pos.getY() < WorldTypeTFC.SEALEVEL + 2) {
       final Biome b = world.getBiome(pos);
-      if (b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN || b == BiomesWorld.BEACH || b == BiomesWorld.GRAVEL_BEACH) {
+      if (b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN || b == BiomesTFC.BEACH || b == BiomesTFC.GRAVEL_BEACH) {
         if (world.isAirBlock(pos) && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP)
             && BlocksTFC.isGround(world.getBlockState(pos.down()))) {
           world.setBlockState(pos, BlocksTFCF.DRIFTWOOD.getDefaultState());

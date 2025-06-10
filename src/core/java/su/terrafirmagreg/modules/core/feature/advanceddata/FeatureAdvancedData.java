@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.core.feature.advanceddata;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.ConfigCore;
 
 import net.minecraft.client.gui.GuiScreen;
@@ -21,10 +21,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class FeatureAdvancedData extends FeatureBase {
+public class FeatureAdvancedData extends BaseFeature {
 
   private static final String TEXT_PRE = TextFormatting.DARK_GRAY + "     "; //§8
   private static final String HEADER_PRE = TextFormatting.GRAY + "  -"; //§7
+
+  public FeatureAdvancedData() {
+    super(Settings.of()
+      .registryKey("Advanced Data")
+      .enabled(ConfigCore.FEATURE.ADVANCED_DATA.enable));
+  }
 
   @SubscribeEvent(priority = EventPriority.LOWEST)
   @SideOnly(Side.CLIENT)
@@ -166,12 +172,6 @@ public class FeatureAdvancedData extends FeatureBase {
         tooltip.add(TEXT_PRE + TextFormatting.ITALIC + "[Press Shift] " + compound.getKeySet().size() + " tag(s)");
       }
     }
-  }
-
-
-  @Override
-  public boolean isEnabled() {
-    return ConfigCore.FEATURE.ADVANCED_DATA.enable;
   }
 
 

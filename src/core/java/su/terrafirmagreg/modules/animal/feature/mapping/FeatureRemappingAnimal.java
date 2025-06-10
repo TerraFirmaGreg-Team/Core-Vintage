@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.feature.mapping;
 
 import su.terrafirmagreg.api.util.DataFixUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
-public class FeatureRemappingAnimal extends FeatureBase {
+public class FeatureRemappingAnimal extends BaseFeature {
 
 
   @SubscribeEvent

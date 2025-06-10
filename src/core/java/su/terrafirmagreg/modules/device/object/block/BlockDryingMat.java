@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.api.base.client.gui.GuiHandler;
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
+import su.terrafirmagreg.api.client.GuiHandler;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.device.client.render.TESRDryingMat;
 import su.terrafirmagreg.modules.device.object.tile.TileDryingMat;
 

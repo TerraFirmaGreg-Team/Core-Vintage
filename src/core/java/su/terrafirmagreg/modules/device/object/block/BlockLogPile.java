@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.api.base.client.gui.GuiHandler;
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileInventory;
+import su.terrafirmagreg.api.client.GuiHandler;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileInventory;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;

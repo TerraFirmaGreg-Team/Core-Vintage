@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.gui;
 
-import su.terrafirmagreg.api.base.client.gui.button.api.IButtonTooltip;
+import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonTooltip;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
@@ -10,15 +10,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import java.io.IOException;
-
-import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.button.GuiButtonUrn;
 import net.dries007.tfc.network.PacketGuiButton;
 import net.dries007.tfc.objects.te.TEUrn;
 import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
+
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFCF;
 
 public class GuiUrn extends GuiContainerTE<TEUrn> {
 

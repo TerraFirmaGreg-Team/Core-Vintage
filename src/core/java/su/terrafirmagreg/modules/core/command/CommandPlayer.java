@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.core.command;
 
-import su.terrafirmagreg.api.base.command.spi.BaseCommand;
 import su.terrafirmagreg.api.util.CommandUtils;
 import su.terrafirmagreg.api.util.CommandUtils.ExecuteType;
 import su.terrafirmagreg.api.util.CommandUtils.Level;
 import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.framework.manager.command.base.BaseCommand;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.Nutrient;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.NutritionStats;

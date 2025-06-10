@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.inventory.api.IItemHandlerSidedCallback;
-import su.terrafirmagreg.api.base.object.inventory.spi.ItemHandlerSidedWrapper;
-import su.terrafirmagreg.api.base.object.tile.api.ITileFields;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.api.IItemHandlerSidedCallback;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemHandlerSidedWrapper;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTileFields;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
@@ -51,7 +51,7 @@ import java.util.Optional;
 
 @SuppressWarnings("WeakerAccess")
 public class TileCrucible extends BaseTileTickableInventory
-  implements ITileFields, IItemHandlerSidedCallback, IAmbientalProviderTile,
+  implements IProviderTileFields, IItemHandlerSidedCallback, IAmbientalProviderTile,
              IProviderContainer<ContainerCrucible, GuiCrucible> {
 
   public static final int SLOT_INPUT_START = 0;

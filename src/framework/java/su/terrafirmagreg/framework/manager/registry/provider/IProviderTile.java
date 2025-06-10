@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.manager.registry.provider;
 
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTile;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -12,8 +12,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * This interface is used by blocks to automatically register a TileEntity for a block.
  */
-public interface IProviderTile
-  extends ITileEntityProvider {
+public interface IProviderTile extends ITileEntityProvider {
 
   /**
    * Gets the class of the tile entity to associate with the block.

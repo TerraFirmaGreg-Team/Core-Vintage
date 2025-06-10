@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.item;
 
-import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;

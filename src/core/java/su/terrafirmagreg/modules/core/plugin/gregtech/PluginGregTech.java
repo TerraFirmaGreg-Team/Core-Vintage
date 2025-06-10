@@ -1,26 +1,31 @@
 package su.terrafirmagreg.modules.core.plugin.gregtech;
 
-import gregtech.api.GregTechAPI;
-import gregtech.api.unification.material.event.MaterialEvent;
-import gregtech.api.unification.material.event.PostMaterialEvent;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.material.properties.ToolProperty;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
-import su.terrafirmagreg.framework.manager.plugin.spi.PluginBase;
+import su.terrafirmagreg.framework.manager.plugin.base.BasePlugin;
 import su.terrafirmagreg.modules.core.plugin.gregtech.init.BlocksGregTech;
 import su.terrafirmagreg.modules.core.plugin.gregtech.init.ItemsGregTech;
 import su.terrafirmagreg.modules.core.plugin.gregtech.init.RecipesGregTech;
 import su.terrafirmagreg.modules.core.plugin.gregtech.unification.material.materials.ElementMaterialsCore;
 import su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.StoneTypesCore;
 
-public class PluginGregTech extends PluginBase {
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import gregtech.api.GregTechAPI;
+import gregtech.api.unification.material.event.MaterialEvent;
+import gregtech.api.unification.material.event.PostMaterialEvent;
+import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.properties.ToolProperty;
+
+public class PluginGregTech extends BasePlugin {
 
   public PluginGregTech() {
-    super(ModIDs.GREGTECH);
+    super(Settings.of()
+      .registryKey("gregtech")
+      .modRequired(ModIDs.GREGTECH)
+    );
   }
 
   @SubscribeEvent(priority = EventPriority.HIGH)

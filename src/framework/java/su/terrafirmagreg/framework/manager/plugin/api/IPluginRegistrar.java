@@ -9,5 +9,5 @@ public interface IPluginRegistrar {
 
   PluginMap getMap();
 
-  <T extends IPlugin> void addPlugin(T plugin);
+  <T extends IPluginEntry> void addPlugin(T plugin);
 }

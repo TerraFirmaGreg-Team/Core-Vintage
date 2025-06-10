@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.framework.manager.registry.base.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.modules.device.object.tile.TileDryingMat;
 
 import net.minecraft.client.resources.I18n;

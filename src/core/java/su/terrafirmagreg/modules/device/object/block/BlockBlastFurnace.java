@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.api.base.client.gui.GuiHandler;
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlockContainer;
+import su.terrafirmagreg.api.client.GuiHandler;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.core.object.block.BlockFireBricks;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;

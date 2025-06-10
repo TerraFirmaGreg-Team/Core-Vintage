@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.falling;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.falling.capability.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.feature.falling.capability.ProviderWorldTracker;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-public class FeatureFalling extends FeatureBase {
+public class FeatureFalling extends BaseFeature {
 
   @Override
   public void onPreInit(FMLPreInitializationEvent event) {

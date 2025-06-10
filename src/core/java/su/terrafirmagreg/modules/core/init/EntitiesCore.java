@@ -8,7 +8,7 @@ public final class EntitiesCore {
   public static EntityTypeSeatOn SIT_BLOCK;
 
   public static void onRegister(IRegistryRegistrar registry) {
-    
+
     SIT_BLOCK = registry.addEntity(new EntityTypeSeatOn());
 
   }

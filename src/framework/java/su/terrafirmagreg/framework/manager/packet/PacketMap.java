@@ -1,16 +1,13 @@
 package su.terrafirmagreg.framework.manager.packet;
 
-import su.terrafirmagreg.framework.manager.packet.PacketMap.PacketWrapper;
-import su.terrafirmagreg.framework.manager.packet.api.IPacket;
+import su.terrafirmagreg.framework.manager.packet.api.IPacketEntry;
 import su.terrafirmagreg.framework.manager.packet.spi.NetworkThreadedWrapper;
-
-import net.minecraftforge.fml.relauncher.Side;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import lombok.Data;
 
-public class PacketMap extends Object2ObjectOpenHashMap<Class<? extends IPacket>, PacketWrapper> {
+public class PacketMap extends Object2ObjectOpenHashMap<Class<? extends IPacketEntry>, IPacketEntry> {
 
 
   public static PacketMap of() {
@@ -22,7 +19,7 @@ public class PacketMap extends Object2ObjectOpenHashMap<Class<? extends IPacket>
   public static class PacketWrapper {
 
     private final NetworkThreadedWrapper channel;
-    private final Side side;
+    private final IPacketEntry entry;
 
   }
 }

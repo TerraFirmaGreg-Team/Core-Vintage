@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.puddles;
 
 import su.terrafirmagreg.api.util.WorldUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
@@ -37,7 +37,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 
-public class FeaturePuddles extends FeatureBase {
+public class FeaturePuddles extends BaseFeature {
 
   @SubscribeEvent
   public static void placePuddles(TickEvent.ServerTickEvent event) {

@@ -1,11 +1,10 @@
 package su.terrafirmagreg.modules.device.client.gui;
 
-import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.api.data.Unicode;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.framework.manager.registry.base.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
-import su.terrafirmagreg.modules.device.packet.CSPacketFreezeDryer;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -133,25 +132,25 @@ public class GuiFreezeDryer extends BaseGuiContainerTile<TileFreezeDryer> {
   protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
     super.mouseClicked(mouseX, mouseY, mouseButton);
 
-    if (mouseX >= guiLeft + 61 && mouseX <= guiLeft + 79 && mouseY >= guiTop + 16 && mouseY <= guiTop + 34) {
-      if (!tile.isSealed()) {
-        new CSPacketFreezeDryer(tile.getPos(), 0, true).sendToServer();
-        // tile.seal();
-      } else {
-        new CSPacketFreezeDryer(tile.getPos(), 0, false).sendToServer();
-        //tile.unseal();
-      }
-    } else if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 159 && mouseY >= guiTop + 52 && mouseY <= guiTop + 70) {
-      if ((tile.isSealed() && tile.getPower() > 0) || tile.isPump()) {
-        if (!tile.isPump()) {
-          new CSPacketFreezeDryer(tile.getPos(), 1, true).sendToServer();
-          //tile.startPump();
-        } else {
-          new CSPacketFreezeDryer(tile.getPos(), 1, false).sendToServer();
-          //tile.stopPump();
-        }
-      }
-    }
+//    if (mouseX >= guiLeft + 61 && mouseX <= guiLeft + 79 && mouseY >= guiTop + 16 && mouseY <= guiTop + 34) {
+//      if (!tile.isSealed()) {
+//        new CSPacketFreezeDryer(tile.getPos(), 0, true).sendToServer();
+//        // tile.seal();
+//      } else {
+//        new CSPacketFreezeDryer(tile.getPos(), 0, false).sendToServer();
+//        //tile.unseal();
+//      }
+//    } else if (mouseX >= guiLeft + 141 && mouseX <= guiLeft + 159 && mouseY >= guiTop + 52 && mouseY <= guiTop + 70) {
+//      if ((tile.isSealed() && tile.getPower() > 0) || tile.isPump()) {
+//        if (!tile.isPump()) {
+//          new CSPacketFreezeDryer(tile.getPos(), 1, true).sendToServer();
+//          //tile.startPump();
+//        } else {
+//          new CSPacketFreezeDryer(tile.getPos(), 1, false).sendToServer();
+//          //tile.stopPump();
+//        }
+//      }
+//    }
   }
 
   @Override

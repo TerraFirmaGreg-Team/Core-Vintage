@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.object.effect;
 
-import su.terrafirmagreg.api.base.object.effect.spi.BaseEffect;
+import su.terrafirmagreg.framework.manager.registry.base.effect.spi.BaseEffect;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.entity.EntityLivingBase;

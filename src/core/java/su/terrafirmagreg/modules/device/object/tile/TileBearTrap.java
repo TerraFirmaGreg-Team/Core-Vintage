@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.world.WorldServer;
 import org.jetbrains.annotations.Nullable;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTile;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTile;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 

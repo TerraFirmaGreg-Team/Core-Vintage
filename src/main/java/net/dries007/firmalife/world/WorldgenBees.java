@@ -1,6 +1,6 @@
 package net.dries007.firmalife.world;
 
-import su.terrafirmagreg.modules.world.init.BiomesWorld;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
@@ -30,7 +30,7 @@ public class WorldgenBees extends WorldGenerator {
     if (!chunkData.isInitialized()) {return false;}
 
     final Biome b = world.getBiome(pos);
-    if (!(b instanceof BiomeTFC) || b == BiomesWorld.OCEAN || b == BiomesWorld.DEEP_OCEAN) {return false;}
+    if (!(b instanceof BiomeTFC) || b == BiomesTFC.OCEAN || b == BiomesTFC.DEEP_OCEAN) {return false;}
 
     BlockPos genPos = world.getTopSolidOrLiquidBlock(pos);
     for (int i = 0; i < 12; i++) {

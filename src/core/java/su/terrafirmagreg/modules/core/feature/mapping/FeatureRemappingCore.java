@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.mapping;
 
 import su.terrafirmagreg.api.util.DataFixUtils;
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
-public class FeatureRemappingCore extends FeatureBase {
+public class FeatureRemappingCore extends BaseFeature {
 
   @SubscribeEvent
   public static void onBlockRemapping(final RegistryEvent.MissingMappings<Block> event) {

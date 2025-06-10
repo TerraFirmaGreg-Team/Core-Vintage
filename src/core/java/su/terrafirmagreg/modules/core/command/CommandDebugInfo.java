@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.command;
 
-import su.terrafirmagreg.api.base.command.spi.BaseCommand;
 import su.terrafirmagreg.api.util.CommandUtils.Level;
+import su.terrafirmagreg.framework.manager.command.base.BaseCommand;
 import su.terrafirmagreg.modules.core.ModuleCore;
 
 import net.minecraft.command.ICommandSender;

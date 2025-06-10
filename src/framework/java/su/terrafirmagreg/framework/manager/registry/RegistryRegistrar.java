@@ -1,14 +1,5 @@
 package su.terrafirmagreg.framework.manager.registry;
 
-import su.terrafirmagreg.api.base.object.biome.api.IBiomeSettings;
-import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
-import su.terrafirmagreg.api.base.object.effect.api.IEffectSettings;
-import su.terrafirmagreg.api.base.object.enchantment.api.IEnchantmentSettings;
-import su.terrafirmagreg.api.base.object.entity.api.IEntitySettings;
-import su.terrafirmagreg.api.base.object.group.spi.BaseItemGroup;
-import su.terrafirmagreg.api.base.object.item.api.IItemSettings;
-import su.terrafirmagreg.api.base.object.potion.api.IPotionSettings;
-import su.terrafirmagreg.api.base.object.sound.api.ISoundSettings;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.util.EntityUtils;
 import su.terrafirmagreg.api.util.KeyBindUtils;
@@ -16,6 +7,16 @@ import su.terrafirmagreg.api.util.LootUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.registry.base.biome.api.IBiomeEntry;
+import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
+import su.terrafirmagreg.framework.manager.registry.base.effect.api.IEffectEntry;
+import su.terrafirmagreg.framework.manager.registry.base.enchantment.api.IEnchantmentEntry;
+import su.terrafirmagreg.framework.manager.registry.base.entity.api.IEntityEntry;
+import su.terrafirmagreg.framework.manager.registry.base.group.spi.BaseItemGroup;
+import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
+import su.terrafirmagreg.framework.manager.registry.base.potion.api.IPotionEntry;
+import su.terrafirmagreg.framework.manager.registry.base.sound.api.ISoundEntry;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderGroupTab;
 import su.terrafirmagreg.framework.module.api.IModule;
 
 import net.minecraft.block.Block;
@@ -59,8 +60,8 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   // Предмет должен быть в рамках модуля
   @Override
   public BaseItemGroup group(String icon) {
-    this.group = BaseItemGroup.of(module.getIdentifier(), getIdentifier(icon));
-    return this.group;
+
+    return this.group(BaseItemGroup.of(module.getIdentifier(), getIdentifier(icon)));
   }
 
   @Override
@@ -75,6 +76,9 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
   @Override
   public <T extends IForgeRegistryEntry<T>> T addEntry(Class<T> registry, String identifier, T entry) {
+    if (entry instanceof IProviderGroupTab providerGroupTab) {
+      providerGroupTab.setGroupTab(group);
+    }
     this.map.computeIfAbsent(registry, RegistryWrapper.of(getIdentifier(identifier), entry));
     return entry;
   }
@@ -84,13 +88,12 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Block> V addBlock(String identifier, V entry) {
 
-    entry.setCreativeTab(group);
     addEntry(Block.class, identifier, entry);
     return entry;
   }
 
   @Override
-  public <V extends Block & IBlockSettings> V addBlock(V entry) {
+  public <V extends Block & IBlockEntry> V addBlock(V entry) {
 
     var settings = entry.getSettings();
     if (settings.getItemBlock() != null) {
@@ -100,22 +103,19 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return this.addBlock(settings.getRegistryKey(), entry);
   }
 
-  @Override
-  public <V extends Block & IBlockSettings> Collection<V> addBlock(Collection<V> collection) {
+  public <V extends Block & IBlockEntry> Collection<V> addBlock(Collection<V> collection) {
 
     collection.forEach(this::addBlock);
     return collection;
   }
 
-  @Override
-  public <V extends Block & IBlockSettings, T extends Type<T>> Map<T, V> addBlock(Map<T, V> entry) {
+  public <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Map<T, V> entry) {
 
     this.addBlock(entry.values());
     return entry;
   }
 
-  @Override
-  public <V extends Block & IBlockSettings, T extends Type<T>> Map<T, V> addBlock(Set<T> types, Function<T, V> factory) {
+  public <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Set<T> types, Function<T, V> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBlock(factory.apply(type))));
   }
@@ -126,34 +126,33 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
   @Override
   public <V extends Item> V addItem(String identifier, V entry) {
-    entry.setCreativeTab(group);
     addEntry(Item.class, identifier, entry);
     return entry;
   }
 
   @Override
-  public <V extends Item & IItemSettings> V addItem(V entry) {
+  public <V extends Item & IItemEntry> V addItem(V entry) {
 
     var settings = entry.getSettings();
     return this.addItem(settings.getRegistryKey(), entry);
   }
 
   @Override
-  public <V extends Item & IItemSettings> Collection<V> addItem(Collection<V> collection) {
+  public <V extends Item & IItemEntry> Collection<V> addItem(Collection<V> collection) {
 
     collection.forEach(this::addItem);
     return collection;
   }
 
   @Override
-  public <V extends Item & IItemSettings, T extends Type<T>> Map<T, V> addItem(Map<T, V> map) {
+  public <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Map<T, V> map) {
 
     this.addItem(map.values());
     return map;
   }
 
   @Override
-  public <V extends Item & IItemSettings, T extends Type<T>> Map<T, V> addItem(Set<T> types, Function<T, V> factory) {
+  public <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Set<T> types, Function<T, V> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addItem(factory.apply(type))));
   }
@@ -171,28 +170,28 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends Biome & IBiomeSettings> V addBiome(V entry) {
+  public <V extends Biome & IBiomeEntry> V addBiome(V entry) {
 
     var settings = entry.getSettings();
     return this.addBiome(settings.getRegistryKey(), entry);
   }
 
   @Override
-  public <V extends Biome & IBiomeSettings> Collection<V> addBiome(Collection<V> collection) {
+  public <V extends Biome & IBiomeEntry> Collection<V> addBiome(Collection<V> collection) {
 
     collection.forEach(this::addBiome);
     return collection;
   }
 
   @Override
-  public <V extends Biome & IBiomeSettings, T extends Type<T>> Map<T, V> addBiome(Map<T, V> map) {
+  public <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Map<T, V> map) {
 
     this.addBiome(map.values());
     return map;
   }
 
   @Override
-  public <V extends Biome & IBiomeSettings, T extends Type<T>> Map<T, V> addBiome(Set<T> types, Function<T, V> factory) {
+  public <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Set<T> types, Function<T, V> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBiome(factory.apply(type))));
   }
@@ -210,28 +209,28 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends Enchantment & IEnchantmentSettings> V addEnchantment(V entry) {
+  public <V extends Enchantment & IEnchantmentEntry> V addEnchantment(V entry) {
 
     var settings = entry.getSettings();
     return this.addEnchantment(settings.getRegistryKey(), entry);
   }
 
   @Override
-  public <V extends Enchantment & IEnchantmentSettings> Collection<V> addEnchantment(Collection<V> collection) {
+  public <V extends Enchantment & IEnchantmentEntry> Collection<V> addEnchantment(Collection<V> collection) {
 
     collection.forEach(this::addEnchantment);
     return collection;
   }
 
   @Override
-  public <V extends Enchantment & IEnchantmentSettings, T extends Type<T>> Map<T, V> addEnchantment(Map<T, V> map) {
+  public <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Map<T, V> map) {
 
     this.addEnchantment(map.values());
     return map;
   }
 
   @Override
-  public <V extends Enchantment & IEnchantmentSettings, T extends Type<T>> Map<T, V> addEnchantment(Set<T> types, Function<T, V> factory) {
+  public <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Set<T> types, Function<T, V> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEnchantment(factory.apply(type))));
   }
@@ -249,28 +248,28 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends Potion & IEffectSettings> V addEffect(V entry) {
+  public <V extends Potion & IEffectEntry> V addEffect(V entry) {
 
     var settings = entry.getSettings();
     return this.addEffect(settings.getRegistryKey(), entry);
   }
 
   @Override
-  public <V extends Potion & IEffectSettings> Collection<V> addEffect(Collection<V> collection) {
+  public <V extends Potion & IEffectEntry> Collection<V> addEffect(Collection<V> collection) {
 
     collection.forEach(this::addEffect);
     return collection;
   }
 
   @Override
-  public <V extends Potion & IEffectSettings, T extends Type<T>> Map<T, V> addEffect(Map<T, V> map) {
+  public <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Map<T, V> map) {
 
     this.addEffect(map.values());
     return map;
   }
 
   @Override
-  public <V extends Potion & IEffectSettings, T extends Type<T>> Map<T, V> addEffect(Set<T> types, Function<T, V> factory) {
+  public <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Set<T> types, Function<T, V> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEffect(factory.apply(type))));
   }
@@ -288,28 +287,28 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends PotionType & IPotionSettings> V addPotion(V entry) {
+  public <V extends PotionType & IPotionEntry> V addPotion(V entry) {
 
     var settings = entry.getSettings();
     return this.addPotion(settings.getRegistryKey(), entry);
   }
 
   @Override
-  public <V extends PotionType & IPotionSettings> Collection<V> addPotion(Collection<V> collection) {
+  public <V extends PotionType & IPotionEntry> Collection<V> addPotion(Collection<V> collection) {
 
     collection.forEach(this::addPotion);
     return collection;
   }
 
   @Override
-  public <V extends PotionType & IPotionSettings, T extends Type<T>> Map<T, V> addPotion(Map<T, V> map) {
+  public <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Map<T, V> map) {
 
     this.addPotion(map.values());
     return map;
   }
 
   @Override
-  public <V extends PotionType & IPotionSettings, T extends Type<T>> Map<T, V> addPotion(Set<T> types, Function<T, V> factory) {
+  public <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Set<T> types, Function<T, V> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addPotion(factory.apply(type))));
   }
@@ -327,7 +326,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends SoundEvent & ISoundSettings> V addSound(V entry) {
+  public <V extends SoundEvent & ISoundEntry> V addSound(V entry) {
 
     var settings = entry.getSettings();
     return this.addSound(settings.getRegistryKey(), entry);
@@ -339,21 +338,21 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends SoundEvent & ISoundSettings> Collection<V> addSound(Collection<V> collection) {
+  public <V extends SoundEvent & ISoundEntry> Collection<V> addSound(Collection<V> collection) {
 
     collection.forEach(this::addSound);
     return collection;
   }
 
   @Override
-  public <V extends SoundEvent & ISoundSettings, T extends Type<T>> Map<T, V> addSound(Map<T, V> map) {
+  public <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Map<T, V> map) {
 
     this.addSound(map.values());
     return map;
   }
 
   @Override
-  public <V extends SoundEvent & ISoundSettings, T extends Type<T>> Map<T, V> addSound(Set<T> types, Function<T, V> factory) {
+  public <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Set<T> types, Function<T, V> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addSound(factory.apply(type))));
   }
@@ -371,7 +370,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends EntityEntry & IEntitySettings> V addEntity(V entry) {
+  public <V extends EntityEntry & IEntityEntry> V addEntity(V entry) {
 
     var settings = entry.getSettings();
 
@@ -380,21 +379,21 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends EntityEntry & IEntitySettings> Collection<V> addEntity(Collection<V> collection) {
+  public <V extends EntityEntry & IEntityEntry> Collection<V> addEntity(Collection<V> collection) {
 
     collection.forEach(this::addEntity);
     return collection;
   }
 
   @Override
-  public <V extends EntityEntry & IEntitySettings, T extends Type<T>> Map<T, V> addEntity(Map<T, V> map) {
+  public <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Map<T, V> map) {
 
     this.addEntity(map.values());
     return map;
   }
 
   @Override
-  public <V extends EntityEntry & IEntitySettings, T extends Type<T>> Map<T, V> addEntity(Set<T> types, Function<T, V> factory) {
+  public <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Set<T> types, Function<T, V> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEntity(factory.apply(type))));
   }

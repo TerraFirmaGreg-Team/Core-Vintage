@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.tile.api.ITileFields;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTileFields;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
@@ -45,7 +45,7 @@ import java.util.Optional;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 public class TileCharcoalForge extends BaseTileTickableInventory
-  implements ICalendarTickable, ITileFields, IAmbientalProviderTile,
+  implements ICalendarTickable, IProviderTileFields, IAmbientalProviderTile,
              IProviderContainer<ContainerCharcoalForge, GuiCharcoalForge> {
 
   public static final int SLOT_FUEL_MIN = 0;

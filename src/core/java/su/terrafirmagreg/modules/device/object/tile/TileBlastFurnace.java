@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.tile.api.ITileFields;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTileFields;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
 import su.terrafirmagreg.modules.device.ConfigDevice;
@@ -44,7 +44,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 import static su.terrafirmagreg.api.data.Properties.IntProp.LAYERS;
 
 public class TileBlastFurnace extends BaseTileTickableInventory
-  implements ITileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {
+  implements IProviderTileFields, IProviderContainer<ContainerBlastFurnace, GuiBlastFurnace> {
 
   public static final int SLOT_TUYERE = 0;
   public static final int FIELD_TEMPERATURE = 0;

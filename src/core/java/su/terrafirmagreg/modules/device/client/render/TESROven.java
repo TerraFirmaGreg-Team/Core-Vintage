@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.api.base.client.tesr.spi.BaseTESR;
 import su.terrafirmagreg.api.util.CapabilityUtils;
+import su.terrafirmagreg.framework.manager.registry.base.tesr.spi.BaseTESR;
 import su.terrafirmagreg.modules.device.object.tile.TileOven;
 
 import net.minecraft.block.state.IBlockState;

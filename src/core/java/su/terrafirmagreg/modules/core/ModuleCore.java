@@ -7,7 +7,7 @@ import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.spi.ModuleBase;
+import su.terrafirmagreg.framework.module.base.ModuleBase;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;

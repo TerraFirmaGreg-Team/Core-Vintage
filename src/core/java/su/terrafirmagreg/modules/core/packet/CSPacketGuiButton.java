@@ -1,13 +1,14 @@
 package su.terrafirmagreg.modules.core.packet;
 
-import su.terrafirmagreg.api.base.client.gui.button.api.IButtonHandler;
-import su.terrafirmagreg.api.base.packet.spi.BasePacket;
-import su.terrafirmagreg.framework.manager.packet.api.IPacket;
+import su.terrafirmagreg.framework.manager.packet.base.BasePacketServer;
+import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonHandler;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 
 import org.jetbrains.annotations.Nullable;
+
+import lombok.NoArgsConstructor;
 
 /// **
 // * This is a generic packet that sends a button notification to the players open container, which can delegate to the tile entity if needed See
@@ -15,19 +16,20 @@ import org.jetbrains.annotations.Nullable;
 // *
 // * @author AlcatrazEscapee
 // */
-public class CSPacketGuiButton extends BasePacket implements IPacket.Server {
+@NoArgsConstructor
+public class CSPacketGuiButton extends BasePacketServer {
 
   private int buttonID;
   private NBTTagCompound extraNBT;
 
-  @SuppressWarnings("unused")
-  public CSPacketGuiButton() {}
 
   public CSPacketGuiButton(int buttonID) {
     this(buttonID, null);
+
   }
 
   public CSPacketGuiButton(int buttonID, @Nullable NBTTagCompound extraNBT) {
+    
     this.buttonID = buttonID;
     this.extraNBT = extraNBT;
   }

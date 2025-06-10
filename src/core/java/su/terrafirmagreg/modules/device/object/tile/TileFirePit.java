@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.inventory.api.IItemHandlerSidedCallback;
-import su.terrafirmagreg.api.base.object.inventory.spi.ItemHandlerSidedWrapper;
-import su.terrafirmagreg.api.base.object.tile.api.ITileFields;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.api.IItemHandlerSidedCallback;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemHandlerSidedWrapper;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTileFields;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;
@@ -68,7 +68,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 import static su.terrafirmagreg.api.data.Properties.EnumProp.FIRE_PIT_ATTACHMENT;
 
 public class TileFirePit extends BaseTileTickableInventory
-  implements ICalendarTickable, ITileFields, IItemHandlerSidedCallback, IAmbientalProviderTile,
+  implements ICalendarTickable, IProviderTileFields, IItemHandlerSidedCallback, IAmbientalProviderTile,
              IProviderContainer<ContainerFirePit, GuiFirePit> {
 
   // Slot 0 - 3 = fuel slots with 3 being input, 4 = normal input slot, 5 and 6 are output slots 1 + 2

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.framework.manager.registry;
 
-import su.terrafirmagreg.api.base.IBaseSettings;
 import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -54,11 +54,12 @@ public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForge
         entry.setRegistryName(identifier);
       }
       registry.register((T) entry);
-      RegistryManager.LOGGER.debug("Registry {}: {}", entry.getRegistryType().getSimpleName(), identifier);
-      if (entry instanceof IBaseSettings settings) {
+      if (entry instanceof IRegistryEntry registryEntry) {
 
-        settings.postRegister();
+        registryEntry.postRegister();
       }
+      RegistryManager.LOGGER.debug("Registry {}: {}", entry.getRegistryType().getSimpleName(), identifier);
+
     });
   }
 

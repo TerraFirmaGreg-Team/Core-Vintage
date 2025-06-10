@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.plugin.top;
 
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
-import su.terrafirmagreg.framework.manager.plugin.spi.PluginBase;
+import su.terrafirmagreg.framework.manager.plugin.base.BasePlugin;
 import su.terrafirmagreg.modules.animal.plugin.top.provider.AnimalProvider;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -9,10 +9,14 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.ITheOneProbe;
 
-public class PluginTheOneProbe extends PluginBase {
+public class PluginTheOneProbe extends BasePlugin {
+
 
   public PluginTheOneProbe() {
-    super(ModIDs.THEONEPROBE);
+    super(Settings.of()
+      .registryKey("theoneprobe")
+      .modRequired(ModIDs.THEONEPROBE)
+    );
   }
 
   @Override

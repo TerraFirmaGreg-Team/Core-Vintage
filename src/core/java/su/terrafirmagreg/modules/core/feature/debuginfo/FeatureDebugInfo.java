@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.feature.debuginfo;
 
-import su.terrafirmagreg.framework.manager.feature.spi.FeatureBase;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 
-public class FeatureDebugInfo extends FeatureBase {
+public class FeatureDebugInfo extends BaseFeature {
 
 
 }

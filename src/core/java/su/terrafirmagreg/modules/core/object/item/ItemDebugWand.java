@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.object.item;
 
 
-import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 import su.terrafirmagreg.api.util.EntityUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;

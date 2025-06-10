@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.api.base.object.tile.api.ITileFields;
-import su.terrafirmagreg.api.base.object.tile.spi.BaseTileTickableInventory;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTileFields;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
@@ -32,7 +32,7 @@ import java.util.Optional;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 public class TileSmelteryFirebox extends BaseTileTickableInventory
-  implements ICalendarTickable, ITileFields, IAmbientalProviderTile, IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
+  implements ICalendarTickable, IProviderTileFields, IAmbientalProviderTile, IProviderContainer<ContainerSmelteryFirebox, GuiSmelteryFirebox> {
 
   private float temperature;
   private float burnTemperature;

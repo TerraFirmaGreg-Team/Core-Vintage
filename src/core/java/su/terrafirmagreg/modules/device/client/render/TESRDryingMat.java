@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.client.render;
 
-import su.terrafirmagreg.api.base.client.tesr.spi.BaseTESR;
+import su.terrafirmagreg.framework.manager.registry.base.tesr.spi.BaseTESR;
 import su.terrafirmagreg.modules.device.object.tile.TileDryingMat;
 
 import net.minecraft.client.Minecraft;

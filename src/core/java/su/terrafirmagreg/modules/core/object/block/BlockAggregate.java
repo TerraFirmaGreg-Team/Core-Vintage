@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.core.object.block;
 
-import su.terrafirmagreg.api.base.object.block.api.IBlockSettings;
-import su.terrafirmagreg.api.base.object.block.spi.BaseBlockFalling;
+import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockFalling;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 
-public class BlockAggregate extends BaseBlockFalling implements IBlockSettings {
+public class BlockAggregate extends BaseBlockFalling implements IBlockEntry {
 
   public BlockAggregate() {
     super(Settings.of(Material.SAND));

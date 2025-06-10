@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.manager.feature;
 
-import su.terrafirmagreg.framework.manager.feature.api.IFeature;
+import su.terrafirmagreg.framework.manager.feature.api.IFeatureEntry;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureService;
 import su.terrafirmagreg.framework.module.api.IModule;
 
@@ -102,8 +102,8 @@ public class FeatureService implements IFeatureService {
     fireEvent(feature -> feature.onServerStopped(event));
   }
 
-  protected void fireEvent(Consumer<IFeature> consumer) {
+  protected void fireEvent(Consumer<IFeatureEntry> consumer) {
 
-    this.map.values().forEach(wrapper -> consumer.accept(wrapper.getFeature()));
+    this.map.values().forEach(consumer);
   }
 }

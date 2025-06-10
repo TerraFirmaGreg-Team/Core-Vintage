@@ -1,8 +1,9 @@
 package net.dries007.tfc.world.classic.worldgen.cave;
 
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
-import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -80,7 +81,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
           case HANGING: {
             switch (MathUtils.RNG.nextInt(2)) {
               case 0: {
-                if ((b != BiomesWorld.OCEAN || b != BiomesWorld.OCEAN) && (
+                if ((b != BiomesTFC.OCEAN || b != BiomesTFC.OCEAN) && (
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
@@ -101,7 +102,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
                 }
               }
               case 1: {
-                if ((b != BiomesWorld.OCEAN || b != BiomesWorld.OCEAN) && (
+                if ((b != BiomesTFC.OCEAN || b != BiomesTFC.OCEAN) && (
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.BEARDED_MOSS) ||
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.GLOW_VINE) ||
                   plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.HANGING_VINE) ||
@@ -125,7 +126,7 @@ public class WorldGeneratorUnderground implements IWorldGenerator {
             }
           }
           case CREEPING: {
-            if ((b != BiomesWorld.OCEAN || b != BiomesWorld.OCEAN) && (
+            if ((b != BiomesTFC.OCEAN || b != BiomesTFC.OCEAN) && (
               plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TACKWEED) ||
               plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.TAKAKIA) ||
               plant == TFCRegistries.PLANTS.getValue(PlantsTFCF.IVY) ||

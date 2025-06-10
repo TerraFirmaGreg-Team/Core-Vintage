@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.recipe.dryingmat;
 
-import su.terrafirmagreg.api.base.object.recipe.api.IBaseRecipe;
+import su.terrafirmagreg.framework.manager.registry.base.recipe.api.IBaseRecipe;
 
 import net.minecraft.item.ItemStack;
 

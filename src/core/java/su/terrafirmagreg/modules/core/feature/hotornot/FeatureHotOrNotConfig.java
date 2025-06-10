@@ -8,7 +8,7 @@ public class FeatureHotOrNotConfig {
     "If true, hot or not enable ",
     "Default = true"
   })
-  public boolean enable = true;
+  public boolean enabled = true;
 
   @Comment({
     "If true, hot/cold/gaseous effects for items will be enabled.",

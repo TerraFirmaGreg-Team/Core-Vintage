@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.object.item.spi;
 
-import su.terrafirmagreg.api.base.object.item.spi.BaseItemFluid;
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemFluid;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.library.MeshDefinitionFix;
 import su.terrafirmagreg.api.util.ModUtils;

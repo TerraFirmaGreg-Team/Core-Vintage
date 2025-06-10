@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework;
 
-import su.terrafirmagreg.api.base.client.gui.GuiHandler;
+import su.terrafirmagreg.api.client.GuiHandler;
 import su.terrafirmagreg.framework.module.ModuleManager;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleManager;

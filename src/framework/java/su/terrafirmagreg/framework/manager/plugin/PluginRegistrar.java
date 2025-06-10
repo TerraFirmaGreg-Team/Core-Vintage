@@ -1,7 +1,6 @@
 package su.terrafirmagreg.framework.manager.plugin;
 
-import su.terrafirmagreg.framework.manager.plugin.PluginMap.PluginWrapper;
-import su.terrafirmagreg.framework.manager.plugin.api.IPlugin;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginEntry;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginManager;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.module.api.IModule;
@@ -26,18 +25,19 @@ public class PluginRegistrar implements IPluginRegistrar {
 
 
   @Override
-  public <T extends IPlugin> void addPlugin(T plugin) {
+  public <T extends IPluginEntry> void addPlugin(T plugin) {
     var pluginClass = plugin.getClass();
+    var settings = plugin.getSettings();
 
-    if (!plugin.isEnabled()) {
-      manager.getLogger().debug("Plugin {} is disabled: {}", pluginClass.getSimpleName());
+    if (!settings.isEnabled()) {
+      manager.getLogger().debug("Plugin {} is disabled: {}", settings.getRegistryKey());
       return;
     }
 
-    if (plugin.hasSubscriptions()) {
+    if (settings.isHasSubscriptions()) {
       MinecraftForge.EVENT_BUS.register(pluginClass);
     }
 
-    this.map.put(pluginClass, PluginWrapper.of(plugin));
+    this.map.put(pluginClass, plugin);
   }
 }

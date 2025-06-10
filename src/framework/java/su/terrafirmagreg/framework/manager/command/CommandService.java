@@ -1,8 +1,8 @@
 package su.terrafirmagreg.framework.manager.command;
 
-import su.terrafirmagreg.api.base.command.api.ICommandSettings;
-import su.terrafirmagreg.api.base.command.spi.BaseCommandTree;
+import su.terrafirmagreg.framework.manager.command.api.ICommandEntry;
 import su.terrafirmagreg.framework.manager.command.api.ICommandService;
+import su.terrafirmagreg.framework.manager.command.spi.CommandTree;
 import su.terrafirmagreg.framework.module.api.IModule;
 
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -26,8 +26,8 @@ public class CommandService implements ICommandService {
 
     var moduleIdentifier = module.getIdentifier();
 
-    var containerCmdTree = new BaseCommandTree(moduleIdentifier.getNamespace());
-    var moduleCmdTree = new BaseCommandTree(moduleIdentifier.getPath());
+    var containerCmdTree = new CommandTree(moduleIdentifier.getNamespace());
+    var moduleCmdTree = new CommandTree(moduleIdentifier.getPath());
 
     containerCmdTree.addSubcommand(moduleCmdTree);
     this.map.values().forEach(wrapper -> {
@@ -35,7 +35,7 @@ public class CommandService implements ICommandService {
       var command = wrapper.getCommand();
       var identifier = wrapper.getIdentifier();
 
-      if (command instanceof ICommandSettings cmdSettings) {
+      if (command instanceof ICommandEntry cmdSettings) {
         if (!identifier.equals(cmdSettings.getRegistryName())) {
           cmdSettings.setRegistryName(identifier);
         }

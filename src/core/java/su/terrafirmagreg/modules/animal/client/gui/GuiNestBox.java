@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.animal.client.gui;
 
-import su.terrafirmagreg.api.base.client.gui.inventory.spi.BaseGuiContainer;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.framework.manager.registry.base.gui.inventory.spi.BaseGuiContainer;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

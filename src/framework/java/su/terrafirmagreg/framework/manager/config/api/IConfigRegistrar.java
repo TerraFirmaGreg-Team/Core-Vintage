@@ -1,0 +1,4 @@
+package su.terrafirmagreg.framework.manager.config.api;
+
+public interface IConfigRegistrar {
+}

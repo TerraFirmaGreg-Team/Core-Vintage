@@ -59,13 +59,34 @@ public class FallingBlockManager {
   }
 
   public static void registerFallable(IBlockState state, Specification specification) {
+    if (specification == null) {
+      return;
+    }
     FALLABLES.put(state, specification);
   }
 
   public static void registerFallable(Block block, Specification specification) {
     for (IBlockState state : block.getBlockState().getValidStates()) {
-      FALLABLES.put(state, specification);
+      registerFallable(state, specification);
     }
+  }
+
+  public static void registerFallable(IBlockState state, Specification specification, IBlockState resultingState) {
+    if (specification == null) {
+      return;
+    }
+    var spec = new Specification(specification);
+    spec.setResultingState(resultingState);
+    registerFallable(state, spec);
+  }
+
+  public static void registerFallable(Block block, Specification specification, IBlockState resultingState) {
+    if (specification == null) {
+      return;
+    }
+    var spec = new Specification(specification);
+    spec.setResultingState(resultingState);
+    registerFallable(block, spec);
   }
 
   public static void registerSideSupports(IBlockState state) {
@@ -329,6 +350,7 @@ public class FallingBlockManager {
     return pos;
   }
 
+
   public static class Specification {
 
     public static final IFallDropsProvider DEFAULT_DROPS_PROVIDER = (world, pos, state, teData, fallTime, fallDistance) -> Collections.singletonList(new ItemStack(state.getBlock(), 1, state.getBlock()
@@ -337,8 +359,10 @@ public class FallingBlockManager {
       .isReplaceable();
 
     public static final Specification VERTICAL_AND_HORIZONTAL = new Specification(true, () -> TFCSounds.DIRT_SLIDE_SHORT);
+    public static final Specification VERTICAL_AND_HORIZONTAL_ROCK = new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT);
     public static final Specification VERTICAL_ONLY = new Specification(false, () -> TFCSounds.DIRT_SLIDE_SHORT);
-    public static final Specification COLLAPSABLE = new Specification(false, true, () -> TFCSounds.ROCK_SLIDE_LONG);
+    public static final Specification VERTICAL_ONLY_SOIL = new Specification(false, () -> TFCSounds.DIRT_SLIDE_SHORT);
+    public static final Specification COLLAPSABLE_ROCK = new Specification(false, true, () -> TFCSounds.ROCK_SLIDE_LONG);
 
     private final boolean canFallHorizontally;
     private final Supplier<SoundEvent> soundEventDelegate;

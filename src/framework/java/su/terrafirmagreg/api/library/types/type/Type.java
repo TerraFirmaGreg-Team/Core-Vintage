@@ -1,6 +1,9 @@
 package su.terrafirmagreg.api.library.types.type;
 
 import su.terrafirmagreg.api.library.types.variant.Variant;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
+
+import net.minecraft.block.Block;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,6 +37,13 @@ public abstract class Type<T extends Type<T>> implements Comparable<Type<T>> {
 
   public String getRegistryKey(Variant<?, T> variant) {
     return String.format("%s/%s", variant, this);
+  }
+
+  public String getRegistryKey(Block model, String variant) {
+    if (model instanceof IRegistryEntry<?, ?> entry) {
+      return String.format("%s/%s/%s", entry.getSettings().getRegistryKey(), variant, this);
+    }
+    return getRegistryKey(variant);
   }
 
   @Override

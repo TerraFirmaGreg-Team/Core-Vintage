@@ -1,0 +1,99 @@
+package su.terrafirmagreg.modules.soil.object.block;
+
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.modules.soil.api.spi.IGrassBlock;
+import su.terrafirmagreg.modules.soil.helper.GrassColorHelper;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.item.Item;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Random;
+
+import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
+
+@SuppressWarnings("deprecation")
+public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor, IGrassBlock {
+
+  public BlockSoilPeatGrass() {
+    super(Settings.of(Material.GRASS));
+
+    getSettings()
+      .registryKey("peat_grass")
+      .sound(SoundType.PLANT)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .randomTicks()
+      .oreDict("peat")
+      .oreDict("peat", "grass");
+
+    setDefaultState(blockState.getBaseState()
+      .withProperty(NORTH, Boolean.FALSE)
+      .withProperty(EAST, Boolean.FALSE)
+      .withProperty(SOUTH, Boolean.FALSE)
+      .withProperty(WEST, Boolean.FALSE));
+
+    BlockUtils.addFireInfo(this, 5, 5);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return 0;
+  }
+
+  @NotNull
+  @Override
+  public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+    pos = pos.add(0, -1, 0);
+    return state
+      .withProperty(NORTH, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+      .withProperty(EAST, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+      .withProperty(SOUTH, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+      .withProperty(WEST, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))));
+  }
+
+  @Override
+  public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
+    if (world.isRemote) {
+      return;
+    }
+    spreadGrass(world, pos, state, rand);
+  }
+
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return Item.getItemFromBlock(BlocksSoil.PEAT);
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
+  }
+
+  @Override
+  public IBlockColor getBlockColor() {
+    return GrassColorHelper::computeGrassColor;
+  }
+
+  @Override
+  public IItemColor getItemColor() {
+    return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
+  }
+}

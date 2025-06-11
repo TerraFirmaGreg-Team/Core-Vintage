@@ -1,0 +1,79 @@
+package su.terrafirmagreg.modules.soil.object.block;
+
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.library.types.type.IType;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockSlab;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+
+import lombok.Getter;
+
+@Getter
+public abstract class BlockSoilMudSlab extends BaseBlockSlab implements IType<SoilType> {
+
+  protected final SoilType type;
+
+  protected Half halfSlab;
+  protected Double doubleSlab;
+
+  private BlockSoilMudSlab(Block model, SoilType type) {
+    super(Settings.of(Material.GROUND));
+
+    this.type = type;
+
+    getSettings()
+      .sound(SoundType.GROUND)
+      .harvestLevel(ToolClasses.PICKAXE, model.getHarvestLevel(model.getDefaultState()))
+      .oreDict("slab")
+      .oreDict("slab", "mud", "bricks");
+  }
+
+  public static class Double extends BlockSoilMudSlab {
+
+    public Double(Block model, SoilType type) {
+      super(model, type);
+
+      getSettings()
+        .registryKey(type.getRegistryKey(model, "slab_double"));
+    }
+
+    @Override
+    public boolean isDouble() {
+      return true;
+    }
+
+    @Override
+    public Double getDoubleSlab() {
+      return this;
+    }
+
+  }
+
+  public static class Half extends BlockSoilMudSlab {
+
+    public Half(Block model, Block doubleSlab, SoilType type) {
+      super(model, type);
+
+      this.doubleSlab = (Double) doubleSlab;
+      this.doubleSlab.halfSlab = this;
+      this.halfSlab = this;
+
+      getSettings()
+        .registryKey(type.getRegistryKey(model, "slab"));
+    }
+
+    @Override
+    public boolean isDouble() {
+      return false;
+    }
+
+    @Override
+    public Half getHalfSlab() {
+      return this;
+    }
+
+  }
+}

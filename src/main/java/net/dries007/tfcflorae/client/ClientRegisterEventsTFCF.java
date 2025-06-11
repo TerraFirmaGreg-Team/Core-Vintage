@@ -2,6 +2,7 @@ package net.dries007.tfcflorae.client;
 
 import su.terrafirmagreg.api.data.Properties.BoolProp;
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.modules.soil.helper.GrassColorHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -27,7 +28,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.base.Strings;
-import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.client.render.TESRFruitChestTFCF;
 import net.dries007.tfc.client.render.TESRFruitLoomTFCF;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
@@ -335,8 +335,8 @@ public class ClientRegisterEventsTFCF {
   @SideOnly(Side.CLIENT)
   public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
     BlockColors blockColors = event.getBlockColors();
-    IBlockColor grassColor = GrassColorHandler::computeGrassColor;
-    IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
+    IBlockColor grassColor = GrassColorHelper::computeGrassColor;
+    IBlockColor foliageColor = GrassColorHelper::computeGrassColor;
 
     if (ConfigTFCF.General.WORLD.enableAllBlockTypes) {
       blockColors.registerBlockColorHandler(grassColor, BlocksTFCF.getAllBlockRockVariantsTFCF().stream().filter(x -> x.getType().isGrass)

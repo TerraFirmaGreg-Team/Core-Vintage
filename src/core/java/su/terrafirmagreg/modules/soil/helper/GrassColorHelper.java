@@ -1,4 +1,4 @@
-package net.dries007.tfc.client;
+package su.terrafirmagreg.modules.soil.helper;
 
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
@@ -17,7 +17,7 @@ import java.time.Month;
 import java.util.Random;
 
 
-public class GrassColorHandler {
+public class GrassColorHelper {
 
   public static NoiseGeneratorPerlin noiseGenerator = new NoiseGeneratorPerlin(new Random("NOISE_GRASS".hashCode()), 2);
   public static Color[] monthlyColors = new Color[12];
@@ -25,6 +25,7 @@ public class GrassColorHandler {
   static {
     resetColors();
   }
+
 
   public static void resetColors() {
     int julyCode = 0x00;

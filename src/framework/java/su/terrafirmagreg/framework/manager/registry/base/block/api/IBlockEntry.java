@@ -6,7 +6,6 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry.Settings;
 import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemBlock;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderGroupTab;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
@@ -37,15 +36,11 @@ import java.util.function.Supplier;
 
 
 @SuppressWarnings("unused")
-public interface IBlockEntry extends IRegistryEntry<Settings, Block>, IProviderGroupTab {
+public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
 
 
   default Item asItem() {
     return Item.getItemFromBlock(asEntry());
-  }
-
-  default void setGroupTab(CreativeTabs tab) {
-    getSettings().group(tab);
   }
 
 
@@ -53,7 +48,6 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block>, IProviderG
   default void postRegister() {
     var settings = getSettings();
     asEntry()
-      .setCreativeTab(settings.getGroup())
       .setResistance(settings.getResistance())
       .setHardness(settings.getHardness())
       .setSoundType(settings.getSoundType())
@@ -411,35 +405,6 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block>, IProviderG
       this.resource = resourceLocation;
       return this;
     }
-
-//    public Settings fallable(Block block, Specification specification, IBlockState resultingState) {
-//      var spec = new Specification(specification);
-//      spec.setResultingState(resultingState);
-//      return fallable(block, spec);
-//    }
-//
-//    public Settings fallable(Block block, Specification specification) {
-//      if (specification != null) {
-//        FallingBlockManager.registerFallable(block, specification);
-//      }
-//      return this;
-//    }
-//
-//    public Settings fallable(IBlockState state, Specification specification, IBlockState resultingState) {
-//      if (specification != null) {
-//        var spec = new Specification(specification);
-//        spec.setResultingState(resultingState);
-//        FallingBlockManager.registerFallable(state, spec);
-//      }
-//      return this;
-//    }
-//
-//    public Settings fallable(IBlockState state, Specification specification) {
-//      if (specification != null) {
-//        FallingBlockManager.registerFallable(state, specification);
-//      }
-//      return this;
-//    }
 
     public interface ContextFunction<R> {
 

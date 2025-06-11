@@ -1,5 +1,7 @@
 package net.dries007.firmalife;
 
+import su.terrafirmagreg.modules.soil.helper.GrassColorHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockFenceGate;
@@ -37,7 +39,6 @@ import net.dries007.firmalife.render.TESRString;
 import net.dries007.firmalife.render.TESRTurntable;
 import net.dries007.firmalife.render.VanillaStemStateMapper;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.objects.blocks.BlockBonsai;
 import net.dries007.tfc.objects.blocks.BlockFruitDoor;
 import net.dries007.tfc.objects.blocks.BlockFruitFenceGate;
@@ -136,7 +137,7 @@ public class ClientRegisterEventsFL {
   @SideOnly(Side.CLIENT)
   public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event) {
     BlockColors blockColors = event.getBlockColors();
-    IBlockColor foliageColor = GrassColorHandler::computeGrassColor;
+    IBlockColor foliageColor = GrassColorHelper::computeGrassColor;
 
     blockColors.registerBlockColorHandler(foliageColor, BlocksFL.getAllFruitLeaves().toArray(new Block[0]));
     blockColors.registerBlockColorHandler(foliageColor, BlocksFL.getAllBonsai().toArray(new Block[0]));

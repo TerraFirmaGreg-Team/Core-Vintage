@@ -7,7 +7,6 @@ import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry.Settings;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderGroupTab;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
@@ -33,7 +32,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-public interface IItemEntry extends IRegistryEntry<Settings, Item>, IProviderGroupTab {
+public interface IItemEntry extends IRegistryEntry<Settings, Item> {
 
   default ICapabilityProvider settings$initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
     ArrayList<ICapabilityProvider> providers = new ArrayList<>();
@@ -47,15 +46,12 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item>, IProviderGro
 
   }
 
-  default void setGroupTab(CreativeTabs tab) {
-    getSettings().group(tab);
-  }
 
   @Override
   default void postRegister() {
     var settings = getSettings();
+    settings.oreDict(settings.getRegistryKey());
     asEntry()
-      .setCreativeTab(settings.getGroup())
       .setHasSubtypes(settings.isHasSubtypes())
       .setMaxDamage(settings.getMaxDamage())
       .setMaxStackSize(settings.getMaxStackSize());
@@ -109,13 +105,6 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item>, IProviderGro
       }
 
       return settingsItem;
-    }
-
-    @Override
-    public Settings registryKey(String registryKey) {
-      super.registryKey(registryKey);
-      this.oreDict.add(new Object[]{registryKey});
-      return this;
     }
 
     public Settings maxDamage(int durability) {

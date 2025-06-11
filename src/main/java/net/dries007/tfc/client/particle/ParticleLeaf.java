@@ -1,13 +1,13 @@
 package net.dries007.tfc.client.particle;
 
+import su.terrafirmagreg.modules.soil.helper.GrassColorHelper;
+
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.client.GrassColorHandler;
 
 import java.awt.Color;
 
@@ -30,7 +30,7 @@ public class ParticleLeaf extends Particle {
     this.motionZ += speedZ;
     this.particleScale *= 2.5F;
     BlockPos pos = new BlockPos(x, y, z);
-    int colorInteger = GrassColorHandler.computeGrassColor(worldIn.getBlockState(pos), worldIn, pos, 0);
+    int colorInteger = GrassColorHelper.computeGrassColor(worldIn.getBlockState(pos), worldIn, pos, 0);
     Color c = new Color(colorInteger);
     this.particleRed = (float) (c.getRed() / 255.0);
     this.particleBlue = (float) (c.getBlue() / 255.0);

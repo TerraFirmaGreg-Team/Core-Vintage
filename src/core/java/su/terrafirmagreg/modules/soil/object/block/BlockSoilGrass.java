@@ -1,0 +1,158 @@
+package su.terrafirmagreg.modules.soil.object.block;
+
+import su.terrafirmagreg.api.helper.BlockHelper;
+import su.terrafirmagreg.api.library.types.type.IType;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
+import su.terrafirmagreg.modules.soil.api.spi.IGrassBlock;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.helper.GrassColorHelper;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.soil.object.block.spi.BlockSoil;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import lombok.Getter;
+
+import java.util.Random;
+
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CLAY;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SNOWY;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.SOUTH;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
+import static su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
+
+@Getter
+@SuppressWarnings("deprecation")
+public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IGrassBlock {
+
+
+  public BlockSoilGrass(SoilType type) {
+    super(Settings.of(Material.GRASS), type);
+
+    getSettings()
+      .registryKey(type.getRegistryKey("grass"))
+      .sound(SoundType.PLANT)
+      .hardness(2.1F)
+      .randomTicks()
+      .oreDict("grass")
+      .renderLayer(BlockRenderLayer.CUTOUT);
+
+    setDefaultState(blockState.getBaseState()
+      .withProperty(NORTH, Boolean.FALSE)
+      .withProperty(EAST, Boolean.FALSE)
+      .withProperty(SOUTH, Boolean.FALSE)
+      .withProperty(WEST, Boolean.FALSE)
+      .withProperty(SNOWY, Boolean.FALSE)
+      .withProperty(CLAY, Boolean.FALSE));
+
+    //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
+    FallingBlockManager.registerFallable(this, VERTICAL_AND_HORIZONTAL);
+
+  }
+
+  @Override
+  public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+    pos = pos.add(0, -1, 0);
+    Block blockUp = world.getBlockState(pos.up()).getBlock();
+    return state
+      .withProperty(NORTH, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.NORTH))))
+      .withProperty(EAST, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.EAST))))
+      .withProperty(SOUTH, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.SOUTH))))
+      .withProperty(WEST, BlockHelper.isGrass(world.getBlockState(pos.offset(EnumFacing.WEST))))
+      .withProperty(SNOWY, blockUp == Blocks.SNOW || blockUp == Blocks.SNOW_LAYER);
+  }
+
+  @Override
+  public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
+    if (world.isRemote) {
+      return;
+    }
+    spreadGrass(world, pos, state, rand);
+    super.randomTick(world, pos, state, rand);
+  }
+
+  @Override
+  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    if (worldIn.isRemote) {
+      return;
+    }
+
+    if (!worldIn.isAreaLoaded(pos, 3)) {
+      return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
+    }
+
+    Block block = worldIn.getBlockState(pos).getBlock();
+    if (block instanceof IType<?> type) {
+      if (type.getType() instanceof SoilType soilType) {
+
+        if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
+          worldIn.setBlockState(pos, BlocksSoil.DIRT.get(soilType).getDefaultState());
+
+        } else {
+          if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
+            for (int i = 0; i < 4; ++i) {
+              BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
+
+              if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos)) {
+                return;
+              }
+
+              IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
+              IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
+
+              if (iblockstate1.getBlock() == BlocksSoil.DIRT.get(soilType) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4
+                  && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
+                worldIn.setBlockState(blockpos, BlocksSoil.GRASS.get(soilType).getDefaultState());
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY, CLAY);
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+    if (settings.isCanFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
+      double d0 = (float) pos.getX() + rand.nextFloat();
+      double d1 = (double) pos.getY() - 0.05D;
+      double d2 = (float) pos.getZ() + rand.nextFloat();
+      world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
+    }
+  }
+
+
+  @Override
+  public IBlockColor getBlockColor() {
+    return GrassColorHelper::computeGrassColor;
+  }
+
+  @Override
+  public IItemColor getItemColor() {
+    return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
+  }
+}

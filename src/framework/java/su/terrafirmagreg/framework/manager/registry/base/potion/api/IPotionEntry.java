@@ -15,13 +15,11 @@ public interface IPotionEntry extends IRegistryEntry<Settings, PotionType> {
   @Getter
   class Settings extends BaseSettings<Settings> {
 
-    PotionEffect[] effect;
+    PotionEffect[] effect = new PotionEffect[]{};
     Potion potion;
     int duration;
 
-    protected Settings() {
-      this.effect = new PotionEffect[]{};
-    }
+    protected Settings() {}
 
     public static Settings of() {
       return new Settings();

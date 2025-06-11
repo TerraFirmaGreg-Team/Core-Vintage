@@ -81,7 +81,7 @@ public class BlockTypesTFCF extends IForgeRegistryEntry.Impl<BlockTypesTFCF> {
   }
 
   public enum RockTFCF {
-    MOSSY_RAW(Material.ROCK, false, Specification.COLLAPSABLE),
+    MOSSY_RAW(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
     MUD_BRICKS(Material.ROCK, false, null),
     MUD(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),
     BOG_IRON(Material.GROUND, false, Specification.VERTICAL_AND_HORIZONTAL),

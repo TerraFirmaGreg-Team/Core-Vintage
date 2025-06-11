@@ -118,10 +118,10 @@ public class Rock extends IForgeRegistryEntry.Impl<Rock> {
   }
 
   public enum Type {
-    RAW(Material.ROCK, false, Specification.COLLAPSABLE),
-    ANVIL(Material.ROCK, false, Specification.COLLAPSABLE),
+    RAW(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
+    ANVIL(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
     SPIKE(Material.ROCK, false, null),
-    SMOOTH(Material.ROCK, false, Specification.COLLAPSABLE),
+    SMOOTH(Material.ROCK, false, Specification.COLLAPSABLE_ROCK),
     COBBLE(Material.ROCK, false, new Specification(true, () -> TFCSounds.ROCK_SLIDE_SHORT)),
     BRICKS(Material.ROCK, false, null),
     SAND(Material.SAND, false, Specification.VERTICAL_AND_HORIZONTAL),

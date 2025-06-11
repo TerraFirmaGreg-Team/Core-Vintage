@@ -16,7 +16,6 @@ import su.terrafirmagreg.framework.manager.registry.base.group.spi.BaseItemGroup
 import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
 import su.terrafirmagreg.framework.manager.registry.base.potion.api.IPotionEntry;
 import su.terrafirmagreg.framework.manager.registry.base.sound.api.ISoundEntry;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderGroupTab;
 import su.terrafirmagreg.framework.module.api.IModule;
 
 import net.minecraft.block.Block;
@@ -76,9 +75,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
   @Override
   public <T extends IForgeRegistryEntry<T>> T addEntry(Class<T> registry, String identifier, T entry) {
-    if (entry instanceof IProviderGroupTab providerGroupTab) {
-      providerGroupTab.setGroupTab(group);
-    }
     this.map.computeIfAbsent(registry, RegistryWrapper.of(getIdentifier(identifier), entry));
     return entry;
   }
@@ -88,6 +84,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Block> V addBlock(String identifier, V entry) {
 
+    entry.setCreativeTab(group);
     addEntry(Block.class, identifier, entry);
     return entry;
   }
@@ -126,6 +123,8 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
   @Override
   public <V extends Item> V addItem(String identifier, V entry) {
+
+    entry.setCreativeTab(group);
     addEntry(Item.class, identifier, entry);
     return entry;
   }
@@ -133,8 +132,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Item & IItemEntry> V addItem(V entry) {
 
-    var settings = entry.getSettings();
-    return this.addItem(settings.getRegistryKey(), entry);
+    return this.addItem(entry.getSettings().getRegistryKey(), entry);
   }
 
   @Override

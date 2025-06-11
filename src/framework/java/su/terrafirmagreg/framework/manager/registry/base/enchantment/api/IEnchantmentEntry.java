@@ -18,9 +18,7 @@ public interface IEnchantmentEntry extends IRegistryEntry<Settings, Enchantment>
     EnumEnchantmentType type;
     EntityEquipmentSlot[] slots;
 
-    protected Settings() {
-
-    }
+    protected Settings() {}
 
     public static Settings of() {
       return new Settings();

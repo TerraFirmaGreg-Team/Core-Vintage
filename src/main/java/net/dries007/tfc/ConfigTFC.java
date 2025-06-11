@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.data.enums.InventoryCraftingMode;
 import su.terrafirmagreg.api.data.enums.QuiverSearch;
 import su.terrafirmagreg.api.data.enums.TemperatureMode;
 import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
+import su.terrafirmagreg.modules.soil.helper.GrassColorHelper;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -13,7 +14,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import net.dries007.tfc.client.GrassColorHandler;
 import net.dries007.tfc.util.Alloy;
 
 import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.TFC;
@@ -29,7 +29,7 @@ public final class ConfigTFC {
     if (event.getModID().equals(TFC)) {
       TerraFirmaCraft.getLog().warn("Config changed");
       ConfigManager.sync(TFC, Config.Type.INSTANCE);
-      GrassColorHandler.resetColors();
+      GrassColorHelper.resetColors();
     }
   }
 

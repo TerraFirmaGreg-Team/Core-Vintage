@@ -1,6 +1,7 @@
 package su.terrafirmagreg.api.helper;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.soil.api.spi.IGrassBlock;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -11,9 +12,9 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.CLAY;
 
 public class BlockHelper {
 
-//  public static boolean isGrass(IBlockState current) {
-//    return current.getBlock() instanceof IGrass;
-//  }
+  public static boolean isGrass(IBlockState current) {
+    return current.getBlock() instanceof IGrassBlock;
+  }
 
   public static boolean isDirt(IBlockState current) {
 //    var block = current.getBlock();

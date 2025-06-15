@@ -3120,14 +3120,12 @@ item.tfc.ceramics.fired.jug.name=Jug
 item.tfc.ceramics.fired.jug.filled=%s Jug
 item.tfc.ceramics.unfired.clay_flower_pot.name=Unfired Clay Flower Pot
 item.tfc.ceramics.unfired.crucible.name=Unfired Crucible
-item.tfc.mortar.name=Mortar
 item.tfc.wrought_iron_grill.name=Wrought Iron Grill
 item.tfc.alabaster_brick.name=Alabaster Brick
 item.tfc.metal.rod.gold.name=Gold Rod
 item.tfc.metal.rod.wrought_iron.name=Wrought Iron Rod
 item.tfc.metal.rod.steel.name=Steel Rod
 item.tfc.brass_mechanisms.name=Brass Mechanisms
-item.tfc.glue.name=Glue
 
 item.tfc.ore.native_copper.name=Native Copper
 item.tfc.ore.native_gold.name=Native Gold

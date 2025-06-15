@@ -3091,14 +3091,12 @@ item.tfc.ceramics.fired.jug.name=Кувшин
 item.tfc.ceramics.fired.jug.filled=Кувшин с %s
 item.tfc.ceramics.unfired.clay_flower_pot.name=Необожженный глиняный цветочный горшок
 item.tfc.ceramics.unfired.crucible.name=Необожженный тигель
-item.tfc.mortar.name=Строительный раствор
 item.tfc.wrought_iron_grill.name=Гриль из кованого железа
 item.tfc.alabaster_brick.name=Алебастровый кирпич
 item.tfc.metal.rod.gold.name=Золотой стержень
 item.tfc.metal.rod.wrought_iron.name=Стержень из кованного железа
 item.tfc.metal.rod.steel.name=Стальной стержень
 item.tfc.brass_mechanisms.name=Латунный механизм
-item.tfc.glue.name=Клей
 
 item.tfc.ore.native_copper.name=Самородная медь
 item.tfc.ore.native_gold.name=Самородное золото

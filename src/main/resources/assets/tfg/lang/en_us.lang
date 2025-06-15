@@ -264,6 +264,8 @@ item.tfg.core.wood_ash.name=Wood Ash
 item.tfg.core.straw.name=Straw
 item.tfg.core.shard.glass.name=Glass Shard
 item.tfg.core.shard.ice.name=Ice Shard
+item.tfg.core.mortar.name=Mortar
+item.tfg.core.glue.name=Glue
 
 ## Effect
 effect.tfg.core.overburdened=Overburdened

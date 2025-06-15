@@ -264,6 +264,8 @@ item.tfg.core.wood_ash.name=Древесная зола
 item.tfg.core.straw.name=Солома
 item.tfg.core.shard.glass.name=Осколок стекла
 item.tfg.core.shard.ice.name=Осколок льда
+item.tfg.core.mortar.name=Раствор
+item.tfg.core.glue.name=Клей
 
 ## Effect
 effect.tfg.core.overburdened=Перегружен

@@ -1,13 +1,11 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
-import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockSlab;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.util.BlockRenderLayer;
 
 import lombok.Getter;
 
@@ -19,25 +17,24 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements IType<So
   protected Half halfSlab;
   protected Double doubleSlab;
 
-  private BlockSoilMudSlab(Block model, SoilType type) {
-    super(Settings.of(Material.GROUND));
+  private BlockSoilMudSlab(SoilType type) {
+    super(Settings.of(BlocksSoil.MUD_BRICKS.get(type)));
 
     this.type = type;
 
     getSettings()
-      .sound(SoundType.GROUND)
-      .harvestLevel(ToolClasses.PICKAXE, model.getHarvestLevel(model.getDefaultState()))
       .oreDict("slab")
       .oreDict("slab", "mud", "bricks");
   }
 
   public static class Double extends BlockSoilMudSlab {
 
-    public Double(Block model, SoilType type) {
-      super(model, type);
+    public Double(SoilType type) {
+      super(type);
 
       getSettings()
-        .registryKey(type.getRegistryKey(model, "slab_double"));
+        .registryKey(type.getRegistryKey("mud_bricks/slab_double"))
+        .renderLayer(BlockRenderLayer.CUTOUT);
     }
 
     @Override
@@ -54,15 +51,15 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements IType<So
 
   public static class Half extends BlockSoilMudSlab {
 
-    public Half(Block model, Block doubleSlab, SoilType type) {
-      super(model, type);
+    public Half(SoilType type) {
+      super(type);
 
-      this.doubleSlab = (Double) doubleSlab;
+      this.doubleSlab = BlocksSoil.MUD_BRICKS_SLAB_DOUBLE.get(type);
       this.doubleSlab.halfSlab = this;
       this.halfSlab = this;
 
       getSettings()
-        .registryKey(type.getRegistryKey(model, "slab"));
+        .registryKey(type.getRegistryKey("mud_bricks/slab"));
     }
 
     @Override

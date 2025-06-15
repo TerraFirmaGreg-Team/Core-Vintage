@@ -1,18 +1,23 @@
 package su.terrafirmagreg.api.helper;
 
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.soil.api.spi.IDirtBlock;
 import su.terrafirmagreg.modules.soil.api.spi.IGrassBlock;
+import su.terrafirmagreg.modules.soil.api.spi.ISoilBlock;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CLAY;
 
 public class BlockHelper {
 
   public static boolean isGrass(IBlockState current) {
+
     return current.getBlock() instanceof IGrassBlock;
   }
 
@@ -22,7 +27,7 @@ public class BlockHelper {
 //      return Variant.isVariant(soil.getVariant(),
 //                               BlocksSoil.DIRT, BlocksSoil.COARSE_DIRT, BlocksSoil.ROOTED_DIRT);
 //    }
-    return false;
+    return current.getBlock() instanceof IDirtBlock || BlocksTFC.isDirt(current);
   }
 
   public static boolean isSoil(IBlockState current) {
@@ -36,7 +41,7 @@ public class BlockHelper {
 //                               BlocksSoil.MYCELIUM, BlocksSoil.DIRT, BlocksSoil.COARSE_DIRT,
 //                               BlocksSoil.SPARSE_GRASS, BlocksSoil.ROOTED_DIRT);
 //    }
-    return false;
+    return current.getBlock() instanceof ISoilBlock || BlocksTFC.isSoil(current);
   }
 
   public static boolean isSoilOrGravel(IBlockState current) {
@@ -50,7 +55,7 @@ public class BlockHelper {
 //                               BlocksSoil.SPARSE_GRASS, BlocksSoil.ROOTED_DIRT, BlocksSoil.DIRT,
 //                               BlocksSoil.MUD, BlocksSoil.PODZOL, BlocksSoil.MYCELIUM);
 //    }
-    return false;
+    return BlocksTFC.isSoilOrGravel(current);
   }
 
   public static boolean isGround(IBlockState current) {
@@ -65,7 +70,7 @@ public class BlockHelper {
 //                               BlocksSoil.SPARSE_GRASS, BlocksSoil.ROOTED_DIRT, BlocksSoil.DIRT,
 //                               BlocksSoil.MUD, BlocksSoil.PODZOL, BlocksSoil.MYCELIUM);
 //    }
-    return false;
+    return BlocksTFC.isGround(current);
   }
 
   public static boolean isGrowableSoil(IBlockState current) {
@@ -75,7 +80,7 @@ public class BlockHelper {
 //                               BlocksSoil.GRASS, BlocksSoil.DRY_GRASS, BlocksSoil.SPARSE_GRASS,
 //                               BlocksSoil.DIRT, BlocksSoil.PODZOL, BlocksSoil.MYCELIUM);
 //    }
-    return false;
+    return BlocksTFC.isGrowableSoil(current);
   }
 
   public static boolean isWater(IBlockState current) {
@@ -95,6 +100,6 @@ public class BlockHelper {
   }
 
   public static boolean isClay(IBlockState current) {
-    return BlockUtils.hasProperty(current, CLAY);
+    return BlockUtils.hasProperty(current, CLAY) || BlocksTFC.isClay(current);
   }
 }

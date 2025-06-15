@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -69,12 +70,12 @@ public interface IGrassBlock extends ISoilBlock {
     if (up.getMaterial().isLiquid() || (neighborLight < 4 && up.getLightOpacity(world, upPos) > 2)) {
 
       // Генерируем торф в зависимости от типа блока
-//      if (usBlock instanceof BlockSoilPeat) {
-//        world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
-//
-//      } else if (usBlock instanceof ISoilBlock soil) {
-//        world.setBlockState(pos, soil.getVariant().getNonGrassVersion().get(soil.getType()).getDefaultState());
-//      }
+      if (usBlock instanceof BlockSoilPeat) {
+        world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
+
+      } else if (usBlock instanceof ISoilBlock soil) {
+        world.setBlockState(pos, soil.getDirt());
+      }
     } else if (neighborLight >= 9) {
       for (int i = 0; i < 4; ++i) {
         // Генерируем случайную позицию вокруг исходной позиции
@@ -96,11 +97,10 @@ public interface IGrassBlock extends ISoilBlock {
         // Получаем позицию верхнего блока целевой позиции
         BlockPos targetUp = target.up();
         // Получаем состояние верхнего блока целевой позиции
-        IBlockState targetUpState = world.getBlockState(targetUp);
+        IBlockState targetUpState;
 
         // Пропускаем итерацию, если верхний блок жидкость или имеет высокую прозрачность
-        if (world.getLightFromNeighbors(targetUp) < 4 || targetUpState.getMaterial()
-          .isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
+        if (world.getLightFromNeighbors(targetUp) < 4 || (targetUpState = world.getBlockState(targetUp)).getMaterial().isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
           continue;
         }
 
@@ -108,23 +108,9 @@ public interface IGrassBlock extends ISoilBlock {
         Block currentBlock = current.getBlock();
 
         // Генерируем траву в зависимости от типа текущего блока
-//        if (currentBlock instanceof BlockSoilPeat) {
-//          world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
-//        } else if (currentBlock instanceof ISoilBlock soilBlock) {
-//          var spreader = BlocksSoil.GRASS;
-//
-//          // Проверяем тип блока, с которого распространяется трава
-//          if (usBlock instanceof ISoilBlock) {
-//            if (VariantBlock.isVariant(usBlock.getDefaultState(), BlocksSoil.DRY_GRASS)) {
-//              spreader = BlocksSoil.DRY_GRASS;
-//            } else if (VariantBlock.isVariant(usBlock.getDefaultState(), BlocksSoil.SPARSE_GRASS)) {
-//              spreader = BlocksSoil.SPARSE_GRASS;
-//            }
-//          }
-//
-//          var s = soilBlock.getVariant().getGrassVersion(spreader);
-//          world.setBlockState(target, s.get(soilBlock.getType()).getDefaultState());
-//        }
+        if (currentBlock instanceof IDirtBlock dirtBlock) {
+          world.setBlockState(target, dirtBlock.getGrass());
+        }
       }
       // Генерируем короткую траву на верхнем блоке с определенной вероятностью
 //      for (FloraType plant : FloraType.getTypes()) {

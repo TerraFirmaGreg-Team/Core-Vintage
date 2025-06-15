@@ -24,6 +24,9 @@ import java.util.Map;
 
 public class BlocksSoil {
 
+  public static BlockSoilPeatGrass PEAT_GRASS;
+  public static BlockSoilPeat PEAT;
+
   public static Map<SoilType, BlockSoilGrass> GRASS;
   public static Map<SoilType, BlockSoilDryGrass> DRY_GRASS;
   public static Map<SoilType, BlockSoilSparseGrass> SPARSE_GRASS;
@@ -42,11 +45,11 @@ public class BlocksSoil {
   public static Map<SoilType, BlockSoilMudWall> MUD_BRICKS_WALL;
   public static Map<SoilType, BlockSoilGrass> DRYING_BRICKS;
 
-  public static BlockSoilPeatGrass PEAT_GRASS;
-  public static BlockSoilPeat PEAT;
 
   public static void onRegister(IRegistryRegistrar registry) {
 
+    PEAT_GRASS = registry.addBlock(new BlockSoilPeatGrass());
+    PEAT = registry.addBlock(new BlockSoilPeat());
     GRASS = registry.addBlock(SoilType.getTypes(), BlockSoilGrass::new);
     DRY_GRASS = registry.addBlock(SoilType.getTypes(), BlockSoilDryGrass::new);
     SPARSE_GRASS = registry.addBlock(SoilType.getTypes(), BlockSoilSparseGrass::new);
@@ -59,13 +62,9 @@ public class BlocksSoil {
     GRASS_PATH = registry.addBlock(SoilType.getTypes(), BlockSoilGrassPath::new);
     MUD = registry.addBlock(SoilType.getTypes(), BlockSoilMud::new);
     MUD_BRICKS = registry.addBlock(SoilType.getTypes(), BlockSoilMudBricks::new);
-//    MUD_BRICKS_STAIRS = registry.addBlock(SoilType.getTypes(), BlockSoilMudStairs::new);
-//    MUD_BRICKS_SLAB_DOUBLE = registry.addBlock(SoilType.getTypes(), BlockSoilMudSlab.Double::new);
-//    MUD_BRICKS_SLAB = registry.addBlock(SoilType.getTypes(), BlockSoilMudSlab.Half::new);
-//    MUD_BRICKS_WALL = registry.addBlock(SoilType.getTypes(), BlockSoilMudWall::new);
-//    DRYING_BRICKS = registry.addBlock(SoilType.getTypes(), BlockSoilGrass::new);
-
-    PEAT_GRASS = registry.addBlock(new BlockSoilPeatGrass());
-    PEAT = registry.addBlock(new BlockSoilPeat());
+    MUD_BRICKS_STAIRS = registry.addBlock(SoilType.getTypes(), BlockSoilMudStairs::new);
+    MUD_BRICKS_SLAB_DOUBLE = registry.addBlock(SoilType.getTypes(), BlockSoilMudSlab.Double::new);
+    MUD_BRICKS_SLAB = registry.addBlock(SoilType.getTypes(), BlockSoilMudSlab.Half::new);
+    MUD_BRICKS_WALL = registry.addBlock(SoilType.getTypes(), BlockSoilMudWall::new);
   }
 }

@@ -5,7 +5,9 @@ import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockGrassPath;
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.api.spi.IDirtBlock;
+import su.terrafirmagreg.modules.soil.api.spi.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.block.Block;
@@ -15,6 +17,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -31,7 +34,7 @@ import static su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockMan
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilGrassPath extends BaseBlockGrassPath implements IType<SoilType> {
+public class BlockSoilGrassPath extends BaseBlockGrassPath implements IType<SoilType>, ISoilBlock {
 
 
   protected final SoilType type;
@@ -47,8 +50,8 @@ public class BlockSoilGrassPath extends BaseBlockGrassPath implements IType<Soil
       .hardness(2.0F)
       .nonCube()
       .useNeighborBrightness()
-      .harvestLevel(ToolClasses.SHOVEL, 0)
-      .oreDict("grass_path");
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .harvestLevel(ToolClasses.SHOVEL, 0);
 
     FallingBlockManager.registerFallable(this, VERTICAL_ONLY_SOIL);
   }
@@ -80,8 +83,7 @@ public class BlockSoilGrassPath extends BaseBlockGrassPath implements IType<Soil
   public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
     BlockPos upPos = pos.up();
     IBlockState up = world.getBlockState(upPos);
-    if (up.isSideSolid(world, upPos, EnumFacing.DOWN)
-        && FallingBlockManager.getSpecification(up) == null) {
+    if (up.isSideSolid(world, upPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
       IDirtBlock.turnToDirt(world, pos);
     }
   }
@@ -95,10 +97,14 @@ public class BlockSoilGrassPath extends BaseBlockGrassPath implements IType<Soil
   public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
     if (fromPos.getY() == pos.getY() + 1) {
       IBlockState up = world.getBlockState(fromPos);
-      if (up.isSideSolid(world, fromPos, EnumFacing.DOWN)
-          && FallingBlockManager.getSpecification(up) == null) {
+      if (up.isSideSolid(world, fromPos, EnumFacing.DOWN) && FallingBlockManager.getSpecification(up) == null) {
         IDirtBlock.turnToDirt(world, pos);
       }
     }
+  }
+
+  @Override
+  public IBlockState getDirt() {
+    return BlocksSoil.DIRT.get(type).getDefaultState();
   }
 }

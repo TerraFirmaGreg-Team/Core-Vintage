@@ -1,6 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -109,9 +110,9 @@ public class WorldGenSoilPits implements IWorldGenerator {
           final IBlockState current = world.getBlockState(pos);
 
           if (BlocksTFC.isGrass(current)) {
-            world.setBlockState(pos, BlocksTFC.PEAT_GRASS.getDefaultState(), 2);
+            world.setBlockState(pos, BlocksSoil.PEAT_GRASS.getDefaultState(), 2);
           } else if (BlocksTFC.isDirt(current) || BlocksTFC.isClay(current)) {
-            world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState(), 2);
+            world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState(), 2);
           }
         }
       }

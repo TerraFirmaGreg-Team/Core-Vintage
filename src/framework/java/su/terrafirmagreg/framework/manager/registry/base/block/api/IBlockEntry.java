@@ -81,9 +81,8 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     IRarity rarity;
     BlockRenderLayer renderLayer;
     Function<Block, Item> itemBlock;
-
-
     String harvestTool;
+
     int harvestLevel;
     int encouragement;
     int flammability;
@@ -102,7 +101,6 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     boolean isReplaceable;
     boolean isTranslucent;
     boolean isPassable;
-
     boolean isAir;
     boolean nonCanStack;
 

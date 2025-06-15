@@ -299,7 +299,6 @@ public final class ClientRegisterEvents {
     // todo: do something different for conifers - they should have a different color mapping through the seasons
     IBlockColor foliageColor = GrassColorHelper::computeGrassColor;
 
-    blockColors.registerBlockColorHandler(grassColor, BlocksTFC.PEAT_GRASS);
     blockColors.registerBlockColorHandler(grassColor, BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType().isGrass)
       .toArray(BlockRockVariant[]::new));
     // This is talking about tall grass vs actual grass blocks
@@ -327,11 +326,6 @@ public final class ClientRegisterEvents {
         event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
           .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
       BlocksTFC.getAllBlockRockVariants().stream().filter(x -> x.getType().isGrass).toArray(BlockRockVariant[]::new));
-
-    itemColors.registerItemColorHandler((stack, tintIndex) ->
-        event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock()
-          .getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
-      BlocksTFC.PEAT_GRASS);
 
     itemColors.registerItemColorHandler((stack, tintIndex) ->
         event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock()

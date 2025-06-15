@@ -4,6 +4,7 @@ import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.core.object.item.ItemDebugWand;
 import su.terrafirmagreg.modules.core.object.item.ItemGlassShard;
 import su.terrafirmagreg.modules.core.object.item.ItemIceShard;
+import su.terrafirmagreg.modules.core.object.item.ItemMortar;
 import su.terrafirmagreg.modules.core.object.item.ItemStraw;
 import su.terrafirmagreg.modules.core.object.item.ItemWoodAsh;
 
@@ -23,9 +24,12 @@ public final class ItemsCore {
   public static void onRegister(IRegistryRegistrar registry) {
 
     DEBUG_WAND = registry.addItem(new ItemDebugWand());
-    WOOD_ASH = registry.addItem(new ItemWoodAsh());
-    STRAW = registry.addItem(new ItemStraw());
     GLASS_SHARD = registry.addItem(new ItemGlassShard());
     ICE_SHARD = registry.addItem(new ItemIceShard());
+    STRAW = registry.addItem(new ItemStraw());
+    WOOD_ASH = registry.addItem(new ItemWoodAsh());
+    MORTAR = registry.addItem(new ItemMortar());
+
+
   }
 }

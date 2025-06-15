@@ -6,6 +6,7 @@ import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockFarm
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.api.spi.IDirtBlock;
+import su.terrafirmagreg.modules.soil.api.spi.ISoilBlock;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
@@ -42,8 +43,9 @@ import static su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockMan
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilFarmland extends BaseBlockFarmland implements IType<SoilType>, IProviderBlockColor {
+public class BlockSoilFarmland extends BaseBlockFarmland implements IType<SoilType>, IProviderBlockColor, ISoilBlock {
 
+  public static final int MAX_MOISTURE = 7;
   public static final int[] TINT = new int[]{
     0xffffffff,
     0xffe7e7e7,
@@ -68,14 +70,19 @@ public class BlockSoilFarmland extends BaseBlockFarmland implements IType<SoilTy
       .ignoresProperties(MOISTURE)
       .sound(SoundType.GROUND)
       .useNeighborBrightness()
+      .lightValue(255)
       .hardness(2.0F)
-      .harvestLevel(ToolClasses.SHOVEL, 0)
-      .oreDict("farmland");
+      .harvestLevel(ToolClasses.SHOVEL, 0);
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt
 
     FallingBlockManager.registerFallable(this, VERTICAL_ONLY_SOIL);
+  }
+
+  @Override
+  public IBlockState getDirt() {
+    return BlocksSoil.DIRT.get(type).getDefaultState();
   }
 
   @Override
@@ -91,10 +98,10 @@ public class BlockSoilFarmland extends BaseBlockFarmland implements IType<SoilTy
   @Override
   public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
     int current = state.getValue(MOISTURE);
-    int target = world.isRainingAt(pos.up()) ? 7 : getWaterScore(world, pos);
+    int target = world.isRainingAt(pos.up()) ? MAX_MOISTURE : getWaterScore(world, pos);
 
     if (current < target) {
-      if (current < 7) {
+      if (current < MAX_MOISTURE) {
         world.setBlockState(pos, state.withProperty(MOISTURE, current + 1), 2);
       }
     } else if (current > target || target == 0) {
@@ -120,7 +127,7 @@ public class BlockSoilFarmland extends BaseBlockFarmland implements IType<SoilTy
       }
       score += ((hRange - hDist) / (float) hRange);
     }
-    return score > 1 ? 7 : Math.round(score * 7);
+    return score > 1 ? MAX_MOISTURE : Math.round(score * MAX_MOISTURE);
   }
 
   private boolean hasCrops(World worldIn, BlockPos pos) {

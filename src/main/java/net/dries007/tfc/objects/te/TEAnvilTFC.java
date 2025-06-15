@@ -1,6 +1,7 @@
 package net.dries007.tfc.objects.te;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
@@ -34,7 +35,6 @@ import net.dries007.tfc.objects.blocks.metal.BlockAnvilTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockStoneAnvil;
 import net.dries007.tfc.objects.inventory.capability.ISlotCallback;
 import net.dries007.tfc.objects.inventory.capability.ItemStackHandlerCallback;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.forge.ForgeStep;
 import net.dries007.tfc.util.forge.ForgeSteps;
 
@@ -321,7 +321,7 @@ public class TEAnvilTFC extends TEInventory {
       // Set stacks in slots
       inventory.setStackInSlot(SLOT_INPUT_1, result);
       inventory.setStackInSlot(SLOT_INPUT_2, ItemStack.EMPTY);
-      inventory.setStackInSlot(SLOT_FLUX, Helpers.consumeItem(fluxStack, 1));
+      inventory.setStackInSlot(SLOT_FLUX, StackUtils.consumeItem(fluxStack, 1));
       markForSync();
 
       return true;

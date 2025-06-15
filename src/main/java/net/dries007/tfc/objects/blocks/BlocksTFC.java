@@ -6,6 +6,8 @@ import su.terrafirmagreg.modules.device.object.block.BlockQuern;
 import su.terrafirmagreg.modules.device.object.block.BlockSluice;
 import su.terrafirmagreg.modules.device.object.tile.TileQuern;
 import su.terrafirmagreg.modules.device.object.tile.TileSluice;
+import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
+import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeatGrass;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -141,8 +143,6 @@ public final class BlocksTFC {
   @GameRegistry.ObjectHolder("alabaster/raw/plain")
   public static final BlockDecorativeStone ALABASTER_RAW_PLAIN = getNull();
 
-  public static final BlockPeat PEAT = getNull();
-  public static final BlockPeat PEAT_GRASS = getNull();
   public static final BlockPlacedItemFlat PLACED_ITEM_FLAT = getNull();
   public static final BlockPlacedItem PLACED_ITEM = getNull();
   public static final BlockPlacedHide PLACED_HIDE = getNull();
@@ -235,9 +235,6 @@ public final class BlocksTFC {
     Builder<ItemBlock> inventoryItemBlocks = ImmutableList.builder();
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "fire_clay_block", new BlockFireClay(), CT_ROCK)));
-
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "peat", new BlockPeat(Material.GROUND), CT_ROCK)));
-    normalItemBlocks.add(new ItemBlockTFC(register(r, "peat_grass", new BlockPeatGrass(Material.GRASS), CT_ROCK)));
 
     normalItemBlocks.add(new ItemBlockTFC(register(r, "quern", new BlockQuern(), CT_MISC)));
 
@@ -721,7 +718,7 @@ public final class BlocksTFC {
   // todo: change to property of type? (soil & stone maybe?)
 
   public static boolean isSoil(IBlockState current) {
-    if (current.getBlock() instanceof BlockPeat) {
+    if (current.getBlock() instanceof BlockSoilPeat) {
       return true;
     }
     if (!(current.getBlock() instanceof BlockRockVariant)) {
@@ -732,7 +729,7 @@ public final class BlocksTFC {
   }
 
   public static boolean isGrowableSoil(IBlockState current) {
-    if (current.getBlock() instanceof BlockPeat) {
+    if (current.getBlock() instanceof BlockSoilPeat) {
       return false;
     }
     if (!(current.getBlock() instanceof BlockRockVariant)) {
@@ -743,7 +740,7 @@ public final class BlocksTFC {
   }
 
   public static boolean isSoilOrGravel(IBlockState current) {
-    if (current.getBlock() instanceof BlockPeat) {
+    if (current.getBlock() instanceof BlockSoilPeat) {
       return true;
     }
     if (!(current.getBlock() instanceof BlockRockVariant)) {
@@ -754,7 +751,7 @@ public final class BlocksTFC {
   }
 
   public static boolean isGrass(IBlockState current) {
-    if (current.getBlock() instanceof BlockPeatGrass) {
+    if (current.getBlock() instanceof BlockSoilPeatGrass) {
       return true;
     }
     if (!(current.getBlock() instanceof BlockRockVariant)) {

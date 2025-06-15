@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.api.util.CollectionUtils;
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.registries.TFCRegistries;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -188,7 +188,7 @@ public class BarrelRecipe extends IForgeRegistryEntry.Impl<BarrelRecipe> {
    */
   @Nonnull
   public List<ItemStack> getOutputItemOnUnseal(FluidStack inputFluid, ItemStack inputStack) {
-    return Helpers.listOf(inputStack);
+    return CollectionUtils.listOf(inputStack);
   }
 
   /**

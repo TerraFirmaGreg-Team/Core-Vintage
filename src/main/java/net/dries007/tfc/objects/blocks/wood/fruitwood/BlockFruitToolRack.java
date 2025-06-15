@@ -1,6 +1,9 @@
 package net.dries007.tfc.objects.blocks.wood.fruitwood;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
+import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -23,12 +26,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-
 import net.dries007.tfc.objects.te.TEToolRack;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -127,7 +127,7 @@ public class BlockFruitToolRack extends Block implements ICapabilitySize {
   @SuppressWarnings("deprecation")
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-    if (!Helpers.canHangAt(worldIn, pos, state.getValue(FACING))) {
+    if (!BlockUtils.canHangAt(worldIn, pos, state.getValue(FACING))) {
       dropBlockAsItem(worldIn, pos, state, 0);
       TEToolRack te = Helpers.getTE(worldIn, pos, TEToolRack.class);
       if (te != null) {

@@ -40,6 +40,7 @@ public class FeatureRemappingCore extends BaseFeature {
       put("ice_shard", () -> ItemsCore.ICE_SHARD);
       put("packed_ice_shard", () -> ItemsCore.ICE_SHARD);
       put("sea_ice_shard", () -> ItemsCore.ICE_SHARD);
+      put("mortar", () -> ItemsCore.MORTAR);
 
       put("debug", () -> BlocksCore.DEBUG.asItem());
       put("puddle", () -> BlocksCore.PUDDLE.asItem());

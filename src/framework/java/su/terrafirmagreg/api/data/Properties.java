@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
 import su.terrafirmagreg.api.library.property.PropertyUnlistedDirection;
 import su.terrafirmagreg.api.library.property.PropertyUnlistedObject;
 
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
@@ -58,9 +59,11 @@ public final class Properties {
     //    public static final PropertyEnum<EnumSpeleothemSize> SPELEOTHEM_SIZE = PropertyEnum.create("size", EnumSpeleothemSize.class);
 //    public static final PropertyEnum<EnumHideSize> HIDE_SIZE = PropertyEnum.create("size", EnumHideSize.class);
     public static final PropertyEnum<EnumDefault> DEFAULT = PropertyEnum.create("variant", EnumDefault.class);
-//    public static final PropertyEnum<EnumPressPart> PRESS_PART = PropertyEnum.create("part", EnumPressPart.class);
+    //    public static final PropertyEnum<EnumPressPart> PRESS_PART = PropertyEnum.create("part", EnumPressPart.class);
 //    public static final PropertyEnum<EnumChopperPart> CHOPPER_PART = PropertyEnum.create("part", EnumChopperPart.class);
 //    public static final PropertyEnum<EnumGradeOre> GRADE_ORE = PropertyEnum.create("grade", EnumGradeOre.class);
+    public static final PropertyEnum<BlockStairs.EnumHalf> HALF = PropertyEnum.create("half", BlockStairs.EnumHalf.class);
+    public static final PropertyEnum<BlockStairs.EnumShape> SHAPE = PropertyEnum.create("shape", BlockStairs.EnumShape.class);
   }
 
   public static class DirectionProp {

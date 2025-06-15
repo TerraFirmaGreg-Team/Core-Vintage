@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.api.util.CollectionUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
@@ -14,8 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -62,7 +61,7 @@ public class BarrelRecipeTemperature extends BarrelRecipe {
     if (heat != null) {
       heat.setTemperature(heat.getTemperature() - coolAmount);
     }
-    return Helpers.listOf(inputStack);
+    return CollectionUtils.listOf(inputStack);
   }
 
   @Override

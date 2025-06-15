@@ -5,6 +5,9 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 
 import net.minecraft.block.BlockGrassPath;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lombok.Getter;
 
@@ -20,5 +23,11 @@ public abstract class BaseBlockGrassPath extends BlockGrassPath implements IBloc
   @Override
   public String getTranslationKey() {
     return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public BlockRenderLayer getRenderLayer() {
+    return this.settings.getRenderLayer();
   }
 }

@@ -52,7 +52,6 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
       .sound(SoundType.PLANT)
       .hardness(2.1F)
       .randomTicks()
-      .oreDict("grass")
       .renderLayer(BlockRenderLayer.CUTOUT);
 
     setDefaultState(blockState.getBaseState()
@@ -154,5 +153,10 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
   @Override
   public IItemColor getItemColor() {
     return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
+  }
+
+  @Override
+  public IBlockState getDirt() {
+    return BlocksSoil.DIRT.get(type).getDefaultState();
   }
 }

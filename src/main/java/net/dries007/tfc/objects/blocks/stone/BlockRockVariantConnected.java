@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.blocks.stone;
 
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
@@ -16,7 +18,6 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.objects.blocks.BlockPeat;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantShortGrass;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
@@ -45,8 +46,8 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
     Block usBlock;
     if (up.getMaterial().isLiquid() || ((neighborLight = world.getLightFromNeighbors(upPos)) < 4 && up.getLightOpacity(world, upPos) > 2)) {
       usBlock = us.getBlock();
-      if (usBlock instanceof BlockPeat) {
-        world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState());
+      if (usBlock instanceof BlockSoilPeat) {
+        world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState());
       } else if (usBlock instanceof BlockRockVariant rock) {
         world.setBlockState(pos, rock.getVariant(rock.getType().getNonGrassVersion()).getDefaultState());
       }
@@ -62,13 +63,13 @@ public class BlockRockVariantConnected extends BlockRockVariantFallable {
         }
         BlockPos targetUp = target.up();
         IBlockState targetUpState;
-        if (world.getLightFromNeighbors(targetUp) < 4 || (targetUpState = world.getBlockState(targetUp)).getMaterial().isLiquid()
-            || targetUpState.getLightOpacity(world, targetUp) > 3) {
+        if (world.getLightFromNeighbors(targetUp) < 4 || (targetUpState = world.getBlockState(targetUp)).getMaterial().isLiquid() || targetUpState.getLightOpacity(world, targetUp) > 3) {
           continue;
         }
         Block currentBlock = current.getBlock();
-        if (currentBlock instanceof BlockPeat) {
-          world.setBlockState(target, BlocksTFC.PEAT_GRASS.getDefaultState());
+        if (currentBlock instanceof BlockSoilPeat) {
+          world.setBlockState(target, BlocksSoil.PEAT_GRASS.getDefaultState());
+
         } else if (currentBlock instanceof BlockRockVariant) {
           Rock.Type spreader = Rock.Type.GRASS;
           usBlock = us.getBlock();

@@ -276,6 +276,139 @@ effect.tfg.core.resist_cold=Resist Cold
 effect.tfg.core.resist_heat=Resist Heat
 effect.tfg.core.caffeine=Caffeine
 
+# Module Soil ###############################################
+
+## Item Group
+item_group.tfg.soil.name=[ TFG ] Soil
+
+## Block
+block.tfg.soil.peat_grass.name=Peat Grass
+block.tfg.soil.peat.name=Peat
+
+block.tfg.soil.grass.silt.name=Silt Grass
+block.tfg.soil.grass.loam.name=Loam Grass
+block.tfg.soil.grass.sandy_loam.name=Sandy Loam Grass
+block.tfg.soil.grass.silty_loam.name=Silty Loam Grass
+block.tfg.soil.grass.humus.name=Humus Grass
+
+block.tfg.soil.dry_grass.silt.name=Silt Dry Grass
+block.tfg.soil.dry_grass.loam.name=Loam Dry Grass
+block.tfg.soil.dry_grass.sandy_loam.name=Sandy Loam Dry Grass
+block.tfg.soil.dry_grass.silty_loam.name=Silty Loam Dry Grass
+block.tfg.soil.dry_grass.humus.name=Humus Dry Grass
+
+block.tfg.soil.sparse_grass.silt.name=Silt Sparse Grass
+block.tfg.soil.sparse_grass.loam.name=Loam Sparse Grass
+block.tfg.soil.sparse_grass.sandy_loam.name=Sandy Loam Sparse Grass
+block.tfg.soil.sparse_grass.silty_loam.name=Silty Loam Sparse Grass
+block.tfg.soil.sparse_grass.humus.name=Humus Sparse Grass
+
+block.tfg.soil.podzol.silt.name=Silt Podzol
+block.tfg.soil.podzol.loam.name=Loam Podzol
+block.tfg.soil.podzol.sandy_loam.name=Sandy Loam Podzol
+block.tfg.soil.podzol.silty_loam.name=Silty Loam Podzol
+block.tfg.soil.podzol.humus.name=Humus Podzol
+
+block.tfg.soil.mycelium.silt.name=Silt Mycelium
+block.tfg.soil.mycelium.loam.name=Loam Mycelium
+block.tfg.soil.mycelium.sandy_loam.name=Sandy Loam Mycelium
+block.tfg.soil.mycelium.silty_loam.name=Silty Loam Mycelium
+block.tfg.soil.mycelium.humus.name=Humus Mycelium
+
+block.tfg.soil.coarse_dirt.silt.name=Silt Coarse Dirt
+block.tfg.soil.coarse_dirt.loam.name=Loam Coarse Dirt
+block.tfg.soil.coarse_dirt.sandy_loam.name=Sandy Loam Coarse Dirt
+block.tfg.soil.coarse_dirt.silty_loam.name=Silty Loam Coarse Dirt
+block.tfg.soil.coarse_dirt.humus.name=Humus Coarse Dirt
+
+block.tfg.soil.rooted_dirt.silt.name=Silt Rooted Dirt
+block.tfg.soil.rooted_dirt.loam.name=Loam Rooted Dirt
+block.tfg.soil.rooted_dirt.sandy_loam.name=Sandy Loam Rooted Dirt
+block.tfg.soil.rooted_dirt.silty_loam.name=Silty Loam Rooted Dirt
+block.tfg.soil.rooted_dirt.humus.name=Humus Rooted Dirt
+
+block.tfg.soil.dirt.silt.name=Silt Dirt
+block.tfg.soil.dirt.loam.name=Loam Dirt
+block.tfg.soil.dirt.sandy_loam.name=Sandy Loam Dirt
+block.tfg.soil.dirt.silty_loam.name=Silty Loam Dirt
+block.tfg.soil.dirt.humus.name=Humus Dirt
+
+block.tfg.soil.farmland.silt.name=Silt Farmland
+block.tfg.soil.farmland.loam.name=Loam Farmland
+block.tfg.soil.farmland.sandy_loam.name=Sandy Loam Farmland
+block.tfg.soil.farmland.silty_loam.name=Silty Loam Farmland
+block.tfg.soil.farmland.humus.name=Humus Farmland
+
+block.tfg.soil.grass_path.silt.name=Silt Grass Path
+block.tfg.soil.grass_path.loam.name=Loam Grass Path
+block.tfg.soil.grass_path.sandy_loam.name=Sandy Loam Grass Path
+block.tfg.soil.grass_path.silty_loam.name=Silty Loam Grass Path
+block.tfg.soil.grass_path.humus.name=Humus Grass Path
+
+block.tfg.soil.mud.silt.name=Silt Mud
+block.tfg.soil.mud.loam.name=Loam Mud
+block.tfg.soil.mud.sandy_loam.name=Sandy Loam Mud
+block.tfg.soil.mud.silty_loam.name=Silty Loam Mud
+block.tfg.soil.mud.humus.name=Humus Mud
+
+block.tfg.soil.mud_bricks.silt.name=Silt Mud Bricks
+block.tfg.soil.mud_bricks.loam.name=Loam Mud Bricks
+block.tfg.soil.mud_bricks.sandy_loam.name=Sandy Loam Mud Bricks
+block.tfg.soil.mud_bricks.silty_loam.name=Silty Loam Mud Bricks
+block.tfg.soil.mud_bricks.humus.name=Humus Mud Bricks
+
+block.tfg.soil.mud_bricks.stairs.silt.name=Silt Mud Bricks Stairs
+block.tfg.soil.mud_bricks.stairs.loam.name=Loam Mud Bricks Stairs
+block.tfg.soil.mud_bricks.stairs.sandy_loam.name=Sandy Loam Mud Bricks Stairs
+block.tfg.soil.mud_bricks.stairs.silty_loam.name=Silty Loam Mud Bricks Stairs
+block.tfg.soil.mud_bricks.stairs.humus.name=Humus Mud Bricks Stairs
+
+block.tfg.soil.mud_bricks.slab.silt.name=Silt Mud Bricks Slab
+block.tfg.soil.mud_bricks.slab.loam.name=Loam Mud Bricks Slab
+block.tfg.soil.mud_bricks.slab.sandy_loam.name=Sandy Loam Mud Bricks Slab
+block.tfg.soil.mud_bricks.slab.silty_loam.name=Silty Loam Mud Bricks Slab
+block.tfg.soil.mud_bricks.slab.humus.name=Humus Mud Bricks Slab
+
+block.tfg.soil.mud_bricks.wall.silt.name=Silt Mud Bricks Wall
+block.tfg.soil.mud_bricks.wall.loam.name=Loam Mud Bricks Wall
+block.tfg.soil.mud_bricks.wall.sandy_loam.name=Sandy Loam Mud Bricks Wall
+block.tfg.soil.mud_bricks.wall.silty_loam.name=Silty Loam Mud Bricks Wall
+block.tfg.soil.mud_bricks.wall.humus.name=Humus Mud Bricks Wall
+
+## Item
+item.tfg.soil.pile.silt.name=Silt Pile
+item.tfg.soil.pile.loam.name=Loam Pile
+item.tfg.soil.pile.sandy_loam.name=Sandy Loam Pile
+item.tfg.soil.pile.silty_loam.name=Silty Loam Pile
+item.tfg.soil.pile.humus.name=Humus Pile
+
+item.tfg.soil.mud_ball.silt.name=Silt Mud Ball
+item.tfg.soil.mud_ball.loam.name=Loam Mud Ball
+item.tfg.soil.mud_ball.sandy_loam.name=Sandy Loam Mud Ball
+item.tfg.soil.mud_ball.silty_loam.name=Silty Loam Mud Ball
+item.tfg.soil.mud_ball.humus.name=Humus Mud Ball
+
+item.tfg.soil.mud_brick.silt.name=Silt Mud Brick
+item.tfg.soil.mud_brick.loam.name=Loam Mud Brick
+item.tfg.soil.mud_brick.sandy_loam.name=Sandy Loam Mud Brick
+item.tfg.soil.mud_brick.silty_loam.name=Silty Loam Mud Brick
+item.tfg.soil.mud_brick.humus.name=Humus Mud Brick
+
+item.tfg.soil.mud_brick_wet.silt.name=Silt Mud Brick Wet
+item.tfg.soil.mud_brick_wet.loam.name=Loam Mud Brick Wet
+item.tfg.soil.mud_brick_wet.sandy_loam.name=Sandy Loam Mud Brick Wet
+item.tfg.soil.mud_brick_wet.silty_loam.name=Silty Loam Mud Brick Wet
+item.tfg.soil.mud_brick_wet.humus.name=Humus Mud Brick Wet
+
+# Module Wood ###############################################
+
+## Item Group
+item_group.tfg.wood.name=[ TFG ] Wood
+
+# Module Metal ##############################################
+
+## Item Group
+item_group.tfg.metal.name=[ TFG ] Metal
 
 
 # Module Device ##############################################
@@ -551,12 +684,4 @@ sound.tfg.animal.entity.cricket=Crickets
 sound.tfg.animal.entity.frog=Frogs
 sound.tfg.animal.entity.rooster.cry=Rooster cries
 
-
-# Module Wood ###############################################
-
-## Item Group
-item_group.tfg.wood.name=[ TFG ] Wood
-
-
-# Module Metal ##############################################
 

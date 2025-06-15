@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.container;
 
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +16,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.objects.inventory.slot.SlotKnappingOutput;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.SimpleCraftMatrix;
 
 import javax.annotation.Nullable;
@@ -49,7 +49,7 @@ public class ContainerKnapping extends ContainerItemStack implements IButtonHand
 
     if (!hasBeenModified) {
       if (!player.isCreative() && !type.consumeAfterComplete()) {
-        ItemStack consumedStack = Helpers.consumeItem(this.stack, type.getAmountToConsume());
+        ItemStack consumedStack = StackUtils.consumeItem(this.stack, type.getAmountToConsume());
         if (isOffhand) {
           player.setHeldItem(EnumHand.OFF_HAND, consumedStack);
         } else {
@@ -135,7 +135,7 @@ public class ContainerKnapping extends ContainerItemStack implements IButtonHand
 
   private void consumeIngredientStackAfterComplete() {
     if (type.consumeAfterComplete() && !hasConsumedIngredient) {
-      ItemStack stack = Helpers.consumeItem(this.stack, type.getAmountToConsume());
+      ItemStack stack = StackUtils.consumeItem(this.stack, type.getAmountToConsume());
       if (isOffhand) {
         player.setHeldItem(EnumHand.OFF_HAND, stack);
       } else {

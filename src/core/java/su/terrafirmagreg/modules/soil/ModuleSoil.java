@@ -41,6 +41,7 @@ public class ModuleSoil extends ModuleBase {
 
   @Override
   public void onFeature(IFeatureRegistrar registrar) {
+
     FeaturesSoil.onRegister(registrar);
   }
 

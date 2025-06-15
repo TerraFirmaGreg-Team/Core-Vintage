@@ -1,5 +1,7 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.api.util.CollectionUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
@@ -13,8 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -54,12 +54,12 @@ public class BarrelRecipeFoodTraits extends BarrelRecipe {
     ItemStack stack = inputStack.copy();
     stack.setCount(multiplier);
 
-    ItemStack remainder = Helpers.consumeItem(inputStack.copy(), multiplier);
+    ItemStack remainder = StackUtils.consumeItem(inputStack.copy(), multiplier);
     ICapabilityFood food = stack.getCapability(CapabilityFood.CAPABILITY, null);
     if (food != null) {
       CapabilityFood.applyTrait(food, trait);
     }
-    return Helpers.listOf(stack, remainder);
+    return CollectionUtils.listOf(stack, remainder);
   }
 
   @SideOnly(Side.CLIENT)

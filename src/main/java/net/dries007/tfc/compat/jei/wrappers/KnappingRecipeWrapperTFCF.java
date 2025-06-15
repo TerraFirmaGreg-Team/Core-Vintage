@@ -1,6 +1,7 @@
 package net.dries007.tfc.compat.jei.wrappers;
 
 import su.terrafirmagreg.api.data.enums.Mods;
+import su.terrafirmagreg.api.util.CollectionUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +13,6 @@ import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.items.rock.ItemMud;
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nullable;
 
@@ -80,7 +80,7 @@ public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
 
     @Override
     public void getIngredients(IIngredients ingredients) {
-      ingredients.setOutputLists(VanillaTypes.ITEM, Helpers.listOf(Helpers.listOf(recipe.getOutput(new ItemStack(ItemMud.get(rock))))));
+      ingredients.setOutputLists(VanillaTypes.ITEM, CollectionUtils.listOf(CollectionUtils.listOf(recipe.getOutput(new ItemStack(ItemMud.get(rock))))));
     }
   }
 }

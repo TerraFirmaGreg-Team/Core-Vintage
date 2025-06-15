@@ -10,11 +10,11 @@ import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.google.common.math.Stats;
+
 import org.jetbrains.annotations.Nullable;
 
 import lombok.experimental.UtilityClass;
-
-import static com.google.common.math.Stats.meanOf;
 
 @UtilityClass
 @SuppressWarnings("unused")
@@ -141,7 +141,7 @@ public final class WorldUtils {
     if (world == null || world.getMinecraftServer() == null) {
       return -1D;
     }
-    double worldTickTime = meanOf(world.getMinecraftServer().worldTickTimes.get(dimId)) * 1.0E-6D;
+    double worldTickTime = Stats.meanOf(world.getMinecraftServer().worldTickTimes.get(dimId)) * 1.0E-6D;
     return Math.min(1000.0D / worldTickTime, 20.0D);
   }
 

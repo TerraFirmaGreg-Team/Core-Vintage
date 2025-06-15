@@ -1,8 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.soil;
 
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
+import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -25,6 +24,7 @@ import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfcflorae.ConfigTFCF;
 
@@ -310,9 +310,9 @@ public class WorldGenSoilDecorative implements IWorldGenerator {
             final IBlockState current = world.getBlockState(pos);
 
             if (BlocksTFC.isGrass(current)) {
-              world.setBlockState(pos, BlocksTFC.PEAT_GRASS.getDefaultState(), 2);
+              world.setBlockState(pos, BlocksSoil.PEAT_GRASS.getDefaultState(), 2);
             } else if (BlocksTFC.isDirt(current) || BlocksTFC.isClay(current)) {
-              world.setBlockState(pos, BlocksTFC.PEAT.getDefaultState(), 2);
+              world.setBlockState(pos, BlocksSoil.PEAT.getDefaultState(), 2);
             }
           }
         }

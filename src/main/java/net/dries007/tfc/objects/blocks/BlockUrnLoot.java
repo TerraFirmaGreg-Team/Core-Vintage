@@ -4,6 +4,7 @@ import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.core.init.ItemsCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -125,7 +126,7 @@ public class BlockUrnLoot extends Block implements ICapabilitySize {
     for (int i = 0; i < count; i++) {
       Item[] dropList = {ItemsTFCF.MADDER, ItemsTFCF.WELD, ItemsTFCF.WOAD, ItemsTFCF.INDIGO, ItemsTFCF.RAPE, ItemsTFCF.HOPS, ItemsTFCF.FLAX,
                          ItemsTFCF.LINEN_STRING, ItemsTFCF.COTTON_BOLL, ItemsTFCF.COTTON_YARN, ItemsTFCF.AGAVE, ItemsTFCF.SISAL_STRING,
-                         ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsTFC.MORTAR, ItemsTFC.FIRE_CLAY, Items.CLAY_BALL,
+                         ItemsTFCF.PAPYRUS_FIBER, ItemsTFC.JUTE, ItemsTFC.JUTE_FIBER, ItemsTFC.SALT, ItemsCore.MORTAR, ItemsTFC.FIRE_CLAY, Items.CLAY_BALL,
                          ItemsAnimal.WOOL, ItemsAnimal.WOOL_YARN,
 
                          // TODO заменить на gt

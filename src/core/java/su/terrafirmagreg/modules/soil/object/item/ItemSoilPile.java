@@ -8,7 +8,8 @@ public class ItemSoilPile extends ItemSoil {
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("pile"));
+      .registryKey(type.getRegistryKey("pile"))
+      .oreDict("pile");
   }
 
 }

@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.helper.BlockHelper;
-import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.modules.soil.api.spi.IGrassBlock;
@@ -41,16 +40,14 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
       .sound(SoundType.PLANT)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .randomTicks()
-      .oreDict("peat")
-      .oreDict("peat", "grass");
+      .fireInfo(5, 5)
+      .oreDict("peat");
 
     setDefaultState(blockState.getBaseState()
       .withProperty(NORTH, Boolean.FALSE)
       .withProperty(EAST, Boolean.FALSE)
       .withProperty(SOUTH, Boolean.FALSE)
       .withProperty(WEST, Boolean.FALSE));
-
-    BlockUtils.addFireInfo(this, 5, 5);
   }
 
   @Override
@@ -78,8 +75,13 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
   }
 
   @Override
+  public IBlockState getDirt() {
+    return BlocksSoil.PEAT.getDefaultState();
+  }
+
+  @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return Item.getItemFromBlock(BlocksSoil.PEAT);
+    return BlocksSoil.PEAT.asItem();
   }
 
   @Override
@@ -96,4 +98,6 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
   public IItemColor getItemColor() {
     return (s, i) -> this.getBlockColor().colorMultiplier(this.getDefaultState(), null, null, i);
   }
+
+
 }

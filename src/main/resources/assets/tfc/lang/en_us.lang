@@ -1093,8 +1093,6 @@ vein.surface_tetrahedrite.name=Surface Tetrahedrite
 
 tile.tfc.placed_item.name=Placed Items
 tile.tfc.placed_item_flat.name=Debris
-tile.tfc.peat.name=Peat
-tile.tfc.peat_grass.name=Peat Grass
 tile.tfc.torch.name=Torch
 tile.tfc.quern.name=Quern
 tile.tfc.ceramics.fired.large_vessel.name=Large Vessel

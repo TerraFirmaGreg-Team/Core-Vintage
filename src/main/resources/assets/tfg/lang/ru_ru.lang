@@ -276,6 +276,139 @@ effect.tfg.core.resist_cold=Resist Cold
 effect.tfg.core.resist_heat=Resist Heat
 effect.tfg.core.caffeine=Caffeine
 
+# Module Soil ###############################################
+
+## Item Group
+item_group.tfg.soil.name=[ TFG ] Земля
+
+## Block
+block.tfg.soil.peat_grass.name=Торфяная трава
+block.tfg.soil.peat.name=Торф
+
+block.tfg.soil.grass.silt.name=Илистая трава
+block.tfg.soil.grass.loam.name=Чернозёмная трава
+block.tfg.soil.grass.sandy_loam.name=Песчаная чернозёмная трава
+block.tfg.soil.grass.silty_loam.name=Илистая чернозёмная трава
+block.tfg.soil.grass.humus.name=Гумусовая трава
+
+block.tfg.soil.dry_grass.silt.name=Сухая илистая трава
+block.tfg.soil.dry_grass.loam.name=Сухая чернозёмная трава
+block.tfg.soil.dry_grass.sandy_loam.name=Сухая песчано-чернозёмная трава
+block.tfg.soil.dry_grass.silty_loam.name=Сухая илисто-чернозёмная трава
+block.tfg.soil.dry_grass.humus.name=Сухая гумусовая трава
+
+block.tfg.soil.sparse_grass.silt.name=Редкая илистая трава
+block.tfg.soil.sparse_grass.loam.name=Редкая чернозёмная трава
+block.tfg.soil.sparse_grass.sandy_loam.name=Редкая песчано-чернозёмная трава
+block.tfg.soil.sparse_grass.silty_loam.name=Редкая илисто-чернозёмная трава
+block.tfg.soil.sparse_grass.humus.name=Редкая гумусовая трава
+
+block.tfg.soil.podzol.silt.name=Илистый подзол
+block.tfg.soil.podzol.loam.name=Чернозёмный подзол
+block.tfg.soil.podzol.sandy_loam.name=Песчано-чернозёмный подзол
+block.tfg.soil.podzol.silty_loam.name=Илисто-чернозёмный подзол
+block.tfg.soil.podzol.humus.name=Гумусовый подзол
+
+block.tfg.soil.mycelium.silt.name=Илистый мицелий
+block.tfg.soil.mycelium.loam.name=Чернозёмный мицелий
+block.tfg.soil.mycelium.sandy_loam.name=Песчано-чернозёмный мицелий
+block.tfg.soil.mycelium.silty_loam.name=Илисто-чернозёмный мицелий
+block.tfg.soil.mycelium.humus.name=Гумусовый мицелий
+
+block.tfg.soil.coarse_dirt.silt.name=Грубая илистая земля
+block.tfg.soil.coarse_dirt.loam.name=Грубая чернозёмная земля
+block.tfg.soil.coarse_dirt.sandy_loam.name=Грубая песчано-чернозёмная земля
+block.tfg.soil.coarse_dirt.silty_loam.name=Грубая илисто-чернозёмная земля
+block.tfg.soil.coarse_dirt.humus.name=Грубая гумусовая земля
+
+block.tfg.soil.rooted_dirt.silt.name=Илистая земля с корнями
+block.tfg.soil.rooted_dirt.loam.name=Чернозёмная земля с корнями
+block.tfg.soil.rooted_dirt.sandy_loam.name=Песчано-чернозёмная земля с корнями
+block.tfg.soil.rooted_dirt.silty_loam.name=Илисто-чернозёмная земля с корнями
+block.tfg.soil.rooted_dirt.humus.name=Гумусовая земля с корнями
+
+block.tfg.soil.dirt.silt.name=Илистая земля
+block.tfg.soil.dirt.loam.name=Чернозёмная земля
+block.tfg.soil.dirt.sandy_loam.name=Песчано-чернозёмная земля
+block.tfg.soil.dirt.silty_loam.name=Илисто-чернозёмная земля
+block.tfg.soil.dirt.humus.name=Гумусовая земля
+
+block.tfg.soil.farmland.silt.name=Илистая пашня
+block.tfg.soil.farmland.loam.name=Чернозёмная пашня
+block.tfg.soil.farmland.sandy_loam.name=Песчано-чернозёмная пашня
+block.tfg.soil.farmland.silty_loam.name=Илисто-чернозёмная пашня
+block.tfg.soil.farmland.humus.name=Гумусовая пашня
+
+block.tfg.soil.grass_path.silt.name=Илистая тропа
+block.tfg.soil.grass_path.loam.name=Чернозёмная тропа
+block.tfg.soil.grass_path.sandy_loam.name=Песчано-чернозёмная тропа
+block.tfg.soil.grass_path.silty_loam.name=Илисто-чернозёмная тропа
+block.tfg.soil.grass_path.humus.name=Гумусовая тропа
+
+block.tfg.soil.mud.silt.name=Илистая грязь
+block.tfg.soil.mud.loam.name=Чернозёмная грязь
+block.tfg.soil.mud.sandy_loam.name=Песчано-чернозёмная грязь
+block.tfg.soil.mud.silty_loam.name=Илисто-чернозёмная грязь
+block.tfg.soil.mud.humus.name=Гумусовая грязь
+
+block.tfg.soil.mud_bricks.silt.name=Илистые саманные кирпичи
+block.tfg.soil.mud_bricks.loam.name=Чернозёмные саманные кирпичи
+block.tfg.soil.mud_bricks.sandy_loam.name=Песчано-чернозёмные саманные кирпичи
+block.tfg.soil.mud_bricks.silty_loam.name=Илисто-чернозёмные саманные кирпичи
+block.tfg.soil.mud_bricks.humus.name=Гумусовые саманные кирпичи
+
+block.tfg.soil.mud_bricks.stairs.silt.name=Ступеньки из илистых саманных кирпичей
+block.tfg.soil.mud_bricks.stairs.loam.name=Ступеньки из чернозёмных саманных кирпичей
+block.tfg.soil.mud_bricks.stairs.sandy_loam.name=Ступеньки из песчано-чернозёмных саманных кирпичей
+block.tfg.soil.mud_bricks.stairs.silty_loam.name=Ступеньки из илисто-чернозёмных саманных кирпичей
+block.tfg.soil.mud_bricks.stairs.humus.name=Ступеньки из гумусовых саманных кирпичей
+
+block.tfg.soil.mud_bricks.slab.silt.name=Плита из илистых саманных кирпичей
+block.tfg.soil.mud_bricks.slab.loam.name=Плита из чернозёмных саманных кирпичей
+block.tfg.soil.mud_bricks.slab.sandy_loam.name=Плита из песчано-чернозёмных саманных кирпичей
+block.tfg.soil.mud_bricks.slab.silty_loam.name=Плита из илисто-чернозёмных саманных кирпичей
+block.tfg.soil.mud_bricks.slab.humus.name=Плита из гумусовых саманных кирпичей
+
+block.tfg.soil.mud_bricks.wall.silt.name=Ограда из илистых саманных кирпичей
+block.tfg.soil.mud_bricks.wall.loam.name=Ограда из чернозёмных саманных кирпичей
+block.tfg.soil.mud_bricks.wall.sandy_loam.name=Ограда из песчано-чернозёмных саманных кирпичей
+block.tfg.soil.mud_bricks.wall.silty_loam.name=Ограда из илисто-чернозёмных саманных кирпичей
+block.tfg.soil.mud_bricks.wall.humus.name=Ограда из гумусовых саманных кирпичей
+
+## Item
+item.tfg.soil.pile.silt.name=Кучка ила
+item.tfg.soil.pile.loam.name=Кучка чернозёма
+item.tfg.soil.pile.sandy_loam.name=Кучка песчаного чернозёма
+item.tfg.soil.pile.silty_loam.name=Кучка илистого чернозёма
+item.tfg.soil.pile.humus.name=Кучка гумуса
+
+item.tfg.soil.mud_ball.silt.name=Илистый комок
+item.tfg.soil.mud_ball.loam.name=Чернозёмный комок
+item.tfg.soil.mud_ball.sandy_loam.name=Песчано-чернозёмный комок
+item.tfg.soil.mud_ball.silty_loam.name=Илисто-чернозёмный комок
+item.tfg.soil.mud_ball.humus.name=Гумусовый комок
+
+item.tfg.soil.mud_brick.silt.name=Илистый саманный кирпич
+item.tfg.soil.mud_brick.loam.name=Чернозёмный саманный кирпич
+item.tfg.soil.mud_brick.sandy_loam.name=Песчано-чернозёмный саманный кирпич
+item.tfg.soil.mud_brick.silty_loam.name=Илисто-чернозёмный саманный кирпич
+item.tfg.soil.mud_brick.humus.name=Гумусовый саманный кирпич
+
+item.tfg.soil.mud_brick_wet.silt.name=Мокрый илистый саманный кирпич
+item.tfg.soil.mud_brick_wet.loam.name=Мокрый чернозёмный саманный кирпич
+item.tfg.soil.mud_brick_wet.sandy_loam.name=Мокрый песчано-чернозёмный саманный кирпич
+item.tfg.soil.mud_brick_wet.silty_loam.name=Мокрый илисто-чернозёмный саманный кирпич
+item.tfg.soil.mud_brick_wet.humus.name=Мокрый гумусовый саманный кирпич
+
+# Module Wood ###############################################
+
+## Item Group
+item_group.tfg.wood.name=[ TFG ] Древесина
+
+# Module Metal ##############################################
+
+## Item Group
+item_group.tfg.metal.name=[ TFG ] Металл
 
 
 # Module Device ##############################################
@@ -552,11 +685,3 @@ sound.tfg.animal.entity.cricket=Сверчки
 sound.tfg.animal.entity.frog=Лягушки
 sound.tfg.animal.entity.rooster.cry=Петух плачет
 
-
-# Module Wood ###############################################
-
-## Item Group
-item_group.tfg.wood.name=[ TFG ] Древесина
-
-
-# Module Metal ##############################################

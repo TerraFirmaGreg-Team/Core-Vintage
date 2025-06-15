@@ -1,6 +1,6 @@
 package net.dries007.tfc.util;
 
-import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken;
@@ -45,7 +45,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -55,26 +54,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import com.google.common.base.Joiner;
-import io.netty.buffer.ByteBuf;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-
-import static com.google.common.math.DoubleMath.mean;
 
 public final class Helpers {
 
@@ -205,36 +197,6 @@ public final class Helpers {
     return false;
   }
 
-  @Nonnull
-  public static ItemStack consumeItem(ItemStack stack, int amount) {
-    if (stack.getCount() <= amount) {
-      return ItemStack.EMPTY;
-    }
-    stack.shrink(amount);
-    return stack;
-  }
-
-  @Nonnull
-  public static ItemStack consumeItem(ItemStack stack, EntityPlayer player, int amount) {
-    return player.isCreative() ? stack : consumeItem(stack, amount);
-  }
-
-  public static void damageItem(ItemStack stack) {
-    damageItem(stack, 1);
-  }
-
-  /**
-   * Utility method for damaging an item that doesn't take an entity
-   *
-   * @param stack the stack to be damaged
-   */
-  public static void damageItem(ItemStack stack, int amount) {
-    if (stack.attemptDamageItem(amount, MathUtils.RNG, null)) {
-      stack.shrink(1);
-      stack.setItemDamage(0);
-    }
-  }
-
   /**
    * Simple method to spawn items in the world at a precise location, rather than using InventoryHelper
    */
@@ -244,16 +206,6 @@ public final class Helpers {
     world.spawnEntity(entityitem);
   }
 
-  /**
-   * Method for hanging blocks to check if they can hang. 11/10 description. NOTE: where applicable, remember to still check if the blockstate allows for the specified direction!
-   *
-   * @param pos    position of the block that makes the check
-   * @param facing the direction the block is facing. This is the direction the block should be pointing and the side it hangs ON, not the side it sticks WITH. e.g: a sign facing north also hangs on the north side of the support block
-   * @return true if the side is solid, false otherwise.
-   */
-  public static boolean canHangAt(World worldIn, BlockPos pos, EnumFacing facing) {
-    return worldIn.isSideSolid(pos.offset(facing.getOpposite()), facing);
-  }
 
   /**
    * Primarily for use in placing checks. Determines a solid side for the block to attach to.
@@ -268,11 +220,11 @@ public final class Helpers {
   }
 
   public static EnumFacing getASolidFacing(World worldIn, BlockPos pos, @Nullable EnumFacing preferredFacing, Collection<EnumFacing> possibleSides) {
-    if (preferredFacing != null && possibleSides.contains(preferredFacing) && canHangAt(worldIn, pos, preferredFacing)) {
+    if (preferredFacing != null && possibleSides.contains(preferredFacing) && BlockUtils.canHangAt(worldIn, pos, preferredFacing)) {
       return preferredFacing;
     }
     for (EnumFacing side : possibleSides) {
-      if (side != null && canHangAt(worldIn, pos, side)) {
+      if (side != null && BlockUtils.canHangAt(worldIn, pos, side)) {
         return side;
       }
     }
@@ -356,40 +308,6 @@ public final class Helpers {
     }
   }
 
-  public static void writeResourceLocation(ByteBuf buf, @Nullable ResourceLocation loc) {
-    buf.writeBoolean(loc != null);
-    if (loc != null) {
-      ByteBufUtils.writeUTF8String(buf, loc.toString());
-    }
-  }
-
-
-  @Nullable
-  public static ResourceLocation readResourceLocation(ByteBuf buf) {
-    if (buf.readBoolean()) {
-      return new ResourceLocation(ByteBufUtils.readUTF8String(buf));
-    }
-    return null;
-  }
-
-  /**
-   * Used because {@link Collections#singletonList(Object)} is immutable
-   */
-  public static <T> List<T> listOf(T element) {
-    List<T> list = new ArrayList<>(1);
-    list.add(element);
-    return list;
-  }
-
-  /**
-   * Used because {@link Arrays#asList(Object[])} is immutable
-   */
-  @SafeVarargs
-  public static <T> List<T> listOf(T... elements) {
-    List<T> list = new ArrayList<>(elements.length);
-    Collections.addAll(list, elements);
-    return list;
-  }
 
   /**
    * This is meant to avoid Intellij's warnings about null fields that are injected to at runtime Use this for things like @ObjectHolder, @CapabilityInject, etc. AKA - The @Nullable is intentional. If it crashes your dev env, then fix your
@@ -404,9 +322,4 @@ public final class Helpers {
     return null;
   }
 
-  public static double getTPS(World world, int dimId) {
-    if (world == null || world.getMinecraftServer() == null) {return -1D;}
-    double worldTickTime = mean(world.getMinecraftServer().worldTickTimes.get(dimId)) * 1.0E-6D;
-    return Math.min(1000.0D / worldTickTime, 20.0D);
-  }
 }

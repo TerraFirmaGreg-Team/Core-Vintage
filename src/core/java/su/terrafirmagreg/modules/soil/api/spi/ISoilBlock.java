@@ -1,6 +1,10 @@
 package su.terrafirmagreg.modules.soil.api.spi;
 
+import net.minecraft.block.state.IBlockState;
+
 public interface ISoilBlock {
+
+  IBlockState getDirt();
 
   //  default boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
 //    int beachDistance = 2;

@@ -14,6 +14,7 @@ public abstract class BaseBlockFarmland extends BlockFarmland implements IBlockE
   protected final Settings settings;
 
   public BaseBlockFarmland(Settings settings) {
+    super();
     this.settings = settings;
   }
 

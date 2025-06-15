@@ -1,5 +1,6 @@
 package net.dries007.tfc.api.recipes.barrel;
 
+import su.terrafirmagreg.api.util.CollectionUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
@@ -11,8 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -43,7 +42,7 @@ public class BarrelRecipeFoodPreservation extends BarrelRecipe {
   @Nonnull
   @Override
   public List<ItemStack> getOutputItem(FluidStack inputFluid, ItemStack inputStack) {
-    return Helpers.listOf(inputStack);
+    return CollectionUtils.listOf(inputStack);
   }
 
   @Override
@@ -55,7 +54,7 @@ public class BarrelRecipeFoodPreservation extends BarrelRecipe {
   @Override
   public List<ItemStack> getOutputItemOnUnseal(FluidStack inputFluid, ItemStack inputStack) {
     CapabilityFood.removeTrait(inputStack, trait);
-    return Helpers.listOf(inputStack);
+    return CollectionUtils.listOf(inputStack);
   }
 
   @SideOnly(Side.CLIENT)

@@ -1,10 +1,12 @@
-package su.terrafirmagreg.modules.core.helper;
+package su.terrafirmagreg.modules.core.feature.oredict;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 import gregtech.api.unification.OreDictUnifier;
@@ -24,10 +26,26 @@ import static gregtech.api.unification.ore.OrePrefix.plate;
 import static gregtech.api.unification.ore.OrePrefix.plateDouble;
 import static su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.oreprefix.OrePrefixCore.ingotDouble;
 
-public class OreDictHelper {
+public class FeatureOreDict extends BaseFeature {
 
-  public static void init() {
+  @Override
+  public void onPostInit(FMLPostInitializationEvent event) {
+
     OreDictionaryHelper.init();
+    minecraftOreDict();
+
+    // GregTech
+    Arrays.asList(Bronze, BlackBronze, BismuthBronze).forEach(bronze -> {
+      Arrays.asList(plate, plateDouble, ingot, ingotDouble, dust, dustTiny, dustSmall, nugget).forEach(ore -> {
+        var stack = OreDictUnifier.get(ore, bronze);
+        OreDictionary.registerOre(OreDictUtils.toString(ore.name, "Any", "Bronze"), stack);
+      });
+    });
+
+
+  }
+
+  private void minecraftOreDict() {
     // Vanilla ore dict values
     OreDictionary.registerOre("fireStarter", new ItemStack(Items.FLINT_AND_STEEL, 1, OreDictionary.WILDCARD_VALUE));
     OreDictionary.registerOre("fireStarter", new ItemStack(Items.FIRE_CHARGE));
@@ -41,15 +59,5 @@ public class OreDictHelper {
 
     // Register a name without any items
     OreDictionary.getOres("infiniteFire", true);
-
-    // GregTech
-    Arrays.asList(Bronze, BlackBronze, BismuthBronze).forEach(bronze -> {
-      Arrays.asList(plate, plateDouble, ingot, ingotDouble, dust, dustTiny, dustSmall, nugget).forEach(ore -> {
-        var stack = OreDictUnifier.get(ore, bronze);
-        OreDictionary.registerOre(OreDictUtils.toString(ore.name, "Any", "Bronze"), stack);
-      });
-    });
-
-
   }
 }

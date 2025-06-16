@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.soil.feature.soiltype.spi;
 
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.type.IType;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
 
@@ -44,8 +44,7 @@ public interface IGrassBlock extends ISoilBlock {
               IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
               IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-              if (iblockstate1.getBlock() == BlocksSoil.DIRT.get(soilType) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4
-                  && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
+              if (iblockstate1.getBlock() == BlocksSoil.DIRT.get(soilType) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
                 worldIn.setBlockState(blockpos, BlocksSoil.GRASS.get(soilType).getDefaultState());
               }
             }

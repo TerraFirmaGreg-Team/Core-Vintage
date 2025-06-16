@@ -54,22 +54,22 @@ public class ModuleService implements IModuleService {
         module.onConstruction(event);
         Optional.ofNullable(module.getNetworkManager()).ifPresent(network -> {
           module.getLogger().debug("Construction network");
-          module.onNetwork(network.getRegistrar());
+          module.onPacketRegistrar(network.getRegistrar());
         });
 
         Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
           module.getLogger().debug("Construction plugin");
-          module.onPlugin(plugin.getRegistrar());
+          module.onPluginRegistrar(plugin.getRegistrar());
         });
 
         Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
           module.getLogger().debug("Construction feature");
-          module.onFeature(feature.getRegistrar());
+          module.onFeatureRegistrar(feature.getRegistrar());
         });
 
         Optional.ofNullable(module.getRegistryManager()).ifPresent(registry -> {
           module.getLogger().debug("Construction registry");
-          module.onRegistry(registry.getRegistrar());
+          module.onRegistryRegistrar(registry.getRegistrar());
         });
         module.getLogger().debug("Construction complete");
       });
@@ -159,7 +159,7 @@ public class ModuleService implements IModuleService {
         });
         Optional.ofNullable(module.getCommandManager()).ifPresent(command -> {
           module.getLogger().debug("Registering command");
-          module.onCommand(command.getRegistrar());
+          module.onCommandRegistrar(command.getRegistrar());
           command.getService().routeEvent(event);
         });
         module.getLogger().debug("Server-starting complete");

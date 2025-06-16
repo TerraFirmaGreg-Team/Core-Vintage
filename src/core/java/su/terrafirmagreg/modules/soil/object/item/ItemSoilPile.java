@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.object.item;
 
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
 
 public class ItemSoilPile extends ItemSoil {
 

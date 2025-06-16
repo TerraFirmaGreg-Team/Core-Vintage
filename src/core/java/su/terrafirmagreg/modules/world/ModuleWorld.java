@@ -24,7 +24,7 @@ public class ModuleWorld extends ModuleBase {
   }
 
   @Override
-  public void onRegistry(IRegistryRegistrar registrar) {
+  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
 
     BiomesWorld.onRegister(registrar);
   }

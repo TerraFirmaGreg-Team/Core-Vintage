@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.soil.object.block;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.soil.feature.soiltype.spi.IGrassBlock;
-import su.terrafirmagreg.modules.soil.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.block.SoundType;

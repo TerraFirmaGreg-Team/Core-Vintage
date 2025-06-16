@@ -37,14 +37,14 @@ public class ModuleDevice extends ModuleBase {
   }
 
   @Override
-  public void onNetwork(IPacketRegistrar registrar) {
+  public void onPacketRegistrar(IPacketRegistrar registrar) {
 
     PacketsDevice.onRegister(registrar);
   }
 
 
   @Override
-  public void onRegistry(IRegistryRegistrar registrar) {
+  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
     registrar.group("bellows");
 
     BlocksDevice.onRegister(registrar);
@@ -54,13 +54,13 @@ public class ModuleDevice extends ModuleBase {
   }
 
   @Override
-  public void onFeature(IFeatureRegistrar registrar) {
+  public void onFeatureRegistrar(IFeatureRegistrar registrar) {
 
     FeaturesDevice.onRegister(registrar);
   }
 
   @Override
-  public void onPlugin(IPluginRegistrar registrar) {
+  public void onPluginRegistrar(IPluginRegistrar registrar) {
 
     PluginsDevice.onRegister(registrar);
   }

@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.client.GuiHandler;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -36,7 +36,7 @@ public class ModuleAnimal extends ModuleBase {
 
 
   @Override
-  public void onRegistry(IRegistryRegistrar registrar) {
+  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
     registrar.group("halter");
 
     BlocksAnimal.onRegister(registrar);
@@ -47,13 +47,13 @@ public class ModuleAnimal extends ModuleBase {
   }
 
   @Override
-  public void onFeature(IFeatureRegistrar registrar) {
+  public void onFeatureRegistrar(IFeatureRegistrar registrar) {
 
     FeaturesAnimal.onRegister(registrar);
   }
 
   @Override
-  public void onPlugin(IPluginRegistrar registrar) {
+  public void onPluginRegistrar(IPluginRegistrar registrar) {
 
     PluginsAnimal.onRegister(registrar);
   }

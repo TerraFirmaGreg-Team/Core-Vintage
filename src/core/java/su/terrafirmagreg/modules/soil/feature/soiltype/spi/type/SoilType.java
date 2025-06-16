@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type;
+package su.terrafirmagreg.modules.soil.feature.soiltype.spi.type;
 
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.library.types.variant.Variant;

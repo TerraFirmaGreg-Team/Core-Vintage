@@ -25,7 +25,7 @@ public class ModuleWood extends ModuleBase {
   }
 
   @Override
-  public void onRegistry(IRegistryRegistrar registrar) {
+  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
     registrar.group("log/aspen");
 
 

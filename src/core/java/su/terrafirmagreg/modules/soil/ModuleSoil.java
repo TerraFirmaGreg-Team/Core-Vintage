@@ -30,7 +30,7 @@ public class ModuleSoil extends ModuleBase {
   }
 
   @Override
-  public void onRegistry(IRegistryRegistrar registrar) {
+  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
     registrar.group("grass/humus");
 
     BlocksSoil.onRegister(registrar);
@@ -40,7 +40,7 @@ public class ModuleSoil extends ModuleBase {
   }
 
   @Override
-  public void onFeature(IFeatureRegistrar registrar) {
+  public void onFeatureRegistrar(IFeatureRegistrar registrar) {
 
     FeaturesSoil.onRegister(registrar);
   }

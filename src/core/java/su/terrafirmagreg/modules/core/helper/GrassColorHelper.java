@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.soil.helper;
+package su.terrafirmagreg.modules.core.helper;
 
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;

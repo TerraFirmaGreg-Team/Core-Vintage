@@ -11,6 +11,7 @@ import su.terrafirmagreg.modules.core.feature.falling.FeatureFalling;
 import su.terrafirmagreg.modules.core.feature.heat.FeatureHeat;
 import su.terrafirmagreg.modules.core.feature.hotornot.FeatureHotOrNot;
 import su.terrafirmagreg.modules.core.feature.mapping.FeatureRemappingCore;
+import su.terrafirmagreg.modules.core.feature.oredict.FeatureOreDict;
 import su.terrafirmagreg.modules.core.feature.playerdata.FeaturePlayerData;
 import su.terrafirmagreg.modules.core.feature.puddles.FeaturePuddles;
 import su.terrafirmagreg.modules.core.feature.pull.FeaturePull;
@@ -36,6 +37,7 @@ public final class FeaturesCore {
     registrar.addFeature(new FeatureAdvancedData());
     registrar.addFeature(new FeatureDebugInfo());
     registrar.addFeature(new FeaturePuddles());
+    registrar.addFeature(new FeatureOreDict());
   }
 
 }

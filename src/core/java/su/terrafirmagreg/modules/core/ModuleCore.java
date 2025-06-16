@@ -25,7 +25,6 @@ import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDime
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedIn;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedOut;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerRespawn;
-import su.terrafirmagreg.modules.core.helper.OreDictHelper;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 import su.terrafirmagreg.modules.core.init.CommandsCore;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
@@ -39,7 +38,6 @@ import su.terrafirmagreg.modules.core.init.PluginsCore;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -70,7 +68,7 @@ public class ModuleCore extends ModuleBase {
   }
 
   @Override
-  public void onRegistry(IRegistryRegistrar registrar) {
+  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
     registrar.group("wand");
 
     FluidsCore.onRegister(registrar);
@@ -82,25 +80,25 @@ public class ModuleCore extends ModuleBase {
   }
 
   @Override
-  public void onCommand(ICommandRegistrar registrar) {
+  public void onCommandRegistrar(ICommandRegistrar registrar) {
 
     CommandsCore.onRegister(registrar);
   }
 
   @Override
-  public void onFeature(IFeatureRegistrar registrar) {
+  public void onFeatureRegistrar(IFeatureRegistrar registrar) {
 
     FeaturesCore.onRegister(registrar);
   }
 
   @Override
-  public void onPlugin(IPluginRegistrar registrar) {
+  public void onPluginRegistrar(IPluginRegistrar registrar) {
 
     PluginsCore.onRegister(registrar);
   }
 
   @Override
-  public void onNetwork(IPacketRegistrar registrar) {
+  public void onPacketRegistrar(IPacketRegistrar registrar) {
 
     PacketsCore.onRegister(registrar);
   }
@@ -124,11 +122,6 @@ public class ModuleCore extends ModuleBase {
 
     CapabilityHandlerFood.init();
     CapabilityHandlerMetal.init();
-  }
-
-  @Override
-  public void onPostInit(FMLPostInitializationEvent event) {
-    OreDictHelper.init();
   }
 
   @Override

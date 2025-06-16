@@ -6,7 +6,7 @@ import su.terrafirmagreg.api.data.enums.InventoryCraftingMode;
 import su.terrafirmagreg.api.data.enums.QuiverSearch;
 import su.terrafirmagreg.api.data.enums.TemperatureMode;
 import su.terrafirmagreg.api.data.enums.TimeTooltipMode;
-import su.terrafirmagreg.modules.soil.helper.GrassColorHelper;
+import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;

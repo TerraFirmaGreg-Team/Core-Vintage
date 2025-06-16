@@ -103,15 +103,15 @@ public interface IModule {
   default void onNewRegister() {}
 
 
-  default void onRegistry(IRegistryRegistrar registrar) {}
+  default void onRegistryRegistrar(IRegistryRegistrar registrar) {}
 
-  default void onNetwork(IPacketRegistrar registrar) {}
+  default void onPacketRegistrar(IPacketRegistrar registrar) {}
 
-  default void onCommand(ICommandRegistrar registrar) {}
+  default void onCommandRegistrar(ICommandRegistrar registrar) {}
 
-  default void onFeature(IFeatureRegistrar registrar) {}
+  default void onFeatureRegistrar(IFeatureRegistrar registrar) {}
 
-  default void onPlugin(IPluginRegistrar registrar) {}
+  default void onPluginRegistrar(IPluginRegistrar registrar) {}
 
 
 }

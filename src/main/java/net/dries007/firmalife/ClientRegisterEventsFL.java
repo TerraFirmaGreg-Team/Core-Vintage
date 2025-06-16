@@ -1,6 +1,6 @@
 package net.dries007.firmalife;
 
-import su.terrafirmagreg.modules.soil.helper.GrassColorHelper;
+import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;

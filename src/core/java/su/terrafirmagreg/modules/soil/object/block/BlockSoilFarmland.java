@@ -7,7 +7,7 @@ import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.feature.soiltype.spi.IDirtBlock;
 import su.terrafirmagreg.modules.soil.feature.soiltype.spi.ISoilBlock;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 

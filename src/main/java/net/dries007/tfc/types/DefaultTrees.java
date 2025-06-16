@@ -1,12 +1,13 @@
 package net.dries007.tfc.types;
 
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.api.registries.TFCRegistryEvent;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenAcacia;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenBushes;
 import net.dries007.tfc.world.classic.worldgen.trees.TreeGenComposite;

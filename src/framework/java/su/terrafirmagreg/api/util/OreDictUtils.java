@@ -13,12 +13,13 @@ import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import lombok.experimental.UtilityClass;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @UtilityClass
@@ -51,7 +52,7 @@ public final class OreDictUtils {
   }
 
   public static void register(ItemStack itemStack, String oreName) {
-    if (oreName == null) {
+    if (oreName == null || oreName.isEmpty()) {
       return;
     }
 
@@ -68,11 +69,9 @@ public final class OreDictUtils {
    * @param parts Массив объектов для преобразования в строку.
    * @return Строка, представляющая объединенные элементы массива в формате lowerCamelCase.
    */
-  public static String toString(@NotNull Object... parts) {
-    if (parts == null) {
-      return null;
-    }
+  public static String toString(@Nullable Object... parts) {
     Object[] modifiedParts = Arrays.stream(parts)
+      .filter(Objects::nonNull)
       .map(part -> {
         String partString = part.toString();
         if (partString.matches("^[a-z]+[A-Z][a-z]+$")) {

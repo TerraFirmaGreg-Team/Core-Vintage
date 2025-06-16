@@ -1,4 +1,4 @@
-package net.dries007.tfc.api.util;
+package su.terrafirmagreg.modules.wood.api.generator;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

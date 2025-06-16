@@ -112,7 +112,7 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
       this.maxDamage = durability;
       this.maxStackSize = 1;
 
-      return this;
+      return this.self();
     }
 
     public Settings maxStackSize(int maxStackSize) {
@@ -120,59 +120,59 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
       if (maxStackSize > 1 && this.maxDamage != 0) {throw new RuntimeException("An item cannot have durability and be stackable!");}
 
       this.maxStackSize = maxStackSize;
-      return this;
+      return this.self();
     }
 
     public Settings group(CreativeTabs group) {
       this.group = group;
-      return this;
+      return this.self();
     }
 
     public Settings rarity(IRarity rarity) {
       this.rarity = rarity;
-      return this;
+      return this.self();
     }
 
     public Settings customResource(String path) {
       this.resource = ModUtils.resource(path);
-      return this;
+      return this.self();
     }
 
     public Settings oreDict(Supplier<Boolean> supplier, Object... oreDict) {
       if (!supplier.get()) {
         this.oreDict.add(oreDict);
       }
-      return this;
+      return this.self();
     }
 
     public Settings oreDict(List<Object[]> oreDict) {
       this.oreDict.addAll(oreDict);
-      return this;
+      return this.self();
     }
 
     public Settings oreDict(Object... oreDict) {
       this.oreDict.add(oreDict);
-      return this;
+      return this.self();
     }
 
     public Settings capability(List<IProviderItemCapability> providers) {
       providers.forEach(this::capability);
-      return this;
+      return this.self();
     }
 
     public Settings capability(IProviderItemCapability... providers) {
       this.capability.addAll(Arrays.asList(providers));
-      return this;
+      return this.self();
     }
 
     public Settings fireResistant() {
       this.isFireResistant = true;
-      return this;
+      return this.self();
     }
 
     public Settings hasSubtypes() {
       this.hasSubtypes = true;
-      return this;
+      return this.self();
     }
   }
 }

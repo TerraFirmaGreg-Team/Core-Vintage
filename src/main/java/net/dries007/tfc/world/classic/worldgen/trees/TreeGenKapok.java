@@ -1,6 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import su.terrafirmagreg.api.util.StructureUtils;
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyBool;
@@ -15,7 +16,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
@@ -34,7 +34,10 @@ public class TreeGenKapok implements ITreeGenerator {
 
   private static final PlacementSettings settings = StructureUtils.getDefaultSettings();
   private static final BlockPos[] trunkPos = new BlockPos[]{
-    new BlockPos(0, 0, 0), new BlockPos(-1, 0, 0), new BlockPos(0, 0, -1), new BlockPos(-1, 0, -1)
+    new BlockPos(0, 0, 0),
+    new BlockPos(-1, 0, 0),
+    new BlockPos(0, 0, -1),
+    new BlockPos(-1, 0, -1)
   };
   private IBlockState trunk;
   private IBlockState bark;

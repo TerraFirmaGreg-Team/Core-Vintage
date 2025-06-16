@@ -23,15 +23,13 @@ public interface IBaseEntry<T extends BaseSettings<T>, V> {
 
     protected String registryKey;
 
-
-    /**
-     * Устанавливает ключ реестра для элемента. Во время регистрации, будет подставлено имя контейнера (modId) и имя модуля
-     * <p>Формат modId:moduleName/registryKey</p>
-     */
     @SuppressWarnings("unchecked")
+    protected T self() {return (T) this;}
+
+
     public T registryKey(String registryKey) {
-      this.registryKey = Preconditions.checkNotNull(registryKey, "name");
-      return (T) this;
+      this.registryKey = Preconditions.checkNotNull(registryKey, "registryKey");
+      return this.self();
     }
 
   }

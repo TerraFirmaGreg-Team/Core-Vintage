@@ -255,6 +255,7 @@ public final class BlockUtils {
   }
 
   public static void addFireInfo(Block blockIn, int encouragement, int flammability) {
+
     Blocks.FIRE.setFireInfo(blockIn, encouragement, flammability);
   }
 

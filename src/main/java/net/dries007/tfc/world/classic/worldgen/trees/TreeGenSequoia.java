@@ -1,6 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen.trees;
 
 import su.terrafirmagreg.api.util.StructureUtils;
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +13,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;

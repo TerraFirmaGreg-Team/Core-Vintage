@@ -1,15 +1,31 @@
 package su.terrafirmagreg.framework.manager.registry.base.generation.spi;
 
+import su.terrafirmagreg.framework.manager.registry.base.generation.api.IGeneratorEntry;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import lombok.Getter;
+
 import java.util.Random;
 
-public abstract class BaseGenerator extends WorldGenerator {
+@Getter
+public abstract class BaseGenerator extends WorldGenerator implements IGeneratorEntry {
+
+  protected final Settings settings;
+
+  public BaseGenerator() {
+    this(Settings.of());
+  }
+
+  public BaseGenerator(Settings settings) {
+
+    this.settings = settings;
+  }
 
   @Override
-  public final boolean generate(World world, Random random, BlockPos pos) {
+  public boolean generate(World world, Random random, BlockPos pos) {
     return generate(world, random, pos, false);
   }
 

@@ -1,9 +1,8 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
-
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -19,13 +18,13 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeFlower;
 import net.dries007.tfc.types.TreesTFCF;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 import net.dries007.tfc.world.classic.worldgen.structures.StructureGeneratorCorals;
 

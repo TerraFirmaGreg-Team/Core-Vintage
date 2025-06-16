@@ -1,6 +1,6 @@
 package net.dries007.tfc.world.classic.worldgen;
 
-import net.dries007.tfc.world.classic.biomes.BiomesTFC;
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -17,11 +17,11 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Tree;
-import net.dries007.tfc.api.util.ITreeGenerator;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.world.classic.ChunkGenTFC;
 import net.dries007.tfc.world.classic.biomes.BiomeTFC;
+import net.dries007.tfc.world.classic.biomes.BiomesTFC;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 
 import java.util.Collections;

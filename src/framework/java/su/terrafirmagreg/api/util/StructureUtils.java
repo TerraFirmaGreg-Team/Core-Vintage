@@ -41,16 +41,11 @@ public final class StructureUtils {
       if (template$blockinfo1 != null) {
         Block block1 = template$blockinfo1.blockState.getBlock();
 
-        if ((!placementIn.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (structureboundingbox == null || structureboundingbox.isVecInside(
-          blockpos))) {
-          IBlockState stateToPlace = template$blockinfo1.blockState.withMirror(
-              placementIn.getMirror())
-            .withRotation(placementIn.getRotation());
+        if ((!placementIn.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (structureboundingbox == null || structureboundingbox.isVecInside(blockpos))) {
+          IBlockState stateToPlace = template$blockinfo1.blockState.withMirror(placementIn.getMirror()).withRotation(placementIn.getRotation());
           IBlockState stateToReplace = worldIn.getBlockState(blockpos);
 
-          if (stateToReplace.getMaterial().isReplaceable()
-              || stateToReplace.getBlock() instanceof BlockLeaves
-              || stateToReplace.getBlock() instanceof BlockSapling) {
+          if (stateToReplace.getMaterial().isReplaceable() || stateToReplace.getBlock() instanceof BlockLeaves || stateToReplace.getBlock() instanceof BlockSapling) {
             worldIn.setBlockState(blockpos, stateToPlace, 2);
           }
         }
@@ -61,10 +56,9 @@ public final class StructureUtils {
       BlockPos blockpos1 = Template.transformedBlockPos(placementIn, template$blockinfo2.pos).add(pos);
 
       if (structureboundingbox == null || structureboundingbox.isVecInside(blockpos1)) {
-        worldIn.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(),
-          false);
+        worldIn.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(), false);
       }
- 
+
     }
   }
 

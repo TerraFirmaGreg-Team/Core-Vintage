@@ -259,7 +259,7 @@ public final class ModelUtils {
 
   //region ===== Color
 
-  public void color(final ColorHandlerEvent.Block colorHandler, Block block) {
+  public static void color(final ColorHandlerEvent.Block colorHandler, Block block) {
     if (block instanceof IProviderBlockColor provider) {
       if (provider.getBlockColor() != null) {
         colorHandler.getBlockColors().registerBlockColorHandler(provider.getBlockColor(), block);
@@ -267,7 +267,7 @@ public final class ModelUtils {
     }
   }
 
-  public void color(final ColorHandlerEvent.Item colorHandler, Block block) {
+  public static void color(final ColorHandlerEvent.Item colorHandler, Block block) {
     if (block instanceof IProviderItemColor provider) {
       if (provider.getItemColor() != null) {
         colorHandler.getItemColors().registerItemColorHandler(provider.getItemColor(), block);
@@ -275,7 +275,7 @@ public final class ModelUtils {
     }
   }
 
-  public void color(final ColorHandlerEvent.Item colorHandler, Item item) {
+  public static void color(final ColorHandlerEvent.Item colorHandler, Item item) {
     if (item instanceof IProviderItemColor provider) {
       if (provider.getItemColor() != null) {
         colorHandler.getItemColors().registerItemColorHandler(provider.getItemColor(), item);

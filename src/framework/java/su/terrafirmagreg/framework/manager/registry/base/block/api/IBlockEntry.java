@@ -171,6 +171,7 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     }
 
     public static Settings of(Material material, MapColor color) {
+
       return new Settings(material, color);
     }
 

@@ -4,8 +4,10 @@ import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalHare;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
@@ -126,5 +128,16 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
     public HareTypeData(int type) {
       this.typeData = type;
     }
+  }
+
+  public static class EntityTypeAnimalHare extends BaseEntityType {
+
+    public EntityTypeAnimalHare() {
+      super(Settings.of()
+        .registryKey("hare")
+        .entity(EntityAnimalHare.class, RenderAnimalHare::new)
+        .egg(0x866724, 0xdadada));
+    }
+
   }
 }

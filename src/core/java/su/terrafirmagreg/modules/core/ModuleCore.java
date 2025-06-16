@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
@@ -111,12 +112,11 @@ public class ModuleCore extends ModuleBase {
     CapabilityMetal.register();
     CapabilityForgeable.register();
 
+    if (ModUtils.isClient()) {
+      MinecraftForge.EVENT_BUS.register(OverlayAmbiental.getInstance());
+    }
 
-  }
 
-  @Override
-  public void onClientPreInit(FMLPreInitializationEvent event) {
-    MinecraftForge.EVENT_BUS.register(OverlayAmbiental.getInstance());
   }
 
   @Override

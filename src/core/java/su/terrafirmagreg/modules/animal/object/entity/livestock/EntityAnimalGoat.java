@@ -2,8 +2,10 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalGoat;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAILawnmower;
@@ -175,4 +177,16 @@ public class EntityAnimalGoat extends EntityAnimalCow implements ILivestock {
       return this.sheepTimer > 0 ? ((float) Math.PI / 5F) : this.rotationPitch * 0.017453292F;
     }
   }
+
+  public static class EntityTypeAnimalGoat extends BaseEntityType {
+
+    public EntityTypeAnimalGoat() {
+      super(Settings.of()
+        .registryKey("goat")
+        .entity(EntityAnimalGoat.class, RenderAnimalGoat::new)
+        .egg(0xA0A0A0, 0x404040));
+    }
+
+  }
+
 }

@@ -9,10 +9,12 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalPolarBear;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIAttackMelee;
@@ -336,5 +338,16 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   @Override
   public boolean canMateWith(@NotNull EntityAnimal otherAnimal) {
     return false; // This animal shouldn't have mating mechanics since it's not farmable
+  }
+
+  public static class EntityTypeAnimalPolarBear extends BaseEntityType {
+
+    public EntityTypeAnimalPolarBear() {
+      super(Settings.of()
+        .registryKey("polarbear")
+        .entity(EntityAnimalPolarBear.class, RenderAnimalPolarBear::new)
+        .egg(0xF1FFF1, 0xA0A0A0));
+    }
+
   }
 }

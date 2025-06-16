@@ -8,10 +8,12 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalParrot;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
@@ -341,12 +343,9 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   }
 
   @Override
-  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity,
-                            float floraDiversity) {
-    BiomeUtils.BiomeType biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
-    if (!BiomeHelper.isOceanic(biome) && !BiomeHelper.isBeach(biome) &&
-        (biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST
-         || biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST)) {
+  public int getSpawnWeight(Biome biome, float temperature, float rainfall, float floraDensity, float floraDiversity) {
+    var biomeType = BiomeUtils.getBiomeType(temperature, rainfall, floraDensity);
+    if (!BiomeHelper.isOceanic(biome) && !BiomeHelper.isBeach(biome) && (biomeType == BiomeUtils.BiomeType.TEMPERATE_FOREST || biomeType == BiomeUtils.BiomeType.TROPICAL_FOREST)) {
       return ConfigAnimal.ENTITY.PARROT.rarity;
     }
     return 0;
@@ -365,5 +364,16 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   @Override
   public int getMaxGroupSize() {
     return 4;
+  }
+
+  public static class EntityTypeAnimalParrot extends BaseEntityType {
+
+    public EntityTypeAnimalParrot() {
+      super(Settings.of()
+        .registryKey("parrot")
+        .entity(EntityAnimalParrot.class, RenderAnimalParrot::new)
+        .egg(0x885040, 0xB0ACAC));
+    }
+
   }
 }

@@ -2,8 +2,10 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalYak;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
@@ -119,6 +121,17 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
   // Equivalent sound
   protected void playStepSound(BlockPos pos, Block blockIn) {
     playSound(SoundEvents.ENTITY_COW_STEP, 0.14F, 0.9F);
+  }
+
+  public static class EntityTypeAnimalYak extends BaseEntityType {
+
+    public EntityTypeAnimalYak() {
+      super(Settings.of()
+        .registryKey("yak")
+        .entity(EntityAnimalYak.class, RenderAnimalYak::new)
+        .egg(0x837669, 0x3e3d7c));
+    }
+
   }
 
 }

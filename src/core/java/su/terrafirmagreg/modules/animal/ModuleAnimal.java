@@ -47,13 +47,6 @@ public class ModuleAnimal extends ModuleBase {
   }
 
   @Override
-  public void onRegistryClient(IRegistryRegistrar registrar) {
-
-    EntitiesAnimal.onClientRegister(registrar);
-
-  }
-
-  @Override
   public void onFeature(IFeatureRegistrar registrar) {
 
     FeaturesAnimal.onRegister(registrar);

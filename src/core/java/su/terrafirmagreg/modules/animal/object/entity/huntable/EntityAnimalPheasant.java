@@ -2,9 +2,11 @@ package su.terrafirmagreg.modules.animal.object.entity.huntable;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalPheasant;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
@@ -155,5 +157,16 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
     this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.14F, 0.9F);
+  }
+
+  public static class EntityTypeAnimalPheasant extends BaseEntityType {
+
+    public EntityTypeAnimalPheasant() {
+      super(Settings.of()
+        .registryKey("pheasant")
+        .entity(EntityAnimalPheasant.class, RenderAnimalPheasant::new)
+        .egg(0x5577FF, 0xFFFA90));
+    }
+
   }
 }

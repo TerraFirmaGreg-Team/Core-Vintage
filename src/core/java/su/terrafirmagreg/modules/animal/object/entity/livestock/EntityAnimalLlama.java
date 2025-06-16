@@ -8,10 +8,12 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalLlama;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIPanic;
@@ -532,6 +534,17 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
       geneVariant = 0;
       this.world.spawnEntity(baby);
     }
+  }
+
+  public static class EntityTypeAnimalLlama extends BaseEntityType {
+
+    public EntityTypeAnimalLlama() {
+      super(Settings.of()
+        .registryKey("llama")
+        .entity(EntityAnimalLlama.class, RenderAnimalLlama::new)
+        .egg(0xA52A2A, 0xAA7722));
+    }
+
   }
 
 

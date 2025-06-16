@@ -2,8 +2,10 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalZebu;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
@@ -119,5 +121,16 @@ public class EntityAnimalZebu extends EntityAnimalCow implements ILivestock {
   // Equivalent sound
   protected void playStepSound(BlockPos pos, Block blockIn) {
     playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
+  }
+
+  public static class EntityTypeAnimalZebu extends BaseEntityType {
+
+    public EntityTypeAnimalZebu() {
+      super(Settings.of()
+        .registryKey("zebu")
+        .entity(EntityAnimalZebu.class, RenderAnimalZebu::new)
+        .egg(0x2c2507, 0xbcb38e));
+    }
+
   }
 }

@@ -8,10 +8,12 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalWolf;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAITamableAvoidPlayer;
@@ -498,5 +500,16 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
     }
     EntityAnimalWolf other = (EntityAnimalWolf) otherAnimal;
     return this.getGender() != other.getGender() && this.isInLove() && other.isInLove();
+  }
+
+  public static class EntityTypeAnimalWolf extends BaseEntityType {
+
+    public EntityTypeAnimalWolf() {
+      super(Settings.of()
+        .registryKey("wolf")
+        .entity(EntityAnimalWolf.class, RenderAnimalWolf::new)
+        .egg(0xB0ACAC, 0x796555));
+    }
+
   }
 }

@@ -8,10 +8,12 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalOcelot;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
@@ -473,5 +475,16 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
 
       return TranslatorUtils.translateToLocal(ModUtils.localize(LocalizeKeys.ENTITY, string, "name"));
     }
+  }
+
+  public static class EntityTypeAnimalOcelot extends BaseEntityType {
+
+    public EntityTypeAnimalOcelot() {
+      super(Settings.of()
+        .registryKey("ocelot")
+        .entity(EntityAnimalOcelot.class, RenderAnimalOcelot::new)
+        .egg(0x3527FA, 0x7F23A0));
+    }
+
   }
 }

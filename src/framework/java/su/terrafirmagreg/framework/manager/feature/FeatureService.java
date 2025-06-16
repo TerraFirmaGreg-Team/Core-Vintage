@@ -55,24 +55,6 @@ public class FeatureService implements IFeatureService {
   }
 
   @Override
-  public void onClientPreInit(FMLPreInitializationEvent event) {
-
-    fireEvent(feature -> feature.onClientPreInit(event));
-  }
-
-  @Override
-  public void onClientInit(FMLInitializationEvent event) {
-
-    fireEvent(feature -> feature.onClientInit(event));
-  }
-
-  @Override
-  public void onClientPostInit(FMLPostInitializationEvent event) {
-
-    fireEvent(feature -> feature.onClientPostInit(event));
-  }
-
-  @Override
   public void onServerAboutToStart(FMLServerAboutToStartEvent event) {
 
     fireEvent(feature -> feature.onServerAboutToStart(event));

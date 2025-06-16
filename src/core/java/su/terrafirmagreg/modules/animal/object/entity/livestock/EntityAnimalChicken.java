@@ -7,9 +7,11 @@ import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalChicken;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
@@ -264,5 +266,16 @@ public class EntityAnimalChicken extends EntityAnimalBase implements ILivestock 
   public void readEntityFromNBT(@NotNull NBTTagCompound nbt) {
     super.readEntityFromNBT(nbt);
     this.setLaidTicks(nbt.getLong("laidTicks"));
+  }
+
+  public static class EntityTypeAnimalChicken extends BaseEntityType {
+
+    public EntityTypeAnimalChicken() {
+      super(Settings.of()
+        .registryKey("chicken")
+        .entity(EntityAnimalChicken.class, RenderAnimalChicken::new)
+        .egg(0x557755, 0xFFF91F));
+    }
+
   }
 }

@@ -3,9 +3,11 @@ package su.terrafirmagreg.modules.animal.object.entity.predator;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalGrizzlyBear;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
@@ -272,5 +274,16 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
   @Nullable
   protected ResourceLocation getLootTable() {
     return LootTablesAnimal.ANIMALS_GRIZZLY_BEAR;
+  }
+
+  public static class EntityTypeAnimalGrizzlyBear extends BaseEntityType {
+
+    public EntityTypeAnimalGrizzlyBear() {
+      super(Settings.of()
+        .registryKey("grizzlybear")
+        .entity(EntityAnimalGrizzlyBear.class, RenderAnimalGrizzlyBear::new)
+        .egg(0xB22222, 0xDEB887));
+    }
+
   }
 }

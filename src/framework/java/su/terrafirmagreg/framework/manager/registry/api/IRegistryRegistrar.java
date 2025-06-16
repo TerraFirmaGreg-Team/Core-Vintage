@@ -14,7 +14,6 @@ import su.terrafirmagreg.framework.manager.registry.base.sound.api.ISoundEntry;
 import net.minecraft.block.Block;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
@@ -24,7 +23,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.LootFunction.Serializer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.Collection;
@@ -154,10 +152,6 @@ public interface IRegistryRegistrar {
   <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Map<T, V> map);
 
   <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Set<T> types, Function<T, V> factory);
-
-  <V extends Entity> EntityEntry addEntity(String identifier, EntityEntryBuilder<V> builder);
-
-  <V extends Entity> EntityEntry addEntity(String identifier, Class<V> entClass, int primary, int seconday);
 
   // --------------------------------------------------------------------------
   // - KeyBinding

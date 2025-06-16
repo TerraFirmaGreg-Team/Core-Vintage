@@ -2,9 +2,11 @@ package su.terrafirmagreg.modules.animal.object.entity.huntable;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalDeer;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
@@ -151,5 +153,16 @@ public class EntityAnimalDeer extends EntityAnimalMammal implements IHuntable {
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
     this.playSound(SoundEvents.ENTITY_HORSE_STEP, 0.14F, 0.9F);
+  }
+
+  public static class EntityTypeAnimalDeer extends BaseEntityType {
+
+    public EntityTypeAnimalDeer() {
+      super(Settings.of()
+        .registryKey("deer")
+        .entity(EntityAnimalDeer.class, RenderAnimalDeer::new)
+        .egg(0x55FF55, 0x5FFAAF));
+    }
+
   }
 }

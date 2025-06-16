@@ -4,9 +4,11 @@ import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalRabbit;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
@@ -478,5 +480,16 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
         this.isJumping = false;
       }
     }
+  }
+
+  public static class EntityTypeAnimalRabbit extends BaseEntityType {
+
+    public EntityTypeAnimalRabbit() {
+      super(Settings.of()
+        .registryKey("rabbit")
+        .entity(EntityAnimalRabbit.class, RenderAnimalRabbit::new)
+        .egg(0x885040, 0x462612));
+    }
+
   }
 }

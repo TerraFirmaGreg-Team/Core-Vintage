@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockStairs;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.util.BlockRenderLayer;

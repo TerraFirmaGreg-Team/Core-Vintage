@@ -2,8 +2,10 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalGrouse;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
@@ -113,5 +115,16 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
   @Override
   public double getOldDeathChance() {
     return ConfigAnimal.ENTITY.GROUSE.oldDeathChance;
+  }
+
+  public static class EntityTypeAnimalGrouse extends BaseEntityType {
+
+    public EntityTypeAnimalGrouse() {
+      super(Settings.of()
+        .registryKey("grouse")
+        .entity(EntityAnimalGrouse.class, RenderAnimalGrouse::new)
+        .egg(0xf7a100, 0x71ffd0));
+    }
+
   }
 }

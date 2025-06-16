@@ -8,11 +8,13 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalHorse;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
@@ -549,9 +551,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
    * @return true if found and charmed a female
    */
   private boolean findFemaleMate() {
-    List<AbstractHorse> list = this.world.getEntitiesWithinAABB(AbstractHorse.class,
-      this.getEntityBoundingBox()
-        .grow(8.0D));
+    List<AbstractHorse> list = this.world.getEntitiesWithinAABB(AbstractHorse.class, this.getEntityBoundingBox().grow(8.0D));
     for (AbstractHorse ent : list) {
       if (ent instanceof EntityAnimalHorse || ent instanceof EntityAnimalDonkey) {
         IAnimal animal = (IAnimal) ent;
@@ -562,5 +562,16 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
       }
     }
     return false;
+  }
+
+  public static class EntityTypeAnimalHorse extends BaseEntityType {
+
+    public EntityTypeAnimalHorse() {
+      super(Settings.of()
+        .registryKey("horse")
+        .entity(EntityAnimalHorse.class, RenderAnimalHorse::new)
+        .egg(0xA5886B, 0xABA400));
+    }
+
   }
 }

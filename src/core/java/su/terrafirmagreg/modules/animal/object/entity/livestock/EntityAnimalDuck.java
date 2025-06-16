@@ -2,8 +2,10 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalDuck;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
@@ -119,5 +121,16 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
   @Override
   public double getOldDeathChance() {
     return ConfigAnimal.ENTITY.DUCK.oldDeathChance;
+  }
+
+  public static class EntityTypeAnimalDuck extends BaseEntityType {
+
+    public EntityTypeAnimalDuck() {
+      super(Settings.of()
+        .registryKey("duck")
+        .entity(EntityAnimalDuck.class, RenderAnimalDuck::new)
+        .egg(0xFFF91F, 0x462612));
+    }
+
   }
 }

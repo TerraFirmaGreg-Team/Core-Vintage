@@ -4,13 +4,15 @@ import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalLion;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
-import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIAttackMelee;
+import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAILionAttack;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIWanderHuntArea;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.helper.BiomeHelper;
@@ -170,7 +172,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
   protected void initEntityAI() {
     EntityAIWander wander = new EntityAnimalAIWanderHuntArea(this, 1.0D);
     this.tasks.addTask(0, new EntityAISwimming(this));
-    this.tasks.addTask(2, new EntityAnimalAILionAttack().setWanderAI(wander));
+    this.tasks.addTask(2, new EntityAnimalAILionAttack(this).setWanderAI(wander));
     this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
     this.tasks.addTask(5, wander);
     this.tasks.addTask(7, new EntityAILookIdle(this));
@@ -229,30 +231,15 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
     playSound(SoundsAnimal.ANIMAL_FELINE_STEP, 0.15F, 1.0F);
   }
 
-  /**
-   * Adds a bit of animation to the attack
-   */
-  protected class EntityAnimalAILionAttack extends EntityAnimalAIAttackMelee<EntityAnimalLion> {
+  public static class EntityTypeAnimalLion extends BaseEntityType {
 
-    protected int attackTicks;
-
-    public EntityAnimalAILionAttack() {
-      super(EntityAnimalLion.this, 1.3D, 1.5D, AttackBehavior.NIGHTTIME_ONLY);
-      this.attackTicks = 0;
+    public EntityTypeAnimalLion() {
+      super(Settings.of()
+        .registryKey("lion")
+        .entity(EntityAnimalLion.class, RenderAnimalLion::new)
+        .egg(0xDAA520, 0xA0522D));
     }
 
-    @Override
-    public void resetTask() {
-      super.resetTask();
-      this.attackTicks = 0;
-      EntityAnimalLion.this.setMouthTicks(0);
-    }
-
-    @Override
-    public void updateTask() {
-      super.updateTask();
-      ++this.attackTicks;
-      EntityAnimalLion.this.setMouthTicks(attackTicks);
-    }
   }
+
 }

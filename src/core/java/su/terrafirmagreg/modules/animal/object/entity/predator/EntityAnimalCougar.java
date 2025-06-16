@@ -2,8 +2,10 @@ package su.terrafirmagreg.modules.animal.object.entity.predator;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalCougar;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
@@ -108,5 +110,17 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
   @Override
   protected ResourceLocation getLootTable() {
     return LootTablesAnimal.ANIMALS_COUGAR;
+  }
+
+
+  public static class EntityTypeAnimalCougar extends BaseEntityType {
+
+    public EntityTypeAnimalCougar() {
+      super(Settings.of()
+        .registryKey("cougar")
+        .entity(EntityAnimalCougar.class, RenderAnimalCougar::new)
+        .egg(0x817a00, 0xdcd889));
+    }
+
   }
 }

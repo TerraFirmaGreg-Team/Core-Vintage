@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.soil.api.spi;
+package su.terrafirmagreg.modules.soil.feature.soiltype.spi;
 
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
 

@@ -1,7 +1,6 @@
 package su.terrafirmagreg.framework.module;
 
 import su.terrafirmagreg.api.library.EventStateWrapper;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.module.api.IModule;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
 import su.terrafirmagreg.framework.module.api.IModuleService;
@@ -71,11 +70,6 @@ public class ModuleService implements IModuleService {
         Optional.ofNullable(module.getRegistryManager()).ifPresent(registry -> {
           module.getLogger().debug("Construction registry");
           module.onRegistry(registry.getRegistrar());
-
-          if (ModUtils.isClient()) {
-            module.getLogger().debug("Client Construction registry");
-            module.onRegistryClient(registry.getRegistrar());
-          }
         });
         module.getLogger().debug("Construction complete");
       });
@@ -94,18 +88,6 @@ public class ModuleService implements IModuleService {
           feature.getService().onPreInit(event);
         });
         module.getLogger().debug("Pre-Init complete");
-
-        if (ModUtils.isClient()) {
-          module.getLogger().debug("Client Pre-Init start");
-          module.onClientPreInit(event);
-          Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
-            plugin.getService().onClientPreInit(event);
-          });
-          Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
-            feature.getService().onClientPreInit(event);
-          });
-          module.getLogger().debug("Client Pre-Init complete");
-        }
       });
     });
 
@@ -120,18 +102,6 @@ public class ModuleService implements IModuleService {
           feature.getService().onInit(event);
         });
         module.getLogger().debug("Init complete");
-
-        if (ModUtils.isClient()) {
-          module.getLogger().debug("Client Init start");
-          module.onClientInit(event);
-          Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
-            plugin.getService().onClientInit(event);
-          });
-          Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
-            feature.getService().onClientInit(event);
-          });
-          module.getLogger().debug("Client Init complete");
-        }
       });
     });
 
@@ -146,18 +116,6 @@ public class ModuleService implements IModuleService {
           feature.getService().onPostInit(event);
         });
         module.getLogger().debug("Post-Init complete");
-
-        if (ModUtils.isClient()) {
-          module.getLogger().debug("Client Post-Init start");
-          module.onClientPostInit(event);
-          Optional.ofNullable(module.getPluginManager()).ifPresent(plugin -> {
-            plugin.getService().onClientPostInit(event);
-          });
-          Optional.ofNullable(module.getFeatureManager()).ifPresent(feature -> {
-            feature.getService().onClientPostInit(event);
-          });
-          module.getLogger().debug("Client Post-Init complete");
-        }
       });
     });
 

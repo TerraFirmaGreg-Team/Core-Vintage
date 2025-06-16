@@ -3,9 +3,11 @@ package su.terrafirmagreg.modules.animal.object.entity.predator;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalHyena;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
@@ -202,5 +204,16 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
     this.playSound(SoundEvents.ENTITY_WOLF_STEP, 0.15F, 1.0F); // Close enough
+  }
+
+  public static class EntityTypeAnimalHyena extends BaseEntityType {
+
+    public EntityTypeAnimalHyena() {
+      super(Settings.of()
+        .registryKey("hyena")
+        .entity(EntityAnimalHyena.class, RenderAnimalHyena::new)
+        .egg(0x666600, 0x331900));
+    }
+
   }
 }

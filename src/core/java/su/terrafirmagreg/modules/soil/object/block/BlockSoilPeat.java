@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
-import su.terrafirmagreg.modules.soil.api.spi.IDirtBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.IDirtBlock;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.block.SoundType;

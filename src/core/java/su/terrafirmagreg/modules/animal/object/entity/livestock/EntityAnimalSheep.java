@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
-import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.BiomeUtils;
@@ -9,6 +8,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
@@ -335,8 +335,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
       super(Settings.of()
         .registryKey("sheep")
         .entity(EntityAnimalSheep.class, RenderAnimalSheep::new)
-        .egg(0xFFFFFF, 0xFF6347)
-        .updateInfo(64, 1, true));
+        .egg(0xFFFFFF, 0xFF6347));
     }
 
   }

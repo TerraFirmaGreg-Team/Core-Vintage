@@ -24,8 +24,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -82,17 +80,6 @@ public interface IModule {
 
   default void onLoadComplete(FMLLoadCompleteEvent event) {}
 
-  // ===== FML Lifecycle: Client
-
-  @SideOnly(Side.CLIENT)
-  default void onClientPreInit(FMLPreInitializationEvent event) {}
-
-  @SideOnly(Side.CLIENT)
-  default void onClientInit(FMLInitializationEvent event) {}
-
-  @SideOnly(Side.CLIENT)
-  default void onClientPostInit(FMLPostInitializationEvent event) {}
-
   // ===== FML Lifecycle: Server
 
   default void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
@@ -113,13 +100,10 @@ public interface IModule {
 
   // ===== Registration
 
-
   default void onNewRegister() {}
 
 
   default void onRegistry(IRegistryRegistrar registrar) {}
-
-  default void onRegistryClient(IRegistryRegistrar registrar) {}
 
   default void onNetwork(IPacketRegistrar registrar) {}
 

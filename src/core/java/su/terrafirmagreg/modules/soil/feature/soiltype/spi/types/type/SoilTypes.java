@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.soil.api.types.type;
+package su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type;
 
 public final class SoilTypes {
 

@@ -1,8 +1,8 @@
-package su.terrafirmagreg.modules.soil.api.types.variant.block;
+package su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.variant.block;
 
 import su.terrafirmagreg.api.library.types.variant.block.VariantBlock;
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager.Specification;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type.SoilType;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.text.TextComponentTranslation;

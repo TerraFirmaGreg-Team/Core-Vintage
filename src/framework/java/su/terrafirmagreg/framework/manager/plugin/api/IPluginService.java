@@ -9,8 +9,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IPluginService {
 
@@ -23,17 +21,6 @@ public interface IPluginService {
   void onPostInit(FMLPostInitializationEvent event);
 
   void onLoadComplete(FMLLoadCompleteEvent event);
-
-  // ===== FML Lifecycle: Client
-
-  @SideOnly(Side.CLIENT)
-  void onClientPreInit(FMLPreInitializationEvent event);
-
-  @SideOnly(Side.CLIENT)
-  void onClientInit(FMLInitializationEvent event);
-
-  @SideOnly(Side.CLIENT)
-  void onClientPostInit(FMLPostInitializationEvent event);
 
   // ===== FML Lifecycle: Server
 

@@ -2,8 +2,10 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalQuail;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
@@ -112,5 +114,17 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
   @Override
   public double getOldDeathChance() {
     return ConfigAnimal.ENTITY.QUAIL.oldDeathChance;
+  }
+
+
+  public static class EntityTypeAnimalQuail extends BaseEntityType {
+
+    public EntityTypeAnimalQuail() {
+      super(Settings.of()
+        .registryKey("quail")
+        .entity(EntityAnimalQuail.class, RenderAnimalQuail::new)
+        .egg(0x237ddc, 0xe3e36d));
+    }
+
   }
 }

@@ -2,9 +2,11 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalPig;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
@@ -144,5 +146,16 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
     playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
+  }
+
+  public static class EntityTypeAnimalPig extends BaseEntityType {
+
+    public EntityTypeAnimalPig() {
+      super(Settings.of()
+        .registryKey("pig")
+        .entity(EntityAnimalPig.class, RenderAnimalPig::new)
+        .egg(0xAA7722, 0xFFEBCD));
+    }
+
   }
 }

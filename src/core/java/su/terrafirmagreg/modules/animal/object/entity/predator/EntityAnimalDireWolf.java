@@ -3,9 +3,11 @@ package su.terrafirmagreg.modules.animal.object.entity.predator;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalDireWolf;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
@@ -194,5 +196,16 @@ public class EntityAnimalDireWolf extends EntityAnimalMammal implements IPredato
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
     this.playSound(SoundEvents.ENTITY_WOLF_STEP, 0.16F, 0.9F); // Close enough
+  }
+
+  public static class EntityTypeAnimalDireWolf extends BaseEntityType {
+
+    public EntityTypeAnimalDireWolf() {
+      super(Settings.of()
+        .registryKey("direwolf")
+        .entity(EntityAnimalDireWolf.class, RenderAnimalDireWolf::new)
+        .egg(0x343434, 0x978f7e));
+    }
+
   }
 }

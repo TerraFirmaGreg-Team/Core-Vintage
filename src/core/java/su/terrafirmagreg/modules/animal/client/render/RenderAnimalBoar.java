@@ -13,11 +13,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
-
 public class RenderAnimalBoar extends RenderLiving<EntityAnimalBoar> {
 
-  private static final ResourceLocation TEXTURE = ModUtils.resource(
-    "textures/entity/animal/huntable/boar.png");
+  private static final ResourceLocation TEXTURE = ModUtils.resource("textures/entity/animal/huntable/boar.png");
 
   public RenderAnimalBoar(RenderManager renderManager) {
     super(renderManager, new ModelAnimalBoar(), 0.7F);

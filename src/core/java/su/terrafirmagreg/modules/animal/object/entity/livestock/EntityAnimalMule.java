@@ -7,11 +7,13 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalMule;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
@@ -426,5 +428,16 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
       }
     }
     return super.processInteract(player, hand);
+  }
+
+  public static class EntityTypeAnimalMule extends BaseEntityType {
+
+    public EntityTypeAnimalMule() {
+      super(Settings.of()
+        .registryKey("mule")
+        .entity(EntityAnimalMule.class, RenderAnimalMule::new)
+        .egg(0x180200, 0x482D1A));
+    }
+
   }
 }

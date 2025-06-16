@@ -14,14 +14,12 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lombok.Getter;
 
 
 public interface IPluginEntry extends IBaseEntry<Settings, BasePlugin> {
-  
+
   // ===== FML Lifecycle
 
   default void onPreInit(FMLPreInitializationEvent event) {}
@@ -31,17 +29,6 @@ public interface IPluginEntry extends IBaseEntry<Settings, BasePlugin> {
   default void onPostInit(FMLPostInitializationEvent event) {}
 
   default void onLoadComplete(FMLLoadCompleteEvent event) {}
-
-  // ===== FML Lifecycle: Client
-
-  @SideOnly(Side.CLIENT)
-  default void onClientPreInit(FMLPreInitializationEvent event) {}
-
-  @SideOnly(Side.CLIENT)
-  default void onClientInit(FMLInitializationEvent event) {}
-
-  @SideOnly(Side.CLIENT)
-  default void onClientPostInit(FMLPostInitializationEvent event) {}
 
   // ===== FML Lifecycle: Server
 

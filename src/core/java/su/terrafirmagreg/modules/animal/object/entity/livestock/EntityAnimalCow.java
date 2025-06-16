@@ -6,9 +6,11 @@ import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalCow;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
@@ -271,5 +273,16 @@ public class EntityAnimalCow extends EntityAnimalMammal implements ILivestock {
 
   protected boolean hasMilk() {
     return getGender() == Gender.FEMALE && getAge() == Age.ADULT && getProductsCooldown() == 0;
+  }
+
+  public static class EntityTypeAnimalCow extends BaseEntityType {
+
+    public EntityTypeAnimalCow() {
+      super(Settings.of()
+        .registryKey("cow")
+        .entity(EntityAnimalCow.class, RenderAnimalCow::new)
+        .egg(0xA52A2A, 0xFFFFFF));
+    }
+
   }
 }

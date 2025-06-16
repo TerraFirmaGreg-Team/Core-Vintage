@@ -143,7 +143,7 @@ public class FeatureRemappingAnimal extends BaseFeature {
     DataFixUtils.remap(event, ModuleAnimal.LOGGER.getLogger(), new Object2ObjectOpenHashMap<>() {{
       put("sheeptfc", () -> EntitiesAnimal.SHEEP);
       put("cowtfc", () -> EntitiesAnimal.COW);
-      put("grizzlybeartfc", () -> EntitiesAnimal.GRIZZLYBEAR);
+      put("grizzlybeartfc", () -> EntitiesAnimal.GRIZZLY_BEAR);
       put("chickentfc", () -> EntitiesAnimal.CHICKEN);
       put("pheasanttfc", () -> EntitiesAnimal.PHEASANT);
       put("deertfc", () -> EntitiesAnimal.DEER);
@@ -153,7 +153,7 @@ public class FeatureRemappingAnimal extends BaseFeature {
       put("horsetfc", () -> EntitiesAnimal.HORSE);
       put("donkeytfc", () -> EntitiesAnimal.DONKEY);
       put("muletfc", () -> EntitiesAnimal.MULE);
-      put("polarbeartfc", () -> EntitiesAnimal.POLARBEAR);
+      put("polarbeartfc", () -> EntitiesAnimal.POLAR_BEAR);
       put("parrottfc", () -> EntitiesAnimal.PARROT);
       put("llamatfc", () -> EntitiesAnimal.LLAMA);
       put("ocelottfc", () -> EntitiesAnimal.OCELOT);
@@ -161,11 +161,11 @@ public class FeatureRemappingAnimal extends BaseFeature {
       put("ducktfc", () -> EntitiesAnimal.DUCK);
       put("alpacatfc", () -> EntitiesAnimal.ALPACA);
       put("goattfc", () -> EntitiesAnimal.GOAT);
-      put("sabertoothtfc", () -> EntitiesAnimal.SABERTOOTH);
+      put("sabertoothtfc", () -> EntitiesAnimal.SABER_TOOTH);
       put("cameltfc", () -> EntitiesAnimal.CAMEL);
       put("liontfc", () -> EntitiesAnimal.LION);
       put("hyenatfc", () -> EntitiesAnimal.HYENA);
-      put("direwolftfc", () -> EntitiesAnimal.DIREWOLF);
+      put("direwolftfc", () -> EntitiesAnimal.DIRE_WOLF);
       put("haretfc", () -> EntitiesAnimal.HARE);
       put("boartfc", () -> EntitiesAnimal.BOAR);
       put("zebutfc", () -> EntitiesAnimal.ZEBU);
@@ -178,7 +178,7 @@ public class FeatureRemappingAnimal extends BaseFeature {
       put("jackaltfc", () -> EntitiesAnimal.JACKAL);
       put("muskoxtfc", () -> EntitiesAnimal.MUSKOX);
       put("yaktfc", () -> EntitiesAnimal.YAK);
-      put("blackbeartfc", () -> EntitiesAnimal.BLACKBEAR);
+      put("blackbeartfc", () -> EntitiesAnimal.BLACK_BEAR);
       put("cougartfc", () -> EntitiesAnimal.COUGAR);
       put("coyotetfc", () -> EntitiesAnimal.COYOTE);
     }});

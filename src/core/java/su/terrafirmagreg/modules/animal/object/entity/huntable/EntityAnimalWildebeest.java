@@ -2,9 +2,11 @@ package su.terrafirmagreg.modules.animal.object.entity.huntable;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalWildebeest;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
@@ -147,5 +149,16 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
     this.playSound(SoundEvents.ENTITY_HORSE_STEP, 0.15F, 0.9F);
+  }
+
+  public static class EntityTypeAnimalWildebeest extends BaseEntityType {
+
+    public EntityTypeAnimalWildebeest() {
+      super(Settings.of()
+        .registryKey("wildebeest")
+        .entity(EntityAnimalWildebeest.class, RenderAnimalWildebeest::new)
+        .egg(0x696142, 0x9c8115));
+    }
+
   }
 }

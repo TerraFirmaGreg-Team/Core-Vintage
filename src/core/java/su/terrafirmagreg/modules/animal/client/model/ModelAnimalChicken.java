@@ -15,7 +15,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
-
 public class ModelAnimalChicken extends ModelBase {
 
   private final ModelRenderer head;

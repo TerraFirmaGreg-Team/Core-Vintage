@@ -4,11 +4,13 @@ import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalCamel;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
@@ -359,5 +361,16 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
 
   public void setHalter(boolean value) {
     dataManager.set(HALTER, value);
+  }
+
+  public static class EntityTypeAnimalCamel extends BaseEntityType {
+
+    public EntityTypeAnimalCamel() {
+      super(Settings.of()
+        .registryKey("camel")
+        .entity(EntityAnimalCamel.class, RenderAnimalCamel::new)
+        .egg(0xA5886B, 0x006633));
+    }
+
   }
 }

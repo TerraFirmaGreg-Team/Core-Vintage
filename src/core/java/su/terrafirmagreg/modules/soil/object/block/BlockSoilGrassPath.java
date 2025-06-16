@@ -4,9 +4,9 @@ import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockGrassPath;
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
-import su.terrafirmagreg.modules.soil.api.spi.IDirtBlock;
-import su.terrafirmagreg.modules.soil.api.spi.ISoilBlock;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.IDirtBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.ISoilBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 

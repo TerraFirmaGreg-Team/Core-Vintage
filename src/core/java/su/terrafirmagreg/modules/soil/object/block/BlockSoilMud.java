@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 import su.terrafirmagreg.modules.soil.object.block.spi.BlockSoil;
 

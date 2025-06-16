@@ -1,7 +1,6 @@
 package su.terrafirmagreg.framework.manager.registry;
 
 import su.terrafirmagreg.api.library.types.type.Type;
-import su.terrafirmagreg.api.util.EntityUtils;
 import su.terrafirmagreg.api.util.KeyBindUtils;
 import su.terrafirmagreg.api.util.LootUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -21,7 +20,6 @@ import su.terrafirmagreg.framework.module.api.IModule;
 import net.minecraft.block.Block;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
@@ -31,7 +29,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.LootFunction.Serializer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import lombok.Getter;
@@ -394,26 +391,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Set<T> types, Function<T, V> factory) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEntity(factory.apply(type))));
-  }
-
-  @Override
-  public <V extends Entity> EntityEntry addEntity(String identifier, EntityEntryBuilder<V> builder) {
-
-    builder.id(getIdentifier(identifier), EntityUtils.getIdSupplier().getAndIncrement());
-    builder.name(ModUtils.localize(getIdentifier(identifier)));
-
-    return this.addEntity(identifier, builder.build());
-  }
-
-  @Override
-  public <V extends Entity> EntityEntry addEntity(String identifier, Class<V> entClass, int primary, int seconday) {
-
-    final EntityEntryBuilder<V> builder = EntityEntryBuilder.create();
-    builder.entity(entClass);
-    builder.tracker(64, 1, true);
-    builder.egg(primary, seconday);
-
-    return this.addEntity(identifier, builder);
   }
 
   // endregion

@@ -1,9 +1,9 @@
 package su.terrafirmagreg.api.helper;
 
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.modules.soil.api.spi.IDirtBlock;
-import su.terrafirmagreg.modules.soil.api.spi.IGrassBlock;
-import su.terrafirmagreg.modules.soil.api.spi.ISoilBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.IDirtBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.IGrassBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.spi.ISoilBlock;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

@@ -2,8 +2,10 @@ package su.terrafirmagreg.modules.animal.object.entity.livestock;
 
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
+import su.terrafirmagreg.modules.animal.client.render.RenderAnimalMuskOx;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
@@ -126,5 +128,16 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
   // Equivalent sound
   protected void playStepSound(BlockPos pos, Block blockIn) {
     playSound(SoundEvents.ENTITY_COW_STEP, 0.16F, 1.1F);
+  }
+
+  public static class EntityTypeAnimalMuskOx extends BaseEntityType {
+
+    public EntityTypeAnimalMuskOx() {
+      super(Settings.of()
+        .registryKey("muskox")
+        .entity(EntityAnimalMuskOx.class, RenderAnimalMuskOx::new)
+        .egg(0x620d55, 0xcdaf4f));
+    }
+
   }
 }

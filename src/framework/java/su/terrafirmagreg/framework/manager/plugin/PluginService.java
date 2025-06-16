@@ -57,24 +57,6 @@ public class PluginService implements IPluginService {
   }
 
   @Override
-  public void onClientPreInit(FMLPreInitializationEvent event) {
-
-    fireEvent(plugin -> plugin.onClientPreInit(event));
-  }
-
-  @Override
-  public void onClientInit(FMLInitializationEvent event) {
-
-    fireEvent(plugin -> plugin.onClientInit(event));
-  }
-
-  @Override
-  public void onClientPostInit(FMLPostInitializationEvent event) {
-
-    fireEvent(plugin -> plugin.onClientPostInit(event));
-  }
-
-  @Override
   public void onServerAboutToStart(FMLServerAboutToStartEvent event) {
 
     fireEvent(plugin -> plugin.onServerAboutToStart(event));

@@ -5,14 +5,15 @@ import su.terrafirmagreg.modules.device.object.tile.TileFreezeDryer;
 
 import net.minecraft.util.math.BlockPos;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class CSPacketFreezeDryer extends BasePacketTile<TileFreezeDryer> {
 
   public int bool;
   public boolean mode;
   public BlockPos blockPos;
-
-  public CSPacketFreezeDryer() {
-  }
+  
 
   public CSPacketFreezeDryer(BlockPos blockPos, int bool, boolean mode) {
     super(blockPos);

@@ -1,5 +1,8 @@
 package net.dries007.tfc.client;
 
+import su.terrafirmagreg.api.data.LocalizeKeys;
+import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
@@ -144,7 +147,7 @@ public class ClientEvents {
         }
 
         // Always add calendar info
-        list.add(I18n.format("tfc.tooltip.date", Calendar.CALENDAR_TIME.getTimeAndDate()));
+        list.add(TranslatorUtils.translate(ModUtils.localize(LocalizeKeys.TOOLTIP, "core.calendar.date"), Calendar.CALENDAR_TIME.getTimeAndDate()));
 
         if (ConfigTFC.General.DEBUG.enable) {
           list.add(I18n.format("tfc.tooltip.debug_times", Calendar.PLAYER_TIME.getTicks(), Calendar.CALENDAR_TIME.getTicks()));

@@ -5,19 +5,19 @@ import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.NoArgsConstructor;
+
 /**
  * Update latex status on client, for render purposes
  */
+@NoArgsConstructor
 public class SCPacketLatexExtractor extends BasePacketTile<TileLatexExtractor> {
 
-  private int cutState = -1;
-  private int fluid = 0;
-  private boolean pot = false;
-  private boolean base = false;
-
-
-  public SCPacketLatexExtractor() {
-  }
+  public int cutState = -1;
+  public int fluid = 0;
+  public boolean pot = false;
+  public boolean base = false;
+  
 
   public SCPacketLatexExtractor(@NotNull TileLatexExtractor tile) {
     super(tile.getPos());

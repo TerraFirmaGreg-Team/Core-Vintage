@@ -1,10 +1,10 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.TerraFirmaGreg;
+
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
 
 import lombok.experimental.UtilityClass;
 
@@ -34,25 +34,13 @@ public final class NetworkUtils {
     return isValidChannel(channel.toString());
   }
 
+  public static <T> void queueTask(MessageContext context, Supplier<T> supplier, Consumer<T> consumer) {
 
-  public static IThreadListener getThreadListener(Side side) {
-    return side.isClient()
-           ? GameUtils.getMinecraft()
-           : FMLCommonHandler.instance().getMinecraftServerInstance();
+    queueTask(context, () -> consumer.accept(supplier.get()));
   }
 
   public static void queueTask(MessageContext context, Runnable task) {
-
-    queueTask(context.side, task);
-  }
-
-  public static <T> void queueTask(MessageContext context, Supplier<T> supplier, Consumer<T> consumer) {
-
-    queueTask(context.side, () -> consumer.accept(supplier.get()));
-  }
-
-  public static void queueTask(Side side, Runnable task) {
-    final IThreadListener target = getThreadListener(side);
+    final IThreadListener target = TerraFirmaGreg.PROXY.getThreadListener(context);
 
     addScheduledTask(target, task);
   }

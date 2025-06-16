@@ -7,7 +7,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,11 +20,6 @@ public abstract class BasePacketTile<T extends TileEntity> extends BasePacketCli
    */
   public transient T tile;
 
-  /**
-   * The message context.
-   */
-  public transient MessageContext context;
-
   public BlockPos blockPos;
 
   /**
@@ -37,24 +31,12 @@ public abstract class BasePacketTile<T extends TileEntity> extends BasePacketCli
     this.blockPos = blockPos;
   }
 
-//  @Override
-//  public IMessage process(MessageContext context) {
-//    this.context = context;
-//    final World world = context.getServerHandler().player.getEntityWorld();
-//    TileUtils.getTile(world, blockPos, this.tile.getClass()).ifPresent(tile -> {
-//      if (world.isBlockLoaded(this.blockPos)) {
-//        if (world instanceof WorldServer worldServer) {
-//          worldServer.addScheduledTask(this::getAction);
-//        }
-//      }
-//    });
-//    return null;
-//  }
-
+  @SuppressWarnings("unchecked")
   @SideOnly(Side.CLIENT)
   public void process(Minecraft minecraft) {
     final World world = minecraft.player.getEntityWorld();
-    TileUtils.getTile(world, blockPos, this.tile.getClass()).ifPresent(tile -> {
+    TileUtils.getTile(world, blockPos).ifPresent(tile -> {
+      this.tile = (T) tile;
       if (world.isBlockLoaded(this.blockPos)) {
         if (world instanceof WorldServer worldServer) {
           worldServer.addScheduledTask(this::getAction);

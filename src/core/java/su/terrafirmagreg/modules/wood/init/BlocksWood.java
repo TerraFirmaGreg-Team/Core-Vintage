@@ -4,6 +4,7 @@ import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilGrass;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodLog;
+import su.terrafirmagreg.modules.wood.object.block.BlockWoodSlab;
 
 import java.util.Map;
 
@@ -15,8 +16,8 @@ public class BlocksWood {
   public static Map<WoodType, BlockSoilGrass> SAPLING;
   public static Map<WoodType, BlockSoilGrass> POTTED_SAPLING;
   public static Map<WoodType, BlockSoilGrass> PLANKS;
-  public static Map<WoodType, BlockSoilGrass> STAIRS_PLANKS;
-  public static Map<WoodType, BlockSoilGrass> SLAB_DOUBLE_PLANKS;
+  public static Map<WoodType, BlockWoodSlab.Half> STAIRS_PLANKS;
+  public static Map<WoodType, BlockWoodSlab.Double> SLAB_DOUBLE_PLANKS;
   public static Map<WoodType, BlockSoilGrass> SLAB_PLANKS;
   public static Map<WoodType, BlockSoilGrass> WALL_PLANKS;
   public static Map<WoodType, BlockSoilGrass> BOOKSHELF;

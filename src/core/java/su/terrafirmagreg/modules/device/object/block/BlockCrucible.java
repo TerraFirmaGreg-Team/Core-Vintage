@@ -63,28 +63,19 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
       .nonFullCube()
       .nonOpaque()
       .hardness(3.0f)
+      .renderType(EnumBlockRenderType.MODEL)
       .harvestLevel(ToolClasses.PICKAXE, 0)
-      .capability(getCapabilitySize());
+      .capability(stack ->
+        CapabilityProviderSize.of(
+          stack.getTagCompound() == null ? Size.LARGE : Size.HUGE, // Can only store in chests if not full, overburden if full and more than one is carried
+          Weight.VERY_HEAVY,
+          stack.getTagCompound() == null
+        )
+      );
 
 
   }
 
-  private CapabilityProviderSize getCapabilitySize() {
-    return new CapabilityProviderSize() {
-      public Weight getWeight(ItemStack stack) {
-        return Weight.VERY_HEAVY;
-      }
-
-      public Size getSize(ItemStack stack) {
-        return stack.getTagCompound() == null ? Size.LARGE : Size.HUGE; // Can only store in chests if not full, overburden if full and more than one is carried
-      }
-    };
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
 
   @Override
   public void acceptHeat(World world, BlockPos pos, float temperature) {

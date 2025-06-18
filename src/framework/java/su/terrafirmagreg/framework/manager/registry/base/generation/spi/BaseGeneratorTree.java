@@ -3,30 +3,19 @@ package su.terrafirmagreg.framework.manager.registry.base.generation.spi;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
-import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import net.dries007.tfc.types.DefaultTrees;
 
 import lombok.Getter;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.function.Supplier;
 
 @Getter
-public abstract class BaseGeneratorTree extends BaseGenerator {
+public abstract class BaseGeneratorTree extends BaseGenerator { //implements ITreeGenerator
 
   public final Builder builder;
   public final Supplier<IBlockState> log;
@@ -36,7 +25,6 @@ public abstract class BaseGeneratorTree extends BaseGenerator {
   private final float dominance;
   private final int maxHeight;
   private final int maxDecayDistance;
-  private final ITreeGenerator bushGenerator;
   private final float minGrowthTime;
   private final float minTemp;
   private final float maxTemp;
@@ -48,7 +36,7 @@ public abstract class BaseGeneratorTree extends BaseGenerator {
   private final Supplier<Item> fruit;
   private final int[] stages;
   private final int numStages;
-  private final ITreeGenerator generator;
+
   private final float[] paramMap;
   private final String logicMap;
   private final int soilLongevity;
@@ -75,8 +63,6 @@ public abstract class BaseGeneratorTree extends BaseGenerator {
     this.maxDecayDistance = builder.maxDecayDistance;
     this.isConifer = builder.isConifer;
     this.minGrowthTime = builder.minGrowthTime;
-    this.generator = builder.generator;
-    this.bushGenerator = builder.bushGenerator;
 
     this.fruit = builder.fruit;
     this.stages = builder.stages;
@@ -118,59 +104,12 @@ public abstract class BaseGeneratorTree extends BaseGenerator {
     return fruit;
   }
 
-  //  public boolean makeTree(World world, BlockPos pos, Random rand, boolean isWorldGen) {
-//    if (!world.isRemote) {
-//      return makeTree(((WorldServer) world).getStructureTemplateManager(), world, pos, rand, isWorldGen);
-//    }
-//    return false;
-//  }
-//
-//  /**
-//   * Создает дерево с использованием менеджера шаблонов, мира, позиции, генератора случайных чисел и флага, указывающего, является ли это генерацией мира.
-//   *
-//   * @param manager    менеджер шаблонов для создания дерева
-//   * @param world      мир, в котором будет создано дерево
-//   * @param pos        позиция, где будет создано дерево
-//   * @param rand       генератор случайных чисел
-//   * @param isWorldGen флаг, указывающий, является ли это генерацией мира
-//   * @return {@code true}, если дерево было успешно создано, иначе {@code false}
-//   */
-//  public boolean makeTree(TemplateManager manager, World world, BlockPos pos, Random rand, boolean isWorldGen) {
-//    if (generator.canGenerateTree(world, pos, this)) {
-//      generator.generateTree(manager, world, pos, this, rand, isWorldGen);
-//      return true;
-//    }
-//    return false;
-//  }
-
-  /**
-   * Проверяет, есть ли кусты в местоположении.
-   *
-   * @return {@code true}, если есть кусты, иначе {@code false}
-   */
-  public boolean hasBushes() {
-    return bushGenerator != null;
-  }
-
-  @SideOnly(Side.CLIENT)
-  public void addInfo(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-    if (GuiScreen.isShiftKeyDown()) {
-      tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
-      tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) minRain, (int) maxRain));
-      tooltip.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", minTemp), String.format("%.1f", maxTemp)));
-    } else {
-      tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
-    }
-  }
-
 
   @Getter
   public static class Builder {
 
     private String name;
     private String logicMap;
-    private ITreeGenerator generator;
-    private ITreeGenerator bushGenerator;
     private ResourceLocation cellKit;
 
     private Supplier<Item> fruit;
@@ -213,7 +152,6 @@ public abstract class BaseGeneratorTree extends BaseGenerator {
       this.isConifer = false;
       this.thick = false;
 
-      this.bushGenerator = null;
     }
 
     public static Builder builder() {
@@ -249,11 +187,6 @@ public abstract class BaseGeneratorTree extends BaseGenerator {
     }
 
 
-    public Builder generator(ITreeGenerator generator) {
-      this.generator = generator;
-      return this;
-    }
-
     // Установить радиус роста
     public Builder radius(int maxGrowthRadius) {
       this.maxGrowthRadius = maxGrowthRadius;
@@ -281,18 +214,6 @@ public abstract class BaseGeneratorTree extends BaseGenerator {
     // Установить хвойное дерево
     public Builder isConifer() {
       this.isConifer = true;
-      return this;
-    }
-
-    // Установить генератор кустов по умолчанию
-    public Builder bushes() {
-      this.bushGenerator = DefaultTrees.GEN_BUSHES; // TODO генератор для кустов
-      return this;
-    }
-
-    // Установить кастомный генератор кустов
-    public Builder bushes(ITreeGenerator bushGenerator) {
-      this.bushGenerator = bushGenerator;
       return this;
     }
 

@@ -38,8 +38,7 @@ public interface ITreeGenerator {
     final int radius = treeType.getMaxGrowthRadius();
     for (int x = -radius; x <= radius; x++) {
       for (int z = -radius; z <= radius; z++) {
-        if ((x == 0 && z == 0) ||
-            world.getBlockState(pos.add(x, 0, z)).getMaterial().isReplaceable() ||
+        if ((x == 0 && z == 0) || world.getBlockState(pos.add(x, 0, z)).getMaterial().isReplaceable() ||
             ((x > 1 || z > 1) && world.getBlockState(pos.add(x, 1, z)).getMaterial().isReplaceable())) {continue;}
         return false;
       }

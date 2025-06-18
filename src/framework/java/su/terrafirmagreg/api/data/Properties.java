@@ -78,6 +78,7 @@ public final class Properties {
   public static class IntProp {
 
     // PropertyInteger
+    public static final PropertyInteger STAGE_2 = PropertyInteger.create("stage", 0, 1);
     public static final PropertyInteger STAGE_3 = PropertyInteger.create("stage", 0, 2);
     public static final PropertyInteger STAGE_4 = PropertyInteger.create("stage", 0, 3);
     public static final PropertyInteger STAGE_5 = PropertyInteger.create("stage", 0, 4);

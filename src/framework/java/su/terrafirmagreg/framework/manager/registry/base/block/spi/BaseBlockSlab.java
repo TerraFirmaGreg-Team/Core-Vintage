@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemSlab;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
@@ -29,6 +30,10 @@ import static su.terrafirmagreg.api.data.Properties.EnumProp.DEFAULT;
 public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
 
   protected final Settings settings;
+
+  public BaseBlockSlab(Block model) {
+    this(Settings.of(model));
+  }
 
   public BaseBlockSlab(Settings settings) {
     super(settings.getMaterial());

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.framework.manager.registry.base.block.spi;
 
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTile;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 
 import net.minecraft.block.material.Material;
@@ -33,6 +34,9 @@ public abstract class BaseBlockContainer extends BaseBlock implements IProviderT
   public BaseBlockContainer(Settings settings) {
     super(settings);
 
+    getSettings()
+      .renderType(EnumBlockRenderType.INVISIBLE);
+
   }
 
   protected boolean isInvalidNeighbor(World world, BlockPos pos, EnumFacing facing) {
@@ -44,13 +48,12 @@ public abstract class BaseBlockContainer extends BaseBlock implements IProviderT
   }
 
   @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.INVISIBLE;
-  }
-
-  @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, this.getTileClass()).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
+    TileUtils.getTile(worldIn, pos, this.getTileClass()).ifPresent(tile -> {
+      if (tile instanceof BaseTile baseTile) {
+        baseTile.onBreakBlock(worldIn, pos, state);
+      }
+    });
     super.breakBlock(worldIn, pos, state);
     worldIn.removeTileEntity(pos);
   }

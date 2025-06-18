@@ -1,0 +1,34 @@
+package su.terrafirmagreg.modules.wood.object.block;
+
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockFence;
+import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
+
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+
+import lombok.Getter;
+
+@Getter
+public class BlockWoodFenceLog extends BaseBlockFence implements IWoodBlock {
+
+  protected final WoodType type;
+
+  public BlockWoodFenceLog(WoodType type) {
+    super(Settings.of(Material.WOOD));
+
+    this.type = type;
+
+    getSettings()
+      .registryKey(type.getRegistryKey("fence_log"))
+      .sound(SoundType.WOOD)
+      .hardness(2.0F)
+      .resistance(15.0F)
+      .harvestLevel(ToolClasses.AXE, 0)
+      .fireInfo(5, 20)
+      .oreDict("fence", "wood")
+      .oreDict("fence", "wood", type);
+
+  }
+}

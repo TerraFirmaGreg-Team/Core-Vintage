@@ -45,7 +45,7 @@ public abstract class BaseItem extends Item implements IItemEntry {
 
   @Override
   public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
-    addCapabilities(stack, nbt);
+    this.addCapabilities(stack, nbt);
 
     if (getSettings().getCapability().isEmpty()) {
       return super.initCapabilities(stack, nbt);

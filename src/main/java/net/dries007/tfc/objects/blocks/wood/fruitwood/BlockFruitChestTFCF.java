@@ -1,6 +1,8 @@
 package net.dries007.tfc.objects.blocks.wood.fruitwood;
 
-import net.dries007.tfc.util.OreDictionaryHelper;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -21,15 +23,12 @@ import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.inventory.capability.TFCInventoryLargeChest;
-import net.dries007.tfcflorae.client.GuiHandler;
 import net.dries007.tfc.objects.te.TEFruitChest;
+import net.dries007.tfc.util.OreDictionaryHelper;
+import net.dries007.tfcflorae.client.GuiHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -126,8 +125,8 @@ public class BlockFruitChestTFCF extends BlockChest implements ICapabilitySize {
   }
 
   /**
-   * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest insertions,
-   * which means we need to block them (to stop inserting items that aren't the correct size)
+   * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest insertions, which means we need to block them (to stop inserting items that aren't the
+   * correct size)
    */
   @Nullable
   public ILockableContainer getContainer(World worldIn, BlockPos pos, boolean allowBlocking) {
@@ -185,15 +184,7 @@ public class BlockFruitChestTFCF extends BlockChest implements ICapabilitySize {
     return Weight.LIGHT; // Stacksize = 32
   }
 
-  private boolean isBlocked(World worldIn, BlockPos pos) {
-    return this.isBelowSolidBlock(worldIn, pos) || this.isOcelotSittingOnChest(worldIn, pos);
-  }
-
-  private boolean isBelowSolidBlock(World worldIn, BlockPos pos) {
-    return worldIn.getBlockState(pos.up()).doesSideBlockChestOpening(worldIn, pos.up(), EnumFacing.DOWN);
-  }
-
-  private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {
+  protected boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {
     for (Entity entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(),
       pos.getY() + 1, pos.getZ(),
       pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {

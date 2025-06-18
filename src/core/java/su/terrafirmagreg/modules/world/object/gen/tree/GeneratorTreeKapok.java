@@ -4,6 +4,14 @@ import su.terrafirmagreg.framework.manager.registry.base.generation.spi.BaseGene
 import su.terrafirmagreg.modules.wood.api.types.type.WoodTypes;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.template.TemplateManager;
+
+import net.dries007.tfc.api.types.Tree;
+
+import java.util.Random;
+
 import static net.dries007.tfc.objects.blocks.wood.BlockLogTFC.PLACED;
 
 public class GeneratorTreeKapok extends BaseGeneratorTree {
@@ -31,4 +39,8 @@ public class GeneratorTreeKapok extends BaseGeneratorTree {
   }
 
 
+  @Override
+  public void generateTree(TemplateManager manager, World world, BlockPos pos, Tree tree, Random rand, boolean isWorldGen) {
+
+  }
 }

@@ -1,16 +1,16 @@
 package net.dries007.tfc.api.util;
 
+import su.terrafirmagreg.api.data.enums.Mods;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import su.terrafirmagreg.api.data.enums.Mods;
-
 public interface IGrowingPlant {
 
-  public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos);
+  GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos);
 
-  public enum GrowthStatus {
+  enum GrowthStatus {
     /**
      * The plant is dead.
      */

@@ -19,6 +19,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -75,6 +76,7 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     CreativeTabs group;
     SoundType soundType;
 
+    EnumBlockRenderType renderType;
     ContextFunction<Integer> lightValue;
     ContextFunction<Float> slipperiness;
     Predicate<IBlockState> isSuffocating;
@@ -119,6 +121,7 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       this.isSuffocating = (state) -> state.getMaterial().blocksMovement() && state.isFullCube();
       this.rarity = EnumRarity.COMMON;
       this.renderLayer = BlockRenderLayer.SOLID;
+      this.renderType = EnumBlockRenderType.MODEL;
       this.itemBlock = BaseItemBlock::new;
       this.harvestLevel = -1;
       this.encouragement = -1;
@@ -248,6 +251,11 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
 
     public Settings renderLayer(BlockRenderLayer renderLayer) {
       this.renderLayer = renderLayer;
+      return this;
+    }
+
+    public Settings renderType(EnumBlockRenderType renderType) {
+      this.renderType = renderType;
       return this;
     }
 

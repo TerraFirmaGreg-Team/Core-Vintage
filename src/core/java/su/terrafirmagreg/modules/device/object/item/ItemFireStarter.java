@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.object.item;
 
-import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
@@ -46,6 +46,7 @@ public class ItemFireStarter extends BaseItem {
       .registryKey("firestarter")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT, false))
       .maxStackSize(1)
+      .oreDict("tool")
       .maxDamage(8);
   }
 

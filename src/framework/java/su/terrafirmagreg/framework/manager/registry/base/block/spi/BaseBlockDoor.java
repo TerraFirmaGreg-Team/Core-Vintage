@@ -37,6 +37,8 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockEntry {
       .itemBlock(BaseItemDoor::new)
       .capability(CapabilityProviderSize.of(Size.VERY_LARGE, Weight.HEAVY))
       .hardness(3.0F);
+
+    disableStats();
   }
 
   @Override

@@ -3,9 +3,9 @@ package su.terrafirmagreg.api.util;
 import su.terrafirmagreg.api.library.model.CustomStateMap;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemDoor;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockState;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderEntityRenderer;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemColor;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemMesh;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
@@ -17,18 +17,18 @@ import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -54,18 +54,21 @@ public final class ModelUtils {
     }
   };
 
-  public static void register(Item item) {
+  public static void addModel(Item item) {
     ModelUtils.model(item);
-    ModelUtils.meshDefinition(item);
+    ModelUtils.mesh(item);
+    // ModelUtils.color(item);
   }
 
-  //region ===== StateMapper
 
-  public static void register(Block block) {
+  public static void addModel(Block block) {
     ModelUtils.stateMapper(block);
     ModelUtils.model(block);
     ModelUtils.tesr(block);
+    //ModelUtils.color(block);
   }
+
+  //region ===== StateMapper
 
   public static void stateMapper(Block block) {
     if (block instanceof IProviderBlockState provider) {
@@ -142,6 +145,8 @@ public final class ModelUtils {
   //region ===== Item
 
   public static void model(Item item) {
+    ResourceLocation registryName = item.getRegistryName();
+    Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
     if (item instanceof IItemEntry provider) {
       if (provider.getSettings().getResource() != null) {
         ModelUtils.model(item, provider.getSettings().getResource());
@@ -160,9 +165,6 @@ public final class ModelUtils {
       ModelUtils.model(itemBlock, block.getRegistryName());
       return;
     }
-
-    ResourceLocation registryName = item.getRegistryName();
-    Preconditions.checkNotNull(registryName, "Item %s has null registry name", item);
 
     ModelUtils.model(item, registryName);
   }
@@ -203,16 +205,16 @@ public final class ModelUtils {
     ModelUtils.model(item, modelLocation);
   }
 
-  public static void meshDefinition(Item item) {
+  public static void mesh(Item item) {
 
     if (item instanceof IProviderItemMesh provider) {
 
-      ModelUtils.meshDefinition(item, provider.getItemMesh());
+      ModelUtils.mesh(item, provider.getItemMesh());
       ModelBakery.registerItemVariants(item, provider.getModelLocations());
     }
   }
 
-  public static void meshDefinition(Item item, ItemMeshDefinition meshDefinition) {
+  public static void mesh(Item item, ItemMeshDefinition meshDefinition) {
 
     ModelLoader.setCustomMeshDefinition(item, meshDefinition);
   }
@@ -240,15 +242,6 @@ public final class ModelUtils {
 
   //region ===== TileEntitySpecialRenderer
 
-  @SuppressWarnings({"unchecked"})
-  public static <T extends EntityEntry> void entity(T entity) {
-    if (entity instanceof IProviderEntityRenderer provider) {
-      if (provider.renderClass() != null) {
-        ModelUtils.entity(entity.getEntityClass(), provider.getRenderFactory());
-      }
-    }
-  }
-
   public static <T extends Entity> void entity(Class<T> entityClass, IRenderFactory<? super T> renderFactory) {
     if (renderFactory != null) {
       RenderingRegistry.registerEntityRenderingHandler(entityClass, renderFactory);
@@ -259,26 +252,34 @@ public final class ModelUtils {
 
   //region ===== Color
 
-  public static void color(final ColorHandlerEvent.Block colorHandler, Block block) {
+  public static void color(final BlockColors blockColors, Block block) {
     if (block instanceof IProviderBlockColor provider) {
       if (provider.getBlockColor() != null) {
-        colorHandler.getBlockColors().registerBlockColorHandler(provider.getBlockColor(), block);
+        blockColors.registerBlockColorHandler(provider.getBlockColor(), block);
       }
     }
   }
 
-  public static void color(final ColorHandlerEvent.Item colorHandler, Block block) {
+  public static void color(final ItemColors itemColors, Block block) {
     if (block instanceof IProviderItemColor provider) {
       if (provider.getItemColor() != null) {
-        colorHandler.getItemColors().registerItemColorHandler(provider.getItemColor(), block);
+        itemColors.registerItemColorHandler(provider.getItemColor(), block);
       }
     }
   }
 
-  public static void color(final ColorHandlerEvent.Item colorHandler, Item item) {
+  public static void color(final ItemColors itemColors, Item item) {
     if (item instanceof IProviderItemColor provider) {
       if (provider.getItemColor() != null) {
-        colorHandler.getItemColors().registerItemColorHandler(provider.getItemColor(), item);
+        itemColors.registerItemColorHandler(provider.getItemColor(), item);
+      }
+    }
+
+    if (item instanceof BaseItemDoor door) {
+      if (door.getBlock() instanceof IProviderItemColor provider) {
+        if (provider.getItemColor() != null) {
+          itemColors.registerItemColorHandler(provider.getItemColor(), item);
+        }
       }
     }
   }

@@ -14,8 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,7 +24,7 @@ public class FeatureSize extends BaseFeature {
 
   public FeatureSize() {
     super(Settings.of()
-      .registryKey("size")
+      .name("size")
       .enabled(ConfigCore.FEATURE.SIZE.enabled)
     );
   }
@@ -74,13 +72,13 @@ public class FeatureSize extends BaseFeature {
   }
 
   @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
+  public void onPreInit() {
 
     CapabilitySize.register();
   }
 
   @Override
-  public void onInit(FMLInitializationEvent event) {
+  public void onInit() {
     CapabilitySize.Handler.init();
   }
 }

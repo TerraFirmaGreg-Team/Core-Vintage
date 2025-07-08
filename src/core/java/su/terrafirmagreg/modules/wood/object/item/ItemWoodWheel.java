@@ -1,31 +1,23 @@
 package su.terrafirmagreg.modules.wood.object.item;
 
-import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
+import su.terrafirmagreg.modules.wood.object.item.spi.ItemWood;
 
 import lombok.Getter;
 
 @Getter
-public class ItemWoodWheel extends BaseItem implements IWoodItem {
+public class ItemWoodWheel extends ItemWood {
 
-  protected final WoodItemVariant variant;
-  protected final WoodType type;
 
-  public ItemWoodWheel(WoodItemVariant variant, WoodType type) {
-    this.variant = variant;
-    this.type = type;
+  public ItemWoodWheel(WoodType type) {
+    super(type, "wheel");
 
     getSettings()
-      .registryKey(type.getRegistryKey(variant))
-      .customResource(variant.getCustomResource())
-      .weight(Weight.HEAVY)
-      .size(Size.NORMAL)
-      .oreDict(variant)
-      .oreDict(variant, type);
+      .capability(CapabilityProviderSize.of(Size.NORMAL, Weight.HEAVY));
   }
 
 }

@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.data.Properties;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
@@ -14,7 +15,6 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.firmalife.util.IWaterable;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.objects.recipes.PlanterRecipe;
@@ -48,7 +48,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
     ICalendarTickable.super.checkForCalendarUpdate();
     if (waterUses < 0) {
       waterUses = 0;
-      world.setBlockState(pos, world.getBlockState(pos).withProperty(StatePropertiesFL.WET, false));
+      world.setBlockState(pos, world.getBlockState(pos).withProperty(Properties.BoolProp.WET, false));
     }
   }
 
@@ -147,7 +147,7 @@ public class TEPlanter extends TEInventory implements ITickable, ICalendarTickab
   protected boolean canGrow(int slot) {
     PlanterRecipe recipe = getRecipe(slot);
     return isClimateValid && recipe != null && getStage(slot) < PlanterRecipe.getMaxStage(recipe) &&
-           tier >= PlanterRecipe.getTier(recipe) && world.getBlockState(pos).getValue(StatePropertiesFL.WET) && GreenhouseHelper.isSkylightValid(world, pos);
+           tier >= PlanterRecipe.getTier(recipe) && world.getBlockState(pos).getValue(Properties.BoolProp.WET) && GreenhouseHelper.isSkylightValid(world, pos);
   }
 
   public PlanterRecipe getRecipe(int slot) {

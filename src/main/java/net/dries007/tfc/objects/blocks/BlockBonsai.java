@@ -30,7 +30,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.STAGE;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_3;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -52,27 +52,27 @@ public class BlockBonsai extends BlockNonCube {
     this.fruit = fruit;
     this.period = period;
     this.tier = tier;
-    setDefaultState(getBlockState().getBaseState().withProperty(STAGE, 0));
+    setDefaultState(getBlockState().getBaseState().withProperty(STAGE_3, 0));
   }
 
   @Override
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(STAGE, meta);
+    return getDefaultState().withProperty(STAGE_3, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(STAGE);
+    return state.getValue(STAGE_3);
   }
 
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     if (!world.isRemote) {
       TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
-      int stage = state.getValue(STAGE);
+      int stage = state.getValue(STAGE_3);
       if (te != null && te.isClimateValid(tier) && te.getTicksSinceUpdate() >= (ICalendar.TICKS_IN_DAY * period) && stage < 2) {
-        world.setBlockState(pos, state.withProperty(STAGE, stage + 1));
+        world.setBlockState(pos, state.withProperty(STAGE_3, stage + 1));
         te.reduceCounter(ICalendar.TICKS_IN_DAY * period);
         te.markForSync();
       }
@@ -85,11 +85,11 @@ public class BlockBonsai extends BlockNonCube {
       TEHangingPlanter te = Helpers.getTE(world, pos, TEHangingPlanter.class);
       if (te == null) {return false;}
       ItemStack held = player.getHeldItem(hand);
-      if (held.isEmpty() && state.getValue(STAGE) == 2) {
+      if (held.isEmpty() && state.getValue(STAGE_3) == 2) {
         BlockPos spawnPos = tier == 4 ? pos.up() : pos.down(); // who let me learn to code???
         Helpers.spawnItemStack(world, spawnPos, new ItemStack(fruit.get(), tier == 4 ? 3 : 1));
         if (MathUtils.RNG.nextInt(7) == 0) {Helpers.spawnItemStack(world, spawnPos, new ItemStack(seed.get()));}
-        world.setBlockState(pos, state.withProperty(STAGE, 0));
+        world.setBlockState(pos, state.withProperty(STAGE_3, 0));
         te.resetCounter();
         return true;
       }
@@ -114,7 +114,7 @@ public class BlockBonsai extends BlockNonCube {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, STAGE);
+    return new BlockStateContainer(this, STAGE_3);
   }
 
   @Override

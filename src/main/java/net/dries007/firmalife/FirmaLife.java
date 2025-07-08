@@ -1,5 +1,7 @@
 package net.dries007.firmalife;
 
+import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -18,16 +20,15 @@ import net.dries007.firmalife.util.HelpersFL;
 import net.dries007.firmalife.util.OreDictsFL;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = FirmaLife.MOD_ID, name = FirmaLife.MODNAME, version = FirmaLife.MODVERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
+@Mod(modid = ModIDs.FL, name = FirmaLife.MODNAME, version = FirmaLife.MODVERSION, dependencies = "required-after:tfc;after:dynamictreestfc")
 public class FirmaLife {
 
-  public static final String MOD_ID = "firmalife";
   public static final String MODNAME = "FirmaLife";
   public static final String MODVERSION = "0.5.1";
   @SidedProxy(clientSide = "net.dries007.firmalife.proxy.ClientProxy", serverSide = "net.dries007.firmalife.proxy.ServerProxy")
   public static CommonProxy proxy;
   public static Logger logger;
-  @Mod.Instance(MOD_ID)
+  @Mod.Instance(ModIDs.FL)
   private static FirmaLife INSTANCE;
   private SimpleNetworkWrapper network;
 
@@ -49,7 +50,7 @@ public class FirmaLife {
     proxy.preInit(event);
 
     NetworkRegistry.INSTANCE.registerGuiHandler(this, new FLGuiHandler());
-    network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
+    network = NetworkRegistry.INSTANCE.newSimpleChannel(ModIDs.FL);
     int id = 0;
     // received client side
     network.registerMessage(new PacketSpawnVanillaParticle.Handler(), PacketSpawnVanillaParticle.class, ++id, Side.CLIENT);

@@ -1,0 +1,21 @@
+package su.terrafirmagreg.api.data.enums;
+
+import net.minecraft.util.IStringSerializable;
+
+import javax.annotation.Nonnull;
+
+public enum EnumLeafState implements IStringSerializable {
+  NORMAL, FLOWERING, FRUIT, AUTUMN, WINTER;
+
+  private static final EnumLeafState[] VALUES = values();
+
+  @Nonnull
+  public static EnumLeafState valueOf(int index) {
+    return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
+  }
+
+  @Override
+  public String getName() {
+    return this.name().toLowerCase();
+  }
+}

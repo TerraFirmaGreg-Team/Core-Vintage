@@ -1,18 +1,12 @@
 package su.terrafirmagreg.framework.manager.feature;
 
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureEntry;
+import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureService;
 import su.terrafirmagreg.framework.module.api.IModule;
+import su.terrafirmagreg.framework.module.spi.EventState;
 
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import lombok.Getter;
 
@@ -22,66 +16,78 @@ import java.util.function.Consumer;
 public class FeatureService implements IFeatureService {
 
   private final IModule module;
+  private final IFeatureRegistrar registrar;
   private final FeatureMap map;
 
   public FeatureService(FeatureManager manager) {
+
     this.module = manager.getModule();
+    this.registrar = manager.getRegistrar();
     this.map = manager.getMap();
   }
 
 
   @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
+  @SubscribeEvent
+  public void onPreInit(EventState.PreInitialization event) {
 
-    fireEvent(feature -> feature.onPreInit(event));
+    fireEvent(IFeatureEntry::onPreInit);
   }
 
   @Override
-  public void onInit(FMLInitializationEvent event) {
+  @SubscribeEvent
+  public void onInit(EventState.Initialization event) {
 
-    fireEvent(feature -> feature.onInit(event));
+    fireEvent(IFeatureEntry::onInit);
   }
 
   @Override
-  public void onPostInit(FMLPostInitializationEvent event) {
+  @SubscribeEvent
+  public void onPostInit(EventState.PostInitialization event) {
 
-    fireEvent(feature -> feature.onPostInit(event));
+    fireEvent(IFeatureEntry::onPostInit);
   }
 
   @Override
-  public void onLoadComplete(FMLLoadCompleteEvent event) {
+  @SubscribeEvent
+  public void onLoadComplete(EventState.LoadComplete event) {
 
-    fireEvent(feature -> feature.onLoadComplete(event));
+    fireEvent(IFeatureEntry::onLoadComplete);
   }
 
   @Override
-  public void onServerAboutToStart(FMLServerAboutToStartEvent event) {
+  @SubscribeEvent
+  public void onServerAboutToStart(EventState.ServerAboutToStart event) {
 
-    fireEvent(feature -> feature.onServerAboutToStart(event));
+    fireEvent(IFeatureEntry::onServerAboutToStart);
   }
 
   @Override
-  public void onServerStarting(FMLServerStartingEvent event) {
+  @SubscribeEvent
+  public void onServerStarting(EventState.ServerStarting event) {
 
-    fireEvent(feature -> feature.onServerStarting(event));
+    fireEvent(IFeatureEntry::onServerStarting);
   }
 
   @Override
-  public void onServerStarted(FMLServerStartedEvent event) {
+  @SubscribeEvent
+  public void onServerStarted(EventState.ServerStarted event) {
 
-    fireEvent(feature -> feature.onServerStarted(event));
+    fireEvent(IFeatureEntry::onServerStarted);
   }
 
   @Override
-  public void onServerStopping(FMLServerStoppingEvent event) {
+  @SubscribeEvent
+  public void onServerStopping(EventState.ServerStopping event) {
 
-    fireEvent(feature -> feature.onServerStopping(event));
+    fireEvent(IFeatureEntry::onServerStopping);
   }
 
   @Override
-  public void onServerStopped(FMLServerStoppedEvent event) {
+  @SubscribeEvent
+  public void onServerStopped(EventState.ServerStopped event) {
 
-    fireEvent(feature -> feature.onServerStopped(event));
+    fireEvent(IFeatureEntry::onServerStopped);
   }
 
   protected void fireEvent(Consumer<IFeatureEntry> consumer) {

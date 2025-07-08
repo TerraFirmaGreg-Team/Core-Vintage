@@ -1,8 +1,9 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.IDirtBlock;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.IMudBlock;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
+import su.terrafirmagreg.api.data.Tags;
+import su.terrafirmagreg.modules.soil.api.types.IDirtBlock;
+import su.terrafirmagreg.modules.soil.api.types.IMudBlock;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.object.block.spi.BlockSoil;
 
@@ -20,7 +21,8 @@ public class BlockSoilDirt extends BlockSoil implements IDirtBlock, IMudBlock {
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("dirt"));
+      .registryKey(type.getRegistryKey("dirt"))
+      .tag(Tags.DIRT);
 
     setDefaultState(blockState.getBaseState().withProperty(CLAY, Boolean.FALSE));
 

@@ -1,16 +1,16 @@
 package su.terrafirmagreg.modules.wood.object.item;
 
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodPlowCart;
+import su.terrafirmagreg.modules.wood.object.item.spi.ItemWoodCart;
 
 import net.minecraft.world.World;
 
-public class ItemWoodPlowCart extends ItemWoodSupplyCart {
+public class ItemWoodPlowCart extends ItemWoodCart {
 
-  public ItemWoodPlowCart(WoodItemVariant variant, WoodType type) {
-    super(variant, type);
+  public ItemWoodPlowCart(WoodType type) {
+    super(type, "plow_cart");
 
   }
 

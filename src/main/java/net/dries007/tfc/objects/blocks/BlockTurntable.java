@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.CLAY;
+import static su.terrafirmagreg.api.data.Properties.IntProp.CLAY_LEVEL;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -37,7 +37,7 @@ public class BlockTurntable extends BlockNonCube {
     super(Material.IRON);
     setHardness(1.0F);
     setResistance(1.0F);
-    setDefaultState(getBlockState().getBaseState().withProperty(CLAY, 0));
+    setDefaultState(getBlockState().getBaseState().withProperty(CLAY_LEVEL, 0));
   }
 
   @Override
@@ -50,10 +50,10 @@ public class BlockTurntable extends BlockNonCube {
         return true;
       }
       if (held.getItem() == Items.CLAY_BALL) {
-        int clay = state.getValue(CLAY);
+        int clay = state.getValue(CLAY_LEVEL);
         if (clay < 4 && held.getCount() > 5) {
           held.shrink(5);
-          world.setBlockState(pos, state.withProperty(CLAY, clay + 1));
+          world.setBlockState(pos, state.withProperty(CLAY_LEVEL, clay + 1));
           return true;
         }
       } else {
@@ -81,18 +81,18 @@ public class BlockTurntable extends BlockNonCube {
   @Override
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(CLAY, meta);
+    return getDefaultState().withProperty(CLAY_LEVEL, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(CLAY);
+    return state.getValue(CLAY_LEVEL);
   }
 
   @Override
   @Nonnull
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, CLAY);
+    return new BlockStateContainer(this, CLAY_LEVEL);
   }
 
   @Override

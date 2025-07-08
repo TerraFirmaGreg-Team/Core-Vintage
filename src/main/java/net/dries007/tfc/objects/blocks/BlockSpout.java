@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.data.Properties;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.helper.GreenhouseHelper;
 
@@ -20,7 +21,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.firmalife.particle.ParticlesFL;
 import net.dries007.firmalife.util.HelpersFL;
 import net.dries007.firmalife.util.IWaterable;
@@ -30,8 +30,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.NEEDS_SOURCE;
-import static net.dries007.firmalife.init.StatePropertiesFL.WATERED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.NEEDS_SOURCE;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WATERED;
 
 @ParametersAreNonnullByDefault
 public class BlockSpout extends BlockNonCube implements GreenhouseHelper.IGreenhouseReceiverBlock {
@@ -91,7 +91,7 @@ public class BlockSpout extends BlockNonCube implements GreenhouseHelper.IGreenh
     if (te instanceof IWaterable) {
       ((IWaterable) te).setWater(2);
       IBlockState stateAt = world.getBlockState(checkPos);
-      world.setBlockState(checkPos, stateAt.withProperty(StatePropertiesFL.WET, true));
+      world.setBlockState(checkPos, stateAt.withProperty(Properties.BoolProp.WET, true));
       return true;
     }
     return false;

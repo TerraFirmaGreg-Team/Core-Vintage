@@ -46,9 +46,9 @@ import net.dries007.tfc.objects.items.food.ItemFoodTFC;
 import net.dries007.tfc.objects.recipes.KnappingRecipeFood;
 import net.dries007.tfc.util.agriculture.Food;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = FL)
 public class TFCRegistry {
 
   public static final ResourceLocation HALITE = new ResourceLocation(Mods.ModIDs.TFC, "halite");
@@ -70,7 +70,7 @@ public class TFCRegistry {
   public static void onRegisterLoomRecipeEvent(RegistryEvent.Register<LoomRecipe> event) {
     IForgeRegistry<LoomRecipe> r = event.getRegistry();
 
-    r.register(new LoomRecipe(new ResourceLocation(MOD_ID, "pineapple_yarn"), IIngredient.of(ItemsFL.PINEAPPLE_YARN, 8), new ItemStack(ItemsFL.PINEAPPLE_LEATHER), 8, new ResourceLocation(MOD_ID, "textures/blocks/pineapple.png")));
+    r.register(new LoomRecipe(new ResourceLocation(FL, "pineapple_yarn"), IIngredient.of(ItemsFL.PINEAPPLE_YARN, 8), new ItemStack(ItemsFL.PINEAPPLE_LEATHER), 8, new ResourceLocation(FL, "textures/blocks/pineapple.png")));
   }
 
   @SubscribeEvent

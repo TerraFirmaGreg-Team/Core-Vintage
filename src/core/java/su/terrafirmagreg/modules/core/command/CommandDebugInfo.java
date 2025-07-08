@@ -24,7 +24,7 @@ public class CommandDebugInfo extends BaseCommand {
   public CommandDebugInfo() {
 
     getSettings()
-      .registryKey("debug_info")
+      .name("debug_info")
       .level(Level.SERVER);
   }
 

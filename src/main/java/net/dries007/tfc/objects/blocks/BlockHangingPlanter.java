@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.data.Properties.EnumProp;
 import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
 
 import net.minecraft.block.Block;
@@ -17,24 +18,23 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.firmalife.init.StatePropertiesFL;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.STAGE;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_3;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class BlockHangingPlanter extends BlockBonsai {
 
-  public static final PropertyEnum<EnumFacing.Axis> AXIS = StatePropertiesFL.XZ;
+  public static final PropertyEnum<EnumFacing.Axis> AXIS = EnumProp.XZ;
   private static final AxisAlignedBB SHAPE = new AxisAlignedBB(0.0D, 0.75D, 0.0D, 1.0D, 1.0D, 1.0D);
 
   public BlockHangingPlanter(Supplier<? extends Item> fruit, Supplier<? extends Item> seed, int period) {
     super(fruit, seed, period, 0, Material.IRON);
-    this.setDefaultState(this.getBlockState().getBaseState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(STAGE, 0));
+    this.setDefaultState(this.getBlockState().getBaseState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(STAGE_3, 0));
   }
 
   @Override
@@ -45,20 +45,20 @@ public class BlockHangingPlanter extends BlockBonsai {
       axis = EnumFacing.Axis.X;
       meta -= 3;
     }
-    return getDefaultState().withProperty(AXIS, axis).withProperty(STAGE, meta);
+    return getDefaultState().withProperty(AXIS, axis).withProperty(STAGE_3, meta);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
     EnumFacing.Axis axis = state.getValue(AXIS); // 0, 3
-    int stage = state.getValue(STAGE); // 0, 1, 2
+    int stage = state.getValue(STAGE_3); // 0, 1, 2
     return stage + (axis == EnumFacing.Axis.X ? 3 : 0);
   }
 
   @Override
   @Nonnull
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, AXIS, STAGE);
+    return new BlockStateContainer(this, AXIS, STAGE_3);
   }
 
   @Override

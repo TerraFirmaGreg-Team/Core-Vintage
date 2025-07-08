@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.data.Properties;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import net.minecraft.block.Block;
@@ -19,7 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.tfc.api.types.IBerryBush;
 import net.dries007.tfc.objects.blocks.agriculture.BlockBerryBush;
@@ -37,7 +37,7 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class BlockBushTrellis extends BlockTrellis {
 
-  public static final PropertyBool GROWN = StatePropertiesFL.GROWN;
+  public static final PropertyBool GROWN = Properties.BoolProp.GROWN;
 
   private static final Map<IBerryBush, BlockBushTrellis> MAP = new HashMap<>();
   private final IBerryBush bush;

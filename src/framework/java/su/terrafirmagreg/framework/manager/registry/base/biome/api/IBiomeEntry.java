@@ -28,7 +28,7 @@ public interface IBiomeEntry extends IRegistryEntry<Settings, Biome> {
   }
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class Settings extends RegistrySettings<Settings> {
 
     final List<BiomeDictionary.Type> types = Lists.newArrayList();
 

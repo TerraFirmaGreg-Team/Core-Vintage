@@ -243,6 +243,16 @@ public final class StackUtils {
     return damagedStack;
   }
 
+  // если хоть один класс совпадает, то true
+  public static boolean doesStackMatchTool(ItemStack stack, String... toolClass) {
+    for (String tool : toolClass) {
+      if (doesStackMatchTool(stack, tool)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public static boolean doesStackMatchTool(ItemStack stack, String toolClass) {
     Set<String> toolClasses = stack.getItem().getToolClasses(stack);
     return toolClasses.contains(toolClass);

@@ -65,30 +65,6 @@ public class FallingBlockManager {
     FALLABLES.put(state, specification);
   }
 
-  public static void registerFallable(Block block, Specification specification) {
-    for (IBlockState state : block.getBlockState().getValidStates()) {
-      registerFallable(state, specification);
-    }
-  }
-
-  public static void registerFallable(IBlockState state, Specification specification, IBlockState resultingState) {
-    if (specification == null) {
-      return;
-    }
-    var spec = new Specification(specification);
-    spec.setResultingState(resultingState);
-    registerFallable(state, spec);
-  }
-
-  public static void registerFallable(Block block, Specification specification, IBlockState resultingState) {
-    if (specification == null) {
-      return;
-    }
-    var spec = new Specification(specification);
-    spec.setResultingState(resultingState);
-    registerFallable(block, spec);
-  }
-
   public static void registerSideSupports(IBlockState state) {
     SIDE_SUPPORTS.add(state);
   }
@@ -350,6 +326,28 @@ public class FallingBlockManager {
     return pos;
   }
 
+  public static void registerFallable(Block block, Specification specification) {
+    for (IBlockState state : block.getBlockState().getValidStates()) {
+      registerFallable(state, specification);
+    }
+  }
+
+  public static void registerFallable(IBlockState state, Specification specification, IBlockState resultingState) {
+    if (specification == null) {
+      return;
+    }
+    var spec = new Specification(specification);
+    spec.setResultingState(resultingState);
+    registerFallable(state, spec);
+  }
+
+  public static void registerFallable(Block block, Specification specification, IBlockState resultingState) {
+    if (specification == null) {
+      return;
+    }
+    registerFallable(block, new Specification(specification, resultingState));
+  }
+
 
   public static class Specification {
 
@@ -387,6 +385,11 @@ public class FallingBlockManager {
       this.resultingState = specification.resultingState;
       this.beginFallCallback = specification.beginFallCallback;
       this.endFallCallback = specification.endFallCallback;
+    }
+
+    public Specification(Specification specification, IBlockState resultingState) {
+      this(specification);
+      setResultingState(resultingState);
     }
 
     public Specification(boolean canFallHorizontally, Supplier<SoundEvent> soundEventDelegate) {

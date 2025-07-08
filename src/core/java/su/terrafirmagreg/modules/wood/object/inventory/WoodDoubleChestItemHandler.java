@@ -1,7 +1,8 @@
 package su.terrafirmagreg.modules.wood.object.inventory;
 
-import su.terrafirmagreg.api.base.object.inventory.api.slot.ISlotCallback;
+
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.api.slot.ISlotCallback;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
 import net.minecraft.block.Block;
@@ -88,7 +89,7 @@ public class WoodDoubleChestItemHandler extends VanillaDoubleChestItemHandler {
     if (chest == null) {
       return stack;
     }
-    if (chest instanceof ISlotCallback && !((ISlotCallback) chest).isItemValid(slot, stack)) {
+    if (chest instanceof ISlotCallback slotCallback && !slotCallback.isItemValid(slot, stack)) {
       return stack;
     }
 

@@ -1,25 +1,19 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
-import su.terrafirmagreg.api.library.MCDate.Month;
-import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.registry.api.provider.IProviderTile;
-import su.terrafirmagreg.modules.core.feature.calendar.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.ICalendar;
-import su.terrafirmagreg.modules.core.feature.climate.Climate;
-import su.terrafirmagreg.modules.soil.client.GrassColorHelper;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockLeaves;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
+import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.wood.ConfigWood;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.IWoodBlock;
-import su.terrafirmagreg.modules.wood.api.types.variant.block.WoodBlockVariant;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodLeaves;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -29,8 +23,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -38,8 +30,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import com.google.common.collect.ImmutableList;
@@ -68,33 +58,26 @@ import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProviderTile {
+public class BlockWoodLeaves extends BaseBlockLeaves implements IWoodEntry, IProviderTile, IProviderBlockColor {
 
 
-  protected final Settings settings;
-  protected final WoodBlockVariant variant;
   protected final WoodType type;
 
-  public BlockWoodLeaves(WoodBlockVariant variant, WoodType type) {
-    this.variant = variant;
+  public BlockWoodLeaves(WoodType type) {
     this.type = type;
-    this.settings = Settings.of(Material.LEAVES);
-    this.leavesFancy = true; // Fast / Fancy graphics works correctly
 
     getSettings()
-      .registryKey(type.getRegistryKey(variant))
+      .registryKey(type.getRegistryKey("leaves"))
       .ignoresProperties(DECAYABLE, HARVESTABLE)
       .nonOpaque()
       .randomTicks()
-      .oreDict(variant)
-      .oreDict(variant, type);
+      .fireInfo(30, 60)
+      .oreDict("leaves");
 
     setDefaultState(blockState.getBaseState()
       .withProperty(LEAF_STATE, NORMAL)
       .withProperty(HARVESTABLE, false)
       .withProperty(DECAYABLE, false)); // TFC leaves don't use CHECK_DECAY, so just don't use it
-
-    BlockUtils.addFireInfo(this, 30, 60);
   }
 
   public double getGrowthRate(World world, BlockPos pos) {
@@ -104,6 +87,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
       return ConfigTFC.General.MISC.plantGrowthRate;
     }
   }
+
 
   @Override
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
@@ -118,24 +102,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     return Items.AIR;
   }
 
-  @SideOnly(Side.CLIENT)
-  @Override
-  public BlockRenderLayer getRenderLayer() {
-    /*
-     * This is a way to make sure the leave settings are updated.
-     * The result of this call is cached somewhere, so it's not that important, but:
-     * The alternative would be to use `GameUtils.getGameSettings().fancyGraphics` directly in the 2 relevant methods.
-     * It's better to do that than to refer to Blocks.LEAVES, for performance reasons.
-     */
-    leavesFancy = GameUtils.getGameSettings().fancyGraphics;
-    return super.getRenderLayer();
-  }
-
-  @Override
-  public BlockPlanks.EnumType getWoodType(int meta) {
-    // Unused so return whatever
-    return BlockPlanks.EnumType.OAK;
-  }
 
   @Override
   public void beginLeavesDecay(IBlockState state, World world, BlockPos pos) {
@@ -164,16 +130,6 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
     }
   }
 
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-    /*
-     * See comment on getRenderLayer()
-     */
-    this.leavesFancy = GameUtils.getGameSettings().fancyGraphics;
-    return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
-  }
 
   private void doLeafDecay(World world, BlockPos pos, IBlockState state) {
     // TFC Leaf Decay
@@ -263,7 +219,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
   }
 
   @Override
-  public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
+  public @Nullable TileWoodLeaves createNewTileEntity(World worldIn, int meta) {
     return new TileWoodLeaves();
   }
 
@@ -307,8 +263,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IWoodBlock, IProvide
       return;
     }
 
-    Month currentMonth = Calendar.CALENDAR_TIME.getMonthOfYear();
-    int expectedStage = this.type.getStageForMonth(currentMonth);
+    int expectedStage = this.type.getStageForMonth();
 
     float avgTemperature = Climate.getAvgTemp(world, pos);
     float tempGauss = (int) (12f + (random.nextGaussian() / 4));

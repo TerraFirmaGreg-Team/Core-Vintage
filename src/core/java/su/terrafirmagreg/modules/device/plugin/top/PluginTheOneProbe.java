@@ -13,8 +13,6 @@ import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLogPile;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderOven;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderPitKiln;
 
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-
 import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.ITheOneProbe;
 
@@ -23,13 +21,12 @@ public class PluginTheOneProbe extends BasePlugin {
 
   public PluginTheOneProbe() {
     super(Settings.of()
-      .registryKey("theoneprobe")
       .modRequired(ModIDs.THEONEPROBE)
     );
   }
 
   @Override
-  public void onInit(FMLInitializationEvent event) {
+  public void onInit() {
     ITheOneProbe oneProbe = TheOneProbe.theOneProbeImp;
 
     oneProbe.registerProvider(new ProviderFridge());

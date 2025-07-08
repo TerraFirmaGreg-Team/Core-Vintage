@@ -1,5 +1,6 @@
 package net.dries007.tfc.compat.waila.providers;
 
+import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarFormatted;
@@ -52,7 +53,7 @@ public class FruitTreeProvider implements IWailaBlock {
     IBlockState state = world.getBlockState(pos);
     if (state.getBlock() instanceof BlockFruitTreeLeaves block) {
       if (state.getValue(BlockFruitTreeLeaves.HARVESTABLE) && block.getTree().isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
-        if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != BlockFruitTreeLeaves.EnumLeafState.FRUIT) {
+        if (state.getValue(BlockFruitTreeLeaves.LEAF_STATE) != EnumFruitLeafState.FRUIT) {
           TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
           addInfo(block.getTree(), te, Climate.getActualTemp(world, pos), ChunkDataTFC.getRainfall(world, pos), currentTooltip);
         }

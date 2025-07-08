@@ -3,11 +3,14 @@ package su.terrafirmagreg.framework.manager.registry.base.generation.spi;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
+import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import net.dries007.tfc.types.DefaultTrees;
 
 import lombok.Getter;
 
@@ -115,6 +118,9 @@ public abstract class BaseGeneratorTree extends BaseGenerator { //implements ITr
     private Supplier<Item> fruit;
     private Supplier<IBlockState> log;
     private Supplier<IBlockState> leaves;
+
+    private ITreeGenerator generator;
+    private ITreeGenerator bushGenerator;
 
     private float[] paramMap;
     private int[] stages;
@@ -235,6 +241,23 @@ public abstract class BaseGeneratorTree extends BaseGenerator { //implements ITr
     public Builder fruit(Supplier<Item> fruit, float ripeningTime) {
       this.fruit = fruit;
       this.ripeningTime = ripeningTime * Calendar.CALENDAR_TIME.getDaysInMonth() * ICalendar.HOURS_IN_DAY;
+      return this;
+    }
+
+    public Builder generator(ITreeGenerator generator) {
+      this.generator = generator;
+      return this;
+    }
+
+    // Установить генератор кустов по умолчанию
+    public Builder bushes() {
+      this.bushGenerator = DefaultTrees.GEN_BUSHES; // TODO генератор для кустов
+      return this;
+    }
+
+    // Установить кастомный генератор кустов
+    public Builder bushes(ITreeGenerator bushGenerator) {
+      this.bushGenerator = bushGenerator;
       return this;
     }
 

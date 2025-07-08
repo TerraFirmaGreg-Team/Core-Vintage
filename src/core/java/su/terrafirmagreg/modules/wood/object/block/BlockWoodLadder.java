@@ -1,15 +1,15 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockLadder;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 
 import net.minecraft.block.SoundType;
 
 import lombok.Getter;
 
 @Getter
-public class BlockWoodLadder extends BaseBlockLadder implements IWoodBlock {
+public class BlockWoodLadder extends BaseBlockLadder implements IWoodEntry {
 
   protected final WoodType type;
 

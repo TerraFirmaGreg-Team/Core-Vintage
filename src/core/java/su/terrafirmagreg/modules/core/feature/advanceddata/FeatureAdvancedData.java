@@ -28,7 +28,7 @@ public class FeatureAdvancedData extends BaseFeature {
 
   public FeatureAdvancedData() {
     super(Settings.of()
-      .registryKey("Advanced Data")
+      .name("Advanced Data")
       .enabled(ConfigCore.FEATURE.ADVANCED_DATA.enable));
   }
 

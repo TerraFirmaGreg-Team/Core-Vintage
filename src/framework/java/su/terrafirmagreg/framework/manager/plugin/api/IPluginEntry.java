@@ -1,19 +1,9 @@
 package su.terrafirmagreg.framework.manager.plugin.api;
 
-import su.terrafirmagreg.api.library.IBaseEntry;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.framework.manager.api.IBaseEntry;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginEntry.Settings;
 import su.terrafirmagreg.framework.manager.plugin.base.BasePlugin;
-
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
 import lombok.Getter;
 
@@ -22,29 +12,30 @@ public interface IPluginEntry extends IBaseEntry<Settings, BasePlugin> {
 
   // ===== FML Lifecycle
 
-  default void onPreInit(FMLPreInitializationEvent event) {}
+  default void onPreInit() {}
 
-  default void onInit(FMLInitializationEvent event) {}
+  default void onInit() {}
 
-  default void onPostInit(FMLPostInitializationEvent event) {}
+  default void onPostInit() {}
 
-  default void onLoadComplete(FMLLoadCompleteEvent event) {}
+  default void onLoadComplete() {}
 
   // ===== FML Lifecycle: Server
 
-  default void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
+  default void onServerAboutToStart() {}
 
-  default void onServerStarting(FMLServerStartingEvent event) {}
+  default void onServerStarting() {}
 
-  default void onServerStarted(FMLServerStartedEvent event) {}
+  default void onServerStarted() {}
 
-  default void onServerStopping(FMLServerStoppingEvent event) {}
+  default void onServerStopping() {}
 
-  default void onServerStopped(FMLServerStoppedEvent event) {}
+  default void onServerStopped() {}
 
   @Getter
   class Settings extends BaseSettings<Settings> {
 
+    String modRequired;
     boolean enabled = true;
     boolean hasSubscriptions = true;
 
@@ -60,6 +51,7 @@ public interface IPluginEntry extends IBaseEntry<Settings, BasePlugin> {
     }
 
     public Settings modRequired(String modRequired) {
+      this.modRequired = modRequired;
       this.enabled = ModUtils.isModLoaded(modRequired);
       return this;
     }

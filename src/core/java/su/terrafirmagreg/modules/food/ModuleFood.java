@@ -2,14 +2,14 @@ package su.terrafirmagreg.modules.food;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.base.ModuleBase;
+import su.terrafirmagreg.framework.module.base.BaseModule;
 
 @ModuleInfo(
   author = "Xikaro",
   version = "1.0.0",
   description = "Food TerraFirmaGreg content."
 )
-public class ModuleFood extends ModuleBase {
+public class ModuleFood extends BaseModule {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleFood.class);
 

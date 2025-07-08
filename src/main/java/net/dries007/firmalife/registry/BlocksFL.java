@@ -77,14 +77,14 @@ import lombok.Getter;
 
 import java.util.Optional;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FLORA;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
-@GameRegistry.ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = FL)
+@GameRegistry.ObjectHolder(FL)
 public class BlocksFL {
 
   @GameRegistry.ObjectHolder("pumpkin_fruit")
@@ -325,13 +325,13 @@ public class BlocksFL {
   }
 
   private static <T extends Block> T register(IForgeRegistry<Block> r, String name, T block) {
-    block.setRegistryName(MOD_ID, name);
-    block.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+    block.setRegistryName(FL, name);
+    block.setTranslationKey(FL + "." + name.replace('/', '.'));
     r.register(block);
     return block;
   }
 
   private static <T extends TileEntity> void register(Class<T> te, String name) {
-    TileEntity.register(MOD_ID + ":" + name, te);
+    TileEntity.register(FL + ":" + name, te);
   }
 }

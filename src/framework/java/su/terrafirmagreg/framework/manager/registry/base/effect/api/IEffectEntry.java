@@ -13,7 +13,7 @@ public interface IEffectEntry extends IRegistryEntry<Settings, Potion> {
 
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class Settings extends RegistrySettings<Settings> {
 
     ResourceLocation texture;
 

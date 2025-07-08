@@ -6,7 +6,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import net.dries007.tfc.objects.recipes.NutRecipe;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
 public class CompatibleRecipeRegistry {
 
@@ -17,7 +17,7 @@ public class CompatibleRecipeRegistry {
   }
 
   public CompatibleRecipeRegistry(String registryName) {
-    this(new ResourceLocation(MOD_ID, registryName));
+    this(new ResourceLocation(FL, registryName));
   }
 
   public ResourceLocation getRegistryName() {

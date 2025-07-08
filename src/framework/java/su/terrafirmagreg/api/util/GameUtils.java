@@ -5,6 +5,8 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
@@ -75,6 +77,14 @@ public final class GameUtils {
 
   public static World getWorld() {
     return getMinecraft().world;
+  }
+
+  public static BlockColors getBlockColors() {
+    return getMinecraft().getBlockColors();
+  }
+
+  public static ItemColors getItemColors() {
+    return getMinecraft().getItemColors();
   }
 
   public static BlockRendererDispatcher getBlockRenderer() {

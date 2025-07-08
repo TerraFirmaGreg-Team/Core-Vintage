@@ -8,8 +8,6 @@ import su.terrafirmagreg.modules.core.plugin.gregtech.init.RecipesGregTech;
 import su.terrafirmagreg.modules.core.plugin.gregtech.unification.material.materials.ElementMaterialsCore;
 import su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.StoneTypesCore;
 
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -23,7 +21,6 @@ public class PluginGregTech extends BasePlugin {
 
   public PluginGregTech() {
     super(Settings.of()
-      .registryKey("gregtech")
       .modRequired(ModIDs.GREGTECH)
     );
   }
@@ -48,13 +45,13 @@ public class PluginGregTech extends BasePlugin {
   }
 
   @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
+  public void onPreInit() {
     ItemsGregTech.preInit();
     BlocksGregTech.preInit();
   }
 
   @Override
-  public void onPostInit(FMLPostInitializationEvent event) {
+  public void onPostInit() {
 
     RecipesGregTech.postInit();
   }

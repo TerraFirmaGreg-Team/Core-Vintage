@@ -1,5 +1,8 @@
 package net.dries007.firmalife;
 
+import su.terrafirmagreg.api.data.Properties.BoolProp;
+import su.terrafirmagreg.api.data.Properties.IntProp;
+import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
 
 import net.minecraft.block.Block;
@@ -28,7 +31,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.firmalife.render.LargePlanterBakedModel;
@@ -51,10 +53,10 @@ import net.dries007.tfc.objects.recipes.PlanterRecipe;
 import net.dries007.tfc.objects.te.TEString;
 import net.dries007.tfc.objects.te.TETurntable;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = FirmaLife.MOD_ID)
+@Mod.EventBusSubscriber(value = {Side.CLIENT}, modid = ModIDs.FL)
 public class ClientRegisterEventsFL {
 
   public ClientRegisterEventsFL() {}
@@ -72,10 +74,10 @@ public class ClientRegisterEventsFL {
     for (BlockFruitTreeLeaves leaves : BlocksFL.getAllFruitLeaves()) {
       ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockFruitTreeLeaves.DECAYABLE).ignore(BlockFruitTreeLeaves.HARVESTABLE).build());
     }
-    ModelLoader.setCustomStateMapper(BlocksFL.SPOUT, new StateMap.Builder().ignore(StatePropertiesFL.WATERED).ignore(StatePropertiesFL.NEEDS_SOURCE).build());
-    ModelLoader.setCustomStateMapper(BlocksFL.SPRINKLER, new StateMap.Builder().ignore(StatePropertiesFL.WATERED).ignore(StatePropertiesFL.NEEDS_SOURCE)
+    ModelLoader.setCustomStateMapper(BlocksFL.SPOUT, new StateMap.Builder().ignore(BoolProp.WATERED).ignore(BoolProp.NEEDS_SOURCE).build());
+    ModelLoader.setCustomStateMapper(BlocksFL.SPRINKLER, new StateMap.Builder().ignore(BoolProp.WATERED).ignore(BoolProp.NEEDS_SOURCE)
       .build());
-    ModelLoader.setCustomStateMapper(BlocksFL.TURNTABLE, new StateMap.Builder().ignore(StatePropertiesFL.CLAY).build());
+    ModelLoader.setCustomStateMapper(BlocksFL.TURNTABLE, new StateMap.Builder().ignore(IntProp.CLAY_LEVEL).build());
 
     ModelLoader.setCustomModelResourceLocation(ItemsFL.CHEESECLOTH, 0, new ModelResourceLocation(ItemsFL.CHEESECLOTH.getRegistryName(), "inventory"));
     ModelLoader.setCustomModelResourceLocation(ItemsFL.CRACKED_COCONUT, 0, new ModelResourceLocation(ItemsFL.CRACKED_COCONUT.getRegistryName(), "inventory"));
@@ -94,12 +96,12 @@ public class ClientRegisterEventsFL {
       ModelLoader.setCustomStateMapper(gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
     }
 
-    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesFL.CAN_GROW).build());
+    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(BoolProp.CAN_GROW).build());
     ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
     ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
 
     for (Block block : BlocksFL.getAllFluidBlocks()) {ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());}
-    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(StatePropertiesFL.CAN_GROW).build());
+    ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LOG, new StateMap.Builder().ignore(BoolProp.CAN_GROW).build());
     ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_LEAVES, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
     ModelLoader.setCustomStateMapper(BlocksFL.CINNAMON_SAPLING, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
 
@@ -163,8 +165,8 @@ public class ClientRegisterEventsFL {
 
   @SubscribeEvent
   public static void onModelBake(ModelBakeEvent event) {
-    event.getModelRegistry().putObject(new ModelResourceLocation(MOD_ID + ":quad_planter"), new QuadPlanterBakedModel());
-    event.getModelRegistry().putObject(new ModelResourceLocation(MOD_ID + ":large_planter"), new LargePlanterBakedModel());
+    event.getModelRegistry().putObject(new ModelResourceLocation(FL + ":quad_planter"), new QuadPlanterBakedModel());
+    event.getModelRegistry().putObject(new ModelResourceLocation(FL + ":large_planter"), new LargePlanterBakedModel());
   }
 
   @SubscribeEvent
@@ -172,11 +174,11 @@ public class ClientRegisterEventsFL {
     for (PlanterRecipe crop : TFCRegistries.PLANTER_QUAD.getValuesCollection()) {
       if (crop.getRegistryName() != null) {
         for (int stage = 0; stage <= PlanterRecipe.getMaxStage(crop); stage++) {
-          event.getMap().registerSprite(new ResourceLocation(MOD_ID, "blocks/crop/" + crop.getRegistryName().getPath() + "_" + stage));
+          event.getMap().registerSprite(new ResourceLocation(FL, "blocks/crop/" + crop.getRegistryName().getPath() + "_" + stage));
         }
       }
     }
-    event.getMap().registerSprite(new ResourceLocation(MOD_ID, "blocks/potting_soil_wet"));
-    event.getMap().registerSprite(new ResourceLocation(MOD_ID, "blocks/potting_soil_dry"));
+    event.getMap().registerSprite(new ResourceLocation(FL, "blocks/potting_soil_wet"));
+    event.getMap().registerSprite(new ResourceLocation(FL, "blocks/potting_soil_dry"));
   }
 }

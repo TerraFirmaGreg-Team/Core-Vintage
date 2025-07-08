@@ -1,9 +1,10 @@
 package su.terrafirmagreg.modules.wood.object.container;
 
-import su.terrafirmagreg.api.base.object.inventory.spi.container.BaseContainerTile;
-import su.terrafirmagreg.modules.core.capabilities.size.CapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.ICapabilitySize;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
+
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.container.BaseContainerTile;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -18,8 +19,7 @@ public class ContainerWoodChest extends Container {
 
   private final IInventory lowerChestInventory;
 
-  public ContainerWoodChest(IInventory playerInventory, IInventory chestInventory,
-                            EntityPlayer player) {
+  public ContainerWoodChest(IInventory playerInventory, IInventory chestInventory, EntityPlayer player) {
     this.lowerChestInventory = chestInventory;
     int numRows = chestInventory.getSizeInventory() / 9;
     chestInventory.openInventory(player);
@@ -105,7 +105,7 @@ public class ContainerWoodChest extends Container {
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-      ICapabilitySize cap = CapabilitySize.getIItemSize(stack);
+      ICapabilitySize cap = CapabilitySize.get(stack);
       if (cap != null) {
         return cap.getSize(stack).isSmallerThan(Size.VERY_LARGE);
       }

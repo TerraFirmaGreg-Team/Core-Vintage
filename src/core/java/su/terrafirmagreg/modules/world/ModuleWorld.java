@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.world;
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.base.ModuleBase;
+import su.terrafirmagreg.framework.module.base.BaseModule;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
 
 @ModuleInfo(
@@ -11,7 +11,7 @@ import su.terrafirmagreg.modules.world.init.BiomesWorld;
   version = "1.0.0",
   description = "World module."
 )
-public class ModuleWorld extends ModuleBase {
+public class ModuleWorld extends BaseModule {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWorld.class);
 

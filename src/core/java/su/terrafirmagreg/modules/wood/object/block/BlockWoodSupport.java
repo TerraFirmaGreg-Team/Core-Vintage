@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.object.block.spi.BlockWood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;

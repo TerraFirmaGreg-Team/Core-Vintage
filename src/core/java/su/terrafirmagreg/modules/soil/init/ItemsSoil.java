@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.init;
 
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.object.item.ItemSoilMud;
 import su.terrafirmagreg.modules.soil.object.item.ItemSoilMudBrick;
 import su.terrafirmagreg.modules.soil.object.item.ItemSoilMudWetBrick;

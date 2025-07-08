@@ -7,7 +7,6 @@ import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class FeaturePull extends BaseFeature {
@@ -28,7 +27,7 @@ public class FeaturePull extends BaseFeature {
   }
 
   @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
+  public void onPreInit() {
 
     CapabilityPull.register();
   }

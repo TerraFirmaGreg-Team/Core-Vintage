@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.data.Properties.IntProp;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
@@ -32,7 +33,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.firmalife.init.FoodFL;
-import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.firmalife.registry.ItemsFL;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
@@ -50,7 +50,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 @MethodsReturnNonnullByDefault
 public class BlockBeehive extends Block implements ICapabilitySize {
 
-  public static final PropertyInteger STAGE = StatePropertiesFL.STAGE;
+  public static final PropertyInteger STAGE = IntProp.STAGE_3;
   private static final Vec3i[] VECTORS = {
     new Vec3i(0, -1, 0),
     new Vec3i(-1, -1, 0),

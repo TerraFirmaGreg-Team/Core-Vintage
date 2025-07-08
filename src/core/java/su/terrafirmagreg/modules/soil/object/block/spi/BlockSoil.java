@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.soil.object.block.spi;
 
 import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
+import su.terrafirmagreg.modules.soil.api.types.ISoilEntry;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.block.Block;
@@ -27,7 +27,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.CLAY;
 import static su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
 
 @Getter
-public abstract class BlockSoil extends BaseBlock implements IType<SoilType> {
+public abstract class BlockSoil extends BaseBlock implements ISoilEntry {
 
   protected final SoilType type;
 

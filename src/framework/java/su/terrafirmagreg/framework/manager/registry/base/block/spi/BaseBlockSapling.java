@@ -12,13 +12,10 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
-
-import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_2;
 
@@ -35,41 +32,39 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
   public BaseBlockSapling(Settings settings) {
 
     this.settings = settings;
-    this.blockState = this.createBlockState();
 
     getSettings()
       .renderLayer(BlockRenderLayer.CUTOUT)
+      .ignoresProperties(TYPE, STAGE_2)
       .nonOpaque()
       .nonFullCube()
       .randomTicks();
 
-    setDefaultState(blockState.getBaseState()
-      .withProperty(STAGE_2, 0));
-
   }
+
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, STAGE_2);
+    return new BlockStateContainer(this, STAGE_2, TYPE);
   }
 
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(STAGE_2, meta);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(STAGE_2);
-  }
-
-  public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-    if (state.getValue(STAGE_2) == 0) {
-      worldIn.setBlockState(pos, state.cycleProperty(STAGE_2), 4);
-    } else {
-      this.generateTree(worldIn, pos, state, rand);
-    }
-  }
+//  @Override
+//  public IBlockState getStateFromMeta(int meta) {
+//    return this.getDefaultState().withProperty(STAGE_2, meta);
+//  }
+//
+//  @Override
+//  public int getMetaFromState(IBlockState state) {
+//    return state.getValue(STAGE_2);
+//  }
+//
+//  public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+//    if (state.getValue(STAGE_2) == 0) {
+//      worldIn.setBlockState(pos, state.cycleProperty(STAGE_2), 4);
+//    } else {
+//      this.generateTree(worldIn, pos, state, rand);
+//    }
+//  }
 
 
   @Override

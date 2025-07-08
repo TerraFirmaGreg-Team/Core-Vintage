@@ -10,25 +10,10 @@ import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class FeatureHeat extends BaseFeature {
-
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-
-    CapabilityHeat.register();
-  }
-
-  @Override
-  public void onInit(FMLInitializationEvent event) {
-
-    CapabilityHeat.Handler.init();
-  }
-
 
   @SideOnly(Side.CLIENT)
   public static void onItemTooltipEvent(ItemTooltipEvent event) {
@@ -51,5 +36,17 @@ public class FeatureHeat extends BaseFeature {
         }
       }
     });
+  }
+
+  @Override
+  public void onPreInit() {
+
+    CapabilityHeat.register();
+  }
+
+  @Override
+  public void onInit() {
+
+    CapabilityHeat.Handler.init();
   }
 }

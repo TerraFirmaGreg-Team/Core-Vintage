@@ -29,7 +29,7 @@ public class FeatureSinkOrSwim extends BaseFeature {
 
   public FeatureSinkOrSwim() {
     super(Settings.of()
-      .registryKey("sink_or_swim")
+      .name("sink_or_swim")
       .enabled(ConfigCore.FEATURE.SINK_OR_SWIM.enabled)
     );
   }

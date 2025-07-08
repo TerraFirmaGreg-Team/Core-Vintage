@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.data.enums.EnumLeafState;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Month;
@@ -25,7 +26,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -57,7 +57,7 @@ import java.util.Set;
 @ParametersAreNonnullByDefault
 public class BlockJoshuaTreeFlower extends Block {
 
-  public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockJoshuaTreeFlower.EnumLeafState.class);
+  public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
   public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
   public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 5);
   private static final Map<Tree, BlockJoshuaTreeFlower> MAP = new HashMap<>();
@@ -721,19 +721,4 @@ public class BlockJoshuaTreeFlower extends Block {
     return BlockFaceShape.UNDEFINED;
   }
 
-  public enum EnumLeafState implements IStringSerializable {
-    NORMAL, FLOWERING, FRUIT;
-
-    private static final EnumLeafState[] VALUES = values();
-
-    @Nonnull
-    public static EnumLeafState valueOf(int index) {
-      return index < 0 || index > VALUES.length - 1 ? NORMAL : VALUES[index];
-    }
-
-    @Override
-    public String getName() {
-      return this.name().toLowerCase();
-    }
-  }
 }

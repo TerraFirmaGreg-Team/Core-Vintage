@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.te;
 
+import su.terrafirmagreg.api.data.Properties.IntProp;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -12,7 +14,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCSounds;
@@ -87,7 +88,7 @@ public class TETurntable extends TETickableInventory {
           progress = 0;
           speed = 15;
           if (!world.isRemote) {
-            world.setBlockState(pos, getBlockType().getDefaultState().withProperty(StatePropertiesFL.CLAY, clay - 1));
+            world.setBlockState(pos, getBlockType().getDefaultState().withProperty(IntProp.CLAY_LEVEL, clay - 1));
             Helpers.spawnItemStack(world, pos.up(), item());
             markForSync();
           }
@@ -110,7 +111,7 @@ public class TETurntable extends TETickableInventory {
   }
 
   public int getClayAmount() {
-    return world.getBlockState(pos).getValue(StatePropertiesFL.CLAY);
+    return world.getBlockState(pos).getValue(IntProp.CLAY_LEVEL);
   }
 
   @Override
@@ -148,7 +149,7 @@ public class TETurntable extends TETickableInventory {
 
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
     Helpers.spawnItemStack(world, pos, inventory.getStackInSlot(0));
-    int clay = state.getValue(StatePropertiesFL.CLAY);
+    int clay = state.getValue(IntProp.CLAY_LEVEL);
     if (clay > 0) {
       Helpers.spawnItemStack(world, pos, new ItemStack(Items.CLAY_BALL, 5 * clay));
     }

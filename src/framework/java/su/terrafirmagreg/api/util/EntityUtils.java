@@ -95,7 +95,7 @@ public final class EntityUtils {
     return SUPPLIER_MAP.computeIfAbsent(modId, s -> new IdSupplier());
   }
 
-  public static <T extends EntityEntry> void addEntity(T entry, UpdateInfo updateInfo) {
+  public static <T extends EntityEntry> void addUpdateInfo(T entry, UpdateInfo updateInfo) {
     var registryName = checkNotNull(entry.getRegistryName(), "name");
 
     EntityRegistry.registerModEntity(registryName,
@@ -105,14 +105,14 @@ public final class EntityUtils {
     );
   }
 
-  public static <T extends EntityEntry> void addEgg(T entry, EggInfo eggInfo) {
+  public static <T extends EntityEntry> void addEggInfo(T entry, EggInfo eggInfo) {
     if (eggInfo != null) {
       EntityRegistry.registerEgg(entry.getRegistryName(), eggInfo.primaryColor, eggInfo.secondaryColor);
     }
   }
 
   @SuppressWarnings("unchecked")
-  public static <T extends EntityEntry> void addSpawn(T entry, SpawnInfo spawnInfo) {
+  public static <T extends EntityEntry> void addSpawnInfo(T entry, SpawnInfo spawnInfo) {
     if (spawnInfo != null) {
       var entityClass = entry.getEntityClass();
       if (EntityLiving.class.isAssignableFrom(entityClass)) {

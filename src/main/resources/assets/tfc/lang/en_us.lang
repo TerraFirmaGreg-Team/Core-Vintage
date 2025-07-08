@@ -3114,8 +3114,6 @@ tile.tfc.trapdoor.red_steel.name=Red Steel Trapdoor
 item.leather.name=Leather
 item.tfc.spindle.name=Spindle
 item.tfc.handstone.name=Quern Handstone
-item.tfc.wooden_bucket.name=Wooden Bucket
-item.tfc.wooden_bucket.filled.name=%s Wooden Bucket
 item.tfc.ceramics.fired.jug.name=Jug
 item.tfc.ceramics.fired.jug.filled=%s Jug
 item.tfc.ceramics.unfired.clay_flower_pot.name=Unfired Clay Flower Pot
@@ -3317,8 +3315,7 @@ item.tfc.brick.gneiss.name=Gneiss Brick
 item.tfc.brick.marble.name=Marble Brick
 item.tfc.brick.ranite.name=Granite Brick
 
-item.tfc.stick_bunch.name=Bunch of Sticks
-item.tfc.stick_bundle.name=Stick Bundle
+
 item.tfc.wood.lumber.ash.name=Ash Lumber
 item.tfc.wood.lumber.aspen.name=Aspen Lumber
 item.tfc.wood.lumber.birch.name=Birch Lumber

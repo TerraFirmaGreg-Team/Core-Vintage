@@ -4,8 +4,7 @@ package su.terrafirmagreg.modules.wood.client.gui;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonTooltip;
 import su.terrafirmagreg.framework.manager.registry.base.gui.inventory.spi.BaseGuiContainerTile;
-import su.terrafirmagreg.modules.core.network.CSPacketGuiButton;
-import su.terrafirmagreg.modules.wood.ModuleWood;
+import su.terrafirmagreg.modules.core.packet.CSPacketGuiButton;
 import su.terrafirmagreg.modules.wood.client.button.GuiButtonBarrelSeal;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodBarrel;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodBarrel;
@@ -215,7 +214,9 @@ public class GuiWoodBarrel extends BaseGuiContainerTile<TileWoodBarrel> {
 
   @Override
   protected void actionPerformed(GuiButton button) throws IOException {
-    ModuleWood.NETWORK.sendToServer(new CSPacketGuiButton(button.id));
+    if (button instanceof GuiButtonBarrelSeal) {
+      new CSPacketGuiButton(button.id).sendToServer();
+    }
     super.actionPerformed(button);
   }
 }

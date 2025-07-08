@@ -8,6 +8,7 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodToolRack;
+import su.terrafirmagreg.modules.wood.object.block.spi.BlockWood;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodToolRack;
 
 import net.minecraft.block.Block;
@@ -38,14 +39,10 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 @SuppressWarnings("deprecation")
 public class BlockWoodToolRack extends BlockWood implements IProviderTile {
 
-  protected static final AxisAlignedBB RACK_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D,
-    1.0D, 1.0D);
-  protected static final AxisAlignedBB RACK_WEST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D,
-    1.0D, 1.0D);
-  protected static final AxisAlignedBB RACK_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D,
-    1.0D, 0.125D);
-  protected static final AxisAlignedBB RACK_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D,
-    1.0D, 1.0D);
+  protected static final AxisAlignedBB RACK_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
+  protected static final AxisAlignedBB RACK_WEST_AABB = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+  protected static final AxisAlignedBB RACK_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
+  protected static final AxisAlignedBB RACK_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
 
   public BlockWoodToolRack(WoodType type) {
     super(type, "tool_rack");

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.object.block.spi.BlockWood;
 
 public class BlockWoodPlanks extends BlockWood {
 

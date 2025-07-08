@@ -1101,7 +1101,7 @@ public class FeatureWoodType extends BaseFeature {
 
   public FeatureWoodType() {
     super(Settings.of()
-      .registryKey("wood_type")
+      .name("wood_type")
     );
 
   }

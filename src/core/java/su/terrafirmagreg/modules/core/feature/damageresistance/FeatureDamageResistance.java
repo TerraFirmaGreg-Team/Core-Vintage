@@ -11,22 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class FeatureDamageResistance extends BaseFeature {
-
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-
-    CapabilityDamageResistance.register();
-  }
-
-  @Override
-  public void onPostInit(FMLPostInitializationEvent event) {
-    CapabilityDamageResistance.Handler.init();
-  }
 
   @SubscribeEvent
   public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
@@ -61,5 +48,16 @@ public class FeatureDamageResistance extends BaseFeature {
     }
 
     event.addCapability(CapabilityDamageResistance.KEY, provider);
+  }
+
+  @Override
+  public void onPreInit() {
+
+    CapabilityDamageResistance.register();
+  }
+
+  @Override
+  public void onPostInit() {
+    CapabilityDamageResistance.Handler.init();
   }
 }

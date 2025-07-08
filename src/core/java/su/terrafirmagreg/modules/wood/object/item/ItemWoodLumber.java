@@ -1,31 +1,19 @@
 package su.terrafirmagreg.modules.wood.object.item;
 
-import su.terrafirmagreg.api.base.object.item.spi.BaseItem;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
+import su.terrafirmagreg.modules.wood.object.item.spi.ItemWood;
 
 import lombok.Getter;
 
 @Getter
-public class ItemWoodLumber extends BaseItem implements IWoodItem {
+public class ItemWoodLumber extends ItemWood {
 
-  protected final WoodItemVariant variant;
-  protected final WoodType type;
 
-  public ItemWoodLumber(WoodItemVariant variant, WoodType type) {
-    this.type = type;
-    this.variant = variant;
+  public ItemWoodLumber(WoodType type) {
+    super(type, "lumber");
 
     getSettings()
-      .registryKey(type.getRegistryKey(variant))
-      .customResource(variant.getCustomResource())
-      .size(Size.SMALL)
-      .weight(Weight.VERY_LIGHT)
-      .maxDamage(0)
-      .oreDict(variant)
-      .oreDict(variant, type);
+      .maxDamage(0);
   }
 }

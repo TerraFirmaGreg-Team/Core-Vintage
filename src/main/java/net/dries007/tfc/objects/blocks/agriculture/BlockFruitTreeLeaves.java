@@ -1,5 +1,9 @@
 package net.dries007.tfc.objects.blocks.agriculture;
 
+import su.terrafirmagreg.api.data.enums.EnumFruitLeafState;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -16,7 +20,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -35,9 +38,6 @@ import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
-import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
-import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -53,7 +53,7 @@ import java.util.Set;
 @ParametersAreNonnullByDefault
 public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 
-  public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockFruitTreeLeaves.EnumLeafState.class);
+  public static final PropertyEnum<EnumFruitLeafState> LEAF_STATE = PropertyEnum.create("state", EnumFruitLeafState.class);
   public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
   private static final Map<IFruitTree, BlockFruitTreeLeaves> MAP = new HashMap<>();
   private final IFruitTree tree;
@@ -61,7 +61,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
   public BlockFruitTreeLeaves(IFruitTree tree) {
     this.tree = tree;
     if (MAP.put(tree, this) != null) {throw new IllegalStateException("There can only be one.");}
-    setDefaultState(getBlockState().getBaseState().withProperty(DECAYABLE, false).withProperty(LEAF_STATE, EnumLeafState.NORMAL)
+    setDefaultState(getBlockState().getBaseState().withProperty(DECAYABLE, false).withProperty(LEAF_STATE, EnumFruitLeafState.NORMAL)
       .withProperty(HARVESTABLE, false));
     leavesFancy = true; // Fast / Fancy graphics works correctly
     OreDictionaryHelper.register(this, "tree", "leaves");
@@ -78,7 +78,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
   @Override
   @Nonnull
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(HARVESTABLE, meta > 3).withProperty(LEAF_STATE, EnumLeafState.valueOf(meta & 0b11));
+    return getDefaultState().withProperty(HARVESTABLE, meta > 3).withProperty(LEAF_STATE, EnumFruitLeafState.valueOf(meta & 0b11));
   }
 
   @Override
@@ -100,17 +100,17 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
         if (te != null) {
           long hours = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_HOUR;
           if (hours > (tree.getGrowthTime() * ConfigTFC.General.FOOD.fruitTreeGrowthTimeModifier)) {
-            world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.FRUIT));
+            world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumFruitLeafState.FRUIT));
             te.resetCounter();
           }
         }
       } else if (tree.isFlowerMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
-        if (state.getValue(LEAF_STATE) != EnumLeafState.FLOWERING) {
-          world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.FLOWERING));
+        if (state.getValue(LEAF_STATE) != EnumFruitLeafState.FLOWERING) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumFruitLeafState.FLOWERING));
         }
       } else {
-        if (state.getValue(LEAF_STATE) != EnumLeafState.NORMAL) {
-          world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumLeafState.NORMAL));
+        if (state.getValue(LEAF_STATE) != EnumFruitLeafState.NORMAL) {
+          world.setBlockState(pos, state.withProperty(LEAF_STATE, EnumFruitLeafState.NORMAL));
         }
       }
       doLeafDecay(world, pos, state);
@@ -133,10 +133,10 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 
   @Override
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT) {
+    if (worldIn.getBlockState(pos).getValue(LEAF_STATE) == EnumFruitLeafState.FRUIT) {
       if (!worldIn.isRemote) {
         ItemHandlerHelper.giveItemToPlayer(playerIn, tree.getFoodDrop());
-        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, EnumLeafState.NORMAL));
+        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(LEAF_STATE, EnumFruitLeafState.NORMAL));
         TETickCounter te = Helpers.getTE(worldIn, pos, TETickCounter.class);
         if (te != null) {
           te.resetCounter();
@@ -267,7 +267,7 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
 
   @Override
   public GrowthStatus getGrowingStatus(IBlockState state, World world, BlockPos pos) {
-    if (world.getBlockState(pos).getValue(LEAF_STATE) == EnumLeafState.FRUIT) {
+    if (world.getBlockState(pos).getValue(LEAF_STATE) == EnumFruitLeafState.FRUIT) {
       return GrowthStatus.FULLY_GROWN;
     } else if (!state.getValue(HARVESTABLE) && tree.isHarvestMonth(Calendar.CALENDAR_TIME.getMonthOfYear())) {
       return GrowthStatus.GROWING;
@@ -275,22 +275,4 @@ public class BlockFruitTreeLeaves extends BlockLeaves implements IGrowingPlant {
     return GrowthStatus.NOT_GROWING;
   }
 
-  /**
-   * Enum state for blockstate Used to render the correct texture of this leaf block
-   */
-  public enum EnumLeafState implements IStringSerializable {
-    NORMAL, FLOWERING, FRUIT;
-
-    private static final EnumLeafState[] VALUES = values();
-
-    @Nonnull
-    public static EnumLeafState valueOf(int index) {
-      return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
-    }
-
-    @Override
-    public String getName() {
-      return this.name().toLowerCase();
-    }
-  }
 }

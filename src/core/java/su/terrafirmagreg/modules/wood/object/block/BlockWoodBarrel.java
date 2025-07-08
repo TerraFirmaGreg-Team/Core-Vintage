@@ -8,6 +8,7 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
+import su.terrafirmagreg.modules.wood.object.block.spi.BlockWood;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodBarrel;
 
 import net.minecraft.block.Block;

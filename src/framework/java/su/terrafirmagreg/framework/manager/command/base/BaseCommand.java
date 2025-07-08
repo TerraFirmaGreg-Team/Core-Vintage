@@ -41,7 +41,7 @@ public abstract class BaseCommand extends CommandBase implements ICommandEntry {
   @Override
   public String getName() {
 
-    return settings.getRegistryKey();
+    return settings.getName();
   }
 
   @Override

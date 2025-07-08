@@ -47,6 +47,7 @@ public abstract class BaseBlockLadder extends BlockLadder implements IBlockEntry
     this.settings = settings;
 
     getSettings()
+      .renderLayer(BlockRenderLayer.CUTOUT)
       .nonCube();
   }
 

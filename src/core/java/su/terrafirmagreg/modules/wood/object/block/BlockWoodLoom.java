@@ -4,12 +4,13 @@ package su.terrafirmagreg.modules.wood.object.block;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodLoom;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodLoom;
 
 import net.minecraft.block.SoundType;
@@ -37,7 +38,7 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockWoodLoom extends BaseBlockContainer implements IWoodBlock {
+public class BlockWoodLoom extends BaseBlockContainer implements IWoodEntry, IProviderBlockColor {
 
   protected static final AxisAlignedBB LOOM_EAST_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.0625D, 0.5625D, 1.0D, 0.9375D);
   protected static final AxisAlignedBB LOOM_WEST_AABB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.875D, 1.0D, 0.9375D);

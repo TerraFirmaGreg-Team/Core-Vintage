@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.init;
 
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilCoarseDirt;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilDirt;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilDryGrass;
@@ -50,6 +50,7 @@ public class BlocksSoil {
 
     PEAT_GRASS = registry.addBlock(new BlockSoilPeatGrass());
     PEAT = registry.addBlock(new BlockSoilPeat());
+
     GRASS = registry.addBlock(SoilType.getTypes(), BlockSoilGrass::new);
     DRY_GRASS = registry.addBlock(SoilType.getTypes(), BlockSoilDryGrass::new);
     SPARSE_GRASS = registry.addBlock(SoilType.getTypes(), BlockSoilSparseGrass::new);

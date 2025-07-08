@@ -29,9 +29,9 @@ import net.dries007.firmalife.registry.ItemsFL;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.CAN_GROW;
-import static net.dries007.firmalife.init.StatePropertiesFL.CONNECTED;
-import static net.dries007.firmalife.init.StatePropertiesFL.GROWN;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_GROW;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.CONNECTED;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.GROWN;
 
 public class BlockCinnamonLog extends Block {
 

@@ -6,7 +6,6 @@ import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 import gregtech.api.unification.OreDictUnifier;
@@ -29,7 +28,7 @@ import static su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.ore
 public class FeatureOreDict extends BaseFeature {
 
   @Override
-  public void onPostInit(FMLPostInitializationEvent event) {
+  public void onPostInit() {
 
     OreDictionaryHelper.init();
     minecraftOreDict();

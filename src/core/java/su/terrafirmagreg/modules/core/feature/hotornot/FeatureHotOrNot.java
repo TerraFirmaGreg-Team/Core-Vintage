@@ -31,7 +31,7 @@ public class FeatureHotOrNot extends BaseFeature {
 
   public FeatureHotOrNot() {
     super(Settings.of()
-      .registryKey("hot_or_not")
+      .name("hot_or_not")
       .enabled(ConfigCore.FEATURE.HOT_OR_NOT.enabled)
     );
 

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
+import su.terrafirmagreg.api.data.Tags;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 
 public class BlockSoilDryGrass extends BlockSoilGrass {
 
@@ -9,6 +10,7 @@ public class BlockSoilDryGrass extends BlockSoilGrass {
 
     getSettings()
       .registryKey(type.getRegistryKey("dry_grass"))
+      .tag(Tags.DRY_GRASS)
       .oreDict("dry_grass");
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);

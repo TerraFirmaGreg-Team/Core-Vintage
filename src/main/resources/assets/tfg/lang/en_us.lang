@@ -266,6 +266,10 @@ item.tfg.core.shard.glass.name=Glass Shard
 item.tfg.core.shard.ice.name=Ice Shard
 item.tfg.core.mortar.name=Mortar
 item.tfg.core.glue.name=Glue
+item.tfg.core.bucket.name=Wooden Bucket
+item.tfg.core.bucket.filled.name=Wooden Bucket ( %s )
+item.tfg.core.stick_bunch.name=Bunch of Sticks
+item.tfg.core.stick_bundle.name=Stick Bundle
 
 ## Effect
 effect.tfg.core.overburdened=Overburdened

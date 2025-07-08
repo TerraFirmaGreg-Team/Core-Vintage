@@ -3085,8 +3085,6 @@ tile.tfc.trapdoor.red_steel.name=Люк из красной стали
 item.leather.name=Кожа
 item.tfc.spindle.name=Веретено
 item.tfc.handstone.name=Верхная часть жёрнова
-item.tfc.wooden_bucket.name=Деревянное ведро
-item.tfc.wooden_bucket.filled.name=Деревянное ведро с %s
 item.tfc.ceramics.fired.jug.name=Кувшин
 item.tfc.ceramics.fired.jug.filled=Кувшин с %s
 item.tfc.ceramics.unfired.clay_flower_pot.name=Необожженный глиняный цветочный горшок
@@ -3288,8 +3286,6 @@ item.tfc.brick.gneiss.name=Гнейсовый кирпич
 item.tfc.brick.marble.name=Мраморный кирпич
 item.tfc.brick.ranite.name=Гранитный кирпич
 
-item.tfc.stick_bunch.name=Связка из палок
-item.tfc.stick_bundle.name=Тюк палок
 item.tfc.wood.lumber.ash.name=Пиломатериалы из ясеня
 item.tfc.wood.lumber.aspen.name=Пиломатериалы из осины
 item.tfc.wood.lumber.birch.name=Пиломатериалы из березы

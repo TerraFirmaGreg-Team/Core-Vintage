@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.rock;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.base.ModuleBase;
+import su.terrafirmagreg.framework.module.base.BaseModule;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
   version = "1.0.0",
   description = "Rock module."
 )
-public class ModuleRock extends ModuleBase {
+public class ModuleRock extends BaseModule {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleRock.class);
 

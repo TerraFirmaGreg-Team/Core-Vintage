@@ -30,7 +30,7 @@ public class PluginRegistrar implements IPluginRegistrar {
     var settings = plugin.getSettings();
 
     if (!settings.isEnabled()) {
-      manager.getLogger().debug("Plugin {} is disabled: {}", settings.getRegistryKey());
+      manager.getLogger().debug("Plugin {} is disabled: {}", pluginClass.getSimpleName());
       return;
     }
 

@@ -5,7 +5,7 @@ import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.base.ModuleBase;
+import su.terrafirmagreg.framework.module.base.BaseModule;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
 import su.terrafirmagreg.modules.animal.init.EntitiesAnimal;
 import su.terrafirmagreg.modules.animal.init.FeaturesAnimal;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
   version = "1.0.0",
   description = "Animal module."
 )
-public class ModuleAnimal extends ModuleBase {
+public class ModuleAnimal extends BaseModule {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class);
 

@@ -2,18 +2,9 @@ package su.terrafirmagreg.framework.manager.plugin;
 
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginEntry;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginManager;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginService;
 import su.terrafirmagreg.framework.module.api.IModule;
-
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
 import lombok.Getter;
 
@@ -23,67 +14,69 @@ import java.util.function.Consumer;
 public class PluginService implements IPluginService {
 
   private final IModule module;
+  private final IPluginRegistrar registrar;
   private final PluginMap map;
 
 
   public PluginService(IPluginManager manager) {
 
     this.module = manager.getModule();
+    this.registrar = manager.getRegistrar();
     this.map = manager.getMap();
   }
 
   @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
+  public void onPreInit() {
 
-    fireEvent(plugin -> plugin.onPreInit(event));
+    fireEvent(IPluginEntry::onPreInit);
   }
 
   @Override
-  public void onInit(FMLInitializationEvent event) {
+  public void onInit() {
 
-    fireEvent(plugin -> plugin.onInit(event));
+    fireEvent(IPluginEntry::onInit);
   }
 
   @Override
-  public void onPostInit(FMLPostInitializationEvent event) {
+  public void onPostInit() {
 
-    fireEvent(plugin -> plugin.onPostInit(event));
+    fireEvent(IPluginEntry::onPostInit);
   }
 
   @Override
-  public void onLoadComplete(FMLLoadCompleteEvent event) {
+  public void onLoadComplete() {
 
-    fireEvent(plugin -> plugin.onLoadComplete(event));
+    fireEvent(IPluginEntry::onLoadComplete);
   }
 
   @Override
-  public void onServerAboutToStart(FMLServerAboutToStartEvent event) {
+  public void onServerAboutToStart() {
 
-    fireEvent(plugin -> plugin.onServerAboutToStart(event));
+    fireEvent(IPluginEntry::onServerAboutToStart);
   }
 
   @Override
-  public void onServerStarting(FMLServerStartingEvent event) {
+  public void onServerStarting() {
 
-    fireEvent(plugin -> plugin.onServerStarting(event));
+    fireEvent(IPluginEntry::onServerStarting);
   }
 
   @Override
-  public void onServerStarted(FMLServerStartedEvent event) {
+  public void onServerStarted() {
 
-    fireEvent(plugin -> plugin.onServerStarted(event));
+    fireEvent(IPluginEntry::onServerStarted);
   }
 
   @Override
-  public void onServerStopping(FMLServerStoppingEvent event) {
+  public void onServerStopping() {
 
-    fireEvent(plugin -> plugin.onServerStopping(event));
+    fireEvent(IPluginEntry::onServerStopping);
   }
 
   @Override
-  public void onServerStopped(FMLServerStoppedEvent event) {
+  public void onServerStopped() {
 
-    fireEvent(plugin -> plugin.onServerStopped(event));
+    fireEvent(IPluginEntry::onServerStopped);
   }
 
   protected void fireEvent(Consumer<IPluginEntry> consumer) {

@@ -17,19 +17,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class FeatureFalling extends BaseFeature {
-
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-
-    CapabilityWorldTracker.register();
-  }
-
 
   @SubscribeEvent
   public static void onWorldTick(TickEvent.WorldTickEvent event) {
@@ -117,5 +109,11 @@ public class FeatureFalling extends BaseFeature {
         }
       }
     }
+  }
+
+  @Override
+  public void onPreInit() {
+
+    CapabilityWorldTracker.register();
   }
 }

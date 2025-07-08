@@ -13,7 +13,7 @@ public interface IPotionEntry extends IRegistryEntry<Settings, PotionType> {
 
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class Settings extends RegistrySettings<Settings> {
 
     PotionEffect[] effect = new PotionEffect[]{};
     Potion potion;

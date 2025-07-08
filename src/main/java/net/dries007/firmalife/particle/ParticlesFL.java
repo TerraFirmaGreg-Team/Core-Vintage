@@ -17,11 +17,11 @@ import net.dries007.tfc.client.particle.TFCParticles;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MOD_ID)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = FL)
 public enum ParticlesFL {
-  SPRINKLE(new ResourceLocation(MOD_ID, "particle/sprinkle"), () -> ParticleSprinkle::new);
+  SPRINKLE(new ResourceLocation(FL, "particle/sprinkle"), () -> ParticleSprinkle::new);
 
   private final ResourceLocation location;
   private final Supplier<TFCParticles.IParticleFactoryTFC> factorySupplier;

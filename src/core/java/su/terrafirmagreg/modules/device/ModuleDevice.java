@@ -6,7 +6,7 @@ import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.base.ModuleBase;
+import su.terrafirmagreg.framework.module.base.BaseModule;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.init.FeaturesDevice;
 import su.terrafirmagreg.modules.device.init.ItemsDevice;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
   version = "1.0.0",
   description = "Device module"
 )
-public class ModuleDevice extends ModuleBase {
+public class ModuleDevice extends BaseModule {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleDevice.class);
 

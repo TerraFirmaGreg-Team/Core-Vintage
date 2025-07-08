@@ -152,44 +152,44 @@ public final class TreesTFCF {
   public static final ITreeGenerator GEN_ZEBRAWOOD = new TreeGenVariants(true, 34);
 
   public static final ITreeGenerator GEN_TALL_TFC = new TreeGenNormal(3, 3);
-  public static final ITreeGenerator GEN_NORMAL = new TreeGenRandom(1, 3, 3);
-  public static final ITreeGenerator GEN_MEDIUM = new TreeGenRandom(2, 2, 3);
-  public static final ITreeGenerator GEN_TALL = new TreeGenRandom(3, 3, 3);
+  public static final ITreeGenerator GEN_NORMAL_2 = new TreeGenRandom(1, 3, 3);
+  public static final ITreeGenerator GEN_MEDIUM_2 = new TreeGenRandom(2, 2, 3);
+  public static final ITreeGenerator GEN_TALL_2 = new TreeGenRandom(3, 3, 3);
   public static final ITreeGenerator GEN_TALL_SINGLE = new TreeGenRandom(3, 3, 1);
 
   // Seasonal & Fruit-bearing Trees
-  public static final Tree ASH_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "ash"), 60f, 140f, -6f, 12f, GEN_NORMAL).setBushes()
+  public static final Tree ASH_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "ash"), 60f, 140f, -6f, 12f, GEN_NORMAL_2).setBushes()
     .setBurnInfo(696f, 1250)
     .build();
   public static final Tree ASPEN_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "aspen"), 70f, 280f, -10f, 16f, GEN_ASPEN).setGrowthTime(8)
     .setDensity(0.25f, 1f)
     .setBurnInfo(611f, 1000)
     .build();
-  public static final Tree BIRCH_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "birch"), 20f, 180f, -15f, 7f, GEN_TALL).setRadius(1)
+  public static final Tree BIRCH_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "birch"), 20f, 180f, -15f, 7f, GEN_TALL_2).setRadius(1)
     .setTannin()
     .setBurnInfo(652f, 1750)
     .build();
-  public static final Tree CHESTNUT_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "chestnut"), 160f, 320f, 11f, 35f, GEN_NORMAL).setTannin()
+  public static final Tree CHESTNUT_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "chestnut"), 160f, 320f, 11f, 35f, GEN_NORMAL_2).setTannin()
     .setBushes()
     .setBurnInfo(651f, 1500)
     .build();
-  public static final Tree HICKORY_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "hickory"), 80f, 250f, 7f, 29f, GEN_TALL).setGrowthTime(10)
+  public static final Tree HICKORY_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "hickory"), 80f, 250f, 7f, 29f, GEN_TALL_2).setGrowthTime(10)
     .setBushes()
     .setTannin()
     .setBurnInfo(762f, 2000)
     .build();
-  public static final Tree MAPLE_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "maple"), 140f, 360f, 3f, 20f, GEN_MEDIUM).setDominance(6.3f)
+  public static final Tree MAPLE_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "maple"), 140f, 360f, 3f, 20f, GEN_MEDIUM_2).setDominance(6.3f)
     .setRadius(1)
     .setTannin()
     .setBurnInfo(745f, 2000)
     .build();
-  public static final Tree OAK_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "oak"), 180f, 430f, -8f, 12f, GEN_TALL).setHeight(16)
+  public static final Tree OAK_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "oak"), 180f, 430f, -8f, 12f, GEN_TALL_2).setHeight(16)
     .setGrowthTime(10)
     .setBushes()
     .setTannin()
     .setBurnInfo(728f, 2250)
     .build();
-  public static final Tree SYCAMORE_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "sycamore"), 120f, 290f, 17f, 33f, GEN_MEDIUM).setGrowthTime(8)
+  public static final Tree SYCAMORE_TREE = new Tree.Builder(new ResourceLocation(Mods.ModIDs.TFC, "sycamore"), 120f, 290f, 17f, 33f, GEN_MEDIUM_2).setGrowthTime(8)
     .setBushes()
     .setDensity(0.25f, 2f)
     .setBurnInfo(653f, 1750)

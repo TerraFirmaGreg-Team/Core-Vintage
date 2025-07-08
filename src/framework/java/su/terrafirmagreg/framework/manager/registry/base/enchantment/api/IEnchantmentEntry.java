@@ -12,7 +12,7 @@ import lombok.Getter;
 public interface IEnchantmentEntry extends IRegistryEntry<Settings, Enchantment> {
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class Settings extends RegistrySettings<Settings> {
 
     Enchantment.Rarity rarity;
     EnumEnchantmentType type;

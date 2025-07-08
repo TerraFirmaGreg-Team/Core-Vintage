@@ -1,29 +1,30 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockSapling;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 import su.terrafirmagreg.modules.wood.object.itemblock.ItemBlockWoodSapling;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodSapling;
 
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
@@ -39,11 +40,11 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Random;
 
-import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_5;
+import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_2;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockWoodSapling extends BaseBlockSapling implements IWoodBlock, IGrowable, IGrowingPlant, IProviderTile, IProviderBlockColor {
+public class BlockWoodSapling extends BaseBlockSapling implements IWoodEntry, IGrowable, IGrowingPlant, IProviderTile, IProviderBlockColor {
 
 
   protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
@@ -55,28 +56,26 @@ public class BlockWoodSapling extends BaseBlockSapling implements IWoodBlock, IG
 
     getSettings()
       .registryKey(type.getRegistryKey("sapling"))
-      .ignoresProperties(STAGE_5)
+      .ignoresProperties(STAGE_2)
       .sound(SoundType.PLANT)
       .itemBlock(ItemBlockWoodSapling::new)
       .hardness(0.0F)
+      .fireInfo(5, 20)
       .oreDict("sapling");
 
     setDefaultState(blockState.getBaseState()
-      .withProperty(STAGE_5, 0));
-
-    BlockUtils.addFireInfo(this, 5, 20);
+      .withProperty(STAGE_2, 0));
   }
 
-
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(STAGE_5, meta);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(STAGE_5);
-  }
+//  @Override
+//  public IBlockState getStateFromMeta(int meta) {
+//    return this.getDefaultState().withProperty(STAGE_5, meta);
+//  }
+//
+//  @Override
+//  public int getMetaFromState(IBlockState state) {
+//    return state.getValue(STAGE_5);
+//  }
 
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
@@ -84,10 +83,10 @@ public class BlockWoodSapling extends BaseBlockSapling implements IWoodBlock, IG
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
   }
 
-  @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, STAGE_5);
-  }
+//  @Override
+//  protected BlockStateContainer createBlockState() {
+//    return new BlockStateContainer(this, STAGE_5);
+//  }
 
   @Override
   public EnumOffsetType getOffsetType() {
@@ -99,13 +98,13 @@ public class BlockWoodSapling extends BaseBlockSapling implements IWoodBlock, IG
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
     // TODO
-//    if (GuiScreen.isShiftKeyDown()) {
-//      tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
-//      tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) type.getMinRain(), (int) type.getMaxRain()));
-//      tooltip.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", type.getMinRain()), String.format("%.1f", type.getMaxRain())));
-//    } else {
-//      tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
-//    }
+    if (GuiScreen.isShiftKeyDown()) {
+      tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.climate_info"));
+      tooltip.add(TextFormatting.BLUE + I18n.format("tfc.tooltip.climate_info_rainfall", (int) type.getMinRain(), (int) type.getMaxRain()));
+      tooltip.add(TextFormatting.GOLD + I18n.format("tfc.tooltip.climate_info_temperature", String.format("%.1f", type.getMinRain()), String.format("%.1f", type.getMaxRain())));
+    } else {
+      tooltip.add(TextFormatting.GRAY + I18n.format("tfc.tooltip.hold_shift_for_climate_info"));
+    }
   }
 
 

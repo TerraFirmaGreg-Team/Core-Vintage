@@ -1,13 +1,12 @@
 package su.terrafirmagreg.modules.wood.object.item;
 
 import su.terrafirmagreg.api.util.MathUtils;
-import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Size;
-import su.terrafirmagreg.modules.core.capabilities.size.spi.Weight;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.IWoodItem;
-import su.terrafirmagreg.modules.wood.api.types.variant.item.WoodItemVariant;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodBoat;
+import su.terrafirmagreg.modules.wood.object.item.spi.ItemWood;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -31,23 +30,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class ItemWoodBoat extends BaseItem implements IWoodItem {
+public class ItemWoodBoat extends ItemWood {
 
-  protected final WoodItemVariant variant;
-  protected final WoodType type;
 
-  public ItemWoodBoat(WoodItemVariant variant, WoodType type) {
-    this.type = type;
-    this.variant = variant;
+  public ItemWoodBoat(WoodType type) {
+    super(type, "boat");
 
     getSettings()
-      .registryKey(type.getRegistryKey(variant))
-      .customResource(variant.getCustomResource())
-      .weight(Weight.MEDIUM)
-      .size(Size.LARGE)
-      .notCanStack()
-      .oreDict(variant)
-      .oreDict(variant, type);
+      .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM, false));
   }
 
   /**

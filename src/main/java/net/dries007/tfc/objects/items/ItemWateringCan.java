@@ -25,7 +25,7 @@ import net.dries007.tfc.util.Helpers;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.WET;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.WET;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

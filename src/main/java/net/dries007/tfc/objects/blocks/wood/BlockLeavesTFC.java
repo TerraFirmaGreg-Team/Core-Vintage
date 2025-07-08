@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 
 import net.minecraft.block.Block;
@@ -142,7 +143,7 @@ public class BlockLeavesTFC extends BlockLeaves {
      * The alternative would be to use `Minecraft.getMinecraft().gameSettings.fancyGraphics` directly in the 2 relevant methods.
      * It's better to do that than to refer to Blocks.LEAVES, for performance reasons.
      */
-    leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+    leavesFancy = GameUtils.getGameSettings().fancyGraphics;
     return super.getRenderLayer();
   }
 

@@ -21,9 +21,8 @@ public class FeatureRegistrar implements IFeatureRegistrar {
     this.map = manager.getMap();
   }
 
-
   @Override
-  public <T extends IFeatureEntry> void addFeature(T feature) {
+  public void addFeature(IFeatureEntry feature) {
     var featureClass = feature.getClass();
     var settings = feature.getSettings();
 

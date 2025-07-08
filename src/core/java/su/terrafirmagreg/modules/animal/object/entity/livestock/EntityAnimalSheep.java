@@ -66,9 +66,6 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
 
       getRandomGrowth(ConfigAnimal.ENTITY.SHEEP.adulthood, ConfigAnimal.ENTITY.SHEEP.elder),
       EntitySheep.getRandomSheepColor(MathUtils.RNG));
-
-    getSettings()
-      .entity(EntityAnimalSheep.class, RenderAnimalSheep::new);
   }
 
   public EntityAnimalSheep(World worldIn, Gender gender, int birthDay, EnumDyeColor dye) {

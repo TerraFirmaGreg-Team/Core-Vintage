@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 
-public class BlockWoodFenceGate extends BlockWoodFenceGateLog implements IWoodBlock {
+public class BlockWoodFenceGate extends BlockWoodFenceGateLog implements IWoodEntry {
 
 
   public BlockWoodFenceGate(WoodType type) {

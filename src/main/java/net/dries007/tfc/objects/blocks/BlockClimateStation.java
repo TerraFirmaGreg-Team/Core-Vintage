@@ -35,8 +35,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.STASIS;
 import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.STASIS;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

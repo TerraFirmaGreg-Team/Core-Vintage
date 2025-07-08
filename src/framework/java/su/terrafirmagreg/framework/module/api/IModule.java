@@ -13,17 +13,7 @@ import su.terrafirmagreg.framework.manager.registry.api.IRegistryManager;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -67,30 +57,6 @@ public interface IModule {
   default @NotNull List<Class<?>> getEventBusSubscribers() {
     return Collections.emptyList();
   }
-
-  // ===== FML Lifecycle
-
-  default void onConstruction(FMLConstructionEvent event) {}
-
-  default void onPreInit(FMLPreInitializationEvent event) {}
-
-  default void onInit(FMLInitializationEvent event) {}
-
-  default void onPostInit(FMLPostInitializationEvent event) {}
-
-  default void onLoadComplete(FMLLoadCompleteEvent event) {}
-
-  // ===== FML Lifecycle: Server
-
-  default void onServerAboutToStart(FMLServerAboutToStartEvent event) {}
-
-  default void onServerStarting(FMLServerStartingEvent event) {}
-
-  default void onServerStarted(FMLServerStartedEvent event) {}
-
-  default void onServerStopping(FMLServerStoppingEvent event) {}
-
-  default void onServerStopped(FMLServerStoppedEvent event) {}
 
   // ===== Other
 

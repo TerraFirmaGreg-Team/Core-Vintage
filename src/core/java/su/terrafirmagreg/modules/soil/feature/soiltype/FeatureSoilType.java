@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.soil.feature.soiltype;
 
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilTypes;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilTypes;
 
 
 public class FeatureSoilType extends BaseFeature {
@@ -33,7 +33,7 @@ public class FeatureSoilType extends BaseFeature {
 
   public FeatureSoilType() {
     super(Settings.of()
-      .registryKey("soil_type")
+      .name("soil_type")
     );
 
   }

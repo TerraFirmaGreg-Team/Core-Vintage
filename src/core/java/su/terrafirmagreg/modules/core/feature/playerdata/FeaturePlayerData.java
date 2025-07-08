@@ -20,7 +20,6 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
@@ -193,7 +192,7 @@ public class FeaturePlayerData extends BaseFeature {
   }
 
   @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
+  public void onPreInit() {
     CapabilityPlayerData.register();
   }
 }

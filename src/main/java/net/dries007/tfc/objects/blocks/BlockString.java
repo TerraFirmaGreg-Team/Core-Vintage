@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.data.Properties;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
@@ -27,7 +28,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.objects.te.TEString;
 import net.dries007.tfc.util.Helpers;
@@ -45,7 +45,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 @MethodsReturnNonnullByDefault
 public class BlockString extends BlockNonCube {
 
-  public static final PropertyEnum<EnumFacing.Axis> AXIS = StatePropertiesFL.XZ;
+  public static final PropertyEnum<EnumFacing.Axis> AXIS = Properties.EnumProp.XZ;
   private static final AxisAlignedBB SHAPE = new AxisAlignedBB(0.0D, 8.0D / 16, 7.0D / 16, 1.0D, 10.0D / 16, 9.0D / 16);
   private static final AxisAlignedBB SHAPE_90 = new AxisAlignedBB(7.0D / 16, 8.0D / 16, 0.0D, 9.0D / 16, 10.0D / 16, 1.0D);
   private final Supplier<? extends Item> item;

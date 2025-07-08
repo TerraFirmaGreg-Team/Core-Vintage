@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.data.Properties;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
@@ -23,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.firmalife.init.StatePropertiesFL;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 @MethodsReturnNonnullByDefault
 public class BlockJars extends BlockNonCube implements ICapabilitySize {
 
-  public static final PropertyInteger JARS = StatePropertiesFL.JARS;
+  public static final PropertyInteger JARS = Properties.IntProp.JARS;
   private static final AxisAlignedBB SHAPE = new AxisAlignedBB(2D / 16, 0D, 2D / 16, 14D / 16, 6D / 16, 14D / 16);
   private final Supplier<? extends Item> item;
 

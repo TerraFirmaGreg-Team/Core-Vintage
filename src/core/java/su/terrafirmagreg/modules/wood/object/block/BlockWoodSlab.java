@@ -2,18 +2,16 @@ package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockSlab;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 
 import net.minecraft.block.SoundType;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 
 import lombok.Getter;
 
 @Getter
-public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock, IProviderBlockColor {
+public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodEntry, IProviderBlockColor {
 
   protected final WoodType type;
 
@@ -28,16 +26,6 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodBlock,
     getSettings()
       .fireInfo(5, 20)
       .sound(SoundType.WOOD);
-  }
-
-  @Override
-  public IBlockColor getBlockColor() {
-    return (s, w, p, i) -> this.getType().getColor();
-  }
-
-  @Override
-  public IItemColor getItemColor() {
-    return (s, i) -> this.getType().getColor();
   }
 
   public static class Double extends BlockWoodSlab {

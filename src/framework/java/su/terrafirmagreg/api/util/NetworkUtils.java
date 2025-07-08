@@ -39,6 +39,7 @@ public final class NetworkUtils {
     queueTask(context, () -> consumer.accept(supplier.get()));
   }
 
+
   public static void queueTask(MessageContext context, Runnable task) {
     final IThreadListener target = TerraFirmaGreg.PROXY.getThreadListener(context);
 

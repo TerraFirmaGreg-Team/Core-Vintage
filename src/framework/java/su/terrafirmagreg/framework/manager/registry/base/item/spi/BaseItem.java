@@ -16,6 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+
 @Getter
 public abstract class BaseItem extends Item implements IItemEntry {
 
@@ -42,14 +44,19 @@ public abstract class BaseItem extends Item implements IItemEntry {
     return ModUtils.localize(LocalizeKeys.ITEM, this.getRegistryName());
   }
 
+  @Override
+  public ArrayList<ICapabilityProvider> addCapabilities(ArrayList<ICapabilityProvider> providers, @NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+
+    return providers;
+  }
+
 
   @Override
   public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
-    this.addCapabilities(stack, nbt);
 
     if (getSettings().getCapability().isEmpty()) {
       return super.initCapabilities(stack, nbt);
     }
-    return settings$initCapabilities(stack, nbt);
+    return settings$initCapabilities(stack, nbt) == null ? super.initCapabilities(stack, nbt) : null;
   }
 }

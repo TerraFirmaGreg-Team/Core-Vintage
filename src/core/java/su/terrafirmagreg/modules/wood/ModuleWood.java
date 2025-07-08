@@ -2,11 +2,14 @@ package su.terrafirmagreg.modules.wood;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
+import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.base.ModuleBase;
+import su.terrafirmagreg.framework.module.base.BaseModule;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 import su.terrafirmagreg.modules.wood.init.FeaturesWood;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
+import su.terrafirmagreg.modules.wood.init.PacketsWood;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,16 +18,18 @@ import org.jetbrains.annotations.NotNull;
   version = "1.0.0",
   description = "Wood module."
 )
-public class ModuleWood extends ModuleBase {
+public class ModuleWood extends BaseModule {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class);
 
   public ModuleWood() {
     super("wood");
 
-    enableRegistry();
     enableNetwork();
     enableFeature();
+    enableRegistry();
+
+
   }
 
   @Override
@@ -32,6 +37,7 @@ public class ModuleWood extends ModuleBase {
     registrar.group("log/aspen");
 
     BlocksWood.onRegister(registrar);
+    ItemsWood.onRegister(registrar);
 
   }
 
@@ -39,6 +45,12 @@ public class ModuleWood extends ModuleBase {
   public void onFeatureRegistrar(IFeatureRegistrar registrar) {
 
     FeaturesWood.onRegister(registrar);
+  }
+
+  @Override
+  public void onPacketRegistrar(IPacketRegistrar registrar) {
+
+    PacketsWood.onRegister(registrar);
   }
 
   @Override

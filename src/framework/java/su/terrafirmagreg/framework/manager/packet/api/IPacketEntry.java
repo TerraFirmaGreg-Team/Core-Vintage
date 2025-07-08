@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.manager.packet.api;
 
-import su.terrafirmagreg.api.library.IBaseEntry;
+import su.terrafirmagreg.framework.manager.api.IBaseEntry;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketEntry.Settings;
 import su.terrafirmagreg.framework.manager.packet.base.BasePacket;
 import su.terrafirmagreg.framework.manager.packet.spi.NetworkThreadedWrapper;

@@ -33,6 +33,11 @@ public class BaseItemBlock extends ItemBlock implements IItemEntry {
   }
 
   @Override
+  public String getTranslationKey(ItemStack stack) {
+    return ModUtils.localize(LocalizeKeys.BLOCK, block.getRegistryName());
+  }
+
+  @Override
   public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
     if (getSettings().getCapability().isEmpty()) {
       return null;

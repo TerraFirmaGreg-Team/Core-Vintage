@@ -12,7 +12,7 @@ import lombok.Getter;
 public interface ISoundEntry extends IRegistryEntry<Settings, SoundEvent> {
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class Settings extends RegistrySettings<Settings> {
 
 
     final ResourceLocation name;
@@ -20,7 +20,7 @@ public interface ISoundEntry extends IRegistryEntry<Settings, SoundEvent> {
     protected Settings(ResourceLocation name) {
 
       this.name = name;
-      this.registryKey = name.getPath();
+      this.registryKey(name.getPath());
     }
 
     public static Settings of(ResourceLocation name) {

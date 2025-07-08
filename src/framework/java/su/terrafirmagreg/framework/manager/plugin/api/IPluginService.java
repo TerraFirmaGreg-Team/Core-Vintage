@@ -1,36 +1,26 @@
 package su.terrafirmagreg.framework.manager.plugin.api;
 
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
-
 public interface IPluginService {
 
   // ===== FML Lifecycle
 
-  void onPreInit(FMLPreInitializationEvent event);
+  void onPreInit();
 
-  void onInit(FMLInitializationEvent event);
+  void onInit();
 
-  void onPostInit(FMLPostInitializationEvent event);
+  void onPostInit();
 
-  void onLoadComplete(FMLLoadCompleteEvent event);
+  void onLoadComplete();
 
   // ===== FML Lifecycle: Server
 
-  void onServerAboutToStart(FMLServerAboutToStartEvent event);
+  void onServerAboutToStart();
 
-  void onServerStarting(FMLServerStartingEvent event);
+  void onServerStarting();
 
-  void onServerStarted(FMLServerStartedEvent event);
+  void onServerStarted();
 
-  void onServerStopping(FMLServerStoppingEvent event);
+  void onServerStopping();
 
-  void onServerStopped(FMLServerStoppedEvent event);
+  void onServerStopped();
 }

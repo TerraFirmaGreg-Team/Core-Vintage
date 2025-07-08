@@ -13,23 +13,9 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class FeatureAmbiental extends BaseFeature {
-
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-
-    CapabilityAmbiental.register();
-  }
-
-  @Override
-  public void onInit(FMLInitializationEvent event) {
-    
-    CapabilityAmbiental.Handler.init();
-  }
 
   @SubscribeEvent
   public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
@@ -87,5 +73,17 @@ public class FeatureAmbiental extends BaseFeature {
       return;
     }
     CapabilityUtils.getOptional(player, CapabilityAmbiental.CAPABILITY).ifPresent(ICapabilityAmbiental::update);
+  }
+
+  @Override
+  public void onPreInit() {
+
+    CapabilityAmbiental.register();
+  }
+
+  @Override
+  public void onInit() {
+
+    CapabilityAmbiental.Handler.init();
   }
 }

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
-import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockWall;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
+import su.terrafirmagreg.modules.soil.api.types.ISoilEntry;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
 import net.minecraft.util.BlockRenderLayer;
@@ -10,7 +10,7 @@ import net.minecraft.util.BlockRenderLayer;
 import lombok.Getter;
 
 @Getter
-public class BlockSoilMudWall extends BaseBlockWall implements IType<SoilType> {
+public class BlockSoilMudWall extends BaseBlockWall implements ISoilEntry {
 
   protected final SoilType type;
 

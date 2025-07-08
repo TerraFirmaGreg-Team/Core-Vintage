@@ -2,6 +2,7 @@ package su.terrafirmagreg.framework.manager.registry.base.block.api;
 
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry.Settings;
@@ -44,9 +45,8 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     return Item.getItemFromBlock(asEntry());
   }
 
-
   @Override
-  default void postRegister() {
+  default void preRegister() {
     var settings = getSettings();
     asEntry()
       .setResistance(settings.getResistance())
@@ -54,14 +54,20 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       .setSoundType(settings.getSoundType())
       .setTickRandomly(settings.isTicksRandomly())
       .setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
+  }
+
+  @Override
+  default void postRegister() {
+    var settings = getSettings();
 
     TileUtils.addTile(asEntry());
     BlockUtils.addFireInfo(asEntry(), settings.getEncouragement(), settings.getFlammability());
+    ModelUtils.addModel(asEntry());
   }
 
   @Getter
   @SuppressWarnings("deprecation")
-  class Settings extends BaseSettings<Settings> {
+  class Settings extends RegistrySettings<Settings> {
 
     final List<Object[]> oreDict;
     final List<IProviderItemCapability> capability;
@@ -180,237 +186,237 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
 
     public Settings noItemBlock() {
       this.itemBlock = null;
-      return this;
+      return this.self();
     }
 
     @SuppressWarnings("unchecked")
     public <B extends Block> Settings itemBlock(Function<B, Item> itemBlock) {
       this.itemBlock = (Function<Block, Item>) itemBlock;
-      return this;
+      return this.self();
     }
 
     public Settings noCollision() {
       this.collidable = false;
       this.opaque = false;
-      return this;
+      return this.self();
     }
 
     public Settings nonOpaque() {
       this.opaque = false;
-      return this;
+      return this.self();
     }
 
     public Settings nonFullCube() {
       this.fullCube = false;
-      return this;
+      return this.self();
     }
 
     public Settings nonCube() {
       this.opaque = false;
       this.fullCube = false;
       this.renderLayer = BlockRenderLayer.CUTOUT;
-      return this;
+      return this.self();
     }
 
     public Settings group(CreativeTabs group) {
       this.group = group;
-      return this;
+      return this.self();
     }
 
     public Settings oreDict(Supplier<Boolean> supplier, Object... oreDict) {
       if (!supplier.get()) {
         this.oreDict.add(oreDict);
       }
-      return this;
+      return this.self();
     }
 
     public Settings oreDict(List<Object[]> oreDict) {
       this.oreDict.addAll(oreDict);
-      return this;
+      return this.self();
     }
 
     public Settings oreDict(Object... oreDict) {
       this.oreDict.add(oreDict);
-      return this;
+      return this.self();
     }
 
     public Settings capability(List<IProviderItemCapability> providers) {
       providers.forEach(this::capability);
-      return this;
+      return this.self();
     }
 
     public Settings capability(IProviderItemCapability... providers) {
       this.capability.addAll(Arrays.asList(providers));
-      return this;
+      return this.self();
     }
 
     public Settings rarity(EnumRarity rarity) {
       this.rarity = rarity;
-      return this;
+      return this.self();
     }
 
     public Settings renderLayer(BlockRenderLayer renderLayer) {
       this.renderLayer = renderLayer;
-      return this;
+      return this.self();
     }
 
     public Settings renderType(EnumBlockRenderType renderType) {
       this.renderType = renderType;
-      return this;
+      return this.self();
     }
 
     public Settings sound(SoundType soundType) {
       this.soundType = soundType;
-      return this;
+      return this.self();
     }
 
     public Settings strength(float strength) {
       this.resistance = strength;
       this.hardness = strength;
-      return this;
+      return this.self();
     }
 
     public Settings resistance(float resistance) {
       this.resistance = Math.max(0, resistance * 5 / 3);
-      return this;
+      return this.self();
     }
 
     public Settings hardness(float hardness) {
       this.hardness = hardness;
-      return this;
+      return this.self();
     }
 
     public Settings unbreakable() {
       this.hardness = -1.0F;
-      return this;
+      return this.self();
     }
 
     public Settings harvestLevel(String harvestTool, int harvestLevel) {
       this.harvestTool = harvestTool;
       this.harvestLevel = harvestLevel;
-      return this;
+      return this.self();
     }
 
     public Settings fireInfo(int encouragement, int flammability) {
       this.encouragement = encouragement;
       this.flammability = flammability;
-      return this;
+      return this.self();
     }
 
     public Settings requiresCorrectTool() {
       this.requiresCorrectTool = true;
-      return this;
+      return this.self();
     }
 
     public Settings useNeighborBrightness() {
       this.useNeighborBrightness = true;
-      return this;
+      return this.self();
     }
 
     public Settings randomTicks() {
       this.ticksRandomly = true;
-      return this;
+      return this.self();
     }
 
     public Settings randomTicks(boolean tickRandomly) {
       this.ticksRandomly = tickRandomly;
-      return this;
+      return this.self();
     }
 
     public Settings replaceable() {
       this.isReplaceable = true;
-      return this;
+      return this.self();
     }
 
     public Settings noReplaceable() {
       this.isReplaceable = false;
-      return this;
+      return this.self();
     }
 
     public Settings translucent() {
       this.isTranslucent = true;
-      return this;
+      return this.self();
     }
 
     public Settings passable() {
       this.isPassable = true;
-      return this;
+      return this.self();
     }
 
     public Settings lightValue(ContextFunction<Integer> lightValue) {
       this.lightValue = lightValue;
-      return this;
+      return this.self();
     }
 
     public Settings lightValue(Function<IBlockState, Integer> lightValue) {
       this.lightValue = (state, access, pos) -> lightValue.apply(state);
-      return this;
+      return this.self();
     }
 
     public Settings lightValue(int lightValue) {
       this.lightValue = (state, access, pos) -> lightValue;
-      return this;
+      return this.self();
     }
 
     public Settings lightValue(float lightValue) {
       this.lightValue = (state, access, pos) -> (int) (15.0F * lightValue);
-      return this;
+      return this.self();
     }
 
     public Settings slipperiness(ContextFunction<Float> slipperiness) {
       this.slipperiness = slipperiness;
-      return this;
+      return this.self();
     }
 
     public Settings slipperiness(Function<IBlockState, Float> slipperiness) {
       this.slipperiness = (state, access, pos) -> slipperiness.apply(state);
-      return this;
+      return this.self();
     }
 
     public Settings slipperiness(float slipperiness) {
       this.slipperiness = (state, access, pos) -> slipperiness;
-      return this;
+      return this.self();
     }
 
     public Settings hasItemSubtypes() {
       this.hasItemSubtypes = true;
-      return this;
+      return this.self();
     }
 
     public Settings air() {
       this.isAir = true;
       this.useNeighborBrightness = false;
-      return this;
+      return this.self();
     }
 
     public Settings isSuffocating(Predicate<IBlockState> isSuffocating) {
       this.isSuffocating = isSuffocating;
-      return this;
+      return this.self();
     }
 
     public Settings isSuffocating() {
       this.isSuffocating = state -> true;
-      return this;
+      return this.self();
     }
 
     public Settings noSuffocating() {
       this.isSuffocating = state -> false;
-      return this;
+      return this.self();
     }
 
     public Settings ignoresProperties(IProperty<?>... properties) {
       this.ignoredProperties = properties;
-      return this;
+      return this.self();
     }
 
     public Settings customResource(String path) {
       this.resource = ModUtils.resource(path);
-      return this;
+      return this.self();
     }
 
-    public Settings customResource(ResourceLocation resourceLocation) {
-      this.resource = resourceLocation;
-      return this;
+    public Settings customResource(ResourceLocation resource) {
+      this.resource = resource;
+      return this.self();
     }
 
     public interface ContextFunction<R> {

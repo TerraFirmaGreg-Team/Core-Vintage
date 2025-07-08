@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockLog;
@@ -11,13 +10,12 @@ import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProvider
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.ConfigWood;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -52,7 +50,7 @@ import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockWoodLog extends BaseBlockLog implements IType<WoodType>, IProviderBlockColor {
+public class BlockWoodLog extends BaseBlockLog implements IWoodEntry, IProviderBlockColor {
 
   public static final AxisAlignedBB SMALL_AABB_Y = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 1, 0.75);
   public static final AxisAlignedBB SMALL_AABB_X = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.75, 0.75);
@@ -296,16 +294,6 @@ public class BlockWoodLog extends BaseBlockLog implements IType<WoodType>, IProv
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     // Small logs are a weird feature, for now they shall be disabled via shift placement since it interferes with log pile placement
     return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(PLACED, true);
-  }
-
-  @Override
-  public IBlockColor getBlockColor() {
-    return (s, w, p, i) -> this.getType().getColor();
-  }
-
-  @Override
-  public IItemColor getItemColor() {
-    return (s, i) -> this.getType().getColor();
   }
 
 

@@ -3,6 +3,7 @@ package su.terrafirmagreg.framework.manager.registry.base.item.api;
 
 import su.terrafirmagreg.api.capability.spi.CombinedCapabilityProvider;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
@@ -39,35 +40,42 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
     for (IProviderItemCapability itemCapability : getSettings().getCapability()) {
       providers.add(itemCapability.createProvider(stack));
     }
+    addCapabilities(providers, stack, nbt);
     return new CombinedCapabilityProvider(providers);
   }
 
-  default void addCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+  default ArrayList<ICapabilityProvider> addCapabilities(ArrayList<ICapabilityProvider> providers, @NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
 
+    return providers;
   }
 
-
   @Override
-  default void postRegister() {
+  default void preRegister() {
     var settings = getSettings();
     settings.oreDict(settings.getRegistryKey());
     asEntry()
       .setHasSubtypes(settings.isHasSubtypes())
       .setMaxDamage(settings.getMaxDamage())
       .setMaxStackSize(settings.getMaxStackSize());
+  }
+
+  @Override
+  default void postRegister() {
+    var settings = getSettings();
 
     OreDictUtils.addOreDict(asEntry(), settings.getOreDict());
+    ModelUtils.addModel(asEntry());
   }
 
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class Settings extends RegistrySettings<Settings> {
 
     final List<Object[]> oreDict;
     final List<IProviderItemCapability> capability;
 
 
-    ResourceLocation resource;
+    ResourceLocation resource = null;
     CreativeTabs group;
     IRarity rarity;
 
@@ -97,6 +105,7 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
         var settings = settingsBlock.getSettings();
         settingsItem
           .registryKey(settings.getRegistryKey())
+          .customResource(settings.getResource())
           .rarity(settings.getRarity())
           .group(settings.getGroup())
           .oreDict(settings.getOreDict())
@@ -135,6 +144,11 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
 
     public Settings customResource(String path) {
       this.resource = ModUtils.resource(path);
+      return this.self();
+    }
+
+    public Settings customResource(ResourceLocation resource) {
+      this.resource = resource;
       return this.self();
     }
 

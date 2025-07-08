@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.wood.api.types.type;
 /**
  * В это классе хранятся типы дерева, которые используются при создании блоков и предметов
  */
-public final class WoodTypes {
+public class WoodTypes {
 
   // TFC
   public static WoodType ACACIA;

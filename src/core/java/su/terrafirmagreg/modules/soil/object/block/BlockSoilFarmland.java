@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockFarmland;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.IDirtBlock;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.ISoilBlock;
-import su.terrafirmagreg.modules.soil.feature.soiltype.spi.type.SoilType;
+import su.terrafirmagreg.modules.soil.api.types.IDirtBlock;
+import su.terrafirmagreg.modules.soil.api.types.ISoilBlock;
+import su.terrafirmagreg.modules.soil.api.types.ISoilEntry;
+import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
@@ -43,7 +43,7 @@ import static su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockMan
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilFarmland extends BaseBlockFarmland implements IType<SoilType>, IProviderBlockColor, ISoilBlock {
+public class BlockSoilFarmland extends BaseBlockFarmland implements ISoilEntry, IProviderBlockColor, ISoilBlock {
 
   public static final int MAX_MOISTURE = 7;
   public static final int[] TINT = new int[]{

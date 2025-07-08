@@ -1,15 +1,16 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockButton;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 
 import net.minecraft.block.SoundType;
 
 import lombok.Getter;
 
 @Getter
-public class BlockWoodButton extends BaseBlockButton implements IWoodBlock {
+public class BlockWoodButton extends BaseBlockButton implements IProviderBlockColor, IWoodEntry {
 
 
   protected final WoodType type;
@@ -28,5 +29,6 @@ public class BlockWoodButton extends BaseBlockButton implements IWoodBlock {
       .oreDict("button", "wood")
       .oreDict("button", "wood", type);
   }
+
 
 }

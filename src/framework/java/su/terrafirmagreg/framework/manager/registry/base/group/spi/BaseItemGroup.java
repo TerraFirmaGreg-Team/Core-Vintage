@@ -36,6 +36,7 @@ public class BaseItemGroup extends CreativeTabs {
     if (hasSearchBar) {
       setBackgroundImageName("item_search.png");
     }
+    sortAlphabeticallyTranslated();
   }
 
   public static BaseItemGroup of(String identifier, String icon) {
@@ -84,6 +85,10 @@ public class BaseItemGroup extends CreativeTabs {
    */
   public BaseItemGroup sortAlphabetically() {
     return this.sorter(Comparator.comparing(ItemStack::getDisplayName));
+  }
+
+  public BaseItemGroup sortAlphabeticallyTranslated() {
+    return this.sorter(Comparator.comparing(ItemStack::getTranslationKey));
   }
 
   /**

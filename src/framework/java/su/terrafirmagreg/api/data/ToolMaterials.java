@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.data;
 
 import su.terrafirmagreg.api.util.ModUtils;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
 public final class ToolMaterials {
@@ -10,20 +10,20 @@ public final class ToolMaterials {
   // Damage here is for the sword.
   // Stone weapons have 75% the damage of a vanilla's wood sword while red/blue steel is like a diamond sword with sharpess V (3+ dmg)
   // All in-between weapons have an exponential growth (not much steep but still making it worth to upgrade)
-  public static final Item.ToolMaterial FLINT; //Tier 0
-  public static final Item.ToolMaterial IGNEOUS_INTRUSIVE; //Tier 0
-  public static final Item.ToolMaterial SEDIMENTARY;
-  public static final Item.ToolMaterial IGNEOUS_EXTRUSIVE;
-  public static final Item.ToolMaterial METAMORPHIC;
-  public static final Item.ToolMaterial COPPER; //Tier 1
-  public static final Item.ToolMaterial BRONZE; //Tier 2
-  public static final Item.ToolMaterial BISMUTH_BRONZE;
-  public static final Item.ToolMaterial BLACK_BRONZE;
-  public static final Item.ToolMaterial WROUGHT_IRON; //Tier 3
-  public static final Item.ToolMaterial STEEL; //Tier 4
-  public static final Item.ToolMaterial BLACK_STEEL; //Tier 5
-  public static final Item.ToolMaterial BLUE_STEEL; //Tier 6
-  public static final Item.ToolMaterial RED_STEEL;
+  public static final ToolMaterial FLINT; //Tier 0
+  public static final ToolMaterial IGNEOUS_INTRUSIVE; //Tier 0
+  public static final ToolMaterial SEDIMENTARY;
+  public static final ToolMaterial IGNEOUS_EXTRUSIVE;
+  public static final ToolMaterial METAMORPHIC;
+  public static final ToolMaterial COPPER; //Tier 1
+  public static final ToolMaterial BRONZE; //Tier 2
+  public static final ToolMaterial BISMUTH_BRONZE;
+  public static final ToolMaterial BLACK_BRONZE;
+  public static final ToolMaterial WROUGHT_IRON; //Tier 3
+  public static final ToolMaterial STEEL; //Tier 4
+  public static final ToolMaterial BLACK_STEEL; //Tier 5
+  public static final ToolMaterial BLUE_STEEL; //Tier 6
+  public static final ToolMaterial RED_STEEL;
 
   static {
     FLINT = EnumHelper.addToolMaterial(ModUtils.id("flint"), 1, 50, 7.3f, 2.0f, 5);
@@ -40,8 +40,5 @@ public final class ToolMaterials {
     BLACK_STEEL = EnumHelper.addToolMaterial(ModUtils.id("black_steel"), 3, 4200, 16, 7.0f, 17);
     BLUE_STEEL = EnumHelper.addToolMaterial(ModUtils.id("blue_steel"), 3, 6500, 18, 9.0f, 22);
     RED_STEEL = EnumHelper.addToolMaterial(ModUtils.id("red_steel"), 3, 6500, 18, 9.0f, 22);
-
   }
-
-  private ToolMaterials() {}
 }

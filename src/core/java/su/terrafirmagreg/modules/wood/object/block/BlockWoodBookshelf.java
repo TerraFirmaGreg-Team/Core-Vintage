@@ -2,8 +2,9 @@ package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockBookshelf;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -12,7 +13,7 @@ import net.minecraft.util.BlockRenderLayer;
 import lombok.Getter;
 
 @Getter
-public class BlockWoodBookshelf extends BaseBlockBookshelf implements IWoodBlock {
+public class BlockWoodBookshelf extends BaseBlockBookshelf implements IProviderBlockColor, IWoodEntry {
 
   protected final WoodType type;
 

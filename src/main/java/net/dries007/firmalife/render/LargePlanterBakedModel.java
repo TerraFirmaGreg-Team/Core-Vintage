@@ -1,5 +1,7 @@
 package net.dries007.firmalife.render;
 
+import su.terrafirmagreg.api.data.Properties.BoolProp;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -14,7 +16,6 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 
 import com.google.common.collect.ImmutableMap;
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.firmalife.init.StatePropertiesFL;
 import net.dries007.tfc.objects.blocks.BlockLargePlanter;
 import net.dries007.tfc.objects.recipes.PlanterRecipe;
 
@@ -24,13 +25,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
 import static net.dries007.firmalife.util.ClientHelpers.bake;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
 @MethodsReturnNonnullByDefault
 public class LargePlanterBakedModel implements IBakedModel {
 
-  private static final IModel dummy = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(MOD_ID, "block/large_planter"));
+  private static final IModel dummy = ModelLoaderRegistry.getModelOrMissing(new ResourceLocation(FL, "block/large_planter"));
 
   public LargePlanterBakedModel() {}
 
@@ -41,7 +42,7 @@ public class LargePlanterBakedModel implements IBakedModel {
   public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
     if (state == null || !(state.getBlock() instanceof BlockLargePlanter)) {return bake(dummy).getQuads(state, side, rand);}
     Map<String, String> sprites = new HashMap<>();
-    sprites.put("soil", MOD_ID + (state.getValue(StatePropertiesFL.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
+    sprites.put("soil", FL + (state.getValue(BoolProp.WET) ? ":blocks/potting_soil_wet" : ":blocks/potting_soil_dry"));
     if (state instanceof IExtendedBlockState) {
       sprites.put("crop1", resolveTexture((IExtendedBlockState) state, BlockLargePlanter.CROP));
     }

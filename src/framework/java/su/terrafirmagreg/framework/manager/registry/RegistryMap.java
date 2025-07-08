@@ -50,16 +50,16 @@ public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForge
       var entry = wrapper.getEntry();
       var identifier = wrapper.getIdentifier();
 
-      if (!identifier.equals(entry.getRegistryName())) {
-        entry.setRegistryName(identifier);
-      }
-      registry.register((T) entry);
       if (entry instanceof IRegistryEntry registryEntry) {
 
+        registryEntry.preRegister();
+        if (!identifier.equals(registryEntry.getRegistryName())) {
+          registryEntry.setRegistryName(identifier);
+        }
+        registry.register((T) registryEntry);
         registryEntry.postRegister();
+        RegistryManager.LOGGER.debug("Registry {}: {}", registryEntry.getRegistryType().getSimpleName(), identifier);
       }
-      RegistryManager.LOGGER.debug("Registry {}: {}", entry.getRegistryType().getSimpleName(), identifier);
-
     });
   }
 

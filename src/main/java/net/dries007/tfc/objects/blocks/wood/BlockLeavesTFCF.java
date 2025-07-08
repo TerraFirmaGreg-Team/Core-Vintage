@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.api.data.enums.EnumLeafState;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
@@ -24,7 +25,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -59,7 +59,7 @@ import static net.dries007.tfc.Constants.RNG;
 @ParametersAreNonnullByDefault
 public class BlockLeavesTFCF extends BlockLeaves {
 
-  public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", BlockLeavesTFCF.EnumLeafState.class);
+  public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("state", EnumLeafState.class);
   public static final PropertyBool HARVESTABLE = PropertyBool.create("harvestable");
   private static final Map<SeasonalTrees, BlockLeavesTFCF> MAP = new HashMap<>();
   public final Tree wood;
@@ -378,19 +378,4 @@ public class BlockLeavesTFCF extends BlockLeaves {
     }
   }
 
-  public enum EnumLeafState implements IStringSerializable {
-    NORMAL, FLOWERING, FRUIT, AUTUMN, WINTER;
-
-    private static final EnumLeafState[] VALUES = values();
-
-    @Nonnull
-    public static EnumLeafState valueOf(int index) {
-      return index < 0 || index > VALUES.length ? NORMAL : VALUES[index];
-    }
-
-    @Override
-    public String getName() {
-      return this.name().toLowerCase();
-    }
-  }
 }

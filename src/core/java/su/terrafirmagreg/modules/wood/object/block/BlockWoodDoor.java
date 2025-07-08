@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockDoor;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -10,7 +10,7 @@ import net.minecraft.block.material.Material;
 import lombok.Getter;
 
 @Getter
-public class BlockWoodDoor extends BaseBlockDoor implements IWoodBlock {
+public class BlockWoodDoor extends BaseBlockDoor implements IWoodEntry {
 
   protected final WoodType type;
 

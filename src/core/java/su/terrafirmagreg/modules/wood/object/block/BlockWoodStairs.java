@@ -3,14 +3,14 @@ package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockStairs;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
 
 import lombok.Getter;
 
 @Getter
-public class BlockWoodStairs extends BaseBlockStairs implements IWoodBlock {
+public class BlockWoodStairs extends BaseBlockStairs implements IWoodEntry {
 
   protected final WoodType type;
 

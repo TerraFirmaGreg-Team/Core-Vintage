@@ -1,20 +1,13 @@
 package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
-import su.terrafirmagreg.framework.module.base.ModuleBase;
-import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
-import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
-import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
-import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
-import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
-import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
+import su.terrafirmagreg.framework.module.base.BaseModule;
 import su.terrafirmagreg.modules.core.event.EventHandlerGuiOpen;
 import su.terrafirmagreg.modules.core.event.EventHandlerGuiScreen;
 import su.terrafirmagreg.modules.core.event.EventHandlerOnConfigChanged;
@@ -36,12 +29,7 @@ import su.terrafirmagreg.modules.core.init.LootTablesCore;
 import su.terrafirmagreg.modules.core.init.PacketsCore;
 import su.terrafirmagreg.modules.core.init.PluginsCore;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectList;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -52,7 +40,7 @@ import java.util.List;
   version = "1.0.0",
   description = "Core TerraFirmaGreg content."
 )
-public class ModuleCore extends ModuleBase {
+public class ModuleCore extends BaseModule {
 
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class);
 
@@ -103,48 +91,28 @@ public class ModuleCore extends ModuleBase {
     PacketsCore.onRegister(registrar);
   }
 
-  @Override
-  public void onPreInit(FMLPreInitializationEvent event) {
-
-    CapabilityFood.register();
-    CapabilityMetal.register();
-    CapabilityForgeable.register();
-
-    if (ModUtils.isClient()) {
-      MinecraftForge.EVENT_BUS.register(OverlayAmbiental.getInstance());
-    }
-
-
-  }
-
-  @Override
-  public void onInit(FMLInitializationEvent event) {
-
-    CapabilityHandlerFood.init();
-    CapabilityHandlerMetal.init();
-  }
 
   @Override
   public @NotNull List<Class<?>> getEventBusSubscribers() {
-    ObjectList<Class<?>> list = new ObjectArrayList<>();
+    return new ObjectArrayList<>() {{
+      add(EventHandlerGuiOpen.class);
+      add(EventHandlerGuiScreen.class);
 
-    list.add(EventHandlerGuiOpen.class);
-    list.add(EventHandlerGuiScreen.class);
+      add(EventHandlerPlayerChangedDimension.class);
+      add(EventHandlerPlayerLoggedIn.class);
+      add(EventHandlerPlayerLoggedOut.class);
+      add(EventHandlerPlayerRespawn.class);
 
-    list.add(EventHandlerPlayerChangedDimension.class);
-    list.add(EventHandlerPlayerLoggedIn.class);
-    list.add(EventHandlerPlayerLoggedOut.class);
-    list.add(EventHandlerPlayerRespawn.class);
+      add(EventHandlerCapabilitiesEntity.class);
 
-    list.add(EventHandlerCapabilitiesEntity.class);
+      add(EventHandlerPortalSpawn.class);
 
-    list.add(EventHandlerPortalSpawn.class);
+      add(EventHandlerItemTooltip.class);
 
-    list.add(EventHandlerItemTooltip.class);
+      add(EventHandlerOnConfigChanged.class);
+    }};
 
-    list.add(EventHandlerOnConfigChanged.class);
 
-    return list;
   }
 
   @Override

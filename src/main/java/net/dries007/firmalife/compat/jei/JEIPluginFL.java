@@ -29,15 +29,15 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
 @JEIPlugin
 public class JEIPluginFL implements IModPlugin {
 
-  public static final String OVEN_ID = MOD_ID + ".oven";
-  public static final String DRY_ID = MOD_ID + ".drying";
-  public static final String KNAP_PUMPKIN_UID = MOD_ID + ".knap.pumpkin";
-  public static final String CASTING_UID = MOD_ID + ".casting";
+  public static final String OVEN_ID = FL + ".oven";
+  public static final String DRY_ID = FL + ".drying";
+  public static final String KNAP_PUMPKIN_UID = FL + ".knap.pumpkin";
+  public static final String CASTING_UID = FL + ".casting";
 
 
   private static IModRegistry REGISTRY;

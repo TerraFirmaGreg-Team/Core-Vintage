@@ -24,13 +24,13 @@ public interface IEntityEntry extends IRegistryEntry<Settings, EntityEntry> {
   default void postRegister() {
     var settings = getSettings();
 
-    EntityUtils.addEntity(asEntry(), settings.getUpdateInfo());
-    EntityUtils.addEgg(asEntry(), settings.getEggInfo());
-    EntityUtils.addSpawn(asEntry(), settings.getSpawnInfo());
+    EntityUtils.addUpdateInfo(asEntry(), settings.getUpdateInfo());
+    EntityUtils.addEggInfo(asEntry(), settings.getEggInfo());
+    EntityUtils.addSpawnInfo(asEntry(), settings.getSpawnInfo());
   }
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class Settings extends RegistrySettings<Settings> {
 
     Class<? extends Entity> entity;
     SpawnInfo spawnInfo;
@@ -62,9 +62,9 @@ public interface IEntityEntry extends IRegistryEntry<Settings, EntityEntry> {
     }
 
 
-    public <T extends Entity> Settings entity(Class<T> entityClass, IRenderFactory<? super T> renderFactory) {
-      entity(entityClass);
-      ModelUtils.entity(entityClass, renderFactory);
+    public <T extends Entity> Settings entity(Class<T> entity, IRenderFactory<? super T> renderFactory) {
+      this.entity = checkNotNull(entity, "entity class");
+      ModelUtils.entity(entity, renderFactory);
       return this;
     }
 

@@ -17,10 +17,10 @@ import net.dries007.tfc.objects.recipes.OvenRecipe;
 import net.dries007.tfc.objects.recipes.PlanterRecipe;
 import net.dries007.tfc.objects.recipes.StrainingRecipe;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
-@GameRegistry.ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = FL)
+@GameRegistry.ObjectHolder(FL)
 public class RegistriesFL {
 
   @SubscribeEvent

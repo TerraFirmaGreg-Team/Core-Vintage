@@ -1,36 +1,28 @@
 package su.terrafirmagreg.framework.manager.feature.api;
 
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
+import su.terrafirmagreg.framework.module.spi.EventState;
 
 public interface IFeatureService {
 
   // ===== FML Lifecycle
 
-  void onPreInit(FMLPreInitializationEvent event);
+  void onPreInit(EventState.PreInitialization event);
 
-  void onInit(FMLInitializationEvent event);
+  void onInit(EventState.Initialization event);
 
-  void onPostInit(FMLPostInitializationEvent event);
+  void onPostInit(EventState.PostInitialization event);
 
-  void onLoadComplete(FMLLoadCompleteEvent event);
+  void onLoadComplete(EventState.LoadComplete event);
 
   // ===== FML Lifecycle: Server
 
-  void onServerAboutToStart(FMLServerAboutToStartEvent event);
+  void onServerAboutToStart(EventState.ServerAboutToStart event);
 
-  void onServerStarting(FMLServerStartingEvent event);
+  void onServerStarting(EventState.ServerStarting event);
 
-  void onServerStarted(FMLServerStartedEvent event);
+  void onServerStarted(EventState.ServerStarted event);
 
-  void onServerStopping(FMLServerStoppingEvent event);
+  void onServerStopping(EventState.ServerStopping event);
 
-  void onServerStopped(FMLServerStoppedEvent event);
+  void onServerStopped(EventState.ServerStopped event);
 }

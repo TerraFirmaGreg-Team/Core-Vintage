@@ -1,7 +1,7 @@
 package su.terrafirmagreg.framework.manager.command.api;
 
-import su.terrafirmagreg.api.library.IBaseEntry;
 import su.terrafirmagreg.api.util.CommandUtils.Level;
+import su.terrafirmagreg.framework.manager.api.IBaseEntry;
 import su.terrafirmagreg.framework.manager.command.api.ICommandEntry.Settings;
 
 import net.minecraft.command.CommandBase;
@@ -26,12 +26,18 @@ public interface ICommandEntry extends IBaseEntry<Settings, CommandBase> {
 
     final List<String> aliases = new ArrayList<>();
 
+    String name;
     Level level = Level.ALL;
 
     protected Settings() {}
 
     public static Settings of() {
       return new Settings();
+    }
+
+    public Settings name(String name) {
+      this.name = name;
+      return this;
     }
 
     public Settings level(Level level) {

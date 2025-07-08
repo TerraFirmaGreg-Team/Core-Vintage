@@ -1,6 +1,7 @@
 package net.dries007.firmalife;
 
 
+import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
 import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGoat;
@@ -36,7 +37,7 @@ import net.dries007.firmalife.gui.FLGuiHandler;
 import net.dries007.firmalife.registry.BlocksFL;
 import net.dries007.tfc.util.Helpers;
 
-@Mod.EventBusSubscriber(modid = FirmaLife.MOD_ID)
+@Mod.EventBusSubscriber(modid = ModIDs.FL)
 public class CommonEventHandlerFL {
 
   @SubscribeEvent(priority = EventPriority.LOWEST)

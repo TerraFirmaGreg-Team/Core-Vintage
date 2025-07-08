@@ -266,6 +266,10 @@ item.tfg.core.shard.glass.name=Осколок стекла
 item.tfg.core.shard.ice.name=Осколок льда
 item.tfg.core.mortar.name=Раствор
 item.tfg.core.glue.name=Клей
+item.tfg.core.bucket.name=Деревянное ведро
+item.tfg.core.bucket.filled.name=Деревянное ведро ( %s )
+item.tfg.core.stick_bunch.name=Связка из палок
+item.tfg.core.stick_bundle.name=Тюк палок
 
 ## Effect
 effect.tfg.core.overburdened=Перегружен

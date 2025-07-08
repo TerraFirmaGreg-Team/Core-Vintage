@@ -17,10 +17,10 @@ import net.dries007.firmalife.util.ClientHelpers;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(modid = MOD_ID, value = Side.CLIENT)
+@Mod.EventBusSubscriber(modid = FL, value = Side.CLIENT)
 public class RenderHandler {
 
   public static Queue<Runnable> TO_RUN = new LinkedList<>();

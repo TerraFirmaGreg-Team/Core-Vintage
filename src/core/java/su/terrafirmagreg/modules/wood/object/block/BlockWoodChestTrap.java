@@ -5,9 +5,9 @@ import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockChes
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodChest;
-import su.terrafirmagreg.modules.wood.feature.woodtype.spi.IWoodBlock;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
 import net.minecraft.block.BlockChest;
@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import lombok.Getter;
 
 @Getter
-public class BlockWoodChestTrap extends BaseBlockChestTrap implements IWoodBlock {
+public class BlockWoodChestTrap extends BaseBlockChestTrap implements IWoodEntry {
 
   protected final WoodType type;
 

@@ -45,13 +45,13 @@ import lombok.Getter;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.dries007.firmalife.FirmaLife.MOD_ID;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_FOOD;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_MISC;
 import static net.dries007.tfc.objects.CreativeTabsTFC.CT_WOOD;
+import static su.terrafirmagreg.api.data.enums.Mods.ModIDs.FL;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
-@GameRegistry.ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = FL)
+@GameRegistry.ObjectHolder(FL)
 public class ItemsFL {
 
   @GameRegistry.ObjectHolder("chestnut_slice")
@@ -316,16 +316,16 @@ public class ItemsFL {
   }
 
   private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item, CreativeTabs ct) {
-    item.setRegistryName(MOD_ID, name);
+    item.setRegistryName(FL, name);
     item.setCreativeTab(ct);
-    item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+    item.setTranslationKey(FL + "." + name.replace('/', '.'));
     r.register(item);
     return item;
   }
 
   private static <T extends Item> T register(IForgeRegistry<Item> r, String name, T item) {
-    item.setRegistryName(MOD_ID, name);
-    item.setTranslationKey(MOD_ID + "." + name.replace('/', '.'));
+    item.setRegistryName(FL, name);
+    item.setTranslationKey(FL + "." + name.replace('/', '.'));
     r.register(item);
     return item;
   }

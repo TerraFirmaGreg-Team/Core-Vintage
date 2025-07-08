@@ -8,6 +8,7 @@ import lombok.Getter;
 
 import java.util.Random;
 
+
 @Getter
 public abstract class BaseBiome extends Biome implements IBiomeEntry {
 

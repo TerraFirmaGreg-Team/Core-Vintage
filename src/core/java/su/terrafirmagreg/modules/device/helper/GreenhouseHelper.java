@@ -15,9 +15,9 @@ import net.dries007.firmalife.util.HelpersFL;
 import net.dries007.tfc.objects.te.TEClimateStation;
 import net.dries007.tfc.util.Helpers;
 
-import static net.dries007.firmalife.init.StatePropertiesFL.GLASS;
-import static net.dries007.firmalife.init.StatePropertiesFL.TOP;
 import static net.minecraft.block.BlockHorizontal.FACING;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.GLASS;
+import static su.terrafirmagreg.api.data.Properties.BoolProp.TOP;
 
 public class GreenhouseHelper {
 

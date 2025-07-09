@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.core.object.item;
+package su.terrafirmagreg.modules.device.object.item;
 
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
@@ -50,7 +50,7 @@ public class ItemWoodBucket extends BaseItem {
   public ItemWoodBucket() {
 
     getSettings()
-      .registryKey("bucket")
+      .registryKey("bucket/wood")
       .hasSubtypes()
       .capability(stack -> CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM, canStack(stack)));
 

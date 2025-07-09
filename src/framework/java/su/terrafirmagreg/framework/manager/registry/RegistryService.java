@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.common.base.Preconditions;
 
@@ -36,15 +37,31 @@ public class RegistryService implements IRegistryService {
   }
 
 
-  @SuppressWarnings("rawtypes")
+  @SuppressWarnings({"unchecked", "rawtypes"})
   @SubscribeEvent
-  public void onRegisterEvent(RegistryEvent.Register event) {
+  public <T extends IForgeRegistryEntry<T>> void onRegisterEvent(RegistryEvent.Register event) {
 
-    IForgeRegistry<?> registry = Preconditions.checkNotNull(
+    IForgeRegistry<T> registry = Preconditions.checkNotNull(
       event.getRegistry(), "Registry not found: %s", event.getName()
     );
 
-    this.map.register(registry);
+    this.map.get(registry).forEach(entry -> {
+
+      entry.preRegister();
+      registry.register((T) entry);
+      entry.postRegister();
+      RegistryManager.LOGGER.debug("Registry {}: {}", entry.getRegistryType().getSimpleName(), entry.getRegistryName());
+    });
+  }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  @SubscribeEvent
+  public <T extends IForgeRegistryEntry<T>> void onMissingMappingsEvent(RegistryEvent.MissingMappings event) {
+    IForgeRegistry<T> registry = Preconditions.checkNotNull(
+      event.getRegistry(), "Registry not found: %s", event.getName()
+    );
+
+
   }
 
   // --------------------------------------------------------------------------

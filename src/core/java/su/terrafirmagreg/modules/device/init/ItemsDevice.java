@@ -8,6 +8,7 @@ import su.terrafirmagreg.modules.device.object.item.ItemFlaskLeatherUnfinished;
 import su.terrafirmagreg.modules.device.object.item.ItemFlaskMetal;
 import su.terrafirmagreg.modules.device.object.item.ItemFlaskMetalBroken;
 import su.terrafirmagreg.modules.device.object.item.ItemFlaskMetalUnfinished;
+import su.terrafirmagreg.modules.device.object.item.ItemWoodBucket;
 
 import net.minecraft.item.Item;
 
@@ -20,6 +21,7 @@ public final class ItemsDevice {
   public static ItemFlaskMetalUnfinished METAL_FLASK_UNFINISHED;
   public static ItemFlaskMetal METAL_FLASK;
   public static ItemFlaskMetalBroken METAL_FLASK_BROKEN;
+  public static ItemWoodBucket WOODEN_BUCKET;
   public static Item SLING;
   public static Item SLING_REINFORCED;
   public static Item SLING_AMMO;
@@ -42,5 +44,6 @@ public final class ItemsDevice {
     METAL_FLASK_UNFINISHED = registrar.addItem(new ItemFlaskMetalUnfinished());
     METAL_FLASK = registrar.addItem(new ItemFlaskMetal());
     METAL_FLASK_BROKEN = registrar.addItem(new ItemFlaskMetalBroken());
+    WOODEN_BUCKET = registrar.addItem(new ItemWoodBucket());
   }
 }

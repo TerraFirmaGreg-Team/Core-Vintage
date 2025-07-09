@@ -56,7 +56,6 @@ import net.dries007.tfc.objects.items.rock.ItemRockToolHead;
 import net.dries007.tfc.objects.items.wood.ItemBoatTFC;
 import net.dries007.tfc.objects.items.wood.ItemDoorTFC;
 import net.dries007.tfc.objects.items.wood.ItemLumberTFC;
-import net.dries007.tfc.objects.items.wood.ItemWoodenBucket;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
@@ -135,8 +134,6 @@ public final class ItemsTFC {
   @GameRegistry.ObjectHolder("quiver")
   public static final ItemQuiver QUIVER = getNull();
 
-  public static final ItemWoodenBucket WOODEN_BUCKET = getNull();
-
   @GameRegistry.ObjectHolder("metal/bucket/blue_steel")
   public static final ItemMetalBucket BLUE_STEEL_BUCKET = getNull();
   @GameRegistry.ObjectHolder("metal/bucket/red_steel")
@@ -183,8 +180,7 @@ public final class ItemsTFC {
   public static void registerItems(RegistryEvent.Register<Item> event) {
     IForgeRegistry<Item> r = event.getRegistry();
     Builder<Item> simpleItems = ImmutableList.builder();
-
-    register(r, "wooden_bucket", new ItemWoodenBucket(), CT_WOOD); //not a simple item, use a custom model
+    
     register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET), CT_METAL); //not a simple item, use a custom model
     register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), CT_METAL); //not a simple item, use a custom model
 //    register(r, "metal/iron_groove", new ItemGroove(Metal.WROUGHT_IRON, Metal.ItemType.GROOVE), CT_METAL);

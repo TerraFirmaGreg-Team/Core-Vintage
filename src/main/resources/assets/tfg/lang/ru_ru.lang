@@ -266,8 +266,6 @@ item.tfg.core.shard.glass.name=Осколок стекла
 item.tfg.core.shard.ice.name=Осколок льда
 item.tfg.core.mortar.name=Раствор
 item.tfg.core.glue.name=Клей
-item.tfg.core.bucket.name=Деревянное ведро
-item.tfg.core.bucket.filled.name=Деревянное ведро ( %s )
 item.tfg.core.stick_bunch.name=Связка из палок
 item.tfg.core.stick_bundle.name=Тюк палок
 
@@ -508,6 +506,8 @@ item.tfg.device.flask.metal.filled.name=Металлическая фляга ( 
 item.tfg.device.flask.metal.broken.name=Поврежденная металлическая фляга
 item.tfg.device.flask.metal.unfinished.name=Незавершенная металлическая фляга
 item.tfg.device.firestarter.name=Поджигатель
+item.tfg.device.bucket.wood.name=Деревянное ведро
+item.tfg.device.bucket.wood.filled.name=Деревянное ведро ( %s )
 
 ## Sound
 sound.tfg.device.item.firestarter=Поджигатель шипит

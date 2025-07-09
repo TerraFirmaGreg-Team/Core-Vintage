@@ -4,9 +4,9 @@
     "inventory": {
       "model": "forge:forgebucket",
       "textures": {
-        "base": "tfg:items/core/bucket/empty",
+        "base": "tfg:items/device/bucket/wood/empty",
         "fluid": "forge:items/bucket_fluid",
-        "cover": "tfg:items/core/bucket/overlay"
+        "cover": "tfg:items/device/bucket/wood/overlay"
       },
       "transform": "forge:default-item",
       "custom": {

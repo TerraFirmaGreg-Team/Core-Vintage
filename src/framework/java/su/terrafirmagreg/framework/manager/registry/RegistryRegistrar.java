@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.util.KeyBindUtils;
 import su.terrafirmagreg.api.util.LootUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.manager.registry.base.biome.api.IBiomeEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
@@ -72,8 +72,19 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
   @Override
   public <T extends IForgeRegistryEntry<T>> T addEntry(Class<T> registry, String identifier, T entry) {
-    this.map.computeIfAbsent(registry, RegistryWrapper.of(getIdentifier(identifier), entry));
+    //this.map.computeIfAbsent(registry, RegistryWrapper.of(getIdentifier(identifier), entry));
+    if (entry.getRegistryName() == null) {
+      entry.setRegistryName(getIdentifier(identifier));
+    }
+    addEntry(entry);
     return entry;
+  }
+
+  public <T extends IForgeRegistryEntry<T>> void addEntry(T entry) {
+
+    if (entry instanceof IRegistryEntry<?, ?> registryEntry) {
+      this.map.computeIfAbsent(registryEntry.getRegistryType(), registryEntry);
+    }
   }
 
   // region Block

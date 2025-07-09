@@ -33,10 +33,11 @@ public final class DataFixUtils {
   public static <T extends IForgeRegistryEntry<T>> void remap(RegistryEvent.MissingMappings<T> event, Logger logger, Map<String, Supplier<T>> map) {
 
     event.getAllMappings().stream()
-      .filter(e -> MOD_ID_SET.contains(e.key.getNamespace()))
+      .filter(mapping -> MOD_ID_SET.contains(mapping.key.getNamespace()))
       .forEach(mapping -> {
         String mappingKey = mapping.key.toString();
         String mappingPath = mapping.key.getPath();
+
         map.forEach((key, value) -> {
           if (mappingPath.endsWith(key)) {
             var object = value.get();
@@ -44,9 +45,10 @@ public final class DataFixUtils {
               logger.error("Failed to map {}", key);
               return;
             }
-            logger.info("Mapped {} to {}", mappingKey, object.getRegistryName());
+
             mapping.remap(object);
-            map.remove(key);
+            logger.info("Mapped {} to {}", mappingKey, object.getRegistryName());
+            //map.remove(key);
           }
         });
       });

@@ -67,6 +67,8 @@ public class FeatureRemappingDevice extends BaseFeature {
       put("iron_flask", () -> ItemsDevice.METAL_FLASK);
       put("unfinished_iron_flask", () -> ItemsDevice.METAL_FLASK_UNFINISHED);
       put("broken_iron_flask", () -> ItemsDevice.METAL_FLASK_BROKEN);
+      put("wooden_bucket", () -> ItemsDevice.WOODEN_BUCKET);
+
       put("greenhouse_door", () -> BlocksDevice.GREENHOUSE_DOOR.asItem());
       put("greenhouse_wall", () -> BlocksDevice.GREENHOUSE_WALL.asItem());
       put("greenhouse_roof", () -> BlocksDevice.GREENHOUSE_ROOF.asItem());

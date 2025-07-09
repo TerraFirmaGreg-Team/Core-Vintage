@@ -1,6 +1,5 @@
 package su.terrafirmagreg.framework.manager.registry;
 
-import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 
 import net.minecraft.util.ResourceLocation;
@@ -15,23 +14,23 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForgeRegistryEntry<?>>, List<RegistryWrapper>> {
+public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForgeRegistryEntry<?>>, List<IRegistryEntry<?, ?>>> {
 
   public static RegistryMap of() {
     return new RegistryMap();
   }
 
-  public <T extends IForgeRegistryEntry<T>> List<RegistryWrapper> computeIfAbsent(Class<T> registry) {
+  public <T extends IForgeRegistryEntry<T>> List<IRegistryEntry<?, ?>> computeIfAbsent(Class<T> registry) {
 
     return super.computeIfAbsent(registry, o -> new LinkedList<>());
   }
 
-  public <T extends IForgeRegistryEntry<T>> void computeIfAbsent(Class<T> registry, RegistryWrapper wrapper) {
+  public <T extends IForgeRegistryEntry<T>> void computeIfAbsent(Class<T> registry, IRegistryEntry<?, ?> wrapper) {
 
     computeIfAbsent(registry).add(wrapper);
   }
 
-  public <T extends IForgeRegistryEntry<T>> List<RegistryWrapper> get(IForgeRegistry<T> forgeRegistry) {
+  public <T extends IForgeRegistryEntry<T>> List<IRegistryEntry<?, ?>> get(IForgeRegistry<T> forgeRegistry) {
 
     return this.computeIfAbsent(forgeRegistry.getRegistrySuperType());
   }
@@ -39,28 +38,7 @@ public class RegistryMap extends Object2ObjectOpenHashMap<Class<? extends IForge
   @SuppressWarnings("unchecked")
   public <T extends IForgeRegistryEntry<T>> void register(Class<T> registry, final Consumer<T> consumer) {
 
-    this.get(registry).forEach(wrapper -> consumer.accept((T) wrapper.getEntry()));
-  }
-
-
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  public <T extends IForgeRegistryEntry<T>> void register(IForgeRegistry<T> registry) {
-
-    this.get(registry).forEach(wrapper -> {
-      var entry = wrapper.getEntry();
-      var identifier = wrapper.getIdentifier();
-
-      if (entry instanceof IRegistryEntry registryEntry) {
-
-        registryEntry.preRegister();
-        if (!identifier.equals(registryEntry.getRegistryName())) {
-          registryEntry.setRegistryName(identifier);
-        }
-        registry.register((T) registryEntry);
-        registryEntry.postRegister();
-        RegistryManager.LOGGER.debug("Registry {}: {}", registryEntry.getRegistryType().getSimpleName(), identifier);
-      }
-    });
+    this.get(registry).forEach(wrapper -> consumer.accept((T) wrapper));
   }
 
 

@@ -266,8 +266,6 @@ item.tfg.core.shard.glass.name=Glass Shard
 item.tfg.core.shard.ice.name=Ice Shard
 item.tfg.core.mortar.name=Mortar
 item.tfg.core.glue.name=Glue
-item.tfg.core.bucket.name=Wooden Bucket
-item.tfg.core.bucket.filled.name=Wooden Bucket ( %s )
 item.tfg.core.stick_bunch.name=Bunch of Sticks
 item.tfg.core.stick_bundle.name=Stick Bundle
 
@@ -508,6 +506,8 @@ item.tfg.device.flask.metal.filled.name=Metal Flask ( %s )
 item.tfg.device.flask.metal.broken.name=Broken Metal Flask
 item.tfg.device.flask.metal.unfinished.name=Unfinished Metal Flask
 item.tfg.device.firestarter.name=Firestarter
+item.tfg.device.bucket.wood.name=Wooden Bucket
+item.tfg.device.bucket.wood.filled.name=Wooden Bucket ( %s )
 
 ## Sound
 sound.tfg.device.item.firestarter=Firestarter sizzles

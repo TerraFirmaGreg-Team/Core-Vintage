@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.recipes.ingredients;
 
+import su.terrafirmagreg.modules.device.init.ItemsDevice;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
@@ -13,7 +15,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.objects.items.ItemsTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -32,7 +33,7 @@ public class FluidIngredient extends Ingredient {
 
   private static ItemStack[] getValidBuckets(FluidStack fluid) {
     List<ItemStack> output = new ArrayList<>();
-    ItemStack woodenBucket = new ItemStack(ItemsTFC.WOODEN_BUCKET);
+    ItemStack woodenBucket = new ItemStack(ItemsDevice.WOODEN_BUCKET);
     IFluidHandler bucketCap = woodenBucket.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     if (bucketCap != null) {
       if (bucketCap.fill(fluid, true) >= Fluid.BUCKET_VOLUME) {

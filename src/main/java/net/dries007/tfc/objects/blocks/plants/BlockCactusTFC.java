@@ -66,7 +66,10 @@ public class BlockCactusTFC extends BlockPlantTFC implements IGrowable, ITallPla
   @Override
   public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
     worldIn.setBlockState(pos.up(), this.getDefaultState());
-    IBlockState iblockstate = state.withProperty(DAYPERIOD, getDayPeriod()).withProperty(AGE, 0).withProperty(growthStageProperty, plant.getStageForMonth())
+    IBlockState iblockstate = state
+      .withProperty(DAYPERIOD, getDayPeriod())
+      .withProperty(AGE, 0)
+      .withProperty(growthStageProperty, plant.getStageForMonth())
       .withProperty(PART, getPlantPart(worldIn, pos));
     worldIn.setBlockState(pos, iblockstate);
     iblockstate.neighborChanged(worldIn, pos.up(), this, pos);

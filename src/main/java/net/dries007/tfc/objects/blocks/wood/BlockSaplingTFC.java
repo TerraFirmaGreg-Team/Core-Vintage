@@ -1,5 +1,7 @@
 package net.dries007.tfc.objects.blocks.wood;
 
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -25,8 +27,6 @@ import net.dries007.tfc.api.util.IGrowingPlant;
 import net.dries007.tfc.objects.te.TETickCounter;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.OreDictionaryHelper;
-
-import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -110,9 +110,8 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
 
   @Override
   public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-    super.updateTick(world, pos, state, random);
-
     if (!world.isRemote) {
+      super.updateTick(world, pos, state, random);
       TETickCounter te = Helpers.getTE(world, pos, TETickCounter.class);
       if (te != null) {
         long days = te.getTicksSinceUpdate() / ICalendar.TICKS_IN_DAY;
@@ -121,6 +120,7 @@ public class BlockSaplingTFC extends BlockBush implements IGrowable, IGrowingPla
         }
       }
     }
+
   }
 
   @SuppressWarnings("deprecation")

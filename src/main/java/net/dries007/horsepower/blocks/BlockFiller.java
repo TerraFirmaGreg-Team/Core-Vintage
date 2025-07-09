@@ -1,9 +1,5 @@
 package net.dries007.horsepower.blocks;
 
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.SoundType;
@@ -19,7 +15,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -38,6 +38,10 @@ import mcjty.theoneprobe.api.ProbeMode;
 import mcjty.theoneprobe.apiimpl.ProbeHitData;
 import net.dries007.horsepower.tileentity.TileEntityFiller;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
 @Optional.Interface(iface = "mcjty.theoneprobe.api.IProbeInfoAccessor", modid = "theoneprobe")
 public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor {
 
@@ -47,6 +51,8 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
   public BlockFiller(Material materialIn, String name, boolean useTileEntity, boolean providePower) {
     super(materialIn);
     setRegistryName(name + "filler");
+    setHardness(5F);
+    setResistance(5F);
     this.useTileEntity = useTileEntity;
     this.providePower = providePower;
   }

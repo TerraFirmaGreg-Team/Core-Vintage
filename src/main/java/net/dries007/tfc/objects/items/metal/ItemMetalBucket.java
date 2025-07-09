@@ -62,7 +62,6 @@ public class ItemMetalBucket extends ItemMetal // quite a bit copied out of Item
   }
 
   @SuppressWarnings("ConstantConditions")
-
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nullable EntityPlayer playerIn, EnumHand handIn) {
     ItemStack stack = playerIn.getHeldItem(handIn);

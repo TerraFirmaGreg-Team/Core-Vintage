@@ -37,7 +37,9 @@ public interface IRegistryRegistrar {
 
   BaseItemGroup group(BaseItemGroup group);
 
-  <T extends IForgeRegistryEntry<T>> T addEntry(Class<T> registry, String identifier, T entry);
+  <T extends IForgeRegistryEntry<T>> void addEntry(String identifier, T entry);
+
+  <T extends IRegistryEntry<?, ?>> T addEntry(String identifier, T entry);
 
   // --------------------------------------------------------------------------
   // - Block

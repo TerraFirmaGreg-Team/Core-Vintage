@@ -21,6 +21,7 @@ public final class DataFixUtils {
     add(ModIDs.TFCF);
     add(ModIDs.TFC);
     add(ModIDs.TFCTECH);
+    add(ModIDs.TFCTHINGS);
     add(ModIDs.FL);
     add(ModIDs.TFCTOWERHEAT);
     add(ModIDs.PUDDLES);
@@ -42,13 +43,13 @@ public final class DataFixUtils {
           if (mappingPath.endsWith(key)) {
             var object = value.get();
             if (object == null) {
+              mapping.warn();
               logger.error("Failed to map {}", key);
               return;
             }
 
             mapping.remap(object);
             logger.info("Mapped {} to {}", mappingKey, object.getRegistryName());
-            //map.remove(key);
           }
         });
       });

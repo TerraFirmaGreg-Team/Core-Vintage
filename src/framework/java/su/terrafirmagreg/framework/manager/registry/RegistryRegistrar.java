@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.util.KeyBindUtils;
 import su.terrafirmagreg.api.util.LootUtils;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.manager.registry.base.biome.api.IBiomeEntry;
@@ -70,21 +71,15 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return ModUtils.resource(module.getIdentifier(), identifier);
   }
 
-  @Override
-  public <T extends IForgeRegistryEntry<T>> T addEntry(Class<T> registry, String identifier, T entry) {
-    //this.map.computeIfAbsent(registry, RegistryWrapper.of(getIdentifier(identifier), entry));
-    if (entry.getRegistryName() == null) {
-      entry.setRegistryName(getIdentifier(identifier));
-    }
-    addEntry(entry);
-    return entry;
+  public <T extends IForgeRegistryEntry<T>> void addEntry(String identifier, T entry) {
+
+    this.map.addEntry(entry.getRegistryType(), RegistryWrapper.of(identifier, entry));
   }
 
-  public <T extends IForgeRegistryEntry<T>> void addEntry(T entry) {
-
-    if (entry instanceof IRegistryEntry<?, ?> registryEntry) {
-      this.map.computeIfAbsent(registryEntry.getRegistryType(), registryEntry);
-    }
+  @Override
+  public <T extends IRegistryEntry<?, ?>> T addEntry(String identifier, T entry) {
+    this.map.addEntry(entry.getRegistryType(), RegistryWrapper.of(identifier, entry));
+    return entry;
   }
 
   // region Block
@@ -93,7 +88,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends Block> V addBlock(String identifier, V entry) {
 
     entry.setCreativeTab(group);
-    addEntry(Block.class, identifier, entry);
+    addEntry(identifier, entry);
     return entry;
   }
 
@@ -133,7 +128,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends Item> V addItem(String identifier, V entry) {
 
     entry.setCreativeTab(group);
-    addEntry(Item.class, identifier, entry);
+    addEntry(identifier, entry);
     return entry;
   }
 
@@ -171,7 +166,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Biome> V addBiome(String identifier, V entry) {
 
-    addEntry(Biome.class, identifier, entry);
+    addEntry(identifier, entry);
     return entry;
   }
 
@@ -210,7 +205,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Enchantment> V addEnchantment(String identifier, V entry) {
 
-    addEntry(Enchantment.class, identifier, entry);
+    addEntry(identifier, entry);
     return entry;
   }
 
@@ -249,7 +244,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Potion> V addEffect(String identifier, V entry) {
 
-    addEntry(Potion.class, identifier, entry);
+    addEntry(identifier, entry);
     return entry;
   }
 
@@ -288,7 +283,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends PotionType> V addPotion(String identifier, V entry) {
 
-    addEntry(PotionType.class, identifier, entry);
+    addEntry(identifier, entry);
     return entry;
   }
 
@@ -327,7 +322,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends SoundEvent> V addSound(String identifier, V entry) {
 
-    addEntry(SoundEvent.class, identifier, entry);
+    addEntry(identifier, entry);
     return entry;
   }
 
@@ -340,6 +335,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
   @Override
   public <V extends SoundEvent> SoundEvent addSound(String identifier) {
+
     return this.addSound(identifier, new SoundEvent(getIdentifier(identifier)));
   }
 
@@ -371,7 +367,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends EntityEntry> V addEntity(String identifier, V entry) {
 
-    addEntry(EntityEntry.class, identifier, entry);
+    addEntry(identifier, entry);
     return entry;
   }
 

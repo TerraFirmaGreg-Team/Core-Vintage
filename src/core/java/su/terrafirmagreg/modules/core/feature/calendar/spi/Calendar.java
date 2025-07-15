@@ -72,6 +72,21 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     }
   }
 
+  private long playerTime;
+  private long calendarTime;
+  private int daysInMonth;
+  private boolean doDaylightCycle;
+  private boolean arePlayersLoggedOn;
+  private MinecraftServer server;
+  public Calendar() {
+    // Initialize to default values
+    daysInMonth = ConfigTFC.General.MISC.defaultMonthLength;
+    playerTime = 0;
+    calendarTime = (5L * daysInMonth * ICalendar.TICKS_IN_DAY) + (6 * ICalendar.TICKS_IN_HOUR);
+    doDaylightCycle = true;
+    arePlayersLoggedOn = false;
+  }
+
   public static void addBirthday(String birthday) {
     if (birthday != null) {
       String[] text = birthday.split(" ");
@@ -82,22 +97,6 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
       }
       BIRTHDAYS.computeIfAbsent(day, k -> name.toString());
     }
-  }
-
-  private long playerTime;
-  private long calendarTime;
-  private int daysInMonth;
-  private boolean doDaylightCycle;
-  private boolean arePlayersLoggedOn;
-  private MinecraftServer server;
-
-  public Calendar() {
-    // Initialize to default values
-    daysInMonth = ConfigTFC.General.MISC.defaultMonthLength;
-    playerTime = 0;
-    calendarTime = (5L * daysInMonth * ICalendar.TICKS_IN_DAY) + (6 * ICalendar.TICKS_IN_HOUR);
-    doDaylightCycle = true;
-    arePlayersLoggedOn = false;
   }
 
   /**
@@ -253,9 +252,9 @@ public final class Calendar implements INBTSerializable<NBTTagCompound> {
     }
     long deltaWorldTime = (world.getWorldTime() % ICalendar.TICKS_IN_DAY) - CALENDAR_TIME.getWorldTime();
     if (deltaWorldTime > 1 || deltaWorldTime < -1) {
-      ModuleCore.LOGGER.info("World time and Calendar Time are out of sync! Trying to fix...");
+      ModuleCore.LOGGER.debug("World time and Calendar Time are out of sync! Trying to fix...");
       ModuleCore.LOGGER
-        .info("Calendar Time = {} ({}), Player Time = {}, World Time = {}, doDaylightCycle = {}, ArePlayersLoggedOn = {}", calendarTime, CALENDAR_TIME.getWorldTime(), playerTime,
+        .debug("Calendar Time = {} ({}), Player Time = {}, World Time = {}, doDaylightCycle = {}, ArePlayersLoggedOn = {}", calendarTime, CALENDAR_TIME.getWorldTime(), playerTime,
           world.getWorldTime() % ICalendar.TICKS_IN_DAY, doDaylightCycle, arePlayersLoggedOn);
 
       // Check if tracking values are wrong

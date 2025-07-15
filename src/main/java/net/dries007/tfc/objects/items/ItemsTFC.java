@@ -24,7 +24,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
 import net.dries007.tfc.api.types.Tree;
@@ -49,7 +48,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockTorch;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.objects.items.metal.ItemMetalBucket;
 import net.dries007.tfc.objects.items.metal.ItemOreTFC;
-import net.dries007.tfc.objects.items.metal.ItemSmallOre;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockToolHead;
@@ -180,7 +178,7 @@ public final class ItemsTFC {
   public static void registerItems(RegistryEvent.Register<Item> event) {
     IForgeRegistry<Item> r = event.getRegistry();
     Builder<Item> simpleItems = ImmutableList.builder();
-    
+
     register(r, "metal/bucket/blue_steel", new ItemMetalBucket(Metal.BLUE_STEEL, Metal.ItemType.BUCKET), CT_METAL); //not a simple item, use a custom model
     register(r, "metal/bucket/red_steel", new ItemMetalBucket(Metal.RED_STEEL, Metal.ItemType.BUCKET), CT_METAL); //not a simple item, use a custom model
 //    register(r, "metal/iron_groove", new ItemGroove(Metal.WROUGHT_IRON, Metal.ItemType.GROOVE), CT_METAL);
@@ -194,17 +192,17 @@ public final class ItemsTFC {
       }
     }
 
-    {
-      Builder<ItemOreTFC> b = new Builder<>();
-      for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
-        b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK));
-        if (ore.isGraded()) {
-          simpleItems.add(register(r, "ore/small/" + ore.getRegistryName().getPath(), new ItemSmallOre(ore), CT_ROCK));
-        }
-      }
-      allOreItems = b.build();
-
-    }
+//    {
+//      Builder<ItemOreTFC> b = new Builder<>();
+//      for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
+//        b.add(register(r, "ore/" + ore.getRegistryName().getPath(), new ItemOreTFC(ore), CT_ROCK));
+//        if (ore.isGraded()) {
+//          simpleItems.add(register(r, "ore/small/" + ore.getRegistryName().getPath(), new ItemSmallOre(ore), CT_ROCK));
+//        }
+//      }
+//      allOreItems = b.build();
+//
+//    }
 
     {
       Builder<ItemGem> b = new Builder<>();

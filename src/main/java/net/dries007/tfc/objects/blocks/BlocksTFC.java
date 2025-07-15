@@ -32,7 +32,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Plant;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
@@ -340,17 +339,17 @@ public final class BlocksTFC {
       }
     }
 
-    {
-      Builder<BlockOreTFC> b = ImmutableList.builder();
-      for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
-        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-          b.add(register(r, ("ore/" + ore.getRegistryName().getPath() + "/" + rock.getRegistryName()
-            .getPath()).toLowerCase(), new BlockOreTFC(ore, rock), CT_ROCK));
-        }
-      }
-      allOreBlocks = b.build();
-      allOreBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-    }
+//    {
+//      Builder<BlockOreTFC> b = ImmutableList.builder();
+//      for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
+//        for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
+//          b.add(register(r, ("ore/" + ore.getRegistryName().getPath() + "/" + rock.getRegistryName()
+//            .getPath()).toLowerCase(), new BlockOreTFC(ore, rock), CT_ROCK));
+//        }
+//      }
+//      allOreBlocks = b.build();
+//      allOreBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
+//    }
 
     {
       Builder<BlockLogTFC> logs = ImmutableList.builder();

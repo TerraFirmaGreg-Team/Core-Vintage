@@ -19,7 +19,6 @@ import gregtech.common.items.ToolItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
-import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
@@ -30,7 +29,6 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
@@ -73,7 +71,6 @@ import net.dries007.tfc.compat.jei.wrappers.UnmoldRecipeWrapper;
 import net.dries007.tfc.compat.jei.wrappers.VeinWrapper;
 import net.dries007.tfc.compat.jei.wrappers.WeldingRecipeWrapper;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLoom;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
@@ -331,12 +328,12 @@ public final class TFCJEIPlugin implements IModPlugin {
     registry.addRecipes(rockLayerList, ROCK_LAYER_UID);
 
     // TODO Hide TFC Ores in HEI
-    IIngredientBlacklist blacklist = registry.getJeiHelpers().getIngredientBlacklist();
-    for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
-      for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
-        blacklist.addIngredientToBlacklist(new ItemStack(BlockOreTFC.get(ore, rock)));
-      }
-    }
+//    IIngredientBlacklist blacklist = registry.getJeiHelpers().getIngredientBlacklist();
+//    for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
+//      for (Ore ore : TFCRegistries.ORES.getValuesCollection()) {
+//        blacklist.addIngredientToBlacklist(new ItemStack(BlockOreTFC.get(ore, rock)));
+//      }
+//    }
 
     //Wraps all veins
     List<VeinWrapper> veinList = VeinRegistry.INSTANCE.getVeins().values()

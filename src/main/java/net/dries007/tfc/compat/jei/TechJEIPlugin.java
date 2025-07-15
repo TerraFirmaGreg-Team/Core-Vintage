@@ -24,7 +24,6 @@ import net.dries007.tfc.compat.jei.categories.GlassworkingCategory;
 import net.dries007.tfc.compat.jei.categories.SmelteryCategory;
 import net.dries007.tfc.compat.jei.categories.WireDrawingCategory;
 import net.dries007.tfc.compat.jei.wrappers.GlassworkingRecipeWrapper;
-import net.dries007.tfc.compat.jei.wrappers.SimpleRecipeWrapper;
 import net.dries007.tfc.compat.jei.wrappers.SmelteryRecipeWrapper;
 import net.dries007.tfc.compat.jei.wrappers.TechCastingRecipeWrapper;
 import net.dries007.tfc.compat.jei.wrappers.TechUnmoldRecipeWrapper;
@@ -58,15 +57,14 @@ public class TechJEIPlugin implements IModPlugin {
   @Override
   public void register(IModRegistry registry) {
     // Wire drawing
-    List<SimpleRecipeWrapper> wireList = TechRegistries.WIRE_DRAWING.getValuesCollection()
-      .stream()
-      .filter(x -> x.getIngredients().size()
-                   == 2) //Only shows recipes which have a wire drawing plate (so, it can be obtained)
-      .map(SimpleRecipeWrapper::new)
-      .collect(Collectors.toList());
-
-    registry.addRecipes(wireList, WIRE_DRAWING_UID);
-    registry.addRecipeCatalyst(new ItemStack(TechBlocks.WIRE_DRAW_BENCH), WIRE_DRAWING_UID);
+//    List<SimpleRecipeWrapper> wireList = TechRegistries.WIRE_DRAWING.getValuesCollection()
+//      .stream()
+//      .filter(x -> x.getIngredients().size() == 2) //Only shows recipes which have a wire drawing plate (so, it can be obtained)
+//      .map(SimpleRecipeWrapper::new)
+//      .collect(Collectors.toList());
+//
+//    registry.addRecipes(wireList, WIRE_DRAWING_UID);
+//    registry.addRecipeCatalyst(new ItemStack(TechBlocks.WIRE_DRAW_BENCH), WIRE_DRAWING_UID);
 
     // Glassworking (blowpipe)
     List<GlassworkingRecipeWrapper> glassList = TechRegistries.GLASSWORKING.getValuesCollection()

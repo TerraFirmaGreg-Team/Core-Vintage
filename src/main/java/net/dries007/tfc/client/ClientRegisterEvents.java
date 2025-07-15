@@ -47,7 +47,6 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.capability.IMoldHandler;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
-import net.dries007.tfc.api.types.Ore;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.render.TESRAnvil;
 import net.dries007.tfc.client.render.TESRBarrel;
@@ -64,7 +63,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.agriculture.BlockFruitTreeLeaves;
 import net.dries007.tfc.objects.blocks.plants.BlockPlantTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockFarmlandTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockOreTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
@@ -75,7 +73,6 @@ import net.dries007.tfc.objects.items.ItemGem;
 import net.dries007.tfc.objects.items.ItemGoldPan;
 import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
-import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TEBarrel;
 import net.dries007.tfc.objects.te.TEChestTFC;
@@ -128,15 +125,15 @@ public final class ClientRegisterEvents {
     }
 
     // Ore Items
-    for (ItemOreTFC item : ItemsTFC.getAllOreItems()) {
-      if (item.ore.isGraded()) {
-        for (Ore.Grade grade : Ore.Grade.values()) {
-          registerEnumBasedMetaItems("ore", grade, item);
-        }
-      } else {
-        registerEnumBasedMetaItems("ore", Ore.Grade.NORMAL, item);
-      }
-    }
+//    for (ItemOreTFC item : ItemsTFC.getAllOreItems()) {
+//      if (item.ore.isGraded()) {
+//        for (Ore.Grade grade : Ore.Grade.values()) {
+//          registerEnumBasedMetaItems("ore", grade, item);
+//        }
+//      } else {
+//        registerEnumBasedMetaItems("ore", Ore.Grade.NORMAL, item);
+//      }
+//    }
 
     // Gold Pan
     ModelLoader.registerItemVariants(ItemsTFC.GOLDPAN, Arrays.stream(ItemGoldPan.TYPES).map(e -> new ResourceLocation(TFC, "goldpan/" + e))
@@ -211,9 +208,9 @@ public final class ClientRegisterEvents {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
     }
 
-    for (Block block : BlocksTFC.getAllOreBlocks()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockOreTFC.GRADE).build());
-    }
+//    for (Block block : BlocksTFC.getAllOreBlocks()) {
+//      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockOreTFC.GRADE).build());
+//    }
 
     for (Block block : BlocksTFC.getAllWallBlocks()) {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockWall.VARIANT).build());

@@ -39,7 +39,7 @@ public class BlocksWood {
   public static Map<WoodType, BlockWoodSapling> POTTED_SAPLING;
   public static Map<WoodType, BlockWoodPlanks> PLANKS;
   public static Map<WoodType, BlockWoodStairs> STAIRS_PLANKS;
-  public static Map<WoodType, BlockWoodSlab.Double> SLAB_DOUBLE_PLANKS;
+  public static Map<WoodType, BlockWoodSlab> SLAB_DOUBLE_PLANKS;
   public static Map<WoodType, BlockWoodSlab.Half> SLAB_PLANKS;
   public static Map<WoodType, BlockWoodWall> WALL_PLANKS;
   public static Map<WoodType, BlockWoodBookshelf> BOOKSHELF;
@@ -70,7 +70,7 @@ public class BlocksWood {
 //    POTTED_SAPLING = registrar.addBlock(WoodType.getTypes(), BlockWoodSapling::new);
     PLANKS = registrar.addBlock(WoodType.getTypes(), BlockWoodPlanks::new);
     STAIRS_PLANKS = registrar.addBlock(WoodType.getTypes(), BlockWoodStairs::new);
-    SLAB_DOUBLE_PLANKS = registrar.addBlock(WoodType.getTypes(), BlockWoodSlab.Double::new);
+    SLAB_DOUBLE_PLANKS = registrar.addBlock(WoodType.getTypes(), BlockWoodSlab::new);
     SLAB_PLANKS = registrar.addBlock(WoodType.getTypes(), BlockWoodSlab.Half::new);
     WALL_PLANKS = registrar.addBlock(WoodType.getTypes(), BlockWoodWall::new);
     BOOKSHELF = registrar.addBlock(WoodType.getTypes(), BlockWoodBookshelf::new);

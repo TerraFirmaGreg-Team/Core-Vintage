@@ -88,7 +88,7 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     Predicate<IBlockState> isSuffocating;
     IRarity rarity;
     BlockRenderLayer renderLayer;
-    Function<Block, Item> itemBlock;
+    Function<Block, ? extends Item> itemBlock;
     String harvestTool;
 
     int harvestLevel;
@@ -189,8 +189,13 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       return this.self();
     }
 
+    public <B extends Block, I extends Item> Settings itemBlock(B block, Function<B, I> itemBlock) {
+      this.itemBlock = (Function<Block, ? extends Item>) itemBlock;
+      return this.self();
+    }
+
     @SuppressWarnings("unchecked")
-    public <B extends Block> Settings itemBlock(Function<B, Item> itemBlock) {
+    public <B extends Block, I extends Item> Settings itemBlock(Function<B, I> itemBlock) {
       this.itemBlock = (Function<Block, Item>) itemBlock;
       return this.self();
     }
@@ -418,6 +423,7 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       this.resource = resource;
       return this.self();
     }
+
 
     public interface ContextFunction<R> {
 

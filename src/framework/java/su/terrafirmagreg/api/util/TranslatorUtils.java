@@ -1,5 +1,7 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.api.library.types.type.Type;
+
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextComponentString;
@@ -37,14 +39,17 @@ public final class TranslatorUtils {
   }
 
   public static String getEnumName(Enum<?> anEnum) {
+
     return getEnumName(anEnum.getDeclaringClass().getSimpleName(), anEnum);
   }
 
   public static String getEnumName(String type, Enum<?> anEnum) {
+
     return ModUtils.localize(ModUtils.localize("enum"), type, anEnum.name());
   }
 
   public static String getEnumName(String type, String anEnum) {
+
     return ModUtils.localize(ModUtils.localize("enum"), type, anEnum);
   }
 
@@ -148,8 +153,28 @@ public final class TranslatorUtils {
     return result;
   }
 
+  public static String getDisplayTypeName(String localizedName, Type<?> type) {
+
+    String displayName;
+    if (canTranslateToLocal(localizedName)) {
+      displayName = TranslatorUtils.translateToLocal(localizedName);
+    } else {
+
+      displayName = String.format(
+        TranslatorUtils.translateToLocal(localizedName.replace(type.getName() + ".", "")),
+        TranslatorUtils.translateToLocal(type.getLocalizedName())
+      );
+    }
+
+    return displayName;
+  }
+
+  public static boolean canTranslateToLocal(String key) {
+    return net.minecraft.util.text.translation.I18n.canTranslate(key);
+  }
+
   public static String translateToLocal(String key) {
-    return net.minecraft.util.text.translation.I18n.canTranslate(key) ? net.minecraft.util.text.translation.I18n.translateToLocal(key) : net.minecraft.util.text.translation.I18n.translateToFallback(key);
+    return canTranslateToLocal(key) ? net.minecraft.util.text.translation.I18n.translateToLocal(key) : net.minecraft.util.text.translation.I18n.translateToFallback(key);
   }
 
   public static String translateToLocalFormatted(String key, Object... format) {

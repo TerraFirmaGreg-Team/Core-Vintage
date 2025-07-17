@@ -11,39 +11,30 @@ import net.minecraft.block.SoundType;
 import lombok.Getter;
 
 @Getter
-public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodEntry, IProviderBlockColor {
+public class BlockWoodSlab extends BaseBlockSlab implements IWoodEntry, IProviderBlockColor {
 
   protected final WoodType type;
 
-  protected Half halfSlab;
-  protected Double doubleSlab;
+  protected BlockWoodSlab halfSlab;
+  protected BlockWoodSlab doubleSlab;
 
-  private BlockWoodSlab(WoodType type) {
+  public BlockWoodSlab(WoodType type) {
     super(Settings.of(BlocksWood.PLANKS.get(type)));
 
     this.type = type;
 
     getSettings()
       .fireInfo(5, 20)
-      .sound(SoundType.WOOD);
+      .sound(SoundType.WOOD)
+      .registryKey(type.getRegistryKey("planks/slab_double"))
+      .customResource(type.getResource("planks/slab_double"));
   }
 
-  public static class Double extends BlockWoodSlab {
-
-    public Double(WoodType type) {
-      super(type);
-
-      getSettings()
-        .registryKey(type.getRegistryKey("slab_double/planks"))
-        .customResource(type.getResource("slab_double/planks"));
-
-    }
-
-    @Override
-    public boolean isDouble() {
-      return true;
-    }
+  @Override
+  public boolean isDouble() {
+    return true;
   }
+
 
   public static class Half extends BlockWoodSlab {
 
@@ -55,8 +46,8 @@ public abstract class BlockWoodSlab extends BaseBlockSlab implements IWoodEntry,
       this.halfSlab = this;
 
       getSettings()
-        .registryKey(type.getRegistryKey("slab/planks"))
-        .customResource(type.getResource("slab/planks"))
+        .registryKey(type.getRegistryKey("planks/slab"))
+        .customResource(type.getResource("planks/slab"))
         .oreDict("slab", "wood")
         .oreDict("slab", "wood", type);
 

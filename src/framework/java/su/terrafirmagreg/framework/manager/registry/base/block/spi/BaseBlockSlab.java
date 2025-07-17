@@ -42,7 +42,8 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
 
     getSettings()
       .ignoresProperties(DEFAULT)
-      .itemBlock(this.isDouble() ? null : BaseItemSlab::new)
+      .itemBlock(isDouble() ? null : BaseItemSlab::new)
+      .renderLayer(isDouble() ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID)
       .useNeighborBrightness();
 
     var state = getBlockState().getBaseState();
@@ -125,5 +126,71 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
   public abstract BaseBlockSlab getHalfSlab();
 
   public abstract BaseBlockSlab getDoubleSlab();
+//
+//  @Override
+//  public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+//    ItemStack stack = player.getHeldItem(hand);
+//
+//    if (!stack.isEmpty() && player.canPlayerEdit(pos, EnumFacing.UP, stack)) {
+//      Comparable<?> comparable = this.getHalfSlab().getTypeForItem(stack);
+//      IBlockState iblockstate = world.getBlockState(pos);
+//
+//      if (iblockstate.getBlock() == this.getHalfSlab()) {
+//        IProperty<?> iproperty = this.getHalfSlab().getVariantProperty();
+//        Comparable<?> comparable1 = iblockstate.getValue(iproperty);
+//        BlockSlab.EnumBlockHalf blockslab$enumblockhalf = (BlockSlab.EnumBlockHalf) iblockstate.getValue(BlockSlab.HALF);
+//
+//        if ((blockslab$enumblockhalf == BlockSlab.EnumBlockHalf.BOTTOM ||
+//             blockslab$enumblockhalf == BlockSlab.EnumBlockHalf.TOP) && comparable1 == comparable) {
+//
+//          IBlockState newState = this.makeState(iproperty, comparable1);
+//          AxisAlignedBB aabb = newState.getCollisionBoundingBox(world, pos);
+//
+//          if (aabb != Block.NULL_AABB && world.checkNoEntityCollision(aabb.offset(pos))) {
+//            world.setBlockState(pos, newState, 11);
+//            SoundType soundtype = this.getDoubleSlab().getSoundType(newState, world, pos, player);
+//            world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
+//              (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+//            stack.shrink(1);
+//
+//            if (player instanceof EntityPlayerMP) {
+//              CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos, stack);
+//            }
+//            return true;
+//          }
+//        }
+//      }
+//
+//      return this.tryPlace(player, stack, world, pos, comparable);
+//    }
+//    return false;
+//  }
+//
+//  protected <T extends Comparable<T>> IBlockState makeState(IProperty<T> p_185055_1_, Comparable<?> p_185055_2_) {
+//    return this.getDoubleSlab().getDefaultState().withProperty(p_185055_1_, (T) p_185055_2_);
+//  }
+//
+//  private boolean tryPlace(EntityPlayer player, ItemStack stack, World world, BlockPos pos, Object itemSlabType) {
+//    IBlockState iblockstate = world.getBlockState(pos);
+//
+//    if (iblockstate.getBlock() == this.getHalfSlab()) {
+//      Comparable<?> comparable = iblockstate.getValue(this.getHalfSlab().getVariantProperty());
+//
+//      if (comparable == itemSlabType) {
+//        IBlockState newState = this.makeState(this.getHalfSlab().getVariantProperty(), comparable);
+//        AxisAlignedBB aabb = newState.getCollisionBoundingBox(world, pos);
+//
+//        if (aabb != Block.NULL_AABB && world.checkNoEntityCollision(aabb.offset(pos))) {
+//          world.setBlockState(pos, newState, 11);
+//          SoundType soundtype = this.getDoubleSlab().getSoundType(newState, world, pos, player);
+//          world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
+//            (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+//          stack.shrink(1);
+//          return true;
+//        }
+//      }
+//    }
+//    return false;
+//  }
 
 }

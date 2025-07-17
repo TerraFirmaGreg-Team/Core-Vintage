@@ -40,7 +40,7 @@ public class BlocksSoil {
   public static Map<SoilType, BlockSoilMud> MUD;
   public static Map<SoilType, BlockSoilMudBricks> MUD_BRICKS;
   public static Map<SoilType, BlockSoilMudStairs> MUD_BRICKS_STAIRS;
-  public static Map<SoilType, BlockSoilMudSlab.Double> MUD_BRICKS_SLAB_DOUBLE;
+  public static Map<SoilType, BlockSoilMudSlab> MUD_BRICKS_SLAB_DOUBLE;
   public static Map<SoilType, BlockSoilMudSlab.Half> MUD_BRICKS_SLAB;
   public static Map<SoilType, BlockSoilMudWall> MUD_BRICKS_WALL;
   public static Map<SoilType, BlockSoilGrass> DRYING_BRICKS;
@@ -64,7 +64,7 @@ public class BlocksSoil {
     MUD = registry.addBlock(SoilType.getTypes(), BlockSoilMud::new);
     MUD_BRICKS = registry.addBlock(SoilType.getTypes(), BlockSoilMudBricks::new);
     MUD_BRICKS_STAIRS = registry.addBlock(SoilType.getTypes(), BlockSoilMudStairs::new);
-    MUD_BRICKS_SLAB_DOUBLE = registry.addBlock(SoilType.getTypes(), BlockSoilMudSlab.Double::new);
+    MUD_BRICKS_SLAB_DOUBLE = registry.addBlock(SoilType.getTypes(), BlockSoilMudSlab::new);
     MUD_BRICKS_SLAB = registry.addBlock(SoilType.getTypes(), BlockSoilMudSlab.Half::new);
     MUD_BRICKS_WALL = registry.addBlock(SoilType.getTypes(), BlockSoilMudWall::new);
   }

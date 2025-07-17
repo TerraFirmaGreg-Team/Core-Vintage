@@ -20,8 +20,8 @@ public class BlockWoodStairs extends BaseBlockStairs implements IWoodEntry {
     this.type = type;
 
     getSettings()
-      .registryKey(type.getRegistryKey("stairs/planks"))
-      .customResource(type.getResource("stairs/planks"))
+      .registryKey(type.getRegistryKey("planks/stairs"))
+      .customResource(type.getResource("planks/stairs"))
       .harvestLevel(ToolClasses.AXE, 0)
       .fireInfo(5, 20)
       .oreDict("stairs")

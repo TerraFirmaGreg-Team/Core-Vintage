@@ -84,6 +84,7 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
 
   @Override
   public String getTranslationKey() {
+
     return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
   }
 

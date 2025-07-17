@@ -63,7 +63,7 @@ public class RegistryService implements IRegistryService {
         }
         registry.register((T) registryEntry);
         registryEntry.postRegister();
-        RegistryManager.LOGGER.info("Registry {}: {}", registryEntry.getRegistryType().getSimpleName(), registryEntry.getRegistryName());
+        RegistryManager.LOGGER.info("Service {}: {}", registryEntry.getRegistryType().getSimpleName(), registryEntry.getRegistryName());
       }
     });
   }

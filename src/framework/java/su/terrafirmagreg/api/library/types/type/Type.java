@@ -6,7 +6,6 @@ import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentTranslation;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -47,9 +46,9 @@ public abstract class Type<T extends Type<T>> implements Comparable<Type<T>> {
   public String getResource(String variant) {
     return String.format("%s/%s", nameType, variant);
   }
-  
+
   public String getLocalizedName() {
-    return new TextComponentTranslation(String.format("%s.type.%s.name", nameType, this)).getFormattedText();
+    return ModUtils.localize(ModUtils.localize("type"), nameType, name);
   }
 
   public String getRegistryKey(String variant) {

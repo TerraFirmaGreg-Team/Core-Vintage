@@ -1,7 +1,7 @@
 package su.terrafirmagreg.framework.manager.registry.base.item.spi;
 
-import su.terrafirmagreg.api.data.LocalizeKeys;
-import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.api.library.types.type.IType;
+import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
 
 import net.minecraft.block.Block;
@@ -39,12 +39,28 @@ public class BaseItemDoor extends ItemDoor implements IItemEntry {
 
   @Override
   public String getTranslationKey() {
-    return ModUtils.localize(LocalizeKeys.BLOCK, block.getRegistryName());
+
+    return block.getTranslationKey();
   }
 
   @Override
   public String getTranslationKey(ItemStack stack) {
-    return ModUtils.localize(LocalizeKeys.BLOCK, block.getRegistryName());
+
+    return getTranslationKey();
+  }
+
+  @Override
+  public String getItemStackDisplayName(ItemStack stack) {
+
+    String displayName;
+
+    if (block instanceof IType<?> type) {
+      displayName = TranslatorUtils.getDisplayTypeName(block.getLocalizedName(), type.getType());
+    } else {
+      displayName = super.getItemStackDisplayName(stack);
+    }
+
+    return displayName;
   }
 
   /**

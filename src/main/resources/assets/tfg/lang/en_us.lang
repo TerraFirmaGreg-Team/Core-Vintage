@@ -282,132 +282,160 @@ effect.tfg.core.caffeine=Caffeine
 
 # Module Soil ###############################################
 
+## Soil Type
+type.tfg.soil.silt=Silt
+type.tfg.soil.loam=Loam
+type.tfg.soil.sandy_loam=Sandy Loam
+type.tfg.soil.silty_loam=Silty Loam
+type.tfg.soil.humus=Humus
+
 ## Item Group
 item_group.tfg.soil.name=[ TFG ] Soil
 
 ## Block
+block.tfg.soil.grass.name=Grass (%s)
+block.tfg.soil.dry_grass.name=Dry Grass (%s)
+block.tfg.soil.sparse_grass.name=Sparse Grass (%s)
+block.tfg.soil.podzol.name=Podzol (%s)
+block.tfg.soil.mycelium.name=Mycelium (%s)
+block.tfg.soil.coarse_dirt.name=Coarse Dirt (%s)
+block.tfg.soil.rooted_dirt.name=Rooted Dirt (%s)
+block.tfg.soil.dirt.name=Dirt (%s)
+block.tfg.soil.farmland.name=Farmland (%s)
+block.tfg.soil.grass_path.name=Grass Path (%s)
+block.tfg.soil.mud.name=Mud (%s)
+block.tfg.soil.mud_bricks.name=Mud Bricks (%s)
+block.tfg.soil.mud_bricks.stairs.name=Mud Bricks Stairs (%s)
+block.tfg.soil.mud_bricks.slab.name=Mud Bricks Slab (%s)
+block.tfg.soil.mud_bricks.wall.name=Mud Bricks Wall (%s)
+
 block.tfg.soil.peat_grass.name=Peat Grass
 block.tfg.soil.peat.name=Peat
 
-block.tfg.soil.grass.silt.name=Silt Grass
-block.tfg.soil.grass.loam.name=Loam Grass
-block.tfg.soil.grass.sandy_loam.name=Sandy Loam Grass
-block.tfg.soil.grass.silty_loam.name=Silty Loam Grass
-block.tfg.soil.grass.humus.name=Humus Grass
-
-block.tfg.soil.dry_grass.silt.name=Silt Dry Grass
-block.tfg.soil.dry_grass.loam.name=Loam Dry Grass
-block.tfg.soil.dry_grass.sandy_loam.name=Sandy Loam Dry Grass
-block.tfg.soil.dry_grass.silty_loam.name=Silty Loam Dry Grass
-block.tfg.soil.dry_grass.humus.name=Humus Dry Grass
-
-block.tfg.soil.sparse_grass.silt.name=Silt Sparse Grass
-block.tfg.soil.sparse_grass.loam.name=Loam Sparse Grass
-block.tfg.soil.sparse_grass.sandy_loam.name=Sandy Loam Sparse Grass
-block.tfg.soil.sparse_grass.silty_loam.name=Silty Loam Sparse Grass
-block.tfg.soil.sparse_grass.humus.name=Humus Sparse Grass
-
-block.tfg.soil.podzol.silt.name=Silt Podzol
-block.tfg.soil.podzol.loam.name=Loam Podzol
-block.tfg.soil.podzol.sandy_loam.name=Sandy Loam Podzol
-block.tfg.soil.podzol.silty_loam.name=Silty Loam Podzol
-block.tfg.soil.podzol.humus.name=Humus Podzol
-
-block.tfg.soil.mycelium.silt.name=Silt Mycelium
-block.tfg.soil.mycelium.loam.name=Loam Mycelium
-block.tfg.soil.mycelium.sandy_loam.name=Sandy Loam Mycelium
-block.tfg.soil.mycelium.silty_loam.name=Silty Loam Mycelium
-block.tfg.soil.mycelium.humus.name=Humus Mycelium
-
-block.tfg.soil.coarse_dirt.silt.name=Silt Coarse Dirt
-block.tfg.soil.coarse_dirt.loam.name=Loam Coarse Dirt
-block.tfg.soil.coarse_dirt.sandy_loam.name=Sandy Loam Coarse Dirt
-block.tfg.soil.coarse_dirt.silty_loam.name=Silty Loam Coarse Dirt
-block.tfg.soil.coarse_dirt.humus.name=Humus Coarse Dirt
-
-block.tfg.soil.rooted_dirt.silt.name=Silt Rooted Dirt
-block.tfg.soil.rooted_dirt.loam.name=Loam Rooted Dirt
-block.tfg.soil.rooted_dirt.sandy_loam.name=Sandy Loam Rooted Dirt
-block.tfg.soil.rooted_dirt.silty_loam.name=Silty Loam Rooted Dirt
-block.tfg.soil.rooted_dirt.humus.name=Humus Rooted Dirt
-
-block.tfg.soil.dirt.silt.name=Silt Dirt
-block.tfg.soil.dirt.loam.name=Loam Dirt
-block.tfg.soil.dirt.sandy_loam.name=Sandy Loam Dirt
-block.tfg.soil.dirt.silty_loam.name=Silty Loam Dirt
-block.tfg.soil.dirt.humus.name=Humus Dirt
-
-block.tfg.soil.farmland.silt.name=Silt Farmland
-block.tfg.soil.farmland.loam.name=Loam Farmland
-block.tfg.soil.farmland.sandy_loam.name=Sandy Loam Farmland
-block.tfg.soil.farmland.silty_loam.name=Silty Loam Farmland
-block.tfg.soil.farmland.humus.name=Humus Farmland
-
-block.tfg.soil.grass_path.silt.name=Silt Grass Path
-block.tfg.soil.grass_path.loam.name=Loam Grass Path
-block.tfg.soil.grass_path.sandy_loam.name=Sandy Loam Grass Path
-block.tfg.soil.grass_path.silty_loam.name=Silty Loam Grass Path
-block.tfg.soil.grass_path.humus.name=Humus Grass Path
-
-block.tfg.soil.mud.silt.name=Silt Mud
-block.tfg.soil.mud.loam.name=Loam Mud
-block.tfg.soil.mud.sandy_loam.name=Sandy Loam Mud
-block.tfg.soil.mud.silty_loam.name=Silty Loam Mud
-block.tfg.soil.mud.humus.name=Humus Mud
-
-block.tfg.soil.mud_bricks.silt.name=Silt Mud Bricks
-block.tfg.soil.mud_bricks.loam.name=Loam Mud Bricks
-block.tfg.soil.mud_bricks.sandy_loam.name=Sandy Loam Mud Bricks
-block.tfg.soil.mud_bricks.silty_loam.name=Silty Loam Mud Bricks
-block.tfg.soil.mud_bricks.humus.name=Humus Mud Bricks
-
-block.tfg.soil.mud_bricks.stairs.silt.name=Silt Mud Bricks Stairs
-block.tfg.soil.mud_bricks.stairs.loam.name=Loam Mud Bricks Stairs
-block.tfg.soil.mud_bricks.stairs.sandy_loam.name=Sandy Loam Mud Bricks Stairs
-block.tfg.soil.mud_bricks.stairs.silty_loam.name=Silty Loam Mud Bricks Stairs
-block.tfg.soil.mud_bricks.stairs.humus.name=Humus Mud Bricks Stairs
-
-block.tfg.soil.mud_bricks.slab.silt.name=Silt Mud Bricks Slab
-block.tfg.soil.mud_bricks.slab.loam.name=Loam Mud Bricks Slab
-block.tfg.soil.mud_bricks.slab.sandy_loam.name=Sandy Loam Mud Bricks Slab
-block.tfg.soil.mud_bricks.slab.silty_loam.name=Silty Loam Mud Bricks Slab
-block.tfg.soil.mud_bricks.slab.humus.name=Humus Mud Bricks Slab
-
-block.tfg.soil.mud_bricks.wall.silt.name=Silt Mud Bricks Wall
-block.tfg.soil.mud_bricks.wall.loam.name=Loam Mud Bricks Wall
-block.tfg.soil.mud_bricks.wall.sandy_loam.name=Sandy Loam Mud Bricks Wall
-block.tfg.soil.mud_bricks.wall.silty_loam.name=Silty Loam Mud Bricks Wall
-block.tfg.soil.mud_bricks.wall.humus.name=Humus Mud Bricks Wall
 
 ## Item
-item.tfg.soil.pile.silt.name=Silt Pile
-item.tfg.soil.pile.loam.name=Loam Pile
-item.tfg.soil.pile.sandy_loam.name=Sandy Loam Pile
-item.tfg.soil.pile.silty_loam.name=Silty Loam Pile
-item.tfg.soil.pile.humus.name=Humus Pile
-
-item.tfg.soil.mud_ball.silt.name=Silt Mud Ball
-item.tfg.soil.mud_ball.loam.name=Loam Mud Ball
-item.tfg.soil.mud_ball.sandy_loam.name=Sandy Loam Mud Ball
-item.tfg.soil.mud_ball.silty_loam.name=Silty Loam Mud Ball
-item.tfg.soil.mud_ball.humus.name=Humus Mud Ball
-
-item.tfg.soil.mud_brick.silt.name=Silt Mud Brick
-item.tfg.soil.mud_brick.loam.name=Loam Mud Brick
-item.tfg.soil.mud_brick.sandy_loam.name=Sandy Loam Mud Brick
-item.tfg.soil.mud_brick.silty_loam.name=Silty Loam Mud Brick
-item.tfg.soil.mud_brick.humus.name=Humus Mud Brick
-
-item.tfg.soil.mud_brick_wet.silt.name=Silt Mud Brick Wet
-item.tfg.soil.mud_brick_wet.loam.name=Loam Mud Brick Wet
-item.tfg.soil.mud_brick_wet.sandy_loam.name=Sandy Loam Mud Brick Wet
-item.tfg.soil.mud_brick_wet.silty_loam.name=Silty Loam Mud Brick Wet
-item.tfg.soil.mud_brick_wet.humus.name=Humus Mud Brick Wet
+item.tfg.soil.pile.name=Pile (%s)
+item.tfg.soil.mud_ball.name=Mud Ball (%s)
+item.tfg.soil.mud_brick.name=Mud Brick (%s)
+item.tfg.soil.mud_brick_wet.name=Mud Brick Wet (%s)
 
 # Module Wood ###############################################
 
+## Wood Type
+type.tfg.wood.hemlock=Hemlock
+type.tfg.wood.hornbeam=Hornbeam
+type.tfg.wood.rowan=Rowan
+type.tfg.wood.holly=Holly
+type.tfg.wood.mangrove=Mangrove
+type.tfg.wood.pink_cherry=Pink Cherry
+type.tfg.wood.rubber_fig=Rubber Fig
+type.tfg.wood.joshua=Joshua
+type.tfg.wood.red_elm=Red Elm
+type.tfg.wood.messmate=Messmate
+type.tfg.wood.eucalyptus=Eucalyptus
+type.tfg.wood.ironwood=Ironwood
+type.tfg.wood.limba=Limba
+type.tfg.wood.kauri=Kauri
+type.tfg.wood.birch=Birch
+type.tfg.wood.cypress=Cypress
+type.tfg.wood.palm=Palm
+type.tfg.wood.cocobolo=Cocobolo
+type.tfg.wood.aspen=Aspen
+type.tfg.wood.blackwood=Blackwood
+type.tfg.wood.black_walnut=Black Walnut
+type.tfg.wood.ginkgo=Ginkgo
+type.tfg.wood.brazilwood=Brazilwood
+type.tfg.wood.pine=Pine
+type.tfg.wood.acacia=Acacia
+type.tfg.wood.maple=Maple
+type.tfg.wood.hevea=Hevea
+type.tfg.wood.nordmann_fir=Nordmann Fir
+type.tfg.wood.douglas_fir=Douglas Fir
+type.tfg.wood.purpleheart=Purpleheart
+type.tfg.wood.locust=Locust
+type.tfg.wood.white_cherry=White Cherry
+type.tfg.wood.greenheart=Greenheart
+type.tfg.wood.larch=Larch
+type.tfg.wood.whitebeam=Whitebeam
+type.tfg.wood.mountain_ash=Mountain Ash
+type.tfg.wood.marblewood=Marblewood
+type.tfg.wood.oak=Oak
+type.tfg.wood.kapok=Kapok
+type.tfg.wood.baobab=Baobab
+type.tfg.wood.chestnut=Chestnut
+type.tfg.wood.ash=Ash
+type.tfg.wood.jacaranda=Jacaranda
+type.tfg.wood.hazel=Hazel
+type.tfg.wood.european_oak=European Oak
+type.tfg.wood.butternut=Butternut
+type.tfg.wood.hickory=Hickory
+type.tfg.wood.white_cedar=White Cedar
+type.tfg.wood.ebony=Ebony
+type.tfg.wood.hawthorn=Hawthorn
+type.tfg.wood.zebrawood=Zebrawood
+type.tfg.wood.spruce=Spruce
+type.tfg.wood.white_elm=White Elm
+type.tfg.wood.poplar=Poplar
+type.tfg.wood.teak=Teak
+type.tfg.wood.iroko=Iroko
+type.tfg.wood.juniper=Juniper
+type.tfg.wood.fruitwood=Fruitwood
+type.tfg.wood.redwood=Redwood
+type.tfg.wood.rosewood=Rosewood
+type.tfg.wood.ipe=Ipe
+type.tfg.wood.fever=Fever
+type.tfg.wood.wenge=Wenge
+type.tfg.wood.beech=Beech
+type.tfg.wood.logwood=Logwood
+type.tfg.wood.angelim=Angelim
+type.tfg.wood.yellow_meranti=Yellow Meranti
+type.tfg.wood.mahoe=Mahoe
+type.tfg.wood.syzygium=Syzygium
+type.tfg.wood.red_cedar=Red Cedar
+type.tfg.wood.mahogany=Mahogany
+type.tfg.wood.maclura=Maclura
+type.tfg.wood.sequoia=Sequoia
+type.tfg.wood.walnut=Walnut
+type.tfg.wood.african_padauk=African Padauk
+type.tfg.wood.alder=Alder
+type.tfg.wood.pink_ivory=Pink Ivory
+type.tfg.wood.bald_cypress=Bald Cypress
+type.tfg.wood.sycamore=Sycamore
+type.tfg.wood.box=Box
+type.tfg.wood.norway_spruce=Norway Spruce
+type.tfg.wood.willow=Willow
+type.tfg.wood.yew=Yew
+type.tfg.wood.sweetgum=Sweetgum
+
 ## Item Group
 item_group.tfg.wood.name=[ TFG ] Wood
+
+## Block
+block.tfg.wood.log.name=Log (%s)
+block.tfg.wood.planks.name=Planks (%s)
+block.tfg.wood.planks.stairs.name=Planks Stairs (%s)
+block.tfg.wood.planks.wall.name=Planks Wall (%s)
+block.tfg.wood.planks.slab.name=Planks Slab (%s)
+block.tfg.wood.bookshelf.name=Bookshelf (%s)
+block.tfg.wood.door.name=Door (%s)
+block.tfg.wood.trapdoor.name=Trapdoor (%s)
+block.tfg.wood.fence.name=Fence (%s)
+block.tfg.wood.fence_log.name=Log Fence (%s)
+block.tfg.wood.fence_gate.name=Fence Gate (%s)
+block.tfg.wood.fence_gate_log.name=Log Fence Gate (%s)
+block.tfg.wood.button.name=Button (%s)
+block.tfg.wood.pressure_plate.name=Pressure Plate (%s)
+block.tfg.wood.support.name=Support (%s)
+block.tfg.wood.workbench.name=Workbench (%s)
+block.tfg.wood.ladder.name=Ladder (%s)
+
+## Item
+item.tfg.wood.lumber.name=Lumber (%s)
+item.tfg.wood.boat.name=Boat (%s)
+item.tfg.wood.wheel.name=Wheel (%s)
+item.tfg.wood.supply_cart.name=Supply Cart (%s)
+item.tfg.wood.animal_cart.name=Animal Cart (%s)
+item.tfg.wood.plow_cart.name=Plow Cart (%s)
 
 # Module Metal ##############################################
 

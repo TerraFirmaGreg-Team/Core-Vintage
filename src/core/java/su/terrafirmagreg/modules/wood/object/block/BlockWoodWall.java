@@ -21,8 +21,8 @@ public class BlockWoodWall extends BaseBlockWall implements IWoodEntry {
     this.type = type;
 
     getSettings()
-      .registryKey(type.getRegistryKey("wall/planks"))
-      .customResource(type.getResource("wall/planks"))
+      .registryKey(type.getRegistryKey("planks/wall"))
+      .customResource(type.getResource("planks/wall"))
       .sound(SoundType.WOOD)
       .fireInfo(5, 20)
       .oreDict("wall", "wood")

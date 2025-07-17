@@ -5,48 +5,30 @@ import su.terrafirmagreg.modules.soil.api.types.ISoilEntry;
 import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
-import net.minecraft.util.BlockRenderLayer;
-
 import lombok.Getter;
 
 @Getter
-public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilEntry {
+public class BlockSoilMudSlab extends BaseBlockSlab implements ISoilEntry {
 
   protected final SoilType type;
 
-  protected Half halfSlab;
-  protected Double doubleSlab;
+  protected BlockSoilMudSlab halfSlab;
+  protected BlockSoilMudSlab doubleSlab;
 
-  private BlockSoilMudSlab(SoilType type) {
-    super(Settings.of(BlocksSoil.MUD_BRICKS.get(type)));
+  public BlockSoilMudSlab(SoilType type) {
+    super(BlocksSoil.MUD_BRICKS.get(type));
 
     this.type = type;
 
     getSettings()
+      .registryKey(type.getRegistryKey("mud_bricks/slab_double"))
       .oreDict("slab")
       .oreDict("slab", "mud", "bricks");
   }
 
-  public static class Double extends BlockSoilMudSlab {
-
-    public Double(SoilType type) {
-      super(type);
-
-      getSettings()
-        .registryKey(type.getRegistryKey("mud_bricks/slab_double"))
-        .renderLayer(BlockRenderLayer.CUTOUT);
-    }
-
-    @Override
-    public boolean isDouble() {
-      return true;
-    }
-
-    @Override
-    public Double getDoubleSlab() {
-      return this;
-    }
-
+  @Override
+  public boolean isDouble() {
+    return true;
   }
 
   public static class Half extends BlockSoilMudSlab {
@@ -65,11 +47,6 @@ public abstract class BlockSoilMudSlab extends BaseBlockSlab implements ISoilEnt
     @Override
     public boolean isDouble() {
       return false;
-    }
-
-    @Override
-    public Half getHalfSlab() {
-      return this;
     }
 
   }

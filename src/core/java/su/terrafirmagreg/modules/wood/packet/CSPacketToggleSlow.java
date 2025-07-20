@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.wood.packet;
 
 import su.terrafirmagreg.framework.manager.packet.base.BasePacketServer;
 import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
-import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
+import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCart;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,5 +29,5 @@ public class CSPacketToggleSlow extends BasePacketServer {
       }
     }
   }
-  
+
 }

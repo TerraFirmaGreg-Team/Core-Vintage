@@ -2,7 +2,9 @@ package su.terrafirmagreg.modules.wood.object.entity;
 
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.client.render.RenderWoodBoat;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.entity.MoverType;
@@ -160,5 +162,16 @@ public class EntityWoodBoat extends EntityBoat {
     if (nbt.hasKey("wood")) {
       this.dataManager.set(WOOD_NAME, nbt.getString("wood"));
     }
+  }
+
+  public static class EntityTypeWoodBoat extends BaseEntityType {
+
+    public EntityTypeWoodBoat() {
+      super(Settings.of()
+        .registryKey("boat")
+        .entity(EntityWoodBoat.class, RenderWoodBoat::new)
+        .updateInfo(160, 20, true));
+    }
+
   }
 }

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.wood.object.item;
 
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodAnimalCart;
-import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
+import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCart;
 import su.terrafirmagreg.modules.wood.object.item.spi.ItemWoodCart;
 
 import net.minecraft.world.World;

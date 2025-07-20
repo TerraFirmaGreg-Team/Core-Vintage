@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.wood.object.entity;
+package su.terrafirmagreg.modules.wood.object.entity.spi;
 
 import su.terrafirmagreg.api.util.NBTUtils;
 

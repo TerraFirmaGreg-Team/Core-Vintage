@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood.object.container;
 
-import su.terrafirmagreg.modules.wood.object.entity.EntityWoodCart;
+import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCart;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerChest;

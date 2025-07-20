@@ -3,11 +3,14 @@ package su.terrafirmagreg.modules.wood.object.entity;
 import su.terrafirmagreg.api.client.GuiHandler;
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodSupplyCart;
+import su.terrafirmagreg.modules.wood.client.render.RenderWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodSupplyCart;
+import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCartInventory;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -157,4 +160,15 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory
     return new GuiWoodSupplyCart(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, inventory);
   }
 
+
+  public static class EntityTypeWoodSupplyCart extends BaseEntityType {
+
+    public EntityTypeWoodSupplyCart() {
+      super(Settings.of()
+        .registryKey("supply_cart")
+        .entity(EntityWoodSupplyCart.class, RenderWoodSupplyCart::new)
+        .updateInfo(80, 3, false));
+    }
+
+  }
 }

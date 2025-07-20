@@ -1,7 +1,10 @@
 package su.terrafirmagreg.modules.wood.object.entity;
 
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.wood.ConfigWood;
+import su.terrafirmagreg.modules.wood.client.render.RenderWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
+import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCart;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -124,6 +127,17 @@ public class EntityWoodAnimalCart extends EntityWoodCart {
 
   protected boolean canFitPassenger(@NotNull Entity passenger) {
     return this.getPassengers().size() < 2;
+  }
+
+  public static class EntityTypeWoodAnimalCart extends BaseEntityType {
+
+    public EntityTypeWoodAnimalCart() {
+      super(Settings.of()
+        .registryKey("animal_cart")
+        .entity(EntityWoodAnimalCart.class, RenderWoodAnimalCart::new)
+        .updateInfo(80, 3, false));
+    }
+
   }
 
 }

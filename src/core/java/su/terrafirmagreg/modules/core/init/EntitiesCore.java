@@ -3,13 +3,13 @@ package su.terrafirmagreg.modules.core.init;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.core.object.entity.EntitySeatOn.EntityTypeSeatOn;
 
-public final class EntitiesCore {
+public class EntitiesCore {
 
   public static EntityTypeSeatOn SIT_BLOCK;
 
-  public static void onRegister(IRegistryRegistrar registry) {
+  public static void onRegister(IRegistryRegistrar registrar) {
 
-    SIT_BLOCK = registry.addEntity(new EntityTypeSeatOn());
+    SIT_BLOCK = registrar.addEntity(new EntityTypeSeatOn());
 
   }
 }

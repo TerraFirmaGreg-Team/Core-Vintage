@@ -7,6 +7,7 @@ import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.base.BaseModule;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
+import su.terrafirmagreg.modules.wood.init.EntitiesWood;
 import su.terrafirmagreg.modules.wood.init.FeaturesWood;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.init.PacketsWood;
@@ -38,6 +39,7 @@ public class ModuleWood extends BaseModule {
 
     BlocksWood.onRegister(registrar);
     ItemsWood.onRegister(registrar);
+    EntitiesWood.onRegister(registrar);
 
   }
 

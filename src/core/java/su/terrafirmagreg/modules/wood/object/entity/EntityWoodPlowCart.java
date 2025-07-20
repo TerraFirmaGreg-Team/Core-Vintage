@@ -7,13 +7,16 @@ import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.RegistryUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.soil.api.types.ISoilEntry;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.client.gui.GuiWoodPlow;
+import su.terrafirmagreg.modules.wood.client.render.RenderWoodPlowCart;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodPlowCart;
+import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCartInventory;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -208,16 +211,24 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
   }
 
   @Override
-  public ContainerWoodPlowCart getContainer(InventoryPlayer inventoryPlayer, World world,
-                                            IBlockState state, BlockPos pos) {
+  public ContainerWoodPlowCart getContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
     return new ContainerWoodPlowCart(inventoryPlayer, inventory, this, inventoryPlayer.player);
   }
 
   @Override
   @SideOnly(Side.CLIENT)
-  public GuiWoodPlow getGuiContainer(InventoryPlayer inventoryPlayer, World world,
-                                     IBlockState state, BlockPos pos) {
-    return new GuiWoodPlow(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer,
-      inventory);
+  public GuiWoodPlow getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
+    return new GuiWoodPlow(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, inventory);
+  }
+
+  public static class EntityTypeWoodPlowCart extends BaseEntityType {
+
+    public EntityTypeWoodPlowCart() {
+      super(Settings.of()
+        .registryKey("plow_cart")
+        .entity(EntityWoodPlowCart.class, RenderWoodPlowCart::new)
+        .updateInfo(80, 3, false));
+    }
+
   }
 }

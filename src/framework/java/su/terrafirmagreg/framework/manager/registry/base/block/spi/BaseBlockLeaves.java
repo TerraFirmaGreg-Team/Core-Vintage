@@ -1,6 +1,8 @@
 package su.terrafirmagreg.framework.manager.registry.base.block.spi;
 
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 
 import net.minecraft.block.BlockLeaves;
@@ -63,6 +65,12 @@ public abstract class BaseBlockLeaves extends BlockLeaves implements IBlockEntry
      */
     this.leavesFancy = GameUtils.getGameSettings().fancyGraphics;
     return true;// super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+  }
+
+  @Override
+  public String getTranslationKey() {
+
+    return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
   }
 
   @Override

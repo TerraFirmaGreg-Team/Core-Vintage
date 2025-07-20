@@ -61,7 +61,7 @@ public final class TileUtils {
     if (block instanceof IProviderTile provider) {
       var registryName = block.getRegistryName();
       assert registryName != null;
-      TileUtils.addTile(provider.getTileClass(), registryName.getNamespace(), registryName.getPath());
+      TileUtils.addTile(provider.getTileClass(), registryName.getNamespace(), provider.getTileClass().getSimpleName().replaceFirst("Tile", ""));
     }
   }
 

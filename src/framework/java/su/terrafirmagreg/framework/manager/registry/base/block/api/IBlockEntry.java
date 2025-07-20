@@ -77,8 +77,8 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     final Material material;
     final MapColor mapColor;
 
-    IProperty<?>[] ignoredProperties = null;
-    ResourceLocation resource = null;
+    IProperty<?>[] ignoredProperties;
+    ResourceLocation resource;
     CreativeTabs group;
     SoundType soundType;
 

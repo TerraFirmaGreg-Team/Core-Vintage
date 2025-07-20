@@ -56,7 +56,7 @@ public class BlockWoodSapling extends BaseBlockSapling implements IWoodEntry, IG
 
     getSettings()
       .registryKey(type.getRegistryKey("sapling"))
-      .ignoresProperties(STAGE_2)
+      //.ignoresProperties(STAGE_2)
       .sound(SoundType.PLANT)
       .itemBlock(ItemBlockWoodSapling::new)
       .hardness(0.0F)

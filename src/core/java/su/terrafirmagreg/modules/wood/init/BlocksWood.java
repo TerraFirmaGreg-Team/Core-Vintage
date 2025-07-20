@@ -65,8 +65,8 @@ public class BlocksWood {
 
     LOG = registrar.addBlock(WoodType.getTypes(), BlockWoodLog::new);
 //    STRIPPED_LOG = registrar.addBlock(WoodType.getTypes(), BlockWoodLog::new);
-//    LEAVES = registrar.addBlock(WoodType.getTypes(), BlockWoodLeaves::new);
-//    SAPLING = registrar.addBlock(WoodType.getTypes(), BlockWoodSapling::new);
+    LEAVES = registrar.addBlock(WoodType.getTypes(), BlockWoodLeaves::new);
+    SAPLING = registrar.addBlock(WoodType.getTypes(), BlockWoodSapling::new);
 //    POTTED_SAPLING = registrar.addBlock(WoodType.getTypes(), BlockWoodSapling::new);
     PLANKS = registrar.addBlock(WoodType.getTypes(), BlockWoodPlanks::new);
     STAIRS_PLANKS = registrar.addBlock(WoodType.getTypes(), BlockWoodStairs::new);
@@ -82,13 +82,13 @@ public class BlocksWood {
     FENCE_GATE_LOG = registrar.addBlock(WoodType.getTypes(), BlockWoodFenceGateLog::new);
     BUTTON = registrar.addBlock(WoodType.getTypes(), BlockWoodButton::new);
     PRESSURE_PLATE = registrar.addBlock(WoodType.getTypes(), BlockWoodPressurePlate::new);
-    //TOOL_RACK = registrar.addBlock(WoodType.getTypes(), BlockWoodToolRack::new);
+    TOOL_RACK = registrar.addBlock(WoodType.getTypes(), BlockWoodToolRack::new);
     SUPPORT = registrar.addBlock(WoodType.getTypes(), BlockWoodSupport::new);
     WORKBENCH = registrar.addBlock(WoodType.getTypes(), BlockWoodWorkbench::new);
-    //CHEST_TRAPPED = registrar.addBlock(WoodType.getTypes(), BlockWoodChestTrap::new);
-    //CHEST = registrar.addBlock(WoodType.getTypes(), BlockWoodChest::new);
-    //LOOM = registrar.addBlock(WoodType.getTypes(), BlockWoodLoom::new);
-    //BARREL = registrar.addBlock(WoodType.getTypes(), BlockWoodBarrel::new);
+    CHEST_TRAPPED = registrar.addBlock(WoodType.getTypes(), BlockWoodChestTrap::new);
+    CHEST = registrar.addBlock(WoodType.getTypes(), BlockWoodChest::new);
+    LOOM = registrar.addBlock(WoodType.getTypes(), BlockWoodLoom::new);
+    BARREL = registrar.addBlock(WoodType.getTypes(), BlockWoodBarrel::new);
     LADDER = registrar.addBlock(WoodType.getTypes(), BlockWoodLadder::new);
     // CHOPPER = registrar.addBlock(WoodType.getTypes(), BlockWoodLog::new);
   }

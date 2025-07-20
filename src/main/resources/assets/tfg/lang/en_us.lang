@@ -428,6 +428,13 @@ block.tfg.wood.pressure_plate.name=Pressure Plate (%s)
 block.tfg.wood.support.name=Support (%s)
 block.tfg.wood.workbench.name=Workbench (%s)
 block.tfg.wood.ladder.name=Ladder (%s)
+block.tfg.wood.tool_rack.name=Tool Rack (%s)
+block.tfg.wood.barrel.name=Barrel (%s)
+block.tfg.wood.loom.name=Loom (%s)
+block.tfg.wood.chest.name=Chest (%s)
+block.tfg.wood.chest_trapped.name=Trapped Chest (%s)
+block.tfg.wood.sapling.name=Sapling (%s)
+block.tfg.wood.leaves.name=Leaves (%s)
 
 ## Item
 item.tfg.wood.lumber.name=Lumber (%s)

@@ -8,14 +8,22 @@ import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
+
+import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_2;
 
@@ -35,7 +43,7 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
 
     getSettings()
       .renderLayer(BlockRenderLayer.CUTOUT)
-      .ignoresProperties(TYPE, STAGE_2)
+      .ignoresProperties(STAGE_2, TYPE)
       .nonOpaque()
       .nonFullCube()
       .randomTicks();
@@ -48,23 +56,37 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
     return new BlockStateContainer(this, STAGE_2, TYPE);
   }
 
-//  @Override
-//  public IBlockState getStateFromMeta(int meta) {
-//    return this.getDefaultState().withProperty(STAGE_2, meta);
-//  }
-//
-//  @Override
-//  public int getMetaFromState(IBlockState state) {
-//    return state.getValue(STAGE_2);
-//  }
-//
-//  public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-//    if (state.getValue(STAGE_2) == 0) {
-//      worldIn.setBlockState(pos, state.cycleProperty(STAGE_2), 4);
-//    } else {
-//      this.generateTree(worldIn, pos, state, rand);
-//    }
-//  }
+  @Override
+  public EnumBlockRenderType getRenderType(IBlockState state) {
+    return this.settings.getRenderType();
+  }
+
+  public int damageDropped(IBlockState state) {
+    return getMetaFromState(state);
+  }
+
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(STAGE_2, meta);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(STAGE_2);
+  }
+
+  public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    if (state.getValue(STAGE_2) == 0) {
+      worldIn.setBlockState(pos, state.cycleProperty(STAGE_2), 4);
+    } else {
+      this.generateTree(worldIn, pos, state, rand);
+    }
+  }
+
+  @Override
+  public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+    items.add(new ItemStack(this));
+  }
 
 
   @Override
@@ -85,6 +107,11 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
   @Override
   public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos) : NULL_AABB;
+  }
+
+  @Override
+  public String getLocalizedName() {
+    return I18n.translateToLocal(this.getTranslationKey() + ".name");
   }
 
   @Override

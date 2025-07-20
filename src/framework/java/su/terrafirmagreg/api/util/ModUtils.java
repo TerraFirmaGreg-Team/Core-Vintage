@@ -115,7 +115,7 @@ public final class ModUtils {
   }
 
   public static String regKey(String key, String name) {
-    return String.format("%s/%s", key, name);
+    return String.format("%s/%s", key, name).toLowerCase();
   }
 
   public static String split(String name) {

@@ -72,7 +72,7 @@ public class BlockWoodLeaves extends BaseBlockLeaves implements IWoodEntry, IPro
       .nonOpaque()
       .randomTicks()
       .fireInfo(30, 60)
-      .oreDict("leaves");
+      .addOreDict("leaves");
 
     setDefaultState(blockState.getBaseState()
       .withProperty(LEAF_STATE, NORMAL)

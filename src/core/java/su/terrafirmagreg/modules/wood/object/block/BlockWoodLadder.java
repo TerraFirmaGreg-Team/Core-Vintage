@@ -21,7 +21,7 @@ public class BlockWoodLadder extends BaseBlockLadder implements IWoodEntry {
       .customResource(type.getResource("ladder"))
       .sound(SoundType.LADDER)
       .fireInfo(5, 20)
-      .oreDict("ladder")
-      .oreDict("ladder", "wood");
+      .addOreDict("ladder")
+      .addOreDict("ladder", "wood");
   }
 }

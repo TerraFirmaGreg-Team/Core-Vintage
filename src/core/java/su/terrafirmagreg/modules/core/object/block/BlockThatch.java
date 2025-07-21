@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -31,7 +31,7 @@ public class BlockThatch extends BaseBlock {
       .nonOpaque()
       .nonFullCube()
       .hardness(0.6F)
-      .oreDict("block", "straw");
+      .addOreDict("block", "straw");
 
     BlockUtils.addFireInfo(this, 60, 20);
   }

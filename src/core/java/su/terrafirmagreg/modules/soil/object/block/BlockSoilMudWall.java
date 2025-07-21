@@ -22,7 +22,7 @@ public class BlockSoilMudWall extends BaseBlockWall implements ISoilEntry {
     getSettings()
       .registryKey(type.getRegistryKey("mud_bricks/wall"))
       .renderLayer(BlockRenderLayer.CUTOUT)
-      .oreDict("wall")
-      .oreDict("wall", "mud", "bricks");
+      .addOreDict("wall")
+      .addOreDict("wall", "mud", "bricks");
   }
 }

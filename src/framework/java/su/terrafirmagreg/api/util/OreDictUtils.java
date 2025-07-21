@@ -133,6 +133,15 @@ public final class OreDictUtils {
       .anyMatch(name -> name.startsWith(oreDict));
   }
 
+  public static boolean contains(ItemStack itemStack, String... oreDict) {
+    for (String name : oreDict) {
+      if (contains(itemStack, name)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public static boolean contains(ItemStack itemStack, String oreDict) {
     if (itemStack.isEmpty()) {
       return false;

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.wood.client.render;
 
 import su.terrafirmagreg.api.util.ColourUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodChest;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockChest;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
 import net.minecraft.block.Block;
@@ -37,7 +37,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
       Block block = tile.getBlockType();
       meta = tile.getBlockMetadata();
 
-      if (block instanceof BlockWoodChest blockWoodChest && meta == 0) {
+      if (block instanceof BaseBlockChest blockWoodChest && meta == 0) {
         blockWoodChest.checkForSurroundingChests(tile.getWorld(), tile.getPos(), tile.getWorld().getBlockState(tile.getPos()));
         meta = tile.getBlockMetadata();
       }
@@ -129,23 +129,22 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
     lidAngle = 1.0F - lidAngle;
     lidAngle = 1.0F - lidAngle * lidAngle * lidAngle;
     modelchest.chestLid.rotateAngleX = -(lidAngle * ((float) Math.PI / 2F));
-    modelchest.renderAll();
+    modelchest.chestKnob.rotateAngleX = modelchest.chestLid.rotateAngleX;
 
     // Отрисовка частей сундука, кроме ручки
     ColourUtils.setGlColor(woodColor);
     modelchest.chestLid.render(0.0625F);
     modelchest.chestBelow.render(0.0625F);
     ColourUtils.resetGlColor();
+    modelchest.chestKnob.render(0.0625F);
 
     // Отрисовка ручки
 //    if (tile.getChestType() == BlockChest.Type.TRAP) {
 //      GlStateManager.color(1.0F, 0.0F, 0.0F, 0.4F);
 //    }
-    modelchest.chestKnob.render(0.0625F);
 
     GlStateManager.disableRescaleNormal();
     GlStateManager.popMatrix();
-    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
     if (destroyStage >= 0) {
       GlStateManager.matrixMode(5890);

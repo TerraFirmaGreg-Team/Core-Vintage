@@ -12,7 +12,7 @@ public class BlockGreenhouseDoor extends BaseBlockDoor {
 
     getSettings()
       .registryKey("greenhouse/door")
-      .oreDict("greenhouse")
+      .addOreDict("greenhouse")
       .sound(SoundType.METAL);
   }
 }

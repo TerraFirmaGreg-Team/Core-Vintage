@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.util.OreDictUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
@@ -40,7 +40,7 @@ public class BlockGreenhouseWall extends BaseBlock {
 
     getSettings()
       .registryKey("greenhouse/wall")
-      .oreDict("greenhouse")
+      .addOreDict("greenhouse")
       .sound(SoundType.METAL)
       .hardness(2.0f)
       .resistance(3.0f)

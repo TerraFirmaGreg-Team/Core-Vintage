@@ -11,7 +11,7 @@ public class BlockSoilDryGrass extends BlockSoilGrass {
     getSettings()
       .registryKey(type.getRegistryKey("dry_grass"))
       .tag(Tags.DRY_GRASS)
-      .oreDict("dry_grass");
+      .addOreDict("dry_grass");
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
   }

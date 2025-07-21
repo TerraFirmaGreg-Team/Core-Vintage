@@ -25,7 +25,7 @@ public class BlockSoilMud extends BlockSoil {
 
     getSettings()
       .registryKey(type.getRegistryKey("mud"))
-      .oreDict("mud");
+      .addOreDict("mud");
 
   }
 

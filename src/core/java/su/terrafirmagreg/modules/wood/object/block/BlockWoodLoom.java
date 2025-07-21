@@ -63,7 +63,7 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodEntry, IPr
       .resistance(3f)
       .fireInfo(5, 20)
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.VERY_HEAVY))
-      .oreDict("loom");
+      .addOreDict("loom");
 
     setDefaultState(blockState.getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH));

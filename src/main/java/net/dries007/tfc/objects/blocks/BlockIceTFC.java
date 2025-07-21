@@ -1,5 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
+import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 import su.terrafirmagreg.modules.core.feature.climate.spi.ITemperatureBlock;
 import su.terrafirmagreg.modules.core.feature.climate.spi.IceMeltHandler;
@@ -23,9 +24,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
-
-import net.dries007.tfc.api.types.Metal.ItemType;
-import net.dries007.tfc.objects.items.metal.ItemMetalTool;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -89,8 +87,8 @@ public class BlockIceTFC extends BlockIce implements ITemperatureBlock {
     }
     EntityPlayer player = harvesters.get();
     if (player != null) {
-      var tool = player.getHeldItemMainhand().getItem();
-      if (tool instanceof ItemMetalTool itemMetalTool && itemMetalTool.getType().equals(ItemType.ICE_SAW)) {
+      var tool = player.getHeldItemMainhand();
+      if (OreDictUtils.contains(tool, "iceSaw")) {
         drops.add(new ItemStack(ItemsCore.ICE_SHARD));
       } else {
         super.getDrops(drops, world, pos, state, fortune);

@@ -35,13 +35,14 @@ public class BlockWoodChest extends BaseBlockChest implements IWoodEntry {
 
   protected final WoodType type;
 
-  public BlockWoodChest(WoodType type, Type chestType) {
+  public BlockWoodChest(Type chestType, WoodType type) {
     super(chestType);
-
+    
     this.type = type;
   }
 
   public BlockWoodChest(WoodType type) {
+    super(Type.BASIC);
 
     this.type = type;
 
@@ -53,9 +54,9 @@ public class BlockWoodChest extends BaseBlockChest implements IWoodEntry {
       .hardness(2.5f)
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM))
       .fireInfo(5, 20)
-      .oreDict("chest")
-      .oreDict("chest", "wood")
-      .oreDict("chest", "wood", type);
+      .addOreDict("chest")
+      .addOreDict("chest", type)
+      .addOreDict("chest", "wood");
   }
 
   @Override

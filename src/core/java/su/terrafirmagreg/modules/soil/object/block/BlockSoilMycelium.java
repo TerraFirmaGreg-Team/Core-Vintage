@@ -13,7 +13,7 @@ public class BlockSoilMycelium extends BlockSoilGrass {
 
     getSettings()
       .registryKey(type.getRegistryKey("mycelium"))
-      .oreDict("mycelium");
+      .addOreDict("mycelium");
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
   }

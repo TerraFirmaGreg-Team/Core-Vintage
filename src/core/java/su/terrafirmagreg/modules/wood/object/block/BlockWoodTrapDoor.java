@@ -26,8 +26,8 @@ public class BlockWoodTrapDoor extends BaseBlockTrapDoor implements IWoodEntry {
       .sound(SoundType.WOOD)
       .hardness(0.5F)
       .fireInfo(5, 20)
-      .oreDict("trapdoor", "wood")
-      .oreDict("trapdoor", "wood", type);
+      .addOreDict("trapdoor", "wood")
+      .addOreDict("trapdoor", "wood", type);
 
   }
 }

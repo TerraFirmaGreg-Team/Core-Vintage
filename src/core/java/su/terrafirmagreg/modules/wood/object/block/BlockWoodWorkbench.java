@@ -42,7 +42,7 @@ public class BlockWoodWorkbench extends BaseBlockWorkbench implements IWoodEntry
       .hardness(2.0F)
       .resistance(5.0F)
       .fireInfo(5, 20)
-      .oreDict("workbench");
+      .addOreDict("workbench");
   }
 
   @Override

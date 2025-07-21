@@ -22,8 +22,8 @@ public class BlockSoilMudSlab extends BaseBlockSlab implements ISoilEntry {
 
     getSettings()
       .registryKey(type.getRegistryKey("mud_bricks/slab_double"))
-      .oreDict("slab")
-      .oreDict("slab", "mud", "bricks");
+      .addOreDict("slab")
+      .addOreDict("slab", "mud", "bricks");
   }
 
   @Override

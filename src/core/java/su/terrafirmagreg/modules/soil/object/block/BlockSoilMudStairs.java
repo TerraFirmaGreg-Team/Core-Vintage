@@ -22,8 +22,8 @@ public class BlockSoilMudStairs extends BaseBlockStairs implements ISoilEntry {
     getSettings()
       .registryKey(type.getRegistryKey("mud_bricks/stairs"))
       .renderLayer(BlockRenderLayer.CUTOUT)
-      .oreDict("stairs")
-      .oreDict("stairs", "mud", "bricks");
+      .addOreDict("stairs")
+      .addOreDict("stairs", "mud", "bricks");
   }
 
 }

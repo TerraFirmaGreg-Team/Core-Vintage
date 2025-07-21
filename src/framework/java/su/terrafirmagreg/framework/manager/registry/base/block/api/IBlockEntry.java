@@ -228,19 +228,29 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       return this.self();
     }
 
-    public Settings oreDict(Supplier<Boolean> supplier, Object... oreDict) {
+    public Settings removeOreDictAll() {
+      this.oreDict.clear();
+      return this.self();
+    }
+
+    public Settings removeOreDict(Object... oreDict) {
+      this.oreDict.remove(oreDict);
+      return this.self();
+    }
+
+    public Settings addOreDict(Supplier<Boolean> supplier, Object... oreDict) {
       if (!supplier.get()) {
         this.oreDict.add(oreDict);
       }
       return this.self();
     }
 
-    public Settings oreDict(List<Object[]> oreDict) {
+    public Settings addOreDict(List<Object[]> oreDict) {
       this.oreDict.addAll(oreDict);
       return this.self();
     }
 
-    public Settings oreDict(Object... oreDict) {
+    public Settings addOreDict(Object... oreDict) {
       this.oreDict.add(oreDict);
       return this.self();
     }

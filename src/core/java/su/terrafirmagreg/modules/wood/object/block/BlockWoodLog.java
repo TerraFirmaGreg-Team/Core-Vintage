@@ -73,9 +73,9 @@ public class BlockWoodLog extends BaseBlockLog implements IWoodEntry, IProviderB
       .hardness(20.0F)//TODO 2.0 в тфк
       .lightValue(this.getDefaultState().getValue(SMALL) ? 0 : 255)
       .fireInfo(5, 5)
-      .oreDict("logWood", type)
-      .oreDict("logWood")
-      .oreDict(type.isCanMakeTannin() ? "tannin" : null);
+      .addOreDict("logWood", type)
+      .addOreDict("logWood")
+      .addOreDict(type.isCanMakeTannin() ? "tannin" : null);
 
     setDefaultState(blockState.getBaseState()
       .withProperty(LOG_AXIS, EnumAxis.Y)

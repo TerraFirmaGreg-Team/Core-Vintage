@@ -24,8 +24,8 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodEntry {
       .customResource(type.getResource("door"))
       .sound(SoundType.WOOD)
       .fireInfo(5, 20)
-      .oreDict("door", "wood")
-      .oreDict("door", "wood", type);
+      .addOreDict("door", "wood")
+      .addOreDict("door", "wood", type);
   }
 
 }

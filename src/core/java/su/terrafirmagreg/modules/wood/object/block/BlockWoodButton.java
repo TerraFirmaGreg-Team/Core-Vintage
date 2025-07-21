@@ -26,8 +26,8 @@ public class BlockWoodButton extends BaseBlockButton implements IProviderBlockCo
       .hardness(0.5F)
       .sound(SoundType.WOOD)
       .fireInfo(5, 20)
-      .oreDict("button", "wood")
-      .oreDict("button", "wood", type);
+      .addOreDict("button", "wood")
+      .addOreDict("button", "wood", type);
   }
 
 

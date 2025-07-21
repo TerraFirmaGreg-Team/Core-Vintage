@@ -55,6 +55,7 @@ public class FeatureOreDict extends BaseFeature {
     OreDictionary.registerOre("powderConcrete", new ItemStack(Blocks.CONCRETE_POWDER, 1, OreDictionary.WILDCARD_VALUE));
     OreDictionary.registerOre("terracotta", new ItemStack(Blocks.HARDENED_CLAY, 1, OreDictionary.WILDCARD_VALUE));
     OreDictionary.registerOre("terracotta", new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, OreDictionary.WILDCARD_VALUE));
+    OreDictionary.registerOre("blockPackedIce", new ItemStack(Blocks.PACKED_ICE, 1, OreDictionary.WILDCARD_VALUE));
 
     // Register a name without any items
     OreDictionary.getOres("infiniteFire", true);

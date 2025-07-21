@@ -41,7 +41,7 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
       .renderLayer(BlockRenderLayer.CUTOUT)
       .randomTicks()
       .fireInfo(5, 5)
-      .oreDict("peat");
+      .addOreDict("peat");
 
     setDefaultState(blockState.getBaseState()
       .withProperty(NORTH, Boolean.FALSE)

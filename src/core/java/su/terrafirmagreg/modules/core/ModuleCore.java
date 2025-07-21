@@ -12,6 +12,7 @@ import su.terrafirmagreg.modules.core.event.EventHandlerGuiOpen;
 import su.terrafirmagreg.modules.core.event.EventHandlerGuiScreen;
 import su.terrafirmagreg.modules.core.event.EventHandlerOnConfigChanged;
 import su.terrafirmagreg.modules.core.event.EventHandlerPortalSpawn;
+import su.terrafirmagreg.modules.core.event.block.EventHandlerBlock;
 import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesEntity;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerItemTooltip;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDimension;
@@ -95,6 +96,8 @@ public class ModuleCore extends BaseModule {
   @Override
   public @NotNull List<Class<?>> getEventBusSubscribers() {
     return new ObjectArrayList<>() {{
+      add(EventHandlerBlock.class);
+
       add(EventHandlerGuiOpen.class);
       add(EventHandlerGuiScreen.class);
 

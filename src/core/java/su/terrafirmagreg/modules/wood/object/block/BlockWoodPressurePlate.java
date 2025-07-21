@@ -26,8 +26,8 @@ public class BlockWoodPressurePlate extends BaseBlockPressurePlate implements IW
       .sound(SoundType.WOOD)
       .hardness(0.5F)
       .fireInfo(5, 20)
-      .oreDict("pressure_plate")
-      .oreDict("pressure_plate", "wood")
-      .oreDict("pressure_plate", "wood", type);
+      .addOreDict("pressure_plate")
+      .addOreDict("pressure_plate", "wood")
+      .addOreDict("pressure_plate", "wood", type);
   }
 }

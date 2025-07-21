@@ -24,7 +24,7 @@ public class BlockSoilMudBricks extends BlockSoilMud {
       .renderLayer(BlockRenderLayer.CUTOUT)
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0)
-      .oreDict("mud_bricks");
+      .addOreDict("mud_bricks");
 
     setDefaultState(blockState.getBaseState()
       .withProperty(MOSSY, false));

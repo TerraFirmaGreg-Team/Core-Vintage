@@ -25,6 +25,6 @@ public abstract class BlockWood extends BaseBlock implements IWoodEntry {
       .customResource(type.getResource(variant))
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)
-      .oreDict(variant);
+      .addOreDict(variant);
   }
 }

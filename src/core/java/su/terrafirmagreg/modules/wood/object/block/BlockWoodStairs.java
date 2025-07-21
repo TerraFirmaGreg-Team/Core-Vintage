@@ -24,7 +24,7 @@ public class BlockWoodStairs extends BaseBlockStairs implements IWoodEntry {
       .customResource(type.getResource("planks/stairs"))
       .harvestLevel(ToolClasses.AXE, 0)
       .fireInfo(5, 20)
-      .oreDict("stairs")
-      .oreDict("stairs", "wood");
+      .addOreDict("stairs")
+      .addOreDict("stairs", "wood");
   }
 }

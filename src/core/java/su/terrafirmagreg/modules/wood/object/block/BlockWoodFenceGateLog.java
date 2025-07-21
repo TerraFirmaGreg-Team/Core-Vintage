@@ -26,8 +26,8 @@ public class BlockWoodFenceGateLog extends BaseBlockFenceGate implements IWoodEn
       .hardness(2.0F)
       .resistance(15.0F)
       .fireInfo(5, 20)
-      .oreDict("fence", "gate", "wood")
-      .oreDict("fence", "gate", "wood", type);
+      .addOreDict("fence", "gate", "wood")
+      .addOreDict("fence", "gate", "wood", type);
 
   }
 }

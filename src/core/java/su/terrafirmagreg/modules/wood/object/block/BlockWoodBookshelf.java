@@ -30,7 +30,7 @@ public class BlockWoodBookshelf extends BaseBlockBookshelf implements IProviderB
       .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
       .harvestLevel(ToolClasses.AXE, 0)
       .fireInfo(30, 20)
-      .oreDict("bookshelf");
+      .addOreDict("bookshelf");
   }
 
 

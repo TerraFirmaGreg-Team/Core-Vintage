@@ -12,7 +12,7 @@ public class BlockSoilCoarseDirt extends BlockSoilDirt {
 
     getSettings()
       .registryKey(type.getRegistryKey("coarse_dirt"))
-      .oreDict("coarse_dirt");
+      .addOreDict("coarse_dirt");
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
   }

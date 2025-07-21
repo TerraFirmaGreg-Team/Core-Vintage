@@ -61,7 +61,7 @@ public class BlockWoodSapling extends BaseBlockSapling implements IWoodEntry, IG
       .itemBlock(ItemBlockWoodSapling::new)
       .hardness(0.0F)
       .fireInfo(5, 20)
-      .oreDict("sapling");
+      .addOreDict("sapling");
 
     setDefaultState(blockState.getBaseState()
       .withProperty(STAGE_2, 0));

@@ -48,8 +48,8 @@ public class BlockWoodSlab extends BaseBlockSlab implements IWoodEntry, IProvide
       getSettings()
         .registryKey(type.getRegistryKey("planks/slab"))
         .customResource(type.getResource("planks/slab"))
-        .oreDict("slab", "wood")
-        .oreDict("slab", "wood", type);
+        .addOreDict("slab", "wood")
+        .addOreDict("slab", "wood", type);
 
     }
 

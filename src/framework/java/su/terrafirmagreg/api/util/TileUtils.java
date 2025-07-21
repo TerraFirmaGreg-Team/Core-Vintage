@@ -73,7 +73,11 @@ public final class TileUtils {
 
   public static void addTile(Class<? extends TileEntity> tileClass, String namespace, String name) {
 
-    GameRegistry.registerTileEntity(tileClass, ModUtils.resource(namespace, "tile", name)); // tileClass.getSimpleName().replaceFirst("Tile", "")
+    var registryName = ModUtils.resource(namespace, "tile", name);
+    if (!TileEntity.REGISTRY.containsKey(registryName)) {
+      GameRegistry.registerTileEntity(tileClass, registryName); // tileClass.getSimpleName().replaceFirst("Tile", "")
+    }
+
   }
 
 }

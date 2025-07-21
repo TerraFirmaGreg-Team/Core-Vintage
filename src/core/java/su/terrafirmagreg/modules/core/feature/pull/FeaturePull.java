@@ -15,7 +15,7 @@ public class FeaturePull extends BaseFeature {
   public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
     Entity entity = event.getObject();
     World world = entity.world;
-    if (entity == null && world == null) {
+    if (world == null) {
       return;
     }
 

@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.client.GuiHandler;
+import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockChest;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
@@ -8,18 +9,24 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.render.TESRWoodChest;
+import su.terrafirmagreg.modules.wood.object.inventory.InventoryWoodLargeChest;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
+
+import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
@@ -27,6 +34,12 @@ import lombok.Getter;
 public class BlockWoodChest extends BaseBlockChest implements IWoodEntry {
 
   protected final WoodType type;
+
+  public BlockWoodChest(WoodType type, Type chestType) {
+    super(chestType);
+
+    this.type = type;
+  }
 
   public BlockWoodChest(WoodType type) {
 
@@ -51,6 +64,47 @@ public class BlockWoodChest extends BaseBlockChest implements IWoodEntry {
       GuiHandler.openGui(worldIn, pos, playerIn);
     }
     return true;
+  }
+
+  /**
+   * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest insertions, which means we need to block them (to stop inserting items that aren't the
+   * correct size)
+   */
+  @Nullable
+  @Override
+  public ILockableContainer getContainer(World worldIn, BlockPos pos, boolean allowBlocking) {
+    return TileUtils.getTile(worldIn, pos, TileEntityChest.class)
+      .map(tile -> {
+        ILockableContainer ilockablecontainer = tile;
+
+        if (!allowBlocking && isBlocked(worldIn, pos)) {
+          return null;
+        } else {
+          for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
+            BlockPos blockpos = pos.offset(enumfacing);
+            Block block = worldIn.getBlockState(blockpos).getBlock();
+
+            if (block == this) {
+              if (!allowBlocking && isBlocked(worldIn, blockpos)) // Forge: fix MC-99321
+              {
+                return null;
+              }
+
+              TileEntity worldInTileEntity = worldIn.getTileEntity(blockpos);
+
+              if (worldInTileEntity instanceof TileEntityChest tileEntityChest1) {
+                if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
+                  ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tileEntityChest1);
+                } else {
+                  ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tileEntityChest1, ilockablecontainer);
+                }
+              }
+            }
+          }
+
+          return ilockablecontainer;
+        }
+      }).orElse(null);
   }
 
 

@@ -3,12 +3,9 @@ package su.terrafirmagreg.framework.manager.registry.base.block.spi;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
-import su.terrafirmagreg.modules.wood.object.inventory.InventoryWoodLargeChest;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -16,14 +13,12 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -64,44 +59,6 @@ public abstract class BaseBlockChest extends BlockChest implements IBlockEntry, 
       .renderType(EnumBlockRenderType.ENTITYBLOCK_ANIMATED);
   }
 
-  /**
-   * This and the following methods are copied from vanilla to allow us to hook into vanilla's chest stuff Hoppers are hardcoded for vanilla chest insertions, which means we need to block them (to stop inserting items that aren't the
-   * correct size)
-   */
-  @Nullable
-  @Override
-  public ILockableContainer getContainer(World worldIn, BlockPos pos, boolean allowBlocking) {
-
-    ILockableContainer ilockablecontainer = TileUtils.getTile(worldIn, pos, TileEntityChest.class).get();
-
-    if (!allowBlocking && isBlocked(worldIn, pos)) {
-      return null;
-    }
-    for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-      BlockPos blockpos = pos.offset(enumfacing);
-      Block block = worldIn.getBlockState(blockpos).getBlock();
-
-      if (block == this) {
-        // Forge: fix MC-99321
-        if (!allowBlocking && isBlocked(worldIn, blockpos)) {
-          return null;
-        }
-
-        var tile = TileUtils.getTile(worldIn, pos, TileEntityChest.class);
-
-        if (tile.isPresent()) {
-          if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
-            ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", ilockablecontainer, tile.get());
-          }
-          ilockablecontainer = new InventoryWoodLargeChest("container.chestDouble", tile.get(), ilockablecontainer);
-
-        }
-      }
-    }
-
-    return ilockablecontainer;
-
-  }
 
   @Override
   protected boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {

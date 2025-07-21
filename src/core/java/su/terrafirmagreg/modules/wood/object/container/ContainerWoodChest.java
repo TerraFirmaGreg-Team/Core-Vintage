@@ -28,16 +28,14 @@ public class ContainerWoodChest extends Container {
     //Adding chest slots
     for (int j = 0; j < numRows; ++j) {
       for (int k = 0; k < 9; ++k) {
-        this.addSlotToContainer(
-          new SlotWoodChest(chestInventory, k + j * 9, 8 + k * 18, 18 + j * 18));
+        this.addSlotToContainer(new SlotWoodChest(chestInventory, k + j * 9, 8 + k * 18, 18 + j * 18));
       }
     }
 
     //Adding player slots
     for (int l = 0; l < 3; ++l) {
       for (int j = 0; j < 9; ++j) {
-        this.addSlotToContainer(
-          new Slot(playerInventory, j + l * 9 + 9, 8 + j * 18, 103 + l * 18 + i));
+        this.addSlotToContainer(new Slot(playerInventory, j + l * 9 + 9, 8 + j * 18, 103 + l * 18 + i));
       }
     }
 

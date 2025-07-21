@@ -6,7 +6,6 @@ import su.terrafirmagreg.modules.wood.object.block.BlockWoodChest;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.GlStateManager;
@@ -32,7 +31,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
     GlStateManager.depthFunc(515);
     GlStateManager.depthMask(true);
     int meta = 0;
-    var woodColor = Objects.requireNonNull(tile.getWood()).getColor();
+    int woodColor = Objects.requireNonNull(tile.getWood()).getColor();
 
     if (tile.hasWorld()) {
       Block block = tile.getBlockType();
@@ -55,7 +54,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
       modelchest = simpleChest;
 
       if (destroyStage >= 0) {
-        bindTexture(TileEntitySpecialRenderer.DESTROY_STAGES[destroyStage]);
+        bindTexture(DESTROY_STAGES[destroyStage]);
         GlStateManager.matrixMode(5890);
         GlStateManager.pushMatrix();
         GlStateManager.scale(4.0F, 4.0F, 1.0F);
@@ -69,7 +68,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
       modelchest = largeChest;
 
       if (destroyStage >= 0) {
-        bindTexture(TileEntitySpecialRenderer.DESTROY_STAGES[destroyStage]);
+        bindTexture(DESTROY_STAGES[destroyStage]);
         GlStateManager.matrixMode(5890);
         GlStateManager.pushMatrix();
         GlStateManager.scale(8.0F, 4.0F, 1.0F);
@@ -121,8 +120,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
     }
 
     if (tile.adjacentChestXNeg != null) {
-      float f2 = tile.adjacentChestXNeg.prevLidAngle
-                 + (tile.adjacentChestXNeg.lidAngle - tile.adjacentChestXNeg.prevLidAngle) * partialTicks;
+      float f2 = tile.adjacentChestXNeg.prevLidAngle + (tile.adjacentChestXNeg.lidAngle - tile.adjacentChestXNeg.prevLidAngle) * partialTicks;
       if (f2 > lidAngle) {
         lidAngle = f2;
       }
@@ -131,6 +129,7 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
     lidAngle = 1.0F - lidAngle;
     lidAngle = 1.0F - lidAngle * lidAngle * lidAngle;
     modelchest.chestLid.rotateAngleX = -(lidAngle * ((float) Math.PI / 2F));
+    modelchest.renderAll();
 
     // Отрисовка частей сундука, кроме ручки
     ColourUtils.setGlColor(woodColor);
@@ -139,14 +138,14 @@ public class TESRWoodChest extends TileEntitySpecialRenderer<TileWoodChest> {
     ColourUtils.resetGlColor();
 
     // Отрисовка ручки
-
-    if (tile.getChestType() == BlockChest.Type.TRAP) {
-      GlStateManager.color(1.0F, 0.0F, 0.0F, 0.4F);
-    }
+//    if (tile.getChestType() == BlockChest.Type.TRAP) {
+//      GlStateManager.color(1.0F, 0.0F, 0.0F, 0.4F);
+//    }
     modelchest.chestKnob.render(0.0625F);
 
     GlStateManager.disableRescaleNormal();
     GlStateManager.popMatrix();
+    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
     if (destroyStage >= 0) {
       GlStateManager.matrixMode(5890);

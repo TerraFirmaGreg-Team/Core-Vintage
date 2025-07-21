@@ -2,13 +2,12 @@ package su.terrafirmagreg.modules.wood.object.entity;
 
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntityBoat;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.client.render.RenderWoodBoat;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,10 +21,11 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class EntityWoodBoat extends EntityBoat {
+public class EntityWoodBoat extends BaseEntityBoat {
 
   private static final DataParameter<String> WOOD_NAME = EntityDataManager.createKey(EntityWoodBoat.class, DataSerializers.STRING);
 
+  @SuppressWarnings("unused")
   public EntityWoodBoat(World worldIn) {
     super(worldIn);
   }

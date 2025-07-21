@@ -444,6 +444,12 @@ item.tfg.wood.supply_cart.name=Supply Cart (%s)
 item.tfg.wood.animal_cart.name=Animal Cart (%s)
 item.tfg.wood.plow_cart.name=Plow Cart (%s)
 
+## Entity
+entity.tfg.wood.boat.name=Boat
+entity.tfg.wood.supply_cart.name=Supply Cart
+entity.tfg.wood.animal_cart.name=Animal Cart
+entity.tfg.wood.plow_cart.name=Plow Cart
+
 # Module Metal ##############################################
 
 ## Item Group

@@ -1,36 +1,22 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
-import su.terrafirmagreg.api.client.GuiHandler;
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockChestTrap;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.client.render.TESRWoodChest;
-import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import lombok.Getter;
 
 @Getter
-public class BlockWoodChestTrap extends BaseBlockChestTrap implements IWoodEntry {
+public class BlockWoodChestTrap extends BlockWoodChest implements IWoodEntry {
 
-  protected final WoodType type;
 
   public BlockWoodChestTrap(WoodType type) {
-
-    this.type = type;
+    super(type, Type.TRAP);
 
     getSettings()
       .registryKey(type.getRegistryKey("chest_trapped"))
@@ -43,30 +29,5 @@ public class BlockWoodChestTrap extends BaseBlockChestTrap implements IWoodEntry
       .oreDict("chest")
       .oreDict("chest", "wood")
       .oreDict("chest", "wood", type);
-  }
-
-  @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    if (!worldIn.isRemote) {
-      GuiHandler.openGui(worldIn, pos, playerIn);
-    }
-    return true;
-  }
-
-
-  @Override
-  public TileEntity createNewTileEntity(World worldIn, int meta) {
-    return new TileWoodChest();
-  }
-
-
-  @Override
-  public Class<TileWoodChest> getTileClass() {
-    return TileWoodChest.class;
-  }
-
-  @Override
-  public TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRWoodChest();
   }
 }

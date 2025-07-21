@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.wood.object.entity.spi;
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
 import su.terrafirmagreg.modules.wood.ConfigWood;
@@ -44,7 +45,7 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-public abstract class EntityWoodCart extends Entity implements IEntityAdditionalSpawnData {
+public abstract class EntityWoodCart extends BaseEntity implements IEntityAdditionalSpawnData {
 
   public static final UUID PULL_SLOWLY_MODIFIER_UUID = UUID.fromString("49B0E52E-48F2-4D89-BED7-4F5DF26F1263");
   public static final AttributeModifier PULL_SLOWLY_MODIFIER = new AttributeModifier(PULL_SLOWLY_MODIFIER_UUID, "Pull slowly modifier", ConfigWood.ENTITY.PULL_SPEED_MODIFIER, 2).setSaved(false);

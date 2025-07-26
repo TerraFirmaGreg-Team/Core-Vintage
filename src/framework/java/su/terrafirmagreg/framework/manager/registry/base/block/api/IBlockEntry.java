@@ -46,17 +46,6 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
   }
 
   @Override
-  default void preRegister() {
-    var settings = getSettings();
-    asEntry()
-      .setResistance(settings.getResistance())
-      .setHardness(settings.getHardness())
-      .setSoundType(settings.getSoundType())
-      .setTickRandomly(settings.isTicksRandomly())
-      .setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
-  }
-
-  @Override
   default void postRegister() {
     var settings = getSettings();
 

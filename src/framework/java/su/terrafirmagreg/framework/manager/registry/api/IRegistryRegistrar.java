@@ -39,8 +39,6 @@ public interface IRegistryRegistrar {
 
   <T extends IForgeRegistryEntry<T>> void addEntry(String identifier, T entry);
 
-  <T extends IRegistryEntry<?, ?>> T addEntry(String identifier, T entry);
-
   // --------------------------------------------------------------------------
   // - Block
   // --------------------------------------------------------------------------

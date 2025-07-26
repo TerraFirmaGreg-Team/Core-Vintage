@@ -4,8 +4,6 @@ import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.util.KeyBindUtils;
 import su.terrafirmagreg.api.util.LootUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.framework.manager.registry.RegistryMap.RegistryWrapper;
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.manager.registry.base.biome.api.IBiomeEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
@@ -71,15 +69,13 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return ModUtils.resource(module.getIdentifier(), identifier);
   }
 
-  public <T extends IForgeRegistryEntry<T>> void addEntry(String identifier, T entry) {
+  public <T extends IForgeRegistryEntry<T>> void addEntry(String registerKey, T entry) {
 
-    this.map.addEntry(entry.getRegistryType(), RegistryWrapper.of(identifier, entry));
-  }
-
-  @Override
-  public <T extends IRegistryEntry<?, ?>> T addEntry(String identifier, T entry) {
-    this.map.addEntry(entry.getRegistryType(), RegistryWrapper.of(identifier, entry));
-    return entry;
+    var identifier = getIdentifier(registerKey);
+    if (!identifier.equals(entry.getRegistryName())) {
+      entry.setRegistryName(identifier);
+    }
+    this.map.addEntry(entry.getRegistryType(), entry);
   }
 
   // region Block
@@ -96,6 +92,13 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends Block & IBlockEntry> V addBlock(V entry) {
 
     var settings = entry.getSettings();
+    entry
+      .setResistance(settings.getResistance())
+      .setHardness(settings.getHardness())
+      .setSoundType(settings.getSoundType())
+      .setTickRandomly(settings.isTicksRandomly())
+      .setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
+
     if (settings.getItemBlock() != null) {
       this.addItem(settings.getRegistryKey(), settings.getItemBlock().apply(entry));
     }
@@ -134,6 +137,13 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
   @Override
   public <V extends Item & IItemEntry> V addItem(V entry) {
+
+    var settings = entry.getSettings();
+    settings.oreDict(settings.getRegistryKey());
+    entry
+      .setHasSubtypes(settings.isHasSubtypes())
+      .setMaxDamage(settings.getMaxDamage())
+      .setMaxStackSize(settings.getMaxStackSize());
 
     return this.addItem(entry.getSettings().getRegistryKey(), entry);
   }

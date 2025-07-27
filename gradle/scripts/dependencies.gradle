@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 apply from: 'gradle/scripts/helpers.gradle'
 
 repositories {
@@ -32,8 +34,22 @@ repositories {
   mavenLocal() // Must be last for caching to work
 }
 
-// Using mods
+def use_dev = true
 def use_util = true
+
+def loadDependencies() {
+  def file = new File('run/obfuscated/pakku-lock.json')
+  def json = new JsonSlurper().parseText(file.text)
+  return json.projects
+}
+
+def MOD_EXCLUDES = [
+  'terrafirmagreg-core',
+  'crafttweaker',
+  'mtlib',
+  'autopack-director',
+  'customskinloader'
+]
 
 dependencies {
 
@@ -49,34 +65,52 @@ dependencies {
   compileOnly("curse.maven:crafttweaker-239197:5013567")
   compileOnly("curse.maven:mtlib-253211:3308160")
 
+  if (use_dev.toBoolean()) {
+    loadDependencies().each { dep ->
 
-  //tfg
-  implementation rfg.deobf("curse.maven:ftb-utilities-forge-237102:3157548-sources-3157549")
-  implementation rfg.deobf("curse.maven:ftb-quests-forge-289412:3156637-sources-3156638")
-  implementation rfg.deobf("curse.maven:ftb-library-legacy-forge-237167:2985811-sources-2985812")
-  implementation rfg.deobf("curse.maven:item-filters-309674:3003364")
+      if (dep.type != 'MOD') {
+        return
+      }
+      if (!dep.slug?.curseforge || !dep.id?.curseforge) {
+        return
+      }
+      if (MOD_EXCLUDES.contains(dep.slug.curseforge)) {
+        return
+      }
+      def curseForgeFile = dep.files.find { it.type == 'curseforge' }
+      if (curseForgeFile) {
+        implementation rfg.deobf("curse.maven:${dep.slug.curseforge}-${dep.id.curseforge}:${curseForgeFile.id}")
+      }
 
-  compileOnly rfg.deobf("curse.maven:galacticraft-legacy-564236:4671122")
-  compileOnly rfg.deobf("curse.maven:extra-planets-241291:5339029-sources-5339031")
-  compileOnly rfg.deobf("curse.maven:mjrlegendslib-284331:3344068-sources-3344069")
+    }
+  } else {
+
+    //tfg
+    implementation rfg.deobf("curse.maven:ftb-utilities-forge-237102:3157548-sources-3157549")
+    implementation rfg.deobf("curse.maven:ftb-quests-forge-289412:3156637-sources-3156638")
+    implementation rfg.deobf("curse.maven:ftb-library-legacy-forge-237167:2985811-sources-2985812")
+    implementation rfg.deobf("curse.maven:item-filters-309674:3003364")
+
+    compileOnly rfg.deobf("curse.maven:galacticraft-legacy-564236:4671122")
+    compileOnly rfg.deobf("curse.maven:extra-planets-241291:5339029-sources-5339031")
+    compileOnly rfg.deobf("curse.maven:mjrlegendslib-284331:3344068-sources-3344069")
+
+    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022-sources-5519024")
+    implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:5619513-sources-5619515")
 
 
-  implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022-sources-5519024")
-  implementation rfg.deobf("curse.maven:gregicality-multiblocks-564858:5619513-sources-5619515")
-
-
-  // Утилиты
-  if (use_util.toBoolean()) {
-    implementation rfg.deobf("curse.maven:had-enough-items-557549:6187146")
+    // Утилиты
+    if (use_util.toBoolean()) {
+      implementation rfg.deobf("curse.maven:had-enough-items-557549:6187146")
 //    implementation rfg.deobf("curse.maven:theonesmeagle-977883:6033917")
-    implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:6130214")
-    implementation rfg.deobf("curse.maven:topalldependents-1120632:6138503")
-    implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5844968")
-    implementation rfg.deobf("curse.maven:reid-629017:5502915")
-    implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
-    implementation rfg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
-    implementation rfg.deobf("curse.maven:ctm-267602:2915363")
-    implementation rfg.deobf("curse.maven:groovyscript-687577:5789690-sources-5789692")
+      implementation rfg.deobf("curse.maven:the-one-probe-community-edition-885670:6130214")
+      implementation rfg.deobf("curse.maven:topalldependents-1120632:6138503")
+      implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5844968")
+      implementation rfg.deobf("curse.maven:reid-629017:5502915")
+      implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
+      implementation rfg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
+      implementation rfg.deobf("curse.maven:ctm-267602:2915363")
+      implementation rfg.deobf("curse.maven:groovyscript-687577:6695118-sources-6695120-dev-6695119")
 
 
 //    implementation rfg.deobf("curse.maven:itemzoom-261725:2643616")
@@ -85,5 +119,8 @@ dependencies {
 //    implementation rfg.deobf("curse.maven:farseek-229708:3093852")
 //    implementation rfg.deobf("curse.maven:modularui-624243:5153413")
 
+    }
   }
+
+
 }

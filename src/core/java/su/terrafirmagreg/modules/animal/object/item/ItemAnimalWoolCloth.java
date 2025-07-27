@@ -12,7 +12,7 @@ public class ItemAnimalWoolCloth extends BaseItem {
     getSettings()
       .registryKey("product/wool_cloth")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
-      .oreDict("cloth_high_quality");
+      .addOreDict("cloth_high_quality");
   }
 
 }

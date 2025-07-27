@@ -92,6 +92,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends Block & IBlockEntry> V addBlock(V entry) {
 
     var settings = entry.getSettings();
+    settings.addOreDict(settings.getRegistryKey());
     entry
       .setResistance(settings.getResistance())
       .setHardness(settings.getHardness())
@@ -139,7 +140,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends Item & IItemEntry> V addItem(V entry) {
 
     var settings = entry.getSettings();
-    settings.oreDict(settings.getRegistryKey());
+    settings.addOreDict(settings.getRegistryKey());
     entry
       .setHasSubtypes(settings.isHasSubtypes())
       .setMaxDamage(settings.getMaxDamage())

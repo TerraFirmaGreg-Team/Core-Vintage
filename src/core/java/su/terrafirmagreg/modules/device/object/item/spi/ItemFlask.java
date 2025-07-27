@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.object.item.spi;
 
-import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemFluid;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.library.MeshDefinitionFix;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemFluid;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemMesh;
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityFluidItem;
 import su.terrafirmagreg.modules.core.capabilities.fluid.CapabilityProviderFluid;
@@ -59,7 +59,7 @@ public abstract class ItemFlask extends BaseItemFluid implements IProviderItemMe
 
     getSettings()
       .maxStackSize(1)
-      .oreDict("flask")
+      .addOreDict("flask")
       .hasSubtypes()
       .capability(
         CapabilityProviderFluid.of(capacity, true, getValidFluids())

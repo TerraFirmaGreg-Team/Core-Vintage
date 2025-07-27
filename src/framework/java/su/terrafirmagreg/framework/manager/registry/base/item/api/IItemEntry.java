@@ -98,7 +98,7 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
           .customResource(settings.getResource())
           .rarity(settings.getRarity())
           .group(settings.getGroup())
-          .oreDict(settings.getOreDict())
+          .addOreDict(settings.getOreDict())
           .maxStackSize(settings.isNonCanStack() ? 1 : 64)
           .capability(settings.getCapability());
       }
@@ -142,19 +142,29 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
       return this.self();
     }
 
-    public Settings oreDict(Supplier<Boolean> supplier, Object... oreDict) {
+    public Settings removeOreDictAll() {
+      this.oreDict.clear();
+      return this.self();
+    }
+
+    public Settings removeOreDict(Object... oreDict) {
+      this.oreDict.remove(oreDict);
+      return this.self();
+    }
+
+    public Settings addOreDict(Supplier<Boolean> supplier, Object... oreDict) {
       if (!supplier.get()) {
         this.oreDict.add(oreDict);
       }
       return this.self();
     }
 
-    public Settings oreDict(List<Object[]> oreDict) {
+    public Settings addOreDict(List<Object[]> oreDict) {
       this.oreDict.addAll(oreDict);
       return this.self();
     }
 
-    public Settings oreDict(Object... oreDict) {
+    public Settings addOreDict(Object... oreDict) {
       this.oreDict.add(oreDict);
       return this.self();
     }

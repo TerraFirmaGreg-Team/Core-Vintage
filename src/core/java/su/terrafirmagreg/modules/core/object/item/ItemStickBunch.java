@@ -9,6 +9,6 @@ public class ItemStickBunch extends BaseItem {
 
     getSettings()
       .registryKey("stick_bunch")
-      .oreDict("log_wood");
+      .addOreDict("log_wood");
   }
 }

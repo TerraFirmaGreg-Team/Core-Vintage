@@ -20,7 +20,7 @@ public abstract class ItemWood extends BaseItem implements IWoodEntry, IProvider
     getSettings()
       .registryKey(type.getRegistryKey(variant))
       .customResource(type.getResource(variant))
-      .oreDict(variant);
+      .addOreDict(variant);
   }
 
   @Override

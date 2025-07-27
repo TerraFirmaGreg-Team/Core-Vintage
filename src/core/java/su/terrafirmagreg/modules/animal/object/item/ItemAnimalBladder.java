@@ -11,7 +11,7 @@ public class ItemAnimalBladder extends BaseItem {
 
     getSettings()
       .registryKey("product/bladder")
-      .oreDict("bladder")
+      .addOreDict("bladder")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT));
   }
 

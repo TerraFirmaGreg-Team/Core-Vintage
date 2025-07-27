@@ -46,7 +46,7 @@ public class ItemFireStarter extends BaseItem {
       .registryKey("firestarter")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT, false))
       .maxStackSize(1)
-      .oreDict("tool")
+      .addOreDict("tool")
       .maxDamage(8);
   }
 

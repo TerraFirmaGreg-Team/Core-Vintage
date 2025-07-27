@@ -12,7 +12,7 @@ public class ItemAnimalSilkCloth extends BaseItem {
     getSettings()
       .registryKey("product/silk_cloth")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
-      .oreDict("cloth_high_quality");
+      .addOreDict("cloth_high_quality");
   }
 
 }

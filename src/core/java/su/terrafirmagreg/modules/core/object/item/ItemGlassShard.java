@@ -11,7 +11,7 @@ public class ItemGlassShard extends BaseItem {
 
     getSettings()
       .registryKey("shard/glass")
-      .oreDict("shard")
+      .addOreDict("shard")
       .capability(CapabilityProviderSize.of(Size.TINY, Weight.LIGHT));
   }
 }

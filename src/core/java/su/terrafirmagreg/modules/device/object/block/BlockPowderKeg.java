@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.device.object.block;
 import su.terrafirmagreg.api.client.GuiHandler;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.NBTTags;
+import su.terrafirmagreg.api.library.model.CustomStateContainer;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
@@ -68,12 +69,20 @@ public class BlockPowderKeg extends BaseBlockContainer {
       .registryKey("powderkeg")
       .sound(SoundType.WOOD)
       .renderLayer(BlockRenderLayer.CUTOUT)
+      .renderType(EnumBlockRenderType.MODEL)
+      .tile(TilePowderKeg.class)
       .hardness(2F)
       .nonCube()
       .randomTicks()
-      .capability(getCapabilitySize());
+      .capability(stack ->
+        CapabilityProviderSize.of(
+          stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE, // Causes overburden if sealed
+          Weight.VERY_HEAVY,
+          stack.getTagCompound() == null
+        )
+      );
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false)
       .withProperty(SEALED, false));
   }
@@ -88,24 +97,6 @@ public class BlockPowderKeg extends BaseBlockContainer {
       world.setBlockState(pos, state.withProperty(SEALED, !previousSealed));
       tile.setSealed(!previousSealed);
     });
-  }
-
-  private CapabilityProviderSize getCapabilitySize() {
-
-    return new CapabilityProviderSize() {
-      public Weight getWeight(ItemStack stack) {
-        return Weight.VERY_HEAVY;
-      }
-
-      public Size getSize(ItemStack stack) {
-        return stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE; // Causes overburden if sealed
-      }
-
-      @Override
-      public boolean canStack(ItemStack stack) {
-        return stack.getTagCompound() == null;
-      }
-    };
   }
 
   @SideOnly(Side.CLIENT)
@@ -131,11 +122,6 @@ public class BlockPowderKeg extends BaseBlockContainer {
         tooltip.add(I18n.format(ModUtils.localize(LocalizeKeys.TOOLTIP, "device.powderkeg.amount"), count, itemStack.getItem().getItemStackDisplayName(itemStack)));
       }
     }
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -316,7 +302,9 @@ public class BlockPowderKeg extends BaseBlockContainer {
 
   @Override
   public BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, SEALED, LIT);
+    return new CustomStateContainer.Builder(this)
+      .add(SEALED, LIT)
+      .build();
   }
 
 
@@ -363,10 +351,6 @@ public class BlockPowderKeg extends BaseBlockContainer {
     return state.getValue(LIT) ? 14 : 0;
   }
 
-  @Override
-  public Class<TilePowderKeg> getTileClass() {
-    return TilePowderKeg.class;
-  }
 
   @Override
   public @Nullable TilePowderKeg createNewTileEntity(World worldIn, int meta) {

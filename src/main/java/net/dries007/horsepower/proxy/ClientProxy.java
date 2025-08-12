@@ -1,7 +1,7 @@
 package net.dries007.horsepower.proxy;
 
-import su.terrafirmagreg.modules.device.client.render.TESRQuernHorse;
-import su.terrafirmagreg.modules.device.client.render.TESRQuernManual;
+import su.terrafirmagreg.modules.device.object.render.TESRQuernHorse;
+import su.terrafirmagreg.modules.device.object.render.TESRQuernManual;
 import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
 import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
 import su.terrafirmagreg.modules.device.object.tile.TileQuernHorse;

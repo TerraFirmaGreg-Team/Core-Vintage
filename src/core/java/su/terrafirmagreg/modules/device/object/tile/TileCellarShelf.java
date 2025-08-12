@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.framework.manager.registry.base.inventory.api.IItemHandlerSidedCallback;
-import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemHandlerSidedWrapper;
-import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.api.IItemHandlerSidedCallback;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemHandlerSidedWrapper;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
@@ -13,8 +13,8 @@ import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.client.gui.GuiCellarShelf;
 import su.terrafirmagreg.modules.device.object.container.ContainerCellarShelf;
+import su.terrafirmagreg.modules.device.object.gui.GuiCellarShelf;
 import su.terrafirmagreg.modules.device.object.inventory.InventoryCellarShelf;
 
 import net.minecraft.block.state.IBlockState;

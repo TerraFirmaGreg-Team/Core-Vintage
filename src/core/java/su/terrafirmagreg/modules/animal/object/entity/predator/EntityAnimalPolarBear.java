@@ -14,14 +14,14 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.client.render.RenderAnimalPolarBear;
+import su.terrafirmagreg.modules.animal.object.render.RenderAnimalPolarBear;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIAttackMelee;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIStandAttack;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIWanderHuntArea;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
-import su.terrafirmagreg.modules.core.helper.BiomeHelper;
+import su.terrafirmagreg.helper.BiomeHelper;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;

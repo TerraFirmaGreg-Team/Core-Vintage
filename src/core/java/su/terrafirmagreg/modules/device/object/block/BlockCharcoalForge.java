@@ -82,16 +82,17 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   }
 
   public BlockCharcoalForge() {
-    super(Settings.of(BlockCharcoalPile.CHARCOAL_MATERIAL));
-
-    getSettings()
+    super(Settings.of(BlockCharcoalPile.CHARCOAL_MATERIAL)
       .registryKey("charcoal_forge")
       .randomTicks()
       .harvestLevel(ToolClasses.SHOVEL, 0)
+      .tile(TileCharcoalForge.class)
+      .renderType(EnumBlockRenderType.MODEL)
       .sound(SoundType.GROUND)
       .hardness(1.0F)
       .nonFullCube()
-      .nonOpaque();
+      .nonOpaque()
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false));
@@ -103,11 +104,6 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
 
   public static boolean isValid(World world, BlockPos pos) {
     return CHARCOAL_FORGE_MULTIBLOCK.test(world, pos);
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -253,10 +249,5 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   @Override
   public @Nullable TileCharcoalForge createNewTileEntity(World worldIn, int meta) {
     return new TileCharcoalForge();
-  }
-
-  @Override
-  public Class<TileCharcoalForge> getTileClass() {
-    return TileCharcoalForge.class;
   }
 }

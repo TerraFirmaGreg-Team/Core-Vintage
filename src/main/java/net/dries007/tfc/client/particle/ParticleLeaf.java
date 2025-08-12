@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.particle;
 
-import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
+import su.terrafirmagreg.helper.GrassColorHelper;
 
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;

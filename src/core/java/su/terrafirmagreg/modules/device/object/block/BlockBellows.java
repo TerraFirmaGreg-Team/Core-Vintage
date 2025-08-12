@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.client.render.TESRBellows;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
+import su.terrafirmagreg.modules.device.object.render.TESRBellows;
 import su.terrafirmagreg.modules.device.object.tile.TileBellows;
 
 import net.minecraft.block.SoundType;
@@ -36,17 +36,14 @@ public class BlockBellows extends BaseBlockContainer {
       .registryKey("bellows")
       .sound(SoundType.WOOD)
       .harvestLevel(ToolClasses.AXE, 0)
+      .renderType(EnumBlockRenderType.MODEL)
+      .tile(TileBellows.class, new TESRBellows())
       .nonFullCube()
       .nonOpaque()
       .hardness(2.0F)
       .resistance(2.0F);
 
     setDefaultState(getBlockState().getBaseState().withProperty(HORIZONTAL, EnumFacing.NORTH));
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -85,15 +82,6 @@ public class BlockBellows extends BaseBlockContainer {
     return face == state.getValue(HORIZONTAL) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
   }
 
-  @Override
-  public Class<TileBellows> getTileClass() {
-    return TileBellows.class;
-  }
-
-  @Override
-  public TESRBellows getTileRenderer() {
-    return new TESRBellows();
-  }
 
   @Nullable
   @Override

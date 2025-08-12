@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.device.object.tile;
 import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
-import su.terrafirmagreg.modules.device.client.gui.GuiAlloyCalculator;
 import su.terrafirmagreg.modules.device.object.container.ContainerAlloyCalculator;
+import su.terrafirmagreg.modules.device.object.gui.GuiAlloyCalculator;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.InventoryPlayer;

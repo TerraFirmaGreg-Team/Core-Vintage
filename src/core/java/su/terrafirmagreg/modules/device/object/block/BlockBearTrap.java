@@ -1,11 +1,10 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.animal.api.type.IPredator;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
@@ -42,7 +41,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.CLOSED;
 import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
-public class BlockBearTrap extends BaseBlock implements IProviderTile {
+public class BlockBearTrap extends BaseBlockContainer {
 
   protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
@@ -54,6 +53,8 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
       .hardness(10.0F)
       .resistance(10.0F)
       .nonCube()
+      .passable()
+      .tile(TileBearTrap.class)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .capability(
         CapabilityProviderSize.of(Size.LARGE, Weight.VERY_HEAVY)
@@ -74,13 +75,7 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BURIED) ? 4 : 0) + (
-      state.getValue(CLOSED) ? 8 : 0);
-  }
-
-  @Override
-  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-    return true;
+    return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(BURIED) ? 4 : 0) + (state.getValue(CLOSED) ? 8 : 0);
   }
 
   @Override
@@ -112,10 +107,8 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
     Block block = iblockstate.getBlock();
 
     if (block != Blocks.BARRIER) {
-      BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(),
-        EnumFacing.UP);
-      return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock()
-        .isLeaves(iblockstate, worldIn, pos.down());
+      BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
+      return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down());
     } else {
       return false;
     }
@@ -203,10 +196,6 @@ public class BlockBearTrap extends BaseBlock implements IProviderTile {
     return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, (float) 0 * 0.125F, axisalignedbb.maxZ);
   }
 
-  @Override
-  public Class<TileBearTrap> getTileClass() {
-    return TileBearTrap.class;
-  }
 
   @Override
   public @Nullable TileBearTrap createNewTileEntity(World worldIn, int meta) {

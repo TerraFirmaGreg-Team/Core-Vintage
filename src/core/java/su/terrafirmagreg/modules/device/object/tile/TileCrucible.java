@@ -15,9 +15,9 @@ import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalP
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;
-import su.terrafirmagreg.modules.device.client.gui.GuiCrucible;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
+import su.terrafirmagreg.modules.device.object.gui.GuiCrucible;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

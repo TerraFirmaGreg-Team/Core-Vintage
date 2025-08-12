@@ -10,7 +10,7 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.client.render.TESRWoodLoom;
+import su.terrafirmagreg.modules.wood.object.render.TESRWoodLoom;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodLoom;
 
 import net.minecraft.block.SoundType;
@@ -18,7 +18,6 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -57,6 +56,8 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodEntry, IPr
       .customResource(type.getResource("loom"))
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)
+      .tile(TileWoodLoom.class, new TESRWoodLoom())
+      .renderType(EnumBlockRenderType.MODEL)
       .nonOpaque()
       .nonFullCube()
       .hardness(0.5f)
@@ -107,30 +108,10 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodEntry, IPr
     return new BlockStateContainer(this, HORIZONTAL);
   }
 
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
-
-  @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    var tile = TileUtils.getTile(worldIn, pos, TileWoodLoom.class);
-    tile.ifPresent(tileWoodLoom -> tileWoodLoom.onBreakBlock(worldIn, pos, state));
-    super.breakBlock(worldIn, pos, state);
-  }
 
   @Override
   public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
     return new TileWoodLoom();
   }
 
-  @Override
-  public Class<TileWoodLoom> getTileClass() {
-    return TileWoodLoom.class;
-  }
-
-  @Override
-  public TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRWoodLoom();
-  }
 }

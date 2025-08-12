@@ -1,9 +1,8 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.animal.api.util.AnimalFood;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalHare;
@@ -53,10 +52,9 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.CLOSED;
 import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
-public class BlockSnare extends BaseBlock implements IProviderTile {
+public class BlockSnare extends BaseBlockContainer {
 
-  protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D,
-    1.0D);
+  protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
   public BlockSnare() {
     super(Settings.of(Material.WOOD));
@@ -67,7 +65,9 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
       .hardness(1.5f)
       .nonFullCube()
       .nonOpaque()
+      .passable()
       .randomTicks()
+      .tile(TileSnare.class)
       .harvestLevel(ToolClasses.AXE, 0)
       .capability(
         CapabilityProviderSize.of(Size.LARGE, Weight.HEAVY)
@@ -94,20 +94,16 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-    return true;
-  }
-
-  @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return TRAP_AABB;
   }
 
   @Override
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-    AxisAlignedBB captureBox = new AxisAlignedBB(pos.getX() - 10.0D, pos.getY() - 5.0D,
-      pos.getZ() - 10.0D, pos.getX() + 10.0D, pos.getY() + 5.0D,
-      pos.getZ() + 10.0D);
+    AxisAlignedBB captureBox = new AxisAlignedBB(
+      pos.getX() - 10.0D, pos.getY() - 5.0D, pos.getZ() - 10.0D,
+      pos.getX() + 10.0D, pos.getY() + 5.0D, pos.getZ() + 10.0D
+    );
     TileUtils.getTile(worldIn, pos, TileSnare.class).ifPresent(tile -> {
       if (tile.isOpen() && worldIn.getEntitiesWithinAABB(EntityPlayer.class, captureBox).isEmpty() && !worldIn.isRemote) {
 
@@ -273,11 +269,6 @@ public class BlockSnare extends BaseBlock implements IProviderTile {
     AxisAlignedBB axisalignedbb = blockState.getBoundingBox(worldIn, pos);
     return new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ,
       axisalignedbb.maxX, (float) 0 * 0.125F, axisalignedbb.maxZ);
-  }
-
-  @Override
-  public Class<TileSnare> getTileClass() {
-    return TileSnare.class;
   }
 
   @Override

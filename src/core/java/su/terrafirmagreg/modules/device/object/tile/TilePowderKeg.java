@@ -1,15 +1,15 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.framework.manager.registry.base.inventory.api.IItemHandlerSidedCallback;
-import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemHandlerSidedWrapper;
-import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.StackUtils;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.api.IItemHandlerSidedCallback;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemHandlerSidedWrapper;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
-import su.terrafirmagreg.modules.device.client.gui.GuiPowderkeg;
 import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
 import su.terrafirmagreg.modules.device.object.container.ContainerPowderKeg;
+import su.terrafirmagreg.modules.device.object.gui.GuiPowderkeg;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -38,7 +38,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -62,6 +61,7 @@ public class TilePowderKeg extends BaseTileTickableInventory
   @Getter
   private int fuse = -1;
 
+  @Getter
   private boolean isLit = false;
   private EntityLivingBase igniter;
 
@@ -101,7 +101,7 @@ public class TilePowderKeg extends BaseTileTickableInventory
   }
 
   @Override
-  public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+  public boolean isItemValid(int slot, ItemStack stack) {
     return OreDictUtils.contains(stack, "dustGunpowder");
   }
 
@@ -111,26 +111,25 @@ public class TilePowderKeg extends BaseTileTickableInventory
   }
 
   @Override
-  public void readFromNBT(@NotNull NBTTagCompound nbt) {
+  public void readFromNBT(NBTTagCompound nbt) {
     super.readFromNBT(nbt);
     sealed = nbt.getBoolean(SEALED_TAG);
   }
 
   @Override
-  @NotNull
-  public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
     nbt.setBoolean(SEALED_TAG, sealed);
     return super.writeToNBT(nbt);
   }
 
   @Override
-  public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
+  public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
     return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
   }
 
   @Override
   @SuppressWarnings("unchecked")
-  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+  public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
     if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
       return (T) new ItemHandlerSidedWrapper(this, inventory, facing);
     }
@@ -169,10 +168,6 @@ public class TilePowderKeg extends BaseTileTickableInventory
 
   public void setIgniter(@Nullable EntityLivingBase igniterIn) {
     igniter = igniterIn;
-  }
-
-  public boolean isLit() {
-    return isLit;
   }
 
   public void setLit(boolean lit) {

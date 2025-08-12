@@ -8,6 +8,7 @@ public final class BlocksAnimal {
   public static BlockNestBox NEST_BOX;
 
   public static void onRegister(IRegistryRegistrar registrar) {
+
     NEST_BOX = registrar.addBlock(new BlockNestBox());
   }
 

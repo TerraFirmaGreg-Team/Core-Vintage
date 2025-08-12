@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.api.data.Properties;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.helper.GreenhouseHelper;
+import su.terrafirmagreg.helper.GreenhouseHelper;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

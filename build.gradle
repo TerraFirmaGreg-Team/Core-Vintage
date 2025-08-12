@@ -243,6 +243,12 @@ sourceSets {
       srcDir 'src/main/java'
       srcDir 'src/framework/java'
     }
+
+    resources {
+      srcDir 'src/core/resources'
+//      srcDir 'src/main/resources'
+      srcDir 'src/framework/resources'
+    }
   }
 }
 

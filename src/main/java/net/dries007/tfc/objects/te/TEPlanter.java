@@ -5,7 +5,7 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarTickable;
-import su.terrafirmagreg.modules.device.helper.GreenhouseHelper;
+import su.terrafirmagreg.helper.GreenhouseHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -119,7 +119,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return entry;
   }
 
-  public <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Set<T> types, Function<T, V> factory) {
+  public <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBlock(factory.apply(type))));
   }
@@ -164,7 +164,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Set<T> types, Function<T, V> factory) {
+  public <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addItem(factory.apply(type))));
   }
@@ -203,7 +203,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Set<T> types, Function<T, V> factory) {
+  public <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBiome(factory.apply(type))));
   }
@@ -242,7 +242,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Set<T> types, Function<T, V> factory) {
+  public <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEnchantment(factory.apply(type))));
   }
@@ -281,7 +281,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Set<T> types, Function<T, V> factory) {
+  public <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEffect(factory.apply(type))));
   }
@@ -320,7 +320,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Set<T> types, Function<T, V> factory) {
+  public <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addPotion(factory.apply(type))));
   }
@@ -406,7 +406,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Set<T> types, Function<T, V> factory) {
+  public <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEntity(factory.apply(type))));
   }

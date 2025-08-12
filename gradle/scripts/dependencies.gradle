@@ -34,7 +34,7 @@ repositories {
   mavenLocal() // Must be last for caching to work
 }
 
-def use_dev = true
+def use_dev = false
 def use_util = true
 
 def loadDependencies() {
@@ -49,6 +49,11 @@ def MOD_EXCLUDES = [
   'mtlib',
   'autopack-director',
   'customskinloader'
+]
+
+def MOD_DEV = [
+  'gregtech-ce-unofficial',
+  'gregicality-multiblocks'
 ]
 
 dependencies {

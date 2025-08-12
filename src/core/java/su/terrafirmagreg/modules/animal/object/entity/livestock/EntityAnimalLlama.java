@@ -13,14 +13,14 @@ import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.client.render.RenderAnimalLlama;
+import su.terrafirmagreg.modules.animal.object.render.RenderAnimalLlama;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.animal.object.entity.ai.EntityAnimalAIPanic;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
-import su.terrafirmagreg.modules.core.helper.BiomeHelper;
+import su.terrafirmagreg.helper.BiomeHelper;
 import su.terrafirmagreg.modules.core.packet.SCPacketSimple;
 
 import net.minecraft.block.BlockChest;

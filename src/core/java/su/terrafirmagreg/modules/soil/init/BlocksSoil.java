@@ -51,21 +51,21 @@ public class BlocksSoil {
     PEAT_GRASS = registry.addBlock(new BlockSoilPeatGrass());
     PEAT = registry.addBlock(new BlockSoilPeat());
 
-    GRASS = registry.addBlock(SoilType.getTypes(), BlockSoilGrass::new);
-    DRY_GRASS = registry.addBlock(SoilType.getTypes(), BlockSoilDryGrass::new);
-    SPARSE_GRASS = registry.addBlock(SoilType.getTypes(), BlockSoilSparseGrass::new);
-    PODZOL = registry.addBlock(SoilType.getTypes(), BlockSoilPodzol::new);
-    MYCELIUM = registry.addBlock(SoilType.getTypes(), BlockSoilMycelium::new);
-    COARSE_DIRT = registry.addBlock(SoilType.getTypes(), BlockSoilCoarseDirt::new);
-    ROOTED_DIRT = registry.addBlock(SoilType.getTypes(), BlockSoilRootedDirt::new);
-    DIRT = registry.addBlock(SoilType.getTypes(), BlockSoilDirt::new);
-    FARMLAND = registry.addBlock(SoilType.getTypes(), BlockSoilFarmland::new);
-    GRASS_PATH = registry.addBlock(SoilType.getTypes(), BlockSoilGrassPath::new);
-    MUD = registry.addBlock(SoilType.getTypes(), BlockSoilMud::new);
-    MUD_BRICKS = registry.addBlock(SoilType.getTypes(), BlockSoilMudBricks::new);
-    MUD_BRICKS_STAIRS = registry.addBlock(SoilType.getTypes(), BlockSoilMudStairs::new);
-    MUD_BRICKS_SLAB_DOUBLE = registry.addBlock(SoilType.getTypes(), BlockSoilMudSlab::new);
-    MUD_BRICKS_SLAB = registry.addBlock(SoilType.getTypes(), BlockSoilMudSlab.Half::new);
-    MUD_BRICKS_WALL = registry.addBlock(SoilType.getTypes(), BlockSoilMudWall::new);
+    GRASS = registry.addBlock(BlockSoilGrass::new, SoilType.getTypes());
+    DRY_GRASS = registry.addBlock(BlockSoilDryGrass::new, SoilType.getTypes());
+    SPARSE_GRASS = registry.addBlock(BlockSoilSparseGrass::new, SoilType.getTypes());
+    PODZOL = registry.addBlock(BlockSoilPodzol::new, SoilType.getTypes());
+    MYCELIUM = registry.addBlock(BlockSoilMycelium::new, SoilType.getTypes());
+    COARSE_DIRT = registry.addBlock(BlockSoilCoarseDirt::new, SoilType.getTypes());
+    ROOTED_DIRT = registry.addBlock(BlockSoilRootedDirt::new, SoilType.getTypes());
+    DIRT = registry.addBlock(BlockSoilDirt::new, SoilType.getTypes());
+    FARMLAND = registry.addBlock(BlockSoilFarmland::new, SoilType.getTypes());
+    GRASS_PATH = registry.addBlock(BlockSoilGrassPath::new, SoilType.getTypes());
+    MUD = registry.addBlock(BlockSoilMud::new, SoilType.getTypes());
+    MUD_BRICKS = registry.addBlock(BlockSoilMudBricks::new, SoilType.getTypes());
+    MUD_BRICKS_STAIRS = registry.addBlock(BlockSoilMudStairs::new, SoilType.getTypes());
+    MUD_BRICKS_SLAB_DOUBLE = registry.addBlock(BlockSoilMudSlab::new, SoilType.getTypes());
+    MUD_BRICKS_SLAB = registry.addBlock(BlockSoilMudSlab.Half::new, SoilType.getTypes());
+    MUD_BRICKS_WALL = registry.addBlock(BlockSoilMudWall::new, SoilType.getTypes());
   }
 }

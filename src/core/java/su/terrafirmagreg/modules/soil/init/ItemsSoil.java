@@ -17,10 +17,10 @@ public class ItemsSoil {
   public static Map<SoilType, ItemSoilMudWetBrick> MUD_BRICK_WET;
 
   public static void onRegister(IRegistryRegistrar registry) {
-    PILE = registry.addItem(SoilType.getTypes(), ItemSoilPile::new);
-    MUD_BALL = registry.addItem(SoilType.getTypes(), ItemSoilMud::new);
-    MUD_BRICK = registry.addItem(SoilType.getTypes(), ItemSoilMudBrick::new);
-    MUD_BRICK_WET = registry.addItem(SoilType.getTypes(), ItemSoilMudWetBrick::new);
+    PILE = registry.addItem(ItemSoilPile::new, SoilType.getTypes());
+    MUD_BALL = registry.addItem(ItemSoilMud::new, SoilType.getTypes());
+    MUD_BRICK = registry.addItem(ItemSoilMudBrick::new, SoilType.getTypes());
+    MUD_BRICK_WET = registry.addItem(ItemSoilMudWetBrick::new, SoilType.getTypes());
 
 
   }

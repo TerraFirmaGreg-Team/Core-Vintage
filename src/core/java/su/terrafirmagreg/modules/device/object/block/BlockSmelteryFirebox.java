@@ -58,6 +58,7 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
       .nonFullCube()
       .nonOpaque()
       .randomTicks()
+      .tile(TileSmelteryFirebox.class)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM));
 
@@ -192,8 +193,4 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
     return new TileSmelteryFirebox();
   }
 
-  @Override
-  public Class<TileSmelteryFirebox> getTileClass() {
-    return TileSmelteryFirebox.class;
-  }
 }

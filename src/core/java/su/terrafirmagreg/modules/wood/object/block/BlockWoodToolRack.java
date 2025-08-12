@@ -7,14 +7,13 @@ import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProvider
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.client.render.TESRWoodToolRack;
 import su.terrafirmagreg.modules.wood.object.block.spi.BlockWood;
+import su.terrafirmagreg.modules.wood.object.render.TESRWoodToolRack;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodToolRack;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -51,6 +50,8 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
       .hardness(0.5f)
       .resistance(3f)
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.VERY_HEAVY))
+      .renderType(EnumBlockRenderType.MODEL)
+      .tile(TileWoodToolRack.class, new TESRWoodToolRack())
       .nonOpaque()
       .nonFullCube();
 
@@ -66,11 +67,6 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(HORIZONTAL).getHorizontalIndex();
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -154,15 +150,6 @@ public class BlockWoodToolRack extends BlockWood implements IProviderTile {
     return slot;
   }
 
-  @Override
-  public Class<TileWoodToolRack> getTileClass() {
-    return TileWoodToolRack.class;
-  }
-
-  @Override
-  public TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRWoodToolRack();
-  }
 
   @Nullable
   @Override

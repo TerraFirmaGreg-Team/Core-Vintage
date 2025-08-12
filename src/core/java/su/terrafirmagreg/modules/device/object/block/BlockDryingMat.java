@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.device.object.block;
 import su.terrafirmagreg.api.client.GuiHandler;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
-import su.terrafirmagreg.modules.device.client.render.TESRDryingMat;
+import su.terrafirmagreg.modules.device.object.render.TESRDryingMat;
 import su.terrafirmagreg.modules.device.object.tile.TileDryingMat;
 
 import net.minecraft.block.Block;
@@ -11,7 +11,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -39,6 +38,8 @@ public class BlockDryingMat extends BaseBlockContainer {
       .hardness(0.5f)
       .randomTicks()
       .nonCube()
+      .tile(TileDryingMat.class, new TESRDryingMat())
+      .renderType(EnumBlockRenderType.MODEL)
       .sound(SoundType.PLANT);
   }
 
@@ -50,7 +51,7 @@ public class BlockDryingMat extends BaseBlockContainer {
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (worldIn.isRemote) {return;}
-    TileUtils.getTile(worldIn, pos, getTileClass())
+    TileUtils.getTile(worldIn, pos, TileDryingMat.class)
       .filter(tile -> worldIn.isRainingAt(pos.up()))
       .ifPresent(TileDryingMat::resetCounter);
   }
@@ -72,7 +73,7 @@ public class BlockDryingMat extends BaseBlockContainer {
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (!hand.equals(EnumHand.MAIN_HAND)) {return false;}
-    TileUtils.getTile(world, pos, getTileClass()).ifPresent(tile -> {
+    TileUtils.getTile(world, pos, TileDryingMat.class).ifPresent(tile -> {
       if (!world.isRemote) {
         if (player.isSneaking()) {
           ItemStack stack = tile.getStack();
@@ -101,33 +102,12 @@ public class BlockDryingMat extends BaseBlockContainer {
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     // Set the initial counter value
-    TileUtils.getTile(worldIn, pos, getTileClass()).ifPresent(TileDryingMat::resetCounter);
+    TileUtils.getTile(worldIn, pos, TileDryingMat.class).ifPresent(TileDryingMat::resetCounter);
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
-
-  @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, getTileClass()).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
-    super.breakBlock(worldIn, pos, state);
   }
 
   @Override
   public TileDryingMat createNewTileEntity(World worldIn, int meta) {
     return new TileDryingMat();
-  }
-
-  @Override
-  public Class<TileDryingMat> getTileClass() {
-    return TileDryingMat.class;
-  }
-
-  @Override
-  public TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRDryingMat();
   }
 }

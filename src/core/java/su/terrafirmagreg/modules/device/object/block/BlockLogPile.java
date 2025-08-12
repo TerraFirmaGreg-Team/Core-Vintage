@@ -53,27 +53,23 @@ public class BlockLogPile extends BaseBlockContainer {
       .registryKey("log_pile")
       .sound(SoundType.WOOD)
       .randomTicks()
+      .tile(TileLogPile.class)
+      .renderType(EnumBlockRenderType.MODEL)
       .harvestLevel(ToolClasses.AXE, 0)
       .hardness(2.0F);
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(XZ, EnumFacing.Axis.Z)
       .withProperty(LIT, false));
   }
 
-  private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos,
-                                           EnumFacing side) {
+  private static boolean isValidCoverBlock(IBlockState offsetState, World world, BlockPos pos, EnumFacing side) {
     if (offsetState.getBlock() instanceof BlockLogPile || offsetState.getBlock() == BlocksDevice.CHARCOAL_PILE) {
       return true;
     } else if (offsetState.getMaterial() == Material.GLASS && ConfigDevice.BLOCK.CHARCOAL_PIT.canAcceptGlass) {
       return offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID || offsetState.isSideSolid(world, pos, side);
     }
     return !offsetState.getMaterial().getCanBurn() && (offsetState.getBlockFaceShape(world, pos, side) == BlockFaceShape.SOLID) || offsetState.isSideSolid(world, pos, side);
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -223,11 +219,6 @@ public class BlockLogPile extends BaseBlockContainer {
     return TileUtils.getTile(world, pos, TileLogPile.class)
       .map(tile -> tile.getLog().copy())
       .orElse(ItemStack.EMPTY);
-  }
-
-  @Override
-  public Class<TileLogPile> getTileClass() {
-    return TileLogPile.class;
   }
 
   @Override

@@ -1,10 +1,11 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
+import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -57,11 +58,18 @@ public final class TileUtils {
            && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
   }
 
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public static void addTile(Block block) {
-    if (block instanceof IProviderTile provider) {
+    if (block instanceof IBlockEntry provider) {
       var registryName = block.getRegistryName();
-      assert registryName != null;
-      TileUtils.addTile(provider.getTileClass(), registryName.getNamespace(), provider.getTileClass().getSimpleName().replaceFirst("Tile", ""));
+
+      var settings = provider.getSettings();
+      var tileClass = settings.getTileClass();
+      final TileEntitySpecialRenderer tesr = settings.getTileRenderer();
+      if (registryName != null && tileClass != null) {
+        TileUtils.addTile(tileClass, registryName.getNamespace(), tileClass.getSimpleName().replaceFirst("Tile", ""));
+        ModelUtils.tesr(tileClass, tesr);
+      }
     }
   }
 

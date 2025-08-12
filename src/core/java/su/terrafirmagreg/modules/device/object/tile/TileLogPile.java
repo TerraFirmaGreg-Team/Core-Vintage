@@ -1,18 +1,18 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.client.gui.GuiLogPile;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
 import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
 import su.terrafirmagreg.modules.device.object.container.ContainerLogPile;
+import su.terrafirmagreg.modules.device.object.gui.GuiLogPile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

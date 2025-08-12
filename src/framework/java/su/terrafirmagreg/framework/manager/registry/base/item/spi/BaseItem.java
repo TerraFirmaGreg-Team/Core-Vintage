@@ -26,8 +26,13 @@ public abstract class BaseItem extends Item implements IItemEntry {
 
   protected final Settings settings;
 
+  public BaseItem(Settings settings) {
+    this.settings = settings;
+
+  }
+
   public BaseItem() {
-    this.settings = Settings.of();
+    this(Settings.of());
 
   }
 

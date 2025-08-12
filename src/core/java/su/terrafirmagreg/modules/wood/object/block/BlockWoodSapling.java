@@ -5,7 +5,7 @@ import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockSapl
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
-import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
+import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.itemblock.ItemBlockWoodSapling;
@@ -57,6 +57,7 @@ public class BlockWoodSapling extends BaseBlockSapling implements IWoodEntry, IG
     getSettings()
       .registryKey(type.getRegistryKey("sapling"))
       //.ignoresProperties(STAGE_2)
+      .tile(TileWoodSapling.class)
       .sound(SoundType.PLANT)
       .itemBlock(ItemBlockWoodSapling::new)
       .hardness(0.0F)
@@ -144,11 +145,6 @@ public class BlockWoodSapling extends BaseBlockSapling implements IWoodEntry, IG
   @Override
   public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
     return new TileWoodSapling();
-  }
-
-  @Override
-  public Class<TileWoodSapling> getTileClass() {
-    return TileWoodSapling.class;
   }
 
   @Override

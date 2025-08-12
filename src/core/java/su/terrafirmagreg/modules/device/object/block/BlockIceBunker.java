@@ -22,6 +22,8 @@ public class BlockIceBunker extends BaseBlockContainer {
 
     getSettings()
       .registryKey("ice_bunker")
+      .tile(TileIceBunker.class)
+      .renderType(EnumBlockRenderType.MODEL)
       .hardness(2F);
   }
 
@@ -37,14 +39,5 @@ public class BlockIceBunker extends BaseBlockContainer {
   public @Nullable TileIceBunker createNewTileEntity(World world, int i) {
     return new TileIceBunker();
   }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
-
-  @Override
-  public Class<TileIceBunker> getTileClass() {
-    return TileIceBunker.class;
-  }
+  
 }

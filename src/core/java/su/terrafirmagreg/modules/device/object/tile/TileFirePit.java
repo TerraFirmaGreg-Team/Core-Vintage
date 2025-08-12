@@ -23,8 +23,8 @@ import su.terrafirmagreg.modules.core.feature.heat.capability.ICapabilityHeat;
 import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;
-import su.terrafirmagreg.modules.device.client.gui.GuiFirePit;
 import su.terrafirmagreg.modules.device.object.container.ContainerFirePit;
+import su.terrafirmagreg.modules.device.object.gui.GuiFirePit;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

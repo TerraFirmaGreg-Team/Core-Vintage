@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.soil.object.block;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
-import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
+import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.soil.api.types.IGrassBlock;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
@@ -19,8 +19,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -55,7 +53,6 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
     return 0;
   }
 
-  @NotNull
   @Override
   public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
     pos = pos.add(0, -1, 0);

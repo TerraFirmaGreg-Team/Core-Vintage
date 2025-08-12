@@ -8,15 +8,14 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.client.render.TESRWoodChest;
 import su.terrafirmagreg.modules.wood.object.inventory.InventoryWoodLargeChest;
+import su.terrafirmagreg.modules.wood.object.render.TESRWoodChest;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
@@ -37,7 +36,7 @@ public class BlockWoodChest extends BaseBlockChest implements IWoodEntry {
 
   public BlockWoodChest(Type chestType, WoodType type) {
     super(chestType);
-    
+
     this.type = type;
   }
 
@@ -52,6 +51,7 @@ public class BlockWoodChest extends BaseBlockChest implements IWoodEntry {
       .ignoresProperties(BlockChest.FACING)
       .sound(SoundType.WOOD)
       .hardness(2.5f)
+      .tile(TileWoodChest.class, new TESRWoodChest())
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM))
       .fireInfo(5, 20)
       .addOreDict("chest")
@@ -115,13 +115,4 @@ public class BlockWoodChest extends BaseBlockChest implements IWoodEntry {
   }
 
 
-  @Override
-  public Class<TileWoodChest> getTileClass() {
-    return TileWoodChest.class;
-  }
-
-  @Override
-  public TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRWoodChest();
-  }
 }

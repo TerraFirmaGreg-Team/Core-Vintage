@@ -1,9 +1,8 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.device.object.tile.TileBloom;
 
 import net.minecraft.block.SoundType;
@@ -22,7 +21,7 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 
 import org.jetbrains.annotations.Nullable;
 
-public class BlockBloom extends BaseBlock implements IProviderTile {
+public class BlockBloom extends BaseBlockContainer {
 
   public BlockBloom() {
     super(Settings.of(Material.IRON));
@@ -30,14 +29,9 @@ public class BlockBloom extends BaseBlock implements IProviderTile {
     getSettings()
       .registryKey("bloom")
       .hardness(3.0f)
+      .tile(TileBloom.class)
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0);
-  }
-
-  @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(world, pos, TileBloom.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
-    super.breakBlock(world, pos, state);
   }
 
   @Override
@@ -75,8 +69,5 @@ public class BlockBloom extends BaseBlock implements IProviderTile {
     return new TileBloom();
   }
 
-  @Override
-  public Class<TileBloom> getTileClass() {
-    return TileBloom.class;
-  }
+
 }

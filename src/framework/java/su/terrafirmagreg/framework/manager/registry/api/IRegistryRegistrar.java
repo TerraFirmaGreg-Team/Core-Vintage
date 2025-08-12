@@ -51,7 +51,7 @@ public interface IRegistryRegistrar {
 
   <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Map<T, V> map);
 
-  <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Set<T> types, Function<T, V> factory);
+  <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
   // - Item
@@ -65,7 +65,7 @@ public interface IRegistryRegistrar {
 
   <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Map<T, V> map);
 
-  <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Set<T> types, Function<T, V> factory);
+  <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
   // - Biome
@@ -79,7 +79,7 @@ public interface IRegistryRegistrar {
 
   <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Map<T, V> map);
 
-  <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Set<T> types, Function<T, V> factory);
+  <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
   // - Enchantment
@@ -93,7 +93,7 @@ public interface IRegistryRegistrar {
 
   <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Map<T, V> map);
 
-  <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Set<T> types, Function<T, V> factory);
+  <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
   // - Effect
@@ -107,7 +107,7 @@ public interface IRegistryRegistrar {
 
   <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Map<T, V> map);
 
-  <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Set<T> types, Function<T, V> factory);
+  <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
   // - Potion
@@ -121,7 +121,7 @@ public interface IRegistryRegistrar {
 
   <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Map<T, V> map);
 
-  <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Set<T> types, Function<T, V> factory);
+  <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
   // - Sound
@@ -151,7 +151,7 @@ public interface IRegistryRegistrar {
 
   <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Map<T, V> map);
 
-  <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Set<T> types, Function<T, V> factory);
+  <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
   // - KeyBinding

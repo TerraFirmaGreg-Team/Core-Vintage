@@ -6,7 +6,7 @@ import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
-import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
+import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
@@ -71,6 +71,7 @@ public class BlockWoodLeaves extends BaseBlockLeaves implements IWoodEntry, IPro
       .ignoresProperties(DECAYABLE, HARVESTABLE)
       .nonOpaque()
       .randomTicks()
+      .tile(TileWoodLeaves.class)
       .fireInfo(30, 60)
       .addOreDict("leaves");
 
@@ -223,10 +224,6 @@ public class BlockWoodLeaves extends BaseBlockLeaves implements IWoodEntry, IPro
     return new TileWoodLeaves();
   }
 
-  @Override
-  public Class<TileWoodLeaves> getTileClass() {
-    return TileWoodLeaves.class;
-  }
 
   @Override
   public IBlockState getStateFromMeta(int meta) {

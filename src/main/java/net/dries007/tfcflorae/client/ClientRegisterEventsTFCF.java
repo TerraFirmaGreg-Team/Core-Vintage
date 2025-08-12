@@ -2,7 +2,7 @@ package net.dries007.tfcflorae.client;
 
 import su.terrafirmagreg.api.data.Properties.BoolProp;
 import su.terrafirmagreg.api.data.enums.Mods;
-import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
+import su.terrafirmagreg.helper.GrassColorHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;

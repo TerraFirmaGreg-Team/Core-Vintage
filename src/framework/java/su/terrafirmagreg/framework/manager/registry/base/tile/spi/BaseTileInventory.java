@@ -1,10 +1,10 @@
 package su.terrafirmagreg.framework.manager.registry.base.tile.spi;
 
-import su.terrafirmagreg.framework.manager.registry.base.inventory.api.slot.ISlotCallback;
-import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemStackHandlerCallback;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.api.slot.ISlotCallback;
+import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemStackHandlerCallback;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -80,6 +80,7 @@ public abstract class BaseTileInventory extends BaseTile implements ISlotCallbac
            : super.getCapability(capability, facing);
   }
 
+  @Override
   public void onBreakBlock(World world, BlockPos pos, IBlockState state) {
     invalidate();
     for (int slot = 0; slot < inventory.getSlots(); slot++) {

@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.BlockUtils;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarFormatted;
-import su.terrafirmagreg.modules.device.client.gui.GuiDryingMat;
 import su.terrafirmagreg.modules.device.object.container.ContainerDryingMat;
+import su.terrafirmagreg.modules.device.object.gui.GuiDryingMat;
 import su.terrafirmagreg.modules.device.object.recipe.dryingmat.DryingMatRecipeManager;
 
 import net.minecraft.block.state.IBlockState;

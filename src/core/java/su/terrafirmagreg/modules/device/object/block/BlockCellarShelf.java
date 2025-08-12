@@ -14,8 +14,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.jetbrains.annotations.Nullable;
-
 public class BlockCellarShelf extends BaseBlockContainer {
 
   public BlockCellarShelf() {
@@ -23,6 +21,8 @@ public class BlockCellarShelf extends BaseBlockContainer {
 
     getSettings()
       .registryKey("cellar/shelf")
+      .tile(TileCellarShelf.class)
+      .renderType(EnumBlockRenderType.MODEL)
       .hardness(2F)
       .nonOpaque();
   }
@@ -36,17 +36,7 @@ public class BlockCellarShelf extends BaseBlockContainer {
   }
 
   @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
-
-  @Override
-  public @Nullable TileEntity createNewTileEntity(World world, int i) {
+  public TileEntity createNewTileEntity(World world, int i) {
     return new TileCellarShelf();
-  }
-
-  @Override
-  public Class<TileCellarShelf> getTileClass() {
-    return TileCellarShelf.class;
   }
 }

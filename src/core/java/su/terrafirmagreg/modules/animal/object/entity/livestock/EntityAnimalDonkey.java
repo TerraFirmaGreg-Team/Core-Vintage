@@ -14,7 +14,7 @@ import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.animal.api.type.ILivestock;
 import su.terrafirmagreg.modules.animal.api.type.IRidable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.client.render.RenderAnimalDonkey;
+import su.terrafirmagreg.modules.animal.object.render.RenderAnimalDonkey;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
@@ -23,7 +23,7 @@ import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.core.helper.BiomeHelper;
+import su.terrafirmagreg.helper.BiomeHelper;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 
 import net.minecraft.block.BlockChest;

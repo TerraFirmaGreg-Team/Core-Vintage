@@ -1,15 +1,15 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.device.client.render.TESROven;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.object.render.TESROven;
 import su.terrafirmagreg.modules.device.object.tile.TileOven;
 
 import net.minecraft.block.Block;
@@ -17,7 +17,6 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -64,6 +63,8 @@ public class BlockOven extends BaseBlock implements IProviderTile {
       .nonOpaque()
       .randomTicks()
       .useNeighborBrightness()
+      .renderType(EnumBlockRenderType.MODEL)
+      .tile(TileOven.class, new TESROven())
       .capability(
         CapabilityProviderSize.of(Size.LARGE, Weight.HEAVY)
       );
@@ -201,11 +202,6 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     int lit = state.getValue(LIT) ? 4 : 0; // true = 0, false = 4
 
     return facing + cured + lit;
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -368,15 +364,6 @@ public class BlockOven extends BaseBlock implements IProviderTile {
     return state.getValue(LIT) ? 15 : 0;
   }
 
-  @Override
-  public Class<TileOven> getTileClass() {
-    return TileOven.class;
-  }
-
-  @Override
-  public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESROven();
-  }
 
   @Nullable
   @Override

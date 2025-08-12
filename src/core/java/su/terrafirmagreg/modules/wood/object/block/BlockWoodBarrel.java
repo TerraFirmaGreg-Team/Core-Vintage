@@ -7,15 +7,14 @@ import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProvider
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.client.render.TESRWoodBarrel;
 import su.terrafirmagreg.modules.wood.object.block.spi.BlockWood;
+import su.terrafirmagreg.modules.wood.object.render.TESRWoodBarrel;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodBarrel;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneComparator;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -33,8 +32,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 
@@ -60,6 +57,7 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
     getSettings()
       .hardness(2F)
       .fireInfo(5, 20)
+      .tile(TileWoodBarrel.class, new TESRWoodBarrel())
       .capability(stack ->
         CapabilityProviderSize.of(
           stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE,
@@ -207,16 +205,6 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
     }).orElse(stack);
   }
 
-  @Override
-  public Class<TileWoodBarrel> getTileClass() {
-    return TileWoodBarrel.class;
-  }
-
-  @Override
-  @SideOnly(Side.CLIENT)
-  public TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRWoodBarrel();
-  }
 
   @Nullable
   @Override

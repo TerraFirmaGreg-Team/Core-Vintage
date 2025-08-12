@@ -8,8 +8,8 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
-import su.terrafirmagreg.modules.device.client.render.TESRFirePit;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.object.render.TESRFirePit;
 import su.terrafirmagreg.modules.device.object.tile.TileBellows;
 import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
 
@@ -17,7 +17,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -73,20 +72,17 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
 
     getSettings()
       .registryKey("fire_pit")
+      .tile(TileFirePit.class, new TESRFirePit())
       .hardness(0.3F)
+      .renderType(EnumBlockRenderType.MODEL)
       .randomTicks()
       .nonCube()
+      .disableStats()
       .lightValue(15);
-    disableStats();
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false)
       .withProperty(FIRE_PIT_ATTACHMENT, EnumFirePitAttachment.NONE));
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
 
@@ -344,15 +340,6 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     TileUtils.getTile(world, pos, TileFirePit.class).ifPresent(tile -> tile.onAirIntake(airAmount));
   }
 
-  @Override
-  public Class<TileFirePit> getTileClass() {
-    return TileFirePit.class;
-  }
-
-  @Override
-  public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRFirePit();
-  }
 
   @Override
   public @Nullable TileFirePit createNewTileEntity(World worldIn, int meta) {

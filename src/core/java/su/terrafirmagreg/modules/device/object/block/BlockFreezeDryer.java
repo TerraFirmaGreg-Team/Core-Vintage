@@ -31,9 +31,12 @@ public class BlockFreezeDryer extends BaseBlockContainer {
 
     getSettings()
       .registryKey("freeze_dryer")
+      .tile(TileFreezeDryer.class)
+      .renderType(EnumBlockRenderType.MODEL)
       .nonCube()
       .hardness(2F);
-    setDefaultState(blockState.getBaseState()
+
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
@@ -99,8 +102,7 @@ public class BlockFreezeDryer extends BaseBlockContainer {
   }
 
   @Override
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state,
-                              EntityLivingBase placer, ItemStack stack) {
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     if (stack.hasDisplayName()) {
       var tile = TileUtils.getTile(worldIn, pos, TileFreezeDryer.class);
       //tile.setCustomName(stack.getDisplayName());
@@ -119,20 +121,5 @@ public class BlockFreezeDryer extends BaseBlockContainer {
     return new TileFreezeDryer();
   }
 
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
-
-  @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, TileFreezeDryer.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
-    super.breakBlock(worldIn, pos, state);
-  }
-
-  @Override
-  public Class<TileFreezeDryer> getTileClass() {
-    return TileFreezeDryer.class;
-  }
 
 }

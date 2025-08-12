@@ -35,6 +35,7 @@ public class BlockGreenhouseWall extends BaseBlock {
   public static final AxisAlignedBB GREEN_WALL_SOUTH = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.25D);
   public static final AxisAlignedBB GREEN_WALL_NORTH = new AxisAlignedBB(0.0D, 0.0D, 0.75D, 1.0D, 1.0D, 1.0D);
 
+
   public BlockGreenhouseWall() {
     super(Settings.of(Material.IRON, MapColor.GRAY));
 
@@ -45,12 +46,12 @@ public class BlockGreenhouseWall extends BaseBlock {
       .hardness(2.0f)
       .resistance(3.0f)
       .lightValue(0)
+      .nonCube()
       .capability(
         CapabilityProviderSize.of(Size.NORMAL, Weight.MEDIUM)
-      )
-      .nonCube();
+      );
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(GLASS, false)
       .withProperty(HORIZONTAL, EnumFacing.EAST)
       .withProperty(TOP, false));

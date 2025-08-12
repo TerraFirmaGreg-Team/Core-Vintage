@@ -22,12 +22,12 @@ public class ItemsWood {
 
 
   public static void onRegister(IRegistryRegistrar registrar) {
-    BOAT = registrar.addItem(WoodType.getTypes(), ItemWoodBoat::new);
-    LUMBER = registrar.addItem(WoodType.getTypes(), ItemWoodLumber::new);
-    WHEEL = registrar.addItem(WoodType.getTypes(), ItemWoodWheel::new);
-    SUPPLY_CART = registrar.addItem(WoodType.getTypes(), ItemWoodSupplyCart::new);
-    ANIMAL_CART = registrar.addItem(WoodType.getTypes(), ItemWoodAnimalCart::new);
-    PLOW_CART = registrar.addItem(WoodType.getTypes(), ItemWoodPlowCart::new);
+    BOAT = registrar.addItem(ItemWoodBoat::new, WoodType.getTypes());
+    LUMBER = registrar.addItem(ItemWoodLumber::new, WoodType.getTypes());
+    WHEEL = registrar.addItem(ItemWoodWheel::new, WoodType.getTypes());
+    SUPPLY_CART = registrar.addItem(ItemWoodSupplyCart::new, WoodType.getTypes());
+    ANIMAL_CART = registrar.addItem(ItemWoodAnimalCart::new, WoodType.getTypes());
+    PLOW_CART = registrar.addItem(ItemWoodPlowCart::new, WoodType.getTypes());
 
   }
 }

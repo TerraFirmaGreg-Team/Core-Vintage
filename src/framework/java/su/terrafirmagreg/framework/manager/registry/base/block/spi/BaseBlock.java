@@ -9,6 +9,7 @@ import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.BlockRenderLayer;
@@ -42,7 +43,12 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
     super(settings.getMaterial(), settings.getMapColor());
 
     this.settings = settings;
-    this.blockState = this.createBlockState();
+//    this.blockState = this.createBlockState();
+  }
+
+  protected BlockStateContainer createBlockState() {
+
+    return new BlockStateContainer.Builder(this).build();
   }
 
   @Override
@@ -53,6 +59,11 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
   @Override
   public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
     return this.settings.isPassable();
+  }
+
+  @Override
+  public boolean getEnableStats() {
+    return this.settings.isEnableStats();
   }
 
 

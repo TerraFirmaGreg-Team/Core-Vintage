@@ -7,16 +7,15 @@ import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.RegistryUtils;
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.soil.api.types.ISoilEntry;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.client.gui.GuiWoodPlow;
-import su.terrafirmagreg.modules.wood.client.render.RenderWoodPlowCart;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodPlowCart;
 import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCartInventory;
+import su.terrafirmagreg.modules.wood.object.gui.GuiWoodPlow;
+import su.terrafirmagreg.modules.wood.object.render.RenderWoodPlowCart;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

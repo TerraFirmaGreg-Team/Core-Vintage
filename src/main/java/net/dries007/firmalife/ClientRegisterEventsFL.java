@@ -3,7 +3,7 @@ package net.dries007.firmalife;
 import su.terrafirmagreg.api.data.Properties.BoolProp;
 import su.terrafirmagreg.api.data.Properties.IntProp;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
-import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
+import su.terrafirmagreg.helper.GrassColorHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;

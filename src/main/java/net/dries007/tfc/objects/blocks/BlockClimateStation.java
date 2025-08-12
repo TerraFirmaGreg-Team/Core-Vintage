@@ -4,7 +4,7 @@ import su.terrafirmagreg.framework.manager.registry.provider.IProviderHighlight;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.device.helper.GreenhouseHelper;
+import su.terrafirmagreg.helper.GreenhouseHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

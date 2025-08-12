@@ -12,8 +12,8 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
-import su.terrafirmagreg.modules.core.client.gui.overlay.OverlayAmbiental;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
+import su.terrafirmagreg.modules.core.object.gui.GuiOverlayAmbiental;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -81,7 +81,7 @@ public class FeatureEgg extends BaseFeature {
     CapabilityForgeable.register();
 
     if (ModUtils.isClient()) {
-      MinecraftForge.EVENT_BUS.register(OverlayAmbiental.getInstance());
+      MinecraftForge.EVENT_BUS.register(GuiOverlayAmbiental.getInstance());
     }
   }
 

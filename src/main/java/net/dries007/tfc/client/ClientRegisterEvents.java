@@ -1,11 +1,11 @@
 package net.dries007.tfc.client;
 
 import su.terrafirmagreg.api.data.enums.EnumHideSize;
+import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
-import su.terrafirmagreg.modules.core.helper.GrassColorHelper;
-import su.terrafirmagreg.modules.device.client.render.TESRQuern;
-import su.terrafirmagreg.modules.device.client.render.TESRSluice;
+import su.terrafirmagreg.modules.device.object.render.TESRQuern;
+import su.terrafirmagreg.modules.device.object.render.TESRSluice;
 import su.terrafirmagreg.modules.device.object.tile.TileQuern;
 import su.terrafirmagreg.modules.device.object.tile.TileSluice;
 

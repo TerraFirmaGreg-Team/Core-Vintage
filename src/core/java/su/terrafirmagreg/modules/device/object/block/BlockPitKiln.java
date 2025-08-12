@@ -1,14 +1,12 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockState;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
-import su.terrafirmagreg.modules.device.client.render.TESRPitKiln;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.object.render.TESRPitKiln;
 import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
 
 import net.minecraft.block.Block;
@@ -17,8 +15,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -51,7 +47,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.FULL;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 
 @SuppressWarnings("deprecation")
-public class BlockPitKiln extends BaseBlock implements IProviderTile, IProviderBlockState {
+public class BlockPitKiln extends BaseBlockContainer {
 
   private static final AxisAlignedBB[] AABB_LEVELS = new AxisAlignedBB[]{
     PLACED_ITEM_AABB,
@@ -73,8 +69,11 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile, IProviderB
     getSettings()
       .registryKey("pit_kiln")
       .nonFullCube()
+      .tile(TilePitKiln.class, new TESRPitKiln())
+      .stateMapper(block -> ImmutableMap.of(block.getDefaultState(), new ModelResourceLocation(ModUtils.id("empty"))))
 //      .noItemBlock()
       .nonOpaque()
+      .renderType(EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
       .harvestLevel(ToolClasses.AXE, 0)
       .hardness(0.5f);
 
@@ -96,11 +95,6 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile, IProviderB
   @Override
   public int getMetaFromState(IBlockState state) {
     return (state.getValue(LIT) ? 1 : 0) + (state.getValue(FULL) ? 2 : 0);
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
   }
 
   @Override
@@ -130,12 +124,6 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile, IProviderB
       }
     });
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-  }
-
-  @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, TilePitKiln.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
-    super.breakBlock(worldIn, pos, state);
   }
 
   @Override
@@ -217,18 +205,4 @@ public class BlockPitKiln extends BaseBlock implements IProviderTile, IProviderB
     return new TilePitKiln();
   }
 
-  @Override
-  public Class<TilePitKiln> getTileClass() {
-    return TilePitKiln.class;
-  }
-
-  @Override
-  public TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRPitKiln();
-  }
-
-  @Override
-  public IStateMapper getStateMapper() {
-    return blockIn -> ImmutableMap.of(this.getDefaultState(), new ModelResourceLocation(ModUtils.id("empty")));
-  }
 }

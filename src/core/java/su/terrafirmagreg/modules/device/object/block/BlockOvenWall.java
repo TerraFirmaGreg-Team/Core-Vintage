@@ -46,6 +46,7 @@ public class BlockOvenWall extends BaseBlock {
       .lightValue(0)
       .nonOpaque()
       .nonFullCube()
+      .renderType(EnumBlockRenderType.MODEL)
       .capability(
         CapabilityProviderSize.of(Size.NORMAL, Weight.HEAVY)
       );
@@ -65,11 +66,6 @@ public class BlockOvenWall extends BaseBlock {
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(HORIZONTAL).getHorizontalIndex() + (state.getValue(CURED) ? 4 : 0);
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override

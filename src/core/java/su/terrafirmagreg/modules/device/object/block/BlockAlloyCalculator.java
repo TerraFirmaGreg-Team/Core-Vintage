@@ -33,11 +33,12 @@ public class BlockAlloyCalculator extends BaseBlockContainer {
   private static final AxisAlignedBB BOUNDS_WE = AABBUtils.create(5, 0, 3, 11, 4, 13);
 
   public BlockAlloyCalculator() {
-    super(Settings.of(Material.IRON));
-
-    getSettings()
+    super(Settings.of(Material.IRON)
       .registryKey("alloy_calculator")
-      .nonCube();
+      .renderType(EnumBlockRenderType.MODEL)
+      .tile(TileAlloyCalculator.class)
+      .nonCube()
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH));
@@ -96,18 +97,8 @@ public class BlockAlloyCalculator extends BaseBlockContainer {
   }
 
   @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
-
-  @Override
   public @Nullable TileEntity createNewTileEntity(World worldIn, int meta) {
     return new TileAlloyCalculator();
-  }
-
-  @Override
-  public Class<TileAlloyCalculator> getTileClass() {
-    return TileAlloyCalculator.class;
   }
 
 }

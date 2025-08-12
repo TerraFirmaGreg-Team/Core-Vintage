@@ -11,10 +11,10 @@ import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;
-import su.terrafirmagreg.modules.device.client.gui.GuiBlastFurnace;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockBlastFurnace;
 import su.terrafirmagreg.modules.device.object.container.ContainerBlastFurnace;
+import su.terrafirmagreg.modules.device.object.gui.GuiBlastFurnace;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

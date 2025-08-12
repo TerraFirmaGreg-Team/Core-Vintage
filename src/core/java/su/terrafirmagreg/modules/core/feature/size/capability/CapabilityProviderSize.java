@@ -52,12 +52,12 @@ public class CapabilityProviderSize implements ICapabilitySize, ICapabilityProvi
   }
 
   @Override
-  public @NotNull Weight getWeight(@NotNull ItemStack stack) {
+  public Weight getWeight(ItemStack stack) {
     return this.weight;
   }
 
   @Override
-  public @NotNull Size getSize(@NotNull ItemStack stack) {
+  public Size getSize(ItemStack stack) {
     return this.size;
   }
 

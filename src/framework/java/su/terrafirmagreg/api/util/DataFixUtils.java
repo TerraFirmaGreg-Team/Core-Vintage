@@ -1,6 +1,5 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.framework.manager.registry.RegistryManager;
 
@@ -136,20 +135,20 @@ public final class DataFixUtils {
     // Обработка события
     public void build() {
 
-      mappings.getAllMappings()
-        .stream()
-        .filter(mapping -> Mods.contains(mapping.key.getNamespace()))
-        .forEach(mapping -> {
-          String mappingPath = mapping.key.getPath();
-
-          multimap.forEach((key, value) -> {
-            if (comparisonRule.test(mappingPath, key)) {
-
-              processMapping(mapping, value);
-            }
-
-          });
-        });
+//      mappings.getAllMappings()
+//        .stream()
+//        .filter(mapping -> Mods.contains(mapping.key.getNamespace()))
+//        .forEach(mapping -> {
+//          String mappingPath = mapping.key.getPath();
+//
+//          multimap.forEach((key, value) -> {
+//            if (comparisonRule.test(mappingPath, key)) {
+//
+//              processMapping(mapping, value);
+//            }
+//
+//          });
+//        });
     }
 
 

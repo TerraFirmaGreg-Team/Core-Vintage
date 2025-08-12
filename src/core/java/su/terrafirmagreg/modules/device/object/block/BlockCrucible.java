@@ -8,14 +8,13 @@ import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProvider
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.client.render.TESRCrucible;
+import su.terrafirmagreg.modules.device.object.render.TESRCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -63,6 +62,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
       .nonFullCube()
       .nonOpaque()
       .hardness(3.0f)
+      .tile(TileCrucible.class, new TESRCrucible())
       .renderType(EnumBlockRenderType.MODEL)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .capability(stack ->
@@ -79,7 +79,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
 
   @Override
   public void acceptHeat(World world, BlockPos pos, float temperature) {
-    TileUtils.getTile(world, pos, getTileClass()).ifPresent(tile -> tile.acceptHeat(temperature));
+    TileUtils.getTile(world, pos, TileCrucible.class).ifPresent(tile -> tile.acceptHeat(temperature));
   }
 
   @Override
@@ -127,10 +127,8 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     if (nbt != null) {
       Alloy alloy = new Alloy(ConfigDevice.BLOCK.CRUCIBLE.tank);
       alloy.deserializeNBT(nbt.getCompoundTag("alloy"));
-      String metalName = new TextComponentTranslation(
-        alloy.getResult().getTranslationKey()).getFormattedText();
-      tooltip.add(I18n.format(TFC + ".tooltip.crucible_alloy", alloy.getAmount(),
-        metalName));
+      String metalName = new TextComponentTranslation(alloy.getResult().getTranslationKey()).getFormattedText();
+      tooltip.add(I18n.format(TFC + ".tooltip.crucible_alloy", alloy.getAmount(), metalName));
     }
   }
 
@@ -141,10 +139,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
 
   @Override
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    if (face == EnumFacing.UP) {
-      return BlockFaceShape.BOWL;
-    }
-    return BlockFaceShape.UNDEFINED;
+    return face == EnumFacing.UP ? BlockFaceShape.BOWL : BlockFaceShape.UNDEFINED;
   }
 
   @Override
@@ -158,13 +153,4 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
     return new TileCrucible();
   }
 
-  @Override
-  public Class<TileCrucible> getTileClass() {
-    return TileCrucible.class;
-  }
-
-  @Override
-  public TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRCrucible();
-  }
 }

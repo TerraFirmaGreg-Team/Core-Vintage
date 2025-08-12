@@ -17,8 +17,8 @@ import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.client.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodBarrel;
+import su.terrafirmagreg.modules.wood.object.gui.GuiWoodBarrel;
 import su.terrafirmagreg.modules.wood.object.itemblock.ItemBlockWoodBarrel;
 
 import net.minecraft.block.state.IBlockState;

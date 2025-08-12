@@ -78,6 +78,8 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
     getSettings()
       .registryKey("blast_furnace")
       .harvestLevel(ToolClasses.PICKAXE, 0)
+      .renderType(EnumBlockRenderType.MODEL)
+      .tile(TileBlastFurnace.class)
       .hardness(2.0F)
       .resistance(2.0F);
   }
@@ -98,11 +100,6 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
     }
     // Maximum levels
     return 5;
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override
@@ -147,11 +144,6 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
   @Override
   public void onAirIntake(World world, BlockPos pos, int airAmount) {
     TileUtils.getTile(world, pos, TileBlastFurnace.class).ifPresent(tile -> tile.onAirIntake(airAmount));
-  }
-
-  @Override
-  public Class<TileBlastFurnace> getTileClass() {
-    return TileBlastFurnace.class;
   }
 
   @Override

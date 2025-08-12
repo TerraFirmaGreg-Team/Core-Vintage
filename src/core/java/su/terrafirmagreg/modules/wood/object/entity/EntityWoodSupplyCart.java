@@ -3,14 +3,13 @@ package su.terrafirmagreg.modules.wood.object.entity;
 import su.terrafirmagreg.api.client.GuiHandler;
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.client.gui.GuiWoodSupplyCart;
-import su.terrafirmagreg.modules.wood.client.render.RenderWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCartInventory;
+import su.terrafirmagreg.modules.wood.object.gui.GuiWoodSupplyCart;
+import su.terrafirmagreg.modules.wood.object.render.RenderWoodSupplyCart;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

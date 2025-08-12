@@ -1,10 +1,9 @@
 package su.terrafirmagreg.modules.wood.object.entity;
 
-import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.client.render.RenderWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCart;
+import su.terrafirmagreg.modules.wood.object.render.RenderWoodAnimalCart;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

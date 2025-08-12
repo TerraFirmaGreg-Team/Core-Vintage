@@ -1,9 +1,9 @@
 package net.dries007.tfctech.client;
 
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.modules.device.client.render.TEISRFridge;
-import su.terrafirmagreg.modules.device.client.render.TESRFridge;
-import su.terrafirmagreg.modules.device.client.render.TESRWireDrawBench;
+import su.terrafirmagreg.modules.device.object.render.TEISRFridge;
+import su.terrafirmagreg.modules.device.object.render.TESRFridge;
+import su.terrafirmagreg.modules.device.object.render.TESRWireDrawBench;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
 

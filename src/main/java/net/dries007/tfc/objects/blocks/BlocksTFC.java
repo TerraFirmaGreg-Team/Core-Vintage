@@ -57,7 +57,6 @@ import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockWallTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockWoodPressurePlateTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.blocks.wood.BlockBookshelfTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockButtonWoodTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
@@ -71,7 +70,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
 import net.dries007.tfc.objects.blocks.wood.BlockTrapDoorWoodTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockWorkbenchTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
@@ -368,13 +366,13 @@ public final class BlocksTFC {
       // This loop is split up to organize the ordering of the creative tab
       // Do not optimize these loops back together
       // All bookshelves + item blocks
-      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-        normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/bookshelf/" + wood.getRegistryName().getPath(), new BlockBookshelfTFC(wood), CT_WOOD)));
-      }
+//      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
+//        normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/bookshelf/" + wood.getRegistryName().getPath(), new BlockBookshelfTFC(wood), CT_WOOD)));
+//      }
       // All workbenches + item blocks
-      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-        normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/workbench/" + wood.getRegistryName().getPath(), new BlockWorkbenchTFC(wood), CT_WOOD)));
-      }
+//      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
+//        normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/workbench/" + wood.getRegistryName().getPath(), new BlockWorkbenchTFC(wood), CT_WOOD)));
+//      }
       // All fences + item blocks
       for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
         inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/fence/" + wood.getRegistryName().getPath(), new BlockFenceTFC(wood), CT_WOOD)));

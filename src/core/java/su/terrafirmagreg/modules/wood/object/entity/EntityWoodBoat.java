@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntityBoat;
 import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.client.render.RenderWoodBoat;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
+import su.terrafirmagreg.modules.wood.object.render.RenderWoodBoat;
 
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;

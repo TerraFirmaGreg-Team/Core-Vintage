@@ -1,16 +1,15 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockHorizontal;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockState;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockHorizontal;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderHighlight;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.device.client.render.TESRFridge;
 import su.terrafirmagreg.modules.device.object.item.ItemBlockFridge;
+import su.terrafirmagreg.modules.device.object.render.TESRFridge;
 import su.terrafirmagreg.modules.device.object.tile.TileFridge;
 
 import net.minecraft.block.Block;
@@ -18,8 +17,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,7 +47,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.UPPER;
 import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
-public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, IProviderBlockState, IProviderHighlight {
+public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, IProviderHighlight {
 
   private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0D, 0D, 0.125D, 1D, 1D, 1D);
   private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0D, 0D, 0.0D, 1D, 1D, 0.875D);
@@ -81,9 +78,12 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, I
       .nonFullCube()
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .itemBlock(ItemBlockFridge::new)
+      .stateMapper(blockIn -> Collections.emptyMap())
+      .tile(TileFridge.class, new TESRFridge())
+      .renderType(EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
       .capability(CapabilityProviderSize.of(Size.HUGE, Weight.MEDIUM, false));
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, NORTH)
       .withProperty(UPPER, false));
   }
@@ -143,11 +143,6 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, I
   }
 
   @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
-  }
-
-  @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return switch (state.getValue(HORIZONTAL)) {
       case NORTH -> state.getValue(UPPER) ? NORTH_AABB.setMaxY(0.75D) : NORTH_AABB;
@@ -174,7 +169,7 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, I
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, getTileClass()).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
+    TileUtils.getTile(worldIn, pos, TileFridge.class).ifPresent(tile -> tile.onBreakBlock(worldIn, pos, state));
     super.breakBlock(worldIn, pos, state);
   }
 
@@ -198,7 +193,7 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, I
     } else {
       tilePos = pos;
     }
-    return TileUtils.getTile(world, tilePos, getTileClass()).map(tile -> {
+    return TileUtils.getTile(world, tilePos, TileFridge.class).map(tile -> {
       if (!tile.isAnimating() && hand == EnumHand.MAIN_HAND && facing == state.getValue(HORIZONTAL)) {
         if (tile.isOpen()) {
           int slot = getPlayerLookingItem(tilePos.down(), player, facing);
@@ -256,21 +251,6 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, I
   @Override
   public TileEntity createNewTileEntity(World worldIn, int meta) {
     return new TileFridge();
-  }
-
-  @Override
-  public Class<TileFridge> getTileClass() {
-    return TileFridge.class;
-  }
-
-  @Override
-  public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRFridge();
-  }
-
-  @Override
-  public IStateMapper getStateMapper() {
-    return blockIn -> Collections.emptyMap();
   }
 
   @Override

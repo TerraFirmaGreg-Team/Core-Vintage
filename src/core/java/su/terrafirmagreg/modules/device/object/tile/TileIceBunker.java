@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
-import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
@@ -13,12 +13,12 @@ import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.core.object.item.ItemIceShard;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;
-import su.terrafirmagreg.modules.device.client.gui.GuiIceBunker;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.block.BlockCellarDoor;
 import su.terrafirmagreg.modules.device.object.block.BlockCellarShelf;
 import su.terrafirmagreg.modules.device.object.block.BlockCellarWall;
 import su.terrafirmagreg.modules.device.object.container.ContainerIceBunker;
+import su.terrafirmagreg.modules.device.object.gui.GuiIceBunker;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;

@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.object.tile;
 
+import su.terrafirmagreg.api.util.NBTUtils;
+import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.framework.manager.registry.base.inventory.api.IItemHandlerSidedCallback;
 import su.terrafirmagreg.framework.manager.registry.base.inventory.spi.ItemHandlerSidedWrapper;
 import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTileTickableInventory;
-import su.terrafirmagreg.api.util.NBTUtils;
-import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
@@ -15,8 +15,8 @@ import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.client.gui.GuiFreezeDryer;
 import su.terrafirmagreg.modules.device.object.container.ContainerFreezeDryer;
+import su.terrafirmagreg.modules.device.object.gui.GuiFreezeDryer;
 import su.terrafirmagreg.modules.device.object.inventory.InventoryFreezeDryer;
 
 import net.minecraft.block.Block;

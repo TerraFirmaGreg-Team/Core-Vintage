@@ -37,6 +37,7 @@ public class BlockOvenChimney extends BaseBlock {
       .resistance(3.0f)
       .nonOpaque()
       .lightValue(0)
+      .renderType(EnumBlockRenderType.MODEL)
       .capability(
         CapabilityProviderSize.of(Size.NORMAL, Weight.HEAVY)
       );
@@ -53,11 +54,6 @@ public class BlockOvenChimney extends BaseBlock {
   @Override
   public int getMetaFromState(IBlockState state) {
     return state.getValue(CURED) ? 1 : 0;
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
   }
 
   @Override

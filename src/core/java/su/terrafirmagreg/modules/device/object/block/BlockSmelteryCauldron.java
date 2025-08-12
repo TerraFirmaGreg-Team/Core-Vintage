@@ -46,6 +46,7 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
       .sound(SoundType.STONE)
       .nonOpaque()
       .nonFullCube()
+      .tile(TileSmelteryCauldron.class)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM))
       .hardness(3.0F);
@@ -126,9 +127,5 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
     return new TileSmelteryCauldron();
   }
 
-  @Override
-  public Class<TileSmelteryCauldron> getTileClass() {
-    return TileSmelteryCauldron.class;
-  }
 
 }

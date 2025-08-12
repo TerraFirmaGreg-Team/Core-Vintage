@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.animal.object.block;
 
 import su.terrafirmagreg.api.client.GuiHandler;
-import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.animal.object.tile.TileNestBox;
@@ -31,14 +30,13 @@ public class BlockNestBox extends BaseBlockContainer {
     0.25D, 0.875D);
 
   public BlockNestBox() {
-    super(Settings.of(Material.GRASS));
-
-    getSettings()
+    super(Settings.of(Material.GRASS)
       .registryKey("nest_box")
+      .tile(TileNestBox.class)
+      .renderType(EnumBlockRenderType.MODEL)
       .nonCube()
-      .hardness(0.5F);
-
-    BlockUtils.addFireInfo(this, 60, 20);
+      .fireInfo(60, 20)
+      .hardness(0.5F));
   }
 
   @Override
@@ -67,7 +65,7 @@ public class BlockNestBox extends BaseBlockContainer {
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
-      TileUtils.getTile(world, pos, getTileClass()).ifPresent(tile -> GuiHandler.openGui(world, pos, player));
+      TileUtils.getTile(world, pos).ifPresent(tile -> GuiHandler.openGui(world, pos, player));
     }
     return true;
   }
@@ -76,10 +74,6 @@ public class BlockNestBox extends BaseBlockContainer {
     return world.getBlockState(pos.down()).getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
   }
 
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
 
   @Override
   public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
@@ -91,8 +85,4 @@ public class BlockNestBox extends BaseBlockContainer {
     return new TileNestBox();
   }
 
-  @Override
-  public Class<TileNestBox> getTileClass() {
-    return TileNestBox.class;
-  }
 }

@@ -14,8 +14,8 @@ import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarTickable;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
 import su.terrafirmagreg.modules.device.ConfigDevice;
 import su.terrafirmagreg.modules.device.ModuleDevice;
-import su.terrafirmagreg.modules.device.client.gui.GuiCharcoalForge;
 import su.terrafirmagreg.modules.device.object.container.ContainerCharcoalForge;
+import su.terrafirmagreg.modules.device.object.gui.GuiCharcoalForge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

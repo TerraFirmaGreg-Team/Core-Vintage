@@ -1,9 +1,8 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
@@ -42,7 +41,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.OPEN;
 import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 
 @SuppressWarnings("deprecation")
-public class BlockBloomery extends BaseBlock implements IProviderTile {
+public class BlockBloomery extends BaseBlockContainer {
 
   //[horizontal index][basic shape / door1 / door2]
   private static final AxisAlignedBB[][] AABB =
@@ -75,10 +74,8 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
 
   static {
     Predicate<IBlockState> stoneMatcher = BlockBloomery::isValidSideBlock;
-    Predicate<IBlockState> insideChimney = state ->
-      state.getBlock() == BlocksDevice.MOLTEN || state.getMaterial().isReplaceable();
-    Predicate<IBlockState> center = state ->
-      state.getBlock() == BlocksDevice.CHARCOAL_PILE || state.getBlock() == BlocksDevice.BLOOM || state.getMaterial().isReplaceable();
+    Predicate<IBlockState> insideChimney = state -> state.getBlock() == BlocksDevice.MOLTEN || state.getMaterial().isReplaceable();
+    Predicate<IBlockState> center = state -> state.getBlock() == BlocksDevice.CHARCOAL_PILE || state.getBlock() == BlocksDevice.BLOOM || state.getMaterial().isReplaceable();
 
     // Bloomery center is the charcoal pile pos
     BLOOMERY_BASE = new Multiblock[4];
@@ -176,6 +173,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
       .hardness(20.0F)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.VERY_HEAVY))
+      .tile(TileBloomery.class)
       .nonFullCube()
       .nonOpaque();
 
@@ -222,12 +220,6 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
   @Override
   public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     return AABB[state.getValue(HORIZONTAL).getHorizontalIndex()][0];
-  }
-
-  @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(world, pos, TileBloomery.class).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
-    super.breakBlock(world, pos, state);
   }
 
   @Override
@@ -319,8 +311,7 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
   }
 
   @Override
-  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn,
-                                               BlockPos pos) {
+  public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     if (blockState.getValue(OPEN)) {
       return NULL_AABB;
     }
@@ -335,10 +326,5 @@ public class BlockBloomery extends BaseBlock implements IProviderTile {
   @Override
   public TileBloomery createNewTileEntity(World worldIn, int meta) {
     return new TileBloomery();
-  }
-
-  @Override
-  public Class<TileBloomery> getTileClass() {
-    return TileBloomery.class;
   }
 }

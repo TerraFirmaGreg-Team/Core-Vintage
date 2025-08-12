@@ -21,6 +21,7 @@ public class BlockInfectedAir extends BaseBlock implements IProviderTile {
     getSettings()
       .registryKey("infected_air")
       .hardness(2F)
+      .tile(TileInfectedAir.class)
       .noCollision()
       .replaceable()
       .nonFullCube();
@@ -37,11 +38,7 @@ public class BlockInfectedAir extends BaseBlock implements IProviderTile {
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return NULL_AABB;
   }
-
-  @Override
-  public Class<TileInfectedAir> getTileClass() {
-    return TileInfectedAir.class;
-  }
+  
 
   @Nullable
   @Override

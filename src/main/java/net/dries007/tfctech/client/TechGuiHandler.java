@@ -1,9 +1,9 @@
 package net.dries007.tfctech.client;
 
-import su.terrafirmagreg.modules.device.client.gui.GuiElectricForge;
-import su.terrafirmagreg.modules.device.client.gui.GuiInductionCrucible;
 import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
 import su.terrafirmagreg.modules.device.object.container.ContainerElectricForge;
+import su.terrafirmagreg.modules.device.object.gui.GuiElectricForge;
+import su.terrafirmagreg.modules.device.object.gui.GuiInductionCrucible;
 import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
 import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
 

@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
-import su.terrafirmagreg.modules.device.client.render.TESRLatexExtractor;
 import su.terrafirmagreg.modules.device.init.SoundsDevice;
+import su.terrafirmagreg.modules.device.object.render.TESRLatexExtractor;
 import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
 
 import net.minecraft.block.Block;
@@ -13,7 +13,6 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -52,6 +51,8 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
       .nonCube()
       .noItemBlock()
       .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
+      .renderType(EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
+      .tile(TileLatexExtractor.class, new TESRLatexExtractor())
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .hardness(2.0F);
 
@@ -74,16 +75,12 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
   @Override
   public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    return TileUtils.getTile(worldIn, pos, getTileClass())
+    return TileUtils.getTile(worldIn, pos, TileLatexExtractor.class)
       .map(tile -> state.withProperty(BASE, tile.hasBase())
         .withProperty(POT, tile.hasPot())
         .withProperty(CUT, tile.cutState())
       )
       .orElse(super.getActualState(state, worldIn, pos));
-  }
-
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
   }
 
   @Override
@@ -106,7 +103,7 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
   @Override
   public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(worldIn, pos, getTileClass()).ifPresent(tile -> {
+    TileUtils.getTile(worldIn, pos, TileLatexExtractor.class).ifPresent(tile -> {
       if (tile.cutState() > 0 && worldIn.getBlockState(pos.offset(state.getValue(HORIZONTAL).getOpposite())).getBlock() instanceof BlockLog) {
         worldIn.destroyBlock(pos.offset(state.getValue(HORIZONTAL).getOpposite()), true);
       }
@@ -116,7 +113,7 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
 
   @Override
   public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    return TileUtils.getTile(world, pos, getTileClass()).map(tile -> {
+    return TileUtils.getTile(world, pos, TileLatexExtractor.class).map(tile -> {
       if (hand == EnumHand.MAIN_HAND) {
         ItemStack stack = player.getHeldItem(hand);
         if (stack.getItem().getHarvestLevel(stack, "knife", player, state) != -1) {
@@ -155,15 +152,5 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
   @Override
   public TileEntity createNewTileEntity(World worldIn, int meta) {
     return new TileLatexExtractor();
-  }
-
-  @Override
-  public Class<TileLatexExtractor> getTileClass() {
-    return TileLatexExtractor.class;
-  }
-
-  @Override
-  public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRLatexExtractor();
   }
 }

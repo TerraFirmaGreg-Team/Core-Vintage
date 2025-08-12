@@ -5,7 +5,6 @@ import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
 import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemDoor;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockState;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemColor;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemMesh;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
@@ -65,22 +64,25 @@ public final class ModelUtils {
     ModelUtils.stateMapper(block);
     ModelUtils.model(block);
     ModelUtils.tesr(block);
-    //ModelUtils.color(block);
+// ModelUtils.color(block);
   }
 
   //region ===== StateMapper
 
   public static void stateMapper(Block block) {
-    if (block instanceof IProviderBlockState provider) {
-      ModelUtils.stateMapper(block, provider.getStateMapper());
-      return;
-    }
     if (block instanceof IBlockEntry provider) {
       final var settings = provider.getSettings();
-      final var ignored = settings.getIgnoredProperties();
-      final var resource = settings.getResource();
 
-      ModelUtils.stateMapper(block, CustomStateMap.builder().ignore(ignored).customResource(resource).build());
+      if (settings.getStateMapper() != null) {
+        ModelUtils.stateMapper(block, settings.getStateMapper());
+
+      } else {
+
+        ModelUtils.stateMapper(block, CustomStateMap.builder()
+          .ignore(settings.getIgnoredProperties())
+          .customResource(settings.getResource())
+          .build());
+      }
     }
   }
 
@@ -99,14 +101,14 @@ public final class ModelUtils {
     if (block instanceof IBlockEntry provider) {
       if (provider.getSettings().getResource() != null) {
         ModelUtils.model(block, provider.getSettings().getResource());
-        return;
+      } else {
+        ResourceLocation registryName = block.getRegistryName();
+        Preconditions.checkNotNull(registryName, "block %s has null registry name", block);
+
+        ModelUtils.model(Item.getItemFromBlock(block), registryName);
       }
     }
 
-    ResourceLocation registryName = block.getRegistryName();
-    Preconditions.checkNotNull(registryName, "block %s has null registry name", block);
-
-    ModelUtils.model(Item.getItemFromBlock(block), registryName);
 
   }
 

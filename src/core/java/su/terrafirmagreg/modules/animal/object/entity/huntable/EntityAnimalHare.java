@@ -7,10 +7,10 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.BaseEntityType;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
-import su.terrafirmagreg.modules.animal.client.render.RenderAnimalHare;
+import su.terrafirmagreg.modules.animal.object.render.RenderAnimalHare;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalBase;
-import su.terrafirmagreg.modules.core.helper.BiomeHelper;
+import su.terrafirmagreg.helper.BiomeHelper;
 
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.nbt.NBTTagCompound;

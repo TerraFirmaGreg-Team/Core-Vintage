@@ -1,20 +1,19 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.device.client.render.TESRLeafMat;
+import su.terrafirmagreg.modules.device.object.render.TESRLeafMat;
 import su.terrafirmagreg.modules.device.object.tile.TileLeafMat;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -50,20 +49,11 @@ public class BlockLeafMat extends BaseBlockContainer {
       .lightValue(0)
       .randomTicks()
       .nonOpaque()
+      .tile(TileLeafMat.class, new TESRLeafMat())
       .harvestLevel(ToolClasses.KNIFE, 0)
       .sound(SoundType.PLANT)
+      .renderType(EnumBlockRenderType.MODEL)
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT));
-  }
-
-  @Override
-  public EnumBlockRenderType getRenderType(IBlockState state) {
-    return EnumBlockRenderType.MODEL;
-  }
-
-  @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    TileUtils.getTile(world, pos, getTileClass()).ifPresent(tile -> tile.onBreakBlock(world, pos, state));
-    super.breakBlock(world, pos, state);
   }
 
   @Override
@@ -74,7 +64,7 @@ public class BlockLeafMat extends BaseBlockContainer {
   @Override
   public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
     if (!worldIn.isRainingAt(pos.up())) {return;}
-    TileUtils.getTile(worldIn, pos, getTileClass()).ifPresent(TileLeafMat::rain);
+    TileUtils.getTile(worldIn, pos, TileLeafMat.class).ifPresent(TileLeafMat::rain);
 
   }
 
@@ -85,7 +75,7 @@ public class BlockLeafMat extends BaseBlockContainer {
     if (held.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
       return false;
     }
-    TileUtils.getTile(world, pos, getTileClass()).map(tile -> {
+    TileUtils.getTile(world, pos, TileLeafMat.class).map(tile -> {
       IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
       if (inventory != null) {
         ItemStack tryStack = new ItemStack(held.getItem(), 1);
@@ -115,13 +105,4 @@ public class BlockLeafMat extends BaseBlockContainer {
     return new TileLeafMat();
   }
 
-  @Override
-  public Class<TileLeafMat> getTileClass() {
-    return TileLeafMat.class;
-  }
-
-  @Override
-  public @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
-    return new TESRLeafMat();
-  }
 }

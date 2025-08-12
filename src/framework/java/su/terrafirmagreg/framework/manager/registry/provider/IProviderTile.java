@@ -18,7 +18,9 @@ public interface IProviderTile extends ITileEntityProvider {
    *
    * @return The TileEntity class to register associated to this block.
    */
-  Class<? extends TileEntity> getTileClass();
+  default Class<? extends TileEntity> getTileClass() {
+    return null;
+  }
 
   /**
    * Gets the TESR for the tile entity. If null is returned nothing will be done.
@@ -26,7 +28,7 @@ public interface IProviderTile extends ITileEntityProvider {
    * @return The TESR to bind to the tile.
    */
   @SideOnly(Side.CLIENT)
-  default @Nullable TileEntitySpecialRenderer<?> getTileRenderer() {
+  default @Nullable TileEntitySpecialRenderer<? extends TileEntity> getTileRenderer() {
     return null;
   }
 }

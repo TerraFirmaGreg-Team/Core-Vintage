@@ -11,8 +11,8 @@ import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidHandlerSidedCallb
 import su.terrafirmagreg.modules.core.capabilities.fluid.IFluidTankCallback;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.modifier.ModifierTile;
 import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalProviderTile;
-import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryCauldron;
 import su.terrafirmagreg.modules.device.object.container.ContainerSmelteryCauldron;
+import su.terrafirmagreg.modules.device.object.gui.GuiSmelteryCauldron;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

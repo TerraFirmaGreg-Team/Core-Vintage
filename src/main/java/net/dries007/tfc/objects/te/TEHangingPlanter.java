@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.te;
 
-import su.terrafirmagreg.modules.device.helper.GreenhouseHelper;
+import su.terrafirmagreg.helper.GreenhouseHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
 

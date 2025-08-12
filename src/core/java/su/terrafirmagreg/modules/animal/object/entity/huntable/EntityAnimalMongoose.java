@@ -6,11 +6,11 @@ import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntity.B
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.api.type.IHuntable;
 import su.terrafirmagreg.modules.animal.api.util.AnimalGroupingRules;
-import su.terrafirmagreg.modules.animal.client.render.RenderAnimalMongoose;
+import su.terrafirmagreg.modules.animal.object.render.RenderAnimalMongoose;
 import su.terrafirmagreg.modules.animal.init.LootTablesAnimal;
 import su.terrafirmagreg.modules.animal.init.SoundsAnimal;
 import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
-import su.terrafirmagreg.modules.core.helper.BiomeHelper;
+import su.terrafirmagreg.helper.BiomeHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;

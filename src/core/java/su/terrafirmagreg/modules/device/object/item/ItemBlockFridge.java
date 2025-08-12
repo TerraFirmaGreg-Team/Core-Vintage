@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.item;
 
 import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemBlock;
-import su.terrafirmagreg.modules.device.client.render.TEISRFridge;
+import su.terrafirmagreg.modules.device.object.render.TEISRFridge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

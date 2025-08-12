@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.manager.registry.base.block.api;
 
+import su.terrafirmagreg.api.library.TriFunction;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
@@ -15,10 +16,13 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.ResourceLocation;
@@ -66,18 +70,22 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     final Material material;
     final MapColor mapColor;
 
-    IProperty<?>[] ignoredProperties;
-    ResourceLocation resource;
+    IProperty<?>[] ignoredProperties = null;
+    ResourceLocation resource = null;
+    IStateMapper stateMapper = null;
+
     CreativeTabs group;
     SoundType soundType;
 
     EnumBlockRenderType renderType;
-    ContextFunction<Integer> lightValue;
-    ContextFunction<Float> slipperiness;
+    TriFunction<IBlockState, IBlockAccess, BlockPos, Integer> lightValue;
+    TriFunction<IBlockState, IBlockAccess, BlockPos, Float> slipperiness;
     Predicate<IBlockState> isSuffocating;
     IRarity rarity;
     BlockRenderLayer renderLayer;
     Function<Block, ? extends Item> itemBlock;
+    Class<? extends TileEntity> tileClass;
+    TileEntitySpecialRenderer<? extends TileEntity> tileRenderer;
     String harvestTool;
 
     int harvestLevel;
@@ -100,6 +108,7 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     boolean isPassable;
     boolean isAir;
     boolean nonCanStack;
+    boolean enableStats;
 
     protected Settings(Material material, MapColor color) {
 
@@ -132,6 +141,7 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       this.nonCanStack = false;
       this.hasItemSubtypes = false;
       this.requiresCorrectTool = false;
+      this.enableStats = true;
     }
 
     public static Settings of(Material material, EnumDyeColor color) {
@@ -178,6 +188,7 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       return this.self();
     }
 
+    @SuppressWarnings("unchecked")
     public <B extends Block, I extends Item> Settings itemBlock(B block, Function<B, I> itemBlock) {
       this.itemBlock = (Function<Block, ? extends Item>) itemBlock;
       return this.self();
@@ -186,6 +197,17 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
     @SuppressWarnings("unchecked")
     public <B extends Block, I extends Item> Settings itemBlock(Function<B, I> itemBlock) {
       this.itemBlock = (Function<Block, Item>) itemBlock;
+      return this.self();
+    }
+
+    public Settings tile(Class<? extends TileEntity> tileClass) {
+      this.tileClass = tileClass;
+      return this.self();
+    }
+
+    public <T extends TileEntity> Settings tile(Class<T> tileClass, TileEntitySpecialRenderer<T> tileRenderer) {
+      this.tileClass = tileClass;
+      this.tileRenderer = tileRenderer;
       return this.self();
     }
 
@@ -347,7 +369,12 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       return this.self();
     }
 
-    public Settings lightValue(ContextFunction<Integer> lightValue) {
+    public Settings disableStats() {
+      this.enableStats = false;
+      return this.self();
+    }
+
+    public Settings lightValue(TriFunction<IBlockState, IBlockAccess, BlockPos, Integer> lightValue) {
       this.lightValue = lightValue;
       return this.self();
     }
@@ -367,7 +394,7 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       return this.self();
     }
 
-    public Settings slipperiness(ContextFunction<Float> slipperiness) {
+    public Settings slipperiness(TriFunction<IBlockState, IBlockAccess, BlockPos, Float> slipperiness) {
       this.slipperiness = slipperiness;
       return this.self();
     }
@@ -423,10 +450,9 @@ public interface IBlockEntry extends IRegistryEntry<Settings, Block> {
       return this.self();
     }
 
-
-    public interface ContextFunction<R> {
-
-      R apply(IBlockState state, IBlockAccess world, BlockPos pos);
+    public Settings stateMapper(IStateMapper stateMapper) {
+      this.stateMapper = stateMapper;
+      return this.self();
     }
   }
 }

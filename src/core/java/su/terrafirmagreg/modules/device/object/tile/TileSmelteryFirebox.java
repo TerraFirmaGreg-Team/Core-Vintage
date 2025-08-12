@@ -9,9 +9,9 @@ import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalP
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarTickable;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
-import su.terrafirmagreg.modules.device.client.gui.GuiSmelteryFirebox;
 import su.terrafirmagreg.modules.device.object.block.BlockSmelteryCauldron;
 import su.terrafirmagreg.modules.device.object.container.ContainerSmelteryFirebox;
+import su.terrafirmagreg.modules.device.object.gui.GuiSmelteryFirebox;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.classic.worldgen;
 
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
-import su.terrafirmagreg.modules.core.helper.BiomeHelper;
+import su.terrafirmagreg.helper.BiomeHelper;
 import su.terrafirmagreg.modules.wood.api.generator.ITreeGenerator;
 
 import net.minecraft.block.state.IBlockState;

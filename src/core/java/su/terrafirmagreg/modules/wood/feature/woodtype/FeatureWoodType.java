@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.feature.woodtype;
 
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodTypes;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodTypes;
 
 import static su.terrafirmagreg.api.util.ColourUtils.rgb;
 

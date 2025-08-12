@@ -6,7 +6,7 @@ import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.block.spi.BlockWood;
 import su.terrafirmagreg.modules.wood.object.render.TESRWoodToolRack;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodToolRack;

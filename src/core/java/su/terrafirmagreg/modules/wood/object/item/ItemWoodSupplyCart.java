@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.object.item;
 
 
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCart;
 import su.terrafirmagreg.modules.wood.object.item.spi.ItemWoodCart;

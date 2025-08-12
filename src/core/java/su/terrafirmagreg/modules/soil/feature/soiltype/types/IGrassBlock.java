@@ -1,8 +1,8 @@
-package su.terrafirmagreg.modules.soil.api.types;
+package su.terrafirmagreg.modules.soil.feature.soiltype.types;
 
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.type.IType;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
 

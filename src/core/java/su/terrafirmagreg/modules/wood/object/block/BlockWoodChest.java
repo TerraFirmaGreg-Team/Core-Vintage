@@ -6,8 +6,8 @@ import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockChes
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.inventory.InventoryWoodLargeChest;
 import su.terrafirmagreg.modules.wood.object.render.TESRWoodChest;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodChest;

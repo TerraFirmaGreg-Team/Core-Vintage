@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodBoat;
 import su.terrafirmagreg.modules.wood.object.item.spi.ItemWood;
 

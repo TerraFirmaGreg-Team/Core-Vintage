@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.init;
 
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.item.ItemWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.object.item.ItemWoodBoat;
 import su.terrafirmagreg.modules.wood.object.item.ItemWoodLumber;

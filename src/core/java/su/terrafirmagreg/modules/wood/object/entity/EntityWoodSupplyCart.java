@@ -166,7 +166,8 @@ public class EntityWoodSupplyCart extends EntityWoodCartInventory
       super(Settings.of()
         .registryKey("supply_cart")
         .entity(EntityWoodSupplyCart.class, RenderWoodSupplyCart::new)
-        .updateInfo(80, 3, false));
+        .updateInfo(80, 3, false)
+      );
     }
 
   }

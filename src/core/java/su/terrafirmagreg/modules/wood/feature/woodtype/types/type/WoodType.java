@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.wood.api.types.type;
+package su.terrafirmagreg.modules.wood.feature.woodtype.types.type;
 
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;

@@ -8,7 +8,7 @@ import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.RegistryUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
-import su.terrafirmagreg.modules.soil.api.types.ISoilEntry;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.ISoilEntry;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
@@ -226,7 +226,8 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
       super(Settings.of()
         .registryKey("plow_cart")
         .entity(EntityWoodPlowCart.class, RenderWoodPlowCart::new)
-        .updateInfo(80, 3, false));
+        .updateInfo(80, 3, false)
+      );
     }
 
   }

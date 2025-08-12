@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.wood.object.entity;
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.framework.manager.registry.base.entity.spi.BaseEntityBoat;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.init.ItemsWood;
 import su.terrafirmagreg.modules.wood.object.render.RenderWoodBoat;
 
@@ -170,7 +170,8 @@ public class EntityWoodBoat extends BaseEntityBoat {
       super(Settings.of()
         .registryKey("boat")
         .entity(EntityWoodBoat.class, RenderWoodBoat::new)
-        .updateInfo(160, 20, true));
+        .updateInfo(160, 20, true)
+      );
     }
 
   }

@@ -2,7 +2,7 @@ package su.terrafirmagreg.modules.wood.init;
 
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilGrass;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodBookshelf;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodButton;

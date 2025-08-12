@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockLadder;
-import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.SoundType;
 

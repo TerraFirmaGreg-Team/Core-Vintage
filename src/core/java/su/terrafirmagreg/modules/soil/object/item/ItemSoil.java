@@ -4,8 +4,8 @@ import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.soil.api.types.ISoilEntry;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.ISoilEntry;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 
 import lombok.Getter;
 

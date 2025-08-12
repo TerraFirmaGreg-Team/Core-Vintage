@@ -6,8 +6,8 @@ import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.helper.GrassColorHelper;
-import su.terrafirmagreg.modules.wood.api.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.itemblock.ItemBlockWoodSapling;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodSapling;
 

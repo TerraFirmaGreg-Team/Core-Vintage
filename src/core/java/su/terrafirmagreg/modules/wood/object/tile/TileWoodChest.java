@@ -6,7 +6,7 @@ import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.wood.api.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.block.BlockWoodChest;
 import su.terrafirmagreg.modules.wood.object.container.ContainerWoodChest;
 import su.terrafirmagreg.modules.wood.object.gui.GuiWoodChest;

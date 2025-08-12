@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.data.Tags;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 
 public class BlockSoilDryGrass extends BlockSoilGrass {
 

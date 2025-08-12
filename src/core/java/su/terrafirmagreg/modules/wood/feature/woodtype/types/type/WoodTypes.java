@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.wood.api.types.type;
+package su.terrafirmagreg.modules.wood.feature.woodtype.types.type;
 
 /**
  * В это классе хранятся типы дерева, которые используются при создании блоков и предметов

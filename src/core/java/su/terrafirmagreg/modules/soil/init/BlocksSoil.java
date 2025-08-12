@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.soil.init;
 
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilCoarseDirt;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilDirt;
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilDryGrass;

@@ -1,4 +1,4 @@
-package su.terrafirmagreg.modules.soil.api.types;
+package su.terrafirmagreg.modules.soil.feature.soiltype.types;
 
 import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
 

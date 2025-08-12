@@ -134,7 +134,8 @@ public class EntityWoodAnimalCart extends EntityWoodCart {
       super(Settings.of()
         .registryKey("animal_cart")
         .entity(EntityWoodAnimalCart.class, RenderWoodAnimalCart::new)
-        .updateInfo(80, 3, false));
+        .updateInfo(80, 3, false)
+      );
     }
 
   }

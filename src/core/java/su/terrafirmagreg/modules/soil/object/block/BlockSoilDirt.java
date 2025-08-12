@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
 import su.terrafirmagreg.api.data.Tags;
-import su.terrafirmagreg.modules.soil.api.types.IDirtBlock;
-import su.terrafirmagreg.modules.soil.api.types.IMudBlock;
-import su.terrafirmagreg.modules.soil.api.types.type.SoilType;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.IDirtBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.IMudBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.object.block.spi.BlockSoil;
 

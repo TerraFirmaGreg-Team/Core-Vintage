@@ -54,6 +54,7 @@ public class RegistryService implements IRegistryService {
     this.map.getEntry(registry.getRegistrySuperType()).forEach(entry -> {
 
       if (entry instanceof IRegistryEntry registryEntry) {
+        registryEntry.preRegister();
         registry.register((T) registryEntry);
         registryEntry.postRegister();
         RegistryManager.LOGGER.info("Service {}: {}",

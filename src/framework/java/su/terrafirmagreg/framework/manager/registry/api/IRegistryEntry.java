@@ -15,6 +15,8 @@ import java.util.List;
 
 public interface IRegistryEntry<T extends RegistrySettings<T>, V extends IForgeRegistryEntry<V>> extends IBaseEntry<T, V>, IForgeRegistryEntry<V> {
 
+  default void preRegister() {}
+
   default void postRegister() {}
 
   @Getter

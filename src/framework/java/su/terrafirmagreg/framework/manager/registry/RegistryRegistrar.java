@@ -32,7 +32,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import lombok.Getter;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -92,31 +91,12 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends Block & IBlockEntry> V addBlock(V entry) {
 
     var settings = entry.getSettings();
-    settings.addOreDict(settings.getRegistryKey());
-    entry
-      .setResistance(settings.getResistance())
-      .setHardness(settings.getHardness())
-      .setSoundType(settings.getSoundType())
-      .setTickRandomly(settings.isTicksRandomly())
-      .setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
 
     if (settings.getItemBlock() != null) {
       this.addItem(settings.getRegistryKey(), settings.getItemBlock().apply(entry));
     }
 
     return this.addBlock(settings.getRegistryKey(), entry);
-  }
-
-  public <V extends Block & IBlockEntry> Collection<V> addBlock(Collection<V> collection) {
-
-    collection.forEach(this::addBlock);
-    return collection;
-  }
-
-  public <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Map<T, V> entry) {
-
-    this.addBlock(entry.values());
-    return entry;
   }
 
   public <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Function<T, V> factory, Set<T> types) {
@@ -140,27 +120,8 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends Item & IItemEntry> V addItem(V entry) {
 
     var settings = entry.getSettings();
-    settings.addOreDict(settings.getRegistryKey());
-    entry
-      .setHasSubtypes(settings.isHasSubtypes())
-      .setMaxDamage(settings.getMaxDamage())
-      .setMaxStackSize(settings.getMaxStackSize());
 
-    return this.addItem(entry.getSettings().getRegistryKey(), entry);
-  }
-
-  @Override
-  public <V extends Item & IItemEntry> Collection<V> addItem(Collection<V> collection) {
-
-    collection.forEach(this::addItem);
-    return collection;
-  }
-
-  @Override
-  public <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Map<T, V> map) {
-
-    this.addItem(map.values());
-    return map;
+    return this.addItem(settings.getRegistryKey(), entry);
   }
 
   @Override
@@ -189,20 +150,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends Biome & IBiomeEntry> Collection<V> addBiome(Collection<V> collection) {
-
-    collection.forEach(this::addBiome);
-    return collection;
-  }
-
-  @Override
-  public <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Map<T, V> map) {
-
-    this.addBiome(map.values());
-    return map;
-  }
-
-  @Override
   public <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBiome(factory.apply(type))));
@@ -225,20 +172,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
     var settings = entry.getSettings();
     return this.addEnchantment(settings.getRegistryKey(), entry);
-  }
-
-  @Override
-  public <V extends Enchantment & IEnchantmentEntry> Collection<V> addEnchantment(Collection<V> collection) {
-
-    collection.forEach(this::addEnchantment);
-    return collection;
-  }
-
-  @Override
-  public <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Map<T, V> map) {
-
-    this.addEnchantment(map.values());
-    return map;
   }
 
   @Override
@@ -267,20 +200,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends Potion & IEffectEntry> Collection<V> addEffect(Collection<V> collection) {
-
-    collection.forEach(this::addEffect);
-    return collection;
-  }
-
-  @Override
-  public <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Map<T, V> map) {
-
-    this.addEffect(map.values());
-    return map;
-  }
-
-  @Override
   public <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addEffect(factory.apply(type))));
@@ -303,20 +222,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
     var settings = entry.getSettings();
     return this.addPotion(settings.getRegistryKey(), entry);
-  }
-
-  @Override
-  public <V extends PotionType & IPotionEntry> Collection<V> addPotion(Collection<V> collection) {
-
-    collection.forEach(this::addPotion);
-    return collection;
-  }
-
-  @Override
-  public <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Map<T, V> map) {
-
-    this.addPotion(map.values());
-    return map;
   }
 
   @Override
@@ -351,21 +256,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   }
 
   @Override
-  public <V extends SoundEvent & ISoundEntry> Collection<V> addSound(Collection<V> collection) {
-
-    collection.forEach(this::addSound);
-    return collection;
-  }
-
-  @Override
-  public <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Map<T, V> map) {
-
-    this.addSound(map.values());
-    return map;
-  }
-
-  @Override
-  public <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Set<T> types, Function<T, V> factory) {
+  public <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Function<T, V> factory, Set<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addSound(factory.apply(type))));
   }
@@ -389,20 +280,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
     this.addEntity(settings.getRegistryKey(), entry);
     return entry;
-  }
-
-  @Override
-  public <V extends EntityEntry & IEntityEntry> Collection<V> addEntity(Collection<V> collection) {
-
-    collection.forEach(this::addEntity);
-    return collection;
-  }
-
-  @Override
-  public <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Map<T, V> map) {
-
-    this.addEntity(map.values());
-    return map;
   }
 
   @Override

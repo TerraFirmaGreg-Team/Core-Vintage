@@ -50,6 +50,16 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
   }
 
   @Override
+  default void preRegister() {
+    var settings = getSettings();
+    settings.addOreDict(settings.getRegistryKey());
+    asEntry()
+      .setHasSubtypes(settings.isHasSubtypes())
+      .setMaxDamage(settings.getMaxDamage())
+      .setMaxStackSize(settings.getMaxStackSize());
+  }
+
+  @Override
   default void postRegister() {
     var settings = getSettings();
 

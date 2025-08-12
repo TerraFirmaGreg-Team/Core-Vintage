@@ -25,7 +25,6 @@ import net.minecraft.world.storage.loot.functions.LootFunction.Serializer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -47,10 +46,6 @@ public interface IRegistryRegistrar {
 
   <V extends Block & IBlockEntry> V addBlock(V block);
 
-  <V extends Block & IBlockEntry> Collection<V> addBlock(Collection<V> collection);
-
-  <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Map<T, V> map);
-
   <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
@@ -60,10 +55,6 @@ public interface IRegistryRegistrar {
   <V extends Item> V addItem(String identifier, V item);
 
   <V extends Item & IItemEntry> V addItem(V item);
-
-  <V extends Item & IItemEntry> Collection<V> addItem(Collection<V> collection);
-
-  <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Map<T, V> map);
 
   <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Function<T, V> factory, Set<T> types);
 
@@ -75,10 +66,6 @@ public interface IRegistryRegistrar {
 
   <V extends Biome & IBiomeEntry> V addBiome(V item);
 
-  <V extends Biome & IBiomeEntry> Collection<V> addBiome(Collection<V> collection);
-
-  <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Map<T, V> map);
-
   <V extends Biome & IBiomeEntry, T extends Type<T>> Map<T, V> addBiome(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
@@ -88,10 +75,6 @@ public interface IRegistryRegistrar {
   <V extends Enchantment> V addEnchantment(String identifier, V entry);
 
   <V extends Enchantment & IEnchantmentEntry> V addEnchantment(V entry);
-
-  <V extends Enchantment & IEnchantmentEntry> Collection<V> addEnchantment(Collection<V> collection);
-
-  <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Map<T, V> map);
 
   <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Function<T, V> factory, Set<T> types);
 
@@ -103,10 +86,6 @@ public interface IRegistryRegistrar {
 
   <V extends Potion & IEffectEntry> V addEffect(V entry);
 
-  <V extends Potion & IEffectEntry> Collection<V> addEffect(Collection<V> collection);
-
-  <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Map<T, V> map);
-
   <V extends Potion & IEffectEntry, T extends Type<T>> Map<T, V> addEffect(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
@@ -117,9 +96,6 @@ public interface IRegistryRegistrar {
 
   <V extends PotionType & IPotionEntry> V addPotion(V entry);
 
-  <V extends PotionType & IPotionEntry> Collection<V> addPotion(Collection<V> collection);
-
-  <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Map<T, V> map);
 
   <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Function<T, V> factory, Set<T> types);
 
@@ -133,11 +109,7 @@ public interface IRegistryRegistrar {
 
   <V extends SoundEvent> SoundEvent addSound(String identifier);
 
-  <V extends SoundEvent & ISoundEntry> Collection<V> addSound(Collection<V> collection);
-
-  <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Map<T, V> map);
-
-  <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Set<T> types, Function<T, V> factory);
+  <V extends SoundEvent & ISoundEntry, T extends Type<T>> Map<T, V> addSound(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
   // - Entity
@@ -146,10 +118,6 @@ public interface IRegistryRegistrar {
   <V extends EntityEntry> V addEntity(String identifier, V entry);
 
   <V extends EntityEntry & IEntityEntry> V addEntity(V entry);
-
-  <V extends EntityEntry & IEntityEntry> Collection<V> addEntity(Collection<V> collection);
-
-  <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Map<T, V> map);
 
   <V extends EntityEntry & IEntityEntry, T extends Type<T>> Map<T, V> addEntity(Function<T, V> factory, Set<T> types);
 

@@ -1,0 +1,151 @@
+package su.terrafirmagreg.modules.wood.feature.path;
+
+import su.terrafirmagreg.api.data.Tags;
+import su.terrafirmagreg.api.util.RegistryUtils;
+import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
+import su.terrafirmagreg.modules.core.ConfigCore;
+import su.terrafirmagreg.modules.soil.ConfigSoil;
+import su.terrafirmagreg.modules.soil.ModuleSoil;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.ISoilEntry;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import net.dries007.tfc.objects.blocks.BlockPlacedItemFlat;
+
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.DIRT;
+import static su.terrafirmagreg.modules.soil.init.BlocksSoil.GRASS_PATH;
+
+public class FeatureCreatePath extends BaseFeature {
+
+  private static int player_debug_cooldown = 100;
+  private static int mob_debug_cooldown = 1000;
+  private static double player_speed = 0.001D;
+
+  public FeatureCreatePath() {
+    super(Settings.of()
+      .name("create_path")
+    );
+
+  }
+
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public static void createPath(LivingEvent.LivingUpdateEvent event) {
+    // PLAYER PATHING
+    if (event.getEntity() != null && event.getEntity() instanceof EntityPlayer) {
+      // GET PLAYER INFORMATION
+      EntityLivingBase player = event.getEntityLiving();
+      int posX = MathHelper.floor(player.posX);
+      int posY = MathHelper.floor(player.getEntityBoundingBox().minY - 1);
+      int posZ = MathHelper.floor(player.posZ);
+      BlockPos posPlayer = new BlockPos(posX, posY, posZ);
+      World world = player.getEntityWorld();
+      IBlockState state = world.getBlockState(posPlayer);
+      Block block = state.getBlock();
+
+      // PLAYER MATH
+      double player_random = Math.random() * 1000.0D + 1.0D;
+      double player_distance_X = player.posX - player.prevPosX;
+      double player_distance_Z = player.posZ - player.prevPosZ;
+      double player_speed_current = MathHelper.sqrt(
+        player_distance_X * player_distance_X + player_distance_Z * player_distance_Z);
+
+      // UPDATE PLAYER SPEED ON UPDATE PACKET
+      if (player_speed_current > 0.0) {
+        player_speed = player_speed_current;
+      }
+
+      if (ConfigSoil.MISC.DEBUG.createPath) {
+        if (player_debug_cooldown == 0) {
+          ModuleSoil.LOGGER.info("[Player] Random: " + player_random);
+          ModuleSoil.LOGGER.info("[Player] Speed: " + player_speed);
+          player_debug_cooldown = 100;
+        } else {
+          player_debug_cooldown--;
+        }
+      }
+
+      if (!world.isRemote && block instanceof ISoilEntry soil && player_speed > 0.2) {
+
+        if (player_random < ConfigSoil.BLOCK.GRASS_PATH.PLAYER_GRASS_TO_DIRT && RegistryUtils.isTag(block, Tags.GRASS, Tags.DRY_GRASS)) {
+          world.setBlockState(posPlayer, DIRT.get(soil.getType()).getDefaultState());
+          if (ConfigSoil.BLOCK.GRASS_PATH.DESTROY_VEGETATION) {
+            BlockPos upPos = posPlayer.up();
+            Material upMaterial = world.getBlockState(upPos).getMaterial();
+            if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos).getBlock() instanceof BlockPlacedItemFlat) {
+              world.destroyBlock(upPos, true);
+            }
+          }
+          return;
+        }
+
+        if (player_random < ConfigSoil.BLOCK.GRASS_PATH.PLAYER_DIRT_TO_PATH && RegistryUtils.isTag(block, Tags.DIRT)) {
+          world.setBlockState(posPlayer, GRASS_PATH.get(soil.getType()).getDefaultState());
+          return;
+        }
+      }
+    }
+
+    // MOB PATHING
+    if (ConfigSoil.BLOCK.GRASS_PATH.ALL_ENTITIES) {
+      if (event.getEntity() != null && !(event.getEntity() instanceof EntityPlayer)) {
+        // GET MOB INFORMATION
+        EntityLivingBase entity = event.getEntityLiving();
+        int posX = MathHelper.floor(entity.posX);
+        int posY = MathHelper.floor(entity.getEntityBoundingBox().minY - 1);
+        int posZ = MathHelper.floor(entity.posZ);
+        BlockPos posEntity = new BlockPos(posX, posY, posZ);
+        World world = entity.getEntityWorld();
+        IBlockState state = world.getBlockState(posEntity);
+        Block block = state.getBlock();
+
+        // MOB MATH
+        double mob_random = Math.random() * 1000.0D + 1.0D;
+        double mob_speed = Math.sqrt(
+          entity.motionX * entity.motionX + entity.motionY * entity.motionY
+          + entity.motionZ * entity.motionZ);
+
+        if (ConfigCore.MISC.DEBUG.enable) {
+          if (mob_debug_cooldown == 0) {
+            ModuleSoil.LOGGER.info("[Mob] Random: " + mob_random);
+            ModuleSoil.LOGGER.info("[Mob] Speed: " + mob_speed);
+            mob_debug_cooldown = 100;
+          } else {
+            mob_debug_cooldown--;
+          }
+        }
+
+        if (!world.isRemote && block instanceof ISoilEntry soil && mob_speed > 0.08) {
+
+          if (mob_random < ConfigSoil.BLOCK.GRASS_PATH.MOB_GRASS_TO_DIRT && RegistryUtils.isTag(block, Tags.GRASS, Tags.DRY_GRASS)) {
+            world.setBlockState(posEntity, DIRT.get(soil.getType()).getDefaultState());
+            if (ConfigSoil.BLOCK.GRASS_PATH.DESTROY_VEGETATION) {
+              BlockPos upPos = posEntity.up();
+              Material upMaterial = world.getBlockState(upPos).getMaterial();
+              if (upMaterial == Material.PLANTS || upMaterial == Material.VINE
+                  || world.getBlockState(upPos)
+                    .getBlock() instanceof BlockPlacedItemFlat) {
+                world.destroyBlock(upPos, true);
+              }
+            }
+            return;
+          }
+
+          if (mob_random < ConfigSoil.BLOCK.GRASS_PATH.MOB_DIRT_TO_PATH && RegistryUtils.isTag(block, Tags.DIRT, Tags.COARSE_DIRT)) {
+            world.setBlockState(posEntity, GRASS_PATH.get(soil.getType()).getDefaultState());
+          }
+        }
+      }
+    }
+  }
+
+}

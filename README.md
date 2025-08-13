@@ -17,3 +17,4 @@
 - [TFC-Farming](https://github.com/BananaFructa/TFC-Farming)
 - [EasyBreedingTFC](https://github.com/ACGaming/EasyBreedingTFC) +
 - [ActuallyAdvancedInfo](https://github.com/Rongmario/ActuallyAdvancedInfo) +
+- [TFCPaths](https://github.com/ACGaming/TFCPaths) +

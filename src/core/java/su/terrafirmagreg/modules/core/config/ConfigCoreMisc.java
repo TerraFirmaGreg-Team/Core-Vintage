@@ -10,7 +10,7 @@ public final class ConfigCoreMisc {
 
   @Config.Comment("Debug settings")
   public final Debug DEBUG = new Debug();
-  
+
 
   @Config.Comment("Display settings")
   public final Display DISPLAY = new Display();
@@ -24,10 +24,6 @@ public final class ConfigCoreMisc {
     @Config.Name("Debug Mode")
     @Config.Comment("When enabled, prints debug values to console. Activates some extra wand features. Enables extra item tooltips.")
     public boolean enable = true;
-
-    @Config.Comment("Debug pathfinding")
-    @Config.RequiresWorldRestart
-    public boolean debugCreatePath = false;
 
     @Config.Comment({
       "Debug worldgen (the danger part) ",

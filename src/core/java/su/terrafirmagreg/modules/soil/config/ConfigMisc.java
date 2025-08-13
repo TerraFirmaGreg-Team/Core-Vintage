@@ -4,6 +4,9 @@ import net.minecraftforge.common.config.Config;
 
 public final class ConfigMisc {
 
+  @Config.Comment("Debug settings")
+  public final Debug DEBUG = new Debug();
+
 
   @Config.Comment("If true, grass and foliage will be slightly varied in color.")
   public boolean noiseEnable = true;
@@ -31,4 +34,15 @@ public final class ConfigMisc {
 
   @Config.Comment("ARGB code for spring coloring in hexadecimal. Default: 3355FFBB")
   public String seasonColorSpring = "3355FFBB";
+
+  public static final class Debug {
+
+    @Config.Name("Debug Mode")
+    public boolean enable = true;
+
+
+    @Config.Comment("Debug pathfinding")
+    @Config.RequiresWorldRestart
+    public boolean createPath = false;
+  }
 }

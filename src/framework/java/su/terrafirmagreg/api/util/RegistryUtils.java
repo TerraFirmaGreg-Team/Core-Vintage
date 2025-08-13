@@ -26,10 +26,7 @@ public final class RegistryUtils {
   }
 
   public static <V extends IForgeRegistryEntry<V>> boolean isTag(V entry, TagKey tagKey) {
-    if (entry instanceof IRegistryEntry<?, ?> registryEntry) {
-      return registryEntry.getSettings().getTagsKey().contains(tagKey);
-    }
-    return false;
+    return getTags(entry).contains(tagKey);
   }
 
   public static <V extends IForgeRegistryEntry<V>> List<TagKey> getTags(V entry) {

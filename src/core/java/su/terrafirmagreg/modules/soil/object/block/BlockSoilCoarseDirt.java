@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
+import su.terrafirmagreg.api.data.Tags;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 
@@ -12,6 +13,7 @@ public class BlockSoilCoarseDirt extends BlockSoilDirt {
 
     getSettings()
       .registryKey(type.getRegistryKey("coarse_dirt"))
+      .tag(Tags.COARSE_DIRT)
       .addOreDict("coarse_dirt");
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);

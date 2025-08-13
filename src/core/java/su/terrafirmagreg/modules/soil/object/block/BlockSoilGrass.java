@@ -4,11 +4,12 @@ import su.terrafirmagreg.api.data.Tags;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
-import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 import su.terrafirmagreg.helper.GrassColorHelper;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.IGrassBlock;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
+import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 import su.terrafirmagreg.modules.soil.object.block.spi.BlockSoil;
 
 import net.minecraft.block.Block;
@@ -19,6 +20,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -56,7 +59,7 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
       .randomTicks()
       .renderLayer(BlockRenderLayer.CUTOUT);
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(NORTH, Boolean.FALSE)
       .withProperty(EAST, Boolean.FALSE)
       .withProperty(SOUTH, Boolean.FALSE)
@@ -82,6 +85,11 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
   }
 
   @Override
+  public boolean isTopSolid(IBlockState state) {
+    return super.isTopSolid(state);
+  }
+
+  @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random rand) {
     if (world.isRemote) {
       return;
@@ -101,33 +109,41 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
     }
 
     Block block = worldIn.getBlockState(pos).getBlock();
-    if (block instanceof IType<?> type) {
-      if (type.getType() instanceof SoilType soilType) {
+    if (block instanceof IType<?> type && type.getType() instanceof SoilType soilType) {
 
-        if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
-          worldIn.setBlockState(pos, BlocksSoil.DIRT.get(soilType).getDefaultState());
+      if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
+        worldIn.setBlockState(pos, BlocksSoil.DIRT.get(soilType).getDefaultState());
 
-        } else {
-          if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
-            for (int i = 0; i < 4; ++i) {
-              BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
+      } else {
+        if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
+          for (int i = 0; i < 4; ++i) {
+            BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
-              if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos)) {
-                return;
-              }
+            if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos)) {
+              return;
+            }
 
-              IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
-              IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
+            IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
+            IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-              if (iblockstate1.getBlock() == BlocksSoil.DIRT.get(soilType) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4
-                  && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
-                worldIn.setBlockState(blockpos, BlocksSoil.GRASS.get(soilType).getDefaultState());
-              }
+            if (iblockstate1.getBlock() == BlocksSoil.DIRT.get(soilType) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2) {
+              worldIn.setBlockState(blockpos, BlocksSoil.GRASS.get(soilType).getDefaultState());
             }
           }
         }
       }
+
     }
+  }
+
+  @Override
+  public int quantityDropped(IBlockState state, int fortune, Random random) {
+    return state.getValue(CLAY) ? random.nextInt(4) : super.quantityDropped(state, fortune, random);
+  }
+
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    return state.getValue(CLAY) ? Items.CLAY_BALL : ItemsSoil.PILE.get(type);
   }
 
   @Override

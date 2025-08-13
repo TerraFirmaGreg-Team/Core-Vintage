@@ -44,6 +44,9 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
 
     this.settings = settings;
 //    this.blockState = this.createBlockState();
+
+    this.fullBlock = this.getDefaultState().isOpaqueCube();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
   }
 
   protected BlockStateContainer createBlockState() {

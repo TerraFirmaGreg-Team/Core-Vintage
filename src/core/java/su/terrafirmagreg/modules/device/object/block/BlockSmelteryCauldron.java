@@ -39,9 +39,8 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProviderTile {
 
   public BlockSmelteryCauldron() {
-    super(BlockSettings.of(Material.IRON));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("smeltery/cauldron")
       .sound(SoundType.STONE)
       .nonOpaque()
@@ -49,7 +48,8 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
       .tile(TileSmelteryCauldron.class)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM))
-      .hardness(3.0F);
+      .hardness(3.0F)
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false)

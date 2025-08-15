@@ -44,9 +44,8 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
   private static final AxisAlignedBB AABB_W = new AxisAlignedBB(0.3125D, 0.125D, 0.1875D, 1.0D, 0.875D, 0.8125D);
 
   public BlockLatexExtractor() {
-    super(BlockSettings.of(Material.IRON));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("latex_extractor")
       .nonCube()
       .noItemBlock()
@@ -54,7 +53,8 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
       .renderType(EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
       .tile(TileLatexExtractor.class, new TESRLatexExtractor())
       .harvestLevel(ToolClasses.PICKAXE, 0)
-      .hardness(2.0F);
+      .hardness(2.0F)
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, NORTH)

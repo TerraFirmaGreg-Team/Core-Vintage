@@ -15,12 +15,14 @@ public abstract class ItemWood extends BaseItem implements IWoodEntry, IProvider
   protected final WoodType type;
 
   public ItemWood(WoodType type, String variant) {
-    this.type = type;
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey(type.getRegistryKey(variant))
       .customResource(type.getResource(variant))
-      .addOreDict(variant);
+      .addOreDict(variant)
+    );
+    
+    this.type = type;
+
   }
 
   @Override

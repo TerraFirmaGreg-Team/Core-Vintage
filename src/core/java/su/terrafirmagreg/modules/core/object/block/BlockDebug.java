@@ -8,10 +8,11 @@ import net.minecraft.block.material.Material;
 public class BlockDebug extends BaseBlock {
 
   public BlockDebug() {
-    super(BlockSettings.of(Material.SPONGE));
-
-    getSettings()
-      .registryKey("debug");
+    super(BlockSettings.of()
+      .material(Material.SPONGE)
+      .registryKey("debug")
+    );
+    
   }
 
 }

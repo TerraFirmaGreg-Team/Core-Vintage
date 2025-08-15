@@ -15,7 +15,9 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Collections;
 import java.util.List;
@@ -65,14 +67,16 @@ public interface IModuleEntry extends IBaseEntry<ModuleSettings, BaseModule> {
   default void onPluginRegistrar(IPluginRegistrar registrar) {}
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class ModuleSettings extends BaseSettings<ModuleSettings> {
 
-    private boolean subscriptionEnabled = true;
-    private boolean packetManagerEnabled = true;
-    private boolean registryManagerEnabled = true;
-    private boolean commandManagerEnabled = true;
-    private boolean featureManagerEnabled = true;
-    private boolean pluginManagerEnabled = true;
+    protected boolean subscriptionEnabled = true;
+    protected boolean packetManagerEnabled = true;
+    protected boolean registryManagerEnabled = true;
+    protected boolean commandManagerEnabled = true;
+    protected boolean featureManagerEnabled = true;
+    protected boolean pluginManagerEnabled = true;
+    
 
     public static ModuleSettings of() {
       return new ModuleSettings();

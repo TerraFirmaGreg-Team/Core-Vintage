@@ -8,8 +8,9 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemFlaskMetalBroken extends BaseItem {
 
   public ItemFlaskMetalBroken() {
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("flask/metal/broken")
-      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT));
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
+    );
   }
 }

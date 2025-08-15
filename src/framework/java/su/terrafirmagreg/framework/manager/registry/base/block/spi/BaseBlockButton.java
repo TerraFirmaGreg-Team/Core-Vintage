@@ -40,7 +40,8 @@ public abstract class BaseBlockButton extends BlockButton implements IBlockEntry
   }
 
   public BaseBlockButton(boolean wooden) {
-    this(wooden, BlockSettings.of(Material.CIRCUITS));
+    this(wooden, BlockSettings.of()
+      .material(Material.CIRCUITS));
   }
 
   public BaseBlockButton(boolean wooden, BlockSettings settings) {

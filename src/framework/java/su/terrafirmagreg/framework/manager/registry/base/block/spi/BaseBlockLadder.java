@@ -38,15 +38,16 @@ public abstract class BaseBlockLadder extends BlockLadder implements IBlockEntry
 
   protected final BlockSettings settings;
 
-  public BaseBlockLadder() {
-    this(BlockSettings.of(Material.CIRCUITS));
-  }
+//  public BaseBlockLadder() {
+//    this(BlockSettings.of());
+//  }
 
   public BaseBlockLadder(BlockSettings settings) {
 
     this.settings = settings;
 
     getSettings()
+      .material(Material.CIRCUITS)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .nonCube();
   }
@@ -106,7 +107,7 @@ public abstract class BaseBlockLadder extends BlockLadder implements IBlockEntry
 
   @Override
   public boolean isFullCube(IBlockState state) {
-    return settings.isFullCube();
+    return settings.getFullCube().apply(state);
   }
 
   @Override

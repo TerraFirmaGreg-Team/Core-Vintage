@@ -61,18 +61,18 @@ public class BlockSoilFarmland extends BaseBlockFarmland implements ISoilEntry, 
   protected final SoilType type;
 
   public BlockSoilFarmland(SoilType type) {
-    super(BlockSettings.of(Material.GROUND));
-
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.GROUND)
       .registryKey(type.getRegistryKey("farmland"))
       .ignoresProperties(MOISTURE)
       .sound(SoundType.GROUND)
       .useNeighborBrightness()
       .lightValue(255)
       .hardness(2.0F)
-      .harvestLevel(ToolClasses.SHOVEL, 0);
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+    );
+
+    this.type = type;
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(MOISTURE, 1)); // 1 is default so it doesn't instantly turn back to dirt

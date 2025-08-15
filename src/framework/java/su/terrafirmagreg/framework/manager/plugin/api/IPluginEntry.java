@@ -14,8 +14,8 @@ public interface IPluginEntry extends IBaseEntry<PluginSettings, BasePlugin> {
   @Getter
   class PluginSettings extends BaseSettings<PluginSettings> {
 
-    String modRequired;
-    boolean hasSubscriptions = true;
+    protected String modRequired;
+    protected boolean hasSubscriptions = true;
 
 
     public static PluginSettings of() {

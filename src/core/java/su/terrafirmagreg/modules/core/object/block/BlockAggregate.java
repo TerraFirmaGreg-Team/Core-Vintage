@@ -10,11 +10,11 @@ import net.minecraft.block.material.Material;
 public class BlockAggregate extends BaseBlockFalling implements IBlockEntry {
 
   public BlockAggregate() {
-    super(BlockSettings.of(Material.SAND));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.SAND)
       .registryKey("aggregate")
       .sound(SoundType.SAND)
-      .hardness(0.4f);
+      .hardness(0.4f)
+    );
   }
 }

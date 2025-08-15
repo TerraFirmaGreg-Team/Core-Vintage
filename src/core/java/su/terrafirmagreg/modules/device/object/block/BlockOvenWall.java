@@ -37,9 +37,8 @@ public class BlockOvenWall extends BaseBlock {
     16.0D / 16, 16.0D / 16, 16.0D / 16);
 
   public BlockOvenWall() {
-    super(BlockSettings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY)
       .registryKey("oven/wall")
       .hardness(2.0F)
       .resistance(3.0F)
@@ -49,7 +48,8 @@ public class BlockOvenWall extends BaseBlock {
       .renderType(EnumBlockRenderType.MODEL)
       .capability(
         CapabilityProviderSize.of(Size.NORMAL, Weight.HEAVY)
-      );
+      )
+    );
 
     setDefaultState(blockState.getBaseState()
       .withProperty(CURED, false)

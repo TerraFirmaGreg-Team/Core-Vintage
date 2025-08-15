@@ -31,13 +31,14 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockEntry {
     super(settings.getMaterial());
 
     this.settings = settings;
-
     getSettings()
       .ignoresProperties(BlockDoor.POWERED)
       .itemBlock(BaseItemDoor::new)
       .disableStats()
       .capability(CapabilityProviderSize.of(Size.VERY_LARGE, Weight.HEAVY))
       .hardness(3.0F);
+
+
   }
 
   @Override

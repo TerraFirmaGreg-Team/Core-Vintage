@@ -25,7 +25,6 @@ public abstract class BaseBlockBush extends BlockBush implements IBlockEntry {
     super(settings.getMaterial(), settings.getMapColor());
 
     this.settings = settings;
-
     getSettings()
       .renderLayer(BlockRenderLayer.CUTOUT)
       .nonOpaque()

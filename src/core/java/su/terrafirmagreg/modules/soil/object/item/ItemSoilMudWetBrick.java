@@ -1,6 +1,11 @@
 package su.terrafirmagreg.modules.soil.object.item;
 
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityProviderHeat;
+import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.ISoilEntry;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 
 import net.minecraft.item.ItemStack;
@@ -9,14 +14,21 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import org.jetbrains.annotations.Nullable;
 
-public class ItemSoilMudWetBrick extends ItemSoil {
+import lombok.Getter;
+
+@Getter
+public class ItemSoilMudWetBrick extends BaseItem implements ISoilEntry {
+
+  protected final SoilType type;
 
   public ItemSoilMudWetBrick(SoilType type) {
-    super(type);
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey(type.getRegistryKey("mud_brick_wet"))
-      .maxDamage(0);
+      .maxDamage(0)
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
+    );
+
+    this.type = type;
   }
 
 

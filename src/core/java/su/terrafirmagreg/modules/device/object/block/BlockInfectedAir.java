@@ -16,15 +16,15 @@ import org.jetbrains.annotations.Nullable;
 public class BlockInfectedAir extends BaseBlock implements IProviderTile {
 
   public BlockInfectedAir() {
-    super(BlockSettings.of(Material.AIR));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.AIR)
       .registryKey("infected_air")
       .hardness(2F)
       .tile(TileInfectedAir.class)
       .noCollision()
       .replaceable()
-      .nonFullCube();
+      .nonFullCube()
+    );
   }
 
   public boolean canCollideCheck(IBlockState state, boolean hitIfLiquid) {
@@ -38,7 +38,7 @@ public class BlockInfectedAir extends BaseBlock implements IProviderTile {
   public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return NULL_AABB;
   }
-  
+
 
   @Nullable
   @Override

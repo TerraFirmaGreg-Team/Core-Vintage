@@ -92,7 +92,7 @@ public abstract class BaseBlockLog extends BlockLog implements IBlockEntry, IFlu
 
   @Override
   public boolean isFullCube(IBlockState state) {
-    return settings.isFullCube();
+    return settings.getFullCube().apply(state);
   }
 
   @Override

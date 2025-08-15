@@ -18,10 +18,8 @@ public class BlockWoodBookshelf extends BaseBlockBookshelf implements IProviderB
   protected final WoodType type;
 
   public BlockWoodBookshelf(WoodType type) {
-    super(BlockSettings.of(Material.WOOD));
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey(type.getRegistryKey("bookshelf"))
       .customResource(type.getResource("bookshelf"))
       .hardness(2.0F)
@@ -30,7 +28,10 @@ public class BlockWoodBookshelf extends BaseBlockBookshelf implements IProviderB
       .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
       .harvestLevel(ToolClasses.AXE, 0)
       .fireInfo(30, 20)
-      .addOreDict("bookshelf");
+      .addOreDict("bookshelf")
+    );
+    
+    this.type = type;
   }
 
 

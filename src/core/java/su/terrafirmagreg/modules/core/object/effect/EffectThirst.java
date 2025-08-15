@@ -9,12 +9,12 @@ import net.minecraft.entity.player.EntityPlayerMP;
 public class EffectThirst extends BaseEffect {
 
   public EffectThirst() {
-
-    getSettings()
+    super(EffectSettings.of()
       .registryKey("thirst")
       .badEffect()
       .texture("thirst")
-      .liquidColor(0x2c86d4);
+      .liquidColor(0x2c86d4)
+    );
   }
 
   @Override

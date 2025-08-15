@@ -209,7 +209,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends SoundEvent> SoundEvent addSound(String identifier) {
 
-    var soundEvent = new BaseSound(SoundSettings.of(getIdentifier(identifier)).registryKey(identifier));
+    var soundEvent = new BaseSound(SoundSettings.of().name(getIdentifier(identifier)).registryKey(identifier));
     this.addContent(soundEvent);
     return soundEvent;
   }

@@ -101,7 +101,7 @@ public abstract class BaseBlockFence extends BlockFence implements IBlockEntry, 
 
   @Override
   public boolean isFullCube(IBlockState state) {
-    return settings.isFullCube();
+    return settings.getFullCube().apply(state);
   }
 
   @Override

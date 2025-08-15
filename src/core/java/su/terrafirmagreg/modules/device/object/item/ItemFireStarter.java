@@ -41,13 +41,14 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
 public class ItemFireStarter extends BaseItem {
 
   public ItemFireStarter() {
-    setNoRepair();
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("firestarter")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT, false))
       .maxStackSize(1)
       .addOreDict("tool")
-      .maxDamage(8);
+      .maxDamage(8)
+    );
+    setNoRepair();
   }
 
   /**

@@ -54,9 +54,8 @@ import static su.terrafirmagreg.api.util.MathUtils.RNG;
 public class BlockOven extends BaseBlock implements IProviderTile {
 
   public BlockOven() {
-    super(BlockSettings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY)
       .registryKey("oven/base")
       .hardness(2.0f)
       .resistance(3.0f)
@@ -67,9 +66,10 @@ public class BlockOven extends BaseBlock implements IProviderTile {
       .tile(TileOven.class, new TESROven())
       .capability(
         CapabilityProviderSize.of(Size.LARGE, Weight.HEAVY)
-      );
+      )
+    );
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(CURED, false)
       .withProperty(HORIZONTAL, EnumFacing.NORTH)
       .withProperty(LIT, false));

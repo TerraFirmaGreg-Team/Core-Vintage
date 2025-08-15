@@ -59,40 +59,30 @@ public class BlockWoodLog extends BaseBlockLog implements IWoodEntry, IProviderB
   protected final WoodType type;
 
   public BlockWoodLog(WoodType type) {
-    super(BlockSettings.of(Material.WOOD));
-
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey(type.getRegistryKey("log"))
       .randomTicks()
       .capability(CapabilityProviderSize.of(Size.VERY_LARGE, Weight.MEDIUM))
       .ignoresProperties(PLACED)
       .harvestLevel(ToolClasses.AXE, 0)
       .resistance(5.0F)
+      .hasFullCube(state -> !state.getValue(SMALL))
       .hardness(20.0F)//TODO 2.0 в тфк
-      .lightValue(this.getDefaultState().getValue(SMALL) ? 0 : 255)
+      .lightValue(state -> state.getValue(SMALL) ? 0 : 255)
       .fireInfo(5, 5)
       .addOreDict("logWood", type)
       .addOreDict("logWood")
-      .addOreDict(type.isCanMakeTannin() ? "tannin" : null);
+      .addOreDict(type.isCanMakeTannin() ? "tannin" : null)
+    );
 
-    setDefaultState(blockState.getBaseState()
+    this.type = type;
+
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(LOG_AXIS, EnumAxis.Y)
       .withProperty(PLACED, true)
       .withProperty(SMALL, false));
 
-  }
-
-
-  @Override
-  public boolean isFullBlock(IBlockState state) {
-    return !state.getValue(SMALL);
-  }
-
-  @Override
-  public boolean isFullCube(IBlockState state) {
-    return !state.getValue(SMALL);
   }
 
   //TODO в этом не вижу смысла после добавления dt, так как все бревна, что имели бы свойство PLACED,

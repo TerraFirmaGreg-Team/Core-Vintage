@@ -8,10 +8,10 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemIceShard extends BaseItem {
 
   public ItemIceShard() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("shard/ice")
       .addOreDict("shard")
-      .capability(CapabilityProviderSize.of(Size.TINY, Weight.LIGHT));
+      .capability(CapabilityProviderSize.of(Size.TINY, Weight.LIGHT))
+    );
   }
 }

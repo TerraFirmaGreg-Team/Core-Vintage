@@ -9,10 +9,10 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemGlue extends BaseItem {
 
   public ItemGlue() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("glue")
       .capability(CapabilityProviderSize.of(Size.TINY, Weight.LIGHT))
-      .addOreDict("slimeball");
+      .addOreDict("slimeball")
+    );
   }
 }

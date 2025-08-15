@@ -8,10 +8,10 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemGlassShard extends BaseItem {
 
   public ItemGlassShard() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("shard/glass")
       .addOreDict("shard")
-      .capability(CapabilityProviderSize.of(Size.TINY, Weight.LIGHT));
+      .capability(CapabilityProviderSize.of(Size.TINY, Weight.LIGHT))
+    );
   }
 }

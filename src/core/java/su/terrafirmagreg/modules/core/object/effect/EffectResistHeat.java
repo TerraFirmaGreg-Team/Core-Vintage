@@ -8,12 +8,12 @@ import net.minecraft.entity.EntityLivingBase;
 public class EffectResistHeat extends BaseEffect {
 
   public EffectResistHeat() {
-
-    getSettings()
+    super(EffectSettings.of()
       .beneficial()
       .registryKey("resist_heat")
       .texture("resist_heat")
-      .liquidColor(0xFFCD72);
+      .liquidColor(0xFFCD72)
+    );
   }
 
   @Override

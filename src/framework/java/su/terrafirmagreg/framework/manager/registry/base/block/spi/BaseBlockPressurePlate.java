@@ -13,7 +13,7 @@ public abstract class BaseBlockPressurePlate extends BlockPressurePlate implemen
 
   protected final BlockSettings settings;
 
-  public BaseBlockPressurePlate(BlockSettings settings, Sensitivity sensitivityIn) {
+  public BaseBlockPressurePlate(Sensitivity sensitivityIn, BlockSettings settings) {
     super(settings.getMaterial(), sensitivityIn);
 
     this.settings = settings;

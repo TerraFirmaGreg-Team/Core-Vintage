@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockBed;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.api.util.ModUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockBed;
 import su.terrafirmagreg.modules.core.init.BlocksCore;
 
 import net.minecraft.block.Block;
@@ -36,14 +36,14 @@ import java.util.Random;
 public class BlockThatchBed extends BaseBlockBed {
 
   public BlockThatchBed() {
-    super(BlockSettings.of(Material.CLOTH));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.CLOTH)
       .registryKey("thatch_bed")
       .ignoresProperties(OCCUPIED)
       .sound(SoundType.CLOTH)
       .fireInfo(60, 20)
-      .hardness(0.6F);
+      .hardness(0.6F)
+    );
   }
 
   @Override

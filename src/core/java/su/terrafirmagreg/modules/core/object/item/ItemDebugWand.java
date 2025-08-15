@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.core.object.item;
 
 
-import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 import su.terrafirmagreg.api.util.EntityUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental;
 
@@ -50,11 +50,11 @@ public class ItemDebugWand extends BaseItem {
   private static final String TAG_BLOCKSTATE_LIST = "BlockstateList";
 
   public ItemDebugWand() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("wand")
       .rarity(EnumRarity.EPIC)
-      .maxStackSize(1);
+      .maxStackSize(1)
+    );
 
     setNoRepair();
     setFull3D();

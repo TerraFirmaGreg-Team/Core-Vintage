@@ -16,11 +16,8 @@ public class BlockWoodFenceLog extends BaseBlockFence implements IWoodEntry {
   protected final WoodType type;
 
   public BlockWoodFenceLog(WoodType type) {
-    super(BlockSettings.of(Material.WOOD));
-
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey(type.getRegistryKey("fence_log"))
       .sound(SoundType.WOOD)
       .hardness(2.0F)
@@ -28,7 +25,10 @@ public class BlockWoodFenceLog extends BaseBlockFence implements IWoodEntry {
       .harvestLevel(ToolClasses.AXE, 0)
       .fireInfo(5, 20)
       .addOreDict("fence", "wood")
-      .addOreDict("fence", "wood", type);
+      .addOreDict("fence", "wood", type)
+    );
+
+    this.type = type;
 
   }
 }

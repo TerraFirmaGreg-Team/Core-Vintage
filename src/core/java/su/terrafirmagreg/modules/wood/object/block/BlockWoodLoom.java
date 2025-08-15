@@ -47,11 +47,8 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodEntry, IPr
   protected final WoodType type;
 
   public BlockWoodLoom(WoodType type) {
-    super(BlockSettings.of(Material.WOOD, MapColor.AIR));
-
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD, MapColor.AIR)
       .registryKey(type.getRegistryKey("loom"))
       .customResource(type.getResource("loom"))
       .harvestLevel(ToolClasses.AXE, 0)
@@ -64,8 +61,11 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodEntry, IPr
       .resistance(3f)
       .fireInfo(5, 20)
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.VERY_HEAVY))
-      .addOreDict("loom");
+      .addOreDict("loom")
+    );
 
+    this.type = type;
+    
     setDefaultState(blockState.getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }

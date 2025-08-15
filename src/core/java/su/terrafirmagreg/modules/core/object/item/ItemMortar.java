@@ -9,9 +9,9 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemMortar extends BaseItem {
 
   public ItemMortar() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("mortar")
-      .capability(CapabilityProviderSize.of(Size.TINY, Weight.VERY_LIGHT));
+      .capability(CapabilityProviderSize.of(Size.TINY, Weight.VERY_LIGHT))
+    );
   }
 }

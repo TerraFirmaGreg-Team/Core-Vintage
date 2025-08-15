@@ -6,7 +6,9 @@ import su.terrafirmagreg.framework.manager.command.api.ICommandEntry.CommandSett
 
 import net.minecraft.command.CommandBase;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +17,16 @@ public interface ICommandEntry extends IBaseEntry<CommandSettings, CommandBase> 
 
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class CommandSettings extends BaseSettings<CommandSettings> {
 
-    final List<String> aliases = new ArrayList<>();
+    protected final List<String> aliases = new ArrayList<>();
 
-    Level level = Level.ALL;
-
-    protected CommandSettings() {}
-
+    protected Level level = Level.ALL;
+    
     public static CommandSettings of() {
       return new CommandSettings();
     }
-
 
     public CommandSettings level(Level level) {
       this.level = level;

@@ -7,14 +7,14 @@ import net.minecraft.entity.EntityLivingBase;
 public class EffectCaffeine extends BaseEffect {
 
   public EffectCaffeine() {
-
-    //registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "3949b211-3421-404d-8a50-267986cb8ac9", 0.15D, 2);
-
-    getSettings()
+    super(EffectSettings.of()
       .registryKey("caffeine")
       .badEffect()
       .texture("caffeine")
-      .liquidColor(0x28120b);
+      .liquidColor(0x28120b)
+    );
+    //registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "3949b211-3421-404d-8a50-267986cb8ac9", 0.15D, 2);
+    
   }
 
   @Override

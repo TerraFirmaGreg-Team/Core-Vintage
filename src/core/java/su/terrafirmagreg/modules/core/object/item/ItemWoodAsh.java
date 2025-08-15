@@ -8,10 +8,10 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemWoodAsh extends BaseItem {
 
   public ItemWoodAsh() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("wood_ash")
       .addOreDict("dustAsh")
-      .capability(CapabilityProviderSize.of(Size.VERY_SMALL, Weight.VERY_LIGHT));
+      .capability(CapabilityProviderSize.of(Size.VERY_SMALL, Weight.VERY_LIGHT))
+    );
   }
 }

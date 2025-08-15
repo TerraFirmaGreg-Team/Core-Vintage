@@ -14,14 +14,16 @@ public class BlockWoodLadder extends BaseBlockLadder implements IWoodEntry {
   protected final WoodType type;
 
   public BlockWoodLadder(WoodType type) {
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
       .registryKey(type.getRegistryKey("ladder"))
       .customResource(type.getResource("ladder"))
       .sound(SoundType.LADDER)
       .fireInfo(5, 20)
       .addOreDict("ladder")
-      .addOreDict("ladder", "wood");
+      .addOreDict("ladder", "wood")
+    );
+    
+    this.type = type;
+
   }
 }

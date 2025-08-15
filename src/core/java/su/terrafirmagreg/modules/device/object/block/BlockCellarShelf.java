@@ -17,14 +17,14 @@ import net.minecraft.world.World;
 public class BlockCellarShelf extends BaseBlockContainer {
 
   public BlockCellarShelf() {
-    super(BlockSettings.of(Material.WOOD));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey("cellar/shelf")
       .tile(TileCellarShelf.class)
       .renderType(EnumBlockRenderType.MODEL)
       .hardness(2F)
-      .nonOpaque();
+      .nonOpaque()
+    );
   }
 
   @Override

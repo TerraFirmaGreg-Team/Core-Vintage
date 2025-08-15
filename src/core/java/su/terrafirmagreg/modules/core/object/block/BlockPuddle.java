@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.util.AABBUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -25,9 +25,8 @@ import java.util.Random;
 public class BlockPuddle extends BaseBlock {
 
   public BlockPuddle() {
-    super(BlockSettings.of(Material.GROUND));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.GROUND)
       .registryKey("puddle")
       .renderLayer(BlockRenderLayer.TRANSLUCENT)
       .useNeighborBrightness()
@@ -37,7 +36,9 @@ public class BlockPuddle extends BaseBlock {
       .passable()
       .nonFullCube()
       .randomTicks()
-      .replaceable();
+      .replaceable()
+    );
+
   }
 
 

@@ -7,11 +7,11 @@ import net.minecraft.block.material.Material;
 public class BlockCellarWall extends BaseBlock {
 
   public BlockCellarWall() {
-    super(BlockSettings.of(Material.WOOD));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey("cellar/wall")
       .hardness(3F)
-      .resistance(25F);
+      .resistance(25F)
+    );
   }
 }

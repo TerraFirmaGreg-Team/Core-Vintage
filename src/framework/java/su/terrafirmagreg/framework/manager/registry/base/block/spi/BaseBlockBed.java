@@ -15,6 +15,7 @@ public abstract class BaseBlockBed extends BlockBed implements IBlockEntry {
 
   public BaseBlockBed(BlockSettings settings) {
     this.settings = settings;
+
   }
 
   @Override

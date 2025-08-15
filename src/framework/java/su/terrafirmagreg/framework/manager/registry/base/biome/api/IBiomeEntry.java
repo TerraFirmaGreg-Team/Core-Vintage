@@ -10,7 +10,9 @@ import net.minecraftforge.common.BiomeDictionary;
 
 import com.google.common.collect.Lists;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.awt.Color;
 import java.util.Arrays;
@@ -28,38 +30,38 @@ public interface IBiomeEntry extends IRegistryEntry<BiomeSettings, Biome> {
   }
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class BiomeSettings extends RegistrySettings<BiomeSettings> {
 
-    final List<BiomeDictionary.Type> types = Lists.newArrayList();
+    protected final List<BiomeDictionary.Type> types = Lists.newArrayList();
 
-    final String name;
+    protected String name;
+    protected String baseBiome;
 
-    String baseBiome;
+    protected int guiColour = 0xffffff;
+    protected int waterColor = 16777215;
+    protected int biomeWeight = 0;
 
-    int guiColour = 0xffffff;
-    int waterColor = 16777215;
-    int biomeWeight = 0;
+    protected float baseHeight = 0.1F;
+    protected float heightVariation = 0.2F;
+    protected float temperature = 0.5F;
+    protected float rainfall = 0.5F;
 
-    float baseHeight = 0.1F;
-    float heightVariation = 0.2F;
-    float temperature = 0.5F;
-    float rainfall = 0.5F;
+    protected boolean spawnBiome = false;
+    protected boolean worldGen = false;
+    protected boolean enableSnow = false;
+    protected boolean enableRain = true;
+    protected boolean generateVillages = true;
 
-    boolean spawnBiome = false;
-    boolean worldGen = false;
-    boolean enableSnow = false;
-    boolean enableRain = true;
-    boolean generateVillages = true;
+    protected Color debugColour = new Color(guiColour);
 
-    Color debugColour = new Color(guiColour);
-
-    protected BiomeSettings(String name) {
-      this.name = ModUtils.name(name);
-
+    public static BiomeSettings of() {
+      return new BiomeSettings();
     }
 
-    public static BiomeSettings of(String name) {
-      return new BiomeSettings(name);
+    public BiomeSettings name(String name) {
+      this.name = ModUtils.name(name);
+      return this.self();
     }
 
     public BiomeSettings baseBiome(Biome baseBiome) {

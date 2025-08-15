@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.object.effect;
 
-import su.terrafirmagreg.framework.manager.registry.base.effect.spi.BaseEffect;
 import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.effect.spi.BaseEffect;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumParticleTypes;
@@ -14,12 +14,12 @@ import java.util.Random;
 public class EffectSwarm extends BaseEffect {
 
   public EffectSwarm() {
-
-    getSettings()
+    super(EffectSettings.of()
       .registryKey("swarm")
       .badEffect()
       .texture("swarm")
-      .liquidColor(0xffff1a);
+      .liquidColor(0xffff1a)
+    );
   }
 
   @Override

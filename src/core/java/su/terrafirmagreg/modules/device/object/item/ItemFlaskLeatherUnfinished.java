@@ -8,8 +8,9 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemFlaskLeatherUnfinished extends BaseItem {
 
   public ItemFlaskLeatherUnfinished() {
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("flask/leather/unfinished")
-      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT));
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
+    );
   }
 }

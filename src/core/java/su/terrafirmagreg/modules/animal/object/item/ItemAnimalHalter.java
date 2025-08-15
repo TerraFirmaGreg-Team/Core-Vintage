@@ -8,9 +8,9 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemAnimalHalter extends BaseItem {
 
   public ItemAnimalHalter() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("halter")
-      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT));
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
+    );
   }
 }

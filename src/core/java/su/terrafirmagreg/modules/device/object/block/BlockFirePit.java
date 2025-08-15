@@ -68,9 +68,8 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
     0.125, 0.1875, 0.8125, 0.9375, 0.8125);
 
   public BlockFirePit() {
-    super(BlockSettings.of(Material.WOOD));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey("fire_pit")
       .tile(TileFirePit.class, new TESRFirePit())
       .hardness(0.3F)
@@ -78,7 +77,8 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
       .randomTicks()
       .nonCube()
       .disableStats()
-      .lightValue(15);
+      .lightValue(15)
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false)

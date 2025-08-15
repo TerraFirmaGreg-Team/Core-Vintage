@@ -103,7 +103,7 @@ public abstract class BaseBlockBookshelf extends BlockBookshelf implements IBloc
 
   @Override
   public boolean isFullCube(IBlockState state) {
-    return settings.isFullCube();
+    return settings.getFullCube().apply(state);
   }
 
   @Override

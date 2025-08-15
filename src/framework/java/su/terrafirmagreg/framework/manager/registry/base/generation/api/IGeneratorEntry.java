@@ -10,7 +10,7 @@ public interface IGeneratorEntry extends IBaseEntry<GeneratorSettings, WorldGene
 
   class GeneratorSettings extends BaseSettings<GeneratorSettings> {
 
-    boolean doBlockNotify;
+    protected boolean doBlockNotify;
 
     protected GeneratorSettings() {
       this.doBlockNotify = false;

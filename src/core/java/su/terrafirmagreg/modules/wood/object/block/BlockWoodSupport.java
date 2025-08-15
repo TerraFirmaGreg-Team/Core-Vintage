@@ -1,10 +1,14 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.modules.wood.ConfigWood;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.object.block.spi.BlockWood;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -21,6 +25,8 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +38,8 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
 import static su.terrafirmagreg.api.data.Properties.EnumProp.AXIS;
 
 @SuppressWarnings("deprecation")
-public class BlockWoodSupport extends BlockWood {
+@Getter
+public class BlockWoodSupport extends BaseBlock implements IWoodEntry {
 
   private static final AxisAlignedBB VERTICAL_SUPPORT_AABB = new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 1.0D, 0.6875D);
   private static final AxisAlignedBB HORIZONTAL_SUPPORT_AABB = new AxisAlignedBB(0.375D, 0.625D, 0.375D, 0.625D, 1.0D, 0.625D);
@@ -41,15 +48,23 @@ public class BlockWoodSupport extends BlockWood {
   private static final AxisAlignedBB CONNECTION_E_AABB = new AxisAlignedBB(0.6875D, 0.625D, 0.3125D, 1.0D, 1.0D, 0.6875D);
   private static final AxisAlignedBB CONNECTION_W_AABB = new AxisAlignedBB(0.0D, 0.625D, 0.3125D, 0.3125D, 1.0D, 0.6875D);
 
-  public BlockWoodSupport(WoodType type) {
-    super(type, "support");
+  protected final WoodType type;
 
-    getSettings()
+  public BlockWoodSupport(WoodType type) {
+    super(BlockSettings.of()
+      .material(Material.WOOD)
+      .registryKey(type.getRegistryKey("support"))
+      .customResource(type.getResource("support"))
+      .harvestLevel(ToolClasses.AXE, 0)
+      .sound(SoundType.WOOD)
+      .addOreDict("support")
       .hardness(2.0F)
       .nonFullCube()
-      .nonOpaque();
+      .nonOpaque()
+    );
 
-    setDefaultState(blockState.getBaseState()
+    this.type = type;
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(AXIS, EnumFacing.Axis.Y)
       .withProperty(NORTH, Boolean.FALSE)
       .withProperty(SOUTH, Boolean.FALSE)

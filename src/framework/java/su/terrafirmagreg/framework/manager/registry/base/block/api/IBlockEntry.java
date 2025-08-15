@@ -76,96 +76,57 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
   @SuppressWarnings("deprecation")
   class BlockSettings extends RegistrySettings<BlockSettings> {
 
-    final List<Object[]> oreDict;
-    final List<IProviderItemCapability> capability;
-
+    protected final List<Object[]> oreDict = new ObjectArrayList<>();
+    protected final List<IProviderItemCapability> capability = new ObjectArrayList<>();
 
     // Block
-    final Material material;
-    final MapColor mapColor;
+    protected Material material = Material.AIR;
+    protected MapColor mapColor = MapColor.AIR;
 
-    IProperty<?>[] ignoredProperties = null;
-    ResourceLocation resource = null;
-    IStateMapper stateMapper = null;
+    protected IProperty<?>[] ignoredProperties = null;
+    protected ResourceLocation resource = null;
+    protected IStateMapper stateMapper = null;
 
-    CreativeTabs group;
-    SoundType soundType;
+    protected CreativeTabs group;
+    protected SoundType soundType = SoundType.STONE;
 
+    protected TriFunction<IBlockState, IBlockAccess, BlockPos, Integer> lightValue = (state, world, pos) -> 0;
+    protected TriFunction<IBlockState, IBlockAccess, BlockPos, Float> slipperiness = (state, world, pos) -> 0.6F;
+    protected BiFunction<IBlockAccess, BlockPos, Boolean> isReplaceable = (world, pos) -> world.getBlockState(pos).getMaterial().isReplaceable();
+    protected Function<IBlockState, Boolean> fullCube = (state) -> true;
+    protected Predicate<IBlockState> isSuffocating = (state) -> state.getMaterial().blocksMovement() && state.isFullCube();
+    protected IRarity rarity = EnumRarity.COMMON;
+    protected EnumBlockRenderType renderType = EnumBlockRenderType.MODEL;
+    protected BlockRenderLayer renderLayer = BlockRenderLayer.SOLID;
+    protected Class<? extends TileEntity> tileClass;
+    protected TileEntitySpecialRenderer<? extends TileEntity> tileRenderer;
+    protected String harvestTool;
+    protected int harvestLevel = -1;
+    protected int encouragement = -1;
+    protected int flammability = -1;
+    protected float resistance = 1.0F;
+    protected float hardness;
+    protected boolean canFall = false;
+    protected boolean collidable = true;
+    protected boolean opaque = true;
 
-    TriFunction<IBlockState, IBlockAccess, BlockPos, Integer> lightValue;
-    TriFunction<IBlockState, IBlockAccess, BlockPos, Float> slipperiness;
-    BiFunction<IBlockAccess, BlockPos, Boolean> isReplaceable;
-    Predicate<IBlockState> isSuffocating;
-    IRarity rarity;
-    EnumBlockRenderType renderType;
-    BlockRenderLayer renderLayer;
-    Function<Block, ? extends ItemBlock> itemBlock;
-    Class<? extends TileEntity> tileClass;
-    TileEntitySpecialRenderer<? extends TileEntity> tileRenderer;
-    String harvestTool;
+    protected boolean hasItemSubtypes = false;
+    protected boolean ticksRandomly;
+    protected boolean requiresCorrectTool = false;
+    protected boolean isAir = material == Material.AIR;
+    protected boolean isTranslucent = !material.blocksLight();
+    protected boolean useNeighborBrightness = !isAir || isTranslucent;
+    protected boolean isPassable = !material.blocksMovement();
 
-    int harvestLevel;
-    int encouragement;
-    int flammability;
+    protected boolean nonCanStack = false;
+    protected Function<Block, ? extends ItemBlock> itemBlock = BaseItemBlock::new;
+    protected boolean enableStats = true;
 
-    float resistance;
-    float hardness;
-
-    boolean canFall;
-    boolean collidable;
-    boolean opaque;
-    boolean fullCube;
-    boolean hasItemSubtypes;
-    boolean ticksRandomly;
-    boolean requiresCorrectTool;
-    boolean useNeighborBrightness;
-    boolean isTranslucent;
-    boolean isPassable;
-    boolean isAir;
-    boolean nonCanStack;
-    boolean enableStats;
-
-    protected BlockSettings(Material material, MapColor color) {
-
-      this.oreDict = new ObjectArrayList<>();
-      this.capability = new ObjectArrayList<>();
-
-      this.material = material;
-      this.mapColor = color;
-      this.isAir = material == Material.AIR;
-
-      this.soundType = SoundType.STONE;
-      this.lightValue = (state, world, pos) -> 0;
-      this.slipperiness = (state, world, pos) -> 0.6F;
-      this.isSuffocating = (state) -> state.getMaterial().blocksMovement() && state.isFullCube();
-      this.rarity = EnumRarity.COMMON;
-      this.renderLayer = BlockRenderLayer.SOLID;
-      this.renderType = EnumBlockRenderType.MODEL;
-      this.itemBlock = BaseItemBlock::new;
-      this.harvestLevel = -1;
-      this.encouragement = -1;
-      this.flammability = -1;
-      this.resistance = 1.0F;
-      this.isTranslucent = !material.blocksLight();
-      this.useNeighborBrightness = !isAir || isTranslucent;
-      this.isPassable = !material.blocksMovement();
-      this.isReplaceable = (world, pos) -> world.getBlockState(pos).getMaterial().isReplaceable();
-      this.canFall = false;
-      this.collidable = true;
-      this.opaque = true;
-      this.fullCube = true;
-      this.nonCanStack = false;
-      this.hasItemSubtypes = false;
-      this.requiresCorrectTool = false;
-      this.enableStats = true;
-    }
-
-    public static BlockSettings of(Material material, EnumDyeColor color) {
-      return new BlockSettings(material, MapColor.getBlockColor(color));
-    }
-
-    public static BlockSettings of(Material material) {
-      return new BlockSettings(material, material.getMaterialMapColor());
+    public static BlockSettings of() {
+      var settings = new BlockSettings();
+      settings.capability.clear();
+      settings.oreDict.clear();
+      return settings;
     }
 
     public static <B extends Block> BlockSettings of(B block) {
@@ -174,11 +135,13 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
 
     public static <B extends Block> BlockSettings of(B block, int meta) {
       IBlockState state = block.getStateFromMeta(meta);
-      BlockSettings settings = BlockSettings.of(block.material, block.blockMapColor);
+      BlockSettings settings = BlockSettings.of();
 
+      settings.material = block.material;
+      settings.mapColor = block.blockMapColor;
       settings.collidable = block.isCollidable();
       settings.opaque = block.isOpaqueCube(state);
-      settings.fullCube = block.isFullCube(state);
+      settings.fullCube = ($) -> block.isFullCube(state);
       settings.soundType = block.getSoundType();
       settings.lightValue = ($, world, pos) -> block.getLightValue(state, world, pos);
       settings.resistance = block.blockResistance;
@@ -194,9 +157,26 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
       return settings;
     }
 
-    public static BlockSettings of(Material material, MapColor color) {
+    public BlockSettings material(Material material) {
+      this.material = material;
+      this.mapColor = material.getMaterialMapColor();
+      return this.self();
+    }
 
-      return new BlockSettings(material, color);
+    public BlockSettings material(Material material, MapColor mapColor) {
+      this.material = material;
+      this.mapColor = mapColor;
+      return this.self();
+    }
+
+    public BlockSettings mapColor(EnumDyeColor color) {
+      this.mapColor = MapColor.getBlockColor(color);
+      return this.self();
+    }
+
+    public BlockSettings mapColor(MapColor mapColor) {
+      this.mapColor = mapColor;
+      return this.self();
     }
 
     public BlockSettings noItemBlock() {
@@ -232,13 +212,18 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
     }
 
     public BlockSettings nonFullCube() {
-      this.fullCube = false;
+      this.fullCube = (state) -> false;
+      return this.self();
+    }
+
+    public BlockSettings hasFullCube(Function<IBlockState, Boolean> fullCube) {
+      this.fullCube = fullCube;
       return this.self();
     }
 
     public BlockSettings nonCube() {
       this.opaque = false;
-      this.fullCube = false;
+      this.fullCube = (state) -> false;
       this.renderLayer = BlockRenderLayer.CUTOUT;
       return this.self();
     }

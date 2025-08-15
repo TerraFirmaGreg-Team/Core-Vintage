@@ -46,9 +46,8 @@ public class BlockBearTrap extends BaseBlockContainer {
   protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
   public BlockBearTrap() {
-    super(BlockSettings.of(Material.IRON));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("bear_trap")
       .hardness(10.0F)
       .resistance(10.0F)
@@ -58,7 +57,8 @@ public class BlockBearTrap extends BaseBlockContainer {
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .capability(
         CapabilityProviderSize.of(Size.LARGE, Weight.VERY_HEAVY)
-      );
+      )
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH)

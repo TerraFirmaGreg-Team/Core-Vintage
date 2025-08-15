@@ -5,10 +5,10 @@ import su.terrafirmagreg.framework.manager.registry.base.effect.spi.BaseEffect;
 public class EffectHyperthermia extends BaseEffect {
 
   public EffectHyperthermia() {
-
-    getSettings()
+    super(EffectSettings.of()
       .registryKey("hyperthermia")
       .texture("hyperthermia")
-      .liquidColor(0xFFC85C);
+      .liquidColor(0xFFC85C)
+    );
   }
 }

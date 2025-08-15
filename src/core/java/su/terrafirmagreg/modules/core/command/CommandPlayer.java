@@ -32,10 +32,10 @@ import java.util.stream.Collectors;
 public class CommandPlayer extends BaseCommand {
 
   public CommandPlayer() {
-
-    getSettings()
+    super(CommandSettings.of()
       .registryKey("player")
-      .level(Level.OP_OR_SP);
+      .level(Level.OP_OR_SP)
+    );
 
   }
 

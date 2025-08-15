@@ -34,7 +34,8 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
   protected final BlockSettings settings;
 
   public BaseBlockSapling() {
-    this(BlockSettings.of(Material.PLANTS));
+    this(BlockSettings.of()
+      .material(Material.PLANTS));
   }
 
   public BaseBlockSapling(BlockSettings settings) {

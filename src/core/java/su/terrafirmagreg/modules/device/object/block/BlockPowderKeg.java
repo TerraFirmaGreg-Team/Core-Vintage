@@ -63,9 +63,8 @@ public class BlockPowderKeg extends BaseBlockContainer {
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
   public BlockPowderKeg() {
-    super(BlockSettings.of(Material.WOOD));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey("powderkeg")
       .sound(SoundType.WOOD)
       .renderLayer(BlockRenderLayer.CUTOUT)
@@ -80,7 +79,8 @@ public class BlockPowderKeg extends BaseBlockContainer {
           Weight.VERY_HEAVY,
           stack.getTagCompound() == null
         )
-      );
+      )
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false)

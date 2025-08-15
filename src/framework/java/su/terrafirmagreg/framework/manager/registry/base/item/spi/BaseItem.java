@@ -31,10 +31,10 @@ public abstract class BaseItem extends Item implements IItemEntry {
 
   }
 
-  public BaseItem() {
-    this(ItemSettings.of());
-
-  }
+//  public BaseItem() {
+//    this(ItemSettings.of());
+//
+//  }
 
   @Override
   public IRarity getForgeRarity(ItemStack stack) {

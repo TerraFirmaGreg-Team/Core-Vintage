@@ -1,18 +1,22 @@
 package su.terrafirmagreg.modules.wood.object.block;
 
 import su.terrafirmagreg.api.client.GuiHandler;
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.object.block.spi.BlockWood;
 import su.terrafirmagreg.modules.wood.object.render.TESRWoodBarrel;
 import su.terrafirmagreg.modules.wood.object.tile.TileWoodBarrel;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneComparator;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,6 +42,8 @@ import net.dries007.tfc.api.recipes.barrel.BarrelRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import static su.terrafirmagreg.api.data.Properties.BoolProp.SEALED;
 
 /**
@@ -47,14 +53,21 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.SEALED;
  * @see BarrelRecipe
  */
 @SuppressWarnings("deprecation")
-public class BlockWoodBarrel extends BlockWood implements IProviderTile {
+@Getter
+public class BlockWoodBarrel extends BaseBlock implements IProviderTile, IWoodEntry {
 
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
-  public BlockWoodBarrel(WoodType type) {
-    super(type, "barrel");
+  protected final WoodType type;
 
-    getSettings()
+  public BlockWoodBarrel(WoodType type) {
+    super(BlockSettings.of()
+      .material(Material.WOOD)
+      .registryKey(type.getRegistryKey("barrel"))
+      .customResource(type.getResource("barrel"))
+      .harvestLevel(ToolClasses.AXE, 0)
+      .sound(SoundType.WOOD)
+      .addOreDict("barrel")
       .hardness(2F)
       .fireInfo(5, 20)
       .tile(TileWoodBarrel.class, new TESRWoodBarrel())
@@ -64,9 +77,11 @@ public class BlockWoodBarrel extends BlockWood implements IProviderTile {
           Weight.VERY_HEAVY,
           stack.getTagCompound() == null
         ))
-      .nonCube();
+      .nonCube()
+    );
 
-    setDefaultState(blockState.getBaseState()
+    this.type = type;
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(SEALED, false));
   }
 

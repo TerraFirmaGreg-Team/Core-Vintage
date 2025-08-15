@@ -53,26 +53,15 @@ public abstract class ItemFlask extends BaseItemFluid implements IProviderItemMe
   private final int drink;
 
   public ItemFlask(int capacity, int drink) {
-    super(capacity);
-
-    this.drink = drink;
-
-    getSettings()
+    super(capacity, ItemSettings.of()
       .maxStackSize(1)
       .addOreDict("flask")
       .hasSubtypes()
-      .capability(
-        CapabilityProviderFluid.of(capacity, true, getValidFluids())
-      );
+      .capability(CapabilityProviderFluid.of(capacity, true, getValidFluids()))
+      .maxDamage(ConfigDevice.ITEM.WATER_FLASKS.damageFactor == 0 ? Integer.MAX_VALUE : capacity / ConfigDevice.ITEM.WATER_FLASKS.damageFactor)
+    );
 
-//    setHasSubtypes(true);
-    if (ConfigDevice.ITEM.WATER_FLASKS.damageFactor == 0) {
-      getSettings()
-        .maxDamage(Integer.MAX_VALUE);
-    } else {
-      getSettings()
-        .maxDamage(capacity / ConfigDevice.ITEM.WATER_FLASKS.damageFactor);
-    }
+    this.drink = drink;
 
   }
 

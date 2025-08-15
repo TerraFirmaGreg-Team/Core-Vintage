@@ -40,18 +40,18 @@ public class BlockSoilGrassPath extends BaseBlockGrassPath implements ISoilEntry
   protected final SoilType type;
 
   public BlockSoilGrassPath(SoilType type) {
-    super(BlockSettings.of(Material.GROUND));
-
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.GROUND)
       .registryKey(type.getRegistryKey("grass_path"))
       .sound(SoundType.PLANT)
       .hardness(2.0F)
       .nonCube()
       .useNeighborBrightness()
       .renderLayer(BlockRenderLayer.CUTOUT)
-      .harvestLevel(ToolClasses.SHOVEL, 0);
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+    );
+
+    this.type = type;
 
     FallingBlockManager.registerFallable(this, VERTICAL_ONLY_SOIL);
   }

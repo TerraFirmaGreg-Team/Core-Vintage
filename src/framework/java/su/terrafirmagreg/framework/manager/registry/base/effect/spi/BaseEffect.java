@@ -24,9 +24,9 @@ public abstract class BaseEffect extends Potion implements IEffectEntry {
   protected int xOffset = 0;
   protected int yOffset = 0;
 
-  protected BaseEffect() {
-    this(EffectSettings.of());
-  }
+//  protected BaseEffect() {
+//    this(EffectSettings.of());
+//  }
 
   protected BaseEffect(EffectSettings settings) {
     super(settings.isBadEffect(), settings.getLiquidColor());
@@ -36,11 +36,13 @@ public abstract class BaseEffect extends Potion implements IEffectEntry {
 
   public void removePotionEffect(EntityLivingBase entity, final Potion potion) {
     //Potion Core Compatibility
-    if (entity.isPotionActive(potion)) {
-      if (entity.getActivePotionEffect(potion).getDuration() > 1) {
-        entity.removePotionEffect(potion);
-        entity.addPotionEffect(new PotionEffect(potion, 1));
-      }
+    if (!entity.isPotionActive(potion)) {
+      return;
+    }
+
+    if (entity.getActivePotionEffect(potion).getDuration() > 1) {
+      entity.removePotionEffect(potion);
+      entity.addPotionEffect(new PotionEffect(potion, 1));
     }
   }
 

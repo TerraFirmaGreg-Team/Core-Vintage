@@ -9,10 +9,10 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemStickBundle extends BaseItem {
 
   public ItemStickBundle() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("stick_bundle")
       .addOreDict("log_wood")
-      .capability(CapabilityProviderSize.of(Size.VERY_LARGE, Weight.MEDIUM));
+      .capability(CapabilityProviderSize.of(Size.VERY_LARGE, Weight.MEDIUM))
+    );
   }
 }

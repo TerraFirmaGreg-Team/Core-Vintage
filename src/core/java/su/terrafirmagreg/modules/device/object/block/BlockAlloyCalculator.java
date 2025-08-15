@@ -33,7 +33,8 @@ public class BlockAlloyCalculator extends BaseBlockContainer {
   private static final AxisAlignedBB BOUNDS_WE = AABBUtils.create(5, 0, 3, 11, 4, 13);
 
   public BlockAlloyCalculator() {
-    super(BlockSettings.of(Material.IRON)
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("alloy_calculator")
       .renderType(EnumBlockRenderType.MODEL)
       .tile(TileAlloyCalculator.class)

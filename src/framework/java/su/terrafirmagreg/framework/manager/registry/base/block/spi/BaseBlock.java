@@ -114,7 +114,7 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
 
   @Override
   public boolean isFullCube(IBlockState state) {
-    return settings.isFullCube();
+    return settings.getFullCube().apply(state);
   }
 
   @Override

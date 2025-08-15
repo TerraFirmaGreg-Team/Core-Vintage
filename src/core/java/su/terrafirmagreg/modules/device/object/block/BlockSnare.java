@@ -57,9 +57,8 @@ public class BlockSnare extends BaseBlockContainer {
   protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
   public BlockSnare() {
-    super(BlockSettings.of(Material.WOOD));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey("snare")
       .sound(SoundType.WOOD)
       .hardness(1.5f)
@@ -71,7 +70,8 @@ public class BlockSnare extends BaseBlockContainer {
       .harvestLevel(ToolClasses.AXE, 0)
       .capability(
         CapabilityProviderSize.of(Size.LARGE, Weight.HEAVY)
-      );
+      )
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH)

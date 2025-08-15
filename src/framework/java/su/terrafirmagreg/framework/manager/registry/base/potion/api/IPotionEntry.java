@@ -7,19 +7,20 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public interface IPotionEntry extends IRegistryEntry<PotionSettings, PotionType> {
 
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class PotionSettings extends RegistrySettings<PotionSettings> {
 
-    PotionEffect[] effect = new PotionEffect[]{};
-    Potion potion;
-    int duration;
-
-    protected PotionSettings() {}
+    protected PotionEffect[] effect = new PotionEffect[]{};
+    protected Potion potion;
+    protected int duration;
 
     public static PotionSettings of() {
       return new PotionSettings();

@@ -73,15 +73,15 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
   }
 
   public BlockBlastFurnace() {
-    super(BlockSettings.of(Material.IRON));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("blast_furnace")
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .renderType(EnumBlockRenderType.MODEL)
       .tile(TileBlastFurnace.class)
       .hardness(2.0F)
-      .resistance(2.0F);
+      .resistance(2.0F)
+    );
   }
 
   /**

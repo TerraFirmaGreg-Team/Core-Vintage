@@ -27,14 +27,14 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 public class BlockFreezeDryer extends BaseBlockContainer {
 
   public BlockFreezeDryer() {
-    super(BlockSettings.of(Material.WOOD));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey("freeze_dryer")
       .tile(TileFreezeDryer.class)
       .renderType(EnumBlockRenderType.MODEL)
       .nonCube()
-      .hardness(2F);
+      .hardness(2F)
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH));

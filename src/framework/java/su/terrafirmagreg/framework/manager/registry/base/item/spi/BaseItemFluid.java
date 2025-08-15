@@ -10,23 +10,26 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.capability.ItemFluidContainer;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
 @Getter
-@SuppressWarnings("deprecation")
 public abstract class BaseItemFluid extends ItemFluidContainer implements IItemEntry {
 
   protected final ItemSettings settings;
   protected final int capacity;
 
-  public BaseItemFluid(int capacity) {
+  public BaseItemFluid(int capacity, ItemSettings settings) {
     super(capacity);
 
-    this.settings = ItemSettings.of();
+    this.settings = settings;
     this.capacity = capacity;
+  }
+
+  public BaseItemFluid(int capacity) {
+    this(capacity, ItemSettings.of());
+
   }
 
 
@@ -42,7 +45,7 @@ public abstract class BaseItemFluid extends ItemFluidContainer implements IItemE
 
 
   @Override
-  public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
+  public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
     if (getSettings().getCapability().isEmpty()) {
       return null;
     }

@@ -1,19 +1,19 @@
 package su.terrafirmagreg.modules.core.object.effect;
 
-import su.terrafirmagreg.framework.manager.registry.base.effect.spi.BaseEffect;
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.framework.manager.registry.base.effect.spi.BaseEffect;
 
 import net.minecraft.entity.EntityLivingBase;
 
 public class EffectParasites extends BaseEffect {
 
   public EffectParasites() {
-
-    getSettings()
+    super(EffectSettings.of()
       .registryKey("parasites")
       .badEffect()
       .texture("parasites")
-      .liquidColor(0xFFE1B7);
+      .liquidColor(0xFFE1B7)
+    );
   }
 
   @Override

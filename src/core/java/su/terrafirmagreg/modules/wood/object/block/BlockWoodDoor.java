@@ -15,17 +15,18 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodEntry {
   protected final WoodType type;
 
   public BlockWoodDoor(WoodType type) {
-    super(BlockSettings.of(Material.WOOD));
-
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey(type.getRegistryKey("door"))
       .customResource(type.getResource("door"))
       .sound(SoundType.WOOD)
       .fireInfo(5, 20)
       .addOreDict("door", "wood")
-      .addOreDict("door", "wood", type);
+      .addOreDict("door", "wood", type)
+    );
+
+    this.type = type;
+    
   }
 
 }

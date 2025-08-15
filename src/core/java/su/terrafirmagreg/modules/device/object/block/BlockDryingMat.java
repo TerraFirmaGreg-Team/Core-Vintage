@@ -31,16 +31,16 @@ public class BlockDryingMat extends BaseBlockContainer {
   public static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
   public BlockDryingMat() {
-    super(BlockSettings.of(Material.GRASS, MapColor.YELLOW));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.GRASS, MapColor.YELLOW)
       .registryKey("drying_mat")
       .hardness(0.5f)
       .randomTicks()
       .nonCube()
       .tile(TileDryingMat.class, new TESRDryingMat())
       .renderType(EnumBlockRenderType.MODEL)
-      .sound(SoundType.PLANT);
+      .sound(SoundType.PLANT)
+    );
   }
 
   @Override

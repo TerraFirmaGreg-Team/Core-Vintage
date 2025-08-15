@@ -7,26 +7,28 @@ import su.terrafirmagreg.framework.manager.registry.base.effect.api.IEffectEntry
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public interface IEffectEntry extends IRegistryEntry<EffectSettings, Potion> {
 
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class EffectSettings extends RegistrySettings<EffectSettings> {
 
-    ResourceLocation texture;
+    protected ResourceLocation texture;
 
-    boolean isBadEffect = false;
-    boolean statusIcon = true;
-    boolean drawInventory = true;
-    boolean drawInventoryText = true;
-    boolean beneficial = false;
+    protected boolean isBadEffect = false;
+    protected boolean statusIcon = true;
+    protected boolean drawInventory = true;
+    protected boolean drawInventoryText = true;
+    protected boolean beneficial = false;
 
-    int liquidColor = 0xFFFFFF;
-    int statusIconIndex = -1;
+    protected int liquidColor = 0xFFFFFF;
+    protected int statusIconIndex = -1;
 
-    protected EffectSettings() {}
 
     public static EffectSettings of() {
       return new EffectSettings();

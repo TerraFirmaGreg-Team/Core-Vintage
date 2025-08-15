@@ -82,7 +82,8 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   }
 
   public BlockCharcoalForge() {
-    super(BlockSettings.of(BlockCharcoalPile.CHARCOAL_MATERIAL)
+    super(BlockSettings.of()
+      .material(BlockCharcoalPile.CHARCOAL_MATERIAL)
       .registryKey("charcoal_forge")
       .randomTicks()
       .harvestLevel(ToolClasses.SHOVEL, 0)

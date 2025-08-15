@@ -16,18 +16,17 @@ public class BlockWoodTrapDoor extends BaseBlockTrapDoor implements IWoodEntry {
   protected final WoodType type;
 
   public BlockWoodTrapDoor(WoodType type) {
-    super(BlockSettings.of(Material.WOOD));
-
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey(type.getRegistryKey("trapdoor"))
       .customResource(type.getResource("trapdoor"))
       .sound(SoundType.WOOD)
       .hardness(0.5F)
       .fireInfo(5, 20)
       .addOreDict("trapdoor", "wood")
-      .addOreDict("trapdoor", "wood", type);
+      .addOreDict("trapdoor", "wood", type)
+    );
 
+    this.type = type;
   }
 }

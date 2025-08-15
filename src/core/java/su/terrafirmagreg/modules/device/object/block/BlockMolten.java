@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.DamageSources;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -36,13 +36,13 @@ public class BlockMolten extends BaseBlock {
   };
 
   public BlockMolten() {
-    super(BlockSettings.of(Material.ROCK));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.ROCK)
       .registryKey("molten")
       .nonFullCube()
       .nonOpaque()
-      .hardness(-1);
+      .hardness(-1)
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false)

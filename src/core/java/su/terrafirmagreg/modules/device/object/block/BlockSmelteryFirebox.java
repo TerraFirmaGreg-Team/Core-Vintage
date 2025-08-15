@@ -48,9 +48,8 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellowsConsumerBlock, IProviderTile {
 
   public BlockSmelteryFirebox() {
-    super(BlockSettings.of(Material.IRON));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("smeltery/firebox")
       .sound(SoundType.STONE)
       .hardness(3.0F)
@@ -60,7 +59,8 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
       .randomTicks()
       .tile(TileSmelteryFirebox.class)
       .harvestLevel(ToolClasses.PICKAXE, 0)
-      .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM));
+      .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM))
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(LIT, false)

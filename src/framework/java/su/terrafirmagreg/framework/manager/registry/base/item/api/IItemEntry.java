@@ -25,7 +25,9 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,34 +71,27 @@ public interface IItemEntry extends IRegistryEntry<ItemSettings, Item> {
 
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class ItemSettings extends RegistrySettings<ItemSettings> {
 
-    final List<Object[]> oreDict;
-    final List<IProviderItemCapability> capability;
+    protected final List<Object[]> oreDict = new ObjectArrayList<>();
+    protected final List<IProviderItemCapability> capability = new ObjectArrayList<>();
 
+    protected ResourceLocation resource = null;
+    protected CreativeTabs group;
+    protected IRarity rarity = EnumRarity.COMMON;
 
-    ResourceLocation resource = null;
-    CreativeTabs group;
-    IRarity rarity;
+    protected boolean isFireResistant;
+    protected boolean hasSubtypes;
+    protected int maxDamage;
+    protected int maxStackSize = 64;
 
-    boolean isFireResistant;
-    boolean hasSubtypes;
-    int maxDamage;
-    int maxStackSize;
-
-
-    protected ItemSettings() {
-
-      this.oreDict = new ObjectArrayList<>();
-      this.capability = new ObjectArrayList<>();
-
-      this.rarity = EnumRarity.COMMON;
-      this.maxStackSize = 64;
-
-    }
 
     public static ItemSettings of() {
-      return new ItemSettings();
+      var settings = new ItemSettings();
+      settings.capability.clear();
+      settings.oreDict.clear();
+      return settings;
     }
 
     public static ItemSettings of(Block block) {

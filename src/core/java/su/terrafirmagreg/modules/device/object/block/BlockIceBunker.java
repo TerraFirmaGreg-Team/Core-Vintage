@@ -18,13 +18,13 @@ import org.jetbrains.annotations.Nullable;
 public class BlockIceBunker extends BaseBlockContainer {
 
   public BlockIceBunker() {
-    super(BlockSettings.of(Material.WOOD));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey("ice_bunker")
       .tile(TileIceBunker.class)
       .renderType(EnumBlockRenderType.MODEL)
-      .hardness(2F);
+      .hardness(2F)
+    );
   }
 
   @Override
@@ -39,5 +39,5 @@ public class BlockIceBunker extends BaseBlockContainer {
   public @Nullable TileIceBunker createNewTileEntity(World world, int i) {
     return new TileIceBunker();
   }
-  
+
 }

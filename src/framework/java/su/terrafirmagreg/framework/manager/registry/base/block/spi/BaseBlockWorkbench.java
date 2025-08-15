@@ -39,7 +39,8 @@ public abstract class BaseBlockWorkbench extends BlockWorkbench implements IBloc
   protected final BlockSettings settings;
 
   public BaseBlockWorkbench() {
-    this(BlockSettings.of(Material.WOOD));
+    this(BlockSettings.of()
+      .material(Material.WOOD));
 
   }
 
@@ -103,7 +104,7 @@ public abstract class BaseBlockWorkbench extends BlockWorkbench implements IBloc
 
   @Override
   public boolean isFullCube(IBlockState state) {
-    return settings.isFullCube();
+    return settings.getFullCube().apply(state);
   }
 
   @Override

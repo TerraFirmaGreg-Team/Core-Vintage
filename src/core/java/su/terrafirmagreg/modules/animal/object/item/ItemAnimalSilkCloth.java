@@ -8,11 +8,11 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemAnimalSilkCloth extends BaseItem {
 
   public ItemAnimalSilkCloth() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("product/silk_cloth")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
-      .addOreDict("cloth_high_quality");
+      .addOreDict("cloth_high_quality")
+    );
   }
 
 }

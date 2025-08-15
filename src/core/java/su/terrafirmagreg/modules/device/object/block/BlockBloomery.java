@@ -165,9 +165,8 @@ public class BlockBloomery extends BaseBlockContainer {
   }
 
   public BlockBloomery() {
-    super(BlockSettings.of(Material.IRON));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("bloomery")
       .sound(SoundType.METAL)
       .hardness(20.0F)
@@ -175,7 +174,8 @@ public class BlockBloomery extends BaseBlockContainer {
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.VERY_HEAVY))
       .tile(TileBloomery.class)
       .nonFullCube()
-      .nonOpaque();
+      .nonOpaque()
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH)

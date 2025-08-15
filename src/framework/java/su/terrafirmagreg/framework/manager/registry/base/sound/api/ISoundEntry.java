@@ -7,32 +7,35 @@ import su.terrafirmagreg.framework.manager.registry.base.sound.api.ISoundEntry.S
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public interface ISoundEntry extends IRegistryEntry<SoundSettings, SoundEvent> {
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class SoundSettings extends RegistrySettings<SoundSettings> {
 
+    protected ResourceLocation name;
 
-    final ResourceLocation name;
+    public static SoundSettings of() {
+      return new SoundSettings();
+    }
 
-    protected SoundSettings(ResourceLocation name) {
-
+    public SoundSettings name(ResourceLocation name) {
       this.name = name;
-      this.registryKey(name.getPath());
+      return this.self();
     }
 
-    public static SoundSettings of(ResourceLocation name) {
-      return new SoundSettings(name);
+    public SoundSettings name(String modId, String name) {
+      this.name = ModUtils.resource(modId, name);
+      return this.self();
     }
 
-    public static SoundSettings of(String modId, String name) {
-      return new SoundSettings(ModUtils.resource(modId, name));
-    }
-
-    public static SoundSettings of(String name) {
-      return new SoundSettings(ModUtils.resource(name));
+    public SoundSettings name(String name) {
+      this.name = ModUtils.resource(name);
+      return this.self();
     }
 
   }

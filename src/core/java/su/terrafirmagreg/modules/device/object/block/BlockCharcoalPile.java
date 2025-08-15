@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.object.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.object.tile.TileCharcoalForge;
@@ -53,13 +53,13 @@ public class BlockCharcoalPile extends BaseBlock {
   };
 
   public BlockCharcoalPile() {
-    super(BlockSettings.of(CHARCOAL_MATERIAL));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(CHARCOAL_MATERIAL)
       .registryKey("charcoal_pile")
       .hardness(1.0F)
       .harvestLevel(ToolClasses.SHOVEL, 0)
-      .sound(TFCSounds.CHARCOAL_PILE);
+      .sound(TFCSounds.CHARCOAL_PILE)
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(TYPE, 1));

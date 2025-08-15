@@ -1,9 +1,11 @@
 package su.terrafirmagreg.modules.soil.object.item;
 
 import su.terrafirmagreg.api.client.GuiHandler;
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.ISoilEntry;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,14 +15,20 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class ItemSoilMud extends ItemSoil {//implements IProviderContainer<ContainerKnappingMud, GuiContainerKnappingMud> {
+import lombok.Getter;
+
+@Getter
+public class ItemSoilMud extends BaseItem implements ISoilEntry {//implements IProviderContainer<ContainerKnappingMud, GuiContainerKnappingMud> {
+
+  protected final SoilType type;
 
   public ItemSoilMud(SoilType type) {
-    super(type);
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey(type.getRegistryKey("mud_ball"))
-      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT));
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT))
+    );
+    
+    this.type = type;
   }
 
 

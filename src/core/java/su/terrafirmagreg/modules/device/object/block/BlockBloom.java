@@ -24,14 +24,14 @@ import org.jetbrains.annotations.Nullable;
 public class BlockBloom extends BaseBlockContainer {
 
   public BlockBloom() {
-    super(BlockSettings.of(Material.IRON));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("bloom")
       .hardness(3.0f)
       .tile(TileBloom.class)
       .sound(SoundType.STONE)
-      .harvestLevel(ToolClasses.PICKAXE, 0);
+      .harvestLevel(ToolClasses.PICKAXE, 0)
+    );
   }
 
   @Override

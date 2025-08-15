@@ -64,18 +64,18 @@ public class BlockPitKiln extends BaseBlockContainer {
   };
 
   public BlockPitKiln() {
-    super(BlockSettings.of(Material.CIRCUITS));
-
-    getSettings()
-      .registryKey("pit_kiln")
-      .nonFullCube()
-      .tile(TilePitKiln.class, new TESRPitKiln())
-      .stateMapper(block -> ImmutableMap.of(block.getDefaultState(), new ModelResourceLocation(ModUtils.id("empty"))))
+    super(BlockSettings.of()
+        .material(Material.CIRCUITS)
+        .registryKey("pit_kiln")
+        .nonFullCube()
+        .tile(TilePitKiln.class, new TESRPitKiln())
+        .stateMapper(block -> ImmutableMap.of(block.getDefaultState(), new ModelResourceLocation(ModUtils.id("empty"))))
 //      .noItemBlock()
-      .nonOpaque()
-      .renderType(EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
-      .harvestLevel(ToolClasses.AXE, 0)
-      .hardness(0.5f);
+        .nonOpaque()
+        .renderType(EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
+        .harvestLevel(ToolClasses.AXE, 0)
+        .hardness(0.5f)
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(FULL, false)

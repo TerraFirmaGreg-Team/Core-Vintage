@@ -8,11 +8,11 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemAnimalBladder extends BaseItem {
 
   public ItemAnimalBladder() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("product/bladder")
       .addOreDict("bladder")
-      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT));
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
+    );
   }
 
 }

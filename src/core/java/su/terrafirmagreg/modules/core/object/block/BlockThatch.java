@@ -1,6 +1,5 @@
 package su.terrafirmagreg.modules.core.object.block;
 
-import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
 
 import net.minecraft.block.SoundType;
@@ -22,18 +21,17 @@ import org.jetbrains.annotations.Nullable;
 public class BlockThatch extends BaseBlock {
 
   public BlockThatch() {
-    super(BlockSettings.of(Material.PLANTS));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.PLANTS)
       .registryKey("thatch")
       .sound(SoundType.PLANT)
       .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
       .nonOpaque()
       .nonFullCube()
       .hardness(0.6F)
-      .addOreDict("block", "straw");
-
-    BlockUtils.addFireInfo(this, 60, 20);
+      .fireInfo(60, 20)
+      .addOreDict("block", "straw")
+    );
   }
 
   @SideOnly(Side.CLIENT)

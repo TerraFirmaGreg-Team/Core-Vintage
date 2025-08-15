@@ -49,15 +49,15 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
 
 
   public BlockSoilGrass(SoilType type) {
-    super(BlockSettings.of(Material.GRASS), type);
-
-    getSettings()
+    super(type, BlockSettings.of()
+      .material(Material.GRASS)
       .registryKey(type.getRegistryKey("grass"))
       .tag(Tags.GRASS)
       .sound(SoundType.PLANT)
       .hardness(2.1F)
       .randomTicks()
-      .renderLayer(BlockRenderLayer.CUTOUT);
+      .renderLayer(BlockRenderLayer.CUTOUT)
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(NORTH, Boolean.FALSE)
@@ -69,7 +69,6 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
     FallingBlockManager.registerFallable(this, VERTICAL_AND_HORIZONTAL);
-
   }
 
   @Override

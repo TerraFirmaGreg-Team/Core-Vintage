@@ -9,7 +9,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public interface IPacketEntry extends IBaseEntry<PacketSettings, BasePacket> {
 
@@ -37,12 +39,11 @@ public interface IPacketEntry extends IBaseEntry<PacketSettings, BasePacket> {
 
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class PacketSettings extends BaseSettings<PacketSettings> {
 
-    Side side = Side.CLIENT;
-    NetworkThreadedWrapper channel;
-
-    protected PacketSettings() {}
+    protected Side side = Side.CLIENT;
+    protected NetworkThreadedWrapper channel;
 
     public static PacketSettings of() {
       return new PacketSettings();

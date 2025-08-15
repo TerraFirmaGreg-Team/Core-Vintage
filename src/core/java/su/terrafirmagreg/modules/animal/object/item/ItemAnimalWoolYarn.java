@@ -8,11 +8,11 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemAnimalWoolYarn extends BaseItem {
 
   public ItemAnimalWoolYarn() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("product/wool_yarn")
       .capability(CapabilityProviderSize.of(Size.VERY_SMALL, Weight.VERY_LIGHT))
-      .addOreDict("string");
+      .addOreDict("string")
+    );
   }
 
 }

@@ -48,18 +48,18 @@ public class ItemWoodBucket extends BaseItem {
   private static final int CAPACITY = Fluid.BUCKET_VOLUME;
 
   public ItemWoodBucket() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("bucket/wood")
       .hasSubtypes()
-      .capability(stack -> CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM, canStack(stack)));
+      .capability(stack -> CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM, canStack(stack)))
+    );
 
     setContainerItem(this);
 
     BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseFluidContainer.getInstance());
   }
 
-  public boolean canStack(ItemStack stack) {
+  private static boolean canStack(ItemStack stack) {
     IFluidHandlerItem cap = CapabilityUtils.get(stack, CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
     if (cap != null) {
       return cap.drain(CAPACITY, false) == null;

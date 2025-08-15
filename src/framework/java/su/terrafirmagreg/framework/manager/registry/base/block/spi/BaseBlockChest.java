@@ -41,11 +41,13 @@ public abstract class BaseBlockChest extends BlockChest implements IBlockEntry, 
   protected final BlockSettings settings;
 
   public BaseBlockChest() {
-    this(Type.BASIC, BlockSettings.of(Material.WOOD));
+    this(Type.BASIC, BlockSettings.of()
+      .material(Material.WOOD));
   }
 
   public BaseBlockChest(Type chestType) {
-    this(chestType, BlockSettings.of(Material.WOOD));
+    this(chestType, BlockSettings.of()
+      .material(Material.WOOD));
   }
 
   public BaseBlockChest(Type chestType, BlockSettings settings) {
@@ -126,7 +128,7 @@ public abstract class BaseBlockChest extends BlockChest implements IBlockEntry, 
 
   @Override
   public boolean isFullCube(IBlockState state) {
-    return settings.isFullCube();
+    return settings.getFullCube().apply(state);
   }
 
   @Override

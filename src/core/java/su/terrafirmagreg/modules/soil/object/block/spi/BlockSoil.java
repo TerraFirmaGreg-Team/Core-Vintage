@@ -28,18 +28,18 @@ public abstract class BlockSoil extends BaseBlock implements ISoilEntry {
   protected final SoilType type;
 
   public BlockSoil(SoilType type) {
-    this(BlockSettings.of(Material.GROUND), type);
+    this(type, BlockSettings.of()
+      .material(Material.GROUND)
+      .sound(SoundType.GROUND)
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+      .hardness(2.0F)
+    );
   }
 
-  public BlockSoil(BlockSettings settings, SoilType type) {
+  public BlockSoil(SoilType type, BlockSettings settings) {
     super(settings);
 
     this.type = type;
-
-    getSettings()
-      .sound(SoundType.GROUND)
-      .harvestLevel(ToolClasses.SHOVEL, 0)
-      .hardness(2.0F);
 
     FallingBlockManager.registerFallable(this, VERTICAL_AND_HORIZONTAL);
   }

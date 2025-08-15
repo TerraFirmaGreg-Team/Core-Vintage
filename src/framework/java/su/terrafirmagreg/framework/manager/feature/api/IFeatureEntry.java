@@ -15,7 +15,8 @@ public interface IFeatureEntry extends IBaseEntry<FeatureSettings, BaseFeature> 
   @Getter
   class FeatureSettings extends BaseSettings<FeatureSettings> {
 
-    boolean hasSubscriptions = true;
+    protected String[] incompatibleMods;
+    protected boolean hasSubscriptions = true;
 
     protected FeatureSettings() {}
 
@@ -26,6 +27,11 @@ public interface IFeatureEntry extends IBaseEntry<FeatureSettings, BaseFeature> 
 
     public FeatureSettings disableSubscriptions() {
       this.hasSubscriptions = false;
+      return this.self();
+    }
+
+    public FeatureSettings incompatibleMods(String... mods) {
+      this.incompatibleMods = mods;
       return this.self();
     }
 

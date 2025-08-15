@@ -7,18 +7,19 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public interface IEnchantmentEntry extends IRegistryEntry<EnchantmentSettings, Enchantment> {
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class EnchantmentSettings extends RegistrySettings<EnchantmentSettings> {
 
-    Enchantment.Rarity rarity;
-    EnumEnchantmentType type;
-    EntityEquipmentSlot[] slots;
-
-    protected EnchantmentSettings() {}
+    protected Enchantment.Rarity rarity;
+    protected EnumEnchantmentType type;
+    protected EntityEquipmentSlot[] slots;
 
     public static EnchantmentSettings of() {
       return new EnchantmentSettings();

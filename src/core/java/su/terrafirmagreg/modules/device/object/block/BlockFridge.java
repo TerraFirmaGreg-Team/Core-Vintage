@@ -69,9 +69,8 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, I
   }
 
   public BlockFridge() {
-    super(BlockSettings.of(Material.IRON));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("fridge")
       .hardness(3.0F)
       .nonOpaque()
@@ -81,7 +80,8 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, I
       .stateMapper(blockIn -> Collections.emptyMap())
       .tile(TileFridge.class, new TESRFridge())
       .renderType(EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
-      .capability(CapabilityProviderSize.of(Size.HUGE, Weight.MEDIUM, false));
+      .capability(CapabilityProviderSize.of(Size.HUGE, Weight.MEDIUM, false))
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(HORIZONTAL, NORTH)

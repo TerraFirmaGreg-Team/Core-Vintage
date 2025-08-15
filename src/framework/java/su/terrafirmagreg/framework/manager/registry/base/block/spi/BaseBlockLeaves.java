@@ -28,7 +28,8 @@ public abstract class BaseBlockLeaves extends BlockLeaves implements IBlockEntry
   protected final BlockSettings settings;
 
   public BaseBlockLeaves() {
-    this(BlockSettings.of(Material.LEAVES));
+    this(BlockSettings.of()
+      .material(Material.LEAVES));
   }
 
   public BaseBlockLeaves(BlockSettings settings) {

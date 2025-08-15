@@ -7,13 +7,13 @@ import net.minecraft.entity.EntityLivingBase;
 public class EffectOverburdened extends BaseEffect {
 
   public EffectOverburdened() {
-    super(EffectSettings.of());
-
-    getSettings()
+    super(EffectSettings.of()
       .registryKey("overburdened")
       .badEffect()
       .texture("overburdened")
-      .liquidColor(0x5A6C91);
+      .liquidColor(0x5A6C91)
+    );
+    
   }
 
   @Override

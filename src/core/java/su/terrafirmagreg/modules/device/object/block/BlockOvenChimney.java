@@ -29,9 +29,8 @@ public class BlockOvenChimney extends BaseBlock {
       .union(new AxisAlignedBB(0.75D, 0.0D, 0.25D, 1.0D, 1.0D, 0.75D)));
 
   public BlockOvenChimney() {
-    super(BlockSettings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY)
       .registryKey("oven/chimney")
       .hardness(2.0f)
       .resistance(3.0f)
@@ -40,9 +39,10 @@ public class BlockOvenChimney extends BaseBlock {
       .renderType(EnumBlockRenderType.MODEL)
       .capability(
         CapabilityProviderSize.of(Size.NORMAL, Weight.HEAVY)
-      );
+      )
+    );
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(CURED, false));
   }
 

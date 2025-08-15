@@ -8,11 +8,11 @@ import net.minecraft.block.material.Material;
 public class BlockGreenhouseDoor extends BaseBlockDoor {
 
   public BlockGreenhouseDoor() {
-    super(BlockSettings.of(Material.WOOD));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey("greenhouse/door")
       .addOreDict("greenhouse")
-      .sound(SoundType.METAL);
+      .sound(SoundType.METAL)
+    );
   }
 }

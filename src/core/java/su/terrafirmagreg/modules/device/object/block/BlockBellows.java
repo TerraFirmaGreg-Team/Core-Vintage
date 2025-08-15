@@ -30,9 +30,8 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 public class BlockBellows extends BaseBlockContainer {
 
   public BlockBellows() {
-    super(BlockSettings.of(Material.CIRCUITS, MapColor.GRAY));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.CIRCUITS, MapColor.GRAY)
       .registryKey("bellows")
       .sound(SoundType.WOOD)
       .harvestLevel(ToolClasses.AXE, 0)
@@ -41,9 +40,11 @@ public class BlockBellows extends BaseBlockContainer {
       .nonFullCube()
       .nonOpaque()
       .hardness(2.0F)
-      .resistance(2.0F);
+      .resistance(2.0F)
+    );
 
-    setDefaultState(getBlockState().getBaseState().withProperty(HORIZONTAL, EnumFacing.NORTH));
+    setDefaultState(getBlockState().getBaseState()
+      .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }
 
   @Override

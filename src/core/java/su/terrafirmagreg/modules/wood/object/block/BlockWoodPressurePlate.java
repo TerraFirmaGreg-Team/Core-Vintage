@@ -16,11 +16,8 @@ public class BlockWoodPressurePlate extends BaseBlockPressurePlate implements IW
   protected final WoodType type;
 
   public BlockWoodPressurePlate(WoodType type) {
-    super(BlockSettings.of(Material.WOOD), Sensitivity.EVERYTHING);
-
-    this.type = type;
-
-    getSettings()
+    super(Sensitivity.EVERYTHING, BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey(type.getRegistryKey("pressure_plate"))
       .customResource(type.getResource("pressure_plate"))
       .sound(SoundType.WOOD)
@@ -28,6 +25,10 @@ public class BlockWoodPressurePlate extends BaseBlockPressurePlate implements IW
       .fireInfo(5, 20)
       .addOreDict("pressure_plate")
       .addOreDict("pressure_plate", "wood")
-      .addOreDict("pressure_plate", "wood", type);
+      .addOreDict("pressure_plate", "wood", type)
+    );
+
+    this.type = type;
+
   }
 }

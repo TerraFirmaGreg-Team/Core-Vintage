@@ -22,10 +22,10 @@ import net.dries007.tfc.world.classic.chunkdata.ChunkDataTFC;
 public class CommandDebugInfo extends BaseCommand {
 
   public CommandDebugInfo() {
-
-    getSettings()
+    super(CommandSettings.of()
       .registryKey("debug_info")
-      .level(Level.SERVER);
+      .level(Level.SERVER)
+    );
   }
 
   @Override

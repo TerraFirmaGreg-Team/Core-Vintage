@@ -31,17 +31,17 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
 public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor, IGrassBlock {
 
   public BlockSoilPeatGrass() {
-    super(BlockSettings.of(Material.GRASS));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.GRASS)
       .registryKey("peat_grass")
       .sound(SoundType.PLANT)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .randomTicks()
       .fireInfo(5, 5)
-      .addOreDict("peat");
+      .addOreDict("peat")
+    );
 
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(NORTH, Boolean.FALSE)
       .withProperty(EAST, Boolean.FALSE)
       .withProperty(SOUTH, Boolean.FALSE)

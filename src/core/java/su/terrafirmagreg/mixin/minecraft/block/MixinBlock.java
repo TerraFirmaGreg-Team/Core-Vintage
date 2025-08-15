@@ -3,42 +3,34 @@ package su.terrafirmagreg.mixin.minecraft.block;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = Block.class)
 public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> implements IBlockEntry {
 
-  @Unique
-  @Mutable
-  @Final
-  protected BlockSettings terraFirmaGreg$settings;
+//  @Unique
+//  @Mutable
+//  @Final
+//  protected BlockSettings terraFirmaGreg$settings;
 
+//
+//  @Inject(
+//    method = "<init>(Lnet/minecraft/block/material/Material;Lnet/minecraft/block/material/MapColor;)V",
+//    at = @At(
+//      value = "TAIL"
+//    )
+//  )
+//  public void onConstruct(Material blockMaterialIn, MapColor blockMapColorIn, CallbackInfo ci) {
+//    this.terraFirmaGreg$settings = BlockSettings.of()
+//      .material(blockMaterialIn, blockMapColorIn);
+//  }
 
-  @Inject(
-    method = "<init>(Lnet/minecraft/block/material/Material;Lnet/minecraft/block/material/MapColor;)V",
-    at = @At(
-      value = "TAIL"
-    )
-  )
-  public void onConstruct(Material blockMaterialIn, MapColor blockMapColorIn, CallbackInfo ci) {
-    this.terraFirmaGreg$settings = BlockSettings.of(blockMaterialIn, blockMapColorIn);
-  }
-
-
-  @Override
-  public BlockSettings getSettings() {
-    return terraFirmaGreg$settings;
-  }
+//  @Override
+//  public BlockSettings getSettings() {
+//    return terraFirmaGreg$settings;
+//  }
 //
 //  /**
 //   * @author Xikaro

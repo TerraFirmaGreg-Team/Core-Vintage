@@ -6,9 +6,9 @@ import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
 public class ItemStickBunch extends BaseItem {
 
   public ItemStickBunch() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("stick_bunch")
-      .addOreDict("log_wood");
+      .addOreDict("log_wood")
+    );
   }
 }

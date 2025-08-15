@@ -14,7 +14,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -30,17 +32,14 @@ public interface IEntityEntry extends IRegistryEntry<EntitySettings, EntityEntry
   }
 
   @Getter
+  @NoArgsConstructor(access = AccessLevel.PROTECTED)
   class EntitySettings extends RegistrySettings<EntitySettings> {
 
-    Class<? extends Entity> entity;
-    SpawnInfo spawnInfo;
-    UpdateInfo updateInfo;
-    EggInfo eggInfo;
+    protected Class<? extends Entity> entity;
+    protected SpawnInfo spawnInfo;
+    protected UpdateInfo updateInfo = new UpdateInfo();
+    protected EggInfo eggInfo;
 
-
-    protected EntitySettings() {
-      this.updateInfo = new UpdateInfo();
-    }
 
     public static EntitySettings of() {
       return new EntitySettings();
@@ -62,7 +61,7 @@ public interface IEntityEntry extends IRegistryEntry<EntitySettings, EntityEntry
     }
 
 
-    public <T extends Entity> EntitySettings entity(Class<T> entity, IRenderFactory<? super T> renderFactory) {
+    public <E extends Entity> EntitySettings entity(Class<E> entity, IRenderFactory<? super E> renderFactory) {
       this.entity = checkNotNull(entity, "entity class");
       ModelUtils.entity(entity, renderFactory);
       return this;

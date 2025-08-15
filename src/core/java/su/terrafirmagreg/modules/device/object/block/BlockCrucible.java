@@ -54,9 +54,8 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
   private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.1875D, 0.9375D, 0.9375D);
 
   public BlockCrucible() {
-    super(BlockSettings.of(Material.IRON));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.IRON)
       .registryKey("crucible")
       .sound(SoundType.METAL)
       .nonFullCube()
@@ -71,7 +70,8 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
           Weight.VERY_HEAVY,
           stack.getTagCompound() == null
         )
-      );
+      )
+    );
 
 
   }

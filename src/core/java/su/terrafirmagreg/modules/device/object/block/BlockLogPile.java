@@ -47,16 +47,16 @@ import static su.terrafirmagreg.api.data.Properties.EnumProp.XZ;
 public class BlockLogPile extends BaseBlockContainer {
 
   public BlockLogPile() {
-    super(BlockSettings.of(Material.WOOD));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .registryKey("log_pile")
       .sound(SoundType.WOOD)
       .randomTicks()
       .tile(TileLogPile.class)
       .renderType(EnumBlockRenderType.MODEL)
       .harvestLevel(ToolClasses.AXE, 0)
-      .hardness(2.0F);
+      .hardness(2.0F)
+    );
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(XZ, EnumFacing.Axis.Z)

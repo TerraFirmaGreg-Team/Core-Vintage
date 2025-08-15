@@ -21,7 +21,8 @@ public abstract class BaseBlockFenceGate extends BlockFenceGate implements IBloc
   protected final BlockSettings settings;
 
   public BaseBlockFenceGate() {
-    this(BlockSettings.of(Material.WOOD));
+    this(BlockSettings.of()
+      .material(Material.WOOD));
   }
 
   public BaseBlockFenceGate(BlockSettings settings) {

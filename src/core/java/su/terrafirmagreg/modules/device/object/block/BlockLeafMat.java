@@ -40,9 +40,8 @@ public class BlockLeafMat extends BaseBlockContainer {
   public static final AxisAlignedBB MAT_SHAPE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
 
   public BlockLeafMat() {
-    super(BlockSettings.of(Material.PLANTS, MapColor.GREEN));
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.PLANTS, MapColor.GREEN)
       .registryKey("leaf_mat")
       .hardness(1.0F)
       .resistance(1.0F)
@@ -53,7 +52,8 @@ public class BlockLeafMat extends BaseBlockContainer {
       .harvestLevel(ToolClasses.KNIFE, 0)
       .sound(SoundType.PLANT)
       .renderType(EnumBlockRenderType.MODEL)
-      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT));
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
+    );
   }
 
   @Override

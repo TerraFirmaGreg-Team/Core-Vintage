@@ -8,10 +8,10 @@ import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 public class ItemStraw extends BaseItem {
 
   public ItemStraw() {
-
-    getSettings()
+    super(ItemSettings.of()
       .registryKey("straw")
       .addOreDict("kindling", "straw")
-      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT));
+      .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT))
+    );
   }
 }

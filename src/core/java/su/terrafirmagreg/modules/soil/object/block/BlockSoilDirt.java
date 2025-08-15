@@ -28,7 +28,7 @@ public class BlockSoilDirt extends BlockSoil implements IDirtBlock, IMudBlock {
       .renderLayer(this.getBlockState().getBaseState().getValue(CLAY) ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID)
       .tag(Tags.DIRT);
 
-    setDefaultState(blockState.getBaseState().withProperty(CLAY, Boolean.FALSE));
+    setDefaultState(getBlockState().getBaseState().withProperty(CLAY, Boolean.FALSE));
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
   }

@@ -24,12 +24,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import lombok.Getter;
 
@@ -148,17 +145,6 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
   @Override
   protected BlockStateContainer createBlockState() {
     return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, SNOWY, CLAY);
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-    if (settings.isCanFall() && rand.nextInt(16) == 0 && FallingBlockManager.shouldFall(world, pos, pos, state, false)) {
-      double d0 = (float) pos.getX() + rand.nextFloat();
-      double d1 = (double) pos.getY() - 0.05D;
-      double d2 = (float) pos.getZ() + rand.nextFloat();
-      world.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(state));
-    }
   }
 
 

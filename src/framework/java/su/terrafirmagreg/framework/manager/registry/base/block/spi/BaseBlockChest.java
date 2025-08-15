@@ -28,7 +28,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -172,7 +171,7 @@ public abstract class BaseBlockChest extends BlockChest implements IBlockEntry, 
 
   @Optional.Method(modid = ModIDs.FLUIDLOGGED)
   @Override
-  public final boolean canFluidFlow(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EnumFacing side) {
+  public final boolean canFluidFlow(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side) {
     return isWaterloggable(state, world, pos) && canWaterFlow(world, pos, state, side);
   }
 

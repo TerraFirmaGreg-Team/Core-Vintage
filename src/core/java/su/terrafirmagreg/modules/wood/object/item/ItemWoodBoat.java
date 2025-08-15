@@ -1,14 +1,17 @@
 package su.terrafirmagreg.modules.wood.object.item;
 
 import su.terrafirmagreg.api.util.MathUtils;
+import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
+import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemColor;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.object.entity.EntityWoodBoat;
-import su.terrafirmagreg.modules.wood.object.item.spi.ItemWood;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,14 +33,24 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class ItemWoodBoat extends ItemWood {
+public class ItemWoodBoat extends BaseItem implements IWoodEntry, IProviderItemColor {
 
+  protected final WoodType type;
 
   public ItemWoodBoat(WoodType type) {
-    super(type, "boat");
+    super(ItemSettings.of()
+      .registryKey(type.getRegistryKey("boat"))
+      .customResource(type.getResource("boat"))
+      .addOreDict("boat")
+      .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM, false))
+    );
 
-    getSettings()
-      .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM, false));
+    this.type = type;
+  }
+
+  @Override
+  public IItemColor getItemColor() {
+    return (s, i) -> this.getType().getColor();
   }
 
   /**

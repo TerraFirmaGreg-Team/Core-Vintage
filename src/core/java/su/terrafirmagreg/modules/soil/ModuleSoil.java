@@ -22,12 +22,9 @@ public class ModuleSoil extends BaseModule {
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleSoil.class);
 
   public ModuleSoil() {
-    super("soil");
-
-    enableNetwork();
-    enableFeature();
-    enableRegistry();
-
+    super(ModuleSettings.of()
+      .registryKey("soil")
+    );
 
   }
 

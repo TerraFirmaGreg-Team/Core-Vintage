@@ -133,7 +133,7 @@ public class EntityAnimalMuskOx extends EntityAnimalSheep implements ILivestock 
   public static class EntityTypeAnimalMuskOx extends BaseEntityType {
 
     public EntityTypeAnimalMuskOx() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("muskox")
         .entity(EntityAnimalMuskOx.class, RenderAnimalMuskOx::new)
         .egg(0x620d55, 0xcdaf4f));

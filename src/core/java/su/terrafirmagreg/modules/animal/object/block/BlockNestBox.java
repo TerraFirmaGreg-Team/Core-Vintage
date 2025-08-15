@@ -30,7 +30,7 @@ public class BlockNestBox extends BaseBlockContainer {
     0.25D, 0.875D);
 
   public BlockNestBox() {
-    super(Settings.of(Material.GRASS)
+    super(BlockSettings.of(Material.GRASS)
       .registryKey("nest_box")
       .tile(TileNestBox.class)
       .renderType(EnumBlockRenderType.MODEL)

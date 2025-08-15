@@ -31,13 +31,6 @@ public class FeatureCreatePath extends BaseFeature {
   private static int mob_debug_cooldown = 1000;
   private static double player_speed = 0.001D;
 
-  public FeatureCreatePath() {
-    super(Settings.of()
-      .name("create_path")
-    );
-
-  }
-
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void createPath(LivingEvent.LivingUpdateEvent event) {
     // PLAYER PATHING

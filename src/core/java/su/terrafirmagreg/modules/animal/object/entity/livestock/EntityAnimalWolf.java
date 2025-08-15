@@ -505,7 +505,7 @@ public class EntityAnimalWolf extends EntityWolf implements IAnimal, ILivestock 
   public static class EntityTypeAnimalWolf extends BaseEntityType {
 
     public EntityTypeAnimalWolf() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("wolf")
         .entity(EntityAnimalWolf.class, RenderAnimalWolf::new)
         .egg(0xB0ACAC, 0x796555));

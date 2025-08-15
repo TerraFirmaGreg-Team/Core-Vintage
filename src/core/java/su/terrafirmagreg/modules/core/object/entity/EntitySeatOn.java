@@ -117,7 +117,7 @@ public class EntitySeatOn extends BaseEntity {
   public static class EntityTypeSeatOn extends BaseEntityType {
 
     public EntityTypeSeatOn() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("sit_block")
         .entity(EntitySeatOn.class)
         .updateInfo(160, 20, true));

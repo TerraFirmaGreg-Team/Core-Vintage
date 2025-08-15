@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.plugin.gregtech;
 
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.framework.manager.plugin.base.BasePlugin;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 import su.terrafirmagreg.modules.core.plugin.gregtech.init.BlocksGregTech;
 import su.terrafirmagreg.modules.core.plugin.gregtech.init.ItemsGregTech;
 import su.terrafirmagreg.modules.core.plugin.gregtech.init.RecipesGregTech;
@@ -20,7 +21,7 @@ import gregtech.api.unification.material.properties.ToolProperty;
 public class PluginGregTech extends BasePlugin {
 
   public PluginGregTech() {
-    super(Settings.of()
+    super(PluginSettings.of()
       .modRequired(ModIDs.GREGTECH)
     );
   }
@@ -44,14 +45,14 @@ public class PluginGregTech extends BasePlugin {
     });
   }
 
-  @Override
-  public void onPreInit() {
+  @SubscribeEvent
+  public static void onPreInit(StateEvent.PreInitialization event) {
     ItemsGregTech.preInit();
     BlocksGregTech.preInit();
   }
 
-  @Override
-  public void onPostInit() {
+  @SubscribeEvent
+  public static void onPostInit(StateEvent.PostInitialization event) {
 
     RecipesGregTech.postInit();
   }

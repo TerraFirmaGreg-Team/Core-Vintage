@@ -29,13 +29,13 @@ import static su.terrafirmagreg.api.data.Properties.EnumProp.DEFAULT;
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
   public BaseBlockSlab(Block model) {
-    this(Settings.of(model));
+    this(BlockSettings.of(model));
   }
 
-  public BaseBlockSlab(Settings settings) {
+  public BaseBlockSlab(BlockSettings settings) {
     super(settings.getMaterial());
 
     this.settings = settings;

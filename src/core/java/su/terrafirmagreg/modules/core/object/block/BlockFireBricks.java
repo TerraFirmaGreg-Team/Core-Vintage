@@ -11,7 +11,7 @@ import net.minecraft.block.material.Material;
 public class BlockFireBricks extends BaseBlock {
 
   public BlockFireBricks() {
-    super(Settings.of(Material.ROCK)
+    super(BlockSettings.of(Material.ROCK)
       .registryKey("fire_bricks")
       .sound(SoundType.STONE)
       .hardness(1.0F)

@@ -30,6 +30,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
+import org.jetbrains.annotations.NotNull;
+
 import lombok.Getter;
 
 import java.util.Map;
@@ -38,6 +40,7 @@ import java.util.Map;
 public class NetworkThreadedWrapper {
 
   private static final Map<String, NetworkThreadedWrapper> WRAPPER_MAP = new Object2ObjectOpenHashMap<>();
+  private static final Map<Class<? extends IPacketEntry>, NetworkThreadedWrapper> ALL_PACKET_MAP = new Object2ObjectOpenHashMap<>();
 
 
   private final IntIdentityHashBiMap<Class<? extends IPacketEntry>> packetMap;
@@ -68,12 +71,26 @@ public class NetworkThreadedWrapper {
     return WRAPPER_MAP.computeIfAbsent(netId, NetworkThreadedWrapper::new);
   }
 
-  public <P extends IPacketEntry> void registerPacket(Class<P> packetClass) {
+  public static @NotNull NetworkThreadedWrapper getChannel(IPacketEntry packet) {
+    var packetClass = packet.getClass();
+    var wrapper = ALL_PACKET_MAP.get(packetClass);
+    if (wrapper == null) {
+      throw new RuntimeException("Trying to send unregistered network packet: " + packetClass.getSimpleName());
+    }
+    return wrapper;
+  }
 
+  public <P extends IPacketEntry> void registerPacket(P packet) {
+
+    registerPacket(packet.getClass());
+  }
+
+  public <P extends IPacketEntry> void registerPacket(Class<P> packetClass) {
+    ALL_PACKET_MAP.put(packetClass, this);
     packetMap.put(packetClass, idSupplier.getAndIncrement());
   }
 
-  public int getPacketId(Class<? extends IPacketEntry> packetClass) {
+  public <P extends IPacketEntry> int getPacketId(Class<P> packetClass) {
 
     return packetMap.getId(packetClass);
   }

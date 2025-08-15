@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.feature.falling;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.falling.capability.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.feature.falling.capability.ProviderWorldTracker;
@@ -111,8 +112,8 @@ public class FeatureFalling extends BaseFeature {
     }
   }
 
-  @Override
-  public void onPreInit() {
+  @SubscribeEvent
+  public static void onPreInit(StateEvent.PreInitialization event) {
 
     CapabilityWorldTracker.register();
   }

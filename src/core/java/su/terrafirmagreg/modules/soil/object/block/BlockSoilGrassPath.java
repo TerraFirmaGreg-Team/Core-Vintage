@@ -40,7 +40,7 @@ public class BlockSoilGrassPath extends BaseBlockGrassPath implements ISoilEntry
   protected final SoilType type;
 
   public BlockSoilGrassPath(SoilType type) {
-    super(Settings.of(Material.GROUND));
+    super(BlockSettings.of(Material.GROUND));
 
     this.type = type;
 

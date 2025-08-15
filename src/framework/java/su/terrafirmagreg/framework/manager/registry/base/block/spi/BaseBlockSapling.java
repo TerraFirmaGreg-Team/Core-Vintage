@@ -31,13 +31,13 @@ import static su.terrafirmagreg.api.data.Properties.IntProp.STAGE_2;
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockSapling extends BlockSapling implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
   public BaseBlockSapling() {
-    this(Settings.of(Material.PLANTS));
+    this(BlockSettings.of(Material.PLANTS));
   }
 
-  public BaseBlockSapling(Settings settings) {
+  public BaseBlockSapling(BlockSettings settings) {
 
     this.settings = settings;
 
@@ -96,7 +96,7 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
 
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+    return this.settings.getIsReplaceable().apply(worldIn, pos);
   }
 
   @Override

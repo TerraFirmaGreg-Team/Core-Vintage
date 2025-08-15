@@ -151,7 +151,7 @@ public class EntityAnimalPig extends EntityAnimalMammal implements ILivestock {
   public static class EntityTypeAnimalPig extends BaseEntityType {
 
     public EntityTypeAnimalPig() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("pig")
         .entity(EntityAnimalPig.class, RenderAnimalPig::new)
         .egg(0xAA7722, 0xFFEBCD));

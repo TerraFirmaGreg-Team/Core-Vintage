@@ -11,9 +11,9 @@ import lombok.Getter;
 @Getter
 public abstract class BaseBlockFarmland extends BlockFarmland implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockFarmland(Settings settings) {
+  public BaseBlockFarmland(BlockSettings settings) {
     super();
     this.settings = settings;
   }

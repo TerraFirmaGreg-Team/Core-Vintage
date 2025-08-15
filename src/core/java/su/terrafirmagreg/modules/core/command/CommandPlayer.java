@@ -34,7 +34,7 @@ public class CommandPlayer extends BaseCommand {
   public CommandPlayer() {
 
     getSettings()
-      .name("player")
+      .registryKey("player")
       .level(Level.OP_OR_SP);
 
   }

@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public class BlockBloom extends BaseBlockContainer {
 
   public BlockBloom() {
-    super(Settings.of(Material.IRON));
+    super(BlockSettings.of(Material.IRON));
 
     getSettings()
       .registryKey("bloom")

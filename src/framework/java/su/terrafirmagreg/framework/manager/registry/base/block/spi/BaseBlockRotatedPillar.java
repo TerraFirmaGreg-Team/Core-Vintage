@@ -21,7 +21,7 @@ import static su.terrafirmagreg.api.data.Properties.EnumProp.AXIS;
 public abstract class BaseBlockRotatedPillar extends BaseBlock {
 
 
-  public BaseBlockRotatedPillar(Settings settings) {
+  public BaseBlockRotatedPillar(BlockSettings settings) {
     super(settings);
 
   }

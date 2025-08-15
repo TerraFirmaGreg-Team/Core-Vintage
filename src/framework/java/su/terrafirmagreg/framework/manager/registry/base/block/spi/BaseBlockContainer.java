@@ -33,7 +33,7 @@ import java.util.Arrays;
 public abstract class BaseBlockContainer extends BaseBlock implements IProviderTile {
 
 
-  public BaseBlockContainer(Settings settings) {
+  public BaseBlockContainer(BlockSettings settings) {
     super(settings);
 
   }

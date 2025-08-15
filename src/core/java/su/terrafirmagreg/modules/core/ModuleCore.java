@@ -13,7 +13,6 @@ import su.terrafirmagreg.modules.core.event.EventHandlerGuiScreen;
 import su.terrafirmagreg.modules.core.event.EventHandlerOnConfigChanged;
 import su.terrafirmagreg.modules.core.event.EventHandlerPortalSpawn;
 import su.terrafirmagreg.modules.core.event.block.EventHandlerBlock;
-import su.terrafirmagreg.modules.core.event.capabilities.EventHandlerCapabilitiesEntity;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerItemTooltip;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerChangedDimension;
 import su.terrafirmagreg.modules.core.event.player.EventHandlerPlayerLoggedIn;
@@ -47,13 +46,9 @@ public class ModuleCore extends BaseModule {
 
 
   public ModuleCore() {
-    super("core");
-
-    enableRegistry();
-    enableNetwork();
-    enableCommand();
-    enableFeature();
-    enablePlugin();
+    super(ModuleSettings.of()
+      .registryKey("core")
+    );
   }
 
   @Override
@@ -105,8 +100,6 @@ public class ModuleCore extends BaseModule {
       add(EventHandlerPlayerLoggedIn.class);
       add(EventHandlerPlayerLoggedOut.class);
       add(EventHandlerPlayerRespawn.class);
-
-      add(EventHandlerCapabilitiesEntity.class);
 
       add(EventHandlerPortalSpawn.class);
 

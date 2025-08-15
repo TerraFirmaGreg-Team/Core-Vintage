@@ -3,41 +3,37 @@ package su.terrafirmagreg.framework.manager.plugin;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginEntry;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginManager;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
-import su.terrafirmagreg.framework.module.api.IModule;
+import su.terrafirmagreg.framework.module.api.IModuleEntry;
 
 import net.minecraftforge.common.MinecraftForge;
+
+import com.google.common.collect.Multimap;
 
 import lombok.Getter;
 
 @Getter
 public class PluginRegistrar implements IPluginRegistrar {
 
-  private final IPluginManager manager;
-  private final IModule module;
-  private final PluginMap map;
+  private final IModuleEntry module;
+  private final Multimap<Class<?>, IPluginEntry> mapEntry;
 
   public PluginRegistrar(IPluginManager manager) {
 
-    this.manager = manager;
     this.module = manager.getModule();
-    this.map = manager.getMap();
+    this.mapEntry = manager.getMapEntry();
   }
 
 
   @Override
-  public <T extends IPluginEntry> void addPlugin(T plugin) {
-    var pluginClass = plugin.getClass();
-    var settings = plugin.getSettings();
-
-    if (!settings.isEnabled()) {
-      manager.getLogger().debug("Plugin {} is disabled: {}", pluginClass.getSimpleName());
-      return;
-    }
+  public <T extends IPluginEntry> void addPlugin(T entry) {
+    var settings = entry.getSettings();
 
     if (settings.isHasSubscriptions()) {
-      MinecraftForge.EVENT_BUS.register(pluginClass);
+      MinecraftForge.EVENT_BUS.register(entry.getClass());
     }
 
-    this.map.put(pluginClass, plugin);
+    addEntry(entry);
   }
+
+
 }

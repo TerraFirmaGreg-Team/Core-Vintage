@@ -1,26 +1,26 @@
 package su.terrafirmagreg.framework.manager.registry.base.generation.api;
 
 import su.terrafirmagreg.framework.manager.api.IBaseEntry;
-import su.terrafirmagreg.framework.manager.registry.base.generation.api.IGeneratorEntry.Settings;
+import su.terrafirmagreg.framework.manager.registry.base.generation.api.IGeneratorEntry.GeneratorSettings;
 
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public interface IGeneratorEntry extends IBaseEntry<Settings, WorldGenerator> {
+public interface IGeneratorEntry extends IBaseEntry<GeneratorSettings, WorldGenerator> {
 
 
-  class Settings extends BaseSettings<Settings> {
+  class GeneratorSettings extends BaseSettings<GeneratorSettings> {
 
     boolean doBlockNotify;
 
-    protected Settings() {
+    protected GeneratorSettings() {
       this.doBlockNotify = false;
     }
 
-    public static Settings of() {
-      return new Settings();
+    public static GeneratorSettings of() {
+      return new GeneratorSettings();
     }
 
-    public Settings doBlockNotify() {
+    public GeneratorSettings doBlockNotify() {
       this.doBlockNotify = true;
       return this.self();
     }

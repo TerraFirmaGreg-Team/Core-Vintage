@@ -61,7 +61,7 @@ public class BlockSoilFarmland extends BaseBlockFarmland implements ISoilEntry, 
   protected final SoilType type;
 
   public BlockSoilFarmland(SoilType type) {
-    super(Settings.of(Material.GROUND));
+    super(BlockSettings.of(Material.GROUND));
 
     this.type = type;
 

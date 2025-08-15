@@ -35,10 +35,10 @@ import lombok.Getter;
 public abstract class BaseBlockLog extends BlockLog implements IBlockEntry, IFluidloggable {
 
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
 
-  public BaseBlockLog(Settings settings) {
+  public BaseBlockLog(BlockSettings settings) {
 
     this.settings = settings;
   }
@@ -67,7 +67,7 @@ public abstract class BaseBlockLog extends BlockLog implements IBlockEntry, IFlu
 
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+    return this.settings.getIsReplaceable().apply(worldIn, pos);
   }
 
   @Override

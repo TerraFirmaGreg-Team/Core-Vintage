@@ -33,9 +33,9 @@ import java.util.Random;
 @Getter
 public abstract class BaseBlockFluid extends BlockFluidClassic implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockFluid(Settings settings, Fluid fluid, boolean canCreateSources) {
+  public BaseBlockFluid(BlockSettings settings, Fluid fluid, boolean canCreateSources) {
     this(settings, fluid);
 
     getSettings()
@@ -44,7 +44,7 @@ public abstract class BaseBlockFluid extends BlockFluidClassic implements IBlock
     this.canCreateSources = canCreateSources;
   }
 
-  public BaseBlockFluid(Settings settings, Fluid fluid) {
+  public BaseBlockFluid(BlockSettings settings, Fluid fluid) {
     super(fluid, settings.getMaterial());
     this.settings = settings;
 

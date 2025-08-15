@@ -46,7 +46,7 @@ public class BlockBearTrap extends BaseBlockContainer {
   protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
   public BlockBearTrap() {
-    super(Settings.of(Material.IRON));
+    super(BlockSettings.of(Material.IRON));
 
     getSettings()
       .registryKey("bear_trap")

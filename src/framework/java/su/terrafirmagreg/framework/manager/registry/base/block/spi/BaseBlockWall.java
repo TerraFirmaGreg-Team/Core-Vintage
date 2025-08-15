@@ -30,14 +30,14 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockWall extends BlockWall implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
   protected final Block modelBlock;
   protected final IBlockState modelState;
 
   public BaseBlockWall(Block block) {
     super(block);
 
-    this.settings = Settings.of(block);
+    this.settings = BlockSettings.of(block);
     this.modelBlock = block;
     this.modelState = block.getDefaultState();
 

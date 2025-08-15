@@ -209,7 +209,7 @@ public class EntityAnimalHyena extends EntityAnimalMammal implements IPredator {
   public static class EntityTypeAnimalHyena extends BaseEntityType {
 
     public EntityTypeAnimalHyena() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("hyena")
         .entity(EntityAnimalHyena.class, RenderAnimalHyena::new)
         .egg(0x666600, 0x331900));

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class BlockInfectedAir extends BaseBlock implements IProviderTile {
 
   public BlockInfectedAir() {
-    super(Settings.of(Material.AIR));
+    super(BlockSettings.of(Material.AIR));
 
     getSettings()
       .registryKey("infected_air")

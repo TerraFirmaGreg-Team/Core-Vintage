@@ -36,7 +36,7 @@ import java.util.Random;
 public class BlockThatchBed extends BaseBlockBed {
 
   public BlockThatchBed() {
-    super(Settings.of(Material.CLOTH));
+    super(BlockSettings.of(Material.CLOTH));
 
     getSettings()
       .registryKey("thatch_bed")

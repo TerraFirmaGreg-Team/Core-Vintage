@@ -366,7 +366,7 @@ public class EntityAnimalCamel extends EntityAnimalLlama implements IAnimal, ILi
   public static class EntityTypeAnimalCamel extends BaseEntityType {
 
     public EntityTypeAnimalCamel() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("camel")
         .entity(EntityAnimalCamel.class, RenderAnimalCamel::new)
         .egg(0xA5886B, 0x006633));

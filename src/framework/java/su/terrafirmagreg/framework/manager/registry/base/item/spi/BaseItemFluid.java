@@ -19,13 +19,13 @@ import lombok.Getter;
 @SuppressWarnings("deprecation")
 public abstract class BaseItemFluid extends ItemFluidContainer implements IItemEntry {
 
-  protected final Settings settings;
+  protected final ItemSettings settings;
   protected final int capacity;
 
   public BaseItemFluid(int capacity) {
     super(capacity);
 
-    this.settings = Settings.of();
+    this.settings = ItemSettings.of();
     this.capacity = capacity;
   }
 

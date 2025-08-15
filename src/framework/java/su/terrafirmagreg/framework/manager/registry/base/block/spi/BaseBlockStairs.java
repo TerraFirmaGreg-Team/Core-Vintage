@@ -16,14 +16,14 @@ import lombok.Getter;
 @Getter
 public abstract class BaseBlockStairs extends BlockStairs implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
   protected BaseBlockStairs(Block model) {
-    this(Settings.of(model), model);
+    this(BlockSettings.of(model), model);
 
   }
 
-  protected BaseBlockStairs(Settings settings, Block model) {
+  protected BaseBlockStairs(BlockSettings settings, Block model) {
     super(model.getDefaultState());
 
     this.settings = settings;

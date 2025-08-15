@@ -47,7 +47,7 @@ import static su.terrafirmagreg.api.data.Properties.EnumProp.XZ;
 public class BlockLogPile extends BaseBlockContainer {
 
   public BlockLogPile() {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     getSettings()
       .registryKey("log_pile")

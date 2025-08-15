@@ -57,7 +57,7 @@ public class BlockSnare extends BaseBlockContainer {
   protected static final AxisAlignedBB TRAP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D);
 
   public BlockSnare() {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     getSettings()
       .registryKey("snare")

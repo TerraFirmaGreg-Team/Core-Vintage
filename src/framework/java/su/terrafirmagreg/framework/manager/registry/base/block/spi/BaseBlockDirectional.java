@@ -17,7 +17,7 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.DIRECTIONAL;
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockDirectional extends BaseBlock {
 
-  public BaseBlockDirectional(Settings settings) {
+  public BaseBlockDirectional(BlockSettings settings) {
     super(settings);
 
     setDefaultState(getBlockState().getBaseState()

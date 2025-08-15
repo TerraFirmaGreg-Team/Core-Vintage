@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 public class BlockCellarDoor extends BaseBlockDoor {
 
   public BlockCellarDoor() {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     getSettings()
       .registryKey("cellar/door")

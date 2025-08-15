@@ -54,7 +54,7 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
   private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.1875D, 0.9375D, 0.9375D);
 
   public BlockCrucible() {
-    super(Settings.of(Material.IRON));
+    super(BlockSettings.of(Material.IRON));
 
     getSettings()
       .registryKey("crucible")

@@ -18,13 +18,13 @@ import lombok.Getter;
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
 public abstract class BaseBlockFenceGate extends BlockFenceGate implements IBlockEntry, IFluidloggable {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
   public BaseBlockFenceGate() {
-    this(Settings.of(Material.WOOD));
+    this(BlockSettings.of(Material.WOOD));
   }
 
-  public BaseBlockFenceGate(Settings settings) {
+  public BaseBlockFenceGate(BlockSettings settings) {
     super(BlockPlanks.EnumType.OAK);
 
     this.settings = settings;

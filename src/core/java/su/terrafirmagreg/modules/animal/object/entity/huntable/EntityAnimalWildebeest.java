@@ -154,7 +154,7 @@ public class EntityAnimalWildebeest extends EntityAnimalMammal implements IHunta
   public static class EntityTypeAnimalWildebeest extends BaseEntityType {
 
     public EntityTypeAnimalWildebeest() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("wildebeest")
         .entity(EntityAnimalWildebeest.class, RenderAnimalWildebeest::new)
         .egg(0x696142, 0x9c8115));

@@ -36,7 +36,7 @@ public class BlockMolten extends BaseBlock {
   };
 
   public BlockMolten() {
-    super(Settings.of(Material.ROCK));
+    super(BlockSettings.of(Material.ROCK));
 
     getSettings()
       .registryKey("molten")

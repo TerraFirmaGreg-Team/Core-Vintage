@@ -37,7 +37,7 @@ public class BlockOvenWall extends BaseBlock {
     16.0D / 16, 16.0D / 16, 16.0D / 16);
 
   public BlockOvenWall() {
-    super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
+    super(BlockSettings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
 
     getSettings()
       .registryKey("oven/wall")

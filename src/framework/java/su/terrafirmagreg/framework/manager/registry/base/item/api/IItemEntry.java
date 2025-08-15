@@ -7,7 +7,7 @@ import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
-import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry.Settings;
+import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry.ItemSettings;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-public interface IItemEntry extends IRegistryEntry<Settings, Item> {
+public interface IItemEntry extends IRegistryEntry<ItemSettings, Item> {
 
   default ICapabilityProvider settings$initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
     ArrayList<ICapabilityProvider> providers = new ArrayList<>();
@@ -69,7 +69,7 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
 
 
   @Getter
-  class Settings extends RegistrySettings<Settings> {
+  class ItemSettings extends RegistrySettings<ItemSettings> {
 
     final List<Object[]> oreDict;
     final List<IProviderItemCapability> capability;
@@ -85,7 +85,7 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
     int maxStackSize;
 
 
-    protected Settings() {
+    protected ItemSettings() {
 
       this.oreDict = new ObjectArrayList<>();
       this.capability = new ObjectArrayList<>();
@@ -95,12 +95,12 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
 
     }
 
-    public static Settings of() {
-      return new Settings();
+    public static ItemSettings of() {
+      return new ItemSettings();
     }
 
-    public static Settings of(Block block) {
-      Settings settingsItem = Settings.of();
+    public static ItemSettings of(Block block) {
+      ItemSettings settingsItem = ItemSettings.of();
       if (block instanceof IBlockEntry settingsBlock) {
         var settings = settingsBlock.getSettings();
         settingsItem
@@ -116,7 +116,7 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
       return settingsItem;
     }
 
-    public Settings maxDamage(int durability) {
+    public ItemSettings maxDamage(int durability) {
       if (this.maxStackSize != 64 && this.maxStackSize > 1) {throw new RuntimeException("An item cannot have durability and be stackable!");}
       this.maxDamage = durability;
       this.maxStackSize = 1;
@@ -124,7 +124,7 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
       return this.self();
     }
 
-    public Settings maxStackSize(int maxStackSize) {
+    public ItemSettings maxStackSize(int maxStackSize) {
       if (maxStackSize < 1) {throw new IllegalArgumentException("Maximum stack size must be greater than zero!");}
       if (maxStackSize > 1 && this.maxDamage != 0) {throw new RuntimeException("An item cannot have durability and be stackable!");}
 
@@ -132,69 +132,69 @@ public interface IItemEntry extends IRegistryEntry<Settings, Item> {
       return this.self();
     }
 
-    public Settings group(CreativeTabs group) {
+    public ItemSettings group(CreativeTabs group) {
       this.group = group;
       return this.self();
     }
 
-    public Settings rarity(IRarity rarity) {
+    public ItemSettings rarity(IRarity rarity) {
       this.rarity = rarity;
       return this.self();
     }
 
-    public Settings customResource(String path) {
+    public ItemSettings customResource(String path) {
       this.resource = ModUtils.resource(path);
       return this.self();
     }
 
-    public Settings customResource(ResourceLocation resource) {
+    public ItemSettings customResource(ResourceLocation resource) {
       this.resource = resource;
       return this.self();
     }
 
-    public Settings removeOreDictAll() {
+    public ItemSettings removeOreDictAll() {
       this.oreDict.clear();
       return this.self();
     }
 
-    public Settings removeOreDict(Object... oreDict) {
+    public ItemSettings removeOreDict(Object... oreDict) {
       this.oreDict.remove(oreDict);
       return this.self();
     }
 
-    public Settings addOreDict(Supplier<Boolean> supplier, Object... oreDict) {
+    public ItemSettings addOreDict(Supplier<Boolean> supplier, Object... oreDict) {
       if (!supplier.get()) {
         this.oreDict.add(oreDict);
       }
       return this.self();
     }
 
-    public Settings addOreDict(List<Object[]> oreDict) {
+    public ItemSettings addOreDict(List<Object[]> oreDict) {
       this.oreDict.addAll(oreDict);
       return this.self();
     }
 
-    public Settings addOreDict(Object... oreDict) {
+    public ItemSettings addOreDict(Object... oreDict) {
       this.oreDict.add(oreDict);
       return this.self();
     }
 
-    public Settings capability(List<IProviderItemCapability> providers) {
+    public ItemSettings capability(List<IProviderItemCapability> providers) {
       providers.forEach(this::capability);
       return this.self();
     }
 
-    public Settings capability(IProviderItemCapability... providers) {
+    public ItemSettings capability(IProviderItemCapability... providers) {
       this.capability.addAll(Arrays.asList(providers));
       return this.self();
     }
 
-    public Settings fireResistant() {
+    public ItemSettings fireResistant() {
       this.isFireResistant = true;
       return this.self();
     }
 
-    public Settings hasSubtypes() {
+    public ItemSettings hasSubtypes() {
       this.hasSubtypes = true;
       return this.self();
     }

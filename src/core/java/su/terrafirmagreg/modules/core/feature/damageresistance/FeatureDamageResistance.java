@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.core.feature.damageresistance;
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 import su.terrafirmagreg.modules.core.feature.damageresistance.capability.CapabilityDamageResistance;
 
 import net.minecraft.entity.Entity;
@@ -50,14 +51,14 @@ public class FeatureDamageResistance extends BaseFeature {
     event.addCapability(CapabilityDamageResistance.KEY, provider);
   }
 
-  @Override
-  public void onPreInit() {
+  @SubscribeEvent
+  public static void onPreInit(StateEvent.PreInitialization event) {
 
     CapabilityDamageResistance.register();
   }
 
-  @Override
-  public void onPostInit() {
+  @SubscribeEvent
+  public static void onPostInit(StateEvent.PostInitialization event) {
     CapabilityDamageResistance.Handler.init();
   }
 }

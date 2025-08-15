@@ -165,7 +165,7 @@ public class BlockBloomery extends BaseBlockContainer {
   }
 
   public BlockBloomery() {
-    super(Settings.of(Material.IRON));
+    super(BlockSettings.of(Material.IRON));
 
     getSettings()
       .registryKey("bloomery")

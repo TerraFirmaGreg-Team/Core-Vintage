@@ -27,13 +27,10 @@ public class ModuleDevice extends BaseModule {
 
 
   public ModuleDevice() {
-    super("device");
+    super(ModuleSettings.of()
+      .registryKey("device")
+    );
 
-    enableRegistry();
-    enableNetwork();
-    enableCommand();
-    enableFeature();
-    enablePlugin();
   }
 
   @Override

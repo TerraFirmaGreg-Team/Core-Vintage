@@ -279,7 +279,7 @@ public class EntityAnimalGrizzlyBear extends EntityAnimalMammal implements IPred
   public static class EntityTypeAnimalGrizzlyBear extends BaseEntityType {
 
     public EntityTypeAnimalGrizzlyBear() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("grizzlybear")
         .entity(EntityAnimalGrizzlyBear.class, RenderAnimalGrizzlyBear::new)
         .egg(0xB22222, 0xDEB887));

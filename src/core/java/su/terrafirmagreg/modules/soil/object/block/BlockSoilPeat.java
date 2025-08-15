@@ -12,7 +12,7 @@ import net.minecraft.block.state.IBlockState;
 public class BlockSoilPeat extends BaseBlock implements IDirtBlock {
 
   public BlockSoilPeat() {
-    super(Settings.of(Material.GROUND));
+    super(BlockSettings.of(Material.GROUND));
 
     getSettings()
       .registryKey("peat")

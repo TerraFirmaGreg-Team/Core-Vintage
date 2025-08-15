@@ -120,7 +120,7 @@ public class EntityAnimalGrouse extends EntityAnimalChicken implements ILivestoc
   public static class EntityTypeAnimalGrouse extends BaseEntityType {
 
     public EntityTypeAnimalGrouse() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("grouse")
         .entity(EntityAnimalGrouse.class, RenderAnimalGrouse::new)
         .egg(0xf7a100, 0x71ffd0));

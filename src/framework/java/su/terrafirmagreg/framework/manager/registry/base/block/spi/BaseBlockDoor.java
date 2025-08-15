@@ -25,9 +25,9 @@ import java.util.Random;
 @Getter
 public abstract class BaseBlockDoor extends BlockDoor implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockDoor(Settings settings) {
+  public BaseBlockDoor(BlockSettings settings) {
     super(settings.getMaterial());
 
     this.settings = settings;

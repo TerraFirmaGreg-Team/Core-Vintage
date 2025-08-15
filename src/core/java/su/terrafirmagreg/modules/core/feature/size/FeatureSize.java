@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
@@ -23,8 +24,7 @@ public class FeatureSize extends BaseFeature {
 
 
   public FeatureSize() {
-    super(Settings.of()
-      .name("size")
+    super(FeatureSettings.of()
       .enabled(ConfigCore.FEATURE.SIZE.enabled)
     );
   }
@@ -71,14 +71,14 @@ public class FeatureSize extends BaseFeature {
     });
   }
 
-  @Override
-  public void onPreInit() {
+  @SubscribeEvent
+  public static void onPreInit(StateEvent.PreInitialization event) {
 
     CapabilitySize.register();
   }
 
-  @Override
-  public void onInit() {
+  @SubscribeEvent
+  public static void onPostInit(StateEvent.PostInitialization event) {
     CapabilitySize.Handler.init();
   }
 }

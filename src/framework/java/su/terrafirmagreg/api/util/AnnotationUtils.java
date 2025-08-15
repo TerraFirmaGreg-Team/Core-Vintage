@@ -1,7 +1,6 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
-import su.terrafirmagreg.framework.Framework;
 
 import net.minecraft.util.Tuple;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
@@ -10,6 +9,7 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import com.google.common.base.Preconditions;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
+import lombok.Setter;
 import lombok.experimental.UtilityClass;
 
 import java.lang.annotation.Annotation;
@@ -26,6 +26,9 @@ import java.util.function.Function;
 @SuppressWarnings("unused")
 public final class AnnotationUtils {
 
+  @Setter
+  public static ASMDataTable asmData;
+
   /**
    * Gets the ASMData for all classes annotated with the annotation class.
    *
@@ -34,7 +37,7 @@ public final class AnnotationUtils {
    */
   public static <A extends Annotation> Set<ASMData> getData(Class<A> annotation) {
 
-    return getData(Framework.asmData, annotation);
+    return getData(asmData, annotation);
   }
 
   /**
@@ -57,7 +60,7 @@ public final class AnnotationUtils {
    */
   public static <A extends Annotation> List<Tuple<Class<?>, A>> getAnnotatedClasses(Class<A> annotation) {
 
-    return getAnnotatedClasses(Framework.asmData, annotation);
+    return getAnnotatedClasses(asmData, annotation);
   }
 
   /**
@@ -116,12 +119,12 @@ public final class AnnotationUtils {
    */
   public static <T, A extends Annotation> Map<T, A> getAnnotations(Class<A> annotation, Class<T> instance) {
 
-    return getAnnotations(Framework.asmData, annotation, instance, aClass -> true);
+    return getAnnotations(asmData, annotation, instance, aClass -> true);
   }
 
   public static <T, A extends Annotation> Map<T, A> getAnnotations(Class<A> annotation, Class<T> instance, Function<A, Boolean> createInstance) {
 
-    return getAnnotations(Framework.asmData, annotation, instance, createInstance);
+    return getAnnotations(asmData, annotation, instance, createInstance);
   }
 
   /**

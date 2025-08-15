@@ -154,7 +154,7 @@ public class EntityAnimalGazelle extends EntityAnimalMammal implements IHuntable
   public static class EntityTypeAnimalGazelle extends BaseEntityType {
 
     public EntityTypeAnimalGazelle() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("gazelle")
         .entity(EntityAnimalGazelle.class, RenderAnimalGazelle::new)
         .egg(0xa9a76f, 0xc0ab55));

@@ -30,8 +30,7 @@ import static su.terrafirmagreg.api.data.ToolClasses.TONGS;
 public class FeatureHotOrNot extends BaseFeature {
 
   public FeatureHotOrNot() {
-    super(Settings.of()
-      .name("hot_or_not")
+    super(FeatureSettings.of()
       .enabled(ConfigCore.FEATURE.HOT_OR_NOT.enabled)
     );
 

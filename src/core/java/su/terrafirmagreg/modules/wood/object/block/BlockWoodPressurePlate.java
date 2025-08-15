@@ -16,7 +16,7 @@ public class BlockWoodPressurePlate extends BaseBlockPressurePlate implements IW
   protected final WoodType type;
 
   public BlockWoodPressurePlate(WoodType type) {
-    super(Settings.of(Material.WOOD), Sensitivity.EVERYTHING);
+    super(BlockSettings.of(Material.WOOD), Sensitivity.EVERYTHING);
 
     this.type = type;
 

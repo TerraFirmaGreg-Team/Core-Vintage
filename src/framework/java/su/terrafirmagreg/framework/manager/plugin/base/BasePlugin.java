@@ -7,17 +7,15 @@ import lombok.Getter;
 @Getter
 public abstract class BasePlugin implements IPluginEntry {
 
-  private final Settings settings;
+  private final PluginSettings settings;
 
   public BasePlugin() {
-    this(Settings.of());
+    this(PluginSettings.of());
 
   }
 
-  public BasePlugin(Settings settings) {
+  public BasePlugin(PluginSettings settings) {
 
     this.settings = settings;
   }
-
-
 }

@@ -36,14 +36,14 @@ import lombok.Getter;
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
 public abstract class BaseBlockWorkbench extends BlockWorkbench implements IBlockEntry, IFluidloggable {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
   public BaseBlockWorkbench() {
-    this(Settings.of(Material.WOOD));
+    this(BlockSettings.of(Material.WOOD));
 
   }
 
-  public BaseBlockWorkbench(Settings settings) {
+  public BaseBlockWorkbench(BlockSettings settings) {
 
     this.settings = settings;
   }
@@ -78,7 +78,7 @@ public abstract class BaseBlockWorkbench extends BlockWorkbench implements IBloc
 
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+    return this.settings.getIsReplaceable().apply(worldIn, pos);
   }
 
   @Override

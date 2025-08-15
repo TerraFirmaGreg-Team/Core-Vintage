@@ -17,9 +17,9 @@ import lombok.Getter;
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockPartial extends BaseBlock {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockPartial(Settings settings) {
+  public BaseBlockPartial(BlockSettings settings) {
     super(settings);
 
     this.settings = settings;

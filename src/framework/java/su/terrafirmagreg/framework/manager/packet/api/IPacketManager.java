@@ -1,35 +1,17 @@
 package su.terrafirmagreg.framework.manager.packet.api;
 
-import su.terrafirmagreg.framework.manager.packet.PacketMap;
-import su.terrafirmagreg.framework.manager.packet.PacketMap.PacketWrapper;
-import su.terrafirmagreg.framework.manager.packet.spi.NetworkThreadedWrapper;
-import su.terrafirmagreg.framework.module.api.IModule;
+import su.terrafirmagreg.framework.manager.api.IBaseManager;
+import su.terrafirmagreg.framework.module.api.IModuleEntry;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import java.util.Map;
 
-public interface IPacketManager {
+public interface IPacketManager extends IBaseManager<IPacketEntry> {
 
-  Map<IModule, IPacketManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
-
-  Map<Class<? extends IPacketEntry>, PacketWrapper> ALL_PACKET_MAP = new Object2ObjectOpenHashMap<>();
-
-  static NetworkThreadedWrapper getChannel(IPacketEntry packet) {
-    var packetClass = packet.getClass();
-    var wrapper = IPacketManager.ALL_PACKET_MAP.get(packetClass);
-    if (wrapper == null) {
-      throw new RuntimeException("Trying to send unregistered network packet: " + packetClass.getSimpleName());
-    }
-    return wrapper.getChannel();
-  }
-
-  IModule getModule();
-
-  PacketMap getMap();
+  Map<IModuleEntry, IPacketManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
 
   IPacketRegistrar getRegistrar();
 
-  IPacketService getService();
 
 }

@@ -201,7 +201,7 @@ public class EntityAnimalDireWolf extends EntityAnimalMammal implements IPredato
   public static class EntityTypeAnimalDireWolf extends BaseEntityType {
 
     public EntityTypeAnimalDireWolf() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("direwolf")
         .entity(EntityAnimalDireWolf.class, RenderAnimalDireWolf::new)
         .egg(0x343434, 0x978f7e));

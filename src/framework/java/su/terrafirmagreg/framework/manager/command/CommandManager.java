@@ -1,12 +1,20 @@
 package su.terrafirmagreg.framework.manager.command;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.manager.command.api.ICommandEntry;
 import su.terrafirmagreg.framework.manager.command.api.ICommandManager;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
-import su.terrafirmagreg.framework.manager.command.api.ICommandService;
-import su.terrafirmagreg.framework.module.api.IModule;
+import su.terrafirmagreg.framework.manager.command.spi.CommandTree;
+import su.terrafirmagreg.framework.module.api.IModuleEntry;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 
+import net.minecraft.command.CommandHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 import lombok.Getter;
 
@@ -16,27 +24,53 @@ public class CommandManager implements ICommandManager {
   public static final LoggingHelper LOGGER = LoggingHelper.of(CommandManager.class);
 
 
-  private final IModule module;
-  private final CommandMap map;
+  private final IModuleEntry module;
+  private final Multimap<Class<?>, ICommandEntry> mapEntry;
 
   private final ICommandRegistrar registrar;
-  private final ICommandService service;
 
 
-  private CommandManager(IModule module) {
+  private CommandManager(IModuleEntry module) {
 
     this.module = module;
-    this.map = CommandMap.of();
+    this.mapEntry = HashMultimap.create();
 
     this.registrar = new CommandRegistrar(this);
-    this.service = new CommandService(this);
 
-    MinecraftForge.EVENT_BUS.register(this.service);
+    MinecraftForge.EVENT_BUS.register(this);
   }
 
-  public static synchronized ICommandManager of(IModule module) {
+  public static synchronized ICommandManager of(IModuleEntry module) {
 
     return MANAGER_MAP.computeIfAbsent(module, CommandManager::new);
   }
 
+  @Override
+  public LoggingHelper getLogger() {
+    return LOGGER;
+  }
+
+  @SubscribeEvent
+  public void onServerStarting(StateEvent.ServerStarting event) {
+
+    CommandHandler registry = Preconditions.checkNotNull(
+      (CommandHandler) event.getServer().getCommandManager(), "Registry not found: %s", event.getClass()
+    );
+
+    var moduleIdentifier = module.getIdentifier();
+
+    var modCommandTree = new CommandTree(moduleIdentifier.getNamespace());
+    var moduleCommandTree = new CommandTree(moduleIdentifier.getPath());
+
+    modCommandTree.addSubcommand(moduleCommandTree);
+    this.getMapEntry().values().forEach(entry -> {
+      moduleCommandTree.addSubcommand(entry.asEntry());
+
+      getLogger().info("Service {}: {}",
+        entry.getClass().getSimpleName(), entry.asEntry().getName()
+      );
+
+      registry.registerCommand(modCommandTree);
+    });
+  }
 }

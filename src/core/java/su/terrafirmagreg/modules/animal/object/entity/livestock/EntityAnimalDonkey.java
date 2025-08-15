@@ -589,7 +589,7 @@ public class EntityAnimalDonkey extends EntityDonkey implements IAnimal, ILivest
   public static class EntityTypeAnimalDonkey extends BaseEntityType {
 
     public EntityTypeAnimalDonkey() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("donkey")
         .entity(EntityAnimalDonkey.class, RenderAnimalDonkey::new)
         .egg(0x493C32, 0x756659));

@@ -36,13 +36,13 @@ import lombok.Getter;
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
 public abstract class BaseBlockLadder extends BlockLadder implements IBlockEntry, IFluidloggable {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
   public BaseBlockLadder() {
-    this(Settings.of(Material.CIRCUITS));
+    this(BlockSettings.of(Material.CIRCUITS));
   }
 
-  public BaseBlockLadder(Settings settings) {
+  public BaseBlockLadder(BlockSettings settings) {
 
     this.settings = settings;
 
@@ -81,7 +81,7 @@ public abstract class BaseBlockLadder extends BlockLadder implements IBlockEntry
 
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+    return this.settings.getIsReplaceable().apply(worldIn, pos);
   }
 
   @Override

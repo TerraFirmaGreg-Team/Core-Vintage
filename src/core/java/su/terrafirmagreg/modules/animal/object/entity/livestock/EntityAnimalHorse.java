@@ -567,7 +567,7 @@ public class EntityAnimalHorse extends EntityHorse implements IAnimal, ILivestoc
   public static class EntityTypeAnimalHorse extends BaseEntityType {
 
     public EntityTypeAnimalHorse() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("horse")
         .entity(EntityAnimalHorse.class, RenderAnimalHorse::new)
         .egg(0xA5886B, 0xABA400));

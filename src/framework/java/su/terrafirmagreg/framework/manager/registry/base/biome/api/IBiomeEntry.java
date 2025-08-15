@@ -3,7 +3,7 @@ package su.terrafirmagreg.framework.manager.registry.base.biome.api;
 import su.terrafirmagreg.api.util.BiomeUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
-import su.terrafirmagreg.framework.manager.registry.base.biome.api.IBiomeEntry.Settings;
+import su.terrafirmagreg.framework.manager.registry.base.biome.api.IBiomeEntry.BiomeSettings;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
@@ -16,7 +16,7 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 
-public interface IBiomeEntry extends IRegistryEntry<Settings, Biome> {
+public interface IBiomeEntry extends IRegistryEntry<BiomeSettings, Biome> {
 
   @Override
   default void postRegister() {
@@ -28,7 +28,7 @@ public interface IBiomeEntry extends IRegistryEntry<Settings, Biome> {
   }
 
   @Getter
-  class Settings extends RegistrySettings<Settings> {
+  class BiomeSettings extends RegistrySettings<BiomeSettings> {
 
     final List<BiomeDictionary.Type> types = Lists.newArrayList();
 
@@ -53,83 +53,83 @@ public interface IBiomeEntry extends IRegistryEntry<Settings, Biome> {
 
     Color debugColour = new Color(guiColour);
 
-    protected Settings(String name) {
+    protected BiomeSettings(String name) {
       this.name = ModUtils.name(name);
 
     }
 
-    public static Settings of(String name) {
-      return new Settings(name);
+    public static BiomeSettings of(String name) {
+      return new BiomeSettings(name);
     }
 
-    public Settings baseBiome(Biome baseBiome) {
+    public BiomeSettings baseBiome(Biome baseBiome) {
       this.baseBiome = baseBiome.getRegistryName().toString();
-      return this;
+      return this.self();
     }
 
-    public Settings baseBiome(String baseBiome) {
+    public BiomeSettings baseBiome(String baseBiome) {
       this.baseBiome = baseBiome;
-      return this;
+      return this.self();
     }
 
-    public Settings biomeWeight(int biomeWeight) {
+    public BiomeSettings biomeWeight(int biomeWeight) {
       this.biomeWeight = biomeWeight;
-      return this;
+      return this.self();
     }
 
-    public Settings addType(BiomeDictionary.Type... types) {
+    public BiomeSettings addType(BiomeDictionary.Type... types) {
       this.types.addAll(Arrays.asList(types));
-      return this;
+      return this.self();
     }
 
-    public Settings guiColour(int guiColour) {
+    public BiomeSettings guiColour(int guiColour) {
       this.guiColour = guiColour;
-      return this;
+      return this.self();
     }
 
-    public Settings waterColor(int waterColor) {
+    public BiomeSettings waterColor(int waterColor) {
       this.waterColor = waterColor;
-      return this;
+      return this.self();
     }
 
-    public Settings baseHeight(float baseHeight) {
+    public BiomeSettings baseHeight(float baseHeight) {
       this.baseHeight = baseHeight;
-      return this;
+      return this.self();
     }
 
-    public Settings heightVariation(float heightVariation) {
+    public BiomeSettings heightVariation(float heightVariation) {
       this.heightVariation = heightVariation;
-      return this;
+      return this.self();
     }
 
-    public Settings temperature(float temperature) {
+    public BiomeSettings temperature(float temperature) {
       this.temperature = temperature;
-      return this;
+      return this.self();
     }
 
-    public Settings rainfall(float rainfall) {
+    public BiomeSettings rainfall(float rainfall) {
       this.rainfall = rainfall;
-      return this;
+      return this.self();
     }
 
-    public Settings spawnBiome() {
+    public BiomeSettings spawnBiome() {
       this.spawnBiome = true;
-      return this;
+      return this.self();
     }
 
-    public Settings enableWorldGen() {
+    public BiomeSettings enableWorldGen() {
       this.worldGen = true;
-      return this;
+      return this.self();
     }
 
-    public Settings enableSnow() {
+    public BiomeSettings enableSnow() {
       this.enableSnow = true;
-      return this;
+      return this.self();
     }
 
-    public Settings disabledRain() {
+    public BiomeSettings disabledRain() {
       this.enableRain = false;
-      return this;
+      return this.self();
     }
 
     public Biome.BiomeProperties build() {

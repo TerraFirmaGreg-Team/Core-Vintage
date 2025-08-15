@@ -2,18 +2,18 @@ package su.terrafirmagreg.framework.manager.registry.base.effect.api;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
-import su.terrafirmagreg.framework.manager.registry.base.effect.api.IEffectEntry.Settings;
+import su.terrafirmagreg.framework.manager.registry.base.effect.api.IEffectEntry.EffectSettings;
 
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 
 import lombok.Getter;
 
-public interface IEffectEntry extends IRegistryEntry<Settings, Potion> {
+public interface IEffectEntry extends IRegistryEntry<EffectSettings, Potion> {
 
 
   @Getter
-  class Settings extends RegistrySettings<Settings> {
+  class EffectSettings extends RegistrySettings<EffectSettings> {
 
     ResourceLocation texture;
 
@@ -26,62 +26,60 @@ public interface IEffectEntry extends IRegistryEntry<Settings, Potion> {
     int liquidColor = 0xFFFFFF;
     int statusIconIndex = -1;
 
-    protected Settings() {
+    protected EffectSettings() {}
 
+    public static EffectSettings of() {
+      return new EffectSettings();
     }
 
-    public static Settings of() {
-      return new Settings();
-    }
-
-    public Settings texture(ResourceLocation texture) {
+    public EffectSettings texture(ResourceLocation texture) {
       this.texture = texture;
-      return this;
+      return this.self();
     }
 
-    public Settings texture(String icon) {
+    public EffectSettings texture(String icon) {
       this.texture = ModUtils.resource("textures/gui/icons/potion/" + icon + ".png");
-      return this;
+      return this.self();
     }
 
-    public Settings texture(String modid, String icon) {
+    public EffectSettings texture(String modid, String icon) {
       this.texture = ModUtils.resource(modid, "textures/gui/icons/potion/" + icon + ".png");
-      return this;
+      return this.self();
     }
 
-    public Settings statusIconIndex(int columnIndex, int rowIndex) {
+    public EffectSettings statusIconIndex(int columnIndex, int rowIndex) {
       this.statusIconIndex = columnIndex + rowIndex * 8;
-      return this;
+      return this.self();
     }
 
-    public Settings badEffect() {
+    public EffectSettings badEffect() {
       this.isBadEffect = true;
-      return this;
+      return this.self();
     }
 
-    public Settings noStatusIcon() {
+    public EffectSettings noStatusIcon() {
       this.statusIcon = false;
-      return this;
+      return this.self();
     }
 
-    public Settings noDrawInventory() {
+    public EffectSettings noDrawInventory() {
       this.drawInventory = false;
-      return this;
+      return this.self();
     }
 
-    public Settings noDrawInventoryText() {
+    public EffectSettings noDrawInventoryText() {
       this.drawInventoryText = false;
-      return this;
+      return this.self();
     }
 
-    public Settings beneficial() {
+    public EffectSettings beneficial() {
       this.beneficial = true;
-      return this;
+      return this.self();
     }
 
-    public Settings liquidColor(int liquidColor) {
+    public EffectSettings liquidColor(int liquidColor) {
       this.liquidColor = liquidColor;
-      return this;
+      return this.self();
     }
 
 

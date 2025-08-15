@@ -1,22 +1,17 @@
 package su.terrafirmagreg.framework.manager.registry.api;
 
-import su.terrafirmagreg.framework.manager.registry.RegistryMap;
-import su.terrafirmagreg.framework.module.api.IModule;
+import su.terrafirmagreg.framework.manager.api.IBaseManager;
+import su.terrafirmagreg.framework.module.api.IModuleEntry;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
 import java.util.Map;
 
-public interface IRegistryManager {
+public interface IRegistryManager extends IBaseManager<IRegistryEntry<?, ?>> {
 
-  Map<IModule, IRegistryManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
-
-  IModule getModule();
-
-  RegistryMap getMap();
+  Map<IModuleEntry, IRegistryManager> MANAGER_MAP = new Object2ObjectOpenHashMap<>();
 
   IRegistryRegistrar getRegistrar();
 
-  IRegistryService getService();
 
 }

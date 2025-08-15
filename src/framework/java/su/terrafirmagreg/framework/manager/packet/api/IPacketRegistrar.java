@@ -1,12 +1,8 @@
 package su.terrafirmagreg.framework.manager.packet.api;
 
-public interface IPacketRegistrar {
+import su.terrafirmagreg.framework.manager.api.IBaseRegistrar;
 
-  /**
-   * Registers a new packet to the network handler.
-   *
-   * @param clazz The class of the packet. This class must implement IMessage and IMessageHandler!
-   * @param side  The side that receives this packet.
-   */
-  <P extends IPacketEntry> void addPacket(P packet);
+public interface IPacketRegistrar extends IBaseRegistrar<IPacketEntry> {
+
+  <P extends IPacketEntry> void addPacket(P entry);
 }

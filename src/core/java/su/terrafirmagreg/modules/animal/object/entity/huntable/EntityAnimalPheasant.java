@@ -162,7 +162,7 @@ public class EntityAnimalPheasant extends EntityAnimalBase implements IHuntable 
   public static class EntityTypeAnimalPheasant extends BaseEntityType {
 
     public EntityTypeAnimalPheasant() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("pheasant")
         .entity(EntityAnimalPheasant.class, RenderAnimalPheasant::new)
         .egg(0x5577FF, 0xFFFA90));

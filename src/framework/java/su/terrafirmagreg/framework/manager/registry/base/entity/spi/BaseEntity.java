@@ -39,9 +39,9 @@ public abstract class BaseEntity extends Entity {
   @Getter
   public abstract static class BaseEntityType extends EntityEntry implements IEntityEntry {
 
-    protected final Settings settings;
+    protected final EntitySettings settings;
 
-    public BaseEntityType(Settings settings) {
+    public BaseEntityType(EntitySettings settings) {
       super(settings.getEntity(), settings.getRegistryKey());
 
       this.settings = settings;

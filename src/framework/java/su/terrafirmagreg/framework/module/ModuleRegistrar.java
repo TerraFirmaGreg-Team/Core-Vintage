@@ -1,20 +1,19 @@
 package su.terrafirmagreg.framework.module;
 
-import su.terrafirmagreg.api.util.AnnotationUtils;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.framework.module.ModuleMap.ModuleWrapper;
-import su.terrafirmagreg.framework.module.api.IModule;
+import su.terrafirmagreg.framework.module.api.IModuleEntry;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
 import su.terrafirmagreg.framework.module.api.IModuleRegistrar;
-import su.terrafirmagreg.framework.module.api.ModuleInfo;
 
 import lombok.Getter;
+
+import java.util.Map;
 
 @Getter
 public class ModuleRegistrar implements IModuleRegistrar {
 
   private final String modId;
-  private final ModuleMap map;
+  private final Map<Class<?>, IModuleEntry> map;
 
   public ModuleRegistrar(IModuleManager manager) {
     this.modId = manager.getModId();
@@ -22,24 +21,29 @@ public class ModuleRegistrar implements IModuleRegistrar {
 
   }
 
-  @Override
-  public <T extends IModule> void addModule(T module) {
+  private <E extends IModuleEntry> boolean validate(E entry) {
+    var entryClass = entry.getClass();
+    var settings = entry.getSettings();
 
-    var moduleClass = module.getClass();
-    if (validate(moduleClass)) {
-      var identifier = ModUtils.resource(modId, module.getName());
-      module.setIdentifier(identifier);
-      map.put(moduleClass, ModuleWrapper.of(module.getName(), module));
+    if (settings.isEnabled()) {
+      entry.getLogger().debug("Entry {} is disabled: {}", entry.asClassEntry(), entryClass.getSimpleName());
+      return true;
+    }
+
+    return false;
+  }
+
+  @Override
+  public <T extends IModuleEntry> void addModule(T entry) {
+
+    var entryClass = entry.getClass();
+    var settings = entry.getSettings();
+
+    if (validate(entry)) {
+      settings.identifier(ModUtils.resource(settings.getRegistryKey()));
+      map.put(entryClass, entry);
     }
   }
 
-
-  private <T extends IModule> boolean validate(Class<T> module) {
-    var annotation = AnnotationUtils.getAnnotation(module, ModuleInfo.class);
-    boolean moduleIsEnabled = annotation.enabled();
-    boolean moduleIsNotRegistered = !map.containsKey(module);
-
-    return moduleIsEnabled && moduleIsNotRegistered;
-  }
 
 }

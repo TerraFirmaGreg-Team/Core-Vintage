@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 public class BlockDebug extends BaseBlock {
 
   public BlockDebug() {
-    super(Settings.of(Material.SPONGE));
+    super(BlockSettings.of(Material.SPONGE));
 
     getSettings()
       .registryKey("debug");

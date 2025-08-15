@@ -17,7 +17,9 @@ public class ModuleMetal extends BaseModule {
 
 
   public ModuleMetal() {
-    super("metal");
+    super(ModuleSettings.of()
+      .registryKey("metal")
+    );
 
   }
 

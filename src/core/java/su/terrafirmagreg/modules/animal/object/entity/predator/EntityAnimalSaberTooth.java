@@ -200,7 +200,7 @@ public class EntityAnimalSaberTooth extends EntityAnimalMammal implements IPreda
   public static class EntityTypeAnimalSaberTooth extends BaseEntityType {
 
     public EntityTypeAnimalSaberTooth() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("sabertooth")
         .entity(EntityAnimalSaberTooth.class, RenderAnimalSaberTooth::new)
         .egg(0xFF8000, 0xFFD700));

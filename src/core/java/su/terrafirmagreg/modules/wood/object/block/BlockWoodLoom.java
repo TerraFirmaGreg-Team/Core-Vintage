@@ -47,7 +47,7 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodEntry, IPr
   protected final WoodType type;
 
   public BlockWoodLoom(WoodType type) {
-    super(Settings.of(Material.WOOD, MapColor.AIR));
+    super(BlockSettings.of(Material.WOOD, MapColor.AIR));
 
     this.type = type;
 

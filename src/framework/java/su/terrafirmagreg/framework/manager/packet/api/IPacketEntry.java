@@ -1,7 +1,7 @@
 package su.terrafirmagreg.framework.manager.packet.api;
 
 import su.terrafirmagreg.framework.manager.api.IBaseEntry;
-import su.terrafirmagreg.framework.manager.packet.api.IPacketEntry.Settings;
+import su.terrafirmagreg.framework.manager.packet.api.IPacketEntry.PacketSettings;
 import su.terrafirmagreg.framework.manager.packet.base.BasePacket;
 import su.terrafirmagreg.framework.manager.packet.spi.NetworkThreadedWrapper;
 
@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import lombok.Getter;
 
-public interface IPacketEntry extends IBaseEntry<Settings, BasePacket> {
+public interface IPacketEntry extends IBaseEntry<PacketSettings, BasePacket> {
 
 
   /**
@@ -19,9 +19,7 @@ public interface IPacketEntry extends IBaseEntry<Settings, BasePacket> {
    *
    * @return {@code true} if all received values are valid
    */
-  default boolean verify(MessageContext context) {
-    return true;
-  }
+  boolean verify(MessageContext context);
 
   /**
    * Called when the message is received and handled. This is where you process the message.
@@ -34,30 +32,39 @@ public interface IPacketEntry extends IBaseEntry<Settings, BasePacket> {
 
   default NetworkThreadedWrapper getWrapper() {
 
-    return IPacketManager.getChannel(this);
+    return NetworkThreadedWrapper.getChannel(asEntry());
   }
 
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class PacketSettings extends BaseSettings<PacketSettings> {
 
     Side side = Side.CLIENT;
+    NetworkThreadedWrapper channel;
 
-    protected Settings() {}
+    protected PacketSettings() {}
 
-    public static Settings of() {
-      return new Settings();
+    public static PacketSettings of() {
+      return new PacketSettings();
+    }
+
+    @Deprecated
+    public PacketSettings channel(NetworkThreadedWrapper channel) {
+      this.channel = channel;
+      return this.self();
     }
 
 
-    public Settings serverSide() {
+    @Deprecated
+    public PacketSettings serverSide() {
       this.side = Side.SERVER;
-      return this;
+      return this.self();
     }
 
-    public Settings clientSide() {
+    @Deprecated
+    public PacketSettings clientSide() {
       this.side = Side.CLIENT;
-      return this;
+      return this.self();
     }
 
   }

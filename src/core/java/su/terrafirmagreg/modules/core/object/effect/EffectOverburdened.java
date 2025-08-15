@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 public class EffectOverburdened extends BaseEffect {
 
   public EffectOverburdened() {
-    super(Settings.of());
+    super(EffectSettings.of());
 
     getSettings()
       .registryKey("overburdened")

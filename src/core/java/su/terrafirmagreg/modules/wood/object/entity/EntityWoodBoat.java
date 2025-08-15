@@ -167,7 +167,7 @@ public class EntityWoodBoat extends BaseEntityBoat {
   public static class EntityTypeWoodBoat extends BaseEntityType {
 
     public EntityTypeWoodBoat() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("boat")
         .entity(EntityWoodBoat.class, RenderWoodBoat::new)
         .updateInfo(160, 20, true)

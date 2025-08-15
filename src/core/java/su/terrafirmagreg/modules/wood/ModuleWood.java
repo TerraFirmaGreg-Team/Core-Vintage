@@ -24,13 +24,9 @@ public class ModuleWood extends BaseModule {
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class);
 
   public ModuleWood() {
-    super("wood");
-
-    enableNetwork();
-    enableFeature();
-    enableRegistry();
-
-
+    super(ModuleSettings.of()
+      .registryKey("wood")
+    );
   }
 
   @Override

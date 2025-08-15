@@ -7,7 +7,7 @@ public class PluginJustEnoughItems extends BasePlugin {
 
 
   public PluginJustEnoughItems() {
-    super(Settings.of()
+    super(PluginSettings.of()
       .modRequired(ModIDs.JEI)
     );
   }

@@ -95,7 +95,7 @@ public class EntityAnimalBlackBear extends EntityAnimalGrizzlyBear implements IP
   public static class EntityTypeAnimalBlackBear extends BaseEntityType {
 
     public EntityTypeAnimalBlackBear() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("blackbear")
         .entity(EntityAnimalBlackBear.class, RenderAnimalBlackBear::new)
         .egg(0x000000, 0xa18f6c));

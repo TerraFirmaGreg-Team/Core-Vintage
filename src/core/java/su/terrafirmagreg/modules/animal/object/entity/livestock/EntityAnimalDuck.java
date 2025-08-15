@@ -126,7 +126,7 @@ public class EntityAnimalDuck extends EntityAnimalChicken implements ILivestock 
   public static class EntityTypeAnimalDuck extends BaseEntityType {
 
     public EntityTypeAnimalDuck() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("duck")
         .entity(EntityAnimalDuck.class, RenderAnimalDuck::new)
         .egg(0xFFF91F, 0x462612));

@@ -1,8 +1,9 @@
 package su.terrafirmagreg.framework.manager.command.api;
 
-import net.minecraft.command.ICommand;
+import su.terrafirmagreg.framework.manager.api.IBaseRegistrar;
 
-public interface ICommandRegistrar {
+public interface ICommandRegistrar extends IBaseRegistrar<ICommandEntry> {
 
-  <T extends ICommand> void addCommand(T command);
+
+  <E extends ICommandEntry> void addCommand(E entry);
 }

@@ -369,7 +369,7 @@ public class EntityAnimalParrot extends EntityParrot implements IAnimal, ILivest
   public static class EntityTypeAnimalParrot extends BaseEntityType {
 
     public EntityTypeAnimalParrot() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("parrot")
         .entity(EntityAnimalParrot.class, RenderAnimalParrot::new)
         .egg(0x885040, 0xB0ACAC));

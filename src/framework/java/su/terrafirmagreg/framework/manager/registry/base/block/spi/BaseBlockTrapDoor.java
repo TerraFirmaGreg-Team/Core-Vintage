@@ -11,9 +11,9 @@ import lombok.Getter;
 @Getter
 public abstract class BaseBlockTrapDoor extends BlockTrapDoor implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockTrapDoor(Settings settings) {
+  public BaseBlockTrapDoor(BlockSettings settings) {
     super(settings.getMaterial());
 
     this.settings = settings;

@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 public class BlockThatch extends BaseBlock {
 
   public BlockThatch() {
-    super(Settings.of(Material.PLANTS));
+    super(BlockSettings.of(Material.PLANTS));
 
     getSettings()
       .registryKey("thatch")

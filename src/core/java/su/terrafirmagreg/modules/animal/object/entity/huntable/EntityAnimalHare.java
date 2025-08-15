@@ -133,7 +133,7 @@ public class EntityAnimalHare extends EntityAnimalRabbit implements IHuntable {
   public static class EntityTypeAnimalHare extends BaseEntityType {
 
     public EntityTypeAnimalHare() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("hare")
         .entity(EntityAnimalHare.class, RenderAnimalHare::new)
         .egg(0x866724, 0xdadada));

@@ -122,7 +122,7 @@ public class EntityAnimalJackal extends EntityAnimalCoyote implements IPredator 
   public static class EntityTypeAnimalJackal extends BaseEntityType {
 
     public EntityTypeAnimalJackal() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("jackal")
         .entity(EntityAnimalJackal.class, RenderAnimalJackal::new)
         .egg(0xb8762b, 0xffffff));

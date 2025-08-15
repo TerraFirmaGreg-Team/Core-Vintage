@@ -13,13 +13,13 @@ import java.util.Random;
 @Getter
 public abstract class BaseGenerator extends WorldGenerator implements IGeneratorEntry {
 
-  protected final Settings settings;
+  protected final GeneratorSettings settings;
 
   public BaseGenerator() {
-    this(Settings.of());
+    this(GeneratorSettings.of());
   }
 
-  public BaseGenerator(Settings settings) {
+  public BaseGenerator(GeneratorSettings settings) {
 
     this.settings = settings;
   }

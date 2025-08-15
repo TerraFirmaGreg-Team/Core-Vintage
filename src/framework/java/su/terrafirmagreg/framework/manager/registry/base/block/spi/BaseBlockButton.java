@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
 public abstract class BaseBlockButton extends BlockButton implements IBlockEntry, IFluidloggable {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
   protected final boolean wooden;
 
   public BaseBlockButton() {
@@ -40,10 +40,10 @@ public abstract class BaseBlockButton extends BlockButton implements IBlockEntry
   }
 
   public BaseBlockButton(boolean wooden) {
-    this(wooden, Settings.of(Material.CIRCUITS));
+    this(wooden, BlockSettings.of(Material.CIRCUITS));
   }
 
-  public BaseBlockButton(boolean wooden, Settings settings) {
+  public BaseBlockButton(boolean wooden, BlockSettings settings) {
     super(wooden);
 
     this.wooden = wooden;

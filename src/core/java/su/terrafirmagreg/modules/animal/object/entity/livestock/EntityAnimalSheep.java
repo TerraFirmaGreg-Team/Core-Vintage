@@ -329,7 +329,7 @@ public class EntityAnimalSheep extends EntityAnimalMammal implements IShearable,
   public static class EntityTypeAnimalSheep extends BaseEntityType {
 
     public EntityTypeAnimalSheep() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("sheep")
         .entity(EntityAnimalSheep.class, RenderAnimalSheep::new)
         .egg(0xFFFFFF, 0xFF6347));

@@ -209,7 +209,7 @@ public class EntityAnimalCoyote extends EntityAnimalMammal implements IPredator 
   public static class EntityTypeAnimalCoyote extends BaseEntityType {
 
     public EntityTypeAnimalCoyote() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("coyote")
         .entity(EntityAnimalCoyote.class, RenderAnimalCoyote::new)
         .egg(0xb7bc88, 0xdac213));

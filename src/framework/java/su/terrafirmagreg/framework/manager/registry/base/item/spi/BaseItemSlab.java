@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockSlab;
 import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 
@@ -14,12 +15,20 @@ import lombok.Getter;
 @Getter
 public class BaseItemSlab extends ItemSlab implements IItemEntry {
 
-  protected final Settings settings;
+  protected final ItemSettings settings;
+
+  public BaseItemSlab(Block block) {
+    this((BaseBlockSlab) block);
+  }
 
   public BaseItemSlab(BaseBlockSlab blockSlab) {
-    super(blockSlab.getHalfSlab(), blockSlab.getHalfSlab(), blockSlab.getDoubleSlab());
+    this(blockSlab.getHalfSlab(), blockSlab.getDoubleSlab());
+  }
 
-    this.settings = Settings.of(blockSlab);
+  public BaseItemSlab(BaseBlockSlab singleSlab, BaseBlockSlab doubleSlab) {
+    super(singleSlab, singleSlab, doubleSlab);
+
+    this.settings = ItemSettings.of(singleSlab);
   }
 
 

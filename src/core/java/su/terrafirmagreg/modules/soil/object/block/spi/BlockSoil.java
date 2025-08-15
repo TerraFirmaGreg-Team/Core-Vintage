@@ -28,10 +28,10 @@ public abstract class BlockSoil extends BaseBlock implements ISoilEntry {
   protected final SoilType type;
 
   public BlockSoil(SoilType type) {
-    this(Settings.of(Material.GROUND), type);
+    this(BlockSettings.of(Material.GROUND), type);
   }
 
-  public BlockSoil(Settings settings, SoilType type) {
+  public BlockSoil(BlockSettings settings, SoilType type) {
     super(settings);
 
     this.type = type;

@@ -44,7 +44,7 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
   private static final AxisAlignedBB AABB_W = new AxisAlignedBB(0.3125D, 0.125D, 0.1875D, 1.0D, 0.875D, 0.8125D);
 
   public BlockLatexExtractor() {
-    super(Settings.of(Material.IRON));
+    super(BlockSettings.of(Material.IRON));
 
     getSettings()
       .registryKey("latex_extractor")

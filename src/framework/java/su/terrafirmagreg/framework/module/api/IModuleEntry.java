@@ -1,45 +1,30 @@
 package su.terrafirmagreg.framework.module.api;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
-import su.terrafirmagreg.framework.manager.command.api.ICommandManager;
+import su.terrafirmagreg.framework.manager.api.IBaseEntry;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
-import su.terrafirmagreg.framework.manager.feature.api.IFeatureManager;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
-import su.terrafirmagreg.framework.manager.packet.api.IPacketManager;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
-import su.terrafirmagreg.framework.manager.plugin.api.IPluginManager;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryManager;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.module.api.IModuleEntry.ModuleSettings;
+import su.terrafirmagreg.framework.module.base.BaseModule;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 import org.jetbrains.annotations.NotNull;
 
+import lombok.Getter;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public interface IModule {
+public interface IModuleEntry extends IBaseEntry<ModuleSettings, BaseModule> {
 
-  String getName();
-
-  ResourceLocation getIdentifier();
-
-  void setIdentifier(ResourceLocation identifier);
 
   LoggingHelper getLogger();
-
-  IPacketManager getNetworkManager();
-
-  IRegistryManager getRegistryManager();
-
-  ICommandManager getCommandManager();
-
-  IFeatureManager getFeatureManager();
-
-  IPluginManager getPluginManager();
 
   /**
    * What other modules this module depends on.
@@ -78,6 +63,52 @@ public interface IModule {
   default void onFeatureRegistrar(IFeatureRegistrar registrar) {}
 
   default void onPluginRegistrar(IPluginRegistrar registrar) {}
+
+  @Getter
+  class ModuleSettings extends BaseSettings<ModuleSettings> {
+
+    private boolean subscriptionEnabled = true;
+    private boolean packetManagerEnabled = true;
+    private boolean registryManagerEnabled = true;
+    private boolean commandManagerEnabled = true;
+    private boolean featureManagerEnabled = true;
+    private boolean pluginManagerEnabled = true;
+
+    public static ModuleSettings of() {
+      return new ModuleSettings();
+    }
+
+    public ModuleSettings disableSubscriptions() {
+      this.subscriptionEnabled = false;
+      return this.self();
+    }
+
+    public ModuleSettings disablePacket() {
+      this.packetManagerEnabled = false;
+      return this.self();
+    }
+
+    public ModuleSettings disableRegistry() {
+      this.registryManagerEnabled = false;
+      return this.self();
+    }
+
+    public ModuleSettings disableCommand() {
+      this.commandManagerEnabled = false;
+      return this.self();
+    }
+
+    public ModuleSettings disableFeature() {
+      this.featureManagerEnabled = false;
+      return this.self();
+    }
+
+    public ModuleSettings disablePlugin() {
+      this.pluginManagerEnabled = false;
+      return this.self();
+    }
+
+  }
 
 
 }

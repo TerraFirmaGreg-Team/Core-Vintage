@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.device.plugin.top;
 
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.framework.manager.plugin.base.BasePlugin;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderBlastFurnace;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderBloom;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderBloomery;
@@ -13,6 +14,8 @@ import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderLogPile;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderOven;
 import su.terrafirmagreg.modules.device.plugin.top.provider.ProviderPitKiln;
 
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
 import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.ITheOneProbe;
 
@@ -20,13 +23,13 @@ public class PluginTheOneProbe extends BasePlugin {
 
 
   public PluginTheOneProbe() {
-    super(Settings.of()
+    super(PluginSettings.of()
       .modRequired(ModIDs.THEONEPROBE)
     );
   }
 
-  @Override
-  public void onInit() {
+  @SubscribeEvent
+  public static void onPostInit(StateEvent.PostInitialization event) {
     ITheOneProbe oneProbe = TheOneProbe.theOneProbeImp;
 
     oneProbe.registerProvider(new ProviderFridge());

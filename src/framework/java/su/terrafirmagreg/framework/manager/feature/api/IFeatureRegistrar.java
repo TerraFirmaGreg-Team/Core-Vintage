@@ -1,8 +1,10 @@
 package su.terrafirmagreg.framework.manager.feature.api;
 
-public interface IFeatureRegistrar {
+import su.terrafirmagreg.framework.manager.api.IBaseRegistrar;
 
-  <F extends IFeatureEntry> void addFeature(F feature);
+public interface IFeatureRegistrar extends IBaseRegistrar<IFeatureEntry> {
+
+  <E extends IFeatureEntry> void addFeature(E entry);
 
 
 }

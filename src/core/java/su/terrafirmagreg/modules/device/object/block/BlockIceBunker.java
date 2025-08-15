@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class BlockIceBunker extends BaseBlockContainer {
 
   public BlockIceBunker() {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     getSettings()
       .registryKey("ice_bunker")

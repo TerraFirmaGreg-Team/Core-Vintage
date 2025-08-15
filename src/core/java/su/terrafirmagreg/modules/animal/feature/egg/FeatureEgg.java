@@ -4,6 +4,7 @@ import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 import su.terrafirmagreg.modules.animal.ConfigAnimal;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityEgg;
 import su.terrafirmagreg.modules.animal.feature.egg.capability.CapabilityHandlerEgg;
@@ -30,8 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class FeatureEgg extends BaseFeature {
 
   public FeatureEgg() {
-    super(Settings.of()
-      .name("egg")
+    super(FeatureSettings.of()
       .enabled(ConfigAnimal.FEATURE.EGG.enable)
     );
   }
@@ -71,8 +71,8 @@ public class FeatureEgg extends BaseFeature {
     });
   }
 
-  @Override
-  public void onPreInit() {
+  @SubscribeEvent
+  public static void onPreInit(StateEvent.PreInitialization event) {
     CapabilityEgg.register();
 
     // TODO: move
@@ -85,8 +85,8 @@ public class FeatureEgg extends BaseFeature {
     }
   }
 
-  @Override
-  public void onInit() {
+  @SubscribeEvent
+  public static void onPostInit(StateEvent.PostInitialization event) {
 
     CapabilityHandlerEgg.init();
 

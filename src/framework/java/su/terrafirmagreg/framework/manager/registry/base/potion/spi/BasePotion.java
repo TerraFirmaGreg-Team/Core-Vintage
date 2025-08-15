@@ -16,14 +16,14 @@ import java.util.Objects;
 @Getter
 public abstract class BasePotion extends PotionType implements IPotionEntry {
 
-  protected final Settings settings;
+  protected final PotionSettings settings;
 
   public BasePotion() {
-    this(Settings.of());
+    this(PotionSettings.of());
 
   }
 
-  public BasePotion(Settings settings) {
+  public BasePotion(PotionSettings settings) {
     super(settings.getRegistryKey(), settings.getEffect());
     this.settings = settings;
 

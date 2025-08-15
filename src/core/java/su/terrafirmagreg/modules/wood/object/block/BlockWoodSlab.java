@@ -19,7 +19,7 @@ public class BlockWoodSlab extends BaseBlockSlab implements IWoodEntry, IProvide
   protected BlockWoodSlab doubleSlab;
 
   public BlockWoodSlab(WoodType type) {
-    super(Settings.of(BlocksWood.PLANKS.get(type)));
+    super(BlockSettings.of(BlocksWood.PLANKS.get(type)));
 
     this.type = type;
 

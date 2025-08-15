@@ -35,10 +35,9 @@ public abstract class BasePacketClient extends BasePacket {
 
   }
 
-
   public Packet<?> getPacketFrom() {
 
-    return getWrapper().getPacketFrom(this);
+    return getWrapper().getPacketFrom(asEntry());
   }
 
   // Send To All
@@ -48,7 +47,7 @@ public abstract class BasePacketClient extends BasePacket {
    */
   public void sendToAll() {
 
-    getWrapper().sendToAll(this);
+    getWrapper().sendToAll(asEntry());
   }
 
   // Send To
@@ -56,21 +55,21 @@ public abstract class BasePacketClient extends BasePacket {
 
   public void sendTo(EntityPlayer player) {
     if (player instanceof EntityPlayerMP playerMP) {
-      getWrapper().sendTo(this, playerMP);
+      getWrapper().sendTo(asEntry(), playerMP);
     }
 
   }
 
   public void sendTo(EntityLivingBase player) {
     if (player instanceof EntityPlayerMP playerMP) {
-      getWrapper().sendTo(this, playerMP);
+      getWrapper().sendTo(asEntry(), playerMP);
     }
   }
 
 
   public void sendTo(BlockPos pos, World world) {
 
-    getWrapper().sendTo(this, pos, world);
+    getWrapper().sendTo(asEntry(), pos, world);
   }
 
   // Send To All Around
@@ -78,49 +77,49 @@ public abstract class BasePacketClient extends BasePacket {
 
   public void sendToAllAround(int dimension, double x, double y, double z, double range) {
 
-    getWrapper().sendToAllAround(this, dimension, x, y, z, range);
+    getWrapper().sendToAllAround(asEntry(), dimension, x, y, z, range);
   }
 
 
   public void sendToAllAround(int dimension, double x, double y, double z) {
 
-    getWrapper().sendToAllAround(this, dimension, x, y, z);
+    getWrapper().sendToAllAround(asEntry(), dimension, x, y, z);
   }
 
 
   public void sendToAllAround(int dimension, BlockPos blockPos, double range) {
 
-    getWrapper().sendToAllAround(this, dimension, blockPos, range);
+    getWrapper().sendToAllAround(asEntry(), dimension, blockPos, range);
   }
 
 
   public void sendToAllAround(int dimension, BlockPos blockPos) {
 
-    getWrapper().sendToAllAround(this, dimension, blockPos);
+    getWrapper().sendToAllAround(asEntry(), dimension, blockPos);
   }
 
 
   public void sendToAllAround(World world, BlockPos pos, double range) {
 
-    getWrapper().sendToAllAround(this, world, pos, range);
+    getWrapper().sendToAllAround(asEntry(), world, pos, range);
   }
 
 
   public void sendToAllAround(World world, BlockPos pos) {
 
-    getWrapper().sendToAllAround(this, world, pos);
+    getWrapper().sendToAllAround(asEntry(), world, pos);
   }
 
 
   public void sendToAllAround(TileEntity tileEntity, int range) {
 
-    getWrapper().sendToAllAround(this, tileEntity, range);
+    getWrapper().sendToAllAround(asEntry(), tileEntity, range);
   }
 
 
   public void sendToAllAround(TileEntity tileEntity) {
 
-    getWrapper().sendToAllAround(this, tileEntity);
+    getWrapper().sendToAllAround(asEntry(), tileEntity);
   }
 
   // Send To All Tracking
@@ -128,25 +127,25 @@ public abstract class BasePacketClient extends BasePacket {
 
   public void sendToAllTracking(Entity entity) {
 
-    getWrapper().sendToAllTracking(this, entity);
+    getWrapper().sendToAllTracking(asEntry(), entity);
   }
 
 
   public void sendToAllTracking(TargetPoint point) {
 
-    getWrapper().sendToAllTracking(this, point);
+    getWrapper().sendToAllTracking(asEntry(), point);
   }
 
 
   public void sendToAllTracking(int dimension, BlockPos blockPos, double range) {
 
-    getWrapper().sendToAllTracking(this, dimension, blockPos, range);
+    getWrapper().sendToAllTracking(asEntry(), dimension, blockPos, range);
   }
 
 
   public void sendToAllTracking(int dimension, double x, double y, double z, double range) {
 
-    getWrapper().sendToAllTracking(this, dimension, x, y, z, range);
+    getWrapper().sendToAllTracking(asEntry(), dimension, x, y, z, range);
   }
 
   // Send To Dimension
@@ -154,12 +153,14 @@ public abstract class BasePacketClient extends BasePacket {
 
   public void sendToDimension(TileEntity tileEntity) {
 
-    getWrapper().sendToDimension(this, tileEntity);
+    getWrapper().sendToDimension(asEntry(), tileEntity);
   }
 
 
   public void sendToDimension(int dimension) {
 
-    getWrapper().sendToDimension(this, dimension);
+    getWrapper().sendToDimension(asEntry(), dimension);
   }
+
+
 }

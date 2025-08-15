@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.core.feature.playerdata;
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.ProviderPlayerData;
@@ -191,8 +192,8 @@ public class FeaturePlayerData extends BaseFeature {
     });
   }
 
-  @Override
-  public void onPreInit() {
+  @SubscribeEvent
+  public static void onPreInit(StateEvent.PreInitialization event) {
     CapabilityPlayerData.register();
   }
 }

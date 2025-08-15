@@ -223,7 +223,7 @@ public class EntityWoodPlowCart extends EntityWoodCartInventory
   public static class EntityTypeWoodPlowCart extends BaseEntityType {
 
     public EntityTypeWoodPlowCart() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("plow_cart")
         .entity(EntityWoodPlowCart.class, RenderWoodPlowCart::new)
         .updateInfo(80, 3, false)

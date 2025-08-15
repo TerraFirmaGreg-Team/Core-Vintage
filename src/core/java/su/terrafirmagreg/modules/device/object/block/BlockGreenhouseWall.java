@@ -37,7 +37,7 @@ public class BlockGreenhouseWall extends BaseBlock {
 
 
   public BlockGreenhouseWall() {
-    super(Settings.of(Material.IRON, MapColor.GRAY));
+    super(BlockSettings.of(Material.IRON, MapColor.GRAY));
 
     getSettings()
       .registryKey("greenhouse/wall")

@@ -30,7 +30,7 @@ public abstract class BasePacketServer extends BasePacket {
    */
   public void sendToServer() {
 
-    getWrapper().sendToServer(this);
+    getWrapper().sendToServer(asEntry());
   }
 
 

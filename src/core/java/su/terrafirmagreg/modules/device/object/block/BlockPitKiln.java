@@ -64,7 +64,7 @@ public class BlockPitKiln extends BaseBlockContainer {
   };
 
   public BlockPitKiln() {
-    super(Settings.of(Material.CIRCUITS));
+    super(BlockSettings.of(Material.CIRCUITS));
 
     getSettings()
       .registryKey("pit_kiln")

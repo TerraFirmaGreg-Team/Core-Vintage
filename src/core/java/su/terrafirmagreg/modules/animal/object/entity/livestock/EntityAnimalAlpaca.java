@@ -151,7 +151,7 @@ public class EntityAnimalAlpaca extends EntityAnimalSheep implements ILivestock 
   public static class EntityTypeAnimalAlpaca extends BaseEntityType {
 
     public EntityTypeAnimalAlpaca() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("alpaca")
         .entity(EntityAnimalAlpaca.class, RenderAnimalAlpaca::new)
         .egg(0x00CC66, 0x006633));

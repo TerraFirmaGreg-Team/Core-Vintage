@@ -59,7 +59,7 @@ public class BlockWoodLog extends BaseBlockLog implements IWoodEntry, IProviderB
   protected final WoodType type;
 
   public BlockWoodLog(WoodType type) {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     this.type = type;
 

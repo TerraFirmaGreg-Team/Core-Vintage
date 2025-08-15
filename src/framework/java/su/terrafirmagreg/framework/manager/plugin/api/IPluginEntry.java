@@ -2,63 +2,36 @@ package su.terrafirmagreg.framework.manager.plugin.api;
 
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.api.IBaseEntry;
-import su.terrafirmagreg.framework.manager.plugin.api.IPluginEntry.Settings;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginEntry.PluginSettings;
 import su.terrafirmagreg.framework.manager.plugin.base.BasePlugin;
 
 import lombok.Getter;
 
 
-public interface IPluginEntry extends IBaseEntry<Settings, BasePlugin> {
+public interface IPluginEntry extends IBaseEntry<PluginSettings, BasePlugin> {
 
-  // ===== FML Lifecycle
-
-  default void onPreInit() {}
-
-  default void onInit() {}
-
-  default void onPostInit() {}
-
-  default void onLoadComplete() {}
-
-  // ===== FML Lifecycle: Server
-
-  default void onServerAboutToStart() {}
-
-  default void onServerStarting() {}
-
-  default void onServerStarted() {}
-
-  default void onServerStopping() {}
-
-  default void onServerStopped() {}
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class PluginSettings extends BaseSettings<PluginSettings> {
 
     String modRequired;
-    boolean enabled = true;
     boolean hasSubscriptions = true;
 
-    protected Settings() {}
 
-    public static Settings of() {
-      return new Settings();
+    public static PluginSettings of() {
+      return new PluginSettings();
     }
 
-    public Settings enabled(boolean enabled) {
-      this.enabled = enabled;
-      return this;
-    }
 
-    public Settings modRequired(String modRequired) {
+    public PluginSettings modRequired(String modRequired) {
       this.modRequired = modRequired;
-      this.enabled = ModUtils.isModLoaded(modRequired);
-      return this;
+      this.enabled = enabled && ModUtils.isModLoaded(modRequired);
+      return this.self();
     }
 
-    public Settings disableSubscriptions() {
+    public PluginSettings disableSubscriptions() {
       this.hasSubscriptions = false;
-      return this;
+      return this.self();
     }
 
 

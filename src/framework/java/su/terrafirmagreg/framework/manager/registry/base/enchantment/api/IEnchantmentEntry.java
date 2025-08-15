@@ -1,7 +1,7 @@
 package su.terrafirmagreg.framework.manager.registry.base.enchantment.api;
 
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
-import su.terrafirmagreg.framework.manager.registry.base.enchantment.api.IEnchantmentEntry.Settings;
+import su.terrafirmagreg.framework.manager.registry.base.enchantment.api.IEnchantmentEntry.EnchantmentSettings;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -9,34 +9,34 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 
 import lombok.Getter;
 
-public interface IEnchantmentEntry extends IRegistryEntry<Settings, Enchantment> {
+public interface IEnchantmentEntry extends IRegistryEntry<EnchantmentSettings, Enchantment> {
 
   @Getter
-  class Settings extends RegistrySettings<Settings> {
+  class EnchantmentSettings extends RegistrySettings<EnchantmentSettings> {
 
     Enchantment.Rarity rarity;
     EnumEnchantmentType type;
     EntityEquipmentSlot[] slots;
 
-    protected Settings() {}
+    protected EnchantmentSettings() {}
 
-    public static Settings of() {
-      return new Settings();
+    public static EnchantmentSettings of() {
+      return new EnchantmentSettings();
     }
 
-    public Settings rarityIn(Enchantment.Rarity rarityIn) {
+    public EnchantmentSettings rarityIn(Enchantment.Rarity rarityIn) {
       this.rarity = rarityIn;
-      return this;
+      return this.self();
     }
 
-    public Settings type(EnumEnchantmentType typeIn) {
+    public EnchantmentSettings type(EnumEnchantmentType typeIn) {
       this.type = typeIn;
-      return this;
+      return this.self();
     }
 
-    public Settings slots(EntityEquipmentSlot... slotsIn) {
+    public EnchantmentSettings slots(EntityEquipmentSlot... slotsIn) {
       this.slots = slotsIn;
-      return this;
+      return this.self();
     }
 
   }

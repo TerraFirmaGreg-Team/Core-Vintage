@@ -31,7 +31,7 @@ public class BlockDryingMat extends BaseBlockContainer {
   public static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
   public BlockDryingMat() {
-    super(Settings.of(Material.GRASS, MapColor.YELLOW));
+    super(BlockSettings.of(Material.GRASS, MapColor.YELLOW));
 
     getSettings()
       .registryKey("drying_mat")

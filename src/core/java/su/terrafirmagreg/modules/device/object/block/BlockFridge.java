@@ -69,7 +69,7 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, I
   }
 
   public BlockFridge() {
-    super(Settings.of(Material.IRON));
+    super(BlockSettings.of(Material.IRON));
 
     getSettings()
       .registryKey("fridge")

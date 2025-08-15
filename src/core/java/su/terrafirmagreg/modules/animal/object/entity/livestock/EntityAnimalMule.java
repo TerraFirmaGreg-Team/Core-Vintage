@@ -433,7 +433,7 @@ public class EntityAnimalMule extends EntityMule implements IAnimal, ILivestock,
   public static class EntityTypeAnimalMule extends BaseEntityType {
 
     public EntityTypeAnimalMule() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("mule")
         .entity(EntityAnimalMule.class, RenderAnimalMule::new)
         .egg(0x180200, 0x482D1A));

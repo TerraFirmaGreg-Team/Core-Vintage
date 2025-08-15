@@ -131,7 +131,7 @@ public class EntityWoodAnimalCart extends EntityWoodCart {
   public static class EntityTypeWoodAnimalCart extends BaseEntityType {
 
     public EntityTypeWoodAnimalCart() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("animal_cart")
         .entity(EntityWoodAnimalCart.class, RenderWoodAnimalCart::new)
         .updateInfo(80, 3, false)

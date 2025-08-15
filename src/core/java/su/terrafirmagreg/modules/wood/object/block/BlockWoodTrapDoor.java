@@ -16,7 +16,7 @@ public class BlockWoodTrapDoor extends BaseBlockTrapDoor implements IWoodEntry {
   protected final WoodType type;
 
   public BlockWoodTrapDoor(WoodType type) {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     this.type = type;
 

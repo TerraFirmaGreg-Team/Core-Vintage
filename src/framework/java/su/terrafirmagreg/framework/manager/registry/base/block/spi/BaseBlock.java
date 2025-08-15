@@ -37,9 +37,9 @@ import lombok.Getter;
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
 public abstract class BaseBlock extends Block implements IBlockEntry, IFluidloggable {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlock(Settings settings) {
+  public BaseBlock(BlockSettings settings) {
     super(settings.getMaterial(), settings.getMapColor());
 
     this.settings = settings;
@@ -88,7 +88,7 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
 
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+    return this.settings.getIsReplaceable().apply(worldIn, pos);
   }
 
   @Override

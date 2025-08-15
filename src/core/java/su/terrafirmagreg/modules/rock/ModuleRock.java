@@ -17,9 +17,10 @@ public class ModuleRock extends BaseModule {
 
 
   public ModuleRock() {
-    super("rock");
+    super(ModuleSettings.of()
+      .registryKey("rock")
+    );
 
-    enableFeature();
 
   }
 

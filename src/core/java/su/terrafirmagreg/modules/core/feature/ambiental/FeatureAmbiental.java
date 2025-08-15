@@ -2,6 +2,7 @@ package su.terrafirmagreg.modules.core.feature.ambiental;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityAmbiental;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.CapabilityProviderAmbiental;
 import su.terrafirmagreg.modules.core.feature.ambiental.capability.ICapabilityAmbiental;
@@ -75,14 +76,14 @@ public class FeatureAmbiental extends BaseFeature {
     CapabilityUtils.getOptional(player, CapabilityAmbiental.CAPABILITY).ifPresent(ICapabilityAmbiental::update);
   }
 
-  @Override
-  public void onPreInit() {
+  @SubscribeEvent
+  public static void onPreInit(StateEvent.PreInitialization event) {
 
     CapabilityAmbiental.register();
   }
 
-  @Override
-  public void onInit() {
+  @SubscribeEvent
+  public static void onPostInit(StateEvent.PostInitialization event) {
 
     CapabilityAmbiental.Handler.init();
   }

@@ -19,9 +19,9 @@ import lombok.Getter;
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockBush extends BlockBush implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockBush(Settings settings) {
+  public BaseBlockBush(BlockSettings settings) {
     super(settings.getMaterial(), settings.getMapColor());
 
     this.settings = settings;
@@ -40,7 +40,7 @@ public abstract class BaseBlockBush extends BlockBush implements IBlockEntry {
 
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+    return this.settings.getIsReplaceable().apply(worldIn, pos);
   }
 
   @Override

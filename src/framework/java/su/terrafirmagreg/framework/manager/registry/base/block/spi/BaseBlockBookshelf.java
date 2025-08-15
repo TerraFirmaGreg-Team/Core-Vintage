@@ -35,9 +35,9 @@ import lombok.Getter;
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
 public abstract class BaseBlockBookshelf extends BlockBookshelf implements IBlockEntry, IFluidloggable {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockBookshelf(Settings settings) {
+  public BaseBlockBookshelf(BlockSettings settings) {
 
     this.settings = settings;
 
@@ -78,7 +78,7 @@ public abstract class BaseBlockBookshelf extends BlockBookshelf implements IBloc
 
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+    return this.settings.getIsReplaceable().apply(worldIn, pos);
   }
 
   @Override

@@ -2,10 +2,12 @@ package su.terrafirmagreg.modules.core.feature.oredict;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 import gregtech.api.unification.OreDictUnifier;
@@ -27,8 +29,8 @@ import static su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.ore
 
 public class FeatureOreDict extends BaseFeature {
 
-  @Override
-  public void onPostInit() {
+  @SubscribeEvent
+  public static void onPostInit(StateEvent.PostInitialization event) {
 
     OreDictionaryHelper.init();
     minecraftOreDict();
@@ -44,7 +46,7 @@ public class FeatureOreDict extends BaseFeature {
 
   }
 
-  private void minecraftOreDict() {
+  private static void minecraftOreDict() {
     // Vanilla ore dict values
     OreDictionary.registerOre("fireStarter", new ItemStack(Items.FLINT_AND_STEEL, 1, OreDictionary.WILDCARD_VALUE));
     OreDictionary.registerOre("fireStarter", new ItemStack(Items.FIRE_CHARGE));

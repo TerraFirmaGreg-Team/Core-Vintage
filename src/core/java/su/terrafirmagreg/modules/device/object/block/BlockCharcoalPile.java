@@ -53,7 +53,7 @@ public class BlockCharcoalPile extends BaseBlock {
   };
 
   public BlockCharcoalPile() {
-    super(Settings.of(CHARCOAL_MATERIAL));
+    super(BlockSettings.of(CHARCOAL_MATERIAL));
 
     getSettings()
       .registryKey("charcoal_pile")

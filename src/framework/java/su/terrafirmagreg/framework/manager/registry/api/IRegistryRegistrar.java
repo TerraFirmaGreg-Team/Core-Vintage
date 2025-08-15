@@ -1,6 +1,7 @@
 package su.terrafirmagreg.framework.manager.registry.api;
 
 import su.terrafirmagreg.api.library.types.type.Type;
+import su.terrafirmagreg.framework.manager.api.IBaseRegistrar;
 import su.terrafirmagreg.framework.manager.registry.base.biome.api.IBiomeEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.registry.base.effect.api.IEffectEntry;
@@ -30,19 +31,15 @@ import java.util.Set;
 import java.util.function.Function;
 
 
-public interface IRegistryRegistrar {
+public interface IRegistryRegistrar extends IBaseRegistrar<IRegistryEntry<?, ?>> {
 
   BaseItemGroup group(String icon);
 
-  BaseItemGroup group(BaseItemGroup group);
-
-  <T extends IForgeRegistryEntry<T>> void addEntry(String identifier, T entry);
+  <T extends IForgeRegistryEntry<T>> void addContent(T entry);
 
   // --------------------------------------------------------------------------
   // - Block
   // --------------------------------------------------------------------------
-
-  <V extends Block> V addBlock(String identifier, V block);
 
   <V extends Block & IBlockEntry> V addBlock(V block);
 
@@ -52,8 +49,6 @@ public interface IRegistryRegistrar {
   // - Item
   // --------------------------------------------------------------------------
 
-  <V extends Item> V addItem(String identifier, V item);
-
   <V extends Item & IItemEntry> V addItem(V item);
 
   <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Function<T, V> factory, Set<T> types);
@@ -61,8 +56,6 @@ public interface IRegistryRegistrar {
   // --------------------------------------------------------------------------
   // - Biome
   // --------------------------------------------------------------------------
-
-  <V extends Biome> V addBiome(String identifier, V item);
 
   <V extends Biome & IBiomeEntry> V addBiome(V item);
 
@@ -72,8 +65,6 @@ public interface IRegistryRegistrar {
   // - Enchantment
   // --------------------------------------------------------------------------
 
-  <V extends Enchantment> V addEnchantment(String identifier, V entry);
-
   <V extends Enchantment & IEnchantmentEntry> V addEnchantment(V entry);
 
   <V extends Enchantment & IEnchantmentEntry, T extends Type<T>> Map<T, V> addEnchantment(Function<T, V> factory, Set<T> types);
@@ -81,8 +72,6 @@ public interface IRegistryRegistrar {
   // --------------------------------------------------------------------------
   // - Effect
   // --------------------------------------------------------------------------
-
-  <V extends Potion> V addEffect(String identifier, V entry);
 
   <V extends Potion & IEffectEntry> V addEffect(V entry);
 
@@ -92,18 +81,13 @@ public interface IRegistryRegistrar {
   // - Potion
   // --------------------------------------------------------------------------
 
-  <V extends PotionType> V addPotion(String identifier, V entry);
-
   <V extends PotionType & IPotionEntry> V addPotion(V entry);
-
 
   <V extends PotionType & IPotionEntry, T extends Type<T>> Map<T, V> addPotion(Function<T, V> factory, Set<T> types);
 
   // --------------------------------------------------------------------------
   // - Sound
   // --------------------------------------------------------------------------
-
-  <V extends SoundEvent> V addSound(String identifier, V entry);
 
   <V extends SoundEvent & ISoundEntry> V addSound(V entry);
 
@@ -114,8 +98,6 @@ public interface IRegistryRegistrar {
   // --------------------------------------------------------------------------
   // - Entity
   // --------------------------------------------------------------------------
-
-  <V extends EntityEntry> V addEntity(String identifier, V entry);
 
   <V extends EntityEntry & IEntityEntry> V addEntity(V entry);
 

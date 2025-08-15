@@ -24,15 +24,15 @@ public abstract class MixinItem extends IForgeRegistryEntry.Impl<Item> implement
   @Unique
   @Mutable
   @Final
-  protected Settings terraFirmaGreg$settings;
+  protected ItemSettings terraFirmaGreg$settings;
 
   @Inject(method = "<init>", at = @At(value = "TAIL"), remap = false)
   public void onConstruct(CallbackInfo ci) {
-    this.terraFirmaGreg$settings = Settings.of();
+    this.terraFirmaGreg$settings = ItemSettings.of();
   }
 
   @Override
-  public Settings getSettings() {
+  public ItemSettings getSettings() {
     return terraFirmaGreg$settings;
   }
 

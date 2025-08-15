@@ -73,7 +73,7 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
   }
 
   public BlockBlastFurnace() {
-    super(Settings.of(Material.IRON));
+    super(BlockSettings.of(Material.IRON));
 
     getSettings()
       .registryKey("blast_furnace")

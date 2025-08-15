@@ -29,7 +29,7 @@ public class BlockOvenChimney extends BaseBlock {
       .union(new AxisAlignedBB(0.75D, 0.0D, 0.25D, 1.0D, 1.0D, 0.75D)));
 
   public BlockOvenChimney() {
-    super(Settings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
+    super(BlockSettings.of(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY));
 
     getSettings()
       .registryKey("oven/chimney")

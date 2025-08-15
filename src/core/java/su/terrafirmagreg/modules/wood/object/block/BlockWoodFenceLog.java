@@ -16,7 +16,7 @@ public class BlockWoodFenceLog extends BaseBlockFence implements IWoodEntry {
   protected final WoodType type;
 
   public BlockWoodFenceLog(WoodType type) {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     this.type = type;
 

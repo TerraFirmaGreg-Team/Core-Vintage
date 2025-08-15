@@ -142,7 +142,7 @@ public class EntityAnimalMongoose extends EntityAnimalMammal implements IHuntabl
   public static class EntityTypeAnimalMongoose extends BaseEntityType {
 
     public EntityTypeAnimalMongoose() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("mongoose")
         .entity(EntityAnimalMongoose.class, RenderAnimalMongoose::new)
         .egg(0xf9f50f, 0x90ec7f));

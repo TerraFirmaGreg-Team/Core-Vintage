@@ -16,7 +16,7 @@ public abstract class BlockWood extends BaseBlock implements IWoodEntry {
   protected final WoodType type;
 
   protected BlockWood(WoodType type, String variant) {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     this.type = type;
 

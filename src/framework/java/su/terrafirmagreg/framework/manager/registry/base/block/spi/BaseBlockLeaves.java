@@ -25,13 +25,13 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockLeaves extends BlockLeaves implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
   public BaseBlockLeaves() {
-    this(Settings.of(Material.LEAVES));
+    this(BlockSettings.of(Material.LEAVES));
   }
 
-  public BaseBlockLeaves(Settings settings) {
+  public BaseBlockLeaves(BlockSettings settings) {
 
     this.settings = settings;
     this.leavesFancy = true; // Fast / Fancy graphics works correctly

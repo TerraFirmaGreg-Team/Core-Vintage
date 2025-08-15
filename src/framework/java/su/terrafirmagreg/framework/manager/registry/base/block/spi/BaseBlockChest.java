@@ -38,17 +38,17 @@ import lombok.Getter;
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
 public abstract class BaseBlockChest extends BlockChest implements IBlockEntry, IProviderTile, IFluidloggable {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
   public BaseBlockChest() {
-    this(Type.BASIC, Settings.of(Material.WOOD));
+    this(Type.BASIC, BlockSettings.of(Material.WOOD));
   }
 
   public BaseBlockChest(Type chestType) {
-    this(chestType, Settings.of(Material.WOOD));
+    this(chestType, BlockSettings.of(Material.WOOD));
   }
 
-  public BaseBlockChest(Type chestType, Settings settings) {
+  public BaseBlockChest(Type chestType, BlockSettings settings) {
     super(chestType);
 
     this.settings = settings;
@@ -101,7 +101,7 @@ public abstract class BaseBlockChest extends BlockChest implements IBlockEntry, 
 
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+    return this.settings.getIsReplaceable().apply(worldIn, pos);
   }
 
   @Override

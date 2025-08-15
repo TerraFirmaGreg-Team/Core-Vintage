@@ -63,7 +63,7 @@ public class BlockPowderKeg extends BaseBlockContainer {
   private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
   public BlockPowderKeg() {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     getSettings()
       .registryKey("powderkeg")

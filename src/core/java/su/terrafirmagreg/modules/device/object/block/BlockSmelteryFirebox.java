@@ -48,7 +48,7 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellowsConsumerBlock, IProviderTile {
 
   public BlockSmelteryFirebox() {
-    super(Settings.of(Material.IRON));
+    super(BlockSettings.of(Material.IRON));
 
     getSettings()
       .registryKey("smeltery/firebox")

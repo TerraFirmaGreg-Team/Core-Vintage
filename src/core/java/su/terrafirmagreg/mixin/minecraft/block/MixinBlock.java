@@ -21,7 +21,7 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
   @Unique
   @Mutable
   @Final
-  protected Settings terraFirmaGreg$settings;
+  protected BlockSettings terraFirmaGreg$settings;
 
 
   @Inject(
@@ -31,12 +31,12 @@ public abstract class MixinBlock extends IForgeRegistryEntry.Impl<Block> impleme
     )
   )
   public void onConstruct(Material blockMaterialIn, MapColor blockMapColorIn, CallbackInfo ci) {
-    this.terraFirmaGreg$settings = Settings.of(blockMaterialIn, blockMapColorIn);
+    this.terraFirmaGreg$settings = BlockSettings.of(blockMaterialIn, blockMapColorIn);
   }
 
 
   @Override
-  public Settings getSettings() {
+  public BlockSettings getSettings() {
     return terraFirmaGreg$settings;
   }
 //

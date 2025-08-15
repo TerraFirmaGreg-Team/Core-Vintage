@@ -199,7 +199,7 @@ public class EntityAnimalPanther extends EntityAnimalMammal implements IPredator
   public static class EntityTypeAnimalPanther extends BaseEntityType {
 
     public EntityTypeAnimalPanther() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("panther")
         .entity(EntityAnimalPanther.class, RenderAnimalPanther::new)
         .egg(0x000066, 0x000000));

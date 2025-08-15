@@ -10,9 +10,9 @@ import lombok.Getter;
 @Getter
 public abstract class BaseEnchantment extends Enchantment implements IEnchantmentEntry {
 
-  protected final Settings settings;
+  protected final EnchantmentSettings settings;
 
-  public BaseEnchantment(Settings settings) {
+  public BaseEnchantment(EnchantmentSettings settings) {
     super(settings.getRarity(), settings.getType(), settings.getSlots());
 
     this.settings = settings;

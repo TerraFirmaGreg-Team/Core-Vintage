@@ -7,14 +7,14 @@ import lombok.Getter;
 @Getter
 public abstract class BaseFeature implements IFeatureEntry {
 
-  protected final Settings settings;
+  protected final FeatureSettings settings;
 
   protected BaseFeature() {
-    this(Settings.of());
+    this(FeatureSettings.of());
 
   }
 
-  protected BaseFeature(Settings settings) {
+  protected BaseFeature(FeatureSettings settings) {
     this.settings = settings;
 
   }

@@ -1098,11 +1098,4 @@ public class FeatureWoodType extends BaseFeature {
 //
   }
 
-
-  public FeatureWoodType() {
-    super(Settings.of()
-      .name("wood_type")
-    );
-
-  }
 }

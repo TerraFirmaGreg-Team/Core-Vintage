@@ -49,7 +49,7 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
 
 
   public BlockSoilGrass(SoilType type) {
-    super(Settings.of(Material.GRASS), type);
+    super(BlockSettings.of(Material.GRASS), type);
 
     getSettings()
       .registryKey(type.getRegistryKey("grass"))

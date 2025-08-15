@@ -343,7 +343,7 @@ public class EntityAnimalPolarBear extends EntityPolarBear implements IAnimal, I
   public static class EntityTypeAnimalPolarBear extends BaseEntityType {
 
     public EntityTypeAnimalPolarBear() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("polarbear")
         .entity(EntityAnimalPolarBear.class, RenderAnimalPolarBear::new)
         .egg(0xF1FFF1, 0xA0A0A0));

@@ -14,9 +14,9 @@ import lombok.Getter;
 @Getter
 public abstract class BaseBlockGrassPath extends BlockGrassPath implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockGrassPath(Settings settings) {
+  public BaseBlockGrassPath(BlockSettings settings) {
     this.settings = settings;
   }
 

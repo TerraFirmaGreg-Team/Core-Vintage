@@ -1,6 +1,8 @@
 package su.terrafirmagreg.framework.module.api;
 
-import su.terrafirmagreg.framework.module.ModuleMap;
+import su.terrafirmagreg.api.helper.LoggingHelper;
+
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
@@ -12,11 +14,13 @@ public interface IModuleManager {
 
   String getModId();
 
-  ModuleMap getMap();
+  Map<Class<?>, IModuleEntry> getMap();
 
   IModuleRegistrar getRegistrar();
 
-  IModuleService getService();
+  void onConstruction(FMLConstructionEvent event);
+
+  LoggingHelper getLogger();
 
 
 }

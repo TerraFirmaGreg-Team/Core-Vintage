@@ -10,7 +10,7 @@ import net.minecraft.block.material.Material;
 public class BlockAggregate extends BaseBlockFalling implements IBlockEntry {
 
   public BlockAggregate() {
-    super(Settings.of(Material.SAND));
+    super(BlockSettings.of(Material.SAND));
 
     getSettings()
       .registryKey("aggregate")

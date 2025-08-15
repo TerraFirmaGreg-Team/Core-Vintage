@@ -19,9 +19,9 @@ import lombok.Getter;
 public abstract class BaseBlockFalling extends BlockFalling implements IBlockEntry {
 
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockFalling(Settings settings) {
+  public BaseBlockFalling(BlockSettings settings) {
     super(settings.getMaterial());
 
     this.settings = settings;
@@ -34,7 +34,7 @@ public abstract class BaseBlockFalling extends BlockFalling implements IBlockEnt
 
   @Override
   public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    return this.settings.isReplaceable() || super.isReplaceable(worldIn, pos);
+    return this.settings.getIsReplaceable().apply(worldIn, pos);
   }
 
   @Override

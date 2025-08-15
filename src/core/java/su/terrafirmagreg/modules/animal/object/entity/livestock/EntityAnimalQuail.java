@@ -120,7 +120,7 @@ public class EntityAnimalQuail extends EntityAnimalChicken implements ILivestock
   public static class EntityTypeAnimalQuail extends BaseEntityType {
 
     public EntityTypeAnimalQuail() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("quail")
         .entity(EntityAnimalQuail.class, RenderAnimalQuail::new)
         .egg(0x237ddc, 0xe3e36d));

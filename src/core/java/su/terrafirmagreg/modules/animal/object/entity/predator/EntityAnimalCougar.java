@@ -116,7 +116,7 @@ public class EntityAnimalCougar extends EntityAnimalPanther implements IPredator
   public static class EntityTypeAnimalCougar extends BaseEntityType {
 
     public EntityTypeAnimalCougar() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("cougar")
         .entity(EntityAnimalCougar.class, RenderAnimalCougar::new)
         .egg(0x817a00, 0xdcd889));

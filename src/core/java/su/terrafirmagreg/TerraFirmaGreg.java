@@ -1,6 +1,7 @@
 package su.terrafirmagreg;
 
 import su.terrafirmagreg.framework.Framework;
+import su.terrafirmagreg.framework.module.api.IModuleRegistrar;
 import su.terrafirmagreg.modules.animal.ModuleAnimal;
 import su.terrafirmagreg.modules.core.ModuleCore;
 import su.terrafirmagreg.modules.device.ModuleDevice;
@@ -34,7 +35,12 @@ import static su.terrafirmagreg.Tags.MOD_VERSION;
 import static su.terrafirmagreg.Tags.SERVER_PROXY;
 
 
-@Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = DEPENDENCIES)
+@Mod(
+  modid = MOD_ID,
+  name = MOD_NAME,
+  version = MOD_VERSION,
+  dependencies = DEPENDENCIES
+)
 public class TerraFirmaGreg extends Framework {
 
   @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
@@ -46,23 +52,27 @@ public class TerraFirmaGreg extends Framework {
 
   public TerraFirmaGreg() {
     super(MOD_ID, MOD_NAME);
-
-    addModule(new ModuleCore());
-    addModule(new ModuleMetal());
-    addModule(new ModuleRock());
-    addModule(new ModuleSoil());
-    addModule(new ModuleWood());
-    addModule(new ModuleDevice());
-    addModule(new ModuleAnimal());
-    addModule(new ModuleFood());
-    addModule(new ModuleWorld());
   }
+
+  @Override
+  public void onModuleRegistrar(IModuleRegistrar registrar) {
+
+    registrar.addModule(new ModuleCore());
+    registrar.addModule(new ModuleMetal());
+    registrar.addModule(new ModuleRock());
+    registrar.addModule(new ModuleSoil());
+    registrar.addModule(new ModuleWood());
+    registrar.addModule(new ModuleDevice());
+    registrar.addModule(new ModuleAnimal());
+    registrar.addModule(new ModuleFood());
+    registrar.addModule(new ModuleWorld());
+  }
+
 
   @EventHandler
   public void onConstruction(FMLConstructionEvent event) {
 
     this.setup(event);
-    this.routeEvent(event);
   }
 
   @EventHandler

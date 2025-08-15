@@ -5,6 +5,7 @@ import su.terrafirmagreg.api.util.CapabilityUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.StackUtils;
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
+import su.terrafirmagreg.framework.module.spi.StateEvent;
 import su.terrafirmagreg.modules.device.feature.sharpness.capability.CapabilitySharpness;
 import su.terrafirmagreg.modules.device.feature.sharpness.capability.CapabilitySharpness.Handler;
 
@@ -159,14 +160,14 @@ public class FeatureSharpness extends BaseFeature {
     }
   }
 
-  @Override
-  public void onPreInit() {
+  @SubscribeEvent
+  public static void onPreInit(StateEvent.PreInitialization event) {
 
     CapabilitySharpness.register();
   }
 
-  @Override
-  public void onPostInit() {
+  @SubscribeEvent
+  public static void onPostInit(StateEvent.PostInitialization event) {
 
     Handler.init();
   }

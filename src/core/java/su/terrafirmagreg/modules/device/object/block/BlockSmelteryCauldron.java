@@ -39,7 +39,7 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProviderTile {
 
   public BlockSmelteryCauldron() {
-    super(Settings.of(Material.IRON));
+    super(BlockSettings.of(Material.IRON));
 
     getSettings()
       .registryKey("smeltery/cauldron")

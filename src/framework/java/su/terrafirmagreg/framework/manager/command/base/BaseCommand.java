@@ -8,11 +8,9 @@ import su.terrafirmagreg.framework.manager.command.api.ICommandEntry;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -24,16 +22,14 @@ import java.util.List;
 @Getter
 public abstract class BaseCommand extends CommandBase implements ICommandEntry {
 
-  protected final Settings settings;
-
-  @Setter
-  private ResourceLocation registryName;
+  protected final CommandSettings settings;
 
   public BaseCommand() {
-    this(Settings.of());
+    this(CommandSettings.of());
+
   }
 
-  public BaseCommand(Settings settings) {
+  public BaseCommand(CommandSettings settings) {
 
     this.settings = settings;
   }
@@ -41,7 +37,7 @@ public abstract class BaseCommand extends CommandBase implements ICommandEntry {
   @Override
   public String getName() {
 
-    return settings.getName();
+    return settings.getRegistryKey();
   }
 
   @Override
@@ -64,7 +60,7 @@ public abstract class BaseCommand extends CommandBase implements ICommandEntry {
   }
 
   public String getTranslationKey() {
-    return ModUtils.localize(LocalizeKeys.COMMAND, this.getRegistryName());
+    return ModUtils.localize(LocalizeKeys.COMMAND, getSettings().getIdentifier());
   }
 
   @Override
@@ -78,6 +74,4 @@ public abstract class BaseCommand extends CommandBase implements ICommandEntry {
 
     return super.getTabCompletions(server, sender, args, pos);
   }
-
-
 }

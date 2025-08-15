@@ -12,9 +12,9 @@ import java.util.Random;
 @Getter
 public abstract class BaseBiome extends Biome implements IBiomeEntry {
 
-  protected final Settings settings;
+  protected final BiomeSettings settings;
 
-  public BaseBiome(Settings settings) {
+  public BaseBiome(BiomeSettings settings) {
     super(settings.build());
 
     this.settings = settings;

@@ -40,7 +40,7 @@ public class BlockLeafMat extends BaseBlockContainer {
   public static final AxisAlignedBB MAT_SHAPE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
 
   public BlockLeafMat() {
-    super(Settings.of(Material.PLANTS, MapColor.GREEN));
+    super(BlockSettings.of(Material.PLANTS, MapColor.GREEN));
 
     getSettings()
       .registryKey("leaf_mat")

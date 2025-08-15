@@ -480,7 +480,7 @@ public class EntityAnimalOcelot extends EntityOcelot implements IAnimal, ILivest
   public static class EntityTypeAnimalOcelot extends BaseEntityType {
 
     public EntityTypeAnimalOcelot() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("ocelot")
         .entity(EntityAnimalOcelot.class, RenderAnimalOcelot::new)
         .egg(0x3527FA, 0x7F23A0));

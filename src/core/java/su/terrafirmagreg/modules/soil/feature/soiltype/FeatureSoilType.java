@@ -30,11 +30,4 @@ public class FeatureSoilType extends BaseFeature {
       .build();
   }
 
-
-  public FeatureSoilType() {
-    super(Settings.of()
-      .name("soil_type")
-    );
-
-  }
 }

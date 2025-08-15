@@ -25,7 +25,7 @@ import java.util.Random;
 public class BlockPuddle extends BaseBlock {
 
   public BlockPuddle() {
-    super(Settings.of(Material.GROUND));
+    super(BlockSettings.of(Material.GROUND));
 
     getSettings()
       .registryKey("puddle")

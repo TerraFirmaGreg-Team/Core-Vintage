@@ -16,11 +16,9 @@ public class ModuleWorld extends BaseModule {
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWorld.class);
 
   public ModuleWorld() {
-    super("world");
-
-    enableRegistry();
-    enableNetwork();
-    enableFeature();
+    super(ModuleSettings.of()
+      .registryKey("world")
+    );
   }
 
   @Override

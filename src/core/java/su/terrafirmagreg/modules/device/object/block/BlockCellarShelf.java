@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class BlockCellarShelf extends BaseBlockContainer {
 
   public BlockCellarShelf() {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     getSettings()
       .registryKey("cellar/shelf")

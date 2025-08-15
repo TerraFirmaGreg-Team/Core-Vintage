@@ -28,8 +28,7 @@ import java.util.Objects;
 public class FeatureSinkOrSwim extends BaseFeature {
 
   public FeatureSinkOrSwim() {
-    super(Settings.of()
-      .name("sink_or_swim")
+    super(FeatureSettings.of()
       .enabled(ConfigCore.FEATURE.SINK_OR_SWIM.enabled)
     );
   }

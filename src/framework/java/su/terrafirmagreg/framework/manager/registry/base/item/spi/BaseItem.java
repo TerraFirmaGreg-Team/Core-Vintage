@@ -24,15 +24,15 @@ import java.util.ArrayList;
 @Getter
 public abstract class BaseItem extends Item implements IItemEntry {
 
-  protected final Settings settings;
+  protected final ItemSettings settings;
 
-  public BaseItem(Settings settings) {
+  public BaseItem(ItemSettings settings) {
     this.settings = settings;
 
   }
 
   public BaseItem() {
-    this(Settings.of());
+    this(ItemSettings.of());
 
   }
 

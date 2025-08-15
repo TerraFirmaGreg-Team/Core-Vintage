@@ -23,7 +23,7 @@ public abstract class BaseBlockGroundcover extends BaseBlock {
 
   protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.9, 0.2, 0.9);
 
-  public BaseBlockGroundcover(Settings settings) {
+  public BaseBlockGroundcover(BlockSettings settings) {
     super(settings);
 
     getSettings()

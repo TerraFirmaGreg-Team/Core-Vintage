@@ -234,7 +234,7 @@ public class EntityAnimalLion extends EntityAnimalMammal implements IPredator {
   public static class EntityTypeAnimalLion extends BaseEntityType {
 
     public EntityTypeAnimalLion() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("lion")
         .entity(EntityAnimalLion.class, RenderAnimalLion::new)
         .egg(0xDAA520, 0xA0522D));

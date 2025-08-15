@@ -26,12 +26,9 @@ public class ModuleAnimal extends BaseModule {
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class);
 
   public ModuleAnimal() {
-    super("animal");
-
-    enableRegistry();
-    enableNetwork();
-    enablePlugin();
-    enableFeature();
+    super(ModuleSettings.of()
+      .registryKey("animal")
+    );
   }
 
 

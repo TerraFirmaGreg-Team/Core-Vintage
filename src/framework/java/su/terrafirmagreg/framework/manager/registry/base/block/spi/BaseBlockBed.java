@@ -11,9 +11,9 @@ import lombok.Getter;
 @Getter
 public abstract class BaseBlockBed extends BlockBed implements IBlockEntry {
 
-  protected final Settings settings;
+  protected final BlockSettings settings;
 
-  public BaseBlockBed(Settings settings) {
+  public BaseBlockBed(BlockSettings settings) {
     this.settings = settings;
   }
 

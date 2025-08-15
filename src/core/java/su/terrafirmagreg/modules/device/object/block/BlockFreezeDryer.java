@@ -27,7 +27,7 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 public class BlockFreezeDryer extends BaseBlockContainer {
 
   public BlockFreezeDryer() {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
 
     getSettings()
       .registryKey("freeze_dryer")

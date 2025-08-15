@@ -19,16 +19,16 @@ public abstract class BaseEffect extends Potion implements IEffectEntry {
 
   //Offsets provided in case it becomes a good idea to switch to a sprite sheet format and not individual textures
 
-  protected final Settings settings;
+  protected final EffectSettings settings;
 
   protected int xOffset = 0;
   protected int yOffset = 0;
 
   protected BaseEffect() {
-    this(Settings.of());
+    this(EffectSettings.of());
   }
 
-  protected BaseEffect(Settings settings) {
+  protected BaseEffect(EffectSettings settings) {
     super(settings.isBadEffect(), settings.getLiquidColor());
 
     this.settings = settings;

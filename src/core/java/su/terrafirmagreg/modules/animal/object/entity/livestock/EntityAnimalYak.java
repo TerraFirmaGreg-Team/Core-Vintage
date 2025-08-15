@@ -126,7 +126,7 @@ public class EntityAnimalYak extends EntityAnimalCow implements ILivestock {
   public static class EntityTypeAnimalYak extends BaseEntityType {
 
     public EntityTypeAnimalYak() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("yak")
         .entity(EntityAnimalYak.class, RenderAnimalYak::new)
         .egg(0x837669, 0x3e3d7c));

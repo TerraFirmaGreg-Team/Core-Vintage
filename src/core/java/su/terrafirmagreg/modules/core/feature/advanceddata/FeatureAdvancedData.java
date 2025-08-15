@@ -27,8 +27,7 @@ public class FeatureAdvancedData extends BaseFeature {
   private static final String HEADER_PRE = TextFormatting.GRAY + "  -"; //§7
 
   public FeatureAdvancedData() {
-    super(Settings.of()
-      .name("Advanced Data")
+    super(FeatureSettings.of()
       .enabled(ConfigCore.FEATURE.ADVANCED_DATA.enable));
   }
 

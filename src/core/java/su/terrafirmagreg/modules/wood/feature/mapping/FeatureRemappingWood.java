@@ -12,13 +12,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class FeatureRemappingWood extends BaseFeature {
 
-  public FeatureRemappingWood() {
-    super(Settings.of()
-      .name("remapping")
-    );
-
-  }
-
 
   @SubscribeEvent
   public static void onBlockRemapping(final RegistryEvent.MissingMappings<Block> event) {

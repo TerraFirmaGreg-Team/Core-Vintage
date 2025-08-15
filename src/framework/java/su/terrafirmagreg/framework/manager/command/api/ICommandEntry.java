@@ -2,52 +2,40 @@ package su.terrafirmagreg.framework.manager.command.api;
 
 import su.terrafirmagreg.api.util.CommandUtils.Level;
 import su.terrafirmagreg.framework.manager.api.IBaseEntry;
-import su.terrafirmagreg.framework.manager.command.api.ICommandEntry.Settings;
+import su.terrafirmagreg.framework.manager.command.api.ICommandEntry.CommandSettings;
 
 import net.minecraft.command.CommandBase;
-import net.minecraft.util.ResourceLocation;
 
 import lombok.Getter;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface ICommandEntry extends IBaseEntry<Settings, CommandBase> {
+public interface ICommandEntry extends IBaseEntry<CommandSettings, CommandBase> {
 
-
-  @Nullable
-  ResourceLocation getRegistryName();
-
-  void setRegistryName(ResourceLocation name);
 
   @Getter
-  class Settings extends BaseSettings<Settings> {
+  class CommandSettings extends BaseSettings<CommandSettings> {
 
     final List<String> aliases = new ArrayList<>();
 
-    String name;
     Level level = Level.ALL;
 
-    protected Settings() {}
+    protected CommandSettings() {}
 
-    public static Settings of() {
-      return new Settings();
+    public static CommandSettings of() {
+      return new CommandSettings();
     }
 
-    public Settings name(String name) {
-      this.name = name;
-      return this;
-    }
 
-    public Settings level(Level level) {
+    public CommandSettings level(Level level) {
       this.level = level;
-      return this;
+      return this.self();
     }
 
-    public Settings alias(String alias) {
+    public CommandSettings alias(String alias) {
       this.aliases.add(alias);
-      return this;
+      return this.self();
     }
   }
 }

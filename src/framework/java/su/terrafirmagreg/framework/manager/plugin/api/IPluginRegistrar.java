@@ -1,13 +1,8 @@
 package su.terrafirmagreg.framework.manager.plugin.api;
 
-import su.terrafirmagreg.framework.manager.plugin.PluginMap;
-import su.terrafirmagreg.framework.module.api.IModule;
+import su.terrafirmagreg.framework.manager.api.IBaseRegistrar;
 
-public interface IPluginRegistrar {
+public interface IPluginRegistrar extends IBaseRegistrar<IPluginEntry> {
 
-  IModule getModule();
-
-  PluginMap getMap();
-
-  <T extends IPluginEntry> void addPlugin(T plugin);
+  <T extends IPluginEntry> void addPlugin(T entry);
 }

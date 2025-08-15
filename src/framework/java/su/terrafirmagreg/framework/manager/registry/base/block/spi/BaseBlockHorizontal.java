@@ -18,7 +18,7 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 public abstract class BaseBlockHorizontal extends BaseBlock {
 
 
-  public BaseBlockHorizontal(Settings settings) {
+  public BaseBlockHorizontal(BlockSettings settings) {
     super(settings);
 
     setDefaultState(getBlockState().getBaseState()

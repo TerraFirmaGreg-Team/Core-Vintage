@@ -30,7 +30,7 @@ import static su.terrafirmagreg.api.data.Properties.DirectionProp.HORIZONTAL;
 public class BlockBellows extends BaseBlockContainer {
 
   public BlockBellows() {
-    super(Settings.of(Material.CIRCUITS, MapColor.GRAY));
+    super(BlockSettings.of(Material.CIRCUITS, MapColor.GRAY));
 
     getSettings()
       .registryKey("bellows")

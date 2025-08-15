@@ -485,7 +485,7 @@ public class EntityAnimalRabbit extends EntityAnimalMammal implements IHuntable 
   public static class EntityTypeAnimalRabbit extends BaseEntityType {
 
     public EntityTypeAnimalRabbit() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("rabbit")
         .entity(EntityAnimalRabbit.class, RenderAnimalRabbit::new)
         .egg(0x885040, 0x462612));

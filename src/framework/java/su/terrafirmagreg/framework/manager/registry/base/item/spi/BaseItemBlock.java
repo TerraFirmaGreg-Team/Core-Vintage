@@ -19,12 +19,12 @@ import lombok.Getter;
 @Getter
 public class BaseItemBlock extends ItemBlock implements IItemEntry {
 
-  protected final Settings settings;
+  protected final ItemSettings settings;
 
   public BaseItemBlock(Block block) {
     super(block);
 
-    this.settings = Settings.of(block);
+    this.settings = ItemSettings.of(block);
   }
 
 

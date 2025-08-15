@@ -539,7 +539,7 @@ public class EntityAnimalLlama extends EntityLlama implements IAnimal, ILivestoc
   public static class EntityTypeAnimalLlama extends BaseEntityType {
 
     public EntityTypeAnimalLlama() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("llama")
         .entity(EntityAnimalLlama.class, RenderAnimalLlama::new)
         .egg(0xA52A2A, 0xAA7722));

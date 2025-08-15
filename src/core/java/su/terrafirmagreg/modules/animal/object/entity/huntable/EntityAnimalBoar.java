@@ -142,7 +142,7 @@ public class EntityAnimalBoar extends EntityAnimalMammal implements IHuntable {
   public static class EntityTypeAnimalBoar extends BaseEntityType {
 
     public EntityTypeAnimalBoar() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("boar")
         .entity(EntityAnimalBoar.class, RenderAnimalBoar::new)
         .egg(0x463c09, 0xe39ad8));

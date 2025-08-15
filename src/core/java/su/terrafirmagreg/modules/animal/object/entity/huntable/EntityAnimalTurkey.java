@@ -137,7 +137,7 @@ public class EntityAnimalTurkey extends EntityAnimalBase implements IHuntable {
   public static class EntityTypeAnimalTurkey extends BaseEntityType {
 
     public EntityTypeAnimalTurkey() {
-      super(Settings.of()
+      super(EntitySettings.of()
         .registryKey("turkey")
         .entity(EntityAnimalTurkey.class, RenderAnimalTurkey::new)
         .egg(0xad1d1d, 0xeaa659));

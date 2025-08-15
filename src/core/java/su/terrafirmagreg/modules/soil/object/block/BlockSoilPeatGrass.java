@@ -31,7 +31,7 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.WEST;
 public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor, IGrassBlock {
 
   public BlockSoilPeatGrass() {
-    super(Settings.of(Material.GRASS));
+    super(BlockSettings.of(Material.GRASS));
 
     getSettings()
       .registryKey("peat_grass")

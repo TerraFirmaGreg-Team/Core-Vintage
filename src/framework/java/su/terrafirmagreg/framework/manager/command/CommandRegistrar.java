@@ -1,35 +1,28 @@
 package su.terrafirmagreg.framework.manager.command;
 
-import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.framework.manager.command.CommandMap.CommandWrapper;
+import su.terrafirmagreg.framework.manager.command.api.ICommandEntry;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
-import su.terrafirmagreg.framework.module.api.IModule;
+import su.terrafirmagreg.framework.module.api.IModuleEntry;
 
-import net.minecraft.command.ICommand;
-import net.minecraft.util.ResourceLocation;
+import com.google.common.collect.Multimap;
 
 import lombok.Getter;
 
 @Getter
 public class CommandRegistrar implements ICommandRegistrar {
 
-  private final IModule module;
-  private final CommandMap map;
+  private final IModuleEntry module;
+  private final Multimap<Class<?>, ICommandEntry> mapEntry;
 
   public CommandRegistrar(CommandManager manager) {
 
     this.module = manager.getModule();
-    this.map = manager.getMap();
-  }
-
-  public ResourceLocation getIdentifier(String identifier) {
-
-    return ModUtils.resource(module.getIdentifier(), identifier);
+    this.mapEntry = manager.getMapEntry();
   }
 
   @Override
-  public <T extends ICommand> void addCommand(T command) {
-    var commandClass = command.getClass();
-    this.map.put(commandClass, CommandWrapper.of(getIdentifier(command.getName()), command));
+  public <E extends ICommandEntry> void addCommand(E entry) {
+
+    addEntry(entry);
   }
 }

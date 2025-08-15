@@ -18,7 +18,7 @@ public class BlockWoodBookshelf extends BaseBlockBookshelf implements IProviderB
   protected final WoodType type;
 
   public BlockWoodBookshelf(WoodType type) {
-    super(Settings.of(Material.WOOD));
+    super(BlockSettings.of(Material.WOOD));
     this.type = type;
 
     getSettings()

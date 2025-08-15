@@ -5,6 +5,7 @@ import su.terrafirmagreg.framework.manager.registry.RegistryManager;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -52,6 +53,11 @@ public class BaseItemGroup extends CreativeTabs {
   public static BaseItemGroup of(ResourceLocation identifier, ResourceLocation icon) {
 
     return of(ModUtils.localize(identifier), icon);
+  }
+
+  public static BaseItemGroup of(ResourceLocation identifier, Item icon) {
+
+    return of(ModUtils.localize(identifier), () -> new ItemStack(icon));
   }
 
   public static BaseItemGroup of(String identifier, ResourceLocation icon) {

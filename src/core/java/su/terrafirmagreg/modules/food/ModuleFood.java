@@ -14,9 +14,9 @@ public class ModuleFood extends BaseModule {
   public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleFood.class);
 
   public ModuleFood() {
-    super("food");
-
-    enableRegistry();
+    super(ModuleSettings.of()
+      .registryKey("food")
+    );
   }
 
   @Override

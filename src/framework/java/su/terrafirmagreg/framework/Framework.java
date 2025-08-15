@@ -1,7 +1,6 @@
 package su.terrafirmagreg.framework;
 
 import su.terrafirmagreg.api.client.GuiHandler;
-import su.terrafirmagreg.api.library.EventStateWrapper;
 import su.terrafirmagreg.api.util.AnnotationUtils;
 import su.terrafirmagreg.framework.module.ModuleManager;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
@@ -28,6 +27,7 @@ import lombok.Getter;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 
 @Getter
@@ -37,7 +37,7 @@ public abstract class Framework {
   public static String modName;
 
   @SuppressWarnings("rawtypes")
-  private final Map<Class<? extends FMLStateEvent>, EventStateWrapper> wrapperMap;
+  private final Map<Class<? extends FMLStateEvent>, Consumer> wrapperMap;
   private final IModuleManager manager;
 
 
@@ -49,21 +49,20 @@ public abstract class Framework {
     this.wrapperMap = new Object2ObjectOpenHashMap<>();
 
     initializeEventWrappers();
-    MinecraftForge.EVENT_BUS.register(this);
   }
 
   public abstract void onModuleRegistrar(IModuleRegistrar registrar);
 
-  protected void setup(FMLConstructionEvent event) {
-    this.onModuleRegistrar(this.manager.getRegistrar());
-    this.manager.onConstruction(event);
-    AnnotationUtils.setAsmData(event.getASMHarvestedData());
-    FluidRegistry.enableUniversalBucket();
-    GuiHandler.enableGui();
-  }
-
 
   private void initializeEventWrappers() {
+
+    registerEventWrapper(FMLConstructionEvent.class, event -> {
+      this.onModuleRegistrar(this.manager.getRegistrar());
+      this.manager.onConstruction();
+      AnnotationUtils.setAsmData(event.getASMHarvestedData());
+      FluidRegistry.enableUniversalBucket();
+      GuiHandler.enableGui();
+    });
 
     registerEventWrapper(FMLPreInitializationEvent.class, event -> MinecraftForge.EVENT_BUS.post(new StateEvent.PreInitialization()));
 
@@ -84,7 +83,7 @@ public abstract class Framework {
     registerEventWrapper(FMLServerStoppedEvent.class, event -> MinecraftForge.EVENT_BUS.post(new StateEvent.ServerStopped()));
   }
 
-  private <T extends FMLStateEvent> void registerEventWrapper(Class<T> eventClass, EventStateWrapper<T> wrapper) {
+  private <T extends FMLStateEvent> void registerEventWrapper(Class<T> eventClass, Consumer<T> wrapper) {
 
     wrapperMap.put(eventClass, wrapper);
   }
@@ -94,10 +93,10 @@ public abstract class Framework {
     var eventClass = event.getClass();
 
     //noinspection unchecked
-    EventStateWrapper<E> route = Optional.ofNullable(wrapperMap.get(eventClass))
+    Consumer<E> route = Optional.ofNullable(wrapperMap.get(eventClass))
       .orElseThrow(() -> new IllegalArgumentException("No route found for event: " + eventClass));
 
-    route.route(event);
+    route.accept(event);
   }
 
 

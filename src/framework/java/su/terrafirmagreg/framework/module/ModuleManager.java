@@ -12,7 +12,6 @@ import su.terrafirmagreg.framework.module.api.IModuleManager;
 import su.terrafirmagreg.framework.module.api.IModuleRegistrar;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 
@@ -50,7 +49,7 @@ public class ModuleManager implements IModuleManager {
 
 
   @Override
-  public void onConstruction(FMLConstructionEvent event) {
+  public void onConstruction() {
     this.fireEvent(module -> {
       var settings = module.getSettings();
       module.getLogger().debug("Construction start");
@@ -84,7 +83,7 @@ public class ModuleManager implements IModuleManager {
         module.getLogger().debug("Construction command");
         module.onCommandRegistrar(CommandManager.of(module).getRegistrar());
       }
-      
+
       module.getLogger().debug("Construction complete");
     });
   }

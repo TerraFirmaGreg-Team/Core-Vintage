@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.dries007.firmalife.FirmaLife;
 import net.dries007.firmalife.init.KnappingFL;
 import net.dries007.firmalife.registry.BlocksFL;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.client.gui.GuiKnapping;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 
@@ -44,7 +44,7 @@ public class FLGuiHandler implements IGuiHandler {
     Type type = Type.valueOf(ID);
     switch (type) {
       case KNAPPING_PUMPKIN:
-        return new GuiKnapping(container, player, KnappingType.LEATHER, PUMPKIN_TEXTURE);
+        return new GuiKnapping(container, player, KnappingTypes.LEATHER, PUMPKIN_TEXTURE);
       default:
         return null;
     }

@@ -1,6 +1,5 @@
 package su.terrafirmagreg.api.library;
 
-import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,7 +12,10 @@ import net.minecraft.world.IBlockAccess;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static su.terrafirmagreg.api.util.MathUtils.RNG;
 
@@ -111,6 +113,9 @@ public class MCColor extends Color {
     DYE_GRAY, DYE_PINK, DYE_LIME, DYE_YELLOW,
     DYE_LIGHT_BLUE, DYE_MAGENTA, DYE_ORANGE, DYE_WHITE
   };
+
+  public static final Set<MCColor> VANILLA_COLORS_SET = Arrays.stream(VANILLA_COLORS).collect(Collectors.toSet());
+
 
   /**
    * Constructs an MCColor from an ItemStack. Expects the stack to have already been checked for validity.
@@ -211,7 +216,7 @@ public class MCColor extends Color {
    * @return int: An integer based representation of a Color.
    */
   public static int getRandomColor() {
-    return new Color(MathUtils.RNG.nextFloat(), RNG.nextFloat(), RNG.nextFloat()).getRGB();
+    return new Color(RNG.nextFloat(), RNG.nextFloat(), RNG.nextFloat()).getRGB();
   }
 
   /**

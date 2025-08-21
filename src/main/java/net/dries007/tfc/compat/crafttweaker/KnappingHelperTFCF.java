@@ -10,6 +10,7 @@ import crafttweaker.api.item.IItemStack;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 
 import java.util.ArrayList;
@@ -84,27 +85,27 @@ public class KnappingHelperTFCF {
   public static KnappingType getType(String type) {
     switch (type) {
       case "pineapple_leather":
-        return KnappingType.PINEAPPLE_LEATHER;
+        return KnappingTypes.PINEAPPLE_LEATHER;
       case "burlap_cloth":
-        return KnappingType.BURLAP_CLOTH;
+        return KnappingTypes.BURLAP_CLOTH;
       case "wool_cloth":
-        return KnappingType.WOOL_CLOTH;
+        return KnappingTypes.WOOL_CLOTH;
       case "silk_cloth":
-        return KnappingType.SILK_CLOTH;
+        return KnappingTypes.SILK_CLOTH;
       case "sisal_cloth":
-        return KnappingType.SISAL_CLOTH;
+        return KnappingTypes.SISAL_CLOTH;
       case "cotton_cloth":
-        return KnappingType.COTTON_CLOTH;
+        return KnappingTypes.COTTON_CLOTH;
       case "linen_cloth":
-        return KnappingType.LINEN_CLOTH;
+        return KnappingTypes.LINEN_CLOTH;
       case "hemp_cloth":
-        return KnappingType.HEMP_CLOTH;
+        return KnappingTypes.HEMP_CLOTH;
       case "yucca_canvas":
-        return KnappingType.YUCCA_CANVAS;
+        return KnappingTypes.YUCCA_CANVAS;
       case "mud":
-        return KnappingType.MUD;
+        return KnappingTypes.MUD;
       case "flint":
-        return KnappingType.FLINT;
+        return KnappingTypes.FLINT;
     }
     return null;
   }

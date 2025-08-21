@@ -14,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.util.Helpers;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 public class TETurntable extends TETickableInventory {
 
   private static final List<Item> POTTERY = TFCRegistries.KNAPPING.getValuesCollection().stream()
-    .filter(recipe -> recipe.getType().equals(KnappingType.CLAY))
+    .filter(recipe -> recipe.getType().equals(KnappingTypes.CLAY))
     .map(recipe -> recipe.getOutput(ItemStack.EMPTY).getItem())
     .collect(Collectors.toList());
 

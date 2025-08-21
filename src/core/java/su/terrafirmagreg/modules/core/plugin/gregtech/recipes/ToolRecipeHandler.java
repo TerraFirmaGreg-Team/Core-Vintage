@@ -19,7 +19,7 @@ import gregtech.common.items.MetaItems;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 
 import static gregtech.api.recipes.RecipeMaps.MACERATOR_RECIPES;
@@ -340,12 +340,12 @@ public class ToolRecipeHandler {
     TFG_OREPREFIX_REGISTRY.forEach(s -> {
 
       // This covers all stone -> single tool head recipes
-      r.register(new KnappingRecipeStone(KnappingType.STONE, rockIn -> OreDictUnifier.get(s.getOrePrefix(), Materials.Stone), s.getStoneKnappingRecipe())
+      r.register(new KnappingRecipeStone(KnappingTypes.STONE, rockIn -> OreDictUnifier.get(s.getOrePrefix(), Materials.Stone), s.getStoneKnappingRecipe())
         .setRegistryName(MOD_ID, s.getOrePrefix().name().toLowerCase() + "_stone_head"));
 
       // This covers all flint -> single tool head recipes
       if (s.getOrePrefix() != OrePrefixCore.toolHeadHammer) {
-        r.register(new KnappingRecipeSimple(KnappingType.FLINT, true, OreDictUnifier.get(s.getOrePrefix(), Materials.Flint), s.getStoneKnappingRecipe())
+        r.register(new KnappingRecipeSimple(KnappingTypes.FLINT, true, OreDictUnifier.get(s.getOrePrefix(), Materials.Flint), s.getStoneKnappingRecipe())
           .setRegistryName(MOD_ID, s.getOrePrefix().name().toLowerCase() + "_flint_head"));
       }
     });

@@ -9,6 +9,7 @@ import net.minecraft.block.BlockButton;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumFacing;
@@ -27,6 +28,8 @@ import org.jetbrains.annotations.NotNull;
 import lombok.Getter;
 
 import javax.annotation.Nullable;
+
+import static su.terrafirmagreg.api.data.Properties.DirectionProp.DIRECTIONAL;
 
 @Getter
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
@@ -49,6 +52,12 @@ public abstract class BaseBlockButton extends BlockButton implements IBlockEntry
 
     this.wooden = wooden;
     this.settings = settings;
+  }
+
+  @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    IBlockState state = getStateFromMeta(meta);
+    return BlockButton.canPlaceBlock(worldIn, pos, facing) ? state.withProperty(DIRECTIONAL, facing) : state.withProperty(DIRECTIONAL, EnumFacing.DOWN);
   }
 
   @Override

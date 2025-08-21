@@ -1,9 +1,13 @@
 package su.terrafirmagreg.modules.soil.object.block;
 
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.ISoilEntry;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
-import su.terrafirmagreg.modules.soil.object.block.spi.BlockSoil;
 
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -14,19 +18,28 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.Nullable;
 
+import lombok.Getter;
+
 import java.util.Random;
 
-public class BlockSoilMud extends BlockSoil {
+@Getter
+public class BlockSoilMud extends BaseBlock implements ISoilEntry {
 
   protected static final AxisAlignedBB MUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.6D, 1.0D);
 
+  protected final SoilType type;
+
   public BlockSoilMud(SoilType type) {
-    super(type);
-
-    getSettings()
+    super(BlockSettings.of()
       .registryKey(type.getRegistryKey("mud"))
-      .addOreDict("mud");
+      .addOreDict("mud")
+      .material(Material.GROUND)
+      .sound(SoundType.GROUND)
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+      .hardness(2.0F)
+    );
 
+    this.type = type;
   }
 
   @Override

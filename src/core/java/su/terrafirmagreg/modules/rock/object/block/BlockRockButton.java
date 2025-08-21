@@ -1,0 +1,32 @@
+package su.terrafirmagreg.modules.rock.object.block;
+
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockButton;
+import su.terrafirmagreg.modules.rock.api.types.type.RockType;
+import su.terrafirmagreg.modules.rock.feature.rocktype.types.IRockEntry;
+
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+
+import lombok.Getter;
+
+@Getter
+public class BlockRockButton extends BaseBlockButton implements IRockEntry {
+
+  public static final String NAME = "button";
+  protected final RockType type;
+
+  public BlockRockButton(RockType type) {
+    super(false, BlockSettings.of()
+      .material(Material.CIRCUITS)
+      .registryKey(type.getRegistryKey(NAME))
+      .hardness(type.getHardness(6f))
+      .sound(SoundType.STONE)
+      .hardness(0.5f)
+      .addOreDict(NAME, "stone")
+      .addOreDict(NAME, "stone", type));
+
+    this.type = type;
+  }
+
+
+}

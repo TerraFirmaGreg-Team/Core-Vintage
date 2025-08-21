@@ -10,6 +10,7 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.button.GuiButtonKnapping;
 import net.dries007.tfc.objects.container.ContainerKnapping;
@@ -78,9 +79,9 @@ public class GuiKnapping extends GuiContainerTFC {
       ((ContainerKnapping) inventorySlots).requiresReset = false;
     }
     super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-    if (type == KnappingType.CLAY || type == KnappingType.FIRE_CLAY) {
+    if (type == KnappingTypes.CLAY || type == KnappingTypes.FIRE_CLAY) {
       GlStateManager.color(1, 1, 1, 1);
-      mc.getTextureManager().bindTexture(type == KnappingType.CLAY ? TFCGuiHandler.CLAY_DISABLED_TEXTURE : TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE);
+      mc.getTextureManager().bindTexture(type == KnappingTypes.CLAY ? TFCGuiHandler.CLAY_DISABLED_TEXTURE : TFCGuiHandler.FIRE_CLAY_DISABLED_TEXTURE);
       for (GuiButton button : buttonList) {
         if (!button.visible) {
           Gui.drawModalRectWithCustomSizedTexture(button.x, button.y, 0, 0, 16, 16, 16, 16);

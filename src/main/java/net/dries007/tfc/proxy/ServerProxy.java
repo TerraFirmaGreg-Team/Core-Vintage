@@ -1,6 +1,6 @@
 package net.dries007.tfc.proxy;
 
-import su.terrafirmagreg.api.exception.WrongSideException;
+import su.terrafirmagreg.api.library.exception.WrongSideException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;

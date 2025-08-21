@@ -127,61 +127,61 @@ public final class CapabilityHeat {
 
     public static void init() {
 
-      CUSTOM_ITEMS.put(IIngredient.of(Items.STICK), () -> CapabilityProviderHeat.of(null, 1, 40));
+      CUSTOM_ITEMS.put(IIngredient.of(Items.STICK), () -> CapabilityProviderHeat.of(1, 40));
 
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsFL.HONEYCOMB), () -> new CapabilityProviderHeat(null, 1, 600));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsFL.HONEYCOMB), () -> CapabilityProviderHeat.of(1, 600));
 
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.ARTISTS_CONK))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.SULPHUR_SHELF))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.TURKEY_TAIL))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.AMANITA))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.BLACK_POWDERPUFF))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.CHANTERELLE))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.DEATH_CAP))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.GIANT_CLUB))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.PARASOL_MUSHROOM))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.STINKHORN))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.WEEPING_MILK_CAP))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.WOOD_BLEWIT))), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.WOOLLY_GOMPHUS))), () -> new CapabilityProviderHeat(null, 1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.ARTISTS_CONK))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.SULPHUR_SHELF))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.TURKEY_TAIL))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(DefaultPlants.PORCINI))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.AMANITA))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.BLACK_POWDERPUFF))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.CHANTERELLE))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.DEATH_CAP))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.GIANT_CLUB))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.PARASOL_MUSHROOM))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.STINKHORN))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.WEEPING_MILK_CAP))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.WOOD_BLEWIT))), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockPlantTFC.get(TFCRegistries.PLANTS.getValue(PlantsTFCF.WOOLLY_GOMPHUS))), () -> CapabilityProviderHeat.of(1, 480));
 
-      CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL), () -> new CapabilityProviderHeat(null, 1, 1599));
-      CUSTOM_ITEMS.put(IIngredient.of(BlockLogTFCF.get(TFCRegistries.TREES.getValue(TreesTFCF.EUCALYPTUS))), () -> new CapabilityProviderHeat(null, 1, 1599));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.STRAW), () -> new CapabilityProviderHeat(null, 1, 30));
-      CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.TWIG), () -> new CapabilityProviderHeat(null, 1, 50));
-      CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.DRIFTWOOD), () -> new CapabilityProviderHeat(null, 1, 60));
-      CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.BONES), () -> new CapabilityProviderHeat(null, 1, 425));
+      CUSTOM_ITEMS.put(IIngredient.of(Items.CLAY_BALL), () -> CapabilityProviderHeat.of(1, 1599));
+      CUSTOM_ITEMS.put(IIngredient.of(BlockLogTFCF.get(TFCRegistries.TREES.getValue(TreesTFCF.EUCALYPTUS))), () -> CapabilityProviderHeat.of(1, 1599));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsCore.STRAW), () -> CapabilityProviderHeat.of(1, 30));
+      CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.TWIG), () -> CapabilityProviderHeat.of(1, 50));
+      CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.DRIFTWOOD), () -> CapabilityProviderHeat.of(1, 60));
+      CUSTOM_ITEMS.put(IIngredient.of(BlocksTFCF.BONES), () -> CapabilityProviderHeat.of(1, 425));
 
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.BLACK_TEA), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.GREEN_TEA), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.WHITE_TEA), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.CANNABIS_BUD), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.CANNABIS_LEAF), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.COCA_LEAF), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.OPIUM_POPPY_BULB), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.PEYOTE), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.TOBACCO_LEAF), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_COFFEA_CHERRIES), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.CHAMOMILE_HEAD), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DANDELION_HEAD), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.LABRADOR_TEA_HEAD), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.SUNFLOWER_HEAD), () -> new CapabilityProviderHeat(null, 1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.BLACK_TEA), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.GREEN_TEA), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.WHITE_TEA), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.CANNABIS_BUD), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.CANNABIS_LEAF), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.COCA_LEAF), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.OPIUM_POPPY_BULB), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.PEYOTE), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.TOBACCO_LEAF), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_COFFEA_CHERRIES), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.CHAMOMILE_HEAD), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DANDELION_HEAD), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.LABRADOR_TEA_HEAD), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.SUNFLOWER_HEAD), () -> CapabilityProviderHeat.of(1, 480));
 
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_BLACK_TEA), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_GREEN_TEA), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_WHITE_TEA), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_CANNABIS_BUD), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_CANNABIS_LEAF), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_COCA_LEAF), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_OPIUM_POPPY_BULB), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_PEYOTE), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_TOBACCO_LEAF), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.ROASTED_COFFEE_BEANS), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_CHAMOMILE_HEAD), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_DANDELION_HEAD), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_LABRADOR_TEA_HEAD), () -> new CapabilityProviderHeat(null, 1, 480));
-      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_SUNFLOWER_HEAD), () -> new CapabilityProviderHeat(null, 1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_BLACK_TEA), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_GREEN_TEA), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_WHITE_TEA), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_CANNABIS_BUD), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_CANNABIS_LEAF), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_COCA_LEAF), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_OPIUM_POPPY_BULB), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_PEYOTE), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_TOBACCO_LEAF), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.ROASTED_COFFEE_BEANS), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_CHAMOMILE_HEAD), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_DANDELION_HEAD), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_LABRADOR_TEA_HEAD), () -> CapabilityProviderHeat.of(1, 480));
+      CUSTOM_ITEMS.put(IIngredient.of(ItemsTFCF.DRIED_SUNFLOWER_HEAD), () -> CapabilityProviderHeat.of(1, 480));
     }
 
   }

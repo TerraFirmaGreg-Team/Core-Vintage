@@ -79,6 +79,7 @@ public class FeatureSize extends BaseFeature {
 
   @SubscribeEvent
   public static void onPostInit(StateEvent.PostInitialization event) {
+
     CapabilitySize.Handler.init();
   }
 }

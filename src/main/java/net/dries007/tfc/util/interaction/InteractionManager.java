@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import net.dries007.tfc.ConfigTFC;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.client.TFCGuiHandler;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.util.Helpers;
@@ -42,7 +42,7 @@ public final class InteractionManager {
   static {
     // Clay knapping
     putBoth(stack -> OreDictUtils.contains(stack, "clay")
-                     && stack.getCount() >= KnappingType.CLAY.getAmountToConsume(), (worldIn, playerIn, handIn) -> {
+                     && stack.getCount() >= KnappingTypes.CLAY.getAmountToConsume(), (worldIn, playerIn, handIn) -> {
       if (!worldIn.isRemote) {
         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_CLAY);
       }
@@ -51,7 +51,7 @@ public final class InteractionManager {
 
     // Fire clay knapping
     putBoth(stack -> OreDictUtils.contains(stack, "fireClay")
-                     && stack.getCount() >= KnappingType.FIRE_CLAY.getAmountToConsume(), ((worldIn, playerIn, handIn) -> {
+                     && stack.getCount() >= KnappingTypes.FIRE_CLAY.getAmountToConsume(), ((worldIn, playerIn, handIn) -> {
       if (!worldIn.isRemote) {
         TFCGuiHandler.openGui(worldIn, playerIn, TFCGuiHandler.Type.KNAPPING_FIRE_CLAY);
       }

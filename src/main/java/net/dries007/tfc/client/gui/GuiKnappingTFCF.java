@@ -8,6 +8,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 
 public class GuiKnappingTFCF extends GuiKnapping {
 
@@ -28,9 +29,9 @@ public class GuiKnappingTFCF extends GuiKnapping {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-    if (type == KnappingType.MUD) {
+    if (type == KnappingTypes.MUD) {
       GlStateManager.color(1, 1, 1, 1);
-      if (type == KnappingType.MUD) {
+      if (type == KnappingTypes.MUD) {
         mc.getTextureManager().bindTexture(backgroundTexture);
       }
       for (GuiButton button : buttonList) {

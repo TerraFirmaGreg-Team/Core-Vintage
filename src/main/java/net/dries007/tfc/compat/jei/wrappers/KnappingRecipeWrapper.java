@@ -13,6 +13,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 
@@ -45,11 +46,11 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
 
   @Nullable
   private static ResourceLocation getHighTexture(KnappingType type) {
-    if (type == KnappingType.CLAY) {
+    if (type == KnappingTypes.CLAY) {
       return CLAY_TEXTURE;
-    } else if (type == KnappingType.FIRE_CLAY) {
+    } else if (type == KnappingTypes.FIRE_CLAY) {
       return FIRE_CLAY_TEXTURE;
-    } else if (type == KnappingType.LEATHER) {
+    } else if (type == KnappingTypes.LEATHER) {
       return LEATHER_TEXTURE;
     }
     return null;
@@ -57,9 +58,9 @@ public class KnappingRecipeWrapper implements IRecipeWrapper {
 
   @Nullable
   private static ResourceLocation getLowTexture(KnappingType type) {
-    if (type == KnappingType.CLAY) {
+    if (type == KnappingTypes.CLAY) {
       return CLAY_DISABLED_TEXTURE;
-    } else if (type == KnappingType.FIRE_CLAY) {
+    } else if (type == KnappingTypes.FIRE_CLAY) {
       return FIRE_CLAY_DISABLED_TEXTURE;
     }
     return null;

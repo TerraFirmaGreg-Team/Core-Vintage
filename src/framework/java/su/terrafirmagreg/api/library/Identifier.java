@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.library;
 
 
-import su.terrafirmagreg.api.exception.InvalidIdentifierException;
+import su.terrafirmagreg.api.library.exception.InvalidIdentifierException;
 
 import org.jetbrains.annotations.Nullable;
 

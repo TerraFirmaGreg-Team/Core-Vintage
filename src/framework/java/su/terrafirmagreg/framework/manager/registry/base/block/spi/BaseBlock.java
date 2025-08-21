@@ -55,6 +55,16 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
   }
 
   @Override
+  public int getMetaFromState(IBlockState state) {
+    return 0;
+  }
+
+  @Override
+  public int damageDropped(IBlockState state) {
+    return getMetaFromState(state);
+  }
+
+  @Override
   public boolean isTranslucent(IBlockState state) {
     return this.settings.isTranslucent();
   }

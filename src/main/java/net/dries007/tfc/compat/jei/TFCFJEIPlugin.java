@@ -13,7 +13,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.gui.GuiKnappingTFCF;
@@ -75,7 +75,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Pineapple Leather
     List<KnappingRecipeWrapperTFCF> leatherPineappleRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.PINEAPPLE_LEATHER)
+      .filter(recipe -> recipe.getType() == KnappingTypes.PINEAPPLE_LEATHER)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -87,7 +87,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Burlap Cloth
     List<KnappingRecipeWrapperTFCF> clothBurlapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.BURLAP_CLOTH)
+      .filter(recipe -> recipe.getType() == KnappingTypes.BURLAP_CLOTH)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -99,7 +99,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Wool Cloth
     List<KnappingRecipeWrapperTFCF> clothWoolRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.WOOL_CLOTH)
+      .filter(recipe -> recipe.getType() == KnappingTypes.WOOL_CLOTH)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -111,7 +111,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Silk Cloth
     List<KnappingRecipeWrapperTFCF> clothSilkRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.SILK_CLOTH)
+      .filter(recipe -> recipe.getType() == KnappingTypes.SILK_CLOTH)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -123,7 +123,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Sisal Cloth
     List<KnappingRecipeWrapperTFCF> clothSisalRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.SISAL_CLOTH)
+      .filter(recipe -> recipe.getType() == KnappingTypes.SISAL_CLOTH)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -135,7 +135,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Cotton Cloth
     List<KnappingRecipeWrapperTFCF> clothCottonRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.COTTON_CLOTH)
+      .filter(recipe -> recipe.getType() == KnappingTypes.COTTON_CLOTH)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -147,7 +147,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Linen Cloth
     List<KnappingRecipeWrapperTFCF> clothLinenRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.LINEN_CLOTH)
+      .filter(recipe -> recipe.getType() == KnappingTypes.LINEN_CLOTH)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -159,7 +159,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Hemp Cloth
     List<KnappingRecipeWrapperTFCF> clothHempRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.HEMP_CLOTH)
+      .filter(recipe -> recipe.getType() == KnappingTypes.HEMP_CLOTH)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -171,7 +171,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Yucca Canvas
     List<KnappingRecipeWrapperTFCF> canvasYuccaRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.YUCCA_CANVAS)
+      .filter(recipe -> recipe.getType() == KnappingTypes.YUCCA_CANVAS)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -183,7 +183,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Mud
     List<KnappingRecipeWrapperTFCF> mudKnapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.MUD)
+      .filter(recipe -> recipe.getType() == KnappingTypes.MUD)
       .flatMap(recipe -> TFCRegistries.ROCKS.getValuesCollection().stream()
         .map(rock -> new KnappingRecipeWrapperTFCF.Mud(recipe, registry.getJeiHelpers()
           .getGuiHelper(), rock)))
@@ -197,7 +197,7 @@ public class TFCFJEIPlugin implements IModPlugin {
 
     // Knapping Flint
     List<KnappingRecipeWrapperTFCF> flintKnapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.FLINT)
+      .filter(recipe -> recipe.getType() == KnappingTypes.FLINT)
       .map(recipe -> new KnappingRecipeWrapperTFCF(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());

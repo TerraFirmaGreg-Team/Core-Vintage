@@ -1,22 +1,29 @@
 package su.terrafirmagreg.framework.manager.registry.base.block.api;
 
-import su.terrafirmagreg.api.library.TriFunction;
+import su.terrafirmagreg.api.library.function.TriFunction;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry.BlockSettings;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockSlab;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockStairs;
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockWall;
 import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemBlock;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
@@ -49,6 +56,18 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
 
   default Item asItem() {
     return Item.getItemFromBlock(asEntry());
+  }
+
+  default BlockStairs asStairs() {
+    return BaseBlockStairs.getStairsFromBlock(asEntry());
+  }
+
+  default BlockWall asWall() {
+    return BaseBlockWall.getWallFromBlock(asEntry());
+  }
+
+  default BlockSlab asSlab() {
+    return BaseBlockSlab.getSlabFromBlock(asEntry());
   }
 
   @Override
@@ -99,6 +118,7 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
     protected EnumBlockRenderType renderType = EnumBlockRenderType.MODEL;
     protected BlockRenderLayer renderLayer = BlockRenderLayer.SOLID;
     protected Class<? extends TileEntity> tileClass;
+    protected Supplier<IBlockColor> colorHandler;
     protected TileEntitySpecialRenderer<? extends TileEntity> tileRenderer;
     protected String harvestTool;
     protected int harvestLevel = -1;
@@ -120,6 +140,11 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
 
     protected boolean nonCanStack = false;
     protected Function<Block, ? extends ItemBlock> itemBlock = BaseItemBlock::new;
+    protected Function<Block, ? extends BaseBlockStairs> stairsBlock;
+    protected Function<Block, ? extends BlockWall> wallBlock;
+    protected Function<Block, ? extends BlockSlab> slabBlock;
+    protected Function<Block, ? extends BlockSlab> slabDoubleBlock;
+
     protected boolean enableStats = true;
 
     public static BlockSettings of() {
@@ -189,8 +214,35 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
       return this.self();
     }
 
+    public BlockSettings stairsBlock(Function<Block, ? extends BaseBlockStairs> stairsBlock) {
+      this.stairsBlock = stairsBlock;
+      return this.self();
+    }
+
+    public BlockSettings wallBlock(Function<Block, ? extends BlockWall> wallBlock) {
+      this.wallBlock = wallBlock;
+      return this.self();
+    }
+
+    public BlockSettings slabDoubleBlock(Function<Block, ? extends BlockSlab> slabDoubleBlock) {
+      this.slabDoubleBlock = slabDoubleBlock;
+      return this.self();
+    }
+
+    public BlockSettings slabBlock(Function<Block, ? extends BlockSlab> slabBlock) {
+      this.slabBlock = slabBlock;
+      return this.self();
+    }
+
+
     public BlockSettings tile(Class<? extends TileEntity> tileClass) {
       this.tileClass = tileClass;
+      return this.self();
+    }
+
+
+    public BlockSettings color(Supplier<IBlockColor> colorHandler) {
+      this.colorHandler = colorHandler;
       return this.self();
     }
 
@@ -360,6 +412,11 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
 
     public BlockSettings passable() {
       this.isPassable = true;
+      return this.self();
+    }
+
+    public BlockSettings noPassable() {
+      this.isPassable = false;
       return this.self();
     }
 

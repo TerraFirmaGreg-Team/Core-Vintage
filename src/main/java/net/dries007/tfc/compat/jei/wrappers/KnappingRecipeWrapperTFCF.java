@@ -11,6 +11,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.items.rock.ItemMud;
 
@@ -40,25 +41,25 @@ public class KnappingRecipeWrapperTFCF extends KnappingRecipeWrapper {
   }
 
   private static ResourceLocation getHighTexture(KnappingType type) {
-    if (type == KnappingType.PINEAPPLE_LEATHER) {
+    if (type == KnappingTypes.PINEAPPLE_LEATHER) {
       return PINEAPPLE_LEATHER_TEXTURE;
-    } else if (type == KnappingType.BURLAP_CLOTH) {
+    } else if (type == KnappingTypes.BURLAP_CLOTH) {
       return BURLAP_CLOTH_TEXTURE;
-    } else if (type == KnappingType.WOOL_CLOTH) {
+    } else if (type == KnappingTypes.WOOL_CLOTH) {
       return WOOL_CLOTH_TEXTURE;
-    } else if (type == KnappingType.SILK_CLOTH) {
+    } else if (type == KnappingTypes.SILK_CLOTH) {
       return SILK_CLOTH_TEXTURE;
-    } else if (type == KnappingType.SISAL_CLOTH) {
+    } else if (type == KnappingTypes.SISAL_CLOTH) {
       return SISAL_CLOTH_TEXTURE;
-    } else if (type == KnappingType.COTTON_CLOTH) {
+    } else if (type == KnappingTypes.COTTON_CLOTH) {
       return COTTON_CLOTH_TEXTURE;
-    } else if (type == KnappingType.LINEN_CLOTH) {
+    } else if (type == KnappingTypes.LINEN_CLOTH) {
       return LINEN_CLOTH_TEXTURE;
-    } else if (type == KnappingType.HEMP_CLOTH) {
+    } else if (type == KnappingTypes.HEMP_CLOTH) {
       return HEMP_CLOTH_TEXTURE;
-    } else if (type == KnappingType.YUCCA_CANVAS) {
+    } else if (type == KnappingTypes.YUCCA_CANVAS) {
       return YUCCA_CANVAS_TEXTURE;
-    } else if (type == KnappingType.FLINT) {
+    } else if (type == KnappingTypes.FLINT) {
       return FLINT_TEXTURE;
     }
     return null;

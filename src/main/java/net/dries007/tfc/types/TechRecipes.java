@@ -35,7 +35,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.objects.items.TechItems;
@@ -160,10 +160,10 @@ public final class TechRecipes {
     IForgeRegistry<KnappingRecipe> r = event.getRegistry();
 
     r.registerAll(
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(TechItems.UNFIRED_SLEEVE), "XXXXX", "XX XX", "X X X", "XX XX", "XXXXX").setRegistryName("clay_sleeve"),
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(TechItems.UNFIRED_RACKWHEEL_PIECE), "XXXXX", "X XXX", "X  XX", "XX  X", "XXXXX").setRegistryName("clay_rackwheel_piece"),
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(TechItems.UNFIRED_MOLD_PANE), "XXXXX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("clay_mold_pane"),
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(TechItems.UNFIRED_MOLD_BLOCK), "X   X", "X   X", "X   X", "X   X", " XXX ").setRegistryName("clay_mold_block")
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_SLEEVE), "XXXXX", "XX XX", "X X X", "XX XX", "XXXXX").setRegistryName("clay_sleeve"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_RACKWHEEL_PIECE), "XXXXX", "X XXX", "X  XX", "XX  X", "XXXXX").setRegistryName("clay_rackwheel_piece"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_MOLD_PANE), "XXXXX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName("clay_mold_pane"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TechItems.UNFIRED_MOLD_BLOCK), "X   X", "X   X", "X   X", "X   X", " XXX ").setRegistryName("clay_mold_block")
     );
   }
 

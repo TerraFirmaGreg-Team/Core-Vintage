@@ -1,8 +1,15 @@
 package su.terrafirmagreg.modules.rock;
 
 import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
+import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
+import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.base.BaseModule;
+import su.terrafirmagreg.modules.rock.init.BlocksRock;
+import su.terrafirmagreg.modules.rock.init.FeatureRock;
+import su.terrafirmagreg.modules.rock.init.ItemsRock;
+import su.terrafirmagreg.modules.rock.init.PluginRock;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,6 +31,27 @@ public class ModuleRock extends BaseModule {
 
   }
 
+  @Override
+  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
+    registrar.group("raw/basalt");
+
+    BlocksRock.onRegister(registrar);
+    ItemsRock.onRegister(registrar);
+
+
+  }
+
+  @Override
+  public void onFeatureRegistrar(IFeatureRegistrar registrar) {
+    
+    FeatureRock.onRegister(registrar);
+  }
+
+  @Override
+  public void onPluginRegistrar(IPluginRegistrar registrar) {
+
+    PluginRock.onRegister(registrar);
+  }
 
   @Override
   public @NotNull LoggingHelper getLogger() {

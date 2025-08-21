@@ -10,7 +10,7 @@ import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.items.rock.ItemRock;
@@ -61,7 +61,7 @@ public class CTStoneKnapping {
       }
       rockOutputMapper = rockIn -> outputMap.getOrDefault(rockIn, ItemStack.EMPTY);
     }
-    KnappingRecipe recipe = new KnappingRecipeStone(KnappingType.STONE, rockOutputMapper, pattern).setRegistryName(registryName);
+    KnappingRecipe recipe = new KnappingRecipeStone(KnappingTypes.STONE, rockOutputMapper, pattern).setRegistryName(registryName);
     CraftTweakerAPI.apply(new IAction() {
       @Override
       public void apply() {
@@ -84,7 +84,7 @@ public class CTStoneKnapping {
     List<KnappingRecipe> removeList = TFCRegistries.KNAPPING.getValuesCollection()
       .stream()
       .filter(x -> {
-        if (x.getType() != KnappingType.STONE) {
+        if (x.getType() != KnappingTypes.STONE) {
           return false;
         } else {
           for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {

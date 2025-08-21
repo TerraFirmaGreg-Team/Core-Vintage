@@ -9,10 +9,10 @@ public abstract class BasePlugin implements IPluginEntry {
 
   private final PluginSettings settings;
 
-  public BasePlugin() {
-    this(PluginSettings.of());
-
-  }
+//  public BasePlugin() {
+//    this(PluginSettings.of());
+//
+//  }
 
   public BasePlugin(PluginSettings settings) {
 

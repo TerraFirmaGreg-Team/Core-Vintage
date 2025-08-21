@@ -37,6 +37,7 @@ import com.google.common.collect.Multimap;
 
 import lombok.Getter;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -83,10 +84,24 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     if (settings.getItemBlock() != null) {
       this.addContent(settings.getItemBlock().apply(entry));
     }
+    if (settings.getWallBlock() != null) {
+      this.addContent(settings.getWallBlock().apply(entry));
+    }
+    if (settings.getStairsBlock() != null) {
+      this.addContent(settings.getStairsBlock().apply(entry));
+    }
+    if (settings.getSlabDoubleBlock() != null) {
+      this.addContent(settings.getSlabDoubleBlock().apply(entry));
+    }
+
+    if (settings.getSlabBlock() != null) {
+      this.addContent(settings.getSlabBlock().apply(entry));
+    }
     return entry;
   }
 
-  public <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Function<T, V> factory, Set<T> types) {
+  @Override
+  public <V extends Block & IBlockEntry, T> Map<T, V> addBlock(Function<T, V> factory, Collection<T> types) {
 
     return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBlock(factory.apply(type))));
   }

@@ -15,7 +15,7 @@ import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.client.gui.GuiChestTFC;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.dries007.tfc.client.gui.GuiKnappingTFCF;
@@ -80,37 +80,37 @@ public class GuiHandler implements IGuiHandler {
       case BAG:
         return new ContainerBag(player.inventory, stack.getItem() instanceof ItemBag ? stack : player.getHeldItemOffhand());
       case PINEAPPLE_LEATHER:
-        return new ContainerKnapping(KnappingType.PINEAPPLE_LEATHER, player.inventory,
+        return new ContainerKnapping(KnappingTypes.PINEAPPLE_LEATHER, player.inventory,
           OreDictUtils.contains(stack, "leatherPineapple") ? stack : player.getHeldItemOffhand());
       case BURLAP_CLOTH:
-        return new ContainerKnapping(KnappingType.BURLAP_CLOTH, player.inventory,
+        return new ContainerKnapping(KnappingTypes.BURLAP_CLOTH, player.inventory,
           OreDictUtils.contains(stack, "clothBurlap") ? stack : player.getHeldItemOffhand());
       case WOOL_CLOTH:
-        return new ContainerKnapping(KnappingType.WOOL_CLOTH, player.inventory,
+        return new ContainerKnapping(KnappingTypes.WOOL_CLOTH, player.inventory,
           OreDictUtils.contains(stack, "clothWool") ? stack : player.getHeldItemOffhand());
       case SILK_CLOTH:
-        return new ContainerKnapping(KnappingType.SILK_CLOTH, player.inventory,
+        return new ContainerKnapping(KnappingTypes.SILK_CLOTH, player.inventory,
           OreDictUtils.contains(stack, "clothSilk") ? stack : player.getHeldItemOffhand());
       case SISAL_CLOTH:
-        return new ContainerKnapping(KnappingType.SISAL_CLOTH, player.inventory,
+        return new ContainerKnapping(KnappingTypes.SISAL_CLOTH, player.inventory,
           OreDictUtils.contains(stack, "clothSisal") ? stack : player.getHeldItemOffhand());
       case COTTON_CLOTH:
-        return new ContainerKnapping(KnappingType.COTTON_CLOTH, player.inventory,
+        return new ContainerKnapping(KnappingTypes.COTTON_CLOTH, player.inventory,
           OreDictUtils.contains(stack, "clothCotton") ? stack : player.getHeldItemOffhand());
       case LINEN_CLOTH:
-        return new ContainerKnapping(KnappingType.LINEN_CLOTH, player.inventory,
+        return new ContainerKnapping(KnappingTypes.LINEN_CLOTH, player.inventory,
           OreDictUtils.contains(stack, "clothLinen") ? stack : player.getHeldItemOffhand());
       case HEMP_CLOTH:
-        return new ContainerKnapping(KnappingType.HEMP_CLOTH, player.inventory,
+        return new ContainerKnapping(KnappingTypes.HEMP_CLOTH, player.inventory,
           OreDictUtils.contains(stack, "clothHemp") ? stack : player.getHeldItemOffhand());
       case YUCCA_CANVAS:
-        return new ContainerKnapping(KnappingType.YUCCA_CANVAS, player.inventory,
+        return new ContainerKnapping(KnappingTypes.YUCCA_CANVAS, player.inventory,
           OreDictUtils.contains(stack, "canvasYucca") ? stack : player.getHeldItemOffhand());
       case MUD:
-        return new ContainerKnapping(KnappingType.MUD, player.inventory,
+        return new ContainerKnapping(KnappingTypes.MUD, player.inventory,
           OreDictUtils.contains(stack, "mud") ? stack : player.getHeldItemOffhand());
       case FLINT:
-        return new ContainerKnapping(KnappingType.FLINT, player.inventory,
+        return new ContainerKnapping(KnappingTypes.FLINT, player.inventory,
           OreDictUtils.contains(stack, "flint") ? stack : player.getHeldItemOffhand());
       case URN:
         return new ContainerUrn(player.inventory, Helpers.getTE(world, pos, TEUrn.class));
@@ -140,30 +140,30 @@ public class GuiHandler implements IGuiHandler {
       case BAG:
         return new GuiContainerTFC(container, player.inventory, BAG_INVENTORY_BACKGROUND);
       case PINEAPPLE_LEATHER:
-        return new GuiKnappingTFCF(container, player, KnappingType.PINEAPPLE_LEATHER, PINEAPPLE_LEATHER_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.PINEAPPLE_LEATHER, PINEAPPLE_LEATHER_TEXTURE);
       case BURLAP_CLOTH:
-        return new GuiKnappingTFCF(container, player, KnappingType.BURLAP_CLOTH, BURLAP_CLOTH_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.BURLAP_CLOTH, BURLAP_CLOTH_TEXTURE);
       case WOOL_CLOTH:
-        return new GuiKnappingTFCF(container, player, KnappingType.WOOL_CLOTH, WOOL_CLOTH_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.WOOL_CLOTH, WOOL_CLOTH_TEXTURE);
       case SILK_CLOTH:
-        return new GuiKnappingTFCF(container, player, KnappingType.SILK_CLOTH, SILK_CLOTH_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.SILK_CLOTH, SILK_CLOTH_TEXTURE);
       case SISAL_CLOTH:
-        return new GuiKnappingTFCF(container, player, KnappingType.SISAL_CLOTH, SISAL_CLOTH_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.SISAL_CLOTH, SISAL_CLOTH_TEXTURE);
       case COTTON_CLOTH:
-        return new GuiKnappingTFCF(container, player, KnappingType.COTTON_CLOTH, COTTON_CLOTH_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.COTTON_CLOTH, COTTON_CLOTH_TEXTURE);
       case LINEN_CLOTH:
-        return new GuiKnappingTFCF(container, player, KnappingType.LINEN_CLOTH, LINEN_CLOTH_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.LINEN_CLOTH, LINEN_CLOTH_TEXTURE);
       case HEMP_CLOTH:
-        return new GuiKnappingTFCF(container, player, KnappingType.HEMP_CLOTH, HEMP_CLOTH_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.HEMP_CLOTH, HEMP_CLOTH_TEXTURE);
       case YUCCA_CANVAS:
-        return new GuiKnappingTFCF(container, player, KnappingType.YUCCA_CANVAS, YUCCA_CANVAS_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.YUCCA_CANVAS, YUCCA_CANVAS_TEXTURE);
       case MUD:
         ItemStack stackMud = player.getHeldItemMainhand();
         stackMud = OreDictUtils.contains(stackMud, "mud") ? stackMud : player.getHeldItemOffhand();
         ItemMud mud = (ItemMud) (stackMud.getItem());
-        return new GuiKnappingTFCF(container, player, KnappingType.MUD, mud.getForegroundTexture(), mud.getBackgroundTexture());
+        return new GuiKnappingTFCF(container, player, KnappingTypes.MUD, mud.getForegroundTexture(), mud.getBackgroundTexture());
       case FLINT:
-        return new GuiKnappingTFCF(container, player, KnappingType.FLINT, FLINT_TEXTURE);
+        return new GuiKnappingTFCF(container, player, KnappingTypes.FLINT, FLINT_TEXTURE);
       case URN:
         return new GuiUrn(container, player.inventory, Helpers.getTE(world, pos, TEUrn.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
           .getTranslationKey());

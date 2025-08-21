@@ -26,6 +26,7 @@ public class BlockSoilMudSlab extends BaseBlockSlab implements ISoilEntry {
       .addOreDict("slab", "mud", "bricks");
   }
 
+
   @Override
   public boolean isDouble() {
     return true;
@@ -43,6 +44,7 @@ public class BlockSoilMudSlab extends BaseBlockSlab implements ISoilEntry {
       getSettings()
         .registryKey(type.getRegistryKey("mud_bricks/slab"));
     }
+
 
     @Override
     public boolean isDouble() {

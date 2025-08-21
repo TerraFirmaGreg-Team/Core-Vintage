@@ -47,8 +47,8 @@ public abstract class Framework {
 
     this.manager = ModuleManager.of(modId);
     this.wrapperMap = new Object2ObjectOpenHashMap<>();
-
-    initializeEventWrappers();
+    this.onModuleRegistrar(this.manager.getRegistrar());
+    this.initializeEventWrappers();
   }
 
   public abstract void onModuleRegistrar(IModuleRegistrar registrar);
@@ -57,14 +57,15 @@ public abstract class Framework {
   private void initializeEventWrappers() {
 
     registerEventWrapper(FMLConstructionEvent.class, event -> {
-      this.onModuleRegistrar(this.manager.getRegistrar());
-      this.manager.onConstruction();
       AnnotationUtils.setAsmData(event.getASMHarvestedData());
       FluidRegistry.enableUniversalBucket();
       GuiHandler.enableGui();
     });
 
-    registerEventWrapper(FMLPreInitializationEvent.class, event -> MinecraftForge.EVENT_BUS.post(new StateEvent.PreInitialization()));
+    registerEventWrapper(FMLPreInitializationEvent.class, event -> {
+      this.manager.onConstruction();
+      MinecraftForge.EVENT_BUS.post(new StateEvent.PreInitialization());
+    });
 
     registerEventWrapper(FMLInitializationEvent.class, event -> MinecraftForge.EVENT_BUS.post(new StateEvent.Initialization()));
 

@@ -13,11 +13,12 @@ import java.util.Set;
 
 public class SoilType extends Type<SoilType> {
 
+  public static final String TYPE = "soil";
   @Getter
   private static final Set<SoilType> types = new ObjectOpenHashSet<>();
 
   private SoilType(Builder builder) {
-    super("soil", builder.name);
+    super(TYPE, builder.name);
 
     if (!types.add(this)) {
       throw new RuntimeException(String.format("Type: [%s] already exists!", name));

@@ -34,7 +34,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
@@ -602,51 +602,51 @@ public final class RecipesTFCF {
 
   @SubscribeEvent
   public static void onRegisterKnappingRecipeEvent(RegistryEvent.Register<KnappingRecipe> event) {
-    KnappingRecipe r = new KnappingRecipeStone(KnappingType.MUD, rockIn -> new ItemStack(ItemUnfiredMudBrick.get(rockIn), 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX");
+    KnappingRecipe r = new KnappingRecipeStone(KnappingTypes.MUD, rockIn -> new ItemStack(ItemUnfiredMudBrick.get(rockIn), 3), "XXXXX", "     ", "XXXXX", "     ", "XXXXX");
     event.getRegistry().register(r.setRegistryName(Mods.ModIDs.TFCF, "knapping_mud_brick"));
 
     event.getRegistry().registerAll(
 
       // Flint Tool Heads
-      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_AXE_HEAD, 1), " X   ", "XXXX ", "XXXXX", "XXXX ", " X   ").setRegistryName(Mods.ModIDs.TFCF, "flint_axe_head"),
+      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_AXE_HEAD, 1), " X   ", "XXXX ", "XXXXX", "XXXX ", " X   ").setRegistryName(Mods.ModIDs.TFCF, "flint_axe_head"),
 
-      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HAMMER_HEAD, 1), "     ", "XXXXX", "XXXXX", "  X  ", "     ").setRegistryName(Mods.ModIDs.TFCF, "flint_hammer_head"),
+      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HAMMER_HEAD, 1), "     ", "XXXXX", "XXXXX", "  X  ", "     ").setRegistryName(Mods.ModIDs.TFCF, "flint_hammer_head"),
 
       //new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 1), "XXXXX", "   XX").setRegistryName(TFCFlorae.MODID, "flint_hoe_head_1"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(Mods.ModIDs.TFCF, "flint_hoe_head_2"),
-      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(Mods.ModIDs.TFCF, "flint_hoe_head_3"),
+      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 2), "XXXXX", "XX   ", "     ", "XXXXX", "XX   ").setRegistryName(Mods.ModIDs.TFCF, "flint_hoe_head_2"),
+      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_HOE_HEAD, 2), "XXXXX", "XX   ", "     ", "XXXXX", "   XX").setRegistryName(Mods.ModIDs.TFCF, "flint_hoe_head_3"),
 
-      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_JAVELIN_HEAD, 1), "XXX  ", "XXXX ", "XXXXX", " XXX ", "  X  ").setRegistryName(Mods.ModIDs.TFCF, "flint_javelin_head"),
+      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_JAVELIN_HEAD, 1), "XXX  ", "XXXX ", "XXXXX", " XXX ", "  X  ").setRegistryName(Mods.ModIDs.TFCF, "flint_javelin_head"),
 
-      new KnappingRecipeSimple(KnappingType.FLINT, true, new ItemStack(ItemsTFCF.FLINT_SHOVEL_HEAD, 1), " XXX ", " XXX ", " XXX ", " XXX ", "  X  ").setRegistryName(Mods.ModIDs.TFCF, "flint_shovel_head"),
+      new KnappingRecipeSimple(KnappingTypes.FLINT, true, new ItemStack(ItemsTFCF.FLINT_SHOVEL_HEAD, 1), " XXX ", " XXX ", " XXX ", " XXX ", "  X  ").setRegistryName(Mods.ModIDs.TFCF, "flint_shovel_head"),
 
-      new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(Mods.ModIDs.TFCF, "clay_urn"),
+      new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(ItemsTFCF.UNFIRED_URN), "XX XX", "X   X", "X   X", "X   X", "XXXXX").setRegistryName(Mods.ModIDs.TFCF, "clay_urn"),
 
       // Containers
-      new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsTFCF.LEATHER_BAG_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("leather_bag_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(ItemsTFCF.LEATHER_BAG_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("leather_bag_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingType.BURLAP_CLOTH, true, new ItemStack(ItemsTFCF.BURLAP_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("burlap_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.BURLAP_CLOTH, true, new ItemStack(ItemsTFCF.BURLAP_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("burlap_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingType.WOOL_CLOTH, true, new ItemStack(ItemsTFCF.WOOL_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("wool_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.WOOL_CLOTH, true, new ItemStack(ItemsTFCF.WOOL_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("wool_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingType.SILK_CLOTH, true, new ItemStack(ItemsTFCF.SILK_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("silk_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.SILK_CLOTH, true, new ItemStack(ItemsTFCF.SILK_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("silk_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingType.SISAL_CLOTH, true, new ItemStack(ItemsTFCF.SISAL_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("sisal_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.SISAL_CLOTH, true, new ItemStack(ItemsTFCF.SISAL_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("sisal_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingType.COTTON_CLOTH, true, new ItemStack(ItemsTFCF.COTTON_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("cotton_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.COTTON_CLOTH, true, new ItemStack(ItemsTFCF.COTTON_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("cotton_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingType.LINEN_CLOTH, true, new ItemStack(ItemsTFCF.LINEN_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("linen_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.LINEN_CLOTH, true, new ItemStack(ItemsTFCF.LINEN_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("linen_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingType.HEMP_CLOTH, true, new ItemStack(ItemsTFCF.HEMP_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("hemp_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.HEMP_CLOTH, true, new ItemStack(ItemsTFCF.HEMP_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("hemp_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingType.YUCCA_CANVAS, true, new ItemStack(ItemsTFCF.YUCCA_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("yucca_sack_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.YUCCA_CANVAS, true, new ItemStack(ItemsTFCF.YUCCA_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("yucca_sack_pieces_vertical"),
-      new KnappingRecipeSimple(KnappingType.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_BAG_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("pineapple_leather_bag_pieces_horizontal"),
-      new KnappingRecipeSimple(KnappingType.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_BAG_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("pineapple_leather_bag_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.LEATHER, true, new ItemStack(ItemsTFCF.LEATHER_BAG_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("leather_bag_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.LEATHER, true, new ItemStack(ItemsTFCF.LEATHER_BAG_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("leather_bag_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.BURLAP_CLOTH, true, new ItemStack(ItemsTFCF.BURLAP_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("burlap_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.BURLAP_CLOTH, true, new ItemStack(ItemsTFCF.BURLAP_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("burlap_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.WOOL_CLOTH, true, new ItemStack(ItemsTFCF.WOOL_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("wool_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.WOOL_CLOTH, true, new ItemStack(ItemsTFCF.WOOL_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("wool_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.SILK_CLOTH, true, new ItemStack(ItemsTFCF.SILK_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("silk_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.SILK_CLOTH, true, new ItemStack(ItemsTFCF.SILK_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("silk_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.SISAL_CLOTH, true, new ItemStack(ItemsTFCF.SISAL_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("sisal_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.SISAL_CLOTH, true, new ItemStack(ItemsTFCF.SISAL_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("sisal_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.COTTON_CLOTH, true, new ItemStack(ItemsTFCF.COTTON_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("cotton_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.COTTON_CLOTH, true, new ItemStack(ItemsTFCF.COTTON_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("cotton_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.LINEN_CLOTH, true, new ItemStack(ItemsTFCF.LINEN_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("linen_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.LINEN_CLOTH, true, new ItemStack(ItemsTFCF.LINEN_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("linen_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.HEMP_CLOTH, true, new ItemStack(ItemsTFCF.HEMP_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("hemp_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.HEMP_CLOTH, true, new ItemStack(ItemsTFCF.HEMP_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("hemp_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.YUCCA_CANVAS, true, new ItemStack(ItemsTFCF.YUCCA_SACK_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("yucca_sack_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.YUCCA_CANVAS, true, new ItemStack(ItemsTFCF.YUCCA_SACK_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("yucca_sack_pieces_vertical"),
+      new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_BAG_PIECE, 2), " XXX ", " XXX ", "     ", " XXX ", " XXX ").setRegistryName("pineapple_leather_bag_pieces_horizontal"),
+      new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_BAG_PIECE, 2), "     ", "XX XX", "XX XX", "XX XX", "     ").setRegistryName("pineapple_leather_bag_pieces_vertical"),
 
       // Pineapple Leather
-      new KnappingRecipeSimple(KnappingType.PINEAPPLE_LEATHER, true, new ItemStack(Items.SADDLE), "  X  ", "XXXXX", "XXXXX", "XXXXX", "  X  ").setRegistryName("pineapple_leather_saddle"),
-      new KnappingRecipeSimple(KnappingType.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFC.QUIVER), " XXXX", "X XXX", "X XXX", "X XXX", " XXXX").setRegistryName("pineapple_leather_quiver")
+      new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(Items.SADDLE), "  X  ", "XXXXX", "XXXXX", "XXXXX", "  X  ").setRegistryName("pineapple_leather_saddle"),
+      new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFC.QUIVER), " XXXX", "X XXX", "X XXX", "X XXX", " XXXX").setRegistryName("pineapple_leather_quiver")
 
       // Armor Knapping
             /*new KnappingRecipeSimple(KnappingTypes.PINEAPPLE_LEATHER, true, new ItemStack(ItemsTFCF.PINEAPPLE_LEATHER_HELMET), "XXXXX", "X   X", "X   X", "     ", "     ").setRegistryName("pineapple_leather_helmet"),

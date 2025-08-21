@@ -13,11 +13,13 @@ import gregtech.core.sound.GTSoundEvents;
 
 public class ItemsGregTech {
 
+  public static MetaItemGregTech META_ITEM;
+
   public static IGTTool TONGS;
   public static IGTTool TUYERE;
   public static IGTTool CHISEL;
   public static IGTTool PROPICK;
-  public static MetaItemGregTech META_ITEM;
+
 
   public static void preInit() {
     META_ITEM = new MetaItemGregTech();

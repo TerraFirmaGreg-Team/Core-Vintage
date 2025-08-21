@@ -1,6 +1,6 @@
 package net.dries007.tfcthings.proxy;
 
-import su.terrafirmagreg.api.exception.WrongSideException;
+import su.terrafirmagreg.api.library.exception.WrongSideException;
 
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

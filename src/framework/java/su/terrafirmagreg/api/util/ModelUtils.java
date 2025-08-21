@@ -56,7 +56,7 @@ public final class ModelUtils {
   public static void addModel(Item item) {
     ModelUtils.model(item);
     ModelUtils.mesh(item);
-    // ModelUtils.color(item);
+//    ModelUtils.color(item);
   }
 
 
@@ -64,7 +64,7 @@ public final class ModelUtils {
     ModelUtils.stateMapper(block);
     ModelUtils.model(block);
     ModelUtils.tesr(block);
-// ModelUtils.color(block);
+//    ModelUtils.color(block);
   }
 
   //region ===== StateMapper

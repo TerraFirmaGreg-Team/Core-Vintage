@@ -26,7 +26,7 @@ import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodPreservation;
 import net.dries007.tfc.api.recipes.barrel.BarrelRecipeFoodTraits;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeMetalMelting;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
@@ -211,7 +211,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
     // Clay Knapping
     List<KnappingRecipeWrapper> clayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.CLAY)
+      .filter(recipe -> recipe.getType() == KnappingTypes.CLAY)
       .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -223,7 +223,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
     // Fire Clay Knapping
     List<KnappingRecipeWrapper> fireclayknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.FIRE_CLAY)
+      .filter(recipe -> recipe.getType() == KnappingTypes.FIRE_CLAY)
       .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -235,7 +235,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
     // Leather Knapping
     List<KnappingRecipeWrapper> leatherknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.LEATHER)
+      .filter(recipe -> recipe.getType() == KnappingTypes.LEATHER)
       .map(recipe -> new KnappingRecipeWrapper(recipe, registry.getJeiHelpers()
         .getGuiHelper()))
       .collect(Collectors.toList());
@@ -247,7 +247,7 @@ public final class TFCJEIPlugin implements IModPlugin {
 
     // Leather Knapping Recipes
     List<KnappingRecipeWrapper> stoneknapRecipes = TFCRegistries.KNAPPING.getValuesCollection().stream()
-      .filter(recipe -> recipe.getType() == KnappingType.STONE)
+      .filter(recipe -> recipe.getType() == KnappingTypes.STONE)
       .flatMap(recipe -> TFCRegistries.ROCKS.getValuesCollection()
         .stream()
         .map(rock -> new KnappingRecipeWrapper.Stone(recipe, registry.getJeiHelpers()

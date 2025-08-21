@@ -26,6 +26,7 @@ import net.minecraft.world.storage.loot.functions.LootFunction.Serializer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -42,8 +43,8 @@ public interface IRegistryRegistrar extends IBaseRegistrar<IRegistryEntry<?, ?>>
   // --------------------------------------------------------------------------
 
   <V extends Block & IBlockEntry> V addBlock(V block);
-
-  <V extends Block & IBlockEntry, T extends Type<T>> Map<T, V> addBlock(Function<T, V> factory, Set<T> types);
+  
+  <V extends Block & IBlockEntry, T> Map<T, V> addBlock(Function<T, V> factory, Collection<T> types);
 
   // --------------------------------------------------------------------------
   // - Item

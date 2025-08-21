@@ -3,6 +3,7 @@ package su.terrafirmagreg.modules.core.feature.heat.capability;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -54,11 +55,15 @@ public class CapabilityProviderHeat implements ICapabilityHeat {
   } // This is here so you can do a custom implementation
 
   public static CapabilityProviderHeat of(float heatCapacity, float meltTemp) {
-    return of(null, heatCapacity, meltTemp);
+    return new CapabilityProviderHeat(null, heatCapacity, meltTemp);
   }
 
   public static CapabilityProviderHeat of(NBTTagCompound nbt, float heatCapacity, float meltTemp) {
     return new CapabilityProviderHeat(nbt, heatCapacity, meltTemp);
+  }
+
+  public static CapabilityProviderHeat of(ItemStack stack, float heatCapacity, float meltTemp) {
+    return new CapabilityProviderHeat(stack.getTagCompound(), heatCapacity, meltTemp);
   }
 
   @Override

@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import net.dries007.tfc.TerraFirmaCraft;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.gui.GuiAnvilPlan;
@@ -96,15 +96,15 @@ public class TFCGuiHandler implements IGuiHandler {
       case ANVIL_PLAN:
         return new ContainerAnvilPlan(player.inventory, Helpers.getTE(world, pos, TEAnvilTFC.class));
       case KNAPPING_STONE:
-        return new ContainerKnapping(KnappingType.STONE, player.inventory, stack.getItem() instanceof ItemRock ? stack : player.getHeldItemOffhand());
+        return new ContainerKnapping(KnappingTypes.STONE, player.inventory, stack.getItem() instanceof ItemRock ? stack : player.getHeldItemOffhand());
       case KNAPPING_CLAY:
-        return new ContainerKnapping(KnappingType.CLAY, player.inventory,
+        return new ContainerKnapping(KnappingTypes.CLAY, player.inventory,
           OreDictUtils.contains(stack, "clay") ? stack : player.getHeldItemOffhand());
       case KNAPPING_LEATHER:
-        return new ContainerKnapping(KnappingType.LEATHER, player.inventory,
+        return new ContainerKnapping(KnappingTypes.LEATHER, player.inventory,
           OreDictUtils.contains(stack, "leather") ? stack : player.getHeldItemOffhand());
       case KNAPPING_FIRE_CLAY:
-        return new ContainerKnapping(KnappingType.FIRE_CLAY, player.inventory,
+        return new ContainerKnapping(KnappingTypes.FIRE_CLAY, player.inventory,
           OreDictUtils.contains(stack, "fireClay") ? stack : player.getHeldItemOffhand());
       case LARGE_VESSEL:
         return new ContainerLargeVessel(player.inventory, Helpers.getTE(world, pos, TELargeVessel.class));
@@ -158,13 +158,13 @@ public class TFCGuiHandler implements IGuiHandler {
         Rock rock = stack.getItem() instanceof IRockObject ? ((IRockObject) stack.getItem()).getRock(stack) :
                     ((IRockObject) player.getHeldItemOffhand().getItem()).getRock(player.getHeldItemOffhand());
         //noinspection ConstantConditions
-        return new GuiKnapping(container, player, KnappingType.STONE, rock.getTexture());
+        return new GuiKnapping(container, player, KnappingTypes.STONE, rock.getTexture());
       case KNAPPING_CLAY:
-        return new GuiKnapping(container, player, KnappingType.CLAY, CLAY_TEXTURE);
+        return new GuiKnapping(container, player, KnappingTypes.CLAY, CLAY_TEXTURE);
       case KNAPPING_LEATHER:
-        return new GuiKnapping(container, player, KnappingType.LEATHER, LEATHER_TEXTURE);
+        return new GuiKnapping(container, player, KnappingTypes.LEATHER, LEATHER_TEXTURE);
       case KNAPPING_FIRE_CLAY:
-        return new GuiKnapping(container, player, KnappingType.FIRE_CLAY, FIRE_CLAY_TEXTURE);
+        return new GuiKnapping(container, player, KnappingTypes.FIRE_CLAY, FIRE_CLAY_TEXTURE);
       case LARGE_VESSEL:
         return new GuiLargeVessel(container, player.inventory, Helpers.getTE(world, pos, TELargeVessel.class), world.getBlockState(new BlockPos(x, y, z))
           .getBlock().getTranslationKey());

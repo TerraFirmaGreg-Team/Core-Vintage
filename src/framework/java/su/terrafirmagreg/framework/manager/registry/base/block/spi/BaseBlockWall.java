@@ -10,6 +10,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -21,14 +22,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+
 import lombok.Getter;
 
+import java.util.Map;
 import java.util.Random;
 
 
 @Getter
 @SuppressWarnings("deprecation")
-public abstract class BaseBlockWall extends BlockWall implements IBlockEntry {
+public class BaseBlockWall extends BlockWall implements IBlockEntry {
+
+  private static final Map<Block, BlockWall> BLOCK_TO_WALL = new Object2ObjectOpenHashMap<>();
 
   protected final BlockSettings settings;
   protected final Block modelBlock;
@@ -43,6 +49,13 @@ public abstract class BaseBlockWall extends BlockWall implements IBlockEntry {
 
     getSettings()
       .ignoresProperties(VARIANT);
+
+    BLOCK_TO_WALL.put(block, this);
+  }
+
+  public static BlockWall getWallFromBlock(Block blockIn) {
+    BlockWall item = BLOCK_TO_WALL.get(blockIn);
+    return item == null ? (BlockWall) Blocks.AIR : item;
   }
 
   @Override

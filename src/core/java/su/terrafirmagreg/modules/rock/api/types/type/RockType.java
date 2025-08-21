@@ -1,0 +1,155 @@
+package su.terrafirmagreg.modules.rock.api.types.type;
+
+import su.terrafirmagreg.api.library.types.type.Type;
+import su.terrafirmagreg.modules.rock.api.types.category.RockCategory;
+
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.ore.OrePrefix;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.function.Supplier;
+
+
+@Getter
+public class RockType extends Type<RockType> {
+
+  public static final String TYPE = "rock";
+  @Getter
+  private static final Set<RockType> types = new ObjectOpenHashSet<>();
+  private final RockCategory category;
+  private final Supplier<OrePrefix> orePrefix;
+  private final Supplier<Material> material;
+  private final boolean isFlux;
+
+  private RockType(Builder builder) {
+    super(TYPE, builder.name);
+
+    this.category = builder.category;
+    this.orePrefix = builder.orePrefix;
+    this.material = builder.material;
+    this.isFlux = builder.isFlux;
+
+    if (!types.add(this)) {
+      throw new RuntimeException(String.format("Type: [%s] already exists!", name));
+    }
+  }
+
+  @Nullable
+  public static RockType getByName(@NotNull String name) {
+    return types
+      .stream()
+      .filter(s -> s.getName().equals(name))
+      .findFirst()
+      .orElse(null);
+  }
+
+  /**
+   * Возвращает экземпляр породы по индексу.
+   *
+   * @param i Индекс породы.
+   * @return Экземпляр породы.
+   */
+  public static RockType valueOf(int i) {
+    var values = new RockType[types.size()];
+    values = types.toArray(values);
+
+    return i >= 0 && i < values.length ? values[i] : values[i % values.length];
+  }
+
+  /**
+   * Возвращает индекс породы в списке.
+   *
+   * @param type Порода.
+   * @return Индекс породы.
+   */
+  public static int indexOf(RockType type) {
+    return new ArrayList<>(types).indexOf(type);
+  }
+
+  public static Builder builder(String name) {
+    return new Builder(name);
+  }
+
+  public float getHardness(float baseHardness) {
+    return baseHardness + this.getCategory().getHardnessModifier();
+  }
+
+  public static class Builder {
+
+    private final String name;
+    private RockCategory category;
+    private Supplier<OrePrefix> orePrefix;
+    private Supplier<Material> material;
+    private boolean isFlux;
+
+    /**
+     * Создает экземпляр Builder с указанным именем.
+     *
+     * @param name Имя породы.
+     */
+    public Builder(@NotNull String name) {
+      this.name = name;
+
+      this.isFlux = false;
+    }
+
+    /**
+     * Устанавливает орпрефикс для типа породы.
+     *
+     * @param orePrefix Орпрефикс для типа породы.
+     * @return Builder.
+     */
+    public Builder orePrefix(@NotNull Supplier<OrePrefix> orePrefix) {
+      this.orePrefix = orePrefix;
+      return this;
+    }
+
+    /**
+     * Устанавливает материал для типа породы.
+     *
+     * @param material Материал для типа породы.
+     * @return Builder.
+     */
+    public Builder material(@NotNull Supplier<Material> material) {
+      this.material = material;
+      return this;
+    }
+
+    /**
+     * Устанавливает категорию породы.
+     *
+     * @param rockCategory Категория породы.
+     * @return Builder.
+     */
+    public Builder rockCategory(@NotNull RockCategory rockCategory) {
+      this.category = rockCategory;
+      return this;
+    }
+
+    /**
+     * Устанавливает флаг, указывающий, является ли порода флюсом.
+     *
+     * @return Builder.
+     */
+    public Builder isFlux() {
+      this.isFlux = true;
+      return this;
+    }
+
+    /**
+     * Создает экземпляр RockType на основе Builder.
+     *
+     * @return Экземпляр RockType.
+     */
+    public RockType build() {
+      return new RockType(this);
+    }
+  }
+}

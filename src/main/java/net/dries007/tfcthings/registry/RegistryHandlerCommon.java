@@ -23,7 +23,7 @@ import net.dries007.tfc.api.recipes.heat.HeatRecipe;
 import net.dries007.tfc.api.recipes.heat.HeatRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.recipes.quern.QuernRecipe;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
@@ -116,11 +116,11 @@ public class RegistryHandlerCommon {
   @SubscribeEvent
   public static void registerKnappingRecipes(RegistryEvent.Register<KnappingRecipe> event) {
     if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableSling) {
-      event.getRegistry().register(new KnappingRecipeSimple(KnappingType.LEATHER, true, new ItemStack(TFCThingsItems.ITEM_SLING),
+      event.getRegistry().register(new KnappingRecipeSimple(KnappingTypes.LEATHER, true, new ItemStack(TFCThingsItems.ITEM_SLING),
         "  XXX", "    X", " XXXX", "XX   ", "X    ").setRegistryName("sling"));
     }
     if (ConfigTFCThings.Items.MASTER_ITEM_LIST.enableProspectorsHammer) {
-      event.getRegistry().register(new KnappingRecipeSimple(KnappingType.CLAY, true, new ItemStack(TFCThingsItems.ITEM_PROSPECTORS_HAMMER_MOLD_UNFIRED),
+      event.getRegistry().register(new KnappingRecipeSimple(KnappingTypes.CLAY, true, new ItemStack(TFCThingsItems.ITEM_PROSPECTORS_HAMMER_MOLD_UNFIRED),
         "XXXXX", " XXX ", "     ", " X X ", "XXXXX").setRegistryName("prospectors_hammer_clay_mold"));
     }
   }

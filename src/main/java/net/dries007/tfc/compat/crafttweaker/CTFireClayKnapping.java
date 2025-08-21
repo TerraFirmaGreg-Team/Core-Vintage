@@ -10,7 +10,7 @@ import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
-import net.dries007.tfc.api.recipes.knapping.KnappingType;
+import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -28,7 +28,7 @@ public class CTFireClayKnapping {
       throw new IllegalArgumentException("Output item must be non-null and pattern must be a closed interval [1, 5]");
     }
     ItemStack outputStack = (ItemStack) output.getInternal();
-    KnappingRecipe recipe = new KnappingRecipeSimple(KnappingType.FIRE_CLAY, true, outputStack, pattern).setRegistryName(registryName);
+    KnappingRecipe recipe = new KnappingRecipeSimple(KnappingTypes.FIRE_CLAY, true, outputStack, pattern).setRegistryName(registryName);
     CraftTweakerAPI.apply(new IAction() {
       @Override
       public void apply() {
@@ -49,7 +49,7 @@ public class CTFireClayKnapping {
     List<KnappingRecipe> removeList = new ArrayList<>();
     TFCRegistries.KNAPPING.getValuesCollection()
       .stream()
-      .filter(x -> x.getType() == KnappingType.FIRE_CLAY && x.getOutput(ItemStack.EMPTY).isItemEqual(item))
+      .filter(x -> x.getType() == KnappingTypes.FIRE_CLAY && x.getOutput(ItemStack.EMPTY).isItemEqual(item))
       .forEach(removeList::add);
     for (KnappingRecipe rem : removeList) {
       CraftTweakerAPI.apply(new IAction() {

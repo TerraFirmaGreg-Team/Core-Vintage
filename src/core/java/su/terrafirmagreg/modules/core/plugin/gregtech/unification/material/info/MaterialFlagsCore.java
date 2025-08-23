@@ -1,0 +1,195 @@
+package su.terrafirmagreg.modules.core.plugin.gregtech.unification.material.info;
+
+import gregtech.api.GregTechAPI;
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.store.FluidStorageKeys;
+import gregtech.api.unification.material.properties.FluidProperty;
+import gregtech.api.unification.material.properties.OreProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.properties.ToolProperty;
+
+import static gregicality.multiblocks.api.unification.GCYMMaterials.Trinaquadalloy;
+import static gregtech.api.unification.material.Materials.Aluminium;
+import static gregtech.api.unification.material.Materials.Americium;
+import static gregtech.api.unification.material.Materials.Antimony;
+import static gregtech.api.unification.material.Materials.Arsenic;
+import static gregtech.api.unification.material.Materials.Bismuth;
+import static gregtech.api.unification.material.Materials.BismuthBronze;
+import static gregtech.api.unification.material.Materials.BlackBronze;
+import static gregtech.api.unification.material.Materials.BlackSteel;
+import static gregtech.api.unification.material.Materials.BlueSteel;
+import static gregtech.api.unification.material.Materials.Borax;
+import static gregtech.api.unification.material.Materials.Brass;
+import static gregtech.api.unification.material.Materials.Bronze;
+import static gregtech.api.unification.material.Materials.Cadmium;
+import static gregtech.api.unification.material.Materials.Caesium;
+import static gregtech.api.unification.material.Materials.Carbon;
+import static gregtech.api.unification.material.Materials.Cerium;
+import static gregtech.api.unification.material.Materials.CertusQuartz;
+import static gregtech.api.unification.material.Materials.Chrome;
+import static gregtech.api.unification.material.Materials.Copper;
+import static gregtech.api.unification.material.Materials.Darmstadtium;
+import static gregtech.api.unification.material.Materials.Electrotine;
+import static gregtech.api.unification.material.Materials.EnrichedNaquadahTriniumEuropiumDuranide;
+import static gregtech.api.unification.material.Materials.Europium;
+import static gregtech.api.unification.material.Materials.Gallium;
+import static gregtech.api.unification.material.Materials.Glowstone;
+import static gregtech.api.unification.material.Materials.Gold;
+import static gregtech.api.unification.material.Materials.HSSE;
+import static gregtech.api.unification.material.Materials.HSSS;
+import static gregtech.api.unification.material.Materials.Iridium;
+import static gregtech.api.unification.material.Materials.Iron;
+import static gregtech.api.unification.material.Materials.Lanthanum;
+import static gregtech.api.unification.material.Materials.Lead;
+import static gregtech.api.unification.material.Materials.Magnesium;
+import static gregtech.api.unification.material.Materials.Manganese;
+import static gregtech.api.unification.material.Materials.NaquadahEnriched;
+import static gregtech.api.unification.material.Materials.Naquadria;
+import static gregtech.api.unification.material.Materials.NetherQuartz;
+import static gregtech.api.unification.material.Materials.Netherrack;
+import static gregtech.api.unification.material.Materials.Nickel;
+import static gregtech.api.unification.material.Materials.Niobium;
+import static gregtech.api.unification.material.Materials.Osmiridium;
+import static gregtech.api.unification.material.Materials.Osmium;
+import static gregtech.api.unification.material.Materials.Perlite;
+import static gregtech.api.unification.material.Materials.Platinum;
+import static gregtech.api.unification.material.Materials.RedSteel;
+import static gregtech.api.unification.material.Materials.RhodiumPlatedPalladium;
+import static gregtech.api.unification.material.Materials.RoseGold;
+import static gregtech.api.unification.material.Materials.Ruridit;
+import static gregtech.api.unification.material.Materials.Rutile;
+import static gregtech.api.unification.material.Materials.SaltWater;
+import static gregtech.api.unification.material.Materials.Samarium;
+import static gregtech.api.unification.material.Materials.Silicon;
+import static gregtech.api.unification.material.Materials.Silver;
+import static gregtech.api.unification.material.Materials.StainlessSteel;
+import static gregtech.api.unification.material.Materials.Steel;
+import static gregtech.api.unification.material.Materials.SterlingSilver;
+import static gregtech.api.unification.material.Materials.Stone;
+import static gregtech.api.unification.material.Materials.Tin;
+import static gregtech.api.unification.material.Materials.Titanium;
+import static gregtech.api.unification.material.Materials.Trinium;
+import static gregtech.api.unification.material.Materials.Tritanium;
+import static gregtech.api.unification.material.Materials.Tungsten;
+import static gregtech.api.unification.material.Materials.Uranium235;
+import static gregtech.api.unification.material.Materials.Uranium238;
+import static gregtech.api.unification.material.Materials.Uvarovite;
+import static gregtech.api.unification.material.Materials.Vanadium;
+import static gregtech.api.unification.material.Materials.Wheat;
+import static gregtech.api.unification.material.Materials.WroughtIron;
+import static gregtech.api.unification.material.Materials.Yttrium;
+import static gregtech.api.unification.material.Materials.Zinc;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_BOLT_SCREW;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_DENSE;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_DOUBLE_PLATE;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_FOIL;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_GEAR;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_LONG_ROD;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_PLATE;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_ROD;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_ROTOR;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_ROUND;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_SMALL_GEAR;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_SPRING;
+import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_SPRING_SMALL;
+import static gregtech.api.unification.material.info.MaterialFlags.NO_UNIFICATION;
+
+public class MaterialFlagsCore {
+
+
+  public static void init() {
+
+    // Material changes
+
+    // GTCEu
+    Stone.setProperty(PropertyKey.TOOL, new ToolProperty(1.0f, 1f, 6, 1));
+    Copper.setProperty(PropertyKey.TOOL, new ToolProperty(1.5f, 2f, 88, 2));
+    BismuthBronze.setProperty(PropertyKey.TOOL, new ToolProperty(1.8f, 2f, 174, 2));
+    Bismuth.setProperty(PropertyKey.TOOL, new ToolProperty(2.0f, 2f, 192, 2));
+    BlackBronze.setProperty(PropertyKey.TOOL, new ToolProperty(2.2f, 2f, 212, 2));
+    BlackSteel.setProperty(PropertyKey.TOOL, new ToolProperty(6.0f, 3f, 784, 3));
+
+    SaltWater.getProperty(PropertyKey.FLUID).getQueuedBuilder(FluidStorageKeys.LIQUID).textures(true, true);
+    Glowstone.setFormula("Au(Si(FeS2)5(CrAl2O3)Hg3)", true);
+    RedSteel.addFlags(GENERATE_LONG_ROD, GENERATE_BOLT_SCREW, GENERATE_DOUBLE_PLATE);
+    BlueSteel.addFlags(GENERATE_LONG_ROD, GENERATE_BOLT_SCREW, GENERATE_DOUBLE_PLATE);
+    BlackSteel.addFlags(GENERATE_LONG_ROD, GENERATE_DENSE, GENERATE_BOLT_SCREW, GENERATE_DOUBLE_PLATE);
+    Magnesium.addFlags(GENERATE_PLATE);
+    Titanium.addFlags(GENERATE_FOIL, GENERATE_DENSE);
+    Zinc.addFlags(GENERATE_LONG_ROD, GENERATE_DOUBLE_PLATE, GENERATE_GEAR, GENERATE_BOLT_SCREW, GENERATE_ROD);
+    Nickel.addFlags(GENERATE_LONG_ROD, GENERATE_GEAR, GENERATE_BOLT_SCREW, GENERATE_ROD);
+    Copper.addFlags(GENERATE_LONG_ROD, GENERATE_DENSE, GENERATE_GEAR, GENERATE_BOLT_SCREW);
+    Bismuth.addFlags(GENERATE_LONG_ROD, GENERATE_GEAR, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_BOLT_SCREW, GENERATE_ROD);
+    BismuthBronze.addFlags(GENERATE_GEAR, GENERATE_DOUBLE_PLATE);
+    CertusQuartz.addFlags(GENERATE_ROD, GENERATE_BOLT_SCREW);
+    NetherQuartz.addFlags(GENERATE_ROD, GENERATE_BOLT_SCREW);
+    Steel.addFlags(GENERATE_DENSE);
+    Iron.addFlags(GENERATE_DENSE, GENERATE_DOUBLE_PLATE);
+    Tin.addFlags(GENERATE_DENSE, GENERATE_GEAR);
+    Aluminium.addFlags(GENERATE_DENSE);
+    Bronze.addFlags(GENERATE_DENSE);
+    Osmiridium.addFlags(GENERATE_DENSE);
+    HSSS.addFlags(GENERATE_DENSE);
+    StainlessSteel.addFlags(GENERATE_DENSE);
+    Platinum.addFlags(GENERATE_DENSE, GENERATE_GEAR);
+    Gold.addFlags(GENERATE_GEAR);
+    Brass.addFlags(GENERATE_GEAR);
+    Lead.addFlags(GENERATE_GEAR, GENERATE_DENSE);
+    RoseGold.addFlags(GENERATE_GEAR);
+    Silver.addFlags(GENERATE_GEAR);
+    SterlingSilver.addFlags(GENERATE_GEAR);
+    WroughtIron.addFlags(GENERATE_SMALL_GEAR, GENERATE_ROTOR, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_ROUND);
+    Netherrack.addFlags(NO_UNIFICATION);
+    Wheat.addFlags(NO_UNIFICATION);
+    Electrotine.addFlags(GENERATE_PLATE);
+    Ruridit.addFlags(GENERATE_BOLT_SCREW);
+    Ruridit.getProperty(PropertyKey.FLUID).setPrimaryKey(FluidStorageKeys.LIQUID);
+    Europium.addFlags(GENERATE_BOLT_SCREW);
+    Americium.addFlags(GENERATE_DENSE);
+    Naquadria.addFlags(GENERATE_DENSE);
+    Carbon.addFlags(GENERATE_DENSE);
+    Trinaquadalloy.addFlags(GENERATE_DENSE);
+    EnrichedNaquadahTriniumEuropiumDuranide.addFlags(GENERATE_DENSE);
+    Trinium.addFlags(GENERATE_DENSE);
+    RhodiumPlatedPalladium.addFlags(GENERATE_FOIL);
+    Darmstadtium.addFlags(GENERATE_FOIL);
+    HSSE.addFlags(GENERATE_DOUBLE_PLATE);
+    Tritanium.addFlags(GENERATE_DOUBLE_PLATE);
+
+    CertusQuartz.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+    NetherQuartz.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
+    Bismuth.setProperty(PropertyKey.ORE, new OreProperty());
+    Perlite.setProperty(PropertyKey.ORE, new OreProperty());
+    Uvarovite.setProperty(PropertyKey.ORE, new OreProperty());
+    Manganese.setProperty(PropertyKey.ORE, new OreProperty());
+    Arsenic.setProperty(PropertyKey.ORE, new OreProperty());
+    Iridium.setProperty(PropertyKey.ORE, new OreProperty(1, 1, true));
+    Osmium.setProperty(PropertyKey.ORE, new OreProperty());
+    Chrome.setProperty(PropertyKey.ORE, new OreProperty());
+    Vanadium.setProperty(PropertyKey.ORE, new OreProperty());
+    Antimony.setProperty(PropertyKey.ORE, new OreProperty());
+    Rutile.setProperty(PropertyKey.ORE, new OreProperty());
+    Silicon.setProperty(PropertyKey.ORE, new OreProperty());
+    Uranium238.setProperty(PropertyKey.ORE, new OreProperty(1, 1, true));
+    Uranium235.setProperty(PropertyKey.ORE, new OreProperty(1, 1, true));
+    Niobium.setProperty(PropertyKey.ORE, new OreProperty());
+    Yttrium.setProperty(PropertyKey.ORE, new OreProperty());
+    Gallium.setProperty(PropertyKey.ORE, new OreProperty());
+    Titanium.setProperty(PropertyKey.ORE, new OreProperty());
+    Borax.setProperty(PropertyKey.ORE, new OreProperty());
+    Cadmium.setProperty(PropertyKey.ORE, new OreProperty());
+    Caesium.setProperty(PropertyKey.ORE, new OreProperty());
+    Samarium.setProperty(PropertyKey.ORE, new OreProperty());
+    Cerium.setProperty(PropertyKey.ORE, new OreProperty());
+    Lanthanum.setProperty(PropertyKey.ORE, new OreProperty());
+    Tungsten.setProperty(PropertyKey.ORE, new OreProperty());
+    NaquadahEnriched.setProperty(PropertyKey.ORE, new OreProperty(1, 1, true));
+    Glowstone.setProperty(PropertyKey.ORE, new OreProperty(1, 1, true));
+    GregTechAPI.materialManager.getRegisteredMaterials().forEach(material -> {
+      if (material.hasProperty(PropertyKey.TOOL)) {
+        ToolProperty toolProperty = material.getProperty(PropertyKey.TOOL);
+        toolProperty.setDurabilityMultiplier(7);
+      }
+    });
+  }
+}

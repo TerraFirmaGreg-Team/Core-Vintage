@@ -1,8 +1,9 @@
-package su.terrafirmagreg.modules.rock.plugin.gregtech.material;
+package su.terrafirmagreg.modules.rock.plugin.gregtech.unification.material;
 
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 
-public class MaterialsRock {
+public class MaterialsRock extends Materials {
 
   // Igneous Intrusive
   public static Material Gabbro;

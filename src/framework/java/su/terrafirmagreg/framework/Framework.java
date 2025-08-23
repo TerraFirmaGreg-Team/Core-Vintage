@@ -60,10 +60,11 @@ public abstract class Framework {
       AnnotationUtils.setAsmData(event.getASMHarvestedData());
       FluidRegistry.enableUniversalBucket();
       GuiHandler.enableGui();
+      this.manager.onConstruction();
     });
 
     registerEventWrapper(FMLPreInitializationEvent.class, event -> {
-      this.manager.onConstruction();
+
       MinecraftForge.EVENT_BUS.post(new StateEvent.PreInitialization());
     });
 

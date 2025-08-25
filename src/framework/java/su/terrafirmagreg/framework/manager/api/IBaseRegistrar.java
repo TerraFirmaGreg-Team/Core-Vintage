@@ -15,19 +15,19 @@ public interface IBaseRegistrar<E extends IBaseEntry<?, ?>> {
 
   default ResourceLocation getIdentifier(String identifier) {
 
-    return ModUtils.resource(getModule().getSettings().getIdentifier(), identifier);
+    return ModUtils.resource(getModule().getIdentifier(), identifier);
   }
 
   default boolean validate(E entry) {
     var entryClass = entry.getClass();
     var settings = entry.getSettings();
 
-    if (settings.isEnabled()) {
+    if (!settings.isEnabled()) {
       getModule().getLogger().debug("Entry {} is disabled: {}", entry.asClassEntry(), entryClass.getSimpleName());
-      return true;
+      return false;
     }
 
-    return false;
+    return true;
   }
 
   default void addEntry(E entry) {

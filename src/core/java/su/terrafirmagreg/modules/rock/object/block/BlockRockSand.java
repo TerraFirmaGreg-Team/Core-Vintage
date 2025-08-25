@@ -23,19 +23,17 @@ import static su.terrafirmagreg.modules.rock.api.types.type.RockTypes.RHYOLITE;
 @Getter
 public class BlockRockSand extends BaseBlockFalling implements IRockEntry {
 
-  public static final String NAME = "sand";
   protected final RockType type;
 
   public BlockRockSand(RockType type) {
     super(BlockSettings.of()
       .material(Material.SAND)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .sound(SoundType.SAND)
       .addOreDict(isSilica(type))
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("sand")
+      .addOreDict("sand", type)
       .capability(stack -> CapabilityProviderHeat.of(stack.getTagCompound(), 1, 600))
     );
 

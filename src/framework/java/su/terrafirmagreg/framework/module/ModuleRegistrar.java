@@ -13,11 +13,11 @@ import java.util.Map;
 public class ModuleRegistrar implements IModuleRegistrar {
 
   private final String modId;
-  private final Map<Class<?>, IModuleEntry> map;
+  private final Map<Class<?>, IModuleEntry> mapEntry;
 
   public ModuleRegistrar(IModuleManager manager) {
     this.modId = manager.getModId();
-    this.map = manager.getMap();
+    this.mapEntry = manager.getMap();
 
   }
 
@@ -25,12 +25,12 @@ public class ModuleRegistrar implements IModuleRegistrar {
     var entryClass = entry.getClass();
     var settings = entry.getSettings();
 
-    if (settings.isEnabled()) {
+    if (!settings.isEnabled()) {
       entry.getLogger().debug("Entry {} is disabled: {}", entry.asClassEntry(), entryClass.getSimpleName());
-      return true;
+      return false;
     }
 
-    return false;
+    return true;
   }
 
   @Override
@@ -39,10 +39,14 @@ public class ModuleRegistrar implements IModuleRegistrar {
     var entryClass = entry.getClass();
     var settings = entry.getSettings();
 
-    if (validate(entry)) {
-      settings.identifier(ModUtils.resource(settings.getRegistryKey()));
-      map.put(entryClass, entry);
+    if (!validate(entry)) {
+      entry.getLogger().info("Entry {} validation failed", entry.getClass().getSimpleName());
+      return;
     }
+
+    settings.identifier(ModUtils.resource(modId, settings.getRegistryKey()));
+    getMapEntry().put(entryClass, entry);
+    entry.getLogger().info("Added entry {}: {}", entry.asClassEntry(), entry.getClass().getSimpleName());
   }
 
 

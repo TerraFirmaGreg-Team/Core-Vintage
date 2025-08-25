@@ -15,7 +15,7 @@ public class BlockWoodStairs extends BaseBlockStairs implements IWoodEntry {
   protected final WoodType type;
 
   public BlockWoodStairs(WoodType type) {
-    super(BlocksWood.PLANKS.get(type));
+    super(BlockSettings.of(BlocksWood.PLANKS.get(type)));
 
     this.type = type;
 

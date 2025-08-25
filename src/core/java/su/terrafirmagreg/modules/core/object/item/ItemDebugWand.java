@@ -39,7 +39,7 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Objects;
 
-import static su.terrafirmagreg.api.data.enums.Colors.RED;
+import static su.terrafirmagreg.api.data.enums.EnumColor.RED;
 
 
 public class ItemDebugWand extends BaseItem {

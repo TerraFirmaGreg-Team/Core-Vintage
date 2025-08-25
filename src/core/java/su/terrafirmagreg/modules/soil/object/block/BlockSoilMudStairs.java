@@ -15,15 +15,14 @@ public class BlockSoilMudStairs extends BaseBlockStairs implements ISoilEntry {
   protected final SoilType type;
 
   public BlockSoilMudStairs(SoilType type) {
-    super(BlocksSoil.MUD_BRICKS.get(type));
-
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of(BlocksSoil.MUD_BRICKS.get(type))
       .registryKey(type.getRegistryKey("mud_bricks/stairs"))
       .renderLayer(BlockRenderLayer.CUTOUT)
       .addOreDict("stairs")
-      .addOreDict("stairs", "mud", "bricks");
+      .addOreDict("stairs", "mud", "bricks")
+    );
+
+    this.type = type;
   }
 
 }

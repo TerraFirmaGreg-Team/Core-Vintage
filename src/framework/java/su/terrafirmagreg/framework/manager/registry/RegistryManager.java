@@ -23,8 +23,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 import lombok.Getter;
@@ -43,7 +43,7 @@ public class RegistryManager implements IRegistryManager {
   private RegistryManager(IModuleEntry module) {
 
     this.module = module;
-    this.mapEntry = HashMultimap.create();
+    this.mapEntry = LinkedHashMultimap.create();
 
     this.registrar = new RegistryRegistrar(this);
 

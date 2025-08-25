@@ -43,7 +43,6 @@ public class BlockRockStandGem extends BaseBlock implements IRockEntry, IProvide
   public BlockRockStandGem(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(1f))
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0)
@@ -52,8 +51,8 @@ public class BlockRockStandGem extends BaseBlock implements IRockEntry, IProvide
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.HEAVY))
       .nonFullCube()
       .nonOpaque()
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("stand_gem")
+      .addOreDict("stand_gem", type)
     );
 
     this.type = type;

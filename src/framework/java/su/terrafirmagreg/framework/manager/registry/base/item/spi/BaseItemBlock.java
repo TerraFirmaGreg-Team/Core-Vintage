@@ -6,6 +6,7 @@ import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,6 +26,12 @@ public class BaseItemBlock extends ItemBlock implements IItemEntry {
     super(block);
 
     this.settings = ItemSettings.of(block);
+  }
+
+
+  @Override
+  public CreativeTabs getCreativeTab() {
+    return this.settings.getGroup();
   }
 
 

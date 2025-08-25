@@ -21,22 +21,20 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.CAN_FALL;
 @SuppressWarnings("deprecation")
 @Getter
 public class BlockRockSmooth extends BaseBlock implements IRockEntry {
-
-  public static final String NAME = "smooth";
+  
   protected final RockType type;
 
   public BlockRockSmooth(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .ignoresProperties(CAN_FALL)
       .addOreDict("stoneSmooth")
       .addOreDict("stonePolished")
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("smooth")
+      .addOreDict("smooth", type)
     );
 
     this.type = type;

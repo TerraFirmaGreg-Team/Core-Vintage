@@ -19,20 +19,18 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.MOSSY;
 @Getter
 public class BlockRockCobble extends BaseBlockFalling implements IRockEntry {
 
-  public static final String NAME = "cobble";
   protected final RockType type;
 
   public BlockRockCobble(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .addOreDict("cobblestone")
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("cobble")
+      .addOreDict("cobble", type)
 
     );
 

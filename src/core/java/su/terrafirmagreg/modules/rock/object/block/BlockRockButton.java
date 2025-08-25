@@ -12,18 +12,16 @@ import lombok.Getter;
 @Getter
 public class BlockRockButton extends BaseBlockButton implements IRockEntry {
 
-  public static final String NAME = "button";
   protected final RockType type;
 
   public BlockRockButton(RockType type) {
     super(false, BlockSettings.of()
       .material(Material.CIRCUITS)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .hardness(0.5f)
-      .addOreDict(NAME, "stone")
-      .addOreDict(NAME, "stone", type));
+      .addOreDict("button", "stone")
+      .addOreDict("button", "stone", type));
 
     this.type = type;
   }

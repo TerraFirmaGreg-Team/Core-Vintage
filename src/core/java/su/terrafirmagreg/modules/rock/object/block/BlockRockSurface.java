@@ -42,7 +42,6 @@ import java.util.Random;
 @Getter
 public class BlockRockSurface extends BaseBlockHorizontal implements IRockEntry {
 
-  public static final String NAME = "surface";
   private static final AxisAlignedBB STONE_AABB = new AxisAlignedBB(
     2.0 / 16.0, 0.0 / 16.0, 2.0 / 16.0,
     14.0 / 16.0, 2.0 / 16.0, 14.0 / 16.0
@@ -52,15 +51,14 @@ public class BlockRockSurface extends BaseBlockHorizontal implements IRockEntry 
   public BlockRockSurface(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey(type.getRegistryKey(NAME))
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .hardness(0.1f)
       .useNeighborBrightness()
       .replaceable()
       .nonCube()
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("surface")
+      .addOreDict("surface", type)
     );
 
     this.type = type;

@@ -42,14 +42,13 @@ public class BlockRockSpeleothem extends BaseBlock implements IRockEntry {
   public BlockRockSpeleothem(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .nonCube()
       .noPassable()
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("speleothem")
+      .addOreDict("speleothem", type)
     );
 
     this.type = type;

@@ -20,7 +20,7 @@ public class BlockRockStairs extends BaseBlockStairs implements IRockEntry {
   private final RockType type;
 
   public BlockRockStairs(Block model, RockType type) {
-    super(model, BlockSettings.of(model)
+    super(BlockSettings.of(model)
       .registryKey(type.getRegistryKey("cobble/stairs"))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)

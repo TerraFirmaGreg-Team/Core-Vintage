@@ -24,7 +24,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.LootFunction.Serializer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.Collection;
 import java.util.Map;
@@ -36,14 +35,18 @@ public interface IRegistryRegistrar extends IBaseRegistrar<IRegistryEntry<?, ?>>
 
   BaseItemGroup group(String icon);
 
-  <T extends IForgeRegistryEntry<T>> void addContent(T entry);
+  <V extends IRegistryEntry<?, ?>> V addContent(V entry);
 
   // --------------------------------------------------------------------------
   // - Block
   // --------------------------------------------------------------------------
 
+  <V extends Block & IBlockEntry> V addBlock(String identifier, V entry);
+
+  <V extends Block & IBlockEntry, T> Map<T, V> addBlock(String identifier, Function<T, V> factory, Collection<T> types);
+
   <V extends Block & IBlockEntry> V addBlock(V block);
-  
+
   <V extends Block & IBlockEntry, T> Map<T, V> addBlock(Function<T, V> factory, Collection<T> types);
 
   // --------------------------------------------------------------------------

@@ -49,21 +49,19 @@ import java.util.Random;
 public class BlockRockAnvil extends BaseBlock implements IRockEntry, IProviderTile {
 
 
-  public static final String NAME = "anvil";
   protected static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.875, 1);
   protected final RockType type;
 
   public BlockRockAnvil(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .tile(TileRockAnvil.class, new TESRRockAnvil())
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .nonCube()
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("anvil")
+      .addOreDict("anvil", type)
     );
 
     this.type = type;

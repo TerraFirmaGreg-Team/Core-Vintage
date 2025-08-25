@@ -13,7 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 import lombok.Getter;
@@ -33,7 +33,7 @@ public class CommandManager implements ICommandManager {
   private CommandManager(IModuleEntry module) {
 
     this.module = module;
-    this.mapEntry = HashMultimap.create();
+    this.mapEntry = LinkedHashMultimap.create();
 
     this.registrar = new CommandRegistrar(this);
 

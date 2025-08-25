@@ -31,7 +31,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.LootFunction.Serializer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import com.google.common.collect.Multimap;
 
@@ -64,38 +63,65 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     return this.group;
   }
 
+  // region Block
+
   @Override
-  public <T extends IForgeRegistryEntry<T>> void addContent(T entry) {
-    if (entry instanceof IRegistryEntry<?, ?> registryEntry) {
-      addEntry(registryEntry);
-    }
+  public <V extends IRegistryEntry<?, ?>> V addContent(V entry) {
+    addEntry(entry);
+
+    return entry;
   }
 
-  // region Block
+  @Override
+  public <V extends Block & IBlockEntry> V addBlock(String identifier, V entry) {
+    var settings = entry.getSettings().registryKey(identifier).group(group);
+
+    this.addEntry(entry);
+
+    if (settings.getItemBlock() != null) {
+      this.addItem(settings.getItemBlock().apply(entry));
+    }
+    if (settings.getWallBlock() != null) {
+      this.addBlock(settings.getWallBlock().apply(entry));
+    }
+    if (settings.getStairsBlock() != null) {
+      this.addBlock(settings.getStairsBlock().apply(entry));
+    }
+    if (settings.getSlabDoubleBlock() != null) {
+      this.addBlock(settings.getSlabDoubleBlock().apply(entry));
+    }
+    if (settings.getSlabBlock() != null) {
+      this.addBlock(settings.getSlabBlock().apply(entry));
+    }
+    return entry;
+  }
+
+  @Override
+  public <V extends Block & IBlockEntry, T> Map<T, V> addBlock(String identifier, Function<T, V> factory, Collection<T> types) {
+    return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBlock(String.format("%s/%s", identifier, type), factory.apply(type))));
+  }
 
   @Override
   public <V extends Block & IBlockEntry> V addBlock(V entry) {
 
-    var settings = entry.getSettings();
+    var settings = entry.getSettings().group(group);
 
-    entry.setCreativeTab(group);
-    this.addContent(entry);
+    this.addEntry(entry);
 
     if (settings.getItemBlock() != null) {
-      this.addContent(settings.getItemBlock().apply(entry));
+      this.addItem(settings.getItemBlock().apply(entry));
     }
     if (settings.getWallBlock() != null) {
-      this.addContent(settings.getWallBlock().apply(entry));
+      this.addBlock(settings.getWallBlock().apply(entry));
     }
     if (settings.getStairsBlock() != null) {
-      this.addContent(settings.getStairsBlock().apply(entry));
+      this.addBlock(settings.getStairsBlock().apply(entry));
     }
     if (settings.getSlabDoubleBlock() != null) {
-      this.addContent(settings.getSlabDoubleBlock().apply(entry));
+      this.addBlock(settings.getSlabDoubleBlock().apply(entry));
     }
-
     if (settings.getSlabBlock() != null) {
-      this.addContent(settings.getSlabBlock().apply(entry));
+      this.addBlock(settings.getSlabBlock().apply(entry));
     }
     return entry;
   }
@@ -113,8 +139,8 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Item & IItemEntry> V addItem(V entry) {
 
-    entry.setCreativeTab(group);
-    this.addContent(entry);
+    entry.getSettings().group(group);
+    this.addEntry(entry);
     return entry;
   }
 
@@ -132,7 +158,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Biome & IBiomeEntry> V addBiome(V entry) {
 
-    this.addContent(entry);
+    this.addEntry(entry);
     return entry;
   }
 
@@ -149,7 +175,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends Enchantment & IEnchantmentEntry> V addEnchantment(V entry) {
 
-    this.addContent(entry);
+    this.addEntry(entry);
     return entry;
   }
 
@@ -166,7 +192,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
   @Override
   public <V extends Potion & IEffectEntry> V addEffect(V entry) {
-    this.addContent(entry);
+    this.addEntry(entry);
     return entry;
   }
 
@@ -183,7 +209,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends PotionType & IPotionEntry> V addPotion(V entry) {
 
-    this.addContent(entry);
+    this.addEntry(entry);
     return entry;
   }
 
@@ -200,7 +226,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends EntityEntry & IEntityEntry> V addEntity(V entry) {
 
-    this.addContent(entry);
+    this.addEntry(entry);
     return entry;
   }
 
@@ -217,7 +243,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   @Override
   public <V extends SoundEvent & ISoundEntry> V addSound(V entry) {
 
-    this.addContent(entry);
+    this.addEntry(entry);
     return entry;
   }
 
@@ -225,7 +251,7 @@ public class RegistryRegistrar implements IRegistryRegistrar {
   public <V extends SoundEvent> SoundEvent addSound(String identifier) {
 
     var soundEvent = new BaseSound(SoundSettings.of().name(getIdentifier(identifier)).registryKey(identifier));
-    this.addContent(soundEvent);
+    this.addEntry(soundEvent);
     return soundEvent;
   }
 

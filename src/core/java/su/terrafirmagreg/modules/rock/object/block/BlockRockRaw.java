@@ -49,14 +49,13 @@ public class BlockRockRaw extends BaseBlock implements IRockEntry {
   public BlockRockRaw(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .ignoresProperties(CAN_FALL)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .harvestLevel(ToolClasses.PICKAXE, 0)
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("raw")
+      .addOreDict("raw", type)
       .addOreDict("stone")
     );
     this.type = type;

@@ -3,7 +3,7 @@
   "defaults": {
     "model": "cube_all",
     "textures": {
-      "all": "tfg:blocks/rock/alabaster/bricks/plain"
+      "all": "tfg:blocks/rock/alabaster/bricks/colorless"
     }
   },
   "variants": {

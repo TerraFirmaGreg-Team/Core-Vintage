@@ -9,7 +9,7 @@ import su.terrafirmagreg.framework.module.api.IModuleEntry;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 import lombok.Getter;
@@ -27,7 +27,7 @@ public class PluginManager implements IPluginManager {
   private PluginManager(IModuleEntry module) {
 
     this.module = module;
-    this.mapEntry = HashMultimap.create();
+    this.mapEntry = LinkedHashMultimap.create();
 
     this.registrar = new PluginRegistrar(this);
 

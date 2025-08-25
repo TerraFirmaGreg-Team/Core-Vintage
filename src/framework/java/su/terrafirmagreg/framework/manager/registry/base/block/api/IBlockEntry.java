@@ -29,7 +29,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -59,15 +58,15 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
   }
 
   default BlockStairs asStairs() {
-    return BaseBlockStairs.getStairsFromBlock(asEntry());
+    return BlockUtils.getStairsFromBlock(asEntry());
   }
 
   default BlockWall asWall() {
-    return BaseBlockWall.getWallFromBlock(asEntry());
+    return BlockUtils.getWallFromBlock(asEntry());
   }
 
   default BlockSlab asSlab() {
-    return BaseBlockSlab.getSlabFromBlock(asEntry());
+    return BlockUtils.getSlabFromBlock(asEntry());
   }
 
   @Override
@@ -99,6 +98,8 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
     protected final List<IProviderItemCapability> capability = new ObjectArrayList<>();
 
     // Block
+    protected Block block;
+
     protected Material material = Material.AIR;
     protected MapColor mapColor = MapColor.AIR;
 
@@ -139,11 +140,11 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
     protected boolean isPassable = !material.blocksMovement();
 
     protected boolean nonCanStack = false;
-    protected Function<Block, ? extends ItemBlock> itemBlock = BaseItemBlock::new;
+    protected Function<Block, ? extends BaseItemBlock> itemBlock = BaseItemBlock::new;
     protected Function<Block, ? extends BaseBlockStairs> stairsBlock;
-    protected Function<Block, ? extends BlockWall> wallBlock;
-    protected Function<Block, ? extends BlockSlab> slabBlock;
-    protected Function<Block, ? extends BlockSlab> slabDoubleBlock;
+    protected Function<Block, ? extends BaseBlockWall> wallBlock;
+    protected Function<Block, ? extends BaseBlockSlab> slabBlock;
+    protected Function<Block, ? extends BaseBlockSlab> slabDoubleBlock;
 
     protected boolean enableStats = true;
 
@@ -162,6 +163,7 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
       IBlockState state = block.getStateFromMeta(meta);
       BlockSettings settings = BlockSettings.of();
 
+      settings.block = block;
       settings.material = block.material;
       settings.mapColor = block.blockMapColor;
       settings.collidable = block.isCollidable();
@@ -209,7 +211,7 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings itemBlock(Function<Block, ? extends ItemBlock> itemBlock) {
+    public BlockSettings itemBlock(Function<Block, ? extends BaseItemBlock> itemBlock) {
       this.itemBlock = itemBlock;
       return this.self();
     }
@@ -219,17 +221,17 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings wallBlock(Function<Block, ? extends BlockWall> wallBlock) {
+    public BlockSettings wallBlock(Function<Block, ? extends BaseBlockWall> wallBlock) {
       this.wallBlock = wallBlock;
       return this.self();
     }
 
-    public BlockSettings slabDoubleBlock(Function<Block, ? extends BlockSlab> slabDoubleBlock) {
+    public BlockSettings slabDoubleBlock(Function<Block, ? extends BaseBlockSlab> slabDoubleBlock) {
       this.slabDoubleBlock = slabDoubleBlock;
       return this.self();
     }
 
-    public BlockSettings slabBlock(Function<Block, ? extends BlockSlab> slabBlock) {
+    public BlockSettings slabBlock(Function<Block, ? extends BaseBlockSlab> slabBlock) {
       this.slabBlock = slabBlock;
       return this.self();
     }

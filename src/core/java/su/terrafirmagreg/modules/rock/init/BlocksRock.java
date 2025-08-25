@@ -1,10 +1,9 @@
 package su.terrafirmagreg.modules.rock.init;
 
+import su.terrafirmagreg.api.data.enums.EnumColor;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.object.block.BlockAlabasterBricks;
-import su.terrafirmagreg.modules.rock.object.block.BlockAlabasterRaw;
-import su.terrafirmagreg.modules.rock.object.block.BlockAlabasterSmooth;
+import su.terrafirmagreg.modules.rock.object.block.BlockAlabaster;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockAnvil;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockBricks;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockButton;
@@ -18,8 +17,6 @@ import su.terrafirmagreg.modules.rock.object.block.BlockRockSmooth;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockSpeleothem;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockStandGem;
 import su.terrafirmagreg.modules.rock.object.block.BlockRockSurface;
-
-import net.minecraft.item.EnumDyeColor;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -64,27 +61,27 @@ public class BlocksRock {
   public static Map<RockType, BlockRockStandGem> STAND_GEM;
 
 
-  public static Map<EnumDyeColor, BlockAlabasterBricks> ALABASTER_BRICKS;
-  public static Map<EnumDyeColor, BlockAlabasterSmooth> ALABASTER_SMOOTH;
-  public static Map<EnumDyeColor, BlockAlabasterRaw> ALABASTER_RAW;
+  public static Map<EnumColor, BlockAlabaster> ALABASTER_BRICKS;
+  public static Map<EnumColor, BlockAlabaster> ALABASTER_SMOOTH;
+  public static Map<EnumColor, BlockAlabaster> ALABASTER_RAW;
 
   public static void onRegister(IRegistryRegistrar registrar) {
 
-    COBBLE = registrar.addBlock(BlockRockCobble::new, RockType.getTypes());
-    RAW = registrar.addBlock(BlockRockRaw::new, RockType.getTypes());
-    SMOOTH = registrar.addBlock(BlockRockSmooth::new, RockType.getTypes());
-    GRAVEL = registrar.addBlock(BlockRockGravel::new, RockType.getTypes());
-    SAND = registrar.addBlock(BlockRockSand::new, RockType.getTypes());
-    SURFACE = registrar.addBlock(BlockRockSurface::new, RockType.getTypes());
-    SPELEOTHEM = registrar.addBlock(BlockRockSpeleothem::new, RockType.getTypes());
-    BUTTON = registrar.addBlock(BlockRockButton::new, RockType.getTypes());
-    PRESSURE_PLATE = registrar.addBlock(BlockRockPressurePlate::new, RockType.getTypes());
-    ANVIL = registrar.addBlock(BlockRockAnvil::new, RockType.getTypes());
-    MAGMA = registrar.addBlock(BlockRockMagma::new, RockType.getTypes());
-    STAND_GEM = registrar.addBlock(BlockRockStandGem::new, RockType.getTypes());
+    COBBLE = registrar.addBlock("cobble", BlockRockCobble::new, RockType.getTypes());
+    RAW = registrar.addBlock("raw", BlockRockRaw::new, RockType.getTypes());
+    SMOOTH = registrar.addBlock("smooth", BlockRockSmooth::new, RockType.getTypes());
+    GRAVEL = registrar.addBlock("gravel", BlockRockGravel::new, RockType.getTypes());
+    SAND = registrar.addBlock("sand", BlockRockSand::new, RockType.getTypes());
+    SURFACE = registrar.addBlock("surface", BlockRockSurface::new, RockType.getTypes());
+    SPELEOTHEM = registrar.addBlock("speleothem", BlockRockSpeleothem::new, RockType.getTypes());
+    BUTTON = registrar.addBlock("button", BlockRockButton::new, RockType.getTypes());
+    PRESSURE_PLATE = registrar.addBlock("pressure_plate", BlockRockPressurePlate::new, RockType.getTypes());
+    ANVIL = registrar.addBlock("anvil", BlockRockAnvil::new, RockType.getTypes());
+    MAGMA = registrar.addBlock("magma", BlockRockMagma::new, RockType.getTypes());
+    STAND_GEM = registrar.addBlock("stand_gem", BlockRockStandGem::new, RockType.getTypes());
 
-    ALABASTER_BRICKS = registrar.addBlock(BlockAlabasterBricks::new, Arrays.asList(EnumDyeColor.values()));
-    ALABASTER_SMOOTH = registrar.addBlock(BlockAlabasterSmooth::new, Arrays.asList(EnumDyeColor.values()));
-    ALABASTER_RAW = registrar.addBlock(BlockAlabasterRaw::new, Arrays.asList(EnumDyeColor.values()));
+    ALABASTER_BRICKS = registrar.addBlock("alabaster/bricks", BlockAlabaster::new, Arrays.asList(EnumColor.values()));
+    ALABASTER_SMOOTH = registrar.addBlock("alabaster/smooth", BlockAlabaster::new, Arrays.asList(EnumColor.values()));
+    ALABASTER_RAW = registrar.addBlock("alabaster/raw", BlockAlabaster::new, Arrays.asList(EnumColor.values()));
   }
 }

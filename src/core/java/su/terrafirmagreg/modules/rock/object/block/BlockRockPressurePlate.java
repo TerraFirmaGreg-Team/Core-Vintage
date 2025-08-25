@@ -11,20 +11,18 @@ import lombok.Getter;
 
 @Getter
 public class BlockRockPressurePlate extends BaseBlockPressurePlate implements IRockEntry {
-
-  public static final String NAME = "pressure_plate";
+  
   protected final RockType type;
 
   public BlockRockPressurePlate(RockType type) {
     super(Sensitivity.MOBS, BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .hardness(0.5f)
-      .addOreDict(NAME)
-      .addOreDict(NAME, "stone")
-      .addOreDict(NAME, "stone", type)
+      .addOreDict("pressure_plate")
+      .addOreDict("pressure_plate", "stone")
+      .addOreDict("pressure_plate", "stone", type)
     );
 
     this.type = type;

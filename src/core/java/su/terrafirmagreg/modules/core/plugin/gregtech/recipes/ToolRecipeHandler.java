@@ -7,6 +7,7 @@ import su.terrafirmagreg.modules.core.plugin.gregtech.unification.ore.oreprefix.
 import net.minecraftforge.registries.IForgeRegistry;
 
 import gregtech.api.recipes.GTRecipeHandler;
+import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
@@ -17,6 +18,7 @@ import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
+import gregtech.common.items.ToolItems;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipe;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeSimple;
 import net.dries007.tfc.api.recipes.knapping.KnappingRecipeStone;
@@ -346,11 +348,11 @@ public class ToolRecipeHandler {
     UnificationEntry toolHeadHoe = new UnificationEntry(OrePrefixCore.toolHeadHoe, Materials.Stone);
     UnificationEntry toolHeadKnife = new UnificationEntry(OrePrefixCore.toolHeadKnife, Materials.Stone);
 
-//    ModHandler.addShapelessRecipe(String.format("hammer_%s", material), ToolItems.HARD_HAMMER.get(material), toolHeadHammer, stick);
-//    ModHandler.addShapelessRecipe(String.format("axe_%s", material), ToolItems.AXE.get(material), toolHeadAxe, stick);
-//    ModHandler.addShapelessRecipe(String.format("hoe_%s", material), ToolItems.HOE.get(material), toolHeadHoe, stick);
-//    ModHandler.addShapelessRecipe(String.format("shovel_%s", material), ToolItems.SHOVEL.get(material), toolHeadShovel, stick);
-//    ModHandler.addShapelessRecipe(String.format("knife_%s", material), ToolItems.KNIFE.get(material), toolHeadKnife, stick);
+    ModHandler.addShapelessRecipe(String.format("hammer_%s", material), ToolItems.HARD_HAMMER.get(material), toolHeadHammer, stick);
+    ModHandler.addShapelessRecipe(String.format("axe_%s", material), ToolItems.AXE.get(material), toolHeadAxe, stick);
+    ModHandler.addShapelessRecipe(String.format("hoe_%s", material), ToolItems.HOE.get(material), toolHeadHoe, stick);
+    ModHandler.addShapelessRecipe(String.format("shovel_%s", material), ToolItems.SHOVEL.get(material), toolHeadShovel, stick);
+    ModHandler.addShapelessRecipe(String.format("knife_%s", material), ToolItems.KNIFE.get(material), toolHeadKnife, stick);
   }
 
   private static void registerKnappingRecipes() {

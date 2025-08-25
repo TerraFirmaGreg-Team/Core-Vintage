@@ -2,6 +2,7 @@ package su.terrafirmagreg.framework.manager.registry.base.block.spi;
 
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.enums.EnumDefault;
+import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemSlab;
@@ -11,7 +12,6 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -20,11 +20,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-
 import lombok.Getter;
 
-import java.util.Map;
 import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Properties.EnumProp.DEFAULT;
@@ -33,14 +30,13 @@ import static su.terrafirmagreg.api.data.Properties.EnumProp.DEFAULT;
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
 
-  private static final Map<Block, BaseBlockSlab> BLOCK_TO_SLAB = new Object2ObjectOpenHashMap<>();
 
   protected final BlockSettings settings;
 
   public BaseBlockSlab(Block model) {
     this(BlockSettings.of(model));
 
-    BLOCK_TO_SLAB.put(model, this);
+    BlockUtils.BLOCK_TO_SLAB.put(model, this);
   }
 
   public BaseBlockSlab(BlockSettings settings) {
@@ -61,10 +57,6 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
     setDefaultState(state.withProperty(DEFAULT, EnumDefault.DEFAULT));
   }
 
-  public static BaseBlockSlab getSlabFromBlock(Block blockIn) {
-    BaseBlockSlab blockSlab = BLOCK_TO_SLAB.get(blockIn);
-    return blockSlab == null ? (BaseBlockSlab) Blocks.AIR : blockSlab;
-  }
 
   @Override
   public String getTranslationKey(int meta) {

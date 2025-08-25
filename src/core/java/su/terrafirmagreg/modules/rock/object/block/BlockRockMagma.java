@@ -19,14 +19,11 @@ import lombok.Getter;
 
 @Getter
 public class BlockRockMagma extends BaseBlockMagma implements IRockEntry {
-
-
-  public static final String NAME = "magma";
+  
   protected final RockType type;
 
   public BlockRockMagma(RockType type) {
     super(BlockSettings.of()
-      .registryKey(type.getRegistryKey(NAME))
       .material(Material.ROCK)
       .mapColor(MapColor.NETHERRACK)
       .lightValue(0.2F)
@@ -35,8 +32,8 @@ public class BlockRockMagma extends BaseBlockMagma implements IRockEntry {
       .renderLayer(BlockRenderLayer.CUTOUT)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("magma")
+      .addOreDict("magma", type)
     );
 
     this.type = type;

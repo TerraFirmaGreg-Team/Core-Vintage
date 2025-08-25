@@ -92,7 +92,6 @@ public class BuilderOrePrefix {
       prefix = new OrePrefix(name, materialAmount, material, materialIconType, flags, condition, tooltipFunc);
     }
 
-    prefix.tooltipFunc = tooltipFunc != null ? tooltipFunc : prefix.tooltipFunc;
     prefix.maxStackSize = maxStackSize;
     prefix.secondaryMaterials.addAll(secondaryMaterials);
     prefix.heatDamageFunction = heatDamageFunction;

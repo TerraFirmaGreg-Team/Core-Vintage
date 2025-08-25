@@ -1,9 +1,13 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockSlab;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockOre;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockStaticLiquid;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -18,6 +22,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.oredict.OreDictionary;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,11 +34,31 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @UtilityClass
 @SuppressWarnings("unused")
 public final class BlockUtils {
 
+  public static final Map<Block, BlockStairs> BLOCK_TO_STAIRS = new Object2ObjectOpenHashMap<>();
+  public static final Map<Block, BlockWall> BLOCK_TO_WALL = new Object2ObjectOpenHashMap<>();
+  public static final Map<Block, BaseBlockSlab> BLOCK_TO_SLAB = new Object2ObjectOpenHashMap<>();
+
+
+  public static BlockStairs getStairsFromBlock(Block blockIn) {
+    BlockStairs item = BLOCK_TO_STAIRS.get(blockIn);
+    return item == null ? (BlockStairs) Blocks.AIR : item;
+  }
+
+  public static BlockWall getWallFromBlock(Block blockIn) {
+    BlockWall item = BLOCK_TO_WALL.get(blockIn);
+    return item == null ? (BlockWall) Blocks.AIR : item;
+  }
+
+  public static BaseBlockSlab getSlabFromBlock(Block blockIn) {
+    BaseBlockSlab blockSlab = BLOCK_TO_SLAB.get(blockIn);
+    return blockSlab == null ? (BaseBlockSlab) Blocks.AIR : blockSlab;
+  }
 
   /**
    * Уведомляет мир о том, что блок был обновлен.

@@ -21,18 +21,16 @@ import java.util.Random;
 @Getter
 public class BlockRockGravel extends BaseBlockFalling implements IRockEntry {
 
-  public static final String NAME = "gravel";
   protected final RockType type;
 
   public BlockRockGravel(RockType type) {
     super(BlockSettings.of()
       .material(Material.SAND)
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.GROUND)
       .harvestLevel(ToolClasses.PICKAXE, 0)
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("gravel")
+      .addOreDict("gravel", type)
     );
 
     this.type = type;

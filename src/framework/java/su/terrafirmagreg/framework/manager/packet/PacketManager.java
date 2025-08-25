@@ -8,7 +8,7 @@ import su.terrafirmagreg.framework.module.api.IModuleEntry;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 import lombok.Getter;
@@ -27,7 +27,7 @@ public class PacketManager implements IPacketManager {
   private PacketManager(IModuleEntry module) {
 
     this.module = module;
-    this.mapEntry = HashMultimap.create();
+    this.mapEntry = LinkedHashMultimap.create();
 
     this.registrar = new PacketRegistrar(this);
 

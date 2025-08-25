@@ -7,6 +7,7 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,6 +36,11 @@ public abstract class BaseItem extends Item implements IItemEntry {
 //    this(ItemSettings.of());
 //
 //  }
+
+  @Override
+  public CreativeTabs getCreativeTab() {
+    return this.settings.getGroup();
+  }
 
   @Override
   public IRarity getForgeRarity(ItemStack stack) {

@@ -50,7 +50,7 @@ public class BaseBlockWall extends BlockWall implements IBlockEntry {
 
     getSettings()
       .ignoresProperties(VARIANT)
-      .registryKey(settings.getRegistryKey() + "/wall");
+      .registryKey(settings.getRegistryKey() + "_wall");
 
     BlockUtils.BLOCK_TO_WALL.put(block, this);
   }

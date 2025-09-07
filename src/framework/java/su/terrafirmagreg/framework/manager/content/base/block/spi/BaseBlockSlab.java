@@ -53,7 +53,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
     this.modelBlock = settings.getBlock();
 
     getSettings()
-      .registryKey(settings.getRegistryKey() + (isDouble() ? "/slab_double" : "/slab"))
+      .registryKey(settings.getRegistryKey() + (isDouble() ? "_slab_double" : "_slab"))
       .ignoresProperties(DEFAULT)
       .itemBlock(isDouble() ? null : BaseItemSlab::new)
       .renderLayer(isDouble() ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID)

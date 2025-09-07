@@ -31,7 +31,7 @@ public class BaseBlockStairs extends BlockStairs implements IBlockEntry {
 
     this.settings = settings;
     getSettings()
-      .registryKey(settings.getRegistryKey() + "/stairs");
+      .registryKey(settings.getRegistryKey() + "_stairs");
 
     BlockUtils.BLOCK_TO_STAIRS.put(settings.getBlock(), this);
   }

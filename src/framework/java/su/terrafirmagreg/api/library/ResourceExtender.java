@@ -5,12 +5,13 @@ import net.minecraft.util.ResourceLocation;
 /**
  * Simple helper methods to extend a resource location, either by prefixing or suffixing values
  */
-public interface ResourceExtender<T extends ResourceLocation> {
+public class ResourceExtender extends ResourceLocation {
 
-  /**
-   * Extender for standard resource locations
-   */
-  LocationExtender INSTANCE = new LocationExtender() {};
+
+  public ResourceExtender(String namespaceIn, String pathIn) {
+    super(namespaceIn, pathIn);
+
+  }
 
   /**
    * Wraps the resource location in the given prefix and suffix
@@ -20,14 +21,18 @@ public interface ResourceExtender<T extends ResourceLocation> {
    * @param suffix   Path suffix
    * @return Location with the given prefix and suffix
    */
-  default T wrap(ResourceLocation location, String prefix, String suffix) {
+  public static ResourceLocation wrap(ResourceLocation location, String prefix, String suffix) {
+
     return location(location.getNamespace(), prefix + location.getPath() + suffix);
   }
 
   /**
    * Creates a resource location
    */
-  T location(String namespace, String path);
+  public static ResourceLocation location(String namespace, String path) {
+
+    return new ResourceExtender(namespace, path);
+  }
 
   /**
    * Prefixes the resource location
@@ -36,7 +41,8 @@ public interface ResourceExtender<T extends ResourceLocation> {
    * @param prefix   Path prefix
    * @return Location with the given prefix
    */
-  default T prefix(ResourceLocation location, String prefix) {
+  public static ResourceLocation prefix(ResourceLocation location, String prefix) {
+
     return location(location.getNamespace(), prefix + location.getPath());
   }
 
@@ -47,15 +53,9 @@ public interface ResourceExtender<T extends ResourceLocation> {
    * @param suffix   Path suffix
    * @return Location with the given suffix
    */
-  default T suffix(ResourceLocation location, String suffix) {
+  public static ResourceLocation suffix(ResourceLocation location, String suffix) {
+
     return location(location.getNamespace(), location.getPath() + suffix);
   }
 
-  interface LocationExtender extends ResourceExtender<ResourceLocation> {
-
-    @Override
-    default ResourceLocation location(String namespace, String path) {
-      return new ResourceLocation(namespace, path);
-    }
-  }
 }

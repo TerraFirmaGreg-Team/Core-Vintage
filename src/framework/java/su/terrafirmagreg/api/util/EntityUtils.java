@@ -1,8 +1,8 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.framework.Framework;
+import su.terrafirmagreg.framework.FrameworkLogger;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -72,7 +72,7 @@ public final class EntityUtils {
       if (Entity.class.isAssignableFrom(clazz)) {
         return clazz;
       } else {
-        LoggingHelper.LOGGER.error("Error in config, the Entity ( {} ) can't be leashed", mobName);
+        FrameworkLogger.LOGGER.error("Error in config, the Entity ( {} ) can't be leashed", mobName);
         return null;
       }
     });

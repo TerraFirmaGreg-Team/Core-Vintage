@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.core.feature.calendar.spi.storage;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.WorldUtils;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 public class WorldDataCalendar extends WorldSavedData {
 
   private static final String DATA_ID = ModUtils.localize("data", "calendar");
-  private static final LoggingHelper LOGGER = LoggingHelper.of(DATA_ID);
+  private static final FrameworkLogger LOGGER = FrameworkLogger.of(DATA_ID);
 
   private static final String TAG_CALENDAR = "calendar";
 

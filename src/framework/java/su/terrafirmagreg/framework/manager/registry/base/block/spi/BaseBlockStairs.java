@@ -21,8 +21,8 @@ public class BaseBlockStairs extends BlockStairs implements IBlockEntry {
   protected final BlockSettings settings;
 
 
-  public BaseBlockStairs(Block model) {
-    this(BlockSettings.of(model));
+  public BaseBlockStairs(Block block) {
+    this(BlockSettings.of(block));
 
   }
 

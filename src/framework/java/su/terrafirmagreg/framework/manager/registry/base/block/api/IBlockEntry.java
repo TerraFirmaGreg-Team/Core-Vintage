@@ -7,16 +7,10 @@ import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry.BlockSettings;
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockSlab;
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockStairs;
-import su.terrafirmagreg.framework.manager.registry.base.block.spi.BaseBlockWall;
 import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemBlock;
 import su.terrafirmagreg.framework.manager.registry.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -55,18 +49,6 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
 
   default Item asItem() {
     return Item.getItemFromBlock(asEntry());
-  }
-
-  default BlockStairs asStairs() {
-    return BlockUtils.getStairsFromBlock(asEntry());
-  }
-
-  default BlockWall asWall() {
-    return BlockUtils.getWallFromBlock(asEntry());
-  }
-
-  default BlockSlab asSlab() {
-    return BlockUtils.getSlabFromBlock(asEntry());
   }
 
   @Override
@@ -141,10 +123,6 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
 
     protected boolean nonCanStack = false;
     protected Function<Block, ? extends BaseItemBlock> itemBlock = BaseItemBlock::new;
-    protected Function<Block, ? extends BaseBlockStairs> stairsBlock;
-    protected Function<Block, ? extends BaseBlockWall> wallBlock;
-    protected Function<Block, ? extends BaseBlockSlab> slabBlock;
-    protected Function<Block, ? extends BaseBlockSlab> slabDoubleBlock;
 
     protected boolean enableStats = true;
 
@@ -163,6 +141,7 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
       IBlockState state = block.getStateFromMeta(meta);
       BlockSettings settings = BlockSettings.of();
 
+      settings.registryKey = block instanceof IBlockEntry blockEntry ? blockEntry.getSettings().getRegistryKey() : null;
       settings.block = block;
       settings.material = block.material;
       settings.mapColor = block.blockMapColor;
@@ -215,27 +194,6 @@ public interface IBlockEntry extends IRegistryEntry<BlockSettings, Block> {
       this.itemBlock = itemBlock;
       return this.self();
     }
-
-    public BlockSettings stairsBlock(Function<Block, ? extends BaseBlockStairs> stairsBlock) {
-      this.stairsBlock = stairsBlock;
-      return this.self();
-    }
-
-    public BlockSettings wallBlock(Function<Block, ? extends BaseBlockWall> wallBlock) {
-      this.wallBlock = wallBlock;
-      return this.self();
-    }
-
-    public BlockSettings slabDoubleBlock(Function<Block, ? extends BaseBlockSlab> slabDoubleBlock) {
-      this.slabDoubleBlock = slabDoubleBlock;
-      return this.self();
-    }
-
-    public BlockSettings slabBlock(Function<Block, ? extends BaseBlockSlab> slabBlock) {
-      this.slabBlock = slabBlock;
-      return this.self();
-    }
-
 
     public BlockSettings tile(Class<? extends TileEntity> tileClass) {
       this.tileClass = tileClass;

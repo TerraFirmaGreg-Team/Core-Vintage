@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.library.Location;
+import su.terrafirmagreg.framework.FrameworkLogger;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -55,7 +55,7 @@ public final class StackUtils {
    */
   public static boolean isValid(ItemStack stack) {
     if (stack == null) {
-      LoggingHelper.LOGGER.warn("Null stack: {}", stack);
+      FrameworkLogger.LOGGER.warn("Null stack: {}", stack);
       return false;
     }
     return !stack.isEmpty();
@@ -853,8 +853,8 @@ public final class StackUtils {
           item.getSubItems(tab, subItems);
         } catch (final Exception e) {
 
-          LoggingHelper.LOGGER.error("Caught the following exception while getting sub items for {}. It should be reported to that mod's author.", item.getRegistryName().toString());
-          LoggingHelper.LOGGER.catching(e);
+          FrameworkLogger.LOGGER.error("Caught the following exception while getting sub items for {}. It should be reported to that mod's author.", item.getRegistryName().toString());
+          FrameworkLogger.LOGGER.catching(e);
         }
 
         items.addAll(subItems);

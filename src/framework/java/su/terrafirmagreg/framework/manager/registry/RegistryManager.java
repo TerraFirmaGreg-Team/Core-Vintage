@@ -1,9 +1,9 @@
 package su.terrafirmagreg.framework.manager.registry;
 
 import su.terrafirmagreg.api.data.enums.Mods;
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.util.DataFixUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryManager;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
@@ -33,7 +33,7 @@ import lombok.Getter;
 @SuppressWarnings("rawtypes")
 public class RegistryManager implements IRegistryManager {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(RegistryManager.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(RegistryManager.class);
 
   private final IModuleEntry module;
   private final Multimap<Class<?>, IRegistryEntry<?, ?>> mapEntry;
@@ -56,7 +56,7 @@ public class RegistryManager implements IRegistryManager {
   }
 
   @Override
-  public LoggingHelper getLogger() {
+  public FrameworkLogger getLogger() {
     return LOGGER;
   }
 

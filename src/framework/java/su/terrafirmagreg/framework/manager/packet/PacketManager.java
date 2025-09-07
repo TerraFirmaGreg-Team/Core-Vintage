@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.manager.packet;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketEntry;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketManager;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
@@ -16,7 +16,7 @@ import lombok.Getter;
 @Getter
 public class PacketManager implements IPacketManager {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(PacketManager.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(PacketManager.class);
 
   private final IModuleEntry module;
   private final Multimap<Class<?>, IPacketEntry> mapEntry;
@@ -41,7 +41,7 @@ public class PacketManager implements IPacketManager {
 
 
   @Override
-  public LoggingHelper getLogger() {
+  public FrameworkLogger getLogger() {
     return LOGGER;
   }
 }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 )
 public class ModuleDevice extends BaseModule {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleDevice.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(ModuleDevice.class);
 
 
   public ModuleDevice() {
@@ -63,7 +63,7 @@ public class ModuleDevice extends BaseModule {
   }
 
   @Override
-  public @NotNull LoggingHelper getLogger() {
+  public @NotNull FrameworkLogger getLogger() {
     return LOGGER;
   }
 }

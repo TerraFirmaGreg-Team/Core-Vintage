@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
@@ -18,7 +18,7 @@ public final class InjectorUtils {
       Field field = ObfuscationReflectionHelper.findField(apiClass, srgName);
       InjectorUtils.setFinalStatic(field, value);
     } catch (final Exception e) {
-      LoggingHelper.LOGGER.catching(e);
+      FrameworkLogger.LOGGER.catching(e);
     }
   }
 

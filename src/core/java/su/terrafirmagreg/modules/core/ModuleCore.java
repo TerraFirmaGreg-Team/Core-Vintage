@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
@@ -42,7 +42,7 @@ import java.util.List;
 )
 public class ModuleCore extends BaseModule {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleCore.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(ModuleCore.class);
 
 
   public ModuleCore() {
@@ -112,7 +112,7 @@ public class ModuleCore extends BaseModule {
   }
 
   @Override
-  public @NotNull LoggingHelper getLogger() {
+  public @NotNull FrameworkLogger getLogger() {
     return LOGGER;
   }
 }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.rock;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 )
 public class ModuleRock extends BaseModule {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleRock.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(ModuleRock.class);
 
 
   public ModuleRock() {
@@ -43,7 +43,7 @@ public class ModuleRock extends BaseModule {
 
   @Override
   public void onFeatureRegistrar(IFeatureRegistrar registrar) {
-    
+
     FeatureRock.onRegister(registrar);
   }
 
@@ -54,7 +54,7 @@ public class ModuleRock extends BaseModule {
   }
 
   @Override
-  public @NotNull LoggingHelper getLogger() {
+  public @NotNull FrameworkLogger getLogger() {
     return LOGGER;
   }
 }

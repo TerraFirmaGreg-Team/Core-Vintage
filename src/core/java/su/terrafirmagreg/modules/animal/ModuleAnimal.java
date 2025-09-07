@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 )
 public class ModuleAnimal extends BaseModule {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleAnimal.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(ModuleAnimal.class);
 
   public ModuleAnimal() {
     super(ModuleSettings.of()
@@ -57,7 +57,7 @@ public class ModuleAnimal extends BaseModule {
 
 
   @Override
-  public @NotNull LoggingHelper getLogger() {
+  public @NotNull FrameworkLogger getLogger() {
     return LOGGER;
   }
 }

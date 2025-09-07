@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -77,7 +77,7 @@ public class GsonUtils {
       writer.close();
       return true;
     } catch (Exception e) {
-      LoggingHelper.LOGGER.error("Write file sync error");
+      FrameworkLogger.LOGGER.error("Write file sync error");
       return false;
     }
   }
@@ -130,7 +130,7 @@ public class GsonUtils {
       callback.accept(data.toString());
       return true;
     } catch (Exception e) {
-      LoggingHelper.LOGGER.error("Read file sync error");
+      FrameworkLogger.LOGGER.error("Read file sync error");
       return false;
     }
   }

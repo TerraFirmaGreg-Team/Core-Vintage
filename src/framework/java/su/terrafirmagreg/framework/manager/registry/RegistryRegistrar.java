@@ -81,18 +81,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
     if (settings.getItemBlock() != null) {
       this.addItem(settings.getItemBlock().apply(entry));
     }
-    if (settings.getWallBlock() != null) {
-      this.addBlock(settings.getWallBlock().apply(entry));
-    }
-    if (settings.getStairsBlock() != null) {
-      this.addBlock(settings.getStairsBlock().apply(entry));
-    }
-    if (settings.getSlabDoubleBlock() != null) {
-      this.addBlock(settings.getSlabDoubleBlock().apply(entry));
-    }
-    if (settings.getSlabBlock() != null) {
-      this.addBlock(settings.getSlabBlock().apply(entry));
-    }
     return entry;
   }
 
@@ -110,18 +98,6 @@ public class RegistryRegistrar implements IRegistryRegistrar {
 
     if (settings.getItemBlock() != null) {
       this.addItem(settings.getItemBlock().apply(entry));
-    }
-    if (settings.getWallBlock() != null) {
-      this.addBlock(settings.getWallBlock().apply(entry));
-    }
-    if (settings.getStairsBlock() != null) {
-      this.addBlock(settings.getStairsBlock().apply(entry));
-    }
-    if (settings.getSlabDoubleBlock() != null) {
-      this.addBlock(settings.getSlabDoubleBlock().apply(entry));
-    }
-    if (settings.getSlabBlock() != null) {
-      this.addBlock(settings.getSlabBlock().apply(entry));
     }
     return entry;
   }

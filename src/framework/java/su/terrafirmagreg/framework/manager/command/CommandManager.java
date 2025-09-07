@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.manager.command;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.command.api.ICommandEntry;
 import su.terrafirmagreg.framework.manager.command.api.ICommandManager;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
@@ -21,7 +21,7 @@ import lombok.Getter;
 @Getter
 public class CommandManager implements ICommandManager {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(CommandManager.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(CommandManager.class);
 
 
   private final IModuleEntry module;
@@ -46,7 +46,7 @@ public class CommandManager implements ICommandManager {
   }
 
   @Override
-  public LoggingHelper getLogger() {
+  public FrameworkLogger getLogger() {
     return LOGGER;
   }
 

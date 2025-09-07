@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.food;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.base.BaseModule;
 
@@ -11,7 +11,7 @@ import su.terrafirmagreg.framework.module.base.BaseModule;
 )
 public class ModuleFood extends BaseModule {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleFood.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(ModuleFood.class);
 
   public ModuleFood() {
     super(ModuleSettings.of()
@@ -20,7 +20,7 @@ public class ModuleFood extends BaseModule {
   }
 
   @Override
-  public LoggingHelper getLogger() {
+  public FrameworkLogger getLogger() {
     return LOGGER;
   }
 }

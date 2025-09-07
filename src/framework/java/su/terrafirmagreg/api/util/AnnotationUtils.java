@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 
 import net.minecraft.util.Tuple;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
@@ -155,7 +155,7 @@ public final class AnnotationUtils {
         // Ignore missing clases, because Forge changed this behaviour to allow these.
       } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 
-        LoggingHelper.LOGGER.warn(e, "Could not load class {}", asmData.getClassName());
+        FrameworkLogger.LOGGER.warn(e, "Could not load class {}", asmData.getClassName());
       }
     }
 

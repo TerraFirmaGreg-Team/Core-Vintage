@@ -26,7 +26,7 @@ public enum EnumColor implements IStringSerializable {
   LIME(10, EnumDyeColor.LIME),
   BROWN(11, EnumDyeColor.BROWN),
   PINK(12, EnumDyeColor.PINK),
-  MAGNETA(13, EnumDyeColor.MAGENTA),
+  MAGENTA(13, EnumDyeColor.MAGENTA),
   YELLOW(14, EnumDyeColor.YELLOW),
   WHITE(15, EnumDyeColor.WHITE),
   COLORLESS(16, EnumDyeColor.WHITE);

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.framework.module;
 
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.command.CommandManager;
 import su.terrafirmagreg.framework.manager.feature.FeatureManager;
 import su.terrafirmagreg.framework.manager.packet.PacketManager;
@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 @Getter
 public class ModuleManager implements IModuleManager {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleManager.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(ModuleManager.class);
 
   private final String modId;
   private final Map<Class<?>, IModuleEntry> map;
@@ -89,7 +89,7 @@ public class ModuleManager implements IModuleManager {
   }
 
   @Override
-  public LoggingHelper getLogger() {
+  public FrameworkLogger getLogger() {
     return LOGGER;
   }
 

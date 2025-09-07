@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
@@ -149,7 +149,7 @@ public final class ClassUtils {
     try {
       return Class.forName(name);
     } catch (final ClassNotFoundException e) {
-      LoggingHelper.LOGGER.warn(e, "Could not load class {} ", name);
+      FrameworkLogger.LOGGER.warn(e, "Could not load class {} ", name);
       return null;
     }
   }
@@ -177,7 +177,7 @@ public final class ClassUtils {
     try {
       return clazz.getDeclaredConstructor().newInstance();
     } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-      LoggingHelper.LOGGER.warn(e, "Could not create instance of {}", clazz);
+      FrameworkLogger.LOGGER.warn(e, "Could not create instance of {}", clazz);
     }
     return null;
   }

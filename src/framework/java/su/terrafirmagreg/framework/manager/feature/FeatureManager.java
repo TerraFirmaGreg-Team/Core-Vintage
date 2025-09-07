@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.manager.feature;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureEntry;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureManager;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
@@ -16,7 +16,7 @@ import lombok.Getter;
 @Getter
 public class FeatureManager implements IFeatureManager {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(FeatureManager.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(FeatureManager.class);
 
   private final IModuleEntry module;
   private final Multimap<Class<?>, IFeatureEntry> mapEntry;
@@ -39,7 +39,7 @@ public class FeatureManager implements IFeatureManager {
   }
 
   @Override
-  public LoggingHelper getLogger() {
+  public FrameworkLogger getLogger() {
     return LOGGER;
   }
 }

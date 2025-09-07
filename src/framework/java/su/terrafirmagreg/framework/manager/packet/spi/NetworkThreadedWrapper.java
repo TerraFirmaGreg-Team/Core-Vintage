@@ -1,10 +1,10 @@
 package su.terrafirmagreg.framework.manager.packet.spi;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
 import su.terrafirmagreg.api.library.IdSupplier;
 import su.terrafirmagreg.api.util.BufUtils;
 import su.terrafirmagreg.api.util.ClassUtils;
 import su.terrafirmagreg.api.util.NetworkUtils;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketEntry;
 
 import net.minecraft.entity.Entity;
@@ -305,7 +305,7 @@ public class NetworkThreadedWrapper {
     try {
       return packetClass.getDeclaredConstructor().newInstance();
     } catch (Throwable e) {
-      LoggingHelper.LOGGER.error("Failed to instanciate " + packetClass);
+      FrameworkLogger.LOGGER.error("Failed to instanciate " + packetClass);
       throw new RuntimeException(e);
     }
   }

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -59,7 +59,7 @@ public final class OreDictUtils {
     if (itemStack != null && !itemStack.isEmpty()) {
       OreDictionary.registerOre(oreName, itemStack);
     } else {
-      LoggingHelper.LOGGER.error("Failed to register ore dict entry for {}. Another unknown mod is likely responsible.", oreName);
+      FrameworkLogger.LOGGER.error("Failed to register ore dict entry for {}. Another unknown mod is likely responsible.", oreName);
     }
   }
 
@@ -148,7 +148,7 @@ public final class OreDictUtils {
     }
 
     if (!OreDictionary.doesOreNameExist(oreDict)) {
-      LoggingHelper.LOGGER.debug("Method called with non-existing name. stack: {} name: {}", itemStack, oreDict);
+      FrameworkLogger.LOGGER.debug("Method called with non-existing name. stack: {} name: {}", itemStack, oreDict);
       return false;
     }
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.wood;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 )
 public class ModuleWood extends BaseModule {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleWood.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(ModuleWood.class);
 
   public ModuleWood() {
     super(ModuleSettings.of()
@@ -52,7 +52,7 @@ public class ModuleWood extends BaseModule {
   }
 
   @Override
-  public @NotNull LoggingHelper getLogger() {
+  public @NotNull FrameworkLogger getLogger() {
     return LOGGER;
   }
 }

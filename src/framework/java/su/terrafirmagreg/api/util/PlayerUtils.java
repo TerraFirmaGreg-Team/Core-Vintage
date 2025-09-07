@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -148,7 +148,7 @@ public final class PlayerUtils {
       reader.close();
     } catch (final Exception exception) {
 
-      LoggingHelper.LOGGER.info("Could not get name for {}", uuid);
+      FrameworkLogger.LOGGER.info("Could not get name for {}", uuid);
       name = exception.getMessage();
     }
 
@@ -190,7 +190,7 @@ public final class PlayerUtils {
       reader.close();
     } catch (final Exception exception) {
 
-      LoggingHelper.LOGGER.info("Could not get name for {}", username);
+      FrameworkLogger.LOGGER.info("Could not get name for {}", username);
     }
 
     return uuid;

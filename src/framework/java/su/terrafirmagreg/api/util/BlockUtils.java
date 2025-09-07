@@ -43,6 +43,7 @@ public final class BlockUtils {
   public static final Map<Block, BlockStairs> BLOCK_TO_STAIRS = new Object2ObjectOpenHashMap<>();
   public static final Map<Block, BlockWall> BLOCK_TO_WALL = new Object2ObjectOpenHashMap<>();
   public static final Map<Block, BaseBlockSlab> BLOCK_TO_SLAB = new Object2ObjectOpenHashMap<>();
+  public static final Map<Block, BaseBlockSlab> BLOCK_TO_DOUBLE_SLAB = new Object2ObjectOpenHashMap<>();
 
 
   public static BlockStairs getStairsFromBlock(Block blockIn) {
@@ -57,6 +58,11 @@ public final class BlockUtils {
 
   public static BaseBlockSlab getSlabFromBlock(Block blockIn) {
     BaseBlockSlab blockSlab = BLOCK_TO_SLAB.get(blockIn);
+    return blockSlab == null ? (BaseBlockSlab) Blocks.AIR : blockSlab;
+  }
+
+  public static BaseBlockSlab getSlabDoubleFromBlock(Block blockIn) {
+    BaseBlockSlab blockSlab = BLOCK_TO_DOUBLE_SLAB.get(blockIn);
     return blockSlab == null ? (BaseBlockSlab) Blocks.AIR : blockSlab;
   }
 

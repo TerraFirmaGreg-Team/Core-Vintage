@@ -1,4 +1,4 @@
-package su.terrafirmagreg.api.helper;
+package su.terrafirmagreg.framework;
 
 import su.terrafirmagreg.api.util.ModUtils;
 
@@ -20,9 +20,9 @@ import java.util.List;
  */
 @Getter
 @SuppressWarnings("unused")
-public class LoggingHelper {
+public class FrameworkLogger {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of();
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of();
 
   /**
    * The logger delegate.
@@ -34,7 +34,7 @@ public class LoggingHelper {
    *
    * @param logger The logger to use as a delegate.
    */
-  private LoggingHelper(Logger logger) {
+  private FrameworkLogger(Logger logger) {
 
     this.logger = logger;
   }
@@ -44,24 +44,24 @@ public class LoggingHelper {
    *
    * @param name The name of the logger to create.
    */
-  public static LoggingHelper of(String name) {
+  public static FrameworkLogger of(String name) {
 
-    return new LoggingHelper(LogManager.getLogger(ModUtils.split(name)));
+    return new FrameworkLogger(LogManager.getLogger(ModUtils.split(name)));
   }
 
-  public static LoggingHelper of(Class<?> clazz) {
+  public static FrameworkLogger of(Class<?> clazz) {
 
-    return LoggingHelper.of(clazz.getSimpleName());
+    return FrameworkLogger.of(clazz.getSimpleName());
   }
 
-  public static LoggingHelper of(Logger logger) {
+  public static FrameworkLogger of(Logger logger) {
 
-    return new LoggingHelper(logger);
+    return new FrameworkLogger(logger);
   }
 
-  public static LoggingHelper of() {
+  public static FrameworkLogger of() {
 
-    return new LoggingHelper(LogManager.getLogger());
+    return new FrameworkLogger(LogManager.getLogger());
   }
 
 

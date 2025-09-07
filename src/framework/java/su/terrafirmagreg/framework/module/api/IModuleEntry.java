@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.module.api;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.api.IBaseEntry;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
@@ -26,7 +26,7 @@ import java.util.Set;
 public interface IModuleEntry extends IBaseEntry<ModuleSettings, BaseModule> {
 
 
-  LoggingHelper getLogger();
+  FrameworkLogger getLogger();
 
   /**
    * What other modules this module depends on.
@@ -76,7 +76,7 @@ public interface IModuleEntry extends IBaseEntry<ModuleSettings, BaseModule> {
     protected boolean commandManagerEnabled = true;
     protected boolean featureManagerEnabled = true;
     protected boolean pluginManagerEnabled = true;
-    
+
 
     public static ModuleSettings of() {
       return new ModuleSettings();

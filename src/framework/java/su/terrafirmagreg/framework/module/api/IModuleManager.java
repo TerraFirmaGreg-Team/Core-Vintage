@@ -1,6 +1,6 @@
 package su.terrafirmagreg.framework.module.api;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
@@ -18,7 +18,7 @@ public interface IModuleManager {
 
   void onConstruction();
 
-  LoggingHelper getLogger();
+  FrameworkLogger getLogger();
 
 
 }

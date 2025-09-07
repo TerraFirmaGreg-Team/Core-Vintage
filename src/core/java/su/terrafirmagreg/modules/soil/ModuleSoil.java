@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil;
 
-import su.terrafirmagreg.api.helper.LoggingHelper;
+import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 )
 public class ModuleSoil extends BaseModule {
 
-  public static final LoggingHelper LOGGER = LoggingHelper.of(ModuleSoil.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(ModuleSoil.class);
 
   public ModuleSoil() {
     super(ModuleSettings.of()
@@ -45,7 +45,7 @@ public class ModuleSoil extends BaseModule {
   }
 
   @Override
-  public @NotNull LoggingHelper getLogger() {
+  public @NotNull FrameworkLogger getLogger() {
     return LOGGER;
   }
 }

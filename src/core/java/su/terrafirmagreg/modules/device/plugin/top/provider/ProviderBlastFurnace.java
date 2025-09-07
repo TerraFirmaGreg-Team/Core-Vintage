@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
-import su.terrafirmagreg.modules.device.object.block.BlockBlastFurnace;
-import su.terrafirmagreg.modules.device.object.tile.TileBlastFurnace;
+import su.terrafirmagreg.modules.device.content.block.BlockBlastFurnace;
+import su.terrafirmagreg.modules.device.content.tile.TileBlastFurnace;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

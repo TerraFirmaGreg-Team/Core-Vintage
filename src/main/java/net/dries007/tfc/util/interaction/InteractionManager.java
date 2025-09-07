@@ -2,7 +2,7 @@ package net.dries007.tfc.util.interaction;
 
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
+import su.terrafirmagreg.modules.device.content.tile.TileLogPile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;

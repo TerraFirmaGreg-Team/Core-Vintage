@@ -1,9 +1,9 @@
 package net.dries007.tfctech.compat.waila;
 
-import su.terrafirmagreg.modules.device.object.block.BlockFridge;
-import su.terrafirmagreg.modules.device.object.block.BlockWireDrawBench;
-import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
-import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
+import su.terrafirmagreg.modules.device.content.block.BlockFridge;
+import su.terrafirmagreg.modules.device.content.block.BlockWireDrawBench;
+import su.terrafirmagreg.modules.device.content.tile.TileLatexExtractor;
+import su.terrafirmagreg.modules.device.content.tile.TileWireDrawBench;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

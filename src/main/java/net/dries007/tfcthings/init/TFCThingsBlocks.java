@@ -1,6 +1,6 @@
 package net.dries007.tfcthings.init;
 
-import su.terrafirmagreg.modules.device.object.block.BlockGrindstoneManual;
+import su.terrafirmagreg.modules.device.content.block.BlockGrindstoneManual;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

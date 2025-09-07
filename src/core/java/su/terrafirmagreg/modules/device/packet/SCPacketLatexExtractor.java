@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.device.packet;
 
 import su.terrafirmagreg.framework.manager.packet.base.BasePacketTile;
-import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
+import su.terrafirmagreg.modules.device.content.tile.TileLatexExtractor;
 
 import org.jetbrains.annotations.NotNull;
 

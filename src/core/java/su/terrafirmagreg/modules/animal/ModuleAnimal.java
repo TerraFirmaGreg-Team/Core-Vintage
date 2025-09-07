@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.animal;
 
 import su.terrafirmagreg.framework.FrameworkLogger;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.base.BaseModule;
 import su.terrafirmagreg.modules.animal.init.BlocksAnimal;
@@ -33,7 +33,7 @@ public class ModuleAnimal extends BaseModule {
 
 
   @Override
-  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
+  public void onRegistryRegistrar(IContentRegistrar registrar) {
     registrar.group("halter");
 
     BlocksAnimal.onRegister(registrar);

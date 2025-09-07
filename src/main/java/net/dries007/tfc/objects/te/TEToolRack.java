@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.te;
 
-import su.terrafirmagreg.framework.manager.registry.base.tile.spi.BaseTile;
+import su.terrafirmagreg.framework.manager.content.base.tile.spi.BaseTile;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.content.item.ItemFireStarter;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;

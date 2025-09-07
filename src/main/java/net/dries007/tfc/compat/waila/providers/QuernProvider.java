@@ -1,7 +1,7 @@
 package net.dries007.tfc.compat.waila.providers;
 
-import su.terrafirmagreg.modules.device.object.block.BlockQuern;
-import su.terrafirmagreg.modules.device.object.tile.TileQuern;
+import su.terrafirmagreg.modules.device.content.block.BlockQuern;
+import su.terrafirmagreg.modules.device.content.tile.TileQuern;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static su.terrafirmagreg.modules.device.object.tile.TileQuern.SLOT_HANDSTONE;
+import static su.terrafirmagreg.modules.device.content.tile.TileQuern.SLOT_HANDSTONE;
 
 public class QuernProvider implements IWailaBlock {
 

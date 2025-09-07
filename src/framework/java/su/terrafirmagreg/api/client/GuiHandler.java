@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.client;
 
 import su.terrafirmagreg.framework.Framework;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderContainer;
+import su.terrafirmagreg.framework.manager.content.provider.IProviderContainer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

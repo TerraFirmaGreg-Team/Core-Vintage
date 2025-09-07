@@ -1,24 +1,24 @@
 package su.terrafirmagreg.modules.soil.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilCoarseDirt;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilDirt;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilDryGrass;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilGrass;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilGrassPath;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilMud;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilMudBricks;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilMudSlab;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilMudStairs;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilMudWall;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilMycelium;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeatGrass;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilPodzol;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilRootedDirt;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilSparseGrass;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilCoarseDirt;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilDirt;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilDryGrass;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilFarmland;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilGrass;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilGrassPath;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilMud;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilMudBricks;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilMudSlab;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilMudStairs;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilMudWall;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilMycelium;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilPeat;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilPeatGrass;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilPodzol;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilRootedDirt;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilSparseGrass;
 
 import java.util.Map;
 
@@ -46,7 +46,7 @@ public class BlocksSoil {
   public static Map<SoilType, BlockSoilGrass> DRYING_BRICKS;
 
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     PEAT_GRASS = registrar.addBlock(new BlockSoilPeatGrass());
     PEAT = registrar.addBlock(new BlockSoilPeat());

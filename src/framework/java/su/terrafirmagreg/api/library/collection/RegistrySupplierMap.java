@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.library.collection;
 
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.framework.manager.registry.RegistryManager;
+import su.terrafirmagreg.framework.manager.content.ContentManager;
 
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -26,7 +26,7 @@ public class RegistrySupplierMap<T extends IForgeRegistryEntry<T>> extends Objec
         object.setRegistryName(regName);
       }
 
-      RegistryManager.LOGGER.debug("Registry {}: {}", object.getRegistryType().getSimpleName(), regName);
+      ContentManager.LOGGER.debug("Registry {}: {}", object.getRegistryType().getSimpleName(), regName);
       event.getRegistry().register(object);
     });
   }

@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
-import su.terrafirmagreg.modules.device.object.block.BlockFridge;
-import su.terrafirmagreg.modules.device.object.tile.TileFridge;
+import su.terrafirmagreg.modules.device.content.block.BlockFridge;
+import su.terrafirmagreg.modules.device.content.tile.TileFridge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

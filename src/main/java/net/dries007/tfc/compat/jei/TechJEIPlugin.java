@@ -2,7 +2,7 @@ package net.dries007.tfc.compat.jei;
 
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.object.gui.GuiSmelteryCauldron;
+import su.terrafirmagreg.modules.device.content.gui.GuiSmelteryCauldron;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;

@@ -1,11 +1,11 @@
 package net.dries007.tfctech.client;
 
 import su.terrafirmagreg.modules.core.capabilities.metal.ICapabilityMetal;
-import su.terrafirmagreg.modules.device.object.render.TEISRFridge;
-import su.terrafirmagreg.modules.device.object.render.TESRFridge;
-import su.terrafirmagreg.modules.device.object.render.TESRWireDrawBench;
-import su.terrafirmagreg.modules.device.object.tile.TileFridge;
-import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
+import su.terrafirmagreg.modules.device.content.render.TEISRFridge;
+import su.terrafirmagreg.modules.device.content.render.TESRFridge;
+import su.terrafirmagreg.modules.device.content.render.TESRWireDrawBench;
+import su.terrafirmagreg.modules.device.content.tile.TileFridge;
+import su.terrafirmagreg.modules.device.content.tile.TileWireDrawBench;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

@@ -3,7 +3,7 @@ package su.terrafirmagreg.modules.animal.plugin.top.provider;
 import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.object.entity.EntityAnimalMammal;
+import su.terrafirmagreg.modules.animal.content.entity.EntityAnimalMammal;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendarFormatted;

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.framework.manager.plugin.spi.jei.wrapper.spi;
 
 
-import su.terrafirmagreg.framework.manager.registry.base.recipe.api.IBaseRecipe;
+import su.terrafirmagreg.framework.manager.content.base.recipe.api.IBaseRecipe;
 
 import mezz.jei.api.recipe.IRecipeWrapper;
 

@@ -6,8 +6,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
-import su.terrafirmagreg.modules.device.object.block.BlockBloom;
-import su.terrafirmagreg.modules.device.object.tile.TileBloom;
+import su.terrafirmagreg.modules.device.content.block.BlockBloom;
+import su.terrafirmagreg.modules.device.content.tile.TileBloom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

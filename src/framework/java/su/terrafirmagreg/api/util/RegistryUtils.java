@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.util;
 
 
 import su.terrafirmagreg.api.library.tag.TagKey;
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
+import su.terrafirmagreg.framework.manager.content.api.IContentEntry;
 
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -30,7 +30,7 @@ public final class RegistryUtils {
   }
 
   public static <V extends IForgeRegistryEntry<V>> List<TagKey> getTags(V entry) {
-    if (entry instanceof IRegistryEntry<?, ?> registryEntry) {
+    if (entry instanceof IContentEntry<?, ?> registryEntry) {
       return registryEntry.getSettings().getTagsKey();
     } else {
       return new ObjectArrayList<>();

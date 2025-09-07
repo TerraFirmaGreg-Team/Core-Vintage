@@ -1,6 +1,6 @@
 package net.dries007.horsepower.client.renderer;
 
-import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperHorse;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

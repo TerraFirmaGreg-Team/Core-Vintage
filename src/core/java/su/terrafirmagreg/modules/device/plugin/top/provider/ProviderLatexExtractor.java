@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.library.TextComponents;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
-import su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor;
-import su.terrafirmagreg.modules.device.object.tile.TileLatexExtractor;
+import su.terrafirmagreg.modules.device.content.block.BlockLatexExtractor;
+import su.terrafirmagreg.modules.device.content.tile.TileLatexExtractor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

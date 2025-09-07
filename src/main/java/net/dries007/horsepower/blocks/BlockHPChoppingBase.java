@@ -1,8 +1,8 @@
 package net.dries007.horsepower.blocks;
 
 import su.terrafirmagreg.api.data.ToolClasses;
-import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
-import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperManual;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

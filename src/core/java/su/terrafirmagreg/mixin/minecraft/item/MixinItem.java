@@ -1,7 +1,7 @@
 package su.terrafirmagreg.mixin.minecraft.item;
 
 
-import su.terrafirmagreg.framework.manager.registry.base.item.api.IItemEntry;
+import su.terrafirmagreg.framework.manager.content.base.item.api.IItemEntry;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

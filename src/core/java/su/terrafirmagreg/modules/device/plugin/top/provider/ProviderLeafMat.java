@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
-import su.terrafirmagreg.modules.device.object.block.BlockLeafMat;
-import su.terrafirmagreg.modules.device.object.tile.TileLeafMat;
+import su.terrafirmagreg.modules.device.content.block.BlockLeafMat;
+import su.terrafirmagreg.modules.device.content.tile.TileLeafMat;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

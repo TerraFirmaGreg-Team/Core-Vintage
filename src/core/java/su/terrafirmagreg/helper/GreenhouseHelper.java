@@ -1,8 +1,8 @@
 package su.terrafirmagreg.helper;
 
-import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseDoor;
-import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseRoof;
-import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
+import su.terrafirmagreg.modules.device.content.block.BlockGreenhouseDoor;
+import su.terrafirmagreg.modules.device.content.block.BlockGreenhouseRoof;
+import su.terrafirmagreg.modules.device.content.block.BlockGreenhouseWall;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

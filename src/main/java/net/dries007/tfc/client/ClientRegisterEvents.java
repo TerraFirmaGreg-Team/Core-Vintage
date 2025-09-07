@@ -4,10 +4,10 @@ import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
-import su.terrafirmagreg.modules.device.object.render.TESRQuern;
-import su.terrafirmagreg.modules.device.object.render.TESRSluice;
-import su.terrafirmagreg.modules.device.object.tile.TileQuern;
-import su.terrafirmagreg.modules.device.object.tile.TileSluice;
+import su.terrafirmagreg.modules.device.content.render.TESRQuern;
+import su.terrafirmagreg.modules.device.content.render.TESRSluice;
+import su.terrafirmagreg.modules.device.content.tile.TileQuern;
+import su.terrafirmagreg.modules.device.content.tile.TileSluice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;

@@ -1,6 +1,6 @@
 package net.dries007.tfc.network;
 
-import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonHandler;
+import su.terrafirmagreg.framework.manager.content.base.gui.button.api.IButtonHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

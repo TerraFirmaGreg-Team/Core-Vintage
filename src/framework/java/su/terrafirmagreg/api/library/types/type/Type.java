@@ -2,7 +2,7 @@ package su.terrafirmagreg.api.library.types.type;
 
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryEntry;
+import su.terrafirmagreg.framework.manager.content.api.IContentEntry;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 
 import net.minecraft.block.Block;
@@ -100,7 +100,7 @@ public abstract class Type<T extends Type<T>> implements Comparable<Type<T>> {
   }
 
   public String getRegistryKey(Block model, String variant) {
-    if (model instanceof IRegistryEntry<?, ?> entry) {
+    if (model instanceof IContentEntry<?, ?> entry) {
       return String.format("%s/%s/%s", entry.getSettings().getRegistryKey(), variant, this);
     }
     return getRegistryKey(variant);

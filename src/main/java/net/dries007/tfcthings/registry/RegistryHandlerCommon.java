@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.core.data.ingredient.IIngredient;
 import su.terrafirmagreg.modules.core.feature.playerdata.spi.SmithingSkill;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.object.tile.TileGrindstone;
+import su.terrafirmagreg.modules.device.content.tile.TileGrindstone;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

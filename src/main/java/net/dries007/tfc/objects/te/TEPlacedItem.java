@@ -3,7 +3,7 @@ package net.dries007.tfc.objects.te;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
+import su.terrafirmagreg.modules.device.content.tile.TilePitKiln;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

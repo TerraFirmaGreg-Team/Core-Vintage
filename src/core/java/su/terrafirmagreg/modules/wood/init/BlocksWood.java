@@ -1,32 +1,32 @@
 package su.terrafirmagreg.modules.wood.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilGrass;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilGrass;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodBarrel;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodBookshelf;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodButton;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodChest;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodChestTrap;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodDoor;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodFence;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodFenceGate;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodFenceGateLog;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodFenceLog;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodLadder;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodLeaves;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodLog;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodLoom;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodPlanks;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodPressurePlate;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodSapling;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodSlab;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodStairs;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodSupport;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodToolRack;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodTrapDoor;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodWall;
-import su.terrafirmagreg.modules.wood.object.block.BlockWoodWorkbench;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodBarrel;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodBookshelf;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodButton;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodChest;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodChestTrap;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodDoor;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodFence;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodFenceGate;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodFenceGateLog;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodFenceLog;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodLadder;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodLeaves;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodLog;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodLoom;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodPlanks;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodPressurePlate;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodSapling;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodSlab;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodStairs;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodSupport;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodToolRack;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodTrapDoor;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodWall;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodWorkbench;
 
 import java.util.Map;
 
@@ -61,7 +61,7 @@ public class BlocksWood {
   public static Map<WoodType, BlockWoodLadder> LADDER;
   public static Map<WoodType, BlockSoilGrass> CHOPPER;
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     LOG = registrar.addBlock(BlockWoodLog::new, WoodType.getTypes());
 //    STRIPPED_LOG = registrar.addBlock(WoodType.getTypes(), BlockWoodLog::new);

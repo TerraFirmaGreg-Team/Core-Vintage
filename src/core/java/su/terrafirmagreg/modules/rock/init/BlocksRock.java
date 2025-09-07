@@ -1,22 +1,22 @@
 package su.terrafirmagreg.modules.rock.init;
 
 import su.terrafirmagreg.api.data.enums.EnumColor;
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.object.block.BlockAlabaster;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockAnvil;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockBricks;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockButton;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockCobble;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockGravel;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockMagma;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockPressurePlate;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockRaw;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockSand;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockSmooth;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockSpeleothem;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockStandGem;
-import su.terrafirmagreg.modules.rock.object.block.BlockRockSurface;
+import su.terrafirmagreg.modules.rock.content.block.BlockAlabaster;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockAnvil;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockBricks;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockButton;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockCobble;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockGravel;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockMagma;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockPressurePlate;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockRaw;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockSand;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockSmooth;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockSpeleothem;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockStandGem;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockSurface;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -65,7 +65,7 @@ public class BlocksRock {
   public static Map<EnumColor, BlockAlabaster> ALABASTER_SMOOTH;
   public static Map<EnumColor, BlockAlabaster> ALABASTER_RAW;
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     COBBLE = registrar.addBlock("cobble", BlockRockCobble::new, RockType.getTypes());
     RAW = registrar.addBlock("raw", BlockRockRaw::new, RockType.getTypes());

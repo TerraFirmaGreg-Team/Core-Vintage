@@ -16,11 +16,11 @@ import su.terrafirmagreg.modules.core.feature.ambiental.spi.provider.IAmbientalP
 import su.terrafirmagreg.modules.core.feature.heat.capability.CapabilityHeat;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.tile.TileCrucible;
-import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
-import su.terrafirmagreg.modules.device.object.tile.TileFridge;
-import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
-import su.terrafirmagreg.modules.device.object.tile.TileOven;
+import su.terrafirmagreg.modules.device.content.tile.TileCrucible;
+import su.terrafirmagreg.modules.device.content.tile.TileElectricForge;
+import su.terrafirmagreg.modules.device.content.tile.TileFridge;
+import su.terrafirmagreg.modules.device.content.tile.TileInductionCrucible;
+import su.terrafirmagreg.modules.device.content.tile.TileOven;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
 
 import net.minecraft.block.state.IBlockState;

@@ -1,6 +1,6 @@
 package net.dries007.horsepower.jei.chopping.manual;
 
-import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperManual;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;

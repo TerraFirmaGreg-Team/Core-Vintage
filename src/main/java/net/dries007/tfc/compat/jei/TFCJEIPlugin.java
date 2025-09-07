@@ -3,8 +3,8 @@ package net.dries007.tfc.compat.jei;
 import su.terrafirmagreg.api.data.enums.EnumHideSize;
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.object.gui.GuiCrucible;
-import su.terrafirmagreg.modules.device.object.gui.GuiFirePit;
+import su.terrafirmagreg.modules.device.content.gui.GuiCrucible;
+import su.terrafirmagreg.modules.device.content.gui.GuiFirePit;
 
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;

@@ -3,10 +3,10 @@ package net.dries007.firmalife;
 
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGoat;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalCow;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalGoat;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalYak;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalZebu;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 
 import net.minecraft.block.state.IBlockState;

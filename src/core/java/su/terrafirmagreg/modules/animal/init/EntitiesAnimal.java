@@ -1,46 +1,46 @@
 package su.terrafirmagreg.modules.animal.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalBoar.EntityTypeAnimalBoar;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalDeer.EntityTypeAnimalDeer;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalGazelle.EntityTypeAnimalGazelle;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalHare.EntityTypeAnimalHare;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalMongoose.EntityTypeAnimalMongoose;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalPheasant.EntityTypeAnimalPheasant;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalRabbit.EntityTypeAnimalRabbit;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalTurkey.EntityTypeAnimalTurkey;
-import su.terrafirmagreg.modules.animal.object.entity.huntable.EntityAnimalWildebeest.EntityTypeAnimalWildebeest;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalAlpaca.EntityTypeAnimalAlpaca;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCamel.EntityTypeAnimalCamel;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalChicken.EntityTypeAnimalChicken;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalCow.EntityTypeAnimalCow;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDonkey.EntityTypeAnimalDonkey;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalDuck.EntityTypeAnimalDuck;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGoat.EntityTypeAnimalGoat;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalGrouse.EntityTypeAnimalGrouse;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalHorse.EntityTypeAnimalHorse;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalLlama.EntityTypeAnimalLlama;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMule.EntityTypeAnimalMule;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalMuskOx.EntityTypeAnimalMuskOx;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalOcelot.EntityTypeAnimalOcelot;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalParrot.EntityTypeAnimalParrot;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig.EntityTypeAnimalPig;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalQuail.EntityTypeAnimalQuail;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep.EntityTypeAnimalSheep;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalWolf.EntityTypeAnimalWolf;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalYak.EntityTypeAnimalYak;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalZebu.EntityTypeAnimalZebu;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalBlackBear.EntityTypeAnimalBlackBear;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalCougar.EntityTypeAnimalCougar;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalCoyote.EntityTypeAnimalCoyote;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalDireWolf.EntityTypeAnimalDireWolf;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalGrizzlyBear.EntityTypeAnimalGrizzlyBear;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalHyena.EntityTypeAnimalHyena;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalJackal.EntityTypeAnimalJackal;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalLion.EntityTypeAnimalLion;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalPanther.EntityTypeAnimalPanther;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalPolarBear.EntityTypeAnimalPolarBear;
-import su.terrafirmagreg.modules.animal.object.entity.predator.EntityAnimalSaberTooth.EntityTypeAnimalSaberTooth;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
+import su.terrafirmagreg.modules.animal.content.entity.huntable.EntityAnimalBoar.EntityTypeAnimalBoar;
+import su.terrafirmagreg.modules.animal.content.entity.huntable.EntityAnimalDeer.EntityTypeAnimalDeer;
+import su.terrafirmagreg.modules.animal.content.entity.huntable.EntityAnimalGazelle.EntityTypeAnimalGazelle;
+import su.terrafirmagreg.modules.animal.content.entity.huntable.EntityAnimalHare.EntityTypeAnimalHare;
+import su.terrafirmagreg.modules.animal.content.entity.huntable.EntityAnimalMongoose.EntityTypeAnimalMongoose;
+import su.terrafirmagreg.modules.animal.content.entity.huntable.EntityAnimalPheasant.EntityTypeAnimalPheasant;
+import su.terrafirmagreg.modules.animal.content.entity.huntable.EntityAnimalRabbit.EntityTypeAnimalRabbit;
+import su.terrafirmagreg.modules.animal.content.entity.huntable.EntityAnimalTurkey.EntityTypeAnimalTurkey;
+import su.terrafirmagreg.modules.animal.content.entity.huntable.EntityAnimalWildebeest.EntityTypeAnimalWildebeest;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalAlpaca.EntityTypeAnimalAlpaca;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalCamel.EntityTypeAnimalCamel;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalChicken.EntityTypeAnimalChicken;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalCow.EntityTypeAnimalCow;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalDonkey.EntityTypeAnimalDonkey;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalDuck.EntityTypeAnimalDuck;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalGoat.EntityTypeAnimalGoat;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalGrouse.EntityTypeAnimalGrouse;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalHorse.EntityTypeAnimalHorse;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalLlama.EntityTypeAnimalLlama;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalMule.EntityTypeAnimalMule;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalMuskOx.EntityTypeAnimalMuskOx;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalOcelot.EntityTypeAnimalOcelot;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalParrot.EntityTypeAnimalParrot;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalPig.EntityTypeAnimalPig;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalQuail.EntityTypeAnimalQuail;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalSheep.EntityTypeAnimalSheep;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalWolf.EntityTypeAnimalWolf;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalYak.EntityTypeAnimalYak;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalZebu.EntityTypeAnimalZebu;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalBlackBear.EntityTypeAnimalBlackBear;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalCougar.EntityTypeAnimalCougar;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalCoyote.EntityTypeAnimalCoyote;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalDireWolf.EntityTypeAnimalDireWolf;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalGrizzlyBear.EntityTypeAnimalGrizzlyBear;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalHyena.EntityTypeAnimalHyena;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalJackal.EntityTypeAnimalJackal;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalLion.EntityTypeAnimalLion;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalPanther.EntityTypeAnimalPanther;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalPolarBear.EntityTypeAnimalPolarBear;
+import su.terrafirmagreg.modules.animal.content.entity.predator.EntityAnimalSaberTooth.EntityTypeAnimalSaberTooth;
 
 import net.minecraftforge.fml.common.registry.EntityEntry;
 
@@ -87,7 +87,7 @@ public final class EntitiesAnimal {
   public static EntityEntry COUGAR;
   public static EntityEntry COYOTE;
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     SHEEP = registrar.addEntity(new EntityTypeAnimalSheep());
     COW = registrar.addEntity(new EntityTypeAnimalCow());

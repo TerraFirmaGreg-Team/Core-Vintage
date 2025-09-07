@@ -1,6 +1,6 @@
 package net.dries007.horsepower.client.renderer;
 
-import su.terrafirmagreg.modules.device.object.block.BlockQuernHorse;
+import su.terrafirmagreg.modules.device.content.block.BlockQuernHorse;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;

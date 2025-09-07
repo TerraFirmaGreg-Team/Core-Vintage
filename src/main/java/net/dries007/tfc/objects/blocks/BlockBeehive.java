@@ -8,7 +8,7 @@ import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.core.init.EffectsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
+import su.terrafirmagreg.modules.device.content.block.BlockFirePit;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

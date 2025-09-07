@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.soil.feature.soiltype.types;
 
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilFarmland;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilFarmland;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.world.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 
 public final class BiomesWorld {
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
   }
 }

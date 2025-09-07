@@ -6,8 +6,8 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.ICapabilityFood;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodTrait;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
-import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
-import su.terrafirmagreg.modules.device.object.tile.TileFirePit;
+import su.terrafirmagreg.modules.device.content.block.BlockFirePit;
+import su.terrafirmagreg.modules.device.content.tile.TileFirePit;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;

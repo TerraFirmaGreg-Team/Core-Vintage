@@ -1,6 +1,6 @@
 package net.dries007.horsepower.blocks;
 
-import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperHorse;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;

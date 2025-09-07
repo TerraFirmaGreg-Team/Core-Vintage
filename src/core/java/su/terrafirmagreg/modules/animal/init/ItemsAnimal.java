@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.animal.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.animal.object.item.ItemAnimalBladder;
-import su.terrafirmagreg.modules.animal.object.item.ItemAnimalHalter;
-import su.terrafirmagreg.modules.animal.object.item.ItemAnimalSilkCloth;
-import su.terrafirmagreg.modules.animal.object.item.ItemAnimalWool;
-import su.terrafirmagreg.modules.animal.object.item.ItemAnimalWoolCloth;
-import su.terrafirmagreg.modules.animal.object.item.ItemAnimalWoolYarn;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
+import su.terrafirmagreg.modules.animal.content.item.ItemAnimalBladder;
+import su.terrafirmagreg.modules.animal.content.item.ItemAnimalHalter;
+import su.terrafirmagreg.modules.animal.content.item.ItemAnimalSilkCloth;
+import su.terrafirmagreg.modules.animal.content.item.ItemAnimalWool;
+import su.terrafirmagreg.modules.animal.content.item.ItemAnimalWoolCloth;
+import su.terrafirmagreg.modules.animal.content.item.ItemAnimalWoolYarn;
 
 public final class ItemsAnimal {
 
@@ -17,7 +17,7 @@ public final class ItemsAnimal {
   public static ItemAnimalSilkCloth SILK_CLOTH;
   public static ItemAnimalHalter HALTER;
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     BLADDER = registrar.addItem(new ItemAnimalBladder());
     WOOL = registrar.addItem(new ItemAnimalWool());

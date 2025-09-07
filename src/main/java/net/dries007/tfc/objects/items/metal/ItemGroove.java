@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items.metal;
 
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor;
+import su.terrafirmagreg.modules.device.content.block.BlockLatexExtractor;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;

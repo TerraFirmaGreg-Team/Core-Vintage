@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 
 import net.minecraft.util.SoundEvent;
 
@@ -125,7 +125,7 @@ public final class SoundsAnimal {
 
   public static SoundEvent ANIMAL_FELINE_STEP;
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     ANIMAL_BEAR_SAY = registrar.addSound("entity/bear/say");
     ANIMAL_BEAR_CRY = registrar.addSound("entity/bear/cry");

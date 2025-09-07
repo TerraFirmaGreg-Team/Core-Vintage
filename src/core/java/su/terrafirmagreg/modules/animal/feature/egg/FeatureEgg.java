@@ -13,8 +13,8 @@ import su.terrafirmagreg.modules.core.capabilities.food.CapabilityHandlerFood;
 import su.terrafirmagreg.modules.core.capabilities.forge.CapabilityForgeable;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityHandlerMetal;
 import su.terrafirmagreg.modules.core.capabilities.metal.CapabilityMetal;
+import su.terrafirmagreg.modules.core.content.gui.GuiOverlayAmbiental;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
-import su.terrafirmagreg.modules.core.object.gui.GuiOverlayAmbiental;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

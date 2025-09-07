@@ -3,10 +3,10 @@ package su.terrafirmagreg.framework.module;
 
 import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.command.CommandManager;
+import su.terrafirmagreg.framework.manager.content.ContentManager;
 import su.terrafirmagreg.framework.manager.feature.FeatureManager;
 import su.terrafirmagreg.framework.manager.packet.PacketManager;
 import su.terrafirmagreg.framework.manager.plugin.PluginManager;
-import su.terrafirmagreg.framework.manager.registry.RegistryManager;
 import su.terrafirmagreg.framework.module.api.IModuleEntry;
 import su.terrafirmagreg.framework.module.api.IModuleManager;
 import su.terrafirmagreg.framework.module.api.IModuleRegistrar;
@@ -76,7 +76,7 @@ public class ModuleManager implements IModuleManager {
 
       if (settings.isRegistryManagerEnabled()) {
         module.getLogger().debug("Construction registry");
-        module.onRegistryRegistrar(RegistryManager.of(module).getRegistrar());
+        module.onRegistryRegistrar(ContentManager.of(module).getRegistrar());
       }
 
       if (settings.isCommandManagerEnabled()) {

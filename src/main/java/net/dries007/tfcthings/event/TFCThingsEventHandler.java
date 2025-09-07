@@ -3,7 +3,7 @@ package net.dries007.tfcthings.event;
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalSheep;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalSheep;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

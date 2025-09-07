@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@Deprecated
 public @interface ModuleInfo {
 
 
@@ -19,7 +20,4 @@ public @interface ModuleInfo {
    * A description of this module in the module configuration file.
    */
   String[] description() default "";
-
-  @Deprecated
-  boolean enabled() default true;
 }

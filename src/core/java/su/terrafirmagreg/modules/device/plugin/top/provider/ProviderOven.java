@@ -4,8 +4,8 @@ import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.object.block.BlockOven;
-import su.terrafirmagreg.modules.device.object.tile.TileOven;
+import su.terrafirmagreg.modules.device.content.block.BlockOven;
+import su.terrafirmagreg.modules.device.content.tile.TileOven;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -24,7 +24,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import net.dries007.tfc.objects.recipes.OvenRecipe;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.LIT;
-import static su.terrafirmagreg.modules.device.object.tile.TileOven.SLOT_MAIN;
+import static su.terrafirmagreg.modules.device.content.tile.TileOven.SLOT_MAIN;
 
 public class ProviderOven implements IProbeInfoProvider {
 

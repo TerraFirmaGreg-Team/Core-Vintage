@@ -1,6 +1,6 @@
 package su.terrafirmagreg.mixin.minecraft.block;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
+import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.registries.IForgeRegistryEntry;

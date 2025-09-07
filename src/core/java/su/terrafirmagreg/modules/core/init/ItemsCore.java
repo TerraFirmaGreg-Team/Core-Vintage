@@ -1,15 +1,15 @@
 package su.terrafirmagreg.modules.core.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.core.object.item.ItemDebugWand;
-import su.terrafirmagreg.modules.core.object.item.ItemGlassShard;
-import su.terrafirmagreg.modules.core.object.item.ItemGlue;
-import su.terrafirmagreg.modules.core.object.item.ItemIceShard;
-import su.terrafirmagreg.modules.core.object.item.ItemMortar;
-import su.terrafirmagreg.modules.core.object.item.ItemStickBunch;
-import su.terrafirmagreg.modules.core.object.item.ItemStickBundle;
-import su.terrafirmagreg.modules.core.object.item.ItemStraw;
-import su.terrafirmagreg.modules.core.object.item.ItemWoodAsh;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
+import su.terrafirmagreg.modules.core.content.item.ItemDebugWand;
+import su.terrafirmagreg.modules.core.content.item.ItemGlassShard;
+import su.terrafirmagreg.modules.core.content.item.ItemGlue;
+import su.terrafirmagreg.modules.core.content.item.ItemIceShard;
+import su.terrafirmagreg.modules.core.content.item.ItemMortar;
+import su.terrafirmagreg.modules.core.content.item.ItemStickBunch;
+import su.terrafirmagreg.modules.core.content.item.ItemStickBundle;
+import su.terrafirmagreg.modules.core.content.item.ItemStraw;
+import su.terrafirmagreg.modules.core.content.item.ItemWoodAsh;
 
 import net.minecraft.item.Item;
 
@@ -27,7 +27,7 @@ public final class ItemsCore {
   public static ItemStickBunch STICK_BUNCH;
 
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     DEBUG_WAND = registrar.addItem(new ItemDebugWand());
     GLUE = registrar.addItem(new ItemGlue());

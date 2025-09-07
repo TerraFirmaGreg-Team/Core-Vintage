@@ -1,6 +1,6 @@
 package net.dries007.tfc.network;
 
-import su.terrafirmagreg.modules.device.object.tile.TileFridge;
+import su.terrafirmagreg.modules.device.content.tile.TileFridge;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;

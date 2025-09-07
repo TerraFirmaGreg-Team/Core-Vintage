@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 
 import net.minecraft.util.SoundEvent;
 
@@ -18,7 +18,7 @@ public final class SoundsDevice {
   public static SoundEvent LATEX_EXTRACTOR_BOWL_GRAB;
   public static SoundEvent LATEX_EXTRACTOR_TRUNK_SCRATH;
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     FLASK_BREAK = registrar.addSound("item/flaskbreak");
     FIRE_STARTER = registrar.addSound("item/firestarter");

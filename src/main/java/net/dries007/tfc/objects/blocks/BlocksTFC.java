@@ -2,12 +2,12 @@ package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockQuern;
-import su.terrafirmagreg.modules.device.object.block.BlockSluice;
-import su.terrafirmagreg.modules.device.object.tile.TileQuern;
-import su.terrafirmagreg.modules.device.object.tile.TileSluice;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeatGrass;
+import su.terrafirmagreg.modules.device.content.block.BlockQuern;
+import su.terrafirmagreg.modules.device.content.block.BlockSluice;
+import su.terrafirmagreg.modules.device.content.tile.TileQuern;
+import su.terrafirmagreg.modules.device.content.tile.TileSluice;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilPeat;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilPeatGrass;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.core.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
@@ -169,7 +169,7 @@ public final class FluidsCore {
   public static FluidWrapper JUICE_PURPLE_GRAPE;
   public static FluidWrapper JUICE_BARREL_CACTUS;
 
-  public static void onRegister(IRegistryRegistrar registry) {
+  public static void onRegister(IContentRegistrar registry) {
     FluidsTFC.registerFluids();
     //==== Water Variants ======================================================================================================================//
 

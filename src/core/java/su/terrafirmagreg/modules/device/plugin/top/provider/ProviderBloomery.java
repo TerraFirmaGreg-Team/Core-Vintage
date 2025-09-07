@@ -8,8 +8,8 @@ import su.terrafirmagreg.modules.core.capabilities.forge.ICapabilityForge;
 import su.terrafirmagreg.modules.core.capabilities.forge.IForgeableMeasurableMetal;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.object.block.BlockBloomery;
-import su.terrafirmagreg.modules.device.object.tile.TileBloomery;
+import su.terrafirmagreg.modules.device.content.block.BlockBloomery;
+import su.terrafirmagreg.modules.device.content.tile.TileBloomery;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

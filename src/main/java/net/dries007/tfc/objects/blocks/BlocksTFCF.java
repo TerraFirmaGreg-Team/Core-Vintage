@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockCrate;
-import su.terrafirmagreg.modules.device.object.tile.TileCrate;
+import su.terrafirmagreg.modules.device.content.block.BlockCrate;
+import su.terrafirmagreg.modules.device.content.tile.TileCrate;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;

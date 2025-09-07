@@ -4,7 +4,7 @@ import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.modules.core.feature.falling.capability.CapabilityWorldTracker;
 import su.terrafirmagreg.modules.core.feature.falling.capability.CollapseData;
 import su.terrafirmagreg.modules.core.feature.falling.capability.ICapabilityWorldTracker;
-import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
+import su.terrafirmagreg.modules.device.content.block.BlockCharcoalPile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;

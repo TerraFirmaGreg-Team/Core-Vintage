@@ -2,10 +2,10 @@ package su.terrafirmagreg.modules.core;
 
 import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.base.BaseModule;
 import su.terrafirmagreg.modules.core.event.EventHandlerGuiOpen;
@@ -52,7 +52,7 @@ public class ModuleCore extends BaseModule {
   }
 
   @Override
-  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
+  public void onRegistryRegistrar(IContentRegistrar registrar) {
     registrar.group("wand");
 
     FluidsCore.onRegister(registrar);

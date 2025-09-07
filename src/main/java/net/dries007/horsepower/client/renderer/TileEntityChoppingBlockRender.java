@@ -1,6 +1,6 @@
 package net.dries007.horsepower.client.renderer;
 
-import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperManual;
 
 import net.minecraft.client.renderer.GlStateManager;
 

@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items;
 
-import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemFood;
+import su.terrafirmagreg.framework.manager.content.base.item.spi.BaseItemFood;
 import su.terrafirmagreg.modules.core.capabilities.food.CapabilityProviderFoodHeat;
 import su.terrafirmagreg.modules.core.capabilities.food.IItemFoodTFC;
 import su.terrafirmagreg.modules.core.capabilities.food.spi.FoodData;

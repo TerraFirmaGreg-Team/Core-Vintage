@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.feature.woodtype.types;
 
 import su.terrafirmagreg.api.library.types.type.IType;
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderBlockColor;
+import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.client.renderer.color.IBlockColor;

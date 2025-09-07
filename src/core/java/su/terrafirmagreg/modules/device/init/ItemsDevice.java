@@ -1,14 +1,14 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.device.object.item.ItemFireStarter;
-import su.terrafirmagreg.modules.device.object.item.ItemFlaskLeather;
-import su.terrafirmagreg.modules.device.object.item.ItemFlaskLeatherBroken;
-import su.terrafirmagreg.modules.device.object.item.ItemFlaskLeatherUnfinished;
-import su.terrafirmagreg.modules.device.object.item.ItemFlaskMetal;
-import su.terrafirmagreg.modules.device.object.item.ItemFlaskMetalBroken;
-import su.terrafirmagreg.modules.device.object.item.ItemFlaskMetalUnfinished;
-import su.terrafirmagreg.modules.device.object.item.ItemWoodBucket;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
+import su.terrafirmagreg.modules.device.content.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.content.item.ItemFlaskLeather;
+import su.terrafirmagreg.modules.device.content.item.ItemFlaskLeatherBroken;
+import su.terrafirmagreg.modules.device.content.item.ItemFlaskLeatherUnfinished;
+import su.terrafirmagreg.modules.device.content.item.ItemFlaskMetal;
+import su.terrafirmagreg.modules.device.content.item.ItemFlaskMetalBroken;
+import su.terrafirmagreg.modules.device.content.item.ItemFlaskMetalUnfinished;
+import su.terrafirmagreg.modules.device.content.item.ItemWoodBucket;
 
 import net.minecraft.item.Item;
 
@@ -33,7 +33,7 @@ public final class ItemsDevice {
   public static Item GRINDSTONE_STEEL;
   public static Item GRINDSTONE_DIAMOND;
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     FIRESTARTER = registrar.addItem(new ItemFireStarter());
 

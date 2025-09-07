@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.wood.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.object.item.ItemWoodAnimalCart;
-import su.terrafirmagreg.modules.wood.object.item.ItemWoodBoat;
-import su.terrafirmagreg.modules.wood.object.item.ItemWoodLumber;
-import su.terrafirmagreg.modules.wood.object.item.ItemWoodPlowCart;
-import su.terrafirmagreg.modules.wood.object.item.ItemWoodSupplyCart;
-import su.terrafirmagreg.modules.wood.object.item.ItemWoodWheel;
+import su.terrafirmagreg.modules.wood.content.item.ItemWoodAnimalCart;
+import su.terrafirmagreg.modules.wood.content.item.ItemWoodBoat;
+import su.terrafirmagreg.modules.wood.content.item.ItemWoodLumber;
+import su.terrafirmagreg.modules.wood.content.item.ItemWoodPlowCart;
+import su.terrafirmagreg.modules.wood.content.item.ItemWoodSupplyCart;
+import su.terrafirmagreg.modules.wood.content.item.ItemWoodWheel;
 
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class ItemsWood {
   public static Map<WoodType, ItemWoodPlowCart> PLOW_CART;
 
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
     BOAT = registrar.addItem(ItemWoodBoat::new, WoodType.getTypes());
     LUMBER = registrar.addItem(ItemWoodLumber::new, WoodType.getTypes());
     WHEEL = registrar.addItem(ItemWoodWheel::new, WoodType.getTypes());

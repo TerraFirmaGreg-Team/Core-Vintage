@@ -6,8 +6,8 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.object.block.BlockPitKiln;
-import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
+import su.terrafirmagreg.modules.device.content.block.BlockPitKiln;
+import su.terrafirmagreg.modules.device.content.tile.TilePitKiln;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

@@ -1,11 +1,11 @@
 package net.dries007.tfctech.client;
 
-import su.terrafirmagreg.modules.device.object.container.ContainerCrucible;
-import su.terrafirmagreg.modules.device.object.container.ContainerElectricForge;
-import su.terrafirmagreg.modules.device.object.gui.GuiElectricForge;
-import su.terrafirmagreg.modules.device.object.gui.GuiInductionCrucible;
-import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
-import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
+import su.terrafirmagreg.modules.device.content.container.ContainerCrucible;
+import su.terrafirmagreg.modules.device.content.container.ContainerElectricForge;
+import su.terrafirmagreg.modules.device.content.gui.GuiElectricForge;
+import su.terrafirmagreg.modules.device.content.gui.GuiInductionCrucible;
+import su.terrafirmagreg.modules.device.content.tile.TileElectricForge;
+import su.terrafirmagreg.modules.device.content.tile.TileInductionCrucible;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

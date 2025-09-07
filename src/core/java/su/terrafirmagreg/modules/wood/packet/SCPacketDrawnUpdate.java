@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.wood.packet;
 
 import su.terrafirmagreg.framework.manager.packet.base.BasePacketClient;
-import su.terrafirmagreg.modules.wood.object.entity.spi.EntityWoodCart;
+import su.terrafirmagreg.modules.wood.content.entity.spi.EntityWoodCart;
 
 import net.minecraft.client.Minecraft;
 

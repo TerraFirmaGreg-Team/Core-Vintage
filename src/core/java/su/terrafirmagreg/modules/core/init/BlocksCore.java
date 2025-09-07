@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.core.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.core.object.block.BlockAggregate;
-import su.terrafirmagreg.modules.core.object.block.BlockDebug;
-import su.terrafirmagreg.modules.core.object.block.BlockFireBricks;
-import su.terrafirmagreg.modules.core.object.block.BlockPuddle;
-import su.terrafirmagreg.modules.core.object.block.BlockThatch;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
+import su.terrafirmagreg.modules.core.content.block.BlockAggregate;
+import su.terrafirmagreg.modules.core.content.block.BlockDebug;
+import su.terrafirmagreg.modules.core.content.block.BlockFireBricks;
+import su.terrafirmagreg.modules.core.content.block.BlockPuddle;
+import su.terrafirmagreg.modules.core.content.block.BlockThatch;
 
 import net.minecraft.block.Block;
 
@@ -30,7 +30,7 @@ public final class BlocksCore {
 //  public static BlockGroundcoverPinecone PINECONE;
 //  public static BlockGroundcoverTwig TWIG;
 
-  public static void onRegister(IRegistryRegistrar registry) {
+  public static void onRegister(IContentRegistrar registry) {
 
     DEBUG = registry.addBlock(new BlockDebug());
     PUDDLE = registry.addBlock(new BlockPuddle());

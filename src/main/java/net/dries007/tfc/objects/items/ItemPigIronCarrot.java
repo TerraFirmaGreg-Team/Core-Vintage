@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.items;
 
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
-import su.terrafirmagreg.modules.animal.object.entity.livestock.EntityAnimalPig;
+import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalPig;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 

@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.packet;
 
 import su.terrafirmagreg.framework.manager.packet.base.BasePacketServer;
-import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonHandler;
+import su.terrafirmagreg.framework.manager.content.base.gui.button.api.IButtonHandler;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;

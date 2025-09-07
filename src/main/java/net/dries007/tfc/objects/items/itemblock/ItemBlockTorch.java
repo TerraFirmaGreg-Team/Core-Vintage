@@ -1,8 +1,8 @@
 package net.dries007.tfc.objects.items.itemblock;
 
 import su.terrafirmagreg.modules.device.init.BlocksDevice;
-import su.terrafirmagreg.modules.device.object.tile.TileLogPile;
-import su.terrafirmagreg.modules.device.object.tile.TilePitKiln;
+import su.terrafirmagreg.modules.device.content.tile.TileLogPile;
+import su.terrafirmagreg.modules.device.content.tile.TilePitKiln;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

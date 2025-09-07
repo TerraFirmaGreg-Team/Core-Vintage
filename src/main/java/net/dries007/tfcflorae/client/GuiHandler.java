@@ -2,9 +2,9 @@ package net.dries007.tfcflorae.client;
 
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.device.object.container.ContainerCrate;
-import su.terrafirmagreg.modules.device.object.gui.GuiCrate;
-import su.terrafirmagreg.modules.device.object.tile.TileCrate;
+import su.terrafirmagreg.modules.device.content.container.ContainerCrate;
+import su.terrafirmagreg.modules.device.content.gui.GuiCrate;
+import su.terrafirmagreg.modules.device.content.tile.TileCrate;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

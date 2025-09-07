@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderHighlight;
+import su.terrafirmagreg.framework.manager.content.provider.IProviderHighlight;
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;

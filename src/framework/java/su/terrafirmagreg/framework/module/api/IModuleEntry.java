@@ -3,10 +3,10 @@ package su.terrafirmagreg.framework.module.api;
 import su.terrafirmagreg.framework.FrameworkLogger;
 import su.terrafirmagreg.framework.manager.api.IBaseEntry;
 import su.terrafirmagreg.framework.manager.command.api.ICommandRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 import su.terrafirmagreg.framework.manager.feature.api.IFeatureRegistrar;
 import su.terrafirmagreg.framework.manager.packet.api.IPacketRegistrar;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
 import su.terrafirmagreg.framework.module.api.IModuleEntry.ModuleSettings;
 import su.terrafirmagreg.framework.module.base.BaseModule;
 
@@ -56,7 +56,7 @@ public interface IModuleEntry extends IBaseEntry<ModuleSettings, BaseModule> {
   default void onNewRegister() {}
 
 
-  default void onRegistryRegistrar(IRegistryRegistrar registrar) {}
+  default void onRegistryRegistrar(IContentRegistrar registrar) {}
 
   default void onPacketRegistrar(IPacketRegistrar registrar) {}
 

@@ -1,6 +1,6 @@
 package su.terrafirmagreg.modules.animal.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 
 import net.minecraft.util.ResourceLocation;
 
@@ -48,7 +48,7 @@ public final class LootTablesAnimal {
   public static ResourceLocation ANIMALS_YAK;
   public static ResourceLocation ANIMALS_ZEBU;
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     ANIMALS_BLACK_BEAR = registrar.addLoot("black_bear");
     ANIMALS_GRIZZLY_BEAR = registrar.addLoot("grizzly_bear");

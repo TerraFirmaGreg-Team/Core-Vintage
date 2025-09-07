@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.container;
 
-import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonHandler;
+import su.terrafirmagreg.framework.manager.content.base.gui.button.api.IButtonHandler;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;

@@ -1,7 +1,7 @@
 package net.dries007.tfc.objects.container;
 
 import su.terrafirmagreg.api.util.StackUtils;
-import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonHandler;
+import su.terrafirmagreg.framework.manager.content.base.gui.button.api.IButtonHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

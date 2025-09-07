@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.blocks;
 
-import su.terrafirmagreg.framework.manager.registry.provider.IProviderHighlight;
+import su.terrafirmagreg.framework.manager.content.provider.IProviderHighlight;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;

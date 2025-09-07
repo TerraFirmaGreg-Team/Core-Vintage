@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.world;
 
 import su.terrafirmagreg.framework.FrameworkLogger;
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 import su.terrafirmagreg.framework.module.api.ModuleInfo;
 import su.terrafirmagreg.framework.module.base.BaseModule;
 import su.terrafirmagreg.modules.world.init.BiomesWorld;
@@ -22,7 +22,7 @@ public class ModuleWorld extends BaseModule {
   }
 
   @Override
-  public void onRegistryRegistrar(IRegistryRegistrar registrar) {
+  public void onRegistryRegistrar(IContentRegistrar registrar) {
 
     BiomesWorld.onRegister(registrar);
   }

@@ -2,7 +2,7 @@ package net.dries007.tfc.objects.blocks.stone;
 
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
-import su.terrafirmagreg.modules.soil.object.block.BlockSoilPeat;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilPeat;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;

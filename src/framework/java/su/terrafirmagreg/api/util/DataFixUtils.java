@@ -1,7 +1,7 @@
 package su.terrafirmagreg.api.util;
 
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
-import su.terrafirmagreg.framework.manager.registry.RegistryManager;
+import su.terrafirmagreg.framework.manager.content.ContentManager;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -71,19 +71,19 @@ public final class DataFixUtils {
     // Получаем объект из registry
     T registryObject = mapping.registry.getValue(resourceLocation);
     if (registryObject == null) {
-      RegistryManager.LOGGER.warn("Failed to remap {}: target object not found in registry", resourceLocation);
+      ContentManager.LOGGER.warn("Failed to remap {}: target object not found in registry", resourceLocation);
       mapping.warn();
       return;
     }
 
     if (mapping.registry.getRegistrySuperType() == registryObject.getRegistryType()) {
       mapping.remap(registryObject);
-      RegistryManager.LOGGER.info("Remapped {} to {}", mapping.key, resourceLocation);
+      ContentManager.LOGGER.info("Remapped {} to {}", mapping.key, resourceLocation);
       return;
     }
 
     mapping.warn();
-    RegistryManager.LOGGER.warn("Failed to remap {}: type mismatch ({} vs {})",
+    ContentManager.LOGGER.warn("Failed to remap {}: type mismatch ({} vs {})",
       mapping.key,
       mapping.registry.getRegistrySuperType(),
       resourceLocation);

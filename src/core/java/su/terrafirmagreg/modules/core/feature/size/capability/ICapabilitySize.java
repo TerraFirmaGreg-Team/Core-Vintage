@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.feature.size.capability;
 
-import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItem;
-import su.terrafirmagreg.framework.manager.registry.base.item.spi.BaseItemBlock;
+import su.terrafirmagreg.framework.manager.content.base.item.spi.BaseItem;
+import su.terrafirmagreg.framework.manager.content.base.item.spi.BaseItemBlock;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 

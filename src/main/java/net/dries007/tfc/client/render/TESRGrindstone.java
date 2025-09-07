@@ -1,6 +1,6 @@
 package net.dries007.tfc.client.render;
 
-import su.terrafirmagreg.modules.device.object.tile.TileGrindstone;
+import su.terrafirmagreg.modules.device.content.tile.TileGrindstone;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

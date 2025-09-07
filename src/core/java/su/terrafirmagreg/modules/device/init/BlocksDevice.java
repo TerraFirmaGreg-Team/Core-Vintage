@@ -1,46 +1,46 @@
 package su.terrafirmagreg.modules.device.init;
 
-import su.terrafirmagreg.framework.manager.registry.api.IRegistryRegistrar;
-import su.terrafirmagreg.modules.device.object.block.BlockAlloyCalculator;
-import su.terrafirmagreg.modules.device.object.block.BlockBearTrap;
-import su.terrafirmagreg.modules.device.object.block.BlockBellows;
-import su.terrafirmagreg.modules.device.object.block.BlockBlastFurnace;
-import su.terrafirmagreg.modules.device.object.block.BlockBloom;
-import su.terrafirmagreg.modules.device.object.block.BlockBloomery;
-import su.terrafirmagreg.modules.device.object.block.BlockCellarDoor;
-import su.terrafirmagreg.modules.device.object.block.BlockCellarShelf;
-import su.terrafirmagreg.modules.device.object.block.BlockCellarWall;
-import su.terrafirmagreg.modules.device.object.block.BlockCharcoalForge;
-import su.terrafirmagreg.modules.device.object.block.BlockCharcoalPile;
-import su.terrafirmagreg.modules.device.object.block.BlockCrate;
-import su.terrafirmagreg.modules.device.object.block.BlockCrucible;
-import su.terrafirmagreg.modules.device.object.block.BlockDryingMat;
-import su.terrafirmagreg.modules.device.object.block.BlockElectricForge;
-import su.terrafirmagreg.modules.device.object.block.BlockFirePit;
-import su.terrafirmagreg.modules.device.object.block.BlockFreezeDryer;
-import su.terrafirmagreg.modules.device.object.block.BlockFridge;
-import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseDoor;
-import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseRoof;
-import su.terrafirmagreg.modules.device.object.block.BlockGreenhouseWall;
-import su.terrafirmagreg.modules.device.object.block.BlockGrindstoneManual;
-import su.terrafirmagreg.modules.device.object.block.BlockIceBunker;
-import su.terrafirmagreg.modules.device.object.block.BlockInductionCrucible;
-import su.terrafirmagreg.modules.device.object.block.BlockInfectedAir;
-import su.terrafirmagreg.modules.device.object.block.BlockLatexExtractor;
-import su.terrafirmagreg.modules.device.object.block.BlockLeafMat;
-import su.terrafirmagreg.modules.device.object.block.BlockLogPile;
-import su.terrafirmagreg.modules.device.object.block.BlockMolten;
-import su.terrafirmagreg.modules.device.object.block.BlockOven;
-import su.terrafirmagreg.modules.device.object.block.BlockOvenChimney;
-import su.terrafirmagreg.modules.device.object.block.BlockOvenWall;
-import su.terrafirmagreg.modules.device.object.block.BlockPitKiln;
-import su.terrafirmagreg.modules.device.object.block.BlockPowderKeg;
-import su.terrafirmagreg.modules.device.object.block.BlockQuernHorse;
-import su.terrafirmagreg.modules.device.object.block.BlockQuernManual;
-import su.terrafirmagreg.modules.device.object.block.BlockSmelteryCauldron;
-import su.terrafirmagreg.modules.device.object.block.BlockSmelteryFirebox;
-import su.terrafirmagreg.modules.device.object.block.BlockSnare;
-import su.terrafirmagreg.modules.device.object.block.BlockThatchBed;
+import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
+import su.terrafirmagreg.modules.device.content.block.BlockAlloyCalculator;
+import su.terrafirmagreg.modules.device.content.block.BlockBearTrap;
+import su.terrafirmagreg.modules.device.content.block.BlockBellows;
+import su.terrafirmagreg.modules.device.content.block.BlockBlastFurnace;
+import su.terrafirmagreg.modules.device.content.block.BlockBloom;
+import su.terrafirmagreg.modules.device.content.block.BlockBloomery;
+import su.terrafirmagreg.modules.device.content.block.BlockCellarDoor;
+import su.terrafirmagreg.modules.device.content.block.BlockCellarShelf;
+import su.terrafirmagreg.modules.device.content.block.BlockCellarWall;
+import su.terrafirmagreg.modules.device.content.block.BlockCharcoalForge;
+import su.terrafirmagreg.modules.device.content.block.BlockCharcoalPile;
+import su.terrafirmagreg.modules.device.content.block.BlockCrate;
+import su.terrafirmagreg.modules.device.content.block.BlockCrucible;
+import su.terrafirmagreg.modules.device.content.block.BlockDryingMat;
+import su.terrafirmagreg.modules.device.content.block.BlockElectricForge;
+import su.terrafirmagreg.modules.device.content.block.BlockFirePit;
+import su.terrafirmagreg.modules.device.content.block.BlockFreezeDryer;
+import su.terrafirmagreg.modules.device.content.block.BlockFridge;
+import su.terrafirmagreg.modules.device.content.block.BlockGreenhouseDoor;
+import su.terrafirmagreg.modules.device.content.block.BlockGreenhouseRoof;
+import su.terrafirmagreg.modules.device.content.block.BlockGreenhouseWall;
+import su.terrafirmagreg.modules.device.content.block.BlockGrindstoneManual;
+import su.terrafirmagreg.modules.device.content.block.BlockIceBunker;
+import su.terrafirmagreg.modules.device.content.block.BlockInductionCrucible;
+import su.terrafirmagreg.modules.device.content.block.BlockInfectedAir;
+import su.terrafirmagreg.modules.device.content.block.BlockLatexExtractor;
+import su.terrafirmagreg.modules.device.content.block.BlockLeafMat;
+import su.terrafirmagreg.modules.device.content.block.BlockLogPile;
+import su.terrafirmagreg.modules.device.content.block.BlockMolten;
+import su.terrafirmagreg.modules.device.content.block.BlockOven;
+import su.terrafirmagreg.modules.device.content.block.BlockOvenChimney;
+import su.terrafirmagreg.modules.device.content.block.BlockOvenWall;
+import su.terrafirmagreg.modules.device.content.block.BlockPitKiln;
+import su.terrafirmagreg.modules.device.content.block.BlockPowderKeg;
+import su.terrafirmagreg.modules.device.content.block.BlockQuernHorse;
+import su.terrafirmagreg.modules.device.content.block.BlockQuernManual;
+import su.terrafirmagreg.modules.device.content.block.BlockSmelteryCauldron;
+import su.terrafirmagreg.modules.device.content.block.BlockSmelteryFirebox;
+import su.terrafirmagreg.modules.device.content.block.BlockSnare;
+import su.terrafirmagreg.modules.device.content.block.BlockThatchBed;
 
 public final class BlocksDevice {
 
@@ -87,7 +87,7 @@ public final class BlocksDevice {
   public static BlockDryingMat DRYING_MAT;
 
 
-  public static void onRegister(IRegistryRegistrar registrar) {
+  public static void onRegister(IContentRegistrar registrar) {
 
     ALLOY_CALCULATOR = registrar.addBlock(new BlockAlloyCalculator());
     BEAR_TRAP = registrar.addBlock(new BlockBearTrap());

@@ -1,7 +1,7 @@
 package net.dries007.tfc.client.button;
 
-import su.terrafirmagreg.framework.manager.registry.base.gui.button.api.IButtonTooltip;
-import su.terrafirmagreg.modules.device.object.tile.TileCrate;
+import su.terrafirmagreg.framework.manager.content.base.gui.button.api.IButtonTooltip;
+import su.terrafirmagreg.modules.device.content.tile.TileCrate;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

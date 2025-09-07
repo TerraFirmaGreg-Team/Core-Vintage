@@ -1,6 +1,6 @@
 package net.dries007.tfc.objects.items.itemblock;
 
-import su.terrafirmagreg.modules.device.object.block.BlockSluice;
+import su.terrafirmagreg.modules.device.content.block.BlockSluice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

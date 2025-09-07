@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.framework.manager.registry.base.block.api.IBlockEntry;
+import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;

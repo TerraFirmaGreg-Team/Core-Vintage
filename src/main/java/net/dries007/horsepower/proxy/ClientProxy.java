@@ -1,11 +1,11 @@
 package net.dries007.horsepower.proxy;
 
-import su.terrafirmagreg.modules.device.object.render.TESRQuernHorse;
-import su.terrafirmagreg.modules.device.object.render.TESRQuernManual;
-import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
-import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
-import su.terrafirmagreg.modules.device.object.tile.TileQuernHorse;
-import su.terrafirmagreg.modules.device.object.tile.TileQuernManual;
+import su.terrafirmagreg.modules.device.content.render.TESRQuernHorse;
+import su.terrafirmagreg.modules.device.content.render.TESRQuernManual;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperManual;
+import su.terrafirmagreg.modules.device.content.tile.TileQuernHorse;
+import su.terrafirmagreg.modules.device.content.tile.TileQuernManual;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;

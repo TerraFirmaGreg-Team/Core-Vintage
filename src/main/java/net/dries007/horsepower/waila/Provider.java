@@ -1,11 +1,11 @@
 package net.dries007.horsepower.waila;
 
-import su.terrafirmagreg.modules.device.object.block.BlockQuernHorse;
-import su.terrafirmagreg.modules.device.object.block.BlockQuernManual;
-import su.terrafirmagreg.modules.device.object.tile.TileChopperHorse;
-import su.terrafirmagreg.modules.device.object.tile.TileChopperManual;
-import su.terrafirmagreg.modules.device.object.tile.TileQuernHorse;
-import su.terrafirmagreg.modules.device.object.tile.TileQuernManual;
+import su.terrafirmagreg.modules.device.content.block.BlockQuernHorse;
+import su.terrafirmagreg.modules.device.content.block.BlockQuernManual;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperHorse;
+import su.terrafirmagreg.modules.device.content.tile.TileChopperManual;
+import su.terrafirmagreg.modules.device.content.tile.TileQuernHorse;
+import su.terrafirmagreg.modules.device.content.tile.TileQuernManual;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;

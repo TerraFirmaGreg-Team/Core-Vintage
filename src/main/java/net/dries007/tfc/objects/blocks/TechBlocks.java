@@ -1,12 +1,12 @@
 package net.dries007.tfc.objects.blocks;
 
 import su.terrafirmagreg.modules.core.init.FluidsCore;
-import su.terrafirmagreg.modules.device.object.block.BlockElectricForge;
-import su.terrafirmagreg.modules.device.object.block.BlockInductionCrucible;
-import su.terrafirmagreg.modules.device.object.block.BlockWireDrawBench;
-import su.terrafirmagreg.modules.device.object.tile.TileElectricForge;
-import su.terrafirmagreg.modules.device.object.tile.TileInductionCrucible;
-import su.terrafirmagreg.modules.device.object.tile.TileWireDrawBench;
+import su.terrafirmagreg.modules.device.content.block.BlockElectricForge;
+import su.terrafirmagreg.modules.device.content.block.BlockInductionCrucible;
+import su.terrafirmagreg.modules.device.content.block.BlockWireDrawBench;
+import su.terrafirmagreg.modules.device.content.tile.TileElectricForge;
+import su.terrafirmagreg.modules.device.content.tile.TileInductionCrucible;
+import su.terrafirmagreg.modules.device.content.tile.TileWireDrawBench;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

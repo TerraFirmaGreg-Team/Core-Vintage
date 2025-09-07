@@ -23,6 +23,7 @@ public class BlockSoilMudBricks extends BlockSoilMud {
       .registryKey(type.getRegistryKey("mud_bricks"))
       .renderLayer(BlockRenderLayer.CUTOUT)
       .sound(SoundType.STONE)
+      .withAllVariants()
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .addOreDict("mud_bricks");
 

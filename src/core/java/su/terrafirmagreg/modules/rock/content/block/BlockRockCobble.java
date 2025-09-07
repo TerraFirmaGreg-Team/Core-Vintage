@@ -24,6 +24,7 @@ public class BlockRockCobble extends BaseBlockFalling implements IRockEntry {
   public BlockRockCobble(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
+      .withAllVariants()
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0)

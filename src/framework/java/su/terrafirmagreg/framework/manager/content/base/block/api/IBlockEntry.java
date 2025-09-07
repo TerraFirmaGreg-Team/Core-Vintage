@@ -7,10 +7,16 @@ import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.content.api.IContentEntry;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry.BlockSettings;
+import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockSlab;
+import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockStairs;
+import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockWall;
 import su.terrafirmagreg.framework.manager.content.base.item.spi.BaseItemBlock;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -49,6 +55,22 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
 
   default Item asItem() {
     return Item.getItemFromBlock(asEntry());
+  }
+
+  default BlockWall asWall() {
+    return BlockUtils.getWallFromBlock(asEntry());
+  }
+
+  default BlockSlab asSlab() {
+    return BlockUtils.getSlabFromBlock(asEntry());
+  }
+
+  default BlockSlab asSlabDouble() {
+    return BlockUtils.getSlabDoubleFromBlock(asEntry());
+  }
+
+  default BlockStairs asStairs() {
+    return BlockUtils.getStairsFromBlock(asEntry());
   }
 
   @Override
@@ -120,11 +142,14 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
     protected boolean isTranslucent = !material.blocksLight();
     protected boolean useNeighborBrightness = !isAir || isTranslucent;
     protected boolean isPassable = !material.blocksMovement();
-
     protected boolean nonCanStack = false;
-    protected Function<Block, ? extends BaseItemBlock> itemBlock = BaseItemBlock::new;
-
     protected boolean enableStats = true;
+
+    protected Function<Block, ? extends BaseItemBlock> itemBlock = BaseItemBlock::new;
+    protected Function<Block, ? extends BaseBlockWall> wallBlock;
+    protected Function<Block, ? extends BaseBlockSlab> slabBlock;
+    protected Function<Block, ? extends BaseBlockSlab> slabDoubleBlock;
+    protected Function<Block, ? extends BaseBlockStairs> stairsBlock;
 
     public static BlockSettings of() {
       var settings = new BlockSettings();
@@ -192,6 +217,49 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
 
     public BlockSettings itemBlock(Function<Block, ? extends BaseItemBlock> itemBlock) {
       this.itemBlock = itemBlock;
+      return this.self();
+    }
+
+    public BlockSettings stairsBlock(Function<Block, ? extends BaseBlockStairs> stairsBlock) {
+      this.stairsBlock = stairsBlock;
+      return this.self();
+    }
+
+    public BlockSettings stairsBlock() {
+      this.stairsBlock = BaseBlockStairs::new;
+      return this.self();
+    }
+
+    public BlockSettings slabBlock(Function<Block, ? extends BaseBlockSlab> slabBlock, Function<Block, ? extends BaseBlockSlab> slabDoubleBlock) {
+      this.slabBlock = slabBlock;
+      this.slabDoubleBlock = slabDoubleBlock;
+      return this.self();
+    }
+
+    public BlockSettings slabBlock() {
+      this.slabDoubleBlock = BaseBlockSlab.Double::new;
+      this.slabBlock = BaseBlockSlab.Half::new;
+      return this.self();
+    }
+
+    public BlockSettings wallBlock(Function<Block, ? extends BaseBlockWall> wallBlock) {
+      this.wallBlock = wallBlock;
+      return this.self();
+    }
+
+    public BlockSettings wallBlock() {
+      this.wallBlock = BaseBlockWall::new;
+      return this.self();
+    }
+
+
+    /**
+     * Включает генерацию всех вариантов (плита, ступеньки, стена)
+     */
+    public BlockSettings withAllVariants() {
+      this.stairsBlock();
+      this.wallBlock();
+      this.slabBlock();
       return this.self();
     }
 

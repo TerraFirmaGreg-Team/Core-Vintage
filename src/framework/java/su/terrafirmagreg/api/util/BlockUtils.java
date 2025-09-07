@@ -1,10 +1,9 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockSlab;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockOre;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.BlockWall;
@@ -42,28 +41,27 @@ public final class BlockUtils {
 
   public static final Map<Block, BlockStairs> BLOCK_TO_STAIRS = new Object2ObjectOpenHashMap<>();
   public static final Map<Block, BlockWall> BLOCK_TO_WALL = new Object2ObjectOpenHashMap<>();
-  public static final Map<Block, BaseBlockSlab> BLOCK_TO_SLAB = new Object2ObjectOpenHashMap<>();
-  public static final Map<Block, BaseBlockSlab> BLOCK_TO_DOUBLE_SLAB = new Object2ObjectOpenHashMap<>();
-
+  public static final Map<Block, BlockSlab> BLOCK_TO_SLAB = new Object2ObjectOpenHashMap<>();
+  public static final Map<Block, BlockSlab> BLOCK_TO_DOUBLE_SLAB = new Object2ObjectOpenHashMap<>();
 
   public static BlockStairs getStairsFromBlock(Block blockIn) {
-    BlockStairs item = BLOCK_TO_STAIRS.get(blockIn);
-    return item == null ? (BlockStairs) Blocks.AIR : item;
+    BlockStairs blockStairs = BLOCK_TO_STAIRS.get(blockIn);
+    return blockStairs == null ? (BlockStairs) Blocks.AIR : blockStairs;
   }
 
   public static BlockWall getWallFromBlock(Block blockIn) {
-    BlockWall item = BLOCK_TO_WALL.get(blockIn);
-    return item == null ? (BlockWall) Blocks.AIR : item;
+    BlockWall blockWall = BLOCK_TO_WALL.get(blockIn);
+    return blockWall == null ? (BlockWall) Blocks.AIR : blockWall;
   }
 
-  public static BaseBlockSlab getSlabFromBlock(Block blockIn) {
-    BaseBlockSlab blockSlab = BLOCK_TO_SLAB.get(blockIn);
-    return blockSlab == null ? (BaseBlockSlab) Blocks.AIR : blockSlab;
+  public static BlockSlab getSlabFromBlock(Block blockIn) {
+    BlockSlab blockSlab = BLOCK_TO_SLAB.get(blockIn);
+    return blockSlab == null ? (BlockSlab) Blocks.AIR : blockSlab;
   }
 
-  public static BaseBlockSlab getSlabDoubleFromBlock(Block blockIn) {
-    BaseBlockSlab blockSlab = BLOCK_TO_DOUBLE_SLAB.get(blockIn);
-    return blockSlab == null ? (BaseBlockSlab) Blocks.AIR : blockSlab;
+  public static BlockSlab getSlabDoubleFromBlock(Block blockIn) {
+    BlockSlab blockSlab = BLOCK_TO_DOUBLE_SLAB.get(blockIn);
+    return blockSlab == null ? (BlockSlab) Blocks.AIR : blockSlab;
   }
 
   /**

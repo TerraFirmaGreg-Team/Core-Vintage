@@ -26,25 +26,34 @@ import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Properties.EnumProp.DEFAULT;
 
-@Getter
 @SuppressWarnings("deprecation")
 public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
 
-
+  @Getter
   protected final BlockSettings settings;
+  @Getter
+  protected Block modelBlock;
+  protected BlockSlab doubleSlab;
+  protected BlockSlab halfSlab;
 
+  /**
+   * Создает плиту на основе блока
+   */
   public BaseBlockSlab(Block model) {
     this(BlockSettings.of(model));
 
-    BlockUtils.BLOCK_TO_SLAB.put(model, this);
   }
 
+  /**
+   * Создает плиту с кастомными настройками
+   */
   public BaseBlockSlab(BlockSettings settings) {
     super(settings.getMaterial());
-
     this.settings = settings;
+    this.modelBlock = settings.getBlock();
 
     getSettings()
+      .registryKey(settings.getRegistryKey() + (isDouble() ? "/slab_double" : "/slab"))
       .ignoresProperties(DEFAULT)
       .itemBlock(isDouble() ? null : BaseItemSlab::new)
       .renderLayer(isDouble() ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID)
@@ -52,8 +61,10 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
 
     var state = getBlockState().getBaseState();
     if (!isDouble()) {
+
       state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
     }
+
     setDefaultState(state.withProperty(DEFAULT, EnumDefault.DEFAULT));
   }
 
@@ -66,6 +77,48 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
   @Override
   public String getTranslationKey() {
     return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
+  }
+
+  public BlockSlab getDoubleSlab() {
+    return BlockUtils.BLOCK_TO_DOUBLE_SLAB.get(modelBlock);
+  }
+
+  public BlockSlab getHalfSlab() {
+
+    return BlockUtils.BLOCK_TO_SLAB.get(modelBlock);
+  }
+
+  public static class Half extends BaseBlockSlab {
+
+
+    public Half(Block model) {
+      super(model);
+      this.halfSlab = this;
+
+      BlockUtils.BLOCK_TO_SLAB.put(model, this);
+    }
+
+    @Override
+    public boolean isDouble() {
+      return false;
+    }
+  }
+
+  public static class Double extends BaseBlockSlab {
+
+
+    public Double(Block model) {
+      super(model);
+      this.doubleSlab = this;
+
+      BlockUtils.BLOCK_TO_DOUBLE_SLAB.put(model, this);
+    }
+
+    @Override
+    public boolean isDouble() {
+      return true;
+    }
+
   }
 
   public abstract boolean isDouble();
@@ -115,7 +168,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
 
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return getHalfSlab().asItem();
+    return Item.getItemFromBlock(getHalfSlab());
   }
 
   @Override
@@ -127,10 +180,6 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry {
   protected BlockStateContainer createBlockState() {
     return this.isDouble() ? new BlockStateContainer(this, DEFAULT) : new BlockStateContainer(this, HALF, DEFAULT);
   }
-
-  public abstract BaseBlockSlab getHalfSlab();
-
-  public abstract BaseBlockSlab getDoubleSlab();
 
 
 }

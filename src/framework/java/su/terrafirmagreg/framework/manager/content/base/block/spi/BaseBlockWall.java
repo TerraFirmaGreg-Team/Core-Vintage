@@ -49,7 +49,8 @@ public class BaseBlockWall extends BlockWall implements IBlockEntry {
     this.modelState = block.getDefaultState();
 
     getSettings()
-      .ignoresProperties(VARIANT);
+      .ignoresProperties(VARIANT)
+      .registryKey(settings.getRegistryKey() + "/wall");
 
     BlockUtils.BLOCK_TO_WALL.put(block, this);
   }

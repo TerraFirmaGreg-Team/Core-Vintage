@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.soil.init;
 
 import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
-import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilCoarseDirt;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilDirt;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilDryGrass;
@@ -10,15 +9,13 @@ import su.terrafirmagreg.modules.soil.content.block.BlockSoilGrass;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilGrassPath;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilMud;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilMudBricks;
-import su.terrafirmagreg.modules.soil.content.block.BlockSoilMudSlab;
-import su.terrafirmagreg.modules.soil.content.block.BlockSoilMudStairs;
-import su.terrafirmagreg.modules.soil.content.block.BlockSoilMudWall;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilMycelium;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilPeat;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilPeatGrass;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilPodzol;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilRootedDirt;
 import su.terrafirmagreg.modules.soil.content.block.BlockSoilSparseGrass;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 
 import java.util.Map;
 
@@ -39,10 +36,6 @@ public class BlocksSoil {
   public static Map<SoilType, BlockSoilGrassPath> GRASS_PATH;
   public static Map<SoilType, BlockSoilMud> MUD;
   public static Map<SoilType, BlockSoilMudBricks> MUD_BRICKS;
-  public static Map<SoilType, BlockSoilMudStairs> MUD_BRICKS_STAIRS;
-  public static Map<SoilType, BlockSoilMudSlab> MUD_BRICKS_SLAB_DOUBLE;
-  public static Map<SoilType, BlockSoilMudSlab.Half> MUD_BRICKS_SLAB;
-  public static Map<SoilType, BlockSoilMudWall> MUD_BRICKS_WALL;
   public static Map<SoilType, BlockSoilGrass> DRYING_BRICKS;
 
 
@@ -63,9 +56,5 @@ public class BlocksSoil {
     GRASS_PATH = registrar.addBlock(BlockSoilGrassPath::new, SoilType.getTypes());
     MUD = registrar.addBlock(BlockSoilMud::new, SoilType.getTypes());
     MUD_BRICKS = registrar.addBlock(BlockSoilMudBricks::new, SoilType.getTypes());
-    MUD_BRICKS_STAIRS = registrar.addBlock(BlockSoilMudStairs::new, SoilType.getTypes());
-    MUD_BRICKS_SLAB_DOUBLE = registrar.addBlock(BlockSoilMudSlab::new, SoilType.getTypes());
-    MUD_BRICKS_SLAB = registrar.addBlock(BlockSoilMudSlab.Half::new, SoilType.getTypes());
-    MUD_BRICKS_WALL = registrar.addBlock(BlockSoilMudWall::new, SoilType.getTypes());
   }
 }

@@ -42,7 +42,7 @@ public class BaseItemSlab extends BaseItemBlock implements IItemEntry {
     this(blockSlab.getHalfSlab(), blockSlab.getDoubleSlab());
   }
 
-  public BaseItemSlab(BaseBlockSlab singleSlab, BaseBlockSlab doubleSlab) {
+  public BaseItemSlab(BlockSlab singleSlab, BlockSlab doubleSlab) {
     super(singleSlab);
 
     this.settings = ItemSettings.of(singleSlab);

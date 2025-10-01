@@ -34,7 +34,7 @@ public class PacketManager implements IPacketManager {
     MinecraftForge.EVENT_BUS.register(this);
   }
 
-  public static synchronized IPacketManager of(IModuleEntry module) {
+  public static IPacketManager of(IModuleEntry module) {
 
     return MANAGER_MAP.computeIfAbsent(module, PacketManager::new);
   }

@@ -33,7 +33,7 @@ public class FeatureManager implements IFeatureManager {
     MinecraftForge.EVENT_BUS.register(this);
   }
 
-  public static synchronized IFeatureManager of(IModuleEntry module) {
+  public static IFeatureManager of(IModuleEntry module) {
 
     return MANAGER_MAP.computeIfAbsent(module, FeatureManager::new);
   }

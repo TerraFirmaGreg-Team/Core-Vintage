@@ -1,7 +1,6 @@
 package su.terrafirmagreg.framework.manager.plugin;
 
 import su.terrafirmagreg.framework.FrameworkLogger;
-import su.terrafirmagreg.framework.manager.feature.FeatureManager;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginEntry;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginManager;
 import su.terrafirmagreg.framework.manager.plugin.api.IPluginRegistrar;
@@ -17,7 +16,7 @@ import lombok.Getter;
 @Getter
 public class PluginManager implements IPluginManager {
 
-  public static final FrameworkLogger LOGGER = FrameworkLogger.of(FeatureManager.class);
+  public static final FrameworkLogger LOGGER = FrameworkLogger.of(PluginManager.class);
 
   private final IModuleEntry module;
   private final Multimap<Class<?>, IPluginEntry> mapEntry;
@@ -34,7 +33,7 @@ public class PluginManager implements IPluginManager {
     MinecraftForge.EVENT_BUS.register(this);
   }
 
-  public static synchronized IPluginManager of(IModuleEntry module) {
+  public static IPluginManager of(IModuleEntry module) {
 
     return MANAGER_MAP.computeIfAbsent(module, PluginManager::new);
   }

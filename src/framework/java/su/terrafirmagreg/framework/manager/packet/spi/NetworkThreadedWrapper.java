@@ -61,12 +61,12 @@ public class NetworkThreadedWrapper {
   }
 
   // ContainerId : ModuleId
-  public static synchronized NetworkThreadedWrapper of(ResourceLocation netId) {
+  public static NetworkThreadedWrapper of(ResourceLocation netId) {
     NetworkUtils.isValidChannel(netId);
     return WRAPPER_MAP.computeIfAbsent(netId.toString(), NetworkThreadedWrapper::new);
   }
 
-  public static synchronized NetworkThreadedWrapper of(String netId) {
+  public static NetworkThreadedWrapper of(String netId) {
     NetworkUtils.isValidChannel(netId);
     return WRAPPER_MAP.computeIfAbsent(netId, NetworkThreadedWrapper::new);
   }

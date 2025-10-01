@@ -42,7 +42,7 @@ public class ModuleManager implements IModuleManager {
   }
 
 
-  public static synchronized IModuleManager of(String modId) {
+  public static IModuleManager of(String modId) {
 
     return MANAGER_MAP.computeIfAbsent(modId, ModuleManager::new);
   }

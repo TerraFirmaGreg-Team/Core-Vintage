@@ -40,7 +40,7 @@ public class CommandManager implements ICommandManager {
     MinecraftForge.EVENT_BUS.register(this);
   }
 
-  public static synchronized ICommandManager of(IModuleEntry module) {
+  public static ICommandManager of(IModuleEntry module) {
 
     return MANAGER_MAP.computeIfAbsent(module, CommandManager::new);
   }

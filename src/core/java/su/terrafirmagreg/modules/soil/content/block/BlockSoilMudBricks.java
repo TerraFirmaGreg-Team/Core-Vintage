@@ -5,6 +5,7 @@ import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -16,17 +17,21 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.MOSSY;
 
 public class BlockSoilMudBricks extends BlockSoilMud {
 
+  protected final SoilType type;
+
   public BlockSoilMudBricks(SoilType type) {
     super(type);
 
     getSettings()
       .registryKey(type.getRegistryKey("mud_bricks"))
       .renderLayer(BlockRenderLayer.CUTOUT)
+      .material(Material.GROUND)
       .sound(SoundType.STONE)
       .withAllVariants()
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .addOreDict("mud_bricks");
 
+    this.type = type;
     setDefaultState(blockState.getBaseState()
       .withProperty(MOSSY, false));
   }

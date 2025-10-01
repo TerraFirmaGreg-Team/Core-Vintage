@@ -6,15 +6,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import lombok.Getter;
 
-import java.io.Serializable;
-
 @Getter
-public abstract class BasePacket implements Serializable, IPacketEntry {
+public abstract class BasePacket implements IPacketEntry {
 
-  /**
-   * The serial version for this UID.
-   */
-  private static final long serialVersionUID = 3214832642504369023L;
 
   protected final PacketSettings settings;
 

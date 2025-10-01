@@ -50,7 +50,7 @@ public class ContentManager implements IContentManager {
     MinecraftForge.EVENT_BUS.register(this);
   }
 
-  public static synchronized IContentManager of(IModuleEntry module) {
+  public static IContentManager of(IModuleEntry module) {
 
     return MANAGER_MAP.computeIfAbsent(module, ContentManager::new);
   }

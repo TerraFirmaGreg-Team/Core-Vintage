@@ -29,11 +29,7 @@ import su.terrafirmagreg.modules.core.init.LootTablesCore;
 import su.terrafirmagreg.modules.core.init.PacketsCore;
 import su.terrafirmagreg.modules.core.init.PluginsCore;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 @ModuleInfo(
   author = "Xikaro",
@@ -48,6 +44,18 @@ public class ModuleCore extends BaseModule {
   public ModuleCore() {
     super(ModuleSettings.of()
       .registryKey("core")
+      .addSubscription(
+        EventHandlerBlock.class,
+        EventHandlerGuiOpen.class,
+        EventHandlerGuiScreen.class,
+        EventHandlerPlayerChangedDimension.class,
+        EventHandlerPlayerLoggedIn.class,
+        EventHandlerPlayerLoggedOut.class,
+        EventHandlerPlayerRespawn.class,
+        EventHandlerPortalSpawn.class,
+        EventHandlerItemTooltip.class,
+        EventHandlerOnConfigChanged.class
+      )
     );
   }
 
@@ -87,29 +95,6 @@ public class ModuleCore extends BaseModule {
     PacketsCore.onRegister(registrar);
   }
 
-
-  @Override
-  public @NotNull List<Class<?>> getEventBusSubscribers() {
-    return new ObjectArrayList<>() {{
-      add(EventHandlerBlock.class);
-
-      add(EventHandlerGuiOpen.class);
-      add(EventHandlerGuiScreen.class);
-
-      add(EventHandlerPlayerChangedDimension.class);
-      add(EventHandlerPlayerLoggedIn.class);
-      add(EventHandlerPlayerLoggedOut.class);
-      add(EventHandlerPlayerRespawn.class);
-
-      add(EventHandlerPortalSpawn.class);
-
-      add(EventHandlerItemTooltip.class);
-
-      add(EventHandlerOnConfigChanged.class);
-    }};
-
-
-  }
 
   @Override
   public @NotNull FrameworkLogger getLogger() {

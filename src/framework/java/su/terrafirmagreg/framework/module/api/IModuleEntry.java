@@ -13,12 +13,14 @@ import su.terrafirmagreg.framework.module.base.BaseModule;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+
 import org.jetbrains.annotations.NotNull;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +44,7 @@ public interface IModuleEntry extends IBaseEntry<ModuleSettings, BaseModule> {
    * @return A list of classes to subscribe to the Forge event bus. As the class gets subscribed, not any specific instance, event handlers must be static!
    */
   default @NotNull List<Class<?>> getEventBusSubscribers() {
-    return Collections.emptyList();
+    return getSettings().getEventBusSubscribers();
   }
 
   // ===== Other
@@ -67,7 +69,7 @@ public interface IModuleEntry extends IBaseEntry<ModuleSettings, BaseModule> {
   default void onPluginRegistrar(IPluginRegistrar registrar) {}
 
   @Getter
-  @NoArgsConstructor(access = AccessLevel.PROTECTED)
+  @NoArgsConstructor(staticName = "of")
   class ModuleSettings extends BaseSettings<ModuleSettings> {
 
     protected boolean subscriptionEnabled = true;
@@ -77,9 +79,22 @@ public interface IModuleEntry extends IBaseEntry<ModuleSettings, BaseModule> {
     protected boolean featureManagerEnabled = true;
     protected boolean pluginManagerEnabled = true;
 
+    protected List<Class<?>> eventBusSubscribers = new ObjectArrayList<>();
 
-    public static ModuleSettings of() {
-      return new ModuleSettings();
+
+    public ModuleSettings addSubscription(Class<?> clazz) {
+      this.eventBusSubscribers.add(clazz);
+      return this.self();
+    }
+
+    public ModuleSettings addSubscription(List<Class<?>> list) {
+      this.eventBusSubscribers.addAll(list);
+      return this.self();
+    }
+
+    public ModuleSettings addSubscription(Class<?>... list) {
+      this.eventBusSubscribers.addAll(Arrays.asList(list));
+      return this.self();
     }
 
     public ModuleSettings disableSubscriptions() {

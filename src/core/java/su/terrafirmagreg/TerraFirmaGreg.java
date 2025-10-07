@@ -14,18 +14,7 @@ import su.terrafirmagreg.modules.world.ModuleWorld;
 import su.terrafirmagreg.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
 import static su.terrafirmagreg.Tags.CLIENT_PROXY;
 import static su.terrafirmagreg.Tags.DEPENDENCIES;
@@ -68,64 +57,4 @@ public class TerraFirmaGreg extends Framework {
     registrar.addModule(new ModuleWorld());
   }
 
-
-  @EventHandler
-  public void onConstruction(FMLConstructionEvent event) {
-
-    this.routeEvent(event);
-  }
-
-  @EventHandler
-  public void onPreInit(FMLPreInitializationEvent event) {
-
-    this.routeEvent(event);
-  }
-
-  @EventHandler
-  public void onInit(FMLInitializationEvent event) {
-
-    this.routeEvent(event);
-  }
-
-  @EventHandler
-  public void onPostInit(FMLPostInitializationEvent event) {
-
-    this.routeEvent(event);
-  }
-
-  @EventHandler
-  public void onLoadComplete(FMLLoadCompleteEvent event) {
-
-    this.routeEvent(event);
-  }
-
-  @EventHandler
-  public void onServerAboutToStart(FMLServerAboutToStartEvent event) {
-
-    this.routeEvent(event);
-  }
-
-  @EventHandler
-  public void onServerStarting(FMLServerStartingEvent event) {
-
-    this.routeEvent(event);
-  }
-
-  @EventHandler
-  public void onServerStarted(FMLServerStartedEvent event) {
-
-    this.routeEvent(event);
-  }
-
-  @EventHandler
-  public void onServerStopping(FMLServerStoppingEvent event) {
-
-    this.routeEvent(event);
-  }
-
-  @EventHandler
-  public void onServerStopped(FMLServerStoppedEvent event) {
-
-    this.routeEvent(event);
-  }
 }

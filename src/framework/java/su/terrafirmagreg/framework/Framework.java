@@ -9,7 +9,10 @@ import su.terrafirmagreg.framework.module.spi.StateEvent;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.LoadController;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
+import net.minecraftforge.fml.common.event.FMLEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -20,8 +23,13 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.event.FMLStateEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import org.apache.logging.log4j.Level;
 
 import lombok.Getter;
 
@@ -36,8 +44,9 @@ public abstract class Framework {
   public static String modId;
   public static String modName;
 
-  @SuppressWarnings("rawtypes")
-  private final Map<Class<? extends FMLStateEvent>, Consumer> wrapperMap;
+  private static final FrameworkLogger LOGGER = FrameworkLogger.of(Framework.class);
+
+  private final Map<Class<? extends FMLStateEvent>, Consumer<? super FMLStateEvent>> wrapperMap;
   private final IModuleManager manager;
 
 
@@ -48,25 +57,70 @@ public abstract class Framework {
     this.manager = ModuleManager.of(modId);
     this.wrapperMap = new Object2ObjectOpenHashMap<>();
     this.onModuleRegistrar(this.manager.getRegistrar());
+    this.manager.onConstruction();
+    MinecraftForge.EVENT_BUS.register(this);
+
     this.initializeEventWrappers();
+    this.registerEventBusListener();
+    FluidRegistry.enableUniversalBucket();
+    GuiHandler.enableGui();
+
+    LOGGER.debug("Framework initialization complete for {} ({})", Framework.modId, Framework.modName);
+
   }
 
   public abstract void onModuleRegistrar(IModuleRegistrar registrar);
+
+  @SuppressWarnings({"deprecation", "UnstableApiUsage"})
+  private void registerEventBusListener() {
+    try {
+      Loader loader = Loader.instance();
+      LoadController controller = ReflectionHelper.getPrivateValue(Loader.class, loader, "modController");
+
+      ImmutableMap<String, EventBus> eventChannels = ReflectionHelper.getPrivateValue(LoadController.class, controller, "eventChannels");
+
+      EventBus modEventBus = eventChannels.get(modId);
+      if (modEventBus != null) {
+        modEventBus.register(new Object() {
+          @Subscribe
+          public void handleEvent(FMLEvent event) {
+            if (!(event instanceof FMLStateEvent stateEvent)) {
+              return;
+            }
+
+            var eventClass = stateEvent.getClass();
+            Consumer<? super FMLStateEvent> route = findRoute(eventClass);
+
+            if (route == null) {
+              LOGGER.log(Level.WARN, "No route found for event {}", eventClass.getName());
+              return;
+            }
+
+            try {
+              route.accept(stateEvent);
+            } catch (Exception e) {
+              LOGGER.error(e, "Error while routing event {}", eventClass.getName());
+              return;
+            }
+
+            wrapperMap.remove(eventClass);
+          }
+        });
+        LOGGER.debug("Registered framework event listener for mod {}", modId);
+      }
+    } catch (Exception e) {
+      LOGGER.error(e, "Failed to register event listener for mod {}", modId);
+    }
+  }
 
 
   private void initializeEventWrappers() {
 
     registerEventWrapper(FMLConstructionEvent.class, event -> {
       AnnotationUtils.setAsmData(event.getASMHarvestedData());
-      FluidRegistry.enableUniversalBucket();
-      GuiHandler.enableGui();
-      this.manager.onConstruction();
     });
 
-    registerEventWrapper(FMLPreInitializationEvent.class, event -> {
-
-      MinecraftForge.EVENT_BUS.post(new StateEvent.PreInitialization());
-    });
+    registerEventWrapper(FMLPreInitializationEvent.class, event -> MinecraftForge.EVENT_BUS.post(new StateEvent.PreInitialization()));
 
     registerEventWrapper(FMLInitializationEvent.class, event -> MinecraftForge.EVENT_BUS.post(new StateEvent.Initialization()));
 
@@ -85,21 +139,34 @@ public abstract class Framework {
     registerEventWrapper(FMLServerStoppedEvent.class, event -> MinecraftForge.EVENT_BUS.post(new StateEvent.ServerStopped()));
   }
 
+
   private <T extends FMLStateEvent> void registerEventWrapper(Class<T> eventClass, Consumer<T> wrapper) {
 
-    wrapperMap.put(eventClass, wrapper);
+    Consumer<? super FMLStateEvent> previous = wrapperMap.putIfAbsent(eventClass, event -> wrapper.accept(eventClass.cast(event)));
+    if (previous != null) {
+      LOGGER.log(Level.WARN, "Duplicate wrapper registration for {} was ignored", eventClass.getName());
+    }
   }
 
+  private Consumer<? super FMLStateEvent> findRoute(Class<? extends FMLStateEvent> eventClass) {
+    Consumer<? super FMLStateEvent> route = wrapperMap.get(eventClass);
+    if (route != null) {
+      return route;
+    }
 
-  public <E extends FMLStateEvent> void routeEvent(E event) {
-    var eventClass = event.getClass();
+    Class<?> superclass = eventClass.getSuperclass();
+    while (superclass != null && FMLStateEvent.class.isAssignableFrom(superclass)) {
+      @SuppressWarnings("unchecked")
+      Class<? extends FMLStateEvent> stateSuperclass = (Class<? extends FMLStateEvent>) superclass;
+      route = wrapperMap.get(stateSuperclass);
+      if (route != null) {
+        wrapperMap.put(eventClass, route);
+        return route;
+      }
+      superclass = superclass.getSuperclass();
+    }
 
-    //noinspection unchecked
-    Consumer<E> route = Optional.ofNullable(wrapperMap.get(eventClass))
-      .orElseThrow(() -> new IllegalArgumentException("No route found for event: " + eventClass));
-
-    route.accept(event);
+    return null;
   }
-
 
 }

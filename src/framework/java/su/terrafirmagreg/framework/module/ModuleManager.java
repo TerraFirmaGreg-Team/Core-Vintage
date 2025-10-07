@@ -54,11 +54,6 @@ public class ModuleManager implements IModuleManager {
       var settings = module.getSettings();
       module.getLogger().debug("Construction start");
 
-      if (settings.isSubscriptionEnabled()) {
-        module.getLogger().debug("Registering event handlers");
-        module.getEventBusSubscribers().forEach(MinecraftForge.EVENT_BUS::register);
-      }
-
       if (settings.isPacketManagerEnabled()) {
         module.getLogger().debug("Construction packet");
         module.onPacketRegistrar(PacketManager.of(module).getRegistrar());
@@ -82,6 +77,11 @@ public class ModuleManager implements IModuleManager {
       if (settings.isCommandManagerEnabled()) {
         module.getLogger().debug("Construction command");
         module.onCommandRegistrar(CommandManager.of(module).getRegistrar());
+      }
+
+      if (settings.isSubscriptionEnabled()) {
+        module.getLogger().debug("Registering event handlers");
+        module.getEventBusSubscribers().forEach(MinecraftForge.EVENT_BUS::register);
       }
 
       module.getLogger().debug("Construction complete");

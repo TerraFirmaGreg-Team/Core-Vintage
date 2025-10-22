@@ -47,10 +47,11 @@ public abstract class BaseBlockMagma extends BlockMagma implements IBlockEntry, 
 //      .lightValue(0.2F);
 
     this.settings = settings;
-//    this.blockState = this.createBlockState();
 
-    this.fullBlock = this.getDefaultState().isOpaqueCube();
+    this.fullBlock = this.settings.isOpaque();
     this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
   protected BlockStateContainer createBlockState() {

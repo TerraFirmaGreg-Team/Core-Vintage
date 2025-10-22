@@ -17,22 +17,19 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.MOSSY;
 
 public class BlockSoilMudBricks extends BlockSoilMud {
 
-  protected final SoilType type;
-
   public BlockSoilMudBricks(SoilType type) {
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("mud_bricks"))
       .renderLayer(BlockRenderLayer.CUTOUT)
       .material(Material.GROUND)
+      .type(type)
       .sound(SoundType.STONE)
       .withAllVariants()
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .addOreDict("mud_bricks");
 
-    this.type = type;
-    setDefaultState(blockState.getBaseState()
+    setDefaultState(getBlockState().getBaseState()
       .withProperty(MOSSY, false));
   }
 

@@ -24,28 +24,9 @@ import java.util.Map;
 public class BlocksRock {
 
   public static Map<RockType, BlockRockCobble> COBBLE;
-  public static Map<RockType, BlockRockCobble> COBBLE_STAIRS;
-  public static Map<RockType, BlockRockCobble> COBBLE_SLAB_DOUBLE;
-  public static Map<RockType, BlockRockCobble> COBBLE_SLAB;
-  public static Map<RockType, BlockRockCobble> COBBLE_WALL;
-
   public static Map<RockType, BlockRockRaw> RAW;
-  public static Map<RockType, BlockRockCobble> RAW_STAIRS;
-  public static Map<RockType, BlockRockCobble> RAW_SLAB_DOUBLE;
-  public static Map<RockType, BlockRockCobble> RAW_SLAB;
-  public static Map<RockType, BlockRockCobble> RAW_WALL;
-
   public static Map<RockType, BlockRockBricks> BRICKS;
-  public static Map<RockType, BlockRockCobble> BRICKS_STAIRS;
-  public static Map<RockType, BlockRockCobble> BRICKS_SLAB_DOUBLE;
-  public static Map<RockType, BlockRockCobble> BRICKS_SLAB;
-  public static Map<RockType, BlockRockCobble> BRICKS_WALL;
-
   public static Map<RockType, BlockRockSmooth> SMOOTH;
-  public static Map<RockType, BlockRockCobble> SMOOTH_STAIRS;
-  public static Map<RockType, BlockRockCobble> SMOOTH_SLAB_DOUBLE;
-  public static Map<RockType, BlockRockCobble> SMOOTH_SLAB;
-  public static Map<RockType, BlockRockCobble> SMOOTH_WALL;
 
   public static Map<RockType, BlockRockCobble> BRICKS_CRACKED;
   public static Map<RockType, BlockRockCobble> CHISELED;

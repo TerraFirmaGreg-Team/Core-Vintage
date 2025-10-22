@@ -18,7 +18,7 @@ public interface IEnchantmentEntry extends IContentEntry<EnchantmentSettings, En
   class EnchantmentSettings extends ContentSettings<EnchantmentSettings> {
 
     protected Enchantment.Rarity rarity;
-    protected EnumEnchantmentType type;
+    protected EnumEnchantmentType enchantmentType;
     protected EntityEquipmentSlot[] slots;
 
     public static EnchantmentSettings of() {
@@ -30,8 +30,8 @@ public interface IEnchantmentEntry extends IContentEntry<EnchantmentSettings, En
       return this.self();
     }
 
-    public EnchantmentSettings type(EnumEnchantmentType typeIn) {
-      this.type = typeIn;
+    public EnchantmentSettings enchantmentType(EnumEnchantmentType enchantmentType) {
+      this.enchantmentType = enchantmentType;
       return this.self();
     }
 

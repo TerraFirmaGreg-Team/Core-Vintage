@@ -39,7 +39,6 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
   }
 
   public BaseBlockSapling(BlockSettings settings) {
-
     this.settings = settings;
 
     getSettings()
@@ -49,8 +48,11 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
       .nonFullCube()
       .randomTicks();
 
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
-
 
   @Override
   protected BlockStateContainer createBlockState() {
@@ -62,6 +64,12 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
     return this.settings.getRenderType();
   }
 
+  @Override
+  public BlockRenderLayer getRenderLayer() {
+    return this.settings.getRenderLayer();
+  }
+
+  @Override
   public int damageDropped(IBlockState state) {
     return getMetaFromState(state);
   }
@@ -76,6 +84,7 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
     return state.getValue(STAGE_2);
   }
 
+  @Override
   public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (state.getValue(STAGE_2) == 0) {
       worldIn.setBlockState(pos, state.cycleProperty(STAGE_2), 4);
@@ -88,7 +97,6 @@ public abstract class BaseBlockSapling extends BlockSapling implements IBlockEnt
   public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
     items.add(new ItemStack(this));
   }
-
 
   @Override
   public boolean getUseNeighborBrightness(IBlockState state) {

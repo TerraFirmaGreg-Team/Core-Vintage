@@ -41,6 +41,11 @@ public abstract class BaseBlockBookshelf extends BlockBookshelf implements IBloc
 
     this.settings = settings;
 
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
+
   }
 
   @Override

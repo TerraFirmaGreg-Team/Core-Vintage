@@ -24,6 +24,7 @@ public abstract class BlockSoil extends BaseBlockFalling implements ISoilEntry {
       .sound(SoundType.GROUND)
       .harvestLevel(ToolClasses.SHOVEL, 0)
       .hardness(2.0F)
+      .type(type)
     );
   }
 

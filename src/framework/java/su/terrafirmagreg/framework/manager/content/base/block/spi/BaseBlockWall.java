@@ -4,14 +4,18 @@ import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
+import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -29,7 +33,7 @@ import java.util.Random;
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BaseBlockWall extends BlockWall implements IBlockEntry {
+public class BaseBlockWall extends BlockWall implements IBlockEntry, IProviderBlockColor {
 
 
   protected final BlockSettings settings;
@@ -37,22 +41,29 @@ public class BaseBlockWall extends BlockWall implements IBlockEntry {
   protected final IBlockState modelState;
 
   public BaseBlockWall(Block block) {
-    this(block, BlockSettings.of(block));
+    this(BlockSettings.of(block));
 
   }
 
-  public BaseBlockWall(Block block, BlockSettings settings) {
-    super(block);
+  public BaseBlockWall(BlockSettings settings) {
+    super(settings.getBlock());
 
     this.settings = settings;
-    this.modelBlock = block;
-    this.modelState = block.getDefaultState();
+    this.modelBlock = settings.getBlock();
+    this.modelState = settings.getBlock().getDefaultState();
 
     getSettings()
       .ignoresProperties(VARIANT)
-      .registryKey(settings.getRegistryKey() + "_wall");
+      .customResource(settings.getResource(), "_wall")
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .addOreDict("wall");
 
-    BlockUtils.BLOCK_TO_WALL.put(block, this);
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
+
+    BlockUtils.BLOCK_TO_WALL.put(settings.getBlock(), this);
   }
 
 
@@ -132,4 +143,14 @@ public class BaseBlockWall extends BlockWall implements IBlockEntry {
     return this.modelBlock.modifyAcceleration(worldIn, pos, entityIn, motion);
   }
 
+
+  @Override
+  public IBlockColor getBlockColor() {
+    return modelBlock instanceof IProviderBlockColor provider ? provider.getBlockColor() : null;
+  }
+
+  @Override
+  public IItemColor getItemColor() {
+    return modelBlock instanceof IProviderBlockColor provider ? provider.getItemColor() : null;
+  }
 }

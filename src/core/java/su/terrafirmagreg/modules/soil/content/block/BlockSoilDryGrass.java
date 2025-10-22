@@ -9,7 +9,6 @@ public class BlockSoilDryGrass extends BlockSoilGrass {
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("dry_grass"))
       .tag(Tags.DRY_GRASS)
       .addOreDict("dry_grass");
 

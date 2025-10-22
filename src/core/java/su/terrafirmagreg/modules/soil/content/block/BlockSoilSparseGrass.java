@@ -8,7 +8,6 @@ public class BlockSoilSparseGrass extends BlockSoilGrass {
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("sparse_grass"))
       .addOreDict("sparse_grass");
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);

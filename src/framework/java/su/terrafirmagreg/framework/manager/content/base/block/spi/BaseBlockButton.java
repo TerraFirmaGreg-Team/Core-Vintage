@@ -52,6 +52,9 @@ public abstract class BaseBlockButton extends BlockButton implements IBlockEntry
 
     this.wooden = wooden;
     this.settings = settings;
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
   }
 
   @Override

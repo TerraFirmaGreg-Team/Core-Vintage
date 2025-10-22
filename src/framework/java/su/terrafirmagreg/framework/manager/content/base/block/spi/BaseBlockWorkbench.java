@@ -47,6 +47,11 @@ public abstract class BaseBlockWorkbench extends BlockWorkbench implements IBloc
   public BaseBlockWorkbench(BlockSettings settings) {
 
     this.settings = settings;
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
 

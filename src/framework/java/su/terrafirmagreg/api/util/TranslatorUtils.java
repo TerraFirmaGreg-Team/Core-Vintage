@@ -1,9 +1,10 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.library.types.type.Type;
+import su.terrafirmagreg.framework.manager.content.api.IContentEntry;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -15,6 +16,7 @@ import lombok.experimental.UtilityClass;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @UtilityClass
 @SuppressWarnings({"unused", "deprecation"})
@@ -153,20 +155,24 @@ public final class TranslatorUtils {
     return result;
   }
 
-  public static String getDisplayTypeName(String localizedName, Type<?> type) {
 
-    String displayName;
-    if (canTranslateToLocal(localizedName)) {
-      displayName = TranslatorUtils.translateToLocal(localizedName);
-    } else {
+  public String getItemStackDisplayName(ItemStack stack) {
+    var item = stack.getItem();
+    String localizedName = translateToLocal(item.getUnlocalizedNameInefficiently(stack) + ".name").trim();
 
-      displayName = String.format(
-        TranslatorUtils.translateToLocal(localizedName.replace(type.getName() + ".", "")),
-        TranslatorUtils.translateToLocal(type.getLocalizedName())
-      );
+    if (item instanceof IContentEntry<?, ?> contentEntry) {
+      var settings = contentEntry.getSettings();
+      var type = settings.getType();
+      if (type != null) {
+        String processedKey = localizedName.replaceFirst(Pattern.quote(type.getName()) + "[._]", "");
+        return String.format(
+          TranslatorUtils.translateToLocal(processedKey),
+          TranslatorUtils.translateToLocal(type.getLocalizedName())
+        );
+      }
     }
 
-    return displayName;
+    return localizedName;
   }
 
   public static boolean canTranslateToLocal(String key) {

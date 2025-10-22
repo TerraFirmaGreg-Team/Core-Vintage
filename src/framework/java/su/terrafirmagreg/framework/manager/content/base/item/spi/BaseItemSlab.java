@@ -1,8 +1,6 @@
 package su.terrafirmagreg.framework.manager.content.base.item.spi;
 
 
-import su.terrafirmagreg.api.library.types.type.IType;
-import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockSlab;
 import su.terrafirmagreg.framework.manager.content.base.item.api.IItemEntry;
 
@@ -39,7 +37,7 @@ public class BaseItemSlab extends BaseItemBlock implements IItemEntry {
   }
 
   public BaseItemSlab(BaseBlockSlab blockSlab) {
-    this(blockSlab.getHalfSlab(), blockSlab.getDoubleSlab());
+    this(blockSlab.getSingleSlab(), blockSlab.getDoubleSlab());
   }
 
   public BaseItemSlab(BlockSlab singleSlab, BlockSlab doubleSlab) {
@@ -49,21 +47,6 @@ public class BaseItemSlab extends BaseItemBlock implements IItemEntry {
 
     this.singleSlab = singleSlab;
     this.doubleSlab = doubleSlab;
-  }
-
-
-  @Override
-  public String getItemStackDisplayName(ItemStack stack) {
-
-    String displayName;
-
-    if (block instanceof IType<?> type) {
-      displayName = TranslatorUtils.getDisplayTypeName(block.getLocalizedName(), type.getType());
-    } else {
-      displayName = super.getItemStackDisplayName(stack);
-    }
-
-    return displayName;
   }
 
   /**

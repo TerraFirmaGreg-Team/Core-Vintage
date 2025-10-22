@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.soil.content.block;
 
+import su.terrafirmagreg.modules.soil.content.block.spi.BlockSoil;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.IDirtBlock;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.IMudBlock;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
-import su.terrafirmagreg.modules.soil.content.block.spi.BlockSoil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
@@ -15,7 +15,6 @@ public class BlockSoilRootedDirt extends BlockSoil implements IDirtBlock, IMudBl
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("rooted_dirt"))
       .renderLayer(BlockRenderLayer.CUTOUT);
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);

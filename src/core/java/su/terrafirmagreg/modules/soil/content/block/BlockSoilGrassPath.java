@@ -42,7 +42,6 @@ public class BlockSoilGrassPath extends BaseBlockGrassPath implements ISoilEntry
   public BlockSoilGrassPath(SoilType type) {
     super(BlockSettings.of()
       .material(Material.GROUND)
-      .registryKey(type.getRegistryKey("grass_path"))
       .sound(SoundType.PLANT)
       .hardness(2.0F)
       .nonCube()

@@ -8,7 +8,6 @@ public class BlockSoilPodzol extends BlockSoilGrass {
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("podzol"))
       .addOreDict("podzol");
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);

@@ -1,8 +1,6 @@
 package su.terrafirmagreg.modules.wood.init;
 
 import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
-import su.terrafirmagreg.modules.soil.content.block.BlockSoilGrass;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodBookshelf;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodButton;
@@ -20,13 +18,11 @@ import su.terrafirmagreg.modules.wood.content.block.BlockWoodLoom;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodPlanks;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodPressurePlate;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodSapling;
-import su.terrafirmagreg.modules.wood.content.block.BlockWoodSlab;
-import su.terrafirmagreg.modules.wood.content.block.BlockWoodStairs;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodSupport;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodToolRack;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodTrapDoor;
-import su.terrafirmagreg.modules.wood.content.block.BlockWoodWall;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodWorkbench;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import java.util.Map;
 
@@ -38,10 +34,6 @@ public class BlocksWood {
   public static Map<WoodType, BlockWoodSapling> SAPLING;
   public static Map<WoodType, BlockWoodSapling> POTTED_SAPLING;
   public static Map<WoodType, BlockWoodPlanks> PLANKS;
-  public static Map<WoodType, BlockWoodStairs> STAIRS_PLANKS;
-  public static Map<WoodType, BlockWoodSlab> SLAB_DOUBLE_PLANKS;
-  public static Map<WoodType, BlockWoodSlab.Half> SLAB_PLANKS;
-  public static Map<WoodType, BlockWoodWall> WALL_PLANKS;
   public static Map<WoodType, BlockWoodBookshelf> BOOKSHELF;
   public static Map<WoodType, BlockWoodDoor> DOOR;
   public static Map<WoodType, BlockWoodTrapDoor> TRAPDOOR;
@@ -59,7 +51,7 @@ public class BlocksWood {
   public static Map<WoodType, BlockWoodLoom> LOOM;
   public static Map<WoodType, BlockWoodBarrel> BARREL;
   public static Map<WoodType, BlockWoodLadder> LADDER;
-  public static Map<WoodType, BlockSoilGrass> CHOPPER;
+  public static Map<WoodType, BlockWoodLog> CHOPPER;
 
   public static void onRegister(IContentRegistrar registrar) {
 
@@ -69,10 +61,6 @@ public class BlocksWood {
     SAPLING = registrar.addBlock(BlockWoodSapling::new, WoodType.getTypes());
 //    POTTED_SAPLING = registrar.addBlock(WoodType.getTypes(), BlockWoodSapling::new);
     PLANKS = registrar.addBlock(BlockWoodPlanks::new, WoodType.getTypes());
-    STAIRS_PLANKS = registrar.addBlock(BlockWoodStairs::new, WoodType.getTypes());
-    SLAB_DOUBLE_PLANKS = registrar.addBlock(BlockWoodSlab::new, WoodType.getTypes());
-    SLAB_PLANKS = registrar.addBlock(BlockWoodSlab.Half::new, WoodType.getTypes());
-    WALL_PLANKS = registrar.addBlock(BlockWoodWall::new, WoodType.getTypes());
     BOOKSHELF = registrar.addBlock(BlockWoodBookshelf::new, WoodType.getTypes());
     DOOR = registrar.addBlock(BlockWoodDoor::new, WoodType.getTypes());
     TRAPDOOR = registrar.addBlock(BlockWoodTrapDoor::new, WoodType.getTypes());

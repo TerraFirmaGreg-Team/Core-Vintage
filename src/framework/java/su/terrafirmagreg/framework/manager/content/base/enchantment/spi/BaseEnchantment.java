@@ -13,7 +13,7 @@ public abstract class BaseEnchantment extends Enchantment implements IEnchantmen
   protected final EnchantmentSettings settings;
 
   public BaseEnchantment(EnchantmentSettings settings) {
-    super(settings.getRarity(), settings.getType(), settings.getSlots());
+    super(settings.getRarity(), settings.getEnchantmentType(), settings.getSlots());
 
     this.settings = settings;
   }

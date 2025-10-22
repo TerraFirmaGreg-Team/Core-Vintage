@@ -41,20 +41,20 @@ public class BlocksSoil {
 
   public static void onRegister(IContentRegistrar registrar) {
 
-    PEAT_GRASS = registrar.addBlock(new BlockSoilPeatGrass());
-    PEAT = registrar.addBlock(new BlockSoilPeat());
+    PEAT_GRASS = registrar.addBlock("peat_grass", new BlockSoilPeatGrass());
+    PEAT = registrar.addBlock("peat", new BlockSoilPeat());
 
-    GRASS = registrar.addBlock(BlockSoilGrass::new, SoilType.getTypes());
-    DRY_GRASS = registrar.addBlock(BlockSoilDryGrass::new, SoilType.getTypes());
-    SPARSE_GRASS = registrar.addBlock(BlockSoilSparseGrass::new, SoilType.getTypes());
-    PODZOL = registrar.addBlock(BlockSoilPodzol::new, SoilType.getTypes());
-    MYCELIUM = registrar.addBlock(BlockSoilMycelium::new, SoilType.getTypes());
-    COARSE_DIRT = registrar.addBlock(BlockSoilCoarseDirt::new, SoilType.getTypes());
-    ROOTED_DIRT = registrar.addBlock(BlockSoilRootedDirt::new, SoilType.getTypes());
-    DIRT = registrar.addBlock(BlockSoilDirt::new, SoilType.getTypes());
-    FARMLAND = registrar.addBlock(BlockSoilFarmland::new, SoilType.getTypes());
-    GRASS_PATH = registrar.addBlock(BlockSoilGrassPath::new, SoilType.getTypes());
-    MUD = registrar.addBlock(BlockSoilMud::new, SoilType.getTypes());
-    MUD_BRICKS = registrar.addBlock(BlockSoilMudBricks::new, SoilType.getTypes());
+    GRASS = registrar.addBlock("grass", BlockSoilGrass::new, SoilType.getTypes());
+    DRY_GRASS = registrar.addBlock("dry_grass", BlockSoilDryGrass::new, SoilType.getTypes());
+    SPARSE_GRASS = registrar.addBlock("sparse_grass", BlockSoilSparseGrass::new, SoilType.getTypes());
+    PODZOL = registrar.addBlock("podzol", BlockSoilPodzol::new, SoilType.getTypes());
+    MYCELIUM = registrar.addBlock("mycelium", BlockSoilMycelium::new, SoilType.getTypes());
+    COARSE_DIRT = registrar.addBlock("coarse_dirt", BlockSoilCoarseDirt::new, SoilType.getTypes());
+    ROOTED_DIRT = registrar.addBlock("rooted_dirt", BlockSoilRootedDirt::new, SoilType.getTypes());
+    DIRT = registrar.addBlock("dirt", BlockSoilDirt::new, SoilType.getTypes());
+    FARMLAND = registrar.addBlock("farmland", BlockSoilFarmland::new, SoilType.getTypes());
+    GRASS_PATH = registrar.addBlock("grass_path", BlockSoilGrassPath::new, SoilType.getTypes());
+    MUD = registrar.addBlock("mud", BlockSoilMud::new, SoilType.getTypes());
+    MUD_BRICKS = registrar.addBlock("mud_bricks", BlockSoilMudBricks::new, SoilType.getTypes());
   }
 }

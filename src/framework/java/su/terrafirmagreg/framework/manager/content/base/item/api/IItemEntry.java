@@ -2,6 +2,7 @@ package su.terrafirmagreg.framework.manager.content.base.item.api;
 
 
 import su.terrafirmagreg.api.capability.spi.CombinedCapabilityProvider;
+import su.terrafirmagreg.api.library.ResourceExtender;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.ModelUtils;
 import su.terrafirmagreg.api.util.OreDictUtils;
@@ -11,6 +12,7 @@ import su.terrafirmagreg.framework.manager.content.base.item.api.IItemEntry.Item
 import su.terrafirmagreg.framework.manager.content.provider.IProviderItemCapability;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -78,6 +80,7 @@ public interface IItemEntry extends IContentEntry<ItemSettings, Item> {
     protected final List<IProviderItemCapability> capability = new ObjectArrayList<>();
 
     protected ResourceLocation resource = null;
+    protected IItemColor itemColor = null;
     protected CreativeTabs group;
     protected IRarity rarity = EnumRarity.COMMON;
 
@@ -96,10 +99,12 @@ public interface IItemEntry extends IContentEntry<ItemSettings, Item> {
 
     public static ItemSettings of(Block block) {
       ItemSettings settingsItem = ItemSettings.of();
-      if (block instanceof IBlockEntry settingsBlock) {
-        var settings = settingsBlock.getSettings();
+      if (block instanceof IBlockEntry entry) {
+        var settings = entry.getSettings();
         settingsItem
           .registryKey(settings.getRegistryKey())
+          .type(settings.getType())
+          .itemColor(settings.getItemColor())
           .customResource(settings.getResource())
           .rarity(settings.getRarity())
           .group(settings.getGroup())
@@ -137,8 +142,20 @@ public interface IItemEntry extends IContentEntry<ItemSettings, Item> {
       return this.self();
     }
 
+    public ItemSettings itemColor(final IItemColor itemColor) {
+      this.itemColor = itemColor;
+      return this.self();
+    }
+
     public ItemSettings customResource(String path) {
       this.resource = ModUtils.resource(path);
+      return this.self();
+    }
+
+    public ItemSettings customResource(final ResourceLocation resource, final String postfix) {
+      if (resource != null) {
+        this.resource = ResourceExtender.suffix(resource, postfix);
+      }
       return this.self();
     }
 

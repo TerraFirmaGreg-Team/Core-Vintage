@@ -33,7 +33,6 @@ public class BlockSoilPeatGrass extends BaseBlock implements IProviderBlockColor
   public BlockSoilPeatGrass() {
     super(BlockSettings.of()
       .material(Material.GRASS)
-      .registryKey("peat_grass")
       .sound(SoundType.PLANT)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .randomTicks()

@@ -63,7 +63,6 @@ public class BlockSoilFarmland extends BaseBlockFarmland implements ISoilEntry, 
   public BlockSoilFarmland(SoilType type) {
     super(BlockSettings.of()
       .material(Material.GROUND)
-      .registryKey(type.getRegistryKey("farmland"))
       .ignoresProperties(MOISTURE)
       .sound(SoundType.GROUND)
       .useNeighborBrightness()

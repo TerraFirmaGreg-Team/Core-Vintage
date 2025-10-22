@@ -12,7 +12,6 @@ public class BlockSoilCoarseDirt extends BlockSoilDirt {
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("coarse_dirt"))
       .tag(Tags.COARSE_DIRT)
       .addOreDict("coarse_dirt");
 

@@ -16,6 +16,8 @@ public abstract class BaseBlockBed extends BlockBed implements IBlockEntry {
   public BaseBlockBed(BlockSettings settings) {
     this.settings = settings;
 
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
   }
 
   @Override

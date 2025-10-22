@@ -25,6 +25,7 @@ public class BlockRockBricks extends BaseBlock implements IRockEntry {
   public BlockRockBricks(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
+      .withAllVariants()
       .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)

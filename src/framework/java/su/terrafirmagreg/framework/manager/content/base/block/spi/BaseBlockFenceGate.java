@@ -33,6 +33,11 @@ public abstract class BaseBlockFenceGate extends BlockFenceGate implements IBloc
     getSettings()
       .nonOpaque()
       .nonFullCube();
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
   @Override

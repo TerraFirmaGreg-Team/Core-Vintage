@@ -38,6 +38,11 @@ public abstract class BaseBlockDoor extends BlockDoor implements IBlockEntry {
       .capability(CapabilityProviderSize.of(Size.VERY_LARGE, Weight.HEAVY))
       .hardness(3.0F);
 
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
+
 
   }
 

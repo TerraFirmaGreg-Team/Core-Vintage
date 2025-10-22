@@ -17,6 +17,11 @@ public abstract class BaseBlockPressurePlate extends BlockPressurePlate implemen
     super(settings.getMaterial(), sensitivityIn);
 
     this.settings = settings;
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
   @Override

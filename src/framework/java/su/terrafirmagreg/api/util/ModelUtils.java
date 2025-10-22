@@ -3,7 +3,6 @@ package su.terrafirmagreg.api.util;
 import su.terrafirmagreg.api.library.model.CustomStateMap;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.content.base.item.api.IItemEntry;
-import su.terrafirmagreg.framework.manager.content.base.item.spi.BaseItemDoor;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderItemColor;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderItemMesh;
@@ -260,12 +259,26 @@ public final class ModelUtils {
         blockColors.registerBlockColorHandler(provider.getBlockColor(), block);
       }
     }
+
+    if (block instanceof IBlockEntry entry) {
+      var settings = entry.getSettings();
+      if (settings.getBlockColor() != null) {
+        blockColors.registerBlockColorHandler(settings.getBlockColor(), block);
+      }
+    }
   }
 
   public static void color(final ItemColors itemColors, Block block) {
     if (block instanceof IProviderItemColor provider) {
       if (provider.getItemColor() != null) {
         itemColors.registerItemColorHandler(provider.getItemColor(), block);
+      }
+    }
+
+    if (block instanceof IBlockEntry entry) {
+      var settings = entry.getSettings();
+      if (settings.getItemColor() != null) {
+        itemColors.registerItemColorHandler(settings.getItemColor(), block);
       }
     }
   }
@@ -277,11 +290,18 @@ public final class ModelUtils {
       }
     }
 
-    if (item instanceof BaseItemDoor door) {
-      if (door.getBlock() instanceof IProviderItemColor provider) {
+    if (item instanceof ItemBlock itemBlock) {
+      if (itemBlock.getBlock() instanceof IProviderBlockColor provider) {
         if (provider.getItemColor() != null) {
           itemColors.registerItemColorHandler(provider.getItemColor(), item);
         }
+      }
+    }
+
+    if (item instanceof IItemEntry entry) {
+      var settings = entry.getSettings();
+      if (settings.getItemColor() != null) {
+        itemColors.registerItemColorHandler(settings.getItemColor(), item);
       }
     }
   }

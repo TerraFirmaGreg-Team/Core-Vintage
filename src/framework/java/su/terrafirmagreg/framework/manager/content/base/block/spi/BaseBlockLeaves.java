@@ -37,6 +37,11 @@ public abstract class BaseBlockLeaves extends BlockLeaves implements IBlockEntry
     this.settings = settings;
     this.leavesFancy = true; // Fast / Fancy graphics works correctly
     this.blockState = this.createBlockState();
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
 

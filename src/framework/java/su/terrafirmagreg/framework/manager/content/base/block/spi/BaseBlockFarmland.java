@@ -16,6 +16,11 @@ public abstract class BaseBlockFarmland extends BlockFarmland implements IBlockE
   public BaseBlockFarmland(BlockSettings settings) {
     super();
     this.settings = settings;
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
   @Override

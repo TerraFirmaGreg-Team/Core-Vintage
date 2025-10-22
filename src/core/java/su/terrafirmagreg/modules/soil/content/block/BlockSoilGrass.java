@@ -6,11 +6,11 @@ import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
+import su.terrafirmagreg.modules.soil.content.block.spi.BlockSoil;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.IGrassBlock;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
-import su.terrafirmagreg.modules.soil.content.block.spi.BlockSoil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -48,7 +48,6 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
   public BlockSoilGrass(SoilType type) {
     super(type, BlockSettings.of()
       .material(Material.GRASS)
-      .registryKey(type.getRegistryKey("grass"))
       .tag(Tags.GRASS)
       .sound(SoundType.PLANT)
       .hardness(2.1F)

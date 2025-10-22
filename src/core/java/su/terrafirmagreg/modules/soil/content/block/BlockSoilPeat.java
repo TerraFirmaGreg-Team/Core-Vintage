@@ -14,13 +14,12 @@ public class BlockSoilPeat extends BaseBlock implements IDirtBlock {
   public BlockSoilPeat() {
     super(BlockSettings.of()
       .material(Material.GROUND)
-      .registryKey("peat")
       .harvestLevel(ToolClasses.SHOVEL, 0)
       .sound(SoundType.GROUND)
       .fireInfo(5, 10)
       .hardness(0.6F)
     );
-    
+
     //DirtHelper.registerSoil(this.getDefaultState().get(), DirtHelper.GRAVELLIKE);
   }
 

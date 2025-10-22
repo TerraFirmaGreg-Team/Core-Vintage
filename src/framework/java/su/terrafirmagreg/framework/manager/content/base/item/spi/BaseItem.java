@@ -2,7 +2,6 @@ package su.terrafirmagreg.framework.manager.content.base.item.spi;
 
 
 import su.terrafirmagreg.api.data.LocalizeKeys;
-import su.terrafirmagreg.api.library.types.type.IType;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.framework.manager.content.base.item.api.IItemEntry;
@@ -66,16 +65,7 @@ public abstract class BaseItem extends Item implements IItemEntry {
 
   @Override
   public String getItemStackDisplayName(ItemStack stack) {
-
-    String displayName;
-
-    if (this instanceof IType<?> type) {
-      displayName = TranslatorUtils.getDisplayTypeName(this.getLocalizedName(), type.getType());
-    } else {
-      displayName = super.getItemStackDisplayName(stack);
-    }
-
-    return displayName;
+    return TranslatorUtils.getItemStackDisplayName(stack);
   }
 
   @Override

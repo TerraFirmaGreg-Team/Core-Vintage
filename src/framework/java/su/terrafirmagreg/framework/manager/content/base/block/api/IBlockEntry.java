@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.manager.content.base.block.api;
 
+import su.terrafirmagreg.api.library.ResourceExtender;
 import su.terrafirmagreg.api.library.function.TriFunction;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.ModUtils;
@@ -24,6 +25,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
@@ -75,19 +77,37 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
 
   @Override
   default void preRegister() {
-    var settings = getSettings();
+    final var settings = getSettings();
     settings.addOreDict(settings.getRegistryKey());
     asEntry()
       .setResistance(settings.getResistance())
       .setHardness(settings.getHardness())
       .setSoundType(settings.getSoundType())
       .setTickRandomly(settings.isTicksRandomly())
+      .setLightOpacity(settings.isOpaque() ? 255 : 0)
       .setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
+
+//    if (!settings.enableStats) {
+//      asEntry().disableStats();
+//    }
+//    if (settings.group != null) {
+//      asEntry().setCreativeTab(settings.group);
+//    }
+//    if (settings.lightValue != null) {
+//      asEntry().setLightLevel(settings.lightValue.apply(null, null, null));
+//    }
+//
+//    if (settings.slipperiness != null) {
+//      asEntry().setDefaultSlipperiness(settings.slipperiness.apply(null, null, null));
+//    }
+//    if (settings.harvestTool != null && settings.harvestLevel >= 0) {
+//      asEntry().setHarvestLevel(settings.harvestTool, settings.harvestLevel);
+//    }
   }
 
   @Override
   default void postRegister() {
-    var settings = getSettings();
+    final var settings = getSettings();
 
     TileUtils.addTile(asEntry());
     BlockUtils.addFireInfo(asEntry(), settings.getEncouragement(), settings.getFlammability());
@@ -110,6 +130,8 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
     protected IProperty<?>[] ignoredProperties = null;
     protected ResourceLocation resource = null;
     protected IStateMapper stateMapper = null;
+    protected IBlockColor blockColor = null;
+    protected IItemColor itemColor = null;
 
     protected CreativeTabs group;
     protected SoundType soundType = SoundType.STONE;
@@ -147,36 +169,46 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
 
     protected Function<Block, ? extends BaseItemBlock> itemBlock = BaseItemBlock::new;
     protected Function<Block, ? extends BaseBlockWall> wallBlock;
-    protected Function<Block, ? extends BaseBlockSlab> slabBlock;
+    protected Function<Block, ? extends BaseBlockSlab> slabSingleBlock;
     protected Function<Block, ? extends BaseBlockSlab> slabDoubleBlock;
     protected Function<Block, ? extends BaseBlockStairs> stairsBlock;
 
     public static BlockSettings of() {
-      var settings = new BlockSettings();
+      final var settings = new BlockSettings();
       settings.capability.clear();
       settings.oreDict.clear();
       return settings;
     }
 
-    public static <B extends Block> BlockSettings of(B block) {
+    public static <B extends Block> BlockSettings of(final B block) {
       return of(block, 0);
     }
 
-    public static <B extends Block> BlockSettings of(B block, int meta) {
-      IBlockState state = block.getStateFromMeta(meta);
-      BlockSettings settings = BlockSettings.of();
 
-      settings.registryKey = block instanceof IBlockEntry blockEntry ? blockEntry.getSettings().getRegistryKey() : null;
+    public static <B extends Block> BlockSettings of(final B block, final int meta) {
+      final IBlockState state = block.getStateFromMeta(meta);
+      final BlockSettings settings = BlockSettings.of();
+
+      if (block instanceof final IBlockEntry entry) {
+        var entrySettings = entry.getSettings();
+        settings.registryKey = entrySettings.getRegistryKey();
+        settings.type = entrySettings.getType();
+        settings.encouragement = entrySettings.getEncouragement();
+        settings.flammability = entrySettings.getFlammability();
+        settings.resource = entrySettings.getResource();
+      }
+
       settings.block = block;
       settings.material = block.material;
       settings.mapColor = block.blockMapColor;
+
       settings.collidable = block.isCollidable();
       settings.opaque = block.isOpaqueCube(state);
       settings.fullCube = ($) -> block.isFullCube(state);
       settings.soundType = block.getSoundType();
-      settings.lightValue = ($, world, pos) -> block.getLightValue(state, world, pos);
+      settings.lightValue = ($, world, pos) -> state.getLightValue();
       settings.resistance = block.blockResistance;
-      settings.hardness = block.getBlockHardness(null, null, null);
+      settings.hardness = block.blockHardness;
       settings.requiresCorrectTool = !block.material.isToolNotRequired();
       settings.ticksRandomly = block.getTickRandomly();
       settings.slipperiness = ($, world, pos) -> block.slipperiness;
@@ -184,29 +216,41 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       settings.isSuffocating = block::causesSuffocation;
       settings.harvestTool = block.getHarvestTool(state);
       settings.harvestLevel = block.getHarvestLevel(state);
+      settings.useNeighborBrightness = block.getUseNeighborBrightness(state);
+      settings.enableStats = block.getEnableStats();
 
       return settings;
     }
 
-    public BlockSettings material(Material material) {
+    public BlockSettings material(final Material material) {
       this.material = material;
       this.mapColor = material.getMaterialMapColor();
       return this.self();
     }
 
-    public BlockSettings material(Material material, MapColor mapColor) {
+    public BlockSettings material(final Material material, final MapColor mapColor) {
       this.material = material;
       this.mapColor = mapColor;
       return this.self();
     }
 
-    public BlockSettings mapColor(EnumDyeColor color) {
+    public BlockSettings mapColor(final EnumDyeColor color) {
       this.mapColor = MapColor.getBlockColor(color);
       return this.self();
     }
 
-    public BlockSettings mapColor(MapColor mapColor) {
+    public BlockSettings mapColor(final MapColor mapColor) {
       this.mapColor = mapColor;
+      return this.self();
+    }
+
+    public BlockSettings blockColor(final IBlockColor blockColor) {
+      this.blockColor = blockColor;
+      return this.self();
+    }
+
+    public BlockSettings itemColor(final IItemColor itemColor) {
+      this.itemColor = itemColor;
       return this.self();
     }
 
@@ -215,12 +259,12 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings itemBlock(Function<Block, ? extends BaseItemBlock> itemBlock) {
+    public BlockSettings itemBlock(final Function<Block, ? extends BaseItemBlock> itemBlock) {
       this.itemBlock = itemBlock;
       return this.self();
     }
 
-    public BlockSettings stairsBlock(Function<Block, ? extends BaseBlockStairs> stairsBlock) {
+    public BlockSettings stairsBlock(final Function<Block, ? extends BaseBlockStairs> stairsBlock) {
       this.stairsBlock = stairsBlock;
       return this.self();
     }
@@ -230,25 +274,41 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings slabBlock(Function<Block, ? extends BaseBlockSlab> slabBlock, Function<Block, ? extends BaseBlockSlab> slabDoubleBlock) {
-      this.slabBlock = slabBlock;
+    public BlockSettings noStairsBlock() {
+      this.stairsBlock = null;
+      return this.self();
+    }
+
+    public BlockSettings slabBlock(final Function<Block, ? extends BaseBlockSlab> slabBlock, final Function<Block, ? extends BaseBlockSlab> slabDoubleBlock) {
+      this.slabSingleBlock = slabBlock;
       this.slabDoubleBlock = slabDoubleBlock;
       return this.self();
     }
 
     public BlockSettings slabBlock() {
       this.slabDoubleBlock = BaseBlockSlab.Double::new;
-      this.slabBlock = BaseBlockSlab.Half::new;
+      this.slabSingleBlock = BaseBlockSlab.Single::new;
       return this.self();
     }
 
-    public BlockSettings wallBlock(Function<Block, ? extends BaseBlockWall> wallBlock) {
+    public BlockSettings noSlabBlock() {
+      this.slabSingleBlock = null;
+      this.slabDoubleBlock = null;
+      return this.self();
+    }
+
+    public BlockSettings wallBlock(final Function<Block, ? extends BaseBlockWall> wallBlock) {
       this.wallBlock = wallBlock;
       return this.self();
     }
 
     public BlockSettings wallBlock() {
       this.wallBlock = BaseBlockWall::new;
+      return this.self();
+    }
+
+    public BlockSettings noWallBlock() {
+      this.wallBlock = null;
       return this.self();
     }
 
@@ -263,18 +323,18 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings tile(Class<? extends TileEntity> tileClass) {
+    public BlockSettings tile(final Class<? extends TileEntity> tileClass) {
       this.tileClass = tileClass;
       return this.self();
     }
 
 
-    public BlockSettings color(Supplier<IBlockColor> colorHandler) {
+    public BlockSettings color(final Supplier<IBlockColor> colorHandler) {
       this.colorHandler = colorHandler;
       return this.self();
     }
 
-    public <T extends TileEntity> BlockSettings tile(Class<T> tileClass, TileEntitySpecialRenderer<T> tileRenderer) {
+    public <T extends TileEntity> BlockSettings tile(final Class<T> tileClass, final TileEntitySpecialRenderer<T> tileRenderer) {
       this.tileClass = tileClass;
       this.tileRenderer = tileRenderer;
       return this.self();
@@ -296,7 +356,7 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings hasFullCube(Function<IBlockState, Boolean> fullCube) {
+    public BlockSettings hasFullCube(final Function<IBlockState, Boolean> fullCube) {
       this.fullCube = fullCube;
       return this.self();
     }
@@ -308,7 +368,7 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings group(CreativeTabs group) {
+    public BlockSettings group(final CreativeTabs group) {
       this.group = group;
       return this.self();
     }
@@ -318,70 +378,70 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings removeOreDict(Object... oreDict) {
+    public BlockSettings removeOreDict(final Object... oreDict) {
       this.oreDict.remove(oreDict);
       return this.self();
     }
 
-    public BlockSettings addOreDict(Supplier<Boolean> supplier, Object... oreDict) {
+    public BlockSettings addOreDict(final Supplier<Boolean> supplier, final Object... oreDict) {
       if (!supplier.get()) {
         this.oreDict.add(oreDict);
       }
       return this.self();
     }
 
-    public BlockSettings addOreDict(List<Object[]> oreDict) {
+    public BlockSettings addOreDict(final List<Object[]> oreDict) {
       this.oreDict.addAll(oreDict);
       return this.self();
     }
 
-    public BlockSettings addOreDict(Object... oreDict) {
+    public BlockSettings addOreDict(final Object... oreDict) {
       this.oreDict.add(oreDict);
       return this.self();
     }
 
-    public BlockSettings capability(List<IProviderItemCapability> providers) {
+    public BlockSettings capability(final List<IProviderItemCapability> providers) {
       providers.forEach(this::capability);
       return this.self();
     }
 
-    public BlockSettings capability(IProviderItemCapability... providers) {
+    public BlockSettings capability(final IProviderItemCapability... providers) {
       this.capability.addAll(Arrays.asList(providers));
       return this.self();
     }
 
-    public BlockSettings rarity(EnumRarity rarity) {
+    public BlockSettings rarity(final EnumRarity rarity) {
       this.rarity = rarity;
       return this.self();
     }
 
-    public BlockSettings renderLayer(BlockRenderLayer renderLayer) {
+    public BlockSettings renderLayer(final BlockRenderLayer renderLayer) {
       this.renderLayer = renderLayer;
       return this.self();
     }
 
-    public BlockSettings renderType(EnumBlockRenderType renderType) {
+    public BlockSettings renderType(final EnumBlockRenderType renderType) {
       this.renderType = renderType;
       return this.self();
     }
 
-    public BlockSettings sound(SoundType soundType) {
+    public BlockSettings sound(final SoundType soundType) {
       this.soundType = soundType;
       return this.self();
     }
 
-    public BlockSettings strength(float strength) {
+    public BlockSettings strength(final float strength) {
       this.resistance = strength;
       this.hardness = strength;
       return this.self();
     }
 
-    public BlockSettings resistance(float resistance) {
+    public BlockSettings resistance(final float resistance) {
       this.resistance = Math.max(0, resistance * 5 / 3);
       return this.self();
     }
 
-    public BlockSettings hardness(float hardness) {
+    public BlockSettings hardness(final float hardness) {
       this.hardness = hardness;
       return this.self();
     }
@@ -391,13 +451,13 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings harvestLevel(String harvestTool, int harvestLevel) {
+    public BlockSettings harvestLevel(final String harvestTool, final int harvestLevel) {
       this.harvestTool = harvestTool;
       this.harvestLevel = harvestLevel;
       return this.self();
     }
 
-    public BlockSettings fireInfo(int encouragement, int flammability) {
+    public BlockSettings fireInfo(final int encouragement, final int flammability) {
       this.encouragement = encouragement;
       this.flammability = flammability;
       return this.self();
@@ -418,7 +478,7 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings randomTicks(boolean tickRandomly) {
+    public BlockSettings randomTicks(final boolean tickRandomly) {
       this.ticksRandomly = tickRandomly;
       return this.self();
     }
@@ -453,37 +513,37 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings lightValue(TriFunction<IBlockState, IBlockAccess, BlockPos, Integer> lightValue) {
+    public BlockSettings lightValue(final TriFunction<IBlockState, IBlockAccess, BlockPos, Integer> lightValue) {
       this.lightValue = lightValue;
       return this.self();
     }
 
-    public BlockSettings lightValue(Function<IBlockState, Integer> lightValue) {
+    public BlockSettings lightValue(final Function<IBlockState, Integer> lightValue) {
       this.lightValue = (state, access, pos) -> lightValue.apply(state);
       return this.self();
     }
 
-    public BlockSettings lightValue(int lightValue) {
+    public BlockSettings lightValue(final int lightValue) {
       this.lightValue = (state, access, pos) -> lightValue;
       return this.self();
     }
 
-    public BlockSettings lightValue(float lightValue) {
+    public BlockSettings lightValue(final float lightValue) {
       this.lightValue = (state, access, pos) -> (int) (15.0F * lightValue);
       return this.self();
     }
 
-    public BlockSettings slipperiness(TriFunction<IBlockState, IBlockAccess, BlockPos, Float> slipperiness) {
+    public BlockSettings slipperiness(final TriFunction<IBlockState, IBlockAccess, BlockPos, Float> slipperiness) {
       this.slipperiness = slipperiness;
       return this.self();
     }
 
-    public BlockSettings slipperiness(Function<IBlockState, Float> slipperiness) {
+    public BlockSettings slipperiness(final Function<IBlockState, Float> slipperiness) {
       this.slipperiness = (state, access, pos) -> slipperiness.apply(state);
       return this.self();
     }
 
-    public BlockSettings slipperiness(float slipperiness) {
+    public BlockSettings slipperiness(final float slipperiness) {
       this.slipperiness = (state, access, pos) -> slipperiness;
       return this.self();
     }
@@ -499,7 +559,7 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings isSuffocating(Predicate<IBlockState> isSuffocating) {
+    public BlockSettings isSuffocating(final Predicate<IBlockState> isSuffocating) {
       this.isSuffocating = isSuffocating;
       return this.self();
     }
@@ -514,22 +574,56 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-    public BlockSettings ignoresProperties(IProperty<?>... properties) {
+    public BlockSettings ignoresProperties(final IProperty<?>... properties) {
       this.ignoredProperties = properties;
       return this.self();
     }
 
-    public BlockSettings customResource(String path) {
-      this.resource = ModUtils.resource(path);
+    public BlockSettings customResource(final String path) {
+      if (path != null) {
+        this.resource = ModUtils.resource(path);
+      }
       return this.self();
     }
 
-    public BlockSettings customResource(ResourceLocation resource) {
-      this.resource = resource;
+    public BlockSettings customResource(final ResourceLocation resource, final String postfix) {
+      if (resource != null && postfix != null) {
+        this.resource = ResourceExtender.suffix(resource, postfix);
+      }
       return this.self();
     }
 
-    public BlockSettings stateMapper(IStateMapper stateMapper) {
+    public BlockSettings customResource(final ResourceLocation resource) {
+      if (resource != null) {
+        this.resource = resource;
+      }
+      return this.self();
+    }
+
+//    public void applyBlockProperties(Block block) {
+//      block.setHardness(this.hardness);
+//      block.setResistance(this.resistance);
+//      block.setSoundType(this.soundType);
+//      block.setTickRandomly(this.ticksRandomly);
+//      if (!this.enableStats) {
+//        block.disableStats();
+//      }
+//      if (this.group != null) {
+//        block.setCreativeTab(this.group);
+//      }
+//      if (this.lightValue != null) {
+//        block.setLightLevel(this.lightValue);
+//      }
+//      block.setLightOpacity(this.opaque ? 255 : 0);
+//      if (this.slipperiness != null) {
+//        block.slipperiness = this.slipperiness;
+//      }
+//      if (this.harvestTool != null && this.harvestLevel >= 0) {
+//        block.setHarvestLevel(this.harvestTool, this.harvestLevel);
+//      }
+//    }
+
+    public BlockSettings stateMapper(final IStateMapper stateMapper) {
       this.stateMapper = stateMapper;
       return this.self();
     }

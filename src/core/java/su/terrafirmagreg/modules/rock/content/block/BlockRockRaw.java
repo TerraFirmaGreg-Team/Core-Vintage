@@ -49,6 +49,7 @@ public class BlockRockRaw extends BaseBlock implements IRockEntry {
   public BlockRockRaw(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
+      .withAllVariants()
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .ignoresProperties(CAN_FALL)

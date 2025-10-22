@@ -1,12 +1,12 @@
 package su.terrafirmagreg.modules.soil.content.block;
 
 import su.terrafirmagreg.api.data.Tags;
+import su.terrafirmagreg.modules.soil.content.block.spi.BlockSoil;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.IDirtBlock;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.IMudBlock;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
-import su.terrafirmagreg.modules.soil.content.block.spi.BlockSoil;
 
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -24,7 +24,6 @@ public class BlockSoilDirt extends BlockSoil implements IDirtBlock, IMudBlock {
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("dirt"))
       .renderLayer(this.getBlockState().getBaseState().getValue(CLAY) ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID)
       .tag(Tags.DIRT);
 

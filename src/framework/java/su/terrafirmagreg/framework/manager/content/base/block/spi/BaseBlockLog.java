@@ -41,6 +41,11 @@ public abstract class BaseBlockLog extends BlockLog implements IBlockEntry, IFlu
   public BaseBlockLog(BlockSettings settings) {
 
     this.settings = settings;
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
   @Override

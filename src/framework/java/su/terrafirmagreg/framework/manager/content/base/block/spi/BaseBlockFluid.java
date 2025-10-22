@@ -50,6 +50,11 @@ public abstract class BaseBlockFluid extends BlockFluidClassic implements IBlock
 
     getSettings()
       .ignoresProperties(BlockLiquid.LEVEL);
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
   @Override

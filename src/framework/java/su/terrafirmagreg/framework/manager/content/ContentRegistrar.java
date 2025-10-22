@@ -79,17 +79,17 @@ public class ContentRegistrar implements IContentRegistrar {
     this.addEntry(entry);
 
     if (settings.getItemBlock() != null) {
-      this.addItem(settings.getItemBlock().apply(entry));
+      this.addItem(settings.getRegistryKey(), settings.getItemBlock().apply(entry));
     }
     if (settings.getStairsBlock() != null) {
-      this.addBlock(settings.getStairsBlock().apply(entry));
+      this.addBlock(settings.getRegistryKey() + "_stairs", settings.getStairsBlock().apply(entry));
     }
     if (settings.getWallBlock() != null) {
-      this.addBlock(settings.getWallBlock().apply(entry));
+      this.addBlock(settings.getRegistryKey() + "_wall", settings.getWallBlock().apply(entry));
     }
     if (settings.getSlabDoubleBlock() != null) {
-      this.addBlock(settings.getSlabDoubleBlock().apply(entry));
-      this.addBlock(settings.getSlabBlock().apply(entry));
+      this.addBlock(settings.getRegistryKey() + "_slab_double", settings.getSlabDoubleBlock().apply(entry));
+      this.addBlock(settings.getRegistryKey() + "_slab", settings.getSlabSingleBlock().apply(entry));
     }
 
     return entry;
@@ -103,13 +103,10 @@ public class ContentRegistrar implements IContentRegistrar {
   @Override
   public <V extends Block & IBlockEntry> V addBlock(V entry) {
 
-    var settings = entry.getSettings().group(group);
+    var settings = entry.getSettings();
 
-    this.addEntry(entry);
+    this.addBlock(settings.getRegistryKey(), entry);
 
-    if (settings.getItemBlock() != null) {
-      this.addItem(settings.getItemBlock().apply(entry));
-    }
     return entry;
   }
 
@@ -123,11 +120,21 @@ public class ContentRegistrar implements IContentRegistrar {
 
   // region Item
 
+
+  public <V extends Item & IItemEntry> V addItem(String identifier, V entry) {
+    var settings = entry.getSettings().registryKey(identifier).group(group);
+
+    this.addEntry(entry);
+
+    return entry;
+  }
+
   @Override
   public <V extends Item & IItemEntry> V addItem(V entry) {
 
-    entry.getSettings().group(group);
-    this.addEntry(entry);
+    var settings = entry.getSettings();
+
+    this.addItem(settings.getRegistryKey(), entry);
     return entry;
   }
 

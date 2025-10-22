@@ -50,6 +50,11 @@ public abstract class BaseBlockLadder extends BlockLadder implements IBlockEntry
       .material(Material.CIRCUITS)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .nonCube();
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
 

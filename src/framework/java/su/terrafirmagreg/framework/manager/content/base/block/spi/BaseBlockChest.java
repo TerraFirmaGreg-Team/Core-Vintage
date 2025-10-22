@@ -58,13 +58,22 @@ public abstract class BaseBlockChest extends BlockChest implements IBlockEntry, 
       .nonOpaque()
       .nonFullCube()
       .renderType(EnumBlockRenderType.ENTITYBLOCK_ANIMATED);
+
+    this.fullBlock = this.settings.isOpaque();
+    this.lightOpacity = this.fullBlock ? 255 : 0;
+    this.translucent = this.settings.isTranslucent();
+    this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
   }
 
 
   @Override
   protected boolean isOcelotSittingOnChest(World worldIn, BlockPos pos) {
-    for (EntityOcelot entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(),
-      pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1))) {
+    for (EntityOcelot entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(),
+      pos.getY() + 1, pos.getZ(),
+      pos.getX() + 1,
+      pos.getY() + 2,
+      pos.getZ() + 1)
+    )) {
       if (entity.isSitting()) {
         return true;
       }

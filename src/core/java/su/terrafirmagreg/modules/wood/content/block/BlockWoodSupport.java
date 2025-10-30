@@ -53,7 +53,6 @@ public class BlockWoodSupport extends BaseBlock implements IWoodEntry {
   public BlockWoodSupport(WoodType type) {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey(type.getRegistryKey("support"))
       .customResource(type.getResource("support"))
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)

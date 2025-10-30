@@ -19,7 +19,6 @@ public class BlockWoodFenceGateLog extends BaseBlockFenceGate implements IWoodEn
     this.type = type;
 
     getSettings()
-      .registryKey(type.getRegistryKey("fence_gate_log"))
       .ignoresProperties(IN_WALL, POWERED)
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)

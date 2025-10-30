@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.wood.content.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockWorkbench;
+import su.terrafirmagreg.modules.wood.content.container.ContainerWoodWorkbench;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.content.container.ContainerWoodWorkbench;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -34,7 +34,6 @@ public class BlockWoodWorkbench extends BaseBlockWorkbench implements IWoodEntry
     this.type = type;
 
     getSettings()
-      .registryKey(type.getRegistryKey("workbench"))
       .customResource(type.getResource("workbench"))
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)

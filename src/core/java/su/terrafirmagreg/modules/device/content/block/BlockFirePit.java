@@ -70,7 +70,6 @@ public class BlockFirePit extends BaseBlockContainer implements IBellowsConsumer
   public BlockFirePit() {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey("fire_pit")
       .tile(TileFirePit.class, new TESRFirePit())
       .hardness(0.3F)
       .renderType(EnumBlockRenderType.MODEL)

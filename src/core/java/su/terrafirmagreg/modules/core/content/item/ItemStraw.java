@@ -9,7 +9,6 @@ public class ItemStraw extends BaseItem {
 
   public ItemStraw() {
     super(ItemSettings.of()
-      .registryKey("straw")
       .addOreDict("kindling", "straw")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT))
     );

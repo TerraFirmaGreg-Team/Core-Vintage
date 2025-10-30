@@ -15,7 +15,6 @@ public class ItemFlaskLeather extends ItemFlask {
     super(capacity, drink);
 
     getSettings()
-      .registryKey("flask/leather")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.MEDIUM, false));
   }
 

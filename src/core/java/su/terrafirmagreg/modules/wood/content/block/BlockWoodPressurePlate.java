@@ -18,7 +18,6 @@ public class BlockWoodPressurePlate extends BaseBlockPressurePlate implements IW
   public BlockWoodPressurePlate(WoodType type) {
     super(Sensitivity.EVERYTHING, BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey(type.getRegistryKey("pressure_plate"))
       .customResource(type.getResource("pressure_plate"))
       .sound(SoundType.WOOD)
       .hardness(0.5F)

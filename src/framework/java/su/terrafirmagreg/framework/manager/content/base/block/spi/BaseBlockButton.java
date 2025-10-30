@@ -1,8 +1,6 @@
 package su.terrafirmagreg.framework.manager.content.base.block.spi;
 
-import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
 
 import net.minecraft.block.BlockButton;
@@ -61,11 +59,6 @@ public abstract class BaseBlockButton extends BlockButton implements IBlockEntry
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     IBlockState state = getStateFromMeta(meta);
     return BlockButton.canPlaceBlock(worldIn, pos, facing) ? state.withProperty(DIRECTIONAL, facing) : state.withProperty(DIRECTIONAL, EnumFacing.DOWN);
-  }
-
-  @Override
-  public String getTranslationKey() {
-    return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
   }
 
   @Override

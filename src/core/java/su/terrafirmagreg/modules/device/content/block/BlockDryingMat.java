@@ -33,7 +33,6 @@ public class BlockDryingMat extends BaseBlockContainer {
   public BlockDryingMat() {
     super(BlockSettings.of()
       .material(Material.GRASS, MapColor.YELLOW)
-      .registryKey("drying_mat")
       .hardness(0.5f)
       .randomTicks()
       .nonCube()

@@ -1,9 +1,7 @@
 package su.terrafirmagreg.framework.manager.content.base.block.spi;
 
-import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.enums.EnumDefault;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.content.base.item.spi.BaseItemBlock;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
@@ -69,6 +67,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry, IP
       .ignoresProperties(DEFAULT)
       .itemBlock(isDouble() ? null : BaseItemBlock::new)
       .customResource(settings.getResource(), (isDouble() ? "_slab_double" : "_slab"))
+      .translateKey(settings.getTranslateKey() + ".slab")
       .renderLayer(isDouble() ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID)
       .useNeighborBrightness();
 
@@ -91,12 +90,6 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry, IP
   public String getTranslationKey(int meta) {
 
     return getSingleSlab().getTranslationKey();
-  }
-
-  @Override
-  public String getTranslationKey() {
-
-    return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
   }
 
   public BlockSlab getDoubleSlab() {
@@ -216,7 +209,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry, IP
    * Called when a Block is right-clicked with this Item
    */
   @Override
-  public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, Supplier<EnumActionResult> resultSupplier) {
+  public EnumActionResult onItemUse(Supplier<EnumActionResult> resultSupplier, ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
     if (!stack.isEmpty() && player.canPlayerEdit(pos.offset(facing), facing, stack)) {
       final var singleSlab = getSingleSlab();
@@ -254,7 +247,7 @@ public abstract class BaseBlockSlab extends BlockSlab implements IBlockEntry, IP
 
   @SideOnly(Side.CLIENT)
   @Override
-  public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack, Supplier<Boolean> resultSupplier) {
+  public boolean canPlaceBlockOnSide(Supplier<Boolean> resultSupplier, World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack) {
     final var singleSlab = getSingleSlab();
     BlockPos blockpos = pos;
     IProperty<?> iproperty = singleSlab.getVariantProperty();

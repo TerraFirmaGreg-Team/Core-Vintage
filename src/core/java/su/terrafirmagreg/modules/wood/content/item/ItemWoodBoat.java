@@ -6,9 +6,9 @@ import su.terrafirmagreg.framework.manager.content.provider.IProviderItemColor;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.content.entity.EntityWoodBoat;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.content.entity.EntityWoodBoat;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -39,7 +39,6 @@ public class ItemWoodBoat extends BaseItem implements IWoodEntry, IProviderItemC
 
   public ItemWoodBoat(WoodType type) {
     super(ItemSettings.of()
-      .registryKey(type.getRegistryKey("boat"))
       .customResource(type.getResource("boat"))
       .addOreDict("boat")
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM, false))

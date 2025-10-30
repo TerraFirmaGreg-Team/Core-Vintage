@@ -32,13 +32,12 @@ public interface IBaseRegistrar<E extends IBaseEntry<?, ?>> {
 
   default void addEntry(E entry) {
 
-    var settings = entry.getSettings();
-
     if (!validate(entry)) {
       getModule().getLogger().debug("Entry {} validation failed", entry.getClass().getSimpleName());
       return;
     }
-    entry.setIdentifier(getIdentifier(settings.getRegistryKey()));
+    var settings = entry.getSettings();
+    settings.identifier(getIdentifier(settings.getRegistryKey()));
     getMapEntry().put(entry.asClassEntry(), entry);
     getModule().getLogger().info("Added entry {}: {}", entry.asClassEntry(), entry.getClass().getSimpleName());
   }

@@ -50,7 +50,6 @@ public class BlockSmelteryFirebox extends BaseBlockHorizontal implements IBellow
   public BlockSmelteryFirebox() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("smeltery/firebox")
       .sound(SoundType.STONE)
       .hardness(3.0F)
       .lightValue(1)

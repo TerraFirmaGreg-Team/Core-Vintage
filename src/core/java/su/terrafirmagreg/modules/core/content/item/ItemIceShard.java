@@ -9,7 +9,6 @@ public class ItemIceShard extends BaseItem {
 
   public ItemIceShard() {
     super(ItemSettings.of()
-      .registryKey("shard/ice")
       .addOreDict("shard")
       .capability(CapabilityProviderSize.of(Size.TINY, Weight.LIGHT))
     );

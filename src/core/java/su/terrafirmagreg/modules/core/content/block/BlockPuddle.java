@@ -27,7 +27,6 @@ public class BlockPuddle extends BaseBlock {
   public BlockPuddle() {
     super(BlockSettings.of()
       .material(Material.GROUND)
-      .registryKey("puddle")
       .renderLayer(BlockRenderLayer.TRANSLUCENT)
       .useNeighborBrightness()
       .unbreakable()

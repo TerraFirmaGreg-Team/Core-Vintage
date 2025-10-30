@@ -72,10 +72,10 @@ public class ContentManager implements IContentManager {
 
     this.getMapEntry().get(registryType).forEach(entry -> {
 
-      entry.preRegister();
-      registry.register((T) entry.asEntry());
+      entry.apply();
+      registry.register((T) entry.asEntry().setRegistryName(entry.getSettings().getIdentifier()));
       entry.postRegister();
-      ContentManager.LOGGER.info("Registry {}: {}",
+      ContentManager.LOGGER.debug("Registry {}: {}",
         entry.getRegistryType().getSimpleName(), entry.getRegistryName()
       );
     });

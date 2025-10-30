@@ -61,7 +61,6 @@ public class BlockWoodLog extends BaseBlockLog implements IWoodEntry, IProviderB
   public BlockWoodLog(WoodType type) {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey(type.getRegistryKey("log"))
       .randomTicks()
       .capability(CapabilityProviderSize.of(Size.VERY_LARGE, Weight.MEDIUM))
       .ignoresProperties(PLACED)

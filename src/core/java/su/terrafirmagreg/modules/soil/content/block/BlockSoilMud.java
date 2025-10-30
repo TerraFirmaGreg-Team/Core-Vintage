@@ -31,7 +31,6 @@ public class BlockSoilMud extends BaseBlock implements ISoilEntry {
 
   public BlockSoilMud(SoilType type) {
     super(BlockSettings.of()
-      .registryKey(type.getRegistryKey("mud"))
       .addOreDict("mud")
       .material(Material.GROUND)
       .sound(SoundType.GROUND)

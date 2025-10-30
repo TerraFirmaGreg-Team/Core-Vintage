@@ -20,7 +20,6 @@ public class BlockWoodBookshelf extends BaseBlockBookshelf implements IProviderB
   public BlockWoodBookshelf(WoodType type) {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey(type.getRegistryKey("bookshelf"))
       .customResource(type.getResource("bookshelf"))
       .hardness(2.0F)
       .resistance(5.0F)
@@ -30,7 +29,7 @@ public class BlockWoodBookshelf extends BaseBlockBookshelf implements IProviderB
       .fireInfo(30, 20)
       .addOreDict("bookshelf")
     );
-    
+
     this.type = type;
   }
 

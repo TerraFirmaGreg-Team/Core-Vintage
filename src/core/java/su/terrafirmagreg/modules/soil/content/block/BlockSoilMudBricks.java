@@ -23,7 +23,6 @@ public class BlockSoilMudBricks extends BlockSoilMud {
     getSettings()
       .renderLayer(BlockRenderLayer.CUTOUT)
       .material(Material.GROUND)
-      .type(type)
       .sound(SoundType.STONE)
       .withAllVariants()
       .harvestLevel(ToolClasses.PICKAXE, 0)

@@ -24,10 +24,9 @@ public class ItemSoilMud extends BaseItem implements ISoilEntry {//implements IP
 
   public ItemSoilMud(SoilType type) {
     super(ItemSettings.of()
-      .registryKey(type.getRegistryKey("mud_ball"))
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT))
     );
-    
+
     this.type = type;
   }
 

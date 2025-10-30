@@ -1,9 +1,10 @@
 package su.terrafirmagreg.api.data.enums;
 
+import su.terrafirmagreg.api.library.IStringLocalized;
 import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.ModUtils;
 
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.util.IStringSerializable;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +13,7 @@ import lombok.Getter;
 import java.util.Locale;
 
 @Getter
-public enum EnumColor implements IStringSerializable {
+public enum EnumColor implements IStringLocalized {
   BLACK(0, EnumDyeColor.BLACK),
   BLUE(1, EnumDyeColor.BLUE),
   GREEN(2, EnumDyeColor.GREEN),
@@ -122,6 +123,11 @@ public enum EnumColor implements IStringSerializable {
 
   @Override
   public @NotNull String getName() {
-    return this.name().toLowerCase(Locale.ROOT);
+    return name().toLowerCase(Locale.ROOT);
+  }
+
+  @Override
+  public String getTranslationKey() {
+    return ModUtils.localize(ModUtils.localize("type"), "color", getName());
   }
 }

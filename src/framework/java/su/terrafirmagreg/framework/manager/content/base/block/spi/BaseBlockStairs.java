@@ -1,8 +1,6 @@
 package su.terrafirmagreg.framework.manager.content.base.block.spi;
 
-import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.BlockUtils;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 
@@ -39,6 +37,7 @@ public class BaseBlockStairs extends BlockStairs implements IBlockEntry, IProvid
     getSettings()
       .renderLayer(BlockRenderLayer.CUTOUT)
       .customResource(settings.getResource(), "_stairs")
+      .translateKey(settings.getTranslateKey() + ".stairs")
       .addOreDict("stairs");
 
     this.fullBlock = this.settings.isOpaque();
@@ -56,25 +55,6 @@ public class BaseBlockStairs extends BlockStairs implements IBlockEntry, IProvid
     return this.settings.getRenderLayer();
   }
 
-  @Override
-  public String getHarvestTool(IBlockState state) {
-    return this.settings.getHarvestTool();
-  }
-
-  @Override
-  public int getHarvestLevel(IBlockState state) {
-    return this.settings.getHarvestLevel();
-  }
-
-//  @Override
-//  public String getLocalizedName() {
-//    return I18n.translateToLocal(this.getTranslationKey() + ".name");
-//  }
-
-  @Override
-  public String getTranslationKey() {
-    return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
-  }
 
   @Override
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {

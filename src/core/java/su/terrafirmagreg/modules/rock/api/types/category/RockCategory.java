@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.library.types.category.Category;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
 
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -24,6 +23,7 @@ public class RockCategory extends Category<RockCategory> {
 
   @Getter
   private static final Set<RockCategory> categories = new ObjectOpenHashSet<>();
+  public static final String CATEGORY = "rock";
 
   private final boolean layer1;
   private final boolean layer2;
@@ -36,7 +36,7 @@ public class RockCategory extends Category<RockCategory> {
   private final ToolMaterial toolMaterial;
 
   private RockCategory(Builder builder) {
-    super(builder.name);
+    super(CATEGORY, builder.name);
 
     this.layer1 = builder.layer1;
     this.layer2 = builder.layer2;
@@ -89,15 +89,15 @@ public class RockCategory extends Category<RockCategory> {
     return new ArrayList<>(categories).indexOf(type);
   }
 
-  /**
-   * Возвращает локализованное имя категории породы.
-   *
-   * @return Локализованное имя категории породы.
-   */
-  public String getLocalizedName() {
-    return textFormatting + new TextComponentTranslation(
-      String.format("rock.category.%s.name", this)).getFormattedText();
-  }
+//  /**
+//   * Возвращает локализованное имя категории породы.
+//   *
+//   * @return Локализованное имя категории породы.
+//   */
+//  public String getLocalizedName() {
+//    return textFormatting + new TextComponentTranslation(
+//      String.format("rock.category.%s.name", this)).getFormattedText();
+//  }
 
   /**
    * Представляет слой породы и определяет, принадлежит ли порода к данному слою.

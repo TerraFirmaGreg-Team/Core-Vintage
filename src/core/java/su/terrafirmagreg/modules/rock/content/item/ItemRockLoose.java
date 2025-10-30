@@ -8,10 +8,9 @@ import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProvider
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.rock.api.types.type.RockType;
-import su.terrafirmagreg.modules.rock.feature.rocktype.types.IRockEntry;
-import su.terrafirmagreg.modules.rock.content.block.BlockRockRaw;
 import su.terrafirmagreg.modules.rock.content.container.ContainerRockKnapping;
 import su.terrafirmagreg.modules.rock.content.gui.GuiContainerKnappingRock;
+import su.terrafirmagreg.modules.rock.feature.rocktype.types.IRockEntry;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,12 +28,10 @@ import lombok.Getter;
 public class ItemRockLoose extends BaseItem
   implements IRockEntry, IProviderContainer<ContainerRockKnapping, GuiContainerKnappingRock> {
 
-  public static final String NAME = "loose";
   protected final RockType type;
 
   public ItemRockLoose(RockType type) {
     super(ItemSettings.of()
-      .registryKey(type.getRegistryKey(NAME))
       .capability(
         CapabilityProviderSize.of(Size.SMALL, Weight.VERY_LIGHT),
         stack -> CapabilityProviderHeat.of(stack.getTagCompound(), 0.2f, 2000f))  // Since this is technically still a pottery item, despite being a block
@@ -64,6 +61,6 @@ public class ItemRockLoose extends BaseItem
 
   @Override
   public GuiContainerKnappingRock getGuiContainer(InventoryPlayer inventoryPlayer, World world, IBlockState state, BlockPos pos) {
-    return new GuiContainerKnappingRock(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, type.getTexture(BlockRockRaw.NAME));
+    return new GuiContainerKnappingRock(getContainer(inventoryPlayer, world, state, pos), inventoryPlayer, type.getTexture("raw"));
   }
 }

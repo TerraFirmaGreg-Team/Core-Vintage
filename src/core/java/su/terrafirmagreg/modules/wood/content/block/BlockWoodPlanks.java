@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.content.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.framework.manager.content.base.block.builder.BlockVariantBuilder;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlock;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
@@ -18,7 +19,6 @@ public class BlockWoodPlanks extends BaseBlock implements IWoodEntry {
   public BlockWoodPlanks(WoodType type) {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey(type.getRegistryKey("planks"))
       .customResource(type.getResource("planks"))
       .withAllVariants()
       .blockColor((s, w, p, i) -> type.getColor())

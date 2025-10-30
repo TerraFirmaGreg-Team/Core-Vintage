@@ -3,9 +3,9 @@ package su.terrafirmagreg.modules.device.content.block;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlock;
-import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.content.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.content.tile.TileCharcoalForge;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -55,7 +55,6 @@ public class BlockCharcoalPile extends BaseBlock {
   public BlockCharcoalPile() {
     super(BlockSettings.of()
       .material(CHARCOAL_MATERIAL)
-      .registryKey("charcoal_pile")
       .hardness(1.0F)
       .harvestLevel(ToolClasses.SHOVEL, 0)
       .sound(TFCSounds.CHARCOAL_PILE)

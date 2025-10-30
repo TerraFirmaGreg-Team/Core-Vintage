@@ -32,7 +32,6 @@ public class BlockBellows extends BaseBlockContainer {
   public BlockBellows() {
     super(BlockSettings.of()
       .material(Material.CIRCUITS, MapColor.GRAY)
-      .registryKey("bellows")
       .sound(SoundType.WOOD)
       .harvestLevel(ToolClasses.AXE, 0)
       .renderType(EnumBlockRenderType.MODEL)

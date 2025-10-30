@@ -48,7 +48,6 @@ public class BlockBearTrap extends BaseBlockContainer {
   public BlockBearTrap() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("bear_trap")
       .hardness(10.0F)
       .resistance(10.0F)
       .nonCube()

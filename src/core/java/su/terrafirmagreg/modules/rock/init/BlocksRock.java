@@ -7,6 +7,7 @@ import su.terrafirmagreg.modules.rock.content.block.BlockAlabaster;
 import su.terrafirmagreg.modules.rock.content.block.BlockRockAnvil;
 import su.terrafirmagreg.modules.rock.content.block.BlockRockBricks;
 import su.terrafirmagreg.modules.rock.content.block.BlockRockButton;
+import su.terrafirmagreg.modules.rock.content.block.BlockRockChiseled;
 import su.terrafirmagreg.modules.rock.content.block.BlockRockCobble;
 import su.terrafirmagreg.modules.rock.content.block.BlockRockGravel;
 import su.terrafirmagreg.modules.rock.content.block.BlockRockMagma;
@@ -28,8 +29,8 @@ public class BlocksRock {
   public static Map<RockType, BlockRockBricks> BRICKS;
   public static Map<RockType, BlockRockSmooth> SMOOTH;
 
-  public static Map<RockType, BlockRockCobble> BRICKS_CRACKED;
-  public static Map<RockType, BlockRockCobble> CHISELED;
+  public static Map<RockType, BlockRockBricks> BRICKS_CRACKED;
+  public static Map<RockType, BlockRockChiseled> CHISELED;
 
   public static Map<RockType, BlockRockGravel> GRAVEL;
   public static Map<RockType, BlockRockSand> SAND;
@@ -50,7 +51,10 @@ public class BlocksRock {
 
     COBBLE = registrar.addBlock("cobble", BlockRockCobble::new, RockType.getTypes());
     RAW = registrar.addBlock("raw", BlockRockRaw::new, RockType.getTypes());
+    BRICKS = registrar.addBlock("bricks", BlockRockBricks::new, RockType.getTypes());
     SMOOTH = registrar.addBlock("smooth", BlockRockSmooth::new, RockType.getTypes());
+    BRICKS_CRACKED = registrar.addBlock("bricks_cracked", BlockRockBricks::new, RockType.getTypes());
+    CHISELED = registrar.addBlock("chiseled", BlockRockChiseled::new, RockType.getTypes());
     GRAVEL = registrar.addBlock("gravel", BlockRockGravel::new, RockType.getTypes());
     SAND = registrar.addBlock("sand", BlockRockSand::new, RockType.getTypes());
     SURFACE = registrar.addBlock("surface", BlockRockSurface::new, RockType.getTypes());

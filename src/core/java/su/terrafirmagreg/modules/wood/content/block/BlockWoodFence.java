@@ -10,7 +10,6 @@ public class BlockWoodFence extends BlockWoodFenceLog {
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("fence"))
       .customResource(type.getResource("fence"));
 
   }

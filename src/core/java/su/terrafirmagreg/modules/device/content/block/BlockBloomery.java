@@ -6,9 +6,9 @@ import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockConta
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.content.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.content.tile.TileBloomery;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -167,7 +167,6 @@ public class BlockBloomery extends BaseBlockContainer {
   public BlockBloomery() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("bloomery")
       .sound(SoundType.METAL)
       .hardness(20.0F)
       .harvestLevel(ToolClasses.PICKAXE, 0)

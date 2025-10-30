@@ -32,11 +32,11 @@ public final class BlocksCore {
 
   public static void onRegister(IContentRegistrar registry) {
 
-    DEBUG = registry.addBlock(new BlockDebug());
-    PUDDLE = registry.addBlock(new BlockPuddle());
-    FIRE_BRICKS = registry.addBlock(new BlockFireBricks());
-    THATCH = registry.addBlock(new BlockThatch());
-    AGGREGATE = registry.addBlock(new BlockAggregate());
+    DEBUG = registry.addBlock("debug", new BlockDebug());
+    PUDDLE = registry.addBlock("puddle", new BlockPuddle());
+    FIRE_BRICKS = registry.addBlock("fire_bricks", new BlockFireBricks());
+    THATCH = registry.addBlock("thatch", new BlockThatch());
+    AGGREGATE = registry.addBlock("aggregate", new BlockAggregate());
 //    INGOT_PILE = registry.addBlock(new BlockIngotPile());
 //    FIRE_CLAY = registry.addBlock(new BlockFireClay());
 //    DRIFTWOOD = registry.block(new BlockGroundcoverDriftwood());

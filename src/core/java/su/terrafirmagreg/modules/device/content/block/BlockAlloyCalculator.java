@@ -35,7 +35,6 @@ public class BlockAlloyCalculator extends BaseBlockContainer {
   public BlockAlloyCalculator() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("alloy_calculator")
       .renderType(EnumBlockRenderType.MODEL)
       .tile(TileAlloyCalculator.class)
       .nonCube()

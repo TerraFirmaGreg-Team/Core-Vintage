@@ -13,7 +13,6 @@ public class BlockFireBricks extends BaseBlock {
   public BlockFireBricks() {
     super(BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey("fire_bricks")
       .sound(SoundType.STONE)
       .hardness(1.0F)
       .capability(

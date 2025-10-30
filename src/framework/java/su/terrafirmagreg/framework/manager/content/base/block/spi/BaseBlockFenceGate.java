@@ -1,8 +1,6 @@
 package su.terrafirmagreg.framework.manager.content.base.block.spi;
 
-import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
 
 import net.minecraft.block.BlockFenceGate;
@@ -38,10 +36,5 @@ public abstract class BaseBlockFenceGate extends BlockFenceGate implements IBloc
     this.lightOpacity = this.fullBlock ? 255 : 0;
     this.translucent = this.settings.isTranslucent();
     this.useNeighborBrightness = this.settings.isUseNeighborBrightness();
-  }
-
-  @Override
-  public String getTranslationKey() {
-    return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
   }
 }

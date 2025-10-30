@@ -9,7 +9,6 @@ public class ItemAnimalSilkCloth extends BaseItem {
 
   public ItemAnimalSilkCloth() {
     super(ItemSettings.of()
-      .registryKey("product/silk_cloth")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
       .addOreDict("cloth_high_quality")
     );

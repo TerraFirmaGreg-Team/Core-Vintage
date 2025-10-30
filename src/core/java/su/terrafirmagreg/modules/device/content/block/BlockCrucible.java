@@ -56,7 +56,6 @@ public class BlockCrucible extends BaseBlockContainer implements IHeatConsumerBl
   public BlockCrucible() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("crucible")
       .sound(SoundType.METAL)
       .nonFullCube()
       .nonOpaque()

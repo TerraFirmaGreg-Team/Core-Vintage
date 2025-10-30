@@ -6,11 +6,11 @@ import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockChest
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.inventory.InventoryWoodLargeChest;
 import su.terrafirmagreg.modules.wood.content.render.TESRWoodChest;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodChest;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -46,7 +46,6 @@ public class BlockWoodChest extends BaseBlockChest implements IWoodEntry {
     this.type = type;
 
     getSettings()
-      .registryKey(type.getRegistryKey("chest"))
       .customResource(type.getResource("chest"))
       .ignoresProperties(BlockChest.FACING)
       .sound(SoundType.WOOD)

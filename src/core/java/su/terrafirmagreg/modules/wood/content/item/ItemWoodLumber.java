@@ -17,7 +17,6 @@ public class ItemWoodLumber extends BaseItem implements IWoodEntry, IProviderIte
 
   public ItemWoodLumber(WoodType type) {
     super(ItemSettings.of()
-      .registryKey(type.getRegistryKey("lumber"))
       .customResource(type.getResource("lumber"))
       .addOreDict("lumber")
       .maxDamage(0)

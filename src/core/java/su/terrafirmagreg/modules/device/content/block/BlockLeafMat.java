@@ -42,7 +42,6 @@ public class BlockLeafMat extends BaseBlockContainer {
   public BlockLeafMat() {
     super(BlockSettings.of()
       .material(Material.PLANTS, MapColor.GREEN)
-      .registryKey("leaf_mat")
       .hardness(1.0F)
       .resistance(1.0F)
       .lightValue(0)

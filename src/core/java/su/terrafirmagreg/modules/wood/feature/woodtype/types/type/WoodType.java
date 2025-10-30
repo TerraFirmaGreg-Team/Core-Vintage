@@ -28,6 +28,7 @@ public class WoodType extends Type<WoodType> {
 
   @Getter
   private static final Set<WoodType> types = new ObjectOpenHashSet<>();
+  public static final String TYPE = "wood";
 
   private final int color;
   private final int burnTicks;
@@ -63,7 +64,7 @@ public class WoodType extends Type<WoodType> {
   private float[] paramMap;
 
   private WoodType(Builder builder) {
-    super("wood", builder.name);
+    super(TYPE, builder.name);
 
     this.color = builder.color;
 

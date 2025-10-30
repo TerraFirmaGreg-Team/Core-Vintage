@@ -10,7 +10,6 @@ public class ItemGlue extends BaseItem {
 
   public ItemGlue() {
     super(ItemSettings.of()
-      .registryKey("glue")
       .capability(CapabilityProviderSize.of(Size.TINY, Weight.LIGHT))
       .addOreDict("slimeball")
     );

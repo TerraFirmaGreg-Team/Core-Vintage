@@ -19,12 +19,12 @@ public final class ItemsAnimal {
 
   public static void onRegister(IContentRegistrar registrar) {
 
-    BLADDER = registrar.addItem(new ItemAnimalBladder());
-    WOOL = registrar.addItem(new ItemAnimalWool());
-    WOOL_YARN = registrar.addItem(new ItemAnimalWoolYarn());
-    WOOL_CLOTH = registrar.addItem(new ItemAnimalWoolCloth());
-    SILK_CLOTH = registrar.addItem(new ItemAnimalSilkCloth());
-    HALTER = registrar.addItem(new ItemAnimalHalter());
+    BLADDER = registrar.addItem("product/bladder", new ItemAnimalBladder());
+    WOOL = registrar.addItem("product/wool", new ItemAnimalWool());
+    WOOL_YARN = registrar.addItem("product/wool_yarn", new ItemAnimalWoolYarn());
+    WOOL_CLOTH = registrar.addItem("product/wool_cloth", new ItemAnimalWoolCloth());
+    SILK_CLOTH = registrar.addItem("product/silk_cloth", new ItemAnimalSilkCloth());
+    HALTER = registrar.addItem("halter", new ItemAnimalHalter());
 
   }
 }

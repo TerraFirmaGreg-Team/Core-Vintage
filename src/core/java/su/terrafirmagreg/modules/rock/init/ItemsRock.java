@@ -15,7 +15,10 @@ public class ItemsRock {
   public static Map<RockType, ItemRockGravel> GRAVEL_LAYER;
 
 
-  public static void onRegister(IContentRegistrar registry) {
+  public static void onRegister(IContentRegistrar registrar) {
 
+    LOOSE = registrar.addItem("loose", ItemRockLoose::new, RockType.getTypes());
+    BRICK = registrar.addItem("brick", ItemRockBrick::new, RockType.getTypes());
+    GRAVEL_LAYER = registrar.addItem("gravel_layer", ItemRockGravel::new, RockType.getTypes());
   }
 }

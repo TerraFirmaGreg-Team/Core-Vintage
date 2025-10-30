@@ -5,9 +5,9 @@ import su.terrafirmagreg.framework.manager.content.provider.IProviderItemColor;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.content.entity.EntityWoodPlowCart;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.content.entity.EntityWoodPlowCart;
 
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.Entity;
@@ -23,7 +23,6 @@ public class ItemWoodPlowCart extends BaseItemEntity implements IWoodEntry, IPro
 
   public ItemWoodPlowCart(WoodType type) {
     super(ItemSettings.of()
-      .registryKey(type.getRegistryKey("plow_cart"))
       .customResource(type.getResource("plow_cart"))
       .addOreDict("supply_cart")
       .capability(CapabilityProviderSize.of(Size.HUGE, Weight.VERY_HEAVY))

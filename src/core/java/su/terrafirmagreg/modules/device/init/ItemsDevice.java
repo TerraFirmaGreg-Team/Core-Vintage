@@ -2,12 +2,10 @@ package su.terrafirmagreg.modules.device.init;
 
 import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 import su.terrafirmagreg.modules.device.content.item.ItemFireStarter;
+import su.terrafirmagreg.modules.device.content.item.ItemFlaskBroken;
 import su.terrafirmagreg.modules.device.content.item.ItemFlaskLeather;
-import su.terrafirmagreg.modules.device.content.item.ItemFlaskLeatherBroken;
-import su.terrafirmagreg.modules.device.content.item.ItemFlaskLeatherUnfinished;
 import su.terrafirmagreg.modules.device.content.item.ItemFlaskMetal;
-import su.terrafirmagreg.modules.device.content.item.ItemFlaskMetalBroken;
-import su.terrafirmagreg.modules.device.content.item.ItemFlaskMetalUnfinished;
+import su.terrafirmagreg.modules.device.content.item.ItemFlaskUnfinished;
 import su.terrafirmagreg.modules.device.content.item.ItemWoodBucket;
 
 import net.minecraft.item.Item;
@@ -15,12 +13,14 @@ import net.minecraft.item.Item;
 public final class ItemsDevice {
 
   public static ItemFireStarter FIRESTARTER;
-  public static ItemFlaskLeatherUnfinished LEATHER_FLASK_UNFINISHED;
+  public static ItemFlaskUnfinished LEATHER_FLASK_UNFINISHED;
+  public static ItemFlaskBroken LEATHER_FLASK_BROKEN;
   public static ItemFlaskLeather LEATHER_FLASK;
-  public static ItemFlaskLeatherBroken LEATHER_FLASK_BROKEN;
-  public static ItemFlaskMetalUnfinished METAL_FLASK_UNFINISHED;
+
+  public static ItemFlaskUnfinished METAL_FLASK_UNFINISHED;
+  public static ItemFlaskBroken METAL_FLASK_BROKEN;
   public static ItemFlaskMetal METAL_FLASK;
-  public static ItemFlaskMetalBroken METAL_FLASK_BROKEN;
+
   public static ItemWoodBucket WOODEN_BUCKET;
   public static Item SLING;
   public static Item SLING_REINFORCED;
@@ -35,15 +35,16 @@ public final class ItemsDevice {
 
   public static void onRegister(IContentRegistrar registrar) {
 
-    FIRESTARTER = registrar.addItem(new ItemFireStarter());
+    FIRESTARTER = registrar.addItem("firestarter", new ItemFireStarter());
 
-    LEATHER_FLASK_UNFINISHED = registrar.addItem(new ItemFlaskLeatherUnfinished());
-    LEATHER_FLASK = registrar.addItem(new ItemFlaskLeather());
-    LEATHER_FLASK_BROKEN = registrar.addItem(new ItemFlaskLeatherBroken());
+    LEATHER_FLASK_UNFINISHED = registrar.addItem("flask/leather/unfinished", new ItemFlaskUnfinished());
+    LEATHER_FLASK_BROKEN = registrar.addItem("flask/leather/broken", new ItemFlaskBroken());
+    LEATHER_FLASK = registrar.addItem("flask/leather", new ItemFlaskLeather());
 
-    METAL_FLASK_UNFINISHED = registrar.addItem(new ItemFlaskMetalUnfinished());
-    METAL_FLASK = registrar.addItem(new ItemFlaskMetal());
-    METAL_FLASK_BROKEN = registrar.addItem(new ItemFlaskMetalBroken());
-    WOODEN_BUCKET = registrar.addItem(new ItemWoodBucket());
+    METAL_FLASK_UNFINISHED = registrar.addItem("flask/metal/unfinished", new ItemFlaskUnfinished());
+    METAL_FLASK_BROKEN = registrar.addItem("flask/metal/broken", new ItemFlaskBroken());
+    METAL_FLASK = registrar.addItem("flask/metal", new ItemFlaskMetal());
+
+    WOODEN_BUCKET = registrar.addItem("bucket/wood", new ItemWoodBucket());
   }
 }

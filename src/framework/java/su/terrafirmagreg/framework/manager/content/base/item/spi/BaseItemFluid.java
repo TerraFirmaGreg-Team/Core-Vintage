@@ -1,8 +1,6 @@
 package su.terrafirmagreg.framework.manager.content.base.item.spi;
 
 
-import su.terrafirmagreg.api.data.LocalizeKeys;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.item.api.IItemEntry;
 
 import net.minecraft.item.ItemStack;
@@ -30,17 +28,6 @@ public abstract class BaseItemFluid extends ItemFluidContainer implements IItemE
   public BaseItemFluid(int capacity) {
     this(capacity, ItemSettings.of());
 
-  }
-
-
-  @Override
-  public String getTranslationKey(ItemStack stack) {
-    return this.getTranslationKey();
-  }
-
-  @Override
-  public String getTranslationKey() {
-    return ModUtils.localize(LocalizeKeys.ITEM, this.getRegistryName());
   }
 
 

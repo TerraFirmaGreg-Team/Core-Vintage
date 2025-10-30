@@ -28,10 +28,6 @@ public interface IBaseEntry<T extends BaseSettings<T>, E> {
     return getSettings().getIdentifier();
   }
 
-  default void setIdentifier(ResourceLocation identifier) {
-    getSettings().identifier(identifier);
-  }
-
 
   @Getter
   abstract class BaseSettings<T> {
@@ -45,9 +41,7 @@ public interface IBaseEntry<T extends BaseSettings<T>, E> {
     protected T self() {return (T) this;}
 
     public T identifier(ResourceLocation identifier) {
-      if (!identifier.equals(this.identifier)) {
-        this.identifier = Preconditions.checkNotNull(identifier, "identifier");
-      }
+      this.identifier = Preconditions.checkNotNull(identifier, "identifier");
       return this.self();
     }
 

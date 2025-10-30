@@ -8,10 +8,10 @@ import su.terrafirmagreg.framework.manager.content.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.render.TESRWoodBarrel;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodBarrel;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneComparator;
@@ -63,7 +63,6 @@ public class BlockWoodBarrel extends BaseBlock implements IProviderTile, IWoodEn
   public BlockWoodBarrel(WoodType type) {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey(type.getRegistryKey("barrel"))
       .customResource(type.getResource("barrel"))
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)

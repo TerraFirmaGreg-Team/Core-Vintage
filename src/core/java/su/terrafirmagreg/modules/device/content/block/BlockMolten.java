@@ -38,7 +38,6 @@ public class BlockMolten extends BaseBlock {
   public BlockMolten() {
     super(BlockSettings.of()
       .material(Material.ROCK)
-      .registryKey("molten")
       .nonFullCube()
       .nonOpaque()
       .hardness(-1)

@@ -21,7 +21,6 @@ public class BlockWoodButton extends BaseBlockButton implements IProviderBlockCo
     this.type = type;
 
     getSettings()
-      .registryKey(type.getRegistryKey("button"))
       .customResource(type.getResource("button"))
       .hardness(0.5F)
       .sound(SoundType.WOOD)

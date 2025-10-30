@@ -10,7 +10,6 @@ public class BlockWoodFenceGate extends BlockWoodFenceGateLog implements IWoodEn
     super(type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("fence_gate"))
       .customResource(type.getResource("fence_gate"));
   }
 

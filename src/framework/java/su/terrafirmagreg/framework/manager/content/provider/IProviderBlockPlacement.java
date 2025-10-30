@@ -12,11 +12,11 @@ import java.util.function.Supplier;
 
 public interface IProviderBlockPlacement {
 
-  default EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, Supplier<EnumActionResult> resultSupplier) {
+  default EnumActionResult onItemUse(Supplier<EnumActionResult> resultSupplier, ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     return resultSupplier.get();
   }
 
-  default boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack, Supplier<Boolean> resultSupplier) {
+  default boolean canPlaceBlockOnSide(Supplier<Boolean> resultSupplier, World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack) {
     return resultSupplier.get();
   }
 }

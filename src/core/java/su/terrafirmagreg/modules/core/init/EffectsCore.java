@@ -24,6 +24,7 @@ public final class EffectsCore {
   public static EffectCaffeine CAFFEINE;
 
   public static void onRegister(IContentRegistrar registry) {
+
     OVERBURDENED = registry.addEffect(new EffectOverburdened());
     THIRST = registry.addEffect(new EffectThirst());
     PARASITES = registry.addEffect(new EffectParasites());

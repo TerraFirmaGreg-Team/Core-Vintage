@@ -59,7 +59,6 @@ public class BlockSnare extends BaseBlockContainer {
   public BlockSnare() {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey("snare")
       .sound(SoundType.WOOD)
       .hardness(1.5f)
       .nonFullCube()

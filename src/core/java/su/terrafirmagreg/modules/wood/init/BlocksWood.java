@@ -55,29 +55,29 @@ public class BlocksWood {
 
   public static void onRegister(IContentRegistrar registrar) {
 
-    LOG = registrar.addBlock(BlockWoodLog::new, WoodType.getTypes());
+    LOG = registrar.addBlock("log", BlockWoodLog::new, WoodType.getTypes());
 //    STRIPPED_LOG = registrar.addBlock(WoodType.getTypes(), BlockWoodLog::new);
-    LEAVES = registrar.addBlock(BlockWoodLeaves::new, WoodType.getTypes());
-    SAPLING = registrar.addBlock(BlockWoodSapling::new, WoodType.getTypes());
+    LEAVES = registrar.addBlock("leaves", BlockWoodLeaves::new, WoodType.getTypes());
+    SAPLING = registrar.addBlock("sapling", BlockWoodSapling::new, WoodType.getTypes());
 //    POTTED_SAPLING = registrar.addBlock(WoodType.getTypes(), BlockWoodSapling::new);
-    PLANKS = registrar.addBlock(BlockWoodPlanks::new, WoodType.getTypes());
-    BOOKSHELF = registrar.addBlock(BlockWoodBookshelf::new, WoodType.getTypes());
-    DOOR = registrar.addBlock(BlockWoodDoor::new, WoodType.getTypes());
-    TRAPDOOR = registrar.addBlock(BlockWoodTrapDoor::new, WoodType.getTypes());
-    FENCE = registrar.addBlock(BlockWoodFence::new, WoodType.getTypes());
-    FENCE_LOG = registrar.addBlock(BlockWoodFenceLog::new, WoodType.getTypes());
-    FENCE_GATE = registrar.addBlock(BlockWoodFenceGate::new, WoodType.getTypes());
-    FENCE_GATE_LOG = registrar.addBlock(BlockWoodFenceGateLog::new, WoodType.getTypes());
-    BUTTON = registrar.addBlock(BlockWoodButton::new, WoodType.getTypes());
-    PRESSURE_PLATE = registrar.addBlock(BlockWoodPressurePlate::new, WoodType.getTypes());
-    TOOL_RACK = registrar.addBlock(BlockWoodToolRack::new, WoodType.getTypes());
-    SUPPORT = registrar.addBlock(BlockWoodSupport::new, WoodType.getTypes());
-    WORKBENCH = registrar.addBlock(BlockWoodWorkbench::new, WoodType.getTypes());
-    CHEST_TRAPPED = registrar.addBlock(BlockWoodChestTrap::new, WoodType.getTypes());
-    CHEST = registrar.addBlock(BlockWoodChest::new, WoodType.getTypes());
-    LOOM = registrar.addBlock(BlockWoodLoom::new, WoodType.getTypes());
-    BARREL = registrar.addBlock(BlockWoodBarrel::new, WoodType.getTypes());
-    LADDER = registrar.addBlock(BlockWoodLadder::new, WoodType.getTypes());
+    PLANKS = registrar.addBlock("planks", BlockWoodPlanks::new, WoodType.getTypes());
+    BOOKSHELF = registrar.addBlock("bookshelf", BlockWoodBookshelf::new, WoodType.getTypes());
+    DOOR = registrar.addBlock("door", BlockWoodDoor::new, WoodType.getTypes());
+    TRAPDOOR = registrar.addBlock("trapdoor", BlockWoodTrapDoor::new, WoodType.getTypes());
+    FENCE = registrar.addBlock("fence", BlockWoodFence::new, WoodType.getTypes());
+    FENCE_LOG = registrar.addBlock("fence_log", BlockWoodFenceLog::new, WoodType.getTypes());
+    FENCE_GATE = registrar.addBlock("fence_gate", BlockWoodFenceGate::new, WoodType.getTypes());
+    FENCE_GATE_LOG = registrar.addBlock("fence_gate_log", BlockWoodFenceGateLog::new, WoodType.getTypes());
+    BUTTON = registrar.addBlock("button", BlockWoodButton::new, WoodType.getTypes());
+    PRESSURE_PLATE = registrar.addBlock("pressure_plate", BlockWoodPressurePlate::new, WoodType.getTypes());
+    TOOL_RACK = registrar.addBlock("tool_rack", BlockWoodToolRack::new, WoodType.getTypes());
+    SUPPORT = registrar.addBlock("support", BlockWoodSupport::new, WoodType.getTypes());
+    WORKBENCH = registrar.addBlock("workbench", BlockWoodWorkbench::new, WoodType.getTypes());
+    CHEST_TRAPPED = registrar.addBlock("chest_trapped", BlockWoodChestTrap::new, WoodType.getTypes());
+    CHEST = registrar.addBlock("chest", BlockWoodChest::new, WoodType.getTypes());
+    LOOM = registrar.addBlock("loom", BlockWoodLoom::new, WoodType.getTypes());
+    BARREL = registrar.addBlock("barrel", BlockWoodBarrel::new, WoodType.getTypes());
+    LADDER = registrar.addBlock("ladder", BlockWoodLadder::new, WoodType.getTypes());
     // CHOPPER = registrar.addBlock(WoodType.getTypes(), BlockWoodLog::new);
   }
 }

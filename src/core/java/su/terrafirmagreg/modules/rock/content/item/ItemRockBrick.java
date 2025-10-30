@@ -11,17 +11,15 @@ import lombok.Getter;
 
 @Getter
 public class ItemRockBrick extends BaseItem implements IRockEntry {
-
-  public static final String NAME = "brick";
+  
   protected final RockType type;
 
   public ItemRockBrick(RockType type) {
     super(ItemSettings.of()
-      .registryKey(type.getRegistryKey(NAME))
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
-      .addOreDict(NAME, type.getCategory())
+      .addOreDict("brick")
+      .addOreDict("brick", type)
+      .addOreDict("brick", type.getCategory())
     );
 
     this.type = type;

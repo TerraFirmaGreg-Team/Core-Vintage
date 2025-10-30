@@ -76,23 +76,23 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
   }
 
   @Override
-  default void preRegister() {
+  default void apply() {
     final var settings = getSettings();
     settings.addOreDict(settings.getRegistryKey());
     asEntry()
+      .setTranslationKey(settings.getTranslateKey() != null ? settings.getTranslateKey() : ModUtils.localize(settings.getIdentifier()))
       .setResistance(settings.getResistance())
       .setHardness(settings.getHardness())
       .setSoundType(settings.getSoundType())
       .setTickRandomly(settings.isTicksRandomly())
-      .setLightOpacity(settings.isOpaque() ? 255 : 0)
-      .setHarvestLevel(settings.getHarvestTool(), settings.getHarvestLevel());
+      .setLightOpacity(settings.isOpaque() ? 255 : 0);
 
-//    if (!settings.enableStats) {
-//      asEntry().disableStats();
-//    }
-//    if (settings.group != null) {
-//      asEntry().setCreativeTab(settings.group);
-//    }
+    if (!settings.enableStats) {
+      asEntry().disableStats();
+    }
+    if (settings.group != null) {
+      asEntry().setCreativeTab(settings.group);
+    }
 //    if (settings.lightValue != null) {
 //      asEntry().setLightLevel(settings.lightValue.apply(null, null, null));
 //    }
@@ -100,9 +100,9 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
 //    if (settings.slipperiness != null) {
 //      asEntry().setDefaultSlipperiness(settings.slipperiness.apply(null, null, null));
 //    }
-//    if (settings.harvestTool != null && settings.harvestLevel >= 0) {
-//      asEntry().setHarvestLevel(settings.harvestTool, settings.harvestLevel);
-//    }
+    if (settings.harvestTool != null && settings.harvestLevel >= 0) {
+      asEntry().setHarvestLevel(settings.harvestTool, settings.harvestLevel);
+    }
   }
 
   @Override
@@ -148,15 +148,19 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
     protected Supplier<IBlockColor> colorHandler;
     protected TileEntitySpecialRenderer<? extends TileEntity> tileRenderer;
     protected String harvestTool;
+    protected String translateKey;
+    protected String translateArgument;
+
     protected int harvestLevel = -1;
     protected int encouragement = -1;
     protected int flammability = -1;
+
     protected float resistance = 1.0F;
     protected float hardness;
+
     protected boolean canFall = false;
     protected boolean collidable = true;
     protected boolean opaque = true;
-
     protected boolean hasItemSubtypes = false;
     protected boolean ticksRandomly;
     protected boolean requiresCorrectTool = false;
@@ -192,7 +196,8 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       if (block instanceof final IBlockEntry entry) {
         var entrySettings = entry.getSettings();
         settings.registryKey = entrySettings.getRegistryKey();
-        settings.type = entrySettings.getType();
+        settings.translateKey = entrySettings.getTranslateKey();
+        settings.translateArgument = entrySettings.getTranslateArgument();
         settings.encouragement = entrySettings.getEncouragement();
         settings.flammability = entrySettings.getFlammability();
         settings.resource = entrySettings.getResource();
@@ -241,6 +246,19 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
 
     public BlockSettings mapColor(final MapColor mapColor) {
       this.mapColor = mapColor;
+      return this.self();
+    }
+
+    public BlockSettings translateKey(final String translateKey) {
+      if (translateKey != null) {
+        this.translateKey = ModUtils.replace(translateKey);
+      }
+      return this.self();
+    }
+
+    public BlockSettings translateKey(final String translateKey, String argument) {
+      this.translateKey(translateKey);
+      this.translateArgument = argument;
       return this.self();
     }
 
@@ -600,7 +618,7 @@ public interface IBlockEntry extends IContentEntry<BlockSettings, Block> {
       return this.self();
     }
 
-//    public void applyBlockProperties(Block block) {
+//    public void apply(Block block) {
 //      block.setHardness(this.hardness);
 //      block.setResistance(this.resistance);
 //      block.setSoundType(this.soundType);

@@ -51,7 +51,6 @@ public class ItemDebugWand extends BaseItem {
 
   public ItemDebugWand() {
     super(ItemSettings.of()
-      .registryKey("wand")
       .rarity(EnumRarity.EPIC)
       .maxStackSize(1)
     );

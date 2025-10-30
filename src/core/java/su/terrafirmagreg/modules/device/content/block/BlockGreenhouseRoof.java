@@ -30,8 +30,6 @@ public class BlockGreenhouseRoof extends BlockGreenhouseWall {
 
   public BlockGreenhouseRoof() {
 
-    getSettings()
-      .registryKey("greenhouse/roof");
   }
 
   @Override

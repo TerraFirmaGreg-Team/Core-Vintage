@@ -65,7 +65,6 @@ public class BlockPowderKeg extends BaseBlockContainer {
   public BlockPowderKeg() {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey("powderkeg")
       .sound(SoundType.WOOD)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .renderType(EnumBlockRenderType.MODEL)
@@ -76,8 +75,7 @@ public class BlockPowderKeg extends BaseBlockContainer {
       .capability(stack ->
         CapabilityProviderSize.of(
           stack.getTagCompound() == null ? Size.VERY_LARGE : Size.HUGE, // Causes overburden if sealed
-          Weight.VERY_HEAVY,
-          stack.getTagCompound() == null
+          Weight.VERY_HEAVY, stack.getTagCompound() == null
         )
       )
     );

@@ -5,10 +5,10 @@ import su.terrafirmagreg.api.data.DamageSources;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockContainer;
-import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.content.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.content.tile.TileBellows;
 import su.terrafirmagreg.modules.device.content.tile.TileCharcoalForge;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -84,7 +84,6 @@ public class BlockCharcoalForge extends BaseBlockContainer implements IBellowsCo
   public BlockCharcoalForge() {
     super(BlockSettings.of()
       .material(BlockCharcoalPile.CHARCOAL_MATERIAL)
-      .registryKey("charcoal_forge")
       .randomTicks()
       .harvestLevel(ToolClasses.SHOVEL, 0)
       .tile(TileCharcoalForge.class)

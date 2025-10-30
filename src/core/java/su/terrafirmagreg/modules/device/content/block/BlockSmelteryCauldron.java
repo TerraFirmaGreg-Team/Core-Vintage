@@ -41,7 +41,6 @@ public class BlockSmelteryCauldron extends BaseBlockHorizontal implements IProvi
   public BlockSmelteryCauldron() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("smeltery/cauldron")
       .sound(SoundType.STONE)
       .nonOpaque()
       .nonFullCube()

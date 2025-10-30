@@ -9,7 +9,6 @@ public class ItemAnimalHalter extends BaseItem {
 
   public ItemAnimalHalter() {
     super(ItemSettings.of()
-      .registryKey("halter")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
     );
   }

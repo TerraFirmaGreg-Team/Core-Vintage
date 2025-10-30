@@ -4,14 +4,14 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockLeaves;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderTile;
+import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.core.feature.climate.spi.Climate;
-import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.wood.ConfigWood;
+import su.terrafirmagreg.modules.wood.content.tile.TileWoodLeaves;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.init.BlocksWood;
-import su.terrafirmagreg.modules.wood.content.tile.TileWoodLeaves;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
@@ -67,7 +67,6 @@ public class BlockWoodLeaves extends BaseBlockLeaves implements IWoodEntry, IPro
     this.type = type;
 
     getSettings()
-      .registryKey(type.getRegistryKey("leaves"))
       .ignoresProperties(DECAYABLE, HARVESTABLE)
       .nonOpaque()
       .randomTicks()

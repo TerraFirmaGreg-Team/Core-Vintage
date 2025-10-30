@@ -8,10 +8,10 @@ import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.render.TESRWoodLoom;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodLoom;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -49,7 +49,6 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodEntry, IPr
   public BlockWoodLoom(WoodType type) {
     super(BlockSettings.of()
       .material(Material.WOOD, MapColor.AIR)
-      .registryKey(type.getRegistryKey("loom"))
       .customResource(type.getResource("loom"))
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)
@@ -65,7 +64,7 @@ public class BlockWoodLoom extends BaseBlockContainer implements IWoodEntry, IPr
     );
 
     this.type = type;
-    
+
     setDefaultState(blockState.getBaseState()
       .withProperty(HORIZONTAL, EnumFacing.NORTH));
   }

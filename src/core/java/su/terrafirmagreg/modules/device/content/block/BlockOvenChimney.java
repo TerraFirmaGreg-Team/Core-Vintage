@@ -31,7 +31,6 @@ public class BlockOvenChimney extends BaseBlock {
   public BlockOvenChimney() {
     super(BlockSettings.of()
       .material(Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY)
-      .registryKey("oven/chimney")
       .hardness(2.0f)
       .resistance(3.0f)
       .nonOpaque()

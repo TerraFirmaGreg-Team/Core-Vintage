@@ -23,7 +23,6 @@ public class ItemSoilMudBrick extends BaseItem implements ISoilEntry {
 
   public ItemSoilMudBrick(SoilType type) {
     super(ItemSettings.of()
-      .registryKey(type.getRegistryKey("mud_brick"))
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
     );
 

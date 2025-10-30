@@ -8,10 +8,10 @@ import su.terrafirmagreg.framework.manager.content.provider.IProviderTile;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.render.TESRWoodToolRack;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodToolRack;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -55,7 +55,6 @@ public class BlockWoodToolRack extends BaseBlock implements IWoodEntry, IProvide
   public BlockWoodToolRack(WoodType type) {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey(type.getRegistryKey("tool_rack"))
       .customResource(type.getResource("tool_rack"))
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)

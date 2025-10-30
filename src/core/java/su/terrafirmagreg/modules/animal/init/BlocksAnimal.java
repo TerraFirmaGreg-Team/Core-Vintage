@@ -9,7 +9,7 @@ public final class BlocksAnimal {
 
   public static void onRegister(IContentRegistrar registrar) {
 
-    NEST_BOX = registrar.addBlock(new BlockNestBox());
+    NEST_BOX = registrar.addBlock("nest_box", new BlockNestBox());
   }
 
 }

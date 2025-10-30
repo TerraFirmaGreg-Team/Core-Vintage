@@ -12,7 +12,6 @@ public class BlockAggregate extends BaseBlockFalling implements IBlockEntry {
   public BlockAggregate() {
     super(BlockSettings.of()
       .material(Material.SAND)
-      .registryKey("aggregate")
       .sound(SoundType.SAND)
       .hardness(0.4f)
     );

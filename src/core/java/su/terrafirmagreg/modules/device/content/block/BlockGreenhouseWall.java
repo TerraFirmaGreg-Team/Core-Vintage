@@ -39,7 +39,6 @@ public class BlockGreenhouseWall extends BaseBlock {
   public BlockGreenhouseWall() {
     super(BlockSettings.of()
       .material(Material.IRON, MapColor.GRAY)
-      .registryKey("greenhouse/wall")
       .addOreDict("greenhouse")
       .sound(SoundType.METAL)
       .hardness(2.0f)
@@ -50,7 +49,7 @@ public class BlockGreenhouseWall extends BaseBlock {
         CapabilityProviderSize.of(Size.NORMAL, Weight.MEDIUM)
       )
     );
-    
+
     setDefaultState(getBlockState().getBaseState()
       .withProperty(GLASS, false)
       .withProperty(HORIZONTAL, EnumFacing.EAST)

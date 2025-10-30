@@ -1,8 +1,10 @@
 package su.terrafirmagreg.framework.manager.content.base.group.spi;
 
+import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.ContentManager;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -13,12 +15,19 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 
 public class BaseItemGroup extends CreativeTabs {
+
+  private static final Map<String, List<ItemStack>> TAB_ITEMS = new Object2ObjectOpenHashMap<>();
 
   private final String identifier;
   private final Supplier<ItemStack> icon;
@@ -37,7 +46,6 @@ public class BaseItemGroup extends CreativeTabs {
     if (hasSearchBar) {
       setBackgroundImageName("item_search.png");
     }
-    sortAlphabeticallyTranslated();
   }
 
   public static BaseItemGroup of(String identifier, String icon) {
@@ -107,6 +115,18 @@ public class BaseItemGroup extends CreativeTabs {
     return this;
   }
 
+  public static void addToTab(String identifier, ItemStack stack) {
+    TAB_ITEMS.computeIfAbsent(identifier, k -> new ArrayList<>()).add(stack);
+  }
+
+  public void addToTab(Item item) {
+    addToTab(identifier, new ItemStack(item));
+  }
+
+  public void addToTab(Block block) {
+    addToTab(identifier, new ItemStack(block));
+  }
+
   @Override
   @SideOnly(Side.CLIENT)
   public String getTabLabel() {
@@ -116,7 +136,7 @@ public class BaseItemGroup extends CreativeTabs {
 
   @Override
   public String getTranslationKey() {
-    return ModUtils.localize("item_group", identifier, "name");
+    return ModUtils.localize(LocalizeKeys.ITEM_GROUP, identifier, "name");
   }
 
   @Override
@@ -141,6 +161,11 @@ public class BaseItemGroup extends CreativeTabs {
 
   @Override
   public void displayAllRelevantItems(NonNullList<ItemStack> items) {
+    List<ItemStack> tabItems = TAB_ITEMS.get(identifier);
+    if (tabItems != null) {
+      items.addAll(tabItems);
+    }
+
     // Fill the list with items
     if (this.filler == null) {super.displayAllRelevantItems(items);} else {this.filler.accept(items::add);}
     // Sort the items

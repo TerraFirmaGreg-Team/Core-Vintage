@@ -7,7 +7,6 @@ public class ItemStickBunch extends BaseItem {
 
   public ItemStickBunch() {
     super(ItemSettings.of()
-      .registryKey("stick_bunch")
       .addOreDict("log_wood")
     );
   }

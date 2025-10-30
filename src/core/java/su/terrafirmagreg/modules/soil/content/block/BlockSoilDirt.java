@@ -1,35 +1,54 @@
 package su.terrafirmagreg.modules.soil.content.block;
 
 import su.terrafirmagreg.api.data.Tags;
-import su.terrafirmagreg.modules.soil.content.block.spi.BlockSoil;
+import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockFalling;
+import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.IDirtBlock;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.IMudBlock;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.ISoilEntry;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
 import su.terrafirmagreg.modules.soil.init.ItemsSoil;
 
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 
+import lombok.Getter;
+
 import java.util.Random;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.CLAY;
+import static su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager.Specification.VERTICAL_AND_HORIZONTAL;
 
-public class BlockSoilDirt extends BlockSoil implements IDirtBlock, IMudBlock {
+@Getter
+public class BlockSoilDirt extends BaseBlockFalling implements IDirtBlock, IMudBlock, ISoilEntry {
+
+  protected final SoilType type;
 
   public BlockSoilDirt(SoilType type) {
-    super(type);
+    super(BlockSettings.of()
+      .material(Material.GROUND)
+      .sound(SoundType.GROUND)
+      .harvestLevel(ToolClasses.SHOVEL, 0)
+      .renderLayer(BlockRenderLayer.CUTOUT)
+      .tag(Tags.DIRT)
+      .hardness(2.0F)
+    );
 
-    getSettings()
-      .renderLayer(this.getBlockState().getBaseState().getValue(CLAY) ? BlockRenderLayer.CUTOUT : BlockRenderLayer.SOLID)
-      .tag(Tags.DIRT);
+    this.type = type;
 
-    setDefaultState(getBlockState().getBaseState().withProperty(CLAY, Boolean.FALSE));
+    setDefaultState(getBlockState().getBaseState()
+      .withProperty(CLAY, Boolean.FALSE)
+    );
 
     //DirtHelper.registerSoil(this, DirtHelper.DIRTLIKE);
+    FallingBlockManager.registerFallable(this, VERTICAL_AND_HORIZONTAL);
   }
 
 

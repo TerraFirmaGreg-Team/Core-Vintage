@@ -17,7 +17,6 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodEntry {
   public BlockWoodDoor(WoodType type) {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey(type.getRegistryKey("door"))
       .customResource(type.getResource("door"))
       .sound(SoundType.WOOD)
       .fireInfo(5, 20)
@@ -26,7 +25,7 @@ public class BlockWoodDoor extends BaseBlockDoor implements IWoodEntry {
     );
 
     this.type = type;
-    
+
   }
 
 }

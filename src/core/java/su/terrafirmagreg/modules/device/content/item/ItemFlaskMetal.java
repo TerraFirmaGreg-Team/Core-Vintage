@@ -15,7 +15,6 @@ public class ItemFlaskMetal extends ItemFlask {
     super(capacity, drink);
 
     getSettings()
-      .registryKey("flask/metal")
       .capability(
         CapabilityProviderSize.of(Size.NORMAL, Weight.HEAVY, false)
       );

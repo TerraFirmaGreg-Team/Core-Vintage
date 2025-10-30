@@ -10,7 +10,6 @@ public class ItemStickBundle extends BaseItem {
 
   public ItemStickBundle() {
     super(ItemSettings.of()
-      .registryKey("stick_bundle")
       .addOreDict("log_wood")
       .capability(CapabilityProviderSize.of(Size.VERY_LARGE, Weight.MEDIUM))
     );

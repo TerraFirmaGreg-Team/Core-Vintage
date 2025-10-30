@@ -10,7 +10,6 @@ public class BlockCellarDoor extends BaseBlockDoor {
   public BlockCellarDoor() {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey("cellar/door")
       .sound(SoundType.WOOD)
       .hardness(2F)
       .fireInfo(5, 20)

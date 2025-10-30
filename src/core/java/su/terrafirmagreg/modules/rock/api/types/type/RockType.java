@@ -20,9 +20,11 @@ import java.util.function.Supplier;
 @Getter
 public class RockType extends Type<RockType> {
 
-  public static final String TYPE = "rock";
+
   @Getter
   private static final Set<RockType> types = new ObjectOpenHashSet<>();
+  public static final String TYPE = "rock";
+
   private final RockCategory category;
   private final Supplier<OrePrefix> orePrefix;
   private final Supplier<Material> material;
@@ -80,6 +82,7 @@ public class RockType extends Type<RockType> {
   public float getHardness(float baseHardness) {
     return baseHardness + this.getCategory().getHardnessModifier();
   }
+
 
   public static class Builder {
 

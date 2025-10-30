@@ -20,7 +20,6 @@ public class BlockIceBunker extends BaseBlockContainer {
   public BlockIceBunker() {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey("ice_bunker")
       .tile(TileIceBunker.class)
       .renderType(EnumBlockRenderType.MODEL)
       .hardness(2F)

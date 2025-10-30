@@ -18,7 +18,6 @@ public class BlockInfectedAir extends BaseBlock implements IProviderTile {
   public BlockInfectedAir() {
     super(BlockSettings.of()
       .material(Material.AIR)
-      .registryKey("infected_air")
       .hardness(2F)
       .tile(TileInfectedAir.class)
       .noCollision()

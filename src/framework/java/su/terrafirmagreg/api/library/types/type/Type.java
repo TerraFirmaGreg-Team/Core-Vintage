@@ -1,14 +1,14 @@
 package su.terrafirmagreg.api.library.types.type;
 
+import su.terrafirmagreg.api.library.IStringLocalized;
 import su.terrafirmagreg.api.library.types.variant.Variant;
 import su.terrafirmagreg.api.util.ModUtils;
-import su.terrafirmagreg.framework.manager.content.api.IContentEntry;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 
-import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Getter
-public abstract class Type<T extends Type<T>> implements Comparable<Type<T>> {
+public abstract class Type<T extends Type<T>> implements Comparable<Type<T>>, IStringLocalized {
 
   private static final Map<String, Set<Type<?>>> MAP = new Object2ObjectOpenHashMap<>();
 
@@ -39,7 +39,7 @@ public abstract class Type<T extends Type<T>> implements Comparable<Type<T>> {
     if (name.isEmpty()) {
       throw new RuntimeException(String.format("Type name must contain any character: [%s]", name));
     }
-    MAP.computeIfAbsent(nameType, s -> new HashSet<>()).add(this);
+    MAP.computeIfAbsent(nameType, s -> new ObjectOpenHashSet<>()).add(this);
   }
 
   @NotNull
@@ -56,12 +56,16 @@ public abstract class Type<T extends Type<T>> implements Comparable<Type<T>> {
     return new ArrayList<>(types).indexOf(type);
   }
 
+  public static Set<? extends Type<?>> getTypes(String nameType) {
+    return MAP.containsKey(nameType) ? MAP.get(nameType) : new HashSet<>();
+  }
+
   @Nullable
   public static Type<? extends Type<?>> getByName(String nameType, String name) {
     var types = MAP.get(nameType);
     return types
       .stream()
-      .filter(s -> s.getName().equals(name))
+      .filter(s -> s.getName().equalsIgnoreCase(name))
       .findFirst()
       .orElse(null);
   }
@@ -87,24 +91,11 @@ public abstract class Type<T extends Type<T>> implements Comparable<Type<T>> {
     return String.format("%s/%s", nameType, variant);
   }
 
-  public String getLocalizedName() {
+  @Override
+  public String getTranslationKey() {
     return ModUtils.localize(ModUtils.localize("type"), nameType, name);
   }
 
-  public String getRegistryKey(String variant) {
-    return String.format("%s/%s", variant, this);
-  }
-
-  public String getRegistryKey(Variant<?, T> variant) {
-    return String.format("%s/%s", variant, this);
-  }
-
-  public String getRegistryKey(Block model, String variant) {
-    if (model instanceof IContentEntry<?, ?> entry) {
-      return String.format("%s/%s/%s", entry.getSettings().getRegistryKey(), variant, this);
-    }
-    return getRegistryKey(variant);
-  }
 
   @Override
   public String toString() {

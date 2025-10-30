@@ -1,9 +1,7 @@
 package su.terrafirmagreg.framework.manager.content.base.block.spi;
 
 
-import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
 
 import net.minecraft.block.Block;
@@ -43,7 +41,7 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
     super(settings.getMaterial(), settings.getMapColor());
 
     this.settings = settings;
-    
+
     this.fullBlock = this.settings.isOpaque();
     this.lightOpacity = this.fullBlock ? 255 : 0;
     this.translucent = this.settings.isTranslucent();
@@ -75,11 +73,6 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
     return this.settings.isPassable();
   }
 
-  @Override
-  public boolean getEnableStats() {
-    return this.settings.isEnableStats();
-  }
-
 
   @Override
   @SideOnly(Side.CLIENT)
@@ -105,12 +98,6 @@ public abstract class BaseBlock extends Block implements IBlockEntry, IFluidlogg
   @Override
   public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos) : NULL_AABB;
-  }
-
-  @Override
-  public String getTranslationKey() {
-
-    return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
   }
 
   @Override

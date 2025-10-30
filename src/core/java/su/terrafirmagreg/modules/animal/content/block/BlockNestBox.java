@@ -32,7 +32,6 @@ public class BlockNestBox extends BaseBlockContainer {
   public BlockNestBox() {
     super(BlockSettings.of()
       .material(Material.GRASS)
-      .registryKey("nest_box")
       .tile(TileNestBox.class)
       .renderType(EnumBlockRenderType.MODEL)
       .nonCube()

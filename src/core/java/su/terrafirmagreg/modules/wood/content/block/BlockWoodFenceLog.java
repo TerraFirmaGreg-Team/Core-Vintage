@@ -18,7 +18,6 @@ public class BlockWoodFenceLog extends BaseBlockFence implements IWoodEntry {
   public BlockWoodFenceLog(WoodType type) {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey(type.getRegistryKey("fence_log"))
       .sound(SoundType.WOOD)
       .hardness(2.0F)
       .resistance(15.0F)

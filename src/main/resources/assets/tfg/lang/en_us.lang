@@ -38,48 +38,10 @@ enum.tfg.skill.tier.adept=Adept
 enum.tfg.skill.tier.expert=Expert
 enum.tfg.skill.tier.master=Master
 
-types.tfg.skill.prospecting=Prospecting: %s
-types.tfg.skill.smithing=Smithing: %s
-types.tfg.skill.agriculture=Agriculture: %s
-types.tfg.skill.butchering=Butchering: %s
-
-## Metal
-types.tfg.metal.unknown=Unknown Alloy
-types.tfg.metal.bismuth=Bismuth
-types.tfg.metal.bismuth_bronze=Bismuth Bronze
-types.tfg.metal.black_bronze=Black Bronze
-types.tfg.metal.brass=Brass
-types.tfg.metal.bronze=Bronze
-types.tfg.metal.copper=Copper
-types.tfg.metal.gold=Gold
-types.tfg.metal.lead=Lead
-types.tfg.metal.nickel=Nickel
-types.tfg.metal.rose_gold=Rose Gold
-types.tfg.metal.silver=Silver
-types.tfg.metal.tin=Tin
-types.tfg.metal.zinc=Zinc
-types.tfg.metal.sterling_silver=Sterling Silver
-types.tfg.metal.wrought_iron=Wrought Iron
-types.tfg.metal.pig_iron=Pig Iron
-types.tfg.metal.steel=Steel
-types.tfg.metal.platinum=Platinum
-types.tfg.metal.black_steel=Black Steel
-types.tfg.metal.blue_steel=Blue Steel
-types.tfg.metal.red_steel=Red Steel
-types.tfg.metal.weak_steel=Weak Steel
-types.tfg.metal.weak_black_steel=Black Weak Steel
-types.tfg.metal.weak_blue_steel=Blue Weak Steel
-types.tfg.metal.weak_red_steel=Red Weak Steel
-types.tfg.metal.high_carbon_steel=High Carbon Steel
-types.tfg.metal.high_carbon_black_steel=Black High Carbon Steel
-types.tfg.metal.high_carbon_blue_steel=Blue High Carbon Steel
-types.tfg.metal.high_carbon_red_steel=Red High Carbon Steel
-
-## Rock category
-types.tfg.rock_category.sedimentary=Sedimentary
-types.tfg.rock_category.metamorphic=Metamorphic
-types.tfg.rock_category.igneous_intrusive=Igneous Intrusive
-types.tfg.rock_category.igneous_extrusive=Igneous Extrusive
+type.tfg.skill.prospecting=Prospecting: %s
+type.tfg.skill.smithing=Smithing: %s
+type.tfg.skill.agriculture=Agriculture: %s
+type.tfg.skill.butchering=Butchering: %s
 
 ## Calendar
 enum.tfg.season.january=Winter
@@ -252,11 +214,11 @@ command.tfg.core.debug_info.usage=/tfg debug_info - write a lot of debug info to
 item_group.tfg.core.name=[ TFG ] Core
 
 ## Block
-block.tfg.core.debug.name=Debug Block
-block.tfg.core.puddle.name=Puddle
-block.tfg.core.fire_bricks.name=Fire Bricks
-block.tfg.core.thatch.name=Thatch
-block.tfg.core.aggregate.name=Aggregate
+tile.tfg.core.debug.name=Debug Block
+tile.tfg.core.puddle.name=Puddle
+tile.tfg.core.fire_bricks.name=Fire Bricks
+tile.tfg.core.thatch.name=Thatch
+tile.tfg.core.aggregate.name=Aggregate
 
 ## Item
 item.tfg.core.wand.name=Debug Wand
@@ -293,24 +255,24 @@ type.tfg.soil.humus=Humus
 item_group.tfg.soil.name=[ TFG ] Soil
 
 ## Block
-block.tfg.soil.grass.name=Grass (%s)
-block.tfg.soil.dry_grass.name=Dry Grass (%s)
-block.tfg.soil.sparse_grass.name=Sparse Grass (%s)
-block.tfg.soil.podzol.name=Podzol (%s)
-block.tfg.soil.mycelium.name=Mycelium (%s)
-block.tfg.soil.coarse_dirt.name=Coarse Dirt (%s)
-block.tfg.soil.rooted_dirt.name=Rooted Dirt (%s)
-block.tfg.soil.dirt.name=Dirt (%s)
-block.tfg.soil.farmland.name=Farmland (%s)
-block.tfg.soil.grass_path.name=Grass Path (%s)
-block.tfg.soil.mud.name=Mud (%s)
-block.tfg.soil.mud_bricks.name=Mud Bricks (%s)
-block.tfg.soil.mud_bricks.stairs.name=Mud Bricks Stairs (%s)
-block.tfg.soil.mud_bricks.slab.name=Mud Bricks Slab (%s)
-block.tfg.soil.mud_bricks.wall.name=Mud Bricks Wall (%s)
+tile.tfg.soil.grass.name=Grass (%s)
+tile.tfg.soil.dry_grass.name=Dry Grass (%s)
+tile.tfg.soil.sparse_grass.name=Sparse Grass (%s)
+tile.tfg.soil.podzol.name=Podzol (%s)
+tile.tfg.soil.mycelium.name=Mycelium (%s)
+tile.tfg.soil.coarse_dirt.name=Coarse Dirt (%s)
+tile.tfg.soil.rooted_dirt.name=Rooted Dirt (%s)
+tile.tfg.soil.dirt.name=Dirt (%s)
+tile.tfg.soil.farmland.name=Farmland (%s)
+tile.tfg.soil.grass_path.name=Grass Path (%s)
+tile.tfg.soil.mud.name=Mud (%s)
+tile.tfg.soil.mud_bricks.name=Mud Bricks (%s)
+tile.tfg.soil.mud_bricks.stairs.name=Mud Bricks Stairs (%s)
+tile.tfg.soil.mud_bricks.slab.name=Mud Bricks Slab (%s)
+tile.tfg.soil.mud_bricks.wall.name=Mud Bricks Wall (%s)
 
-block.tfg.soil.peat_grass.name=Peat Grass
-block.tfg.soil.peat.name=Peat
+tile.tfg.soil.peat_grass.name=Peat Grass
+tile.tfg.soil.peat.name=Peat
 
 
 ## Item
@@ -411,30 +373,30 @@ type.tfg.wood.sweetgum=Sweetgum
 item_group.tfg.wood.name=[ TFG ] Wood
 
 ## Block
-block.tfg.wood.log.name=Log (%s)
-block.tfg.wood.planks.name=Planks (%s)
-block.tfg.wood.planks.stairs.name=Planks Stairs (%s)
-block.tfg.wood.planks.wall.name=Planks Wall (%s)
-block.tfg.wood.planks.slab.name=Planks Slab (%s)
-block.tfg.wood.bookshelf.name=Bookshelf (%s)
-block.tfg.wood.door.name=Door (%s)
-block.tfg.wood.trapdoor.name=Trapdoor (%s)
-block.tfg.wood.fence.name=Fence (%s)
-block.tfg.wood.fence_log.name=Log Fence (%s)
-block.tfg.wood.fence_gate.name=Fence Gate (%s)
-block.tfg.wood.fence_gate_log.name=Log Fence Gate (%s)
-block.tfg.wood.button.name=Button (%s)
-block.tfg.wood.pressure_plate.name=Pressure Plate (%s)
-block.tfg.wood.support.name=Support (%s)
-block.tfg.wood.workbench.name=Workbench (%s)
-block.tfg.wood.ladder.name=Ladder (%s)
-block.tfg.wood.tool_rack.name=Tool Rack (%s)
-block.tfg.wood.barrel.name=Barrel (%s)
-block.tfg.wood.loom.name=Loom (%s)
-block.tfg.wood.chest.name=Chest (%s)
-block.tfg.wood.chest_trapped.name=Trapped Chest (%s)
-block.tfg.wood.sapling.name=Sapling (%s)
-block.tfg.wood.leaves.name=Leaves (%s)
+tile.tfg.wood.log.name=Log (%s)
+tile.tfg.wood.planks.name=Planks (%s)
+tile.tfg.wood.planks.stairs.name=Planks Stairs (%s)
+tile.tfg.wood.planks.wall.name=Planks Wall (%s)
+tile.tfg.wood.planks.slab.name=Planks Slab (%s)
+tile.tfg.wood.bookshelf.name=Bookshelf (%s)
+tile.tfg.wood.door.name=Door (%s)
+tile.tfg.wood.trapdoor.name=Trapdoor (%s)
+tile.tfg.wood.fence.name=Fence (%s)
+tile.tfg.wood.fence_log.name=Log Fence (%s)
+tile.tfg.wood.fence_gate.name=Fence Gate (%s)
+tile.tfg.wood.fence_gate_log.name=Log Fence Gate (%s)
+tile.tfg.wood.button.name=Button (%s)
+tile.tfg.wood.pressure_plate.name=Pressure Plate (%s)
+tile.tfg.wood.support.name=Support (%s)
+tile.tfg.wood.workbench.name=Workbench (%s)
+tile.tfg.wood.ladder.name=Ladder (%s)
+tile.tfg.wood.tool_rack.name=Tool Rack (%s)
+tile.tfg.wood.barrel.name=Barrel (%s)
+tile.tfg.wood.loom.name=Loom (%s)
+tile.tfg.wood.chest.name=Chest (%s)
+tile.tfg.wood.chest_trapped.name=Trapped Chest (%s)
+tile.tfg.wood.sapling.name=Sapling (%s)
+tile.tfg.wood.leaves.name=Leaves (%s)
 
 ## Item
 item.tfg.wood.lumber.name=Lumber (%s)
@@ -452,8 +414,176 @@ entity.tfg.wood.plow_cart.name=Plow Cart
 
 # Module Metal ##############################################
 
+## Metal Type
+type.tfg.metal.unknown=Unknown Alloy
+type.tfg.metal.bismuth=Bismuth
+type.tfg.metal.bismuth_bronze=Bismuth Bronze
+type.tfg.metal.black_bronze=Black Bronze
+type.tfg.metal.brass=Brass
+type.tfg.metal.bronze=Bronze
+type.tfg.metal.copper=Copper
+type.tfg.metal.gold=Gold
+type.tfg.metal.lead=Lead
+type.tfg.metal.nickel=Nickel
+type.tfg.metal.rose_gold=Rose Gold
+type.tfg.metal.silver=Silver
+type.tfg.metal.tin=Tin
+type.tfg.metal.zinc=Zinc
+type.tfg.metal.sterling_silver=Sterling Silver
+type.tfg.metal.wrought_iron=Wrought Iron
+type.tfg.metal.pig_iron=Pig Iron
+type.tfg.metal.steel=Steel
+type.tfg.metal.platinum=Platinum
+type.tfg.metal.black_steel=Black Steel
+type.tfg.metal.blue_steel=Blue Steel
+type.tfg.metal.red_steel=Red Steel
+type.tfg.metal.weak_steel=Weak Steel
+type.tfg.metal.weak_black_steel=Black Weak Steel
+type.tfg.metal.weak_blue_steel=Blue Weak Steel
+type.tfg.metal.weak_red_steel=Red Weak Steel
+type.tfg.metal.high_carbon_steel=High Carbon Steel
+type.tfg.metal.high_carbon_black_steel=Black High Carbon Steel
+type.tfg.metal.high_carbon_blue_steel=Blue High Carbon Steel
+type.tfg.metal.high_carbon_red_steel=Red High Carbon Steel
+
 ## Item Group
 item_group.tfg.metal.name=[ TFG ] Metal
+
+# Module Rock ###############################################
+
+
+## Rock Type
+type.tfg.color.black=Black
+type.tfg.color.blue=Blue
+type.tfg.color.green=Green
+type.tfg.color.cyan=Cyan
+type.tfg.color.red=Red
+type.tfg.color.purple=Purple
+type.tfg.color.orange=Orange
+type.tfg.color.silver=Silver
+type.tfg.color.gray=Gray
+type.tfg.color.light_blue=Light Blue
+type.tfg.color.lime=Lime
+type.tfg.color.brown=Brown
+type.tfg.color.pink=Pink
+type.tfg.color.magenta=Magenta
+type.tfg.color.yellow=Yellow
+type.tfg.color.white=White
+type.tfg.color.colorless=Colorless
+
+type.tfg.rock.granite=Granite
+type.tfg.rock.diorite=Diorite
+type.tfg.rock.gabbro=Gabbro
+type.tfg.rock.breccia=Breccia
+type.tfg.rock.foidolite=Foidolite
+type.tfg.rock.red_granite=Red Granite
+type.tfg.rock.shale=Shale
+type.tfg.rock.claystone=Claystone
+type.tfg.rock.limestone=Limestone
+type.tfg.rock.conglomerate=Conglomerate
+type.tfg.rock.dolomite=Dolomite
+type.tfg.rock.chert=Chert
+type.tfg.rock.chalk=Chalk
+type.tfg.rock.mudstone=Mudstone
+type.tfg.rock.sandstone=Sandstone
+type.tfg.rock.siltstone=Siltstone
+type.tfg.rock.laterite=Laterite
+type.tfg.rock.arkose=Arkose
+type.tfg.rock.jaspillite=Jaspillite
+type.tfg.rock.travertine=Travertine
+type.tfg.rock.wackestone=Wackestone
+type.tfg.rock.blackband_ironstone=Blackband Ironstone
+type.tfg.rock.rhyolite=Rhyolite
+type.tfg.rock.basalt=Basalt
+type.tfg.rock.andesite=Andesite
+type.tfg.rock.dacite=Dacite
+type.tfg.rock.peridotite=Peridotite
+type.tfg.rock.porphyry=Porphyry
+type.tfg.rock.blaimorite=Blaimorite
+type.tfg.rock.boninite=Boninite
+type.tfg.rock.carbonatite=Carbonatite
+type.tfg.rock.quartzite=Quartzite
+type.tfg.rock.slate=Slate
+type.tfg.rock.phyllite=Phyllite
+type.tfg.rock.schist=Schist
+type.tfg.rock.gneiss=Gneiss
+type.tfg.rock.marble=Marble
+type.tfg.rock.blueschist=Blueschist
+type.tfg.rock.catlinite=Catlinite
+type.tfg.rock.greenschist=Greenschist
+type.tfg.rock.novaculite=Novaculite
+type.tfg.rock.soapstone=Soapstone
+type.tfg.rock.komatiite=Komatiite
+type.tfg.rock.cataclasite=Cataclasite
+type.tfg.rock.mylonite=Mylonite
+
+## Rock Category
+category.tfg.rock.sedimentary=Sedimentary
+category.tfg.rock.metamorphic=Metamorphic
+category.tfg.rock.igneous_intrusive=Igneous Intrusive
+category.tfg.rock.igneous_extrusive=Igneous Extrusive
+
+
+# Tooltip
+tooltip.tfg.rock.layer.category=Category
+
+## Item Group
+item_group.tfg.rock.name=[ TFG ] Rock
+
+## Block
+
+# Варианты блоков пород
+tile.tfg.rock.cobble.name=Cobble (%s)
+tile.tfg.rock.cobble.stairs.name=Cobble Stairs (%s)
+tile.tfg.rock.cobble.slab.name=Cobble Slab (%s)
+tile.tfg.rock.cobble.wall.name=Cobble Wall (%s)
+tile.tfg.rock.raw.name=Raw (%s)
+tile.tfg.rock.raw.stairs.name=Raw Stairs (%s)
+tile.tfg.rock.raw.slab.name=Raw Slab (%s)
+tile.tfg.rock.raw.wall.name=Raw Wall (%s)
+tile.tfg.rock.bricks.name=Bricks (%s)
+tile.tfg.rock.bricks.stairs.name=Bricks Stairs (%s)
+tile.tfg.rock.bricks.slab.name=Bricks Slab (%s)
+tile.tfg.rock.bricks.wall.name=Bricks Wall (%s)
+tile.tfg.rock.smooth.name=Smooth (%s)
+tile.tfg.rock.smooth.stairs.name=Smooth Stairs (%s)
+tile.tfg.rock.smooth.slab.name=Smooth Slab (%s)
+tile.tfg.rock.smooth.wall.name=Smooth Wall (%s)
+tile.tfg.rock.bricks_cracked.name=Cracked Bricks (%s)
+tile.tfg.rock.bricks_cracked.stairs.name=Cracked Bricks Stairs (%s)
+tile.tfg.rock.bricks_cracked.slab.name=Cracked Bricks Slab (%s)
+tile.tfg.rock.bricks_cracked.wall.name=Cracked Bricks Wall (%s)
+tile.tfg.rock.chiseled.name=Chiseled (%s)
+tile.tfg.rock.chiseled.stairs.name=Chiseled Stairs (%s)
+tile.tfg.rock.chiseled.slab.name=Chiseled Slab (%s)
+tile.tfg.rock.chiseled.wall.name=Chiseled Wall (%s)
+tile.tfg.rock.gravel.name=Gravel (%s)
+tile.tfg.rock.sand.name=Sand (%s)
+tile.tfg.rock.surface.name=Surface (%s)
+tile.tfg.rock.speleothem.name=Speleothem (%s)
+tile.tfg.rock.button.name=Button (%s)
+tile.tfg.rock.pressure_plate.name=Pressure Plate (%s)
+tile.tfg.rock.anvil.name=Anvil (%s)
+tile.tfg.rock.magma.name=Magma (%s)
+tile.tfg.rock.stand_gem.name=Gem Stand (%s)
+tile.tfg.rock.alabaster.bricks.name=Alabaster Bricks (%s)
+tile.tfg.rock.alabaster.bricks.stairs.name=Alabaster Bricks Stairs (%s)
+tile.tfg.rock.alabaster.bricks.slab.name=Alabaster Bricks Slab (%s)
+tile.tfg.rock.alabaster.bricks.wall.name=Alabaster Bricks Wall (%s)
+tile.tfg.rock.alabaster.smooth.name=Smooth Alabaster (%s)
+tile.tfg.rock.alabaster.smooth.stairs.name=Smooth Alabaster Stairs (%s)
+tile.tfg.rock.alabaster.smooth.slab.name=Smooth Alabaster Slab (%s)
+tile.tfg.rock.alabaster.smooth.wall.name=Smooth Alabaster Wall (%s)
+tile.tfg.rock.alabaster.raw.name=Raw Alabaster (%s)
+tile.tfg.rock.alabaster.raw.stairs.name=Raw Alabaster Stairs (%s)
+tile.tfg.rock.alabaster.raw.slab.name=Raw Alabaster Slab (%s)
+tile.tfg.rock.alabaster.raw.wall.name=Raw Alabaster Wall (%s)
+
+## Item
+item.tfg.rock.loose.name=Loose Rock (%s)
+item.tfg.rock.brick.name=Brick (%s)
+item.tfg.rock.gravel_layer.name=Gravel Layer (%s)
+
 
 
 # Module Device ##############################################
@@ -502,40 +632,40 @@ message.tfg.thatch_bed.not_thundering=This bed is too uncomfortable to sleep.
 item_group.tfg.device.name=[ TFG ] Device
 
 ## Block
-block.tfg.device.alloy_calculator.name=Alloy Calculator
-block.tfg.device.bear_trap.name=Bear Trap
-block.tfg.device.snare.name=Snare
-block.tfg.device.bellows.name=Bellows
-block.tfg.device.blast_furnace.name=Blast Furnace
-block.tfg.device.bloomery.name=Bloomery
-block.tfg.device.molten.name=Molten
-block.tfg.device.bloom.name=Bloom
-block.tfg.device.charcoal_forge.name=Charcoal Forge
-block.tfg.device.crucible.name=Crucible
-block.tfg.device.charcoal_pile.name=Charcoal Pile
-block.tfg.device.fire_pit.name=Firepit
-block.tfg.device.pit_kiln.name=Pit Kiln
-block.tfg.device.cellar.door.name=Cellar Door
-block.tfg.device.cellar.shelf.name=Cellar Shelf
-block.tfg.device.cellar.wall.name=Cellar Wall
-block.tfg.device.infected_air.name=Infected Air
-block.tfg.device.smeltery.cauldron.name=Smeltery Cauldron
-block.tfg.device.smeltery.firebox.name=Smeltery Firebox
-block.tfg.device.latex_extractor.name=Latex Extractor
-block.tfg.device.freeze_dryer.name=Freeze Dryer
-block.tfg.device.ice_bunker.name=Ice Bunker
-block.tfg.device.powderkeg.name=Powderkeg
-block.tfg.device.thatch_bed.name=Thatch Bed
-block.tfg.device.greenhouse.door.name=Greenhouse Door
-block.tfg.device.greenhouse.wall.name=Greenhouse Wall
-block.tfg.device.greenhouse.roof.name=Greenhouse Roof
-block.tfg.device.oven.base.name=Oven
-block.tfg.device.oven.wall.name=Oven Wall
-block.tfg.device.oven.chimney.name=Oven Chimney
-block.tfg.device.log_pile.name=Log Pile
-block.tfg.device.drying_mat.name=Drying Mat
-block.tfg.device.leaf_mat.name=Leaf Mat
-block.tfg.device.fridge.name=Fridge
+tile.tfg.device.alloy_calculator.name=Alloy Calculator
+tile.tfg.device.bear_trap.name=Bear Trap
+tile.tfg.device.snare.name=Snare
+tile.tfg.device.bellows.name=Bellows
+tile.tfg.device.blast_furnace.name=Blast Furnace
+tile.tfg.device.bloomery.name=Bloomery
+tile.tfg.device.molten.name=Molten
+tile.tfg.device.bloom.name=Bloom
+tile.tfg.device.charcoal_forge.name=Charcoal Forge
+tile.tfg.device.crucible.name=Crucible
+tile.tfg.device.charcoal_pile.name=Charcoal Pile
+tile.tfg.device.fire_pit.name=Firepit
+tile.tfg.device.pit_kiln.name=Pit Kiln
+tile.tfg.device.cellar.door.name=Cellar Door
+tile.tfg.device.cellar.shelf.name=Cellar Shelf
+tile.tfg.device.cellar.wall.name=Cellar Wall
+tile.tfg.device.infected_air.name=Infected Air
+tile.tfg.device.smeltery.cauldron.name=Smeltery Cauldron
+tile.tfg.device.smeltery.firebox.name=Smeltery Firebox
+tile.tfg.device.latex_extractor.name=Latex Extractor
+tile.tfg.device.freeze_dryer.name=Freeze Dryer
+tile.tfg.device.ice_bunker.name=Ice Bunker
+tile.tfg.device.powderkeg.name=Powderkeg
+tile.tfg.device.thatch_bed.name=Thatch Bed
+tile.tfg.device.greenhouse.door.name=Greenhouse Door
+tile.tfg.device.greenhouse.wall.name=Greenhouse Wall
+tile.tfg.device.greenhouse.roof.name=Greenhouse Roof
+tile.tfg.device.oven.base.name=Oven
+tile.tfg.device.oven.wall.name=Oven Wall
+tile.tfg.device.oven.chimney.name=Oven Chimney
+tile.tfg.device.log_pile.name=Log Pile
+tile.tfg.device.drying_mat.name=Drying Mat
+tile.tfg.device.leaf_mat.name=Leaf Mat
+tile.tfg.device.fridge.name=Fridge
 
 ## Item
 item.tfg.device.flask.leather.name=Empty Leather Flask
@@ -577,7 +707,7 @@ top.tfg.animal.pregnant_end=Will give birth in %s days
 item_group.tfg.animal.name=[ TFG ] Animal
 
 ## Block
-block.tfg.animal.nest_box.name=Nest Box
+tile.tfg.animal.nest_box.name=Nest Box
 
 ## Item
 item.tfg.animal.halter.name=Halter

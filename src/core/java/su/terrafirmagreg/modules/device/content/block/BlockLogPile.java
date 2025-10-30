@@ -7,9 +7,9 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.framework.manager.content.base.tile.spi.BaseTileInventory;
 import su.terrafirmagreg.modules.device.ConfigDevice;
-import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.content.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.content.tile.TileLogPile;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -49,7 +49,6 @@ public class BlockLogPile extends BaseBlockContainer {
   public BlockLogPile() {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey("log_pile")
       .sound(SoundType.WOOD)
       .randomTicks()
       .tile(TileLogPile.class)

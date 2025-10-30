@@ -16,7 +16,6 @@ public class ItemSoilPile extends BaseItem implements ISoilEntry {
 
   public ItemSoilPile(SoilType type) {
     super(ItemSettings.of()
-      .registryKey(type.getRegistryKey("pile"))
       .addOreDict("pile")
       .capability(CapabilityProviderSize.of(Size.SMALL, Weight.LIGHT))
     );

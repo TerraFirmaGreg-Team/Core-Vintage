@@ -1,6 +1,6 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.framework.manager.content.api.IContentEntry;
+import su.terrafirmagreg.framework.manager.content.base.item.api.IItemEntry;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
@@ -16,7 +16,6 @@ import lombok.experimental.UtilityClass;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @UtilityClass
 @SuppressWarnings({"unused", "deprecation"})
@@ -160,20 +159,33 @@ public final class TranslatorUtils {
     var item = stack.getItem();
     String localizedName = translateToLocal(item.getUnlocalizedNameInefficiently(stack) + ".name").trim();
 
-    if (item instanceof IContentEntry<?, ?> contentEntry) {
-      var settings = contentEntry.getSettings();
-      var type = settings.getType();
-      if (type != null) {
-        String processedKey = localizedName.replaceFirst(Pattern.quote(type.getName()) + "[._]", "");
-        return String.format(
-          TranslatorUtils.translateToLocal(processedKey),
-          TranslatorUtils.translateToLocal(type.getLocalizedName())
-        );
-      }
+    if (item instanceof IItemEntry itemEntry) {
+
+      var settings = itemEntry.getSettings();
+      return String.format(
+        TranslatorUtils.translateToLocal(localizedName),
+        TranslatorUtils.translateToLocal(settings.getTranslateArgument())
+      );
     }
 
     return localizedName;
   }
+
+  public String getItemStackDisplayName(String localizedName, String nameType, String name) {
+
+    return ModUtils.localize(ModUtils.localize("type"), nameType, name);
+  }
+
+//  public String getItemStackDisplayName(String localizedName, String type) {
+//    if (type != null) {
+//      String processedKey = localizedName.replaceFirst(Pattern.quote(type.getName()) + "[._]", "");
+//      return String.format(
+//        TranslatorUtils.translateToLocal(processedKey),
+//        TranslatorUtils.translateToLocal(type)
+//      );
+//    }
+//    return localizedName;
+//  }
 
   public static boolean canTranslateToLocal(String key) {
     return net.minecraft.util.text.translation.I18n.canTranslate(key);

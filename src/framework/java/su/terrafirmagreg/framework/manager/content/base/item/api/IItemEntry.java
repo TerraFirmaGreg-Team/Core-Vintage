@@ -54,10 +54,11 @@ public interface IItemEntry extends IContentEntry<ItemSettings, Item> {
   }
 
   @Override
-  default void preRegister() {
+  default void apply() {
     var settings = getSettings();
     settings.addOreDict(settings.getRegistryKey());
     asEntry()
+      .setTranslationKey(settings.getTranslateKey() != null ? settings.getTranslateKey() : ModUtils.localize(settings.getIdentifier()))
       .setHasSubtypes(settings.isHasSubtypes())
       .setMaxDamage(settings.getMaxDamage())
       .setMaxStackSize(settings.getMaxStackSize());
@@ -83,6 +84,8 @@ public interface IItemEntry extends IContentEntry<ItemSettings, Item> {
     protected IItemColor itemColor = null;
     protected CreativeTabs group;
     protected IRarity rarity = EnumRarity.COMMON;
+    protected String translateKey;
+    protected String translateArgument;
 
     protected boolean isFireResistant;
     protected boolean hasSubtypes;
@@ -103,7 +106,7 @@ public interface IItemEntry extends IContentEntry<ItemSettings, Item> {
         var settings = entry.getSettings();
         settingsItem
           .registryKey(settings.getRegistryKey())
-          .type(settings.getType())
+          .translateKey(settings.getTranslateKey(), settings.getTranslateArgument())
           .itemColor(settings.getItemColor())
           .customResource(settings.getResource())
           .rarity(settings.getRarity())
@@ -114,6 +117,19 @@ public interface IItemEntry extends IContentEntry<ItemSettings, Item> {
       }
 
       return settingsItem;
+    }
+
+    public ItemSettings translateKey(final String translateKey) {
+      if (translateKey != null) {
+        this.translateKey = ModUtils.replace(translateKey);
+      }
+      return this.self();
+    }
+
+    public ItemSettings translateKey(final String translateKey, String argument) {
+      this.translateKey(translateKey);
+      this.translateArgument = argument;
+      return this.self();
     }
 
     public ItemSettings maxDamage(int durability) {

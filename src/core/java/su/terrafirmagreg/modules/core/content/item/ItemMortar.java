@@ -10,7 +10,6 @@ public class ItemMortar extends BaseItem {
 
   public ItemMortar() {
     super(ItemSettings.of()
-      .registryKey("mortar")
       .capability(CapabilityProviderSize.of(Size.TINY, Weight.VERY_LIGHT))
     );
   }

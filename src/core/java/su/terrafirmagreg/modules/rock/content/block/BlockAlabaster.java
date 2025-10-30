@@ -13,6 +13,7 @@ public class BlockAlabaster extends BaseBlock {
     super(BlockSettings.of()
       .material(Material.ROCK)
       .mapColor(color.getDyeColor())
+      .withAllVariants()
       .addOreDict("alabaster")
       .addOreDict("alabaster", color)
       .sound(SoundType.STONE)

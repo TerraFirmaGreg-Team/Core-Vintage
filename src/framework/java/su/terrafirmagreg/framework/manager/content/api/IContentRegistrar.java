@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.manager.content.api;
 
+import su.terrafirmagreg.api.library.IStringLocalized;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.framework.manager.api.IBaseRegistrar;
 import su.terrafirmagreg.framework.manager.content.base.biome.api.IBiomeEntry;
@@ -35,7 +36,9 @@ public interface IContentRegistrar extends IBaseRegistrar<IContentEntry<?, ?>> {
 
   BaseItemGroup group(String icon);
 
-  <V extends IContentEntry<?, ?>> V addContent(V entry);
+  <V extends IContentEntry<?, ?>> void addContent(String identifier, V entry);
+
+  <V extends IContentEntry<?, ?>> void addContent(V entry);
 
   // --------------------------------------------------------------------------
   // - Block
@@ -43,19 +46,15 @@ public interface IContentRegistrar extends IBaseRegistrar<IContentEntry<?, ?>> {
 
   <V extends Block & IBlockEntry> V addBlock(String identifier, V entry);
 
-  <V extends Block & IBlockEntry, T> Map<T, V> addBlock(String identifier, Function<T, V> factory, Collection<T> types);
-
-  <V extends Block & IBlockEntry> V addBlock(V block);
-
-  <V extends Block & IBlockEntry, T> Map<T, V> addBlock(Function<T, V> factory, Collection<T> types);
+  <V extends Block & IBlockEntry, T extends IStringLocalized> Map<T, V> addBlock(String identifier, Function<T, V> factory, Collection<T> types);
 
   // --------------------------------------------------------------------------
   // - Item
   // --------------------------------------------------------------------------
 
-  <V extends Item & IItemEntry> V addItem(V item);
+  <V extends Item & IItemEntry> V addItem(String identifier, V entry);
 
-  <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Function<T, V> factory, Set<T> types);
+  <V extends Item & IItemEntry, T extends IStringLocalized> Map<T, V> addItem(String identifier, Function<T, V> factory, Collection<T> collection);
 
   // --------------------------------------------------------------------------
   // - Biome

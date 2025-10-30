@@ -49,7 +49,6 @@ public class ItemWoodBucket extends BaseItem {
 
   public ItemWoodBucket() {
     super(ItemSettings.of()
-      .registryKey("bucket/wood")
       .hasSubtypes()
       .capability(stack -> CapabilityProviderSize.of(Size.LARGE, Weight.MEDIUM, canStack(stack)))
     );

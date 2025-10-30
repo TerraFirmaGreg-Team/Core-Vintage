@@ -19,22 +19,20 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.MOSSY;
 @Getter
 public class BlockRockBricks extends BaseBlock implements IRockEntry {
 
-  public static final String NAME = "bricks";
   protected final RockType type;
 
   public BlockRockBricks(RockType type) {
     super(BlockSettings.of()
       .material(Material.ROCK)
       .withAllVariants()
-      .registryKey(type.getRegistryKey(NAME))
       .hardness(type.getHardness(6f))
       .sound(SoundType.STONE)
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .renderLayer(BlockRenderLayer.CUTOUT)
       .addOreDict("stoneBrick")
       .addOreDict("brickStone")
-      .addOreDict(NAME)
-      .addOreDict(NAME, type)
+      .addOreDict("bricks")
+      .addOreDict("bricks", type)
     );
 
     this.type = type;

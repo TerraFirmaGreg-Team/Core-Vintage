@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.rock.api.types.category.RockCategoryHandler;
 import su.terrafirmagreg.modules.rock.api.types.type.RockTypeHandler;
 import su.terrafirmagreg.modules.rock.feature.rocktype.types.IRockEntry;
 
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -38,7 +39,11 @@ public class FeatureRockType extends BaseFeature {
     if (!StackUtils.isValid(stack)) {return;}
 
     if (stack.getItem() instanceof IRockEntry rockEntry) {
-      tooltip.add(new TextComponentTranslation("rockcategory.name").getFormattedText() + ": " + rockEntry.getType().getCategory().getLocalizedName());
+      var rockCategory = rockEntry.getType().getCategory();
+      tooltip.add(String.format("%s: %s",
+        new TextComponentTranslation("tooltip.tfg.rock.layer.category").getFormattedText(),
+        new TextComponentTranslation(rockCategory.getLocalizedName()).setStyle(new Style().setColor(rockCategory.getTextFormatting())).getFormattedText()
+      ));
 
       if (rockEntry.getType().isFlux()) {
         tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("is_flux_rock.name").getFormattedText());

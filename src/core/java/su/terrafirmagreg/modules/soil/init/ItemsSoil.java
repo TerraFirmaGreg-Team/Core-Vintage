@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.soil.init;
 
 import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
-import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.content.item.ItemSoilMud;
 import su.terrafirmagreg.modules.soil.content.item.ItemSoilMudBrick;
 import su.terrafirmagreg.modules.soil.content.item.ItemSoilMudWetBrick;
 import su.terrafirmagreg.modules.soil.content.item.ItemSoilPile;
+import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 
 import java.util.Map;
 
@@ -17,10 +17,11 @@ public class ItemsSoil {
   public static Map<SoilType, ItemSoilMudWetBrick> MUD_BRICK_WET;
 
   public static void onRegister(IContentRegistrar registry) {
-    PILE = registry.addItem(ItemSoilPile::new, SoilType.getTypes());
-    MUD_BALL = registry.addItem(ItemSoilMud::new, SoilType.getTypes());
-    MUD_BRICK = registry.addItem(ItemSoilMudBrick::new, SoilType.getTypes());
-    MUD_BRICK_WET = registry.addItem(ItemSoilMudWetBrick::new, SoilType.getTypes());
+
+    PILE = registry.addItem("pile", ItemSoilPile::new, SoilType.getTypes());
+    MUD_BALL = registry.addItem("mud_ball", ItemSoilMud::new, SoilType.getTypes());
+    MUD_BRICK = registry.addItem("mud_brick", ItemSoilMudBrick::new, SoilType.getTypes());
+    MUD_BRICK_WET = registry.addItem("mud_brick_wet", ItemSoilMudWetBrick::new, SoilType.getTypes());
 
 
   }

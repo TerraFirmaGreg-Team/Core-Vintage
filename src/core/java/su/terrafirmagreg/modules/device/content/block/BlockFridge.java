@@ -71,7 +71,6 @@ public class BlockFridge extends BaseBlockHorizontal implements IProviderTile, I
   public BlockFridge() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("fridge")
       .hardness(3.0F)
       .nonOpaque()
       .nonFullCube()

@@ -29,15 +29,15 @@ public final class ItemsCore {
 
   public static void onRegister(IContentRegistrar registrar) {
 
-    DEBUG_WAND = registrar.addItem(new ItemDebugWand());
-    GLUE = registrar.addItem(new ItemGlue());
-    GLASS_SHARD = registrar.addItem(new ItemGlassShard());
-    ICE_SHARD = registrar.addItem(new ItemIceShard());
-    STRAW = registrar.addItem(new ItemStraw());
-    WOOD_ASH = registrar.addItem(new ItemWoodAsh());
-    MORTAR = registrar.addItem(new ItemMortar());
-    STICK_BUNDLE = registrar.addItem(new ItemStickBundle());
-    STICK_BUNCH = registrar.addItem(new ItemStickBunch());
+    DEBUG_WAND = registrar.addItem("wand", new ItemDebugWand());
+    GLUE = registrar.addItem("glue", new ItemGlue());
+    GLASS_SHARD = registrar.addItem("shard/glass", new ItemGlassShard());
+    ICE_SHARD = registrar.addItem("shard/ice", new ItemIceShard());
+    STRAW = registrar.addItem("straw", new ItemStraw());
+    WOOD_ASH = registrar.addItem("wood_ash", new ItemWoodAsh());
+    MORTAR = registrar.addItem("mortar", new ItemMortar());
+    STICK_BUNDLE = registrar.addItem("stick_bundle", new ItemStickBundle());
+    STICK_BUNCH = registrar.addItem("stick_bunch", new ItemStickBunch());
 
 
   }

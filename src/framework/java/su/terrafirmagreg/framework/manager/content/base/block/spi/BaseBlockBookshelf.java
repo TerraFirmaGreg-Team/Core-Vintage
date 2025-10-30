@@ -1,8 +1,6 @@
 package su.terrafirmagreg.framework.manager.content.base.block.spi;
 
-import su.terrafirmagreg.api.data.LocalizeKeys;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
-import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
 
 import net.minecraft.block.BlockBookshelf;
@@ -89,11 +87,6 @@ public abstract class BaseBlockBookshelf extends BlockBookshelf implements IBloc
   @Override
   public @Nullable AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
     return this.settings.isCollidable() ? super.getCollisionBoundingBox(blockState, worldIn, pos) : NULL_AABB;
-  }
-
-  @Override
-  public String getTranslationKey() {
-    return ModUtils.localize(LocalizeKeys.BLOCK, this.getRegistryName());
   }
 
   @Override

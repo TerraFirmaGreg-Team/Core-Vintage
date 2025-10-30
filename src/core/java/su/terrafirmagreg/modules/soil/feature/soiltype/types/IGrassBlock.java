@@ -2,9 +2,10 @@ package su.terrafirmagreg.modules.soil.feature.soiltype.types;
 
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.type.IType;
+import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
+import su.terrafirmagreg.modules.soil.content.block.BlockSoilPeat;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
-import su.terrafirmagreg.modules.soil.content.block.BlockSoilPeat;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -26,6 +27,13 @@ public interface IGrassBlock extends ISoilBlock {
       return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
     }
     Block block = worldIn.getBlockState(pos).getBlock();
+    if (!(block instanceof IBlockEntry blockEntry)) {
+      return;
+    }
+//    if (blockEntry.getSettings().getType() instanceof SoilType soilType) {
+//
+//    }
+
     if (block instanceof IType<?> type) {
       if (type.getType() instanceof SoilType soilType) {
 

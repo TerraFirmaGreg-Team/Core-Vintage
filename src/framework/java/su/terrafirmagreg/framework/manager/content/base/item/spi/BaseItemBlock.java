@@ -62,7 +62,7 @@ public class BaseItemBlock extends ItemBlock implements IItemEntry, IProviderBlo
     Supplier<EnumActionResult> resultSupplier = () -> super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 
     if (block instanceof IProviderBlockPlacement provider) {
-      provider.onItemUse(player.getHeldItem(hand), player, world, pos, hand, facing, hitX, hitY, hitZ, resultSupplier);
+      provider.onItemUse(resultSupplier, player.getHeldItem(hand), player, world, pos, hand, facing, hitX, hitY, hitZ);
     }
     return resultSupplier.get();
   }
@@ -72,7 +72,7 @@ public class BaseItemBlock extends ItemBlock implements IItemEntry, IProviderBlo
     Supplier<Boolean> resultSupplier = () -> super.canPlaceBlockOnSide(world, pos, side, player, stack);
 
     if (block instanceof IProviderBlockPlacement provider) {
-      return provider.canPlaceBlockOnSide(world, pos, side, player, stack, resultSupplier);
+      return provider.canPlaceBlockOnSide(resultSupplier, world, pos, side, player, stack);
     }
     return resultSupplier.get();
   }

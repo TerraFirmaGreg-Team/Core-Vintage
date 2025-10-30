@@ -10,7 +10,6 @@ public class BlockGreenhouseDoor extends BaseBlockDoor {
   public BlockGreenhouseDoor() {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey("greenhouse/door")
       .addOreDict("greenhouse")
       .sound(SoundType.METAL)
     );

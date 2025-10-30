@@ -23,7 +23,6 @@ public class BlockThatch extends BaseBlock {
   public BlockThatch() {
     super(BlockSettings.of()
       .material(Material.PLANTS)
-      .registryKey("thatch")
       .sound(SoundType.PLANT)
       .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)
       .nonOpaque()

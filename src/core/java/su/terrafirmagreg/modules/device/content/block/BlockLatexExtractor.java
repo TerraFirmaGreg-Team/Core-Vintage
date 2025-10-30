@@ -4,9 +4,9 @@ import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlock;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderTile;
-import su.terrafirmagreg.modules.device.init.SoundsDevice;
 import su.terrafirmagreg.modules.device.content.render.TESRLatexExtractor;
 import su.terrafirmagreg.modules.device.content.tile.TileLatexExtractor;
+import su.terrafirmagreg.modules.device.init.SoundsDevice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
@@ -46,7 +46,6 @@ public class BlockLatexExtractor extends BaseBlock implements IProviderTile {
   public BlockLatexExtractor() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("latex_extractor")
       .nonCube()
       .noItemBlock()
       .renderLayer(BlockRenderLayer.CUTOUT_MIPPED)

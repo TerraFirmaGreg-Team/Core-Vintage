@@ -4,12 +4,12 @@ import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockSapling;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderTile;
-import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.helper.GrassColorHelper;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
+import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
 import su.terrafirmagreg.modules.wood.content.itemblock.ItemBlockWoodSapling;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodSapling;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
+import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -55,7 +55,6 @@ public class BlockWoodSapling extends BaseBlockSapling implements IWoodEntry, IG
     this.type = type;
 
     getSettings()
-      .registryKey(type.getRegistryKey("sapling"))
       //.ignoresProperties(STAGE_2)
       .tile(TileWoodSapling.class)
       .sound(SoundType.PLANT)

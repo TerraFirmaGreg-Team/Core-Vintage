@@ -26,7 +26,6 @@ public class BlockBloom extends BaseBlockContainer {
   public BlockBloom() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("bloom")
       .hardness(3.0f)
       .tile(TileBloom.class)
       .sound(SoundType.STONE)

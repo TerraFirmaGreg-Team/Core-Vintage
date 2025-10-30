@@ -41,7 +41,6 @@ import static su.terrafirmagreg.api.data.Properties.BoolProp.MOSSY;
 public class BlockRockRaw extends BaseBlock implements IRockEntry {
 
 
-  public static final String NAME = "raw";
   protected final RockType type;
 
   /* This is for the not-surrounded-on-all-sides-pop-off mechanic. It's a dirty fix to the stack overflow caused by placement during water / lava collisions in world gen */

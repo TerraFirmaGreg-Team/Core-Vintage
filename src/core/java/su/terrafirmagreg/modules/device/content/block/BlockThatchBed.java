@@ -38,7 +38,6 @@ public class BlockThatchBed extends BaseBlockBed {
   public BlockThatchBed() {
     super(BlockSettings.of()
       .material(Material.CLOTH)
-      .registryKey("thatch_bed")
       .ignoresProperties(OCCUPIED)
       .sound(SoundType.CLOTH)
       .fireInfo(60, 20)

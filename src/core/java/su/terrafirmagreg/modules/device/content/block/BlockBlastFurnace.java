@@ -5,10 +5,10 @@ import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.TileUtils;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockContainer;
 import su.terrafirmagreg.modules.core.content.block.BlockFireBricks;
-import su.terrafirmagreg.modules.device.init.BlocksDevice;
 import su.terrafirmagreg.modules.device.content.item.ItemFireStarter;
 import su.terrafirmagreg.modules.device.content.tile.TileBellows;
 import su.terrafirmagreg.modules.device.content.tile.TileBlastFurnace;
+import su.terrafirmagreg.modules.device.init.BlocksDevice;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -75,7 +75,6 @@ public class BlockBlastFurnace extends BaseBlockContainer implements IBellowsCon
   public BlockBlastFurnace() {
     super(BlockSettings.of()
       .material(Material.IRON)
-      .registryKey("blast_furnace")
       .harvestLevel(ToolClasses.PICKAXE, 0)
       .renderType(EnumBlockRenderType.MODEL)
       .tile(TileBlastFurnace.class)

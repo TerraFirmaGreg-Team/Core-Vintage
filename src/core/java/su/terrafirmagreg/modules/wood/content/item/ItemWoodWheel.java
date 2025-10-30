@@ -20,7 +20,6 @@ public class ItemWoodWheel extends BaseItem implements IWoodEntry, IProviderItem
 
   public ItemWoodWheel(WoodType type) {
     super(ItemSettings.of()
-      .registryKey(type.getRegistryKey("wheel"))
       .customResource(type.getResource("wheel"))
       .addOreDict("wheel")
       .capability(CapabilityProviderSize.of(Size.NORMAL, Weight.HEAVY))

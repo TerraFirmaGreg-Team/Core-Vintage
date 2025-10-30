@@ -3,10 +3,10 @@ package su.terrafirmagreg.modules.soil.content.block;
 import su.terrafirmagreg.api.data.Tags;
 import su.terrafirmagreg.api.helper.BlockHelper;
 import su.terrafirmagreg.api.library.types.type.IType;
+import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockFalling;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockManager;
-import su.terrafirmagreg.modules.soil.content.block.spi.BlockSoil;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.IGrassBlock;
 import su.terrafirmagreg.modules.soil.feature.soiltype.types.type.SoilType;
 import su.terrafirmagreg.modules.soil.init.BlocksSoil;
@@ -42,11 +42,12 @@ import static su.terrafirmagreg.modules.core.feature.falling.spi.FallingBlockMan
 
 @Getter
 @SuppressWarnings("deprecation")
-public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IGrassBlock {
+public class BlockSoilGrass extends BaseBlockFalling implements IProviderBlockColor, IGrassBlock {
 
+  protected final SoilType type;
 
   public BlockSoilGrass(SoilType type) {
-    super(type, BlockSettings.of()
+    super(BlockSettings.of()
       .material(Material.GRASS)
       .tag(Tags.GRASS)
       .sound(SoundType.PLANT)
@@ -54,6 +55,8 @@ public class BlockSoilGrass extends BlockSoil implements IProviderBlockColor, IG
       .randomTicks()
       .renderLayer(BlockRenderLayer.CUTOUT)
     );
+
+    this.type = type;
 
     setDefaultState(getBlockState().getBaseState()
       .withProperty(NORTH, Boolean.FALSE)

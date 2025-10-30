@@ -29,7 +29,6 @@ public class BlockFreezeDryer extends BaseBlockContainer {
   public BlockFreezeDryer() {
     super(BlockSettings.of()
       .material(Material.WOOD)
-      .registryKey("freeze_dryer")
       .tile(TileFreezeDryer.class)
       .renderType(EnumBlockRenderType.MODEL)
       .nonCube()

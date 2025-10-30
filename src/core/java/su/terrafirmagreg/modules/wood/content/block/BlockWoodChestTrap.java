@@ -17,7 +17,6 @@ public class BlockWoodChestTrap extends BlockWoodChest {
     super(Type.TRAP, type);
 
     getSettings()
-      .registryKey(type.getRegistryKey("chest_trapped"))
       .customResource(type.getResource("chest_trapped"))
       .ignoresProperties(BlockChest.FACING)
       .sound(SoundType.WOOD)

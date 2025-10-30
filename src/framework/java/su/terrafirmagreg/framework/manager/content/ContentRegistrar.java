@@ -1,5 +1,6 @@
 package su.terrafirmagreg.framework.manager.content;
 
+import su.terrafirmagreg.api.library.IStringLocalized;
 import su.terrafirmagreg.api.library.types.type.Type;
 import su.terrafirmagreg.api.util.KeyBindUtils;
 import su.terrafirmagreg.api.util.LootUtils;
@@ -64,84 +65,92 @@ public class ContentRegistrar implements IContentRegistrar {
   }
 
   // region Block
+  @Override
+  public <V extends IContentEntry<?, ?>> void addContent(String identifier, V entry) {
+    this.group = group != null ? group : BaseItemGroup.of(module.getIdentifier(), getIdentifier(identifier));
+    entry.getSettings().registryKey(identifier);
+    addContent(entry);
+  }
 
   @Override
-  public <V extends IContentEntry<?, ?>> V addContent(V entry) {
-    addEntry(entry);
+  public <V extends IContentEntry<?, ?>> void addContent(V entry) {
 
-    return entry;
+    addEntry(entry);
   }
+
 
   @Override
   public <V extends Block & IBlockEntry> V addBlock(String identifier, V entry) {
-    var settings = entry.getSettings().registryKey(identifier).group(group);
-
-    this.addEntry(entry);
-
-    if (settings.getItemBlock() != null) {
-      this.addItem(settings.getRegistryKey(), settings.getItemBlock().apply(entry));
-    }
-    if (settings.getStairsBlock() != null) {
-      this.addBlock(settings.getRegistryKey() + "_stairs", settings.getStairsBlock().apply(entry));
-    }
-    if (settings.getWallBlock() != null) {
-      this.addBlock(settings.getRegistryKey() + "_wall", settings.getWallBlock().apply(entry));
-    }
-    if (settings.getSlabDoubleBlock() != null) {
-      this.addBlock(settings.getRegistryKey() + "_slab_double", settings.getSlabDoubleBlock().apply(entry));
-      this.addBlock(settings.getRegistryKey() + "_slab", settings.getSlabSingleBlock().apply(entry));
-    }
-
-    return entry;
-  }
-
-  @Override
-  public <V extends Block & IBlockEntry, T> Map<T, V> addBlock(String identifier, Function<T, V> factory, Collection<T> types) {
-    return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBlock(String.format("%s/%s", identifier, type), factory.apply(type))));
-  }
-
-  @Override
-  public <V extends Block & IBlockEntry> V addBlock(V entry) {
-
     var settings = entry.getSettings();
 
-    this.addBlock(settings.getRegistryKey(), entry);
+    this.addContent(identifier, entry);
+
+    if (settings.getItemBlock() != null) {
+      this.addItem(identifier, settings.getItemBlock().apply(entry));
+    }
+    if (settings.getStairsBlock() != null) {
+      this.addBlock(identifier + "_stairs", settings.getStairsBlock().apply(entry));
+    }
+    if (settings.getWallBlock() != null) {
+      this.addBlock(identifier + "_wall", settings.getWallBlock().apply(entry));
+    }
+    if (settings.getSlabDoubleBlock() != null) {
+      this.addBlock(identifier + "_slab_double", settings.getSlabDoubleBlock().apply(entry));
+      this.addBlock(identifier + "_slab", settings.getSlabSingleBlock().apply(entry));
+    }
 
     return entry;
   }
 
   @Override
-  public <V extends Block & IBlockEntry, T> Map<T, V> addBlock(Function<T, V> factory, Collection<T> types) {
+  public <V extends Block & IBlockEntry, T extends IStringLocalized> Map<T, V> addBlock(String identifier, Function<T, V> factory, Collection<T> collection) {
+    return collection.stream().collect(Collectors.toMap(Function.identity(), type -> {
 
-    return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addBlock(factory.apply(type))));
+      var entry = factory.apply(type);
+
+      entry.getSettings().translateKey(
+        ModUtils.localize(getIdentifier(identifier)),
+        type.getTranslationKey()
+      );
+
+      return this.addBlock(
+        String.format("%s/%s", identifier, type),
+        entry
+      );
+    }));
+
   }
 
   // endregion
 
   // region Item
 
-
+  @Override
   public <V extends Item & IItemEntry> V addItem(String identifier, V entry) {
-    var settings = entry.getSettings().registryKey(identifier).group(group);
 
-    this.addEntry(entry);
+    group.addToTab(entry);
+
+    this.addContent(identifier, entry);
 
     return entry;
   }
 
   @Override
-  public <V extends Item & IItemEntry> V addItem(V entry) {
+  public <V extends Item & IItemEntry, T extends IStringLocalized> Map<T, V> addItem(String identifier, Function<T, V> factory, Collection<T> collection) {
+    return collection.stream().collect(Collectors.toMap(Function.identity(), type -> {
 
-    var settings = entry.getSettings();
+      var entry = factory.apply(type);
+      entry.getSettings().translateKey(
+        ModUtils.localize(getIdentifier(identifier)),
+        type.getTranslationKey()
+      );
 
-    this.addItem(settings.getRegistryKey(), entry);
-    return entry;
-  }
+      return this.addItem(
+        String.format("%s/%s", identifier, type),
+        entry
+      );
+    }));
 
-  @Override
-  public <V extends Item & IItemEntry, T extends Type<T>> Map<T, V> addItem(Function<T, V> factory, Set<T> types) {
-
-    return types.stream().collect(Collectors.toMap(Function.identity(), type -> this.addItem(factory.apply(type))));
   }
 
   // endregion
@@ -152,7 +161,7 @@ public class ContentRegistrar implements IContentRegistrar {
   @Override
   public <V extends Biome & IBiomeEntry> V addBiome(V entry) {
 
-    this.addEntry(entry);
+    this.addContent(entry);
     return entry;
   }
 
@@ -169,7 +178,7 @@ public class ContentRegistrar implements IContentRegistrar {
   @Override
   public <V extends Enchantment & IEnchantmentEntry> V addEnchantment(V entry) {
 
-    this.addEntry(entry);
+    this.addContent(entry);
     return entry;
   }
 
@@ -186,7 +195,7 @@ public class ContentRegistrar implements IContentRegistrar {
 
   @Override
   public <V extends Potion & IEffectEntry> V addEffect(V entry) {
-    this.addEntry(entry);
+    this.addContent(entry);
     return entry;
   }
 
@@ -203,7 +212,7 @@ public class ContentRegistrar implements IContentRegistrar {
   @Override
   public <V extends PotionType & IPotionEntry> V addPotion(V entry) {
 
-    this.addEntry(entry);
+    this.addContent(entry);
     return entry;
   }
 
@@ -220,7 +229,7 @@ public class ContentRegistrar implements IContentRegistrar {
   @Override
   public <V extends EntityEntry & IEntityEntry> V addEntity(V entry) {
 
-    this.addEntry(entry);
+    this.addContent(entry);
     return entry;
   }
 
@@ -237,16 +246,16 @@ public class ContentRegistrar implements IContentRegistrar {
   @Override
   public <V extends SoundEvent & ISoundEntry> V addSound(V entry) {
 
-    this.addEntry(entry);
+    this.addContent(entry);
     return entry;
   }
 
   @Override
   public <V extends SoundEvent> SoundEvent addSound(String identifier) {
 
-    var soundEvent = new BaseSound(SoundSettings.of().name(getIdentifier(identifier)).registryKey(identifier));
-    this.addEntry(soundEvent);
-    return soundEvent;
+    var entry = new BaseSound(SoundSettings.of().name(getIdentifier(identifier)).registryKey(identifier));
+    this.addContent(entry);
+    return entry;
   }
 
   @Override

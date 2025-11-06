@@ -1,6 +1,7 @@
 package net.dries007.tfc.proxy;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
@@ -19,7 +20,7 @@ public class ClientProxy implements IProxy {
   @Override
   public IThreadListener getThreadListener(MessageContext context) {
     if (context.side.isClient()) {
-      return Minecraft.getMinecraft();
+      return GameUtils.getMinecraft();
     } else {
       return context.getServerHandler().player.server;
     }
@@ -29,7 +30,7 @@ public class ClientProxy implements IProxy {
   @Nullable
   public EntityPlayer getPlayer(MessageContext context) {
     if (context.side.isClient()) {
-      return Minecraft.getMinecraft().player;
+      return GameUtils.getPlayer();
     } else {
       return context.getServerHandler().player;
     }
@@ -39,7 +40,7 @@ public class ClientProxy implements IProxy {
   @Nullable
   public World getWorld(MessageContext context) {
     if (context.side.isClient()) {
-      return Minecraft.getMinecraft().world;
+      return GameUtils.getWorld();
     } else {
       return context.getServerHandler().player.getEntityWorld();
     }

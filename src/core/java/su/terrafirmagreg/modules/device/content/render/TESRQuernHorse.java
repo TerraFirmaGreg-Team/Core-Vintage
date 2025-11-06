@@ -1,10 +1,11 @@
 package su.terrafirmagreg.modules.device.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.RenderUtils;
 import su.terrafirmagreg.modules.device.content.block.BlockQuernHorse;
 import su.terrafirmagreg.modules.device.content.tile.TileQuernHorse;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,7 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.dries007.horsepower.blocks.BlockHPBase;
 import net.dries007.horsepower.client.model.modelvariants.GrindStoneModels;
 import net.dries007.horsepower.client.renderer.TileEntityHPBaseRenderer;
-import net.dries007.horsepower.util.RenderUtils;
 import org.lwjgl.opengl.GL11;
 
 public class TESRQuernHorse extends TileEntityHPBaseRenderer<TileQuernHorse> {
@@ -36,7 +36,7 @@ public class TESRQuernHorse extends TileEntityHPBaseRenderer<TileQuernHorse> {
 
       Tessellator tessellator = Tessellator.getInstance();
       BufferBuilder buffer = tessellator.getBuffer();
-      BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+      BlockRendererDispatcher dispatcher = GameUtils.getBlockRenderer();
 
       IBakedModel filledModel = dispatcher.getBlockModelShapes().getModelForState(filledState);
 

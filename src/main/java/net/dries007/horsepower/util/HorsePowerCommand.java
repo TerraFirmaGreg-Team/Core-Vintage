@@ -1,14 +1,7 @@
 package net.dries007.horsepower.util;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nullable;
+import su.terrafirmagreg.api.util.GameUtils;
 
-import com.google.common.collect.Lists;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -25,8 +18,15 @@ import net.minecraftforge.client.IClientCommand;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.collect.Lists;
 import net.dries007.horsepower.HPEventHandler;
 import net.dries007.horsepower.recipes.HPRecipes;
+
+import javax.annotation.Nullable;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.util.Collections;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class HorsePowerCommand extends CommandBase implements IClientCommand {
@@ -46,7 +46,7 @@ public class HorsePowerCommand extends CommandBase implements IClientCommand {
     if (args.length == 1) {
       if ("entity".equals(args[0])) {
         if (sender instanceof EntityPlayerSP) {
-          RayTraceResult result = Minecraft.getMinecraft().objectMouseOver;
+          RayTraceResult result = GameUtils.getMinecraft().objectMouseOver;
 
           if (result != null && result.typeOfHit == RayTraceResult.Type.ENTITY) {
             Entity entity = result.entityHit;

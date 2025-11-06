@@ -1,6 +1,7 @@
 package net.dries007.horsepower.blocks;
 
 import su.terrafirmagreg.api.data.ToolClasses;
+import su.terrafirmagreg.api.util.RenderUtils;
 import su.terrafirmagreg.modules.device.content.tile.TileChopperHorse;
 import su.terrafirmagreg.modules.device.content.tile.TileChopperManual;
 
@@ -28,7 +29,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.dries007.horsepower.Configs;
 import net.dries007.horsepower.blocks.property.PropertyUnlistedString;
 import net.dries007.horsepower.tileentity.TileEntityHPBase;
-import net.dries007.horsepower.util.RenderUtils;
 import net.dries007.horsepower.util.Utils;
 
 import javax.annotation.Nonnull;

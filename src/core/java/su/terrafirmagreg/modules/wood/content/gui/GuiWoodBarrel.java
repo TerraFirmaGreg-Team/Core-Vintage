@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.content.gui;
 
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.gui.button.api.IButtonTooltip;
 import su.terrafirmagreg.framework.manager.content.base.gui.inventory.spi.BaseGuiContainerTile;
@@ -9,7 +10,6 @@ import su.terrafirmagreg.modules.wood.content.button.GuiButtonBarrelSeal;
 import su.terrafirmagreg.modules.wood.content.container.ContainerWoodBarrel;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodBarrel;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -150,7 +150,7 @@ public class GuiWoodBarrel extends BaseGuiContainerTile<TileWoodBarrel> {
           int positionX = guiLeft + 8;
           int positionY = guiTop + 54;
 
-          Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+          GameUtils.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
           BufferBuilder buffer = Tessellator.getInstance().getBuffer();
 
           GlStateManager.enableAlpha();
@@ -203,7 +203,7 @@ public class GuiWoodBarrel extends BaseGuiContainerTile<TileWoodBarrel> {
 
           Tessellator.getInstance().draw();
 
-          Minecraft.getMinecraft().renderEngine.bindTexture(BACKGROUND);
+          GameUtils.getTextureManager().bindTexture(BACKGROUND);
           GlStateManager.color(1, 1, 1, 1);
         }
       }

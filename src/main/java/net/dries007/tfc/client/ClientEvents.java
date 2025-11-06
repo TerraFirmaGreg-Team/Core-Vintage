@@ -1,6 +1,7 @@
 package net.dries007.tfc.client;
 
 import su.terrafirmagreg.api.data.LocalizeKeys;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.api.util.TranslatorUtils;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.Calendar;
@@ -117,7 +118,7 @@ public class ClientEvents {
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
   public static void onRenderGameOverlayText(RenderGameOverlayEvent.Text event) {
-    Minecraft mc = Minecraft.getMinecraft();
+    Minecraft mc = GameUtils.getMinecraft();
     List<String> list = event.getRight();
     if (mc.gameSettings.showDebugInfo) {
       //noinspection ConstantConditions

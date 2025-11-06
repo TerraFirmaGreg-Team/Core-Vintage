@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.particle;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -74,7 +75,7 @@ public enum TFCParticles {
   public void spawn(World worldIn, double x, double y, double z, double speedX, double speedY, double speedZ, int duration) {
     Particle particle = factorySupplier.get().createParticle(worldIn, x, y, z, speedX, speedY, speedZ, duration);
     particle.setParticleTexture(sprite);
-    Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+    GameUtils.getMinecraft().effectRenderer.addEffect(particle);
   }
 
   /**

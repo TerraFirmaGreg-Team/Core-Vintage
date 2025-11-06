@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.render;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -26,7 +27,7 @@ import javax.annotation.Nonnull;
 
 public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
 
-  private final RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
+  private final RenderItem itemRenderer = GameUtils.getRenderItem();
 
   public RenderThrownRopeJavelin(RenderManager renderManager) {
     super(renderManager);
@@ -108,7 +109,7 @@ public class RenderThrownRopeJavelin extends Render<EntityThrownRopeJavelin> {
       double d6;
       double d7;
 
-      if ((this.renderManager.options == null || this.renderManager.options.thirdPersonView <= 0) && entityplayer == Minecraft.getMinecraft().player) {
+      if ((this.renderManager.options == null || this.renderManager.options.thirdPersonView <= 0) && entityplayer == GameUtils.getPlayer()) {
         float f10 = this.renderManager.options.fovSetting;
         f10 = f10 / 100.0F;
         Vec3d vec3d = new Vec3d((double) k * -0.36D * (double) f10, -0.045D * (double) f10, 0.4D);

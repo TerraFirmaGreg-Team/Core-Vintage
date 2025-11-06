@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.content.render;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.framework.manager.content.base.tesr.spi.BaseTESR;
 import su.terrafirmagreg.modules.device.content.tile.TileOven;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -59,7 +59,7 @@ public class TESROven extends BaseTESR<TileOven> {
       ItemStack fuel1 = cap.getStackInSlot(SLOT_FUEL_1);
       ItemStack fuel2 = cap.getStackInSlot(SLOT_FUEL_2);
       ItemStack main = cap.getStackInSlot(SLOT_MAIN);
-      RenderItem renderer = Minecraft.getMinecraft().getRenderItem();
+      RenderItem renderer = GameUtils.getRenderItem();
       if (!fuel1.isEmpty()) {
         renderer.renderItem(fuel1, ItemCameraTransforms.TransformType.FIXED);
       }

@@ -1,12 +1,13 @@
 package net.dries007.horsepower.blocks;
 
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -273,7 +274,7 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
     if (!validateFilled(world, state1, target.getBlockPos())) {return true;}
     RayTraceResult target1 = new RayTraceResult(target.typeOfHit, target.hitVec.subtract(0, 1, 0), target.sideHit, pos);
     boolean flag = state1.getBlock().addHitEffects(state1, world, target1, manager);
-    if (!flag) {Minecraft.getMinecraft().effectRenderer.addBlockHitEffects(pos, target.sideHit);}
+    if (!flag) {GameUtils.getMinecraft().effectRenderer.addBlockHitEffects(pos, target.sideHit);}
     return true;
   }
 
@@ -284,7 +285,7 @@ public class BlockFiller extends BlockDirectional implements IProbeInfoAccessor 
     IBlockState state1 = world.getBlockState(pos);
     if (!validateFilled(world, state1, pos0)) {return true;}
     boolean flag = state1.getBlock().addDestroyEffects(world, pos, manager);
-    if (!flag) {Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, state1);}
+    if (!flag) {GameUtils.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, state1);}
     return true;
   }
 

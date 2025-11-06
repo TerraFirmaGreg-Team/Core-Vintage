@@ -1,5 +1,9 @@
 package net.dries007.horsepower.blocks;
 
+import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
+import su.terrafirmagreg.modules.core.feature.size.spi.Size;
+import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,14 +24,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
-import su.terrafirmagreg.modules.core.feature.size.spi.Size;
-import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
-
-import net.dries007.tfc.objects.CreativeTabsTFC;
 import net.dries007.horsepower.tileentity.TileEntityHPBase;
 import net.dries007.horsepower.tileentity.TileEntityHPHorseBase;
 import net.dries007.horsepower.util.Utils;
+import net.dries007.tfc.objects.CreativeTabsTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -102,8 +102,7 @@ public abstract class BlockHPBase extends Block implements ICapabilitySize {
       for (Class<? extends Entity> clazz : clazzes) {
         for (Object entity : worldIn.getEntitiesWithinAABB(clazz, new AxisAlignedBB(
           (double) x - 7.0D, (double) y - 7.0D, (double) z - 7.0D, (double) x + 7.0D, (double) y + 7.0D, (double) z + 7.0D))) {
-          if (entity instanceof EntityCreature) {
-            EntityCreature tmp = (EntityCreature) entity;
+          if (entity instanceof EntityCreature tmp) {
             if ((tmp.getLeashed() && tmp.getLeashHolder() == playerIn)) {
               creature = tmp;
               break search;

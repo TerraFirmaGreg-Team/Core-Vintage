@@ -1,10 +1,14 @@
 package net.dries007.horsepower.client.renderer;
 
-import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.RenderUtils;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -17,7 +21,7 @@ import net.dries007.horsepower.blocks.BlockHPBase;
 import net.dries007.horsepower.blocks.BlockPress;
 import net.dries007.horsepower.client.model.modelvariants.PressModels;
 import net.dries007.horsepower.tileentity.TileEntityPress;
-import net.dries007.horsepower.util.RenderUtils;
+import org.lwjgl.opengl.GL11;
 
 public class TileEntityPressRender extends TileEntityHPBaseRenderer<TileEntityPress> {
 
@@ -25,7 +29,7 @@ public class TileEntityPressRender extends TileEntityHPBaseRenderer<TileEntityPr
   public void render(TileEntityPress te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     Tessellator tessellator = Tessellator.getInstance();
     BufferBuilder buffer = tessellator.getBuffer();
-    BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+    BlockRendererDispatcher dispatcher = GameUtils.getBlockRenderer();
     IBlockState blockState = te.getWorld().getBlockState(te.getPos());
     if (!(blockState.getBlock() instanceof BlockHPBase)) {return;}
     IBlockState topState = blockState.withProperty(BlockPress.PART, PressModels.TOP);
@@ -82,14 +86,14 @@ public class TileEntityPressRender extends TileEntityHPBaseRenderer<TileEntityPr
     FluidStack stack = tankProperties.getContents();
     if (stack != null && move <= 0.25) {
       float amount = (0.75F / ((float) tankProperties.getCapacity())) * stack.amount;
-      TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(stack.getFluid().getStill().toString());
+      TextureAtlasSprite sprite = GameUtils.getTextureMapBlocks().getAtlasSprite(stack.getFluid().getStill().toString());
       int fluidColor = stack.getFluid().getColor(stack);
 
       GlStateManager.disableLighting();
       GlStateManager.pushMatrix();
       GlStateManager.enableBlend();
       GlStateManager.translate(x, y + 0.07, z);
-      Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+      GameUtils.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
       float red = (fluidColor >> 16 & 0xFF) / 255.0F;
       float green = (fluidColor >> 8 & 0xFF) / 255.0F;
       float blue = (fluidColor & 0xFF) / 255.0F;

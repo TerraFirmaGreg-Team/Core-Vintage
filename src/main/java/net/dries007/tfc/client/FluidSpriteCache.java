@@ -1,6 +1,7 @@
 package net.dries007.tfc.client;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraftforge.fluids.Fluid;
 
@@ -16,7 +17,7 @@ public class FluidSpriteCache {
     TextureAtlasSprite sprite = CACHESTILL.get(fluid);
 
     if (sprite == null) {
-      sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getStill().toString());
+      sprite = GameUtils.getTextureMapBlocks().getAtlasSprite(fluid.getStill().toString());
       CACHESTILL.put(fluid, sprite);
     }
 
@@ -27,7 +28,7 @@ public class FluidSpriteCache {
     TextureAtlasSprite sprite = CACHEFLOWING.get(fluid);
 
     if (sprite == null) {
-      sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getFlowing().toString());
+      sprite = GameUtils.getTextureMapBlocks().getAtlasSprite(fluid.getFlowing().toString());
       CACHEFLOWING.put(fluid, sprite);
     }
 

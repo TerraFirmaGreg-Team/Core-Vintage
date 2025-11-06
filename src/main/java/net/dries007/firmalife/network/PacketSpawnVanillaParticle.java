@@ -1,6 +1,7 @@
 package net.dries007.firmalife.network;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -57,11 +58,10 @@ public class PacketSpawnVanillaParticle implements IMessage {
     public IMessage onMessage(PacketSpawnVanillaParticle message, MessageContext ctx) {
       if (ctx.side.isClient()) // always true but we'll be defensive here
       {
-        Minecraft mc = Minecraft.getMinecraft();
-        mc.addScheduledTask(() -> {
+        GameUtils.getMinecraft().addScheduledTask(() -> {
           EnumParticleTypes particle = EnumParticleTypes.getParticleFromId(message.particleID);
           if (particle != null) {
-            mc.world.spawnParticle(particle, message.x, message.y, message.z, message.speedX, message.speedY, message.speedZ);
+            GameUtils.getWorld().spawnParticle(particle, message.x, message.y, message.z, message.speedX, message.speedY, message.speedZ);
           }
         });
       }

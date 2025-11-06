@@ -1,23 +1,10 @@
 package net.dries007.horsepower.client.model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.vecmath.Matrix4f;
-
-import com.google.common.base.Function;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-import org.apache.commons.lang3.tuple.Pair;
+import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.RenderUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -36,9 +23,22 @@ import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
+import com.google.common.base.Function;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import net.dries007.horsepower.blocks.BlockChopper;
 import net.dries007.horsepower.blocks.BlockHPChoppingBase;
-import net.dries007.horsepower.util.RenderUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.vecmath.Matrix4f;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class BakedChopperModel implements IBakedModel {
 
@@ -61,7 +61,7 @@ public class BakedChopperModel implements IBakedModel {
     textureGetter = location ->
     {
       assert location != null;
-      return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
+      return GameUtils.getTextureMapBlocks().getAtlasSprite(location.toString());
     };
   }
 
@@ -72,8 +72,7 @@ public class BakedChopperModel implements IBakedModel {
     String top_texture = null;
     EnumFacing face = EnumFacing.SOUTH;
 
-    if (state instanceof IExtendedBlockState) {
-      IExtendedBlockState extendedState = (IExtendedBlockState) state;
+    if (state instanceof IExtendedBlockState extendedState) {
       if (extendedState.getUnlistedNames().contains(BlockHPChoppingBase.SIDE_TEXTURE)) {
         side_texture = extendedState.getValue(BlockHPChoppingBase.SIDE_TEXTURE);
       }

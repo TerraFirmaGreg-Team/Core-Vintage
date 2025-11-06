@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.wood.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodToolRack;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -77,9 +77,7 @@ public class TESRWoodToolRack extends TileEntitySpecialRenderer<TileWoodToolRack
             z + ITEM_LOCATION[dir][i][2]);
           GlStateManager.rotate(META_TO_ANGLE[dir], 0.0F, 1.0F, 0.0F);
           GlStateManager.scale(blockScale, blockScale, blockScale);
-          Minecraft.getMinecraft()
-            .getRenderItem()
-            .renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+          GameUtils.getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
           GlStateManager.popMatrix();
         }
       }

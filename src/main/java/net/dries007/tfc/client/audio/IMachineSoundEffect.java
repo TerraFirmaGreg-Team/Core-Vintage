@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.audio;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,7 +27,7 @@ public interface IMachineSoundEffect {
       setPlaying(true);
       MachineSound sound = new MachineSound(this);
       // Play sound on client side
-      Minecraft.getMinecraft().getSoundHandler().playSound(sound);
+      GameUtils.getMinecraft().getSoundHandler().playSound(sound);
     } else if (!shouldPlay()) {
       setPlaying(false);
     }

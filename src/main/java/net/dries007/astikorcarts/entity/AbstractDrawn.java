@@ -1,8 +1,8 @@
 package net.dries007.astikorcarts.entity;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -146,7 +146,7 @@ public abstract class AbstractDrawn extends Entity implements IEntityAdditionalS
    */
   @SideOnly(Side.CLIENT)
   public float getWheelRotation() {
-    if (this.pulling != null && !Minecraft.getMinecraft().isGamePaused()) {
+    if (this.pulling != null && !GameUtils.getMinecraft().isGamePaused()) {
       this.wheelrot -= 0.12F * this.factor;
     }
     return this.wheelrot;

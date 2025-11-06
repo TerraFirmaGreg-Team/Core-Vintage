@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.device.content.render;
 
 import su.terrafirmagreg.api.data.enums.EnumFirePitAttachment;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.framework.manager.content.base.tesr.spi.BaseTESR;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.content.block.BlockFirePit;
 import su.terrafirmagreg.modules.device.content.tile.TileFirePit;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -124,9 +124,7 @@ public class TESRFirePit extends BaseTESR<TileFirePit> {
           for (int i = SLOT_EXTRA_INPUT_START; i <= SLOT_EXTRA_INPUT_END; i++) {
             ItemStack item = cap.getStackInSlot(i);
             if (!item.isEmpty()) {
-              Minecraft.getMinecraft()
-                .getRenderItem()
-                .renderItem(item, ItemCameraTransforms.TransformType.FIXED);
+              GameUtils.getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
             }
 
             GlStateManager.translate(-leftTranslate, 0, 0);

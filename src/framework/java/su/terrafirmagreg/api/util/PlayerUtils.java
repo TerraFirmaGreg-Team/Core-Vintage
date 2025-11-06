@@ -340,7 +340,7 @@ public final class PlayerUtils {
   @Deprecated
   public static EntityPlayer getClientPlayer() {
 
-    return Minecraft.getMinecraft().player;
+    return GameUtils.getMinecraft().player;
   }
 
   /**
@@ -349,7 +349,7 @@ public final class PlayerUtils {
   @SideOnly(Side.CLIENT)
   public static EntityPlayerSP getClientPlayerSP() {
 
-    return Minecraft.getMinecraft().player;
+    return GameUtils.getMinecraft().player;
   }
 
   /**
@@ -361,7 +361,7 @@ public final class PlayerUtils {
   @SideOnly(Side.CLIENT)
   public static void sendSpamlessMessage(int messageID, ITextComponent message) {
 
-    final GuiNewChat chat = Minecraft.getMinecraft().ingameGUI.getChatGUI();
+    final GuiNewChat chat = GameUtils.getMinecraft().ingameGUI.getChatGUI();
     chat.printChatMessageWithOptionalDeletion(message, messageID);
   }
 
@@ -373,7 +373,7 @@ public final class PlayerUtils {
   @SideOnly(Side.CLIENT)
   public static boolean isPlayerInGame() {
 
-    final Minecraft mc = Minecraft.getMinecraft();
+    final Minecraft mc = GameUtils.getMinecraft();
     return mc.player != null && mc.world != null && mc.player.world != null;
   }
 
@@ -385,7 +385,7 @@ public final class PlayerUtils {
   @SideOnly(Side.CLIENT)
   public static UUID getClientUUID() {
 
-    return fixStrippedUUID(Minecraft.getMinecraft().getSession().getPlayerID());
+    return fixStrippedUUID(GameUtils.getMinecraft().getSession().getPlayerID());
   }
 
   /**
@@ -471,7 +471,7 @@ public final class PlayerUtils {
     // Validate the profile first.
     if (profile != null) {
 
-      final Minecraft minecraft = Minecraft.getMinecraft();
+      final Minecraft minecraft = GameUtils.getMinecraft();
 
       // Load skin data about the profile.
       final Map<Type, MinecraftProfileTexture> map = minecraft.getSkinManager().loadSkinFromCache(profile);

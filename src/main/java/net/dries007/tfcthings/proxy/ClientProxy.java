@@ -1,8 +1,8 @@
 package net.dries007.tfcthings.proxy;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.device.content.tile.TileGrindstone;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -19,8 +19,6 @@ import net.dries007.tfc.objects.te.TEGemDisplay;
 import net.dries007.tfcthings.init.TFCThingsEntities;
 
 public class ClientProxy extends CommonProxy {
-
-  private final Minecraft MINECRAFT = Minecraft.getMinecraft();
 
   @Override
   public void preInit(FMLPreInitializationEvent event) {
@@ -52,14 +50,14 @@ public class ClientProxy extends CommonProxy {
 
   public IThreadListener getThreadListener(final MessageContext context) {
     if (context.side.isClient()) {
-      return MINECRAFT;
+      return GameUtils.getMinecraft();
     } else {
       return context.getServerHandler().player.server;
     }
   }
 
   public void syncJavelinGroundState(int javelinID, boolean inGround) {
-    EntityThrownHookJavelin javelin = (EntityThrownHookJavelin) MINECRAFT.world.getEntityByID(javelinID);
+    EntityThrownHookJavelin javelin = (EntityThrownHookJavelin) GameUtils.getWorld().getEntityByID(javelinID);
     javelin.setInGroundSynced(inGround);
   }
 

@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.device.content.tile.TileQuern;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -70,11 +70,11 @@ public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
 
           GlStateManager.scale(0.125, 0.125, 0.125);
 
-          IBakedModel outputModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(output, te.getWorld(), null);
+          IBakedModel outputModel = GameUtils.getRenderItem().getItemModelWithOverrides(output, te.getWorld(), null);
           outputModel = ForgeHooksClient.handleCameraTransforms(outputModel, ItemCameraTransforms.TransformType.FIXED, false);
 
-          Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-          Minecraft.getMinecraft().getRenderItem().renderItem(output, outputModel);
+          GameUtils.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+          GameUtils.getRenderItem().renderItem(output, outputModel);
 
           GlStateManager.popMatrix();
           GlStateManager.disableRescaleNormal();
@@ -98,12 +98,12 @@ public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
           GlStateManager.rotate((rotationTicks - partialTicks) * 4, 0, 1, 0);
         }
 
-        IBakedModel handstoneModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(handstone, te.getWorld(), null);
+        IBakedModel handstoneModel = GameUtils.getRenderItem().getItemModelWithOverrides(handstone, te.getWorld(), null);
         handstoneModel = ForgeHooksClient.handleCameraTransforms(handstoneModel, ItemCameraTransforms.TransformType.FIXED, false);
 
         GlStateManager.scale(1.25, 1.25, 1.25);
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        Minecraft.getMinecraft().getRenderItem().renderItem(handstone, handstoneModel);
+        GameUtils.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        GameUtils.getRenderItem().renderItem(handstone, handstoneModel);
 
         GlStateManager.popMatrix();
         GlStateManager.disableRescaleNormal();
@@ -122,11 +122,11 @@ public class TESRQuern extends TileEntitySpecialRenderer<TileQuern> {
         GlStateManager.rotate(45, 0, 1, 0);
         GlStateManager.scale(0.5, 0.5, 0.5);
 
-        IBakedModel inputModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(input, te.getWorld(), null);
+        IBakedModel inputModel = GameUtils.getRenderItem().getItemModelWithOverrides(input, te.getWorld(), null);
         inputModel = ForgeHooksClient.handleCameraTransforms(inputModel, ItemCameraTransforms.TransformType.GROUND, false);
 
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        Minecraft.getMinecraft().getRenderItem().renderItem(input, inputModel);
+        GameUtils.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        GameUtils.getRenderItem().renderItem(input, inputModel);
 
         GlStateManager.popMatrix();
         GlStateManager.disableRescaleNormal();

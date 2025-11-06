@@ -1,7 +1,6 @@
 package net.dries007.horsepower.client;
 
-import java.util.HashSet;
-import java.util.Set;
+import su.terrafirmagreg.api.library.MeshDefinitionFix;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -27,6 +26,9 @@ import net.dries007.horsepower.blocks.ModBlocks;
 import net.dries007.horsepower.client.model.BakedChopperModel;
 import net.dries007.horsepower.items.ModItems;
 import net.dries007.horsepower.lib.Reference;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = Reference.MODID)

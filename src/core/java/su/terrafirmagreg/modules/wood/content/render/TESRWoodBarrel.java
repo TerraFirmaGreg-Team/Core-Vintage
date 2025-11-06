@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.wood.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodBarrel;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -59,8 +59,7 @@ public class TESRWoodBarrel extends TileEntitySpecialRenderer<TileWoodBarrel> {
       GlStateManager.translate(0.5D, 0.15625D, 0.5D);
       GlStateManager.scale(0.5F, 0.5F, 0.5F);
       GlStateManager.rotate(90F, 1F, 0F, 0F);
-      Minecraft.getMinecraft().getRenderItem()
-        .renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+      GameUtils.getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
       GlStateManager.popMatrix();
     }
 

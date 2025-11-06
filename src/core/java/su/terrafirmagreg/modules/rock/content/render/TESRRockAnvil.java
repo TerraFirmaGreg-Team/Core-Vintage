@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.rock.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.rock.content.tile.TileRockAnvil;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -34,22 +34,19 @@ public class TESRRockAnvil
       // Hammer Item
       ItemStack hammer = cap.getStackInSlot(TileRockAnvil.SLOT_HAMMER);
       if (!hammer.isEmpty()) {
-        Minecraft.getMinecraft().getRenderItem()
-          .renderItem(hammer, ItemCameraTransforms.TransformType.FIXED);
+        GameUtils.getRenderItem().renderItem(hammer, ItemCameraTransforms.TransformType.FIXED);
       }
 
       GlStateManager.translate(-1.3f, 0, 0);
       ItemStack input1 = cap.getStackInSlot(TileRockAnvil.SLOT_INPUT_1);
       if (!input1.isEmpty()) {
-        Minecraft.getMinecraft().getRenderItem()
-          .renderItem(input1, ItemCameraTransforms.TransformType.FIXED);
+        GameUtils.getRenderItem().renderItem(input1, ItemCameraTransforms.TransformType.FIXED);
       }
 
       GlStateManager.translate(-0.4f, 0, -0.05f);
       ItemStack input2 = cap.getStackInSlot(TileRockAnvil.SLOT_INPUT_2);
       if (!input2.isEmpty()) {
-        Minecraft.getMinecraft().getRenderItem()
-          .renderItem(input2, ItemCameraTransforms.TransformType.FIXED);
+        GameUtils.getRenderItem().renderItem(input2, ItemCameraTransforms.TransformType.FIXED);
       }
 
       ItemStack flux = cap.getStackInSlot(TileRockAnvil.SLOT_FLUX);
@@ -57,8 +54,7 @@ public class TESRRockAnvil
         GlStateManager.pushMatrix();
         GlStateManager.translate(0.9f, -0.25f, 0.05f);
         GlStateManager.scale(0.6f, 0.6f, 0.6f);
-        Minecraft.getMinecraft().getRenderItem()
-          .renderItem(flux, ItemCameraTransforms.TransformType.FIXED);
+        GameUtils.getRenderItem().renderItem(flux, ItemCameraTransforms.TransformType.FIXED);
         GlStateManager.popMatrix();
       }
 

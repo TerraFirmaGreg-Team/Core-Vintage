@@ -1,7 +1,8 @@
 package net.dries007.firmalife.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
@@ -37,7 +38,7 @@ public class TESRTurntable extends TileEntitySpecialRenderer<TETurntable> {
     if (te.hasWorld()) {
       IBlockState state = te.getWorld().getBlockState(te.getPos());
       IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
+      RenderItem itemRenderer = GameUtils.getRenderItem();
       if (cap != null) {
         ItemStack stack = cap.getStackInSlot(0);
         if (!stack.isEmpty()) {

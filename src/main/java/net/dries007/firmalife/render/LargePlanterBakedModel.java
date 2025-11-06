@@ -1,9 +1,9 @@
 package net.dries007.firmalife.render;
 
 import su.terrafirmagreg.api.data.Properties.BoolProp;
+import su.terrafirmagreg.api.util.GameUtils;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemOverrideList;
@@ -67,7 +67,7 @@ public class LargePlanterBakedModel implements IBakedModel {
 
   @Override
   public TextureAtlasSprite getParticleTexture() {
-    return Objects.requireNonNull(Minecraft.getMinecraft().getTextureMapBlocks().getTextureExtry("minecraft:blocks/hardened_clay"));
+    return Objects.requireNonNull(GameUtils.getTextureMapBlocks().getTextureExtry("minecraft:blocks/hardened_clay"));
   }
 
   @Override

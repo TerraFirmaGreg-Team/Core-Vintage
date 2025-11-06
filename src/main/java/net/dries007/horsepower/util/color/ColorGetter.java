@@ -1,19 +1,11 @@
 package net.dries007.horsepower.util.color;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.Nullable;
+import su.terrafirmagreg.api.util.GameUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockModelShapes;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -24,6 +16,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Copied and modified from JEI (JustEnoughItems)
@@ -87,7 +86,7 @@ public final class ColorGetter {
   }
 
   private static List<Color> getItemColors(ItemStack itemStack, int colorCount) {
-    final ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+    final ItemColors itemColors = GameUtils.getItemColors();
     final int renderColor = itemColors.colorMultiplier(itemStack, 0);
     final TextureAtlasSprite textureAtlasSprite = getTextureAtlasSprite(itemStack);
     if (textureAtlasSprite == null) {
@@ -107,7 +106,7 @@ public final class ColorGetter {
       blockState = block.getDefaultState();
     }
 
-    final BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+    final BlockColors blockColors = GameUtils.getBlockColors();
     final int renderColor = blockColors.colorMultiplier(blockState, null, null, 0);
     final TextureAtlasSprite textureAtlasSprite = getTextureAtlasSprite(blockState);
     if (textureAtlasSprite == null) {
@@ -137,11 +136,10 @@ public final class ColorGetter {
 
   @Nullable
   private static TextureAtlasSprite getTextureAtlasSprite(IBlockState blockState) {
-    Minecraft minecraft = Minecraft.getMinecraft();
-    BlockRendererDispatcher blockRendererDispatcher = minecraft.getBlockRendererDispatcher();
+    BlockRendererDispatcher blockRendererDispatcher = GameUtils.getBlockRenderer();
     BlockModelShapes blockModelShapes = blockRendererDispatcher.getBlockModelShapes();
     TextureAtlasSprite textureAtlasSprite = blockModelShapes.getTexture(blockState);
-    if (textureAtlasSprite == minecraft.getTextureMapBlocks().getMissingSprite()) {
+    if (textureAtlasSprite == GameUtils.getTextureMapBlocks().getMissingSprite()) {
       return null;
     }
     return textureAtlasSprite;
@@ -149,9 +147,7 @@ public final class ColorGetter {
 
   @Nullable
   private static TextureAtlasSprite getTextureAtlasSprite(ItemStack itemStack) {
-    RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-    ItemModelMesher itemModelMesher = renderItem.getItemModelMesher();
-    IBakedModel itemModel = itemModelMesher.getItemModel(itemStack);
+    IBakedModel itemModel = GameUtils.getRenderItem().getItemModelMesher().getItemModel(itemStack);
     return itemModel.getParticleTexture();
   }
 }

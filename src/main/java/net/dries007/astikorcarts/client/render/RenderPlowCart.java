@@ -1,6 +1,7 @@
 package net.dries007.astikorcarts.client.render;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -60,7 +61,7 @@ public class RenderPlowCart extends Render<EntityPlowCart> {
         GlStateManager.rotate(120.0F - entityYaw - 30.0F * i, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(207.0F, 0.0F, 0.0F, 1.0F);
       }
-      Minecraft.getMinecraft().getRenderItem().renderItem(entity.getTool(i), ItemCameraTransforms.TransformType.FIXED);
+      GameUtils.getRenderItem().renderItem(entity.getTool(i), ItemCameraTransforms.TransformType.FIXED);
       GlStateManager.popMatrix();
     }
     super.doRender(entity, x, y, z, entityYaw, partialTicks);

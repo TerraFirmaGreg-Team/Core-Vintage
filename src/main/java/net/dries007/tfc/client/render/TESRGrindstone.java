@@ -1,8 +1,8 @@
 package net.dries007.tfc.client.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.device.content.tile.TileGrindstone;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -59,10 +59,10 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
             ((float) rotationTicks - partialTicks) * (axis % 2 == 0 ? 4.0F : -4.0F), axis <= 2 ? 1.0F : 0.0F, 0.0F, axis <= 2 ? 0.0F : 1.0F);
         }
         GlStateManager.rotate(angle, 0.0F, 1.0F, 0.0F);
-        outputModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(grindstone, te.getWorld(), null);
+        outputModel = GameUtils.getRenderItem().getItemModelWithOverrides(grindstone, te.getWorld(), null);
         outputModel = ForgeHooksClient.handleCameraTransforms(outputModel, ItemCameraTransforms.TransformType.FIXED, false);
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        Minecraft.getMinecraft().getRenderItem().renderItem(grindstone, outputModel);
+        GameUtils.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        GameUtils.getRenderItem().renderItem(grindstone, outputModel);
         GlStateManager.popMatrix();
         GlStateManager.disableRescaleNormal();
         GlStateManager.disableBlend();
@@ -83,10 +83,10 @@ public class TESRGrindstone extends TileEntitySpecialRenderer<TileGrindstone> {
         GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
         GlStateManager.rotate(270 - angle, 0.0F, 0.0F, 1.0F);
         GlStateManager.scale(0.65D, 0.65D, 0.65);
-        IBakedModel inputModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(input, te.getWorld(), null);
+        IBakedModel inputModel = GameUtils.getRenderItem().getItemModelWithOverrides(input, te.getWorld(), null);
         inputModel = ForgeHooksClient.handleCameraTransforms(inputModel, ItemCameraTransforms.TransformType.GROUND, false);
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        Minecraft.getMinecraft().getRenderItem().renderItem(input, inputModel);
+        GameUtils.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        GameUtils.getRenderItem().renderItem(input, inputModel);
         GlStateManager.popMatrix();
         GlStateManager.disableRescaleNormal();
         GlStateManager.disableBlend();

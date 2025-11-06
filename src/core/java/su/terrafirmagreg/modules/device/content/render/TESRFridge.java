@@ -1,9 +1,9 @@
 package su.terrafirmagreg.modules.device.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.device.content.model.ModelFridge;
 import su.terrafirmagreg.modules.device.content.tile.TileFridge;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -49,7 +49,7 @@ public class TESRFridge extends TileEntitySpecialRenderer<TileFridge> {
           }
           GlStateManager.rotate(90, 1, 0, 0);
           GlStateManager.scale(0.25F, 0.25F, 0.25F);
-          Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+          GameUtils.getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
           GlStateManager.popMatrix();
         }
       }

@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.content.render;
 
 import su.terrafirmagreg.api.util.CapabilityUtils;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.framework.manager.content.base.tesr.spi.BaseTESR;
 import su.terrafirmagreg.modules.device.content.tile.TileLeafMat;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,7 @@ public class TESRLeafMat extends BaseTESR<TileLeafMat> {
 
         ItemStack item = cap.getStackInSlot(0);
         if (!item.isEmpty()) {
-          Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
+          GameUtils.getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
         }
         GlStateManager.popMatrix();
       });

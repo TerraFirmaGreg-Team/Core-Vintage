@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.content.entity.spi;
 
 import su.terrafirmagreg.api.data.DataSerializers;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.MathUtils;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.framework.manager.content.base.entity.spi.BaseEntity;
@@ -11,7 +12,6 @@ import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodTypes;
 import su.terrafirmagreg.modules.wood.packet.SCPacketDrawnUpdate;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -91,7 +91,7 @@ public abstract class EntityWoodCart extends BaseEntity implements IEntityAdditi
    */
   @SideOnly(Side.CLIENT)
   public float getWheelRotation() {
-    if (this.pulling != null && !Minecraft.getMinecraft().isGamePaused()) {
+    if (this.pulling != null && !GameUtils.getMinecraft().isGamePaused()) {
       this.wheelrot -= (float) (0.12F * this.factor);
     }
     return this.wheelrot;

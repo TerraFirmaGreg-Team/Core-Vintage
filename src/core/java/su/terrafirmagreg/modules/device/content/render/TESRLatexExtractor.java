@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.framework.manager.content.base.tesr.spi.BaseTESR;
 import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.device.content.tile.TileLatexExtractor;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -44,8 +44,8 @@ public class TESRLatexExtractor extends BaseTESR<TileLatexExtractor> {
         .withProperty(POT, tile.hasPot())
         .withProperty(CUT, tile.cutState());
 
-      Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-      BlockRendererDispatcher renderer = Minecraft.getMinecraft().getBlockRendererDispatcher();
+      GameUtils.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+      BlockRendererDispatcher renderer = GameUtils.getBlockRenderer();
 
       Vec3i vec = state.getValue(HORIZONTAL).getOpposite().getDirectionVec();
 

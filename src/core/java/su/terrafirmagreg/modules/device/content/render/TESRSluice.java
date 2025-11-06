@@ -1,8 +1,8 @@
 package su.terrafirmagreg.modules.device.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.device.content.tile.TileSluice;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -149,7 +149,7 @@ public class TESRSluice extends TileEntitySpecialRenderer<TileSluice> {
     GlStateManager.rotate(rotation, 0, 1, 0);
     GlStateManager.scale(0.1D, 0.1D, 0.1D);
 
-    Minecraft.getMinecraft().getRenderItem().renderItem(GRAVEL, ItemCameraTransforms.TransformType.FIXED);
+    GameUtils.getRenderItem().renderItem(GRAVEL, ItemCameraTransforms.TransformType.FIXED);
 
     GlStateManager.popMatrix();
   }

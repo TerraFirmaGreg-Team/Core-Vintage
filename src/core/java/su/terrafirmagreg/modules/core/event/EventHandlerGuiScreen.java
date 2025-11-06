@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.core.event;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,7 +19,7 @@ public class EventHandlerGuiScreen {
   public static void on(GuiScreenEvent.ActionPerformedEvent.Post event) {
     if (event.getGui() instanceof GuiIngameMenu) {
       if (event.getButton().id == ADVANCEMENTS_BUTTON_ID) {
-        ClientQuestFile.INSTANCE.openQuestGui(Minecraft.getMinecraft().player);
+        ClientQuestFile.INSTANCE.openQuestGui(GameUtils.getPlayer());
       }
     }
   }

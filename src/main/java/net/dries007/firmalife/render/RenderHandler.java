@@ -1,6 +1,7 @@
 package net.dries007.firmalife.render;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -29,7 +30,7 @@ public class RenderHandler {
   public static void onRenderTick(RenderWorldLastEvent event) {
     Runnable runnable = TO_RUN.poll();
     if (runnable != null) {
-      EntityPlayerSP entity = Minecraft.getMinecraft().player;
+      EntityPlayerSP entity = GameUtils.getPlayer();
       Vec3d trans = ClientHelpers.getEntityMovementPartial(entity, event.getPartialTicks());
 
       GlStateManager.disableAlpha();

@@ -46,7 +46,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @UtilityClass
-@SuppressWarnings("unused")
 public final class EntityUtils {
 
   private static final Map<String, IdSupplier> SUPPLIER_MAP = new Object2ObjectOpenHashMap<>();
@@ -69,7 +68,7 @@ public final class EntityUtils {
     return ENTITY_CLASSES_CACHE.computeIfAbsent(mobName, k -> {
 
       Class clazz = ClassUtils.getClassFromString(mobName);
-      if (Entity.class.isAssignableFrom(clazz)) {
+      if (clazz != null && Entity.class.isAssignableFrom(clazz)) {
         return clazz;
       } else {
         FrameworkLogger.LOGGER.error("Error in config, the Entity ( {} ) can't be leashed", mobName);

@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.render;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
@@ -20,7 +21,7 @@ public class TESRPlacedItem extends TileEntitySpecialRenderer<TEPlacedItem> {
 
   @Override
   public void render(TEPlacedItem te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-    RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+    RenderItem renderItem = GameUtils.getRenderItem();
     World world = te.getWorld();
     //noinspection ConstantConditions
     if (world == null) {return;}

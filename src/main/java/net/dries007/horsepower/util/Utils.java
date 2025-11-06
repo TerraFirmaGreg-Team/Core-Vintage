@@ -47,7 +47,7 @@ public class Utils {
     for (String entityTypeName : Configs.general.grindstoneMobList) {
       Class clazz = EntityUtils.getEntity(entityTypeName);
 
-      if (EntityCreature.class.isAssignableFrom(clazz)) {
+      if (clazz != null && EntityCreature.class.isAssignableFrom(clazz)) {
         clazzes.add(clazz);
       } else {
         HorsePowerMod.logger.error("Error in config, the mob (" + entityTypeName + ") can't be leashed");
@@ -161,27 +161,25 @@ public class Utils {
     NonNullList<ItemStack> stacks = NonNullList.create();
     main:
     for (IRecipe recipe : ForgeRegistries.RECIPES) {
-      if (recipe instanceof ShapedChoppingRecipe) {
-        if (((ShapedChoppingRecipe) recipe).getSimpleRecipeOutput().getItem() instanceof ItemBlock
-            && ((ItemBlock) ((ShapedChoppingRecipe) recipe).getSimpleRecipeOutput().getItem()).getBlock() == block) {
-          for (ItemStack stack : ((ShapedChoppingRecipe) recipe).outputBlocks) {
+      if (recipe instanceof ShapedChoppingRecipe shapedChoppingRecipe) {
+        if (shapedChoppingRecipe.getSimpleRecipeOutput().getItem() instanceof ItemBlock itemBlock && itemBlock.getBlock() == block) {
+          for (ItemStack stack : shapedChoppingRecipe.outputBlocks) {
             if (Block.getBlockFromItem(stack.getItem()) instanceof BlockHPChoppingBase) {
               Block.getBlockFromItem(stack.getItem()).getSubBlocks(null, stacks);
               continue main;
             }
           }
-          stacks.addAll(((ShapedChoppingRecipe) recipe).outputBlocks);
+          stacks.addAll(shapedChoppingRecipe.outputBlocks);
         }
-      } else if (recipe instanceof ShapelessChoppingRecipe) {
-        if (((ShapelessChoppingRecipe) recipe).getSimpleRecipeOutput().getItem() instanceof ItemBlock
-            && ((ItemBlock) ((ShapelessChoppingRecipe) recipe).getSimpleRecipeOutput().getItem()).getBlock() == block) {
-          for (ItemStack stack : ((ShapelessChoppingRecipe) recipe).outputBlocks) {
+      } else if (recipe instanceof ShapelessChoppingRecipe shapelessChoppingRecipe) {
+        if (shapelessChoppingRecipe.getSimpleRecipeOutput().getItem() instanceof ItemBlock itemBlock && itemBlock.getBlock() == block) {
+          for (ItemStack stack : shapelessChoppingRecipe.outputBlocks) {
             if (Block.getBlockFromItem(stack.getItem()) instanceof BlockHPChoppingBase) {
               Block.getBlockFromItem(stack.getItem()).getSubBlocks(null, stacks);
               continue main;
             }
           }
-          stacks.addAll(((ShapelessChoppingRecipe) recipe).outputBlocks);
+          stacks.addAll(shapelessChoppingRecipe.outputBlocks);
         }
       }
     }

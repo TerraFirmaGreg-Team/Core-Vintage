@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.tesr.spi.BaseTESR;
 import su.terrafirmagreg.modules.device.content.tile.TilePitKiln;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -39,7 +39,7 @@ public class TESRPitKiln extends BaseTESR<TilePitKiln> {
 
   @Override
   public void render(TilePitKiln tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-    RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+    RenderItem renderItem = GameUtils.getRenderItem();
     World world = tile.getWorld();
     //noinspection ConstantConditions
     if (world == null) {

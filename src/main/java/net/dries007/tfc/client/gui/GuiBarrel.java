@@ -1,8 +1,8 @@
 package net.dries007.tfc.client.gui;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.framework.manager.content.base.gui.button.api.IButtonTooltip;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -145,7 +145,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
           int positionX = guiLeft + 8;
           int positionY = guiTop + 54;
 
-          Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+          GameUtils.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
           BufferBuilder buffer = Tessellator.getInstance().getBuffer();
 
           GlStateManager.enableAlpha();
@@ -184,7 +184,7 @@ public class GuiBarrel extends GuiContainerTE<TEBarrel> {
 
           Tessellator.getInstance().draw();
 
-          Minecraft.getMinecraft().renderEngine.bindTexture(BARREL_BACKGROUND);
+          GameUtils.getMinecraft().renderEngine.bindTexture(BARREL_BACKGROUND);
           GlStateManager.color(1, 1, 1, 1);
         }
       }

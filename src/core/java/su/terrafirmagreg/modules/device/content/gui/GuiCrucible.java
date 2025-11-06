@@ -1,11 +1,11 @@
 package su.terrafirmagreg.modules.device.content.gui;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.api.util.ModUtils;
 import su.terrafirmagreg.framework.manager.content.base.gui.inventory.spi.BaseGuiContainerTile;
 import su.terrafirmagreg.modules.core.feature.heat.spi.Heat;
 import su.terrafirmagreg.modules.device.content.tile.TileCrucible;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -118,7 +118,7 @@ public class GuiCrucible extends BaseGuiContainerTile<TileCrucible> {
       Fluid fluid = FluidsTFC.getFluidFromMetal(alloy.getResult());
       TextureAtlasSprite sprite = FluidSpriteCache.getStillSprite(fluid);
 
-      Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+      GameUtils.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
       BufferBuilder buffer = Tessellator.getInstance().getBuffer();
 
       GlStateManager.enableAlpha();
@@ -164,7 +164,7 @@ public class GuiCrucible extends BaseGuiContainerTile<TileCrucible> {
       }
       Tessellator.getInstance().draw();
 
-      Minecraft.getMinecraft().renderEngine.bindTexture(BACKGROUND);
+      GameUtils.getTextureManager().bindTexture(BACKGROUND);
       GlStateManager.color(1, 1, 1, 1);
 
       // Draw Title:

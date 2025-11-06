@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.button;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.item.ItemStack;
@@ -19,7 +20,7 @@ public class GuiButtonTFC extends GuiButton {
   }
 
   protected void drawItemStack(ItemStack stack, int x, int y) {
-    RenderItem itemRender = Minecraft.getMinecraft().getRenderItem();
+    RenderItem itemRender = GameUtils.getRenderItem();
     this.zLevel = 200.0F;
     itemRender.zLevel = 200.0F;
     //FontRenderer font = stack.getItem().getFontRenderer(stack);

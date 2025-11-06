@@ -1,13 +1,18 @@
 package su.terrafirmagreg.api.util;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.EnumDifficulty;
@@ -18,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-@SuppressWarnings("unused")
 public final class GameUtils {
 
   /**
@@ -63,15 +67,31 @@ public final class GameUtils {
     return Minecraft.getMinecraft();
   }
 
+  public static TextureMap getTextureMapBlocks() {
+    return getMinecraft().getTextureMapBlocks();
+  }
+
   public static TextureManager getTextureManager() {
     return getMinecraft().getTextureManager();
+  }
+
+  public static IResourceManager getResourceManager() {
+    return getMinecraft().getResourceManager();
+  }
+
+  public static RenderManager getRenderManager() {
+    return getMinecraft().getRenderManager();
   }
 
   public static FontRenderer getFontRenderer() {
     return getMinecraft().fontRenderer;
   }
 
-  public static EntityPlayer getPlayer() {
+  public static RenderGlobal getRenderGlobal() {
+    return getMinecraft().renderGlobal;
+  }
+
+  public static EntityPlayerSP getPlayer() {
     return getMinecraft().player;
   }
 

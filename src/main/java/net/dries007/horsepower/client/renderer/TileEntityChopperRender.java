@@ -1,9 +1,10 @@
 package net.dries007.horsepower.client.renderer;
 
+import su.terrafirmagreg.api.util.GameUtils;
+import su.terrafirmagreg.api.util.RenderUtils;
 import su.terrafirmagreg.modules.device.content.tile.TileChopperHorse;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,7 +16,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.dries007.horsepower.blocks.BlockChopper;
 import net.dries007.horsepower.blocks.BlockHPBase;
 import net.dries007.horsepower.client.model.modelvariants.ChopperModels;
-import net.dries007.horsepower.util.RenderUtils;
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityChopperRender extends TileEntityHPBaseRenderer<TileChopperHorse> {
@@ -24,7 +24,7 @@ public class TileEntityChopperRender extends TileEntityHPBaseRenderer<TileChoppe
   public void render(TileChopperHorse te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     Tessellator tessellator = Tessellator.getInstance();
     BufferBuilder buffer = tessellator.getBuffer();
-    BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+    BlockRendererDispatcher dispatcher = GameUtils.getBlockRenderer();
     IBlockState blockState = te.getWorld().getBlockState(te.getPos());
     if (!(blockState.getBlock() instanceof BlockHPBase)) {return;}
     IBlockState bladeState = blockState.withProperty(BlockChopper.PART, ChopperModels.BLADE);

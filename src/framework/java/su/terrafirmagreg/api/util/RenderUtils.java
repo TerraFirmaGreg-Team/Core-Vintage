@@ -201,7 +201,7 @@ public final class RenderUtils {
 
   // Code based on code from The Betweenlands
   public static void renderInvalidArea(World world, BlockPos blockPos, int yOffset) {
-    if (StreamSupport.stream(GameUtils.getMinecraft().player.getHeldEquipment().spliterator(), false)
+    if (StreamSupport.stream(GameUtils.getPlayer().getHeldEquipment().spliterator(), false)
       .anyMatch(stack -> !stack.isEmpty() && stack.getItem() == Items.LEAD)) {
 
       renderUsedArea(world, blockPos, yOffset, 0.55F, 0.15F);
@@ -241,7 +241,7 @@ public final class RenderUtils {
 
   private static void renderBoxes(World world, BlockPos blockPos, int yOffset, float invalidAplha, float validAplha) {
     final int BOX_SIZE = 3;
-    final var renderManager = GameUtils.getMinecraft().getRenderManager();
+    final var renderManager = GameUtils.getRenderManager();
 
     for (int x = -BOX_SIZE; x <= BOX_SIZE; x++) {
       for (int y = yOffset; y <= 1 + yOffset; y++) {
@@ -255,9 +255,15 @@ public final class RenderUtils {
             if (!state.getBlock().isReplaceable(world, pos)) {
 
               GlStateManager.color(1, 0, 0, invalidAplha);
-              drawBoundingBoxOutline(new AxisAlignedBB(pos).offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ));
-              drawBoundingBox(state.getBoundingBox(world, pos).offset(pos)
-                .offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ));
+              drawBoundingBoxOutline(
+                new AxisAlignedBB(pos)
+                  .offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ)
+              );
+              drawBoundingBox(state
+                .getBoundingBox(world, pos)
+                .offset(pos)
+                .offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ)
+              );
             } else {
               GlStateManager.color(0, 1, 0, validAplha);
               drawBoundingBoxOutline(new AxisAlignedBB(pos).offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ));

@@ -1,13 +1,18 @@
 package net.dries007.horsepower.client.renderer;
 
-import java.util.Arrays;
-
-import org.lwjgl.opengl.GL11;
+import su.terrafirmagreg.api.util.GameUtils;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderGlobal;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -27,12 +32,16 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import net.dries007.horsepower.Configs;
 import net.dries007.horsepower.blocks.BlockFiller;
 import net.dries007.horsepower.tileentity.TileEntityHPBase;
 import net.dries007.horsepower.util.Localization;
+import org.lwjgl.opengl.GL11;
+
+import java.util.Arrays;
 
 public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> extends TileEntitySpecialRenderer<T> {
 
@@ -41,7 +50,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
 
   public static TextureAtlasSprite getDestroyBlockIcon(int destroyState) {
     if (destroyBlockIcons[destroyState] == null) {
-      destroyBlockIcons = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, Minecraft.getMinecraft().renderGlobal, "destroyBlockIcons", "field_94141_F");
+      destroyBlockIcons = ObfuscationReflectionHelper.getPrivateValue(RenderGlobal.class, GameUtils.getRenderGlobal(), "destroyBlockIcons", "field_94141_F");
     }
     return destroyBlockIcons[destroyState];
   }
@@ -96,10 +105,9 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
 
   public void renderBlockDamage(IBlockState state, BlockPos pos, TextureAtlasSprite texture, IBlockAccess blockAccess) {
     state = state.getActualState(blockAccess, pos);
-    IBakedModel ibakedmodel = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(state);
-    IBakedModel ibakedmodel1 = net.minecraftforge.client.ForgeHooksClient.getDamageModel(ibakedmodel, texture, state, blockAccess, pos);
-    Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer()
-      .renderModel(blockAccess, ibakedmodel1, state, pos, Tessellator.getInstance().getBuffer(), true);
+    IBakedModel ibakedmodel = GameUtils.getBlockRenderer().getBlockModelShapes().getModelForState(state);
+    IBakedModel ibakedmodel1 = ForgeHooksClient.getDamageModel(ibakedmodel, texture, state, blockAccess, pos);
+    GameUtils.getBlockRenderer().getBlockModelRenderer().renderModel(blockAccess, ibakedmodel1, state, pos, Tessellator.getInstance().getBuffer(), true);
   }
 
   public void drawDisplayText(TileEntity te, double x, double y, double z) {
@@ -147,7 +155,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
     setRenderSettings();
 
     IBlockState blockState = te.getWorld().getBlockState(te.getPos());
-    BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+    BlockRendererDispatcher dispatcher = GameUtils.getBlockRenderer();
     IBakedModel model = dispatcher.getModelForState(blockState);
 
     buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
@@ -165,7 +173,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
     preDestroyRender(destroyStage);
     setRenderSettings();
 
-    BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+    BlockRendererDispatcher dispatcher = GameUtils.getBlockRenderer();
     IBakedModel model = dispatcher.getModelForState(blockState);
 
     buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
@@ -212,7 +220,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
     if (destroyStage >= 0) {
       GlStateManager.enableBlend();
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-      Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
+      GameUtils.getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
 
       GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.DST_COLOR, GlStateManager.DestFactor.SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
       GlStateManager.enableBlend();
@@ -235,7 +243,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
       GlStateManager.depthMask(true);
       GlStateManager.popMatrix();
 
-      Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
+      GameUtils.getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
       GlStateManager.disableBlend();
     }
   }
@@ -346,7 +354,7 @@ public abstract class TileEntityHPBaseRenderer<T extends TileEntityHPBase> exten
   }
 
   private void renderItem(TileEntityHPBase te, ItemStack stack, float x, float y, float z, float scale, boolean rotate) {
-    RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
+    RenderItem itemRenderer = GameUtils.getRenderItem();
     if (stack != null) {
       GlStateManager.translate(x, y, z);
       EntityItem entityitem = new EntityItem(te.getWorld(), 0.0D, 0.0D, 0.0D, stack.copy());

@@ -1,8 +1,7 @@
 package net.dries007.tfc.client.render.projectile;
 
-import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
+import su.terrafirmagreg.api.util.GameUtils;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -14,6 +13,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import net.dries007.tfc.objects.entity.projectile.EntityThrownWeapon;
+
 import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
@@ -23,7 +24,7 @@ public class RenderThrownWeapon<T extends EntityThrownWeapon> extends Render<T> 
 
   public RenderThrownWeapon(RenderManager renderManagerIn) {
     super(renderManagerIn);
-    this.itemRenderer = Minecraft.getMinecraft().getRenderItem();
+    this.itemRenderer = GameUtils.getRenderItem();
   }
 
   public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks) {

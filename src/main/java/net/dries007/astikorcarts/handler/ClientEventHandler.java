@@ -1,6 +1,7 @@
 package net.dries007.astikorcarts.handler;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -23,11 +24,11 @@ public class ClientEventHandler {
   @SubscribeEvent
   public static void onClientTickEvent(ClientTickEvent event) {
     if (event.phase == TickEvent.Phase.END) {
-      if (Minecraft.getMinecraft().world != null) {
+      if (GameUtils.getWorld() != null) {
         if (ModKeybindings.keybindings.get(0).isPressed()) {
           PacketHandler.INSTANCE.sendToServer(new CPacketActionKey());
         }
-        if (Minecraft.getMinecraft().gameSettings.keyBindSprint.isPressed()) {
+        if (GameUtils.getGameSettings().keyBindSprint.isPressed()) {
           PacketHandler.INSTANCE.sendToServer(new CPacketToggleSlow());
         }
       }
@@ -37,7 +38,7 @@ public class ClientEventHandler {
   @SubscribeEvent
   public static void onGuiOpen(GuiOpenEvent event) {
     if (event.getGui() instanceof GuiInventory) {
-      EntityPlayerSP player = Minecraft.getMinecraft().player;
+      EntityPlayerSP player = GameUtils.getPlayer();
       if (player.getRidingEntity() instanceof EntityCargoCart) {
         event.setCanceled(true);
         player.world.sendPacketToServer(PacketHandler.INSTANCE.getPacketFrom(new CPacketOpenCartGui(0, player.getRidingEntity().getEntityId())));

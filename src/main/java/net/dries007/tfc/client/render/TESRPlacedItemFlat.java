@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.render;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -22,7 +23,7 @@ public class TESRPlacedItemFlat extends TileEntitySpecialRenderer<TEPlacedItemFl
     GlStateManager.scale(.5f, .5f, .5f);
     GlStateManager.rotate(90f, 1f, 0f, 0f);
     GlStateManager.rotate(90f * (float) rotation, 0f, 0f, 1f);
-    Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+    GameUtils.getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
     GlStateManager.popMatrix();
   }
 }

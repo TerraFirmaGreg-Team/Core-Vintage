@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.gui.overlay;
 
 import su.terrafirmagreg.api.data.enums.HealthDisplayFormat;
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.animal.api.type.IAnimal;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.CapabilityPlayerData;
 import su.terrafirmagreg.modules.core.feature.playerdata.capability.ICapabilityPlayerData;
@@ -65,8 +66,8 @@ public final class PlayerDataOverlay {
 
   @SubscribeEvent
   public void render(RenderGameOverlayEvent.Pre event) {
-    Minecraft mc = Minecraft.getMinecraft();
-    EntityPlayer player = mc.player.inventory.player;
+    Minecraft mc = GameUtils.getMinecraft();
+    EntityPlayer player = GameUtils.getPlayer().inventory.player;
     GuiIngameForge.renderFood = ConfigTFC.Client.DISPLAY.useVanillaHunger;
     GuiIngameForge.renderHealth = ConfigTFC.Client.DISPLAY.useVanillaHealth;
     GuiIngameForge.renderArmor = ConfigTFC.Client.DISPLAY.useVanillaHealth; // Draws on top of health
@@ -238,8 +239,8 @@ public final class PlayerDataOverlay {
 
   @SubscribeEvent
   public void renderAnimalFamiliarity(RenderLivingEvent.Post<EntityLiving> event) {
-    Minecraft mc = Minecraft.getMinecraft();
-    EntityPlayer player = mc.player.inventory.player;
+    Minecraft mc = GameUtils.getMinecraft();
+    EntityPlayer player = GameUtils.getPlayer().inventory.player;
 
     if (player.isSneaking()) {
       EntityLivingBase entity = event.getEntity();

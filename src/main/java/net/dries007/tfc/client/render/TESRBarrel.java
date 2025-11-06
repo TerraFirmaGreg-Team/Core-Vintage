@@ -1,7 +1,8 @@
 package net.dries007.tfc.client.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -52,7 +53,7 @@ public class TESRBarrel extends TileEntitySpecialRenderer<TEBarrel> {
       GlStateManager.translate(0.5D, 0.15625D, 0.5D);
       GlStateManager.scale(0.5F, 0.5F, 0.5F);
       GlStateManager.rotate(90F, 1F, 0F, 0F);
-      Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+      GameUtils.getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
       GlStateManager.popMatrix();
     }
 

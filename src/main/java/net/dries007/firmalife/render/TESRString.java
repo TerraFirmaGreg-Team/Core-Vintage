@@ -1,7 +1,8 @@
 package net.dries007.firmalife.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -35,7 +36,7 @@ public class TESRString extends TileEntitySpecialRenderer<TEString> {
         GlStateManager.scale(0.5f, 0.5f, 0.5f);
         if (state.getValue(BlockString.AXIS) == EnumFacing.Axis.Z) {GlStateManager.rotate(90f, 0f, 1f, 0f);}
         ItemStack item = cap.getStackInSlot(0);
-        if (!item.isEmpty()) {Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);}
+        if (!item.isEmpty()) {GameUtils.getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);}
         GlStateManager.popMatrix();
       }
     }

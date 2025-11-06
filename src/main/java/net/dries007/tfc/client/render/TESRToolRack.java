@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.render;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -64,7 +65,7 @@ public class TESRToolRack extends TileEntitySpecialRenderer<TEToolRack> {
           GlStateManager.translate(x + ITEM_LOCATION[dir][i][0], y + ITEM_LOCATION[dir][i][1], z + ITEM_LOCATION[dir][i][2]);
           GlStateManager.rotate(META_TO_ANGLE[dir], 0.0F, 1.0F, 0.0F);
           GlStateManager.scale(blockScale, blockScale, blockScale);
-          Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
+          GameUtils.getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
           GlStateManager.popMatrix();
         }
       }

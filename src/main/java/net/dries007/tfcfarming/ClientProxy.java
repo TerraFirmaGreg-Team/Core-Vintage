@@ -1,5 +1,7 @@
 package net.dries007.tfcfarming;
 
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -107,8 +109,8 @@ public class ClientProxy extends CommonProxy {
   @SubscribeEvent
   public void onGuiIngame(RenderGameOverlayEvent.Post event) {
     if (event.getType() != RenderGameOverlayEvent.ElementType.HOTBAR) {return;}
-    Minecraft mc = Minecraft.getMinecraft();
-    EntityPlayer player = Minecraft.getMinecraft().player;
+    Minecraft mc = GameUtils.getMinecraft();
+    EntityPlayer player = GameUtils.getPlayer();
     if (
       player.isSneaking() &&
       mc.objectMouseOver != null &&
@@ -140,7 +142,7 @@ public class ClientProxy extends CommonProxy {
                                 (isPlanter && lastResponse.y != blockpos.getY());
 
       if (invalidResponse || ticksSinceLastResponse > 20) {
-        Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+        GameUtils.getMinecraft().addScheduledTask(new Runnable() {
           @Override
           public void run() {
             if (!isPlanter) {

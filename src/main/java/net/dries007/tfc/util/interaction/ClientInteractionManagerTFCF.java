@@ -1,10 +1,11 @@
 package net.dries007.tfc.util.interaction;
 
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCommandBlock;
 import net.minecraft.block.BlockStructure;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -59,7 +60,7 @@ final class ClientInteractionManagerTFCF {
       hitZ = ((float) (hitVec.z - pos.getZ()));
     }
     boolean flag = false;
-    PlayerControllerMP controller = Minecraft.getMinecraft().playerController;
+    PlayerControllerMP controller = GameUtils.getMinecraft().playerController;
 
     if (controller.getCurrentGameType() != GameType.SPECTATOR) {
       EnumActionResult ret = itemstack.onItemUseFirst(player, worldIn, pos, hand, direction, hitX, hitY, hitZ);

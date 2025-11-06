@@ -1,5 +1,6 @@
 package net.dries007.horsepower.proxy;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.device.content.render.TESRQuernHorse;
 import su.terrafirmagreg.modules.device.content.render.TESRQuernManual;
 import su.terrafirmagreg.modules.device.content.tile.TileChopperHorse;
@@ -7,7 +8,6 @@ import su.terrafirmagreg.modules.device.content.tile.TileChopperManual;
 import su.terrafirmagreg.modules.device.content.tile.TileQuernHorse;
 import su.terrafirmagreg.modules.device.content.tile.TileQuernManual;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -53,12 +53,12 @@ public class ClientProxy extends CommonProxy {
   public void loadComplete() {
     ClientCommandHandler.instance.registerCommand(new HorsePowerCommand());
 
-    ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(resourceManager ->
+    ((IReloadableResourceManager) GameUtils.getResourceManager()).registerReloadListener(resourceManager ->
     {
       TileEntityHPBaseRenderer.clearDestroyStageicons();
     });
 
-    Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
+    GameUtils.getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
     {
       if (worldIn != null && pos != null) {
         TileEntity tileEntity = worldIn.getTileEntity(pos);

@@ -1,8 +1,6 @@
 package net.dries007.horsepower.jei;
 
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import su.terrafirmagreg.api.util.GameUtils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +13,10 @@ import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.dries007.horsepower.util.color.Colors;
+
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 public abstract class HorsePowerCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
 
@@ -63,9 +65,9 @@ public abstract class HorsePowerCategory<T extends IRecipeWrapper> implements IR
 
   protected void openRecipe() {
     currentDrawable = horse;
-    Random rand = Minecraft.getMinecraft().world.rand;
+    Random rand = GameUtils.getWorld().rand;
 
-    if (rand.nextInt(100) <= 10 && UUID.fromString("10755ea6-9721-467a-8b5c-92adf689072c").equals(Minecraft.getMinecraft().player.getGameProfile().getId())) {
+    if (rand.nextInt(100) <= 10 && UUID.fromString("10755ea6-9721-467a-8b5c-92adf689072c").equals(GameUtils.getPlayer().getGameProfile().getId())) {
       currentDrawable = character;
     } else if (rand.nextInt(3000) <= 50 && Loader.isModLoaded("animania")) {currentDrawable = hedgehog;}
   }

@@ -1,10 +1,10 @@
 package su.terrafirmagreg.modules.device.content.render;
 
+import su.terrafirmagreg.api.util.GameUtils;
 import su.terrafirmagreg.modules.device.content.block.BlockQuernManual;
 import su.terrafirmagreg.modules.device.content.tile.TileQuernManual;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -25,7 +25,7 @@ public class TESRQuernManual extends TileEntityHPBaseRenderer<TileQuernManual> {
   public void render(TileQuernManual te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     Tessellator tessellator = Tessellator.getInstance();
     BufferBuilder buffer = tessellator.getBuffer();
-    BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+    BlockRendererDispatcher dispatcher = GameUtils.getBlockRenderer();
     IBlockState blockState = te.getWorld().getBlockState(te.getPos());
     if (!(blockState.getBlock() instanceof BlockHPBase)) {return;}
     IBlockState centerState = blockState.withProperty(BlockQuernManual.PART, HandGrindstoneModels.CENTER);

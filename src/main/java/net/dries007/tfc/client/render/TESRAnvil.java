@@ -1,6 +1,7 @@
 package net.dries007.tfc.client.render;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -36,19 +37,19 @@ public class TESRAnvil extends TileEntitySpecialRenderer<TEAnvilTFC> {
       // Hammer Item
       ItemStack hammer = cap.getStackInSlot(SLOT_HAMMER);
       if (!hammer.isEmpty()) {
-        Minecraft.getMinecraft().getRenderItem().renderItem(hammer, ItemCameraTransforms.TransformType.FIXED);
+        GameUtils.getRenderItem().renderItem(hammer, ItemCameraTransforms.TransformType.FIXED);
       }
 
       GlStateManager.translate(-1.3f, 0, 0);
       ItemStack input1 = cap.getStackInSlot(SLOT_INPUT_1);
       if (!input1.isEmpty()) {
-        Minecraft.getMinecraft().getRenderItem().renderItem(input1, ItemCameraTransforms.TransformType.FIXED);
+        GameUtils.getRenderItem().renderItem(input1, ItemCameraTransforms.TransformType.FIXED);
       }
 
       GlStateManager.translate(-0.4f, 0, -0.05f);
       ItemStack input2 = cap.getStackInSlot(SLOT_INPUT_2);
       if (!input2.isEmpty()) {
-        Minecraft.getMinecraft().getRenderItem().renderItem(input2, ItemCameraTransforms.TransformType.FIXED);
+        GameUtils.getRenderItem().renderItem(input2, ItemCameraTransforms.TransformType.FIXED);
       }
 
       ItemStack flux = cap.getStackInSlot(SLOT_FLUX);
@@ -56,7 +57,7 @@ public class TESRAnvil extends TileEntitySpecialRenderer<TEAnvilTFC> {
         GlStateManager.pushMatrix();
         GlStateManager.translate(0.9f, -0.25f, 0.05f);
         GlStateManager.scale(0.6f, 0.6f, 0.6f);
-        Minecraft.getMinecraft().getRenderItem().renderItem(flux, ItemCameraTransforms.TransformType.FIXED);
+        GameUtils.getRenderItem().renderItem(flux, ItemCameraTransforms.TransformType.FIXED);
         GlStateManager.popMatrix();
       }
 

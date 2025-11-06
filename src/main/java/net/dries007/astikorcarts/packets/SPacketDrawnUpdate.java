@@ -1,6 +1,7 @@
 package net.dries007.astikorcarts.packets;
 
-import net.minecraft.client.Minecraft;
+import su.terrafirmagreg.api.util.GameUtils;
+
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -38,8 +39,8 @@ public class SPacketDrawnUpdate implements IMessage {
 
     @Override
     public IMessage onMessage(SPacketDrawnUpdate message, MessageContext ctx) {
-      Minecraft.getMinecraft().addScheduledTask(() -> {
-        AbstractDrawn cart = (AbstractDrawn) Minecraft.getMinecraft().world.getEntityByID(message.cartId);
+      GameUtils.getMinecraft().addScheduledTask(() -> {
+        AbstractDrawn cart = (AbstractDrawn) GameUtils.getWorld().getEntityByID(message.cartId);
         if (message.pullingId < 0) {
           cart.setPulling(null);
         } else {

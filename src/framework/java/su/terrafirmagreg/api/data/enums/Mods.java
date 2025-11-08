@@ -104,6 +104,7 @@ public enum Mods {
     public static final String TFCPASSINGDAYS = "tfcpassingdays";
     public static final String FLUIDLOGGED = "fluidlogged_api";
     public static final String GREGTECH = "gregtech";
+    public static final String GROOVYSCRIPT = "groovyscript";
     public static final String TFCTOWERHEAT = "tfctowerheat";
     public static final String PUDDLES = "puddles";
     public static final String WATERFLASKS = "waterflasks";

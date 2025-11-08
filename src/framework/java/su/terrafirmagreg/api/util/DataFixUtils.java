@@ -1,5 +1,6 @@
 package su.terrafirmagreg.api.util;
 
+import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.framework.manager.content.ContentManager;
 
@@ -92,41 +93,41 @@ public final class DataFixUtils {
   }
 
 
-  public static <T extends IForgeRegistryEntry<T>> RemapBuilder builder(RegistryEvent.MissingMappings<T> mappings) {
-    return new RemapBuilder(mappings);
+  public static <T extends IForgeRegistryEntry<T>> RemapBuilder<T> builder(RegistryEvent.MissingMappings<T> mappings) {
+    return new RemapBuilder<>(mappings);
   }
 
 
-  public static class RemapBuilder {
+  public static class RemapBuilder<T extends IForgeRegistryEntry<T>> {
 
-    Multimap<String, ResourceLocation> multimap = ArrayListMultimap.create();
+    final Multimap<String, ResourceLocation> multimap = ArrayListMultimap.create();
 
 
-    RegistryEvent.MissingMappings<?> mappings;
+    RegistryEvent.MissingMappings<T> mappings;
     Logger logger;
     BiPredicate<String, String> comparisonRule = endsWithPredicate;
 
-    public RemapBuilder(RegistryEvent.MissingMappings<?> mappings) {
+    public RemapBuilder(RegistryEvent.MissingMappings<T> mappings) {
       this.mappings = mappings;
     }
 
 
-    public RemapBuilder comparisonRule(BiPredicate<String, String> comparisonRule) {
+    public RemapBuilder<T> comparisonRule(BiPredicate<String, String> comparisonRule) {
       this.comparisonRule = comparisonRule;
       return this;
     }
 
-    public RemapBuilder logger(Logger logger) {
+    public RemapBuilder<T> logger(Logger logger) {
       this.logger = logger;
       return this;
     }
 
-    public RemapBuilder put(String key, IForgeRegistryEntry<?> values) {
+    public RemapBuilder<T> put(String key, T values) {
       multimap.put(key, values.getRegistryName());
       return this;
     }
 
-    public RemapBuilder put(String key, Collection<? extends IForgeRegistryEntry<?>> values) {
+    public RemapBuilder<T> put(String key, Collection<? extends IForgeRegistryEntry<?>> values) {
 
       values.forEach(value -> multimap.put(key, value.getRegistryName()));
       return this;
@@ -135,20 +136,20 @@ public final class DataFixUtils {
     // Обработка события
     public void build() {
 
-//      mappings.getAllMappings()
-//        .stream()
-//        .filter(mapping -> Mods.contains(mapping.key.getNamespace()))
-//        .forEach(mapping -> {
-//          String mappingPath = mapping.key.getPath();
-//
-//          multimap.forEach((key, value) -> {
-//            if (comparisonRule.test(mappingPath, key)) {
-//
-//              processMapping(mapping, value);
-//            }
-//
-//          });
-//        });
+      mappings.getAllMappings()
+        .stream()
+        .filter(mapping -> Mods.contains(mapping.key.getNamespace()))
+        .forEach(mapping -> {
+          String mappingPath = mapping.key.getPath();
+
+          multimap.forEach((key, value) -> {
+            if (comparisonRule.test(mappingPath, key)) {
+
+              processMapping(mapping, value);
+            }
+
+          });
+        });
     }
 
 

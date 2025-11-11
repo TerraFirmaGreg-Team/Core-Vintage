@@ -10,8 +10,8 @@ import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProvider
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.IWoodEntry;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;

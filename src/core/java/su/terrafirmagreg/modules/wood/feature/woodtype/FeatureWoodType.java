@@ -1,7 +1,6 @@
 package su.terrafirmagreg.modules.wood.feature.woodtype;
 
 import su.terrafirmagreg.framework.manager.feature.base.BaseFeature;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodTypeHandler;
 
 
 public class FeatureWoodType extends BaseFeature {
@@ -12,6 +11,6 @@ public class FeatureWoodType extends BaseFeature {
       .registryKey("wood_type")
     );
 
-    WoodTypeHandler.init();
+
   }
 }

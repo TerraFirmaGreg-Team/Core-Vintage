@@ -1,6 +1,5 @@
 package su.terrafirmagreg.api.util;
 
-import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.api.data.enums.Mods.ModIDs;
 import su.terrafirmagreg.framework.manager.content.ContentManager;
 
@@ -40,21 +39,35 @@ public final class DataFixUtils {
   public static final BiPredicate<String, String> exactMatchPredicate = String::equals;
   public static final BiPredicate<String, String> containsPredicate = String::contains;
   public static final BiPredicate<String, String> caseInsensitivePredicate = (path, key) -> path.toLowerCase().contains(key.toLowerCase());
+  /**
+   * Универсальный предикат для сравнения путей, который поддерживает: 1. Обычное сравнение (полное или частичное совпадение концов путей) 2. TFC-стиль путей (сравнение только типа и материала, игнорируя модификатор)
+   * <p>
+   * Примеры совпадений: - path: "wood/bookshelf/mahogany" и key: "bookshelf/mahogany" -> true - path: "tfc:wood/bookshelf/mahogany" и key: "wood/bookshelf/mahogany" -> true - path: "wood/bookshelf/mahogany" и key:
+   * "tfg:wood/bookshelf/mahogany" -> true - path: "wood/bookshelf/mahogany" и key: "wood/bookshelf/mahogany" -> true
+   */
   public static final BiPredicate<String, String> variantPredicate = (path, key) -> {
+    // Удаляем namespace, если он есть
+    path = path.contains(":") ? path.split(":")[1] : path;
+    key = key.contains(":") ? key.split(":")[1] : key;
+
     String[] pathParts = path.split("/");
     String[] keyParts = key.split("/");
 
-    if (keyParts.length < 2) {
+    // Если оба пути имеют TFC-стиль (минимум 3 части), сравниваем только тип и материал
+    if (pathParts.length >= 3 && keyParts.length >= 3) {
+      // Сравниваем предпоследнюю и последнюю части (тип и материал)
+      return pathParts[pathParts.length - 2].equals(keyParts[keyParts.length - 2]) &&  // тип (bookshelf, button и т.д.)
+             pathParts[pathParts.length - 1].equals(keyParts[keyParts.length - 1]);     // материал (mahogany, granite и т.д.)
+    }
+
+    // Для обычных путей используем сравнение с конца
+    if (keyParts.length > pathParts.length) {
       return false;
     }
 
-    if (pathParts.length < keyParts.length) {
-      return false;
-    }
-
-    for (int i = 0; i < keyParts.length; i++) {
-      int pathIndex = pathParts.length - keyParts.length + i;
-      if (!pathParts[pathIndex].equals(keyParts[i])) {
+    // Сравниваем с конца, начиная с последнего элемента keyParts
+    for (int i = 1; i <= keyParts.length; i++) {
+      if (!pathParts[pathParts.length - i].equals(keyParts[keyParts.length - i])) {
         return false;
       }
     }
@@ -136,20 +149,20 @@ public final class DataFixUtils {
     // Обработка события
     public void build() {
 
-      mappings.getAllMappings()
-        .stream()
-        .filter(mapping -> Mods.contains(mapping.key.getNamespace()))
-        .forEach(mapping -> {
-          String mappingPath = mapping.key.getPath();
-
-          multimap.forEach((key, value) -> {
-            if (comparisonRule.test(mappingPath, key)) {
-
-              processMapping(mapping, value);
-            }
-
-          });
-        });
+//      mappings.getAllMappings()
+//        .stream()
+//        .filter(mapping -> Mods.contains(mapping.key.getNamespace()))
+//        .forEach(mapping -> {
+//          String mappingPath = mapping.key.getPath();
+//
+//          multimap.forEach((key, value) -> {
+//            if (comparisonRule.test(mappingPath, key)) {
+//
+//              processMapping(mapping, value);
+//            }
+//
+//          });
+//        });
     }
 
 

@@ -3,8 +3,8 @@ package su.terrafirmagreg.modules.wood.content.item;
 
 import su.terrafirmagreg.framework.manager.content.base.item.spi.BaseItem;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderItemColor;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.IWoodEntry;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 
 import net.minecraft.client.renderer.color.IItemColor;
 

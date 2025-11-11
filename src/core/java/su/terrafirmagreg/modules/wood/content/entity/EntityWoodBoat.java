@@ -3,9 +3,9 @@ package su.terrafirmagreg.modules.wood.content.entity;
 import su.terrafirmagreg.api.data.DataSerializers;
 import su.terrafirmagreg.api.util.NBTUtils;
 import su.terrafirmagreg.framework.manager.content.base.entity.spi.BaseEntityBoat;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.init.ItemsWood;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.render.RenderWoodBoat;
+import su.terrafirmagreg.modules.wood.init.ItemsWood;
 
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;

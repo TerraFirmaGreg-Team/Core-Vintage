@@ -16,6 +16,7 @@ public class PluginGroovy extends BasePlugin {
 
   @SubscribeEvent
   public static void onInit(StateEvent.Initialization event) {
+
     GroovyScriptLoader.init();
   }
 

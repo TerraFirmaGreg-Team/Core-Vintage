@@ -365,14 +365,6 @@ public final class BlocksTFC {
 
       // This loop is split up to organize the ordering of the creative tab
       // Do not optimize these loops back together
-      // All bookshelves + item blocks
-//      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-//        normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/bookshelf/" + wood.getRegistryName().getPath(), new BlockBookshelfTFC(wood), CT_WOOD)));
-//      }
-      // All workbenches + item blocks
-//      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-//        normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/workbench/" + wood.getRegistryName().getPath(), new BlockWorkbenchTFC(wood), CT_WOOD)));
-//      }
       // All fences + item blocks
       for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
         inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/fence/" + wood.getRegistryName().getPath(), new BlockFenceTFC(wood), CT_WOOD)));

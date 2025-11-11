@@ -19,6 +19,7 @@ public class FeatureRemappingWood extends BaseFeature {
       .logger(ModuleWood.LOGGER.getLogger())
       .comparisonRule(DataFixUtils.variantPredicate)
       .put("bookshelf", BlocksWood.BOOKSHELF.values())
+      .put("workbench", BlocksWood.WORKBENCH.values())
       .build();
   }
 
@@ -28,6 +29,7 @@ public class FeatureRemappingWood extends BaseFeature {
       .logger(ModuleWood.LOGGER.getLogger())
       .comparisonRule(DataFixUtils.variantPredicate)
       .put("bookshelf", BlocksWood.BOOKSHELF.values())
+      .put("workbench", BlocksWood.WORKBENCH.values())
       .build();
   }
 

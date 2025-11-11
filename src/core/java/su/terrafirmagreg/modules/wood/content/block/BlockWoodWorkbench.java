@@ -2,9 +2,9 @@ package su.terrafirmagreg.modules.wood.content.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockWorkbench;
+import su.terrafirmagreg.modules.wood.api.IWoodEntry;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.container.ContainerWoodWorkbench;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -41,7 +41,8 @@ public class BlockWoodWorkbench extends BaseBlockWorkbench implements IWoodEntry
       .hardness(2.0F)
       .resistance(5.0F)
       .fireInfo(5, 20)
-      .addOreDict("workbench");
+      .addOreDict("workbench")
+      .addOreDict("craftingTableWood");
   }
 
   @Override

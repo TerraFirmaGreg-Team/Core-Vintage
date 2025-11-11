@@ -8,8 +8,8 @@ import su.terrafirmagreg.framework.manager.content.base.entity.spi.BaseEntity;
 import su.terrafirmagreg.modules.core.ConfigCore;
 import su.terrafirmagreg.modules.core.feature.pull.capability.CapabilityPull;
 import su.terrafirmagreg.modules.wood.ConfigWood;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodTypes;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.type.WoodTypes;
 import su.terrafirmagreg.modules.wood.packet.SCPacketDrawnUpdate;
 
 import net.minecraft.entity.Entity;

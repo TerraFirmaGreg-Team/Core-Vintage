@@ -8,8 +8,6 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ContainerWoodWorkbench extends ContainerWorkbench {
 
   //todo: replace with proper workbench mechanics
@@ -25,12 +23,15 @@ public class ContainerWoodWorkbench extends ContainerWorkbench {
   }
 
   @Override
-  public boolean canInteractWith(@NotNull EntityPlayer playerIn) {
+  public boolean canInteractWith(EntityPlayer playerIn) {
     if (world.getBlockState(pos).getBlock() != block) {
       return false;
     } else {
-      return playerIn.getDistanceSq((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D,
-        (double) pos.getZ() + 0.5D) <= 64.0D;
+      return playerIn.getDistanceSq(
+        (double) pos.getX() + 0.5D,
+        (double) pos.getY() + 0.5D,
+        (double) pos.getZ() + 0.5D
+      ) <= 64.0D;
     }
   }
 }

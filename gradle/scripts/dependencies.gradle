@@ -115,7 +115,7 @@ dependencies {
       implementation rfg.deobf("curse.maven:configanytime-870276:5212709")
       implementation rfg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
       implementation rfg.deobf("curse.maven:ctm-267602:2915363")
-      implementation rfg.deobf("curse.maven:groovyscript-687577:6695118-sources-6695120-dev-6695119")
+      implementation rfg.deobf("curse.maven:groovyscript-687577:7092147-sources-7092149-dev-7092148")
 
 
 //    implementation rfg.deobf("curse.maven:itemzoom-261725:2643616")

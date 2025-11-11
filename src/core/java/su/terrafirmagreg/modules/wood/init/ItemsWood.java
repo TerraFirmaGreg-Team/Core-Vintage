@@ -1,13 +1,13 @@
 package su.terrafirmagreg.modules.wood.init;
 
 import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.item.ItemWoodAnimalCart;
 import su.terrafirmagreg.modules.wood.content.item.ItemWoodBoat;
 import su.terrafirmagreg.modules.wood.content.item.ItemWoodLumber;
 import su.terrafirmagreg.modules.wood.content.item.ItemWoodPlowCart;
 import su.terrafirmagreg.modules.wood.content.item.ItemWoodSupplyCart;
 import su.terrafirmagreg.modules.wood.content.item.ItemWoodWheel;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import java.util.Map;
 

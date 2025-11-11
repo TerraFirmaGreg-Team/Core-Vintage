@@ -8,10 +8,10 @@ import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.api.IWoodEntry;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.render.TESRWoodLoom;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodLoom;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;

@@ -69,16 +69,21 @@ public class ContentManager implements IContentManager {
       event.getRegistry(), "Registry not found: %s", event.getName()
     );
     final Class<T> registryType = registry.getRegistrySuperType();
+    final var map = this.getMapEntry();
+    if (!map.containsKey(registryType)) {
+      return;
+    }
+    map.get(registryType)
+      .forEach(entry -> {
 
-    this.getMapEntry().get(registryType).forEach(entry -> {
+        entry.apply();
+        registry.register((T) entry.setRegistryName(entry.getIdentifier()));
+        entry.postRegister();
+        ContentManager.LOGGER.debug("Registry {}: {}",
+          entry.getRegistryType().getSimpleName(), entry.getRegistryName()
+        );
+      });
 
-      entry.apply();
-      registry.register((T) entry.asEntry().setRegistryName(entry.getSettings().getIdentifier()));
-      entry.postRegister();
-      ContentManager.LOGGER.debug("Registry {}: {}",
-        entry.getRegistryType().getSimpleName(), entry.getRegistryName()
-      );
-    });
   }
 
   @SuppressWarnings({"unchecked", "rawtypes"})
@@ -93,58 +98,34 @@ public class ContentManager implements IContentManager {
 
     mappings.stream()
       .filter(mapping -> Mods.contains(mapping.key.getNamespace()))
+      .filter(mapping -> this.getMapEntry().containsKey(registryType))
       .forEach(mapping -> {
-        String mappingKey = mapping.key.toString();
         String mappingPath = mapping.key.getPath();
 
         this.getMapEntry().get(registryType).stream()
           .filter(entry -> {
             ResourceLocation registryName = entry.getRegistryName();
-
             if (registryName == null) {
-              mapping.fail();
               return false;
             }
-
-//            var registryNamePath = registryName.getPath();
-//
-//            if (!mappingPath.endsWith(registryNamePath)) {
-//              mapping.warn();
-//              return false;
-//            }
-
-            // Проверяем полное совпадение ключа или совпадение по variantPredicate
+            // Используем обновленный variantPredicate для сравнения путей
             return DataFixUtils.variantPredicate.test(mappingPath, registryName.getPath());
-          })
-          .findFirst() // Берем первый подходящий
-          .ifPresent(entry -> {
-
-            var resourceLocation = entry.getRegistryName();
-            if (resourceLocation == null) {
-              mapping.warn();
-              return;
-            }
-
-            // Получаем объект из registry
-            T registryObject = mapping.registry.getValue(resourceLocation);
+          }).forEach(entry -> {
+            // Нашли совпадение, выполняем ремаппинг
+            ResourceLocation registryName = entry.getRegistryName();
+            T registryObject = mapping.registry.getValue(registryName);
+            var registrySuperType = mapping.registry.getRegistrySuperType();
             if (registryObject == null) {
-              mapping.warn();
-              ContentManager.LOGGER.warn("Failed to remap {}: target object not found in registry", resourceLocation);
-
               return;
             }
 
-            if (mapping.registry.getRegistrySuperType() == registryObject.getRegistryType()) {
+            if (registrySuperType == registryObject.getRegistryType()) {
               mapping.remap(registryObject);
-              ContentManager.LOGGER.info("Remapped {} to {}", mapping.key, resourceLocation);
-              return;
+              ContentManager.LOGGER.info("Remapped {} to {} (type: {})", mapping.key, registryName, registrySuperType.getSimpleName());
+            } else {
+              mapping.fail();
             }
-
-            mapping.warn();
-            ContentManager.LOGGER.warn("Failed to remap {}: type mismatch ({} vs {})", mapping.key, mapping.registry.getRegistrySuperType(), resourceLocation);
-
           });
-        mapping.warn();
       });
   }
 

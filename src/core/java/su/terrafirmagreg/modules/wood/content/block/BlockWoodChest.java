@@ -6,11 +6,11 @@ import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockChest
 import su.terrafirmagreg.modules.core.feature.size.capability.CapabilityProviderSize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
+import su.terrafirmagreg.modules.wood.api.IWoodEntry;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.inventory.InventoryWoodLargeChest;
 import su.terrafirmagreg.modules.wood.content.render.TESRWoodChest;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodChest;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;

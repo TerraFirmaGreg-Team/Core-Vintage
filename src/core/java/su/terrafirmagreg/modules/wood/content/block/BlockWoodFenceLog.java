@@ -2,8 +2,8 @@ package su.terrafirmagreg.modules.wood.content.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlockFence;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
+import su.terrafirmagreg.modules.wood.api.IWoodEntry;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

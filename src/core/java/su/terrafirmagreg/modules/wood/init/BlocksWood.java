@@ -1,6 +1,7 @@
 package su.terrafirmagreg.modules.wood.init;
 
 import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodBarrel;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodBookshelf;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodButton;
@@ -22,7 +23,6 @@ import su.terrafirmagreg.modules.wood.content.block.BlockWoodSupport;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodToolRack;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodTrapDoor;
 import su.terrafirmagreg.modules.wood.content.block.BlockWoodWorkbench;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import java.util.Map;
 

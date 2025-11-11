@@ -69,7 +69,7 @@ public class ContentRegistrar implements IContentRegistrar {
   public <V extends IContentEntry<?, ?>> void addContent(String identifier, V entry) {
     this.group = group != null ? group : BaseItemGroup.of(module.getIdentifier(), getIdentifier(identifier));
     entry.getSettings().registryKey(identifier);
-    addContent(entry);
+    this.addContent(entry);
   }
 
   @Override

@@ -6,10 +6,10 @@ import su.terrafirmagreg.framework.manager.content.provider.IProviderBlockColor;
 import su.terrafirmagreg.framework.manager.content.provider.IProviderTile;
 import su.terrafirmagreg.helper.GrassColorHelper;
 import su.terrafirmagreg.modules.core.feature.calendar.spi.ICalendar;
+import su.terrafirmagreg.modules.wood.api.IWoodEntry;
+import su.terrafirmagreg.modules.wood.api.type.WoodType;
 import su.terrafirmagreg.modules.wood.content.itemblock.ItemBlockWoodSapling;
 import su.terrafirmagreg.modules.wood.content.tile.TileWoodSapling;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.IWoodEntry;
-import su.terrafirmagreg.modules.wood.feature.woodtype.types.type.WoodType;
 
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;

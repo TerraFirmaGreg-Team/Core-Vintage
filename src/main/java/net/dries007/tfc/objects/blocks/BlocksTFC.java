@@ -58,8 +58,6 @@ import net.dries007.tfc.objects.blocks.stone.BlockWallTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockFenceGateTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockFenceTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLoom;
@@ -166,8 +164,6 @@ public final class BlocksTFC {
   private static ImmutableList<BlockLogTFC> allLogBlocks;
   @Getter
   private static ImmutableList<BlockLeavesTFC> allLeafBlocks;
-  @Getter
-  private static ImmutableList<BlockFenceGateTFC> allFenceGateBlocks;
   @Getter
   private static ImmutableList<BlockSaplingTFC> allSaplingBlocks;
   @Getter
@@ -350,7 +346,6 @@ public final class BlocksTFC {
     {
       Builder<BlockLogTFC> logs = ImmutableList.builder();
       Builder<BlockLeavesTFC> leaves = ImmutableList.builder();
-      Builder<BlockFenceGateTFC> fenceGates = ImmutableList.builder();
       Builder<BlockSaplingTFC> saplings = ImmutableList.builder();
       Builder<BlockDoorTFC> doors = ImmutableList.builder();
       Builder<BlockTrapDoorWoodTFC> trapDoors = ImmutableList.builder();
@@ -361,13 +356,6 @@ public final class BlocksTFC {
       Builder<BlockLoom> looms = ImmutableList.builder();
       Builder<BlockSupport> supports = ImmutableList.builder();
 
-      // This loop is split up to organize the ordering of the creative tab
-      // Do not optimize these loops back together
-      // All fences + item blocks
-      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-        inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/fence/" + wood.getRegistryName().getPath(), new BlockFenceTFC(wood), CT_WOOD)));
-      }
-
       // Other blocks that don't have specific order requirements
       for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
         // Only block in the decorations category
@@ -375,7 +363,6 @@ public final class BlocksTFC {
         // Blocks with specific block collections don't matter
         logs.add(register(r, "wood/log/" + wood.getRegistryName().getPath(), new BlockLogTFC(wood), CT_WOOD));
         leaves.add(register(r, "wood/leaves/" + wood.getRegistryName().getPath(), new BlockLeavesTFC(wood), CT_WOOD));
-        fenceGates.add(register(r, "wood/fence_gate/" + wood.getRegistryName().getPath(), new BlockFenceGateTFC(wood), CT_WOOD));
         saplings.add(register(r, "wood/sapling/" + wood.getRegistryName().getPath(), new BlockSaplingTFC(wood), CT_WOOD));
         doors.add(register(r, "wood/door/" + wood.getRegistryName().getPath(), new BlockDoorTFC(wood), CT_WOOD));
         trapDoors.add(register(r, "wood/trapdoor/" + wood.getRegistryName().getPath(), new BlockTrapDoorWoodTFC(wood), CT_WOOD));
@@ -391,7 +378,6 @@ public final class BlocksTFC {
 
       allLogBlocks = logs.build();
       allLeafBlocks = leaves.build();
-      allFenceGateBlocks = fenceGates.build();
       allSaplingBlocks = saplings.build();
       allDoorBlocks = doors.build();
       allTrapDoorWoodBlocks = trapDoors.build();
@@ -404,7 +390,6 @@ public final class BlocksTFC {
 
       //logs are special
       allLeafBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-      allFenceGateBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
 
       allSaplingBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockSaplingTFC(x)));
 

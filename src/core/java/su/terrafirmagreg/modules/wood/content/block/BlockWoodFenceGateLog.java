@@ -6,6 +6,7 @@ import su.terrafirmagreg.modules.wood.api.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.type.WoodType;
 
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 
 import lombok.Getter;
 
@@ -15,18 +16,18 @@ public class BlockWoodFenceGateLog extends BaseBlockFenceGate implements IWoodEn
   protected final WoodType type;
 
   public BlockWoodFenceGateLog(WoodType type) {
-
-    this.type = type;
-
-    getSettings()
+    super(BlockSettings.of()
+      .material(Material.WOOD)
       .ignoresProperties(IN_WALL, POWERED)
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)
       .hardness(2.0F)
       .resistance(15.0F)
       .fireInfo(5, 20)
-      .addOreDict("fence", "gate", "wood")
-      .addOreDict("fence", "gate", "wood", type);
+      .addOreDict("fence", "gate", "log")
+      .addOreDict("fence", "gate", "log", type));
+
+    this.type = type;
 
   }
 }

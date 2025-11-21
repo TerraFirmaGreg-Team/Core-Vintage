@@ -22,6 +22,10 @@ public class FeatureRemappingWood extends BaseFeature {
       .put("workbench", BlocksWood.WORKBENCH.values())
       .put("pressure_plate", BlocksWood.PRESSURE_PLATE.values())
       .put("button", BlocksWood.BUTTON.values())
+      .put("fence", BlocksWood.FENCE.values())
+      .put("fence_gate", BlocksWood.FENCE_GATE.values())
+      .put("fence_log", BlocksWood.FENCE.values())
+      .put("fence_gate_log", BlocksWood.FENCE_GATE.values())
       .build();
   }
 
@@ -34,6 +38,10 @@ public class FeatureRemappingWood extends BaseFeature {
       .put("workbench", BlocksWood.WORKBENCH.values())
       .put("pressure_plate", BlocksWood.PRESSURE_PLATE.values())
       .put("button", BlocksWood.BUTTON.values())
+      .put("fence", BlocksWood.FENCE.values())
+      .put("fence_gate", BlocksWood.FENCE_GATE.values())
+      .put("fence_log", BlocksWood.FENCE.values())
+      .put("fence_gate_log", BlocksWood.FENCE_GATE.values())
       .build();
   }
 

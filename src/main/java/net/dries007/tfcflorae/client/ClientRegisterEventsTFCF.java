@@ -52,14 +52,11 @@ import net.dries007.tfc.objects.blocks.plants.BlockShortGrassTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockTallGrassWater;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterGlowPlant;
 import net.dries007.tfc.objects.blocks.plants.BlockWaterPlantTFCF;
-import net.dries007.tfc.objects.blocks.wood.BlockFenceGateLog;
 import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeSapling;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitDoorTFCF;
-import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitFenceGate;
-import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitLogFenceGate;
 import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitSlab;
 import net.dries007.tfc.objects.items.ItemArmorTFCF;
 import net.dries007.tfc.objects.items.ItemFruitDoorTFCF;
@@ -157,18 +154,6 @@ public class ClientRegisterEventsTFCF {
 
     for (BlockFruitDoorTFCF door : BlocksTFCF.getAllFruitDoors()) {
       ModelLoader.setCustomStateMapper(door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
-    }
-
-    for (BlockFruitFenceGate gate : BlocksTFCF.getAllFruitFenceGates()) {
-      ModelLoader.setCustomStateMapper(gate, new StateMap.Builder().ignore(BlockFruitFenceGate.POWERED).build());
-    }
-
-    for (BlockFruitLogFenceGate gate : BlocksTFCF.getAllFruitLogFenceGates()) {
-      ModelLoader.setCustomStateMapper(gate, new StateMap.Builder().ignore(BlockFruitLogFenceGate.POWERED).build());
-    }
-
-    for (BlockFenceGateLog gate : BlocksTFCF.getAllFenceGateLogBlocks()) {
-      ModelLoader.setCustomStateMapper(gate, new StateMap.Builder().ignore(BlockFenceGateLog.POWERED).build());
     }
 
     for (Block block : BlocksTFCF.getAllWallBlocks()) {ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockWall.VARIANT).build());}

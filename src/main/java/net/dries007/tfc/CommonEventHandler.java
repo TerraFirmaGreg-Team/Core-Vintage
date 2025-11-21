@@ -33,6 +33,8 @@ import su.terrafirmagreg.modules.core.init.FluidsCore;
 import su.terrafirmagreg.modules.core.init.ItemsCore;
 import su.terrafirmagreg.modules.food.api.FoodStatsTFC;
 import su.terrafirmagreg.modules.food.api.IFoodStatsTFC;
+import su.terrafirmagreg.modules.wood.api.type.WoodTypes;
+import su.terrafirmagreg.modules.wood.init.BlocksWood;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCarrot;
@@ -140,8 +142,6 @@ import net.dries007.tfc.objects.blocks.plants.BlockCactusTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockFenceGateTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockFenceTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
@@ -387,11 +387,11 @@ public final class CommonEventHandler {
     }
     if (block instanceof BlockFenceGate) {
       event.getDrops().clear();
-      event.getDrops().add(new ItemStack(BlockFenceGateTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+      event.getDrops().add(new ItemStack(BlocksWood.FENCE_GATE.get(WoodTypes.OAK)));
     }
     if (block instanceof BlockFence) {
       event.getDrops().clear();
-      event.getDrops().add(new ItemStack(BlockFenceTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+      event.getDrops().add(new ItemStack(BlocksWood.FENCE.get(WoodTypes.OAK)));
     }
     if (block instanceof BlockPotato || block instanceof BlockCarrot || OreDictUtils.contains(stackAt, "cropWheat")) {
       event.getDrops().clear();

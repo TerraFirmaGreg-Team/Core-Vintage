@@ -23,8 +23,8 @@ public class BlockWoodFenceLog extends BaseBlockFence implements IWoodEntry {
       .resistance(15.0F)
       .harvestLevel(ToolClasses.AXE, 0)
       .fireInfo(5, 20)
-      .addOreDict("fence", "wood")
-      .addOreDict("fence", "wood", type)
+      .addOreDict("fence", "log")
+      .addOreDict("fence", "log", type)
     );
 
     this.type = type;

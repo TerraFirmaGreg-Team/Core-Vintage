@@ -12,7 +12,6 @@ import su.terrafirmagreg.modules.device.content.tile.TileSluice;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockWall;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -198,10 +197,6 @@ public final class ClientRegisterEvents {
     // Blocks with Ignored Properties
     for (Block block : BlocksTFC.getAllFluidBlocks()) {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
-    }
-
-    for (Block block : BlocksTFC.getAllFenceGateBlocks()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
     }
 
     for (Block block : BlocksTFC.getAllLeafBlocks()) {

@@ -26,6 +26,8 @@ public class FeatureRemappingWood extends BaseFeature {
       .put("fence_gate", BlocksWood.FENCE_GATE.values())
       .put("fence_log", BlocksWood.FENCE.values())
       .put("fence_gate_log", BlocksWood.FENCE_GATE.values())
+      .put("door", BlocksWood.DOOR.values())
+      .put("trapdoor", BlocksWood.TRAPDOOR.values())
       .build();
   }
 
@@ -42,6 +44,8 @@ public class FeatureRemappingWood extends BaseFeature {
       .put("fence_gate", BlocksWood.FENCE_GATE.values())
       .put("fence_log", BlocksWood.FENCE.values())
       .put("fence_gate_log", BlocksWood.FENCE_GATE.values())
+      .put("door", BlocksWood.DOOR.values())
+      .put("trapdoor", BlocksWood.TRAPDOOR.values())
       .build();
   }
 

@@ -6,7 +6,6 @@ import su.terrafirmagreg.helper.GrassColorHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
-import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockWall;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -56,10 +55,8 @@ import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeSapling;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitDoorTFCF;
 import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitSlab;
 import net.dries007.tfc.objects.items.ItemArmorTFCF;
-import net.dries007.tfc.objects.items.ItemFruitDoorTFCF;
 import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.te.TEFruitChest;
 import net.dries007.tfc.objects.te.TEFruitLoom;
@@ -87,10 +84,6 @@ public class ClientRegisterEventsTFCF {
     }
 
     for (Item item : ItemsTFCF.getAllItemBows()) {
-      ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
-    }
-
-    for (ItemFruitDoorTFCF item : ItemsTFCF.getAllFruitDoors()) {
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString()));
     }
 
@@ -151,10 +144,6 @@ public class ClientRegisterEventsTFCF {
     }
 
     for (Block block : BlocksTFCF.getAllCropBlocks()) {ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(WILD).build());}
-
-    for (BlockFruitDoorTFCF door : BlocksTFCF.getAllFruitDoors()) {
-      ModelLoader.setCustomStateMapper(door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
-    }
 
     for (Block block : BlocksTFCF.getAllWallBlocks()) {ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockWall.VARIANT).build());}
 

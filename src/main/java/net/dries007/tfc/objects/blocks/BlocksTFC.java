@@ -57,7 +57,6 @@ import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockWallTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLoom;
@@ -65,7 +64,6 @@ import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
-import net.dries007.tfc.objects.blocks.wood.BlockTrapDoorWoodTFC;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
@@ -166,10 +164,6 @@ public final class BlocksTFC {
   private static ImmutableList<BlockLeavesTFC> allLeafBlocks;
   @Getter
   private static ImmutableList<BlockSaplingTFC> allSaplingBlocks;
-  @Getter
-  private static ImmutableList<BlockDoorTFC> allDoorBlocks;
-  @Getter
-  private static ImmutableList<BlockTrapDoorWoodTFC> allTrapDoorWoodBlocks;
   @Getter
   private static ImmutableList<BlockTrapDoorMetalTFC> allTrapDoorMetalBlocks;
   @Getter
@@ -347,8 +341,6 @@ public final class BlocksTFC {
       Builder<BlockLogTFC> logs = ImmutableList.builder();
       Builder<BlockLeavesTFC> leaves = ImmutableList.builder();
       Builder<BlockSaplingTFC> saplings = ImmutableList.builder();
-      Builder<BlockDoorTFC> doors = ImmutableList.builder();
-      Builder<BlockTrapDoorWoodTFC> trapDoors = ImmutableList.builder();
       Builder<BlockChestTFC> chests = ImmutableList.builder();
       Builder<BlockToolRack> toolRacks = ImmutableList.builder();
       Builder<ItemBlockBarrel> barrelItems = ImmutableList.builder();
@@ -364,8 +356,6 @@ public final class BlocksTFC {
         logs.add(register(r, "wood/log/" + wood.getRegistryName().getPath(), new BlockLogTFC(wood), CT_WOOD));
         leaves.add(register(r, "wood/leaves/" + wood.getRegistryName().getPath(), new BlockLeavesTFC(wood), CT_WOOD));
         saplings.add(register(r, "wood/sapling/" + wood.getRegistryName().getPath(), new BlockSaplingTFC(wood), CT_WOOD));
-        doors.add(register(r, "wood/door/" + wood.getRegistryName().getPath(), new BlockDoorTFC(wood), CT_WOOD));
-        trapDoors.add(register(r, "wood/trapdoor/" + wood.getRegistryName().getPath(), new BlockTrapDoorWoodTFC(wood), CT_WOOD));
         chests.add(register(r, "wood/chest/" + wood.getRegistryName().getPath(), new BlockChestTFC(BlockChestTFC.TFCBASIC, wood), CT_WOOD));
         chests.add(register(r, "wood/chest_trap/" + wood.getRegistryName().getPath(), new BlockChestTFC(BlockChestTFC.TFCTRAP, wood), CT_WOOD));
 
@@ -379,8 +369,6 @@ public final class BlocksTFC {
       allLogBlocks = logs.build();
       allLeafBlocks = leaves.build();
       allSaplingBlocks = saplings.build();
-      allDoorBlocks = doors.build();
-      allTrapDoorWoodBlocks = trapDoors.build();
       allChestBlocks = chests.build();
       allToolRackBlocks = toolRacks.build();
       allLoomBlocks = looms.build();
@@ -394,7 +382,6 @@ public final class BlocksTFC {
       allSaplingBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockSaplingTFC(x)));
 
       // doors are special
-      allTrapDoorWoodBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockTFC(x)));
       allChestBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
       allToolRackBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
       allLoomBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));

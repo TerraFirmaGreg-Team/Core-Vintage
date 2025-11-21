@@ -31,7 +31,6 @@ import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemJug;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
@@ -52,7 +51,6 @@ import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockToolHead;
 import net.dries007.tfc.objects.items.wood.ItemBoatTFC;
-import net.dries007.tfc.objects.items.wood.ItemDoorTFC;
 import net.dries007.tfc.objects.items.wood.ItemLumberTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
@@ -225,10 +223,6 @@ public final class ItemsTFC {
     BlocksTFC.getAllBarrelItemBlocks().forEach(x -> registerItemBlock(r, x));
 
     for (BlockLogTFC log : BlocksTFC.getAllLogBlocks()) {simpleItems.add(register(r, log.getRegistryName().getPath(), new ItemBlockTFC(log), CT_WOOD));}
-
-    for (BlockDoorTFC door : BlocksTFC.getAllDoorBlocks()) {
-      simpleItems.add(register(r, door.getRegistryName().getPath(), new ItemDoorTFC(door), CT_WOOD));
-    }
 
     for (BlockSlabTFC.Half slab : BlocksTFC.getAllSlabBlocks()) {
       simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_WOOD));

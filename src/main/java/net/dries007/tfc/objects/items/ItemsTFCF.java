@@ -30,7 +30,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.blocktype.BlockSlabTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.blocks.wood.bamboo.BlockBambooLog;
-import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitDoorTFCF;
 import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitSlab;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.objects.items.ceramics.ItemUnfiredUrn;
@@ -1159,8 +1158,6 @@ public final class ItemsTFCF {
   @Getter
   private static ImmutableList<Item> allFoodItems;
   @Getter
-  private static ImmutableList<ItemFruitDoorTFCF> allFruitDoors;
-  @Getter
   private static ImmutableList<Item> allCeramicMoldItems;
   @Getter
   private static ImmutableList<ItemArmorTFCF> allArmorItems;
@@ -1176,7 +1173,6 @@ public final class ItemsTFCF {
 
     ImmutableList.Builder<Item> simpleItems = ImmutableList.builder();
     ImmutableList.Builder<ItemBowTFCF> itemBows = ImmutableList.builder();
-    ImmutableList.Builder<ItemFruitDoorTFCF> fruitDoors = ImmutableList.builder();
     ImmutableList.Builder<ItemArmorTFCF> armorItems = ImmutableList.builder();
 
     // Fruit Tree Fruits
@@ -1930,13 +1926,6 @@ public final class ItemsTFCF {
       simpleItems.add(register(r, "wood/fruit_tree/boat/" + name, new ItemBoatTFCF(fruitTree), CT_WOOD));
     }
 
-    for (BlockFruitDoorTFCF blockDoor : BlocksTFCF.getAllFruitDoors()) {
-      ItemFruitDoorTFCF itemDoor = new ItemFruitDoorTFCF(blockDoor);
-      fruitDoors.add(register(r, blockDoor.getRegistryName().getPath(), itemDoor, CT_WOOD));
-      OreDictionary.registerOre(net.dries007.tfc.util.OreDictionaryHelper.toString("door_wood"), itemDoor);
-      OreDictionary.registerOre(net.dries007.tfc.util.OreDictionaryHelper.toString("door_wood_" + blockDoor.Name), itemDoor);
-    }
-
     for (BlockFruitSlab.Half slab : BlocksTFCF.getAllFruitSlabBlocks()) {
       simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFCF(slab, slab, slab.doubleSlab), CT_WOOD));
     }
@@ -1967,8 +1956,6 @@ public final class ItemsTFCF {
         simpleItems.add(register(r, "wood/fruit_tree/boat/" + name, new ItemBoatTFCF(fruitTree), CT_WOOD));
       }
     }
-
-    allFruitDoors = fruitDoors.build();
 
     BlocksTFCF.getAllNormalItemBlocks().forEach((x) -> {
       registerItemBlock(r, x);

@@ -11,7 +11,6 @@ import su.terrafirmagreg.modules.device.content.tile.TileSluice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
-import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockWall;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -217,10 +216,6 @@ public final class ClientRegisterEvents {
 
     for (Block block : BlocksTFC.getAllSaplingBlocks()) {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
-    }
-
-    for (Block block : BlocksTFC.getAllDoorBlocks()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
     }
 
     for (Block block : BlocksTFC.getAllChestBlocks()) {

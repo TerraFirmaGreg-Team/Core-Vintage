@@ -55,9 +55,7 @@ import net.dries007.tfc.objects.blocks.stone.BlockPressurePlateTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockWallTFC;
-import net.dries007.tfc.objects.blocks.stone.BlockWoodPressurePlateTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.blocks.wood.BlockButtonWoodTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockFenceGateTFC;
@@ -368,15 +366,6 @@ public final class BlocksTFC {
       // All fences + item blocks
       for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
         inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/fence/" + wood.getRegistryName().getPath(), new BlockFenceTFC(wood), CT_WOOD)));
-      }
-      // All buttons + item blocks
-      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-        inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/button/" + wood.getRegistryName().getPath(), new BlockButtonWoodTFC(wood), CT_WOOD)));
-      }
-      // All pressure plates + item blocks
-      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-        inventoryItemBlocks.add(new ItemBlockTFC(register(r, "wood/pressure_plate/" + wood.getRegistryName().getPath()
-          .toLowerCase(), new BlockWoodPressurePlateTFC(wood), CT_WOOD)));
       }
 
       // Other blocks that don't have specific order requirements

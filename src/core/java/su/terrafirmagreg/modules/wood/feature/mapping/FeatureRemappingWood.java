@@ -20,6 +20,8 @@ public class FeatureRemappingWood extends BaseFeature {
       .comparisonRule(DataFixUtils.variantPredicate)
       .put("bookshelf", BlocksWood.BOOKSHELF.values())
       .put("workbench", BlocksWood.WORKBENCH.values())
+      .put("pressure_plate", BlocksWood.PRESSURE_PLATE.values())
+      .put("button", BlocksWood.BUTTON.values())
       .build();
   }
 
@@ -30,6 +32,8 @@ public class FeatureRemappingWood extends BaseFeature {
       .comparisonRule(DataFixUtils.variantPredicate)
       .put("bookshelf", BlocksWood.BOOKSHELF.values())
       .put("workbench", BlocksWood.WORKBENCH.values())
+      .put("pressure_plate", BlocksWood.PRESSURE_PLATE.values())
+      .put("button", BlocksWood.BUTTON.values())
       .build();
   }
 

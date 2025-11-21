@@ -16,11 +16,14 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.dries007.tfc.types.DefaultTrees;
 
+import lombok.Getter;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Supplier;
 
+@Getter
 public class WoodType extends Type<WoodType> {
 
   private static final Set<WoodType> TYPES = new ObjectOpenHashSet<>();
@@ -177,58 +180,6 @@ public class WoodType extends Type<WoodType> {
   public boolean hasBushes() {
     return bushGenerator != null;
   }
-
-  public int getColor() {return this.color;}
-
-  public int getBurnTicks() {return this.burnTicks;}
-
-  public float getBurnTemp() {return this.burnTemp;}
-
-  public boolean isCanMakeTannin() {return this.canMakeTannin;}
-
-  public String getLogicMap() {return this.logicMap;}
-
-  public Supplier<ItemStack> getFruit() {return this.fruit;}
-
-  public ITreeGenerator getBushGenerator() {return this.bushGenerator;}
-
-  public ITreeGenerator getGenerator() {return this.generator;}
-
-  public float getMinGrowthTime() {return this.minGrowthTime;}
-
-  public float getMinTemp() {return this.minTemp;}
-
-  public float getMaxTemp() {return this.maxTemp;}
-
-  public float getMinRain() {return this.minRain;}
-
-  public float getMaxRain() {return this.maxRain;}
-
-  public float getMinDensity() {return this.minDensity;}
-
-  public float getMaxDensity() {return this.maxDensity;}
-
-  public float getRipeningTime() {return this.ripeningTime;}
-
-  public float getDominance() {return this.dominance;}
-
-  public int getMaxGrowthRadius() {return this.maxGrowthRadius;}
-
-  public int getNumStages() {return this.numStages;}
-
-  public int getSoilLongevity() {return this.soilLongevity;}
-
-  public int getMaxHeight() {return this.maxHeight;}
-
-  public int getMaxDecayDistance() {return this.maxDecayDistance;}
-
-  public boolean isThick() {return this.thick;}
-
-  public boolean isConifer() {return this.isConifer;}
-
-  public int[] getStages() {return this.stages;}
-
-  public float[] getParamMap() {return this.paramMap;}
 
   public static class Builder {
 

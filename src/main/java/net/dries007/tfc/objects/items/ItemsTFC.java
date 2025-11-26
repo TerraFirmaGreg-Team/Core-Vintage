@@ -26,7 +26,6 @@ import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.api.types.RockCategory;
-import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.Powder;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
@@ -50,8 +49,6 @@ import net.dries007.tfc.objects.items.metal.ItemOreTFC;
 import net.dries007.tfc.objects.items.rock.ItemBrickTFC;
 import net.dries007.tfc.objects.items.rock.ItemRock;
 import net.dries007.tfc.objects.items.rock.ItemRockToolHead;
-import net.dries007.tfc.objects.items.wood.ItemBoatTFC;
-import net.dries007.tfc.objects.items.wood.ItemLumberTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.Food;
@@ -226,11 +223,6 @@ public final class ItemsTFC {
 
     for (BlockSlabTFC.Half slab : BlocksTFC.getAllSlabBlocks()) {
       simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_WOOD));
-    }
-
-    for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-      simpleItems.add(register(r, "wood/lumber/" + wood.getRegistryName().getPath(), new ItemLumberTFC(wood), CT_WOOD));
-      simpleItems.add(register(r, "wood/boat/" + wood.getRegistryName().getPath(), new ItemBoatTFC(wood), CT_WOOD));
     }
 
     simpleItems.add(register(r, "stick_bunch", new ItemMisc(Size.NORMAL, Weight.LIGHT), CT_WOOD));

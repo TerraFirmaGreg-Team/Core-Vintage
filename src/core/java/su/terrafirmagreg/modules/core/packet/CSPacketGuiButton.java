@@ -1,7 +1,7 @@
 package su.terrafirmagreg.modules.core.packet;
 
-import su.terrafirmagreg.framework.manager.packet.base.BasePacketServer;
 import su.terrafirmagreg.framework.manager.content.base.gui.button.api.IButtonHandler;
+import su.terrafirmagreg.framework.manager.packet.base.BasePacketServer;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CSPacketGuiButton extends BasePacketServer {
 
-  private int buttonID;
-  private NBTTagCompound extraNBT;
+  public int buttonID;
+  public NBTTagCompound extraNBT;
 
 
   public CSPacketGuiButton(int buttonID) {
@@ -29,7 +29,7 @@ public class CSPacketGuiButton extends BasePacketServer {
   }
 
   public CSPacketGuiButton(int buttonID, @Nullable NBTTagCompound extraNBT) {
-    
+
     this.buttonID = buttonID;
     this.extraNBT = extraNBT;
   }

@@ -38,10 +38,8 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.api.util.IRockObject;
 import net.dries007.tfc.client.button.GuiButtonPlayerInventoryTab;
-import net.dries007.tfc.client.render.RenderBoatTFC;
 import net.dries007.tfc.client.render.projectile.RenderThrownJavelin;
 import net.dries007.tfc.network.PacketSwitchPlayerInventoryTab;
-import net.dries007.tfc.objects.entity.EntityBoatTFC;
 import net.dries007.tfc.objects.entity.EntityFallingBlockTFC;
 import net.dries007.tfc.objects.entity.projectile.EntityThrownJavelin;
 import net.dries007.tfc.world.classic.chunkdata.ChunkDataProvider;
@@ -60,7 +58,6 @@ public class ClientEvents {
   public static void preInit() {
     RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, RenderFallingBlock::new);
     RenderingRegistry.registerEntityRenderingHandler(EntityThrownJavelin.class, RenderThrownJavelin::new);
-    RenderingRegistry.registerEntityRenderingHandler(EntityBoatTFC.class, RenderBoatTFC::new);
   }
 
   @SideOnly(Side.CLIENT)

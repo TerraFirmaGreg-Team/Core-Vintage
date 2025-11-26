@@ -141,10 +141,7 @@ import net.dries007.tfc.objects.blocks.blocktype.BlockRockVariantTFCF;
 import net.dries007.tfc.objects.blocks.plants.BlockCactusTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockRaw;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
 import net.dries007.tfc.objects.blocks.wood.bamboo.BlockBambooLeaves;
 import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCassiaCinnamonLeaves;
 import net.dries007.tfc.objects.blocks.wood.cinnamon.BlockCeylonCinnamonLeaves;
@@ -157,7 +154,6 @@ import net.dries007.tfc.objects.items.ItemsTFCF;
 import net.dries007.tfc.objects.items.metal.ItemMetal;
 import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfc.types.DefaultPlants;
-import net.dries007.tfc.types.DefaultTrees;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MonsterEquipment;
 import net.dries007.tfc.world.classic.WorldTypeTFC;
@@ -368,22 +364,22 @@ public final class CommonEventHandler {
     if (block instanceof BlockChest blockChest) {
       event.getDrops().clear();
       if (blockChest.chestType == BlockChest.Type.BASIC) {
-        event.getDrops().add(new ItemStack(BlockChestTFC.getBasic(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+        event.getDrops().add(new ItemStack(BlocksWood.CHEST.get(WoodTypes.OAK)));
       } else if (blockChest.chestType == BlockChest.Type.TRAP) {
-        event.getDrops().add(new ItemStack(BlockChestTFC.getTrap(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+        event.getDrops().add(new ItemStack(BlocksWood.CHEST_TRAPPED.get(WoodTypes.OAK)));
       }
     }
     if (block instanceof BlockPlanks) {
       event.getDrops().clear();
-      event.getDrops().add(new ItemStack(BlockPlanksTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+      event.getDrops().add(new ItemStack(BlocksWood.PLANKS.get(WoodTypes.OAK)));
     }
     if (block instanceof BlockOldLog || block instanceof BlockNewLog) {
       event.getDrops().clear();
-      event.getDrops().add(new ItemStack(BlockLogTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+      event.getDrops().add(new ItemStack(BlocksWood.LOG.get(WoodTypes.OAK)));
     }
     if (block instanceof BlockSapling) {
       event.getDrops().clear();
-      event.getDrops().add(new ItemStack(BlockSaplingTFC.get(TFCRegistries.TREES.getValue(DefaultTrees.OAK))));
+      event.getDrops().add(new ItemStack(BlocksWood.SAPLING.get(WoodTypes.OAK)));
     }
     if (block instanceof BlockFenceGate) {
       event.getDrops().clear();

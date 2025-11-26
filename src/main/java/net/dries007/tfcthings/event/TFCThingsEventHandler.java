@@ -2,8 +2,9 @@ package net.dries007.tfcthings.event;
 
 import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.api.util.OreDictUtils;
-import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
 import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalSheep;
+import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodToolRack;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +13,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
 import net.dries007.tfc.objects.items.ItemRopeJavelin;
 import net.dries007.tfc.util.Helpers;
 
@@ -33,7 +33,7 @@ public class TFCThingsEventHandler {
     var itemStack = event.getItemStack();
     var item = itemStack.getItem();
     if (item instanceof ItemRopeJavelin itemRopeJavelin) {
-      if (world.getBlockState(event.getPos()).getBlock() instanceof BlockToolRack) {
+      if (world.getBlockState(event.getPos()).getBlock() instanceof BlockWoodToolRack) {
         itemRopeJavelin.retractJavelin(itemStack, world);
       }
     }

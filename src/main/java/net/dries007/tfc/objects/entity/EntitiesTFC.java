@@ -60,7 +60,6 @@ public class EntitiesTFC {
   public static void preInit() {
     register("falling_block", EntityFallingBlockTFC.class);
     register("thrown_javelin", EntityThrownJavelin.class);
-    register("boat", EntityBoatTFC.class);
   }
 
   private static void register(String name, Class<? extends Entity> cls) {

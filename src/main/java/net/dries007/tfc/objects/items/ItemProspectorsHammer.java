@@ -40,7 +40,6 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariantFallable;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfcthings.main.ConfigTFCThings;
 
 import javax.annotation.Nonnull;
@@ -175,7 +174,7 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
     int radX = 4;
     int radY = 2;
     int radZ = 4;
-    Iterator var6 = BlockSupport.getAllUnsupportedBlocksIn(worldIn, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ)).iterator();
+    Iterator var6 = FallingBlockManager.getAllUnsupportedBlocksIn(worldIn, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ)).iterator();
 
     while (var6.hasNext()) {
       BlockPos checking = (BlockPos) var6.next();
@@ -193,7 +192,7 @@ public class ItemProspectorsHammer extends ItemTFC implements ICapabilityMetal, 
     IBlockState iblockstate = worldIn.getBlockState(pos.up());
     Block block = iblockstate.getBlock();
     if (block instanceof BlockRockVariantFallable || block instanceof BlockFalling) {
-      return !BlockSupport.isBeingSupported(worldIn, pos.up());
+      return !FallingBlockManager.isBeingSupported(worldIn, pos.up());
     }
     return false;
   }

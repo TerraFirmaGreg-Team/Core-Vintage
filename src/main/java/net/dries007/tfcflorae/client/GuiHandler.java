@@ -11,18 +11,14 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import net.dries007.tfc.api.recipes.knapping.KnappingTypes;
-import net.dries007.tfc.client.gui.GuiChestTFC;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.dries007.tfc.client.gui.GuiKnappingTFCF;
 import net.dries007.tfc.client.gui.GuiUrn;
-import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitChestTFCF;
 import net.dries007.tfc.objects.container.ContainerBag;
-import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 import net.dries007.tfc.objects.container.ContainerSack;
 import net.dries007.tfc.objects.container.ContainerUrn;
@@ -116,13 +112,6 @@ public class GuiHandler implements IGuiHandler {
         return new ContainerUrn(player.inventory, Helpers.getTE(world, pos, TEUrn.class));
       case CRATE:
         return new ContainerCrate(player.inventory, Helpers.getTE(world, pos, TileCrate.class));
-      case CHEST:
-        if (world.getBlockState(pos).getBlock() instanceof BlockFruitChestTFCF) {
-          ILockableContainer chestContainer = ((BlockFruitChestTFCF) world.getBlockState(pos).getBlock()).getLockableContainer(world, pos);
-          //noinspection ConstantConditions
-          return new ContainerChestTFC(player.inventory, chestContainer, player);
-        }
-        return null;
       default:
         return null;
     }
@@ -170,11 +159,6 @@ public class GuiHandler implements IGuiHandler {
       case CRATE:
         return new GuiCrate(container, player.inventory, Helpers.getTE(world, pos, TileCrate.class), world.getBlockState(new BlockPos(x, y, z)).getBlock()
           .getTranslationKey());
-      case CHEST:
-        if (container instanceof ContainerChestTFC) {
-          return new GuiChestTFC((ContainerChestTFC) container, player.inventory);
-        }
-        return null;
       default:
         return null;
     }

@@ -1,16 +1,14 @@
 package net.dries007.tfc.objects.items;
 
-import net.minecraft.item.ItemSlab;
-import net.minecraft.item.ItemStack;
-
-import mcp.MethodsReturnNonnullByDefault;
-
 import su.terrafirmagreg.modules.core.feature.size.capability.ICapabilitySize;
 import su.terrafirmagreg.modules.core.feature.size.spi.Size;
 import su.terrafirmagreg.modules.core.feature.size.spi.Weight;
 
+import net.minecraft.item.ItemSlab;
+import net.minecraft.item.ItemStack;
+
+import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.objects.blocks.blocktype.BlockSlabTFCF;
-import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitSlab;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -18,10 +16,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemSlabTFCF extends ItemSlab implements ICapabilitySize {
-
-  public ItemSlabTFCF(BlockFruitSlab.Half slab, BlockFruitSlab.Half slab1, BlockFruitSlab.Double doubleSlab) {
-    super(slab, slab1, doubleSlab);
-  }
 
   public ItemSlabTFCF(BlockSlabTFCF.Half slab, BlockSlabTFCF.Half slab1, BlockSlabTFCF.Double doubleSlab) {
     super(slab, slab1, doubleSlab);

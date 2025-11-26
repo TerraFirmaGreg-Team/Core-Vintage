@@ -10,7 +10,6 @@ import su.terrafirmagreg.modules.device.content.tile.TileQuern;
 import su.terrafirmagreg.modules.device.content.tile.TileSluice;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockWall;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -48,13 +47,11 @@ import net.dries007.tfc.api.types.Metal;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.render.TESRAnvil;
 import net.dries007.tfc.client.render.TESRBarrel;
-import net.dries007.tfc.client.render.TESRChestTFC;
 import net.dries007.tfc.client.render.TESRIngotPile;
 import net.dries007.tfc.client.render.TESRLoom;
 import net.dries007.tfc.client.render.TESRPlacedHide;
 import net.dries007.tfc.client.render.TESRPlacedItem;
 import net.dries007.tfc.client.render.TESRPlacedItemFlat;
-import net.dries007.tfc.client.render.TESRToolRack;
 import net.dries007.tfc.objects.Gem;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
@@ -73,13 +70,11 @@ import net.dries007.tfc.objects.items.ItemsTFC;
 import net.dries007.tfc.objects.items.ceramics.ItemMold;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.objects.te.TEChestTFC;
 import net.dries007.tfc.objects.te.TEIngotPile;
 import net.dries007.tfc.objects.te.TELoom;
 import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
-import net.dries007.tfc.objects.te.TEToolRack;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -218,10 +213,6 @@ public final class ClientRegisterEvents {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSaplingTFC.STAGE).build());
     }
 
-    for (Block block : BlocksTFC.getAllChestBlocks()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockChest.FACING).build());
-    }
-
     for (BlockSlabTFC.Half block : BlocksTFC.getAllSlabBlocks()) {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT).build());
       ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT).build());
@@ -260,8 +251,6 @@ public final class ClientRegisterEvents {
 
     // TESRs //
 
-    ClientRegistry.bindTileEntitySpecialRenderer(TEChestTFC.class, new TESRChestTFC());
-    ClientRegistry.bindTileEntitySpecialRenderer(TEToolRack.class, new TESRToolRack());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItemFlat.class, new TESRPlacedItemFlat());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedItem.class, new TESRPlacedItem());
     ClientRegistry.bindTileEntitySpecialRenderer(TEPlacedHide.class, new TESRPlacedHide());

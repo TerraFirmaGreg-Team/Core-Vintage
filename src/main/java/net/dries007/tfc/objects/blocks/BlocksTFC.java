@@ -56,14 +56,10 @@ import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 import net.dries007.tfc.objects.blocks.stone.BlockWallTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockBarrel;
-import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockLoom;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
-import net.dries007.tfc.objects.blocks.wood.BlockToolRack;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.dries007.tfc.objects.fluids.properties.FluidWrapper;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockBarrel;
@@ -76,7 +72,6 @@ import net.dries007.tfc.objects.items.itemblock.ItemBlockSluice;
 import net.dries007.tfc.objects.items.itemblock.ItemBlockTFC;
 import net.dries007.tfc.objects.te.TEAnvilTFC;
 import net.dries007.tfc.objects.te.TEBarrel;
-import net.dries007.tfc.objects.te.TEChestTFC;
 import net.dries007.tfc.objects.te.TECropBase;
 import net.dries007.tfc.objects.te.TECropSpreading;
 import net.dries007.tfc.objects.te.TEIngotPile;
@@ -88,7 +83,6 @@ import net.dries007.tfc.objects.te.TEPlacedHide;
 import net.dries007.tfc.objects.te.TEPlacedItem;
 import net.dries007.tfc.objects.te.TEPlacedItemFlat;
 import net.dries007.tfc.objects.te.TETickCounter;
-import net.dries007.tfc.objects.te.TEToolRack;
 import net.dries007.tfc.util.agriculture.BerryBush;
 import net.dries007.tfc.util.agriculture.Crop;
 import net.dries007.tfc.util.agriculture.FruitTree;
@@ -171,15 +165,11 @@ public final class BlocksTFC {
   @Getter
   private static ImmutableList<BlockSlabTFC.Half> allSlabBlocks;
   @Getter
-  private static ImmutableList<BlockChestTFC> allChestBlocks;
-  @Getter
   private static ImmutableList<BlockAnvilTFC> allAnvils;
   @Getter
   private static ImmutableList<BlockMetalSheet> allSheets;
   @Getter
   private static ImmutableList<BlockMetalLamp> allLamps;
-  @Getter
-  private static ImmutableList<BlockToolRack> allToolRackBlocks;
   @Getter
   private static ImmutableList<BlockCropTFC> allCropBlocks;
   @Getter
@@ -190,8 +180,6 @@ public final class BlocksTFC {
   private static ImmutableList<BlockPlantTFC> allGrassBlocks;
   @Getter
   private static ImmutableList<BlockLoom> allLoomBlocks;
-  @Getter
-  private static ImmutableList<BlockSupport> allSupportBlocks;
   @Getter
   private static ImmutableList<BlockFlowerPotTFC> allFlowerPots;
 
@@ -341,38 +329,26 @@ public final class BlocksTFC {
       Builder<BlockLogTFC> logs = ImmutableList.builder();
       Builder<BlockLeavesTFC> leaves = ImmutableList.builder();
       Builder<BlockSaplingTFC> saplings = ImmutableList.builder();
-      Builder<BlockChestTFC> chests = ImmutableList.builder();
-      Builder<BlockToolRack> toolRacks = ImmutableList.builder();
       Builder<ItemBlockBarrel> barrelItems = ImmutableList.builder();
       Builder<BlockPlantTFC> plants = ImmutableList.builder();
       Builder<BlockLoom> looms = ImmutableList.builder();
-      Builder<BlockSupport> supports = ImmutableList.builder();
 
       // Other blocks that don't have specific order requirements
       for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-        // Only block in the decorations category
-        normalItemBlocks.add(new ItemBlockTFC(register(r, "wood/planks/" + wood.getRegistryName().getPath(), new BlockPlanksTFC(wood), CT_WOOD)));
         // Blocks with specific block collections don't matter
         logs.add(register(r, "wood/log/" + wood.getRegistryName().getPath(), new BlockLogTFC(wood), CT_WOOD));
         leaves.add(register(r, "wood/leaves/" + wood.getRegistryName().getPath(), new BlockLeavesTFC(wood), CT_WOOD));
         saplings.add(register(r, "wood/sapling/" + wood.getRegistryName().getPath(), new BlockSaplingTFC(wood), CT_WOOD));
-        chests.add(register(r, "wood/chest/" + wood.getRegistryName().getPath(), new BlockChestTFC(BlockChestTFC.TFCBASIC, wood), CT_WOOD));
-        chests.add(register(r, "wood/chest_trap/" + wood.getRegistryName().getPath(), new BlockChestTFC(BlockChestTFC.TFCTRAP, wood), CT_WOOD));
 
-        toolRacks.add(register(r, "wood/tool_rack/" + wood.getRegistryName().getPath(), new BlockToolRack(wood), CT_WOOD));
         barrelItems.add(new ItemBlockBarrel(register(r, "wood/barrel/" + wood.getRegistryName().getPath(), new BlockBarrel(), CT_WOOD)));
 
         looms.add(register(r, "wood/loom/" + wood.getRegistryName().getPath(), new BlockLoom(wood), CT_WOOD));
-        supports.add(register(r, "wood/support/" + wood.getRegistryName().getPath(), new BlockSupport(wood), CT_WOOD));
       }
 
       allLogBlocks = logs.build();
       allLeafBlocks = leaves.build();
       allSaplingBlocks = saplings.build();
-      allChestBlocks = chests.build();
-      allToolRackBlocks = toolRacks.build();
       allLoomBlocks = looms.build();
-      allSupportBlocks = supports.build();
 
       allBarrelItemBlocks = barrelItems.build();
 
@@ -382,10 +358,7 @@ public final class BlocksTFC {
       allSaplingBlocks.forEach(x -> inventoryItemBlocks.add(new ItemBlockSaplingTFC(x)));
 
       // doors are special
-      allChestBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-      allToolRackBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
       allLoomBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
-      allSupportBlocks.forEach(x -> normalItemBlocks.add(new ItemBlockTFC(x)));
     }
 
     {
@@ -407,18 +380,12 @@ public final class BlocksTFC {
             .getPath()).toLowerCase(), new BlockStairsTFC(rock, type), CT_ROCK));
         }
       }
-      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-        stairs.add(register(r, "stairs/wood/" + wood.getRegistryName().getPath(), new BlockStairsTFC(wood), CT_WOOD));
-      }
 
       // Full slabs are the same as full blocks, they are not saved to a list, they are kept track of by the halfslab version.
       for (Rock.Type type : new Rock.Type[]{SMOOTH, COBBLE, BRICKS}) {
         for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
           register(r, "double_slab/" + (type.name() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockSlabTFC.Double(rock, type));
         }
-      }
-      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-        register(r, "double_slab/wood/" + wood.getRegistryName().getPath(), new BlockSlabTFC.Double(wood));
       }
 
       // Slabs
@@ -427,9 +394,6 @@ public final class BlocksTFC {
           slab.add(register(r,
             "slab/" + (type.name() + "/" + rock.getRegistryName().getPath()).toLowerCase(), new BlockSlabTFC.Half(rock, type), CT_ROCK));
         }
-      }
-      for (Tree wood : TFCRegistries.TREES.getValuesCollection()) {
-        slab.add(register(r, "slab/wood/" + wood.getRegistryName().getPath(), new BlockSlabTFC.Half(wood), CT_WOOD));
       }
 
       for (Rock rock : TFCRegistries.ROCKS.getValuesCollection()) {
@@ -586,9 +550,7 @@ public final class BlocksTFC {
     register(TEPlacedItem.class, "placed_item");
     register(TEPlacedItemFlat.class, "placed_item_flat");
     register(TEPlacedHide.class, "placed_hide");
-    register(TEChestTFC.class, "chest");
     register(TEIngotPile.class, "ingot_pile");
-    register(TEToolRack.class, "tool_rack");
     register(TELoom.class, "loom");
     register(TELamp.class, "lamp");
     register(TEBarrel.class, "barrel");

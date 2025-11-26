@@ -146,7 +146,7 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback, IPr
   @SuppressWarnings("unchecked")
   @Override
   @Nullable
-  public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
+  public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
     if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
       if (doubleChestHandler == null || doubleChestHandler.needsRefresh()) {
         doubleChestHandler = WoodDoubleChestItemHandler.get(this);
@@ -165,7 +165,6 @@ public class TileWoodChest extends TileEntityChest implements ISlotCallback, IPr
 
   @Override
   @SideOnly(Side.CLIENT)
-  @NotNull
   public AxisAlignedBB getRenderBoundingBox() {
     return new AxisAlignedBB(getPos().add(-1, 0, -1), getPos().add(2, 2, 2));
   }

@@ -5,7 +5,6 @@ import su.terrafirmagreg.api.data.enums.Mods;
 import su.terrafirmagreg.helper.GrassColorHelper;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockWall;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -20,15 +19,12 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.base.Strings;
-import net.dries007.tfc.client.render.TESRFruitChestTFCF;
-import net.dries007.tfc.client.render.TESRFruitLoomTFCF;
 import net.dries007.tfc.objects.blocks.BlockSlabTFC;
 import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.agriculture.BlockCropDead;
@@ -55,11 +51,8 @@ import net.dries007.tfc.objects.blocks.wood.BlockJoshuaTreeSapling;
 import net.dries007.tfc.objects.blocks.wood.BlockLeavesTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockSaplingTFC;
-import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitSlab;
 import net.dries007.tfc.objects.items.ItemArmorTFCF;
 import net.dries007.tfc.objects.items.ItemsTFCF;
-import net.dries007.tfc.objects.te.TEFruitChest;
-import net.dries007.tfc.objects.te.TEFruitLoom;
 import net.dries007.tfc.types.BlockTypesTFCF.RockTFCF;
 import net.dries007.tfcflorae.ConfigTFCF;
 
@@ -152,13 +145,6 @@ public class ClientRegisterEventsTFCF {
       ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockSlabTFCF.VARIANT).build());
     }
 
-    for (BlockFruitSlab.Half block : BlocksTFCF.getAllFruitSlabBlocks()) {
-      ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFruitSlab.VARIANT).build());
-      ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockFruitSlab.VARIANT).build());
-    }
-
-    for (Block block : BlocksTFCF.getAllFruitChestBlocks()) {ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockChest.FACING).build());}
-
     for (BlockSlabTFC.Half block : BlocksTFCF.getAllSlabBlocksTFC()) {
       ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT).build());
       ModelLoader.setCustomStateMapper(block.doubleSlab, new StateMap.Builder().ignore(BlockSlabTFC.VARIANT).build());
@@ -203,10 +189,6 @@ public class ClientRegisterEventsTFCF {
         }
       });
     }
-
-    //TESRs
-    ClientRegistry.bindTileEntitySpecialRenderer(TEFruitChest.class, new TESRFruitChestTFCF());
-    ClientRegistry.bindTileEntitySpecialRenderer(TEFruitLoom.class, new TESRFruitLoomTFCF());
   }
 
   @SuppressWarnings("deprecation")

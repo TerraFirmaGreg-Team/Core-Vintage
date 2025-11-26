@@ -8,7 +8,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -17,9 +16,7 @@ import net.minecraft.world.World;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.dries007.tfc.api.types.Rock;
-import net.dries007.tfc.api.types.Tree;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.wood.BlockPlanksTFC;
 import net.dries007.tfc.util.OreDictionaryHelper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -42,15 +39,6 @@ public abstract class BlockSlabTFC extends BlockSlab {
     //noinspection ConstantConditions
     setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
     useNeighborBrightness = true;
-  }
-
-  private BlockSlabTFC(Tree wood) {
-    this(BlockPlanksTFC.get(wood));
-    Block c = BlockPlanksTFC.get(wood);
-    //noinspection ConstantConditions
-    setHarvestLevel(c.getHarvestTool(c.getDefaultState()), c.getHarvestLevel(c.getDefaultState()));
-    useNeighborBrightness = true;
-    Blocks.FIRE.setFireInfo(this, 5, 20);
   }
 
   private BlockSlabTFC(Block block) {
@@ -146,7 +134,6 @@ public abstract class BlockSlabTFC extends BlockSlab {
   public static class Double extends BlockSlabTFC {
 
     private static final Map<Rock, EnumMap<Rock.Type, Double>> ROCK_TABLE = new HashMap<>();
-    private static final Map<Tree, Double> WOOD_MAP = new HashMap<>();
 
     public Double(Rock rock, Rock.Type type) {
       super(rock, type);
@@ -157,18 +144,8 @@ public abstract class BlockSlabTFC extends BlockSlab {
       // No oredict, because no item.
     }
 
-    public Double(Tree wood) {
-      super(wood);
-      if (WOOD_MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
-      // No oredict, because no item.
-    }
-
     public static Double get(Rock rock, Rock.Type type) {
       return ROCK_TABLE.get(rock).get(type);
-    }
-
-    public static Double get(Tree wood) {
-      return WOOD_MAP.get(wood);
     }
 
     @Override
@@ -180,7 +157,6 @@ public abstract class BlockSlabTFC extends BlockSlab {
   public static class Half extends BlockSlabTFC {
 
     private static final Map<Rock, EnumMap<Rock.Type, Half>> ROCK_TABLE = new HashMap<>();
-    private static final Map<Tree, Half> WOOD_MAP = new HashMap<>();
     public final Double doubleSlab;
 
     public Half(Rock rock, Rock.Type type) {
@@ -196,24 +172,11 @@ public abstract class BlockSlabTFC extends BlockSlab {
       OreDictionaryHelper.registerRockType(this, type, "slab");
     }
 
-    public Half(Tree wood) {
-      super(wood);
-      if (WOOD_MAP.put(wood, this) != null) {throw new IllegalStateException("There can only be one.");}
-      doubleSlab = Double.get(wood);
-      doubleSlab.halfSlab = this;
-      halfSlab = this;
-      OreDictionaryHelper.register(this, "slab");
-      OreDictionaryHelper.register(this, "slab", "wood");
-      OreDictionaryHelper.register(this, "slab", "wood", wood);
-    }
 
     public static Half get(Rock rock, Rock.Type type) {
       return ROCK_TABLE.get(rock).get(type);
     }
 
-    public static Half get(Tree wood) {
-      return WOOD_MAP.get(wood);
-    }
 
     @Override
     public boolean isDouble() {

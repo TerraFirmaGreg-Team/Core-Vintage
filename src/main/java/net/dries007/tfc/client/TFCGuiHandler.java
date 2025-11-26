@@ -7,7 +7,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
@@ -19,7 +18,6 @@ import net.dries007.tfc.client.gui.GuiAnvilPlan;
 import net.dries007.tfc.client.gui.GuiAnvilTFC;
 import net.dries007.tfc.client.gui.GuiBarrel;
 import net.dries007.tfc.client.gui.GuiCalendar;
-import net.dries007.tfc.client.gui.GuiChestTFC;
 import net.dries007.tfc.client.gui.GuiContainerTFC;
 import net.dries007.tfc.client.gui.GuiInventoryCrafting;
 import net.dries007.tfc.client.gui.GuiKnapping;
@@ -28,11 +26,9 @@ import net.dries007.tfc.client.gui.GuiLiquidTransfer;
 import net.dries007.tfc.client.gui.GuiNutrition;
 import net.dries007.tfc.client.gui.GuiSalad;
 import net.dries007.tfc.client.gui.GuiSkills;
-import net.dries007.tfc.objects.blocks.wood.BlockChestTFC;
 import net.dries007.tfc.objects.container.ContainerAnvilPlan;
 import net.dries007.tfc.objects.container.ContainerAnvilTFC;
 import net.dries007.tfc.objects.container.ContainerBarrel;
-import net.dries007.tfc.objects.container.ContainerChestTFC;
 import net.dries007.tfc.objects.container.ContainerInventoryCrafting;
 import net.dries007.tfc.objects.container.ContainerKnapping;
 import net.dries007.tfc.objects.container.ContainerLargeVessel;
@@ -116,16 +112,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return new ContainerInventoryCrafting(player.inventory, player.world);
       case QUIVER:
         return new ContainerQuiver(player.inventory, stack.getItem() instanceof ItemQuiver ? stack : player.getHeldItemOffhand());
-      case CHEST:
-        if (world.getBlockState(pos).getBlock() instanceof BlockChestTFC) {
-          ILockableContainer chestContainer = ((BlockChestTFC) world.getBlockState(pos).getBlock()).getLockableContainer(world, pos);
-          if (chestContainer == null) // This is null if the chest is blocked
-          {
-            return null;
-          }
-          return new ContainerChestTFC(player.inventory, chestContainer, player);
-        }
-        return null;
       case SALAD:
         return new ContainerSalad(player.inventory);
       default:
@@ -178,11 +164,6 @@ public class TFCGuiHandler implements IGuiHandler {
         return new GuiInventoryCrafting(container);
       case QUIVER:
         return new GuiContainerTFC(container, player.inventory, QUIVER_BACKGROUND);
-      case CHEST:
-        if (container instanceof ContainerChestTFC) {
-          return new GuiChestTFC((ContainerChestTFC) container, player.inventory);
-        }
-        return null;
       case SALAD:
         return new GuiSalad(container, player.inventory);
       default:

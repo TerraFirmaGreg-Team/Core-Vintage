@@ -2,7 +2,6 @@ package su.terrafirmagreg.modules.wood.content.block;
 
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.framework.manager.content.base.block.spi.BaseBlock;
-import su.terrafirmagreg.modules.wood.ConfigWood;
 import su.terrafirmagreg.modules.wood.api.IWoodEntry;
 import su.terrafirmagreg.modules.wood.api.type.WoodType;
 
@@ -27,9 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static su.terrafirmagreg.api.data.Properties.BoolProp.EAST;
 import static su.terrafirmagreg.api.data.Properties.BoolProp.NORTH;
@@ -72,91 +69,13 @@ public class BlockWoodSupport extends BaseBlock implements IWoodEntry {
   }
 
   /**
-   * Checks if this pos is being supported by a support beam
-   *
-   * @param worldIn the worldObj to check
-   * @param pos     the BlockPos to check for support
-   * @return true if there is a support in 4 block radius
-   */
-  public static boolean isBeingSupported(World worldIn, BlockPos pos) {
-    int sRangeHor = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor;
-    int sRangeVert = ConfigWood.BLOCK.SUPPORT.supportBeamRangeUp;
-    int sRangeHorNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor * -1;
-    int sRangeVertNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeDown * -1;
-    if (!worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
-      return true; // If world isn't loaded...
-    }
-    for (BlockPos.MutableBlockPos searchSupport : BlockPos.getAllInBoxMutable(
-      pos.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
-      pos.add(sRangeHor, sRangeVert, sRangeHor))) {
-      IBlockState st = worldIn.getBlockState(searchSupport);
-      if (st.getBlock() instanceof BlockWoodSupport blockWoodSupport) {
-        if (blockWoodSupport.canSupportBlocks(worldIn, searchSupport)) {
-          return true; // Found support block that can support this position
-        }
-      }
-    }
-    return false;
-  }
-
-  /**
-   * This is an optimized way to check for blocks that aren't supported during a cave in, instead of checking every single block individually and calling BlockSupper#isBeingSupported
-   */
-  public static Set<BlockPos> getAllUnsupportedBlocksIn(World worldIn, BlockPos from, BlockPos to) {
-    Set<BlockPos> listSupported = new HashSet<>();
-    Set<BlockPos> listUnsupported = new HashSet<>();
-    int minX = Math.min(from.getX(), to.getX());
-    int maxX = Math.max(from.getX(), to.getX());
-    int minY = Math.min(from.getY(), to.getY());
-    int maxY = Math.max(from.getY(), to.getY());
-    int minZ = Math.min(from.getZ(), to.getZ());
-    int maxZ = Math.max(from.getZ(), to.getZ());
-    int sRangeHor = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor;
-    int sRangeVert = ConfigWood.BLOCK.SUPPORT.supportBeamRangeUp;
-    int sRangeHorNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor * -1;
-    int sRangeVertNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeDown * -1;
-    BlockPos minPoint = new BlockPos(minX, minY, minZ);
-    BlockPos maxPoint = new BlockPos(maxX, maxY, maxZ);
-    for (BlockPos.MutableBlockPos searchingPoint : BlockPos.getAllInBoxMutable(
-      minPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
-      maxPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
-
-      if (!listSupported.contains(searchingPoint)) {
-        listUnsupported.add(
-          searchingPoint.toImmutable()); //Adding blocks that wasn't found supported
-      }
-      IBlockState st = worldIn.getBlockState(searchingPoint);
-      if (st.getBlock() instanceof BlockWoodSupport) {
-        if (((BlockWoodSupport) st.getBlock()).canSupportBlocks(worldIn, searchingPoint)) {
-          for (BlockPos.MutableBlockPos supported : BlockPos.getAllInBoxMutable(
-            searchingPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
-            searchingPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
-
-            listSupported.add(
-              supported.toImmutable()); //Adding all supported blocks by this support
-            listUnsupported.remove(supported); //Remove if this block was added earlier
-          }
-        }
-      }
-    }
-    //Searching point wasn't from points between from <-> to but
-    //Time to remove the outsides that were added for convenience
-    listUnsupported.removeIf(
-      content -> content.getX() < minX || content.getX() > maxX || content.getY() < minY
-                 || content.getY() > maxY ||
-                 content.getZ() < minZ || content.getZ() > maxZ);
-
-    return listUnsupported;
-  }
-
-  /**
    * Checks if this support block can support collapsable/fallable blocks Returns true only if this is horizontally placed and can stay in place.
    *
    * @param world the worldObj this support block is in
    * @param pos   the BlockPos this support block is in
    * @return true if this can support blocks
    */
-  private boolean canSupportBlocks(IBlockAccess world, BlockPos pos) {
+  public boolean canSupportBlocks(IBlockAccess world, BlockPos pos) {
     return canBlockStay(world, pos) && world.getBlockState(pos).getValue(AXIS) != EnumFacing.Axis.Y;
   }
 

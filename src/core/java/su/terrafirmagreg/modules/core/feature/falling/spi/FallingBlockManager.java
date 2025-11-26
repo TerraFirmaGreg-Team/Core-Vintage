@@ -5,6 +5,8 @@ import su.terrafirmagreg.modules.core.feature.falling.capability.CapabilityWorld
 import su.terrafirmagreg.modules.core.feature.falling.capability.CollapseData;
 import su.terrafirmagreg.modules.core.feature.falling.capability.ICapabilityWorldTracker;
 import su.terrafirmagreg.modules.device.content.block.BlockCharcoalPile;
+import su.terrafirmagreg.modules.wood.ConfigWood;
+import su.terrafirmagreg.modules.wood.content.block.BlockWoodSupport;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -27,13 +29,13 @@ import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.types.Rock;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.entity.EntityFallingBlockTFC;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -127,7 +129,7 @@ public class FallingBlockManager {
 
   public static boolean shouldFall(World world, BlockPos posToFallFrom, BlockPos originalPos, IBlockState originalState, boolean ignoreSupportChecks) {
     return ConfigTFC.General.FALLABLE.enable && canFallThrough(world, posToFallFrom.down(), originalState.getMaterial()) && (ignoreSupportChecks
-                                                                                                                             || !BlockSupport.isBeingSupported(world, originalPos));
+                                                                                                                             || !isBeingSupported(world, originalPos));
   }
 
   public static boolean canCollapse(World world, BlockPos pos) {
@@ -254,7 +256,7 @@ public class FallingBlockManager {
       int radX = (MathUtils.RNG.nextInt(5) + 4) / 2;
       int radY = (MathUtils.RNG.nextInt(3) + 2) / 2;
       int radZ = (MathUtils.RNG.nextInt(5) + 4) / 2;
-      for (BlockPos checking : BlockSupport.getAllUnsupportedBlocksIn(world, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ))) //9x5x9 max
+      for (BlockPos checking : getAllUnsupportedBlocksIn(world, pos.add(-radX, -radY, -radZ), pos.add(radX, radY, radZ))) //9x5x9 max
       {
         // Check the area for a block collapse!
         IBlockState state = world.getBlockState(checking);
@@ -290,7 +292,7 @@ public class FallingBlockManager {
         IBlockState stateAt = world.getBlockState(posAt);
         Specification specAt;
         if (foundEmpty && (specAt = getSpecification(stateAt)) != null && specAt.collapsable && specAt.collapseChecker.canCollapse(world, posAt)
-            && !BlockSupport.isBeingSupported(world, posAt)) {
+            && !isBeingSupported(world, posAt)) {
           // Check for a possible collapse
           if (posAt.distanceSq(centerPoint) < radiusSquared && world.rand.nextFloat() < ConfigTFC.General.FALLABLE.propagateCollapseChance) {
             // This column has started to collapse. Mark the next block above as unstable for the "follow up"
@@ -346,6 +348,85 @@ public class FallingBlockManager {
       return;
     }
     registerFallable(block, new Specification(specification, resultingState));
+  }
+
+  /**
+   * This is an optimized way to check for blocks that aren't supported during a cave in, instead of checking every single block individually and calling BlockSupper#isBeingSupported
+   */
+  public static Set<BlockPos> getAllUnsupportedBlocksIn(World worldIn, BlockPos from, BlockPos to) {
+    Set<BlockPos> listSupported = new HashSet<>();
+    Set<BlockPos> listUnsupported = new HashSet<>();
+    int minX = Math.min(from.getX(), to.getX());
+    int maxX = Math.max(from.getX(), to.getX());
+    int minY = Math.min(from.getY(), to.getY());
+    int maxY = Math.max(from.getY(), to.getY());
+    int minZ = Math.min(from.getZ(), to.getZ());
+    int maxZ = Math.max(from.getZ(), to.getZ());
+    int sRangeHor = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor;
+    int sRangeVert = ConfigWood.BLOCK.SUPPORT.supportBeamRangeUp;
+    int sRangeHorNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor * -1;
+    int sRangeVertNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeDown * -1;
+    BlockPos minPoint = new BlockPos(minX, minY, minZ);
+    BlockPos maxPoint = new BlockPos(maxX, maxY, maxZ);
+    for (BlockPos.MutableBlockPos searchingPoint : BlockPos.getAllInBoxMutable(
+      minPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
+      maxPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
+
+      if (!listSupported.contains(searchingPoint)) {
+        listUnsupported.add(
+          searchingPoint.toImmutable()); //Adding blocks that wasn't found supported
+      }
+      IBlockState st = worldIn.getBlockState(searchingPoint);
+      if (st.getBlock() instanceof BlockWoodSupport blockWoodSupport) {
+        if (blockWoodSupport.canSupportBlocks(worldIn, searchingPoint)) {
+          for (BlockPos.MutableBlockPos supported : BlockPos.getAllInBoxMutable(
+            searchingPoint.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
+            searchingPoint.add(sRangeHor, sRangeVert, sRangeHor))) {
+
+            listSupported.add(
+              supported.toImmutable()); //Adding all supported blocks by this support
+            listUnsupported.remove(supported); //Remove if this block was added earlier
+          }
+        }
+      }
+    }
+    //Searching point wasn't from points between from <-> to but
+    //Time to remove the outsides that were added for convenience
+    listUnsupported.removeIf(content ->
+      content.getX() < minX || content.getX() > maxX ||
+      content.getY() < minY || content.getY() > maxY ||
+      content.getZ() < minZ || content.getZ() > maxZ
+    );
+
+    return listUnsupported;
+  }
+
+  /**
+   * Checks if this pos is being supported by a support beam
+   *
+   * @param worldIn the worldObj to check
+   * @param pos     the BlockPos to check for support
+   * @return true if there is a support in 4 block radius
+   */
+  public static boolean isBeingSupported(World worldIn, BlockPos pos) {
+    int sRangeHor = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor;
+    int sRangeVert = ConfigWood.BLOCK.SUPPORT.supportBeamRangeUp;
+    int sRangeHorNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeHor * -1;
+    int sRangeVertNeg = ConfigWood.BLOCK.SUPPORT.supportBeamRangeDown * -1;
+    if (!worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
+      return true; // If world isn't loaded...
+    }
+    for (BlockPos.MutableBlockPos searchSupport : BlockPos.getAllInBoxMutable(
+      pos.add(sRangeHorNeg, sRangeVertNeg, sRangeHorNeg),
+      pos.add(sRangeHor, sRangeVert, sRangeHor))) {
+      IBlockState st = worldIn.getBlockState(searchSupport);
+      if (st.getBlock() instanceof BlockWoodSupport blockWoodSupport) {
+        if (blockWoodSupport.canSupportBlocks(worldIn, searchSupport)) {
+          return true; // Found support block that can support this position
+        }
+      }
+    }
+    return false;
   }
 
 

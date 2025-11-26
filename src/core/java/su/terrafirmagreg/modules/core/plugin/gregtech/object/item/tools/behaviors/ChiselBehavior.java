@@ -33,7 +33,6 @@ import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.api.recipes.ChiselRecipe;
 import net.dries007.tfc.objects.blocks.stone.BlockRockSmooth;
-import net.dries007.tfc.objects.blocks.wood.BlockSupport;
 import net.dries007.tfc.objects.container.ContainerEmpty;
 
 import org.jetbrains.annotations.NotNull;
@@ -169,7 +168,7 @@ public class ChiselBehavior implements IToolBehavior {
         if (ConfigTFC.General.FALLABLE.chiselCausesCollapse) {
           IBlockState oldState = worldIn.getBlockState(pos);
           FallingBlockManager.Specification oldSpec = FallingBlockManager.getSpecification(oldState);
-          if (oldSpec != null && oldSpec.isCollapsable() && !BlockSupport.isBeingSupported(worldIn, pos)) {
+          if (oldSpec != null && oldSpec.isCollapsable() && !FallingBlockManager.isBeingSupported(worldIn, pos)) {
             worldIn.setBlockToAir(pos); // Set block to air before attempting a collapse mechanic
             if (FallingBlockManager.checkCollapsingArea(worldIn, pos)) {
               return EnumActionResult.SUCCESS; // Collapse mechanic triggered, cancel chisel!

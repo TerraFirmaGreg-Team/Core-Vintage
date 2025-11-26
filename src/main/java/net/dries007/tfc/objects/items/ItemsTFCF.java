@@ -20,8 +20,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
-import net.dries007.firmalife.init.FruitTreeFL;
-import net.dries007.firmalife.init.PlantsFL;
 import net.dries007.tfc.api.registries.TFCRegistries;
 import net.dries007.tfc.api.types.IFruitTree;
 import net.dries007.tfc.api.types.Rock;
@@ -30,7 +28,6 @@ import net.dries007.tfc.objects.blocks.BlocksTFCF;
 import net.dries007.tfc.objects.blocks.blocktype.BlockSlabTFCF;
 import net.dries007.tfc.objects.blocks.wood.BlockLogTFCF;
 import net.dries007.tfc.objects.blocks.wood.bamboo.BlockBambooLog;
-import net.dries007.tfc.objects.blocks.wood.fruitwood.BlockFruitSlab;
 import net.dries007.tfc.objects.items.ceramics.ItemPottery;
 import net.dries007.tfc.objects.items.ceramics.ItemUnfiredUrn;
 import net.dries007.tfc.objects.items.food.ItemFoodTFCF;
@@ -50,7 +47,6 @@ import net.dries007.tfc.objects.items.tools.ItemShovelTFCF;
 import net.dries007.tfc.objects.items.tools.ItemWalkingStick;
 import net.dries007.tfc.types.TreesTFCF;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.util.OreDictionaryHelper;
 import net.dries007.tfc.util.agriculture.CropTFCF;
 import net.dries007.tfc.util.agriculture.FoodDataTFCF;
 import net.dries007.tfc.util.agriculture.FruitTree;
@@ -1926,35 +1922,12 @@ public final class ItemsTFCF {
       simpleItems.add(register(r, "wood/fruit_tree/boat/" + name, new ItemBoatTFCF(fruitTree), CT_WOOD));
     }
 
-    for (BlockFruitSlab.Half slab : BlocksTFCF.getAllFruitSlabBlocks()) {
-      simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFCF(slab, slab, slab.doubleSlab), CT_WOOD));
-    }
-
     for (BlockSlabTFC.Half slab : BlocksTFCF.getAllSlabBlocksTFC()) {
       simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFC(slab, slab, slab.doubleSlab), CT_WOOD));
     }
 
     for (BlockSlabTFCF.Half slab : BlocksTFCF.getAllSlabBlocks()) {
       simpleItems.add(register(r, slab.getRegistryName().getPath(), new ItemSlabTFCF(slab, slab, slab.doubleSlab), CT_WOOD));
-    }
-
-    if (TFCFlorae.FirmaLifeAdded) {
-      // Cinnamon
-      ItemMisc cinnamonLumber = new ItemMisc(Size.SMALL, Weight.VERY_LIGHT);
-      simpleItems.add(register(r, "wood/fruit_tree/lumber/cinnamon", cinnamonLumber, CT_WOOD));
-      OreDictionary.registerOre("lumberCinnamon", cinnamonLumber);
-
-      simpleItems.add(register(r, "wood/fruit_tree/boat/cinnamon", new ItemBoatTFCF(PlantsFL.CINNAMON_TREE), CT_WOOD));
-
-      for (FruitTreeFL fruitTree : FruitTreeFL.values()) {
-        // Lumber
-        String name = fruitTree.getName().toLowerCase();
-        ItemMisc lumber = new ItemMisc(Size.SMALL, Weight.VERY_LIGHT);
-        simpleItems.add(register(r, "wood/fruit_tree/lumber/" + name, lumber, CT_WOOD));
-        OreDictionary.registerOre(OreDictionaryHelper.toString("lumber_" + name.substring(0, 1).toLowerCase() + name.substring(1).toLowerCase()), lumber);
-
-        simpleItems.add(register(r, "wood/fruit_tree/boat/" + name, new ItemBoatTFCF(fruitTree), CT_WOOD));
-      }
     }
 
     BlocksTFCF.getAllNormalItemBlocks().forEach((x) -> {

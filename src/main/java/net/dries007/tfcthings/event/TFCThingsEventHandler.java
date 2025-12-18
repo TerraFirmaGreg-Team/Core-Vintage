@@ -1,10 +1,9 @@
 package net.dries007.tfcthings.event;
 
+import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.data.enums.Mods;
-import su.terrafirmagreg.api.util.OreDictUtils;
 import su.terrafirmagreg.modules.animal.content.entity.livestock.EntityAnimalSheep;
 import su.terrafirmagreg.modules.animal.init.ItemsAnimal;
-import su.terrafirmagreg.modules.wood.content.block.BlockWoodToolRack;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +14,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import net.dries007.tfc.objects.items.ItemRopeJavelin;
 import net.dries007.tfc.util.Helpers;
+
+import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = Mods.ModIDs.TFCTHINGS)
 public class TFCThingsEventHandler {
@@ -27,23 +28,25 @@ public class TFCThingsEventHandler {
     }
   }
 
-  @SubscribeEvent
-  public static void onPlayerInteractBlock(PlayerInteractEvent.RightClickBlock event) {
-    var world = event.getWorld();
-    var itemStack = event.getItemStack();
-    var item = itemStack.getItem();
-    if (item instanceof ItemRopeJavelin itemRopeJavelin) {
-      if (world.getBlockState(event.getPos()).getBlock() instanceof BlockWoodToolRack) {
-        itemRopeJavelin.retractJavelin(itemStack, world);
-      }
-    }
-  }
+//  @SubscribeEvent
+//  public static void onPlayerInteractBlock(PlayerInteractEvent.RightClickBlock event) {
+//    var world = event.getWorld();
+//    var itemStack = event.getItemStack();
+//    var item = itemStack.getItem();
+//    var block = world.getBlockState(event.getPos()).getBlock();
+//    if (item instanceof ItemRopeJavelin itemRopeJavelin) {
+//      if (RegistryUtils.isTag(block, Tags.TOOL_RACK)) {
+//        itemRopeJavelin.retractJavelin(itemStack, world);
+//      }
+//    }
+//  }
 
   @SubscribeEvent
   public static void onPlayerInteractEntity(PlayerInteractEvent.EntityInteract event) {
     if (event.getTarget() instanceof EntityAnimalSheep sheep) {
-      if ((OreDictUtils.contains(event.getItemStack(), "shears") || OreDictUtils.contains(event.getItemStack(), "knife"))
-          && sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
+      var stack = event.getItemStack();
+      final Set<String> toolClasses = stack.getItem().getToolClasses(stack);
+      if ((toolClasses.contains(ToolClasses.SHEARS) || toolClasses.contains(ToolClasses.KNIFE)) && sheep.hasWool() && sheep.getFamiliarity() == 1.0F) {
         if (!sheep.world.isRemote) {
           ItemStack woolStack = new ItemStack(ItemsAnimal.WOOL);
           Helpers.spawnItemStack(sheep.world, new BlockPos(sheep.posX, sheep.posY, sheep.posZ), woolStack);

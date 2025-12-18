@@ -9,6 +9,7 @@ import su.terrafirmagreg.framework.manager.content.api.IContentEntry;
 import su.terrafirmagreg.framework.manager.content.api.IContentRegistrar;
 import su.terrafirmagreg.framework.manager.content.base.biome.api.IBiomeEntry;
 import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry;
+import su.terrafirmagreg.framework.manager.content.base.block.api.IBlockEntry.BlockSettings;
 import su.terrafirmagreg.framework.manager.content.base.effect.api.IEffectEntry;
 import su.terrafirmagreg.framework.manager.content.base.enchantment.api.IEnchantmentEntry;
 import su.terrafirmagreg.framework.manager.content.base.entity.api.IEntityEntry;
@@ -76,6 +77,10 @@ public class ContentRegistrar implements IContentRegistrar {
   public <V extends IContentEntry<?, ?>> void addContent(V entry) {
 
     addEntry(entry);
+  }
+
+  public <T extends Block & IBlockEntry> T addBlock(String name, Function<BlockSettings, T> factory) {
+    return addBlock(name, factory.apply(BlockSettings.of()));
   }
 
 

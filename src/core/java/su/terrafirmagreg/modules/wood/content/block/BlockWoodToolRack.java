@@ -1,5 +1,6 @@
 package su.terrafirmagreg.modules.wood.content.block;
 
+import su.terrafirmagreg.api.data.Tags;
 import su.terrafirmagreg.api.data.ToolClasses;
 import su.terrafirmagreg.api.util.BlockUtils;
 import su.terrafirmagreg.api.util.TileUtils;
@@ -59,6 +60,7 @@ public class BlockWoodToolRack extends BaseBlock implements IWoodEntry, IProvide
       .harvestLevel(ToolClasses.AXE, 0)
       .sound(SoundType.WOOD)
       .addOreDict("tool_rack")
+      .tag(Tags.TOOL_RACK)
       .hardness(0.5f)
       .resistance(3f)
       .capability(CapabilityProviderSize.of(Size.LARGE, Weight.VERY_HEAVY))

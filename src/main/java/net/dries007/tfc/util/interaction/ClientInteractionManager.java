@@ -77,8 +77,7 @@ final class ClientInteractionManager {
         if (flag) {result = EnumActionResult.SUCCESS;}
       }
 
-      if (!flag && itemstack.getItem() instanceof ItemBlock) {
-        ItemBlock itemblock = (ItemBlock) itemstack.getItem();
+      if (!flag && itemstack.getItem() instanceof ItemBlock itemblock) {
 
         if (!itemblock.canPlaceBlockOnSide(worldIn, pos, direction, player, itemstack)) {
           return EnumActionResult.FAIL;

@@ -23,7 +23,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import gregtech.api.items.toolitem.IGTTool;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
@@ -64,8 +63,7 @@ public class TileWoodToolRack extends BaseTile {
   }
 
   @Override
-  @NotNull
-  public NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+  public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
     super.writeToNBT(nbt);
     NBTUtils.setGenericNBTValue(nbt, "items",
       ItemStackHelper.saveAllItems(new NBTTagCompound(), items));
@@ -73,7 +71,7 @@ public class TileWoodToolRack extends BaseTile {
   }
 
   @Override
-  public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
+  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
     super.onDataPacket(net, pkt);
     markForBlockUpdate();
   }
